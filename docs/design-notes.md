@@ -140,8 +140,9 @@ tokens require WCAG contrast testing in context.
 
 ### Typography
 
-- **Display and navigation:** Bricolage Grotesque, 600–700. Use for the wordmark,
-  page questions, and major navigation—not body copy.
+- **Display and navigation:** IBM Plex Sans, 500–600. Use for the wordmark,
+  page questions, and major navigation. Its quieter proportions let the
+  analytical structure carry the identity instead of oversized display type.
 - **Reading:** Literata, 400–600. Use for explanations, historical accounts,
   interpretations, and longer statements.
 - **Apparatus:** IBM Plex Mono, 400–500. Use for dates, scope labels, citation
@@ -151,8 +152,8 @@ Suggested fluid scale:
 
 | Role | Size | Line height |
 |---|---:|---:|
-| Display | `clamp(2.5rem, 6vw, 5.5rem)` | `0.98` |
-| Page question | `clamp(1.9rem, 4vw, 3.5rem)` | `1.06` |
+| Display | `clamp(2rem, 3.2vw, 3.25rem)` | `1.06` |
+| Page question | `clamp(1.9rem, 3vw, 3.2rem)` | `1.06` |
 | Section | `clamp(1.35rem, 2vw, 1.8rem)` | `1.15` |
 | Reading | `clamp(1rem, 0.4vw + .92rem, 1.16rem)` | `1.65` |
 | Apparatus | `0.74rem` | `1.35` |

@@ -2,9 +2,11 @@
 import prototype from "../../../prototypes/analytical-framework/prototype.json";
 
 const challenge = prototype.challenges[0]!;
+const secondChallenge = prototype.challenges[1]!;
 const caseOne = prototype.cases[0]!;
 const caseTwo = prototype.cases[1]!;
 const trace = prototype.traces[0]!;
+const secondTrace = prototype.traces[1]!;
 const assessment = trace.assessments[0]!;
 const criterion = prototype.criteria.find(({ id }) => id === assessment.criterionId) ?? prototype.criteria[0]!;
 const sources = new Map(prototype.sources.map((source) => [source.id, source]));
@@ -120,6 +122,30 @@ const stages = [
             <div><dt>Relationship</dt><dd>Partial and contested</dd></div>
             <div><dt>Evidence</dt><dd>Statement by statement</dd></div>
           </dl>
+        </div>
+      </section>
+
+      <section class="sample-map" aria-labelledby="sample-title">
+        <header>
+          <div>
+            <p class="kicker">Prototype coverage</p>
+            <h2 id="sample-title">Two questions, two traces, two cases.</h2>
+          </div>
+          <p>This is enough to test the anatomy of a trace, but not yet enough to prove the pattern across unlike traditions.</p>
+        </header>
+        <div class="sample-map__grid">
+          <article>
+            <p class="sample-map__number">01</p>
+            <h3>{challenge.question}</h3>
+            <p>{assessment.text}</p>
+            <a href="#trace">Open the full trace ↓</a>
+          </article>
+          <article>
+            <p class="sample-map__number">02</p>
+            <h3>{secondChallenge.question}</h3>
+            <p>{secondTrace.assessments[0]!.text}</p>
+            <a href="#compare">See the interpretation fork ↓</a>
+          </article>
         </div>
       </section>
 
@@ -286,8 +312,8 @@ const stages = [
 </html>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Literata:opsz,wght@7..72,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-  :root { color-scheme: light; --night:#17232b; --ink:#263941; --muted:#587078; --atmosphere:#edf4f5; --sheet:#fff; --cobalt:#2556d8; --teal:#087e72; --teal-wash:#e2f3ef; --amber:#a85f08; --amber-wash:#fff3d5; --rule:#b8c9ce; --display:"Bricolage Grotesque",sans-serif; --reading:"Literata",serif; --mono:"IBM Plex Mono",monospace; }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400..600&display=swap');
+  :root { color-scheme: light; --night:#17232b; --ink:#263941; --muted:#587078; --atmosphere:#edf4f5; --sheet:#fff; --cobalt:#2556d8; --teal:#087e72; --teal-wash:#e2f3ef; --amber:#a85f08; --amber-wash:#fff3d5; --rule:#b8c9ce; --display:"IBM Plex Sans",sans-serif; --reading:"Literata",serif; --mono:"IBM Plex Mono",monospace; }
   * { box-sizing:border-box; }
   html { scroll-behavior:smooth; background:var(--atmosphere); }
   body { margin:0; min-width:20rem; overflow-x:hidden; color:var(--night); font-family:var(--display); }
@@ -305,14 +331,25 @@ const stages = [
   .prototype-header nav { display:flex; justify-content:flex-end; gap:1.4rem; }
   .prototype-header nav a { color:var(--night); font-size:.82rem; font-weight:600; text-decoration:none; }
   main { padding-bottom:6rem; }
-  .intro { display:grid; grid-template-columns:5rem minmax(0,1.5fr) minmax(17rem,.6fr); gap:2rem; align-items:end; padding:clamp(4rem,9vw,8.5rem) 0 clamp(3rem,7vw,6rem); }
+  .intro { display:grid; grid-template-columns:5rem minmax(0,1.5fr) minmax(17rem,.6fr); gap:2rem; align-items:end; padding:clamp(3rem,6vw,5.5rem) 0 clamp(2.5rem,5vw,4rem); }
   .intro__index { align-self:start; color:var(--cobalt); font:500 .78rem/1 var(--mono); writing-mode:vertical-rl; }
   .kicker,.apparatus-title { margin:0 0 .75rem; color:var(--cobalt); font:500 .68rem/1.45 var(--mono); letter-spacing:.09em; text-transform:uppercase; }
   h1,h2,h3,p { margin-top:0; }
-  h1 { max-width:20ch; margin:0; font-size:clamp(2.6rem,6vw,5.7rem); font-weight:600; letter-spacing:-.065em; line-height:.98; text-wrap:balance; }
+  h1 { max-width:27ch; margin:0; font-size:clamp(2rem,3.2vw,3.25rem); font-weight:500; letter-spacing:-.04em; line-height:1.06; text-wrap:balance; }
   h2 { margin:0; font-size:clamp(1.65rem,3vw,2.9rem); font-weight:600; letter-spacing:-.045em; line-height:1.05; }
   .intro__context { max-width:29rem; font-family:var(--reading); font-size:.92rem; line-height:1.6; }
   .intro__context>p { font-size:1.06rem; }
+  .sample-map { margin-bottom:clamp(3rem,6vw,5rem); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .sample-map>header { display:grid; grid-template-columns:1fr minmax(18rem,.65fr); gap:2rem; align-items:end; padding:1.5rem 0; }
+  .sample-map>header h2 { font-size:clamp(1.45rem,2.2vw,2.1rem); font-weight:500; }
+  .sample-map>header>p { max-width:40ch; margin:0; color:var(--muted); font:400 .86rem/1.6 var(--reading); }
+  .sample-map__grid { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--rule); }
+  .sample-map__grid article { display:grid; grid-template-columns:2rem 1fr; gap:.5rem 1.25rem; padding:clamp(1.5rem,3vw,2.5rem) 0; }
+  .sample-map__grid article+article { padding-left:clamp(1.5rem,3vw,2.5rem); border-left:1px solid var(--rule); }
+  .sample-map__number { grid-row:1/5; color:var(--cobalt); font:500 .65rem/1.4 var(--mono); }
+  .sample-map__grid h3 { max-width:32ch; margin:0; font-size:clamp(1.05rem,1.6vw,1.35rem); font-weight:500; line-height:1.25; }
+  .sample-map__grid article>p:not(.sample-map__number) { max-width:50ch; margin:.4rem 0; color:var(--muted); font:400 .8rem/1.55 var(--reading); }
+  .sample-map__grid a { width:max-content; font-size:.72rem; font-weight:600; }
   dl { margin:0; }
   dl div { display:grid; grid-template-columns:7rem 1fr; gap:1rem; padding:.55rem 0; border-top:1px solid var(--rule); }
   dt { color:var(--muted); font:500 .64rem/1.45 var(--mono); letter-spacing:.06em; text-transform:uppercase; }
@@ -333,7 +370,7 @@ const stages = [
   .trace-node.is-active .trace-node__mark { border-color:var(--cobalt); color:white; background:var(--cobalt); box-shadow:0 0 0 4px #e2e8fb; }
   .argument { display:flex; flex-direction:column; min-width:0; padding:clamp(2rem,5vw,5rem); }
   .argument-stage { margin:auto 0; }
-  .argument-stage h3 { max-width:16ch; margin-bottom:1.5rem; font-size:clamp(2rem,4vw,4.4rem); font-weight:600; letter-spacing:-.06em; line-height:.98; text-wrap:balance; }
+  .argument-stage h3 { max-width:20ch; margin-bottom:1.5rem; font-size:clamp(1.75rem,3vw,3.2rem); font-weight:500; letter-spacing:-.045em; line-height:1.04; text-wrap:balance; }
   .argument-stage__statement { max-width:36ch; font:500 clamp(1.08rem,1.6vw,1.38rem)/1.55 var(--reading); }
   .argument-stage__meta { margin-top:2rem; color:var(--muted); font:400 .68rem/1.6 var(--mono); }
   .caution { max-width:42rem; padding:1rem; border-left:3px solid var(--amber); background:var(--amber-wash); font:400 .86rem/1.55 var(--reading); }
@@ -406,8 +443,10 @@ const stages = [
     .prototype-header nav a { flex:none; }
     .intro { display:block; }
     .intro__index { display:none; }
-    .intro h1 { font-size:clamp(2.15rem,11vw,3rem); overflow-wrap:anywhere; }
+    .intro h1 { font-size:clamp(1.9rem,8.5vw,2.4rem); overflow-wrap:anywhere; }
     .intro__context { margin-top:2.5rem; }
+    .sample-map>header,.sample-map__grid { grid-template-columns:1fr; }
+    .sample-map__grid article+article { padding-left:0; border-top:1px solid var(--rule); border-left:0; }
     .workbench__header,.case-study>header { display:grid; align-items:start; }
     .scope,.case-status { text-align:left; }
     .trace-layout { width:100%; min-width:0; grid-template-columns:minmax(0,1fr); }
