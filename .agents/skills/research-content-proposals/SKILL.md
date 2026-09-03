@@ -7,6 +7,20 @@ description: Research and stage evidence-backed proposals for Ends and Means tra
 
 Create a reviewable proposal, never a canonical-content change.
 
+## Branch and review boundary
+
+Before writing, run `git branch --show-current`. Never create or revise a
+proposal on `main` or `master`. If the worktree is clean, create a focused branch
+named `research/<type>-<stable-id>`; if it is not clean, stop and ask the user
+how to preserve their work. A reviewed proposal branch may be merged to stage
+research on `main`; merging it does not approve or publish canonical content.
+
+After validation, commit locally when the user asked for an implementation or
+completed research artifact. Push and open a draft pull request only when the
+user has authorized repository publishing. The PR must remain proposal-only:
+canonical content, generated content, and application code are reviewed and
+promoted separately after a human accepts the proposal.
+
 ## Route the request
 
 1. Read [references/editorial-policy.md](references/editorial-policy.md).
@@ -53,8 +67,12 @@ Run before handoff:
 npm run validate
 node .agents/skills/research-content-proposals/scripts/validate-proposal.mjs proposals/<type>/<stable-id>
 node .agents/skills/research-content-proposals/scripts/check-duplicates.mjs proposals/<type>/<stable-id>
+npm run validate:proposals
 ```
 
 If duplicate checking reports `unacknowledged` candidates, add each plausible
 candidate with a comparison reason and rerun it. Report validation, duplicate
 candidates, evidence conflicts, limitations, and human-review questions.
+
+Use the repository pull-request template. Mark the PR as research input and
+name the human decisions required before promotion.
