@@ -14,10 +14,11 @@ dashboard. The interface should feel intellectually confident without
 pretending to certainty. A reader can always distinguish a sourced observation,
 an inference, and a value judgment—and can follow each one to its support.
 
-The home page has one job: help a reader enter a meaningful question quickly.
-The core reading experience has one job: preserve the chain of reasoning from
-an attributed End through institutional Means and bounded practice to an
-assessment under an explicit Criterion.
+The product has two equal modes. **Explore** helps readers understand systems,
+ideas, institutions, Cases, People, and Works. **Compare** examines shared
+Challenges, differences among selected subjects, political-economic dimensions,
+and change over time. The core reading experience preserves the chain of
+reasoning behind both descriptions and comparisons.
 
 ## Information architecture
 
@@ -27,10 +28,21 @@ matrix:
 - **Topics** are broad, familiar discovery labels such as ownership, work,
   security, coordination, and power. They organize navigation but make no
   analytical claim.
-- **Challenges** are recurring open questions. They are the primary entry point
-  for comparison.
-- **Traditions and ideal types** are contested families of ideas. They provide
-  context but are not country labels or causal treatments.
+- **Explore** is an entity-neutral entry point. “Systems & ideas” collects
+  familiar terms while each result identifies whether it is a Concept,
+  Approach, Means, Case, or another entity.
+- **Compare** is a first-class product mode, not a report added after dossiers.
+  It supports shared Questions, pairwise/small-set views, dimensions, and
+  transitions.
+- **Approaches** are recognizable configurations of Concepts, attributed Ends,
+  and proposed Means—not a universal navigation bucket or ontology root.
+- **Concepts** are reusable, contested ideas whose meaning and importance may
+  differ among Approaches.
+- **Collections** are overlapping browse views such as Socialist, Communist,
+  Anarchist, or Democratic approaches. Qualified membership replaces a single
+  parent hierarchy.
+- **Challenges** are recurring open questions and the primary unit for
+  comparison.
 - **Ends** are attributed aims: declared, design-implied, or cautiously
   interpreted from practice.
 - **Means** are concrete institutional arrangements: roles, rules, authority,
@@ -38,8 +50,16 @@ matrix:
 - **Cases** are bounded in place, time, participants, and institutional scope.
 - **Criteria** are disclosed evaluative lenses with stated assumptions and
   evidence requirements.
+- **Comparison Dimensions** are descriptive axes or category sets with explicit
+  definitions, eligible subjects, methods, limitations, and placements.
+- **Events** record sourced occurrences. **Transitions** connect bounded Case
+  episodes; turning-point and causal significance remain attributed claims.
 - **Statements, sources, and interpretations** form the evidence layer beneath
   every summary.
+
+Political, economic, social, legal, and cultural spheres are overlapping
+facets. More precise Domains drive filters and context labels. Neither spheres
+nor Domains divide the catalogue into exclusive sections.
 
 A **response trace** is a view across these entities, not another content type
 that owns or duplicates them:
@@ -51,6 +71,15 @@ Challenge → attributed End → Means → expected interaction
 
 Coverage may be sparse. The product must never invent a rectangular comparison
 or imply that every tradition has one coherent response to every Challenge.
+
+A **placement trace** exposes why a subject appears where it does:
+
+```text
+subject + scope → Dimension definition → evidence / interpretation
+                → value or range → uncertainty + rival placement
+```
+
+A Dimension is not a Criterion, and a placement never determines an assessment.
 
 ## Durable decisions from the exploratory UI
 
@@ -176,38 +205,38 @@ Major analytical stages need more separation than statements within a stage.
 Use square or 2–4px corners on functional surfaces. Reserve shadows for
 temporary overlays; use rules and background contrast for permanent structure.
 
-## Screen 1: home and discovery
+## Screen 1: home, Explore, and Compare
 
-The opening thesis is a real Challenge selector, not a decorative hero. Topics
-provide recognizable doors; selecting one reveals a small set of Challenges and
-real response traces.
+The opening gives Explore and Compare equal visual weight. Search accepts
+familiar terms without requiring the reader to know the ontology. A real
+Challenge provides a direct comparison path rather than serving as decoration.
 
 ```text
-┌ Ends and Means ───────── Explore  Cases  Reading  Method  Contribute ┐
+┌ Ends and Means ─────── Explore  Compare  Cases  People & Works  Method ┐
 │                                                                      │
-│ Political and economic arrangements connect what people seek        │
-│ to what they build—and what follows.                                 │
+│ Explore systems and ideas. Compare what they value, how they work,   │
+│ and what happens in practice.                                       │
 │                                                                      │
-│ Start with a question.                                               │
-│ ┌──────────────────────────────────────────────────────────────────┐ │
-│ │ Who captures gains from productivity and ownership?           ▾ │ │
-│ └──────────────────────────────────────────────────────────────────┘ │
-│ Topics:  Ownership  Work  Security  Coordination  Power              │
+│ ┌ EXPLORE ─────────────────┐  ┌ COMPARE ──────────────────────────┐ │
+│ │ Search systems, ideas,   │  │ Start with a shared question     │ │
+│ │ institutions, people…   │  │ Who controls investment?      ▾ │ │
+│ │ Systems & ideas          │  │ Compare selected subjects       │ │
+│ │ Institutions · Cases    │  │ Explore dimensions and maps     │ │
+│ └──────────────────────────┘  └────────────────────────────────────┘ │
 ├──────────────────────────────────────────────────────────────────────┤
-│ TWO DOCUMENTED RESPONSES                         Scope / evidence      │
-│ Solidaristic wage bargaining ── Sweden, 1951–83 ── View trace         │
-│ Wage-earner funds            ── Sweden, 1984–91 ── View trace         │
-│                                                                      │
-│ A response is absent?  See what evidence is needed →                 │
+│ FEATURED TRACE     End ── Means ── Case ── Criterion                 │
+│ FEATURED MAP       Ownership × allocation · ranges + uncertainty     │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 Rules:
 
+- Explore and Compare are peer actions in navigation and hierarchy.
+- Search results expose entity kind, scope, and relevant discovery paths.
 - The selector label is always the complete Challenge question.
 - Topic selection filters; it does not navigate to a presumed conclusion.
 - Result count and active filters are announced and encoded in the URL.
-- Results identify arrangements and bounded cases before traditions.
+- Results identify arrangements and bounded cases before Approach labels.
 - Empty results explain whether research is missing, scope excludes a result,
   or no meaningful relationship has been proposed.
 
@@ -303,6 +332,42 @@ is structural, not reduced to amber “controversy” styling.
 On mobile, compare one dimension at a time with a persistent two-column identity
 header. Preserve table semantics in the underlying markup and provide a linear
 reading view.
+
+## Screen 5: dimensional map
+
+A map compares eligible subjects on one or two independently defined Dimensions.
+It is an evidence interface, not a political-compass quiz. Broad or uncertain
+placements render as ranges; dated Cases and ideal-type Approaches use visibly
+different marks.
+
+```text
+┌ Map ─ Ownership × allocation ───────── Lens: editorial synthesis ▾ ┐
+│                                                                   │
+│ SOCIAL OWNERSHIP                                                  │
+│      market socialism ━━━━━━━                                     │
+│                              participatory economics ━━━━━        │
+│                    Sweden, 1984–91 ●                               │
+│                                                                   │
+│      laissez-faire ○                                              │
+│ PRIVATE OWNERSHIP                                                 │
+│      MARKET ALLOCATION ───────────── ADMINISTRATIVE ALLOCATION    │
+├───────────────────────────────────────────────────────────────────┤
+│ Selected: market socialism                                        │
+│ Range basis · scope · uncertainty · sources · rival placement     │
+│ View as accessible table                                          │
+└───────────────────────────────────────────────────────────────────┘
+```
+
+Rules:
+
+- Every axis links to its definition, method, normative choices, and limits.
+- A placement identifies subject kind, time/place scope, basis, uncertainty,
+  Statements, and Sources.
+- Concepts and Collections normally receive ranges or remain unplaced.
+- Alternative lenses are separate placements, never averaged silently.
+- Missing placement means absent or inapplicable evidence, not a midpoint.
+- The complete table/text equivalent is available without JavaScript and does
+  not rely on color, position, or shape alone.
 
 ## Evidence and uncertainty
 
@@ -405,12 +470,15 @@ prescriptive and matches the Challenge model more precisely.
 
 ## Prototype sequence
 
-Build and evaluate the four screens in this order:
+Build and evaluate the five screens in this order:
 
 1. the analytical response trace, because it tests the core information model;
 2. the case page, because it tests scope and formal rules versus rules-in-use;
-3. comparison, because it tests Criteria and competing interpretations;
-4. home/discovery, after the available entities and useful entry paths are known.
+3. shared-Challenge and pairwise comparison, because they test Criteria,
+   comparability, and competing interpretations;
+4. one-dimensional mapping, because it tests definitions, placements, scope,
+   uncertainty, and nonvisual equivalence before a two-axis chart;
+5. home/Explore/Compare, after the useful entry paths are known.
 
 Use the Swedish analytical-framework fixture for the first three screens. Test
 the design with a second, substantially unlike case before treating any layout

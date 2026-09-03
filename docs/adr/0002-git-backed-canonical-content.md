@@ -13,23 +13,37 @@ collaborative editing, personalized state, or high-frequency writes.
 ## Decision
 
 Keep canonical content in small, reviewable files in Git. Organize authoring
-records by entity type and compile them deterministically into one validated
-read graph consumed by Astro routes, tests, and future exports.
+records by entity type and relationship family and compile them deterministically
+into one validated read graph consumed by Astro routes, tests, and future
+exports. “One graph” is a logical/runtime guarantee, not a single authoring
+document.
 
-The canonical domain distinguishes four layers:
+The canonical domain distinguishes five layers:
 
-1. concepts: Approaches, Ends, Means, Challenges, Criteria, and Topics;
-2. real-world evidence: bounded historical or ongoing Cases, participants,
+1. vocabulary: Concepts, Domains, Collections, labels, and external identities;
+2. arguments: Approaches, attributed Ends, Means, Challenges, Criteria, and
+   Topics;
+3. real-world evidence: bounded historical or ongoing Cases, participants,
    formal rules, rules-in-use, outcomes, Statements, and Sources;
-3. interpretation: typed relationships, competing interpretations, response
+4. interpretation: typed relationships, competing interpretations, response
    traces, and Criterion-specific assessments;
-4. presentation: dossiers, comparisons, timelines, reading paths, and a
+5. presentation: dossiers, comparisons, timelines, reading paths, and a
    separate fictional Depiction experience.
 
-Approach is an umbrella, not a claim that every entry is the same kind of
-thing. Each Approach records a kind such as tradition, ideal type,
-institutional family, named model, or political program, plus the institutional
-domains it addresses.
+Approach is one domain entity within entity-neutral Explore and Compare views,
+not the graph's root type or universal public bucket. An Approach is a
+recognizable configuration of Concepts, attributed Ends, and proposed Means.
+Broad ideological or thematic umbrellas are overlapping
+Collections with qualified membership, not Approach kinds. Domains are
+first-class vocabulary records connected through sourced relationships rather
+than a closed enum embedded on an Approach.
+
+The vocabulary subset follows SKOS semantics for Concepts, labels, Concept
+Schemes, Collections, mappings, and broader/narrower/related links. Canonical
+authoring remains TypeScript-validated records rather than RDF; a deterministic
+JSON-LD export may expose the compatible subset later. Domain entities and
+analytical predicates are not flattened into `skos:Concept` merely for
+standards conformance.
 
 Real-world Approach–Case relationships are first-class, typed, sourced, scoped,
 and uncertain where appropriate. Ongoing Cases carry `asOf`, review-date, and
@@ -48,6 +62,10 @@ make file-backed authoring inadequate.
 - Git supplies attribution, discussion, history, rollback, and branching.
 - Authors review focused records instead of one hand-edited graph document.
 - The compiled graph is generated and never hand-edited.
+- Generated graphs, indexes, reports, and exports live outside canonical
+  authoring directories.
+- Entity files own intrinsic fields; subject-centered relationship files own
+  substantive edges; rendered dossiers and backlinks are derived views.
 - Publication state lives on entities or relationships rather than requiring a
   parallel schema.
 - Runtime pages cannot introduce route-specific content models.
