@@ -2,9 +2,10 @@
 
 **Political and economic systems in theory and practice.**
 
-An evidence-forward reference comparing systems by how each handles a fixed set
-of core problems ("cruxes"). The content is a graph: systems × cruxes produce
-cells, and every cell cites sources and historical cases.
+An evidence-forward reference in development for comparing political-economic
+Ends, institutional Means, recurring Challenges, and outcomes in bounded cases
+under explicit Criteria. The deployed matrix is an early exploration and
+research input, not the target ontology or a compatibility contract.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
@@ -19,7 +20,9 @@ importer, and the portable graph validator are in place.
 
 | File | What it is |
 |---|---|
-| [`docs/website-brief.md`](docs/website-brief.md) | Implementation brief — content model, validation rules, pages, milestones. Read this first. |
+| [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
+| [`docs/analytical-framework.md`](docs/analytical-framework.md) | Current target concepts and analytical boundaries. |
+| [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Clean, non-canonical target-model prototype and migration notes. |
 | [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Primary content: 8 systems × 14 cruxes, with verdicts and a summary matrix. Source of `cells`. |
 | [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
 | [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |

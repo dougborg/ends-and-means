@@ -3,6 +3,10 @@
 This backlog is ordered by dependency. Each checkbox is intended to become one
 GitHub issue when the private remote is available.
 
+The checked items below describe the exploratory site that exists today. New
+work targets the clean analytical model being tested in M1.9; completed matrix
+work is source material, not an API or compatibility contract.
+
 ## M1 — Content foundation
 
 - [x] **M1.0 Choose the implementation stack.** Use Astro for static rendering
@@ -19,12 +23,12 @@ GitHub issue when the private remote is available.
   duplicate IDs.
 - [x] **M1.4 Curate verdict and evidence mappings.** Replace importer heuristics
   with a reviewed override file. Acceptance: all 112 mappings reviewed in diff.
-- [ ] **M1.5 Extract cases and citations.** Create case records and connect cells
-  to cases/sources. Acceptance: every reference resolves and the uncited report
-  is empty.
+- [ ] **M1.5 Inventory cases and citations.** Extract useful research into
+  bounded case and statement candidates for the replacement model. Acceptance:
+  every retained claim has resolved provenance and scope.
 - [x] **M1.6 Enforce graph integrity.** Fail builds on missing pairs, duplicates,
   broken references, invalid enums, or unacknowledged missing citations.
-- [ ] **M1.7 Model claims and resource links.** Give challengeable claims stable
+- [ ] **M1.7 Model statements and resource links.** Give challengeable statements stable
   anchors. Extend sources with ISBN, DOI, Open Library, publisher, reading, and
   purchase links without making retailer URLs canonical identifiers.
 - [ ] **M1.8 Validate external links.** Check links on a scheduled basis, report
@@ -35,6 +39,11 @@ GitHub issue when the private remote is available.
   context, interaction patterns, outcomes, and evaluative judgments; adapt IAD
   as a diagnostic lens without scoring whole societies or treating historical
   cases as universal blueprints.
+  A non-canonical, validated prototype now traces social-democratic capitalism
+  through two newly framed Challenges across two bounded Swedish cases. The
+  replacement prototype intentionally has no compatibility fields or type
+  dependencies on the current matrix; human review and schema approval remain
+  required before replacing canonical content.
 
 ## M2 — Reference pages
 
@@ -44,17 +53,18 @@ GitHub issue when the private remote is available.
   same cell records, including row/column neighbors.
 - [ ] **M2.3 Source, case, and reading routes.** Add backlinks and verification
   filters, borrowing links, publisher links, and clearly labeled purchase links.
-- [ ] **M2.4 About and contribution model.** Explain scope, verdicts, evidence
+- [ ] **M2.4 About and contribution model.** Explain scope, assessments, evidence
   tiers, editorial review, and how to propose changes.
-- [ ] **M2.5 Claim-level correction links.** Add “Suggest a correction” actions
+- [ ] **M2.5 Statement-level correction links.** Add “Suggest a correction” actions
   that prefill the entity, claim anchor, and page URL in a structured GitHub
   issue form.
 
-## M3 — Matrix
+## M3 — Comparison explorer
 
-- [ ] **M3.1 Static accessible matrix.** Deliver a useful no-JavaScript table.
-- [ ] **M3.2 Progressive filters and transpose.** Add evidence filtering,
-  hide-untested, and transpose with keyboard and URL-state support.
+- [ ] **M3.1 Static accessible comparisons.** Deliver useful no-JavaScript
+  tables generated from response traces; do not require rectangular coverage.
+- [ ] **M3.2 Progressive filters and pivot.** Add Challenge, tradition, Means,
+  case, evidence-gap, and interpretation filters with keyboard and URL-state support.
 
 ## M4 — Release
 
@@ -67,7 +77,7 @@ GitHub issue when the private remote is available.
   the official GitHub Pages workflow, verify the Pages deployment, and connect
   the custom `endsandmeans.info` domain when its DNS is configured.
 - [ ] **M4.4 Open contribution workflow.** Add `CONTRIBUTING.md`, correction,
-  missing-source, broken-link, verdict-challenge, and new-case issue forms; decide
+  missing-source, broken-link, assessment-challenge, and new-case issue forms; decide
   when the repository becomes public.
 - [x] **M4.5 Add an editorial research skill suite.** Provide a repo-local,
   routed skill for proposing new Challenges, systems, authors/sources, and cases.
@@ -91,7 +101,7 @@ GitHub issue when the private remote is available.
 - [ ] **M5.3 Add fictional-system comparisons.** Create a clearly separated
   interpretive layer for systems depicted in literature, with primary-text
   provenance, spoiler controls, copyright-safe summaries, and links to real
-  systems and Challenges that never count as empirical verdict evidence.
+  traditions and Challenges that never count as empirical evidence.
 - [ ] **M5.4 Add a first-class People layer.** Replace the optional Thinker
   concept with stable Person records for relevant philosophers, authors,
   researchers, organizers, and political leaders. Model cited, typed, and
@@ -102,9 +112,10 @@ GitHub issue when the private remote is available.
   existing eight systems on independently defined, sourced axes rather than a
   universal left-right score. Support multiple scholarly lenses, ranges and
   uncertainty, change over time, and accessible nonvisual comparisons while
-  keeping mapped positions independent from cell verdicts and evidence.
-- [ ] **M5.6 Publish rigorous methods.** Define systems, cases, claims, verdicts,
-  evidence, Ends, Means, Challenges, Criteria, context, rules-in-use, outcomes,
+  keeping mapped positions independent from assessments and evidence.
+- [ ] **M5.6 Publish rigorous methods.** Define traditions, ideal types, cases,
+  statements, assessments, evidence, Ends, Means, Challenges, Criteria, context,
+  rules-in-use, outcomes,
   classification, and proposal-to-canonical promotion rules before expanding
   the graph or presenting additional analytical views. Document where the IAD
   adaptation applies and where analysis of broad system ideal types exceeds its
@@ -122,7 +133,7 @@ GitHub issue when the private remote is available.
   transitions with interval uncertainty and accessible tabular equivalents,
   building on the time-bounded relationships from M5.1.
 - [ ] **M5.11 Add pairwise comparison.** Generate an accessible “compare these
-  two” view from canonical cells without creating duplicate comparison content.
+  two” view from response traces without creating duplicate comparison content.
 - [ ] **M5.12 Add claim-level revision history.** Record reasons, evidence,
   changes, and privacy-safe contributor attribution for substantive claim edits.
 - [ ] **M5.13 Publish machine-readable graph exports.** Provide versioned exports
@@ -140,7 +151,7 @@ GitHub issue when the private remote is available.
   explicitly declare, priorities implied by institutional design, and cautious
   interpretations of dated practice. Use defined, sourced, lens-aware dimensions
   with uncertainty and accessible comparisons—never an aggregate score, proof
-  of intent from outcomes, or an input to cell verdicts and evidence.
+  of intent from outcomes, or an input to assessments and evidence.
 
 ## Later
 

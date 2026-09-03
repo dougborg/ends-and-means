@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "iad-prototype-1",
+  "status": "non-canonical",
+  "tradition": {
+    "id": "social-democratic-tradition",
+    "label": "Social-democratic tradition",
+    "caveat": "A diverse intellectual and political tradition, not a claim that either Swedish case embodies a single system."
+  },
+  "challenges": [
+    {
+      "id": "challenge-distribution-of-gains-and-ownership",
+      "question": "Who captures gains from productivity, wage restraint, and capital ownership—and how can that distribution change?",
+      "rationale": "Ownership, control, income, and wealth are analytically distinct but interact through the distribution of productive gains."
+    },
+    {
+      "id": "challenge-coordination-and-accountability",
+      "question": "How can delegated bargaining and investment authority coordinate action while remaining representative, contestable, and accountable?",
+      "rationale": "Authority can be concentrated in public, private, or associational bodies, so accountability should follow positions and powers rather than a state/non-state label."
+    }
+  ],
+  "sources": [
+    { "id": "erixon-2010", "title": "The Rehn-Meidner Model in Sweden: Its Rise, Challenges and Survival", "authors": ["Lennart Erixon"], "year": 2010, "url": "https://doi.org/10.2753/JEI0021-3624440306" },
+    { "id": "hibbs-locking-2000", "title": "Wage Dispersion and Productive Efficiency: Evidence for Sweden", "authors": ["Douglas A. Hibbs Jr.", "Håkan Locking"], "year": 2000, "url": "https://doi.org/10.1086/209976" },
+    { "id": "molinder-2019", "title": "Wage differentials, economic restructuring and the solidaristic wage policy in Sweden", "authors": ["Jakob Molinder"], "year": 2019, "url": "https://doi.org/10.1093/ereh/hey005" },
+    { "id": "prop-1983-84-50", "title": "Proposition 1983/84:50 om löntagarfonder", "authors": ["Swedish Government"], "year": 1983, "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/" },
+    { "id": "prop-1991-92-36", "title": "Proposition 1991/92:36 om avveckling av löntagarfonderna", "authors": ["Swedish Government"], "year": 1991, "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-avveckling-av-lontagarfonderna_gf0336/html/" },
+    { "id": "westerberg-2023", "title": "From Marxist Venture to Venture Capitalists", "authors": ["Rikard Westerberg"], "year": 2023, "url": "https://doi.org/10.1017/eso.2022.23" }
+  ],
+  "ends": [
+    { "id": "end-equality", "label": "Equality with employment", "attributions": [
+      { "id": "end-attribution-rehn-meidner-equality", "text": "Combine fair wages and full employment with price stability and growth.", "kind": "fact", "type": "declared", "attributedTo": "LO's 1951 Rehn–Meidner program", "reasoning": "Erixon reconstructs these as the program's explicit goals.", "scope": { "caseIds": ["sweden-rehn-meidner-1951-1983"], "geography": ["Sweden"], "period": { "start": "1951", "end": "1983" } }, "uncertainty": "low", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 678–686" }] }
+    ] },
+    { "id": "end-wage-earner-influence", "label": "Wage-earner influence", "attributions": [
+      { "id": "end-attribution-funds-influence", "text": "Distribute wealth more evenly and strengthen wage-earner influence through co-ownership while supporting pensions and capital formation.", "kind": "fact", "type": "declared", "attributedTo": "Swedish Government Proposition 1983/84:50", "reasoning": "The proposition states several ends that can conflict and should remain jointly visible.", "scope": { "caseIds": ["sweden-wage-earner-funds-1984-1991"], "geography": ["Sweden"], "period": { "start": "1983", "end": "1991" } }, "uncertainty": "low", "citations": [{ "sourceId": "prop-1983-84-50", "locator": "sections 2.1–2.3" }] }
+    ] }
+  ],
+  "means": [
+    { "id": "means-solidaristic-bargaining", "text": "Peak labor and employer organizations set central wage frames alongside active labor-market adjustment.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 680–690" }], "ruleType": "aggregation", "level": "collective-choice" },
+    { "id": "means-fund-boards", "text": "Five government-appointed AP-system boards invested payroll- and profit-tax receipts under ownership and voting caps.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "prop-1983-84-50", "locator": "sections 2.2–2.3 and proposed statutes" }], "ruleType": "authority", "level": "collective-choice" }
+  ],
+  "criteria": [
+    { "id": "criterion-distribution", "label": "Distribution", "definition": "Who receives income, wealth, control, benefits, and adjustment costs?", "appliesToChallengeIds": ["challenge-distribution-of-gains-and-ownership"], "evidenceRequirements": ["Separate measures of wages, wealth, ownership, control, employment, and adjustment costs."], "normativeAssumptions": ["Concentrated wealth and involuntary burdens require justification."], "limitations": ["Wage equality does not establish wealth equality."] },
+    { "id": "criterion-accountability", "label": "Accountability", "definition": "Can affected people inspect, contest, and replace delegated decision-makers?", "appliesToChallengeIds": ["challenge-coordination-and-accountability"], "evidenceRequirements": ["Formal appointment rules plus evidence of representation, transparency, contestation, and practice."], "normativeAssumptions": ["Public and quasi-public power should be answerable to affected people."], "limitations": ["Formal appointment rules do not establish accountability in practice."] }
+  ],
+  "cases": [
+    {
+      "id": "sweden-rehn-meidner-1951-1983",
+      "name": "Swedish Rehn–Meidner policy complex",
+      "location": "Sweden",
+      "period": { "start": "1951", "end": "1983" },
+      "boundary": "Begins with LO program adoption; focuses on the 1956–1982 centralized-bargaining implementation window; ends with the metal/engineering break. Excludes later wage-earner funds.",
+      "traditionRelationship": { "traditionId": "social-democratic-tradition", "relation": "influenced-by", "reasoning": "The program was developed inside Swedish organized labor and Social Democratic policymaking, but its partial implementation is not the whole tradition." },
+      "context": { "materialConditions": ["Postwar growth, capital controls, industrial restructuring, and later oil and competitiveness shocks."], "communityAttributes": ["High union and employer organization with heterogeneous sectoral interests."] },
+      "participants": [
+        { "id": "participant-lo", "label": "LO and affiliated unions", "role": "Peak labor bargainer", "resources": ["membership", "bargaining coordination"], "information": ["wages", "workplace and sector conditions"] },
+        { "id": "participant-saf", "label": "SAF and affiliated employers", "role": "Peak employer bargainer", "resources": ["firm coordination", "investment and employment decisions"], "information": ["firm productivity", "labor demand"] },
+        { "id": "participant-ams", "label": "National Labour Market Board", "role": "Adjustment-policy administrator", "resources": ["training", "matching", "mobility support"], "information": ["vacancies", "skills", "regional displacement"] }
+      ],
+      "formalRules": [
+        { "id": "rule-central-frames", "implementsMeansIds": ["means-solidaristic-bargaining"], "text": "LO and SAF peak organizations negotiated national wage frames that structured lower-level bargaining.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 680–690" }] }
+      ],
+      "rulesInUse": [
+        { "id": "practice-wage-drift", "text": "Local wage drift reintroduced firm-specific scarcity and bargaining effects beneath central settlements.", "kind": "fact", "uncertainty": "moderate", "citations": [{ "sourceId": "molinder-2019", "locator": "pp. 100–106" }] }
+      ],
+      "interactionPatterns": [
+        { "id": "interaction-restructuring", "text": "Common wage pressure encouraged low-productivity firms to modernize or exit while labor-market policy attempted to move displaced workers toward expanding firms.", "kind": "inference", "participantIds": ["participant-lo", "participant-saf", "participant-ams"], "uncertainty": "moderate", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 680–690" }] }
+      ],
+      "outcomes": [
+        { "id": "outcome-wage-compression", "text": "Swedish wage dispersion fell sharply in the late 1960s and 1970s, with deliberate union policy explaining a substantial share of the later compression.", "kind": "fact", "uncertainty": "moderate", "citations": [{ "sourceId": "molinder-2019", "locator": "pp. 97–121" }] },
+        { "id": "outcome-restructuring", "text": "Reduced inter-industry wage differentials were associated with higher output and productivity, but within-industry compression was not.", "kind": "fact", "uncertainty": "moderate", "citations": [{ "sourceId": "hibbs-locking-2000", "locator": "pp. 755–782" }] }
+      ]
+    },
+    {
+      "id": "sweden-wage-earner-funds-1984-1991",
+      "name": "Enacted Swedish wage-earner funds",
+      "location": "Sweden",
+      "period": { "start": "1984", "end": "1991" },
+      "boundary": "Covers the five enacted AP-system fund boards from revenue collection through abolition; distinguishes them from the open-ended 1975 Meidner proposal.",
+      "traditionRelationship": { "traditionId": "social-democratic-tradition", "relation": "contested", "reasoning": "The enacted compromise pursued several social-democratic aims but materially changed the labor-ownership proposal that prompted it." },
+      "context": { "materialConditions": ["Financial deregulation, equity-market growth, and the 1990–1991 market reversal."], "communityAttributes": ["Polarized conflict between organized labor and organized business over ownership."] },
+      "participants": [
+        { "id": "participant-fund-boards", "label": "Five fund boards", "role": "Delegated public pension investors", "resources": ["tax-financed capital", "voting rights"], "information": ["market prices", "company disclosures"] },
+        { "id": "participant-local-unions", "label": "Local unions", "role": "Potential delegated voters", "resources": ["half of associated voting rights on request"], "information": ["workplace knowledge"] },
+        { "id": "participant-government", "label": "Government and parliament", "role": "Rule maker and appointing authority", "resources": ["legislation", "appointments", "abolition authority"], "information": ["tax receipts", "audit reports"] }
+      ],
+      "formalRules": [
+        { "id": "rule-fund-caps", "implementsMeansIds": ["means-fund-boards"], "text": "The five boards received time-limited tax revenue and faced statutory caps on funding, ownership, and listed-company voting power.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "prop-1983-84-50", "locator": "sections 2.2–2.3 and proposed statutes" }] }
+      ],
+      "rulesInUse": [
+        { "id": "practice-conventional-investor", "text": "The funds generally acted as diversified long-term investors and did not pool holdings or seek company-board control.", "kind": "fact", "uncertainty": "moderate", "citations": [{ "sourceId": "westerberg-2023", "locator": "pp. 1021–1030" }] }
+      ],
+      "interactionPatterns": [
+        { "id": "interaction-fund-investment", "text": "Capped boards diversified holdings and generally avoided control, while local voting delegation produced limited employee influence.", "kind": "inference", "participantIds": ["participant-fund-boards", "participant-local-unions", "participant-government"], "uncertainty": "moderate", "citations": [{ "sourceId": "westerberg-2023", "locator": "pp. 1021–1030" }] }
+      ],
+      "outcomes": [
+        { "id": "outcome-limited-control", "text": "By 1991 the funds held about 2.6 percent of exchange value and never became controlling owners.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "westerberg-2023", "locator": "pp. 1025–1031" }] },
+        { "id": "outcome-abolition", "text": "The incoming center-right government abolished the boards at the turn of 1991–1992.", "kind": "fact", "uncertainty": "low", "citations": [{ "sourceId": "prop-1991-92-36", "locator": "proposal summary and sections 2–3" }] }
+      ]
+    }
+  ],
+  "interpretations": [
+    { "id": "interpretation-diluted", "target": { "type": "outcome", "id": "outcome-limited-control" }, "position": "challenges", "attributedTo": ["Rikard Westerberg"], "reasoning": "Compare the enacted caps and investor behavior with the original ownership-transfer mechanism.", "scope": { "caseIds": ["sweden-wage-earner-funds-1984-1991"], "geography": ["Sweden"], "period": { "start": "1984", "end": "1991" } }, "text": "The enacted caps diluted the ownership-transforming mechanism enough that limited worker control was largely designed in.", "kind": "inference", "uncertainty": "moderate", "citations": [{ "sourceId": "westerberg-2023", "locator": "pp. 1014–1037" }] },
+    { "id": "interpretation-pluralist", "target": { "type": "outcome", "id": "outcome-limited-control" }, "position": "qualifies", "attributedTo": ["prototype editorial analysis"], "reasoning": "Apply the accountability Criterion to statutory ownership and voting limits rather than treating maximum labor control as the only End.", "scope": { "caseIds": ["sweden-wage-earner-funds-1984-1991"], "geography": ["Sweden"], "period": { "start": "1984", "end": "1991" } }, "text": "The same caps can be interpreted as safeguards for ownership pluralism and limits on delegated fund power.", "kind": "value-judgment", "uncertainty": "high", "citations": [{ "sourceId": "prop-1983-84-50", "locator": "section 2.3.4" }] }
+  ],
+  "traces": [
+    {
+      "id": "trace-sd-distribution-ownership",
+      "challengeId": "challenge-distribution-of-gains-and-ownership",
+      "endAttributionIds": ["end-attribution-rehn-meidner-equality", "end-attribution-funds-influence"],
+      "meansIds": ["means-solidaristic-bargaining", "means-fund-boards"],
+      "expectedInteractions": [
+        { "id": "expected-distribution-interaction", "text": "Wage compression should shift gains toward lower-paid workers, while collective capital claims should alter who receives profit and exercises ownership rights.", "kind": "inference", "participantIds": ["participant-lo", "participant-fund-boards"], "uncertainty": "high", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 680–690" }, { "sourceId": "prop-1983-84-50", "locator": "sections 2.1–2.3" }] }
+      ],
+      "caseIds": ["sweden-rehn-meidner-1951-1983", "sweden-wage-earner-funds-1984-1991"],
+      "outcomeIds": ["outcome-wage-compression", "outcome-limited-control"],
+      "assessments": [
+        { "id": "assessment-distribution", "criterionId": "criterion-distribution", "outcomeIds": ["outcome-wage-compression", "outcome-limited-control"], "interpretationIds": ["interpretation-diluted", "interpretation-pluralist"], "reasoning": "Wage, wealth, ownership, and control are separate outcomes; evidence for one cannot stand in for the others.", "text": "The arrangements affected wage distribution, but this evidence does not establish a comparable reduction in private wealth concentration.", "kind": "inference", "uncertainty": "high", "citations": [{ "sourceId": "molinder-2019", "locator": "pp. 97–121" }, { "sourceId": "westerberg-2023", "locator": "pp. 1025–1031" }] }
+      ]
+    },
+    {
+      "id": "trace-sd-coordination-accountability",
+      "challengeId": "challenge-coordination-and-accountability",
+      "endAttributionIds": ["end-attribution-rehn-meidner-equality", "end-attribution-funds-influence"],
+      "meansIds": ["means-solidaristic-bargaining", "means-fund-boards"],
+      "expectedInteractions": [
+        { "id": "expected-accountability-interaction", "text": "Delegation to peak bargainers and capped fund boards should increase coordination, but may weaken direct voice and create principal-agent problems.", "kind": "inference", "participantIds": ["participant-lo", "participant-saf", "participant-fund-boards", "participant-government"], "uncertainty": "high", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 695–710" }, { "sourceId": "prop-1983-84-50", "locator": "sections 2.2–2.3" }] }
+      ],
+      "caseIds": ["sweden-rehn-meidner-1951-1983", "sweden-wage-earner-funds-1984-1991"],
+      "outcomeIds": ["outcome-abolition", "outcome-limited-control"],
+      "assessments": [
+        { "id": "assessment-accountability", "criterionId": "criterion-accountability", "outcomeIds": ["outcome-abolition", "outcome-limited-control"], "interpretationIds": ["interpretation-diluted", "interpretation-pluralist"], "reasoning": "Coordination capacity and accountability must be assessed separately across peak organizations, fund boards, and elected institutions.", "text": "Peak bargaining and appointed fund boards created coordination capacity while raising distinct questions about representation, contestability, and electoral durability.", "kind": "inference", "uncertainty": "high", "citations": [{ "sourceId": "erixon-2010", "locator": "pp. 695–710" }, { "sourceId": "prop-1991-92-36", "locator": "proposal summary and sections 2–3" }] }
+      ]
+    }
+  ]
+}

@@ -16,10 +16,32 @@ summary opens into its reasoning.
 
 The information architecture follows the proposed
 [Ends, Means, Challenges, and Criteria framework](analytical-framework.md).
-“Challenges” is the public label for the current crux collection; stable
-internal IDs may remain during migration. Ends and Means describe systems,
-Challenges organize common questions, and Criteria disclose how responses are
-being evaluated.
+It is a clean replacement model, not a relabeling of the current matrix. Ends
+are attributable, Means are concrete arrangements, Challenges organize open
+questions, bounded cases show practice, and Criteria disclose how an assessment
+is being made. Traditions and ideal types provide context; they do not turn a
+country into an instance of one homogeneous system.
+
+## UI decisions to carry forward
+
+The ontology is changing, but the strongest earlier interface decisions remain:
+
+- the calm “comparative instrument” character and field-instrument visual
+  language;
+- the asymmetric Ends / Means / Practice / Criteria reading frame;
+- claim-adjacent evidence, uncertainty, disagreement, and correction actions;
+- semantic comparison tables with deliberate horizontal scrolling;
+- a focused single-Challenge mobile comparison rather than a generic card feed;
+- accessible, URL-addressable filters and a spatially legible pivot;
+- bibliography-first source pages where library and reading access outrank
+  disclosed purchase links; and
+- restrained motion, strong focus states, and no political red/blue coding.
+
+What does **not** carry forward is the assumption that every tradition must
+fill one rectangular grid, that one cell owns the whole analysis, or that a
+verdict is the primary visual summary. The eventual comparison surface should
+be generated from response traces and may be sparse where honest evidence or a
+meaningful relationship is absent.
 
 ## Signature: the analytical reading frame
 
@@ -69,9 +91,10 @@ grids, and generic “serious publication” sepia.
 | Signal amber | `#C47712` | Contested and needs-review states |
 | Field teal | `#087E72` | Verified and extensive-evidence states |
 
-Weak, failed, or untested systems must not share a single alarm-red treatment.
-Verdicts are semantic labels, not a traffic-light score. Color contrast must be
-tested before these values become implementation tokens.
+Weak, failed, or untested claims must not share a single alarm-red treatment.
+Evidence, uncertainty, and interpretation are separate semantic labels, never
+a traffic-light score. Color contrast must be tested before these values become
+implementation tokens.
 
 ## Typography
 
@@ -92,31 +115,31 @@ readable text, and compact apparatus.
 ### Home: start with the instrument
 
 Do not spend the first viewport on a slogan. Introduce the method in two short
-sentences and show a useful portion of the real matrix immediately.
+sentences and open a useful comparison immediately.
 
 ```text
 ┌ Ends and Means ────── Compare  Reading  Method  Contribute ┐
 │ Political and economic systems in theory and practice.       │
 │ Start with a problem, not an ideology.                        │
 ├──────────────────────────────────────────────────────────────┤
-│ [Evidence ▾] [Hide untested] [Transpose]                   │
-│ CRUX                 SOCIAL DEM.  MARKET SOC.  CENTRAL PLAN.  │
-│ Information         STRONG       MIXED        WEAK           │
-│ Innovation          STRONG       MIXED        LIMITED        │
-│ Workplace voice     MODERATE     STRONG       WEAK           │
+│ Challenge: [Distribution of gains and ownership ▾]          │
+│ RESPONSE             MEANS          CASE          ASSESSMENT │
+│ Solidaristic wages  Central frames Sweden 1951–83  Read →   │
+│ Wage-earner funds   Capped boards  Sweden 1984–91  Read →   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The matrix is a semantic table on wide screens. Freeze the Challenge column and
-column headers. Use deliberate horizontal scrolling rather than compressing
-eight systems into illegibility. On narrow screens, switch to one selected Challenge
-across systems; never turn 112 cells into an endless generic card feed.
+Comparisons use semantic tables on wide screens. Freeze the identifying column
+and headers where helpful. Use deliberate horizontal scrolling rather than
+compressing unlike responses into illegibility. On narrow screens, focus on one
+selected Challenge and preserve the Ends → Means → Practice → Criteria sequence;
+never turn the full evidence graph into an endless generic card feed.
 
 ### Entity pages: comparison dossier
 
 ```text
 ┌ identity rail ────────┬ argument ─────────────┬ evidence rail ─────┐
-│ System / Challenge │ Ends                 │ Evidence: partial   │
+│ Response / Challenge│ Ends                 │ Evidence gaps       │
 │ neighbor navigation│ Means                │ Criteria used       │
 │                     │ Practice + outcomes  │ 3 sources / 2 cases│
 │                     │ Uncertainty          │ Suggest correction │
@@ -147,8 +170,9 @@ and never visually outrank access or citation information.
 
 “Suggest a correction” appears beside the evidence state, not as a floating chat
 bubble. It opens a prefilled GitHub issue containing the entity ID, claim anchor,
-and page URL. Use specific actions such as “Challenge this verdict,” “Add a
-source,” and “Report a broken link.” Avoid an undifferentiated comment box.
+and page URL. Use specific actions such as “Challenge this assessment,” “Offer
+another interpretation,” “Add a source,” and “Report a broken link.” Avoid an
+undifferentiated comment box.
 
 ## Voice
 
@@ -163,7 +187,7 @@ tagline repeated throughout the site.
 ## Accessibility baseline
 
 - Preserve semantic table relationships in every matrix mode.
-- Never encode verdict or evidence in color alone.
+- Never encode evidence, uncertainty, or interpretation in color alone.
 - Provide visible, high-contrast focus states.
 - Keep filters operable without precision pointing.
 - Announce filter result changes without moving keyboard focus.

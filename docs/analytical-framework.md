@@ -22,11 +22,11 @@ SYSTEM
     └── assessment under explicit criteria
 ```
 
-The public vocabulary is **Challenges**, not “Cruxes.” Existing `c01`–`c14`
-IDs and internal `crux` fields may remain during migration so URLs and source
-history do not churn. **Criteria** are not a replacement name for Challenges:
-a challenge is the problem being examined; criteria are the declared lenses
-used to assess responses.
+**Criteria** are not a replacement name for Challenges: a challenge is the
+problem being examined; criteria are the declared lenses used to assess
+responses. The replacement schema should be modeled cleanly without aliases or
+compatibility fields from the exploratory matrix. One-time extraction and any
+necessary archival redirects belong outside the new content model.
 
 ## Ends
 

@@ -1,9 +1,16 @@
 # Implementation Brief: Comparative Political-Economy Website
 
+> **Status: superseded implementation brief.** This documents the exploratory
+> matrix site currently deployed. It is retained as a record and research input,
+> not as the target architecture. New work follows `analytical-framework.md`,
+> `design-notes.md`, and the clean prototype under
+> `prototypes/analytical-framework/`; nothing here is a compatibility
+> requirement for the replacement.
+
 **Title:** Ends and Means
 **Subtitle:** Political and economic systems in theory and practice
 **Canonical domain:** endsandmeans.info
-**Status:** working implementation; analytical-model revision proposed
+**Status:** superseded by the analytical-model prototype
 **Owner:** Doug
 
 ## 1. What this is
