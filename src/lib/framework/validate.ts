@@ -33,6 +33,12 @@ export function validateFrameworkDraft(input: unknown): string[] {
     ...value.responses.flatMap(({ means, failureHypotheses }) => [...means, ...failureHypotheses].map(({ id }) => id)),
   ];
   if (new Set(ids).size !== ids.length) errors.push("all framework IDs must be globally unique");
+  for (const tradition of value.traditions) {
+    if (tradition.overview.length < 2 || tradition.overview.some((paragraph) => !paragraph.trim())) errors.push(`${tradition.id}: overview requires at least 2 substantive paragraphs`);
+    if (tradition.distinctions.length < 3 || tradition.distinctions.some((item) => !item.trim())) errors.push(`${tradition.id}: requires at least 3 boundary distinctions`);
+    if (tradition.commonQuestions.length < 3) errors.push(`${tradition.id}: requires at least 3 common questions`);
+    for (const item of tradition.commonQuestions) if (!item.question.trim() || !item.answer.trim()) errors.push(`${tradition.id}: common question requires a question and answer`);
+  }
   for (const challenge of value.challenges) {
     if (!challenge.topicIds.length) errors.push(`${challenge.id}: Challenge requires at least one Topic`);
     for (const topicId of challenge.topicIds) if (!topics.has(topicId)) errors.push(`${challenge.id}: unresolved Topic ${topicId}`);

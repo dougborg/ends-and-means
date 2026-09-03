@@ -6,6 +6,29 @@
       "id": "laissez-faire-capitalism",
       "name": "Laissez-faire capitalism",
       "description": "private ownership, minimal state (defense, courts, contract enforcement).",
+      "overview": [
+        "Laissez-faire capitalism is a family of arguments for organizing most production and exchange through private property, voluntary contract, market prices, and competition. In its minimal-state forms, public authority still defines and enforces property, contract, and protections against force or fraud.",
+        "The tradition places unusual confidence in decentralized choice and price signals, while treating concentrated public discretion as a recurring danger. Its central disputes concern whether nominally voluntary exchange remains meaningfully voluntary when wealth, bargaining power, information, or market access are highly unequal."
+      ],
+      "distinctions": [
+        "Minimal-state capitalism, not the absence of all government",
+        "A theoretical tradition, not a description of every market economy",
+        "Private ownership and contract as institutions that still require rules and enforcement"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is laissez-faire capitalism the same as anarcho-capitalism?",
+          "answer": "No. Most laissez-faire traditions retain a state for courts, defense, property, and contract enforcement. Anarcho-capitalism proposes private provision of those functions as well."
+        },
+        {
+          "question": "Does laissez-faire mean that markets have no rules?",
+          "answer": "No. Property, contract, liability, bankruptcy, and corporate forms are rules. The disagreement is mainly about their scope, source, and how much discretionary regulation should accompany them."
+        },
+        {
+          "question": "Has a completely laissez-faire economy existed?",
+          "answer": "That is not established here. Historical economies combine public and private institutions, so the label is better used for a direction of argument or an ideal type than as an unqualified country classification."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -13,6 +36,29 @@
       "id": "social-democratic-tradition",
       "name": "Social-democratic capitalism",
       "description": "private ownership and markets plus a large tax-funded state correcting failures and redistributing. Nordic model; the German variant adds codetermination.",
+      "overview": [
+        "Social-democratic capitalism combines predominantly private ownership and market coordination with democratic government, collective bargaining, social insurance, public services, and economic regulation. It generally seeks to constrain the risks and inequalities of capitalism without replacing markets as the main coordinating institution.",
+        "There is no single social-democratic package. Nordic, continental European, and later reform traditions differ over ownership, unions, taxation, industrial policy, universal benefits, and the degree to which workers should share authority inside firms."
+      ],
+      "distinctions": [
+        "Capitalist ownership with extensive social and democratic constraints",
+        "Broader than a welfare state alone",
+        "Historically variable across parties, countries, and periods"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is social democracy the same as democratic socialism?",
+          "answer": "They overlap historically and politically, but they are not interchangeable. Many contemporary social democrats accept a durable mixed capitalist economy, while democratic socialists generally seek deeper changes in ownership or economic authority."
+        },
+        {
+          "question": "Does social democracy mean that the state runs most businesses?",
+          "answer": "Not necessarily. Its characteristic arrangements can include private firms, public enterprises, cooperatives, regulated markets, collective bargaining, and tax-funded services in different combinations."
+        },
+        {
+          "question": "Is the Nordic model one uniform system?",
+          "answer": "No. Nordic institutions differ by country and have changed substantially over time. The phrase is a comparative shorthand, not a complete institutional description."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -20,6 +66,29 @@
       "id": "market-socialist-tradition",
       "name": "Market socialism / economic democracy",
       "description": "worker-managed or socially-owned firms competing in markets. Schweickart's model, Yugoslav self-management, Mondragón-style cooperative federations.",
+      "overview": [
+        "Market socialism and economic democracy describe proposals that retain markets for at least some allocation while changing who owns firms, who governs workplaces, or who receives returns to capital. Common models emphasize worker cooperatives, social investment funds, public ownership, or combinations of these institutions.",
+        "The category contains major disagreements. Some approaches center workplace democracy, others social ownership of investment, and others a mixed economy with stronger worker voice. Their shared question is whether market coordination can be separated from concentrated private ownership and hierarchical control."
+      ],
+      "distinctions": [
+        "Markets without conventional capital ownership as the defining combination",
+        "Not one blueprint for cooperatives or public ownership",
+        "Workplace authority and investment control are separate design questions"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is market socialism a contradiction?",
+          "answer": "Not by definition. Markets describe a mode of exchange and coordination; socialism in these proposals describes ownership, governance, or the distribution of investment returns. Whether the combination is stable or desirable remains disputed."
+        },
+        {
+          "question": "Is every worker cooperative an example of market socialism?",
+          "answer": "A cooperative can illustrate one institution associated with the tradition, but a firm operating inside a broader capitalist economy does not by itself establish a system-wide arrangement."
+        },
+        {
+          "question": "Does market socialism eliminate competition?",
+          "answer": "Usually not. Many versions retain competition among enterprises while changing ownership and governance. Other versions limit markets in investment, land, essential services, or other domains."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -27,6 +96,29 @@
       "id": "centrally-planned-economy",
       "name": "Central planning",
       "description": "state ownership and administrative allocation without market prices. Soviet-type; computational planning is the modern variant.",
+      "overview": [
+        "Central planning coordinates significant production and investment through administrative decisions rather than relying primarily on decentralized market prices. Planning bodies may set output targets, allocate inputs, direct investment, or establish priorities across sectors and enterprises.",
+        "The label covers different institutional designs, from hierarchical command systems to proposals for democratic or computational planning. Those differences matter: who supplies information, who can revise a plan, and who bears the consequences of error are more revealing than the word planning alone."
+      ],
+      "distinctions": [
+        "Administrative allocation as a dominant coordinating mechanism",
+        "Planning exists inside market economies too; dominance and scope are what distinguish this category",
+        "Centralized, democratic, and computational proposals should not be collapsed"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Does central planning mean one office decides every detail?",
+          "answer": "Not necessarily. Plans can be hierarchical and distributed across agencies and enterprises. The analytical questions are which decisions are binding, where information moves, and who can correct errors."
+        },
+        {
+          "question": "Is all public investment central planning?",
+          "answer": "No. Governments and firms routinely plan within market economies. This ideal type applies when administrative allocation replaces markets across a substantial range of production and investment decisions."
+        },
+        {
+          "question": "Would better computers settle the planning debate?",
+          "answer": "Computation may change what can be processed, but it does not by itself settle how preferences are expressed, information is elicited, priorities are chosen, power is constrained, or errors are contested."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -34,6 +126,29 @@
       "id": "social-anarchist-tradition",
       "name": "Social anarchism",
       "description": "no state; production by federated worker associations or communes. Mutualism, collectivism, syndicalism, anarcho-communism. Spain 1936–39 is the main test; Ostrom's polycentric commons the closest documented small-scale analogue.",
+      "overview": [
+        "Social anarchism groups traditions that reject the state and other entrenched hierarchies while emphasizing cooperation, mutual aid, common or worker control, and federated self-government. It includes mutualist, collectivist, anarcho-communist, and syndicalist currents that disagree over property, exchange, and organization.",
+        "Its institutional question is not whether organization disappears, but how coordination and enforcement might occur without a sovereign hierarchy. Proposals therefore focus on associations, councils, communes, unions, federations, and negotiated rules whose authority is intended to remain contestable from below."
+      ],
+      "distinctions": [
+        "Opposition to hierarchy, not opposition to organization",
+        "Federation and association rather than an isolated localism",
+        "Several incompatible positions on markets, property, and remuneration"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Does anarchy mean the absence of rules?",
+          "answer": "Not in this tradition. Social anarchists typically distinguish rules and collective coordination from a state or entrenched hierarchy. The difficult issue is how rules gain legitimacy and are enforced without recreating domination."
+        },
+        {
+          "question": "Is social anarchism necessarily anti-market?",
+          "answer": "No. Mutualist currents have defended forms of exchange and possession, while anarcho-communist currents reject markets more broadly. The category should preserve that disagreement."
+        },
+        {
+          "question": "Does local self-government rule out large-scale coordination?",
+          "answer": "Not in theory. Federation is meant to connect local bodies across larger scales. Whether those arrangements can coordinate complex interdependence without concentrating authority is a central research question."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -41,6 +156,29 @@
       "id": "state-capitalist-ideal-type",
       "name": "State capitalism / developmental state",
       "description": "markets and private firms, with the state steering credit, protecting strategic sectors, and owning key enterprises. Singapore, South Korea, Taiwan; China since 1978.",
+      "overview": [
+        "State capitalism and the developmental state are overlapping but contested labels for economies in which markets and firms operate alongside unusually directive public control over finance, investment, strategic sectors, or major enterprises. The state may act as owner, lender, coordinator, regulator, or partner to private capital.",
+        "The combined category is useful for exploring state direction, but it can also conceal important differences. Public ownership, authoritarian political control, export-oriented industrial policy, and ordinary regulation are not the same institution and should be separated in historical analysis."
+      ],
+      "distinctions": [
+        "Market activity combined with directive state ownership or coordination",
+        "Developmental-state and state-capitalist labels overlap but are not synonyms",
+        "A contested analytical category rather than a neutral country classification"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is every mixed economy state capitalist?",
+          "answer": "That usage would be too broad for this project. The category is most useful where state ownership, credit allocation, or strategic direction plays a defining role rather than merely setting background rules."
+        },
+        {
+          "question": "Is a developmental state necessarily authoritarian?",
+          "answer": "No by definition, although prominent historical cases raise that association. Political regime, administrative capacity, industrial policy, and ownership should be modeled as related but separate dimensions."
+        },
+        {
+          "question": "Does state ownership eliminate markets?",
+          "answer": "No. State-owned firms may sell in markets, compete, earn profits, and operate alongside private firms. Ownership and coordination mechanisms must be described separately."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -48,6 +186,29 @@
       "id": "anarcho-capitalist-tradition",
       "name": "Anarcho-capitalism",
       "description": "no state; law, courts, and defense supplied by competing private agencies (Rothbard, David Friedman). No real-world case; medieval Iceland and Somalia 1991–2006 are the contested analogies.",
+      "overview": [
+        "Anarcho-capitalism proposes extending private property, contract, and market competition to functions usually assigned to the state, including adjudication, policing, and defense. Its advocates imagine legal and protective services supplied by firms, associations, insurers, or other voluntary arrangements.",
+        "It shares market-liberal skepticism of public monopoly but differs by rejecting even the minimal state. The key institutional disputes concern whether rival protection agencies could remain competitive, how rights would be defined without a final public authority, and what meaningful consent requires under unequal bargaining power."
+      ],
+      "distinctions": [
+        "No state, including no public monopoly on courts or defense",
+        "Distinct from minimal-state liberalism",
+        "A primarily theoretical tradition with disputed historical analogies"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is anarcho-capitalism simply laissez-faire capitalism?",
+          "answer": "No. Laissez-faire positions commonly retain a minimal state. Anarcho-capitalism proposes private or associational substitutes for its courts, law enforcement, and defense functions."
+        },
+        {
+          "question": "Does it mean that there would be no law?",
+          "answer": "Its advocates propose non-state legal rules and adjudication, not the absence of law. Critics question how conflicting rule systems would be reconciled and how coercive providers would be constrained."
+        },
+        {
+          "question": "Are medieval Iceland or stateless Somalia proven examples?",
+          "answer": "No such classification should be treated as settled. They are contested analogies with institutional and historical differences that require bounded case analysis."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     },
@@ -55,6 +216,29 @@
       "id": "participatory-economics",
       "name": "Participatory economics (Parecon)",
       "description": "no markets, no state; worker and consumer councils, balanced job complexes, pay by effort, allocation by iterated participatory planning with indicative prices (Albert, Hahnel). No real-world case.",
+      "overview": [
+        "Participatory economics, often called Parecon, is a specific proposal for coordinating production and consumption through worker and consumer councils rather than conventional markets or central command. Its design combines participatory planning, social ownership, balanced job complexes, and remuneration based on effort or sacrifice.",
+        "The model aims to distribute decision-making influence in proportion to how people are affected and to prevent both capitalist ownership and a managerial coordinator class. Its open questions concern information burdens, preference formation, expertise, incentives, and how iterative planning would work beyond models and small-scale exercises."
+      ],
+      "distinctions": [
+        "A named institutional model rather than a broad family of all participatory practices",
+        "Council-based iterative planning rather than Soviet-style command planning",
+        "Balanced job complexes and effort-based remuneration are core, not optional details"
+      ],
+      "commonQuestions": [
+        {
+          "question": "Is participatory economics another name for central planning?",
+          "answer": "No. It is designed around iterative proposals from worker and consumer councils rather than commands from a central authority. Critics may see related information problems, but the proposed decision structure is different."
+        },
+        {
+          "question": "Does it retain ordinary markets?",
+          "answer": "The full model is intended to replace conventional markets for production and consumption with participatory planning and indicative prices. Partial adaptations may use some of its institutions without adopting the whole model."
+        },
+        {
+          "question": "Has Parecon been implemented at national scale?",
+          "answer": "No national-scale implementation is established in this draft. Its large-scale performance therefore remains a theoretical and research question rather than an observed record."
+        }
+      ],
       "caveat": "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
       "reviewStatus": "unreviewed-migration"
     }

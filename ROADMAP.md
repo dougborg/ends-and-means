@@ -77,6 +77,12 @@ work is source material, not an API or compatibility contract.
 - [ ] **M2.5 Statement-level correction links.** Add “Suggest a correction” actions
   that prefill the entity, claim anchor, and page URL in a structured GitHub
   issue form.
+- [ ] **M2.6 Complete tradition overview dossiers.** Give every tradition or
+  ideal type a sourced orientation, explicit boundaries and internal variants,
+  characteristic institutional Means, common questions or misconceptions, and
+  links to its strongest bounded cases. All eight pages now have substantial
+  editorial overview drafts, three boundary distinctions, and three FAQs; these
+  remain labeled working answers until claim-level sources are attached.
 
 ## M3 — Comparison explorer
 
@@ -104,6 +110,11 @@ work is source material, not an API or compatibility contract.
   complete 14-Challenge system proposals, deduplication and cross-link checks, graph
   validation, a hard human-review boundary before canonical changes, and
   independent forward tests.
+- [ ] **M4.6 Migrate research skills to the replacement ontology.** Replace the
+  retired fixed-row system proposal contract with proposal routes for
+  traditions, attributed Ends, institutional Means, Topics, Challenges,
+  Criteria, statements, interpretations, and bounded cases. Preserve the hard
+  human-review boundary and authoritative-source requirements.
 
 ## M5 — Expansion (post-v1)
 

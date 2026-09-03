@@ -20,6 +20,7 @@ describe("clean framework migration", () => {
     expect(draft.responses).toHaveLength(72);
     expect(draft.researchNotes).toHaveLength(16);
     expect(draft.sources).toHaveLength(51);
+    expect(draft.traditions.every(({ overview, distinctions, commonQuestions }) => overview.length >= 2 && distinctions.length >= 3 && commonQuestions.length >= 3)).toBe(true);
     const serialized = JSON.stringify(draft);
     expect(serialized).not.toMatch(/"(?:system|crux|cell|verdict|evidence|needsCitation)"\s*:/i);
     expect(validateFrameworkDraft(draft)).toEqual([]);

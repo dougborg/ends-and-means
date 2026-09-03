@@ -22,6 +22,9 @@ export interface Tradition {
   id: string;
   name: string;
   description: string;
+  overview: string[];
+  distinctions: string[];
+  commonQuestions: Array<{ question: string; answer: string }>;
   caveat: string;
   reviewStatus: ReviewStatus;
 }

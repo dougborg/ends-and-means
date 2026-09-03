@@ -138,7 +138,10 @@ describe("generated reference routes", () => {
     expect(stripMarkup(challenge)).toContain("migrated research leads, not reviewed conclusions");
 
     const tradition = await readFile(routeFile("/traditions/social-democratic-tradition/"), "utf8");
-    expect(tradition.match(/<details>/g)).toHaveLength(9);
+    expect(tradition.match(/proposed Means<\/small>/g)).toHaveLength(9);
+    expect(tradition.match(/<section class="tradition-faq"/g)).toHaveLength(1);
+    expect(tradition.match(/<details>/g)).toHaveLength(12);
+    expect(stripMarkup(tradition)).toContain("Questions & misconceptions");
     expect(stripMarkup(tradition)).toContain("Evidence to investigate");
 
     const topic = await readFile(routeFile("/topics/ownership/"), "utf8");
