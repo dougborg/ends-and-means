@@ -1,8 +1,9 @@
 # Analytical Framework: Ends, Means, Challenges, and Criteria
 
-**Status:** proposed foundation for review; not yet a canonical content schema
+**Status:** accepted analytical foundation. The unified canonical TypeScript
+schema is tracked in [#47](https://github.com/dougborg/ends-and-means/issues/47).
 
-Ends and Means compares political-economic systems by tracing the relationship
+Ends and Means compares political-economic approaches by tracing the relationship
 between what they seek, how they organize action, and what happens in bounded
 historical settings. The framework adapts concepts from Institutional Analysis
 and Development (IAD), especially Polski and Ostrom's *An Institutional
@@ -12,7 +13,7 @@ formula for whole societies.
 ## Core model
 
 ```text
-SYSTEM
+APPROACH
 ├── ENDS: values, promises, and legitimacy claims
 ├── MEANS: institutions, rules, incentives, and distributions of authority
 └── RESPONSES TO SHARED CHALLENGES
@@ -30,7 +31,7 @@ necessary archival redirects belong outside the new content model.
 
 ## Ends
 
-Ends describe what a system, tradition, advocate, or institution claims to
+Ends describe what an approach, advocate, or institution claims to
 value or produce. Record three attribution types separately:
 
 1. **Declared:** stated in an attributable text, platform, constitution, or
@@ -61,7 +62,7 @@ questions:
 | Payoff | Who receives benefits, bears costs, or faces sanctions? |
 
 Analyze these rules at operational, collective-choice, and constitutional
-levels where the distinction matters. A system may be decentralized in daily
+levels where the distinction matters. An approach's proposed institutions may be decentralized in daily
 operation while centralizing authority over who can change the rules.
 
 ## Challenges
@@ -78,8 +79,8 @@ patterns of cooperation, bargaining, capture, evasion, or conflict.
 
 ## Context, practice, and outcomes
 
-Never infer a system's universal performance directly from a country label.
-Historical evidence belongs to a bounded case or state/regime period and should
+Never infer an approach's universal performance directly from a country label.
+Historical evidence belongs to a bounded Case or state/regime period and should
 record material conditions, community attributes, formal rules, rules-in-use,
 participants, and time period where sources allow.
 
@@ -123,8 +124,8 @@ assessment can still need citation.
 
 ## Product implications
 
-- System dossiers open with distinct Ends and Means sections.
-- Challenge pages ask one common question across systems.
+- Approach dossiers open with an explicit kind, domains, and distinct Ends and Means sections.
+- Challenge pages ask one common question across approaches.
 - Comparison pages use an Ends / Means / Practice frame and name the criteria
   behind any assessment.
 - Case pages carry context and rules-in-use rather than serving as timeless
@@ -142,6 +143,26 @@ must not imply that large, internally diverse traditions can be mechanically
 encoded or predicted. The framework is a checklist for asking better questions
 and exposing assumptions; it is not a scientific score generator or a claim
 that all political disagreement can be resolved empirically.
+
+## Approaches, Cases, and fictional Depictions
+
+**Approach** is the reader-facing umbrella for traditions, ideal types,
+institutional families, and named institutional models. Each Approach records
+its more precise kind and the institutional domains it addresses; the umbrella
+must not imply that unlike entities are interchangeable.
+
+Real-world practice belongs in a **Case** with geographic and temporal bounds.
+Cases may be historical or ongoing. Ongoing Cases require an explicit
+`as of` date, review date, and update state so current conditions are never
+presented as timeless. A typed, sourced relationship describes whether a Case
+was influenced by, partially instantiates, contests, hybridizes, or departs
+from an Approach. A country or government is never itself proof of an Approach.
+
+Fictional political economies belong in separate **Depictions** tied to their
+works and editions. They may illuminate or criticize an Approach, End, Means,
+or Challenge, but cannot serve as empirical evidence for real-world outcomes.
+Interpretive relationships require attribution, primary-text locations,
+spoiler scope, and copyright-safe summaries.
 
 ## Foundational source
 
