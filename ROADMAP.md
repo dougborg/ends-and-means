@@ -8,12 +8,12 @@ GitHub issue when the private remote is available.
 - [x] **M1.0 Choose the implementation stack.** Use Astro for static rendering
   and isolated matrix interactivity, with a framework-independent TypeScript
   content compiler. Record the decision and boundaries in an ADR.
-- [ ] **M1.1 Scaffold the chosen stack and CI.** Pin the runtime, add
+- [x] **M1.1 Scaffold the chosen stack and CI.** Pin the runtime, add
   install/build checks, and document the clean-clone path.
-- [ ] **M1.2 Import the 8×14 matrix.** Parse systems, cruxes, cells, and row
+- [x] **M1.2 Import the 8×14 matrix.** Parse systems, cruxes, cells, and row
   verdicts without rewriting source prose. Acceptance: exactly 8 systems, 14
   cruxes, and 112 unique cells.
-- [ ] **M1.3 Import and classify the reading list.** Preserve section and note;
+- [x] **M1.3 Import and classify the reading list.** Preserve section and note;
   assign every source a verification tier. Acceptance: stable IDs and no
   duplicate IDs.
 - [ ] **M1.4 Curate verdict and evidence mappings.** Replace importer heuristics

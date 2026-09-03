@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "counts": {
+    "systems": 8,
+    "cruxes": 14,
+    "cells": 112,
+    "sourceCandidates": 51
+  },
+  "unresolved": {
+    "structuralGaps": [
+      {
+        "cruxId": "crux-10-track-record",
+        "missing": [
+          "prompt",
+          "verdictText"
+        ],
+        "reason": "The source document omits this field; the importer does not synthesize it."
+      }
+    ],
+    "verdicts": [
+      {
+        "cruxId": "crux-01-information-and-coordination",
+        "verdictText": "Laissez-faire, social democracy, state capitalism (for catch-up) — strong. Market socialism — strong on goods, weak on investment. Central planning — weak, with a strong negative record. Social anarchism — strong in mutualist form, untested otherwise. Anarcho-capitalism — strong on private goods, no answer for public ones. Parecon — untested; theoretically contested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-02-innovation-risk-and-failure",
+        "verdictText": "Laissez-faire, social democracy — strong. State capitalism — strong for catch-up, contested at the frontier. Market socialism — mixed. Central planning — weak outside priorities. Social anarchism, anarcho-capitalism, Parecon — untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+        "verdictText": "Partly a value question. Market socialism, social anarchism, and Parecon eliminate the wage relation; social democracy moderates it; the others do not.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+        "verdictText": "Parecon, social anarchism, market socialism — strongest by design, all scale-limited. Social democracy — moderate. Laissez-faire, anarcho-capitalism, central planning, state capitalism — weak.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-05-externalities-and-public-goods",
+        "verdictText": "Social democracy — strongest record. State capitalism — strong when willing, unaccountable when not. Market socialism — inherits social democracy's tools. Central planning — weak in practice. Social anarchism — local only. Laissez-faire, anarcho-capitalism — weak. Parecon — untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+        "verdictText": "The structural solutions (market socialism, central planning, anarchism, Parecon) relocate concentration rather than eliminate it. Social democracy — mixed, erodes. State capitalism — concentrates in the state. Laissez-faire, anarcho-capitalism — weak.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+        "verdictText": "Social democracy — strongest record, capture unresolved. State capitalism — depends on elite discipline, no guarantee. Anarchism and anarcho-capitalism — remove the target, no answer to re-emergence. Central planning — worst. Laissez-faire — weak by omission. Parecon — untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-08-labor-mobility-and-exit",
+        "verdictText": "Social democracy — strongest. Laissez-faire, anarcho-capitalism — free formally, uneven in practice. State capitalism — free for citizens, restricted for migrants. Market socialism, social anarchism — admission-dependent. Central planning — worst. Parecon — untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-09-provision-of-basic-needs-and-security",
+        "verdictText": "Social democracy — strongest. State capitalism — effective where prioritized (Singapore housing), thin elsewhere. Central planning — unreliable. Market socialism — inherits social democracy. Laissez-faire, anarcho-capitalism — weak. Social anarchism — local. Parecon — untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-10-track-record",
+        "verdictText": null,
+        "reason": "Source document provides no narrative verdict."
+      },
+      {
+        "cruxId": "crux-11-scale-sensitivity",
+        "verdictText": "Laissez-faire, central planning, state capitalism — scale by construction (with information loss). Social democracy — proven to ~100 million. Market socialism, social anarchism — bounded. Anarcho-capitalism, Parecon — unknown, with theoretical reasons for concern.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-12-transition-path",
+        "verdictText": "Social democracy — the only proven peaceful path. Laissez-faire — partial retrenchment only. Market socialism — one serious attempt, defeated. The rest — revolution, dictatorship, or no path.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-13-external-security-and-defense",
+        "verdictText": "Central planning and state capitalism — strongest, at civilian cost. Social democracy, market socialism, laissez-faire — conventional. Social anarchism — weakest with the clearest historical record. Anarcho-capitalism — theoretically unstable. Parecon — unaddressed.",
+        "reason": "Narrative verdict requires editorial classification."
+      },
+      {
+        "cruxId": "crux-14-robustness-to-bad-actors",
+        "verdictText": "Social democracy — strongest record. Social anarchism — strong at small scale (Ostrom), none at large. State capitalism — high variance, no guarantee. Market socialism — moderate. Laissez-faire, anarcho-capitalism — weak against dominant private actors. Central planning — worst. Parecon — partial by design, untested.",
+        "reason": "Narrative verdict requires editorial classification."
+      }
+    ],
+    "cellSources": [
+      {
+        "cellId": "crux-01-information-and-coordination--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-04-hierarchy-and-voice-inside-the-workplace--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-10-track-record--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-12-transition-path--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--laissez-faire-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--social-democratic-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--market-socialism-economic-democracy",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--central-planning",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--social-anarchism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--state-capitalism-developmental-state",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--anarcho-capitalism",
+        "reason": "No citation mapping has been reviewed."
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--participatory-economics-parecon",
+        "reason": "No citation mapping has been reviewed."
+      }
+    ],
+    "referenceHints": [
+      {
+        "cellId": "crux-01-information-and-coordination--laissez-faire-capitalism",
+        "hint": "Hayek"
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--state-capitalism-developmental-state",
+        "hint": "Japan after 1990"
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--state-capitalism-developmental-state",
+        "hint": "China's property and infrastructure debt"
+      },
+      {
+        "cellId": "crux-01-information-and-coordination--participatory-economics-parecon",
+        "hint": "Schweickart, \"Nonsense on Stilts\""
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--market-socialism-economic-democracy",
+        "hint": "Fagor, 2013"
+      },
+      {
+        "cellId": "crux-02-innovation-risk-and-failure--central-planning",
+        "hint": "Kornai"
+      },
+      {
+        "cellId": "crux-03-ownership-of-production-and-control-of-surplus--central-planning",
+        "hint": "Bakunin's prediction"
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--central-planning",
+        "hint": "Aral Sea, Soviet-bloc pollution"
+      },
+      {
+        "cellId": "crux-05-externalities-and-public-goods--social-anarchism",
+        "hint": "Ostrom"
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--laissez-faire-capitalism",
+        "hint": "Piketty"
+      },
+      {
+        "cellId": "crux-06-inequality-and-concentration-of-private-capital--state-capitalism-developmental-state",
+        "hint": "Alibaba/Ant, 2020"
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--social-democratic-capitalism",
+        "hint": "Stigler"
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--market-socialism-economic-democracy",
+        "hint": "Yugoslav banks were politically directed"
+      },
+      {
+        "cellId": "crux-07-concentration-of-state-power-and-capture-of-the-state--anarcho-capitalism",
+        "hint": "Somalia 1991–2006 is the contested case — Leeson argues outcomes improved vs. the prior regime; others point to warlord rule"
+      },
+      {
+        "cellId": "crux-08-labor-mobility-and-exit--social-democratic-capitalism",
+        "hint": "Southern Europe"
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--state-capitalism-developmental-state",
+        "hint": "Singapore's CPF"
+      },
+      {
+        "cellId": "crux-09-provision-of-basic-needs-and-security--state-capitalism-developmental-state",
+        "hint": "HDB houses ~80% of Singaporeans"
+      },
+      {
+        "cellId": "crux-10-track-record--anarcho-capitalism",
+        "hint": "Leeson vs. critics"
+      },
+      {
+        "cellId": "crux-10-track-record--participatory-economics-parecon",
+        "hint": "South End Press, Z Magazine"
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--market-socialism-economic-democracy",
+        "hint": "Mondragón splits them"
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--social-anarchism",
+        "hint": "Ostrom's cases are hundreds to thousands"
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--state-capitalism-developmental-state",
+        "hint": "China"
+      },
+      {
+        "cellId": "crux-11-scale-sensitivity--state-capitalism-developmental-state",
+        "hint": "GDP-target gaming, debt"
+      },
+      {
+        "cellId": "crux-12-transition-path--laissez-faire-capitalism",
+        "hint": "Thatcher, Reagan, Pinochet's Chile"
+      },
+      {
+        "cellId": "crux-12-transition-path--social-democratic-capitalism",
+        "hint": "New Deal, postwar Europe, Nordic reforms"
+      },
+      {
+        "cellId": "crux-12-transition-path--social-anarchism",
+        "hint": "Spain, Ukraine"
+      },
+      {
+        "cellId": "crux-12-transition-path--state-capitalism-developmental-state",
+        "hint": "Korea, Taiwan, Singapore"
+      },
+      {
+        "cellId": "crux-12-transition-path--state-capitalism-developmental-state",
+        "hint": "China"
+      },
+      {
+        "cellId": "crux-12-transition-path--anarcho-capitalism",
+        "hint": "Honduras"
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--social-democratic-capitalism",
+        "hint": "NATO, Nordic cooperation"
+      },
+      {
+        "cellId": "crux-13-external-security-and-defense--anarcho-capitalism",
+        "hint": "Nozick"
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--social-anarchism",
+        "hint": "May 1937"
+      },
+      {
+        "cellId": "crux-14-robustness-to-bad-actors--state-capitalism-developmental-state",
+        "hint": "China's is unresolved"
+      }
+    ],
+    "sourceSplits": [
+      {
+        "sourceId": "source-acemoglu-and-robinson-2019-the-narrow-corridor-2019",
+        "rawMarkdown": "**▶ Acemoglu & Robinson — *The Narrow Corridor* (2019).** The strong-state-vs-strong-society framing; built around exactly the two-sided fear of private and state concentration.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-acemoglu-and-robinson-2012-why-nations-fail-2012",
+        "rawMarkdown": "**Acemoglu & Robinson — *Why Nations Fail* (2012).** Inclusive vs. extractive institutions; why some countries stay in the corridor.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-buchanan-and-tullock-1962-the-calculus-of-consent-1962",
+        "rawMarkdown": "**Buchanan & Tullock — *The Calculus of Consent* (1962).** Public choice: models officials as self-interested and asks which constitutional rules survive that assumption. The intellectual home of the government-tyranny worry.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-besley-and-persson-2011-pillars-of-prosperity-2011",
+        "rawMarkdown": "**Besley & Persson — *Pillars of Prosperity* (2011).** State capacity as a development achievement; why weak states are often more predatory.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-hall-and-soskice-eds-2001-varieties-of-capitalism-2001",
+        "rawMarkdown": "**Hall & Soskice (eds.) — *Varieties of Capitalism* (2001).** The \"coordinated vs. liberal market economies\" framework; the academic basis for treating Germany and the Nordics as a distinct system.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-hayek-1944-the-road-to-serfdom-1944-and-friedman-capitalism-and-freedom-196",
+        "rawMarkdown": "**Hayek — *The Road to Serfdom* (1944)** and **Friedman — *Capitalism and Freedom* (1962).** The canonical statements of the taxation-and-tyranny worry; the laissez-faire side of the argument.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-coase-and-wang-2012-how-china-became-capitalist-2012",
+        "rawMarkdown": "**Coase & Wang — *How China Became Capitalist* (2012).** The state-capitalism / developmental-state case, from the author of \"The Nature of the Firm.\"",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-phillips-and-rozworski-2019-the-people-s-republic-of-walmart-2019",
+        "rawMarkdown": "**Phillips & Rozworski — *The People's Republic of Walmart* (2019).** The modern pro-planning case built on corporate logistics.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-cockshott-and-cottrell-1993-towards-a-new-socialism-1993",
+        "rawMarkdown": "**Cockshott & Cottrell — *Towards a New Socialism* (1993).** The computational-planning proposal.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-whyte-and-whyte-1988-making-mondragon-1988",
+        "rawMarkdown": "**Whyte & Whyte — *Making Mondragon* (1988).** The definitive institutional history; explains the capital-account mechanics.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-michael-albert-2003-parecon-life-after-capitalism-2003",
+        "rawMarkdown": "**Michael Albert — *Parecon: Life After Capitalism* (2003).** Participatory economics; the main non-market democratic proposal. (Albert is sole author; Hahnel co-wrote the earlier academic statements, *The Political Economy of Participatory Economics* and *Looking Forward*, both 1991.) Pair with Schweickart's 2006 critique, \"Nonsense on Stilts: Michael Albert's Parecon\" — a direct market-socialist vs. non-market exchange.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-blasi-freeman-and-kruse-2013-the-citizen-s-share-2013",
+        "rawMarkdown": "**Blasi, Freeman & Kruse — *The Citizen's Share* (2013).** Empirical record of employee ownership in the U.S.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-jager-and-noy-undated-what-does-codetermination-do-nber-working-paper-28921-2021",
+        "rawMarkdown": "**Jäger & Noy — \"What Does Codetermination Do?\" (NBER Working Paper 28921, 2021).** The empirical basis for the codetermination claims in Part 1.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-graeber-and-wengrow-2021-the-dawn-of-everything-2021",
+        "rawMarkdown": "**Graeber & Wengrow — *The Dawn of Everything* (2021).** Argues the archaeological record shows far more variety in political organization than \"state or chaos\" allows. Anthropology by anarchists, not anarchist theory — background, not a statement of the tradition.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      },
+      {
+        "sourceId": "source-ackerman-and-alstott-1999-the-stakeholder-society-1999",
+        "rawMarkdown": "**Ackerman & Alstott — *The Stakeholder Society* (1999).** Universal basic capital.",
+        "reason": "Bullet may describe multiple works or authors; review before splitting."
+      }
+    ]
+  }
+}

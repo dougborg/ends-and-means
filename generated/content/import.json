@@ -1,0 +1,1698 @@
+{
+  "schemaVersion": 1,
+  "systems": [
+    {
+      "id": "laissez-faire-capitalism",
+      "order": 1,
+      "name": "Laissez-faire capitalism",
+      "description": "private ownership, minimal state (defense, courts, contract enforcement)."
+    },
+    {
+      "id": "social-democratic-capitalism",
+      "order": 2,
+      "name": "Social-democratic capitalism",
+      "description": "private ownership and markets plus a large tax-funded state correcting failures and redistributing. Nordic model; the German variant adds codetermination."
+    },
+    {
+      "id": "market-socialism-economic-democracy",
+      "order": 3,
+      "name": "Market socialism / economic democracy",
+      "description": "worker-managed or socially-owned firms competing in markets. Schweickart's model, Yugoslav self-management, Mondragón-style cooperative federations."
+    },
+    {
+      "id": "central-planning",
+      "order": 4,
+      "name": "Central planning",
+      "description": "state ownership and administrative allocation without market prices. Soviet-type; computational planning is the modern variant."
+    },
+    {
+      "id": "social-anarchism",
+      "order": 5,
+      "name": "Social anarchism",
+      "description": "no state; production by federated worker associations or communes. Mutualism, collectivism, syndicalism, anarcho-communism. Spain 1936–39 is the main test; Ostrom's polycentric commons the closest documented small-scale analogue."
+    },
+    {
+      "id": "state-capitalism-developmental-state",
+      "order": 6,
+      "name": "State capitalism / developmental state",
+      "description": "markets and private firms, with the state steering credit, protecting strategic sectors, and owning key enterprises. Singapore, South Korea, Taiwan; China since 1978."
+    },
+    {
+      "id": "anarcho-capitalism",
+      "order": 7,
+      "name": "Anarcho-capitalism",
+      "description": "no state; law, courts, and defense supplied by competing private agencies (Rothbard, David Friedman). No real-world case; medieval Iceland and Somalia 1991–2006 are the contested analogies."
+    },
+    {
+      "id": "participatory-economics-parecon",
+      "order": 8,
+      "name": "Participatory economics (Parecon)",
+      "description": "no markets, no state; worker and consumer councils, balanced job complexes, pay by effort, allocation by iterated participatory planning with indicative prices (Albert, Hahnel). No real-world case."
+    }
+  ],
+  "cruxes": [
+    {
+      "id": "crux-01-information-and-coordination",
+      "number": 1,
+      "title": "Information and coordination",
+      "prompt": "How does the system know what to produce and where resources should go?",
+      "verdictText": "Laissez-faire, social democracy, state capitalism (for catch-up) — strong. Market socialism — strong on goods, weak on investment. Central planning — weak, with a strong negative record. Social anarchism — strong in mutualist form, untested otherwise. Anarcho-capitalism — strong on private goods, no answer for public ones. Parecon — untested; theoretically contested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure",
+      "number": 2,
+      "title": "Innovation, risk, and failure",
+      "prompt": "Who funds experiments, who bears risk, and what happens when something fails?",
+      "verdictText": "Laissez-faire, social democracy — strong. State capitalism — strong for catch-up, contested at the frontier. Market socialism — mixed. Central planning — weak outside priorities. Social anarchism, anarcho-capitalism, Parecon — untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus",
+      "number": 3,
+      "title": "Ownership of production and control of surplus",
+      "prompt": "Who owns productive assets, who captures profit, and what is the status of wage labor?",
+      "verdictText": "Partly a value question. Market socialism, social anarchism, and Parecon eliminate the wage relation; social democracy moderates it; the others do not.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "number": 4,
+      "title": "Hierarchy and voice inside the workplace",
+      "prompt": "Who has authority over work, and how are decisions made?",
+      "verdictText": "Parecon, social anarchism, market socialism — strongest by design, all scale-limited. Social democracy — moderate. Laissez-faire, anarcho-capitalism, central planning, state capitalism — weak.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods",
+      "number": 5,
+      "title": "Externalities and public goods",
+      "prompt": "How are costs and benefits not captured by prices handled?",
+      "verdictText": "Social democracy — strongest record. State capitalism — strong when willing, unaccountable when not. Market socialism — inherits social democracy's tools. Central planning — weak in practice. Social anarchism — local only. Laissez-faire, anarcho-capitalism — weak. Parecon — untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital",
+      "number": 6,
+      "title": "Inequality and concentration of private capital",
+      "prompt": "What stops accumulation from becoming dynastic wealth and political power?",
+      "verdictText": "The structural solutions (market socialism, central planning, anarchism, Parecon) relocate concentration rather than eliminate it. Social democracy — mixed, erodes. State capitalism — concentrates in the state. Laissez-faire, anarcho-capitalism — weak.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "number": 7,
+      "title": "Concentration of state power and capture of the state",
+      "prompt": "What constrains the state, and what prevents the powerful from capturing it?",
+      "verdictText": "Social democracy — strongest record, capture unresolved. State capitalism — depends on elite discipline, no guarantee. Anarchism and anarcho-capitalism — remove the target, no answer to re-emergence. Central planning — worst. Laissez-faire — weak by omission. Parecon — untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit",
+      "number": 8,
+      "title": "Labor mobility and exit",
+      "prompt": "Can people leave a firm or jurisdiction, and how do labor markets clear?",
+      "verdictText": "Social democracy — strongest. Laissez-faire, anarcho-capitalism — free formally, uneven in practice. State capitalism — free for citizens, restricted for migrants. Market socialism, social anarchism — admission-dependent. Central planning — worst. Parecon — untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security",
+      "number": 9,
+      "title": "Provision of basic needs and security",
+      "prompt": "How are healthcare, education, housing, and income floors provided?",
+      "verdictText": "Social democracy — strongest. State capitalism — effective where prioritized (Singapore housing), thin elsewhere. Central planning — unreliable. Market socialism — inherits social democracy. Laissez-faire, anarcho-capitalism — weak. Social anarchism — local. Parecon — untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-10-track-record",
+      "number": 10,
+      "title": "Track record",
+      "prompt": null,
+      "verdictText": null,
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Evidence base",
+        "breaks": "What it shows"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-11-scale-sensitivity",
+      "number": 11,
+      "title": "Scale sensitivity",
+      "prompt": "Does it work at 500 people, 5 million, 500 million?",
+      "verdictText": "Laissez-faire, central planning, state capitalism — scale by construction (with information loss). Social democracy — proven to ~100 million. Market socialism, social anarchism — bounded. Anarcho-capitalism, Parecon — unknown, with theoretical reasons for concern.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-12-transition-path",
+      "number": 12,
+      "title": "Transition path",
+      "prompt": "How do you get there from here without a revolution?",
+      "verdictText": "Social democracy — the only proven peaceful path. Laissez-faire — partial retrenchment only. Market socialism — one serious attempt, defeated. The rest — revolution, dictatorship, or no path.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-13-external-security-and-defense",
+      "number": 13,
+      "title": "External security and defense",
+      "prompt": "Who defends the system from outside coercion?",
+      "verdictText": "Central planning and state capitalism — strongest, at civilian cost. Social democracy, market socialism, laissez-faire — conventional. Social anarchism — weakest with the clearest historical record. Anarcho-capitalism — theoretically unstable. Parecon — unaddressed.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors",
+      "number": 14,
+      "title": "Robustness to bad actors",
+      "prompt": "What happens when the people running it are self-interested or malicious?",
+      "verdictText": "Social democracy — strongest record. Social anarchism — strong at small scale (Ostrom), none at large. State capitalism — high variance, no guarantee. Market socialism — moderate. Laissez-faire, anarcho-capitalism — weak against dominant private actors. Central planning — worst. Parecon — partial by design, untested.",
+      "columnLabels": {
+        "system": "System",
+        "mechanism": "Mechanism",
+        "breaks": "Where it breaks"
+      },
+      "verdict": null
+    }
+  ],
+  "cells": [
+    {
+      "id": "crux-01-information-and-coordination--laissez-faire-capitalism",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Prices aggregate dispersed knowledge; profit and loss steer resources (Hayek).",
+      "breaks": "Prices omit externalities; no mechanism for public goods; monopoly and information asymmetry distort the signal.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--social-democratic-capitalism",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Same price mechanism; the state corrects known distortions and supplies public goods directly.",
+      "breaks": "Correction is only as good as the regulator; heavily regulated sectors can lose the signal.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--market-socialism-economic-democracy",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Price mechanism for goods. Investment allocation is partly administrative (public banks).",
+      "breaks": "The investment side reintroduces a planning problem; banks must judge projects without a capital market's signal.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--central-planning",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "central-planning",
+      "mechanism": "Input-output tables, quotas, administrative allocation; modern variant runs optimization on large datasets.",
+      "breaks": "The calculation problem: tacit and real-time knowledge cannot be centrally collected; quota incentives corrupt reported data. Computation addresses volume, not knowledge that only exists once markets generate it.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--social-anarchism",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "social-anarchism",
+      "mechanism": "Mutualism: markets plus mutual credit. Non-market variants: federated councils negotiate directly.",
+      "breaks": "Mutualism inherits the market's gaps; non-market variants face the calculation problem beyond face-to-face scale. Untested long-run.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--state-capitalism-developmental-state",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Markets for most goods; the state directs credit and investment into targeted sectors via state banks and industrial policy.",
+      "breaks": "Works for catch-up (copying a known frontier); picking winners degrades at the frontier (Japan after 1990). State-owned enterprises and local-government investment misallocate (China's property and infrastructure debt).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--anarcho-capitalism",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Pure price system, extended to law, courts, and security as purchasable services.",
+      "breaks": "No mechanism at all for public goods or diffuse externalities; assumes courts and defense behave like ordinary goods.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-01-information-and-coordination--participatory-economics-parecon",
+      "cruxId": "crux-01-information-and-coordination",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Councils submit consumption and production proposals; facilitation boards compute indicative prices; several rounds of revision converge on a plan.",
+      "breaks": "Never tested. Critics (Schweickart, \"Nonsense on Stilts\") argue the iteration burden is enormous and indicative prices without real trades face the same calculation problem. Hahnel has only simulations.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--laissez-faire-capitalism",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Private risk capital; competition selects; bankruptcy clears failures fast.",
+      "breaks": "Short-termism; under-investment in basic research; winners entrench.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--social-democratic-capitalism",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Same, plus public basic research and social insurance lowering the personal cost of failure.",
+      "breaks": "Too-big-to-fail bailouts soften the budget constraint; public R&D can be captured.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--market-socialism-economic-democracy",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Firms compete and can fail; public banks fund new ventures.",
+      "breaks": "Cooperatives have poor access to outside risk capital; federation solidarity funds recreate the soft budget constraint (Fagor, 2013).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--central-planning",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "central-planning",
+      "mechanism": "Directed investment into state priorities; failure is administrative.",
+      "breaks": "Strong in a few prioritized sectors; stagnant elsewhere; failure is hidden, not cleared (Kornai).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--social-anarchism",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "social-anarchism",
+      "mechanism": "Cooperative credit or communal funding; failure borne by the association.",
+      "breaks": "No scaled evidence; unclear who bears enough concentrated risk for large, long-horizon bets.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--state-capitalism-developmental-state",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Massive directed investment plus private competition in non-strategic sectors; export discipline (firms must compete abroad to keep support).",
+      "breaks": "Excellent for catch-up; frontier innovation is contested — recent Chinese success in EVs, batteries, and solar cuts against the older view that it cannot reach the frontier. Zombie state enterprises persist.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--anarcho-capitalism",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Maximal private risk-bearing; no bailouts of any kind.",
+      "breaks": "No public research at all; same entrenchment problem as laissez-faire with no antitrust remedy.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-02-innovation-risk-and-failure--participatory-economics-parecon",
+      "cruxId": "crux-02-innovation-risk-and-failure",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Councils propose investments; workers are paid for effort, not output.",
+      "breaks": "No risk-bearer; innovation is a collective proposal with no reward for success. Albert addresses this in a chapter; there is no evidence either way.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--laissez-faire-capitalism",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Private ownership; surplus to owners; wage labor as voluntary contract.",
+      "breaks": "The socialist critique: the wage relation is hierarchical, and surplus accrues to capital regardless of contribution.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--social-democratic-capitalism",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Private ownership; surplus partly redirected by taxation; codetermination gives voice without ownership.",
+      "breaks": "Codetermination's measured effects are neutral-to-small-positive; the wage relation is untouched.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--market-socialism-economic-democracy",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Workers own or control the firm; profit distributed to members.",
+      "breaks": "Two-tier workforces in practice (a third of Mondragón's workers are members); members resist new hires.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--central-planning",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "central-planning",
+      "mechanism": "State ownership; workers are employees of the state.",
+      "breaks": "The state becomes the new owning class (Bakunin's prediction).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--social-anarchism",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "social-anarchism",
+      "mechanism": "Collective or communal ownership; no wage labor; distribution by contribution or need.",
+      "breaks": "Firm-level ownership still fragments production into entitled groups (the anarcho-communist objection).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--state-capitalism-developmental-state",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Mixed: private firms, state enterprises, and hybrids; surplus split between private owners and the state; wage labor throughout.",
+      "breaks": "In China the party retains control rights over large private firms regardless of formal ownership; in Korea, chaebol families control conglomerates through minority stakes.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--anarcho-capitalism",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Absolute private ownership including of law and security; wage labor as contract.",
+      "breaks": "Identical to laissez-faire on this crux; removes even the minimal state's constraints on ownership.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-03-ownership-of-production-and-control-of-surplus--participatory-economics-parecon",
+      "cruxId": "crux-03-ownership-of-production-and-control-of-surplus",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Social ownership; no wage labor; remuneration by effort and sacrifice, measured by co-workers.",
+      "breaks": "Effort is hard to measure and easy to game; balanced job complexes require rotating people out of tasks they are best at.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--laissez-faire-capitalism",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Managerial hierarchy answerable to owners; voice is exit or individual bargaining.",
+      "breaks": "Firms are internally command-and-control (\"islands of tyranny\").",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--social-democratic-capitalism",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Hierarchy plus unions, sectoral bargaining, works councils, board seats.",
+      "breaks": "Voice can be outvoted; union density has fallen outside the Nordics.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--market-socialism-economic-democracy",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "One member, one vote; elected managers.",
+      "breaks": "Larger cooperatives drift toward conventional hierarchy; Mondragón splits cooperatives around 400–500 workers.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--central-planning",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "central-planning",
+      "mechanism": "State-appointed management; nominal councils.",
+      "breaks": "Rigid hierarchy with political oversight; dissent is dangerous.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--social-anarchism",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "social-anarchism",
+      "mechanism": "Direct democracy; recallable delegates; bottom-up federation.",
+      "breaks": "Slow, and thins as groups grow.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--state-capitalism-developmental-state",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Managerial hierarchy; unions are state-controlled or party-aligned (China's ACFTU; Singapore's NTUC).",
+      "breaks": "Voice is weakest of any market system; strikes are suppressed or channeled.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--anarcho-capitalism",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Hierarchy by contract; exit only.",
+      "breaks": "Same as laissez-faire, without even labor law.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-04-hierarchy-and-voice-inside-the-workplace--participatory-economics-parecon",
+      "cruxId": "crux-04-hierarchy-and-voice-inside-the-workplace",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Balanced job complexes: every worker does a mix of empowering and rote tasks so no \"coordinator class\" forms; councils decide.",
+      "breaks": "Its signature idea and its most criticized: rotating experts out of expert work trades competence for equality. Untested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--laissez-faire-capitalism",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Coasean bargaining, property rights, private provision.",
+      "breaks": "Bargaining fails for diffuse harms; public goods under-supplied.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--social-democratic-capitalism",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Pigouvian taxes, cap-and-trade, regulation, direct provision.",
+      "breaks": "Regulators can be captured; correction lags. Still the best record.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--market-socialism-economic-democracy",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Same tools applied to worker-owned firms.",
+      "breaks": "Co-ops have no inherent incentive to internalize externalities; need the same external correction.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--central-planning",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "central-planning",
+      "mechanism": "Planners can include any cost in principle.",
+      "breaks": "Worst environmental record of the 20th century in practice (Aral Sea, Soviet-bloc pollution).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--social-anarchism",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "social-anarchism",
+      "mechanism": "Communal ownership aligns incentives locally (Ostrom).",
+      "breaks": "No mechanism for cross-community externalities or continental public goods.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--state-capitalism-developmental-state",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "The state can act decisively when it prioritizes the problem.",
+      "breaks": "Acts only when it chooses to: China's air pollution turnaround after 2013 followed three decades of growth-first neglect. No independent check forces the choice.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--anarcho-capitalism",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Bargaining and private litigation only.",
+      "breaks": "No coercive remedy for diffuse harms; the weakest column on this crux.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-05-externalities-and-public-goods--participatory-economics-parecon",
+      "cruxId": "crux-05-externalities-and-public-goods",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Consumer councils weigh social and environmental impacts in the plan by construction.",
+      "breaks": "Untested; depends on councils correctly valuing harms with no price benchmark.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--laissez-faire-capitalism",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Competition erodes rents; inheritance disperses fortunes.",
+      "breaks": "r > g (Piketty): concentration is the default; network effects create durable monopolies.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--social-democratic-capitalism",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Progressive taxation, inheritance tax, antitrust, codetermination as pre-distribution.",
+      "breaks": "Wealth taxes mostly repealed in Europe; capital mobility disciplines the taxing state; concentration rose across the OECD after 1980.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--market-socialism-economic-democracy",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Structural: no private ownership of large capital.",
+      "breaks": "Concentration relocates to successful cooperatives and public investment banks.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--central-planning",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "central-planning",
+      "mechanism": "Structural: no private capital.",
+      "breaks": "Inequality reappears as political privilege (nomenklatura).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--social-anarchism",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "social-anarchism",
+      "mechanism": "Structural: no capital ownership, no state.",
+      "breaks": "Nothing prevents re-concentration except vigilance; no case has run long enough to observe drift.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--state-capitalism-developmental-state",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "The state can break private concentration at will (Alibaba/Ant, 2020) and owns the commanding heights.",
+      "breaks": "Concentration sits in the party-state and connected families; crony capitalism (chaebol) is the characteristic failure; the state's own power is unchecked.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--anarcho-capitalism",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Nothing structural; competition among protection agencies is supposed to prevent domination.",
+      "breaks": "Nozick's argument: a dominant protection agency becomes a de facto state. Concentration of coercive capacity is the specific risk.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-06-inequality-and-concentration-of-private-capital--participatory-economics-parecon",
+      "cruxId": "crux-06-inequality-and-concentration-of-private-capital",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Structural: no capital; balanced job complexes target the \"coordinator class\" — the technocratic elite that anarchism and Marxism both missed.",
+      "breaks": "Untested; the coordinator-class analysis is Albert's most distinctive contribution and his answer to why Soviet planning produced a new elite.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--laissez-faire-capitalism",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "A small state has little to capture; constitutional limits.",
+      "breaks": "A weak state is captured by default — it cannot enforce against concentrated private power.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--social-democratic-capitalism",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Separation of powers, courts, free press, unions as counter-power, transparency. Taxation itself creates an accountability bargain.",
+      "breaks": "Regulatory capture (Stigler); discretionary spending enables patronage; durability depends on continual re-contestation.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--market-socialism-economic-democracy",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Same tools; fewer concentrated private actors.",
+      "breaks": "Public investment banks are the new capture target (Yugoslav banks were politically directed).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--central-planning",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "central-planning",
+      "mechanism": "None internal; the state is the economy.",
+      "breaks": "Worst case: no separation of economic and political power; no press or courts.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--social-anarchism",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "social-anarchism",
+      "mechanism": "No state to capture; recallable delegates; polycentric governance.",
+      "breaks": "The crux reappears as defense and re-emergence; nothing structurally prevents a coercive organization from re-forming.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--state-capitalism-developmental-state",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Varies entirely with elite discipline: Singapore's low corruption and meritocratic bureaucracy vs. Marcos-era Philippines. Korea and Taiwan later democratized.",
+      "breaks": "State and capital are fused by design; capture runs both ways. Where elites are undisciplined the result is kleptocracy. No internal mechanism guarantees the Singapore outcome.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--anarcho-capitalism",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "No state to capture.",
+      "breaks": "Absent Leviathan: private domination fills the space; protection agencies become warlords or a state (Somalia 1991–2006 is the contested case — Leeson argues outcomes improved vs. the prior regime; others point to warlord rule).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-07-concentration-of-state-power-and-capture-of-the-state--participatory-economics-parecon",
+      "cruxId": "crux-07-concentration-of-state-power-and-capture-of-the-state",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "No state; facilitation boards and councils.",
+      "breaks": "Untested; facilitation boards are the obvious capture target and the coordinator-class problem in miniature.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--laissez-faire-capitalism",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Free labor market.",
+      "breaks": "Non-competes, employer-tied benefits, monopsony.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--social-democratic-capitalism",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Free labor market plus portable benefits; Nordic \"flexicurity.\"",
+      "breaks": "Insider/outsider markets where employment protection is high (Southern Europe).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--market-socialism-economic-democracy",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Workers choose firms but must be admitted; capital accounts pay out slowly; federations reassign internally.",
+      "breaks": "Admission friction, golden handcuffs, mobility bounded by the federation.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--central-planning",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "central-planning",
+      "mechanism": "Administrative assignment; internal passports.",
+      "breaks": "Workers often could not legally change cities; emigration criminalized.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--social-anarchism",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "social-anarchism",
+      "mechanism": "Free association.",
+      "breaks": "Admission-dependent; same dilution logic as cooperatives.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--state-capitalism-developmental-state",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Labor markets mostly free; heavy reliance on migrant and guest labor.",
+      "breaks": "China's hukou system restricts internal migration and excludes migrants from urban services; Singapore's guest-worker regime ties residence to employer.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--anarcho-capitalism",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Free by contract.",
+      "breaks": "Same as laissez-faire; contracts can restrict exit with no labor law to limit them.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-08-labor-mobility-and-exit--participatory-economics-parecon",
+      "cruxId": "crux-08-labor-mobility-and-exit",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Council membership; job complexes assigned within councils.",
+      "breaks": "Movement between councils requires re-balancing job complexes; friction likely. Untested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--laissez-faire-capitalism",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Market provision, charity, insurance.",
+      "breaks": "Systematic under-provision for those who cannot pay; adverse selection.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--social-democratic-capitalism",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Universal tax-funded provision plus social insurance.",
+      "breaks": "Cost growth; the state becomes a large provider (the discretion concern). Strongest outcome record.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--market-socialism-economic-democracy",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Assumes a social-democratic welfare state on top.",
+      "breaks": "Adds nothing beyond social democracy here.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--central-planning",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "central-planning",
+      "mechanism": "Universal state provision by construction.",
+      "breaks": "Chronic shortage: guaranteed on paper, unreliable in practice; famine when the plan fails.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--social-anarchism",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "social-anarchism",
+      "mechanism": "Communal provision; mutual aid societies.",
+      "breaks": "Community scale only.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--state-capitalism-developmental-state",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Targeted, often through mandatory savings (Singapore's CPF) and state housing (HDB houses ~80% of Singaporeans); China expanded basic insurance after 2003.",
+      "breaks": "Korea and Taiwan built welfare states only after democratizing; China's provision is thin outside cities. Coverage follows state priority, not citizen entitlement.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--anarcho-capitalism",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Charity and insurance only.",
+      "breaks": "Weakest column; no mechanism for those who cannot pay.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-09-provision-of-basic-needs-and-security--participatory-economics-parecon",
+      "cruxId": "crux-09-provision-of-basic-needs-and-security",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Consumption councils allocate by need within the plan.",
+      "breaks": "Untested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--laissez-faire-capitalism",
+      "cruxId": "crux-10-track-record",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "19th-century Britain and U.S.; no modern pure case.",
+      "breaks": "Rapid growth alongside severe inequality and instability; every modern economy moved away from it.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--social-democratic-capitalism",
+      "cruxId": "crux-10-track-record",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Nordics since the 1930s; Germany since 1951; most of the OECD partially.",
+      "breaks": "Consistently high on freedom, health, mobility, innovation. Transferability contested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--market-socialism-economic-democracy",
+      "cruxId": "crux-10-track-record",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Yugoslavia 1950–90; Mondragón since 1956; thousands of cooperatives.",
+      "breaks": "Co-ops match conventional productivity; Yugoslavia collapsed with its state; Mondragón reverts to capitalism abroad. No national case outlasting its regime.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--central-planning",
+      "cruxId": "crux-10-track-record",
+      "systemId": "central-planning",
+      "mechanism": "USSR 1928–91; China 1949–78; Eastern bloc; Cuba; North Korea.",
+      "breaks": "Industrialization in priorities; shortage, stagnation, famine; every case liberalized or collapsed.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--social-anarchism",
+      "cruxId": "crux-10-track-record",
+      "systemId": "social-anarchism",
+      "mechanism": "Spain 1936–39; Ukraine 1918–21; Rojava since 2012; Ostrom's commons; Zapatistas.",
+      "breaks": "Functional locally under wartime conditions; destroyed externally each time; no peacetime long-run test.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--state-capitalism-developmental-state",
+      "cruxId": "crux-10-track-record",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Japan 1950–90; Korea, Taiwan, Singapore since the 1960s; China since 1978.",
+      "breaks": "The strongest growth record of the last sixty years; Korea and Taiwan democratized, Singapore and China did not. The one system on this list whose track record is mostly positive and mostly recent.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--anarcho-capitalism",
+      "cruxId": "crux-10-track-record",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "No case. Medieval Iceland (930–1262) and Somalia 1991–2006 as contested analogies.",
+      "breaks": "Iceland's system ended in civil war and Norwegian rule; Somalia's outcome is disputed (Leeson vs. critics). No modern evidence.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-10-track-record--participatory-economics-parecon",
+      "cruxId": "crux-10-track-record",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "No case. Small collectives (South End Press, Z Magazine).",
+      "breaks": "Nothing beyond a handful of workplaces.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--laissez-faire-capitalism",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Prices scale without limit; that is the point of the price mechanism.",
+      "breaks": "Public-goods and externality failures grow with scale (climate).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--social-democratic-capitalism",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Scales via bureaucracy and law; the Nordics are 5–10 million each, Germany 84 million.",
+      "breaks": "Trust and homogeneity questions at U.S. or Indian scale; the largest social democracies are the most contested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--market-socialism-economic-democracy",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Individual cooperatives cap around 500 (Mondragón splits them); federations reach ~80,000.",
+      "breaks": "No national-scale case; the federation's own size bounds mobility and capital pooling.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--central-planning",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "central-planning",
+      "mechanism": "Scales administratively — the USSR planned for 290 million.",
+      "breaks": "Information degrades with every layer of hierarchy; the calculation problem is a scale problem.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--social-anarchism",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "social-anarchism",
+      "mechanism": "Strong at village, factory, and commons scale (Ostrom's cases are hundreds to thousands).",
+      "breaks": "Direct democracy and face-to-face trust do not survive scale; regional coordination in Spain was contested.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--state-capitalism-developmental-state",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Scales to 1.4 billion (China) through state capacity.",
+      "breaks": "Local-government incentive distortion at scale (GDP-target gaming, debt); the center loses information the same way planners do.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--anarcho-capitalism",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Unknown; theory assumes competition among agencies at any scale.",
+      "breaks": "No evidence; agency competition at continental scale is speculation.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-11-scale-sensitivity--participatory-economics-parecon",
+      "cruxId": "crux-11-scale-sensitivity",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Planning rounds are combinatorial: every council's proposal affects every other's.",
+      "breaks": "The iteration burden grows faster than population; the strongest theoretical objection to the model.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--laissez-faire-capitalism",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Deregulation and retrenchment (Thatcher, Reagan, Pinochet's Chile).",
+      "breaks": "Politically hard to sustain; every attempt stopped well short of the model.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--social-democratic-capitalism",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Incremental, electoral, proven repeatedly (New Deal, postwar Europe, Nordic reforms).",
+      "breaks": "Can be reversed incrementally too; the path is real but never finished.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--market-socialism-economic-democracy",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Schweickart assumes a \"landslide election.\" Wright's \"interstitial\" strategy: grow the co-op sector until it is dominant. Sweden's 1976 Meidner Plan (wage-earner funds buying into firms) was the serious attempt.",
+      "breaks": "Meidner was defeated politically and dismantled by 1991; co-op share of most economies has stayed small for a century.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--central-planning",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "central-planning",
+      "mechanism": "Revolution or conquest in every historical case.",
+      "breaks": "No electoral path exists; the transitions were violent.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--social-anarchism",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "social-anarchism",
+      "mechanism": "Revolution (Spain, Ukraine) or prefiguration (build the new inside the old).",
+      "breaks": "Revolutionary cases were destroyed; prefigurative cases stay small.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--state-capitalism-developmental-state",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Arose under authoritarian regimes facing security threats (Korea, Taiwan, Singapore) or after a prior collapse (China).",
+      "breaks": "No democratic society has adopted it deliberately; the path ran through dictatorship.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--anarcho-capitalism",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Secession, seasteading, charter cities, \"startup societies.\"",
+      "breaks": "No path from an existing state; charter-city attempts (Honduras) were reversed.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-12-transition-path--participatory-economics-parecon",
+      "cruxId": "crux-12-transition-path",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Prefigurative: build participatory workplaces and councils.",
+      "breaks": "No path proposed beyond example-setting.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--laissez-faire-capitalism",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "The minimal state's one uncontested function.",
+      "breaks": "Defense is a public good the model otherwise disclaims; large militaries create the state the model wants to limit.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--social-democratic-capitalism",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Conventional state defense; alliances (NATO, Nordic cooperation).",
+      "breaks": "Small states depend on alliances; defense spending competes with the welfare state.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--market-socialism-economic-democracy",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "State defense.",
+      "breaks": "Same as social democracy.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--central-planning",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "central-planning",
+      "mechanism": "Strong: the USSR won the Eastern Front and matched the U.S. militarily for forty years.",
+      "breaks": "Militarization consumed the civilian economy; defense was the one sector planning served well and at everything else's expense.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--social-anarchism",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "social-anarchism",
+      "mechanism": "Militias; federated defense.",
+      "breaks": "Spain's militias were absorbed into the Republican army then crushed; Makhno was crushed; Rojava survives on external patrons. The weakest column.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--state-capitalism-developmental-state",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Strong: the developmental state is partly a security state (Korea, Taiwan, Singapore all built under existential threat).",
+      "breaks": "Security justification underwrites the authoritarianism.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--anarcho-capitalism",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Private defense agencies.",
+      "breaks": "The standard objection (Nozick): a successful agency becomes a state; an unsuccessful one loses to a state.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-13-external-security-and-defense--participatory-economics-parecon",
+      "cruxId": "crux-13-external-security-and-defense",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Unaddressed in the model.",
+      "breaks": "—",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--laissez-faire-capitalism",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "laissez-faire-capitalism",
+      "mechanism": "Competition disciplines firms; a small state has little to abuse.",
+      "breaks": "A weak state cannot stop a private actor who achieves dominance; fraud and coercion go unremedied.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--social-democratic-capitalism",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "social-democratic-capitalism",
+      "mechanism": "Checks and balances, courts, press, elections; the Nordics' record of resisting corruption is the best available.",
+      "breaks": "Capture is slow degradation, not a coup; institutions decay when not defended (the \"narrow corridor\" is narrow).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--market-socialism-economic-democracy",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "market-socialism-economic-democracy",
+      "mechanism": "Cooperative governance: elected, recallable management.",
+      "breaks": "Elected managers entrench like any politician; public investment banks concentrate discretion.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--central-planning",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "central-planning",
+      "mechanism": "None above the top.",
+      "breaks": "Stalin and Mao: the worst outcomes in the whole table came from unconstrained leaders inside this system.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--social-anarchism",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "social-anarchism",
+      "mechanism": "Recallable delegates; Ostrom's commons rely on monitoring and graduated sanctions, designed for exactly this at small scale.",
+      "breaks": "No answer to an armed faction at any scale; Spain's own revolution saw anarchists fighting communists in Barcelona (May 1937).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--state-capitalism-developmental-state",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "state-capitalism-developmental-state",
+      "mechanism": "Depends entirely on elite discipline and succession; Singapore built institutions to enforce it (high official pay, anti-corruption agency).",
+      "breaks": "The Marcos, Suharto, and post-Soviet cases show the same structure producing kleptocracy; succession is the recurring crisis (China's is unresolved).",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--anarcho-capitalism",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "anarcho-capitalism",
+      "mechanism": "Competing agencies check each other.",
+      "breaks": "A dominant agency faces no check; the model assumes competition persists without an enforcer of competition.",
+      "sourceIds": []
+    },
+    {
+      "id": "crux-14-robustness-to-bad-actors--participatory-economics-parecon",
+      "cruxId": "crux-14-robustness-to-bad-actors",
+      "systemId": "participatory-economics-parecon",
+      "mechanism": "Balanced job complexes and recallable councils prevent a coordinator class.",
+      "breaks": "Designed against elite formation, not against coercion; unaddressed for armed or fraudulent actors.",
+      "sourceIds": []
+    }
+  ],
+  "sourceCandidates": [
+    {
+      "id": "source-acemoglu-and-robinson-2019-the-narrow-corridor-2019",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": true,
+      "author": "Acemoglu & Robinson",
+      "title": "The Narrow Corridor (2019)",
+      "year": "2019",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Acemoglu & Robinson — *The Narrow Corridor* (2019).** The strong-state-vs-strong-society framing; built around exactly the two-sided fear of private and state concentration."
+    },
+    {
+      "id": "source-acemoglu-and-robinson-2012-why-nations-fail-2012",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Acemoglu & Robinson",
+      "title": "Why Nations Fail (2012)",
+      "year": "2012",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Acemoglu & Robinson — *Why Nations Fail* (2012).** Inclusive vs. extractive institutions; why some countries stay in the corridor."
+    },
+    {
+      "id": "source-madison-undated-federalist-nos",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Madison",
+      "title": "Federalist Nos",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Madison — Federalist Nos. 10 and 51 (1787–88).** Short. Factions, and the original \"ambition must be made to counteract ambition.\""
+    },
+    {
+      "id": "source-hirschman-1970-exit-voice-and-loyalty-1970",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Hirschman",
+      "title": "Exit, Voice, and Loyalty (1970)",
+      "year": "1970",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Hirschman — *Exit, Voice, and Loyalty* (1970).** Short. When exit disciplines power and when it just lets it escape."
+    },
+    {
+      "id": "source-buchanan-and-tullock-1962-the-calculus-of-consent-1962",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Buchanan & Tullock",
+      "title": "The Calculus of Consent (1962)",
+      "year": "1962",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Buchanan & Tullock — *The Calculus of Consent* (1962).** Public choice: models officials as self-interested and asks which constitutional rules survive that assumption. The intellectual home of the government-tyranny worry."
+    },
+    {
+      "id": "source-ostrom-1990-governing-the-commons-1990",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": true,
+      "author": "Ostrom",
+      "title": "Governing the Commons (1990)",
+      "year": "1990",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Ostrom — *Governing the Commons* (1990).** Nobel-winning fieldwork on communities managing shared resources without privatization or central control."
+    },
+    {
+      "id": "source-james-c-undated-james-c",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": true,
+      "author": "James C",
+      "title": "James C",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ James C. Scott — *Seeing Like a State* (1998).** Why top-down \"legibility\" schemes fail; written by an anarchist-sympathetic political scientist, so it bridges to the anarchist section. Belongs equally under the calculation debate — it is about planning failure."
+    },
+    {
+      "id": "source-besley-and-persson-2011-pillars-of-prosperity-2011",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Besley & Persson",
+      "title": "Pillars of Prosperity (2011)",
+      "year": "2011",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Besley & Persson — *Pillars of Prosperity* (2011).** State capacity as a development achievement; why weak states are often more predatory."
+    },
+    {
+      "id": "source-stigler-1971-the-theory-of-economic-regulation-1971",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Stigler",
+      "title": "The Theory of Economic Regulation (1971)",
+      "year": "1971",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Stigler — \"The Theory of Economic Regulation\" (1971).** Short article. The foundational regulatory-capture argument."
+    },
+    {
+      "id": "source-hall-and-soskice-eds-2001-varieties-of-capitalism-2001",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Hall & Soskice (eds.)",
+      "title": "Varieties of Capitalism (2001)",
+      "year": "2001",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Hall & Soskice (eds.) — *Varieties of Capitalism* (2001).** The \"coordinated vs. liberal market economies\" framework; the academic basis for treating Germany and the Nordics as a distinct system."
+    },
+    {
+      "id": "source-hayek-1944-the-road-to-serfdom-1944-and-friedman-capitalism-and-freedom-196",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Hayek",
+      "title": "The Road to Serfdom (1944) and Friedman — Capitalism and Freedom (1962)",
+      "year": "1944",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Hayek — *The Road to Serfdom* (1944)** and **Friedman — *Capitalism and Freedom* (1962).** The canonical statements of the taxation-and-tyranny worry; the laissez-faire side of the argument."
+    },
+    {
+      "id": "source-coase-and-wang-2012-how-china-became-capitalist-2012",
+      "section": "power-institutions-and-the-state-society-problem",
+      "sectionTitle": "Power, institutions, and the state/society problem",
+      "recommended": false,
+      "author": "Coase & Wang",
+      "title": "How China Became Capitalist (2012)",
+      "year": "2012",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Coase & Wang — *How China Became Capitalist* (2012).** The state-capitalism / developmental-state case, from the author of \"The Nature of the Firm.\""
+    },
+    {
+      "id": "source-hayek-1945-the-use-of-knowledge-in-society-1945",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": true,
+      "author": "Hayek",
+      "title": "The Use of Knowledge in Society (1945)",
+      "year": "1945",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Hayek — \"The Use of Knowledge in Society\" (1945).** ~15 pages. The whole knowledge-problem argument."
+    },
+    {
+      "id": "source-mises-1920-economic-calculation-in-the-socialist-commonwealth-1920",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Mises",
+      "title": "Economic Calculation in the Socialist Commonwealth (1920)",
+      "year": "1920",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Mises — \"Economic Calculation in the Socialist Commonwealth\" (1920).** The original salvo."
+    },
+    {
+      "id": "source-coase-1937-the-nature-of-the-firm-1937",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Coase",
+      "title": "The Nature of the Firm (1937)",
+      "year": "1937",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Coase — \"The Nature of the Firm\" (1937).** Short. Islands of planning in a sea of markets."
+    },
+    {
+      "id": "source-kornai-1992-the-socialist-system-1992",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Kornai",
+      "title": "The Socialist System (1992)",
+      "year": "1992",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Kornai — *The Socialist System* (1992).** The soft-budget-constraint account from inside actually-existing planning."
+    },
+    {
+      "id": "source-alec-nove-1983-the-economics-of-feasible-socialism-1983",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": true,
+      "author": "Alec Nove",
+      "title": "The Economics of Feasible Socialism (1983)",
+      "year": "1983",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**▶ Alec Nove — *The Economics of Feasible Socialism* (1983).** A socialist who took the calculation problem seriously and designed around it."
+    },
+    {
+      "id": "source-schumpeter-1942-capitalism-socialism-and-democracy-1942",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Schumpeter",
+      "title": "Capitalism, Socialism, and Democracy (1942)",
+      "year": "1942",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Schumpeter — *Capitalism, Socialism, and Democracy* (1942).** Creative destruction, plus an even-handed narration of the debate."
+    },
+    {
+      "id": "source-phillips-and-rozworski-2019-the-people-s-republic-of-walmart-2019",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Phillips & Rozworski",
+      "title": "The People's Republic of Walmart (2019)",
+      "year": "2019",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Phillips & Rozworski — *The People's Republic of Walmart* (2019).** The modern pro-planning case built on corporate logistics."
+    },
+    {
+      "id": "source-cockshott-and-cottrell-1993-towards-a-new-socialism-1993",
+      "section": "markets-planning-and-the-calculation-debate",
+      "sectionTitle": "Markets, planning, and the calculation debate",
+      "recommended": false,
+      "author": "Cockshott & Cottrell",
+      "title": "Towards a New Socialism (1993)",
+      "year": "1993",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Cockshott & Cottrell — *Towards a New Socialism* (1993).** The computational-planning proposal."
+    },
+    {
+      "id": "source-schweickart-2002-after-capitalism-2002",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": true,
+      "author": "Schweickart",
+      "title": "After Capitalism (2002)",
+      "year": "2002",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**▶ Schweickart — *After Capitalism* (2002).** The Economic Democracy model: worker self-management, markets for goods, socially controlled investment."
+    },
+    {
+      "id": "source-erik-olin-wright-2010-envisioning-real-utopias-2010",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": true,
+      "author": "Erik Olin Wright",
+      "title": "Envisioning Real Utopias (2010)",
+      "year": "2010",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Erik Olin Wright — *Envisioning Real Utopias* (2010).** The best survey of real-world experiments (Mondragón, participatory budgeting, Wikipedia, basic income) with honest assessment of each."
+    },
+    {
+      "id": "source-robert-dahl-1985-a-preface-to-economic-democracy-1985",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Robert Dahl",
+      "title": "A Preface to Economic Democracy (1985)",
+      "year": "1985",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Robert Dahl — *A Preface to Economic Democracy* (1985).** Short. The political-theory case that democratic principles apply to firms."
+    },
+    {
+      "id": "source-whyte-and-whyte-1988-making-mondragon-1988",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Whyte & Whyte",
+      "title": "Making Mondragon (1988)",
+      "year": "1988",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Whyte & Whyte — *Making Mondragon* (1988).** The definitive institutional history; explains the capital-account mechanics."
+    },
+    {
+      "id": "source-david-ellerman-1990-the-democratic-worker-owned-firm-1990",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "David Ellerman",
+      "title": "The Democratic Worker-Owned Firm (1990)",
+      "year": "1990",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**David Ellerman — *The Democratic Worker-Owned Firm* (1990).** The \"labor theory of property\" argument against the employment contract itself."
+    },
+    {
+      "id": "source-isabelle-ferreras-2017-firms-as-political-entities-2017",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Isabelle Ferreras",
+      "title": "Firms as Political Entities (2017)",
+      "year": "2017",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Isabelle Ferreras — *Firms as Political Entities* (2017).** \"Economic bicameralism\": a workers' chamber alongside the shareholders' chamber. The most developed extension of codetermination."
+    },
+    {
+      "id": "source-john-roemer-1994-a-future-for-socialism-1994",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "John Roemer",
+      "title": "A Future for Socialism (1994)",
+      "year": "1994",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**John Roemer — *A Future for Socialism* (1994).** A different market-socialist design (coupon-based shares), for contrast with Schweickart."
+    },
+    {
+      "id": "source-michael-albert-2003-parecon-life-after-capitalism-2003",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Michael Albert",
+      "title": "Parecon: Life After Capitalism (2003)",
+      "year": "2003",
+      "verificationTier": "publisher-or-library-checked",
+      "rawMarkdown": "**Michael Albert — *Parecon: Life After Capitalism* (2003).** Participatory economics; the main non-market democratic proposal. (Albert is sole author; Hahnel co-wrote the earlier academic statements, *The Political Economy of Participatory Economics* and *Looking Forward*, both 1991.) Pair with Schweickart's 2006 critique, \"Nonsense on Stilts: Michael Albert's Parecon\" — a direct market-socialist vs. non-market exchange."
+    },
+    {
+      "id": "source-blasi-freeman-and-kruse-2013-the-citizen-s-share-2013",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Blasi, Freeman & Kruse",
+      "title": "The Citizen's Share (2013)",
+      "year": "2013",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Blasi, Freeman & Kruse — *The Citizen's Share* (2013).** Empirical record of employee ownership in the U.S."
+    },
+    {
+      "id": "source-richard-wolff-2012-democracy-at-work-2012",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Richard Wolff",
+      "title": "Democracy at Work (2012)",
+      "year": "2012",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Richard Wolff — *Democracy at Work* (2012).** Accessible; worker self-directed enterprises."
+    },
+    {
+      "id": "source-jager-and-noy-undated-what-does-codetermination-do-nber-working-paper-28921-2021",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Jäger & Noy",
+      "title": "What Does Codetermination Do? (NBER Working Paper 28921, 2021)",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Jäger & Noy — \"What Does Codetermination Do?\" (NBER Working Paper 28921, 2021).** The empirical basis for the codetermination claims in Part 1."
+    },
+    {
+      "id": "source-perotin-undated-what-do-we-really-know-about-worker-co-operatives-co-operatives-",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Pérotin",
+      "title": "What do we really know about worker co-operatives? (Co-operatives UK, 2016)",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Pérotin — \"What do we really know about worker co-operatives?\" (Co-operatives UK, 2016).** The productivity meta-review cited in Part 1."
+    },
+    {
+      "id": "source-hacker-undated-the-institutional-foundations-of-middle-class-democracy-policy-n",
+      "section": "economic-democracy-market-socialism-worker-ownership",
+      "sectionTitle": "Economic democracy, market socialism, worker ownership",
+      "recommended": false,
+      "author": "Hacker",
+      "title": "The Institutional Foundations of Middle-Class Democracy (Policy Network, 2011)",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Hacker — \"The Institutional Foundations of Middle-Class Democracy\" (Policy Network, 2011).** Where \"predistribution\" was coined."
+    },
+    {
+      "id": "source-proudhon-1840-what-is-property-1840",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Proudhon",
+      "title": "What Is Property? (1840)",
+      "year": "1840",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Proudhon — *What Is Property?* (1840).** The mutualist foundation; possession vs. property."
+    },
+    {
+      "id": "source-kropotkin-1892-the-conquest-of-bread-1892-and-mutual-aid-1902",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Kropotkin",
+      "title": "The Conquest of Bread (1892) and Mutual Aid (1902)",
+      "year": "1892",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Kropotkin — *The Conquest of Bread* (1892) and *Mutual Aid* (1902).** Anarcho-communism; *Mutual Aid* argues cooperation, not just competition, drives evolution and social order — it supports the anarchist premise rather than describing the system."
+    },
+    {
+      "id": "source-bakunin-1873-statism-and-anarchy-1873",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Bakunin",
+      "title": "Statism and Anarchy (1873)",
+      "year": "1873",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Bakunin — *Statism and Anarchy* (1873).** The collectivist critique of Marx, including the prediction that a \"workers' state\" becomes a new ruling class."
+    },
+    {
+      "id": "source-rudolf-rocker-1938-anarcho-syndicalism-theory-and-practice-1938",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Rudolf Rocker",
+      "title": "Anarcho-Syndicalism: Theory and Practice (1938)",
+      "year": "1938",
+      "verificationTier": "previously-confirmed",
+      "rawMarkdown": "**Rudolf Rocker — *Anarcho-Syndicalism: Theory and Practice* (1938).** The standard statement."
+    },
+    {
+      "id": "source-colin-ward-1973-anarchy-in-action-1973",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": true,
+      "author": "Colin Ward",
+      "title": "Anarchy in Action (1973)",
+      "year": "1973",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Colin Ward — *Anarchy in Action* (1973).** Short, practical; treats anarchism as already present in how people organize. Good fit for an engineering mindset."
+    },
+    {
+      "id": "source-james-c-undated-james-c-2",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "James C",
+      "title": "James C",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**James C. Scott — *Two Cheers for Anarchism* (2012).** Short essays; the \"two cheers\" hedge is honest about limits."
+    },
+    {
+      "id": "source-kevin-carson-2008-organization-theory-a-libertarian-perspective-2008",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": true,
+      "author": "Kevin Carson",
+      "title": "Organization Theory: A Libertarian Perspective (2008)",
+      "year": "2008",
+      "verificationTier": "publisher-or-library-checked",
+      "rawMarkdown": "**▶ Kevin Carson — *Organization Theory: A Libertarian Perspective* (2008).** A mutualist applying the Coase firm-size question to argue that state intervention subsidizes firms beyond their efficient scale. Directly relevant to the concentration thread. *Note:* self-published (BookSurge, Center for a Stateless Society) by an independent scholar — a serious argument, not a peer-reviewed authority."
+    },
+    {
+      "id": "source-sam-dolgoff-ed-1974-the-anarchist-collectives-1974",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Sam Dolgoff (ed.)",
+      "title": "The Anarchist Collectives (1974)",
+      "year": "1974",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Sam Dolgoff (ed.) — *The Anarchist Collectives* (1974).** Primary documents from Spain 1936–39, the only large-scale test."
+    },
+    {
+      "id": "source-murray-bookchin-2015-the-next-revolution-2015",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Murray Bookchin",
+      "title": "The Next Revolution (2015)",
+      "year": "2015",
+      "verificationTier": "publisher-or-library-checked",
+      "rawMarkdown": "**Murray Bookchin — *The Next Revolution* (2015).** Libertarian municipalism; the theoretical basis for Rojava's confederalism. *Note:* Bookchin broke with anarchism in 1999 and called his later politics \"Communalism\"; this posthumous collection is mostly post-break essays. Adjacent to anarchism rather than inside it."
+    },
+    {
+      "id": "source-graeber-and-wengrow-2021-the-dawn-of-everything-2021",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Graeber & Wengrow",
+      "title": "The Dawn of Everything (2021)",
+      "year": "2021",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Graeber & Wengrow — *The Dawn of Everything* (2021).** Argues the archaeological record shows far more variety in political organization than \"state or chaos\" allows. Anthropology by anarchists, not anarchist theory — background, not a statement of the tradition."
+    },
+    {
+      "id": "source-ruth-kinna-2019-the-government-of-no-one-2019",
+      "section": "anarchist",
+      "sectionTitle": "Anarchist",
+      "recommended": false,
+      "author": "Ruth Kinna",
+      "title": "The Government of No One (2019)",
+      "year": "2019",
+      "verificationTier": "publisher-or-library-checked",
+      "rawMarkdown": "**Ruth Kinna — *The Government of No One* (2019).** A modern scholarly map of the tradition before diving into primary sources."
+    },
+    {
+      "id": "source-piketty-2014-capital-in-the-twenty-first-century-2014",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Piketty",
+      "title": "Capital in the Twenty-First Century (2014)",
+      "year": "2014",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Piketty — *Capital in the Twenty-First Century* (2014).** The r > g argument for why concentration is the default."
+    },
+    {
+      "id": "source-tim-wu-2018-the-curse-of-bigness-2018",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": true,
+      "author": "Tim Wu",
+      "title": "The Curse of Bigness (2018)",
+      "year": "2018",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**▶ Tim Wu — *The Curse of Bigness* (2018).** Short. The neo-Brandeisian case that concentration is a political problem, not just a price problem."
+    },
+    {
+      "id": "source-lina-khan-undated-amazon-s-antitrust-paradox-2017-yale-law-journal",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Lina Khan",
+      "title": "Amazon's Antitrust Paradox (2017, Yale Law Journal)",
+      "year": null,
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Lina Khan — \"Amazon's Antitrust Paradox\" (2017, *Yale Law Journal*).** The article that relaunched the antitrust debate."
+    },
+    {
+      "id": "source-henry-george-1879-progress-and-poverty-1879",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Henry George",
+      "title": "Progress and Poverty (1879)",
+      "year": "1879",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Henry George — *Progress and Poverty* (1879).** The land-value-tax argument; the core is in the first third."
+    },
+    {
+      "id": "source-ackerman-and-alstott-1999-the-stakeholder-society-1999",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Ackerman & Alstott",
+      "title": "The Stakeholder Society (1999)",
+      "year": "1999",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Ackerman & Alstott — *The Stakeholder Society* (1999).** Universal basic capital."
+    },
+    {
+      "id": "source-lessig-2011-republic-lost-2011",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Lessig",
+      "title": "Republic, Lost (2011)",
+      "year": "2011",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Lessig — *Republic, Lost* (2011).** Money in politics as systemic rather than individual corruption."
+    },
+    {
+      "id": "source-landemore-2020-open-democracy-2020",
+      "section": "concentration-capture-and-the-fixes",
+      "sectionTitle": "Concentration, capture, and the fixes",
+      "recommended": false,
+      "author": "Landemore",
+      "title": "Open Democracy (2020)",
+      "year": "2020",
+      "verificationTier": "not-rechecked",
+      "rawMarkdown": "**Landemore — *Open Democracy* (2020).** The strongest case for sortition and citizens' assemblies as capture-resistant institutions."
+    }
+  ]
+}

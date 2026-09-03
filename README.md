@@ -8,8 +8,8 @@ cells, and every cell cites sources and historical cases.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
-**Status:** architecture and design direction chosen; implementation has not yet
-started. Astro will render a portable TypeScript content core.
+**Status:** M1 implementation is underway. Astro, CI, the deterministic staging
+importer, and the portable graph validator are in place.
 
 ## Contents
 
@@ -25,8 +25,19 @@ started. Astro will render a portable TypeScript content core.
 
 ## Next step
 
-Next, scaffold Astro and the framework-independent content compiler, then import
-the matrix and enforce graph integrity before building product UI.
+Requires Node 24 (see `.node-version` and `.nvmrc`).
+
+```sh
+npm ci
+npm run check
+npm test
+npm run build
+```
+
+`npm run import` parses the source documents into deterministic staging records
+and an editorial report. It intentionally does not guess verdict classes or
+citation mappings. The next step is an explicit curation adapter from those
+records into the canonical graph, followed by full build-time graph validation.
 
 ## Open decisions
 

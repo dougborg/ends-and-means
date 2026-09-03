@@ -1,0 +1,28 @@
+{
+  "name": "ends-and-means",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm run validate && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run tests/content && node --test tests/import/*.test.mjs",
+    "import": "node scripts/import-content.mjs",
+    "validate": "node scripts/import-content.mjs"
+  },
+  "dependencies": {
+    "astro": "7.2.10"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "24.10.4",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "vitest": "4.1.11"
+  }
+}

@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+
+type DiagnosticReport = Record<string, unknown>;
+
+const reportCandidates = [
+  "generated/reports/import-report.json",
+  "generated/diagnostic-report.json",
+  "generated/report.json",
+  "src/generated/diagnostic-report.json",
+];
+
+let report: DiagnosticReport | undefined;
+let reportPath: string | undefined;
+
+for (const candidate of reportCandidates) {
+  try {
+    report = JSON.parse(
+      await readFile(path.join(process.cwd(), candidate), "utf8"),
+    ) as DiagnosticReport;
+    reportPath = candidate;
+    break;
+  } catch (error) {
+    if (!(error instanceof Error) || !("code" in error) || error.code !== "ENOENT") {
+      throw error;
+    }
+  }
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Political and economic systems in theory and practice."
+    />
+    <title>Ends and Means</title>
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <p class="coordinate">BUILD / CONTENT FOUNDATION</p>
+        <h1>Ends <span>and</span> Means</h1>
+        <p class="dek">Political and economic systems in theory and practice.</p>
+      </header>
+
+      <section aria-labelledby="diagnostics-heading">
+        <div class="section-heading">
+          <div>
+            <p class="coordinate">M1 / DIAGNOSTICS</p>
+            <h2 id="diagnostics-heading">Knowledge graph status</h2>
+          </div>
+          <p class:list={["status", { ready: report }]}>
+            <span aria-hidden="true"></span>
+            {report ? "Report loaded" : "Waiting for first import"}
+          </p>
+        </div>
+
+        {
+          report ? (
+            <>
+              <p class="report-source">Generated from <code>{reportPath}</code></p>
+              <pre><code>{JSON.stringify(report, null, 2)}</code></pre>
+            </>
+          ) : (
+            <div class="empty-state">
+              <p>No generated diagnostic report exists yet.</p>
+              <p>
+                Run <code>npm run import</code>, then <code>npm run validate</code>.
+                This page will expose the resulting graph report without requiring
+                browser JavaScript.
+              </p>
+            </div>
+          )
+        }
+      </section>
+    </main>
+  </body>
+</html>
