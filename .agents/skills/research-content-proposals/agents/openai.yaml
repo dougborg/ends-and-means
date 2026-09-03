@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Content Proposals"
+  short_description: "Research evidence-backed additions for Ends and Means"
+  default_prompt: "Use $research-content-proposals to research a new content proposal for Ends and Means."

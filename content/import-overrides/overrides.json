@@ -2,5 +2,455 @@
   "version": 1,
   "verdicts": {},
   "cellSources": {},
-  "sourceSplits": {}
+  "sourceSplits": {},
+  "cellJudgments": {
+    "lf-c01": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "sd-c01": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c01": {
+      "verdict": "mixed",
+      "evidence": "partial"
+    },
+    "cp-c01": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sa-c01": {
+      "verdict": "contested",
+      "evidence": "partial"
+    },
+    "sc-c01": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ac-c01": {
+      "verdict": "contested",
+      "evidence": "none"
+    },
+    "pe-c01": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c02": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "sd-c02": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c02": {
+      "verdict": "mixed",
+      "evidence": "partial"
+    },
+    "cp-c02": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sa-c02": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "sc-c02": {
+      "verdict": "contested",
+      "evidence": "extensive"
+    },
+    "ac-c02": {
+      "verdict": "untested",
+      "evidence": "none"
+    },
+    "pe-c02": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c03": {
+      "verdict": "value-question",
+      "evidence": "extensive"
+    },
+    "sd-c03": {
+      "verdict": "value-question",
+      "evidence": "extensive"
+    },
+    "ms-c03": {
+      "verdict": "value-question",
+      "evidence": "partial"
+    },
+    "cp-c03": {
+      "verdict": "value-question",
+      "evidence": "extensive"
+    },
+    "sa-c03": {
+      "verdict": "value-question",
+      "evidence": "partial"
+    },
+    "sc-c03": {
+      "verdict": "value-question",
+      "evidence": "extensive"
+    },
+    "ac-c03": {
+      "verdict": "value-question",
+      "evidence": "none"
+    },
+    "pe-c03": {
+      "verdict": "value-question",
+      "evidence": "untested"
+    },
+    "lf-c04": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c04": {
+      "verdict": "moderate",
+      "evidence": "extensive"
+    },
+    "ms-c04": {
+      "verdict": "strong",
+      "evidence": "partial"
+    },
+    "cp-c04": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sa-c04": {
+      "verdict": "strong",
+      "evidence": "partial"
+    },
+    "sc-c04": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "ac-c04": {
+      "verdict": "weak",
+      "evidence": "none"
+    },
+    "pe-c04": {
+      "verdict": "strong",
+      "evidence": "untested"
+    },
+    "lf-c05": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c05": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c05": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c05": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sa-c05": {
+      "verdict": "local",
+      "evidence": "partial"
+    },
+    "sc-c05": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ac-c05": {
+      "verdict": "worst",
+      "evidence": "none"
+    },
+    "pe-c05": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c06": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c06": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "ms-c06": {
+      "verdict": "mixed",
+      "evidence": "partial"
+    },
+    "cp-c06": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "sa-c06": {
+      "verdict": "contested",
+      "evidence": "partial"
+    },
+    "sc-c06": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "ac-c06": {
+      "verdict": "weak",
+      "evidence": "none"
+    },
+    "pe-c06": {
+      "verdict": "mixed",
+      "evidence": "untested"
+    },
+    "lf-c07": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c07": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c07": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c07": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "sa-c07": {
+      "verdict": "contested",
+      "evidence": "partial"
+    },
+    "sc-c07": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "ac-c07": {
+      "verdict": "weak",
+      "evidence": "none"
+    },
+    "pe-c07": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c08": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c08": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c08": {
+      "verdict": "mixed",
+      "evidence": "partial"
+    },
+    "cp-c08": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "sa-c08": {
+      "verdict": "mixed",
+      "evidence": "partial"
+    },
+    "sc-c08": {
+      "verdict": "contested",
+      "evidence": "extensive"
+    },
+    "ac-c08": {
+      "verdict": "weak",
+      "evidence": "none"
+    },
+    "pe-c08": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c09": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c09": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c09": {
+      "verdict": "strong",
+      "evidence": "partial"
+    },
+    "cp-c09": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sa-c09": {
+      "verdict": "local",
+      "evidence": "partial"
+    },
+    "sc-c09": {
+      "verdict": "moderate",
+      "evidence": "extensive"
+    },
+    "ac-c09": {
+      "verdict": "worst",
+      "evidence": "none"
+    },
+    "pe-c09": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c10": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "sd-c10": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c10": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c10": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "sa-c10": {
+      "verdict": "contested",
+      "evidence": "partial"
+    },
+    "sc-c10": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ac-c10": {
+      "verdict": "untested",
+      "evidence": "contested"
+    },
+    "pe-c10": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c11": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "sd-c11": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c11": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c11": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "sa-c11": {
+      "verdict": "local",
+      "evidence": "partial"
+    },
+    "sc-c11": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ac-c11": {
+      "verdict": "untested",
+      "evidence": "none"
+    },
+    "pe-c11": {
+      "verdict": "weak",
+      "evidence": "untested"
+    },
+    "lf-c12": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "sd-c12": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c12": {
+      "verdict": "weak",
+      "evidence": "partial"
+    },
+    "cp-c12": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "sa-c12": {
+      "verdict": "contested",
+      "evidence": "partial"
+    },
+    "sc-c12": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "ac-c12": {
+      "verdict": "untested",
+      "evidence": "none"
+    },
+    "pe-c12": {
+      "verdict": "untested",
+      "evidence": "untested"
+    },
+    "lf-c13": {
+      "verdict": "moderate",
+      "evidence": "extensive"
+    },
+    "sd-c13": {
+      "verdict": "moderate",
+      "evidence": "extensive"
+    },
+    "ms-c13": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c13": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "sa-c13": {
+      "verdict": "weak",
+      "evidence": "partial"
+    },
+    "sc-c13": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ac-c13": {
+      "verdict": "contested",
+      "evidence": "none"
+    },
+    "pe-c13": {
+      "verdict": "weak",
+      "evidence": "untested"
+    },
+    "lf-c14": {
+      "verdict": "weak",
+      "evidence": "extensive"
+    },
+    "sd-c14": {
+      "verdict": "strong",
+      "evidence": "extensive"
+    },
+    "ms-c14": {
+      "verdict": "moderate",
+      "evidence": "partial"
+    },
+    "cp-c14": {
+      "verdict": "worst",
+      "evidence": "extensive"
+    },
+    "sa-c14": {
+      "verdict": "local",
+      "evidence": "partial"
+    },
+    "sc-c14": {
+      "verdict": "mixed",
+      "evidence": "extensive"
+    },
+    "ac-c14": {
+      "verdict": "weak",
+      "evidence": "none"
+    },
+    "pe-c14": {
+      "verdict": "weak",
+      "evidence": "untested"
+    }
+  }
 }

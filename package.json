@@ -11,9 +11,9 @@
     "build": "npm run validate && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run tests/content && node --test tests/import/*.test.mjs",
+    "test": "vitest run tests/content && node --test tests/import/*.test.mjs tests/skills/*.test.mjs",
     "import": "node scripts/import-content.mjs",
-    "validate": "node scripts/import-content.mjs"
+    "validate": "npm run import && node --import tsx scripts/build-content.ts"
   },
   "dependencies": {
     "astro": "7.2.10"

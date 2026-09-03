@@ -15,6 +15,11 @@ validation, backlink generation, and editorial reports in a framework-independen
 TypeScript module. Use Astro islands only for interactions that cannot be
 delivered well with HTML and CSS.
 
+Publish the static build with GitHub Pages using the official Astro deployment
+action. The canonical site URL is `https://endsandmeans.info`; because this is a
+custom-domain root deployment, Astro does not use a repository-name `base`.
+Deployment CI remains separate from the pull-request verification workflow.
+
 Canonical content will be Markdown with structured frontmatter, one file per
 entity. Generated indexes and reports are build artifacts, never hand-edited.
 
@@ -24,6 +29,8 @@ entity. Generated indexes and reports are build artifacts, never hand-edited.
 - Content integrity can be tested without booting Astro.
 - A future renderer migration does not require migrating the knowledge model.
 - We accept Astro as a build dependency and must pin upgrades deliberately.
+- Hosting requires no application server; GitHub Actions produces and publishes
+  the Pages artifact after pushes to `main`.
 - Server-side participation features are out of the static core; initial
   contributions route through GitHub, with a small moderated endpoint possible
   later.

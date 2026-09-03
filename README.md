@@ -8,6 +8,10 @@ cells, and every cell cites sources and historical cases.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
+The static Astro build deploys through GitHub Pages. Pull-request verification
+and Pages deployment use separate GitHub Actions workflows; DNS configuration
+for the custom domain is a separate release step.
+
 **Status:** M1 implementation is underway. Astro, CI, the deterministic staging
 importer, and the portable graph validator are in place.
 
@@ -21,7 +25,9 @@ importer, and the portable graph validator are in place.
 | [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones and issue-ready backlog, ordered by dependency. |
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
+| [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
+| [`.agents/skills/research-content-proposals/SKILL.md`](.agents/skills/research-content-proposals/SKILL.md) | Reusable, proposal-only research workflow for systems, cruxes, sources, and cases. |
 
 ## Next step
 

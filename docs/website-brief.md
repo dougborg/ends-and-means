@@ -10,7 +10,11 @@
 
 A static, evidence-forward reference site that compares economic and political systems by how each one handles a fixed set of core problems ("cruxes"). The content is a graph, not a set of articles: systems × cruxes produce cells, and every cell cites sources and historical cases. The site's job is to let a reader pivot through that graph — read one crux across all systems, walk one system through all cruxes, click any claim and see what it rests on, and filter the whole matrix by how much evidence actually exists.
 
-The goal is understanding, not advocacy. The site takes positions only inside explicit, labeled "verdict" fields, and every verdict must be traceable to sources and cases.
+The goal is understanding, not advocacy disguised as neutral reference. The
+project strives for fairness, transparency, and corrigibility, not a view from
+nowhere. It separates facts, inferences, and value judgments; takes positions
+inside explicit, labeled verdict fields; and makes the evidence and evaluative
+criteria behind those verdicts inspectable.
 
 ## 2. Inputs you will be given
 
@@ -83,9 +87,9 @@ Regulatory capture (Stigler); discretionary spending enables patronage; durabili
 
 Static Astro site with a framework-independent TypeScript content compiler and
 schema validation. Use Astro islands only where interaction earns client-side
-JavaScript, initially the matrix controls. Deploy target: **Vercel** (already
-connected on Doug's account). Keep dependencies minimal — no component library
-unless it earns its place.
+JavaScript, initially the matrix controls. Deploy target: **GitHub Pages** at
+`endsandmeans.info`, built and published by GitHub Actions. Keep dependencies
+minimal — no component library unless it earns its place.
 
 ### Pages
 
@@ -134,10 +138,13 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 ## 6. Design principles
 
 - **Evidence-forward.** The evidence tier and verification status are always visible, never buried. "Untested" and "needs citation" are honest labels, not embarrassments.
-- **Neutral surface, explicit verdicts.** Prose in `mechanism` and `breaks` describes; only the `verdict` field judges. Do not let the tone drift into advocacy for any column.
+- **Fair surface, explicit viewpoint.** Prose in `mechanism` and `breaks`
+  describes; verdicts judge. Represent serious views fairly without pretending
+  that framing or evaluation is value-neutral, and do not let analysis drift
+  into undisclosed advocacy.
 - **Pivotable.** From any cell, one click reaches its row, its column, its sources, and its cases.
 - **Readable without JS.** Everything except the matrix filters must work with JavaScript disabled.
-- **Small.** No accounts, no comments, no analytics beyond Vercel's defaults, no tracking.
+- **Small.** No accounts, no comments, and no analytics or tracking by default.
 - **Addressable disagreement.** Feedback attaches to a claim, citation, case, or
   verdict rather than becoming an unstructured comment stream.
 - **Access before commerce.** Prefer publisher, legal reading, and library links;
@@ -153,7 +160,8 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 ## 8. Open decisions (Doug to confirm; proceed with defaults if unanswered)
 
 1. Site name and domain — decided: **Ends and Means** at
-   **endsandmeans.info**. Use a Vercel preview URL until DNS is connected.
+   **endsandmeans.info**. GitHub Pages is the static host; DNS connection is a
+   separate release task.
 2. Content license — default: CC BY-SA 4.0 for content, MIT for code.
 3. Whether cells should carry a `confidence` field separate from `evidence` — default: no, `evidence` is enough for v1.
 4. Whether to include a "changelog" page listing edits to cells — default: rely on git history and skip.
@@ -164,4 +172,4 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 - All 112 cells, all sources, and all extracted cases render, with validation enforced at build time.
 - Matrix, system, crux, cell, source, case, and reading pages exist and cross-link per §4.
 - The uncited-cells report is either empty or surfaced on the site as "needs citation" badges.
-- Deployed to Vercel with a shareable URL.
+- Deployed through GitHub Pages at `endsandmeans.info` once DNS is connected.
