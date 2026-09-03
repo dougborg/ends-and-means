@@ -1,4 +1,4 @@
-# Means proposal
+# Means change
 
 A Means is an institutional mechanism or arrangement: who may act, through what
 rules, with which resources, oversight, and enforcement.

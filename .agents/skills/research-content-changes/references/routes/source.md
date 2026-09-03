@@ -1,4 +1,4 @@
-# Source proposal
+# Source change
 
 Propose a source because it supports, challenges, or contextualizes specific
 claims or entities—not merely because it belongs on a general reading list.

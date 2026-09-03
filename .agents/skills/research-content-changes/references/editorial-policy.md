@@ -29,10 +29,7 @@ country into a tradition, or encode evaluation in an entity name.
 
 ## Editorial authority
 
-A proposal is research input, not published truth. This skill writes only within
-the proposal directory. Human review owns acceptance, IDs, reconciliation,
-relationship decisions, revisions to canonical content, and publication.
-
-Run repository validation before proposal validation. Proposal validation checks
-known relationship targets against the current framework; it neither inserts the
-proposal nor simulates promotion.
+A pull request is the proposed concrete change, not published truth. Human
+review owns acceptance, IDs, reconciliation, relationship decisions, and
+publication. Keep claims and their supporting implementation together in the
+branch so reviewers evaluate what merging will actually publish.

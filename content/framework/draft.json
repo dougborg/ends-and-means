@@ -93,17 +93,18 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy",
+      "id": "central-planning-tradition",
       "name": "Central planning",
       "description": "state ownership and administrative allocation without market prices. Soviet-type; computational planning is the modern variant.",
       "overview": [
-        "Central planning coordinates significant production and investment through administrative decisions rather than relying primarily on decentralized market prices. Planning bodies may set output targets, allocate inputs, direct investment, or establish priorities across sectors and enterprises.",
-        "The label covers different institutional designs, from hierarchical command systems to proposals for democratic or computational planning. Those differences matter: who supplies information, who can revise a plan, and who bears the consequences of error are more revealing than the word planning alone."
+        "Central planning is a family of arrangements that coordinates a substantial scope of production, investment, or distribution through collectively authorized plans and administrative or computational allocation. Ownership alone does not determine the mechanism: the revealing questions are who sets objectives, supplies information, revises targets, allocates resources, and contests decisions.",
+        "The family includes hierarchical administrative-command systems, indicative and mixed planning, and democratic or computational proposals. Historical command systems also operated through bargaining, managerial discretion, strategic reporting, and informal exchange; participatory computational designs may distribute operational authority differently. These are distinct institutional forms, not interchangeable evidence."
       ],
       "distinctions": [
-        "Administrative allocation as a dominant coordinating mechanism",
-        "Planning exists inside market economies too; dominance and scope are what distinguish this category",
-        "Centralized, democratic, and computational proposals should not be collapsed"
+        "Coordination rules, not state ownership alone",
+        "Economy-wide dominance is distinct from public investment or planning inside firms",
+        "Command, indicative, democratic, and computational forms should not be collapsed",
+        "A historical case is not the tradition itself"
       ],
       "commonQuestions": [
         {
@@ -1256,12 +1257,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--coordination-of-information-and-resources",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--coordination-of-information-and-resources",
+      "traditionId": "central-planning-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
-          "id": "centrally-planned-economy--coordination-of-information-and-resources--means-1",
+          "id": "central-planning-tradition--coordination-of-information-and-resources--means-1",
           "text": "Input-output tables, quotas, administrative allocation; modern variant runs optimization on large datasets.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1271,7 +1272,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--coordination-of-information-and-resources--failure-1",
+          "id": "central-planning-tradition--coordination-of-information-and-resources--failure-1",
           "text": "The calculation problem: tacit and real-time knowledge cannot be centrally collected; quota incentives corrupt reported data. Computation addresses volume, not knowledge that only exists once markets generate it.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1282,12 +1283,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--innovation-risk-and-failure",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--innovation-risk-and-failure",
+      "traditionId": "central-planning-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
-          "id": "centrally-planned-economy--innovation-risk-and-failure--means-1",
+          "id": "central-planning-tradition--innovation-risk-and-failure--means-1",
           "text": "Directed investment into state priorities; failure is administrative.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1297,7 +1298,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--innovation-risk-and-failure--failure-1",
+          "id": "central-planning-tradition--innovation-risk-and-failure--failure-1",
           "text": "Strong in a few prioritized sectors; stagnant elsewhere; failure is hidden, not cleared (Kornai).",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1308,12 +1309,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--distribution-of-gains-and-ownership",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--distribution-of-gains-and-ownership",
+      "traditionId": "central-planning-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
-          "id": "centrally-planned-economy--distribution-of-gains-and-ownership--means-1",
+          "id": "central-planning-tradition--distribution-of-gains-and-ownership--means-1",
           "text": "State ownership; workers are employees of the state.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1321,7 +1322,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--distribution-of-gains-and-ownership--means-2",
+          "id": "central-planning-tradition--distribution-of-gains-and-ownership--means-2",
           "text": "Structural: no private capital.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1331,7 +1332,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--distribution-of-gains-and-ownership--failure-1",
+          "id": "central-planning-tradition--distribution-of-gains-and-ownership--failure-1",
           "text": "The state becomes the new owning class (Bakunin's prediction).",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1339,7 +1340,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--distribution-of-gains-and-ownership--failure-2",
+          "id": "central-planning-tradition--distribution-of-gains-and-ownership--failure-2",
           "text": "Inequality reappears as political privilege (nomenklatura).",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1350,12 +1351,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--authority-accountability-and-abuse",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--authority-accountability-and-abuse",
+      "traditionId": "central-planning-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--means-1",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--means-1",
           "text": "State-appointed management; nominal councils.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1363,7 +1364,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--means-2",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--means-2",
           "text": "None internal; the state is the economy.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1371,7 +1372,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--means-3",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--means-3",
           "text": "None above the top.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1381,7 +1382,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--failure-1",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--failure-1",
           "text": "Rigid hierarchy with political oversight; dissent is dangerous.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1389,7 +1390,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--failure-2",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--failure-2",
           "text": "Worst case: no separation of economic and political power; no press or courts.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1397,7 +1398,7 @@
           "researchNeeded": true
         },
         {
-          "id": "centrally-planned-economy--authority-accountability-and-abuse--failure-3",
+          "id": "central-planning-tradition--authority-accountability-and-abuse--failure-3",
           "text": "Stalin and Mao: the worst outcomes in the whole table came from unconstrained leaders inside this system.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1408,12 +1409,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--externalities-and-collective-goods",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--externalities-and-collective-goods",
+      "traditionId": "central-planning-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
-          "id": "centrally-planned-economy--externalities-and-collective-goods--means-1",
+          "id": "central-planning-tradition--externalities-and-collective-goods--means-1",
           "text": "Planners can include any cost in principle.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1423,7 +1424,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--externalities-and-collective-goods--failure-1",
+          "id": "central-planning-tradition--externalities-and-collective-goods--failure-1",
           "text": "Worst environmental record of the 20th century in practice (Aral Sea, Soviet-bloc pollution).",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1434,12 +1435,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--mobility-exit-and-dependence",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--mobility-exit-and-dependence",
+      "traditionId": "central-planning-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
-          "id": "centrally-planned-economy--mobility-exit-and-dependence--means-1",
+          "id": "central-planning-tradition--mobility-exit-and-dependence--means-1",
           "text": "Administrative assignment; internal passports.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1449,7 +1450,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--mobility-exit-and-dependence--failure-1",
+          "id": "central-planning-tradition--mobility-exit-and-dependence--failure-1",
           "text": "Workers often could not legally change cities; emigration criminalized.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1460,12 +1461,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--basic-needs-and-security",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--basic-needs-and-security",
+      "traditionId": "central-planning-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
-          "id": "centrally-planned-economy--basic-needs-and-security--means-1",
+          "id": "central-planning-tradition--basic-needs-and-security--means-1",
           "text": "Universal state provision by construction.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1475,7 +1476,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--basic-needs-and-security--failure-1",
+          "id": "central-planning-tradition--basic-needs-and-security--failure-1",
           "text": "Chronic shortage: guaranteed on paper, unreliable in practice; famine when the plan fails.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1486,12 +1487,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--transition-and-institutional-change",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--transition-and-institutional-change",
+      "traditionId": "central-planning-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
-          "id": "centrally-planned-economy--transition-and-institutional-change--means-1",
+          "id": "central-planning-tradition--transition-and-institutional-change--means-1",
           "text": "Revolution or conquest in every historical case.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1501,7 +1502,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--transition-and-institutional-change--failure-1",
+          "id": "central-planning-tradition--transition-and-institutional-change--failure-1",
           "text": "No electoral path exists; the transitions were violent.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -1512,12 +1513,12 @@
       "reviewStatus": "unreviewed-migration"
     },
     {
-      "id": "centrally-planned-economy--external-coercion-and-defense",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--external-coercion-and-defense",
+      "traditionId": "central-planning-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
-          "id": "centrally-planned-economy--external-coercion-and-defense--means-1",
+          "id": "central-planning-tradition--external-coercion-and-defense--means-1",
           "text": "Strong: the USSR won the Eastern Front and matched the U.S. militarily for forty years.",
           "role": "proposed-means",
           "claimKind": "unreviewed-editorial-claim",
@@ -1527,7 +1528,7 @@
       ],
       "failureHypotheses": [
         {
-          "id": "centrally-planned-economy--external-coercion-and-defense--failure-1",
+          "id": "central-planning-tradition--external-coercion-and-defense--failure-1",
           "text": "Militarization consumed the civilian economy; defense was the one sector planning served well and at everything else's expense.",
           "role": "failure-hypothesis",
           "claimKind": "unreviewed-editorial-claim",
@@ -2689,8 +2690,8 @@
       "researchNeeded": true
     },
     {
-      "id": "centrally-planned-economy--historical-evidence-inventory",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--historical-evidence-inventory",
+      "traditionId": "central-planning-tradition",
       "kind": "historical-evidence-inventory",
       "text": "USSR 1928–91; China 1949–78; Eastern bloc; Cuba; North Korea. Industrialization in priorities; shortage, stagnation, famine; every case liberalized or collapsed.",
       "researchNeeded": true
@@ -2748,8 +2749,8 @@
       "researchNeeded": true
     },
     {
-      "id": "centrally-planned-economy--scale-and-transferability",
-      "traditionId": "centrally-planned-economy",
+      "id": "central-planning-tradition--scale-and-transferability",
+      "traditionId": "central-planning-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Scales administratively — the USSR planned for 290 million. Information degrades with every layer of hierarchy; the calculation problem is a scale problem.",

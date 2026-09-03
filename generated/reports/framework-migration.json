@@ -382,7 +382,7 @@
     {
       "inputId": "cp-c01",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--coordination-of-information-and-resources",
+      "targetId": "central-planning-tradition--coordination-of-information-and-resources",
       "withheld": [
         "verdict",
         "evidence"
@@ -392,7 +392,7 @@
     {
       "inputId": "cp-c02",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--innovation-risk-and-failure",
+      "targetId": "central-planning-tradition--innovation-risk-and-failure",
       "withheld": [
         "verdict",
         "evidence"
@@ -402,7 +402,7 @@
     {
       "inputId": "cp-c03",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--distribution-of-gains-and-ownership",
+      "targetId": "central-planning-tradition--distribution-of-gains-and-ownership",
       "withheld": [
         "verdict",
         "evidence"
@@ -412,7 +412,7 @@
     {
       "inputId": "cp-c06",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--distribution-of-gains-and-ownership",
+      "targetId": "central-planning-tradition--distribution-of-gains-and-ownership",
       "withheld": [
         "verdict",
         "evidence"
@@ -422,7 +422,7 @@
     {
       "inputId": "cp-c04",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "targetId": "central-planning-tradition--authority-accountability-and-abuse",
       "withheld": [
         "verdict",
         "evidence"
@@ -432,7 +432,7 @@
     {
       "inputId": "cp-c07",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "targetId": "central-planning-tradition--authority-accountability-and-abuse",
       "withheld": [
         "verdict",
         "evidence"
@@ -442,7 +442,7 @@
     {
       "inputId": "cp-c14",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "targetId": "central-planning-tradition--authority-accountability-and-abuse",
       "withheld": [
         "verdict",
         "evidence"
@@ -452,7 +452,7 @@
     {
       "inputId": "cp-c05",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--externalities-and-collective-goods",
+      "targetId": "central-planning-tradition--externalities-and-collective-goods",
       "withheld": [
         "verdict",
         "evidence"
@@ -462,7 +462,7 @@
     {
       "inputId": "cp-c08",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--mobility-exit-and-dependence",
+      "targetId": "central-planning-tradition--mobility-exit-and-dependence",
       "withheld": [
         "verdict",
         "evidence"
@@ -472,7 +472,7 @@
     {
       "inputId": "cp-c09",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--basic-needs-and-security",
+      "targetId": "central-planning-tradition--basic-needs-and-security",
       "withheld": [
         "verdict",
         "evidence"
@@ -482,7 +482,7 @@
     {
       "inputId": "cp-c12",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--transition-and-institutional-change",
+      "targetId": "central-planning-tradition--transition-and-institutional-change",
       "withheld": [
         "verdict",
         "evidence"
@@ -492,7 +492,7 @@
     {
       "inputId": "cp-c13",
       "disposition": "response-draft",
-      "targetId": "centrally-planned-economy--external-coercion-and-defense",
+      "targetId": "central-planning-tradition--external-coercion-and-defense",
       "withheld": [
         "verdict",
         "evidence"
@@ -1012,7 +1012,7 @@
     {
       "inputId": "cp-c10",
       "disposition": "historical-evidence-inventory",
-      "targetId": "centrally-planned-economy--historical-evidence-inventory",
+      "targetId": "central-planning-tradition--historical-evidence-inventory",
       "withheld": [
         "verdict",
         "evidence"
@@ -1092,7 +1092,7 @@
     {
       "inputId": "cp-c11",
       "disposition": "criterion-observation",
-      "targetId": "centrally-planned-economy--scale-and-transferability",
+      "targetId": "central-planning-tradition--scale-and-transferability",
       "withheld": [
         "verdict",
         "evidence"

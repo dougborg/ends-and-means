@@ -1,4 +1,4 @@
-# Statement or interpretation proposal
+# Statement or interpretation change
 
 A statement is one contestable proposition in an argument trace. It may be an
 empirical claim, attributed value, causal hypothesis, or editorial

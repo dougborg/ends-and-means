@@ -38,7 +38,7 @@ ranking or treating historical states as single-system examples.
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
-| [`.agents/skills/research-content-proposals/SKILL.md`](.agents/skills/research-content-proposals/SKILL.md) | Reusable, proposal-only research workflow for the current analytical model. |
+| [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Source-backed workflow for concrete content changes reviewed in pull requests. |
 
 ## Next step
 

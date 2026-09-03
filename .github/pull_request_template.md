@@ -4,14 +4,13 @@
 
 ## Change type
 
-- [ ] Research proposal only — no canonical or application changes
-- [ ] Human-reviewed promotion into canonical content
+- [ ] Research-backed content change
 - [ ] Application, tooling, or documentation change
 
 ## Review boundary
 
 - [ ] I identified the claims or decisions that require human judgment.
-- [ ] Proposal research remains under `proposals/` unless this PR explicitly documents human approval for promotion.
+- [ ] The concrete change, sources, and review decisions are contained in this PR; there is no parallel proposal artifact.
 - [ ] Sources support the specific claims attached to them; contrary evidence and limitations are visible.
 - [ ] This change does not treat a country or historical case as a pure or timeless instance of a tradition.
 
@@ -20,7 +19,6 @@
 - [ ] `npm run check`
 - [ ] `npm test`
 - [ ] `npm run build`
-- [ ] `npm run validate:proposals` when proposals are present
 
 ## Human decisions requested
 

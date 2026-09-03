@@ -36,7 +36,7 @@ Development.
 ## 2. Inputs you will be given
 
 Three markdown files supplied the initial import. Preserve them as provenance;
-substantial additions or revisions now use staged proposals and human review.
+substantial additions or revisions are made concretely on branches and reviewed through pull requests.
 
 - `system-comparison-by-crux-v2.md` — the legacy source file for 8 systems ×
   14 Challenges. Each legacy “crux” section contains a system/mechanism/failure

@@ -1,4 +1,4 @@
-# Tradition proposal
+# Tradition change
 
 A tradition is a historically situated family of ideas and institutional
 arguments, not a country, party, slogan, or internally uniform blueprint.

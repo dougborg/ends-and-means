@@ -1,4 +1,4 @@
-# Challenge proposal
+# Challenge change
 
 A Challenge is a recurring comparative question about institutional performance
 or design, not a Topic label, desired outcome, or disguised verdict.

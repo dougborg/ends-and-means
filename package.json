@@ -15,7 +15,6 @@
     "test:routes": "vitest run tests/routes",
     "import": "node scripts/import-content.mjs",
     "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts",
-    "validate:proposals": "node scripts/validate-proposals.mjs",
     "migrate:framework": "npm run validate"
   },
   "dependencies": {
