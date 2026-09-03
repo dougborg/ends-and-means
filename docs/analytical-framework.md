@@ -109,6 +109,25 @@ assumptions, evidence requirements, and known limitations. Criteria must never
 be silently combined into a universal score. When conclusions change because
 readers prioritize criteria differently, the dependency should be visible.
 
+## Comparison Dimensions and Placements
+
+A Comparison Dimension describes a difference; a Criterion evaluates an
+arrangement or outcome. Ownership structure, allocation mechanism, and
+concentration of authority can be Dimensions. Accountability, liberty,
+resilience, or equity may be Criteria when their normative assumptions and
+evidence requirements are stated.
+
+Each Dimension defines its endpoints or categories, eligible subject types,
+method, embedded choices, known correlations, and limits. Each Placement is a
+separate, sourced analytical Statement with a subject, time/place scope, basis,
+range or category, uncertainty, and rival interpretations. Ideal types and
+dated empirical Cases must remain distinguishable.
+
+No canonical left/right coordinate or aggregate political score is inferred.
+Broad, internally diverse Concepts and Collections ordinarily receive ranges or
+remain unplaced. Missing evidence never defaults to a midpoint. A visual map
+must have a complete structured-text or table equivalent.
+
 ## Claim structure
 
 A comparison claim should be able to expose this trace:
@@ -125,14 +144,21 @@ assessment can still need citation.
 
 ## Product implications
 
-- Approach dossiers open with an explicit kind, domains, and distinct Ends and Means sections.
+- Explore and Compare are peer product modes; neither is an ontology root.
+- Entity pages open with actual kind and scope rather than forcing every
+  familiar term into Approach.
 - Challenge pages ask one common question across approaches.
 - Comparison pages use an Ends / Means / Practice frame and name the criteria
   behind any assessment.
 - Case pages carry context and rules-in-use rather than serving as timeless
   examples of an ideology.
+- Events record sourced occurrences; Transition analyses connect bounded Case
+  episodes while keeping turning-point and causal claims separately reviewable.
 - Evidence traces link individual claims to sources, cases, interpretations,
   and criteria.
+- Comparison pages and maps are derived queries over shared relationships.
+  Dimension definitions and Placements are canonical, reviewable records; the
+  rendered comparison does not own duplicate prose.
 - The matrix provides navigation and comparison, not an aggregate ranking.
 - Feedback actions attach to the precise claim, attribution, mechanism,
   evidence link, or criterion being challenged.
@@ -149,11 +175,12 @@ that all political disagreement can be resolved empirically.
 
 **Concepts** are reusable but contested ideas. **Approaches** are recognizable
 configurations of Concepts, attributed Ends, diagnoses, and proposed Means.
-Approaches remain the primary reader-facing entry point, but are not the root
-type of the graph. Editorial Collections provide overlapping umbrella views;
-typed and sourced relationships represent membership, influence, advocacy, and
-disagreement. Political, economic, social, legal, and cultural spheres are
-overlapping facets rather than exclusive kinds.
+Entity-neutral Explore and Compare views may feature them without making
+Approach the public entry bucket or root type of the graph. Editorial
+Collections provide overlapping umbrella views; typed and sourced relationships
+represent membership, influence, advocacy, and disagreement. Political,
+economic, social, legal, and cultural spheres are overlapping facets rather
+than exclusive kinds.
 
 Real-world practice belongs in a **Case** with geographic and temporal bounds.
 Cases may be historical or ongoing. Ongoing Cases require an explicit

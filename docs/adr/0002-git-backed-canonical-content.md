@@ -30,9 +30,10 @@ The canonical domain distinguishes five layers:
 5. presentation: dossiers, comparisons, timelines, reading paths, and a
    separate fictional Depiction experience.
 
-Approach is a public discovery entry point, not the graph's root type. An
-Approach is a recognizable configuration of Concepts, attributed Ends, and
-proposed Means. Broad ideological or thematic umbrellas are overlapping
+Approach is one domain entity within entity-neutral Explore and Compare views,
+not the graph's root type or universal public bucket. An Approach is a
+recognizable configuration of Concepts, attributed Ends, and proposed Means.
+Broad ideological or thematic umbrellas are overlapping
 Collections with qualified membership, not Approach kinds. Domains are
 first-class vocabulary records connected through sourced relationships rather
 than a closed enum embedded on an Approach.

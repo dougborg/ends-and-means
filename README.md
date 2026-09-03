@@ -13,7 +13,7 @@ The static Astro build deploys through GitHub Pages. Pull-request verification
 and Pages deployment use separate GitHub Actions workflows; DNS configuration
 for the custom domain is a separate release step.
 
-**Status:** the current reference shell is live while the approaches-first
+**Status:** the current reference shell is live while an Explore / Compare
 reader experience is consolidated onto a plural canonical graph. Astro, CI, the
 portable graph validator, Topic and Challenge discovery, eight transitional
 dossiers, and the source inventory are in place. The active work is separating
@@ -21,10 +21,11 @@ Concepts, Approaches, Means, Collections, and bounded Cases; consolidating the
 content schemas; and connecting independently citable Statements to typed,
 sourced relationships.
 
-Approaches are the primary public entry point. Challenges and Topics provide
-secondary ways to compare the same material without implying a ranking or
-treating historical states as timeless embodiments of an Approach.
-Approach is not the root type of the underlying ontology.
+Explore provides entity-neutral paths through systems and ideas, institutions,
+Questions, Cases, People, and Works. Compare examines the same graph through
+shared Challenges, pairwise views, and independently defined political-economic
+dimensions without implying a universal ranking. No public navigation label is
+the root type of the underlying ontology.
 
 ## Contents
 

@@ -8,9 +8,11 @@ contexts, and appear in theory, institutional design, historical practice, and
 fiction. The canonical model is therefore a **plural graph**, not a taxonomy of
 systems and not an Approach-shaped tree.
 
-“Approaches” remains the primary reader entry point because people commonly
-begin with names such as social democracy, Marxism–Leninism, or mutualism. It
-is not the root type from which every other entity derives.
+Public navigation has two equal modes: **Explore** and **Compare**. Explore
+provides entity-neutral paths through familiar systems and ideas, institutions,
+Questions, Cases, People, and Works. Compare examines shared Challenges,
+pairwise differences, and political-economic dimensions. Neither mode nor any
+navigation label is an ontology root.
 
 ## Design principles
 
@@ -131,6 +133,75 @@ requirements, limits, and plausible reasons for weighting it differently. An
 assessment applies one Criterion to a scoped object or outcome; Criteria are
 never silently aggregated into a master score.
 
+### Comparison Dimension and Placement
+
+A Comparison Dimension is an explicitly defined descriptive continuum,
+category set, or measurable property used to compare eligible subjects. It is
+not a Criterion: a Dimension says where or how subjects differ; a Criterion
+says how an evaluator judges an arrangement or outcome.
+
+Examples include ownership of productive assets, allocation mechanism,
+concentration of political authority, workplace governance, political
+contestation, and degree of decommodification. “Left” and “right” are too
+compound and context-dependent to serve as the canonical axis.
+
+```ts
+interface ComparisonDimension {
+  id: ComparisonDimensionId;
+  label: string;
+  definition: string;
+  valueType: "continuum" | "ordinal" | "categorical";
+  polesOrCategories: DimensionValueDefinition[];
+  eligibleSubjectTypes: EntityKind[];
+  method: string;
+  normativeChoices: string[];
+  knownCorrelations: ComparisonDimensionId[];
+  limitations: string[];
+  statementIds: StatementId[];
+}
+
+interface Placement extends RelationshipBase {
+  subjectRef: EntityRef;
+  dimensionId: ComparisonDimensionId;
+  value: DimensionValue | DimensionRange;
+  basis: "declared-design" | "ideal-type-analysis" | "case-observation";
+  uncertainty: string;
+  lensId?: InterpretationLensId;
+}
+```
+
+Placements are independently reviewable analytical claims. They must identify
+the subject, scope, basis, evidence, and uncertainty. Broad Concepts and
+internally diverse Collections ordinarily receive a range or no placement;
+specific Approaches, Means, and dated Case episodes are more defensible units.
+Ideal-type placements and empirical observations must never be shown as though
+they were measured on the same basis.
+
+Multiple sourced lenses may define different dimensions or place the same
+subject differently. Placements do not determine a Criterion assessment,
+evidence quality, Collection membership, or any other relationship.
+
+### Comparison specification
+
+A comparison page is a derived query over canonical entities and relationships,
+not another content owner. A saved or curated specification may select:
+
+```ts
+interface ComparisonSpec {
+  id?: ComparisonSpecId;
+  subjectRefs: EntityRef[];
+  challengeIds?: ChallengeId[];
+  dimensionIds?: ComparisonDimensionId[];
+  criterionIds?: CriterionId[];
+  caseScope?: CaseScope;
+  lensIds?: InterpretationLensId[];
+}
+```
+
+The compiler returns only genuinely comparable relationships and reports
+missing, inapplicable, differently scoped, or unreviewed material explicitly.
+It does not manufacture symmetric coverage or comparison prose.
+
 ### Case and episode
 
 A Case is a bounded empirical setting. Large or changing Cases contain
@@ -158,6 +229,59 @@ partial instantiation, hybridization, contestation, or departure. A
 Case-to-Means relationship identifies an evidenced institutional arrangement
 in formal design or rules-in-use. Neither relationship turns a Case into proof
 of an ideology.
+
+### Event and Transition
+
+An Event is a sourced occurrence with temporal and geographic bounds: an
+election, enactment, coup, strike, war, institutional reform, court decision,
+party split, publication, or other occurrence relevant to the graph. Events may
+be nearly instantaneous or span an interval.
+
+```ts
+interface Event {
+  id: EventId;
+  name: string;
+  eventKindIds: ConceptId[];
+  startDate: HistoricalDate;
+  endDate?: HistoricalDate;
+  placeIds: PlaceId[];
+  descriptionStatementIds: StatementId[];
+  participantRelations: EventParticipantRelation[];
+  externalRefs: ExternalReference[];
+}
+```
+
+An Event records what occurred. “Turning point,” “trigger,” “cause,” and
+“collapse” are interpretive claims about an Event and require Statements,
+Sources, scope, and rival explanations.
+
+A Transition is a bounded analytical sequence connecting a prior institutional
+configuration to a later one. It may contain several Events, gradual changes,
+overlapping institutions, reversals, or disputed boundaries:
+
+```ts
+interface Transition {
+  id: TransitionId;
+  name: string;
+  caseId: CaseId;
+  fromEpisodeRefs: CaseEpisodeId[];
+  toEpisodeRefs: CaseEpisodeId[];
+  eventIds: EventId[];
+  changedRelationshipIds: RelationshipId[];
+  boundaryStatus: "exact" | "approximate" | "disputed" | "open";
+  explanationStatementIds: StatementId[];
+  rivalInterpretationIds: StatementId[];
+}
+```
+
+This prevents a timeline from implying that one monolithic “system” instantly
+replaced another. Before/after descriptions come from bounded Case episodes and
+their evidenced institutional relationships. The Transition identifies the
+sequence being analyzed; causal significance remains in challengeable
+Statements.
+
+A timeline is a derived presentation joining Events, Case episodes, and
+Transitions. It is not a fourth source of chronology.
 
 ### Depiction and Work
 
@@ -365,6 +489,8 @@ content/
         case.json             # boundary, context, and selection rationale
         episodes/             # meaningful changes within a larger case
         observations/         # scoped empirical Statements
+    events/                    # sourced occurrences, independently reusable
+    transitions/               # bounded before/change/after analyses
     sources/                  # citable manifestations and access metadata
   depictions/                 # interpretations of fictional systems
   relationships/
@@ -393,6 +519,8 @@ embedding them in either endpoint or producing thousands of fragments.
 - Relationship files own claims about how independently addressable entities
   relate; endpoint files do not duplicate those edges.
 - Statement files or case observation files own challengeable prose.
+- Event files own chronology and participants; Transition files own the bounded
+  before/change/after sequence, not an uncontested causal verdict.
 - Sources own bibliographic identity; citation links own locators and the exact
   Statements they support.
 - Dossiers, comparisons, navigation trees, backlinks, and counts are derived
@@ -424,6 +552,7 @@ Validation must enforce:
 - allowed subject/object types for each predicate;
 - Statement and Source support for published substantive relationships;
 - temporal bounds and freshness metadata for empirical claims;
+- valid Event chronology and resolvable Transition episode boundaries;
 - no empirical-evidence edges originating from Depictions;
 - no circular direct broader/narrower paths;
 - no automatic inheritance of Ends, Means, domains, or assessments through
@@ -436,10 +565,30 @@ a database later without changing content identity.
 
 ## Reader-facing information architecture
 
-The main navigation should begin with **Approaches**, followed by **Questions**
-(Challenges), **Institutions** (Means), **Cases**, and **Ideas** (Concepts and
-Ends). Topics and Collections support browse pages rather than becoming global
-ontology roots.
+The main navigation begins with two peer actions:
+
+```text
+Explore   Compare   Cases   People & Works   Method
+```
+
+Explore is an entity-neutral discovery layer:
+
+```text
+Systems & ideas   Institutions   Questions   Cases   People   Works
+```
+
+“Systems & ideas” is a reader-facing Collection of familiar entry terms, not an
+entity type. A result immediately identifies its actual kind and can appear in
+more than one discovery path. Topics and Collections support browsing without
+becoming ontology roots.
+
+Compare supports three initial modes:
+
+1. responses to a shared Challenge;
+2. pairwise or small-set comparison across supported factual dimensions and
+   response traces;
+3. maps on independently defined Comparison Dimensions, with ranges,
+   uncertainty, alternative lenses, and a complete nonvisual representation.
 
 An Approach dossier should contain:
 
@@ -469,11 +618,15 @@ analytical distinctions.
 3. Convert central planning from an Approach to a Means family and preserve its
    old material only where it maps cleanly.
 4. Build a vertical slice around social democracy, democratic Concepts,
-   solidaristic bargaining, and the two bounded Swedish Cases.
-5. Add one overlap stress test: anarcho-communism in several Collections.
-6. Add one measurement stress test using selected V-Dem or International IDEA
-   dimensions without importing a universal democracy score.
-7. Review the compiled graph and rendered dossiers. Only then migrate the other
+   solidaristic bargaining, and the two bounded Swedish Cases. It must render
+   both an Explore dossier and one evidence-backed comparison.
+5. Add one Event and Transition spanning two Case episodes without encoding its
+   causal importance as an intrinsic property.
+6. Add one overlap stress test: anarcho-communism in several Collections.
+7. Add one Comparison Dimension and Placement stress test using selected V-Dem
+   or International IDEA dimensions without importing a universal democracy
+   score.
+8. Review the compiled graph and rendered dossiers. Only then migrate the other
    inherited records and retire remaining transitional fixtures.
 
 ## Research basis
