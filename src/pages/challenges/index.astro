@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+---
+<BaseLayout title="Challenges" description="Recurring political-economic questions used to compare institutional responses.">
+  <div class="framework-index"><header><p class="coordinate">FRAMEWORK / CHALLENGES</p><h1>Questions institutions must answer.</h1><p class="dek">Challenges are recurring open problems. They do not assume one preferred solution, and unlike broad topics they are written as questions that can expose different Ends and Means.</p></header>
+    <ol class="indexed-list">{framework.challenges.map((challenge, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><div><h2><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h2><p>{challenge.rationale}</p></div><small>{framework.responses.filter(({ challengeId }) => challengeId === challenge.id).length} draft responses</small></li>)}</ol>
+  </div>
+</BaseLayout>

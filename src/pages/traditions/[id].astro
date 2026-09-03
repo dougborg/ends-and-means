@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+export function getStaticPaths() { return framework.traditions.map((tradition) => ({ params: { id: tradition.id }, props: { tradition } })); }
+const { tradition } = Astro.props;
+const responses = framework.responses.filter(({ traditionId }) => tradition.id === traditionId).map((response) => ({ ...response, challenge: framework.challenges.find(({ id }) => id === response.challengeId)! }));
+const notes = framework.researchNotes.filter(({ traditionId }) => traditionId === tradition.id);
+---
+<BaseLayout title={tradition.name} description={tradition.description}>
+  <article class="tradition-page">
+    <nav aria-label="Breadcrumb"><a href="/traditions/">Traditions</a> <span aria-hidden="true">/</span> Exploratory ideal type</nav>
+    <header><p class="coordinate">TRADITION / RESEARCH DRAFT</p><h1>{tradition.name}</h1><p class="dek">{tradition.description}</p><p class="boundary-note"><strong>Boundary:</strong> {tradition.caveat}</p></header>
+    <section class="tradition-responses" aria-labelledby="response-title"><header><p class="coordinate">RESPONSE MAP</p><h2 id="response-title">Responses by Challenge</h2></header>
+      {responses.map((response) => <details><summary><span>{response.challenge.question}</span><small>{response.means.length} proposed Means</small></summary><div class="response-columns"><section><h3>Proposed Means</h3><ul>{response.means.map(({ text }) => <li>{text}</li>)}</ul></section><section><h3>Failure hypotheses</h3><ul>{response.failureHypotheses.map(({ text }) => <li>{text}</li>)}</ul></section></div><a class="detail-link" href={`/challenges/${response.challenge.id}/`}>Compare every response to this Challenge →</a></details>)}
+    </section>
+    <aside class="research-notes" aria-labelledby="notes-title"><p class="coordinate">SEPARATED DURING MIGRATION</p><h2 id="notes-title">Evidence to investigate</h2>{notes.map((note) => <section><h3>{note.kind === "historical-evidence-inventory" ? "Historical evidence inventory" : "Scale and transferability"}</h3><p>{note.text}</p></section>)}</aside>
+  </article>
+</BaseLayout>

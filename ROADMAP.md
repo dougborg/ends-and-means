@@ -53,6 +53,11 @@ work is source material, not an API or compatibility contract.
   generated target graph contains no legacy fields or identifiers; every
   inherited assertion remains explicitly unreviewed until claim-level research
   and bounded-case modeling are complete.
+  The first public rendering slice now reads that draft directly: discovery,
+  Challenge, tradition, and method routes expose all migrated responses and
+  research notes with persistent review warnings. Primary navigation uses only
+  the replacement vocabulary; source, case, End, and full argument-trace routes
+  remain gated on the next research pass.
 
 ## M2 — Reference pages
 

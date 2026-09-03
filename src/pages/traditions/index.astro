@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+---
+<BaseLayout title="Traditions and ideal types" description="Exploratory political-economic traditions and ideal types in the Ends and Means framework.">
+  <div class="framework-index"><header><p class="coordinate">FRAMEWORK / TRADITIONS</p><h1>Families of ideas, not country labels.</h1><p class="dek">Traditions help organize arguments about institutions. Each contains internal disagreement, changes over time, and only partial relationships to historical cases.</p></header>
+    <ul class="tradition-list">{framework.traditions.map((tradition) => <li><p class="coordinate">EXPLORATORY IDEAL TYPE</p><h2><a href={`/traditions/${tradition.id}/`}>{tradition.name}</a></h2><p>{tradition.description}</p><small>{framework.responses.filter(({ traditionId }) => traditionId === tradition.id).length} Challenge responses</small></li>)}</ul>
+  </div>
+</BaseLayout>

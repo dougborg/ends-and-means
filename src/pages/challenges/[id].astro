@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+export function getStaticPaths() { return framework.challenges.map((challenge) => ({ params: { id: challenge.id }, props: { challenge } })); }
+const { challenge } = Astro.props;
+const responses = framework.responses.filter(({ challengeId }) => challengeId === challenge.id).map((response) => ({ ...response, tradition: framework.traditions.find(({ id }) => id === response.traditionId)! }));
+---
+<BaseLayout title={challenge.question} description={challenge.rationale}>
+  <article class="challenge-page">
+    <nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> Research draft</nav>
+    <header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p><p class="status-line"><span aria-hidden="true">◇</span> All responses below are migrated research leads, not reviewed conclusions.</p></header>
+    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">COMPARATIVE RESPONSE LEDGER</p><h2 id="responses-title">How traditions propose to respond</h2></header>
+      {responses.map((response, index) => <article class="response-draft"><header><span class="ledger-index">{String(index + 1).padStart(2, "0")}</span><div><p class="coordinate">TRADITION / DRAFT</p><h3><a href={`/traditions/${response.tradition.id}/`}>{response.tradition.name}</a></h3></div><span class="review-flag">Research needed</span></header><div class="response-columns"><section><h4>Proposed Means</h4><ul>{response.means.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section><section><h4>Failure hypotheses</h4><ul>{response.failureHypotheses.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section></div></article>)}
+    </section>
+  </article>
+</BaseLayout>

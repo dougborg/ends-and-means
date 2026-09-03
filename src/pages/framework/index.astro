@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+---
+<BaseLayout title="Framework" description="How Ends and Means separates questions, traditions, institutional responses, evidence, and evaluation.">
+  <article class="method-page">
+    <header><p class="coordinate">METHOD / WORKING MODEL</p><h1>Separate the question, mechanism, evidence, and judgment.</h1><p class="dek">The framework is designed to make disagreement inspectable. It does not produce a score, flatten a country into one system, or treat a theoretical mechanism as an observed outcome.</p></header>
+    <section class="method-sequence" aria-labelledby="sequence-title"><h2 id="sequence-title">The intended argument trace</h2><ol><li><strong>Challenge</strong><span>A recurring open question</span></li><li><strong>Attributed End</strong><span>What a specified actor sought</span></li><li><strong>Institutional Means</strong><span>Roles, rules, authority, and incentives</span></li><li><strong>Bounded case</strong><span>What operated where, when, and for whom</span></li><li><strong>Observed outcome</strong><span>A sourced result with limits</span></li><li><strong>Criterion</strong><span>The disclosed lens used to assess it</span></li></ol></section>
+    <section class="criteria-section" aria-labelledby="criteria-title"><header><p class="coordinate">CURRENT DRAFT</p><h2 id="criteria-title">Explicit Criteria</h2></header><div>{framework.criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p><dl><div><dt>Assumption</dt><dd>{criterion.normativeAssumptions[0]}</dd></div><div><dt>Evidence needed</dt><dd>{criterion.evidenceRequirements[0]}</dd></div><div><dt>Limit</dt><dd>{criterion.limitations[0]}</dd></div></dl></article>)}</div></section>
+    <section class="migration-state"><p class="coordinate">MIGRATION STATUS</p><h2>Complete transfer; incomplete research.</h2><p>All 112 entries from the exploratory comparison are accounted for: 96 feed 72 response drafts, and 16 became historical-evidence or scale-and-transferability notes. None of the former evaluative labels entered this graph.</p><p>The next editorial step is to split these inherited summaries into independently citable claims, connect them to attributed Ends and concrete Means, and test them against bounded historical cases.</p></section>
+  </article>
+</BaseLayout>

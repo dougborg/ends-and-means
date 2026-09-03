@@ -1,75 +1,21 @@
 ---
-import { readFile } from "node:fs/promises";
-import path from "node:path";
-import EvidenceBadge from "../components/EvidenceBadge.astro";
-import VerificationBadge from "../components/VerificationBadge.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import framework from "../../content/framework/draft.json";
 
-type DiagnosticReport = Record<string, unknown>;
-
-const reportCandidates = [
-  "generated/reports/import-report.json",
-  "generated/diagnostic-report.json",
-  "generated/report.json",
-  "src/generated/diagnostic-report.json",
-];
-
-let report: DiagnosticReport | undefined;
-let reportPath: string | undefined;
-
-for (const candidate of reportCandidates) {
-  try {
-    report = JSON.parse(
-      await readFile(path.join(process.cwd(), candidate), "utf8"),
-    ) as DiagnosticReport;
-    reportPath = candidate;
-    break;
-  } catch (error) {
-    if (!(error instanceof Error) || !("code" in error) || error.code !== "ENOENT") {
-      throw error;
-    }
-  }
-}
+const responseCount = new Map(framework.challenges.map((challenge) => [challenge.id, framework.responses.filter(({ challengeId }) => challengeId === challenge.id).length]));
 ---
-
-<BaseLayout fullBleed>
-  <header class="masthead">
-    <p class="coordinate">COMPARATIVE INSTRUMENT / OPEN WORK</p>
-    <h1>Start with a problem,<br /><span>not an ideology.</span></h1>
-    <div class="masthead__statement">
-      <p>Political and economic systems promise different ends and depend on different means.</p>
-      <p>Trace the tradeoffs, mechanisms, evidence, and historical record behind each claim.</p>
-    </div>
+<BaseLayout fullBleed description="Explore recurring political-economic Challenges, institutional responses, and the evidence still needed to evaluate them.">
+  <header class="framework-hero">
+    <p class="coordinate">ENDS AND MEANS / RESEARCH DRAFT</p>
+    <div><h1>Start with the question.<br /><span>Trace what follows.</span></h1><p class="dek">Political and economic traditions pursue different Ends through different institutional Means. Begin with a shared Challenge, then inspect the proposed mechanisms, failure hypotheses, and research gaps.</p></div>
+    <aside class="draft-notice"><strong>Working material</strong><p>The current comparison has been reorganized, not certified. Its inherited claims remain visible as research leads until they receive claim-level sources and bounded cases.</p><a href="/framework/">How to read this draft →</a></aside>
   </header>
-
-  <section class="instrument-panel" aria-labelledby="diagnostics-heading">
-        <div class="section-heading">
-          <div>
-            <p class="coordinate">FOUNDATION / KNOWLEDGE GRAPH</p>
-            <h2 id="diagnostics-heading">Research status</h2>
-          </div>
-          <div class="badge-row">
-            <EvidenceBadge state={report ? "partial" : "untested"} />
-            <VerificationBadge state={report ? "reviewed" : "draft"} />
-          </div>
-        </div>
-
-        {
-          report ? (
-            <>
-              <p class="report-source">Generated from <code>{reportPath}</code></p>
-              <pre><code>{JSON.stringify(report, null, 2)}</code></pre>
-            </>
-          ) : (
-            <div class="empty-state">
-              <p>No generated diagnostic report exists yet.</p>
-              <p>
-                Run <code>npm run import</code>, then <code>npm run validate</code>.
-                This page will expose the resulting graph report without requiring
-                browser JavaScript.
-              </p>
-            </div>
-          )
-        }
+  <section class="question-ledger" aria-labelledby="questions-title">
+    <header class="section-heading"><div><p class="coordinate">DISCOVERY / 9 OPEN QUESTIONS</p><h2 id="questions-title">Choose a Challenge</h2></div><p>Each question opens the same analytical structure across multiple traditions.</p></header>
+    <ol>{framework.challenges.map((challenge, index) => <li><a href={`/challenges/${challenge.id}/`}><span class="ledger-index">{String(index + 1).padStart(2, "0")}</span><span class="ledger-question">{challenge.question}</span><span class="ledger-count">{responseCount.get(challenge.id)} draft responses</span><span class="ledger-arrow" aria-hidden="true">→</span></a></li>)}</ol>
+  </section>
+  <section class="framework-directory" aria-labelledby="traditions-title">
+    <div><p class="coordinate">ANOTHER ENTRY POINT</p><h2 id="traditions-title">Explore traditions and ideal types</h2><p>These are contested families of ideas, not labels for whole countries or uniform blueprints.</p></div>
+    <ul class="text-directory">{framework.traditions.map((tradition) => <li><a href={`/traditions/${tradition.id}/`}>{tradition.name}<span aria-hidden="true">↗</span></a></li>)}</ul>
   </section>
 </BaseLayout>

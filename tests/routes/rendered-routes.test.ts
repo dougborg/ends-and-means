@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import graph from "../../generated/content/graph.json";
+import framework from "../../content/framework/draft.json";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -110,6 +111,33 @@ describe("generated reference routes", () => {
     expect(text).toContain("Observed practice");
     expect(text).toContain("The same limit can mean different things.");
     expect(text).not.toMatch(/\bcrux(?:es)?\b/i);
+  });
+
+  it("renders the migrated framework through clean public routes", async () => {
+    const routes = [
+      "/", "/challenges/", "/traditions/", "/framework/",
+      ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
+      ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
+    ];
+    expect(routes).toHaveLength(21);
+
+    for (const route of routes) {
+      const html = await readFile(routeFile(route), "utf8");
+      const text = stripMarkup(html);
+      expect(html.match(/<main\b/gi), route).toHaveLength(1);
+      expect(html.match(/<h1\b/gi), route).toHaveLength(1);
+      expect(text.length, route).toBeGreaterThan(250);
+      expect(html, route).not.toMatch(/<astro-island\b/i);
+      expect(text, route).not.toMatch(/\bcrux(?:es)?\b/i);
+    }
+
+    const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
+    expect(challenge.match(/class="response-draft"/g)).toHaveLength(8);
+    expect(stripMarkup(challenge)).toContain("migrated research leads, not reviewed conclusions");
+
+    const tradition = await readFile(routeFile("/traditions/social-democratic-tradition/"), "utf8");
+    expect(tradition.match(/<details>/g)).toHaveLength(9);
+    expect(stripMarkup(tradition)).toContain("Evidence to investigate");
   });
 
   it("links each pivot to the complete, unique set of canonical cells", async () => {

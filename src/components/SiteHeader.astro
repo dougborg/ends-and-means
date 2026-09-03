@@ -2,10 +2,10 @@
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
 const navItems = [
-  { href: "/", label: "Overview", exact: true },
-  { href: "/systems/", label: "Systems" },
-  { href: "/cruxes/", label: "Cruxes" },
-  { href: "/cells/", label: "Compare" },
+  { href: "/", label: "Explore", exact: true },
+  { href: "/challenges/", label: "Challenges" },
+  { href: "/traditions/", label: "Traditions" },
+  { href: "/framework/", label: "Framework" },
 ];
 const isCurrent = (href: string, exact = false) => exact ? currentPath === href : currentPath.startsWith(href);
 ---
