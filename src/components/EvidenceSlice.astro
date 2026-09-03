@@ -1,0 +1,43 @@
+---
+type EvidenceSlice = typeof import("../../content/framework/social-democratic-slice.json");
+interface Props { slice: EvidenceSlice }
+const { slice } = Astro.props;
+const sources = new Map(slice.sources.map((source) => [source.id, source]));
+---
+<section class="evidence-slice" aria-labelledby="evidence-slice-title">
+  <header>
+    <div><p class="coordinate">REVIEW CANDIDATE / VERTICAL SLICE</p><h2 id="evidence-slice-title">From stated Ends to bounded evidence</h2></div>
+    <a href={slice.wikipediaUrl}>Wikipedia orientation ↗</a>
+  </header>
+  <p class="slice-intro">This researched slice tests the analytical model. It does not treat Sweden as the tradition or convert a bounded result into a general verdict.</p>
+
+  <div class="ends-means-grid">
+    <section><p class="coordinate">ENDS / ATTRIBUTED</p>{slice.ends.map((end) => <article><h3>{end.label}</h3><p>{end.statement}</p><small>Attributed to {end.attributedTo}</small></article>)}</section>
+    <section><p class="coordinate">MEANS / INSTITUTIONAL</p>{slice.means.map((means) => <article><h3>{means.label}</h3><p>{means.description}</p><small>{means.level} · {means.ruleType} rule</small></article>)}</section>
+  </div>
+
+  <section class="case-evidence" aria-labelledby="cases-title">
+    <p class="coordinate">BOUNDED CASES</p><h3 id="cases-title">Two episodes, kept distinct</h3>
+    <div>{slice.cases.map((item) => <article id={item.id}>
+      <header><div><p>{item.location} · {item.period}</p><h4>{item.name}</h4></div>{item.wikipediaUrl && <a href={item.wikipediaUrl}>Wikipedia ↗</a>}</header>
+      <p class="case-boundary"><strong>Boundary:</strong> {item.boundary}</p><p>{item.relationship}</p>
+      <h5>Observed statements</h5>
+      {item.statements.map((statement) => <div class="sourced-statement"><p>{statement.text}</p><footer><span>{statement.kind} · uncertainty: {statement.uncertainty}</span>{statement.sourceIds.map((sourceId) => { const source = sources.get(sourceId)!; return <a href={source.url}>{source.authors}, {source.year} ↗</a>; })}</footer><small><strong>Limit:</strong> {statement.limitation}</small></div>)}
+      <details><summary>Rival explanations and interpretations</summary><ul>{item.rivalExplanations.map((rival) => <li>{rival}</li>)}</ul></details>
+    </article>)}</div>
+  </section>
+
+  <section class="argument-trace" aria-labelledby="trace-title">
+    <p class="coordinate">COMPLETE ARGUMENT TRACE</p><h3 id="trace-title">{slice.trace.question}</h3>
+    <ol>
+      <li><span>End</span>{slice.ends.filter(({ id }) => slice.trace.endIds.includes(id)).map(({ label }) => label).join("; ")}</li>
+      <li><span>Means</span>{slice.means.filter(({ id }) => slice.trace.meansIds.includes(id)).map(({ label }) => label).join("; ")}</li>
+      <li><span>Expected interaction</span>{slice.trace.expectedInteraction}</li>
+      <li><span>Bounded evidence</span>{slice.cases.filter(({ id }) => slice.trace.caseIds.includes(id)).map(({ name, period }) => `${name} (${period})`).join("; ")}</li>
+      <li><span>Criterion</span>{slice.trace.criterion.definition}<small>Normative assumption: {slice.trace.criterion.assumption}</small></li>
+      <li><span>Assessment</span>{slice.trace.assessment}<small>Uncertainty: {slice.trace.uncertainty}</small></li>
+    </ol>
+  </section>
+
+  <footer class="slice-sources"><h3>Sources in this slice</h3><ol>{slice.sources.map((source) => <li><a href={source.url}>{source.authors}. <cite>{source.title}</cite> ({source.year}).</a> <small>{source.kind}</small></li>)}</ol></footer>
+</section>

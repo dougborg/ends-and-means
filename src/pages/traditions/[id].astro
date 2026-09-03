@@ -1,16 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EvidenceSlice from "../../components/EvidenceSlice.astro";
 import framework from "../../../content/framework/draft.json";
+import socialDemocraticSlice from "../../../content/framework/social-democratic-slice.json";
+import "../../styles/evidence-slice.css";
 export function getStaticPaths() { return framework.traditions.map((tradition) => ({ params: { id: tradition.id }, props: { tradition } })); }
 const { tradition } = Astro.props;
 const responses = framework.responses.filter(({ traditionId }) => tradition.id === traditionId).map((response) => ({ ...response, challenge: framework.challenges.find(({ id }) => id === response.challengeId)! }));
 const notes = framework.researchNotes.filter(({ traditionId }) => traditionId === tradition.id);
+const evidenceSlice = tradition.id === socialDemocraticSlice.traditionId ? socialDemocraticSlice : undefined;
 ---
 <BaseLayout fullBleed title={tradition.name} description={tradition.description}>
   <article class="tradition-page">
     <nav aria-label="Breadcrumb"><a href="/traditions/">Traditions</a> <span aria-hidden="true">/</span> Exploratory ideal type</nav>
     <header><p class="coordinate">TRADITION / RESEARCH DRAFT</p><h1>{tradition.name}</h1><p class="dek">{tradition.description}</p><p class="boundary-note"><strong>Boundary:</strong> {tradition.caveat}</p></header>
     <section class="tradition-overview" aria-labelledby="overview-title"><article><p class="coordinate">OVERVIEW</p><h2 id="overview-title">What this tradition proposes</h2>{tradition.overview.map((paragraph) => <p>{paragraph}</p>)}</article><aside><p class="coordinate">KEEP DISTINCT</p><ul>{tradition.distinctions.map((item) => <li>{item}</li>)}</ul></aside></section>
+    {evidenceSlice && <EvidenceSlice slice={evidenceSlice} />}
     <section class="tradition-responses" aria-labelledby="response-title"><header><p class="coordinate">RESPONSE MAP</p><h2 id="response-title">Responses by Challenge</h2></header>
       {responses.map((response) => <details><summary><span>{response.challenge.question}</span><small>{response.means.length} proposed Means</small></summary><div class="response-columns"><section><h3>Proposed Means</h3><ul>{response.means.map(({ text }) => <li>{text}</li>)}</ul></section><section><h3>Failure hypotheses</h3><ul>{response.failureHypotheses.map(({ text }) => <li>{text}</li>)}</ul></section></div><a class="detail-link" href={`/challenges/${response.challenge.id}/`}>Compare every response to this Challenge →</a></details>)}
     </section>
