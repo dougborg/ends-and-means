@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import framework from "../../../content/framework/draft.json";
+import "../../styles/challenge-topic.css";
 ---
-<BaseLayout title="Topics" description="Familiar discovery paths into the Ends and Means analytical Challenges.">
-  <div class="framework-index"><header><p class="coordinate">DISCOVERY / TOPICS</p><h1>Familiar doors into harder questions.</h1><p class="dek">Topics organize discovery without asserting a theory or judgment. Because political-economic questions overlap, each Challenge may appear under more than one Topic.</p></header>
+<BaseLayout fullBleed title="Topics" description="Familiar discovery paths into the Ends and Means analytical Challenges.">
+  <div class="framework-index challenge-topic-page"><header><p class="coordinate">DISCOVERY / TOPICS</p><h1>Familiar doors into harder questions.</h1><p class="dek">Topics organize discovery without asserting a theory or judgment. Because political-economic questions overlap, each Challenge may appear under more than one Topic.</p></header>
+    <section class="topic-explainer" aria-labelledby="topic-explainer-title"><div><p class="coordinate">TOPICS ARE A DISCOVERY LAYER</p><h2 id="topic-explainer-title">Use them to find questions, not conclusions</h2></div><p>A Topic gathers several related Challenges under familiar language. It is intentionally porous: a question about work may also concern power or security. For a complete account of an institutional tradition, begin with its <a href="/traditions/">overview</a>.</p></section>
     <ul class="topic-list">{framework.topics.map((topic) => { const count = framework.challenges.filter(({ topicIds }) => topicIds.includes(topic.id)).length; return <li><p class="coordinate">DISCOVERY LABEL</p><h2><a href={`/topics/${topic.id}/`}>{topic.label}</a></h2><p>{topic.description}</p><small>{count} {count === 1 ? "Challenge" : "Challenges"}</small></li>; })}</ul>
+    <nav class="next-path" aria-labelledby="next-path-title"><div><p class="coordinate">ANOTHER WAY IN</p><h2 id="next-path-title">Know the question already?</h2></div><p>Browse the full <a href="/challenges/">Challenge directory</a> to compare how each tradition approaches the same institutional problem.</p></nav>
   </div>
 </BaseLayout>

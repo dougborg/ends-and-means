@@ -1,216 +1,112 @@
 #!/usr/bin/env node
-
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const TYPES = new Set(["crux", "system", "source", "case"]);
+const TYPES = new Set(["tradition", "end", "means", "topic", "challenge", "criterion", "statement", "source", "case"]);
 const SOURCE_TYPES = new Set(["primary", "official", "peer-reviewed", "academic-book", "reputable-secondary"]);
-const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const CRUX_IDS = Array.from({ length: 14 }, (_, index) => `c${String(index + 1).padStart(2, "0")}`);
-const hasText = (value) => typeof value === "string" && value.trim().length > 0;
+const CLAIM_KINDS = new Set(["empirical", "attributed-value", "editorial-interpretation"]);
+const STATEMENT_KINDS = new Set(["empirical-claim", "attributed-value", "causal-hypothesis", "editorial-interpretation"]);
+const ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const isArray = Array.isArray;
-const normalizeText = (value) => String(value ?? "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, " ").trim();
-const DATE_PATTERN = /^\d{4}(?:-\d{2}(?:-\d{2})?)?$/;
+const text = (v) => typeof v === "string" && v.trim().length > 0;
+const url = (v) => { try { return text(v) && ["http:", "https:"].includes(new URL(v).protocol); } catch { return false; } };
+const needText = (e, v, f) => { if (!text(v)) e.push(`${f} must be a non-empty string`); };
+const needTexts = (e, v, f, empty = false) => { if (!isArray(v) || (!empty && !v.length) || v.some((x) => !text(x))) e.push(`${f} must be ${empty ? "an" : "a non-empty"} array of non-empty strings`); };
+const needClaims = (e, v, ids, f, empty = false) => {
+  if (!isArray(v) || (!empty && !v.length)) e.push(`${f} must be ${empty ? "an" : "a non-empty"} array`);
+  else v.forEach((id) => { if (!ids.has(id)) e.push(`${f} references unknown claim: ${id}`); });
+};
 
-function validUrl(value) {
-  if (!hasText(value)) return false;
-  try { return ["http:", "https:"].includes(new URL(value).protocol); } catch { return false; }
-}
-
-function requireText(errors, value, field) {
-  if (!hasText(value)) errors.push(`${field} must be a non-empty string`);
-}
-
-function validateRelationships(proposal, errors, context) {
+function relationships(p, e, context) {
   const proposed = new Set();
-  if (proposal.proposedRelationships !== undefined && !isArray(proposal.proposedRelationships)) errors.push("proposedRelationships must be an array");
-  else for (const [index, item] of (proposal.proposedRelationships ?? []).entries()) {
-    if (!["system", "crux", "source", "case"].includes(item?.type)) errors.push(`proposedRelationships[${index}].type is invalid`);
-    if (!ID_PATTERN.test(item?.id ?? "")) errors.push(`proposedRelationships[${index}].id must be lowercase kebab-case`);
-    requireText(errors, item?.reason, `proposedRelationships[${index}].reason`);
-    proposed.add(`${item?.type}:${item?.id}`);
-  }
-  const requireKnown = (type, id, field) => {
-    const known = context?.[`${type}s`];
-    if (known instanceof Set && !known.has(id) && !proposed.has(`${type}:${id}`)) errors.push(`${field} references unknown canonical ${type} '${id}'; declare it in proposedRelationships for human review`);
-  };
-  if (proposal.proposalType === "case" && isArray(proposal.content?.systems)) proposal.content.systems.forEach((id, index) => requireKnown("system", id, `content.systems[${index}]`));
-  if (proposal.proposalType === "system" && isArray(proposal.content?.cruxes)) proposal.content.cruxes.forEach((item, index) => requireKnown("crux", item?.cruxId, `content.cruxes[${index}].cruxId`));
-}
-
-function validateContent(proposal, errors, claimIds, context) {
-  const content = proposal.content;
-  if (!content || typeof content !== "object" || isArray(content)) {
-    errors.push("content must be an object");
-    return;
-  }
-  if (proposal.proposalType === "crux") {
-    requireText(errors, content.question, "content.question");
-    if (hasText(content.question) && !content.question.trim().endsWith("?")) errors.push("content.question must end in ?");
-    requireText(errors, content.scope, "content.scope");
-    requireText(errors, content.inclusionRationale, "content.inclusionRationale");
-    if (typeof content.valueLaden !== "boolean") errors.push("content.valueLaden must be boolean");
-  }
-  if (proposal.proposalType === "system") {
-    requireText(errors, content.description, "content.description");
-    requireText(errors, content.boundaries, "content.boundaries");
-    if (!isArray(content.cruxes)) errors.push("content.cruxes must be an array covering c01 through c14");
-    else {
-      const ids = content.cruxes.map((item) => item?.cruxId);
-      if (content.cruxes.length !== 14 || new Set(ids).size !== 14 || CRUX_IDS.some((id) => !ids.includes(id))) errors.push("content.cruxes must contain each of c01 through c14 exactly once");
-      content.cruxes.forEach((item, index) => {
-        for (const field of ["cruxId", "ends", "means", "practice", "evidenceSummary"]) requireText(errors, item?.[field], `content.cruxes[${index}].${field}`);
-        if (!isArray(item?.claimIds) || item.claimIds.length === 0) errors.push(`content.cruxes[${index}].claimIds must contain at least one bounded claim`);
-        else for (const id of item.claimIds) if (!claimIds.has(id)) errors.push(`content.cruxes[${index}] references unknown claim: ${id}`);
-      });
-      const usedClaims = content.cruxes.flatMap((item) => isArray(item?.claimIds) ? item.claimIds : []);
-      if (new Set(usedClaims).size < content.cruxes.length) errors.push("each system crux must have distinct claim coverage; do not reuse one claim across the matrix");
-      const claimById = new Map((proposal.claims ?? []).map((claim) => [claim.id, claim]));
-      const empiricalTextOwners = new Map();
-      const narrativeOwners = new Map();
-      content.cruxes.forEach((item) => {
-        for (const id of item?.claimIds ?? []) {
-          const claim = claimById.get(id);
-          if (claim?.kind !== "empirical") continue;
-          const normalized = normalizeText(claim.text);
-          const previous = empiricalTextOwners.get(normalized);
-          if (normalized && previous && previous !== item.cruxId) errors.push(`system cruxes ${previous} and ${item.cruxId} reuse identical empirical claim text`);
-          else if (normalized) empiricalTextOwners.set(normalized, item.cruxId);
-        }
-        const narrative = normalizeText([item?.ends, item?.means, item?.practice, item?.evidenceSummary].join(" "));
-        const previous = narrativeOwners.get(narrative);
-        if (narrative && previous && previous !== item?.cruxId) errors.push(`system cruxes ${previous} and ${item?.cruxId} reuse an identical combined narrative`);
-        else if (narrative) narrativeOwners.set(narrative, item?.cruxId);
-      });
+  for (const field of ["relationships", "proposedRelationships"]) {
+    if (p[field] !== undefined && !isArray(p[field])) { e.push(`${field} must be an array`); continue; }
+    for (const [i, item] of (p[field] ?? []).entries()) {
+      if (!TYPES.has(item?.type)) e.push(`${field}[${i}].type is invalid`);
+      if (!ID.test(item?.id ?? "")) e.push(`${field}[${i}].id must be semantic lowercase kebab-case`);
+      needText(e, item?.reason, `${field}[${i}].reason`);
+      const key = `${item?.type}:${item?.id}`;
+      if (field === "proposedRelationships") proposed.add(key);
+      else if (context?.[item?.type] instanceof Set && !context[item.type].has(item.id)) e.push(`${field}[${i}] references unknown canonical ${item.type} '${item.id}'; use proposedRelationships for human review`);
     }
   }
-  if (proposal.proposalType === "source") {
-    if (!isArray(content.authors) || content.authors.length === 0 || content.authors.some((v) => !hasText(v))) errors.push("content.authors must contain at least one author");
-    for (const field of ["title", "sourceType", "relevance"]) requireText(errors, content[field], `content.${field}`);
-    if (!isArray(content.accessUrls) || content.accessUrls.length === 0 || content.accessUrls.some((v) => !validUrl(v))) errors.push("content.accessUrls must contain valid HTTP(S) URLs");
-  }
-  if (proposal.proposalType === "case") {
-    for (const field of ["name", "dates", "location", "summary"]) requireText(errors, content[field], `content.${field}`);
-    if (!isArray(content.systems) || content.systems.length === 0 || content.systems.some((v) => !hasText(v))) errors.push("content.systems must contain at least one system ID");
-    if (!isArray(content.claimIds)) errors.push("content.claimIds must be an array");
-    else for (const id of content.claimIds) if (!claimIds.has(id)) errors.push(`content.claimIds references unknown claim: ${id}`);
-  }
-  validateRelationships(proposal, errors, context);
+  if ((p.relationships ?? []).some((x) => proposed.has(`${x?.type}:${x?.id}`))) e.push("the same relationship cannot be both canonical and proposed");
 }
 
-export function validateProposal(proposal, expected = {}, context = undefined) {
-  const errors = [];
-  if (!proposal || typeof proposal !== "object" || isArray(proposal)) return ["proposal must be a JSON object"];
-  if (proposal.schemaVersion !== 1) errors.push("schemaVersion must equal 1");
-  if (!TYPES.has(proposal.proposalType)) errors.push("proposalType must be crux, system, source, or case");
-  if (!ID_PATTERN.test(proposal.id ?? "")) errors.push("id must be lowercase kebab-case");
-  if (expected.scope && expected.scope !== "proposals") errors.push("proposal must be under proposals/<type>/<stable-id>");
-  if (expected.type && proposal.proposalType !== expected.type) errors.push(`proposalType must match directory type ${expected.type}`);
-  if (expected.id && proposal.id !== expected.id) errors.push(`id must match directory ID ${expected.id}`);
-  requireText(errors, proposal.title, "title");
-  requireText(errors, proposal.summary, "summary");
-  if (proposal.status !== "draft") errors.push("status must equal draft");
-  for (const field of ["aliases", "identifiers"]) if (proposal[field] !== undefined && (!isArray(proposal[field]) || proposal[field].some((v) => !hasText(v)))) errors.push(`${field} must be an array of non-empty strings`);
+function content(p, e, ids) {
+  const c = p.content, t = p.proposalType;
+  if (!c || typeof c !== "object" || isArray(c)) { e.push("content must be an object"); return; }
+  if (t === "tradition") {
+    ["description", "scope"].forEach((f) => needText(e, c[f], `content.${f}`));
+    ["variants", "distinctions", "commonQuestions"].forEach((f) => needTexts(e, c[f], `content.${f}`));
+  } else if (t === "end") {
+    ["description", "scope"].forEach((f) => needText(e, c[f], `content.${f}`)); needTexts(e, c.tensions, "content.tensions", true);
+    if (!isArray(c.attributions) || !c.attributions.length) e.push("content.attributions must be non-empty; Ends require attribution");
+    else c.attributions.forEach((a, i) => { needText(e, a?.holder, `content.attributions[${i}].holder`); needText(e, a?.context, `content.attributions[${i}].context`); needClaims(e, a?.claimIds, ids, `content.attributions[${i}].claimIds`); });
+  } else if (t === "means") {
+    ["description", "institutionalForm", "decisionRules", "enforcement"].forEach((f) => needText(e, c[f], `content.${f}`));
+    ["actors", "conditions", "failureModes"].forEach((f) => needTexts(e, c[f], `content.${f}`));
+  } else if (t === "topic") {
+    ["description", "scope"].forEach((f) => needText(e, c[f], `content.${f}`)); ["inclusions", "exclusions"].forEach((f) => needTexts(e, c[f], `content.${f}`));
+  } else if (t === "challenge") {
+    ["question", "scope", "inclusionRationale"].forEach((f) => needText(e, c[f], `content.${f}`)); if (text(c.question) && !c.question.trim().endsWith("?")) e.push("content.question must end in ?");
+  } else if (t === "criterion") {
+    needText(e, c.definition, "content.definition"); ["normativeAssumptions", "evidenceRequirements", "limitations"].forEach((f) => needTexts(e, c[f], `content.${f}`));
+  } else if (t === "statement") {
+    if (!STATEMENT_KINDS.has(c.statementKind)) e.push("content.statementKind is invalid"); needText(e, c.text, "content.text"); needText(e, c.interpretationStatus, "content.interpretationStatus"); needClaims(e, c.claimIds, ids, "content.claimIds");
+    if (["causal-hypothesis", "editorial-interpretation"].includes(c.statementKind)) { needText(e, c.rationale, "content.rationale"); needTexts(e, c.rivalInterpretations, "content.rivalInterpretations"); needTexts(e, c.conditions, "content.conditions"); }
+  } else if (t === "source") {
+    needTexts(e, c.authors, "content.authors"); ["title", "sourceType", "relevance"].forEach((f) => needText(e, c[f], `content.${f}`)); if (!isArray(c.accessUrls) || !c.accessUrls.length || c.accessUrls.some((x) => !url(x))) e.push("content.accessUrls must contain valid HTTP(S) URLs");
+  } else if (t === "case") {
+    ["name", "startDate", "endDate", "location", "scope", "selectionRationale"].forEach((f) => needText(e, c[f], `content.${f}`));
+    ["conditions", "outcomes", "rivalExplanations", "transferLimitations"].forEach((f) => needTexts(e, c[f], `content.${f}`)); needClaims(e, c.claimIds, ids, "content.claimIds");
+  }
+}
 
+export function validateProposal(p, expected = {}, context) {
+  const e = [];
+  if (!p || typeof p !== "object" || isArray(p)) return ["proposal must be a JSON object"];
+  if (p.schemaVersion !== 2) e.push("schemaVersion must equal 2");
+  if (!TYPES.has(p.proposalType)) e.push(`proposalType must be one of: ${[...TYPES].join(", ")}`);
+  if (!ID.test(p.id ?? "")) e.push("id must be semantic lowercase kebab-case");
+  if (expected.scope && expected.scope !== "proposals") e.push("proposal must be under proposals/<type>/<stable-id>");
+  if (expected.type && p.proposalType !== expected.type) e.push(`proposalType must match directory type ${expected.type}`);
+  if (expected.id && p.id !== expected.id) e.push(`id must match directory ID ${expected.id}`);
+  needText(e, p.title, "title"); needText(e, p.summary, "summary"); if (p.status !== "draft") e.push("status must equal draft");
+  ["aliases", "identifiers"].forEach((f) => { if (p[f] !== undefined) needTexts(e, p[f], f, true); });
   const sourceUrls = new Set();
-  if (!isArray(proposal.sources) || proposal.sources.length === 0) errors.push("sources must contain at least one authoritative source");
-  else proposal.sources.forEach((source, index) => {
-    for (const field of ["url", "title", "publisher", "publishedAt", "accessedAt", "authorityNote"]) requireText(errors, source?.[field], `sources[${index}].${field}`);
-    if (!validUrl(source?.url)) errors.push(`sources[${index}].url must be HTTP(S)`);
-    else sourceUrls.add(source.url);
-    if (!SOURCE_TYPES.has(source?.sourceType)) errors.push(`sources[${index}].sourceType is not authoritative`);
-    if (hasText(source?.publishedAt) && !DATE_PATTERN.test(source.publishedAt)) errors.push(`sources[${index}].publishedAt must be YYYY, YYYY-MM, or YYYY-MM-DD`);
-    if (hasText(source?.accessedAt) && !/^\d{4}-\d{2}-\d{2}$/.test(source.accessedAt)) errors.push(`sources[${index}].accessedAt must be YYYY-MM-DD`);
-    if (!source?.provenance || typeof source.provenance !== "object") errors.push(`sources[${index}].provenance must identify publisher or identifier provenance`);
-    else {
-      if (!validUrl(source.provenance.publisherUrl)) errors.push(`sources[${index}].provenance.publisherUrl must be HTTP(S)`);
-      if (source.provenance.identifier !== undefined && !hasText(source.provenance.identifier)) errors.push(`sources[${index}].provenance.identifier must be non-empty`);
-      if (source.provenance.identifier !== undefined && !validUrl(source.provenance.identifierUrl)) errors.push(`sources[${index}].provenance.identifierUrl must verify the identifier`);
-    }
+  if (!isArray(p.sources) || !p.sources.length) e.push("sources must contain at least one authoritative source");
+  else p.sources.forEach((s, i) => {
+    ["url", "title", "publisher", "publishedAt", "accessedAt", "authorityNote"].forEach((f) => needText(e, s?.[f], `sources[${i}].${f}`));
+    if (!url(s?.url)) e.push(`sources[${i}].url must be HTTP(S)`); else sourceUrls.add(s.url);
+    if (!SOURCE_TYPES.has(s?.sourceType)) e.push(`sources[${i}].sourceType is not authoritative`);
+    if (text(s?.publishedAt) && !/^\d{4}(?:-\d{2}(?:-\d{2})?)?$/.test(s.publishedAt)) e.push(`sources[${i}].publishedAt must be YYYY, YYYY-MM, or YYYY-MM-DD`);
+    if (text(s?.accessedAt) && !/^\d{4}-\d{2}-\d{2}$/.test(s.accessedAt)) e.push(`sources[${i}].accessedAt must be YYYY-MM-DD`);
+    if (!s?.provenance || typeof s.provenance !== "object" || !url(s.provenance.publisherUrl)) e.push(`sources[${i}].provenance must include a publisherUrl`);
+    if (s?.provenance?.identifier !== undefined && (!text(s.provenance.identifier) || !url(s.provenance.identifierUrl))) e.push(`sources[${i}].provenance identifier must have a verification URL`);
   });
-
-  const claimIds = new Set();
-  if (!isArray(proposal.claims) || proposal.claims.length === 0) errors.push("claims must contain at least one claim");
-  else proposal.claims.forEach((claim, index) => {
-    if (!ID_PATTERN.test(claim?.id ?? "")) errors.push(`claims[${index}].id must be lowercase kebab-case`);
-    else if (claimIds.has(claim.id)) errors.push(`duplicate claim ID: ${claim.id}`);
-    else claimIds.add(claim.id);
-    requireText(errors, claim?.text, `claims[${index}].text`);
-    if (!isArray(claim?.limitations) || claim.limitations.length === 0 || claim.limitations.some((v) => !hasText(v))) errors.push(`claims[${index}].limitations must be non-empty`);
-    if (claim?.kind === "empirical") {
-      if (!isArray(claim.sourceUrls) || claim.sourceUrls.length === 0) errors.push(`empirical claim ${claim.id ?? index} must cite sourceUrls`);
-      else for (const url of claim.sourceUrls) if (!sourceUrls.has(url)) errors.push(`claim ${claim.id ?? index} cites undeclared source URL: ${url}`);
-    } else if (claim?.kind === "value-judgment") requireText(errors, claim.rationale, `claims[${index}].rationale`);
-    else errors.push(`claims[${index}].kind must be empirical or value-judgment`);
+  const ids = new Set();
+  if (!isArray(p.claims) || !p.claims.length) e.push("claims must contain at least one claim");
+  else p.claims.forEach((c, i) => {
+    if (!ID.test(c?.id ?? "")) e.push(`claims[${i}].id must be lowercase kebab-case`); else if (ids.has(c.id)) e.push(`duplicate claim ID: ${c.id}`); else ids.add(c.id);
+    needText(e, c?.text, `claims[${i}].text`); needTexts(e, c?.limitations, `claims[${i}].limitations`); if (!CLAIM_KINDS.has(c?.kind)) e.push(`claims[${i}].kind is invalid`);
+    if (["empirical", "attributed-value"].includes(c?.kind)) { if (!isArray(c.sourceUrls) || !c.sourceUrls.length) e.push(`${c.kind} claim ${c.id ?? i} must cite sourceUrls`); else c.sourceUrls.forEach((u) => { if (!sourceUrls.has(u)) e.push(`claim ${c.id ?? i} cites undeclared source URL: ${u}`); }); }
+    if (c?.kind === "attributed-value") needText(e, c.holder, `claims[${i}].holder`); if (c?.kind === "editorial-interpretation") needText(e, c.rationale, `claims[${i}].rationale`);
   });
-
-  if (!isArray(proposal.conflictingEvidence) || proposal.conflictingEvidence.length === 0) errors.push("conflictingEvidence must be non-empty");
-  else proposal.conflictingEvidence.forEach((item, index) => {
-    requireText(errors, item?.summary, `conflictingEvidence[${index}].summary`);
-    if (!isArray(item?.claimIds)) errors.push(`conflictingEvidence[${index}].claimIds must be an array`);
-    else for (const id of item.claimIds) if (!claimIds.has(id)) errors.push(`conflictingEvidence references unknown claim: ${id}`);
-    if (!isArray(item?.sourceUrls)) errors.push(`conflictingEvidence[${index}].sourceUrls must be an array`);
-    else for (const url of item.sourceUrls) if (!sourceUrls.has(url)) errors.push(`conflictingEvidence cites undeclared source URL: ${url}`);
-  });
-  if (!isArray(proposal.limitations) || proposal.limitations.length === 0 || proposal.limitations.some((v) => !hasText(v))) errors.push("limitations must be non-empty");
-  if (!isArray(proposal.duplicateCandidates)) errors.push("duplicateCandidates must be an array");
-  else proposal.duplicateCandidates.forEach((item, index) => {
-    if (!TYPES.has(item?.type)) errors.push(`duplicateCandidates[${index}].type is invalid`);
-    if (!ID_PATTERN.test(item?.id ?? "")) errors.push(`duplicateCandidates[${index}].id must be lowercase kebab-case`);
-    requireText(errors, item?.reason, `duplicateCandidates[${index}].reason`);
-  });
-  if (TYPES.has(proposal.proposalType)) validateContent(proposal, errors, claimIds, context);
-  return errors;
+  if (!isArray(p.conflictingEvidence) || !p.conflictingEvidence.length) e.push("conflictingEvidence must be non-empty");
+  else p.conflictingEvidence.forEach((x, i) => { needText(e, x?.summary, `conflictingEvidence[${i}].summary`); needClaims(e, x?.claimIds, ids, `conflictingEvidence[${i}].claimIds`, true); if (!isArray(x?.sourceUrls)) e.push(`conflictingEvidence[${i}].sourceUrls must be an array`); else x.sourceUrls.forEach((u) => { if (!sourceUrls.has(u)) e.push(`conflictingEvidence cites undeclared source URL: ${u}`); }); });
+  needTexts(e, p.limitations, "limitations");
+  if (!isArray(p.duplicateCandidates)) e.push("duplicateCandidates must be an array"); else p.duplicateCandidates.forEach((x, i) => { if (!TYPES.has(x?.type)) e.push(`duplicateCandidates[${i}].type is invalid`); if (!ID.test(x?.id ?? "")) e.push(`duplicateCandidates[${i}].id must be lowercase kebab-case`); needText(e, x?.reason, `duplicateCandidates[${i}].reason`); });
+  relationships(p, e, context); if (TYPES.has(p.proposalType)) content(p, e, ids); return e;
 }
 
 async function canonicalContext(root) {
-  try {
-    const [graph, report] = await Promise.all([
-      readFile(path.join(root, "generated/content/graph.json"), "utf8").then(JSON.parse),
-      readFile(path.join(root, "generated/reports/content-report.json"), "utf8").then(JSON.parse),
-    ]);
-    return {
-      systems: new Set((graph.systems ?? []).map((item) => item.id)),
-      cruxes: new Set((graph.cruxes ?? []).map((item) => item.id)),
-      sources: new Set((graph.sources ?? []).map((item) => item.id)),
-      cases: new Set((graph.cases ?? []).map((item) => item.id)),
-      graphValid: report?.validation?.valid === true,
-    };
-  } catch { return undefined; }
+  try { const graph = JSON.parse(await readFile(path.join(root, "content/framework/draft.json"), "utf8")); const keys = { tradition: "traditions", topic: "topics", challenge: "challenges", criterion: "criteria", source: "sources" }; return Object.fromEntries([...TYPES].map((t) => [t, new Set((graph[keys[t]] ?? []).map((x) => x.id))])); } catch { return undefined; }
 }
-
-export async function loadProposal(target) {
-  const resolved = path.resolve(target);
-  const file = (await stat(resolved)).isDirectory() ? path.join(resolved, "proposal.json") : resolved;
-  const parts = path.dirname(file).split(path.sep);
-  return { file, proposal: JSON.parse(await readFile(file, "utf8")), expected: { scope: parts.at(-3), type: parts.at(-2), id: parts.at(-1) } };
-}
-
+export async function loadProposal(target) { const resolved = path.resolve(target); const file = (await stat(resolved)).isDirectory() ? path.join(resolved, "proposal.json") : resolved; const parts = path.dirname(file).split(path.sep); return { file, proposal: JSON.parse(await readFile(file, "utf8")), expected: { scope: parts.at(-3), type: parts.at(-2), id: parts.at(-1) } }; }
 async function main() {
-  const target = process.argv[2];
-  if (!target) { console.error("Usage: validate-proposal.mjs <proposal-directory-or-json>"); process.exitCode = 2; return; }
-  try {
-    const { file, proposal, expected } = await loadProposal(target);
-    const context = await canonicalContext(process.cwd());
-    const errors = validateProposal(proposal, expected, context);
-    if (!context) errors.push("canonical graph unavailable; run npm run validate before validating cross-links");
-    else if (!context.graphValid) errors.push("canonical graph validation is not valid; resolve npm run validate diagnostics first");
-    const { findDuplicates, unacknowledgedDuplicates } = await import("./check-duplicates.mjs");
-    const unacknowledged = unacknowledgedDuplicates(proposal, await findDuplicates(file, process.cwd()));
-    if (unacknowledged.length) errors.push(`duplicateCandidates must acknowledge detected IDs: ${unacknowledged.map((item) => item.id).join(", ")}`);
-    try {
-      const memo = await readFile(path.join(path.dirname(file), "research.md"), "utf8");
-      if (!hasText(memo)) errors.push("research.md must be non-empty");
-    } catch {
-      errors.push("research.md must exist beside proposal.json");
-    }
-    if (errors.length) { console.error(JSON.stringify({ valid: false, file, errors }, null, 2)); process.exitCode = 1; }
-    else console.log(JSON.stringify({ valid: true, file, id: proposal.id, proposalType: proposal.proposalType }, null, 2));
-  } catch (error) {
-    console.error(JSON.stringify({ valid: false, errors: [error instanceof Error ? error.message : String(error)] }, null, 2));
-    process.exitCode = 1;
-  }
+  const target = process.argv[2]; if (!target) { console.error("Usage: validate-proposal.mjs <proposal-directory-or-json>"); process.exitCode = 2; return; }
+  try { const { file, proposal, expected } = await loadProposal(target); const repositoryRoot = path.resolve(path.dirname(file), "../../.."); const context = await canonicalContext(repositoryRoot); const errors = validateProposal(proposal, expected, context); if (!context) errors.push("framework draft unavailable; run npm run validate before validating relationships"); const { findDuplicates, unacknowledgedDuplicates } = await import("./check-duplicates.mjs"); const unacknowledged = unacknowledgedDuplicates(proposal, await findDuplicates(file, repositoryRoot)); if (unacknowledged.length) errors.push(`duplicateCandidates must acknowledge detected IDs: ${unacknowledged.map((x) => x.id).join(", ")}`); try { if (!text(await readFile(path.join(path.dirname(file), "research.md"), "utf8"))) errors.push("research.md must be non-empty"); } catch { errors.push("research.md must exist beside proposal.json"); } if (errors.length) { console.error(JSON.stringify({ valid: false, file, errors }, null, 2)); process.exitCode = 1; } else console.log(JSON.stringify({ valid: true, file, id: proposal.id, proposalType: proposal.proposalType }, null, 2)); } catch (error) { console.error(JSON.stringify({ valid: false, errors: [error instanceof Error ? error.message : String(error)] }, null, 2)); process.exitCode = 1; }
 }
-
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) await main();

@@ -133,6 +133,13 @@ describe("generated reference routes", () => {
       expect(text, route).not.toMatch(/\bcrux(?:es)?\b/i);
     }
 
+    const home = await readFile(routeFile("/"), "utf8");
+    expect(home.match(/class="tradition-card"/g)).toHaveLength(8);
+    expect(stripMarkup(home)).toContain("PRIMARY ENTRY POINT / 8 DOSSIERS");
+    const primaryNav = home.match(/<nav aria-label="Primary navigation">([\s\S]*?)<\/nav>/)?.[1] ?? "";
+    expect(routeHrefs(primaryNav, "/traditions/")[0]).toBe("/traditions/");
+    expect(primaryNav.indexOf("Traditions")).toBeLessThan(primaryNav.indexOf("Challenges"));
+
     const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
     expect(challenge.match(/class="response-draft"/g)).toHaveLength(8);
     expect(stripMarkup(challenge)).toContain("migrated research leads, not reviewed conclusions");

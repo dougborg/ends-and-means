@@ -1,22 +1,83 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import framework from "../../content/framework/draft.json";
+import "../styles/traditions-entry.css";
 
-const responseCount = new Map(framework.challenges.map((challenge) => [challenge.id, framework.responses.filter(({ challengeId }) => challengeId === challenge.id).length]));
+const challengeCount = new Map(framework.traditions.map((tradition) => [
+  tradition.id,
+  framework.responses.filter(({ traditionId }) => traditionId === tradition.id).length,
+]));
 ---
-<BaseLayout fullBleed description="Explore recurring political-economic Challenges, institutional responses, and the evidence still needed to evaluate them.">
-  <header class="framework-hero">
-    <p class="coordinate">ENDS AND MEANS / RESEARCH DRAFT</p>
-    <div><h1>Start with the question.<br /><span>Trace what follows.</span></h1><p class="dek">Political and economic traditions pursue different Ends through different institutional Means. Begin with a shared Challenge, then inspect the proposed mechanisms, failure hypotheses, and research gaps.</p></div>
-    <aside class="draft-notice"><strong>Working material</strong><p>The current comparison has been reorganized, not certified. Its inherited claims remain visible as research leads until they receive claim-level sources and bounded cases.</p><a href="/framework/">How to read this draft →</a></aside>
+<BaseLayout fullBleed description="Explore political-economic traditions and ideal types through their defining commitments, institutional responses, disputes, and open research questions.">
+  <header class="traditions-hero">
+    <p class="coordinate">ENDS AND MEANS / COMPARATIVE FIELD GUIDE</p>
+    <div class="traditions-hero__thesis">
+      <h1>How different systems<br /><span>organize common life.</span></h1>
+      <p class="dek">Begin with a political-economic tradition. Each dossier asks what it values, which institutions it relies on, how it responds to recurring problems, and where its record remains contested.</p>
+    </div>
+    <aside class="traditions-hero__guide" aria-label="How to use this guide">
+      <p class="coordinate">A NOTE ON THE LABELS</p>
+      <p>These are families of ideas and analytical ideal types—not boxes that whole countries fit neatly inside. Each overview names its boundaries and internal tensions.</p>
+      <a href="/framework/">Read the method <span aria-hidden="true">→</span></a>
+    </aside>
   </header>
-  <nav aria-label="Explore by Topic"><p class="coordinate">EXPLORE BY TOPIC</p><ul class="topic-strip">{framework.topics.map((topic) => <li><a href={`/topics/${topic.id}/`}>{topic.label}</a></li>)}</ul></nav>
-  <section class="question-ledger" aria-labelledby="questions-title">
-    <header class="section-heading"><div><p class="coordinate">DISCOVERY / 9 OPEN QUESTIONS</p><h2 id="questions-title">Choose a Challenge</h2></div><p>Each question opens the same analytical structure across multiple traditions.</p></header>
-    <ol>{framework.challenges.map((challenge, index) => <li><a href={`/challenges/${challenge.id}/`}><span class="ledger-index">{String(index + 1).padStart(2, "0")}</span><span class="ledger-question">{challenge.question}</span><span class="ledger-count">{responseCount.get(challenge.id)} draft responses</span><span class="ledger-arrow" aria-hidden="true">→</span></a></li>)}</ol>
+
+  <section class="tradition-catalogue" aria-labelledby="tradition-catalogue-title">
+    <header class="tradition-catalogue__heading">
+      <div>
+        <p class="coordinate">PRIMARY ENTRY POINT / 8 DOSSIERS</p>
+        <h2 id="tradition-catalogue-title">Traditions and ideal types</h2>
+      </div>
+      <p>Read an orientation, clarify common misconceptions, then follow its proposed Means across the same set of Challenges.</p>
+    </header>
+    <ol class="tradition-cards">
+      {framework.traditions.map((tradition) => (
+        <li>
+          <article class="tradition-card">
+            <header>
+              <p class="tradition-card__kind">Working dossier</p>
+              <h3><a href={`/traditions/${tradition.id}/`}>{tradition.name}</a></h3>
+            </header>
+            <p class="tradition-card__summary">{tradition.overview[0]}</p>
+            <div class="tradition-card__boundary">
+              <span>Keep in view</span>
+              <p>{tradition.distinctions[0]}</p>
+            </div>
+            <footer>
+              <span>{challengeCount.get(tradition.id)} Challenge responses</span>
+              <a href={`/traditions/${tradition.id}/`} aria-label={`Open the ${tradition.name} dossier`}>Open dossier <span aria-hidden="true">→</span></a>
+            </footer>
+          </article>
+        </li>
+      ))}
+    </ol>
   </section>
-  <section class="framework-directory" aria-labelledby="traditions-title">
-    <div><p class="coordinate">ANOTHER ENTRY POINT</p><h2 id="traditions-title">Explore traditions and ideal types</h2><p>These are contested families of ideas, not labels for whole countries or uniform blueprints.</p></div>
-    <ul class="text-directory">{framework.traditions.map((tradition) => <li><a href={`/traditions/${tradition.id}/`}>{tradition.name}<span aria-hidden="true">↗</span></a></li>)}</ul>
+
+  <section class="secondary-discovery" aria-labelledby="compare-title">
+    <header>
+      <p class="coordinate">COMPARE ACROSS TRADITIONS</p>
+      <h2 id="compare-title">Start somewhere else</h2>
+      <p>Already have a question in mind? Approach the same material through a recurring institutional Challenge or a broad Topic.</p>
+    </header>
+    <div class="secondary-discovery__paths">
+      <article>
+        <p class="coordinate">9 QUESTIONS</p>
+        <h3>Challenges</h3>
+        <p>Compare how every tradition responds to coordination, power, security, transition, and other recurring problems.</p>
+        <a href="/challenges/">Browse all Challenges <span aria-hidden="true">→</span></a>
+      </article>
+      <article>
+        <p class="coordinate">5 LENSES</p>
+        <h3>Topics</h3>
+        <p>Follow related questions through Ownership, Work, Security, Coordination, and Power.</p>
+        <a href="/topics/">Browse all Topics <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
   </section>
+
+  <aside class="homepage-draft-note">
+    <p class="coordinate">RESEARCH STATUS</p>
+    <p><strong>This is a working research draft.</strong> The dossiers establish a clearer structure for inquiry; inherited assertions remain marked for sourcing and review rather than presented as settled conclusions.</p>
+    <a href="/reading/">Inspect the reading directory <span aria-hidden="true">→</span></a>
+  </aside>
 </BaseLayout>

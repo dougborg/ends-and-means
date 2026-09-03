@@ -18,6 +18,10 @@ importer, the portable graph validator, Topic and Challenge discovery, tradition
 dossiers, and the working source inventory are in place. Inherited assertions
 remain clearly marked for research.
 
+Traditions and ideal types are the primary public entry point. Challenges and
+Topics provide secondary ways to compare the same material without implying a
+ranking or treating historical states as single-system examples.
+
 ## Contents
 
 | File | What it is |

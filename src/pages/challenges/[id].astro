@@ -1,16 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import framework from "../../../content/framework/draft.json";
+import "../../styles/challenge-topic.css";
 export function getStaticPaths() { return framework.challenges.map((challenge) => ({ params: { id: challenge.id }, props: { challenge } })); }
 const { challenge } = Astro.props;
 const responses = framework.responses.filter(({ challengeId }) => challengeId === challenge.id).map((response) => ({ ...response, tradition: framework.traditions.find(({ id }) => id === response.traditionId)! }));
+const relatedTopics = challenge.topicIds.map((topicId) => framework.topics.find(({ id }) => id === topicId)!);
 ---
-<BaseLayout title={challenge.question} description={challenge.rationale}>
-  <article class="challenge-page">
+<BaseLayout fullBleed title={challenge.question} description={challenge.rationale}>
+  <article class="challenge-page challenge-topic-page">
     <nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> Research draft</nav>
-    <header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p><ul class="topic-strip" aria-label="Related Topics">{challenge.topicIds.map((topicId) => { const topic = framework.topics.find(({ id }) => id === topicId)!; return <li><a href={`/topics/${topic.id}/`}>{topic.label}</a></li>; })}</ul><p class="status-line"><span aria-hidden="true">◇</span> All responses below are migrated research leads, not reviewed conclusions.</p></header>
-    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">COMPARATIVE RESPONSE LEDGER</p><h2 id="responses-title">How traditions propose to respond</h2></header>
+    <header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p><ul class="topic-strip" aria-label="Related Topics">{relatedTopics.map((topic) => <li><a href={`/topics/${topic.id}/`}>{topic.label}</a></li>)}</ul><p class="status-line"><span aria-hidden="true">◇</span> All responses below are migrated research leads, not reviewed conclusions.</p></header>
+    <nav class="page-contents" aria-labelledby="contents-title"><p class="coordinate" id="contents-title">ON THIS PAGE</p><ol><li><a href="#question-overview">Question overview</a></li><li><a href="#responses-title">Tradition responses</a></li><li><a href="#research-state">Research state</a></li></ol></nav>
+    <section class="question-overview" id="question-overview" aria-labelledby="overview-title"><div><p class="coordinate">COMPARISON FRAME</p><h2 id="overview-title">What this question helps us inspect</h2></div><div><p>{challenge.rationale}</p><p>The comparison below keeps the question fixed while the tradition changes. This makes differences in proposed Means and anticipated failures easier to examine without implying that every tradition is internally uniform.</p></div></section>
+    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">COMPARATIVE RESPONSE LEDGER</p><h2 id="responses-title">How traditions propose to respond</h2><p>Open a tradition overview for its wider orientation, boundaries, and full set of Challenge responses.</p></header>
       {responses.map((response, index) => <article class="response-draft"><header><span class="ledger-index">{String(index + 1).padStart(2, "0")}</span><div><p class="coordinate">TRADITION / DRAFT</p><h3><a href={`/traditions/${response.tradition.id}/`}>{response.tradition.name}</a></h3></div><span class="review-flag">Research needed</span></header><div class="response-columns"><section><h4>Proposed Means</h4><ul>{response.means.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section><section><h4>Failure hypotheses</h4><ul>{response.failureHypotheses.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section></div></article>)}
     </section>
+    <section class="research-state" id="research-state" aria-labelledby="research-state-title"><div><p class="coordinate">RESEARCH STATE</p><h2 id="research-state-title">What remains to be established</h2></div><div><p>The entries preserve editorial hypotheses from the initial comparison material. They still need attribution, direct sources, boundaries around variants, concrete cases, and serious competing interpretations.</p><p>No statement on this page should yet be read as a verified claim about theory or practice.</p></div></section>
   </article>
 </BaseLayout>

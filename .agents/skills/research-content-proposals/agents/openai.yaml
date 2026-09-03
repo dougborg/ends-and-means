@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Content Proposals"
-  short_description: "Research evidence-backed additions for Ends and Means"
-  default_prompt: "Use $research-content-proposals to research a new content proposal for Ends and Means."
+  short_description: "Stage sourced framework proposals for human review"
+  default_prompt: "Use $research-content-proposals to research a new framework entity or relationship proposal for Ends and Means."

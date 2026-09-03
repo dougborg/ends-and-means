@@ -1,7 +1,7 @@
 # Source proposal
 
-Propose a source because it supports, challenges, or contextualizes a specific
-part of the graph—not merely because it belongs on a general reading list.
+Propose a source because it supports, challenges, or contextualizes specific
+claims or entities—not merely because it belongs on a general reading list.
 
 In `content`, include:
 
@@ -12,7 +12,7 @@ In `content`, include:
   "year": 2024,
   "sourceType": "book",
   "identifiers": { "doi": "10.x/example", "isbn13": "9780000000000" },
-  "relevance": "Which entities or claims this source informs",
+  "relevance": "Which entities or claim IDs this source informs",
   "accessUrls": ["https://publisher.example/item"]
 }
 ```

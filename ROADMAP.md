@@ -60,6 +60,10 @@ work is source material, not an API or compatibility contract.
   remain gated on the next research pass.
   Five many-to-many Topics now provide familiar discovery paths into the nine
   Challenges without becoming analytical claims themselves.
+  Traditions and ideal types are now the primary public entry point: the home
+  page is an annotated eight-dossier catalogue, while Challenges and Topics are
+  secondary comparative paths. Their directories and detail pages now explain
+  how to use the framework and name unresolved research requirements.
 
 ## M2 — Reference pages
 
@@ -105,16 +109,18 @@ work is source material, not an API or compatibility contract.
   missing-source, broken-link, assessment-challenge, and new-case issue forms; decide
   when the repository becomes public.
 - [x] **M4.5 Add an editorial research skill suite.** Provide a repo-local,
-  routed skill for proposing new Challenges, systems, authors/sources, and cases.
-  Require authoritative-source research, explicit provenance, neutral summaries,
-  complete 14-Challenge system proposals, deduplication and cross-link checks, graph
-  validation, a hard human-review boundary before canonical changes, and
-  independent forward tests.
-- [ ] **M4.6 Migrate research skills to the replacement ontology.** Replace the
+  proposal-only research workflow with authoritative-source requirements,
+  explicit provenance, conflicting evidence, deduplication and cross-link
+  checks, graph validation, a hard human-review boundary, and independent
+  forward tests. Its initial entity contract was superseded by M4.6.
+- [x] **M4.6 Migrate research skills to the replacement ontology.** Replace the
   retired fixed-row system proposal contract with proposal routes for
   traditions, attributed Ends, institutional Means, Topics, Challenges,
   Criteria, statements, interpretations, and bounded cases. Preserve the hard
-  human-review boundary and authoritative-source requirements.
+  human-review boundary and authoritative-source requirements. The v2 proposal
+  validator and duplicate checker now accept all nine replacement entity types,
+  resolve canonical versus proposed relationships, and reject fixed-matrix
+  assumptions; forward tests cover the new contracts.
 
 ## M5 — Expansion (post-v1)
 

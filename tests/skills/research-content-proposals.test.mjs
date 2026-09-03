@@ -4,144 +4,75 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-
 import { findDuplicates, unacknowledgedDuplicates } from "../../.agents/skills/research-content-proposals/scripts/check-duplicates.mjs";
 import { validateProposal } from "../../.agents/skills/research-content-proposals/scripts/validate-proposal.mjs";
 
-function validCrux(overrides = {}) {
-  const url = "https://example.edu/research";
+const sourceUrl = "https://example.edu/research";
+function base(type, content, overrides = {}) {
   return {
-    schemaVersion: 1,
-    proposalType: "crux",
-    id: "coordination-costs",
-    title: "Coordination costs",
-    status: "draft",
-    summary: "Adds a bounded comparative question.",
-    sources: [{ url, title: "Study", publisher: "Example University", publishedAt: "2024", accessedAt: "2026-09-03", sourceType: "peer-reviewed", authorityNote: "Peer-reviewed empirical study.", provenance: { publisherUrl: "https://example.edu/about", identifier: "10.1/study", identifierUrl: "https://doi.org/10.1/study" } }],
-    claims: [{ id: "coordination-varies", kind: "empirical", text: "Coordination costs vary by arrangement.", sourceUrls: [url], limitations: ["One measured setting."] }],
-    conflictingEvidence: [{ summary: "Results differ under other conditions.", claimIds: ["coordination-varies"], sourceUrls: [url] }],
-    limitations: ["The scope needs editorial review."],
-    duplicateCandidates: [],
-    content: { question: "How are coordination costs distributed?", scope: "Institutional coordination only.", valueLaden: false, inclusionRationale: "Not represented by an existing question." },
-    ...overrides,
+    schemaVersion: 2, proposalType: type, id: `new-${type}`, title: `New ${type}`, status: "draft", summary: "A bounded addition.",
+    sources: [{ url: sourceUrl, title: "Study", publisher: "Example University", publishedAt: "2024", accessedAt: "2026-09-03", sourceType: "peer-reviewed", authorityNote: "Peer-reviewed work.", provenance: { publisherUrl: "https://example.edu/about", identifier: "10.1/study", identifierUrl: "https://doi.org/10.1/study" } }],
+    claims: [{ id: "bounded-finding", kind: "empirical", text: "A bounded finding.", sourceUrls: [sourceUrl], limitations: ["One setting."] }],
+    conflictingEvidence: [{ summary: "The result varies under other conditions.", claimIds: ["bounded-finding"], sourceUrls: [sourceUrl] }],
+    limitations: ["Needs editorial review."], duplicateCandidates: [], content, ...overrides,
   };
 }
+const contents = {
+  tradition: { description: "A family of institutional arguments.", scope: "A bounded tradition.", variants: ["Variant A"], distinctions: ["Not a country."], commonQuestions: ["Is it uniform? No."] },
+  end: { description: "A valued outcome.", scope: "A bounded value.", tensions: [], attributions: [{ holder: "Named author", context: "A named text.", claimIds: ["bounded-finding"] }] },
+  means: { description: "An arrangement.", institutionalForm: "A formal rule.", actors: ["Members"], decisionRules: "Members vote.", enforcement: "Review process.", conditions: ["Participation"], failureModes: ["Capture"] },
+  topic: { description: "A navigation area.", scope: "Institutional questions.", inclusions: ["Rules"], exclusions: ["Verdicts"] },
+  challenge: { question: "How is authority constrained?", scope: "Formal and informal constraints.", inclusionRationale: "A recurring comparative question." },
+  criterion: { definition: "A stated evaluation lens.", normativeAssumptions: ["Accountability matters."], evidenceRequirements: ["Auditable records."], limitations: ["Weights are contested."] },
+  statement: { statementKind: "causal-hypothesis", text: "A rule may change incentives.", claimIds: ["bounded-finding"], interpretationStatus: "contested", rationale: "The mechanism is plausible.", rivalInterpretations: ["Selection effects."], conditions: ["Stable enforcement."] },
+  source: { authors: ["A. Author"], title: "Study", sourceType: "article", relevance: "Supports bounded-finding.", accessUrls: [sourceUrl] },
+  case: { name: "Bounded episode", startDate: "2000", endDate: "2005", location: "Example", scope: "One reform period.", selectionRationale: "Tests the mechanism.", conditions: ["Condition"], outcomes: ["Outcome"], claimIds: ["bounded-finding"], rivalExplanations: ["Selection"], transferLimitations: ["One jurisdiction"] },
+};
 
-function validSystem() {
-  const proposal = validCrux({ proposalType: "system", id: "new-system", title: "New system" });
-  proposal.claims = Array.from({ length: 14 }, (_, index) => ({ ...proposal.claims[0], id: `claim-c${String(index + 1).padStart(2, "0")}`, text: `Crux ${index + 1} has a bounded empirical finding.` }));
-  proposal.conflictingEvidence[0].claimIds = [proposal.claims[0].id];
-  proposal.content = {
-    description: "A coherent institutional arrangement.",
-    boundaries: "Excludes temporary policies.",
-    cruxes: proposal.claims.map((claim, index) => ({ cruxId: `c${String(index + 1).padStart(2, "0")}`, ends: `End specific to crux ${index + 1}.`, means: `Mechanism specific to crux ${index + 1}.`, practice: `Practice specific to crux ${index + 1}.`, evidenceSummary: `Evidence limits for crux ${index + 1}.`, claimIds: [claim.id] })),
-  };
-  return proposal;
-}
-
-test("accepts a complete, source-linked crux proposal", () => {
-  assert.deepEqual(validateProposal(validCrux(), { type: "crux", id: "coordination-costs" }), []);
+test("accepts all replacement-ontology proposal types without matrix coverage", () => {
+  for (const [type, content] of Object.entries(contents)) assert.deepEqual(validateProposal(base(type, content), { type, id: `new-${type}` }), [], type);
 });
-
-test("rejects unsupported empirical citations and missing counterevidence", () => {
-  const proposal = validCrux({ conflictingEvidence: [] });
-  proposal.claims[0].sourceUrls = ["https://unlisted.example/claim"];
+test("Ends require attribution and Challenges remain questions", () => {
+  const end = base("end", { ...contents.end, attributions: [] });
+  assert.ok(validateProposal(end).some((e) => e.includes("require attribution")));
+  const challenge = base("challenge", { ...contents.challenge, question: "Authority constraints" });
+  assert.ok(validateProposal(challenge).some((e) => e.includes("end in ?")));
+});
+test("interpretations expose rationale, rivals, and conditions", () => {
+  const proposal = base("statement", { ...contents.statement, rationale: "", rivalInterpretations: [], conditions: [] });
   const errors = validateProposal(proposal);
-  assert.ok(errors.some((error) => error.includes("undeclared source URL")));
-  assert.ok(errors.some((error) => error.includes("conflictingEvidence")));
+  assert.ok(errors.some((e) => e.includes("rationale")) && errors.some((e) => e.includes("rivalInterpretations")) && errors.some((e) => e.includes("conditions")));
 });
-
-test("requires a system proposal to cover all fourteen cruxes exactly once", () => {
-  const proposal = validCrux({ proposalType: "system", content: { description: "A system.", boundaries: "A boundary.", cruxes: [] } });
-  assert.ok(validateProposal(proposal).some((error) => error.includes("c01 through c14 exactly once")));
+test("canonical and proposed relationships are distinguished", () => {
+  const proposal = base("means", contents.means, { relationships: [{ type: "challenge", id: "known-challenge", reason: "It addresses this question." }] });
+  assert.deepEqual(validateProposal(proposal, {}, { challenge: new Set(["known-challenge"]) }), []);
+  proposal.relationships[0].id = "unknown-challenge";
+  assert.ok(validateProposal(proposal, {}, { challenge: new Set(["known-challenge"]) }).some((e) => e.includes("use proposedRelationships")));
 });
-
-test("accepts distinct per-crux system claims and rejects reused generic coverage", () => {
-  const proposal = validSystem();
-  const context = { cruxes: new Set(Array.from({ length: 14 }, (_, index) => `c${String(index + 1).padStart(2, "0")}`)) };
-  assert.deepEqual(validateProposal(proposal, {}, context), []);
-  proposal.content.cruxes.forEach((item) => { item.claimIds = [proposal.claims[0].id]; });
-  assert.ok(validateProposal(proposal, {}, context).some((error) => error.includes("distinct claim coverage")));
-});
-
-test("rejects cosmetically distinct IDs backed by identical claims and row narratives", () => {
-  const proposal = validSystem();
-  proposal.claims.forEach((claim) => { claim.text = "The same generic empirical assertion."; });
-  proposal.content.cruxes.forEach((item) => {
-    item.ends = "The same end.";
-    item.means = "The same means.";
-    item.practice = "The same practice.";
-    item.evidenceSummary = "The same evidence summary.";
-  });
-  const context = { cruxes: new Set(Array.from({ length: 14 }, (_, index) => `c${String(index + 1).padStart(2, "0")}`)) };
-  const errors = validateProposal(proposal, {}, context);
-  assert.ok(errors.some((error) => error.includes("identical empirical claim text")));
-  assert.ok(errors.some((error) => error.includes("identical combined narrative")));
-});
-
-test("case relationships must be canonical or explicitly proposed for review", () => {
-  const proposal = validCrux({ proposalType: "case", id: "bounded-case", title: "Bounded case", content: { name: "Bounded case", dates: "2000–2005", location: "Example", summary: "Tests a mechanism.", systems: ["unknown-system"], claimIds: ["coordination-varies"] } });
-  const context = { systems: new Set(["lf"]) };
-  assert.ok(validateProposal(proposal, {}, context).some((error) => error.includes("unknown canonical system")));
-  proposal.proposedRelationships = [{ type: "system", id: "unknown-system", reason: "Companion proposal needs review." }];
-  assert.deepEqual(validateProposal(proposal, {}, context), []);
-});
-
-test("source proposals require dated publisher and identifier provenance", () => {
-  const proposal = validCrux({ proposalType: "source", id: "source-record", title: "Source record", content: { authors: ["A. Author"], title: "Source record", sourceType: "book", relevance: "Supports a claim.", accessUrls: ["https://example.edu/research"] } });
+test("claims preserve provenance, attribution, conflicts, and limitations", () => {
+  const proposal = base("end", contents.end);
+  proposal.claims[0] = { id: "stated-value", kind: "attributed-value", holder: "Named author", text: "The author values participation.", sourceUrls: [sourceUrl], limitations: ["One text."] };
+  proposal.content.attributions[0].claimIds = ["stated-value"];
+  proposal.conflictingEvidence[0].claimIds = ["stated-value"];
   assert.deepEqual(validateProposal(proposal), []);
-  delete proposal.sources[0].accessedAt;
   delete proposal.sources[0].provenance;
-  const errors = validateProposal(proposal);
-  assert.ok(errors.some((error) => error.includes("accessedAt")));
-  assert.ok(errors.some((error) => error.includes("provenance")));
+  assert.ok(validateProposal(proposal).some((e) => e.includes("publisherUrl")));
 });
-
-test("duplicate search finds canonical ID and normalized title matches deterministically", async () => {
+test("duplicate search uses the framework and proposals, not retired generated content", async () => {
   const root = path.join(tmpdir(), `proposal-skill-${process.pid}-${Date.now()}`);
-  const proposalDir = path.join(root, "proposals", "crux", "coordination-costs");
-  await mkdir(proposalDir, { recursive: true });
-  await mkdir(path.join(root, "content"), { recursive: true });
-  const proposal = validCrux({ aliases: ["Institutional coordination cost"], identifiers: ["urn:coordination:1"] });
-  await writeFile(path.join(proposalDir, "proposal.json"), JSON.stringify(proposal));
-  await writeFile(path.join(root, "content", "records.json"), JSON.stringify([
-    { id: "coordination-costs", title: "Different title" },
-    { id: "c96", title: "Institutional coordination cost" },
-    { id: "c99", title: "Coordination Costs" },
-    { id: "c98", title: "Coordination institutional costs" },
-    { id: "c97", title: "Unrelated", identifiers: { catalog: "urn:coordination:1" } },
-  ]));
-  const candidates = await findDuplicates(proposalDir, root);
-  assert.deepEqual(candidates, [
-    { match: "title-or-alias", id: "c96", label: "Institutional coordination cost", file: "content/records.json" },
-    { match: "identifier", id: "c97", label: "Unrelated", file: "content/records.json" },
-    { match: "similar-title", id: "c98", label: "Coordination institutional costs", file: "content/records.json", similarity: 0.67 },
-    { match: "title-or-alias", id: "c99", label: "Coordination Costs", file: "content/records.json" },
-    { match: "id", id: "coordination-costs", label: "Different title", file: "content/records.json" },
-  ]);
-  assert.equal(unacknowledgedDuplicates(proposal, candidates).length, 5);
-  const checker = path.resolve(".agents/skills/research-content-proposals/scripts/check-duplicates.mjs");
-  const unacknowledged = spawnSync(process.execPath, [checker, proposalDir, root], { encoding: "utf8" });
-  assert.equal(unacknowledged.status, 1);
-  assert.match(unacknowledged.stdout, /"unacknowledged"/);
-  proposal.duplicateCandidates = candidates.map((candidate) => ({ type: "crux", id: candidate.id, reason: "Requires editorial comparison." }));
-  assert.deepEqual(unacknowledgedDuplicates(proposal, candidates), []);
-  await writeFile(path.join(proposalDir, "proposal.json"), JSON.stringify(proposal));
-  const acknowledged = spawnSync(process.execPath, [checker, proposalDir, root], { encoding: "utf8" });
-  assert.equal(acknowledged.status, 0, acknowledged.stderr);
+  const dir = path.join(root, "proposals", "topic", "new-topic");
+  await mkdir(dir, { recursive: true }); await mkdir(path.join(root, "content", "framework"), { recursive: true }); await mkdir(path.join(root, "generated", "content"), { recursive: true });
+  const proposal = base("topic", contents.topic); await writeFile(path.join(dir, "proposal.json"), JSON.stringify(proposal));
+  await writeFile(path.join(root, "content", "framework", "draft.json"), JSON.stringify({ topics: [{ id: "existing-topic", label: "New topic" }] }));
+  await writeFile(path.join(root, "generated", "content", "old.json"), JSON.stringify([{ id: "retired-record", title: "New topic" }]));
+  const found = await findDuplicates(dir, root);
+  assert.deepEqual(found.map((x) => x.id), ["existing-topic"]); assert.equal(unacknowledgedDuplicates(proposal, found).length, 1);
 });
-
-test("validator CLI requires the research memo and accepts the routed directory", async () => {
-  const root = path.join(tmpdir(), `proposal-cli-${process.pid}-${Date.now()}`);
-  const proposalDir = path.join(root, "proposals", "crux", "coordination-costs");
-  await mkdir(proposalDir, { recursive: true });
-  await writeFile(path.join(proposalDir, "proposal.json"), JSON.stringify(validCrux()));
+test("validator CLI requires the research memo and accepts routed directories", async () => {
+  const root = path.join(tmpdir(), `proposal-cli-${process.pid}-${Date.now()}`), dir = path.join(root, "proposals", "topic", "new-topic");
+  await mkdir(dir, { recursive: true }); await mkdir(path.join(root, "content", "framework"), { recursive: true });
+  await writeFile(path.join(root, "content", "framework", "draft.json"), JSON.stringify({ topics: [] })); await writeFile(path.join(dir, "proposal.json"), JSON.stringify(base("topic", contents.topic)));
   const script = path.resolve(".agents/skills/research-content-proposals/scripts/validate-proposal.mjs");
-  const missingMemo = spawnSync(process.execPath, [script, proposalDir], { encoding: "utf8" });
-  assert.equal(missingMemo.status, 1);
-  assert.match(missingMemo.stderr, /research\.md must exist/);
-  await writeFile(path.join(proposalDir, "research.md"), "# Research\n\nEvidence and limitations.\n");
-  const valid = spawnSync(process.execPath, [script, proposalDir], { encoding: "utf8" });
-  assert.equal(valid.status, 0, valid.stderr);
-  assert.match(valid.stdout, /"valid": true/);
+  let result = spawnSync(process.execPath, [script, dir], { cwd: root, encoding: "utf8" }); assert.equal(result.status, 1); assert.match(result.stderr, /research\.md must exist/);
+  await writeFile(path.join(dir, "research.md"), "# Research\n\nEvidence and limitations.\n"); result = spawnSync(process.execPath, [script, dir], { cwd: root, encoding: "utf8" }); assert.equal(result.status, 0, result.stderr);
 });

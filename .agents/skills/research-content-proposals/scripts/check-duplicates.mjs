@@ -40,7 +40,7 @@ function collectRecords(value, file, records) {
   if (!value || typeof value !== "object") return;
   if (typeof value.id === "string") records.push({
     id: value.id,
-    label: String(value.title ?? value.name ?? value.question ?? value.id),
+    label: String(value.title ?? value.name ?? value.label ?? value.question ?? value.id),
     aliases: Array.isArray(value.aliases) ? value.aliases.map(String) : [],
     identifiers: Array.isArray(value.identifiers)
       ? value.identifiers.map(String)
@@ -53,8 +53,7 @@ function collectRecords(value, file, records) {
 export async function findDuplicates(target, repositoryRoot = process.cwd()) {
   const { file, proposal } = await loadProposal(target);
   const files = [
-    ...(await jsonFiles(path.join(repositoryRoot, "content"))),
-    ...(await jsonFiles(path.join(repositoryRoot, "generated", "content"))),
+    ...(await jsonFiles(path.join(repositoryRoot, "content", "framework"))),
     ...(await jsonFiles(path.join(repositoryRoot, "proposals"))),
   ].filter((candidate) => path.resolve(candidate) !== path.resolve(file));
   const records = [];

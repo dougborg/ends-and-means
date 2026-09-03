@@ -1,6 +1,6 @@
 ---
 name: research-content-proposals
-description: Research and stage evidence-backed proposals for new Ends and Means cruxes, systems, sources, or cases. Use for researching additions or substantial revisions; do not use for directly editing canonical content.
+description: Research and stage evidence-backed proposals for Ends and Means traditions, Ends, institutional Means, Topics, Challenges, Criteria, statements or interpretations, sources, and bounded cases. Use for additions or substantial revisions; never use it to publish canonical content.
 ---
 
 # Research Content Proposals
@@ -11,14 +11,19 @@ Create a reviewable proposal, never a canonical-content change.
 
 1. Read [references/editorial-policy.md](references/editorial-policy.md).
 2. Read [references/proposal-format.md](references/proposal-format.md).
-3. Read exactly one route matching the requested entity:
-   - [references/routes/crux.md](references/routes/crux.md)
-   - [references/routes/system.md](references/routes/system.md)
-   - [references/routes/source.md](references/routes/source.md)
-   - [references/routes/case.md](references/routes/case.md)
+3. Read each relevant entity route:
+   - [tradition](references/routes/tradition.md)
+   - [end](references/routes/end.md)
+   - [means](references/routes/means.md)
+   - [topic](references/routes/topic.md)
+   - [challenge](references/routes/challenge.md)
+   - [criterion](references/routes/criterion.md)
+   - [statement](references/routes/statement.md)
+   - [source](references/routes/source.md)
+   - [case](references/routes/case.md)
 
-If the request spans entity types, make a separate proposal for each and read
-only those routes.
+For requests spanning entity types, make a separate proposal for each and
+connect them through proposed relationships instead of embedding entities.
 
 ## Required boundary
 
@@ -30,16 +35,19 @@ proposals/<type>/<stable-id>/research.md
 ```
 
 Do not edit `content/`, `generated/`, source research documents, or application
-code. A human promotes accepted proposals outside this skill.
+code. A human reconciles and promotes accepted proposals outside this skill.
 
-Research with authoritative sources. Browse and verify every cited URL; scripts
-can check metadata and links, but cannot prove that a source is authoritative.
-Preserve URL-level provenance, distinguish
-empirical claims from value judgments, and document conflicting evidence and
-limitations. Search for duplicates before writing; record plausible duplicate
-candidates rather than silently merging concepts.
+Use authoritative sources and browse every cited URL. Preserve URL-level
+provenance, distinguish observations from attributed values and editorial
+interpretations, and document conflicting evidence and limitations. Search the
+current framework and staged proposals for duplicates before writing. Record
+plausible candidates; do not silently merge concepts.
 
-Run both checks before handing off:
+Do not recreate a fixed comparison matrix or require every tradition to answer
+every Challenge. Do not use retired entity names, abbreviated row IDs, verdicts,
+or evidence grades. Missing relationships are legitimate research gaps.
+
+Run before handoff:
 
 ```bash
 npm run validate
@@ -47,7 +55,6 @@ node .agents/skills/research-content-proposals/scripts/validate-proposal.mjs pro
 node .agents/skills/research-content-proposals/scripts/check-duplicates.mjs proposals/<type>/<stable-id>
 ```
 
-If the duplicate checker reports `unacknowledged` candidates, add each plausible
-candidate to `duplicateCandidates` with a comparison reason, then rerun it.
-
-Report validation results, duplicate candidates, and questions for human review.
+If duplicate checking reports `unacknowledged` candidates, add each plausible
+candidate with a comparison reason and rerun it. Report validation, duplicate
+candidates, evidence conflicts, limitations, and human-review questions.

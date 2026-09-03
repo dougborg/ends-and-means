@@ -6,7 +6,7 @@ const { tradition } = Astro.props;
 const responses = framework.responses.filter(({ traditionId }) => tradition.id === traditionId).map((response) => ({ ...response, challenge: framework.challenges.find(({ id }) => id === response.challengeId)! }));
 const notes = framework.researchNotes.filter(({ traditionId }) => traditionId === tradition.id);
 ---
-<BaseLayout title={tradition.name} description={tradition.description}>
+<BaseLayout fullBleed title={tradition.name} description={tradition.description}>
   <article class="tradition-page">
     <nav aria-label="Breadcrumb"><a href="/traditions/">Traditions</a> <span aria-hidden="true">/</span> Exploratory ideal type</nav>
     <header><p class="coordinate">TRADITION / RESEARCH DRAFT</p><h1>{tradition.name}</h1><p class="dek">{tradition.description}</p><p class="boundary-note"><strong>Boundary:</strong> {tradition.caveat}</p></header>

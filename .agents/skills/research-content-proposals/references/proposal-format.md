@@ -1,16 +1,13 @@
 # Proposal format
 
-Create two files in `proposals/<type>/<stable-id>/`.
-
-## `proposal.json`
-
-Use UTF-8 JSON with this common envelope:
+Create `proposal.json` and `research.md` in
+`proposals/<type>/<stable-id>/`. The JSON uses this envelope:
 
 ```json
 {
-  "schemaVersion": 1,
-  "proposalType": "crux",
-  "id": "stable-kebab-case-id",
+  "schemaVersion": 2,
+  "proposalType": "tradition",
+  "id": "stable-semantic-id",
   "title": "Reader-facing title",
   "status": "draft",
   "summary": "What this adds and why it belongs.",
@@ -21,12 +18,8 @@ Use UTF-8 JSON with this common envelope:
     "publishedAt": "2024-05-01",
     "accessedAt": "2026-09-03",
     "sourceType": "official",
-    "authorityNote": "Why this source is appropriate for these claims",
-    "provenance": {
-      "publisherUrl": "https://example.org/about",
-      "identifier": "10.x/example",
-      "identifierUrl": "https://doi.org/10.x/example"
-    }
+    "authorityNote": "Why this source is appropriate",
+    "provenance": { "publisherUrl": "https://example.org/about" }
   }],
   "claims": [{
     "id": "stable-claim-id",
@@ -36,53 +29,44 @@ Use UTF-8 JSON with this common envelope:
     "limitations": ["What this evidence cannot establish."]
   }],
   "conflictingEvidence": [{
-    "summary": "A material counterfinding, or a precise account of the search when none was found.",
+    "summary": "A counterfinding, or the search performed when none was found.",
     "claimIds": ["stable-claim-id"],
     "sourceUrls": ["https://example.org/source"]
   }],
-  "limitations": ["A proposal-level scope or evidence limitation."],
+  "limitations": ["A proposal-level boundary or uncertainty."],
   "aliases": ["Known alternate name"],
-  "identifiers": ["DOI, ISBN, or another stable external identifier"],
+  "identifiers": ["A stable external identifier"],
+  "relationships": [{
+    "type": "challenge",
+    "id": "existing-challenge-id",
+    "reason": "Why the relationship belongs."
+  }],
   "proposedRelationships": [{
-    "type": "system",
-    "id": "not-yet-canonical-system",
-    "reason": "Why this unresolved relationship is proposed for human review."
+    "type": "means",
+    "id": "not-yet-canonical-means",
+    "reason": "Why this unresolved relationship needs human review."
   }],
-  "duplicateCandidates": [{
-    "type": "crux",
-    "id": "possible-existing-id",
-    "reason": "Why a reviewer should compare these records."
-  }],
+  "duplicateCandidates": [],
   "content": {}
 }
 ```
 
-Allowed proposal types are `crux`, `system`, `source`, and `case`. IDs and claim
-IDs use lowercase letters, digits, and single hyphens. `sourceType` is one of
-`primary`, `official`, `peer-reviewed`, `academic-book`, or
-`reputable-secondary`. Every empirical claim cites at least one URL declared in
-`sources`. A value judgment uses `kind: "value-judgment"`, includes a
-`rationale`, and keeps factual support in separate empirical claims.
+Types are `tradition`, `end`, `means`, `topic`, `challenge`, `criterion`,
+`statement`, `source`, and `case`. IDs are semantic lowercase kebab-case.
+`sourceType` is `primary`, `official`, `peer-reviewed`, `academic-book`, or
+`reputable-secondary`.
 
-`duplicateCandidates` is required but may be empty only after running the
-duplicate checker and finding no plausible match. Do not use it to resolve or
-merge records. The checker considers IDs, aliases, identifiers, and meaningful
-title-token similarity. It fails until every detected candidate ID is recorded.
+Every empirical claim cites a declared source URL. An `attributed-value` claim
+names its holder and cites the source where the value is expressed. An
+`editorial-interpretation` claim supplies a rationale and keeps supporting facts
+in separate empirical claims. Every claim states limitations.
 
-Relationship IDs must resolve in the generated canonical graph. Put an unknown
-ID in `proposedRelationships` only when it is intentionally part of the proposal;
-this marks it for human review and does not make it canonical.
+Use `relationships` only for IDs already in the current framework. Put an
+unknown companion entity in `proposedRelationships`; this exposes a review gap
+without pretending it is canonical. Neither collection implies complete graph
+coverage. `duplicateCandidates` may be empty only after duplicate checking; it
+records comparisons, never merge decisions.
 
-## `research.md`
-
-Write a concise research memo that a human can audit:
-
-- scope and inclusion rationale;
-- findings organized around claims, using inline Markdown URL citations;
-- conflicting evidence and alternative interpretations;
-- limitations and unresolved questions;
-- duplicate search notes;
-- recommended editorial decision.
-
-The JSON is the machine-checkable proposal; the memo explains reasoning. Keep
-claim IDs consistent between both files.
+The memo explains scope, findings by claim ID, counterevidence, rival
+interpretations, limitations, duplicate search, and recommended editorial
+decision with inline URL citations.
