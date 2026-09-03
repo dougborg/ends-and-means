@@ -57,17 +57,20 @@ implementation before researching the inherited dossiers in parallel:
    Domains, and typed relationship records; retain Approaches as the primary
    route rather than the graph root. Align the vocabulary subset with SKOS
    semantics without adopting RDF as the authoring format (#47).
-2. Correct inherited category errors: move central planning into Means and use
+2. Replace the monolithic framework authoring document with modular directories
+   organized by entity type and relationship family. Compile one generated read
+   graph and derived indexes; never hand-edit build products (#47).
+3. Correct inherited category errors: move central planning into Means and use
    Democracy and anarcho-communism as multiplicity and overlap tests (#47).
-3. Move the complete social-democratic trace onto that graph and finish removal
+4. Move the complete social-democratic trace onto that graph and finish removal
    of remaining transitional schema/runtime code (#48).
-4. Give substantive Statements stable anchors, locators, and Source
+5. Give substantive Statements stable anchors, locators, and Source
    relationships (#18).
-5. Model the two bounded Swedish Cases with explicit context and uncertainty
+6. Model the two bounded Swedish Cases with explicit context and uncertainty
    (#13).
-6. Add Wikipedia and Wikidata orientation/identity references plus publisher,
+7. Add Wikipedia and Wikidata orientation/identity references plus publisher,
    library, and reading links; validate them continuously (#41 and #19).
-7. Review the complete Challenge → attributed End → Means → bounded evidence →
+8. Review the complete Challenge → attributed End → Means → bounded evidence →
    Criterion → assessment trace. Then migrate only inherited material that fits
    the new entities and relationships (#39).
 
@@ -78,7 +81,7 @@ This implementation tests the content model, editorial workflow, temporal semant
 This is the active phase. Finish it before widening the catalogue.
 
 - [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Phase 1 model tests.
-- [ ] **Validate and consolidate one plural canonical graph** ([#47](https://github.com/dougborg/ends-and-means/issues/47)). Add Concepts, Collections, Domains, external identities, and typed sourced relationships; prove the distinctions with Democracy, communism/socialism, central planning, anarcho-communism, and one complete evidence trace.
+- [ ] **Validate and consolidate one plural canonical graph** ([#47](https://github.com/dougborg/ends-and-means/issues/47)). Add Concepts, Collections, Domains, external identities, and typed sourced relationships; replace the monolithic authoring JSON with modular entity and relationship sources plus a generated read graph; prove the distinctions with Democracy, communism/socialism, central planning, anarcho-communism, and one complete evidence trace.
 - [ ] **Remove retired matrix and prototype runtime cruft** ([#48](https://github.com/dougborg/ends-and-means/issues/48)). Route cleanup is complete; close the issue after transitional schemas, fixtures, generators, and vocabulary that fail the target model are removed or archived for provenance.
 - [ ] **Complete sourced Approach dossiers** ([#39](https://github.com/dougborg/ends-and-means/issues/39)). After the vertical slice, review overview prose, scope, classification disputes, conceptual morphology, attributed Ends, Means relationships, variants, cases, FAQs, and misconceptions; do not preserve all eight inherited rows as Approaches when they belong to another entity type.
 - [ ] **Model statements and resource links** ([#18](https://github.com/dougborg/ends-and-means/issues/18)). Give challengeable claims stable anchors. Support DOI, ISBN, publisher, library, reading, and clearly labeled purchase links without making a retailer a canonical identifier.
@@ -89,6 +92,8 @@ This is the active phase. Finish it before widening the catalogue.
 ### Phase 1 exit criteria
 
 - The replacement schema is canonical and contains no retired-model fields.
+- Canonical authoring is modular; the full graph is a deterministic generated
+  artifact outside the authoring directories.
 - Democracy can exist as a Concept, attributed End, family of Approaches,
   collection of Means, and measured feature of Cases without one overloaded
   record.

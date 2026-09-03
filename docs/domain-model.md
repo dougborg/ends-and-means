@@ -336,8 +336,87 @@ editorial conclusions without review.
 ## Authoring and compilation
 
 Canonical authoring remains small TypeScript-validated records in Git, grouped
-by entity type. The build compiles them into one graph and derived indexes.
-Astro pages consume only that compiled graph.
+by entity type. “One canonical graph” means one logical schema and one compiled
+read model—not one hand-edited file.
+
+### Proposed source layout
+
+```text
+content/
+  vocabulary/
+    concepts/                 # one Concept per file
+    schemes/                  # Concept Scheme definitions
+    collections/              # editorial umbrellas and inclusion rules
+    domains/                  # spheres and precise institutional domains
+  approaches/                 # one Approach dossier core per file
+  ends/                       # normalized End definitions
+  means/                      # one institutional arrangement per file
+  questions/
+    topics/
+    challenges/
+    criteria/
+  actors/
+    people/
+    organizations/
+  works/                      # books, articles, constitutions, fictional works
+  evidence/
+    cases/
+      <case-id>/
+        case.json             # boundary, context, and selection rationale
+        episodes/             # meaningful changes within a larger case
+        observations/         # scoped empirical Statements
+    sources/                  # citable manifestations and access metadata
+  depictions/                 # interpretations of fictional systems
+  relationships/
+    approach-concepts/        # subject-centered relationship sets
+    approach-ends/
+    approach-means/
+    collection-memberships/
+    case-approaches/
+    case-means/
+    statement-support/
+```
+
+JSON remains appropriate for declarative content; executable repository code
+remains TypeScript-only. Every file is validated against TypeScript types. If
+author ergonomics later justify Markdown for long prose, structured frontmatter
+must compile to exactly the same records rather than creating another model.
+
+Use one file per independently reviewed entity. For high-volume relationships,
+use one subject-centered relationship-set file rather than one tiny file per
+edge. This keeps related editorial decisions reviewable together without
+embedding them in either endpoint or producing thousands of fragments.
+
+### Ownership rules
+
+- Entity files own identity, labels, scope, and intrinsic descriptive fields.
+- Relationship files own claims about how independently addressable entities
+  relate; endpoint files do not duplicate those edges.
+- Statement files or case observation files own challengeable prose.
+- Sources own bibliographic identity; citation links own locators and the exact
+  Statements they support.
+- Dossiers, comparisons, navigation trees, backlinks, and counts are derived
+  views and never canonical authoring files.
+
+### Build products
+
+The compiler reads the modular sources, validates each record, resolves
+references, validates graph-wide invariants, and emits:
+
+```text
+generated/
+  graph.json                  # complete internal read model
+  indexes/                    # route/search/backlink indexes if needed
+  reports/                    # coverage, freshness, and research diagnostics
+  exports/                    # later JSON-LD/SKOS and public data products
+```
+
+Generated products must never live beside authoring records or be edited by
+hand. Astro pages consume the compiled graph or deterministic indexes; they do
+not scan and reinterpret source directories independently.
+
+This structure allows a single coherent graph at runtime while keeping pull
+requests small, ownership obvious, and merge conflicts localized.
 
 Validation must enforce:
 
@@ -384,14 +463,17 @@ analytical distinctions.
 1. Define Concept, Collection, Domain, typed Relationship, and external-reference
    primitives alongside the existing evidence primitives. Document and test the
    SKOS mapping for the vocabulary subset.
-2. Convert central planning from an Approach to a Means family and preserve its
+2. Establish the modular authoring directories and compiler boundary. Move the
+   current monolithic `content/framework/graph.json` to generated output; no
+   route may treat it as hand-authored source.
+3. Convert central planning from an Approach to a Means family and preserve its
    old material only where it maps cleanly.
-3. Build a vertical slice around social democracy, democratic Concepts,
+4. Build a vertical slice around social democracy, democratic Concepts,
    solidaristic bargaining, and the two bounded Swedish Cases.
-4. Add one overlap stress test: anarcho-communism in several Collections.
-5. Add one measurement stress test using selected V-Dem or International IDEA
+5. Add one overlap stress test: anarcho-communism in several Collections.
+6. Add one measurement stress test using selected V-Dem or International IDEA
    dimensions without importing a universal democracy score.
-6. Review the compiled graph and rendered dossiers. Only then migrate the other
+7. Review the compiled graph and rendered dossiers. Only then migrate the other
    inherited records and retire remaining transitional fixtures.
 
 ## Research basis

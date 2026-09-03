@@ -13,8 +13,10 @@ collaborative editing, personalized state, or high-frequency writes.
 ## Decision
 
 Keep canonical content in small, reviewable files in Git. Organize authoring
-records by entity type and compile them deterministically into one validated
-read graph consumed by Astro routes, tests, and future exports.
+records by entity type and relationship family and compile them deterministically
+into one validated read graph consumed by Astro routes, tests, and future
+exports. “One graph” is a logical/runtime guarantee, not a single authoring
+document.
 
 The canonical domain distinguishes five layers:
 
@@ -59,6 +61,10 @@ make file-backed authoring inadequate.
 - Git supplies attribution, discussion, history, rollback, and branching.
 - Authors review focused records instead of one hand-edited graph document.
 - The compiled graph is generated and never hand-edited.
+- Generated graphs, indexes, reports, and exports live outside canonical
+  authoring directories.
+- Entity files own intrinsic fields; subject-centered relationship files own
+  substantive edges; rendered dossiers and backlinks are derived views.
 - Publication state lives on entities or relationships rather than requiring a
   parallel schema.
 - Runtime pages cannot introduce route-specific content models.
