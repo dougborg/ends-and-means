@@ -1,195 +1,416 @@
 # Design Notes: Ends and Means
 
-**Status:** direction for exploration, not a finished visual specification
+**Status:** design direction for the clean analytical model; ready for screen prototypes, not production implementation
 
-## Design thesis
+## Product thesis
 
-Ends and Means should feel like a comparative instrument: a calm place to hold
-competing institutional claims next to their mechanisms and records. It is not a
-campaign, a newspaper, or a dashboard. The primary audience is a curious reader
-who wants to test an intuition and follow the evidence. The home page has one
-job: get that reader into a meaningful comparison immediately.
+Ends and Means is a comparative instrument for examining political-economic
+ideas, institutions, and historical practice. It gives a curious reader one
+place to ask what people sought, what arrangements they built, what happened,
+and which values shape an assessment.
 
-The interface should communicate intellectual confidence without pretending to
-certainty. Evidence state is visible, disagreement has an address, and every
-summary opens into its reasoning.
+It is not a campaign, newspaper, encyclopedia of ideologies, or ranking
+dashboard. The interface should feel intellectually confident without
+pretending to certainty. A reader can always distinguish a sourced observation,
+an inference, and a value judgment—and can follow each one to its support.
 
-The information architecture follows the proposed
-[Ends, Means, Challenges, and Criteria framework](analytical-framework.md).
-It is a clean replacement model, not a relabeling of the current matrix. Ends
-are attributable, Means are concrete arrangements, Challenges organize open
-questions, bounded cases show practice, and Criteria disclose how an assessment
-is being made. Traditions and ideal types provide context; they do not turn a
-country into an instance of one homogeneous system.
+The home page has one job: help a reader enter a meaningful question quickly.
+The core reading experience has one job: preserve the chain of reasoning from
+an attributed End through institutional Means and bounded practice to an
+assessment under an explicit Criterion.
 
-## UI decisions to carry forward
+## Information architecture
 
-The ontology is changing, but the strongest earlier interface decisions remain:
+The target interface reflects the clean model rather than the exploratory
+matrix:
 
-- the calm “comparative instrument” character and field-instrument visual
-  language;
-- the asymmetric Ends / Means / Practice / Criteria reading frame;
-- claim-adjacent evidence, uncertainty, disagreement, and correction actions;
-- semantic comparison tables with deliberate horizontal scrolling;
-- a focused single-Challenge mobile comparison rather than a generic card feed;
-- accessible, URL-addressable filters and a spatially legible pivot;
-- bibliography-first source pages where library and reading access outrank
-  disclosed purchase links; and
-- restrained motion, strong focus states, and no political red/blue coding.
+- **Topics** are broad, familiar discovery labels such as ownership, work,
+  security, coordination, and power. They organize navigation but make no
+  analytical claim.
+- **Challenges** are recurring open questions. They are the primary entry point
+  for comparison.
+- **Traditions and ideal types** are contested families of ideas. They provide
+  context but are not country labels or causal treatments.
+- **Ends** are attributed aims: declared, design-implied, or cautiously
+  interpreted from practice.
+- **Means** are concrete institutional arrangements: roles, rules, authority,
+  information, incentives, and distributions of costs and benefits.
+- **Cases** are bounded in place, time, participants, and institutional scope.
+- **Criteria** are disclosed evaluative lenses with stated assumptions and
+  evidence requirements.
+- **Statements, sources, and interpretations** form the evidence layer beneath
+  every summary.
 
-What does **not** carry forward is the assumption that every tradition must
-fill one rectangular grid, that one cell owns the whole analysis, or that a
-verdict is the primary visual summary. The eventual comparison surface should
-be generated from response traces and may be sparse where honest evidence or a
-meaningful relationship is absent.
-
-## Signature: the analytical reading frame
-
-The name supplies the organizing device. Detailed comparisons use a persistent
-analytical frame:
+A **response trace** is a view across these entities, not another content type
+that owns or duplicates them:
 
 ```text
-ENDS                    MEANS                         PRACTICE
-What is valued          Roles and rules               Bounded context
-What is promised        Information and incentives    Rules-in-use
-Legitimacy claims       Where mechanisms break        Outcomes and uncertainty
----------------------- evidence trace --------------------------
-CRITERIA
-The explicit lenses behind the assessment
+Challenge → attributed End → Means → expected interaction
+          → bounded case → observed outcome → Criterion → assessment
 ```
 
-On a comparison page this becomes an asymmetrical sequence, not equal cards.
-Means gets more room because roles, rules, incentives, information, and failure
-modes carry most of the causal analysis. Practice is never a placeless verdict:
-it identifies a bounded case and separates institutional design from
-rules-in-use and outcomes. The evidence trace connects assertions to sources,
-cases, interpretations, and criteria. On small screens the frame remains a
-labeled sequence: Ends, Means, Practice, Criteria.
+Coverage may be sparse. The product must never invent a rectangular comparison
+or imply that every tradition has one coherent response to every Challenge.
 
-The split is structural, never decorative. Do not force it onto pages where an
-ends/means distinction is not present, such as a simple bibliography entry.
+## Durable decisions from the exploratory UI
+
+Carry these forward:
+
+- a calm, cool “comparative instrument” character;
+- asymmetrical Ends / Means / Practice / Criteria reading space;
+- semantic comparison tables with deliberate horizontal scrolling;
+- one focused Challenge on narrow screens instead of a generic card feed;
+- claim-adjacent citations, uncertainty, disagreement, and correction actions;
+- accessible, URL-addressable filters and pivots;
+- bibliography-first source pages where library and reading access outrank
+  disclosed purchase links;
+- restrained motion, visible focus, and no political red/blue coding.
+
+Do not carry forward:
+
+- fixed grid coverage;
+- a single comparison cell as the owner of an argument;
+- verdicts or cell-wide evidence grades;
+- country-as-system presentation;
+- compatibility terminology or identifiers in the new interface.
+
+## Signature: the argument trace
+
+The signature visual is an **argument trace**: a quiet line connecting the
+actual stages of a claim. It behaves like an instrument readout, not a decorative
+timeline. Each node corresponds to a real entity or statement and exposes its
+scope and provenance.
+
+```text
+THE QUESTION
+Who captures gains from productivity and ownership?
+
+  END                MEANS                 PRACTICE              CRITERION
+  Fair wages    ───  Central wage     ───  Sweden, 1951–83  ─── Distribution
+  LO program         bargaining            wage compression     of gains
+  declared           formal + in use       observed              disclosed lens
+      [1]                 [2]                   [3][4]                 [5]
+```
+
+The line is interrupted when evidence or reasoning is missing. A fork represents
+competing interpretations of the same evidence. It never visually resolves back
+into a winner unless the content genuinely records agreement.
+
+```text
+Observed: funds acquired limited voting power
+                         ├── diluted democratization
+                         └── safeguard for pluralism
+```
+
+Selecting or focusing a node reveals a compact evidence drawer anchored to that
+node. On desktop, the drawer may occupy a contextual side rail. On mobile, it
+opens directly beneath the selected statement. Citations never live only in a
+distant page-level bibliography.
+
+This is the one deliberate aesthetic risk: the connective rule carries primary
+information and becomes the project’s recognizable visual grammar. Everything
+around it stays quiet.
 
 ## Visual character
 
 Use the language of field instruments and scholarly apparatus without imitating
 graph paper, newspapers, government forms, or academic PDFs. Surfaces are cool
-and clear. Rules show relationships. Labels behave like coordinates. Color
-communicates status sparingly and is always redundant with text or shape.
+and clear. Rules express relationships. Labels behave like coordinates because
+they name actual analytical roles.
 
-Avoid political red/blue coding, flags, portraits of theorists as decoration,
-marble columns, voting-box imagery, gradients, glass effects, rounded card
-grids, and generic “serious publication” sepia.
+Avoid political red/blue coding, flags, ornamental portraits, marble columns,
+voting-box imagery, gradients, glass effects, pill-heavy interfaces, rounded
+card grids, and generic “serious publication” sepia.
 
-## Color tokens
+### Color tokens
 
 | Token | Value | Use |
 |---|---:|---|
 | Night | `#17232B` | Primary text and dark emphasis surfaces |
 | Atmosphere | `#F1F6F7` | Cool page ground |
-| Sheet | `#FFFFFF` | Reading surfaces |
-| Cobalt | `#2556D8` | Links, focus, active navigation |
-| Signal amber | `#C47712` | Contested and needs-review states |
-| Field teal | `#087E72` | Verified and extensive-evidence states |
+| Sheet | `#FFFFFF` | Reading surface |
+| Cobalt | `#2556D8` | Links, focus, selected trace nodes |
+| Signal amber | `#A85F08` | Contested, qualified, or needs-review states |
+| Field teal | `#087E72` | Source-verified statements |
+| Hairline | `#B9C8CD` | Structural rules and inactive trace segments |
 
-Weak, failed, or untested claims must not share a single alarm-red treatment.
-Evidence, uncertainty, and interpretation are separate semantic labels, never
-a traffic-light score. Color contrast must be tested before these values become
-implementation tokens.
+Color describes provenance or state, never whether an institution is “good” or
+“bad.” Every use is redundant with text, icon shape, or line treatment. Final
+tokens require WCAG contrast testing in context.
 
-## Typography
+### Typography
 
-- **Display and navigation:** Bricolage Grotesque, used for the wordmark, page
-  theses, and major navigation. Its constructed shapes fit a project about
-  designed systems without looking bureaucratic.
-- **Reading:** Literata, used for mechanisms, cases, quotations, and long notes.
-  It gives source material a different cadence from interface text.
-- **Data and apparatus:** IBM Plex Mono, used sparingly for IDs, evidence labels,
-  dates, coordinates, and citation markers.
+- **Display and navigation:** Bricolage Grotesque, 600–700. Use for the wordmark,
+  page questions, and major navigation—not body copy.
+- **Reading:** Literata, 400–600. Use for explanations, historical accounts,
+  interpretations, and longer statements.
+- **Apparatus:** IBM Plex Mono, 400–500. Use for dates, scope labels, citation
+  markers, evidence states, and compact control labels.
 
-Self-host only the weights and character sets used. If performance or licensing
-changes the font choice, preserve the three roles: constructed display, highly
-readable text, and compact apparatus.
+Suggested fluid scale:
 
-## Layout
+| Role | Size | Line height |
+|---|---:|---:|
+| Display | `clamp(2.5rem, 6vw, 5.5rem)` | `0.98` |
+| Page question | `clamp(1.9rem, 4vw, 3.5rem)` | `1.06` |
+| Section | `clamp(1.35rem, 2vw, 1.8rem)` | `1.15` |
+| Reading | `clamp(1rem, 0.4vw + .92rem, 1.16rem)` | `1.65` |
+| Apparatus | `0.74rem` | `1.35` |
 
-### Home: start with the instrument
+Self-host only required weights and subsets. Keep long-form measure between 60
+and 72 characters. Do not use monospace for prose or identity labels.
 
-Do not spend the first viewport on a slogan. Introduce the method in two short
-sentences and open a useful comparison immediately.
+### Spacing and structure
+
+Use a 4px base unit with primary steps of 8, 12, 16, 24, 32, 48, 72, and 96px.
+Major analytical stages need more separation than statements within a stage.
+
+- content maximum: `90rem`;
+- reading column: `38–45rem`;
+- evidence rail: `18–22rem`;
+- desktop gutter: `clamp(1.5rem, 4vw, 4rem)`;
+- compact breakpoint: approximately `48rem`, determined by content stress;
+- wide three-region dossier: approximately `72rem` and above.
+
+Use square or 2–4px corners on functional surfaces. Reserve shadows for
+temporary overlays; use rules and background contrast for permanent structure.
+
+## Screen 1: home and discovery
+
+The opening thesis is a real Challenge selector, not a decorative hero. Topics
+provide recognizable doors; selecting one reveals a small set of Challenges and
+real response traces.
 
 ```text
-┌ Ends and Means ────── Compare  Reading  Method  Contribute ┐
-│ Political and economic systems in theory and practice.       │
-│ Start with a problem, not an ideology.                        │
-├──────────────────────────────────────────────────────────────┤
-│ Challenge: [Distribution of gains and ownership ▾]          │
-│ RESPONSE             MEANS          CASE          ASSESSMENT │
-│ Solidaristic wages  Central frames Sweden 1951–83  Read →   │
-│ Wage-earner funds   Capped boards  Sweden 1984–91  Read →   │
-└─────────────────────────────────────────────────────────────┘
+┌ Ends and Means ───────── Explore  Cases  Reading  Method  Contribute ┐
+│                                                                      │
+│ Political and economic arrangements connect what people seek        │
+│ to what they build—and what follows.                                 │
+│                                                                      │
+│ Start with a question.                                               │
+│ ┌──────────────────────────────────────────────────────────────────┐ │
+│ │ Who captures gains from productivity and ownership?           ▾ │ │
+│ └──────────────────────────────────────────────────────────────────┘ │
+│ Topics:  Ownership  Work  Security  Coordination  Power              │
+├──────────────────────────────────────────────────────────────────────┤
+│ TWO DOCUMENTED RESPONSES                         Scope / evidence      │
+│ Solidaristic wage bargaining ── Sweden, 1951–83 ── View trace         │
+│ Wage-earner funds            ── Sweden, 1984–91 ── View trace         │
+│                                                                      │
+│ A response is absent?  See what evidence is needed →                 │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-Comparisons use semantic tables on wide screens. Freeze the identifying column
-and headers where helpful. Use deliberate horizontal scrolling rather than
-compressing unlike responses into illegibility. On narrow screens, focus on one
-selected Challenge and preserve the Ends → Means → Practice → Criteria sequence;
-never turn the full evidence graph into an endless generic card feed.
+Rules:
 
-### Entity pages: comparison dossier
+- The selector label is always the complete Challenge question.
+- Topic selection filters; it does not navigate to a presumed conclusion.
+- Result count and active filters are announced and encoded in the URL.
+- Results identify arrangements and bounded cases before traditions.
+- Empty results explain whether research is missing, scope excludes a result,
+  or no meaningful relationship has been proposed.
+
+## Screen 2: analytical response trace
+
+This is the signature reading experience. It answers one Challenge through one
+or more connected Ends, Means, cases, outcomes, and Criteria.
 
 ```text
-┌ identity rail ────────┬ argument ─────────────┬ evidence rail ─────┐
-│ Response / Challenge│ Ends                 │ Evidence gaps       │
-│ neighbor navigation│ Means                │ Criteria used       │
-│                     │ Practice + outcomes  │ 3 sources / 2 cases│
-│                     │ Uncertainty          │ Suggest correction │
-└─────────────────────┴──────────────────────┴──────────────────┘
+┌ Challenge ─────────────────────────────────────────── Share / correct ┐
+│ Who captures gains from productivity and ownership?                  │
+│                                                                      │
+│ CONTEXT      Social-democratic tradition · relationship: contested   │
+├──────────────┬───────────────────────────────────────┬───────────────┤
+│ Trace map    │ Argument                              │ Evidence       │
+│              │                                       │               │
+│ ● End        │ Fair wages with full employment       │ Declared by   │
+│ │            │ attributed to LO’s 1951 program  [1] │ LO program    │
+│ ● Means      │ Central wage frames + adjustment [2] │ Source 2      │
+│ │            │ formal rule / expected interaction    │ Scope         │
+│ ● Practice   │ Sweden · 1951–1983                    │ 2 studies     │
+│ ├ Outcome    │ Wage dispersion fell …          [3]  │ Uncertainty   │
+│ └ Dispute    │ Union policy / alternative cause      │ Interpretations│
+│ ● Criterion  │ Distribution of gains                 │ Assumptions   │
+│              │ Assessment and limits                 │ Requirements  │
+└──────────────┴───────────────────────────────────────┴───────────────┘
 ```
 
-The central reading measure stays between 60 and 72 characters. The evidence
-rail may stick on desktop but follows the relevant claim inline on mobile.
+The left trace map is navigation, not a progress meter. The center is the
+argument. The right rail changes with the focused statement. At compact widths,
+the trace becomes a vertical line and evidence expands inline.
 
-### Sources and books
+Every assessment names exactly one Criterion. If another Criterion changes the
+interpretation, show another assessment beside it or behind an explicit
+“Evaluate through another lens” control—never average them.
 
-Bibliographic facts lead; commerce follows. The primary actions are “Find at a
-library,” “Read online,” and “Publisher.” A separate “Buy this book” region can
-list Bookshop.org and other vendors, disclose affiliate status beside the links,
-and never visually outrank access or citation information.
+## Screen 3: bounded historical case
+
+Case pages begin with the boundary because it controls what every observation
+can support.
+
+```text
+┌ CASE ─ Sweden · 1984–1991 ───────────── Bounded / source reviewed ┐
+│ Enacted Swedish wage-earner funds                                 │
+│ Covers five AP-system boards through abolition. Does not represent│
+│ the original ownership-transfer proposal or Swedish society.      │
+├──────────────────────────────┬─────────────────────────────────────┤
+│ CONTEXT + PARTICIPANTS       │ INSTITUTION IN PRACTICE             │
+│ Market reversal              │ Formal rule                         │
+│ Organized labor / business   │ Funding and voting caps       [1]  │
+│ Fund boards / local unions   │            ↓ differed in use        │
+│ Government / parliament      │ Rules-in-use                        │
+│                              │ Diversified, non-controlling [2]    │
+│                              │            ↓                        │
+│                              │ Outcomes + uncertainties            │
+├──────────────────────────────┴─────────────────────────────────────┤
+│ RELATED CHALLENGES   Distribution · Coordination and accountability│
+└────────────────────────────────────────────────────────────────────┘
+```
+
+Formal rules and rules-in-use receive parallel but visibly different labels.
+Never present an enacted institution as identical to a proposal, or a case as
+an embodiment of a tradition. Dates, exclusions, and relationship qualifiers
+remain visible near the title.
+
+## Screen 4: comparison and competing interpretations
+
+Comparison begins with a common question and common scope—not with a scorecard.
+Rows are response traces or bounded cases; columns are factual dimensions that
+can actually be compared.
+
+```text
+┌ Compare responses ──────────────────────────────────────────────────┐
+│ Challenge: Coordination and accountability                          │
+│ Criterion: Accountability ▾     Scope: Sweden · 1951–1991            │
+├────────────────────┬──────────────────────┬──────────────────────────┤
+│                    │ Central bargaining   │ Wage-earner funds        │
+│ Delegated authority│ Peak organizations   │ Five appointed boards    │
+│ Contestability     │ Affiliate defection  │ Electoral abolition      │
+│ Evidence gaps      │ Outsider voice       │ Effective local voice    │
+├────────────────────┴──────────────────────┴──────────────────────────┤
+│ SAME OBSERVATION, DIFFERENT INTERPRETATIONS                          │
+│ Limited fund control                                                 │
+│ ├ Challenges: dilution prevented meaningful economic democracy [1]  │
+│ └ Qualifies: caps limited a new concentration of delegated power [2] │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+Interpretation branches name the source or editorial lens and use verbs such as
+supports, challenges, qualifies, or proposes an alternative cause. Difference
+is structural, not reduced to amber “controversy” styling.
+
+On mobile, compare one dimension at a time with a persistent two-column identity
+header. Preserve table semantics in the underlying markup and provide a linear
+reading view.
+
+## Evidence and uncertainty
+
+Evidence belongs to statements, not pages or response traces as a whole.
+
+Each statement can expose:
+
+- claim kind: sourced observation, inference, or value judgment;
+- exact citation and locator;
+- bounded scope;
+- uncertainty with a written basis;
+- counterevidence or competing interpretations;
+- what evidence is still needed; and
+- “Suggest a correction” anchored to that statement.
+
+Use status labels such as “Source checked,” “Inference,” “Scope limited,” and
+“Evidence needed.” Avoid global labels like “Evidence: partial,” which hide what
+is known and unknown inside a larger argument.
+
+Citation markers use apparatus typography and stable numbering within the
+current view. Their accessible name includes author and shortened title; opening
+one moves focus to the anchored evidence drawer and returning restores focus.
+
+## Empty, incomplete, and disputed states
+
+Absence is part of the analysis and must not look like an application error.
+
+- **No documented response:** “No response within this scope has been reviewed.”
+- **Missing evidence:** name the exact statement or relationship needing support.
+- **No historical case:** distinguish an untested design from a failed one.
+- **Competing interpretations:** show parallel attributed branches.
+- **Unresolved attribution:** do not promote an inferred End to a tradition-wide
+  claim; show who has made the claim and what remains uncertain.
+
+Each state offers the relevant next action: review scope, add a source, propose
+a case, or offer another interpretation.
+
+## Sources, books, and people
+
+Bibliographic facts lead; commerce follows. Primary actions are “Find at a
+library,” “Read online,” and “Publisher.” A separate “Buy this book” region may
+list vendors with affiliate status disclosed beside each link. Purchase links
+never affect ordering or visually outrank access and citation information.
+
+People pages show typed relationships: author of, advocate of, critic of,
+participant in, officeholder during, or subject of a claim. Portraits are useful
+only when they aid identification, never as ideological decoration.
 
 ## Interaction and motion
 
-- The one orchestrated motion is changing the matrix pivot: headers and the
-  active axis move into their new roles so the reader retains spatial context.
-- Hover and focus reveal a mechanism preview, but every preview is also
-  reachable by keyboard and tap.
-- Filters update a plain-language result count and the URL.
-- Respect reduced motion by switching the pivot instantly.
+- The one orchestrated motion is changing focus along the argument trace. The
+  evidence rail and connective line update together so the reader retains
+  causal and spatial context.
+- Comparison filters update a plain-language result count and the URL.
+- Hover may preview a statement, but the identical content is available through
+  focus and tap.
+- Reduced-motion mode switches trace focus instantly.
 - Do not animate article content on scroll.
+- Do not use motion to suggest causal certainty.
 
 ## Feedback as interface
 
-“Suggest a correction” appears beside the evidence state, not as a floating chat
-bubble. It opens a prefilled GitHub issue containing the entity ID, claim anchor,
-and page URL. Use specific actions such as “Challenge this assessment,” “Offer
-another interpretation,” “Add a source,” and “Report a broken link.” Avoid an
-undifferentiated comment box.
+“Suggest a correction” sits beside the statement’s evidence state. It opens a
+prefilled GitHub issue containing the entity, statement anchor, page URL, and
+requested action. Use precise actions:
+
+- Correct this statement
+- Add a source
+- Challenge this assessment
+- Offer another interpretation
+- Clarify this case boundary
+- Report a broken link
+
+Avoid an undifferentiated comment box or floating chat bubble.
 
 ## Voice
 
-Use plain, exact labels: “Evidence: partial,” “3 sources,” “Read the case,” and
-“Suggest a correction.” Avoid marketing copy, claims of objectivity, and
+Use plain, exact labels: “Source checked,” “Inference,” “2 interpretations,”
+“Read the case,” and “Suggest a correction.” Avoid claims of objectivity and
 gamified language such as scores, winners, or leaderboards.
 
-The recurring invitation is: **Start with a problem, not an ideology.** It is a
-navigation instruction and a concise expression of the method, not a hero
-tagline repeated throughout the site.
+The recurring invitation is **Start with a question.** It is a navigation
+instruction, not a hero slogan repeated across the site. “Start with a problem,
+not an ideology” may still appear in explanatory copy, but “question” is less
+prescriptive and matches the Challenge model more precisely.
 
 ## Accessibility baseline
 
-- Preserve semantic table relationships in every matrix mode.
-- Never encode evidence, uncertainty, or interpretation in color alone.
-- Provide visible, high-contrast focus states.
-- Keep filters operable without precision pointing.
-- Announce filter result changes without moving keyboard focus.
-- Keep source and purchase link purpose explicit out of context.
-- Test at 200% zoom, narrow viewports, forced colors, and reduced motion.
+- Use semantic headings, lists, figures, tables, and disclosure controls.
+- Preserve header relationships in every comparison mode.
+- Provide a linear alternative for visual argument traces.
+- Never encode provenance, uncertainty, or interpretation in color alone.
+- Keep citations and interpretation branches keyboard reachable.
+- Maintain visible, high-contrast focus states.
+- Announce filter changes without moving keyboard focus.
+- Restore focus after closing an evidence drawer.
+- Keep source and purchase-link purpose explicit out of context.
+- Support 200% zoom, narrow viewports, forced colors, reduced motion, and print.
+- In print, expand evidence drawers and render source locators beside statements.
+
+## Prototype sequence
+
+Build and evaluate the four screens in this order:
+
+1. the analytical response trace, because it tests the core information model;
+2. the case page, because it tests scope and formal rules versus rules-in-use;
+3. comparison, because it tests Criteria and competing interpretations;
+4. home/discovery, after the available entities and useful entry paths are known.
+
+Use the Swedish analytical-framework fixture for the first three screens. Test
+the design with a second, substantially unlike case before treating any layout
+as a reusable production component.
