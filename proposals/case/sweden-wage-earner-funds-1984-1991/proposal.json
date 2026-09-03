@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "proposalType": "case",
+  "id": "sweden-wage-earner-funds-1984-1991",
+  "title": "Enacted Swedish wage-earner funds, 1984–1991",
+  "status": "draft",
+  "summary": "Separates the enacted five-board pension-fund compromise from the earlier open-ended Meidner proposal and examines its ownership, delegation, and abolition rules.",
+  "sources": [
+    {
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/",
+      "title": "Proposition 1983/84:50 om löntagarfonder",
+      "publisher": "Sveriges riksdag",
+      "publishedAt": "1983-11-04",
+      "accessedAt": "2026-09-03",
+      "sourceType": "primary",
+      "authorityNote": "The government proposition specifies the enacted boards, funding, appointment, ownership, voting, delegation, and evaluation rules.",
+      "provenance": { "publisherUrl": "https://www.riksdagen.se/" }
+    },
+    {
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-avveckling-av-lontagarfonderna_gf0336/html/",
+      "title": "Proposition 1991/92:36 om avveckling av löntagarfonderna",
+      "publisher": "Sveriges riksdag",
+      "publishedAt": "1991-10-24",
+      "accessedAt": "2026-09-03",
+      "sourceType": "primary",
+      "authorityNote": "The government proposition documents the abolition proposal and transfer to a liquidation board.",
+      "provenance": { "publisherUrl": "https://www.riksdagen.se/" }
+    },
+    {
+      "url": "https://www.cambridge.org/core/journals/enterprise-and-society/article/from-marxist-venture-to-venture-capitalists-the-swedish-wageearner-funds-and-the-market-turn-19831994/A3EA6060B9A66F27C32D1CEDC065CC04",
+      "title": "From Marxist Venture to Venture Capitalists: The Swedish Wage-Earner Funds and the Market Turn, 1983–1994",
+      "publisher": "Cambridge University Press",
+      "publishedAt": "2022-06-23",
+      "accessedAt": "2026-09-03",
+      "sourceType": "peer-reviewed",
+      "authorityNote": "An open-access business-history study of the funds’ rules, board operation, portfolio, performance, and political dismantling.",
+      "provenance": { "publisherUrl": "https://www.cambridge.org/core/journals/enterprise-and-society", "identifier": "10.1017/eso.2022.23", "identifierUrl": "https://doi.org/10.1017/eso.2022.23" }
+    }
+  ],
+  "claims": [
+    { "id": "five-appointed-capped-boards", "kind": "empirical", "text": "The enacted arrangement created five independent government-appointed boards within the public pension system, funded through specified payroll and profit levies and constrained by funding and company-vote caps.", "sourceUrls": ["https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/"], "limitations": ["Formal statutory rules do not by themselves establish how authority operated in practice."] },
+    { "id": "local-union-vote-delegation", "kind": "empirical", "text": "Local unions could request delegation of half the voting rights attached to a board’s shares in their company.", "sourceUrls": ["https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/"], "limitations": ["The existence of a delegation rule does not show how frequently or effectively it was used."] },
+    { "id": "limited-market-ownership", "kind": "empirical", "text": "At the end of 1991 the funds held approximately 2.6 percent of stock-exchange value and had generally come to operate as investment companies rather than controlling owners.", "sourceUrls": ["https://www.cambridge.org/core/journals/enterprise-and-society/article/from-marxist-venture-to-venture-capitalists-the-swedish-wageearner-funds-and-the-market-turn-19831994/A3EA6060B9A66F27C32D1CEDC065CC04"], "limitations": ["Aggregate ownership share does not capture every firm-level influence or non-listed investment."] },
+    { "id": "boards-abolished-1991", "kind": "empirical", "text": "The five boards were abolished at the end of 1991 and their assets transferred to a liquidation board.", "sourceUrls": ["https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-avveckling-av-lontagarfonderna_gf0336/html/"], "limitations": ["The abolition date does not by itself identify the relative causal weight of ideology, electoral change, performance, or economic conditions."] }
+  ],
+  "conflictingEvidence": [
+    { "summary": "The enacted design can be interpreted either as a politically diluted ownership-transfer mechanism or as a deliberate pluralist limit on delegated fund power. Statutory caps establish the design but do not resolve which normative interpretation should dominate.", "claimIds": ["five-appointed-capped-boards", "limited-market-ownership"], "sourceUrls": ["https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/", "https://www.cambridge.org/core/journals/enterprise-and-society/article/from-marxist-venture-to-venture-capitalists-the-swedish-wageearner-funds-and-the-market-turn-19831994/A3EA6060B9A66F27C32D1CEDC065CC04"] }
+  ],
+  "limitations": ["The enacted compromise must not be conflated with the 1975 Meidner proposal.", "The case is evidence about one contested Swedish episode, not social democracy generally."],
+  "aliases": ["Swedish wage-earner funds"],
+  "identifiers": [],
+  "relationships": [
+    { "type": "tradition", "id": "social-democratic-tradition", "reason": "The enacted compromise pursued contested goals inside Swedish social-democratic politics without defining the whole tradition." },
+    { "type": "challenge", "id": "distribution-of-gains-and-ownership", "reason": "The design explicitly altered collective capital claims while imposing ownership and voting caps." },
+    { "type": "challenge", "id": "authority-accountability-and-abuse", "reason": "Appointment, delegation, voting caps, audits, and legislative abolition expose multiple accountability channels." },
+    { "type": "criterion", "id": "distribution", "reason": "Income, ownership, control, and pension returns must be evaluated separately." },
+    { "type": "criterion", "id": "accountability", "reason": "The appointed boards and delegated votes require explicit assessment of representation and contestability." }
+  ],
+  "proposedRelationships": [
+    { "type": "means", "id": "wage-earner-fund-boards", "reason": "The board, funding, investment, and voting rules form a distinct institutional mechanism." }
+  ],
+  "duplicateCandidates": [
+    { "type": "case", "id": "sweden-wage-earner-funds-1984-1991", "reason": "The tradition revision proposes this same companion case relationship; this file supplies the independently reviewable case entity." }
+  ],
+  "content": {
+    "name": "Enacted Swedish wage-earner funds",
+    "startDate": "1984",
+    "endDate": "1991",
+    "location": "Sweden",
+    "scope": "Covers the five enacted AP-system fund boards from their establishment through abolition; excludes treating the more radical 1975 proposal as enacted policy.",
+    "selectionRationale": "Tests how formal ownership and delegation limits shaped distribution, control, accountability, and political durability.",
+    "conditions": ["Polarized conflict between organized labor and business", "Financial deregulation and equity-market expansion", "Government appointment and parliamentary authority over the fund rules"],
+    "outcomes": ["Limited aggregate stock-market ownership", "Investor behavior closer to conventional investment companies than controlling owners", "Abolition following the 1991 change of government"],
+    "claimIds": ["five-appointed-capped-boards", "local-union-vote-delegation", "limited-market-ownership", "boards-abolished-1991"],
+    "rivalExplanations": ["Design dilution, market conditions, business opposition, board experience, and partisan turnover may each explain different outcomes"],
+    "transferLimitations": ["Swedish pension institutions and organized-interest structures were case-specific", "Short duration and political contestation constrain performance inference"]
+  }
+}
