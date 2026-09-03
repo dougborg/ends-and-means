@@ -33,5 +33,10 @@ weights, rankings, verdicts, and derived evidence labels.
 
 Run the prototype checks with `npm test`.
 
+The visual sketch generated from this fixture is available at `/prototype/`
+in local and deployed builds. It is intentionally omitted from primary
+navigation and marked `noindex` while the interaction and vocabulary are under
+review.
+
 See `migration-notes.md` for an analysis of how to extract useful research from
 the current matrix without carrying its ontology into the replacement.

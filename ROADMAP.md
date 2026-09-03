@@ -44,6 +44,9 @@ work is source material, not an API or compatibility contract.
   replacement prototype intentionally has no compatibility fields or type
   dependencies on the current matrix; human review and schema approval remain
   required before replacing canonical content.
+  An isolated, noindex visual sketch at `/prototype/` now exercises the argument
+  trace, statement-level evidence, bounded-case, and competing-interpretation
+  patterns without changing the deployed exploratory routes.
 
 ## M2 — Reference pages
 

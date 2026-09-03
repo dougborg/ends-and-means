@@ -97,6 +97,21 @@ describe("generated reference routes", () => {
     expect(stripMarkup(cell)).toMatch(/citation/i);
   });
 
+  it("renders the clean analytical-framework prototype as a standalone static view", async () => {
+    const html = await readFile(routeFile("/prototype/"), "utf8");
+    const text = stripMarkup(html);
+
+    expect(html).toMatch(/<meta name="robots" content="noindex">/);
+    expect(html).toMatch(/data-stage="end"/);
+    expect(html).toMatch(/data-panel="assessment"/);
+    expect(html.match(/class="trace-node/g)).toHaveLength(12);
+    expect(text).toContain("Who captures gains from productivity, wage restraint, and capital ownership—and how can that distribution change?");
+    expect(text).toContain("Formal rule");
+    expect(text).toContain("Observed practice");
+    expect(text).toContain("The same limit can mean different things.");
+    expect(text).not.toMatch(/\bcrux(?:es)?\b/i);
+  });
+
   it("links each pivot to the complete, unique set of canonical cells", async () => {
     for (const system of graph.systems) {
       const html = await readFile(routeFile(`/systems/${system.id}/`), "utf8");
