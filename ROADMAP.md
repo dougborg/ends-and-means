@@ -82,7 +82,8 @@ implementation before researching the inherited dossiers in parallel:
 6. Model the two bounded Swedish Cases with explicit context and uncertainty
    (#13).
 7. Add one Event and Transition across two Case episodes as a chronology and
-   causal-interpretation boundary test (#22 and #29).
+   causal-interpretation boundary test (#22); expand timeline views later in
+   #29.
 8. Define the first Comparison Dimension and sourced Placements, and render one
    shared-Challenge comparison as part of the vertical slice (#4 and #26).
 9. Add Wikipedia and Wikidata orientation/identity references plus publisher,
@@ -93,11 +94,17 @@ implementation before researching the inherited dossiers in parallel:
 
 This implementation tests the content model, editorial workflow, temporal semantics, empirical/fictional boundary, and reader experience together. Once it survives review, use it as the template for researching the remaining valid dossiers and reclassifying inherited rows under #39.
 
-## Phase 1 — Establish a trustworthy core
+## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.
 
-- [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Phase 1 model tests.
+**Execution order:** #47 schema and modular compiler → #18 Statements and
+Sources → #13 bounded Cases → #22 entity/Means/Case relationships plus the
+first Event/Transition → #41 external identities → #19 continuous link checks
+→ #48 final transitional cleanup. Some work can overlap after #47 establishes
+stable interfaces, but #48 closes only after parity is demonstrated.
+
+- [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Milestone 1 model tests.
 - [ ] **Validate and consolidate one plural canonical graph** ([#47](https://github.com/dougborg/ends-and-means/issues/47)). Add Concepts, Collections, Domains, external identities, and typed sourced relationships; replace the monolithic authoring JSON with modular entity and relationship sources plus a generated read graph; prove the distinctions with Democracy, communism/socialism, central planning, anarcho-communism, and one complete evidence trace.
 - [ ] **Remove retired matrix and prototype runtime cruft** ([#48](https://github.com/dougborg/ends-and-means/issues/48)). Route cleanup is complete; close the issue after transitional schemas, fixtures, generators, and vocabulary that fail the target model are removed or archived for provenance.
 - [ ] **Complete sourced Approach dossiers** ([#39](https://github.com/dougborg/ends-and-means/issues/39)). After the vertical slice, review overview prose, scope, classification disputes, conceptual morphology, attributed Ends, Means relationships, variants, cases, FAQs, and misconceptions; do not preserve all eight inherited rows as Approaches when they belong to another entity type.
@@ -106,7 +113,7 @@ This is the active phase. Finish it before widening the catalogue.
 - [ ] **Add canonical external orientation and identity links** ([#41](https://github.com/dougborg/ends-and-means/issues/41)). Link applicable entities to reviewed Wikipedia articles and Wikidata identifiers while keeping orientation, identity reconciliation, and evidence distinct.
 - [ ] **Validate external links continuously** ([#19](https://github.com/dougborg/ends-and-means/issues/19)). Check canonical, editorial, library, and commercial links on a schedule; report redirects and failures without making temporary outages block every build.
 
-### Phase 1 exit criteria
+### Milestone 1 exit criteria
 
 - The replacement schema is canonical and contains no retired-model fields.
 - Canonical authoring is modular; the full graph is a deterministic generated
@@ -130,7 +137,12 @@ This is the active phase. Finish it before widening the catalogue.
 - The same vertical slice renders an Explore dossier, a shared-Challenge
   comparison, and one dimensional placement without duplicated canonical prose.
 
-## Phase 2 — Complete the reference and comparison core
+## Milestone 2 — [Explore and Compare core](https://github.com/dougborg/ends-and-means/milestone/2)
+
+**Execution order:** #39 valid dossiers → #3 evidence/reference routes → #4
+static comparison core → #26 one-dimensional Placement prototype → #35
+entity-neutral pairwise comparison → #9 public method → #20 correction links →
+#12 accessibility and metadata release review.
 
 - [ ] **Build complete Source, Case, and Reading views** ([#3](https://github.com/dougborg/ends-and-means/issues/3)). Add useful backlinks, verification and source-type filters, case context, and transparent library/publisher/purchase actions.
 - [ ] **Build static, accessible comparisons** ([#4](https://github.com/dougborg/ends-and-means/issues/4)). Support shared-Challenge and factual-dimension comparisons generated from the graph, with sparse coverage and no aggregate winner.
@@ -140,7 +152,7 @@ This is the active phase. Finish it before widening the catalogue.
 - [ ] **Add statement-level correction links** ([#20](https://github.com/dougborg/ends-and-means/issues/20)). Prefill structured GitHub issue forms with the page, entity, and claim anchor.
 - [ ] **Complete accessibility and metadata review** ([#12](https://github.com/dougborg/ends-and-means/issues/12)). Verify keyboard use, focus, landmarks, contrast, reduced motion, metadata, social cards, structured data, and sitemap behavior.
 
-### Phase 2 exit criteria
+### Milestone 2 exit criteria
 
 - Readers can move from any important statement to its evidence and context.
 - Readers can compare responses and eligible subjects without false symmetry,
@@ -150,36 +162,48 @@ This is the active phase. Finish it before widening the catalogue.
 - Readers can understand the method and challenge a precise assertion.
 - Core routes meet the accessibility and metadata release checklist.
 
-## Phase 3 — Extend comparison and mapping tools
+## Milestone 3 — [Advanced comparison and change over time](https://github.com/dougborg/ends-and-means/milestone/3)
+
+**Execution order:** #6 progressive filters and pivots → #29 expanded Event,
+Transition, timeline, and temporal-comparison views. Two-axis maps under #26
+proceed only after the one-dimensional model and accessibility fallback survive
+Milestone 2 review.
 
 - [ ] **Add progressive filters and pivots** ([#6](https://github.com/dougborg/ends-and-means/issues/6)). Filter by Question, entity kind, Collection, Domain, Means, Case, Dimension, evidence gap, and interpretation; preserve keyboard access and URL state.
 - [ ] **Add two-dimensional and temporal maps** ([#26](https://github.com/dougborg/ends-and-means/issues/26)). Extend the reviewed one-dimensional model to paired axes and change over time only where comparability and accessibility remain defensible.
 - [ ] **Compare transition sequences** ([#29](https://github.com/dougborg/ends-and-means/issues/29)). Compare before/change/after institutional relationships while retaining disputed chronology and rival causal accounts.
 
-## Phase 4 — Open and govern contributions
+## Milestone 4 — [Contribution and editorial governance](https://github.com/dougborg/ends-and-means/milestone/4)
+
+**Execution order:** #32 governance and appeals → #16 licensing, disclosure,
+and release gate → #17 contribution workflow → #33 claim-level revision
+history.
 
 - [ ] **Open the contribution workflow** ([#17](https://github.com/dougborg/ends-and-means/issues/17)). Add contributor guidance and structured forms for corrections, missing sources, broken links, challenged assessments, and proposed cases. Decide separately when the repository itself should become public.
 - [ ] **Define editorial governance** ([#32](https://github.com/dougborg/ends-and-means/issues/32)). Cover moderation, conflicts, affiliate revenue, contentious history, living people, appeals, privacy-safe attribution, and final maintainer authority.
 - [ ] **Clear the editorial release gate** ([#16](https://github.com/dougborg/ends-and-means/issues/16)). Confirm code/content licenses, publish affiliate disclosure, and ensure commercial relationships cannot influence source selection or evaluation.
 - [ ] **Add claim-level revision history** ([#33](https://github.com/dougborg/ends-and-means/issues/33)). Record substantive changes, reasons, supporting evidence, and privacy-safe contributor credit.
 
-## Phase 5 — Expand the knowledge graph
+## Milestone 5 — [Knowledge graph expansion](https://github.com/dougborg/ends-and-means/milestone/5)
 
 These features become valuable after the core model and evidence workflow are stable.
+
+**Execution order:** #27 classification method → #30 vocabulary expansion →
+#31 competing interpretations. Historical formations, People, Depictions,
+reading paths, value profiles, and exports can then proceed in bounded slices
+according to research readiness rather than as one bulk migration.
 
 ### Interpretation and navigation
 
 - [ ] **Publish a rigorous methods and classification guide** ([#27](https://github.com/dougborg/ends-and-means/issues/27)).
-- [ ] **Expand the controlled Concept, Collection, and Domain vocabulary** ([#30](https://github.com/dougborg/ends-and-means/issues/30)). The core primitives move into Phase 1 under #47; this later work broadens coverage and reconciles external vocabularies.
+- [ ] **Expand the controlled Concept, Collection, and Domain vocabulary** ([#30](https://github.com/dougborg/ends-and-means/issues/30)). The core primitives belong to Milestone 1 under #47; this later work broadens coverage and reconciles external vocabularies.
 - [ ] **Model competing scholarly interpretations** ([#31](https://github.com/dougborg/ends-and-means/issues/31)).
 - [ ] **Publish the editorial philosophy as a first-class site section** ([#36](https://github.com/dougborg/ends-and-means/issues/36)).
 - [ ] **Curate transparent reading paths** ([#28](https://github.com/dougborg/ends-and-means/issues/28)).
 
 ### History, people, and literature
 
-- [ ] **Relate Approaches and Means to historical and ongoing Cases** ([#22](https://github.com/dougborg/ends-and-means/issues/22)). Use typed, sourced, many-to-many relationships with explicit periods; distinguish self-identification, influence, partial instantiation, departure, formal design, and rules-in-use; require freshness metadata for ongoing Cases.
 - [ ] **Research historical political-economic formations** ([#23](https://github.com/dougborg/ends-and-means/issues/23)). Include monarchies, feudal arrangements, Greek democracy and poleis, the Roman Republic and Empire, and bounded Chinese and Japanese imperial forms.
-- [ ] **Add sourced Event and Transition timelines** ([#29](https://github.com/dougborg/ends-and-means/issues/29)). The core Event/Transition primitives and one boundary test move into Phase 1 under #47/#22; this work expands chronology, transition comparison, and accessible timeline views.
 - [ ] **Add a first-class People layer** ([#25](https://github.com/dougborg/ends-and-means/issues/25)). Connect philosophers, authors, researchers, organizers, and leaders through typed, sourced relationships.
 - [ ] **Add a separate fictional Depictions layer** ([#24](https://github.com/dougborg/ends-and-means/issues/24)). Use primary-text provenance, spoiler controls, and copyright-safe summaries; never treat fiction as empirical evidence.
 
