@@ -1,6 +1,12 @@
-# Systems by Crux
+# Ends and Means
 
-An evidence-forward reference comparing economic and political systems by how each handles a fixed set of core problems ("cruxes"). The content is a graph: systems × cruxes produce cells, and every cell cites sources and historical cases.
+**Political and economic systems in theory and practice.**
+
+An evidence-forward reference comparing systems by how each handles a fixed set
+of core problems ("cruxes"). The content is a graph: systems × cruxes produce
+cells, and every cell cites sources and historical cases.
+
+Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
 **Status:** discovery and planning; content exists, but the implementation stack
 is intentionally undecided. Start with the brief, then see the roadmap.

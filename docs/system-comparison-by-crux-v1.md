@@ -1,4 +1,4 @@
-# Comparing Systems by Crux
+# Ends and Means — Comparison Matrix v1
 
 A framework for comparing how different economic/political systems address the core problems that came up in the political-economy notes. Each crux is a problem every system has to solve somehow. For each, the table shows the mechanism each system uses, and where that mechanism breaks or is unproven.
 

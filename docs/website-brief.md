@@ -1,6 +1,8 @@
 # Implementation Brief: Comparative Political-Economy Website
 
-**Working title:** Systems by Crux (rename freely)
+**Title:** Ends and Means
+**Subtitle:** Political and economic systems in theory and practice
+**Canonical domain:** endsandmeans.info
 **Status:** greenfield; content exists, no code yet
 **Owner:** Doug
 
@@ -136,7 +138,8 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 
 ## 8. Open decisions (Doug to confirm; proceed with defaults if unanswered)
 
-1. Site name and domain — default: use the repo name; deploy to a Vercel preview URL.
+1. Site name and domain — decided: **Ends and Means** at
+   **endsandmeans.info**. Use a Vercel preview URL until DNS is connected.
 2. Content license — default: CC BY-SA 4.0 for content, MIT for code.
 3. Whether cells should carry a `confidence` field separate from `evidence` — default: no, `evidence` is enough for v1.
 4. Whether to include a "changelog" page listing edits to cells — default: rely on git history and skip.

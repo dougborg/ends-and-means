@@ -1,4 +1,4 @@
-# Comparing Systems by Crux — v2
+# Ends and Means — Comparison Matrix v2
 
 Eight system families compared across fourteen cruxes. Each crux is a problem every system must solve. For each, the table gives the mechanism each system uses and where it breaks or is unproven. A summary matrix and observations follow.
 
