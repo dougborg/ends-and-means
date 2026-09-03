@@ -150,14 +150,14 @@ describe("generated reference routes", () => {
     expect(tradition.match(/<details>/g)).toHaveLength(14);
     expect(stripMarkup(tradition)).toContain("Questions & misconceptions");
     expect(stripMarkup(tradition)).toContain("Evidence to investigate");
-    expect(tradition.match(/class="evidence-slice"/g)).toHaveLength(1);
+    expect(tradition.match(/class="tradition-evidence"/g)).toHaveLength(1);
     expect(stripMarkup(tradition)).toContain("From stated Ends to bounded evidence");
     expect(stripMarkup(tradition)).toContain("Two episodes, kept distinct");
     expect(stripMarkup(tradition)).toContain("COMPLETE ARGUMENT TRACE");
     expect(hrefs(tradition)).toContain("https://en.wikipedia.org/wiki/Social_democracy");
 
     const laissezFaire = await readFile(routeFile("/traditions/laissez-faire-capitalism/"), "utf8");
-    expect(laissezFaire).not.toMatch(/class="evidence-slice"/);
+    expect(laissezFaire).not.toMatch(/class="tradition-evidence"/);
 
     const topic = await readFile(routeFile("/topics/ownership/"), "utf8");
     expect(stripMarkup(topic)).toContain("Challenges connected to ownership");

@@ -29,9 +29,9 @@ The site is live at [endsandmeans.info](https://endsandmeans.info) as a static A
 
 The primary weakness is editorial, not visual: inherited prose is not yet supported by claim-level citations and bounded cases. The model is also still marked proposed rather than canonical.
 
-## Recommended next slice
+## Recommended next implementation
 
-Build one complete, publishable vertical slice before researching all eight dossiers in parallel:
+Build one complete, publishable reference implementation before researching all eight dossiers in parallel:
 
 1. Approve the canonical entity contracts and promotion workflow in #38.
 2. Apply them to the social-democratic tradition dossier as the reference implementation.
@@ -40,7 +40,7 @@ Build one complete, publishable vertical slice before researching all eight doss
 5. Add and validate its Wikipedia, publisher, library, and reading links (#41 and #19).
 6. Render at least one full Challenge → End → Means → evidence → Criterion → assessment trace.
 
-This slice tests the content model, editorial workflow, and reader experience together. Once it survives review, use it as the template for researching the other seven dossiers under #39.
+This implementation tests the content model, editorial workflow, and reader experience together. Once it survives review, use it as the template for researching the other seven dossiers under #39.
 
 ## Phase 1 — Establish a trustworthy core
 
