@@ -12,7 +12,8 @@ Create a reviewable proposal, never a canonical-content change.
 Before writing, run `git branch --show-current`. Never create or revise a
 proposal on `main` or `master`. If the worktree is clean, create a focused branch
 named `research/<type>-<stable-id>`; if it is not clean, stop and ask the user
-how to preserve their work. Do not merge a proposal branch.
+how to preserve their work. A reviewed proposal branch may be merged to stage
+research on `main`; merging it does not approve or publish canonical content.
 
 After validation, commit locally when the user asked for an implementation or
 completed research artifact. Push and open a draft pull request only when the
