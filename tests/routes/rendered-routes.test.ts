@@ -147,9 +147,21 @@ describe("generated reference routes", () => {
     const tradition = await readFile(routeFile("/traditions/social-democratic-tradition/"), "utf8");
     expect(tradition.match(/proposed Means<\/small>/g)).toHaveLength(9);
     expect(tradition.match(/<section class="tradition-faq"/g)).toHaveLength(1);
-    expect(tradition.match(/<details>/g)).toHaveLength(12);
+    expect(tradition.match(/<details>/g)).toHaveLength(14);
     expect(stripMarkup(tradition)).toContain("Questions & misconceptions");
     expect(stripMarkup(tradition)).toContain("Evidence to investigate");
+    expect(tradition.match(/class="tradition-evidence"/g)).toHaveLength(1);
+    expect(stripMarkup(tradition)).toContain("From stated Ends to bounded evidence");
+    expect(stripMarkup(tradition)).toContain("Two episodes, kept distinct");
+    expect(stripMarkup(tradition)).toContain("COMPLETE ARGUMENT TRACE");
+    expect(stripMarkup(tradition)).toContain("EVIDENCE / PUBLISHED ANALYSIS");
+    expect(stripMarkup(tradition)).toContain("Who receives benefits, resources, authority, and adjustment costs?");
+    expect(hrefs(tradition)).toContain("https://en.wikipedia.org/wiki/Social_democracy");
+    expect(hrefs(tradition).filter((href) => href === "https://doi.org/10.2753/JEI0021-3624440306").length).toBeGreaterThanOrEqual(3);
+    expect(hrefs(tradition).filter((href) => href === "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/").length).toBeGreaterThanOrEqual(3);
+
+    const laissezFaire = await readFile(routeFile("/traditions/laissez-faire-capitalism/"), "utf8");
+    expect(laissezFaire).not.toMatch(/class="tradition-evidence"/);
 
     const topic = await readFile(routeFile("/topics/ownership/"), "utf8");
     expect(stripMarkup(topic)).toContain("Challenges connected to ownership");

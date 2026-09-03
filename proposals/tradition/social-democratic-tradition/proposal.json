@@ -56,7 +56,7 @@
     }
   ],
   "limitations": [
-    "This proposal tests a Swedish vertical slice and does not establish Nordic uniformity.",
+    "This proposal tests a Swedish reference implementation and does not establish Nordic uniformity.",
     "It does not classify any present-day country as an instance of the tradition."
   ],
   "aliases": ["Social democracy"],

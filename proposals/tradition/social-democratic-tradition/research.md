@@ -12,7 +12,7 @@ Definitions of social democracy differ across eras. Some emphasize gradual democ
 
 ## Limitations
 
-- This research packet is deliberately Sweden-heavy because it supports the first vertical slice.
+- This research packet is deliberately Sweden-heavy because it supports the first reference implementation.
 - It does not establish claims about the performance of social democracy as a whole.
 - The proposed Wikipedia URL is an orientation link, not evidence.
 - Full dossier publication needs broader sources on non-Swedish and contemporary variants.

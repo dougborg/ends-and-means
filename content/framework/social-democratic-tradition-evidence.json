@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "tradition-evidence-1",
+  "status": "published",
+  "traditionId": "social-democratic-tradition",
+  "wikipediaUrl": "https://en.wikipedia.org/wiki/Social_democracy",
+  "ends": [
+    {
+      "id": "equality-with-employment",
+      "label": "Equality with employment",
+      "statement": "Combine fair wages and full employment with price stability and growth.",
+      "attributedTo": "LO’s 1951 Rehn–Meidner program",
+      "sourceIds": ["erixon-2010"]
+    },
+    {
+      "id": "wage-earner-influence",
+      "label": "Wage-earner influence",
+      "statement": "Distribute wealth more evenly and strengthen wage-earner influence through co-ownership while supporting pensions and capital formation.",
+      "attributedTo": "Swedish Government Proposition 1983/84:50",
+      "sourceIds": ["prop-1983-84-50"]
+    }
+  ],
+  "means": [
+    {
+      "id": "solidaristic-bargaining-and-adjustment",
+      "label": "Solidaristic bargaining and adjustment",
+      "description": "Peak labor and employer organizations set central wage frames while public labor-market institutions support training, matching, and mobility.",
+      "ruleType": "aggregation",
+      "level": "collective-choice",
+      "sourceIds": ["erixon-2010"]
+    },
+    {
+      "id": "wage-earner-fund-boards",
+      "label": "Capped wage-earner fund boards",
+      "description": "Five government-appointed pension-system boards invested payroll- and profit-tax receipts under funding, ownership, and voting limits.",
+      "ruleType": "authority",
+      "level": "collective-choice",
+      "sourceIds": ["prop-1983-84-50"]
+    }
+  ],
+  "cases": [
+    {
+      "id": "sweden-rehn-meidner-1951-1983",
+      "name": "Swedish Rehn–Meidner policy complex",
+      "location": "Sweden",
+      "period": "1951–1983",
+      "boundary": "Begins with the 1951 LO program, focuses on the 1956–1982 centralized-bargaining window, and ends with the 1983 breakdown. It excludes the later enacted wage-earner funds.",
+      "relationship": "Influenced by Swedish organized labor and social-democratic policymaking; not an embodiment of the whole tradition.",
+      "conditions": [
+        "High union and employer organization",
+        "Postwar growth and industrial restructuring",
+        "Macroeconomic and labor-market policies operating alongside wage bargaining"
+      ],
+      "statements": [
+        {
+          "id": "late-wage-compression",
+          "kind": "empirical",
+          "text": "Wage inequality was stable before the late 1960s and declined rapidly thereafter; deliberate union policy likely explains a substantial share of the 1970s compression.",
+          "uncertainty": "moderate",
+          "sourceIds": ["molinder-2019"],
+          "limitation": "The study disputes a simple account of 1960s compression and does not identify one cause for every wage change."
+        },
+        {
+          "id": "differentiated-productivity-result",
+          "kind": "empirical",
+          "text": "Reduced interindustry wage differentials were associated with higher aggregate output and productivity, while within-industry compression was not.",
+          "uncertainty": "moderate",
+          "sourceIds": ["hibbs-locking-2000"],
+          "limitation": "The association does not establish transferability or isolate every concurrent institution."
+        }
+      ],
+      "rivalExplanations": [
+        "Economic structure, macroeconomic policy, wage drift, and external shocks may explain outcomes attributed to solidaristic wage policy.",
+        "Molinder finds that wage compression coincided with falling growth and structural change, qualifying a simple restructuring-success account."
+      ],
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Rehn%E2%80%93Meidner_model"
+    },
+    {
+      "id": "sweden-wage-earner-funds-1984-1991",
+      "name": "Enacted Swedish wage-earner funds",
+      "location": "Sweden",
+      "period": "1984–1991",
+      "boundary": "Covers the five enacted pension-system fund boards through abolition and keeps them distinct from the more open-ended 1975 Meidner proposal.",
+      "relationship": "A contested compromise within Swedish social-democratic politics, not a definition of the tradition.",
+      "conditions": [
+        "Polarized conflict between organized labor and business",
+        "Financial deregulation and equity-market expansion",
+        "Government appointment and parliamentary control of the rules"
+      ],
+      "statements": [
+        {
+          "id": "five-appointed-capped-boards",
+          "kind": "empirical",
+          "text": "The arrangement created five independent government-appointed boards with worker-interest representation, specified tax funding, and company voting limits.",
+          "uncertainty": "low",
+          "sourceIds": ["prop-1983-84-50"],
+          "limitation": "Formal statutory rules do not establish how authority operated in practice."
+        },
+        {
+          "id": "limited-market-ownership",
+          "kind": "empirical",
+          "text": "At the end of 1991 the funds held approximately 2.6 percent of stock-exchange value and generally operated as investment companies rather than controlling owners.",
+          "uncertainty": "moderate",
+          "sourceIds": ["westerberg-2023"],
+          "limitation": "Aggregate ownership does not capture every firm-level influence or unlisted investment."
+        },
+        {
+          "id": "boards-abolished-1991",
+          "kind": "empirical",
+          "text": "The five boards were abolished at the end of 1991 and their assets transferred to a liquidation board.",
+          "uncertainty": "low",
+          "sourceIds": ["prop-1991-92-36"],
+          "limitation": "The abolition date alone does not establish the relative importance of ideology, electoral change, performance, or economic conditions."
+        }
+      ],
+      "rivalExplanations": [
+        "Limited control can be interpreted as dilution of an ownership-transfer mechanism.",
+        "The same limits can be interpreted as safeguards against concentrated delegated power."
+      ]
+    }
+  ],
+  "trace": {
+    "challengeId": "distribution-of-gains-and-ownership",
+    "endIds": ["equality-with-employment", "wage-earner-influence"],
+    "meansIds": ["solidaristic-bargaining-and-adjustment", "wage-earner-fund-boards"],
+    "expectedInteraction": "Wage compression should shift gains toward lower-paid workers, while collective capital claims should alter who receives profit and exercises ownership rights.",
+    "caseIds": ["sweden-rehn-meidner-1951-1983", "sweden-wage-earner-funds-1984-1991"],
+    "criterionId": "distribution",
+    "assessment": "The arrangements affected wage distribution, but the evidence presented here does not establish a comparable reduction in private wealth concentration.",
+    "uncertainty": "high"
+  },
+  "sources": [
+    {
+      "id": "erixon-2010",
+      "authors": "Lennart Erixon",
+      "title": "The Rehn-Meidner Model in Sweden: Its Rise, Challenges and Survival",
+      "year": 2010,
+      "kind": "Peer-reviewed article",
+      "url": "https://doi.org/10.2753/JEI0021-3624440306"
+    },
+    {
+      "id": "molinder-2019",
+      "authors": "Jakob Molinder",
+      "title": "Wage differentials, economic restructuring and the solidaristic wage policy in Sweden",
+      "year": 2019,
+      "kind": "Peer-reviewed article",
+      "url": "https://doi.org/10.1093/ereh/hey005"
+    },
+    {
+      "id": "hibbs-locking-2000",
+      "authors": "Douglas A. Hibbs Jr. and Håkan Locking",
+      "title": "Wage Dispersion and Productive Efficiency: Evidence for Sweden",
+      "year": 2000,
+      "kind": "Peer-reviewed article",
+      "url": "https://doi.org/10.1086/209976"
+    },
+    {
+      "id": "prop-1983-84-50",
+      "authors": "Swedish Government",
+      "title": "Proposition 1983/84:50 om löntagarfonder",
+      "year": 1983,
+      "kind": "Primary government record",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/"
+    },
+    {
+      "id": "prop-1991-92-36",
+      "authors": "Swedish Government",
+      "title": "Proposition 1991/92:36 om avveckling av löntagarfonderna",
+      "year": 1991,
+      "kind": "Primary government record",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-avveckling-av-lontagarfonderna_gf0336/html/"
+    },
+    {
+      "id": "westerberg-2023",
+      "authors": "Rikard Westerberg",
+      "title": "From Marxist Venture to Venture Capitalists: The Swedish Wage-Earner Funds and the Market Turn, 1983–1994",
+      "year": 2023,
+      "kind": "Peer-reviewed article",
+      "url": "https://doi.org/10.1017/eso.2022.23"
+    }
+  ]
+}
