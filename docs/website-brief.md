@@ -33,7 +33,8 @@ Everything lives in the repo as structured content. No CMS, no database.
 | **System** | `lf`, `sd`, `ms`, `cp`, `sa`, `sc`, `ac`, `pe` | Eight in v1. See v2 file §"How to read this" for names and definitions. |
 | **Crux** | `c01` … `c14` | Fourteen in v1. Each has a title, a one-line question, and an optional note on whether it is value-laden. |
 | **Cell** | `{system}-{crux}` e.g. `sd-c07` | Exactly one per system × crux pair (112 in v1). Fields: `mechanism`, `breaks`, `verdict`, `evidence`, `sources[]`, `cases[]`. |
-| **Source** | slug, e.g. `hayek-1945-use-of-knowledge` | From the reading list. Fields: author(s), title, year, type (book/article/paper), section, note, `verified` status, optional URL. |
+| **Claim** | stable anchor within a cell or case | The smallest statement a reader can cite, challenge, or propose a correction to. Fields: text, context, `sources[]`, `cases[]`. |
+| **Source** | slug, e.g. `hayek-1945-use-of-knowledge` | From the reading list. Fields: author(s), title, year, type, section, note, `verified` status, identifiers (ISBN/DOI/Open Library), and typed external links. Retailer URLs are never canonical IDs. |
 | **Case** | slug, e.g. `mondragon`, `spain-1936` | A historical instance. Fields: name, dates, location, summary, which systems claim it, `sources[]`. |
 | **Thinker** | slug, e.g. `kropotkin` | Optional in v1. Only if it falls out of the source import cheaply. |
 
@@ -80,11 +81,11 @@ Regulatory capture (Stigler); discretionary spending enables patronage; durabili
 
 ## 4. Site structure
 
-Static site. The stack is deliberately undecided; evaluate options against the
-content graph, build-time validation, no-JavaScript reading experience, and the
-small interactive matrix. Deploy target: **Vercel** (already connected on Doug's
-account). Keep dependencies minimal — no component library unless it earns its
-place.
+Static Astro site with a framework-independent TypeScript content compiler and
+schema validation. Use Astro islands only where interaction earns client-side
+JavaScript, initially the matrix controls. Deploy target: **Vercel** (already
+connected on Doug's account). Keep dependencies minimal — no component library
+unless it earns its place.
 
 ### Pages
 
@@ -92,7 +93,9 @@ place.
 - `/systems/{id}` — one system walked through all fourteen cruxes in order, each cell inline, with a sidebar listing every case and source the system relies on.
 - `/cruxes/{id}` — one crux across all eight systems, side by side, with the verdict line at the top and the "value-laden" note if applicable.
 - `/cells/{id}` — the full cell: mechanism, where it breaks, verdict, evidence, sources, cases, and links to its row and column neighbors.
-- `/sources/{id}` — bibliographic entry, note, verification badge, and **backlinks**: every cell and case that cites it.
+- `/sources/{id}` — bibliographic entry, identifiers, note, verification badge,
+  borrowing/reading/publisher links, clearly labeled purchase links, and
+  **backlinks**: every claim, cell, and case that cites it.
 - `/cases/{id}` — summary, dates, which systems claim it as evidence and on which cruxes (Spain 1936 is evidence *for* anarchism on voice and *against* it on defense — the page should show both), sources.
 - `/reading` — the reading list, filterable by section and verification status, each entry linking to its source page.
 - `/about` — what the site is, how verdicts are made, the evidence tiers, how to propose a change (link to the repo).
@@ -102,6 +105,10 @@ place.
 - Every mention of a system, crux, source, or case inside prose should be a link if it can be resolved by ID. A remark-style plugin that turns `[[slug]]` into links is sufficient.
 - Every page shows its backlinks ("referenced by").
 - The matrix, system pages, and crux pages are three views of the same 112 cells. Do not duplicate content; render from the cell collection.
+- Stable claim anchors make feedback addressable. “Suggest a correction” links
+  prefill the entity ID, claim anchor, and current URL.
+- Purchase links are secondary to citation and access links, disclose affiliate
+  status, and never influence inclusion or evaluation.
 
 ## 5. Milestones
 
@@ -117,7 +124,10 @@ work. No UI yet beyond a diagnostic dump.
 
 **M3 — Matrix.** The home-page matrix with filter, hide-untested, and transpose. This is the only interactive component; keep it small.
 
-**M4 — Polish.** Typography, accessibility pass (keyboard nav on the matrix, contrast, semantic tables), OpenGraph, sitemap, a `CONTRIBUTING.md` explaining how to add a cell, source, or case and what validation will reject.
+**M4 — Polish and contribution.** Typography, accessibility pass (keyboard nav
+on the matrix, contrast, semantic tables), OpenGraph, sitemap, affiliate
+disclosure, structured GitHub issue forms, and a `CONTRIBUTING.md` explaining
+how to add a cell, source, case, or correction and what validation will reject.
 
 Ship M1 and M2 before any visual design work. The point of M1 is to find out whether the graph model holds up against the real content.
 
@@ -128,6 +138,10 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 - **Pivotable.** From any cell, one click reaches its row, its column, its sources, and its cases.
 - **Readable without JS.** Everything except the matrix filters must work with JavaScript disabled.
 - **Small.** No accounts, no comments, no analytics beyond Vercel's defaults, no tracking.
+- **Addressable disagreement.** Feedback attaches to a claim, citation, case, or
+  verdict rather than becoming an unstructured comment stream.
+- **Access before commerce.** Prefer publisher, legal reading, and library links;
+  offer purchase links as a convenience with transparent disclosure.
 
 ## 7. Non-goals for v1
 

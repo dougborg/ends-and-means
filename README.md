@@ -8,8 +8,8 @@ cells, and every cell cites sources and historical cases.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
-**Status:** discovery and planning; content exists, but the implementation stack
-is intentionally undecided. Start with the brief, then see the roadmap.
+**Status:** architecture and design direction chosen; implementation has not yet
+started. Astro will render a portable TypeScript content core.
 
 ## Contents
 
@@ -20,12 +20,13 @@ is intentionally undecided. Start with the brief, then see the roadmap.
 | [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
 | [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones and issue-ready backlog, ordered by dependency. |
+| [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
+| [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
 
 ## Next step
 
-Next, run a short architecture spike to choose the content representation,
-validation approach, and site stack. Then implement the M1 import and graph
-integrity checks without coupling source content to a framework.
+Next, scaffold Astro and the framework-independent content compiler, then import
+the matrix and enforce graph integrity before building product UI.
 
 ## Open decisions
 
