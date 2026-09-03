@@ -35,10 +35,11 @@ async function jsonFiles(root) {
   return found;
 }
 
-function collectRecords(value, file, records) {
-  if (Array.isArray(value)) { value.forEach((item) => collectRecords(item, file, records)); return; }
-  if (!value || typeof value !== "object") return;
-  if (typeof value.id === "string") records.push({
+const ENTITY_COLLECTIONS = new Set(["traditions", "ends", "means", "topics", "challenges", "criteria", "statements", "sources", "cases"]);
+
+function addRecord(value, file, records) {
+  if (!value || typeof value !== "object" || typeof value.id !== "string") return;
+  records.push({
     id: value.id,
     label: String(value.title ?? value.name ?? value.label ?? value.question ?? value.id),
     aliases: Array.isArray(value.aliases) ? value.aliases.map(String) : [],
@@ -47,7 +48,18 @@ function collectRecords(value, file, records) {
       : Object.values(value.identifiers ?? {}).filter((item) => typeof item === "string"),
     file,
   });
-  for (const child of Object.values(value)) collectRecords(child, file, records);
+}
+
+function collectRecords(value, file, records) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return;
+  if (value.schemaVersion === 2 && typeof value.proposalType === "string") {
+    addRecord(value, file, records);
+    return;
+  }
+  for (const [key, collection] of Object.entries(value)) {
+    if (!ENTITY_COLLECTIONS.has(key) || !Array.isArray(collection)) continue;
+    collection.forEach((record) => addRecord(record, file, records));
+  }
 }
 
 export async function findDuplicates(target, repositoryRoot = process.cwd()) {

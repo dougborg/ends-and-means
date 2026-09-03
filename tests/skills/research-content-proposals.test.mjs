@@ -68,6 +68,25 @@ test("duplicate search uses the framework and proposals, not retired generated c
   const found = await findDuplicates(dir, root);
   assert.deepEqual(found.map((x) => x.id), ["existing-topic"]); assert.equal(unacknowledgedDuplicates(proposal, found).length, 1);
 });
+test("duplicate search ignores nested relationship and migration-note IDs", async () => {
+  const root = path.join(tmpdir(), `proposal-nested-${process.pid}-${Date.now()}`);
+  const dir = path.join(root, "proposals", "tradition", "social-democratic-tradition");
+  await mkdir(dir, { recursive: true }); await mkdir(path.join(root, "content", "framework"), { recursive: true });
+  const proposal = base("tradition", contents.tradition, {
+    id: "social-democratic-tradition",
+    title: "Social-democratic tradition",
+    duplicateCandidates: [{ type: "tradition", id: "social-democratic-tradition", reason: "Revises the existing entity." }],
+  });
+  await writeFile(path.join(dir, "proposal.json"), JSON.stringify(proposal));
+  await writeFile(path.join(root, "content", "framework", "draft.json"), JSON.stringify({
+    traditions: [{ id: "social-democratic-tradition", name: "Social-democratic capitalism" }],
+    researchNotes: [{ id: "social-democratic-tradition--scale-and-transferability", traditionId: "social-democratic-tradition" }],
+    cases: [{ id: "bounded-case", name: "Bounded case", traditionRelationship: { id: "social-democratic-tradition" } }],
+  }));
+  const found = await findDuplicates(dir, root);
+  assert.deepEqual(found.map((x) => x.id), ["social-democratic-tradition"]);
+  assert.deepEqual(unacknowledgedDuplicates(proposal, found), []);
+});
 test("validator CLI requires the research memo and accepts routed directories", async () => {
   const root = path.join(tmpdir(), `proposal-cli-${process.pid}-${Date.now()}`), dir = path.join(root, "proposals", "topic", "new-topic");
   await mkdir(dir, { recursive: true }); await mkdir(path.join(root, "content", "framework"), { recursive: true });
