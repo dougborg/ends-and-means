@@ -30,7 +30,7 @@ treating historical states as timeless embodiments of an Approach.
 |---|---|
 | [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
 | [`docs/analytical-framework.md`](docs/analytical-framework.md) | Accepted concepts and analytical boundaries. |
-| [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Clean, non-canonical target-model prototype and migration notes. |
+| [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Transitional model fixture retained only until its useful relationships move into the canonical graph in issue #47. |
 | [`content/framework/`](content/framework/) | Transitional framework data pending consolidation into the canonical graph tracked in issue #47. |
 | [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Archived eight-by-fourteen comparison input retained for provenance and migration checks. |
 | [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
