@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "proposalType": "case",
+  "id": "soviet-industrial-planning-1928-1940",
+  "title": "Soviet industrial planning, 1928–1940",
+  "status": "draft",
+  "summary": "A bounded case of the first three Five-Year Plans used to examine target-led investment, rapid industrialization, planner-producer conflict, coercive agricultural transformation, and disputed welfare effects.",
+  "sources": [
+    {
+      "url": "https://academic.oup.com/ereh/article-abstract/2/1/1/459122",
+      "title": "Capital accumulation, the soft budget constraint and Soviet industrialisation",
+      "publisher": "Oxford University Press",
+      "publishedAt": "1998-04-01",
+      "accessedAt": "2026-09-03",
+      "sourceType": "peer-reviewed",
+      "authorityNote": "A peer-reviewed simulation study that separates investment strategy, planning, soft budget constraints, and collectivization in the first three plans.",
+      "provenance": { "publisherUrl": "https://academic.oup.com/ereh", "identifier": "10.1017/S136149169800001X", "identifierUrl": "https://doi.org/10.1017/S136149169800001X" }
+    },
+    {
+      "url": "https://www.cambridge.org/core/books/the-political-economy-of-stalinism/FAABB401D87807B17CFFE6FFD2FD83E6",
+      "title": "The Political Economy of Stalinism: Evidence from the Soviet Secret Archives",
+      "publisher": "Cambridge University Press",
+      "publishedAt": "2003",
+      "accessedAt": "2026-09-03",
+      "sourceType": "academic-book",
+      "authorityNote": "Uses formerly secret archives to reconstruct objectives, operational planning, bargaining, information problems, and informal enterprise behavior.",
+      "provenance": { "publisherUrl": "https://www.cambridge.org/", "identifier": "10.1017/CBO9780511615856", "identifierUrl": "https://doi.org/10.1017/CBO9780511615856" }
+    },
+    {
+      "url": "https://eh.net/book_reviews/farm-to-factory-a-reinterpretation-of-the-soviet-industrial-revolution/",
+      "title": "Review of Farm to Factory: A Reinterpretation of the Soviet Industrial Revolution",
+      "publisher": "Economic History Association",
+      "publishedAt": "2004-06",
+      "accessedAt": "2026-09-03",
+      "sourceType": "reputable-secondary",
+      "authorityNote": "R. W. Davies’s expert review identifies disputed consumption estimates and separates industrial growth from the human and economic costs of collectivization and repression.",
+      "provenance": { "publisherUrl": "https://eh.net/" }
+    }
+  ],
+  "claims": [
+    {
+      "id": "targeted-investment-and-industrialization",
+      "kind": "empirical",
+      "text": "During the first three Five-Year Plans, concentrated investment in heavy industry and ambitious output targets operating with soft budget constraints contributed materially to rapid industrialization.",
+      "sourceUrls": ["https://academic.oup.com/ereh/article-abstract/2/1/1/459122"],
+      "limitations": ["A simulation-based contribution estimate depends on model assumptions and does not imply that all plan instruments were efficient or necessary."]
+    },
+    {
+      "id": "planning-operated-through-bargaining-and-discretion",
+      "kind": "empirical",
+      "text": "Formal plans were implemented through nested authorities whose planners and producers had conflicting information and incentives, leaving room for bargaining, concealment, discretion, and informal procurement.",
+      "sourceUrls": ["https://www.cambridge.org/core/books/the-political-economy-of-stalinism/FAABB401D87807B17CFFE6FFD2FD83E6"],
+      "limitations": ["Archive evidence is richer for some agencies, sectors, and years than others; operational practices changed over time."]
+    },
+    {
+      "id": "collectivization-small-growth-contribution",
+      "kind": "empirical",
+      "text": "Allen’s model attributes only a small increment of 1930s growth to collectivization compared with the contribution of investment strategy and industrial planning.",
+      "sourceUrls": ["https://academic.oup.com/ereh/article-abstract/2/1/1/459122"],
+      "limitations": ["This result is one contested counterfactual estimate and does not measure the full mortality, coercion, distributional, or political effects of collectivization."]
+    },
+    {
+      "id": "living-standard-estimates-disputed",
+      "kind": "empirical",
+      "text": "Scholars dispute whether average consumption and living standards rose or fell across key years of Stalinist industrialization, with materially different estimates and measures.",
+      "sourceUrls": ["https://eh.net/book_reviews/farm-to-factory-a-reinterpretation-of-the-soviet-industrial-revolution/"],
+      "limitations": ["Average consumption measures obscure famine mortality, regional variation, distribution, repression, and non-consumption dimensions of welfare."]
+    }
+  ],
+  "conflictingEvidence": [
+    {
+      "summary": "Allen attributes rapid industrialization and a significant living-standard rise to the investment strategy and planning system, while Davies identifies contested consumption estimates and stresses that forced collectivization, overambitious plans, deportation, and repression imposed severe costs without corresponding benefits.",
+      "claimIds": ["targeted-investment-and-industrialization", "collectivization-small-growth-contribution", "living-standard-estimates-disputed"],
+      "sourceUrls": ["https://academic.oup.com/ereh/article-abstract/2/1/1/459122", "https://eh.net/book_reviews/farm-to-factory-a-reinterpretation-of-the-soviet-industrial-revolution/"]
+    }
+  ],
+  "limitations": [
+    "The case ends before wartime mobilization and does not represent postwar or late-Soviet planning.",
+    "Planning, dictatorship, collectivization, repression, international threat, and initial development conditions interacted; this packet does not identify one treatment effect for the whole system."
+  ],
+  "aliases": ["First three Soviet Five-Year Plans"],
+  "identifiers": [],
+  "relationships": [
+    { "type": "challenge", "id": "coordination-of-information-and-resources", "reason": "Targets, material allocation, reporting, and informal procurement expose both formal coordination and rules-in-use." },
+    { "type": "challenge", "id": "authority-accountability-and-abuse", "reason": "Nested dictatorship and coercive enforcement require analysis of who could contest objectives and implementation." },
+    { "type": "challenge", "id": "distribution-of-gains-and-ownership", "reason": "Investment priorities, rural extraction, wages, consumption, and state control distributed gains and burdens differently." },
+    { "type": "criterion", "id": "distribution", "reason": "Industrial output, average consumption, mortality, coercion, and regional burdens must not be collapsed into one welfare result." },
+    { "type": "criterion", "id": "accountability", "reason": "Formal hierarchy and practical planner-producer bargaining expose different forms of authority and contestability." }
+  ],
+  "proposedRelationships": [
+    { "type": "tradition", "id": "central-planning-tradition", "reason": "The case is a historically consequential hierarchical variant, not a definition of all planning traditions." },
+    { "type": "means", "id": "hierarchical-target-and-material-balance-planning", "reason": "The plan’s targets, allocations, reporting channels, and enforcement form the mechanism under study." }
+  ],
+  "duplicateCandidates": [],
+  "content": {
+    "name": "Soviet industrial planning during the first three Five-Year Plans",
+    "startDate": "1928-10-01",
+    "endDate": "1940-12-31",
+    "location": "Union of Soviet Socialist Republics",
+    "scope": "Covers industrial planning and its connection to agricultural collectivization from the launch of the first Five-Year Plan through the prewar third-plan period; excludes wartime and postwar institutions.",
+    "selectionRationale": "Tests whether the framework can keep formal targets, rules-in-use, industrial outcomes, distributional burdens, coercion, and rival causal accounts visible in one bounded case.",
+    "conditions": [
+      "Large underemployed agrarian population and low initial industrialization",
+      "One-party dictatorship with coercive authority over investment, labor, and agriculture",
+      "International insecurity and leadership priority for rapid heavy-industrial capacity",
+      "Weak and changing statistical, technical, and administrative capacity"
+    ],
+    "outcomes": [
+      "Rapid expansion of industrial and heavy-industry capacity",
+      "Large transfer of labor and resources from agriculture toward urban industry",
+      "Severe coercion, collectivization disruption, famine mortality, and disputed consumption effects",
+      "Persistent planner-producer conflict and informal practices alongside formal allocation"
+    ],
+    "claimIds": ["targeted-investment-and-industrialization", "planning-operated-through-bargaining-and-discretion", "collectivization-small-growth-contribution", "living-standard-estimates-disputed"],
+    "rivalExplanations": [
+      "Rapid catch-up may reflect initial conditions, urbanization potential, education, international threat, and state investment rather than central planning as a general mechanism",
+      "Measured growth may overstate welfare improvement when coercion, mortality, quality, distribution, and foregone alternatives are included"
+    ],
+    "transferLimitations": [
+      "A coercive catch-up strategy in an agrarian dictatorship does not establish performance in a mature, democratic, or information-rich economy",
+      "The observed package cannot isolate administrative planning from political dictatorship and forced collectivization"
+    ]
+  }
+}

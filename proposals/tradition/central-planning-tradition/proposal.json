@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 2,
+  "proposalType": "tradition",
+  "id": "central-planning-tradition",
+  "title": "Central-planning tradition",
+  "status": "draft",
+  "summary": "Reframes central planning as a varied family of administrative and computational coordination proposals, separating ownership from allocation and historical command systems from participatory designs.",
+  "sources": [
+    {
+      "url": "https://academic.oup.com/book/4729",
+      "title": "The Socialist System: The Political Economy of Communism",
+      "publisher": "Oxford University Press",
+      "publishedAt": "1992",
+      "accessedAt": "2026-09-03",
+      "sourceType": "academic-book",
+      "authorityNote": "A major institutional account of bureaucratic coordination, direct control, shortage, and soft budget constraints in classical socialist systems.",
+      "provenance": { "publisherUrl": "https://academic.oup.com/", "identifier": "9780198287766", "identifierUrl": "https://global.oup.com/academic/product/the-socialist-system-9780198287766" }
+    },
+    {
+      "url": "https://www.cambridge.org/core/books/the-political-economy-of-stalinism/FAABB401D87807B17CFFE6FFD2FD83E6",
+      "title": "The Political Economy of Stalinism: Evidence from the Soviet Secret Archives",
+      "publisher": "Cambridge University Press",
+      "publishedAt": "2003",
+      "accessedAt": "2026-09-03",
+      "sourceType": "academic-book",
+      "authorityNote": "Archive-based study of the creation and operation of the Soviet administrative-command system, including planner-producer conflicts and informal practices.",
+      "provenance": { "publisherUrl": "https://www.cambridge.org/", "identifier": "10.1017/CBO9780511615856", "identifierUrl": "https://doi.org/10.1017/CBO9780511615856" }
+    },
+    {
+      "url": "https://mitpress.mit.edu/9780262525961/cybernetic-revolutionaries/",
+      "title": "Cybernetic Revolutionaries: Technology and Politics in Allende’s Chile",
+      "publisher": "The MIT Press",
+      "publishedAt": "2011",
+      "accessedAt": "2026-09-03",
+      "sourceType": "academic-book",
+      "authorityNote": "Archival and interview-based history demonstrating a computational planning project designed around decentralized management and worker participation.",
+      "provenance": { "publisherUrl": "https://mitpress.mit.edu/", "identifier": "9780262525961", "identifierUrl": "https://mitpress.mit.edu/9780262525961/cybernetic-revolutionaries/" }
+    }
+  ],
+  "claims": [
+    {
+      "id": "planning-is-not-ownership",
+      "kind": "editorial-interpretation",
+      "text": "Central planning should be classified by dominant coordination and decision rules, not by state ownership alone.",
+      "sourceUrls": [],
+      "rationale": "Ownership identifies who holds formal claims; it does not specify how information, targets, resources, revisions, and enforcement are organized.",
+      "limitations": ["The boundary between dominant administrative allocation and planning within a mixed economy remains a human classification decision."]
+    },
+    {
+      "id": "historical-command-systems-had-informal-action",
+      "kind": "empirical",
+      "text": "Soviet administrative planning coexisted with managerial discretion, bargaining, concealed information, opportunistic alliances, and secondary exchange outside formal plans.",
+      "sourceUrls": ["https://www.cambridge.org/core/books/the-political-economy-of-stalinism/FAABB401D87807B17CFFE6FFD2FD83E6"],
+      "limitations": ["Evidence about Soviet operation does not describe every planning proposal or every Soviet period uniformly."]
+    },
+    {
+      "id": "computational-planning-can-decentralize",
+      "kind": "empirical",
+      "text": "Project Cybersyn combined national information infrastructure with a stated design goal of decentralized management and worker participation.",
+      "sourceUrls": ["https://mitpress.mit.edu/9780262525961/cybernetic-revolutionaries/"],
+      "limitations": ["Cybersyn was incomplete and cannot establish the performance of a mature national planning system."]
+    }
+  ],
+  "conflictingEvidence": [
+    {
+      "summary": "Kornai and Gregory emphasize systemic pathologies of bureaucratic-command coordination, while Medina documents a planning design explicitly intended to devolve rather than simply concentrate operational control. These accounts concern different institutional forms and should not be forced into one verdict.",
+      "claimIds": ["historical-command-systems-had-informal-action", "computational-planning-can-decentralize"],
+      "sourceUrls": ["https://academic.oup.com/book/4729", "https://www.cambridge.org/core/books/the-political-economy-of-stalinism/FAABB401D87807B17CFFE6FFD2FD83E6", "https://mitpress.mit.edu/9780262525961/cybernetic-revolutionaries/"]
+    }
+  ],
+  "limitations": [
+    "The proposal does not treat the Soviet Union, Chile, socialism, public ownership, or firm-level planning as synonyms for central planning.",
+    "The selected cases test institutional variation but do not exhaust market-socialist, participatory, wartime, corporate, or contemporary computational proposals."
+  ],
+  "aliases": ["Central planning", "Planned economy"],
+  "identifiers": ["https://en.wikipedia.org/wiki/Planned_economy"],
+  "relationships": [
+    { "type": "challenge", "id": "coordination-of-information-and-resources", "reason": "Planning designs specify how dispersed information becomes targets and allocations." },
+    { "type": "challenge", "id": "authority-accountability-and-abuse", "reason": "Planning assigns consequential authority and requires explicit contest, revision, and oversight rules." },
+    { "type": "challenge", "id": "innovation-risk-and-failure", "reason": "Administrative systems differ in who may experiment and how errors become visible and correctable." },
+    { "type": "criterion", "id": "accountability", "reason": "Formal authority and practical ability to contest planners must be assessed separately." },
+    { "type": "criterion", "id": "scale-and-transferability", "reason": "Information and control mechanisms may change materially with scope, complexity, and time pressure." }
+  ],
+  "proposedRelationships": [
+    { "type": "case", "id": "soviet-industrial-planning-1928-1940", "reason": "A bounded historical case of target-led investment, material allocation, forced agricultural transformation, and rapid industrialization." },
+    { "type": "case", "id": "chile-project-cybersyn-1971-1973", "reason": "A bounded, incomplete computational planning experiment with stated decentralizing and participatory aims." },
+    { "type": "means", "id": "hierarchical-target-and-material-balance-planning", "reason": "The Soviet case exposes target setting, material allocation, reporting, bargaining, and enforcement as a concrete institutional mechanism." },
+    { "type": "means", "id": "exception-based-cybernetic-coordination", "reason": "Cybersyn exposes near-real-time reporting, exception escalation, modeling, and intended worker participation as a distinct mechanism." }
+  ],
+  "duplicateCandidates": [
+    { "type": "tradition", "id": "centrally-planned-economy", "reason": "This proposal replaces and renames the existing migrated draft rather than creating a second tradition; human review must approve the ID change." }
+  ],
+  "content": {
+    "description": "A varied family of arguments and arrangements that coordinates a substantial scope of production, investment, or distribution through collectively authorized plans and administrative or computational allocation rather than primarily through decentralized market exchange.",
+    "scope": "Classify the institutional dominance and reach of planning, including who sets objectives, supplies information, revises targets, allocates resources, and contests decisions; do not infer the form from ownership alone.",
+    "variants": [
+      "Hierarchical administrative-command planning organized through political authorities, planning agencies, ministries, and enterprises",
+      "Indicative and mixed planning that directs selected investment or priorities while retaining substantial market coordination",
+      "Democratic, participatory, or computational proposals that distribute modeling and operational decisions while coordinating shared constraints"
+    ],
+    "distinctions": [
+      "Not synonymous with public ownership, which can coexist with markets or decentralized governance",
+      "Not synonymous with socialism, which includes traditions that reject centralized administrative allocation",
+      "Not equivalent to planning inside firms, households, militaries, or market economies unless administrative planning dominates the relevant economy-wide scope",
+      "Historical command systems and unimplemented computational proposals are different kinds of evidence"
+    ],
+    "commonQuestions": [
+      "Does central planning mean one office chooses every output? — No; even hierarchical systems distribute tasks across agencies and enterprises, though binding authority and escalation may remain centralized.",
+      "Did Soviet plans operate exactly as written? — No; formal targets interacted with bargaining, discretion, strategic reporting, informal procurement, and secondary exchange.",
+      "Would better computers settle the planning problem? — No; computation changes processing capacity but does not by itself determine objectives, elicit truthful information, distribute authority, or create contestability.",
+      "Is every industrial policy a planned economy? — No; selective public direction and economy-wide administrative dominance should remain distinct."
+    ],
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Planned_economy"
+  }
+}
