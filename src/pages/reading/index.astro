@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import framework from "../../../content/framework/draft.json";
+import framework from "../../../content/framework/graph.json";
 const label = (value = "Unsorted") => value.split("-").map((part) => part[0]?.toUpperCase() + part.slice(1)).join(" ");
 const sections = [...new Set(framework.sources.map(({ section }) => section ?? "unsorted"))].map((id) => ({ id, sources: framework.sources.filter(({ section }) => (section ?? "unsorted") === id) }));
 ---

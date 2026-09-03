@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "tradition-evidence-1",
+  "schemaVersion": "approach-evidence-1",
   "status": "published",
-  "traditionId": "social-democratic-tradition",
+  "approachId": "social-democratic-tradition",
   "wikipediaUrl": "https://en.wikipedia.org/wiki/Social_democracy",
   "ends": [
     {

@@ -1,7 +1,7 @@
-interface TraditionEvidence {
+interface ApproachEvidence {
   schemaVersion: string;
   status: string;
-  traditionId: string;
+  approachId: string;
   wikipediaUrl: string;
   ends: Array<{ id: string; sourceIds: string[] }>;
   means: Array<{ id: string; sourceIds: string[] }>;
@@ -10,16 +10,16 @@ interface TraditionEvidence {
   sources: Array<{ id: string; url: string }>;
 }
 
-export function validateTraditionEvidence(evidence: TraditionEvidence, context: { traditions: Set<string>; challenges: Set<string>; criteria: Set<string> }): string[] {
+export function validateApproachEvidence(evidence: ApproachEvidence, context: { approaches: Set<string>; challenges: Set<string>; criteria: Set<string> }): string[] {
   const errors: string[] = [];
-  if (evidence.schemaVersion !== "tradition-evidence-1") errors.push("unsupported tradition-evidence schema");
-  if (evidence.status !== "published") errors.push("promoted tradition evidence must have published status");
-  if (!context.traditions.has(evidence.traditionId)) errors.push(`unknown tradition: ${evidence.traditionId}`);
+  if (evidence.schemaVersion !== "approach-evidence-1") errors.push("unsupported Approach evidence schema");
+  if (evidence.status !== "published") errors.push("reviewed Approach evidence must have published status");
+  if (!context.approaches.has(evidence.approachId)) errors.push(`unknown Approach: ${evidence.approachId}`);
   if (!context.challenges.has(evidence.trace.challengeId)) errors.push(`unknown Challenge: ${evidence.trace.challengeId}`);
   if (!context.criteria.has(evidence.trace.criterionId)) errors.push(`unknown Criterion: ${evidence.trace.criterionId}`);
 
   const ids = [...evidence.ends, ...evidence.means, ...evidence.cases, ...evidence.sources, ...evidence.cases.flatMap(({ statements }) => statements)].map(({ id }) => id);
-  if (new Set(ids).size !== ids.length) errors.push("tradition-evidence IDs must be globally unique");
+  if (new Set(ids).size !== ids.length) errors.push("Approach evidence IDs must be globally unique");
   const ends = new Set(evidence.ends.map(({ id }) => id));
   const means = new Set(evidence.means.map(({ id }) => id));
   const cases = new Set(evidence.cases.map(({ id }) => id));

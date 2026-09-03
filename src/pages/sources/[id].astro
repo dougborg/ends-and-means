@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import rawFramework from "../../../content/framework/draft.json";
-import type { FrameworkDraftGraph, FrameworkSource } from "../../lib/framework/model";
-const framework = rawFramework as FrameworkDraftGraph;
+import rawFramework from "../../../content/framework/graph.json";
+import type { ApproachGraph, FrameworkSource } from "../../lib/framework/model";
+const framework = rawFramework as ApproachGraph;
 export function getStaticPaths() { return rawFramework.sources.map((source) => ({ params: { id: source.id }, props: { source } })); }
 const source = Astro.props.source as FrameworkSource;
 const cleanNote = source.note?.replace(/\*\*/g, "").replace(/\*/g, "").replace(/^▶\s*/, "");

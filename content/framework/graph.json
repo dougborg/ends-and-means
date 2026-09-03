@@ -1,10 +1,16 @@
 {
-  "schemaVersion": "framework-draft-1",
-  "status": "migration-draft",
-  "traditions": [
+  "schemaVersion": "approach-graph-1",
+  "approaches": [
     {
       "id": "laissez-faire-capitalism",
       "name": "Laissez-faire capitalism",
+      "kind": "ideal-type",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "political-authority",
+        "law-coercion"
+      ],
       "description": "private ownership, minimal state (defense, courts, contract enforcement).",
       "overview": [
         "Laissez-faire capitalism is a family of arguments for organizing most production and exchange through private property, voluntary contract, market prices, and competition. In its minimal-state forms, public authority still defines and enforces property, contract, and protections against force or fraud.",
@@ -35,6 +41,15 @@
     {
       "id": "social-democratic-tradition",
       "name": "Social-democratic capitalism",
+      "kind": "tradition",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "workplace-governance",
+        "political-authority",
+        "social-provision",
+        "transition-change"
+      ],
       "description": "private ownership and markets plus a large tax-funded state correcting failures and redistributing. Nordic model; the German variant adds codetermination.",
       "overview": [
         "Social-democratic capitalism combines predominantly private ownership and market coordination with democratic government, collective bargaining, social insurance, public services, and economic regulation. It generally seeks to constrain the risks and inequalities of capitalism without replacing markets as the main coordinating institution.",
@@ -65,6 +80,13 @@
     {
       "id": "market-socialist-tradition",
       "name": "Market socialism / economic democracy",
+      "kind": "institutional-family",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "workplace-governance",
+        "political-authority"
+      ],
       "description": "worker-managed or socially-owned firms competing in markets. Schweickart's model, Yugoslav self-management, Mondragón-style cooperative federations.",
       "overview": [
         "Market socialism and economic democracy describe proposals that retain markets for at least some allocation while changing who owns firms, who governs workplaces, or who receives returns to capital. Common models emphasize worker cooperatives, social investment funds, public ownership, or combinations of these institutions.",
@@ -95,6 +117,14 @@
     {
       "id": "central-planning-tradition",
       "name": "Central planning",
+      "kind": "institutional-family",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "workplace-governance",
+        "political-authority",
+        "transition-change"
+      ],
       "description": "state ownership and administrative allocation without market prices. Soviet-type; computational planning is the modern variant.",
       "overview": [
         "Central planning is a family of arrangements that coordinates a substantial scope of production, investment, or distribution through collectively authorized plans and administrative or computational allocation. Ownership alone does not determine the mechanism: the revealing questions are who sets objectives, supplies information, revises targets, allocates resources, and contests decisions.",
@@ -126,6 +156,15 @@
     {
       "id": "social-anarchist-tradition",
       "name": "Social anarchism",
+      "kind": "tradition",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "workplace-governance",
+        "political-authority",
+        "law-coercion",
+        "transition-change"
+      ],
       "description": "no state; production by federated worker associations or communes. Mutualism, collectivism, syndicalism, anarcho-communism. Spain 1936–39 is the main test; Ostrom's polycentric commons the closest documented small-scale analogue.",
       "overview": [
         "Social anarchism groups traditions that reject the state and other entrenched hierarchies while emphasizing cooperation, mutual aid, common or worker control, and federated self-government. It includes mutualist, collectivist, anarcho-communist, and syndicalist currents that disagree over property, exchange, and organization.",
@@ -156,6 +195,13 @@
     {
       "id": "state-capitalist-ideal-type",
       "name": "State capitalism / developmental state",
+      "kind": "ideal-type",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "political-authority",
+        "social-provision"
+      ],
       "description": "markets and private firms, with the state steering credit, protecting strategic sectors, and owning key enterprises. Singapore, South Korea, Taiwan; China since 1978.",
       "overview": [
         "State capitalism and the developmental state are overlapping but contested labels for economies in which markets and firms operate alongside unusually directive public control over finance, investment, strategic sectors, or major enterprises. The state may act as owner, lender, coordinator, regulator, or partner to private capital.",
@@ -186,6 +232,14 @@
     {
       "id": "anarcho-capitalist-tradition",
       "name": "Anarcho-capitalism",
+      "kind": "tradition",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "political-authority",
+        "law-coercion",
+        "transition-change"
+      ],
       "description": "no state; law, courts, and defense supplied by competing private agencies (Rothbard, David Friedman). No real-world case; medieval Iceland and Somalia 1991–2006 are the contested analogies.",
       "overview": [
         "Anarcho-capitalism proposes extending private property, contract, and market competition to functions usually assigned to the state, including adjudication, policing, and defense. Its advocates imagine legal and protective services supplied by firms, associations, insurers, or other voluntary arrangements.",
@@ -216,6 +270,15 @@
     {
       "id": "participatory-economics",
       "name": "Participatory economics (Parecon)",
+      "kind": "named-model",
+      "domains": [
+        "ownership",
+        "allocation-coordination",
+        "workplace-governance",
+        "political-authority",
+        "social-provision",
+        "transition-change"
+      ],
       "description": "no markets, no state; worker and consumer councils, balanced job complexes, pay by effort, allocation by iterated participatory planning with indicative prices (Albert, Hahnel). No real-world case.",
       "overview": [
         "Participatory economics, often called Parecon, is a specific proposal for coordinating production and consumption through worker and consumer councils rather than conventional markets or central command. Its design combines participatory planning, social ownership, balanced job complexes, and remuneration based on effort or sacrifice.",
@@ -412,7 +475,7 @@
   "responses": [
     {
       "id": "laissez-faire-capitalism--coordination-of-information-and-resources",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -438,7 +501,7 @@
     },
     {
       "id": "laissez-faire-capitalism--innovation-risk-and-failure",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -464,7 +527,7 @@
     },
     {
       "id": "laissez-faire-capitalism--distribution-of-gains-and-ownership",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -506,7 +569,7 @@
     },
     {
       "id": "laissez-faire-capitalism--authority-accountability-and-abuse",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -564,7 +627,7 @@
     },
     {
       "id": "laissez-faire-capitalism--externalities-and-collective-goods",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -590,7 +653,7 @@
     },
     {
       "id": "laissez-faire-capitalism--mobility-exit-and-dependence",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -616,7 +679,7 @@
     },
     {
       "id": "laissez-faire-capitalism--basic-needs-and-security",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -642,7 +705,7 @@
     },
     {
       "id": "laissez-faire-capitalism--transition-and-institutional-change",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -668,7 +731,7 @@
     },
     {
       "id": "laissez-faire-capitalism--external-coercion-and-defense",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -694,7 +757,7 @@
     },
     {
       "id": "social-democratic-tradition--coordination-of-information-and-resources",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -720,7 +783,7 @@
     },
     {
       "id": "social-democratic-tradition--innovation-risk-and-failure",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -746,7 +809,7 @@
     },
     {
       "id": "social-democratic-tradition--distribution-of-gains-and-ownership",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -788,7 +851,7 @@
     },
     {
       "id": "social-democratic-tradition--authority-accountability-and-abuse",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -846,7 +909,7 @@
     },
     {
       "id": "social-democratic-tradition--externalities-and-collective-goods",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -872,7 +935,7 @@
     },
     {
       "id": "social-democratic-tradition--mobility-exit-and-dependence",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -898,7 +961,7 @@
     },
     {
       "id": "social-democratic-tradition--basic-needs-and-security",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -924,7 +987,7 @@
     },
     {
       "id": "social-democratic-tradition--transition-and-institutional-change",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -950,7 +1013,7 @@
     },
     {
       "id": "social-democratic-tradition--external-coercion-and-defense",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -976,7 +1039,7 @@
     },
     {
       "id": "market-socialist-tradition--coordination-of-information-and-resources",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -1002,7 +1065,7 @@
     },
     {
       "id": "market-socialist-tradition--innovation-risk-and-failure",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -1028,7 +1091,7 @@
     },
     {
       "id": "market-socialist-tradition--distribution-of-gains-and-ownership",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -1070,7 +1133,7 @@
     },
     {
       "id": "market-socialist-tradition--authority-accountability-and-abuse",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -1128,7 +1191,7 @@
     },
     {
       "id": "market-socialist-tradition--externalities-and-collective-goods",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -1154,7 +1217,7 @@
     },
     {
       "id": "market-socialist-tradition--mobility-exit-and-dependence",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -1180,7 +1243,7 @@
     },
     {
       "id": "market-socialist-tradition--basic-needs-and-security",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -1206,7 +1269,7 @@
     },
     {
       "id": "market-socialist-tradition--transition-and-institutional-change",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -1232,7 +1295,7 @@
     },
     {
       "id": "market-socialist-tradition--external-coercion-and-defense",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -1258,7 +1321,7 @@
     },
     {
       "id": "central-planning-tradition--coordination-of-information-and-resources",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -1284,7 +1347,7 @@
     },
     {
       "id": "central-planning-tradition--innovation-risk-and-failure",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -1310,7 +1373,7 @@
     },
     {
       "id": "central-planning-tradition--distribution-of-gains-and-ownership",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -1352,7 +1415,7 @@
     },
     {
       "id": "central-planning-tradition--authority-accountability-and-abuse",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -1410,7 +1473,7 @@
     },
     {
       "id": "central-planning-tradition--externalities-and-collective-goods",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -1436,7 +1499,7 @@
     },
     {
       "id": "central-planning-tradition--mobility-exit-and-dependence",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -1462,7 +1525,7 @@
     },
     {
       "id": "central-planning-tradition--basic-needs-and-security",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -1488,7 +1551,7 @@
     },
     {
       "id": "central-planning-tradition--transition-and-institutional-change",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -1514,7 +1577,7 @@
     },
     {
       "id": "central-planning-tradition--external-coercion-and-defense",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -1540,7 +1603,7 @@
     },
     {
       "id": "social-anarchist-tradition--coordination-of-information-and-resources",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -1566,7 +1629,7 @@
     },
     {
       "id": "social-anarchist-tradition--innovation-risk-and-failure",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -1592,7 +1655,7 @@
     },
     {
       "id": "social-anarchist-tradition--distribution-of-gains-and-ownership",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -1634,7 +1697,7 @@
     },
     {
       "id": "social-anarchist-tradition--authority-accountability-and-abuse",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -1692,7 +1755,7 @@
     },
     {
       "id": "social-anarchist-tradition--externalities-and-collective-goods",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -1718,7 +1781,7 @@
     },
     {
       "id": "social-anarchist-tradition--mobility-exit-and-dependence",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -1744,7 +1807,7 @@
     },
     {
       "id": "social-anarchist-tradition--basic-needs-and-security",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -1770,7 +1833,7 @@
     },
     {
       "id": "social-anarchist-tradition--transition-and-institutional-change",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -1796,7 +1859,7 @@
     },
     {
       "id": "social-anarchist-tradition--external-coercion-and-defense",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -1822,7 +1885,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--coordination-of-information-and-resources",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -1848,7 +1911,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--innovation-risk-and-failure",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -1874,7 +1937,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--distribution-of-gains-and-ownership",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -1916,7 +1979,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--authority-accountability-and-abuse",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -1974,7 +2037,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--externalities-and-collective-goods",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -2000,7 +2063,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--mobility-exit-and-dependence",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -2026,7 +2089,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--basic-needs-and-security",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -2052,7 +2115,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--transition-and-institutional-change",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -2078,7 +2141,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--external-coercion-and-defense",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -2104,7 +2167,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--coordination-of-information-and-resources",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -2130,7 +2193,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--innovation-risk-and-failure",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -2156,7 +2219,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--distribution-of-gains-and-ownership",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -2198,7 +2261,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--authority-accountability-and-abuse",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -2256,7 +2319,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--externalities-and-collective-goods",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -2282,7 +2345,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--mobility-exit-and-dependence",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -2308,7 +2371,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--basic-needs-and-security",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -2334,7 +2397,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--transition-and-institutional-change",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -2360,7 +2423,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--external-coercion-and-defense",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -2386,7 +2449,7 @@
     },
     {
       "id": "participatory-economics--coordination-of-information-and-resources",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "coordination-of-information-and-resources",
       "means": [
         {
@@ -2412,7 +2475,7 @@
     },
     {
       "id": "participatory-economics--innovation-risk-and-failure",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "innovation-risk-and-failure",
       "means": [
         {
@@ -2438,7 +2501,7 @@
     },
     {
       "id": "participatory-economics--distribution-of-gains-and-ownership",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "distribution-of-gains-and-ownership",
       "means": [
         {
@@ -2480,7 +2543,7 @@
     },
     {
       "id": "participatory-economics--authority-accountability-and-abuse",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "authority-accountability-and-abuse",
       "means": [
         {
@@ -2538,7 +2601,7 @@
     },
     {
       "id": "participatory-economics--externalities-and-collective-goods",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "externalities-and-collective-goods",
       "means": [
         {
@@ -2564,7 +2627,7 @@
     },
     {
       "id": "participatory-economics--mobility-exit-and-dependence",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "mobility-exit-and-dependence",
       "means": [
         {
@@ -2590,7 +2653,7 @@
     },
     {
       "id": "participatory-economics--basic-needs-and-security",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "basic-needs-and-security",
       "means": [
         {
@@ -2616,7 +2679,7 @@
     },
     {
       "id": "participatory-economics--transition-and-institutional-change",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "transition-and-institutional-change",
       "means": [
         {
@@ -2642,7 +2705,7 @@
     },
     {
       "id": "participatory-economics--external-coercion-and-defense",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "challengeId": "external-coercion-and-defense",
       "means": [
         {
@@ -2670,63 +2733,63 @@
   "researchNotes": [
     {
       "id": "laissez-faire-capitalism--historical-evidence-inventory",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "kind": "historical-evidence-inventory",
       "text": "19th-century Britain and U.S.; no modern pure case. Rapid growth alongside severe inequality and instability; every modern economy moved away from it.",
       "researchNeeded": true
     },
     {
       "id": "social-democratic-tradition--historical-evidence-inventory",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "kind": "historical-evidence-inventory",
       "text": "Nordics since the 1930s; Germany since 1951; most of the OECD partially. Consistently high on freedom, health, mobility, innovation. Transferability contested.",
       "researchNeeded": true
     },
     {
       "id": "market-socialist-tradition--historical-evidence-inventory",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "kind": "historical-evidence-inventory",
       "text": "Yugoslavia 1950–90; Mondragón since 1956; thousands of cooperatives. Co-ops match conventional productivity; Yugoslavia collapsed with its state; Mondragón reverts to capitalism abroad. No national case outlasting its regime.",
       "researchNeeded": true
     },
     {
       "id": "central-planning-tradition--historical-evidence-inventory",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "kind": "historical-evidence-inventory",
       "text": "USSR 1928–91; China 1949–78; Eastern bloc; Cuba; North Korea. Industrialization in priorities; shortage, stagnation, famine; every case liberalized or collapsed.",
       "researchNeeded": true
     },
     {
       "id": "social-anarchist-tradition--historical-evidence-inventory",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "kind": "historical-evidence-inventory",
       "text": "Spain 1936–39; Ukraine 1918–21; Rojava since 2012; Ostrom's commons; Zapatistas. Functional locally under wartime conditions; destroyed externally each time; no peacetime long-run test.",
       "researchNeeded": true
     },
     {
       "id": "state-capitalist-ideal-type--historical-evidence-inventory",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "kind": "historical-evidence-inventory",
       "text": "Japan 1950–90; Korea, Taiwan, Singapore since the 1960s; China since 1978. The strongest growth record of the last sixty years; Korea and Taiwan democratized, Singapore and China did not. The one system on this list whose track record is mostly positive and mostly recent.",
       "researchNeeded": true
     },
     {
       "id": "anarcho-capitalist-tradition--historical-evidence-inventory",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "kind": "historical-evidence-inventory",
       "text": "No case. Medieval Iceland (930–1262) and Somalia 1991–2006 as contested analogies. Iceland's system ended in civil war and Norwegian rule; Somalia's outcome is disputed (Leeson vs. critics). No modern evidence.",
       "researchNeeded": true
     },
     {
       "id": "participatory-economics--historical-evidence-inventory",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "kind": "historical-evidence-inventory",
       "text": "No case. Small collectives (South End Press, Z Magazine). Nothing beyond a handful of workplaces.",
       "researchNeeded": true
     },
     {
       "id": "laissez-faire-capitalism--scale-and-transferability",
-      "traditionId": "laissez-faire-capitalism",
+      "approachId": "laissez-faire-capitalism",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Prices scale without limit; that is the point of the price mechanism. Public-goods and externality failures grow with scale (climate).",
@@ -2734,7 +2797,7 @@
     },
     {
       "id": "social-democratic-tradition--scale-and-transferability",
-      "traditionId": "social-democratic-tradition",
+      "approachId": "social-democratic-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Scales via bureaucracy and law; the Nordics are 5–10 million each, Germany 84 million. Trust and homogeneity questions at U.S. or Indian scale; the largest social democracies are the most contested.",
@@ -2742,7 +2805,7 @@
     },
     {
       "id": "market-socialist-tradition--scale-and-transferability",
-      "traditionId": "market-socialist-tradition",
+      "approachId": "market-socialist-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Individual cooperatives cap around 500 (Mondragón splits them); federations reach ~80,000. No national-scale case; the federation's own size bounds mobility and capital pooling.",
@@ -2750,7 +2813,7 @@
     },
     {
       "id": "central-planning-tradition--scale-and-transferability",
-      "traditionId": "central-planning-tradition",
+      "approachId": "central-planning-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Scales administratively — the USSR planned for 290 million. Information degrades with every layer of hierarchy; the calculation problem is a scale problem.",
@@ -2758,7 +2821,7 @@
     },
     {
       "id": "social-anarchist-tradition--scale-and-transferability",
-      "traditionId": "social-anarchist-tradition",
+      "approachId": "social-anarchist-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Strong at village, factory, and commons scale (Ostrom's cases are hundreds to thousands). Direct democracy and face-to-face trust do not survive scale; regional coordination in Spain was contested.",
@@ -2766,7 +2829,7 @@
     },
     {
       "id": "state-capitalist-ideal-type--scale-and-transferability",
-      "traditionId": "state-capitalist-ideal-type",
+      "approachId": "state-capitalist-ideal-type",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Scales to 1.4 billion (China) through state capacity. Local-government incentive distortion at scale (GDP-target gaming, debt); the center loses information the same way planners do.",
@@ -2774,7 +2837,7 @@
     },
     {
       "id": "anarcho-capitalist-tradition--scale-and-transferability",
-      "traditionId": "anarcho-capitalist-tradition",
+      "approachId": "anarcho-capitalist-tradition",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Unknown; theory assumes competition among agencies at any scale. No evidence; agency competition at continental scale is speculation.",
@@ -2782,7 +2845,7 @@
     },
     {
       "id": "participatory-economics--scale-and-transferability",
-      "traditionId": "participatory-economics",
+      "approachId": "participatory-economics",
       "kind": "criterion-observation",
       "criterionId": "scale-and-transferability",
       "text": "Planning rounds are combinatorial: every council's proposal affects every other's. The iteration burden grows faster than population; the strongest theoretical objection to the model.",

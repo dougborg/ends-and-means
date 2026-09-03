@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ApproachEvidence from "../../components/ApproachEvidence.astro";
+import framework from "../../../content/framework/graph.json";
+import socialDemocraticEvidence from "../../../content/framework/social-democratic-approach-evidence.json";
+import "../../styles/tradition-evidence.css";
+export function getStaticPaths() { return framework.approaches.map((approach) => ({ params: { id: approach.id }, props: { approach } })); }
+const { approach } = Astro.props;
+const responses = framework.responses.filter(({ approachId }) => approach.id === approachId).map((response) => ({ ...response, challenge: framework.challenges.find(({ id }) => id === response.challengeId)! }));
+const notes = framework.researchNotes.filter(({ approachId }) => approachId === approach.id);
+const approachEvidence = approach.id === socialDemocraticEvidence.approachId ? socialDemocraticEvidence : undefined;
+const evidenceChallenge = approachEvidence ? framework.challenges.find(({ id }) => id === approachEvidence.trace.challengeId) : undefined;
+const evidenceCriterion = approachEvidence ? framework.criteria.find(({ id }) => id === approachEvidence.trace.criterionId) : undefined;
+---
+<BaseLayout fullBleed title={approach.name} description={approach.description}>
+  <article class="tradition-page">
+    <nav aria-label="Breadcrumb"><a href="/approaches/">Approaches</a> <span aria-hidden="true">/</span> {approach.kind.replaceAll("-", " ")}</nav>
+    <header><p class="coordinate">{approach.kind.replaceAll("-", " ").toUpperCase()} / RESEARCH NEEDED</p><h1>{approach.name}</h1><p class="dek">{approach.description}</p><p class="boundary-note"><strong>Domains:</strong> {approach.domains.map((domain) => domain.replaceAll("-", " ")).join(" · ")}</p><p class="boundary-note"><strong>Boundary:</strong> {approach.caveat}</p></header>
+    <section class="tradition-overview" aria-labelledby="overview-title"><article><p class="coordinate">OVERVIEW</p><h2 id="overview-title">What this Approach proposes</h2>{approach.overview.map((paragraph) => <p>{paragraph}</p>)}</article><aside><p class="coordinate">KEEP DISTINCT</p><ul>{approach.distinctions.map((item) => <li>{item}</li>)}</ul></aside></section>
+    {approachEvidence && evidenceChallenge && evidenceCriterion && <ApproachEvidence evidence={approachEvidence} challenge={evidenceChallenge} criterion={evidenceCriterion} />}
+    <section class="tradition-responses" aria-labelledby="response-title"><header><p class="coordinate">RESPONSE MAP</p><h2 id="response-title">Responses by Challenge</h2></header>
+      {responses.map((response) => <details><summary><span>{response.challenge.question}</span><small>{response.means.length} proposed Means</small></summary><div class="response-columns"><section><h3>Proposed Means</h3><ul>{response.means.map(({ text }) => <li>{text}</li>)}</ul></section><section><h3>Failure hypotheses</h3><ul>{response.failureHypotheses.map(({ text }) => <li>{text}</li>)}</ul></section></div><a class="detail-link" href={`/challenges/${response.challenge.id}/`}>Compare every response to this Challenge →</a></details>)}
+    </section>
+    <section class="tradition-faq" aria-labelledby="faq-title"><header><p class="coordinate">COMMON QUESTIONS / WORKING ANSWERS</p><h2 id="faq-title">Questions & misconceptions</h2><p>These answers clarify how this project uses the label. They remain editorial drafts until the cited overview is complete.</p></header>{approach.commonQuestions.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</section>
+    <aside class="research-notes" aria-labelledby="notes-title"><p class="coordinate">SEPARATED DURING MIGRATION</p><h2 id="notes-title">Evidence to investigate</h2>{notes.map((note) => <section><h3>{note.kind === "historical-evidence-inventory" ? "Historical evidence inventory" : "Scale and transferability"}</h3><p>{note.text}</p></section>)}</aside>
+  </article>
+</BaseLayout>

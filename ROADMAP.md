@@ -79,8 +79,8 @@ This is the active phase. Finish it before widening the catalogue.
 ## Phase 3 — Build comparison tools
 
 - [ ] **Build static, accessible comparisons** ([#4](https://github.com/dougborg/ends-and-means/issues/4)). Generate useful no-JavaScript views from response traces without assuming rectangular coverage or producing a universal score.
-- [ ] **Add progressive filters and pivots** ([#6](https://github.com/dougborg/ends-and-means/issues/6)). Filter by Challenge, Tradition, Means, Case, evidence gap, and interpretation; preserve keyboard access and URL state.
-- [ ] **Add pairwise tradition comparison** ([#35](https://github.com/dougborg/ends-and-means/issues/35)). Generate “compare these two” views from canonical traces rather than duplicating comparison prose.
+- [ ] **Add progressive filters and pivots** ([#6](https://github.com/dougborg/ends-and-means/issues/6)). Filter by Challenge, Approach kind/domain, Means, Case, evidence gap, and interpretation; preserve keyboard access and URL state.
+- [ ] **Add pairwise Approach comparison** ([#35](https://github.com/dougborg/ends-and-means/issues/35)). Generate “compare these two” views from canonical traces rather than duplicating comparison prose.
 
 ## Phase 4 — Open and govern contributions
 
@@ -122,7 +122,7 @@ These features become valuable after the core model and evidence workflow are st
 - [x] Preserved the original eight-by-fourteen research matrix and reading list in deterministic staging records.
 - [x] Added graph integrity checks and reviewed migration coverage.
 - [x] Migrated all inherited comparisons into clean response drafts or explicit research notes without requiring rectangular target coverage.
-- [x] Implemented Traditions, Challenges, Topics, Reading, Framework, and an analytical trace prototype using the current vocabulary.
+- [x] Implemented Approach, Challenge, Topic, Reading, and Framework routes plus an analytical trace prototype.
 - [x] Made the eight initial dossiers the primary homepage entry point; their Approach classification is the next canonical-model step.
 - [x] Added a research skill that implements source-backed content changes directly in reviewable pull requests.
 - [x] Deployed the static site to GitHub Pages with the custom domain.

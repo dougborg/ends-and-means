@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import framework from "../../../content/framework/draft.json";
+import framework from "../../../content/framework/graph.json";
 import "../../styles/challenge-topic.css";
 ---
 <BaseLayout fullBleed title="Challenges" description="Recurring political-economic questions used to compare institutional responses.">
   <div class="framework-index challenge-topic-page"><header><p class="coordinate">FRAMEWORK / CHALLENGES</p><h1>Questions institutions must answer.</h1><p class="dek">Challenges are recurring open problems. They do not assume one preferred solution, and unlike broad topics they are written as questions that can expose different Ends and Means.</p></header>
-    <aside class="orientation-panel" aria-labelledby="challenge-orientation"><div><p class="coordinate">HOW TO USE THIS DIRECTORY</p><h2 id="challenge-orientation">Compare one question across traditions</h2></div><div class="orientation-steps"><p><strong>Choose a Challenge</strong><span>Start with a question you want different institutional arrangements to answer.</span></p><p><strong>Read across traditions</strong><span>Compare proposed Means and possible failure modes without treating draft statements as findings.</span></p><p><strong>Follow the Topics</strong><span>Use broader subject areas to find related questions and see where concerns overlap.</span></p></div></aside>
+    <aside class="orientation-panel" aria-labelledby="challenge-orientation"><div><p class="coordinate">HOW TO USE THIS DIRECTORY</p><h2 id="challenge-orientation">Compare one question across Approaches</h2></div><div class="orientation-steps"><p><strong>Choose a Challenge</strong><span>Start with a question you want different institutional arrangements to answer.</span></p><p><strong>Read across Approaches</strong><span>Compare proposed Means and possible failure modes without treating research leads as findings.</span></p><p><strong>Follow the Topics</strong><span>Use broader subject areas to find related questions and see where concerns overlap.</span></p></div></aside>
     <ol class="indexed-list">{framework.challenges.map((challenge, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><div><h2><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h2><p>{challenge.rationale}</p></div><small>{framework.responses.filter(({ challengeId }) => challengeId === challenge.id).length} draft responses</small></li>)}</ol>
-    <aside class="research-caveat"><p class="coordinate">RESEARCH STATE</p><p>This directory provides the comparison structure. Its response drafts are starting points for source review, qualification, and competing interpretations—not settled descriptions of any tradition.</p></aside>
+    <aside class="research-caveat"><p class="coordinate">RESEARCH STATE</p><p>This directory provides the comparison structure. Its research leads are starting points for source review, qualification, and competing interpretations—not settled descriptions of any Approach.</p></aside>
   </div>
 </BaseLayout>

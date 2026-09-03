@@ -1,19 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import framework from "../../content/framework/draft.json";
+import framework from "../../content/framework/graph.json";
 import "../styles/traditions-entry.css";
 
-const challengeCount = new Map(framework.traditions.map((tradition) => [
+const challengeCount = new Map(framework.approaches.map((tradition) => [
   tradition.id,
-  framework.responses.filter(({ traditionId }) => traditionId === tradition.id).length,
+  framework.responses.filter(({ approachId }) => approachId === tradition.id).length,
 ]));
 ---
-<BaseLayout fullBleed description="Explore political-economic traditions and ideal types through their defining commitments, institutional responses, disputes, and open research questions.">
+<BaseLayout fullBleed description="Explore political-economic Approaches through their defining commitments, institutional responses, disputes, and open research questions.">
   <header class="traditions-hero">
     <p class="coordinate">ENDS AND MEANS / COMPARATIVE FIELD GUIDE</p>
     <div class="traditions-hero__thesis">
-      <h1>How different systems<br /><span>organize common life.</span></h1>
-      <p class="dek">Begin with a political-economic tradition. Each dossier asks what it values, which institutions it relies on, how it responds to recurring problems, and where its record remains contested.</p>
+      <h1>How different approaches<br /><span>organize common life.</span></h1>
+      <p class="dek">Begin with an Approach to political economy. Each dossier identifies what kind of Approach it is, what it values, which institutions it relies on, and where its record remains contested.</p>
     </div>
     <aside class="traditions-hero__guide" aria-label="How to use this guide">
       <p class="coordinate">A NOTE ON THE LABELS</p>
@@ -26,17 +26,17 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
     <header class="tradition-catalogue__heading">
       <div>
         <p class="coordinate">PRIMARY ENTRY POINT / 8 DOSSIERS</p>
-        <h2 id="tradition-catalogue-title">Traditions and ideal types</h2>
+        <h2 id="tradition-catalogue-title">Approaches to political economy</h2>
       </div>
       <p>Read an orientation, clarify common misconceptions, then follow its proposed Means across the same set of Challenges.</p>
     </header>
     <ol class="tradition-cards">
-      {framework.traditions.map((tradition) => (
+      {framework.approaches.map((tradition) => (
         <li>
           <article class="tradition-card">
             <header>
-              <p class="tradition-card__kind">Working dossier</p>
-              <h3><a href={`/traditions/${tradition.id}/`}>{tradition.name}</a></h3>
+              <p class="tradition-card__kind">{tradition.kind.replaceAll("-", " ")}</p>
+              <h3><a href={`/approaches/${tradition.id}/`}>{tradition.name}</a></h3>
             </header>
             <p class="tradition-card__summary">{tradition.overview[0]}</p>
             <div class="tradition-card__boundary">
@@ -45,7 +45,7 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
             </div>
             <footer>
               <span>{challengeCount.get(tradition.id)} Challenge responses</span>
-              <a href={`/traditions/${tradition.id}/`} aria-label={`Open the ${tradition.name} dossier`}>Open dossier <span aria-hidden="true">→</span></a>
+              <a href={`/approaches/${tradition.id}/`} aria-label={`Open the ${tradition.name} dossier`}>Open dossier <span aria-hidden="true">→</span></a>
             </footer>
           </article>
         </li>
@@ -55,7 +55,7 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
 
   <section class="secondary-discovery" aria-labelledby="compare-title">
     <header>
-      <p class="coordinate">COMPARE ACROSS TRADITIONS</p>
+      <p class="coordinate">COMPARE ACROSS APPROACHES</p>
       <h2 id="compare-title">Start somewhere else</h2>
       <p>Already have a question in mind? Approach the same material through a recurring institutional Challenge or a broad Topic.</p>
     </header>
@@ -63,7 +63,7 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
       <article>
         <p class="coordinate">9 QUESTIONS</p>
         <h3>Challenges</h3>
-        <p>Compare how every tradition responds to coordination, power, security, transition, and other recurring problems.</p>
+        <p>Compare how each Approach responds to coordination, power, security, transition, and other recurring problems.</p>
         <a href="/challenges/">Browse all Challenges <span aria-hidden="true">→</span></a>
       </article>
       <article>
