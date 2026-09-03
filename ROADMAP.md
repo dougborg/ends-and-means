@@ -1,199 +1,132 @@
-# Roadmap
+# Ends and Means roadmap
 
-This backlog is ordered by dependency. Each checkbox is intended to become one
-GitHub issue when the private remote is available.
+This roadmap is ordered by product dependency, not by when an idea was first suggested. GitHub issues are the execution backlog; this document explains how the pieces fit together and what “next” means.
 
-The checked items below describe the exploratory site that exists today. New
-work targets the clean analytical model being tested in M1.9; completed matrix
-work is source material, not an API or compatibility contract.
+## Product direction
 
-## M1 — Content foundation
+Ends and Means is a traditions-first reference for examining political and economic systems in theory and practice.
 
-- [x] **M1.0 Choose the implementation stack.** Use Astro for static rendering
-  and isolated matrix interactivity, with a framework-independent TypeScript
-  content compiler. Record the decision and boundaries in an ADR.
-- [x] **M1.1 Scaffold the chosen stack and CI.** Pin the runtime, add
-  install/build checks, and document the clean-clone path.
-- [x] **M1.2 Import the 8×14 matrix.** Parse systems, Challenges (stored under
-  legacy crux IDs), comparison cells, and row
-  verdicts without rewriting source prose. Acceptance: exactly 8 systems, 14
-  Challenges, and 112 unique cells.
-- [x] **M1.3 Import and classify the reading list.** Preserve section and note;
-  assign every source a verification tier. Acceptance: stable IDs and no
-  duplicate IDs.
-- [x] **M1.4 Curate verdict and evidence mappings.** Replace importer heuristics
-  with a reviewed override file. Acceptance: all 112 mappings reviewed in diff.
-- [ ] **M1.5 Inventory cases and citations.** Extract useful research into
-  bounded case and statement candidates for the replacement model. Acceptance:
-  every retained claim has resolved provenance and scope.
-- [x] **M1.6 Enforce graph integrity.** Fail builds on missing pairs, duplicates,
-  broken references, invalid enums, or unacknowledged missing citations.
-- [ ] **M1.7 Model statements and resource links.** Give challengeable statements stable
-  anchors. Extend sources with ISBN, DOI, Open Library, publisher, reading, and
-  purchase links without making retailer URLs canonical identifiers.
-- [ ] **M1.8 Validate external links.** Check links on a scheduled basis, report
-  redirects and failures, and distinguish editorial links from purchase links.
-- [ ] **M1.9 Formalize the analytical framework.** Review and encode the
-  Ends/Means/Challenges/Criteria model before redesigning comparison views.
-  Distinguish theoretical mechanisms, formal rules, rules-in-use, bounded
-  context, interaction patterns, outcomes, and evaluative judgments; adapt IAD
-  as a diagnostic lens without scoring whole societies or treating historical
-  cases as universal blueprints.
-  A non-canonical, validated prototype now traces social-democratic capitalism
-  through two newly framed Challenges across two bounded Swedish cases. The
-  replacement prototype intentionally has no compatibility fields or type
-  dependencies on the current matrix; human review and schema approval remain
-  required before replacing canonical content.
-  An isolated, noindex visual sketch at `/prototype/` now exercises the argument
-  trace, statement-level evidence, bounded-case, and competing-interpretation
-  patterns without changing the deployed exploratory routes.
-  A complete migration draft now accounts for all 112 exploratory comparisons:
-  96 inputs form 72 tradition-by-Challenge response drafts, while 16 inputs are
-  retained as historical-evidence or scale/transferability research notes. The
-  generated target graph contains no legacy fields or identifiers; every
-  inherited assertion remains explicitly unreviewed until claim-level research
-  and bounded-case modeling are complete.
-  The first public rendering slice now reads that draft directly: discovery,
-  Challenge, tradition, and method routes expose all migrated responses and
-  research notes with persistent review warnings. Primary navigation uses only
-  the replacement vocabulary; source, case, End, and full argument-trace routes
-  remain gated on the next research pass.
-  Five many-to-many Topics now provide familiar discovery paths into the nine
-  Challenges without becoming analytical claims themselves.
-  Traditions and ideal types are now the primary public entry point: the home
-  page is an annotated eight-dossier catalogue, while Challenges and Topics are
-  secondary comparative paths. Their directories and detail pages now explain
-  how to use the framework and name unresolved research requirements.
+- **Traditions and ideal types are the primary entry point.** Each dossier explains what a tradition seeks, the institutional arrangements it proposes, its internal variation, and how it responds to recurring Challenges.
+- **Challenges are the primary comparison unit.** They are open questions, not tests with predetermined winners.
+- **Topics are discovery aids.** They group related Challenges in familiar language but do not make analytical claims.
+- **Ends, Means, and Criteria expose the reasoning.** They distinguish goals, institutional arrangements, and evaluative judgments.
+- **Statements, Sources, and bounded Cases carry the evidence.** Countries are never treated as timeless or internally uniform examples of a tradition.
+- **People and historical periods enrich the graph later.** Relationships must be typed, sourced, and time-bounded rather than implying endorsement or sole causation.
 
-## M2 — Reference pages
+The original fixed comparison matrix and its source documents are research inputs only. They are not the target ontology, a coverage requirement, or a compatibility contract.
 
-- [x] **M2.1 Shared layout and evidence language.** Establish typography,
-  navigation, badges, and mobile behavior.
-- [x] **M2.2 System, Challenge, and comparison routes.** Render all three pivots from the
-  same cell records, including row/column neighbors.
-- [ ] **M2.3 Source, case, and reading routes.** Add backlinks and verification
-  filters, borrowing links, publisher links, and clearly labeled purchase links.
-  The first reading slice now publishes all 51 migrated bibliographic records,
-  their provenance status, editorial notes, and honest empty claim/link states.
-  Verified external links, filters, case routes, and useful backlinks remain.
-- [ ] **M2.4 About and contribution model.** Explain scope, assessments, evidence
-  tiers, editorial review, and how to propose changes.
-- [ ] **M2.5 Statement-level correction links.** Add “Suggest a correction” actions
-  that prefill the entity, claim anchor, and page URL in a structured GitHub
-  issue form.
-- [ ] **M2.6 Complete tradition overview dossiers.** Give every tradition or
-  ideal type a sourced orientation, explicit boundaries and internal variants,
-  characteristic institutional Means, common questions or misconceptions, and
-  links to its strongest bounded cases. All eight pages now have substantial
-  editorial overview drafts, three boundary distinctions, and three FAQs; these
-  remain labeled working answers until claim-level sources are attached.
+## Current state
 
-## M3 — Comparison explorer
+The site is live at [endsandmeans.info](https://endsandmeans.info) as a static Astro build on GitHub Pages. It currently provides:
 
-- [ ] **M3.1 Static accessible comparisons.** Deliver useful no-JavaScript
-  tables generated from response traces; do not require rectangular coverage.
-- [ ] **M3.2 Progressive filters and pivot.** Add Challenge, tradition, Means,
-  case, evidence-gap, and interpretation filters with keyboard and URL-state support.
+- a traditions-first homepage and eight working dossiers;
+- nine Challenges and five Topics as secondary discovery paths;
+- migrated response drafts with visible research warnings;
+- a reading catalogue containing 51 inherited bibliographic records;
+- a proposed analytical framework and editorial philosophy;
+- a proposal-only research skill for the replacement ontology;
+- CI, graph validation, route tests, and automated Pages deployment.
 
-## M4 — Release
+The primary weakness is editorial, not visual: inherited prose is not yet supported by claim-level citations and bounded cases. The model is also still marked proposed rather than canonical.
 
-- [ ] **M4.1 Accessibility and metadata pass.** Test keyboard navigation,
-  contrast, reduced motion, Open Graph, sitemap, and structured metadata.
-- [ ] **M4.2 Editorial release gate.** Clear missing citations and confirm the
-  content/code licenses. Publish an affiliate disclosure and ensure commercial
-  relationships cannot affect source selection or evaluation.
-- [ ] **M4.3 Deploy with GitHub Pages.** Publish the static Astro build through
-  the official GitHub Pages workflow, verify the Pages deployment, and connect
-  the custom `endsandmeans.info` domain when its DNS is configured.
-- [ ] **M4.4 Open contribution workflow.** Add `CONTRIBUTING.md`, correction,
-  missing-source, broken-link, assessment-challenge, and new-case issue forms; decide
-  when the repository becomes public.
-- [x] **M4.5 Add an editorial research skill suite.** Provide a repo-local,
-  proposal-only research workflow with authoritative-source requirements,
-  explicit provenance, conflicting evidence, deduplication and cross-link
-  checks, graph validation, a hard human-review boundary, and independent
-  forward tests. Its initial entity contract was superseded by M4.6.
-- [x] **M4.6 Migrate research skills to the replacement ontology.** Replace the
-  retired fixed-row system proposal contract with proposal routes for
-  traditions, attributed Ends, institutional Means, Topics, Challenges,
-  Criteria, statements, interpretations, and bounded cases. Preserve the hard
-  human-review boundary and authoritative-source requirements. The v2 proposal
-  validator and duplicate checker now accept all nine replacement entity types,
-  resolve canonical versus proposed relationships, and reject fixed-matrix
-  assumptions; forward tests cover the new contracts.
+## Recommended next slice
 
-## M5 — Expansion (post-v1)
+Build one complete, publishable vertical slice before researching all eight dossiers in parallel:
 
-- [ ] **M5.1 Relate systems to historical states and regimes.** Model
-  time-bounded, many-to-many classifications with citations and explicit
-  contested or partial status; never reduce a country to a single system.
-- [ ] **M5.2 Research historical systems and political formations.** Develop a
-  sourced taxonomy for monarchy, feudalism, Greek democracy and poleis, the
-  Roman Republic and Empire, and historically bounded Chinese and Japanese
-  imperial formations. Distinguish political form from economic order and
-  determine whether heterogeneous candidates belong as systems, state/regime
-  periods, political forms, or other entities before testing any system proposal
-  against the existing fourteen Challenges and considering canonical inclusion.
-- [ ] **M5.3 Add fictional-system comparisons.** Create a clearly separated
-  interpretive layer for systems depicted in literature, with primary-text
-  provenance, spoiler controls, copyright-safe summaries, and links to real
-  traditions and Challenges that never count as empirical evidence.
-- [ ] **M5.4 Add a first-class People layer.** Replace the optional Thinker
-  concept with stable Person records for relevant philosophers, authors,
-  researchers, organizers, and political leaders. Model cited, typed, and
-  time-bounded relationships to sources, claims, systems, cases, and state
-  periods without implying endorsement, causation, sole responsibility, or a
-  great-person account of history.
-- [ ] **M5.5 Add multidimensional political-economic mapping.** Prototype the
-  existing eight systems on independently defined, sourced axes rather than a
-  universal left-right score. Support multiple scholarly lenses, ranges and
-  uncertainty, change over time, and accessible nonvisual comparisons while
-  keeping mapped positions independent from assessments and evidence.
-- [ ] **M5.6 Publish rigorous methods.** Define traditions, ideal types, cases,
-  statements, assessments, evidence, Ends, Means, Challenges, Criteria, context,
-  rules-in-use, outcomes,
-  classification, and proposal-to-canonical promotion rules before expanding
-  the graph or presenting additional analytical views. Document where the IAD
-  adaptation applies and where analysis of broad system ideal types exceeds its
-  bounded action-situation scope.
-- [ ] **M5.7 Establish a glossary and controlled vocabulary.** Disambiguate
-  frequently conflated political-economic terms, manage aliases and deprecated
-  labels, and backlink definitions throughout the graph.
-- [ ] **M5.8 Model competing interpretations.** Preserve named scholarly lenses,
-  disagreements, scope, and provenance without flattening disputes into false
-  consensus; build on the methods and vocabulary foundations.
-- [ ] **M5.9 Define editorial governance.** Document corrections, moderation,
-  conflicts of interest, affiliate revenue, living people, contentious history,
-  appeals, and final maintainer authority before opening broader contributions.
-- [ ] **M5.10 Add historical timelines.** Visualize sourced state/regime
-  transitions with interval uncertainty and accessible tabular equivalents,
-  building on the time-bounded relationships from M5.1.
-- [ ] **M5.11 Add pairwise comparison.** Generate an accessible “compare these
-  two” view from response traces without creating duplicate comparison content.
-- [ ] **M5.12 Add claim-level revision history.** Record reasons, evidence,
-  changes, and privacy-safe contributor attribution for substantive claim edits.
-- [ ] **M5.13 Publish machine-readable graph exports.** Provide versioned exports
-  with schemas, licenses, provenance, and an explicit compatibility/stability
-  policy after the expanded entity model settles.
-- [ ] **M5.14 Curate reading paths.** Offer transparent “start here,” “strongest
-  critique,” and “primary sources” paths independently of retailer or affiliate
-  ranking, with disclosed selection criteria.
-- [ ] **M5.15 Publish the editorial philosophy.** Explain the project’s
-  commitment to fairness, transparency, and corrigibility; distinguish fact,
-  inference, value judgment, analysis, and advocacy; disclose unavoidable
-  editorial choices; and tie uncertainty, steelmanning, and revision commitments
-  to the methods and governance policies.
-- [ ] **M5.16 Add system value profiles.** Compare separately the values systems
-  explicitly declare, priorities implied by institutional design, and cautious
-  interpretations of dated practice. Use defined, sourced, lens-aware dimensions
-  with uncertainty and accessible comparisons—never an aggregate score, proof
-  of intent from outcomes, or an input to assessments and evidence.
+1. Approve the canonical entity contracts and promotion workflow in #38.
+2. Apply them to the social-democratic tradition dossier as the reference implementation.
+3. Give its substantive statements stable anchors and source relationships (#18).
+4. Model two bounded historical cases with explicit context and uncertainty (#13).
+5. Add and validate its Wikipedia, publisher, library, and reading links (#41 and #19).
+6. Render at least one full Challenge → End → Means → evidence → Criterion → assessment trace.
 
-## Later
+This slice tests the content model, editorial workflow, and reader experience together. Once it survives review, use it as the template for researching the other seven dossiers under #39.
 
-- [ ] Add changelog views only if git history proves insufficient.
-- [ ] Evaluate additional systems or Challenges only after v1 is fully cited.
-- [ ] Evaluate GitHub Discussions after issue-based feedback establishes a
-  moderation pattern.
-- [ ] Add private or no-GitHub-account feedback through a moderated serverless
-  intake only if the GitHub workflow proves too restrictive.
+## Phase 1 — Establish a trustworthy core
+
+This is the active phase. Finish it before widening the catalogue.
+
+- [ ] **Approve and encode the analytical model** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). Finalize the clean contracts for Traditions, Ends, Means, Challenges, Criteria, Topics, Statements, Sources, interpretations, and Cases. Preserve distinctions among theory, formal rules, rules-in-use, observed outcomes, causal inference, and value judgment.
+- [ ] **Complete the eight sourced tradition dossiers** ([#39](https://github.com/dougborg/ends-and-means/issues/39)). Review the overview prose, boundaries, variants, Ends, Means, FAQs, and common misconceptions. Attach claim-level evidence and explicitly mark unresolved disputes.
+- [ ] **Model statements and resource links** ([#18](https://github.com/dougborg/ends-and-means/issues/18)). Give challengeable claims stable anchors. Support DOI, ISBN, publisher, library, reading, and clearly labeled purchase links without making a retailer a canonical identifier.
+- [ ] **Extract bounded cases and connect citations** ([#13](https://github.com/dougborg/ends-and-means/issues/13)). Convert useful inherited examples into time- and place-bounded evidence with context, provenance, uncertainty, and carefully scoped relationships.
+- [ ] **Add canonical Wikipedia orientation links** ([#41](https://github.com/dougborg/ends-and-means/issues/41)). Link applicable entities to a well-matched article while keeping Wikipedia distinct from evidence supporting analytical claims.
+- [ ] **Validate external links continuously** ([#19](https://github.com/dougborg/ends-and-means/issues/19)). Check canonical, editorial, library, and commercial links on a schedule; report redirects and failures without making temporary outages block every build.
+
+### Phase 1 exit criteria
+
+- The replacement schema is canonical and contains no retired-model fields.
+- Every published dossier clearly separates sourced fact, interpretation, uncertainty, and editorial judgment.
+- Each substantive public claim has a source or a visible research-needed state.
+- At least one complete trace demonstrates the full model from Challenge and End through Means, bounded evidence, Criterion, and assessment.
+
+## Phase 2 — Complete the reference experience
+
+- [ ] **Build complete Source, Case, and Reading views** ([#3](https://github.com/dougborg/ends-and-means/issues/3)). Add useful backlinks, verification and source-type filters, case context, and transparent library/publisher/purchase actions.
+- [ ] **Publish the method and contribution model** ([#9](https://github.com/dougborg/ends-and-means/issues/9)). Explain scope, evidence tiers, assessments, uncertainty, editorial review, and the proposal-to-publication boundary in reader-facing language.
+- [ ] **Add statement-level correction links** ([#20](https://github.com/dougborg/ends-and-means/issues/20)). Prefill structured GitHub issue forms with the page, entity, and claim anchor.
+- [ ] **Complete accessibility and metadata review** ([#12](https://github.com/dougborg/ends-and-means/issues/12)). Verify keyboard use, focus, landmarks, contrast, reduced motion, metadata, social cards, structured data, and sitemap behavior.
+
+### Phase 2 exit criteria
+
+- Readers can move from any important statement to its evidence and context.
+- Readers can understand the method and challenge a precise assertion.
+- Core routes meet the accessibility and metadata release checklist.
+
+## Phase 3 — Build comparison tools
+
+- [ ] **Build static, accessible comparisons** ([#4](https://github.com/dougborg/ends-and-means/issues/4)). Generate useful no-JavaScript views from response traces without assuming rectangular coverage or producing a universal score.
+- [ ] **Add progressive filters and pivots** ([#6](https://github.com/dougborg/ends-and-means/issues/6)). Filter by Challenge, Tradition, Means, Case, evidence gap, and interpretation; preserve keyboard access and URL state.
+- [ ] **Add pairwise tradition comparison** ([#35](https://github.com/dougborg/ends-and-means/issues/35)). Generate “compare these two” views from canonical traces rather than duplicating comparison prose.
+
+## Phase 4 — Open and govern contributions
+
+- [ ] **Open the contribution workflow** ([#17](https://github.com/dougborg/ends-and-means/issues/17)). Add contributor guidance and structured forms for corrections, missing sources, broken links, challenged assessments, and proposed cases. Decide separately when the repository itself should become public.
+- [ ] **Define editorial governance** ([#32](https://github.com/dougborg/ends-and-means/issues/32)). Cover moderation, conflicts, affiliate revenue, contentious history, living people, appeals, privacy-safe attribution, and final maintainer authority.
+- [ ] **Clear the editorial release gate** ([#16](https://github.com/dougborg/ends-and-means/issues/16)). Confirm code/content licenses, publish affiliate disclosure, and ensure commercial relationships cannot influence source selection or evaluation.
+- [ ] **Add claim-level revision history** ([#33](https://github.com/dougborg/ends-and-means/issues/33)). Record substantive changes, reasons, supporting evidence, and privacy-safe contributor credit.
+
+## Phase 5 — Expand the knowledge graph
+
+These features become valuable after the core model and evidence workflow are stable.
+
+### Interpretation and navigation
+
+- [ ] **Publish a rigorous methods and classification guide** ([#27](https://github.com/dougborg/ends-and-means/issues/27)).
+- [ ] **Establish a glossary and controlled vocabulary** ([#30](https://github.com/dougborg/ends-and-means/issues/30)).
+- [ ] **Model competing scholarly interpretations** ([#31](https://github.com/dougborg/ends-and-means/issues/31)).
+- [ ] **Publish the editorial philosophy as a first-class site section** ([#36](https://github.com/dougborg/ends-and-means/issues/36)).
+- [ ] **Curate transparent reading paths** ([#28](https://github.com/dougborg/ends-and-means/issues/28)).
+
+### History, people, and literature
+
+- [ ] **Relate traditions to historical states and regimes** ([#22](https://github.com/dougborg/ends-and-means/issues/22)). Use time-bounded, many-to-many, contested classifications.
+- [ ] **Research historical political-economic formations** ([#23](https://github.com/dougborg/ends-and-means/issues/23)). Include monarchies, feudal arrangements, Greek democracy and poleis, the Roman Republic and Empire, and bounded Chinese and Japanese imperial forms.
+- [ ] **Add sourced historical transition timelines** ([#29](https://github.com/dougborg/ends-and-means/issues/29)).
+- [ ] **Add a first-class People layer** ([#25](https://github.com/dougborg/ends-and-means/issues/25)). Connect philosophers, authors, researchers, organizers, and leaders through typed, sourced relationships.
+- [ ] **Add a separate fictional-systems layer** ([#24](https://github.com/dougborg/ends-and-means/issues/24)). Use primary-text provenance, spoiler controls, and copyright-safe summaries; never treat fiction as empirical evidence.
+
+### Additional analytical views
+
+- [ ] **Explore multidimensional political-economic mapping** ([#26](https://github.com/dougborg/ends-and-means/issues/26)). Use independently defined axes, multiple scholarly lenses, uncertainty, and accessible nonvisual equivalents—never a single left/right score.
+- [ ] **Add sourced value profiles** ([#37](https://github.com/dougborg/ends-and-means/issues/37)). Separate declared values, design-implied priorities, and cautiously interpreted practice without producing an aggregate score.
+- [ ] **Publish stable machine-readable graph exports** ([#34](https://github.com/dougborg/ends-and-means/issues/34)).
+
+## Completed foundations
+
+- [x] Selected Astro and a framework-independent TypeScript content core.
+- [x] Added pinned runtime setup, clean-build documentation, CI, and graph tests.
+- [x] Preserved the original eight-by-fourteen research matrix and reading list in deterministic staging records.
+- [x] Added graph integrity checks and reviewed migration coverage.
+- [x] Migrated all inherited comparisons into clean response drafts or explicit research notes without requiring rectangular target coverage.
+- [x] Implemented Traditions, Challenges, Topics, Reading, Framework, and prototype routes using the replacement vocabulary.
+- [x] Made the eight tradition dossiers the primary homepage entry point.
+- [x] Added a proposal-only research skill for all replacement-model entities.
+- [x] Deployed the static site to GitHub Pages with the custom domain.
+
+## Explicitly deferred
+
+- Changelog views unless claim-level history proves insufficient.
+- GitHub Discussions until issue-based feedback establishes a moderation model.
+- Anonymous/private feedback until the GitHub workflow proves too restrictive.
+- Additional traditions or Challenges until the initial eight dossiers and shared analytical model are properly sourced.
