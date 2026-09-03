@@ -1,0 +1,1142 @@
+{
+  "input": {
+    "systems": 8,
+    "topics": 14,
+    "comparisons": 112,
+    "sources": 51
+  },
+  "output": {
+    "traditions": 8,
+    "challenges": 9,
+    "criteria": 3,
+    "responses": 72,
+    "researchNotes": 16,
+    "sources": 51
+  },
+  "coverage": {
+    "consumed": 112,
+    "missing": []
+  },
+  "audit": [
+    {
+      "inputId": "lf-c01",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c02",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c03",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c06",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c04",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c07",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c14",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c05",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c08",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c09",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c12",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c13",
+      "disposition": "response-draft",
+      "targetId": "laissez-faire-capitalism--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c01",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c02",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c03",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c06",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c04",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c07",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c14",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c05",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c08",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c09",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c12",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sd-c13",
+      "disposition": "response-draft",
+      "targetId": "social-democratic-tradition--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c01",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c02",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c03",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c06",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c04",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c07",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c14",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c05",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c08",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c09",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c12",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ms-c13",
+      "disposition": "response-draft",
+      "targetId": "market-socialist-tradition--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c01",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c02",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c03",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c06",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c04",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c07",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c14",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c05",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c08",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c09",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c12",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "cp-c13",
+      "disposition": "response-draft",
+      "targetId": "centrally-planned-economy--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c01",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c02",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c03",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c06",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c04",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c07",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c14",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c05",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c08",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c09",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c12",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sa-c13",
+      "disposition": "response-draft",
+      "targetId": "social-anarchist-tradition--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c01",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c02",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c03",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c06",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c04",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c07",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c14",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c05",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c08",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c09",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c12",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "sc-c13",
+      "disposition": "response-draft",
+      "targetId": "state-capitalist-ideal-type--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c01",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c02",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c03",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c06",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c04",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c07",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c14",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c05",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c08",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c09",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c12",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "ac-c13",
+      "disposition": "response-draft",
+      "targetId": "anarcho-capitalist-tradition--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c01",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--coordination-of-information-and-resources",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c02",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--innovation-risk-and-failure",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c03",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c06",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--distribution-of-gains-and-ownership",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c04",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c07",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c14",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--authority-accountability-and-abuse",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c05",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--externalities-and-collective-goods",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c08",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--mobility-exit-and-dependence",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c09",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--basic-needs-and-security",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c12",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--transition-and-institutional-change",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "pe-c13",
+      "disposition": "response-draft",
+      "targetId": "participatory-economics--external-coercion-and-defense",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph."
+    },
+    {
+      "inputId": "lf-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "laissez-faire-capitalism--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "sd-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "social-democratic-tradition--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "ms-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "market-socialist-tradition--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "cp-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "centrally-planned-economy--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "sa-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "social-anarchist-tradition--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "sc-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "state-capitalist-ideal-type--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "ac-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "anarcho-capitalist-tradition--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "pe-c10",
+      "disposition": "historical-evidence-inventory",
+      "targetId": "participatory-economics--historical-evidence-inventory",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Track record is evidence about bounded cases, not a Challenge."
+    },
+    {
+      "inputId": "lf-c11",
+      "disposition": "criterion-observation",
+      "targetId": "laissez-faire-capitalism--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "sd-c11",
+      "disposition": "criterion-observation",
+      "targetId": "social-democratic-tradition--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "ms-c11",
+      "disposition": "criterion-observation",
+      "targetId": "market-socialist-tradition--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "cp-c11",
+      "disposition": "criterion-observation",
+      "targetId": "centrally-planned-economy--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "sa-c11",
+      "disposition": "criterion-observation",
+      "targetId": "social-anarchist-tradition--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "sc-c11",
+      "disposition": "criterion-observation",
+      "targetId": "state-capitalist-ideal-type--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "ac-c11",
+      "disposition": "criterion-observation",
+      "targetId": "anarcho-capitalist-tradition--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    },
+    {
+      "inputId": "pe-c11",
+      "disposition": "criterion-observation",
+      "targetId": "participatory-economics--scale-and-transferability",
+      "withheld": [
+        "verdict",
+        "evidence"
+      ],
+      "reason": "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem."
+    }
+  ]
+}

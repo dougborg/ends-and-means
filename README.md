@@ -23,6 +23,7 @@ importer, and the portable graph validator are in place.
 | [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
 | [`docs/analytical-framework.md`](docs/analytical-framework.md) | Current target concepts and analytical boundaries. |
 | [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Clean, non-canonical target-model prototype and migration notes. |
+| [`content/framework/`](content/framework/) | Generated, non-canonical migration draft of all current comparison content. |
 | [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Primary content: 8 systems × 14 cruxes, with verdicts and a summary matrix. Source of `cells`. |
 | [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
 | [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |
@@ -47,6 +48,11 @@ npm run build
 and an editorial report. It intentionally does not guess verdict classes or
 citation mappings. The next step is an explicit curation adapter from those
 records into the canonical graph, followed by full build-time graph validation.
+
+`npm run migrate:framework` rebuilds the exploratory graph and migrates every
+comparison into the replacement draft structure. The generated coverage audit
+proves that no input was silently dropped; the public routes continue to use the
+exploratory graph until migrated claims have been researched and reviewed.
 
 ## Open decisions
 

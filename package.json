@@ -14,7 +14,8 @@
     "test": "vitest run tests/content && node --test tests/import/*.test.mjs tests/skills/*.test.mjs",
     "test:routes": "vitest run tests/routes",
     "import": "node scripts/import-content.mjs",
-    "validate": "npm run import && node --import tsx scripts/build-content.ts"
+    "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts",
+    "migrate:framework": "npm run validate"
   },
   "dependencies": {
     "astro": "7.2.10"

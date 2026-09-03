@@ -47,6 +47,12 @@ work is source material, not an API or compatibility contract.
   An isolated, noindex visual sketch at `/prototype/` now exercises the argument
   trace, statement-level evidence, bounded-case, and competing-interpretation
   patterns without changing the deployed exploratory routes.
+  A complete migration draft now accounts for all 112 exploratory comparisons:
+  96 inputs form 72 tradition-by-Challenge response drafts, while 16 inputs are
+  retained as historical-evidence or scale/transferability research notes. The
+  generated target graph contains no legacy fields or identifiers; every
+  inherited assertion remains explicitly unreviewed until claim-level research
+  and bounded-case modeling are complete.
 
 ## M2 — Reference pages
 
