@@ -1,4 +1,4 @@
-# Criterion proposal
+# Criterion change
 
 A Criterion is an explicit lens for evaluating arrangements and trade-offs.
 

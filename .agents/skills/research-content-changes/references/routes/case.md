@@ -1,4 +1,4 @@
-# Bounded case proposal
+# Bounded case change
 
 A case is a specific historical or contemporary episode used to examine a
 mechanism under named conditions. A whole country, civilization, or century is

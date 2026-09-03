@@ -12,7 +12,7 @@ const traditionIds: Record<string, string> = {
   lf: "laissez-faire-capitalism",
   sd: "social-democratic-tradition",
   ms: "market-socialist-tradition",
-  cp: "centrally-planned-economy",
+  cp: "central-planning-tradition",
   sa: "social-anarchist-tradition",
   sc: "state-capitalist-ideal-type",
   ac: "anarcho-capitalist-tradition",
@@ -58,10 +58,10 @@ const traditionOrientation: Record<string, Pick<Tradition, "overview" | "distinc
   },
   cp: {
     overview: [
-      "Central planning coordinates significant production and investment through administrative decisions rather than relying primarily on decentralized market prices. Planning bodies may set output targets, allocate inputs, direct investment, or establish priorities across sectors and enterprises.",
-      "The label covers different institutional designs, from hierarchical command systems to proposals for democratic or computational planning. Those differences matter: who supplies information, who can revise a plan, and who bears the consequences of error are more revealing than the word planning alone.",
+      "Central planning is a family of arrangements that coordinates a substantial scope of production, investment, or distribution through collectively authorized plans and administrative or computational allocation. Ownership alone does not determine the mechanism: the revealing questions are who sets objectives, supplies information, revises targets, allocates resources, and contests decisions.",
+      "The family includes hierarchical administrative-command systems, indicative and mixed planning, and democratic or computational proposals. Historical command systems also operated through bargaining, managerial discretion, strategic reporting, and informal exchange; participatory computational designs may distribute operational authority differently. These are distinct institutional forms, not interchangeable evidence.",
     ],
-    distinctions: ["Administrative allocation as a dominant coordinating mechanism", "Planning exists inside market economies too; dominance and scope are what distinguish this category", "Centralized, democratic, and computational proposals should not be collapsed"],
+    distinctions: ["Coordination rules, not state ownership alone", "Economy-wide dominance is distinct from public investment or planning inside firms", "Command, indicative, democratic, and computational forms should not be collapsed", "A historical case is not the tradition itself"],
     commonQuestions: [
       { question: "Does central planning mean one office decides every detail?", answer: "Not necessarily. Plans can be hierarchical and distributed across agencies and enterprises. The analytical questions are which decisions are binding, where information moves, and who can correct errors." },
       { question: "Is all public investment central planning?", answer: "No. Governments and firms routinely plan within market economies. This ideal type applies when administrative allocation replaces markets across a substantial range of production and investment decisions." },

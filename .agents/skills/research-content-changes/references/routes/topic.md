@@ -1,4 +1,4 @@
-# Topic proposal
+# Topic change
 
 A Topic is a reader-facing subject area grouping related questions; it is not an
 evaluative question or claim.

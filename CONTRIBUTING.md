@@ -1,32 +1,27 @@
 # Contributing to Ends and Means
 
 Ends and Means welcomes corrections, sources, and carefully bounded additions.
-Because the project makes contestable political and historical claims, research
-and publication are separate steps.
+Because the project makes contestable political and historical claims,
+substantial changes receive pull-request review before publication.
 
-## Research proposals
+## Research and content changes
 
 1. Start from an up-to-date `main` branch with a clean worktree.
 2. Create a focused branch named `research/<type>-<stable-id>`.
-3. Put research only in `proposals/<type>/<stable-id>/proposal.json` and
-   `research.md`. Do not change canonical content or application code in the
-   same proposal.
-4. Run `npm run validate`, `npm run validate:proposals`, `npm test`, and
-   `npm run build`.
-5. Open a draft pull request and select “Research proposal only” in the
-   template. Identify all judgments the reviewer must make.
-6. Revise the proposal in that PR. Merging is not automatic approval to publish
-   it on the site.
+3. Implement the concrete candidate in the canonical content model or its
+   deterministic source generator, including rendering and tests when needed.
+4. Run `npm run validate`, `npm run check`, `npm test`, `npm run build`, and
+   `npm run test:routes`.
+5. Open a draft pull request. The PR is the proposal: identify all claims,
+   classifications, and judgments the reviewer must decide.
+6. Revise the concrete change in that PR. Merging records acceptance and
+   publishes the result through the normal deployment workflow.
 
-The repo-local `research-content-proposals` skill provides the detailed entity
+Do not maintain a parallel proposal artifact or staging tree. Git history and
+the PR preserve the candidate, discussion, revisions, and decision.
+
+The repo-local `research-content-changes` skill provides the detailed entity
 contracts and editorial evidence policy.
-
-## Promotion
-
-Promotion is a separate pull request created only after a maintainer records an
-explicit acceptance decision. A promotion PR may reconcile accepted material
-into canonical content and update rendering or tests, but it must link back to
-the reviewed proposal and state what was accepted, revised, or declined.
 
 ## Review standards
 
