@@ -12,6 +12,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run tests/content && node --test tests/import/*.test.mjs tests/skills/*.test.mjs",
+    "test:routes": "vitest run tests/routes",
     "import": "node scripts/import-content.mjs",
     "validate": "npm run import && node --import tsx scripts/build-content.ts"
   },

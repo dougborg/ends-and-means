@@ -1,0 +1,21 @@
+---
+interface Props { currentPath?: string; }
+const { currentPath = "/" } = Astro.props;
+const navItems = [
+  { href: "/", label: "Overview", exact: true },
+  { href: "/systems/", label: "Systems" },
+  { href: "/cruxes/", label: "Cruxes" },
+  { href: "/cells/", label: "Compare" },
+];
+const isCurrent = (href: string, exact = false) => exact ? currentPath === href : currentPath.startsWith(href);
+---
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/" aria-label="Ends and Means, home"><span>Ends</span><span class="wordmark__hinge">and</span><span>Means</span></a>
+    <nav aria-label="Primary navigation">
+      <ul class="primary-nav">
+        {navItems.map(({ href, label, exact }) => <li><a href={href} aria-current={isCurrent(href, exact) ? "page" : undefined}>{label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</header>

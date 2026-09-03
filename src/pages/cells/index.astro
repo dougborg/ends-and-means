@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EvidenceBadge from "../../components/EvidenceBadge.astro";
+import { cellHref, cells, getCrux, getSystem } from "../../lib/routes/reference";
+---
+
+<BaseLayout title="Comparisons" description="Every system–crux pairing in the canonical comparison graph." currentPath="/cells/" eyebrow="Reference / Comparisons" fullBleed>
+  <header>
+    <p class="coordinate">REFERENCE / {cells.length} COMPARISONS</p>
+    <h1>Comparisons</h1>
+    <p class="dek">Open any pairing for its mechanism, failure modes, evidence status, and links across the same row and column.</p>
+  </header>
+  <nav aria-label="System and crux comparisons">
+    <ol class="reference-list">
+      {cells.map((cell) => (
+        <li>
+          <p class="coordinate">{cell.id.toUpperCase()} / {cell.verdict}</p>
+          <h2><a href={cellHref(cell)}>{getSystem(cell.system).name}</a></h2>
+          <p>{getCrux(cell.crux).title}</p>
+          {cell.evidence === "none" ? <span>No evidence linked</span> : <EvidenceBadge state={cell.evidence} />}
+        </li>
+      ))}
+    </ol>
+  </nav>
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+type VerificationState = "verified" | "reviewed" | "needs-review" | "draft";
+interface Props { state: VerificationState; label?: string; }
+const { state, label } = Astro.props;
+const defaultLabels: Record<VerificationState, string> = { verified: "Sources verified", reviewed: "Editorially reviewed", "needs-review": "Needs review", draft: "Working draft" };
+---
+<span class:list={["verification-badge", `verification-badge--${state}`]}><span aria-hidden="true">{state === "verified" || state === "reviewed" ? "✓" : "◇"}</span>{label ?? defaultLabels[state]}</span>

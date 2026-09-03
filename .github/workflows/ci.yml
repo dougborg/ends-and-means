@@ -33,3 +33,6 @@ jobs:
 
       - name: Build site
         run: npm run build
+
+      - name: Test rendered routes
+        run: npm run test:routes

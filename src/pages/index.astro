@@ -1,8 +1,9 @@
 ---
-import "../styles/global.css";
-
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import EvidenceBadge from "../components/EvidenceBadge.astro";
+import VerificationBadge from "../components/VerificationBadge.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 type DiagnosticReport = Record<string, unknown>;
 
@@ -31,35 +32,26 @@ for (const candidate of reportCandidates) {
 }
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Political and economic systems in theory and practice."
-    />
-    <title>Ends and Means</title>
-  </head>
-  <body>
-    <main>
-      <header class="masthead">
-        <p class="coordinate">BUILD / CONTENT FOUNDATION</p>
-        <h1>Ends <span>and</span> Means</h1>
-        <p class="dek">Political and economic systems in theory and practice.</p>
-      </header>
+<BaseLayout fullBleed>
+  <header class="masthead">
+    <p class="coordinate">COMPARATIVE INSTRUMENT / OPEN WORK</p>
+    <h1>Start with a problem,<br /><span>not an ideology.</span></h1>
+    <div class="masthead__statement">
+      <p>Political and economic systems promise different ends and depend on different means.</p>
+      <p>Trace the tradeoffs, mechanisms, evidence, and historical record behind each claim.</p>
+    </div>
+  </header>
 
-      <section aria-labelledby="diagnostics-heading">
+  <section class="instrument-panel" aria-labelledby="diagnostics-heading">
         <div class="section-heading">
           <div>
-            <p class="coordinate">M1 / DIAGNOSTICS</p>
-            <h2 id="diagnostics-heading">Knowledge graph status</h2>
+            <p class="coordinate">FOUNDATION / KNOWLEDGE GRAPH</p>
+            <h2 id="diagnostics-heading">Research status</h2>
           </div>
-          <p class:list={["status", { ready: report }]}>
-            <span aria-hidden="true"></span>
-            {report ? "Report loaded" : "Waiting for first import"}
-          </p>
+          <div class="badge-row">
+            <EvidenceBadge state={report ? "partial" : "untested"} />
+            <VerificationBadge state={report ? "reviewed" : "draft"} />
+          </div>
         </div>
 
         {
@@ -79,7 +71,5 @@ for (const candidate of reportCandidates) {
             </div>
           )
         }
-      </section>
-    </main>
-  </body>
-</html>
+  </section>
+</BaseLayout>
