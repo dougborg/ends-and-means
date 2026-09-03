@@ -4,11 +4,17 @@
 editorial discussion
 
 Ends and Means is not written from nowhere. Choosing which systems to compare,
-which problems count as cruxes, what evidence deserves weight, and what belongs
+which problems count as Challenges, what evidence deserves weight, and what belongs
 in a verdict all involve judgment. We will not describe those choices as neutral
 when they are not.
 
 Our standard is fairness, transparency, and corrigibility.
+
+Our analytical vocabulary separates **Ends** (values and promised outcomes),
+**Means** (formal institutions and rules-in-use), **Challenges** (recurring
+problems), and **Criteria** (the disclosed lenses used to evaluate responses).
+The working definitions and limits are recorded in the
+[analytical framework](analytical-framework.md).
 
 ## Fairness, not viewlessness
 
@@ -42,12 +48,22 @@ We aim to:
   value disagreement;
 - avoid generalizing from one historical case beyond what it can establish.
 
+We also distinguish a theoretical mechanism, formal institutional design,
+behavior under rules-in-use, observed outcomes, and our causal interpretation.
+Similarity between an outcome and a stated end does not by itself establish
+intent or causation.
+
 ## Visible judgment
 
 Verdicts are allowed, but they must be labeled, sourced, and explain their
 criteria. Where reasonable people could reach different conclusions because
 they prioritize different ends, the comparison should expose that dependency
 rather than present one ranking as objective.
+
+Criteria are not silently collapsed into a universal score. Where possible,
+an assessment should state which criterion it applies, why that criterion is
+relevant, and how uncertainty or a different normative priority could change
+the conclusion.
 
 The project may eventually state substantive editorial commitments. Those
 commitments should be adopted deliberately and published plainly, not inferred

@@ -3,26 +3,41 @@
 **Title:** Ends and Means
 **Subtitle:** Political and economic systems in theory and practice
 **Canonical domain:** endsandmeans.info
-**Status:** greenfield; content exists, no code yet
+**Status:** working implementation; analytical-model revision proposed
 **Owner:** Doug
 
 ## 1. What this is
 
-A static, evidence-forward reference site that compares economic and political systems by how each one handles a fixed set of core problems ("cruxes"). The content is a graph, not a set of articles: systems × cruxes produce cells, and every cell cites sources and historical cases. The site's job is to let a reader pivot through that graph — read one crux across all systems, walk one system through all cruxes, click any claim and see what it rests on, and filter the whole matrix by how much evidence actually exists.
+A static, evidence-forward reference site that compares economic and political
+systems by their Ends, Means, and responses to a shared set of Challenges.
+Criteria make the lenses behind each assessment explicit. The content is a
+graph, not a set of articles: systems × challenges produce comparison cells,
+and every cell traces institutional mechanisms to sources and bounded
+historical cases. The site's job is to let a reader pivot through that graph,
+inspect formal design versus rules-in-use and outcomes, and see what each claim
+and judgment rests on.
 
 The goal is understanding, not advocacy disguised as neutral reference. The
 project strives for fairness, transparency, and corrigibility, not a view from
 nowhere. It separates facts, inferences, and value judgments; takes positions
 inside explicit, labeled verdict fields; and makes the evidence and evaluative
-criteria behind those verdicts inspectable.
+criteria behind those verdicts inspectable. See
+[the analytical framework](analytical-framework.md) for working definitions
+and the limits of the project's adaptation of Institutional Analysis and
+Development.
 
 ## 2. Inputs you will be given
 
-Three markdown files. Treat them as the content of record for v1; do not invent additional claims, sources, or cases beyond what they contain.
+Three markdown files supplied the initial import. Preserve them as provenance;
+substantial additions or revisions now use staged proposals and human review.
 
-- `system-comparison-by-crux-v2.md` — 8 systems × 14 cruxes. Each crux is a section with a table (System | Mechanism | Where it breaks) and a **Verdict** line. Ends with a summary matrix and observations. This is the primary source of cells.
-- `political-economy-notes.md` — Part 1 is thirteen narrative summaries (background for system and crux descriptions); Part 2 is the reading list, organized by section, with a verification-status note. This is the source of `sources`.
-- `system-comparison-by-crux.md` — v1 of the matrix (5 systems × 10 cruxes). Superseded by v2; use only to cross-check.
+- `system-comparison-by-crux-v2.md` — the legacy source file for 8 systems ×
+  14 Challenges. Each legacy “crux” section contains a system/mechanism/failure
+  table and verdict. Preserve the filename as provenance during migration.
+- `political-economy-notes.md` — Part 1 contains narrative background for
+  system and Challenge descriptions; Part 2 is the source reading list.
+- `system-comparison-by-crux.md` — superseded v1 input retained only for
+  cross-checking and provenance.
 
 Historical cases (Mondragón, Spain 1936–39, the Meidner Plan, Fagor's 2013 bankruptcy, Singapore, the Great Leap Forward, etc.) are not yet in a structured file. They are mentioned throughout the cells. Extracting them into `cases` is part of the import work (see §5, M1).
 
@@ -35,11 +50,14 @@ Everything lives in the repo as structured content. No CMS, no database.
 | Entity | ID scheme | Notes |
 |---|---|---|
 | **System** | `lf`, `sd`, `ms`, `cp`, `sa`, `sc`, `ac`, `pe` | Eight in v1. See v2 file §"How to read this" for names and definitions. |
-| **Crux** | `c01` … `c14` | Fourteen in v1. Each has a title, a one-line question, and an optional note on whether it is value-laden. |
-| **Cell** | `{system}-{crux}` e.g. `sd-c07` | Exactly one per system × crux pair (112 in v1). Fields: `mechanism`, `breaks`, `verdict`, `evidence`, `sources[]`, `cases[]`. |
+| **Challenge** | `c01` … `c14` | Fourteen in v1. Each is an open political-economic question. The legacy internal field name `crux` remains temporarily for migration stability. |
+| **End** | stable slug | A declared, design-implied, or practice-interpreted value, promised outcome, or legitimacy claim. Attribution type, scope, lens, and sources are required. |
+| **Means** | stable slug | A reusable institutional mechanism described through roles, rules, information, incentives, authority, and costs/benefits rather than ideological shorthand. |
+| **Criterion** | stable slug | An explicit evaluative lens with an operational definition, normative assumptions, evidence requirements, and limitations. Criteria never become an automatic aggregate score. |
+| **Cell** | `{system}-{challenge}` e.g. `sd-c07` | Exactly one per system × challenge pair (112 in v1). Connects implicated Ends and Means to mechanism, failure modes, context, outcomes, criteria, evidence, sources, and cases. |
 | **Claim** | stable anchor within a cell or case | The smallest statement a reader can cite, challenge, or propose a correction to. Fields: text, context, `sources[]`, `cases[]`. |
 | **Source** | slug, e.g. `hayek-1945-use-of-knowledge` | From the reading list. Fields: author(s), title, year, type, section, note, `verified` status, identifiers (ISBN/DOI/Open Library), and typed external links. Retailer URLs are never canonical IDs. |
-| **Case** | slug, e.g. `mondragon`, `spain-1936` | A historical instance. Fields: name, dates, location, summary, which systems claim it, `sources[]`. |
+| **Case** | slug, e.g. `mondragon`, `spain-1936` | A bounded historical instance. Records dates, location, material/community context, formal rules and rules-in-use, participants, outcomes, uncertainty, relationships claimed by systems, and `sources[]`. |
 | **Thinker** | slug, e.g. `kropotkin` | Optional in v1. Only if it falls out of the source import cheaply. |
 
 ### Enumerations
@@ -52,7 +70,9 @@ Everything lives in the repo as structured content. No CMS, no database.
 
 ### Format
 
-Recommended: one YAML or Markdown-with-frontmatter file per entity, under `content/{systems,cruxes,cells,sources,cases}/`. Cell bodies can hold the mechanism/breaks prose as markdown; references are ID arrays in frontmatter.
+Recommended: one YAML or Markdown-with-frontmatter file per entity. Retain the
+legacy `content/cruxes` path until a deliberate migration introduces
+`content/challenges`; do not rename stable IDs merely to update public wording.
 
 Example cell (`content/cells/sd-c07.md`):
 
@@ -74,7 +94,7 @@ Regulatory capture (Stigler); discretionary spending enables patronage; durabili
 
 ### Validation (build must fail on any violation)
 
-1. Every system × crux pair has exactly one cell.
+1. Every system × Challenge pair has exactly one cell.
 2. Every `sources[]` and `cases[]` ID resolves to an existing entity.
 3. Every cell exposes citation status. During M1, an empty `sources[]` and
    `cases[]` is valid only when `needsCitation: true`; the importer emits a
@@ -93,22 +113,31 @@ minimal — no component library unless it earns its place.
 
 ### Pages
 
-- `/` — the matrix. Systems as columns, cruxes as rows, each cell showing its verdict as a compact label. Hover/tap reveals the first line of mechanism. Click opens the cell page. Controls: filter rows by evidence level; toggle to hide untested systems; transpose (cruxes as columns).
-- `/systems/{id}` — one system walked through all fourteen cruxes in order, each cell inline, with a sidebar listing every case and source the system relies on.
-- `/cruxes/{id}` — one crux across all eight systems, side by side, with the verdict line at the top and the "value-laden" note if applicable.
-- `/cells/{id}` — the full cell: mechanism, where it breaks, verdict, evidence, sources, cases, and links to its row and column neighbors.
+- `/` — an introduction and useful portion of the matrix. Systems are columns,
+  Challenges are rows, and cells expose concise assessments without implying a
+  universal ranking.
+- `/systems/{id}` — one system's Ends and Means followed through all fourteen
+  Challenges, with attributed interpretations, sources, and bounded cases.
+- `/challenges/{id}` — one open Challenge across all eight systems. Legacy
+  `/cruxes/{id}` routes redirect or remain aliases during migration.
+- `/cells/{id}` — an Ends / Means / Practice / Criteria trace: mechanism,
+  failure modes, context, rules-in-use, outcomes, uncertainty, sources, cases,
+  and links to row and column neighbors.
 - `/sources/{id}` — bibliographic entry, identifiers, note, verification badge,
   borrowing/reading/publisher links, clearly labeled purchase links, and
   **backlinks**: every claim, cell, and case that cites it.
-- `/cases/{id}` — summary, dates, which systems claim it as evidence and on which cruxes (Spain 1936 is evidence *for* anarchism on voice and *against* it on defense — the page should show both), sources.
+- `/cases/{id}` — bounded context, dates, formal rules, rules-in-use, outcomes,
+  and which system/Challenge claims cite it in support or criticism.
 - `/reading` — the reading list, filterable by section and verification status, each entry linking to its source page.
 - `/about` — what the site is, how verdicts are made, the evidence tiers, how to propose a change (link to the repo).
 
 ### Cross-linking rules
 
-- Every mention of a system, crux, source, or case inside prose should be a link if it can be resolved by ID. A remark-style plugin that turns `[[slug]]` into links is sufficient.
+- Every mention of a system, Challenge, End, Means, Criterion, source, or case
+  inside prose should be a link if it can be resolved by ID.
 - Every page shows its backlinks ("referenced by").
-- The matrix, system pages, and crux pages are three views of the same 112 cells. Do not duplicate content; render from the cell collection.
+- The matrix, system pages, and Challenge pages are three views of the same 112
+  cells. Do not duplicate content; render from the cell collection.
 - Stable claim anchors make feedback addressable. “Suggest a correction” links
   prefill the entity ID, claim anchor, and current URL.
 - Purchase links are secondary to citation and access links, disclose affiliate
@@ -124,9 +153,13 @@ Part 2 into sources. Preserve source prose exactly; keep interpretive mappings
 build fails structural validation and prints a report of unresolved editorial
 work. No UI yet beyond a diagnostic dump.
 
-**M2 — Entity pages.** System, crux, cell, source, case, reading-list, and about pages. Backlinks working. Plain, readable, mobile-first. No matrix UI yet.
+**M2 — Entity pages.** System, Challenge, comparison, source, case,
+reading-list, and about pages. Backlinks working. Plain, readable,
+mobile-first. No matrix UI yet.
 
-**M3 — Matrix.** The home-page matrix with filter, hide-untested, and transpose. This is the only interactive component; keep it small.
+**M3 — Matrix.** A semantic Systems × Challenges matrix with progressive
+filters and transpose. It navigates assessments under explicit Criteria and
+never calculates an aggregate system score.
 
 **M4 — Polish and contribution.** Typography, accessibility pass (keyboard nav
 on the matrix, contrast, semantic tables), OpenGraph, sitemap, affiliate
@@ -142,7 +175,10 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
   describes; verdicts judge. Represent serious views fairly without pretending
   that framing or evaluation is value-neutral, and do not let analysis drift
   into undisclosed advocacy.
-- **Pivotable.** From any cell, one click reaches its row, its column, its sources, and its cases.
+- **Causally legible.** Separate Ends, institutional Means, expected interaction,
+  formal design, rules-in-use, observed outcomes, and editorial assessment.
+- **Pivotable.** From any cell, one click reaches its system, Challenge,
+  Criteria, sources, and cases.
 - **Readable without JS.** Everything except the matrix filters must work with JavaScript disabled.
 - **Small.** No accounts, no comments, and no analytics or tracking by default.
 - **Addressable disagreement.** Feedback attaches to a claim, citation, case, or
@@ -152,7 +188,9 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 
 ## 7. Non-goals for v1
 
-- Do not add systems, cruxes, sources, or cases beyond the input files. Adding a system means writing fourteen cells; that is a content task for later.
+- Do not add systems, Challenges, sources, or cases beyond the input files.
+  Adding a system means writing fourteen comparison responses; that is a
+  content task for later.
 - Do not editorialize beyond the verdict field or rewrite the cell prose for style.
 - Do not fabricate URLs or ISBNs for sources. Leave the URL field empty if the input does not supply one.
 - No CMS, no auth, no server runtime.
@@ -170,6 +208,7 @@ Ship M1 and M2 before any visual design work. The point of M1 is to find out whe
 
 - Repo builds from a clean clone with a single install and build command.
 - All 112 cells, all sources, and all extracted cases render, with validation enforced at build time.
-- Matrix, system, crux, cell, source, case, and reading pages exist and cross-link per §4.
+- Matrix, system, Challenge, comparison, source, case, and reading pages exist
+  and cross-link per §4.
 - The uncited-cells report is either empty or surfaced on the site as "needs citation" badges.
 - Deployed through GitHub Pages at `endsandmeans.info` once DNS is connected.

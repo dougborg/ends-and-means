@@ -10,9 +10,10 @@ GitHub issue when the private remote is available.
   content compiler. Record the decision and boundaries in an ADR.
 - [x] **M1.1 Scaffold the chosen stack and CI.** Pin the runtime, add
   install/build checks, and document the clean-clone path.
-- [x] **M1.2 Import the 8×14 matrix.** Parse systems, cruxes, cells, and row
+- [x] **M1.2 Import the 8×14 matrix.** Parse systems, Challenges (stored under
+  legacy crux IDs), comparison cells, and row
   verdicts without rewriting source prose. Acceptance: exactly 8 systems, 14
-  cruxes, and 112 unique cells.
+  Challenges, and 112 unique cells.
 - [x] **M1.3 Import and classify the reading list.** Preserve section and note;
   assign every source a verification tier. Acceptance: stable IDs and no
   duplicate IDs.
@@ -28,12 +29,18 @@ GitHub issue when the private remote is available.
   purchase links without making retailer URLs canonical identifiers.
 - [ ] **M1.8 Validate external links.** Check links on a scheduled basis, report
   redirects and failures, and distinguish editorial links from purchase links.
+- [ ] **M1.9 Formalize the analytical framework.** Review and encode the
+  Ends/Means/Challenges/Criteria model before redesigning comparison views.
+  Distinguish theoretical mechanisms, formal rules, rules-in-use, bounded
+  context, interaction patterns, outcomes, and evaluative judgments; adapt IAD
+  as a diagnostic lens without scoring whole societies or treating historical
+  cases as universal blueprints.
 
 ## M2 — Reference pages
 
-- [ ] **M2.1 Shared layout and evidence language.** Establish typography,
+- [x] **M2.1 Shared layout and evidence language.** Establish typography,
   navigation, badges, and mobile behavior.
-- [ ] **M2.2 System, crux, and cell routes.** Render all three pivots from the
+- [x] **M2.2 System, Challenge, and comparison routes.** Render all three pivots from the
   same cell records, including row/column neighbors.
 - [ ] **M2.3 Source, case, and reading routes.** Add backlinks and verification
   filters, borrowing links, publisher links, and clearly labeled purchase links.
@@ -63,9 +70,9 @@ GitHub issue when the private remote is available.
   missing-source, broken-link, verdict-challenge, and new-case issue forms; decide
   when the repository becomes public.
 - [x] **M4.5 Add an editorial research skill suite.** Provide a repo-local,
-  routed skill for proposing new cruxes, systems, authors/sources, and cases.
+  routed skill for proposing new Challenges, systems, authors/sources, and cases.
   Require authoritative-source research, explicit provenance, neutral summaries,
-  complete 14-cell system proposals, deduplication and cross-link checks, graph
+  complete 14-Challenge system proposals, deduplication and cross-link checks, graph
   validation, a hard human-review boundary before canonical changes, and
   independent forward tests.
 
@@ -80,11 +87,11 @@ GitHub issue when the private remote is available.
   imperial formations. Distinguish political form from economic order and
   determine whether heterogeneous candidates belong as systems, state/regime
   periods, political forms, or other entities before testing any system proposal
-  against the existing fourteen cruxes and considering canonical inclusion.
+  against the existing fourteen Challenges and considering canonical inclusion.
 - [ ] **M5.3 Add fictional-system comparisons.** Create a clearly separated
   interpretive layer for systems depicted in literature, with primary-text
   provenance, spoiler controls, copyright-safe summaries, and links to real
-  systems and cruxes that never count as empirical verdict evidence.
+  systems and Challenges that never count as empirical verdict evidence.
 - [ ] **M5.4 Add a first-class People layer.** Replace the optional Thinker
   concept with stable Person records for relevant philosophers, authors,
   researchers, organizers, and political leaders. Model cited, typed, and
@@ -97,8 +104,11 @@ GitHub issue when the private remote is available.
   uncertainty, change over time, and accessible nonvisual comparisons while
   keeping mapped positions independent from cell verdicts and evidence.
 - [ ] **M5.6 Publish rigorous methods.** Define systems, cases, claims, verdicts,
-  evidence, classification, and proposal-to-canonical promotion rules before
-  expanding the graph or presenting additional analytical views.
+  evidence, Ends, Means, Challenges, Criteria, context, rules-in-use, outcomes,
+  classification, and proposal-to-canonical promotion rules before expanding
+  the graph or presenting additional analytical views. Document where the IAD
+  adaptation applies and where analysis of broad system ideal types exceeds its
+  bounded action-situation scope.
 - [ ] **M5.7 Establish a glossary and controlled vocabulary.** Disambiguate
   frequently conflated political-economic terms, manage aliases and deprecated
   labels, and backlink definitions throughout the graph.
@@ -135,7 +145,7 @@ GitHub issue when the private remote is available.
 ## Later
 
 - [ ] Add changelog views only if git history proves insufficient.
-- [ ] Evaluate additional systems or cruxes only after v1 is fully cited.
+- [ ] Evaluate additional systems or Challenges only after v1 is fully cited.
 - [ ] Evaluate GitHub Discussions after issue-based feedback establishes a
   moderation pattern.
 - [ ] Add private or no-GitHub-account feedback through a moderated serverless

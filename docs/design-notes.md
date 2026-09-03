@@ -14,24 +14,35 @@ The interface should communicate intellectual confidence without pretending to
 certainty. Evidence state is visible, disagreement has an address, and every
 summary opens into its reasoning.
 
-## Signature: the split reading frame
+The information architecture follows the proposed
+[Ends, Means, Challenges, and Criteria framework](analytical-framework.md).
+“Challenges” is the public label for the current crux collection; stable
+internal IDs may remain during migration. Ends and Means describe systems,
+Challenges organize common questions, and Criteria disclose how responses are
+being evaluated.
+
+## Signature: the analytical reading frame
 
 The name supplies the organizing device. Detailed comparisons use a persistent
-two-part frame:
+analytical frame:
 
 ```text
-ENDS                                  MEANS
-What is promised or valued            How it is organized
-                                      Where the mechanism breaks
----------------- evidence trace ------------------------------
-PRACTICE
-Cases, sources, confidence, and challenges
+ENDS                    MEANS                         PRACTICE
+What is valued          Roles and rules               Bounded context
+What is promised        Information and incentives    Rules-in-use
+Legitimacy claims       Where mechanisms break        Outcomes and uncertainty
+---------------------- evidence trace --------------------------
+CRITERIA
+The explicit lenses behind the assessment
 ```
 
-On a cell page this becomes an asymmetrical split, not two equal cards. “Means”
-gets more room because mechanisms and failure modes carry most of the analysis.
-The evidence trace visually connects assertions to sources and cases. On small
-screens the frame becomes a labeled sequence: Ends, Means, Practice.
+On a comparison page this becomes an asymmetrical sequence, not equal cards.
+Means gets more room because roles, rules, incentives, information, and failure
+modes carry most of the causal analysis. Practice is never a placeless verdict:
+it identifies a bounded case and separates institutional design from
+rules-in-use and outcomes. The evidence trace connects assertions to sources,
+cases, interpretations, and criteria. On small screens the frame remains a
+labeled sequence: Ends, Means, Practice, Criteria.
 
 The split is structural, never decorative. Do not force it onto pages where an
 ends/means distinction is not present, such as a simple bibliography entry.
@@ -96,19 +107,19 @@ sentences and show a useful portion of the real matrix immediately.
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The matrix is a semantic table on wide screens. Freeze the crux column and
+The matrix is a semantic table on wide screens. Freeze the Challenge column and
 column headers. Use deliberate horizontal scrolling rather than compressing
-eight systems into illegibility. On narrow screens, switch to one selected crux
+eight systems into illegibility. On narrow screens, switch to one selected Challenge
 across systems; never turn 112 cells into an endless generic card feed.
 
 ### Entity pages: comparison dossier
 
 ```text
 ┌ identity rail ────────┬ argument ─────────────┬ evidence rail ─────┐
-│ System / crux / ID  │ Ends                 │ Evidence: partial   │
-│ neighbor navigation│ Means                │ 3 sources          │
-│                      │ Where it breaks      │ 2 cases            │
-│                      │ Practice             │ Suggest correction│
+│ System / Challenge │ Ends                 │ Evidence: partial   │
+│ neighbor navigation│ Means                │ Criteria used       │
+│                     │ Practice + outcomes  │ 3 sources / 2 cases│
+│                     │ Uncertainty          │ Suggest correction │
 └─────────────────────┴──────────────────────┴──────────────────┘
 ```
 
