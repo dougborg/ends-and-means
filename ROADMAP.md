@@ -219,8 +219,11 @@ according to research readiness rather than as one bulk migration.
 - [x] Preserved the original eight-by-fourteen research matrix and reading list in deterministic staging records.
 - [x] Added graph integrity checks and reviewed migration coverage.
 - [x] Migrated all inherited comparisons into clean response drafts or explicit research notes without requiring rectangular target coverage.
-- [x] Implemented Approach, Challenge, Topic, Reading, and Framework routes plus an analytical trace prototype.
-- [x] Made the inherited dossiers the primary homepage entry point as a reader-experience experiment; their ontology remains transitional.
+- [x] Implemented transitional Tradition, Challenge, Topic, Reading, and
+  Framework routes plus an analytical trace prototype.
+- [x] Tested inherited dossiers as the primary homepage entry point; the target
+  information architecture now replaces that experiment with Explore and
+  Compare.
 - [x] Added a research skill that implements source-backed content changes directly in reviewable pull requests.
 - [x] Deployed the static site to GitHub Pages with the custom domain.
 

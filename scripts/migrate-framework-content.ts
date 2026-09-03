@@ -4,11 +4,11 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ContentGraph } from "../src/lib/content/model";
-import type { Approach, ApproachGraph, FrameworkChallenge } from "../src/lib/framework/model";
+import type { FrameworkDraftGraph, FrameworkChallenge, Tradition } from "../src/lib/framework/model";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-const approachIds: Record<string, string> = {
+const traditionIds: Record<string, string> = {
   lf: "laissez-faire-capitalism",
   sd: "social-democratic-tradition",
   ms: "market-socialist-tradition",
@@ -19,7 +19,7 @@ const approachIds: Record<string, string> = {
   pe: "participatory-economics",
 };
 
-const traditionOrientation: Record<string, Pick<Approach, "overview" | "distinctions" | "commonQuestions">> = {
+const traditionOrientation: Record<string, Pick<Tradition, "overview" | "distinctions" | "commonQuestions">> = {
   lf: {
     overview: [
       "Laissez-faire capitalism is a family of arguments for organizing most production and exchange through private property, voluntary contract, market prices, and competition. In its minimal-state forms, public authority still defines and enforces property, contract, and protections against force or fraud.",
@@ -118,17 +118,6 @@ const traditionOrientation: Record<string, Pick<Approach, "overview" | "distinct
   },
 };
 
-const approachClassification: Record<string, Pick<Approach, "kind" | "domains">> = {
-  lf: { kind: "ideal-type", domains: ["ownership", "allocation-coordination", "political-authority", "law-coercion"] },
-  sd: { kind: "tradition", domains: ["ownership", "allocation-coordination", "workplace-governance", "political-authority", "social-provision", "transition-change"] },
-  ms: { kind: "institutional-family", domains: ["ownership", "allocation-coordination", "workplace-governance", "political-authority"] },
-  cp: { kind: "institutional-family", domains: ["ownership", "allocation-coordination", "workplace-governance", "political-authority", "transition-change"] },
-  sa: { kind: "tradition", domains: ["ownership", "allocation-coordination", "workplace-governance", "political-authority", "law-coercion", "transition-change"] },
-  sc: { kind: "ideal-type", domains: ["ownership", "allocation-coordination", "political-authority", "social-provision"] },
-  ac: { kind: "tradition", domains: ["ownership", "allocation-coordination", "political-authority", "law-coercion", "transition-change"] },
-  pe: { kind: "named-model", domains: ["ownership", "allocation-coordination", "workplace-governance", "political-authority", "social-provision", "transition-change"] },
-};
-
 const challengeSpecs: Array<FrameworkChallenge & { inputs: string[] }> = [
   { id: "coordination-of-information-and-resources", question: "How do participants learn what is needed and coordinate resources under dispersed, incomplete, or strategic information?", rationale: "Coordination includes discovery, communication, calculation, and authority rather than presuming one allocation mechanism.", topicIds: ["coordination"], inputs: ["c01"], reviewStatus: "unreviewed-migration" },
   { id: "innovation-risk-and-failure", question: "Who can initiate experiments, who bears their risks, and how does the arrangement learn from failure?", rationale: "Innovation and failure are linked institutional problems involving permission, finance, loss, and adaptation.", topicIds: ["coordination", "ownership"], inputs: ["c02"], reviewStatus: "unreviewed-migration" },
@@ -148,10 +137,9 @@ function migrateLanguage(value: string) {
 export async function migrateFrameworkContent(root = ROOT) {
   const graph = JSON.parse(await readFile(resolve(root, "generated/content/graph.json"), "utf8")) as ContentGraph;
   const challenges = challengeSpecs.map(({ inputs: _inputs, ...challenge }) => challenge);
-  const approaches: Approach[] = graph.systems.map((item) => ({
-    id: approachIds[item.id]!,
+  const traditions: Tradition[] = graph.systems.map((item) => ({
+    id: traditionIds[item.id]!,
     name: item.name,
-    ...approachClassification[item.id]!,
     description: migrateLanguage(item.description),
     ...traditionOrientation[item.id]!,
     caveat: "Exploratory ideal-type description. It does not identify a country, case, advocate, or internally uniform tradition.",
@@ -161,37 +149,37 @@ export async function migrateFrameworkContent(root = ROOT) {
   const consumed = new Set<string>();
   const audit: Array<Record<string, unknown>> = [];
 
-  const responses = approaches.flatMap((approach) => challengeSpecs.map((challenge) => {
-    const systemInput = Object.entries(approachIds).find(([, id]) => id === approach.id)![0];
+  const responses = traditions.flatMap((tradition) => challengeSpecs.map((challenge) => {
+    const systemInput = Object.entries(traditionIds).find(([, id]) => id === tradition.id)![0];
     const fragments = graph.cells.filter((cell) => cell.system === systemInput && challenge.inputs.includes(cell.crux));
     fragments.forEach((cell) => consumed.add(cell.id));
     const citationIds = (cell: (typeof fragments)[number]) => cell.sources.filter((id) => sourceByInput.has(id));
     audit.push(...fragments.map((cell) => ({
       inputId: cell.id,
       disposition: "response-draft",
-      targetId: `${approach.id}--${challenge.id}`,
+      targetId: `${tradition.id}--${challenge.id}`,
       withheld: ["verdict", "evidence"],
       reason: "Narrative retained as uncited research hypotheses; evaluative labels do not enter the replacement graph.",
     })));
     return {
-      id: `${approach.id}--${challenge.id}`,
-      approachId: approach.id,
+      id: `${tradition.id}--${challenge.id}`,
+      traditionId: tradition.id,
       challengeId: challenge.id,
-      means: fragments.map((cell, index) => ({ id: `${approach.id}--${challenge.id}--means-${index + 1}`, text: migrateLanguage(cell.mechanism), role: "proposed-means" as const, claimKind: "unreviewed-editorial-claim" as const, citations: citationIds(cell), researchNeeded: true as const })),
-      failureHypotheses: fragments.map((cell, index) => ({ id: `${approach.id}--${challenge.id}--failure-${index + 1}`, text: migrateLanguage(cell.breaks), role: "failure-hypothesis" as const, claimKind: "unreviewed-editorial-claim" as const, citations: citationIds(cell), researchNeeded: true as const })),
+      means: fragments.map((cell, index) => ({ id: `${tradition.id}--${challenge.id}--means-${index + 1}`, text: migrateLanguage(cell.mechanism), role: "proposed-means" as const, claimKind: "unreviewed-editorial-claim" as const, citations: citationIds(cell), researchNeeded: true as const })),
+      failureHypotheses: fragments.map((cell, index) => ({ id: `${tradition.id}--${challenge.id}--failure-${index + 1}`, text: migrateLanguage(cell.breaks), role: "failure-hypothesis" as const, claimKind: "unreviewed-editorial-claim" as const, citations: citationIds(cell), researchNeeded: true as const })),
       reviewStatus: "unreviewed-migration" as const,
     };
   }));
 
   const researchNotes = graph.cells.filter((cell) => cell.crux === "c10" || cell.crux === "c11").map((cell) => {
     consumed.add(cell.id);
-    const approachId = approachIds[cell.system]!;
+    const traditionId = traditionIds[cell.system]!;
     const historical = cell.crux === "c10";
-    const id = `${approachId}--${historical ? "historical-evidence-inventory" : "scale-and-transferability"}`;
+    const id = `${traditionId}--${historical ? "historical-evidence-inventory" : "scale-and-transferability"}`;
     audit.push({ inputId: cell.id, disposition: historical ? "historical-evidence-inventory" : "criterion-observation", targetId: id, withheld: ["verdict", "evidence"], reason: historical ? "Track record is evidence about bounded cases, not a Challenge." : "Scale is a contextual transferability Criterion, not necessarily a shared institutional problem." });
     return {
       id,
-      approachId,
+      traditionId,
       kind: historical ? "historical-evidence-inventory" as const : "criterion-observation" as const,
       ...(!historical && { criterionId: "scale-and-transferability" }),
       text: migrateLanguage(`${cell.mechanism} ${cell.breaks}`.trim()),
@@ -199,9 +187,10 @@ export async function migrateFrameworkContent(root = ROOT) {
     };
   });
 
-  const output: ApproachGraph = {
-    schemaVersion: "approach-graph-1",
-    approaches,
+  const output: FrameworkDraftGraph = {
+    schemaVersion: "framework-draft-1",
+    status: "migration-draft",
+    traditions,
     topics: [
       { id: "ownership", label: "Ownership", description: "Who may control productive assets, transfer them, and receive the gains or losses attached to them?" },
       { id: "work", label: "Work", description: "How livelihood, authority, bargaining power, mobility, and security are organized around labor." },
@@ -225,14 +214,14 @@ export async function migrateFrameworkContent(root = ROOT) {
   if (missing.length || consumed.size !== expected.size) throw new Error(`Migration coverage failure: ${missing.join(", ")}`);
   const report = {
     input: { systems: graph.systems.length, topics: graph.cruxes.length, comparisons: graph.cells.length, sources: graph.sources.length },
-    output: { approaches: output.approaches.length, topics: output.topics.length, challenges: output.challenges.length, criteria: output.criteria.length, responses: output.responses.length, researchNotes: output.researchNotes.length, sources: output.sources.length },
+    output: { traditions: output.traditions.length, topics: output.topics.length, challenges: output.challenges.length, criteria: output.criteria.length, responses: output.responses.length, researchNotes: output.researchNotes.length, sources: output.sources.length },
     coverage: { consumed: consumed.size, missing },
     audit,
   };
   await mkdir(resolve(root, "content/framework"), { recursive: true });
   await mkdir(resolve(root, "generated/reports"), { recursive: true });
   await Promise.all([
-    writeFile(resolve(root, "content/framework/graph.json"), `${JSON.stringify(output, null, 2)}\n`),
+    writeFile(resolve(root, "content/framework/draft.json"), `${JSON.stringify(output, null, 2)}\n`),
     writeFile(resolve(root, "generated/reports/framework-migration.json"), `${JSON.stringify(report, null, 2)}\n`),
   ]);
   return { output, report };

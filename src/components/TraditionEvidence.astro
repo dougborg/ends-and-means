@@ -1,7 +1,7 @@
 ---
-type ApproachEvidence = typeof import("../../content/framework/social-democratic-approach-evidence.json");
+type TraditionEvidence = typeof import("../../content/framework/social-democratic-tradition-evidence.json");
 interface Props {
-  evidence: ApproachEvidence;
+  evidence: TraditionEvidence;
   challenge: { question: string };
   criterion: { definition: string; normativeAssumptions: string[] };
 }
@@ -14,7 +14,7 @@ const citedSources = (sourceIds: string[]) => sourceIds.map((sourceId) => source
     <div><p class="coordinate">EVIDENCE / PUBLISHED ANALYSIS</p><h2 id="tradition-evidence-title">From stated Ends to bounded evidence</h2></div>
     <a href={evidence.wikipediaUrl}>Wikipedia orientation ↗</a>
   </header>
-  <p class="evidence-intro">This researched analysis tests the analytical model. It does not treat Sweden as an Approach or convert a bounded result into a general assessment.</p>
+  <p class="evidence-intro">This researched analysis tests the analytical model. It does not treat Sweden as the tradition or convert a bounded result into a general verdict.</p>
 
   <div class="ends-means-grid">
     <section><p class="coordinate">ENDS / ATTRIBUTED</p>{evidence.ends.map((end) => <article><h3>{end.label}</h3><p>{end.statement}</p><small>Attributed to {end.attributedTo}</small><footer>{citedSources(end.sourceIds).map((source) => <a href={source.url}>{source.authors}, {source.year} ↗</a>)}</footer></article>)}</section>

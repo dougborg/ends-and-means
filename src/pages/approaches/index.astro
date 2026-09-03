@@ -1,9 +1,0 @@
----
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import framework from "../../../content/framework/graph.json";
----
-<BaseLayout fullBleed title="Approaches" description="Political-economic traditions, ideal types, institutional families, and named models in the Ends and Means framework.">
-  <div class="framework-index"><header><p class="coordinate">FRAMEWORK / APPROACHES</p><h1>Ways of organizing political economy.</h1><p class="dek">Approach is an umbrella, not a claim that every entry is the same kind of thing. Each dossier names its kind, scope, internal disagreements, and partial relationships to bounded Cases.</p></header>
-    <ul class="tradition-list">{framework.approaches.map((approach) => <li><p class="coordinate">{approach.kind.replaceAll("-", " ").toUpperCase()}</p><h2><a href={`/approaches/${approach.id}/`}>{approach.name}</a></h2><p>{approach.description}</p><small>{framework.responses.filter(({ approachId }) => approachId === approach.id).length} Challenge responses</small></li>)}</ul>
-  </div>
-</BaseLayout>

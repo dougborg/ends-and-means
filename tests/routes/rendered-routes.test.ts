@@ -1,7 +1,7 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import framework from "../../content/framework/graph.json";
+import framework from "../../content/framework/draft.json";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -58,17 +58,17 @@ async function resolves(pathname: string): Promise<boolean> {
 
 describe("generated reference routes", () => {
   it("does not publish retired matrix or standalone prototype routes", async () => {
-    for (const route of ["/systems/", "/cruxes/", "/cells/", "/prototype/", "/traditions/"]) {
+    for (const route of ["/systems/", "/cruxes/", "/cells/", "/prototype/"]) {
       expect(await resolves(route), route).toBe(false);
     }
   });
 
   it("renders the migrated framework through clean public routes", async () => {
     const routes = [
-      "/", "/topics/", "/challenges/", "/approaches/", "/reading/", "/framework/",
+      "/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
       ...framework.topics.map(({ id }) => `/topics/${id}/`),
       ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
-      ...framework.approaches.map(({ id }) => `/approaches/${id}/`),
+      ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
       ...framework.sources.map(({ id }) => `/sources/${id}/`),
     ];
     expect(routes).toHaveLength(79);
@@ -87,14 +87,14 @@ describe("generated reference routes", () => {
     expect(home.match(/class="tradition-card"/g)).toHaveLength(8);
     expect(stripMarkup(home)).toContain("PRIMARY ENTRY POINT / 8 DOSSIERS");
     const primaryNav = home.match(/<nav aria-label="Primary navigation">([\s\S]*?)<\/nav>/)?.[1] ?? "";
-    expect(routeHrefs(primaryNav, "/approaches/")[0]).toBe("/approaches/");
-    expect(primaryNav.indexOf("Approaches")).toBeLessThan(primaryNav.indexOf("Challenges"));
+    expect(routeHrefs(primaryNav, "/traditions/")[0]).toBe("/traditions/");
+    expect(primaryNav.indexOf("Traditions")).toBeLessThan(primaryNav.indexOf("Challenges"));
 
     const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
     expect(challenge.match(/class="response-draft"/g)).toHaveLength(8);
     expect(stripMarkup(challenge)).toContain("migrated research leads, not reviewed conclusions");
 
-    const tradition = await readFile(routeFile("/approaches/social-democratic-tradition/"), "utf8");
+    const tradition = await readFile(routeFile("/traditions/social-democratic-tradition/"), "utf8");
     expect(tradition.match(/proposed Means<\/small>/g)).toHaveLength(9);
     expect(tradition.match(/<section class="tradition-faq"/g)).toHaveLength(1);
     expect(tradition.match(/<details>/g)).toHaveLength(14);
@@ -110,7 +110,7 @@ describe("generated reference routes", () => {
     expect(hrefs(tradition).filter((href) => href === "https://doi.org/10.2753/JEI0021-3624440306").length).toBeGreaterThanOrEqual(3);
     expect(hrefs(tradition).filter((href) => href === "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/").length).toBeGreaterThanOrEqual(3);
 
-    const laissezFaire = await readFile(routeFile("/approaches/laissez-faire-capitalism/"), "utf8");
+    const laissezFaire = await readFile(routeFile("/traditions/laissez-faire-capitalism/"), "utf8");
     expect(laissezFaire).not.toMatch(/class="tradition-evidence"/);
 
     const topic = await readFile(routeFile("/topics/ownership/"), "utf8");

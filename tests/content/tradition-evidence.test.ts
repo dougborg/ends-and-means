@@ -1,21 +1,21 @@
 import { describe, expect, it } from "vitest";
-import framework from "../../content/framework/graph.json";
-import evidence from "../../content/framework/social-democratic-approach-evidence.json";
-import { validateApproachEvidence } from "../../src/lib/framework/validate-approach-evidence";
+import framework from "../../content/framework/draft.json";
+import evidence from "../../content/framework/social-democratic-tradition-evidence.json";
+import { validateTraditionEvidence } from "../../src/lib/framework/validate-tradition-evidence";
 
 const context = {
-  approaches: new Set(framework.approaches.map(({ id }) => id)),
+  traditions: new Set(framework.traditions.map(({ id }) => id)),
   challenges: new Set(framework.challenges.map(({ id }) => id)),
   criteria: new Set(framework.criteria.map(({ id }) => id)),
 };
 
-describe("social-democratic Approach evidence", () => {
+describe("social-democratic tradition evidence", () => {
   it("is in the post-review state represented by this promotion", () => {
     expect(evidence.status).toBe("published");
   });
 
   it("resolves every canonical and internal relationship", () => {
-    expect(validateApproachEvidence(evidence, context)).toEqual([]);
+    expect(validateTraditionEvidence(evidence, context)).toEqual([]);
   });
 
   it("references canonical Challenge and Criterion records without duplicating them", () => {

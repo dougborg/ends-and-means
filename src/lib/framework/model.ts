@@ -18,22 +18,9 @@ export interface FrameworkSource {
   };
 }
 
-export type ApproachKind = "tradition" | "ideal-type" | "institutional-family" | "named-model" | "political-program";
-
-export type InstitutionalDomain =
-  | "ownership"
-  | "allocation-coordination"
-  | "workplace-governance"
-  | "political-authority"
-  | "social-provision"
-  | "law-coercion"
-  | "transition-change";
-
-export interface Approach {
+export interface Tradition {
   id: string;
   name: string;
-  kind: ApproachKind;
-  domains: InstitutionalDomain[];
   description: string;
   overview: string[];
   distinctions: string[];
@@ -77,7 +64,7 @@ export interface MigratedStatement {
 
 export interface ResponseDraft {
   id: string;
-  approachId: string;
+  traditionId: string;
   challengeId: string;
   means: MigratedStatement[];
   failureHypotheses: MigratedStatement[];
@@ -86,16 +73,17 @@ export interface ResponseDraft {
 
 export interface ResearchNote {
   id: string;
-  approachId: string;
+  traditionId: string;
   kind: "historical-evidence-inventory" | "criterion-observation";
   criterionId?: string;
   text: string;
   researchNeeded: true;
 }
 
-export interface ApproachGraph {
-  schemaVersion: "approach-graph-1";
-  approaches: Approach[];
+export interface FrameworkDraftGraph {
+  schemaVersion: "framework-draft-1";
+  status: "migration-draft";
+  traditions: Tradition[];
   topics: FrameworkTopic[];
   challenges: FrameworkChallenge[];
   criteria: FrameworkCriterion[];
