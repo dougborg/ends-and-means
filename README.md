@@ -13,16 +13,18 @@ The static Astro build deploys through GitHub Pages. Pull-request verification
 and Pages deployment use separate GitHub Actions workflows; DNS configuration
 for the custom domain is a separate release step.
 
-**Status:** the current reference shell is live while the accepted
-approaches-first model is consolidated into one canonical graph. Astro, CI, the
+**Status:** the current reference shell is live while the approaches-first
+reader experience is consolidated onto a plural canonical graph. Astro, CI, the
 portable graph validator, Topic and Challenge discovery, eight transitional
-dossiers, and the source inventory are in place. The active work is classifying
-those dossiers as Approaches, consolidating the content schemas, and connecting
-independently citable Statements to bounded historical and ongoing Cases.
+dossiers, and the source inventory are in place. The active work is separating
+Concepts, Approaches, Means, Collections, and bounded Cases; consolidating the
+content schemas; and connecting independently citable Statements to typed,
+sourced relationships.
 
 Approaches are the primary public entry point. Challenges and Topics provide
 secondary ways to compare the same material without implying a ranking or
 treating historical states as timeless embodiments of an Approach.
+Approach is not the root type of the underlying ontology.
 
 ## Contents
 
@@ -30,6 +32,7 @@ treating historical states as timeless embodiments of an Approach.
 |---|---|
 | [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
 | [`docs/analytical-framework.md`](docs/analytical-framework.md) | Accepted concepts and analytical boundaries. |
+| [`docs/domain-model.md`](docs/domain-model.md) | Working implementation contract for the plural graph, relationships, and migration tests. |
 | [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Transitional model fixture retained only until its useful relationships move into the canonical graph in issue #47. |
 | [`content/framework/`](content/framework/) | Transitional framework data pending consolidation into the canonical graph tracked in issue #47. |
 | [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Archived eight-by-fourteen comparison input retained for provenance and migration checks. |

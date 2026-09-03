@@ -1,7 +1,8 @@
 # Analytical Framework: Ends, Means, Challenges, and Criteria
 
-**Status:** accepted analytical foundation. The unified canonical TypeScript
-schema is tracked in [#47](https://github.com/dougborg/ends-and-means/issues/47).
+**Status:** accepted analytical method. The domain ontology remains under
+validation in the [target domain model](domain-model.md) and is tracked in
+[#47](https://github.com/dougborg/ends-and-means/issues/47).
 
 Ends and Means compares political-economic approaches by tracing the relationship
 between what they seek, how they organize action, and what happens in bounded
@@ -10,17 +11,17 @@ and Development (IAD), especially Polski and Ostrom's *An Institutional
 Framework for Policy Analysis and Design*, without treating IAD as a scoring
 formula for whole societies.
 
-## Core model
+## Analytical trace
 
 ```text
-APPROACH
-├── ENDS: values, promises, and legitimacy claims
-├── MEANS: institutions, rules, incentives, and distributions of authority
-└── RESPONSES TO SHARED CHALLENGES
-    ├── context and participants
+QUESTION / CHALLENGE
+├── ATTRIBUTED END: who seeks what, and in which context
+├── PROPOSED MEANS: institutions, rules, incentives, and authority
+└── RESPONSE TRACE
+    ├── relevant Concepts and Approach context
     ├── expected patterns of interaction
-    ├── observed practice and outcomes
-    └── assessment under explicit criteria
+    ├── bounded Case, observed practice, and outcomes
+    └── assessment under an explicit Criterion
 ```
 
 **Criteria** are not a replacement name for Challenges: a challenge is the
@@ -144,12 +145,15 @@ encoded or predicted. The framework is a checklist for asking better questions
 and exposing assumptions; it is not a scientific score generator or a claim
 that all political disagreement can be resolved empirically.
 
-## Approaches, Cases, and fictional Depictions
+## Concepts, Approaches, Cases, and fictional Depictions
 
-**Approach** is the reader-facing umbrella for traditions, ideal types,
-institutional families, and named institutional models. Each Approach records
-its more precise kind and the institutional domains it addresses; the umbrella
-must not imply that unlike entities are interchangeable.
+**Concepts** are reusable but contested ideas. **Approaches** are recognizable
+configurations of Concepts, attributed Ends, diagnoses, and proposed Means.
+Approaches remain the primary reader-facing entry point, but are not the root
+type of the graph. Editorial Collections provide overlapping umbrella views;
+typed and sourced relationships represent membership, influence, advocacy, and
+disagreement. Political, economic, social, legal, and cultural spheres are
+overlapping facets rather than exclusive kinds.
 
 Real-world practice belongs in a **Case** with geographic and temporal bounds.
 Cases may be historical or ongoing. Ongoing Cases require an explicit

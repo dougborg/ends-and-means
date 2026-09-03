@@ -27,10 +27,16 @@ matrix:
 - **Topics** are broad, familiar discovery labels such as ownership, work,
   security, coordination, and power. They organize navigation but make no
   analytical claim.
-- **Challenges** are recurring open questions. They are the primary entry point
-  for comparison.
-- **Traditions and ideal types** are contested families of ideas. They provide
-  context but are not country labels or causal treatments.
+- **Approaches** are the primary reader entry point. They are recognizable
+  configurations of Concepts, attributed Ends, and proposed Means—not the root
+  type of the underlying graph.
+- **Concepts** are reusable, contested ideas whose meaning and importance may
+  differ among Approaches.
+- **Collections** are overlapping browse views such as Socialist, Communist,
+  Anarchist, or Democratic approaches. Qualified membership replaces a single
+  parent hierarchy.
+- **Challenges** are recurring open questions and the primary unit for
+  comparison.
 - **Ends** are attributed aims: declared, design-implied, or cautiously
   interpreted from practice.
 - **Means** are concrete institutional arrangements: roles, rules, authority,
@@ -40,6 +46,10 @@ matrix:
   evidence requirements.
 - **Statements, sources, and interpretations** form the evidence layer beneath
   every summary.
+
+Political, economic, social, legal, and cultural spheres are overlapping
+facets. More precise Domains drive filters and context labels. Neither spheres
+nor Domains divide the catalogue into exclusive sections.
 
 A **response trace** is a view across these entities, not another content type
 that owns or duplicates them:
@@ -207,7 +217,7 @@ Rules:
 - The selector label is always the complete Challenge question.
 - Topic selection filters; it does not navigate to a presumed conclusion.
 - Result count and active filters are announced and encoded in the URL.
-- Results identify arrangements and bounded cases before traditions.
+- Results identify arrangements and bounded cases before Approach labels.
 - Empty results explain whether research is missing, scope excludes a result,
   or no meaningful relationship has been proposed.
 
