@@ -1,59 +1,59 @@
 #!/usr/bin/env node
 
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-export function slug(value) {
+export function slug(value: string) {
   return value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
     .replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function plain(value) {
+function plain(value: string) {
   return value.replace(/\*\*/g, '').replace(/\*/g, '').replace(/▶\s*/g, '').trim();
 }
 
-export function parseMatrix(markdown) {
+export function parseMatrix(markdown: string) {
   const systemBlock = markdown.match(/\*\*The eight systems\*\*([\s\S]*?)\n\*\*Verdicts\*\*/)?.[1];
   if (!systemBlock) throw new Error('Could not find system definitions');
   const systems = [...systemBlock.matchAll(/^\d+\. \*\*(.+?)\*\* — (.+)$/gm)].map((m, index) => ({
-    id: slug(m[1]), order: index + 1, name: m[1], description: m[2]
+    id: slug(m[1]!), order: index + 1, name: m[1]!, description: m[2]!
   }));
   if (systems.length !== 8) throw new Error(`Expected 8 systems; found ${systems.length}`);
   const tableNames = ['Laissez-faire', 'Social democracy', 'Market socialism', 'Central planning', 'Social anarchism', 'State capitalism', 'Anarcho-capitalism', 'Parecon'];
 
   const headings = [...markdown.matchAll(/^## Crux (\d+) — (.+)$/gm)];
-  const cruxes = [];
-  const cells = [];
+  const cruxes: any[] = [];
+  const cells: any[] = [];
   for (let i = 0; i < headings.length; i++) {
-    const match = headings[i];
+    const match = headings[i]!;
     const end = headings[i + 1]?.index ?? markdown.length;
     const body = markdown.slice(match.index + match[0].length, end);
     const number = Number(match[1]);
-    const title = match[2].trim();
+    const title = match[2]!.trim();
     const id = `crux-${String(number).padStart(2, '0')}-${slug(title)}`;
     const prompt = body.match(/^\n+\*(.+?)\*/)?.[1] ?? null;
     const verdict = body.match(/^\*\*Verdict:\*\*\s*(.+)$/m)?.[1] ?? null;
     const allRows = [...body.matchAll(/^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$/gm)];
     if (!allRows[0]) throw new Error(`Crux ${number}: table is missing`);
-    const columnLabels = { system: allRows[0][1].trim(), mechanism: allRows[0][2].trim(), breaks: allRows[0][3].trim() };
+    const headerRow = allRows[0]!;
+    const columnLabels = { system: headerRow[1]!.trim(), mechanism: headerRow[2]!.trim(), breaks: headerRow[3]!.trim() };
     cruxes.push({ id, number, title, prompt, verdictText: verdict, columnLabels });
 
     const rows = allRows.slice(2);
     if (rows.length !== systems.length) throw new Error(`Crux ${number}: expected 8 rows; found ${rows.length}`);
     for (const [rowIndex, row] of rows.entries()) {
-      const systemName = row[1].trim();
+      const systemName = row[1]!.trim();
       if (systemName !== tableNames[rowIndex]) throw new Error(`Crux ${number}: expected ${tableNames[rowIndex]} row; found ${systemName}`);
-      const system = systems[rowIndex];
+      const system = systems[rowIndex]!;
       cells.push({
         id: `${id}--${system.id}`,
         cruxId: id,
         systemId: system.id,
-        mechanism: row[2].trim(),
-        breaks: row[3].trim()
+        mechanism: row[2]!.trim(),
+        breaks: row[3]!.trim()
       });
     }
   }
@@ -65,30 +65,30 @@ export function parseMatrix(markdown) {
 const CHECKED = ['albert', 'carson', 'kinna', 'bookchin'];
 const CONFIRMED = ['schweickart', 'ellerman', 'whyte', 'phillips', 'rozworski', 'cockshott', 'cottrell', 'nove', 'kornai', 'coase', 'proudhon', 'kropotkin', 'bakunin', 'rocker'];
 
-function sourceTier(raw) {
+function sourceTier(raw: string) {
   const normalized = plain(raw).toLowerCase();
   if (CHECKED.some(name => normalized.includes(name))) return 'publisher-or-library-checked';
   if (CONFIRMED.some(name => normalized.includes(name))) return 'previously-confirmed';
   return 'not-rechecked';
 }
 
-export function parseReadingList(markdown) {
+export function parseReadingList(markdown: string) {
   const part = markdown.split(/^## Part 2 — Reading List$/m)[1];
   if (!part) throw new Error('Could not find reading list');
-  const beforeCompressed = part.split(/^### A compressed path$/m)[0];
+  const beforeCompressed = part.split(/^### A compressed path$/m)[0]!;
   let section = null;
-  const candidates = [];
-  const seen = new Map();
+  const candidates: any[] = [];
+  const seen = new Map<string, number>();
   for (const line of beforeCompressed.split('\n')) {
     const heading = line.match(/^### (.+)$/);
     if (heading) { section = heading[1]; continue; }
     const item = line.match(/^- (.+)$/);
     if (!item || !section) continue;
-    const raw = item[1].trim();
+    const raw = item[1]!.trim();
     const cleaned = plain(raw);
-    const lead = cleaned.split(/\.\s/)[0];
+    const lead = cleaned.split(/\.\s/)[0]!;
     const year = lead.match(/\((\d{4}(?:[–-]\d{2})?)\)/)?.[1] ?? null;
-    const author = lead.split(/\s+—\s+/)[0].trim();
+    const author = lead.split(/\s+—\s+/)[0]!.trim();
     const title = lead.match(/—\s+(.+?)(?:\s+\(\d{4})?$/)?.[1]?.replace(/[“”"]/g, '') ?? lead;
     let id = `source-${slug(author)}-${year ?? 'undated'}-${slug(title).slice(0, 64)}`;
     const count = (seen.get(id) ?? 0) + 1;
@@ -99,7 +99,7 @@ export function parseReadingList(markdown) {
   return candidates;
 }
 
-function referenceHints(cells) {
+function referenceHints(cells: any[]) {
   return cells.flatMap(cell => {
     const text = `${cell.mechanism} ${cell.breaks}`;
     const hints = [...text.matchAll(/\(([^()]*(?:19|20)\d{2}[^()]*)\)|\(([A-Z][^();]{2,40})\)/g)].map(m => m[1] ?? m[2]);
@@ -107,17 +107,17 @@ function referenceHints(cells) {
   });
 }
 
-function validateOverrides(overrides, ids) {
+function validateOverrides(overrides: any, ids: { cruxes: Set<string>; cells: Set<string>; sources: Set<string> }) {
   if (overrides.version !== 1) throw new Error('Override version must be 1');
   for (const id of Object.keys(overrides.verdicts ?? {})) if (!ids.cruxes.has(id)) throw new Error(`Unknown verdict override: ${id}`);
-  for (const [id, sourceIds] of Object.entries(overrides.cellSources ?? {})) {
+  for (const [id, sourceIds] of Object.entries(overrides.cellSources ?? {}) as Array<[string, string[]]>) {
     if (!ids.cells.has(id)) throw new Error(`Unknown cell source override: ${id}`);
     for (const sourceId of sourceIds) if (!ids.sources.has(sourceId)) throw new Error(`Unknown source override: ${sourceId}`);
   }
   for (const id of Object.keys(overrides.sourceSplits ?? {})) if (!ids.sources.has(id)) throw new Error(`Unknown source split override: ${id}`);
 }
 
-export function buildImport(matrixMarkdown, notesMarkdown, overrides = { version: 1, verdicts: {}, cellSources: {}, sourceSplits: {} }) {
+export function buildImport(matrixMarkdown: string, notesMarkdown: string, overrides: any = { version: 1, verdicts: {}, cellSources: {}, sourceSplits: {} }) {
   const matrix = parseMatrix(matrixMarkdown);
   const sources = parseReadingList(notesMarkdown);
   validateOverrides(overrides, { cruxes: new Set(matrix.cruxes.map(x => x.id)), cells: new Set(matrix.cells.map(x => x.id)), sources: new Set(sources.map(x => x.id)) });
@@ -147,12 +147,12 @@ export function buildImport(matrixMarkdown, notesMarkdown, overrides = { version
   return { content, report };
 }
 
-async function writeJson(path, value) {
+async function writeJson(path: string, value: unknown) {
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-export async function run(root = ROOT) {
+export async function run(root: string = ROOT) {
   const [matrix, notes, overridesText] = await Promise.all([
     readFile(resolve(root, 'docs/system-comparison-by-crux-v2.md'), 'utf8'),
     readFile(resolve(root, 'docs/political-economy-notes.md'), 'utf8'),
