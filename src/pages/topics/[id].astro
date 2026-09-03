@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+export function getStaticPaths() { return framework.topics.map((topic) => ({ params: { id: topic.id }, props: { topic } })); }
+const { topic } = Astro.props;
+const challenges = framework.challenges.filter(({ topicIds }) => topicIds.includes(topic.id));
+---
+<BaseLayout title={topic.label} description={topic.description}>
+  <article class="framework-index"><nav aria-label="Breadcrumb"><a href="/topics/">Topics</a> <span aria-hidden="true">/</span> {topic.label}</nav><header><p class="coordinate">TOPIC / DISCOVERY LABEL</p><h1>{topic.label}</h1><p class="dek">{topic.description}</p></header>
+    <section aria-labelledby="topic-challenges"><p class="coordinate">RELATED OPEN QUESTIONS</p><h2 id="topic-challenges">Challenges connected to {topic.label.toLowerCase()}</h2><ol class="indexed-list">{challenges.map((challenge, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><div><h2><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h2><p>{challenge.rationale}</p></div><small>8 draft responses</small></li>)}</ol></section>
+  </article>
+</BaseLayout>

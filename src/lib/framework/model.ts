@@ -26,10 +26,17 @@ export interface Tradition {
   reviewStatus: ReviewStatus;
 }
 
+export interface FrameworkTopic {
+  id: string;
+  label: string;
+  description: string;
+}
+
 export interface FrameworkChallenge {
   id: string;
   question: string;
   rationale: string;
+  topicIds: string[];
   reviewStatus: ReviewStatus;
 }
 
@@ -74,6 +81,7 @@ export interface FrameworkDraftGraph {
   schemaVersion: "framework-draft-1";
   status: "migration-draft";
   traditions: Tradition[];
+  topics: FrameworkTopic[];
   challenges: FrameworkChallenge[];
   criteria: FrameworkCriterion[];
   responses: ResponseDraft[];

@@ -115,11 +115,13 @@ describe("generated reference routes", () => {
 
   it("renders the migrated framework through clean public routes", async () => {
     const routes = [
-      "/", "/challenges/", "/traditions/", "/framework/",
+      "/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
+      ...framework.topics.map(({ id }) => `/topics/${id}/`),
       ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
       ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
+      ...framework.sources.map(({ id }) => `/sources/${id}/`),
     ];
-    expect(routes).toHaveLength(21);
+    expect(routes).toHaveLength(79);
 
     for (const route of routes) {
       const html = await readFile(routeFile(route), "utf8");
@@ -138,6 +140,16 @@ describe("generated reference routes", () => {
     const tradition = await readFile(routeFile("/traditions/social-democratic-tradition/"), "utf8");
     expect(tradition.match(/<details>/g)).toHaveLength(9);
     expect(stripMarkup(tradition)).toContain("Evidence to investigate");
+
+    const topic = await readFile(routeFile("/topics/ownership/"), "utf8");
+    expect(stripMarkup(topic)).toContain("Challenges connected to ownership");
+    expect(routeHrefs(topic, "/challenges/").filter((href) => href !== "/challenges/")).toHaveLength(3);
+
+    const reading = await readFile(routeFile("/reading/"), "utf8");
+    expect(routeHrefs(reading, "/sources/")).toHaveLength(51);
+    const source = await readFile(routeFile(`/sources/${framework.sources[0]!.id}/`), "utf8");
+    expect(stripMarkup(source)).toContain("Where this source is used");
+    expect(stripMarkup(source)).toContain("bibliographic record only");
   });
 
   it("links each pivot to the complete, unique set of canonical cells", async () => {

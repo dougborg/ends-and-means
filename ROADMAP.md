@@ -58,6 +58,8 @@ work is source material, not an API or compatibility contract.
   research notes with persistent review warnings. Primary navigation uses only
   the replacement vocabulary; source, case, End, and full argument-trace routes
   remain gated on the next research pass.
+  Five many-to-many Topics now provide familiar discovery paths into the nine
+  Challenges without becoming analytical claims themselves.
 
 ## M2 — Reference pages
 
@@ -67,6 +69,9 @@ work is source material, not an API or compatibility contract.
   same cell records, including row/column neighbors.
 - [ ] **M2.3 Source, case, and reading routes.** Add backlinks and verification
   filters, borrowing links, publisher links, and clearly labeled purchase links.
+  The first reading slice now publishes all 51 migrated bibliographic records,
+  their provenance status, editorial notes, and honest empty claim/link states.
+  Verified external links, filters, case routes, and useful backlinks remain.
 - [ ] **M2.4 About and contribution model.** Explain scope, assessments, evidence
   tiers, editorial review, and how to propose changes.
 - [ ] **M2.5 Statement-level correction links.** Add “Suggest a correction” actions

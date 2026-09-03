@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+const label = (value = "Unsorted") => value.split("-").map((part) => part[0]?.toUpperCase() + part.slice(1)).join(" ");
+const sections = [...new Set(framework.sources.map(({ section }) => section ?? "unsorted"))].map((id) => ({ id, sources: framework.sources.filter(({ section }) => (section ?? "unsorted") === id) }));
+---
+<BaseLayout title="Reading" description="The working source inventory behind Ends and Means.">
+  <article class="reading-page"><header><p class="coordinate">EVIDENCE / SOURCE INVENTORY</p><h1>Reading for claims still being built.</h1><p class="dek">This bibliography is a research inventory, not yet a claim-level evidence map. Verification labels describe our handling of the citation—not agreement with its argument or support for a particular conclusion.</p></header>
+    <nav class="section-jump" aria-label="Reading sections"><p class="coordinate">JUMP TO SECTION</p><ul>{sections.map((section) => <li><a href={`#${section.id}`}>{label(section.id)} <span>{section.sources.length}</span></a></li>)}</ul></nav>
+    {sections.map((section) => <section class="reading-section" id={section.id} aria-labelledby={`${section.id}-title`}><header><p class="coordinate">READING SECTION / {section.sources.length} SOURCES</p><h2 id={`${section.id}-title`}>{label(section.id)}</h2></header><ol>{section.sources.map((source) => <li><div><p class="source-authors">{source.authors.join(", ")}</p><h3><a href={`/sources/${source.id}/`}>{source.title}</a></h3></div><span class:list={["source-state", `source-state--${source.reviewStatus}`]}>{source.reviewStatus === "checked" ? "Checked" : source.reviewStatus === "confirmed-earlier" ? "Previously confirmed" : "From working knowledge"}</span></li>)}</ol></section>)}
+  </article>
+</BaseLayout>

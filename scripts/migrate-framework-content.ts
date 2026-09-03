@@ -20,15 +20,15 @@ const traditionIds: Record<string, string> = {
 };
 
 const challengeSpecs: Array<FrameworkChallenge & { inputs: string[] }> = [
-  { id: "coordination-of-information-and-resources", question: "How do participants learn what is needed and coordinate resources under dispersed, incomplete, or strategic information?", rationale: "Coordination includes discovery, communication, calculation, and authority rather than presuming one allocation mechanism.", inputs: ["c01"], reviewStatus: "unreviewed-migration" },
-  { id: "innovation-risk-and-failure", question: "Who can initiate experiments, who bears their risks, and how does the arrangement learn from failure?", rationale: "Innovation and failure are linked institutional problems involving permission, finance, loss, and adaptation.", inputs: ["c02"], reviewStatus: "unreviewed-migration" },
-  { id: "distribution-of-gains-and-ownership", question: "Who captures gains from production, productivity, and ownership—and how can that distribution change?", rationale: "Ownership, control, wages, profit, and wealth are distinct but interacting distributions.", inputs: ["c03", "c06"], reviewStatus: "unreviewed-migration" },
-  { id: "authority-accountability-and-abuse", question: "Where does consequential authority sit, how can affected people contest it, and what limits capture or abuse?", rationale: "Power can concentrate in workplaces, firms, associations, markets, or states; institutional safeguards should follow actual positions and powers.", inputs: ["c04", "c07", "c14"], reviewStatus: "unreviewed-migration" },
-  { id: "externalities-and-collective-goods", question: "How are diffuse harms, shared resources, and collective goods recognized, governed, and paid for?", rationale: "The problem includes information, jurisdiction, enforcement, and distribution—not only whether prices exist.", inputs: ["c05"], reviewStatus: "unreviewed-migration" },
-  { id: "mobility-exit-and-dependence", question: "Can people meaningfully leave firms, communities, or jurisdictions, and what dependencies shape that choice?", rationale: "Formal exit is different from practical mobility when livelihood, care, geography, or membership constrain choice.", inputs: ["c08"], reviewStatus: "unreviewed-migration" },
-  { id: "basic-needs-and-security", question: "How are basic needs and protection against predictable life risks provided, and on what terms?", rationale: "Provision must expose access, eligibility, financing, quality, discretion, and dependency.", inputs: ["c09"], reviewStatus: "unreviewed-migration" },
-  { id: "transition-and-institutional-change", question: "How can institutions change from a specified starting point, and who bears the costs and risks of transition?", rationale: "A transition is a path with actors, sequencing, resistance, and failure modes—not a property of an ideal endpoint.", inputs: ["c12"], reviewStatus: "unreviewed-migration" },
-  { id: "external-coercion-and-defense", question: "How does an arrangement respond to external coercion without making emergency power permanently unaccountable?", rationale: "Defense joins capacity against threats to the internal distribution and duration of coercive authority.", inputs: ["c13"], reviewStatus: "unreviewed-migration" },
+  { id: "coordination-of-information-and-resources", question: "How do participants learn what is needed and coordinate resources under dispersed, incomplete, or strategic information?", rationale: "Coordination includes discovery, communication, calculation, and authority rather than presuming one allocation mechanism.", topicIds: ["coordination"], inputs: ["c01"], reviewStatus: "unreviewed-migration" },
+  { id: "innovation-risk-and-failure", question: "Who can initiate experiments, who bears their risks, and how does the arrangement learn from failure?", rationale: "Innovation and failure are linked institutional problems involving permission, finance, loss, and adaptation.", topicIds: ["coordination", "ownership"], inputs: ["c02"], reviewStatus: "unreviewed-migration" },
+  { id: "distribution-of-gains-and-ownership", question: "Who captures gains from production, productivity, and ownership—and how can that distribution change?", rationale: "Ownership, control, wages, profit, and wealth are distinct but interacting distributions.", topicIds: ["ownership", "work"], inputs: ["c03", "c06"], reviewStatus: "unreviewed-migration" },
+  { id: "authority-accountability-and-abuse", question: "Where does consequential authority sit, how can affected people contest it, and what limits capture or abuse?", rationale: "Power can concentrate in workplaces, firms, associations, markets, or states; institutional safeguards should follow actual positions and powers.", topicIds: ["power", "work"], inputs: ["c04", "c07", "c14"], reviewStatus: "unreviewed-migration" },
+  { id: "externalities-and-collective-goods", question: "How are diffuse harms, shared resources, and collective goods recognized, governed, and paid for?", rationale: "The problem includes information, jurisdiction, enforcement, and distribution—not only whether prices exist.", topicIds: ["coordination", "security"], inputs: ["c05"], reviewStatus: "unreviewed-migration" },
+  { id: "mobility-exit-and-dependence", question: "Can people meaningfully leave firms, communities, or jurisdictions, and what dependencies shape that choice?", rationale: "Formal exit is different from practical mobility when livelihood, care, geography, or membership constrain choice.", topicIds: ["work", "power"], inputs: ["c08"], reviewStatus: "unreviewed-migration" },
+  { id: "basic-needs-and-security", question: "How are basic needs and protection against predictable life risks provided, and on what terms?", rationale: "Provision must expose access, eligibility, financing, quality, discretion, and dependency.", topicIds: ["security", "work"], inputs: ["c09"], reviewStatus: "unreviewed-migration" },
+  { id: "transition-and-institutional-change", question: "How can institutions change from a specified starting point, and who bears the costs and risks of transition?", rationale: "A transition is a path with actors, sequencing, resistance, and failure modes—not a property of an ideal endpoint.", topicIds: ["power", "ownership"], inputs: ["c12"], reviewStatus: "unreviewed-migration" },
+  { id: "external-coercion-and-defense", question: "How does an arrangement respond to external coercion without making emergency power permanently unaccountable?", rationale: "Defense joins capacity against threats to the internal distribution and duration of coercive authority.", topicIds: ["security", "power"], inputs: ["c13"], reviewStatus: "unreviewed-migration" },
 ];
 
 function migrateLanguage(value: string) {
@@ -91,6 +91,13 @@ export async function migrateFrameworkContent(root = ROOT) {
     schemaVersion: "framework-draft-1",
     status: "migration-draft",
     traditions,
+    topics: [
+      { id: "ownership", label: "Ownership", description: "Who may control productive assets, transfer them, and receive the gains or losses attached to them?" },
+      { id: "work", label: "Work", description: "How livelihood, authority, bargaining power, mobility, and security are organized around labor." },
+      { id: "security", label: "Security", description: "How people and institutions respond to basic needs, shared risks, collective harms, and external threats." },
+      { id: "coordination", label: "Coordination", description: "How information, resources, experimentation, and collective action are organized under uncertainty." },
+      { id: "power", label: "Power", description: "Where consequential authority sits, how it changes, and how affected people can contest or constrain it." },
+    ],
     challenges,
     criteria: [
       { id: "distribution", label: "Distribution", definition: "Who receives benefits, resources, authority, and adjustment costs?", normativeAssumptions: ["Concentrated advantages and involuntary burdens require explicit justification."], evidenceRequirements: ["Measures must distinguish income, wealth, ownership, control, access, and risk."], limitations: ["Improvement on one distribution does not establish improvement on another."], reviewStatus: "unreviewed-migration" },
@@ -107,7 +114,7 @@ export async function migrateFrameworkContent(root = ROOT) {
   if (missing.length || consumed.size !== expected.size) throw new Error(`Migration coverage failure: ${missing.join(", ")}`);
   const report = {
     input: { systems: graph.systems.length, topics: graph.cruxes.length, comparisons: graph.cells.length, sources: graph.sources.length },
-    output: { traditions: output.traditions.length, challenges: output.challenges.length, criteria: output.criteria.length, responses: output.responses.length, researchNotes: output.researchNotes.length, sources: output.sources.length },
+    output: { traditions: output.traditions.length, topics: output.topics.length, challenges: output.challenges.length, criteria: output.criteria.length, responses: output.responses.length, researchNotes: output.researchNotes.length, sources: output.sources.length },
     coverage: { consumed: consumed.size, missing },
     audit,
   };

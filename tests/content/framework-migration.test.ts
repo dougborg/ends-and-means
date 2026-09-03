@@ -14,6 +14,7 @@ describe("clean framework migration", () => {
 
   it("creates a sparse clean graph without inherited schema fields", () => {
     expect(draft.traditions).toHaveLength(8);
+    expect(draft.topics).toHaveLength(5);
     expect(draft.challenges).toHaveLength(9);
     expect(draft.criteria).toHaveLength(3);
     expect(draft.responses).toHaveLength(72);

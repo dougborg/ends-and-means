@@ -14,8 +14,9 @@ and Pages deployment use separate GitHub Actions workflows; DNS configuration
 for the custom domain is a separate release step.
 
 **Status:** M1 implementation is underway. Astro, CI, the deterministic staging
-importer, the portable graph validator, and the first migrated-framework routes
-are in place. Their inherited assertions remain clearly marked for research.
+importer, the portable graph validator, Topic and Challenge discovery, tradition
+dossiers, and the working source inventory are in place. Inherited assertions
+remain clearly marked for research.
 
 ## Contents
 

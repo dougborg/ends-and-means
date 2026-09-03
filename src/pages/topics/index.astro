@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import framework from "../../../content/framework/draft.json";
+---
+<BaseLayout title="Topics" description="Familiar discovery paths into the Ends and Means analytical Challenges.">
+  <div class="framework-index"><header><p class="coordinate">DISCOVERY / TOPICS</p><h1>Familiar doors into harder questions.</h1><p class="dek">Topics organize discovery without asserting a theory or judgment. Because political-economic questions overlap, each Challenge may appear under more than one Topic.</p></header>
+    <ul class="topic-list">{framework.topics.map((topic) => { const count = framework.challenges.filter(({ topicIds }) => topicIds.includes(topic.id)).length; return <li><p class="coordinate">DISCOVERY LABEL</p><h2><a href={`/topics/${topic.id}/`}>{topic.label}</a></h2><p>{topic.description}</p><small>{count} {count === 1 ? "Challenge" : "Challenges"}</small></li>; })}</ul>
+  </div>
+</BaseLayout>

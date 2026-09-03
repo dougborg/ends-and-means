@@ -13,7 +13,7 @@ export function validateFrameworkDraft(input: unknown): string[] {
   };
   walk(input);
   if (!input || typeof input !== "object") return ["framework must be an object"];
-  const collections = ["traditions", "challenges", "criteria", "responses", "researchNotes", "sources"] as const;
+  const collections = ["traditions", "topics", "challenges", "criteria", "responses", "researchNotes", "sources"] as const;
   if (collections.some((key) => !Array.isArray((input as Record<string, unknown>)[key]))) {
     return [...errors, "framework is missing required collections"];
   }
@@ -22,16 +22,21 @@ export function validateFrameworkDraft(input: unknown): string[] {
   if (value.schemaVersion !== "framework-draft-1") errors.push("unsupported framework schema version");
   if (value.status !== "migration-draft") errors.push("migrated framework must remain a draft");
   const traditions = new Set(value.traditions.map(({ id }) => id));
+  const topics = new Set(value.topics.map(({ id }) => id));
   const challenges = new Set(value.challenges.map(({ id }) => id));
   const criteria = new Set(value.criteria.map(({ id }) => id));
   const sources = new Set(value.sources.map(({ id }) => id));
   const ids = [
-    ...traditions, ...challenges, ...criteria, ...sources,
+    ...traditions, ...topics, ...challenges, ...criteria, ...sources,
     ...value.responses.map(({ id }) => id),
     ...value.researchNotes.map(({ id }) => id),
     ...value.responses.flatMap(({ means, failureHypotheses }) => [...means, ...failureHypotheses].map(({ id }) => id)),
   ];
   if (new Set(ids).size !== ids.length) errors.push("all framework IDs must be globally unique");
+  for (const challenge of value.challenges) {
+    if (!challenge.topicIds.length) errors.push(`${challenge.id}: Challenge requires at least one Topic`);
+    for (const topicId of challenge.topicIds) if (!topics.has(topicId)) errors.push(`${challenge.id}: unresolved Topic ${topicId}`);
+  }
 
   for (const response of value.responses) {
     if (!traditions.has(response.traditionId)) errors.push(`${response.id}: unresolved tradition`);
