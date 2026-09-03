@@ -1,6 +1,6 @@
 {
   "schemaVersion": "tradition-evidence-1",
-  "status": "review-candidate",
+  "status": "published",
   "traditionId": "social-democratic-tradition",
   "wikipediaUrl": "https://en.wikipedia.org/wiki/Social_democracy",
   "ends": [
@@ -120,16 +120,11 @@
   ],
   "trace": {
     "challengeId": "distribution-of-gains-and-ownership",
-    "question": "Who captures gains from production, productivity, and ownership—and how can that distribution change?",
     "endIds": ["equality-with-employment", "wage-earner-influence"],
     "meansIds": ["solidaristic-bargaining-and-adjustment", "wage-earner-fund-boards"],
     "expectedInteraction": "Wage compression should shift gains toward lower-paid workers, while collective capital claims should alter who receives profit and exercises ownership rights.",
     "caseIds": ["sweden-rehn-meidner-1951-1983", "sweden-wage-earner-funds-1984-1991"],
-    "criterion": {
-      "id": "distribution",
-      "definition": "Who receives income, wealth, control, benefits, and adjustment costs?",
-      "assumption": "Concentrated advantages and involuntary burdens require explicit justification."
-    },
+    "criterionId": "distribution",
     "assessment": "The arrangements affected wage distribution, but the evidence presented here does not establish a comparable reduction in private wealth concentration.",
     "uncertainty": "high"
   },

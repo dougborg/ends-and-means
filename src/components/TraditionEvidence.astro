@@ -1,19 +1,24 @@
 ---
 type TraditionEvidence = typeof import("../../content/framework/social-democratic-tradition-evidence.json");
-interface Props { evidence: TraditionEvidence }
-const { evidence } = Astro.props;
+interface Props {
+  evidence: TraditionEvidence;
+  challenge: { question: string };
+  criterion: { definition: string; normativeAssumptions: string[] };
+}
+const { evidence, challenge, criterion } = Astro.props;
 const sources = new Map(evidence.sources.map((source) => [source.id, source]));
+const citedSources = (sourceIds: string[]) => sourceIds.map((sourceId) => sources.get(sourceId)!);
 ---
 <section class="tradition-evidence" aria-labelledby="tradition-evidence-title">
   <header>
-    <div><p class="coordinate">EVIDENCE / REVIEW CANDIDATE</p><h2 id="tradition-evidence-title">From stated Ends to bounded evidence</h2></div>
+    <div><p class="coordinate">EVIDENCE / PUBLISHED ANALYSIS</p><h2 id="tradition-evidence-title">From stated Ends to bounded evidence</h2></div>
     <a href={evidence.wikipediaUrl}>Wikipedia orientation ↗</a>
   </header>
   <p class="evidence-intro">This researched analysis tests the analytical model. It does not treat Sweden as the tradition or convert a bounded result into a general verdict.</p>
 
   <div class="ends-means-grid">
-    <section><p class="coordinate">ENDS / ATTRIBUTED</p>{evidence.ends.map((end) => <article><h3>{end.label}</h3><p>{end.statement}</p><small>Attributed to {end.attributedTo}</small></article>)}</section>
-    <section><p class="coordinate">MEANS / INSTITUTIONAL</p>{evidence.means.map((means) => <article><h3>{means.label}</h3><p>{means.description}</p><small>{means.level} · {means.ruleType} rule</small></article>)}</section>
+    <section><p class="coordinate">ENDS / ATTRIBUTED</p>{evidence.ends.map((end) => <article><h3>{end.label}</h3><p>{end.statement}</p><small>Attributed to {end.attributedTo}</small><footer>{citedSources(end.sourceIds).map((source) => <a href={source.url}>{source.authors}, {source.year} ↗</a>)}</footer></article>)}</section>
+    <section><p class="coordinate">MEANS / INSTITUTIONAL</p>{evidence.means.map((means) => <article><h3>{means.label}</h3><p>{means.description}</p><small>{means.level} · {means.ruleType} rule</small><footer>{citedSources(means.sourceIds).map((source) => <a href={source.url}>{source.authors}, {source.year} ↗</a>)}</footer></article>)}</section>
   </div>
 
   <section class="case-evidence" aria-labelledby="cases-title">
@@ -28,13 +33,13 @@ const sources = new Map(evidence.sources.map((source) => [source.id, source]));
   </section>
 
   <section class="argument-trace" aria-labelledby="trace-title">
-    <p class="coordinate">COMPLETE ARGUMENT TRACE</p><h3 id="trace-title">{evidence.trace.question}</h3>
+    <p class="coordinate">COMPLETE ARGUMENT TRACE</p><h3 id="trace-title">{challenge.question}</h3>
     <ol>
       <li><span>End</span>{evidence.ends.filter(({ id }) => evidence.trace.endIds.includes(id)).map(({ label }) => label).join("; ")}</li>
       <li><span>Means</span>{evidence.means.filter(({ id }) => evidence.trace.meansIds.includes(id)).map(({ label }) => label).join("; ")}</li>
       <li><span>Expected interaction</span>{evidence.trace.expectedInteraction}</li>
       <li><span>Bounded evidence</span>{evidence.cases.filter(({ id }) => evidence.trace.caseIds.includes(id)).map(({ name, period }) => `${name} (${period})`).join("; ")}</li>
-      <li><span>Criterion</span>{evidence.trace.criterion.definition}<small>Normative assumption: {evidence.trace.criterion.assumption}</small></li>
+      <li><span>Criterion</span>{criterion.definition}{criterion.normativeAssumptions.map((assumption) => <small>Normative assumption: {assumption}</small>)}</li>
       <li><span>Assessment</span>{evidence.trace.assessment}<small>Uncertainty: {evidence.trace.uncertainty}</small></li>
     </ol>
   </section>

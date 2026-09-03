@@ -9,6 +9,8 @@
 .ends-means-grid h3 { margin:0 0 .5rem; font-size:1.05rem; }
 .ends-means-grid p { margin:.5rem 0; font-family:var(--reading); line-height:1.6; }
 .ends-means-grid small, .sourced-statement footer, .sourced-statement > small { color:var(--muted); font:400 .68rem/1.5 var(--apparatus); }
+.ends-means-grid article footer { display:flex; flex-wrap:wrap; gap:.35rem 1rem; margin-top:.65rem; font:400 .68rem/1.5 var(--apparatus); }
+.ends-means-grid article footer a { color:var(--cobalt); }
 .case-evidence > h3, .argument-trace > h3, .evidence-sources h3 { margin:.25rem 0 1.25rem; }
 .case-evidence > div { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
 .case-evidence > div > article { padding:clamp(1.25rem,3vw,2rem); border:1px solid var(--rule); background:var(--sheet); }

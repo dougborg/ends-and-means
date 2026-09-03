@@ -154,7 +154,11 @@ describe("generated reference routes", () => {
     expect(stripMarkup(tradition)).toContain("From stated Ends to bounded evidence");
     expect(stripMarkup(tradition)).toContain("Two episodes, kept distinct");
     expect(stripMarkup(tradition)).toContain("COMPLETE ARGUMENT TRACE");
+    expect(stripMarkup(tradition)).toContain("EVIDENCE / PUBLISHED ANALYSIS");
+    expect(stripMarkup(tradition)).toContain("Who receives benefits, resources, authority, and adjustment costs?");
     expect(hrefs(tradition)).toContain("https://en.wikipedia.org/wiki/Social_democracy");
+    expect(hrefs(tradition).filter((href) => href === "https://doi.org/10.2753/JEI0021-3624440306").length).toBeGreaterThanOrEqual(3);
+    expect(hrefs(tradition).filter((href) => href === "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/").length).toBeGreaterThanOrEqual(3);
 
     const laissezFaire = await readFile(routeFile("/traditions/laissez-faire-capitalism/"), "utf8");
     expect(laissezFaire).not.toMatch(/class="tradition-evidence"/);

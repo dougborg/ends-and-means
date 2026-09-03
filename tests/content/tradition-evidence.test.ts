@@ -10,8 +10,19 @@ const context = {
 };
 
 describe("social-democratic tradition evidence", () => {
+  it("is in the post-review state represented by this promotion", () => {
+    expect(evidence.status).toBe("published");
+  });
+
   it("resolves every canonical and internal relationship", () => {
     expect(validateTraditionEvidence(evidence, context)).toEqual([]);
+  });
+
+  it("references canonical Challenge and Criterion records without duplicating them", () => {
+    expect(framework.challenges.some(({ id }) => id === evidence.trace.challengeId)).toBe(true);
+    expect(framework.criteria.some(({ id }) => id === evidence.trace.criterionId)).toBe(true);
+    expect(evidence.trace).not.toHaveProperty("question");
+    expect(evidence.trace).not.toHaveProperty("criterion");
   });
 
   it("keeps cases bounded and statements qualified", () => {
