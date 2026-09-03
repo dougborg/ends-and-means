@@ -13,24 +13,25 @@ The static Astro build deploys through GitHub Pages. Pull-request verification
 and Pages deployment use separate GitHub Actions workflows; DNS configuration
 for the custom domain is a separate release step.
 
-**Status:** the traditions-first reference shell is live. Astro, CI, the
-portable graph validator, Topic and Challenge discovery, eight working tradition
-dossiers, and the source inventory are in place. The active work is formalizing
-the replacement model and attaching claim-level evidence and bounded cases to
-the inherited drafts.
+**Status:** the current reference shell is live while the accepted
+approaches-first model is consolidated into one canonical graph. Astro, CI, the
+portable graph validator, Topic and Challenge discovery, eight transitional
+dossiers, and the source inventory are in place. The active work is classifying
+those dossiers as Approaches, consolidating the content schemas, and connecting
+independently citable Statements to bounded historical and ongoing Cases.
 
-Traditions and ideal types are the primary public entry point. Challenges and
-Topics provide secondary ways to compare the same material without implying a
-ranking or treating historical states as single-system examples.
+Approaches are the primary public entry point. Challenges and Topics provide
+secondary ways to compare the same material without implying a ranking or
+treating historical states as timeless embodiments of an Approach.
 
 ## Contents
 
 | File | What it is |
 |---|---|
 | [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
-| [`docs/analytical-framework.md`](docs/analytical-framework.md) | Current target concepts and analytical boundaries. |
+| [`docs/analytical-framework.md`](docs/analytical-framework.md) | Accepted concepts and analytical boundaries. |
 | [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Clean, non-canonical target-model prototype and migration notes. |
-| [`content/framework/`](content/framework/) | Generated, non-canonical migration draft of all current comparison content. |
+| [`content/framework/`](content/framework/) | Transitional framework data pending consolidation into the canonical graph tracked in issue #47. |
 | [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Archived eight-by-fourteen comparison input retained for provenance and migration checks. |
 | [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
 | [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |
@@ -38,6 +39,7 @@ ranking or treating historical states as single-system examples.
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
+| [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Source-backed workflow for concrete content changes reviewed in pull requests. |
 
 ## Next step
