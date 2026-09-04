@@ -207,7 +207,15 @@ according to research readiness rather than as one bulk migration.
 
 - [ ] **Research historical political-economic formations** ([#23](https://github.com/dougborg/ends-and-means/issues/23)). Include monarchies, feudal arrangements, Greek democracy and poleis, the Roman Republic and Empire, and bounded Chinese and Japanese imperial forms.
 - [ ] **Add a first-class People layer** ([#25](https://github.com/dougborg/ends-and-means/issues/25)). Connect philosophers, authors, researchers, organizers, and leaders through typed, sourced relationships.
-- [ ] **Add a separate fictional Depictions layer** ([#24](https://github.com/dougborg/ends-and-means/issues/24)). Use primary-text provenance, spoiler controls, and copyright-safe summaries; never treat fiction as empirical evidence.
+- [ ] **Add a separate fictional Depictions layer** ([#24](https://github.com/dougborg/ends-and-means/issues/24)).
+  Use primary-text provenance, spoiler controls, and copyright-safe summaries;
+  never treat fiction as empirical evidence. Model a fictional universe as
+  context containing bounded Depictions connected by Events and Transitions,
+  just as historical states contain changing Cases rather than one timeless
+  system. Begin with a deliberately varied cohort—*1984*, *The Dispossessed*,
+  *Snow Crash*, *The Handmaid's Tale*, *Dune*, and bounded *Star Wars* eras—before
+  using larger settings such as *Foundation*, the Mars trilogy, *Red Rising*, and
+  *Warhammer 40,000* as stress tests.
 
 ### Additional analytical views
 

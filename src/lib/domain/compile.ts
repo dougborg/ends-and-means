@@ -64,6 +64,14 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     entityById.set(entity.id, entity);
   }
 
+  for (const [index, document] of documents.entries()) {
+    if (document.documentType !== "relationships") continue;
+    const subject = entityById.get(document.subject.id);
+    if (!subject || subject.kind !== document.subject.kind) {
+      errors.push(`document ${index}: unresolved or mistyped document subject ${refKey(document.subject)}`);
+    }
+  }
+
   const relationshipIds = new Set<string>();
   for (const relationship of relationships) {
     if (!stableId.test(relationship.id)) errors.push(`${relationship.id}: relationship ID is not stable kebab-case`);
@@ -94,7 +102,7 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
   for (const entity of entities) {
     if (entity.kind !== "concept") continue;
     for (const schemeId of entity.schemeIds) {
-      const key = `${schemeId}:${entity.label.toLocaleLowerCase("en")}`;
+      const key = `${schemeId}:${entity.label.trim().toLocaleLowerCase("en")}`;
       const existing = preferredLabels.get(key);
       if (existing) errors.push(`${entity.id}: preferred label duplicates ${existing} in ${schemeId}`);
       preferredLabels.set(key, entity.id);
