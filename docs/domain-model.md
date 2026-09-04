@@ -150,23 +150,26 @@ interface ComparisonDimension {
   id: ComparisonDimensionId;
   label: string;
   definition: string;
-  valueType: "continuum" | "ordinal" | "categorical";
-  polesOrCategories: DimensionValueDefinition[];
-  eligibleSubjectTypes: EntityKind[];
+  valueType: "ordinal" | "categorical";
+  values: DimensionValueDefinition[];
+  eligibleSubjectKinds: ComparisonSubjectKind[];
   method: string;
   normativeChoices: string[];
-  knownCorrelations: ComparisonDimensionId[];
+  knownCorrelationIds: ComparisonDimensionId[];
   limitations: string[];
   statementIds: StatementId[];
 }
 
 interface Placement extends RelationshipBase {
-  subjectRef: EntityRef;
-  dimensionId: ComparisonDimensionId;
-  value: DimensionValue | DimensionRange;
+  predicate: "placed-on";
+  subject: EntityRef & { kind: ComparisonSubjectKind };
+  object: EntityRef & { kind: "comparison-dimension" };
+  value:
+    | { kind: "category"; categoryId: string }
+    | { kind: "range"; fromCategoryId: string; toCategoryId: string };
   basis: "declared-design" | "ideal-type-analysis" | "case-observation";
   uncertainty: string;
-  lensId?: InterpretationLensId;
+  scope: RelationshipScope;
 }
 ```
 

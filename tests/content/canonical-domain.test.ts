@@ -30,4 +30,11 @@ describe("canonical vertical slice", () => {
     expect(relations.some(({ predicate }) => predicate === "used-means")).toBe(true);
     expect(JSON.stringify(relations)).not.toContain('"predicate":"embodied"');
   });
+
+  it("publishes a descriptive Dimension with scoped episode Placements", () => {
+    expect(entitiesOfKind("comparison-dimension").map(({ id }) => id)).toEqual(["collective-wage-earner-shareholding-authority"]);
+    const placements = canonicalGraph.relationships.filter(({ predicate }) => predicate === "placed-on");
+    expect(placements).toHaveLength(2);
+    expect(placements.map(({ subject }) => subject.id)).toEqual(["enacted-wage-earner-funds-1984-1991", "liquidation-board-period-1992"]);
+  });
 });

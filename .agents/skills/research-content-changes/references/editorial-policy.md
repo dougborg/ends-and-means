@@ -13,19 +13,22 @@
 - Seek serious counterevidence and rival interpretations. If none is found,
   describe the search. State boundaries, uncertainty, missing data, case
   selection limits, and transfer limits.
-- A bounded case is evidence about institutions under stated conditions, not a
-  pure realization of a tradition and not proof about every place or period.
+- A bounded Case is evidence about institutions under stated conditions, not a
+  pure realization of an Approach and not proof about every place or period.
 
 ## Model integrity
 
-Treat traditions, Ends, Means, Topics, Challenges, Criteria, statements, sources,
-and cases as related but independent entities. A tradition may contain variants;
-an End must be attributed; a Means is an institutional arrangement; a Criterion
-makes its normative assumptions visible; a statement represents one contestable
-claim or interpretation. Create only relationships supported by the research.
+Treat Concepts, Collections, Approaches, Ends, Means, Topics, Challenges,
+Criteria, Statements, Sources, Cases, Events, Transitions, Comparison
+Dimensions, and Placements as related but independent records. An End must be
+attributed; a Means is an institutional arrangement; a Criterion makes its
+normative assumptions visible; a Dimension describes a difference; a Placement
+is a scoped analytical claim rather than an intrinsic property. Create only
+relationships supported by the research.
 
 Do not infer completeness from absent links, force uniform coverage, collapse a
-country into a tradition, or encode evaluation in an entity name.
+country into an Approach, encode evaluation in an entity name, or render missing
+Placement data as a midpoint.
 
 ## Editorial authority
 

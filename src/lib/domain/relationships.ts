@@ -1,4 +1,5 @@
 import type { EntityRef, RelationshipStatus } from "./common";
+import type { ComparisonSubjectKind } from "./analysis";
 
 export interface RelationshipScope {
   startDate?: string;
@@ -93,6 +94,20 @@ export interface CaseCriterionRelationship extends RelationshipBase {
   conclusion: "supports" | "mixed" | "challenges" | "inconclusive";
 }
 
+export type PlacementValue =
+  | { kind: "category"; categoryId: string }
+  | { kind: "range"; fromCategoryId: string; toCategoryId: string };
+
+export interface Placement extends RelationshipBase {
+  predicate: "placed-on";
+  subject: EntityRef & { kind: ComparisonSubjectKind };
+  object: EntityRef & { kind: "comparison-dimension" };
+  value: PlacementValue;
+  basis: "declared-design" | "ideal-type-analysis" | "case-observation";
+  uncertainty: string;
+  scope: RelationshipScope;
+}
+
 export interface StatementCitation {
   id: string;
   predicate: "cites";
@@ -103,4 +118,4 @@ export interface StatementCitation {
   note?: string;
 }
 
-export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | ApproachChallengeRelationship | CriterionChallengeRelationship | CaseCriterionRelationship | StatementCitation;
+export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | ApproachChallengeRelationship | CriterionChallengeRelationship | CaseCriterionRelationship | Placement | StatementCitation;

@@ -213,6 +213,28 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
       if (!entity.normativeAssumptions.length) errors.push(`${entity.id}: Criterion requires disclosed normative assumptions`);
     }
 
+    if (entity.kind === "comparison-dimension") {
+      if (!entity.definition.trim()) errors.push(`${entity.id}: Comparison Dimension definition is empty`);
+      if (entity.values.length < 2) errors.push(`${entity.id}: Comparison Dimension requires at least two values`);
+      if (!entity.eligibleSubjectKinds.length) errors.push(`${entity.id}: Comparison Dimension requires eligible subject kinds`);
+      if (!entity.method.trim()) errors.push(`${entity.id}: Comparison Dimension method is empty`);
+      if (!entity.normativeChoices.length) errors.push(`${entity.id}: Comparison Dimension requires disclosed analytical choices`);
+      if (!entity.limitations.length) errors.push(`${entity.id}: Comparison Dimension requires limitations`);
+      if (!entity.statementIds.length) errors.push(`${entity.id}: Comparison Dimension requires supporting Statements`);
+      const valueIds = new Set<string>();
+      const valueOrders = new Set<number>();
+      for (const value of entity.values) {
+        if (!stableId.test(value.id)) errors.push(`${entity.id}: Dimension value ${value.id} is not stable kebab-case`);
+        if (!value.label.trim() || !value.description.trim()) errors.push(`${entity.id}: Dimension value ${value.id} requires a label and description`);
+        if (valueIds.has(value.id)) errors.push(`${entity.id}: duplicate Dimension value ${value.id}`);
+        if (valueOrders.has(value.order)) errors.push(`${entity.id}: duplicate Dimension value order ${value.order}`);
+        valueIds.add(value.id);
+        valueOrders.add(value.order);
+      }
+      validateEntityRefs(entityById, entity.id, "statement", entity.statementIds, "Statement", errors);
+      validateEntityRefs(entityById, entity.id, "comparison-dimension", entity.knownCorrelationIds, "known correlated Comparison Dimension", errors);
+    }
+
     if (entity.kind === "case" || entity.kind === "case-episode") {
       validateHistoricalDate(entity.id, "startDate", entity.startDate, errors);
       if (entity.endDate) validateHistoricalDate(entity.id, "endDate", entity.endDate, errors);
@@ -291,6 +313,32 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
         const episode = entityById.get(episodeId);
         if (episode?.kind === "case-episode" && episode.caseId !== entity.caseId) errors.push(`${entity.id}: Case Episode ${episodeId} belongs to another Case`);
       }
+    }
+  }
+
+
+  for (const relationship of relationships) {
+    if (relationship.predicate !== "placed-on") continue;
+    const dimension = entityById.get(relationship.object.id);
+    if (dimension?.kind !== "comparison-dimension") continue;
+    if (!dimension.eligibleSubjectKinds.includes(relationship.subject.kind)) {
+      errors.push(`${relationship.id}: subject kind ${relationship.subject.kind} is not eligible for ${dimension.id}`);
+    }
+    if (!relationship.uncertainty.trim()) errors.push(`${relationship.id}: Placement uncertainty is empty`);
+    if (!relationship.scope.note?.trim() && !relationship.scope.startDate && !relationship.scope.endDate && !relationship.scope.placeIds?.length) {
+      errors.push(`${relationship.id}: Placement requires an explicit scope`);
+    }
+    validateEntityRefs(entityById, relationship.id, "place", relationship.scope.placeIds ?? [], "scope Place", errors);
+    const valueIds = new Set(dimension.values.map(({ id }) => id));
+    const value = relationship.value;
+    if (value.kind === "category") {
+      if (!valueIds.has(value.categoryId)) errors.push(`${relationship.id}: unknown Dimension value ${value.categoryId}`);
+    } else {
+      const from = dimension.values.find(({ id }) => id === value.fromCategoryId);
+      const to = dimension.values.find(({ id }) => id === value.toCategoryId);
+      if (!from) errors.push(`${relationship.id}: unknown Dimension range start ${value.fromCategoryId}`);
+      if (!to) errors.push(`${relationship.id}: unknown Dimension range end ${value.toCategoryId}`);
+      if (from && to && from.order > to.order) errors.push(`${relationship.id}: Dimension range must run from lower to higher order`);
     }
   }
 

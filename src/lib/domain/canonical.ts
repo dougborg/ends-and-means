@@ -26,3 +26,9 @@ export function entityById<T extends DomainEntity = DomainEntity>(id: string) {
 export function citationsFor(statementId: string) {
   return relationshipsFrom(statementId).filter((relationship): relationship is Extract<DomainRelationship, { predicate: "cites" }> => relationship.predicate === "cites");
 }
+
+export function placementsForDimension(dimensionId: string) {
+  return canonicalGraph.relationships.filter((relationship): relationship is Extract<DomainRelationship, { predicate: "placed-on" }> =>
+    relationship.predicate === "placed-on" && relationship.object.id === dimensionId,
+  );
+}

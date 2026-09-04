@@ -1,5 +1,27 @@
 import type { EntityBase } from "./common";
 
+export type ComparisonSubjectKind = "concept" | "collection" | "approach" | "means" | "case" | "case-episode";
+
+export interface DimensionValueDefinition {
+  id: string;
+  label: string;
+  description: string;
+  order: number;
+}
+
+export interface ComparisonDimension extends EntityBase {
+  kind: "comparison-dimension";
+  definition: string;
+  valueType: "ordinal" | "categorical";
+  values: DimensionValueDefinition[];
+  eligibleSubjectKinds: ComparisonSubjectKind[];
+  method: string;
+  normativeChoices: string[];
+  knownCorrelationIds: string[];
+  limitations: string[];
+  statementIds: string[];
+}
+
 export interface Challenge extends EntityBase {
   kind: "challenge";
   question: string;
@@ -14,4 +36,4 @@ export interface Criterion extends EntityBase {
   limitations: string[];
 }
 
-export type AnalysisEntity = Challenge | Criterion;
+export type AnalysisEntity = Challenge | Criterion | ComparisonDimension;

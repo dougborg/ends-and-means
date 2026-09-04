@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Content Changes"
   short_description: "Build sourced framework changes for PR review"
-  default_prompt: "Use $research-content-changes to research and implement a concrete framework change for Ends and Means."
+  default_prompt: "Use $research-content-changes to research and implement a concrete canonical-graph change for Ends and Means."
