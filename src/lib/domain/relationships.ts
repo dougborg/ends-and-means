@@ -55,6 +55,25 @@ export interface ApproachMeansRelationship extends RelationshipBase {
   object: EntityRef & { kind: "means" };
 }
 
+export interface ConceptCaseRelationship extends RelationshipBase {
+  predicate: "applies-to-case" | "contested-in-case";
+  subject: EntityRef & { kind: "case" | "case-episode" };
+  object: EntityRef & { kind: "concept" };
+}
+
+export interface CaseApproachRelationship extends RelationshipBase {
+  predicate: "self-identified-with" | "influenced-by-approach" | "partially-instantiated" | "hybridized-with" | "departed-from";
+  subject: EntityRef & { kind: "case" | "case-episode" };
+  object: EntityRef & { kind: "approach" };
+}
+
+export interface CaseMeansRelationship extends RelationshipBase {
+  predicate: "used-means";
+  subject: EntityRef & { kind: "case" | "case-episode" };
+  object: EntityRef & { kind: "means" };
+  implementation: "formal-design" | "rules-in-use" | "mixed" | "contested";
+}
+
 export interface StatementCitation {
   id: string;
   predicate: "cites";
@@ -65,4 +84,4 @@ export interface StatementCitation {
   note?: string;
 }
 
-export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | StatementCitation;
+export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | StatementCitation;

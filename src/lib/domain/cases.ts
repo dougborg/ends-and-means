@@ -39,4 +39,25 @@ export interface CaseEpisode extends CaseBase {
   outcomeStatementIds: string[];
 }
 
-export type EvidenceEntity = Place | Case | CaseEpisode;
+export interface Event extends EntityBase {
+  kind: "event";
+  eventType: "enactment" | "election" | "reform" | "strike" | "conflict" | "institutional-change" | "publication" | "other";
+  locationIds: string[];
+  startDate: HistoricalDate;
+  endDate?: HistoricalDate;
+  descriptionStatementIds: string[];
+}
+
+export interface Transition extends EntityBase {
+  kind: "transition";
+  caseId: string;
+  fromEpisodeIds: string[];
+  toEpisodeIds: string[];
+  eventIds: string[];
+  changedRelationshipIds: string[];
+  boundaryStatus: "exact" | "approximate" | "disputed" | "open";
+  explanationStatementIds: string[];
+  rivalInterpretationStatementIds: string[];
+}
+
+export type EvidenceEntity = Place | Case | CaseEpisode | Event | Transition;

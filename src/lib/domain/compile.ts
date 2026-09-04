@@ -67,6 +67,10 @@ function statementIdsForCase(entity: DomainEntity) {
   return [];
 }
 
+function validateEntityRefs(entityById: Map<string, DomainEntity>, ownerId: string, kind: EntityRef["kind"], ids: string[], label: string, errors: string[]) {
+  for (const id of ids) if (entityById.get(id)?.kind !== kind) errors.push(`${ownerId}: unresolved ${label} ${id}`);
+}
+
 function detectBroaderCycle(relationships: DomainRelationship[]) {
   const edges = new Map<string, string[]>();
   for (const relationship of relationships) {
@@ -204,6 +208,34 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
         errors.push(`${entity.id}: unresolved parent Case ${entity.caseId}`);
       } else if (!parent.episodeIds.includes(entity.id)) {
         errors.push(`${entity.id}: parent Case ${entity.caseId} does not reference this episode`);
+      }
+    }
+
+    if (entity.kind === "event") {
+      validateHistoricalDate(entity.id, "startDate", entity.startDate, errors);
+      if (entity.endDate) validateHistoricalDate(entity.id, "endDate", entity.endDate, errors);
+      const start = comparableDate(entity.startDate, "start");
+      const end = entity.endDate && comparableDate(entity.endDate, "end");
+      if (start !== undefined && end !== undefined && start > end) errors.push(`${entity.id}: startDate must not be after endDate`);
+      if (!entity.locationIds.length) errors.push(`${entity.id}: Event requires at least one Place`);
+      validateEntityRefs(entityById, entity.id, "place", entity.locationIds, "Place", errors);
+      validateEntityRefs(entityById, entity.id, "statement", entity.descriptionStatementIds, "Statement", errors);
+    }
+
+    if (entity.kind === "transition") {
+      if (entityById.get(entity.caseId)?.kind !== "case") errors.push(`${entity.id}: unresolved Case ${entity.caseId}`);
+      if (!entity.fromEpisodeIds.length || !entity.toEpisodeIds.length) errors.push(`${entity.id}: Transition requires before and after Case Episodes`);
+      validateEntityRefs(entityById, entity.id, "case-episode", entity.fromEpisodeIds, "from Case Episode", errors);
+      validateEntityRefs(entityById, entity.id, "case-episode", entity.toEpisodeIds, "to Case Episode", errors);
+      validateEntityRefs(entityById, entity.id, "event", entity.eventIds, "Event", errors);
+      validateEntityRefs(entityById, entity.id, "statement", entity.explanationStatementIds, "explanation Statement", errors);
+      validateEntityRefs(entityById, entity.id, "statement", entity.rivalInterpretationStatementIds, "rival interpretation Statement", errors);
+      for (const relationshipId of entity.changedRelationshipIds) {
+        if (!relationshipIds.has(relationshipId)) errors.push(`${entity.id}: unresolved changed Relationship ${relationshipId}`);
+      }
+      for (const episodeId of [...entity.fromEpisodeIds, ...entity.toEpisodeIds]) {
+        const episode = entityById.get(episodeId);
+        if (episode?.kind === "case-episode" && episode.caseId !== entity.caseId) errors.push(`${entity.id}: Case Episode ${episodeId} belongs to another Case`);
       }
     }
   }
