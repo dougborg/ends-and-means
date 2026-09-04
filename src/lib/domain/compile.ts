@@ -171,6 +171,17 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
       }
     }
 
+    if (entity.kind === "challenge") {
+      if (!entity.question.trim()) errors.push(`${entity.id}: Challenge question is empty`);
+      if (!entity.rationale.trim()) errors.push(`${entity.id}: Challenge rationale is empty`);
+    }
+
+    if (entity.kind === "criterion") {
+      if (!entity.definition.trim()) errors.push(`${entity.id}: Criterion definition is empty`);
+      if (!entity.evidenceRequirements.length) errors.push(`${entity.id}: Criterion requires evidence guidance`);
+      if (!entity.normativeAssumptions.length) errors.push(`${entity.id}: Criterion requires disclosed normative assumptions`);
+    }
+
     if (entity.kind === "case" || entity.kind === "case-episode") {
       validateHistoricalDate(entity.id, "startDate", entity.startDate, errors);
       if (entity.endDate) validateHistoricalDate(entity.id, "endDate", entity.endDate, errors);

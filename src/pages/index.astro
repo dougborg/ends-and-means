@@ -2,33 +2,37 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import framework from "../../content/framework/draft.json";
 import "../styles/traditions-entry.css";
-
-const challengeCount = new Map(framework.traditions.map((tradition) => [
-  tradition.id,
-  framework.responses.filter(({ traditionId }) => traditionId === tradition.id).length,
-]));
 ---
-<BaseLayout fullBleed description="Explore political-economic traditions and ideal types through their defining commitments, institutional responses, disputes, and open research questions.">
+<BaseLayout fullBleed description="Explore and compare political-economic systems, institutions, cases, and evidence.">
   <header class="traditions-hero">
-    <p class="coordinate">ENDS AND MEANS / COMPARATIVE FIELD GUIDE</p>
+    <p class="coordinate">ENDS AND MEANS / SYSTEMS IN THEORY AND PRACTICE</p>
     <div class="traditions-hero__thesis">
-      <h1>How different systems<br /><span>organize common life.</span></h1>
-      <p class="dek">Begin with a political-economic tradition. Each dossier asks what it values, which institutions it relies on, how it responds to recurring problems, and where its record remains contested.</p>
+      <h1>Follow the claim<br /><span>from purpose to practice.</span></h1>
+      <p class="dek">Explore what an approach values, the institutions it proposes, what happened in bounded cases, and which judgments the evidence can—or cannot—support.</p>
     </div>
     <aside class="traditions-hero__guide" aria-label="How to use this guide">
-      <p class="coordinate">A NOTE ON THE LABELS</p>
-      <p>These are families of ideas and analytical ideal types—not boxes that whole countries fit neatly inside. Each overview names its boundaries and internal tensions.</p>
-      <a href="/framework/">Read the method <span aria-hidden="true">→</span></a>
+      <p class="coordinate">FIRST CANONICAL SLICE</p>
+      <p>The new graph is deliberately starting with one deeply traced example. It is a design and method test, not a claim that this subject deserves permanent priority.</p>
+      <a href="/explore/swedish-wage-earner-fund-program/">Open the reviewed slice <span aria-hidden="true">→</span></a>
     </aside>
   </header>
 
-  <section class="tradition-catalogue" aria-labelledby="tradition-catalogue-title">
+  <section class="canonical-launch" aria-labelledby="canonical-launch-title">
+    <header><p class="coordinate">EXPLORE / COMPARE / VERIFY</p><h2 id="canonical-launch-title">One graph, three ways into the argument</h2></header>
+    <div>
+      <article><p class="coordinate">01 / EXPLORE</p><h3>Swedish wage-earner fund program</h3><p>Trace attributed Ends through proposed Means, bounded implementation, Challenges, and Criteria.</p><a href="/explore/swedish-wage-earner-fund-program/">Explore the Approach →</a></article>
+      <article><p class="coordinate">02 / CASE</p><h3>Enacted funds, 1984–1991</h3><p>Keep formal design, rules-in-use, outcomes, and interpretation visibly separate.</p><a href="/cases/swedish-wage-earner-funds/">Inspect the Case →</a></article>
+      <article><p class="coordinate">03 / COMPARE</p><h3>Promise and practice</h3><p>Compare the same canonical Statements without manufacturing a score or duplicating prose.</p><a href="/compare/">Open Compare →</a></article>
+    </div>
+  </section>
+
+  <section class="tradition-catalogue legacy-catalogue" aria-labelledby="tradition-catalogue-title">
     <header class="tradition-catalogue__heading">
       <div>
-        <p class="coordinate">PRIMARY ENTRY POINT / 8 DOSSIERS</p>
-        <h2 id="tradition-catalogue-title">Traditions and ideal types</h2>
+        <p class="coordinate">TRANSITIONAL RESEARCH / {framework.traditions.length} DOSSIERS</p>
+        <h2 id="tradition-catalogue-title">Earlier working material</h2>
       </div>
-      <p>Read an orientation, clarify common misconceptions, then follow its proposed Means across the same set of Challenges.</p>
+      <p>These dossiers remain available for provenance and feedback, but they have not yet been reconciled into the canonical graph.</p>
     </header>
     <ol class="tradition-cards">
       {framework.traditions.map((tradition) => (
@@ -44,8 +48,8 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
               <p>{tradition.distinctions[0]}</p>
             </div>
             <footer>
-              <span>{challengeCount.get(tradition.id)} Challenge responses</span>
-              <a href={`/traditions/${tradition.id}/`} aria-label={`Open the ${tradition.name} dossier`}>Open dossier <span aria-hidden="true">→</span></a>
+              <span>Transitional</span>
+              <a href={`/traditions/${tradition.id}/`} aria-label={`Open the transitional ${tradition.name} dossier`}>View working material <span aria-hidden="true">→</span></a>
             </footer>
           </article>
         </li>
@@ -53,31 +57,20 @@ const challengeCount = new Map(framework.traditions.map((tradition) => [
     </ol>
   </section>
 
-  <section class="secondary-discovery" aria-labelledby="compare-title">
+  <section class="secondary-discovery" aria-labelledby="archive-title">
     <header>
-      <p class="coordinate">COMPARE ACROSS TRADITIONS</p>
-      <h2 id="compare-title">Start somewhere else</h2>
-      <p>Already have a question in mind? Approach the same material through a recurring institutional Challenge or a broad Topic.</p>
+      <p class="coordinate">WORK IN PROGRESS</p>
+      <h2 id="archive-title">The catalogue will grow after the structure survives review.</h2>
+      <p>Gender, anarchism, historical transitions, people, and fictional Depictions are in the roadmap. We are testing the evidence path before multiplying pages.</p>
     </header>
     <div class="secondary-discovery__paths">
       <article>
-        <p class="coordinate">9 QUESTIONS</p>
-        <h3>Challenges</h3>
-        <p>Compare how every tradition responds to coordination, power, security, transition, and other recurring problems.</p>
-        <a href="/challenges/">Browse all Challenges <span aria-hidden="true">→</span></a>
+        <p class="coordinate">METHOD</p><h3>How the graph works</h3><p>See why Concepts, Approaches, Means, Cases, Statements, and Sources remain distinct.</p><a href="/framework/">Read the method <span aria-hidden="true">→</span></a>
       </article>
       <article>
-        <p class="coordinate">5 LENSES</p>
-        <h3>Topics</h3>
-        <p>Follow related questions through Ownership, Work, Security, Coordination, and Power.</p>
-        <a href="/topics/">Browse all Topics <span aria-hidden="true">→</span></a>
+        <p class="coordinate">PROVENANCE</p><h3>Earlier questions and sources</h3><p>Browse the transitional research directory while canonical migration continues.</p><a href="/reading/">Inspect the reading directory <span aria-hidden="true">→</span></a>
       </article>
     </div>
   </section>
 
-  <aside class="homepage-draft-note">
-    <p class="coordinate">RESEARCH STATUS</p>
-    <p><strong>This is a working research draft.</strong> The dossiers establish a clearer structure for inquiry; inherited assertions remain marked for sourcing and review rather than presented as settled conclusions.</p>
-    <a href="/reading/">Inspect the reading directory <span aria-hidden="true">→</span></a>
-  </aside>
 </BaseLayout>

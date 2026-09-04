@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { entitiesOfKind, entityById } from "../../lib/domain/canonical";
+const cases = entitiesOfKind("case");
+---
+<BaseLayout title="Cases" description="Time- and place-bounded political-economic cases." fullBleed>
+  <article class="canonical-index"><header><p class="coordinate">CASES / EVIDENCE IN CONTEXT</p><h1>A place is not a system. A period is not forever.</h1><p class="dek">Cases preserve the institutional setting in which claims were observed. Episodes keep materially different arrangements from collapsing into a country label.</p></header><ol class="canonical-directory">{cases.map((item) => <li><p class="coordinate">{item.startDate.year}–{item.endDate?.year ?? "ongoing"}</p><h2><a href={`/cases/${item.id}/`}>{item.label}</a></h2><p>{item.description}</p><p><strong>Location:</strong> {item.locationIds.map((id) => entityById(id)?.label).join(", ")}</p></li>)}</ol></article>
+</BaseLayout>

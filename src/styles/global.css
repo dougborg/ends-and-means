@@ -216,10 +216,76 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .source-layout aside h2 { margin: .5rem 0 1rem; font-size: 1.2rem; }
 .source-layout aside dl div { grid-template-columns: 5rem 1fr; }
 .missing-link { padding: 1rem; border-left: 3px solid var(--amber); background: var(--amber-wash); font-size: .84rem; }
+.transition-panel { margin: 4rem 0; padding: 1.5rem; border: 1px solid var(--rule); border-top: 4px solid var(--blue); background: var(--paper); }
+.transition-panel > article { margin-top: 1.5rem; }
 .source-links { padding-left: 1.2rem; }
 .claim-connections { padding-top: 1.5rem; border-top: 3px solid var(--night); }
 .claim-connections > p:last-child, .claim-connections li { font-family: var(--reading); line-height: 1.65; }
 .claim-connections ul { padding-left: 1.2rem; }
+
+/* Canonical graph preview: the evidence thread is the visual structure. */
+.canonical-index, .canonical-dossier, .compare-page { display: grid; gap: clamp(3rem, 7vw, 6rem); }
+.canonical-index > header, .canonical-dossier > header, .compare-page > header { max-width: 66rem; }
+.canonical-index h1, .canonical-dossier h1, .compare-page h1 { margin: .45rem 0 1.25rem; font-size: clamp(2.15rem, 5vw, 4.5rem); font-weight: 550; line-height: .98; }
+.slice-notice { display: grid; grid-template-columns: minmax(10rem, .3fr) 1fr; gap: 1.5rem; padding: 1.3rem; border-top: 3px solid var(--teal); background: var(--teal-wash); }
+.slice-notice strong { font: 600 .72rem/1.4 var(--apparatus); letter-spacing: .06em; text-transform: uppercase; }
+.slice-notice p { max-width: 65ch; margin: 0; font-family: var(--reading); line-height: 1.6; }
+.canonical-directory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; padding: 0; border-top: 4px solid var(--night); list-style: none; }
+.canonical-directory > li { padding: clamp(1.5rem, 4vw, 3rem); border-bottom: 1px solid var(--rule); }
+.canonical-directory > li:nth-child(odd) { border-right: 1px solid var(--rule); }
+.canonical-directory h2 { margin: .5rem 0 1rem; }
+.canonical-directory > li > p:not(.coordinate) { font-family: var(--reading); line-height: 1.65; }
+.canonical-dossier > nav { color: var(--muted); font: .72rem/1.5 var(--apparatus); }
+.scope-note { max-width: 72ch; padding: 1rem 1.2rem; border-left: 3px solid var(--cobalt); background: var(--sheet); font-family: var(--reading); line-height: 1.6; }
+.trace-grid { display: grid; grid-template-columns: minmax(10rem, .28fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.trace-grid > aside { position: sticky; top: 1rem; padding-top: 1rem; border-top: 3px solid var(--night); }
+.trace-grid > aside ol { margin: 1rem 0 0; padding-left: 1.2rem; color: var(--muted); font: .72rem/1.8 var(--apparatus); }
+.claim-thread { position: relative; }
+.claim-thread::before { position: absolute; top: 2rem; bottom: 2rem; left: 1.15rem; width: 2px; background: var(--cobalt); content: ""; }
+.claim-thread > section { position: relative; padding: 0 0 clamp(3rem, 7vw, 5rem) 4rem; }
+.claim-thread > section > header { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1rem; align-items: start; margin-left: -4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+.trace-marker { z-index: 1; display: grid; width: 2.4rem; height: 2.4rem; place-items: center; margin: 0; border: 2px solid var(--cobalt); border-radius: 50%; color: var(--cobalt-dark); background: var(--atmosphere); font: 600 .68rem/1 var(--apparatus); }
+.claim-thread h2 { margin-top: .3rem; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+.claim-thread h3 { margin: 1.5rem 0 .8rem; }
+.claim-thread > section > div > p:not(.coordinate), .evaluation-pairs article > p:not(.coordinate) { font-family: var(--reading); line-height: 1.65; }
+.canonical-claim { margin-top: 1rem; padding: 1.15rem; border: 1px solid var(--rule); background: var(--sheet); }
+.canonical-claim__text { margin: .55rem 0 1rem; font-family: var(--reading); font-size: 1.02rem; line-height: 1.68; }
+.canonical-claim footer { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; padding-top: .8rem; border-top: 1px solid var(--rule); }
+.claim-status { color: var(--teal); font: 600 .62rem/1.4 var(--apparatus); text-transform: uppercase; }
+.canonical-claim footer ol { margin: 0; padding: 0; list-style: none; }
+.canonical-claim footer li { display: flex; flex-wrap: wrap; gap: .25rem .65rem; font: .67rem/1.45 var(--apparatus); }
+.canonical-claim footer li + li { margin-top: .4rem; }
+.canonical-claim footer li span { color: var(--muted); }
+.evaluation-pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.evaluation-pairs article { padding: 1.25rem; border-bottom: 1px solid var(--rule); }
+.evaluation-pairs article + article { border-left: 1px solid var(--rule); }
+.next-actions { display: flex; flex-wrap: wrap; gap: .8rem; padding-top: 1.5rem; border-top: 3px solid var(--night); }
+.next-actions a { padding: .8rem 1rem; border: 1px solid var(--cobalt); background: var(--sheet); font-weight: 600; text-decoration: none; }
+.episode > header { max-width: 70ch; padding-bottom: 1.5rem; border-bottom: 4px solid var(--night); }
+.episode > header > p:not(.coordinate) { font-family: var(--reading); line-height: 1.65; }
+.evidence-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.evidence-columns > section { min-width: 0; padding: 1.2rem; border-bottom: 1px solid var(--rule); }
+.evidence-columns > section + section { border-left: 1px solid var(--rule); }
+.evidence-columns h3 { color: var(--cobalt-dark); font: 600 .7rem/1.4 var(--apparatus); text-transform: uppercase; }
+.case-assessments { margin-top: 3rem; padding-top: 1.25rem; border-top: 3px solid var(--night); }
+.case-assessments > article { display: grid; grid-template-columns: minmax(10rem, .3fr) 1fr; gap: 1.5rem; padding-block: 1.5rem; border-bottom: 1px solid var(--rule); }
+.case-assessments h3 small { display: block; margin-top: .5rem; color: var(--muted); font: .62rem/1.4 var(--apparatus); text-transform: uppercase; }
+.comparison-table { overflow-x: auto; border-top: 4px solid var(--night); background: var(--sheet); }
+.comparison-table table { width: 100%; min-width: 74rem; border-collapse: collapse; }
+.comparison-table th, .comparison-table td { min-width: 14rem; padding: 1rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; }
+.comparison-table thead th { color: var(--cobalt-dark); background: var(--atmosphere); font: 600 .65rem/1.4 var(--apparatus); text-transform: uppercase; }
+.comparison-table tbody > tr > th { font-family: var(--reading); line-height: 1.5; }
+.comparison-table tbody > tr > th span { display: block; margin-top: .8rem; color: var(--muted); font: .63rem/1.4 var(--apparatus); text-transform: uppercase; }
+.comparison-table .canonical-claim { margin: 0; padding: 0; border: 0; }
+.comparison-table .canonical-claim footer { grid-template-columns: 1fr; }
+.comparison-caveat { max-width: 68ch; padding: 1rem 1.2rem; border-left: 3px solid var(--amber); background: var(--amber-wash); font-family: var(--reading); line-height: 1.65; }
+.canonical-launch { margin-bottom: clamp(4rem, 9vw, 8rem); border-top: 4px solid var(--night); }
+.canonical-launch > header { display: flex; justify-content: space-between; gap: 2rem; align-items: end; padding: 1.3rem 0; border-bottom: 1px solid var(--rule); }
+.canonical-launch > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.canonical-launch article { padding: clamp(1.25rem, 3vw, 2rem); background: var(--sheet); }
+.canonical-launch article + article { border-left: 1px solid var(--rule); }
+.canonical-launch article > p:not(.coordinate) { min-height: 6rem; font-family: var(--reading); line-height: 1.6; }
+.legacy-catalogue { opacity: .82; }
 @media (max-width: 48rem) {
   .site-header__inner { display: grid; gap: .65rem; padding-block: .8rem; }
   .primary-nav { gap: 1.15rem; overflow-x: auto; padding-bottom: .35rem; }
@@ -255,6 +321,13 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .reading-section li, .source-layout { grid-template-columns: 1fr; }
   .source-state { text-align: left; }
   .source-layout > aside { padding-left: 0; border-left: 0; }
+  .slice-notice, .trace-grid, .case-assessments > article { grid-template-columns: 1fr; }
+  .trace-grid > aside { position: static; }
+  .canonical-directory, .evaluation-pairs, .evidence-columns, .canonical-launch > div { grid-template-columns: 1fr; }
+  .canonical-directory > li:nth-child(odd), .evaluation-pairs article + article, .evidence-columns > section + section, .canonical-launch article + article { border-left: 0; border-right: 0; }
+  .claim-thread > section { padding-left: 3.2rem; }
+  .claim-thread > section > header { margin-left: -3.2rem; }
+  .canonical-claim footer { grid-template-columns: 1fr; }
 }
 @media (max-width: 25rem) { .primary-nav { width: calc(100vw - 2rem); } .primary-nav a { font-size: .76rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
