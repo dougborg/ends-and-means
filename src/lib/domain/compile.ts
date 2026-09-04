@@ -125,7 +125,7 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
   const citedStatementIds = new Set(relationships.filter((relationship) => relationship.predicate === "cites").map((relationship) => relationship.subject.id));
   for (const entity of entities) {
     if (entity.kind === "statement" && entity.publicationStatus !== "research-needed" && !citedStatementIds.has(entity.id)) {
-      errors.push(`${entity.id}: reviewed Statement requires a citation`);
+      errors.push(`${entity.id}: Statement requires a citation to advance beyond research-needed`);
     }
   }
 

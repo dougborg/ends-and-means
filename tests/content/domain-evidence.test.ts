@@ -72,7 +72,7 @@ describe("domain evidence model", () => {
 
   it("requires citations for Statements promoted beyond research-needed", () => {
     expect(validateAuthoringDocuments(evidenceDocuments.slice(0, 3))).toContain(
-      "commons-can-be-self-governed: reviewed Statement requires a citation",
+      "commons-can-be-self-governed: Statement requires a citation to advance beyond research-needed",
     );
   });
 
