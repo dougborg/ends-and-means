@@ -50,7 +50,8 @@ The site is live at [endsandmeans.info](https://endsandmeans.info) as a static A
 - a reading catalogue containing 51 inherited bibliographic records;
 - an accepted analytical framework and working editorial philosophy;
 - a pull-request-based research skill for concrete content changes;
-- CI, graph validation, route tests, and automated Pages deployment.
+- CI, graph validation, route tests, a rendered-page review gate, and automated
+  Pages deployment.
 
 The analytical method is accepted, but the ontology is still being validated.
 Its implementation is split across a shallow migration graph, a richer
@@ -101,6 +102,10 @@ Event/Transition. Explore, Case, and comparison views intentionally expose this
 single slice for reader feedback before the catalogue expands. Remaining
 Milestone 1 work broadens the model tests, adds placements and external
 identities, and retires the transitional framework once parity is demonstrated.
+Rendered-page self-review now runs in CI and preserves desktop, tablet, and
+mobile screenshots; the first live pass repaired the Case overview contrast
+failure. Shared dossier hierarchy and responsive evidence-density refinements
+remain tracked in #67 rather than being treated as complete.
 
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
@@ -150,7 +155,8 @@ stable interfaces, but #48 closes only after parity is demonstrated.
 **Execution order:** #39 valid dossiers → #55 and #56 priority anarchism Cases →
 #3 evidence/reference routes → #4 static comparison core → #26 one-dimensional
 Placement prototype → #35 entity-neutral pairwise comparison → #9 public method
-→ #20 correction links → #12 accessibility and metadata release review.
+→ #20 correction links → #67 shared dossier presentation refinement → #12
+accessibility and metadata release review.
 
 - [ ] **Develop the Zapatistas as a principal anarchism Case** ([#55](https://github.com/dougborg/ends-and-means/issues/55)). Distinguish the EZLN, civilian communities, governance institutions, and bounded episodes of institutional change; retain Indigenous context, competing classifications, and ongoing-case freshness.
 - [ ] **Develop bounded Spanish Revolution anarchism Cases** ([#56](https://github.com/dougborg/ends-and-means/issues/56)). Distinguish the CNT, FAI, workplace and rural collectives, federations, militias, committees, regions, and wartime periods rather than treating Spain from 1936–1939 as one system.
@@ -160,6 +166,7 @@ Placement prototype → #35 entity-neutral pairwise comparison → #9 public met
 - [ ] **Define and prototype multidimensional mapping** ([#26](https://github.com/dougborg/ends-and-means/issues/26)). Establish Comparison Dimension and Placement records, then test one dimension before attempting a two-axis visualization.
 - [ ] **Publish the method and contribution model** ([#9](https://github.com/dougborg/ends-and-means/issues/9)). Explain scope, evidence breadth, assessments, uncertainty, editorial review, and the pull-request review boundary in reader-facing language.
 - [ ] **Add statement-level correction links** ([#20](https://github.com/dougborg/ends-and-means/issues/20)). Prefill structured GitHub issue forms with the page, entity, and claim anchor.
+- [ ] **Refine dossier hierarchy and responsive evidence scanning** ([#67](https://github.com/dougborg/ends-and-means/issues/67)). Use the rendered-page workflow to reduce excessive spacing, improve dense evidence scanning, and unify related-idea and external-reference treatments across representative sparse and dense pages.
 - [ ] **Complete accessibility and metadata review** ([#12](https://github.com/dougborg/ends-and-means/issues/12)). Verify keyboard use, focus, landmarks, contrast, reduced motion, metadata, social cards, structured data, and sitemap behavior.
 
 ### Milestone 2 exit criteria
@@ -170,6 +177,9 @@ Placement prototype → #35 entity-neutral pairwise comparison → #9 public met
 - Every Placement exposes its Dimension, basis, scope, uncertainty, evidence,
   and alternative interpretations through an equivalent nonvisual view.
 - Readers can understand the method and challenge a precise assertion.
+- Changed public routes pass automated rendering checks and receive explicit
+  desktop, tablet, and mobile screenshot review before implementation is called
+  complete.
 - Core routes meet the accessibility and metadata release checklist.
 
 ## Milestone 3 — [Advanced comparison and change over time](https://github.com/dougborg/ends-and-means/milestone/3)
@@ -243,6 +253,10 @@ according to research readiness rather than as one bulk migration.
   information architecture now replaces that experiment with Explore and
   Compare.
 - [x] Added a research skill that implements source-backed content changes directly in reviewable pull requests.
+- [x] Added a rendered-page completion gate with desktop, tablet, and mobile
+  screenshots plus automated checks for contrast, undefined design tokens,
+  overflow, and browser errors; used it to repair the Case overview contrast
+  defect ([#66](https://github.com/dougborg/ends-and-means/pull/66)).
 - [x] Deployed the static site to GitHub Pages with the custom domain.
 
 ## Explicitly deferred
