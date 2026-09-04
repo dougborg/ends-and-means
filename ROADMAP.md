@@ -85,10 +85,12 @@ implementation before researching the inherited dossiers in parallel:
 7. Add one Event and Transition across two Case episodes as a chronology and
    causal-interpretation boundary test (#22); expand timeline views later in
    #29.
-8. Define the first Comparison Dimension and sourced Placements, and render one
-   shared-Challenge comparison as part of the vertical slice (#4 and #26).
-9. Add Wikipedia and Wikidata orientation/identity references plus publisher,
-   library, and reading links; validate them continuously (#41 and #19).
+8. The first Comparison Dimension, sourced Placements, and one-dimensional
+   shared-Challenge view landed in #69; expand comparison only after the
+   reviewed slice establishes a stable boundary (#4 and #26).
+9. The external-reference contract, validation, shared rendering, and initial
+   Swedish mappings have landed. Complete the canonical-entity audit/backfill,
+   then add continuous link reporting (#41 and #19).
 10. Review the complete Challenge → attributed End → Means → bounded evidence →
    Criterion → assessment trace. Then migrate only inherited material that fits
    the new entities and relationships (#39).
@@ -99,9 +101,11 @@ This implementation tests the content model, editorial workflow, temporal semant
 wage-earner-fund program from attributed Ends through formal Means, bounded
 practice, criterion-specific assessments, and the 1991–1992 abolition
 Event/Transition. Explore, Case, and comparison views intentionally expose this
-single slice for reader feedback before the catalogue expands. Remaining
-Milestone 1 work broadens the model tests, adds placements and external
-identities, and retires the transitional framework once parity is demonstrated.
+single slice for reader feedback before the catalogue expands. The first
+Comparison Dimension and sourced Placements now render from the same graph.
+Remaining Milestone 1 work broadens the model-boundary tests, completes the
+external-identity audit and link reporting, and retires the transitional
+framework once parity is demonstrated.
 Rendered-page self-review now runs in CI and preserves desktop, tablet, and
 mobile screenshots; the first live pass repaired the Case overview contrast
 failure. Shared dossier hierarchy and responsive evidence-density refinements
