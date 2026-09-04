@@ -63,4 +63,14 @@ describe("Comparison Dimension and Placement model", () => {
     expect(errors).toContain("test-means-authority-placement: Placement uncertainty is empty");
     expect(errors).toContain("test-means-authority-placement: Placement requires an explicit scope");
   });
+
+  it("reports a missing Placement scope instead of throwing", () => {
+    const invalid = structuredClone(documents);
+    const placementDocument = invalid[4];
+    if (placementDocument?.documentType === "relationships") {
+      const placement = placementDocument.relationships[0];
+      if (placement?.predicate === "placed-on") delete (placement as unknown as { scope?: unknown }).scope;
+    }
+    expect(validateAuthoringDocuments(invalid)).toContain("test-means-authority-placement: Placement requires an explicit scope");
+  });
 });

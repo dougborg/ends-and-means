@@ -9,9 +9,11 @@ limitations. Prefer one narrow operational definition over a compound axis.
 
 A Placement is an independently reviewable analytical claim. Record its subject,
 Dimension, value or range, time/place scope, basis, uncertainty, supporting
-Statements and Sources, and any rival lens. Distinguish ideal type, declared
-design, and observed practice. Internally diverse Concepts and Collections
-ordinarily receive ranges or remain unplaced.
+Statements, and Sources. Represent a rival placement as another independently
+sourced Placement with distinct supporting Statements; the current schema does
+not carry a separate lens identifier. Distinguish ideal type, declared design,
+and observed practice. Internally diverse Concepts and Collections ordinarily
+receive ranges or remain unplaced.
 
 Test unlike subject types, missing data, uncertainty, and rival Placements.
 Missing data must remain absent rather than appearing at a midpoint. A Placement

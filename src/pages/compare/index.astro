@@ -10,11 +10,12 @@ const rows = [
 ];
 const dimension = requireEntityOfKind("collective-wage-earner-shareholding-authority", "comparison-dimension");
 const placements = placementsForDimension(dimension.id);
+const orderedValues = [...dimension.values].sort((left, right) => left.order - right.order);
 const valueLabel = (placement: (typeof placements)[number]) => {
   const value = placement.value;
-  if (value.kind === "category") return dimension.values.find(({ id }) => id === value.categoryId)?.label;
-  const from = dimension.values.find(({ id }) => id === value.fromCategoryId)?.label;
-  const to = dimension.values.find(({ id }) => id === value.toCategoryId)?.label;
+  if (value.kind === "category") return orderedValues.find(({ id }) => id === value.categoryId)?.label;
+  const from = orderedValues.find(({ id }) => id === value.fromCategoryId)?.label;
+  const to = orderedValues.find(({ id }) => id === value.toCategoryId)?.label;
   return `${from}–${to}`;
 };
 const scopeLabel = (placement: (typeof placements)[number]) => {
@@ -28,7 +29,7 @@ const scopeLabel = (placement: (typeof placements)[number]) => {
 
   <section class="dimension-comparison" aria-labelledby="dimension-heading">
     <header><p class="coordinate">DESCRIPTIVE DIMENSION / ONE-DIMENSIONAL PROTOTYPE</p><h2 id="dimension-heading">{dimension.label}</h2><p>{dimension.definition}</p></header>
-    <div class="dimension-scale" aria-label="Ordered dimension categories">{dimension.values.map((value) => <div><strong>{value.label}</strong><span>{value.description}</span></div>)}</div>
+    <div class="dimension-scale" aria-label="Ordered dimension categories">{orderedValues.map((value) => <div><strong>{value.label}</strong><span>{value.description}</span></div>)}</div>
     <div class="dimension-table" role="region" aria-label={`${dimension.label} placements`} tabindex="0"><table><thead><tr><th scope="col">Bounded subject</th><th scope="col">Placement</th><th scope="col">Basis and scope</th><th scope="col">Uncertainty</th><th scope="col">Evidence</th></tr></thead><tbody>{placements.map((placement) => { const subject = requireEntityOfKind(placement.subject.id, placement.subject.kind); return <tr><th scope="row" data-label="Bounded subject">{subject.label}</th><td data-label="Placement"><strong>{valueLabel(placement)}</strong></td><td data-label="Basis and scope"><span class="placement-basis">{placement.basis.replaceAll("-", " ")}</span><p>{scopeLabel(placement)}</p></td><td data-label="Uncertainty">{placement.uncertainty}</td><td data-label="Evidence">{placement.statementIds.map((statementId) => <CanonicalStatement statementId={statementId} />)}</td></tr>; })}</tbody></table></div>
     <div class="dimension-method"><div><h3>Method</h3><p>{dimension.method}</p></div><div><h3>Analytical choices</h3><ul>{dimension.normativeChoices.map((choice) => <li>{choice}</li>)}</ul></div><div><h3>Limits</h3><ul>{dimension.limitations.map((limitation) => <li>{limitation}</li>)}</ul></div></div>
     <p class="comparison-caveat"><strong>Dimension, not Criterion.</strong> These placements describe bounded voting authority. They do not say whether that authority was desirable, accountable, effective, or distributively sufficient. Unplaced subjects remain missing—not halfway along the scale.</p>

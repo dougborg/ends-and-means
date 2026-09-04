@@ -325,10 +325,15 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
       errors.push(`${relationship.id}: subject kind ${relationship.subject.kind} is not eligible for ${dimension.id}`);
     }
     if (!relationship.uncertainty.trim()) errors.push(`${relationship.id}: Placement uncertainty is empty`);
-    if (!relationship.scope.note?.trim() && !relationship.scope.startDate && !relationship.scope.endDate && !relationship.scope.placeIds?.length) {
+    const scope = relationship.scope;
+    if (!scope) {
       errors.push(`${relationship.id}: Placement requires an explicit scope`);
+    } else {
+      if (!scope.note?.trim() && !scope.startDate && !scope.endDate && !scope.placeIds?.length) {
+        errors.push(`${relationship.id}: Placement requires an explicit scope`);
+      }
+      validateEntityRefs(entityById, relationship.id, "place", scope.placeIds ?? [], "scope Place", errors);
     }
-    validateEntityRefs(entityById, relationship.id, "place", relationship.scope.placeIds ?? [], "scope Place", errors);
     const valueIds = new Set(dimension.values.map(({ id }) => id));
     const value = relationship.value;
     if (value.kind === "category") {
