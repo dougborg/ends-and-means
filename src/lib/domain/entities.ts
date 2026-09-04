@@ -22,10 +22,40 @@ export interface Statement extends EntityBase {
   text: string;
 }
 
-export interface Source extends EntityBase {
-  kind: "source";
-  sourceType: string;
+export type WorkType = "book" | "article" | "report" | "dataset" | "law" | "constitution" | "archival-work" | "fiction" | "other";
+
+export interface Work extends EntityBase {
+  kind: "work";
   title: string;
+  workType: WorkType;
+  originalPublicationYear?: number;
 }
 
-export type DomainEntity = VocabularyEntity | Approach | End | Means | Statement | Source;
+export interface SourceIdentifiers {
+  doi?: string;
+  isbn10?: string;
+  isbn13?: string;
+  openLibraryId?: string;
+}
+
+export interface ResourceLink {
+  purpose: "publisher" | "library" | "authorized-reading" | "purchase" | "archive" | "other";
+  url: string;
+  label: string;
+  vendor?: string;
+  affiliate?: boolean;
+}
+
+export interface Source extends EntityBase {
+  kind: "source";
+  sourceType: "edition" | "article" | "report" | "dataset" | "legal-text" | "archival-record" | "web-page" | "other";
+  title: string;
+  workId?: string;
+  contributorDisplay?: string[];
+  publicationYear?: number;
+  publisher?: string;
+  identifiers?: SourceIdentifiers;
+  resourceLinks?: ResourceLink[];
+}
+
+export type DomainEntity = VocabularyEntity | Approach | End | Means | Statement | Work | Source;

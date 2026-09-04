@@ -13,6 +13,14 @@ function addIndex(index: Record<string, string[]>, key: string, relationshipId: 
   (index[key] ??= []).push(relationshipId);
 }
 
+function isHttpUrl(value: string) {
+  try {
+    return ["http:", "https:"].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+}
+
 function detectBroaderCycle(relationships: DomainRelationship[]) {
   const edges = new Map<string, string[]>();
   for (const relationship of relationships) {
@@ -83,11 +91,15 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     const object = entityById.get(relationship.object.id);
     if (!subject || subject.kind !== relationship.subject.kind) errors.push(`${relationship.id}: unresolved or mistyped subject ${refKey(relationship.subject)}`);
     if (!object || object.kind !== relationship.object.kind) errors.push(`${relationship.id}: unresolved or mistyped object ${refKey(relationship.object)}`);
-    if (relationship.status !== "research-needed" && relationship.statementIds.length === 0) {
-      errors.push(`${relationship.id}: substantive relationship requires a supporting Statement`);
-    }
-    for (const statementId of relationship.statementIds) {
-      if (entityById.get(statementId)?.kind !== "statement") errors.push(`${relationship.id}: unresolved Statement ${statementId}`);
+    if (relationship.predicate === "cites") {
+      if (!relationship.locator.trim()) errors.push(`${relationship.id}: citation requires a locator`);
+    } else {
+      if (relationship.status !== "research-needed" && relationship.statementIds.length === 0) {
+        errors.push(`${relationship.id}: substantive relationship requires a supporting Statement`);
+      }
+      for (const statementId of relationship.statementIds) {
+        if (entityById.get(statementId)?.kind !== "statement") errors.push(`${relationship.id}: unresolved Statement ${statementId}`);
+      }
     }
   }
 
@@ -95,6 +107,25 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     const schemeIds = entity.kind === "concept" || entity.kind === "domain" ? entity.schemeIds : [];
     for (const schemeId of schemeIds) {
       if (entityById.get(schemeId)?.kind !== "concept-scheme") errors.push(`${entity.id}: unresolved Concept Scheme ${schemeId}`);
+    }
+
+    if (entity.kind === "source") {
+      if (entity.workId && entityById.get(entity.workId)?.kind !== "work") errors.push(`${entity.id}: unresolved Work ${entity.workId}`);
+      if (entity.identifiers?.doi && !/^10\.\d{4,9}\/[\S]+$/i.test(entity.identifiers.doi)) errors.push(`${entity.id}: DOI must be a bare DOI identifier`);
+      if (entity.identifiers?.isbn10 && !/^[\dX]{10}$/i.test(entity.identifiers.isbn10.replaceAll("-", ""))) errors.push(`${entity.id}: invalid ISBN-10`);
+      if (entity.identifiers?.isbn13 && !/^\d{13}$/.test(entity.identifiers.isbn13.replaceAll("-", ""))) errors.push(`${entity.id}: invalid ISBN-13`);
+      for (const [index, link] of (entity.resourceLinks ?? []).entries()) {
+        if (!isHttpUrl(link.url)) errors.push(`${entity.id}: resource link ${index} requires an HTTP(S) URL`);
+        if (!link.label.trim()) errors.push(`${entity.id}: resource link ${index} requires a label`);
+        if (link.purpose === "purchase" && typeof link.affiliate !== "boolean") errors.push(`${entity.id}: purchase link ${index} must declare affiliate true or false`);
+      }
+    }
+  }
+
+  const citedStatementIds = new Set(relationships.filter((relationship) => relationship.predicate === "cites").map((relationship) => relationship.subject.id));
+  for (const entity of entities) {
+    if (entity.kind === "statement" && entity.publicationStatus !== "research-needed" && !citedStatementIds.has(entity.id)) {
+      errors.push(`${entity.id}: Statement requires a citation to advance beyond research-needed`);
     }
   }
 
