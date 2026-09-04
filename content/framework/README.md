@@ -12,3 +12,11 @@ and the former evaluative labels are recorded only in the migration audit at
 
 Promotion requires source review, claim-level citations, bounded cases, and
 editorial approval under `docs/analytical-framework.md`.
+
+The Rehn–Meidner model and the 1956–1983 Swedish solidaristic-bargaining
+episode have been reconciled into `content/domain/`. Their canonical records
+split the legacy compound Means into solidaristic wage bargaining, active
+labor-market adjustment, and restrictive macroeconomic demand management, and
+retain the model/practice distinction. The draft
+records remain here as migration provenance until transitional routes are
+retired; they must not be promoted a second time.

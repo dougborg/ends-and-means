@@ -31,4 +31,12 @@ describe("research-content-changes skill", () => {
     expect(skill).toContain("dedicated branch and worktree");
     expect(skill).toMatch(/resolved\s+non-fiction Work/);
   });
+
+  it("requires reconciliation rather than mechanical legacy promotion", async () => {
+    const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
+    expect(skill).toContain("semantic duplicates");
+    expect(skill).toContain("split compound Means");
+    expect(skill).toContain("precise locators");
+    expect(skill).toContain("gaps rather than manufacturing canonical coverage");
+  });
 });

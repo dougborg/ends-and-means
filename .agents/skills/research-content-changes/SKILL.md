@@ -58,6 +58,17 @@ interpretations, and document conflicting evidence and limitations. Search the
 canonical graph, transitional inputs, and open changes for duplicates before
 writing. Record plausible candidates; do not silently merge concepts.
 
+When promoting transitional or legacy material:
+
+- search for semantic duplicates as well as exact ID collisions;
+- split compound Means and multi-proposition claims into independently
+  addressable records;
+- treat legacy prose and IDs as provenance, not aliases or canonical contracts;
+- require verified source metadata and precise locators before advancing a
+  Statement beyond `research-needed`; and
+- leave unresolved fragments in the transitional inventory as explicit research
+  gaps rather than manufacturing canonical coverage.
+
 Do not recreate a fixed comparison matrix or require every Approach to answer
 every Challenge. Keep Dimensions descriptive and Criteria evaluative; never let
 a Placement determine an assessment, Collection membership, or aggregate score.

@@ -3,7 +3,9 @@ import { expect, test } from "@playwright/test";
 const defaultRoutes = [
   "/",
   "/explore/swedish-wage-earner-fund-program/",
+  "/explore/swedish-rehn-meidner-model/",
   "/cases/swedish-wage-earner-funds/",
+  "/cases/swedish-solidaristic-bargaining/",
   "/compare/",
   "/concepts/economic-democracy/",
 ];
