@@ -1,0 +1,19 @@
+---
+import type { Concept } from "../lib/domain";
+
+interface IdeaLink {
+  concept: Concept;
+  role: "core" | "adjacent" | "peripheral" | "contested";
+  interpretation: string;
+}
+
+const { ideas } = Astro.props as { ideas: IdeaLink[] };
+---
+{ideas.length > 0 && <aside class="related-ideas" aria-labelledby="related-ideas-title">
+  <p class="coordinate" id="related-ideas-title">RELATED IDEAS</p>
+  <ul>{ideas.map(({ concept, role, interpretation }) => <li>
+    <a href={`/concepts/${concept.id}/`} title={interpretation}>{concept.label}</a>
+    <span>{role}</span>
+  </li>)}</ul>
+  <p>These are qualified connections, not claims that the case perfectly embodies each idea.</p>
+</aside>}

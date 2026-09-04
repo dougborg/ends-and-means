@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CanonicalStatement from "../../components/CanonicalStatement.astro";
+import ExternalReferences from "../../components/ExternalReferences.astro";
+import { entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
+import type { Approach, Concept } from "../../lib/domain";
+
+export function getStaticPaths() { return entitiesOfKind("concept").map((concept) => ({ params: { id: concept.id }, props: { concept } })); }
+const concept = Astro.props.concept as Concept;
+const approaches = relationshipsTo(concept.id).filter((relation) => relation.predicate === "interprets-concept").map((relation) => ({ approach: entityById(relation.subject.id) as Approach | undefined, role: relation.role, interpretation: relation.interpretation, statementIds: relation.statementIds })).filter((value): value is { approach: Approach; role: "core" | "adjacent" | "peripheral" | "contested"; interpretation: string; statementIds: string[] } => Boolean(value.approach));
+---
+<BaseLayout title={concept.label} description={concept.description}>
+  <article class="concept-dossier">
+    <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Concept</nav>
+    <header><p class="coordinate">CONCEPT / REVIEWED VOCABULARY</p><h1>{concept.label}</h1><p class="dek">{concept.description}</p><p class="scope-note"><strong>Scope note:</strong> {concept.scopeNote}</p><ExternalReferences references={concept.externalRefs} /></header>
+    {approaches.length > 0 && <section class="concept-connections"><p class="coordinate">CONNECTED APPROACHES</p><h2>How this idea is being used here</h2>{approaches.map(({ approach, role, interpretation, statementIds }) => <article><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a><small>{role}</small></h3><p>{interpretation}</p><details><summary>Review the supporting claims</summary>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</details></article>)}</section>}
+  </article>
+</BaseLayout>

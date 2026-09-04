@@ -56,7 +56,7 @@ function comparableDate(value: HistoricalDate, boundary: "start" | "end") {
 }
 
 function statementIdsForCase(entity: DomainEntity) {
-  if (entity.kind === "case") return entity.conditionStatementIds;
+  if (entity.kind === "case") return [...entity.conditionStatementIds, ...entity.overview.flatMap(({ statementIds }) => statementIds)];
   if (entity.kind === "case-episode") return [
     ...entity.conditionStatementIds,
     ...entity.formalRuleStatementIds,
@@ -114,12 +114,41 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
   }
 
   const entityById = new Map<string, DomainEntity>();
+  const externalIdentities = new Map<string, string>();
   for (const entity of entities) {
     if (!stableId.test(entity.id)) errors.push(`${entity.id}: entity ID is not stable kebab-case`);
     if (!entity.label.trim()) errors.push(`${entity.id}: label is empty`);
     if (!entity.description.trim()) errors.push(`${entity.id}: description is empty`);
     if (entityById.has(entity.id)) errors.push(`${entity.id}: duplicate global entity ID`);
     entityById.set(entity.id, entity);
+
+    const refs = new Set<string>();
+    for (const [index, reference] of (entity.externalRefs ?? []).entries()) {
+      const key = `${reference.system}:${reference.id ?? reference.url}`;
+      if (refs.has(key)) errors.push(`${entity.id}: duplicate external reference ${key}`);
+      refs.add(key);
+      if (!isHttpUrl(reference.url)) errors.push(`${entity.id}: external reference ${index} requires an HTTP(S) URL`);
+      validateIsoDate(entity.id, `external reference ${index} checkedAt`, reference.checkedAt, errors);
+
+      let url: URL | undefined;
+      try { url = new URL(reference.url); } catch { /* Reported above. */ }
+      if (reference.system === "wikipedia") {
+        if (reference.purpose !== "orientation") errors.push(`${entity.id}: Wikipedia references must be orientation links`);
+        if (!reference.language) errors.push(`${entity.id}: Wikipedia references require a language`);
+        if (url && (url.hostname !== `${reference.language}.wikipedia.org` || !url.pathname.startsWith("/wiki/"))) errors.push(`${entity.id}: Wikipedia reference ${index} does not match its language and article form`);
+      }
+      if (reference.system === "wikidata") {
+        if (reference.purpose !== "identity") errors.push(`${entity.id}: Wikidata references must be identity links`);
+        if (!reference.id?.match(/^Q\d+$/)) errors.push(`${entity.id}: Wikidata references require a QID`);
+        if (!reference.match) errors.push(`${entity.id}: Wikidata references require exact or close match confidence`);
+        if (url && url.hostname !== "www.wikidata.org") errors.push(`${entity.id}: Wikidata reference ${index} requires the canonical host`);
+        if (url && reference.id && url.pathname !== `/wiki/${reference.id}`) errors.push(`${entity.id}: Wikidata URL does not match ${reference.id}`);
+        const identityKey = `${reference.system}:${reference.id}`;
+        const existing = externalIdentities.get(identityKey);
+        if (existing) errors.push(`${entity.id}: external identity ${identityKey} already maps to ${existing}`);
+        else externalIdentities.set(identityKey, entity.id);
+      }
+    }
   }
 
   for (const [index, document] of documents.entries()) {
@@ -201,6 +230,11 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     }
 
     if (entity.kind === "case") {
+      if (!entity.overview.length) errors.push(`${entity.id}: Case requires a plain-language overview`);
+      for (const [index, section] of entity.overview.entries()) {
+        if (!section.heading.trim() || !section.text.trim()) errors.push(`${entity.id}: overview section ${index} requires a heading and text`);
+        if (!section.statementIds.length) errors.push(`${entity.id}: overview section ${index} requires supporting Statements`);
+      }
       if (!entity.selectionRationale.trim()) errors.push(`${entity.id}: selection rationale is empty`);
       if (!entity.endDate) {
         validateIsoDate(entity.id, "asOf", entity.asOf, errors);

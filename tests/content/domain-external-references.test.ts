@@ -1,0 +1,36 @@
+import { describe, expect, it } from "vitest";
+import { validateAuthoringDocuments } from "../../src/lib/domain";
+import type { AuthoringDocument } from "../../src/lib/domain";
+
+const base = { label: "Example", description: "External-reference fixture.", publicationStatus: "research-needed" as const };
+
+describe("external references", () => {
+  it("accepts reviewed orientation and identity forms", () => {
+    const documents: AuthoringDocument[] = [{ documentType: "entity", entity: { id: "example", kind: "concept-scheme", scope: "Fixture.", externalRefs: [
+      { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Example", purpose: "orientation", language: "en", checkedAt: "2026-09-04" },
+      { system: "wikidata", id: "Q123", url: "https://www.wikidata.org/wiki/Q123", purpose: "identity", match: "exact", checkedAt: "2026-09-04" },
+    ], ...base } }];
+    expect(validateAuthoringDocuments(documents)).toEqual([]);
+  });
+
+  it("rejects malformed roles, URLs, dates, and duplicate identities", () => {
+    const documents: AuthoringDocument[] = [
+      { documentType: "entity", entity: { id: "first", kind: "concept-scheme", scope: "Fixture.", externalRefs: [
+        { system: "wikipedia", url: "https://fr.wikipedia.org/wiki/Example", purpose: "evidence", language: "en", checkedAt: "not-a-date" },
+        { system: "wikidata", id: "123", url: "https://wikidata.org/wiki/Q123", purpose: "orientation", checkedAt: "2026-09-04" },
+      ], ...base } },
+      { documentType: "entity", entity: { id: "second", kind: "concept-scheme", scope: "Fixture.", externalRefs: [
+        { system: "wikidata", id: "123", url: "https://www.wikidata.org/wiki/123", purpose: "identity", match: "close", checkedAt: "2026-09-04" },
+      ], ...base } },
+    ];
+    const errors = validateAuthoringDocuments(documents);
+    expect(errors).toContain("first: Wikipedia references must be orientation links");
+    expect(errors).toContain("first: Wikipedia reference 0 does not match its language and article form");
+    expect(errors).toContain("first: external reference 0 checkedAt requires an ISO calendar date");
+    expect(errors).toContain("first: Wikidata references require a QID");
+    expect(errors).toContain("first: Wikidata references must be identity links");
+    expect(errors).toContain("first: Wikidata references require exact or close match confidence");
+    expect(errors).toContain("first: Wikidata reference 1 requires the canonical host");
+    expect(errors).toContain("second: external identity wikidata:123 already maps to first");
+  });
+});

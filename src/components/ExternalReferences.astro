@@ -1,0 +1,12 @@
+---
+import type { ExternalReference } from "../lib/domain";
+interface Props { references: ExternalReference[] | undefined; }
+const { references = [] } = Astro.props;
+const orientation = references.filter(({ purpose }) => purpose === "orientation");
+const identities = references.filter(({ purpose }) => purpose === "identity");
+---
+{references.length > 0 && <aside class="external-references" aria-label="External references">
+  {orientation.length > 0 && <p><strong>Background:</strong> {orientation.map((reference) => <a href={reference.url}>{reference.system === "wikipedia" ? "Wikipedia" : reference.system}</a>)}</p>}
+  {identities.length > 0 && <p><strong>Identity:</strong> {identities.map((reference) => <a href={reference.url}>{reference.id ?? reference.system}<span>{reference.match} match</span></a>)}</p>}
+  <p class="external-references__note">Orientation and identity links are not evidence for the claims below.</p>
+</aside>}

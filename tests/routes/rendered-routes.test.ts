@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import framework from "../../content/framework/draft.json";
+import { entitiesOfKind } from "../../src/lib/domain/canonical";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -66,12 +67,13 @@ describe("generated reference routes", () => {
   it("renders the migrated framework through clean public routes", async () => {
     const routes = [
       "/", "/explore/", "/explore/swedish-wage-earner-fund-program/", "/cases/", "/cases/swedish-wage-earner-funds/", "/compare/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
+      ...entitiesOfKind("concept").map(({ id }) => `/concepts/${id}/`),
       ...framework.topics.map(({ id }) => `/topics/${id}/`),
       ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
       ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
       ...framework.sources.map(({ id }) => `/sources/${id}/`),
     ];
-    expect(routes).toHaveLength(84);
+    expect(routes).toHaveLength(90);
 
     for (const route of routes) {
       const html = await readFile(routeFile(route), "utf8");
@@ -97,6 +99,9 @@ describe("generated reference routes", () => {
     expect(explore.match(/class="canonical-claim"/g)?.length).toBeGreaterThanOrEqual(2);
     expect(stripMarkup(explore)).toContain("Claim reviewed");
     expect(stripMarkup(explore)).not.toContain("undefined");
+    expect(stripMarkup(explore).match(/Five AP-system boards investing payroll-/g) ?? []).toHaveLength(0);
+    expect(stripMarkup(explore)).toContain("Orientation and identity links are not evidence");
+    expect(hrefs(explore)).toContain("https://en.wikipedia.org/wiki/Employee_funds");
     expect(hrefs(explore)).toContain("https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/");
 
     const canonicalCase = await readFile(routeFile("/cases/swedish-wage-earner-funds/"), "utf8");
@@ -105,6 +110,19 @@ describe("generated reference routes", () => {
     expect(stripMarkup(canonicalCase)).toContain("Observed outcomes");
     expect(stripMarkup(canonicalCase)).toContain("From wage-earner fund boards to liquidation administration");
     expect(stripMarkup(canonicalCase)).toContain("The event records what changed");
+    expect(stripMarkup(canonicalCase)).toContain("What were wage-earner funds?");
+    expect(stripMarkup(canonicalCase)).toContain("rough modern analogy is a sovereign wealth or public investment fund");
+    expect(stripMarkup(canonicalCase)).toContain("RELATED IDEAS");
+    expect(stripMarkup(canonicalCase)).toContain("Market socialism");
+    expect(stripMarkup(canonicalCase)).toContain("These are qualified connections");
+    expect(hrefs(canonicalCase)).toContain("/concepts/economic-democracy/");
+    expect(hrefs(canonicalCase)).toContain("https://en.wikipedia.org/wiki/Employee_funds");
+    expect(hrefs(canonicalCase)).toContain("https://doi.org/10.1017/eso.2022.23");
+
+    const economicDemocracy = await readFile(routeFile("/concepts/economic-democracy/"), "utf8");
+    expect(stripMarkup(economicDemocracy)).toContain("How this idea is being used here");
+    expect(stripMarkup(economicDemocracy)).toContain("Swedish wage-earner fund program");
+    expect(hrefs(economicDemocracy)).toContain("https://en.wikipedia.org/wiki/Economic_democracy");
 
     const compare = await readFile(routeFile("/compare/"), "utf8");
     expect(stripMarkup(compare)).toContain("Do the Means deliver the Ends?");

@@ -36,6 +36,16 @@ contracts and editorial evidence policy.
 - Treat historical evidence as bounded by place, time, institutions, and
   context—not as proof about an entire tradition.
 - Use Wikipedia for orientation, not as evidence for analytical claims.
+- Record Wikipedia links as `orientation` references with a language and
+  checked date. Link a specific article, not a search result, category, or
+  disambiguation page.
+- Record Wikidata links as `identity` references with the QID, checked date,
+  and an `exact` or `close` match. A shared name is not enough: confirm that the
+  item denotes the same entity. Do not import Wikidata classifications into the
+  project graph.
+- Keep absent and ambiguous matches absent. Redirects should be reviewed and
+  updated to their stable target; a close match must never be presented as an
+  exact identity.
 
 ## Small corrections and software changes
 

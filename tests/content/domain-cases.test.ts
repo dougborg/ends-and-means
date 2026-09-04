@@ -42,6 +42,7 @@ const documents: AuthoringDocument[] = [
   entity({
     id: "example-ongoing-case",
     kind: "case",
+    overview: [{ heading: "What it was", text: "A fixture case overview.", statementIds: ["example-condition"] }],
     label: "Example ongoing case",
     locationIds: ["example-region"],
     startDate: { year: 1994, certainty: "exact" },

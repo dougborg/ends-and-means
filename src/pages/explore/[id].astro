@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
+import ExternalReferences from "../../components/ExternalReferences.astro";
 import { entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
 import type { Approach, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
 
@@ -15,10 +16,10 @@ const challenges = outgoing.filter((relation) => relation.predicate === "respond
 <BaseLayout title={approach.label} description={approach.description} fullBleed>
   <article class="canonical-dossier">
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Approach</nav>
-    <header><p class="coordinate">APPROACH / REVIEWED SLICE</p><h1>{approach.label}</h1><p class="dek">{approach.description}</p><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p></header>
+    <header><p class="coordinate">APPROACH / REVIEWED SLICE</p><h1>{approach.label}</h1><p class="dek">{approach.description}</p><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p><ExternalReferences references={approach.externalRefs} /></header>
     <div class="trace-grid"><aside aria-label="Argument trace"><p class="coordinate">TRACE</p><ol><li>Attributed Ends</li><li>Proposed Means</li><li>Bounded practice</li><li>Evaluation</li></ol></aside><div class="claim-thread">
       <section><header><p class="trace-marker">01</p><div><p class="coordinate">ENDS / ATTRIBUTED</p><h2>What the program said it was for</h2></div></header>{ends.map(({ entity, statementIds }) => entity && <div><h3>{entity.label}</h3>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section>
-      <section><header><p class="trace-marker">02</p><div><p class="coordinate">MEANS / PROPOSED</p><h2>What institutions were supposed to do</h2></div></header>{means.map(({ entity, statementIds }) => entity && <div><h3>{entity.label}</h3><p>{entity.institutionalForm}</p>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section>
+      <section><header><p class="trace-marker">02</p><div><p class="coordinate">MEANS / PROPOSED</p><h2>What institutions were supposed to do</h2></div></header>{means.map(({ entity, statementIds }) => entity && <div><h3>{entity.label}</h3>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section>
       <section><header><p class="trace-marker">03</p><div><p class="coordinate">CASES / BOUNDED</p><h2>Where the design met practice</h2></div></header>{cases.map(({ episode, predicate, status }) => episode && <div class="case-link"><p class="coordinate">{status} / {predicate.replaceAll("-", " ")}</p><h3><a href={`/cases/${episode.caseId}/`}>{episode.label}</a></h3><p>{episode.description}</p></div>)}</section>
       <section><header><p class="trace-marker">04</p><div><p class="coordinate">CHALLENGES / CRITERIA</p><h2>How the claims can be judged</h2></div></header><div class="evaluation-pairs">{challenges.map(({ challenge, criteria }) => challenge && <article><p class="coordinate">CHALLENGE</p><h3>{challenge.question}</h3><p>{challenge.rationale}</p>{criteria.map((criterion) => <p><strong>{criterion.label}:</strong> {criterion.definition}</p>)}</article>)}</div></section>
     </div></div>
