@@ -55,4 +55,14 @@ export interface ApproachMeansRelationship extends RelationshipBase {
   object: EntityRef & { kind: "means" };
 }
 
-export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship;
+export interface StatementCitation {
+  id: string;
+  predicate: "cites";
+  subject: EntityRef & { kind: "statement" };
+  object: EntityRef & { kind: "source" };
+  role: "supports" | "challenges" | "qualifies" | "context";
+  locator: string;
+  note?: string;
+}
+
+export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | StatementCitation;

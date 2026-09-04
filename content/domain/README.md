@@ -13,3 +13,10 @@ inputs.
 
 Declarative records may use JSON. All executable repository code remains
 TypeScript.
+
+Works represent intellectual objects. Sources represent the particular edition,
+article, dataset, legal text, archival record, or web manifestation actually
+consulted. Statement-to-Source citation relationships own evidentiary roles and
+locators. Publisher, library, authorized-reading, archive, and purchase links
+are secondary resource metadata; purchase links must disclose affiliate status
+and never serve as canonical identifiers.
