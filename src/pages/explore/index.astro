@@ -3,12 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { entitiesOfKind } from "../../lib/domain/canonical";
 const approaches = entitiesOfKind("approach");
 ---
-<BaseLayout title="Explore" description="Explore systems, ideas, institutions, and evidence in the canonical Ends and Means graph." fullBleed>
-  <article class="canonical-index">
-    <header><p class="coordinate">EXPLORE / CANONICAL GRAPH</p><h1>Systems and ideas, without forcing one hierarchy.</h1><p class="dek">Start with a recognizable approach, then follow its Ends, Means, challenges, evidence, and disagreements. This first reviewed slice is intentionally narrow.</p></header>
-    <section class="slice-notice" aria-label="Coverage notice"><strong>1 reviewed slice</strong><p>The new graph currently contains one Swedish wage-earner-fund dossier. Transitional pages remain available while we test this structure before expanding it.</p></section>
-    <ol class="canonical-directory">
-      {approaches.map((approach) => <li><p class="coordinate">APPROACH</p><h2><a href={`/explore/${approach.id}/`}>{approach.label}</a></h2><p>{approach.description}</p><a class="detail-link" href={`/explore/${approach.id}/`}>Follow the argument trace →</a></li>)}
-    </ol>
-  </article>
+<BaseLayout title="Explore" description="Explore approaches and institutions in Ends and Means." fullBleed>
+  <article class="canonical-index"><header><p class="coordinate">EXPLORE / APPROACHES</p><h1>Follow purposes into institutions and evidence.</h1><p class="dek">Each dossier connects attributed Ends, proposed Means, bounded cases, Challenges, Criteria, and the Statements that support the trace.</p></header><ol class="canonical-directory">{approaches.map((approach) => <li><p class="coordinate">APPROACH</p><h2><a href={`/explore/${approach.id}/`}>{approach.label}</a></h2><p>{approach.description}</p><a class="detail-link" href={`/explore/${approach.id}/`}>Follow the argument trace →</a></li>)}</ol></article>
 </BaseLayout>

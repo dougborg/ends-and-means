@@ -11,13 +11,11 @@
     "build": "npm run validate && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run tests/content tests/import tests/skills",
+    "test": "vitest run tests/content tests/skills",
     "test:routes": "vitest run tests/routes",
     "test:visual": "playwright test",
     "review:visual": "npm run build && playwright test",
-    "import": "node --import tsx scripts/import-content.ts",
-    "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts && node --import tsx scripts/validate-domain.ts",
-    "migrate:framework": "npm run validate"
+    "validate": "node --import tsx scripts/validate-domain.ts"
   },
   "dependencies": {
     "astro": "7.2.10"

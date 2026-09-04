@@ -1,21 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import framework from "../../../content/framework/draft.json";
+import CanonicalStatement from "../../components/CanonicalStatement.astro";
+import { entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
+import type { Approach, Challenge, Criterion, DomainRelationship } from "../../lib/domain";
 import "../../styles/challenge-topic.css";
-export function getStaticPaths() { return framework.challenges.map((challenge) => ({ params: { id: challenge.id }, props: { challenge } })); }
-const { challenge } = Astro.props;
-const responses = framework.responses.filter(({ challengeId }) => challengeId === challenge.id).map((response) => ({ ...response, tradition: framework.traditions.find(({ id }) => id === response.traditionId)! }));
-const relatedTopics = challenge.topicIds.map((topicId) => framework.topics.find(({ id }) => id === topicId)!);
+export function getStaticPaths() { return entitiesOfKind("challenge").map((challenge) => ({ params: { id: challenge.id }, props: { challenge } })); }
+const challenge = Astro.props.challenge as Challenge;
+const incoming = relationshipsTo(challenge.id);
+const approaches = incoming.filter((relationship): relationship is Extract<DomainRelationship, { predicate: "responds-to" }> => relationship.predicate === "responds-to").flatMap((relationship) => { const entity = entityById(relationship.subject.id); return entity?.kind === "approach" ? [{ approach: entity as Approach, relationship }] : []; });
+const criteria = incoming.filter(({ predicate }) => predicate === "evaluates-response-to").flatMap((relationship) => { const entity = entityById(relationship.subject.id); return entity?.kind === "criterion" ? [entity as Criterion] : []; });
 ---
 <BaseLayout fullBleed title={challenge.question} description={challenge.rationale}>
-  <article class="challenge-page challenge-topic-page">
-    <nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> Research draft</nav>
-    <header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p><ul class="topic-strip" aria-label="Related Topics">{relatedTopics.map((topic) => <li><a href={`/topics/${topic.id}/`}>{topic.label}</a></li>)}</ul><p class="status-line"><span aria-hidden="true">◇</span> All responses below are migrated research leads, not reviewed conclusions.</p></header>
-    <nav class="page-contents" aria-labelledby="contents-title"><p class="coordinate" id="contents-title">ON THIS PAGE</p><ol><li><a href="#question-overview">Question overview</a></li><li><a href="#responses-title">Tradition responses</a></li><li><a href="#research-state">Research state</a></li></ol></nav>
-    <section class="question-overview" id="question-overview" aria-labelledby="overview-title"><div><p class="coordinate">COMPARISON FRAME</p><h2 id="overview-title">What this question helps us inspect</h2></div><div><p>{challenge.rationale}</p><p>The comparison below keeps the question fixed while the tradition changes. This makes differences in proposed Means and anticipated failures easier to examine without implying that every tradition is internally uniform.</p></div></section>
-    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">COMPARATIVE RESPONSE LEDGER</p><h2 id="responses-title">How traditions propose to respond</h2><p>Open a tradition overview for its wider orientation, boundaries, and full set of Challenge responses.</p></header>
-      {responses.map((response, index) => <article class="response-draft"><header><span class="ledger-index">{String(index + 1).padStart(2, "0")}</span><div><p class="coordinate">TRADITION / DRAFT</p><h3><a href={`/traditions/${response.tradition.id}/`}>{response.tradition.name}</a></h3></div><span class="review-flag">Research needed</span></header><div class="response-columns"><section><h4>Proposed Means</h4><ul>{response.means.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section><section><h4>Failure hypotheses</h4><ul>{response.failureHypotheses.map((statement) => <li id={statement.id}>{statement.text}</li>)}</ul></section></div></article>)}
-    </section>
-    <section class="research-state" id="research-state" aria-labelledby="research-state-title"><div><p class="coordinate">RESEARCH STATE</p><h2 id="research-state-title">What remains to be established</h2></div><div><p>The entries preserve editorial hypotheses from the initial comparison material. They still need attribution, direct sources, boundaries around variants, concrete cases, and serious competing interpretations.</p><p>No statement on this page should yet be read as a verified claim about theory or practice.</p></div></section>
+  <article class="challenge-page challenge-topic-page"><nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> {challenge.label}</nav><header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p></header>
+    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">CONNECTED APPROACHES / {approaches.length}</p><h2 id="responses-title">How published approaches respond</h2></header>{approaches.map(({ approach, relationship }) => <article class="approach-response"><header><div><p class="coordinate">APPROACH / {relationship.status.replaceAll("-", " ")}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3></div></header><p>{approach.description}</p>{relationship.statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</section>
+    {criteria.length > 0 && <section class="question-overview" aria-labelledby="criteria-title"><div><p class="coordinate">CRITERIA / {criteria.length}</p><h2 id="criteria-title">How responses are evaluated</h2></div><div>{criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p></article>)}</div></section>}
   </article>
 </BaseLayout>

@@ -18,7 +18,7 @@
 
 ## Model integrity
 
-Treat Concepts, Collections, Approaches, Ends, Means, Topics, Challenges,
+Treat Concepts, Collections, Approaches, Ends, Means, Challenges,
 Criteria, Statements, Sources, Cases, Events, Transitions, Comparison
 Dimensions, and Placements as related but independent records. An End must be
 attributed; a Means is an institutional arrangement; a Criterion makes its

@@ -1,8 +1,0 @@
----
-type EvidenceState = "extensive" | "partial" | "limited" | "untested" | "contested";
-interface Props { state: EvidenceState; label?: string; count?: number; }
-const { state, label, count } = Astro.props;
-const defaultLabels: Record<EvidenceState, string> = { extensive: "Evidence: extensive", partial: "Evidence: partial", limited: "Evidence: limited", untested: "Evidence: untested", contested: "Evidence: contested" };
-const badgeText = label ?? defaultLabels[state];
----
-<span class:list={["evidence-badge", `evidence-badge--${state}`]}><span class="evidence-badge__mark" aria-hidden="true"></span><span>{badgeText}{typeof count === "number" && ` · ${count} ${count === 1 ? "source" : "sources"}`}</span></span>

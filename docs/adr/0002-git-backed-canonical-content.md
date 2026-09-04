@@ -5,9 +5,9 @@
 ## Context
 
 Ends and Means needs a reviewable source of truth for an evolving, strongly
-typed knowledge model. Current experiments split content among a shallow
-migration graph, a richer analytical prototype, and a dossier-specific evidence
-file. The project does not yet require accounts, private submissions, live
+typed knowledge model. Earlier matrix, migration-graph, and prototype
+experiments demonstrated why one publication model is necessary; they now live
+only in the non-runtime research archive. The project does not require accounts, private submissions, live
 collaborative editing, personalized state, or high-frequency writes.
 
 ## Decision
@@ -21,8 +21,7 @@ document.
 The canonical domain distinguishes five layers:
 
 1. vocabulary: Concepts, Domains, Collections, labels, and external identities;
-2. arguments: Approaches, attributed Ends, Means, Challenges, Criteria, and
-   Topics;
+2. arguments: Approaches, attributed Ends, Means, Challenges, and Criteria;
 3. real-world evidence: bounded historical or ongoing Cases, participants,
    formal rules, rules-in-use, outcomes, Statements, and Sources;
 4. interpretation: typed relationships, competing interpretations, response
@@ -61,15 +60,13 @@ make file-backed authoring inadequate.
 - Pull requests remain the proposal, review, and publication boundary.
 - Git supplies attribution, discussion, history, rollback, and branching.
 - Authors review focused records instead of one hand-edited graph document.
-- The compiled graph is generated and never hand-edited.
-- Generated graphs, indexes, reports, and exports live outside canonical
-  authoring directories.
+- The compiled graph is derived in memory and never hand-edited.
+- Future generated exports must remain outside canonical authoring directories.
 - Entity files own intrinsic fields; subject-centered relationship files own
   substantive edges; rendered dossiers and backlinks are derived views.
 - Publication state lives on entities or relationships rather than requiring a
   parallel schema.
 - Runtime pages cannot introduce route-specific content models.
-- Archive imports remain provenance inputs and leave the production build after
-  canonical migration parity is demonstrated.
+- Archived research is a discovery aid, never a production or import input.
 - Database adoption requires a new ADR tied to concrete interactive-write or
   scale requirements.

@@ -1,16 +1,16 @@
 # Canonical domain authoring
 
 This directory contains the modular authoring records for the plural graph
-defined in `docs/domain-model.md`. Transitional framework material enters this
-directory only after record-by-record reconciliation, source review, and
-claim-level citation; legacy IDs and shapes are migration inputs, not canonical
-aliases or compatibility contracts.
+defined in `docs/domain-model.md`. It is the sole publication content tree.
+Research from `archive/legacy-research/` enters only after record-by-record
+reconciliation, source review, and claim-level citation; archived IDs and
+shapes are not canonical aliases or compatibility contracts.
 
 Authoring is organized by entity type and relationship family. Entity files own
 identity and intrinsic description; subject-centered relationship files own
 substantive edges. The compiler in `src/lib/domain/` validates these records and
-produces a read graph under `generated/`. Generated files never become authoring
-inputs.
+produces the read graph consumed by routes. Build products never become
+authoring inputs.
 
 Declarative records may use JSON. All executable repository code remains
 TypeScript.

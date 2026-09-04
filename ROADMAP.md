@@ -42,92 +42,48 @@ The original fixed comparison matrix and its source documents are research input
 
 ## Current state
 
-The site is live at [endsandmeans.info](https://endsandmeans.info) as a static Astro build on GitHub Pages. It currently provides:
+The site is live at [endsandmeans.info](https://endsandmeans.info) as a static
+Astro build on GitHub Pages. Its public routes are generated only from the
+canonical graph and currently include reviewed Swedish wage-earner-fund and
+Rehn–Meidner Approach/Case traces, reusable Concepts and Challenges, a sourced
+Comparison Dimension, canonical Source/Reading views, and the public method.
 
-- an early dossier-first direction currently rendered through eight transitional records;
-- nine Challenges and five Topics as secondary discovery paths;
-- migrated response drafts with visible research warnings;
-- a reading catalogue containing 51 inherited bibliographic records;
-- an accepted analytical framework and working editorial philosophy;
-- a pull-request-based research skill for concrete content changes;
-- CI, graph validation, route tests, a rendered-page review gate, and automated
-  Pages deployment.
-
-The analytical method is accepted, but the ontology is still being validated.
-Its implementation is split across a shallow migration graph, a richer
-prototype, and a dossier-specific evidence schema. The current Approach kind
-and flat domain fields are transitional. Inherited prose also lacks claim-level
-citations and bounded cases. The immediate prerequisite to responsible content
-expansion is a vertical slice that proves the plural graph can distinguish
-Concepts, Approaches, Means, Collections, Cases, and their sourced relationships.
+The retired matrix, intermediate framework, and analytical prototype are kept
+only in `archive/legacy-research/` as issue-routed research provenance. They are
+not production inputs and do not generate routes. CI covers graph validation,
+route integrity, responsive rendered-page review, and Pages deployment.
 
 ## Recommended next implementation
 
-Converge on one canonical graph, then build one complete, publishable reference
-implementation before researching the inherited dossiers in parallel:
+Finish the canonical-only publication boundary, then expand the catalogue from
+reviewed research rather than restoring inherited dossiers wholesale:
 
-1. Revise the canonical graph around first-class Concepts, Collections,
-   Domains, and typed relationship records. Keep Approach as one entity type
-   within entity-neutral Explore and Compare routes. Align the vocabulary
-   subset with SKOS semantics without adopting RDF as the authoring format
-   (#47).
-2. Replace the monolithic framework authoring document with modular directories
-   organized by entity type and relationship family. Compile one generated read
-   graph and derived indexes; never hand-edit build products (#47).
-3. Correct inherited category errors: move central planning into Means and use
-   Democracy and anarcho-communism as multiplicity and overlap tests (#47).
-4. Move the complete social-democratic trace onto that graph and finish removal
-   of remaining transitional schema/runtime code (#48).
-5. Give substantive Statements stable anchors, locators, and Source
-   relationships (#18).
-6. Model the two bounded Swedish Cases with explicit context and uncertainty
-   (#13).
-7. Add one Event and Transition across two Case episodes as a chronology and
-   causal-interpretation boundary test (#22); expand timeline views later in
-   #29.
-8. The first Comparison Dimension, sourced Placements, and one-dimensional
-   shared-Challenge view landed in #69; expand comparison only after the
-   reviewed slice establishes a stable boundary (#4 and #26).
-9. The external-reference contract, validation, shared rendering, and initial
-   Swedish mappings have landed. Complete the canonical-entity audit/backfill,
-   then add continuous link reporting (#41 and #19).
-10. Review the complete Challenge → attributed End → Means → bounded evidence →
-   Criterion → assessment trace. Then migrate only inherited material that fits
-   the new entities and relationships (#39).
+1. Complete the model-boundary contracts and second canonical Swedish trace
+   tracked by #47 and #39.
+2. Complete #48 by removing retired public routes and runtime code and keeping
+   useful previous research only in the non-runtime archive.
+3. Complete the canonical external-reference audit and continuous link report
+   (#41 and #19).
+4. Expand sourced Approach dossiers from issue-routed research (#39), followed
+   by the bounded Zapatista and Spanish Revolution cases (#55 and #56).
+5. Continue comparison and reference work only from canonical records (#3, #4,
+   #26, and #35).
 
 This implementation tests the content model, editorial workflow, temporal semantics, empirical/fictional boundary, and reader experience together. Once it survives review, use it as the template for researching the remaining valid dossiers and reclassifying inherited rows under #39.
 
-**Current checkpoint:** the first modular canonical slice now traces the Swedish
-wage-earner-fund program from attributed Ends through formal Means, bounded
-practice, criterion-specific assessments, and the 1991–1992 abolition
-Event/Transition. Explore, Case, and comparison views intentionally expose this
-single slice for reader feedback before the catalogue expands. The first
-Comparison Dimension and sourced Placements now render from the same graph.
-Remaining Milestone 1 work broadens the model-boundary tests, completes the
-external-identity audit and link reporting, and retires the transitional
-framework once parity is demonstrated.
-Rendered-page self-review now runs in CI and preserves desktop, tablet, and
-mobile screenshots; the first live pass repaired the Case overview contrast
-failure. Shared dossier hierarchy and responsive evidence-density refinements
-remain tracked in #67 rather than being treated as complete.
-
-**Next work package:** finish #47 with focused schema-boundary fixtures and
-invariants for Democracy, communism/socialism, central planning, overlapping
-anarcho-communist Collection membership, and the empirical versus fictional
-evidence boundary. The Comparison Dimension/Placement slice and its first #26
-one-dimensional view merged in #69 and are awaiting deployed-page review.
-After #47 parity,
-complete the bounded #41 external-reference audit/backfill, add #19 scheduled
-link reporting, execute #48 transitional cleanup, and then take up #67
-presentation refinement. This ordering is the active backlog priority.
+**Current checkpoint:** the model-boundary contracts and two Swedish evidence
+traces establish the canonical publication surface. The #48 cleanup makes graph
+membership the public-content boundary and keeps earlier research solely in a
+non-runtime archive. Shared responsive dossier refinement remains tracked in
+#67; design-system and theme work is #77.
 
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.
 
-**Execution order:** remaining #47 model-boundary fixtures and invariants → #41
-canonical-entity external-reference audit/backfill → #19
-scheduled link reports → #48 final transitional cleanup. The Statement,
+**Execution order:** complete the model-boundary and second-trace work → #48
+canonical-only publication cleanup → #41 canonical-entity external-reference audit/backfill → #19 scheduled link
+reports. The Statement,
 bounded-Case, Event/Transition, external-reference, and Comparison
 Dimension/Placement foundations have landed; their broader content expansion
 remains tracked in #18, #13, #22, #41, and #26. #48 closes only after parity is
@@ -135,7 +91,7 @@ demonstrated.
 
 - [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Milestone 1 model tests.
 - [ ] **Validate and consolidate one plural canonical graph** ([#47](https://github.com/dougborg/ends-and-means/issues/47)). Add Concepts, Collections, Domains, external identities, and typed sourced relationships; replace the monolithic authoring JSON with modular entity and relationship sources plus a generated read graph; prove the distinctions with Democracy, communism/socialism, central planning, anarcho-communism, and one complete evidence trace.
-- [ ] **Remove retired matrix and prototype runtime cruft** ([#48](https://github.com/dougborg/ends-and-means/issues/48)). Route cleanup is complete; close the issue after transitional schemas, fixtures, generators, and vocabulary that fail the target model are removed or archived for provenance.
+- [ ] **Remove retired matrix and prototype runtime cruft** ([#48](https://github.com/dougborg/ends-and-means/issues/48)). Publish only canonical graph records; remove retired routes, schemas, generators, and fixtures, and retain useful research solely in the non-runtime archive.
 - [ ] **Complete sourced Approach dossiers** ([#39](https://github.com/dougborg/ends-and-means/issues/39)). After the vertical slice, review overview prose, scope, classification disputes, conceptual morphology, attributed Ends, Means relationships, variants, cases, FAQs, and misconceptions; do not preserve all eight inherited rows as Approaches when they belong to another entity type.
 - [ ] **Model statements and resource links** ([#18](https://github.com/dougborg/ends-and-means/issues/18)). Give challengeable claims stable anchors. Support DOI, ISBN, publisher, library, reading, and clearly labeled purchase links without making a retailer a canonical identifier.
 - [ ] **Extract bounded cases and connect citations** ([#13](https://github.com/dougborg/ends-and-means/issues/13)). Convert useful inherited examples into time- and place-bounded evidence with context, provenance, uncertainty, and carefully scoped relationships.
@@ -275,7 +231,7 @@ according to research readiness rather than as one bulk migration.
 - [x] Added a rendered-page completion gate with desktop, tablet, and mobile
   screenshots plus automated checks for contrast, undefined design tokens,
   overflow, and browser errors; used it to repair the Case overview contrast
-  defect ([#66](https://github.com/dougborg/ends-and-means/pull/66)).
+  defect through the rendered-page review workflow.
 - [x] Deployed the static site to GitHub Pages with the custom domain.
 
 ## Explicitly deferred
