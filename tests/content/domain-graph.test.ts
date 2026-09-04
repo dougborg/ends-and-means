@@ -46,6 +46,29 @@ describe("plural domain graph", () => {
     expect(validateAuthoringDocuments(invalid)).toContain("document 9: relationship wrong-subject does not match its subject-centered file");
   });
 
+  it("validates the declared subject of empty relationship files", () => {
+    const invalid = [...documents, relationships({ kind: "approach", id: "missing-approach" }, [])];
+
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "document 9: unresolved or mistyped document subject approach:missing-approach",
+    );
+  });
+
+  it("normalizes surrounding whitespace when checking preferred-label uniqueness", () => {
+    const invalid = [...documents, entity({
+      id: "democracy-with-whitespace",
+      kind: "concept",
+      label: " Democracy ",
+      schemeIds: ["political-ideas"],
+      scopeNote: "A duplicate label used to test normalization.",
+      ...base,
+    })];
+
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "democracy-with-whitespace: preferred label duplicates democracy in political-ideas",
+    );
+  });
+
   it("rejects cycles in the direct Concept hierarchy", () => {
     const cyclic = [...documents,
       relationships({ kind: "concept", id: "democracy" }, [{ id: "democracy-broader-communism", predicate: "broader-than", subject: { kind: "concept", id: "democracy" }, object: { kind: "concept", id: "communism" }, status: "research-needed", statementIds: [] }]),
