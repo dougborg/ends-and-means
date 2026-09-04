@@ -139,15 +139,14 @@ stable interfaces, but #48 closes only after parity is demonstrated.
 
 ## Milestone 2 — [Explore and Compare core](https://github.com/dougborg/ends-and-means/milestone/2)
 
-**Execution order:** #39 valid dossiers → #55 and #56 priority anarchism Cases
-→ #3 evidence/reference routes → #4 static comparison core → #26
-one-dimensional Placement prototype → #35 entity-neutral pairwise comparison
-→ #9 public method → #20 correction links → #12 accessibility and metadata
-release review.
+**Execution order:** #39 valid dossiers → #55 and #56 priority anarchism Cases →
+#3 evidence/reference routes → #4 static comparison core → #26 one-dimensional
+Placement prototype → #35 entity-neutral pairwise comparison → #9 public method
+→ #20 correction links → #12 accessibility and metadata release review.
 
-- [ ] **Build complete Source, Case, and Reading views** ([#3](https://github.com/dougborg/ends-and-means/issues/3)). Add useful backlinks, verification and source-type filters, case context, and transparent library/publisher/purchase actions.
 - [ ] **Develop the Zapatistas as a principal anarchism Case** ([#55](https://github.com/dougborg/ends-and-means/issues/55)). Distinguish the EZLN, civilian communities, governance institutions, and bounded episodes of institutional change; retain Indigenous context, competing classifications, and ongoing-case freshness.
 - [ ] **Develop bounded Spanish Revolution anarchism Cases** ([#56](https://github.com/dougborg/ends-and-means/issues/56)). Distinguish the CNT, FAI, workplace and rural collectives, federations, militias, committees, regions, and wartime periods rather than treating Spain from 1936–1939 as one system.
+- [ ] **Build complete Source, Case, and Reading views** ([#3](https://github.com/dougborg/ends-and-means/issues/3)). Add useful backlinks, verification and source-type filters, case context, and transparent library/publisher/purchase actions.
 - [ ] **Build static, accessible comparisons** ([#4](https://github.com/dougborg/ends-and-means/issues/4)). Support shared-Challenge and factual-dimension comparisons generated from the graph, with sparse coverage and no aggregate winner.
 - [ ] **Build entity-neutral pairwise comparison** ([#35](https://github.com/dougborg/ends-and-means/issues/35)). Compare eligible Concepts, Approaches, Means, or Case episodes through only the relationships and dimensions they genuinely share.
 - [ ] **Define and prototype multidimensional mapping** ([#26](https://github.com/dougborg/ends-and-means/issues/26)). Establish Comparison Dimension and Placement records, then test one dimension before attempting a two-axis visualization.
