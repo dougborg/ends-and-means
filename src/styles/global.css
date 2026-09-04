@@ -4,6 +4,8 @@
   --amber: #9b5a08; --amber-wash: #fff5de; --teal: #087e72; --teal-light: #77d9cc; --teal-wash: #e6f5f2; --rule: #bfd0d5; --muted: #52666f;
   --display: "IBM Plex Sans", sans-serif; --reading: "Literata", Georgia, serif; --apparatus: "IBM Plex Mono", Consolas, monospace;
   --measure: 70ch; --page: 76rem;
+  --space-page: clamp(1.75rem, 4vw, 3.25rem); --space-section: clamp(2rem, 4vw, 3.5rem); --space-section-tight: clamp(1.25rem, 2.5vw, 2rem);
+  --type-page-title: clamp(2.15rem, 4.25vw, 4rem);
   font-family: var(--display); color: var(--night); background: var(--atmosphere);
 }
 * { box-sizing: border-box; }
@@ -23,7 +25,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .primary-nav { display: flex; gap: clamp(.8rem, 3vw, 2rem); margin: 0; padding: 0; list-style: none; }
 .primary-nav a { position: relative; color: var(--night); font-size: .82rem; font-weight: 600; text-decoration: none; }
 .primary-nav a[aria-current="page"]::after { position: absolute; right: 0; bottom: -.65rem; left: 0; height: .2rem; background: var(--cobalt); content: ""; }
-.site-main { width: min(var(--measure), calc(100% - 2rem)); min-height: 65vh; margin-inline: auto; padding-block: clamp(2.5rem, 7vw, 6rem); }
+.site-main { width: min(var(--measure), calc(100% - 2rem)); min-height: 65vh; margin-inline: auto; padding-block: var(--space-page); }
 .site-main--wide { width: min(var(--page), calc(100% - 2rem)); }
 .page-coordinate { margin-bottom: .75rem; }
 h1, h2, h3, p { margin-top: 0; }
@@ -60,8 +62,8 @@ code { font-size: .86em; }
 pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top: 1px solid var(--rule); background: var(--night); color: var(--atmosphere); font-size: .78rem; line-height: 1.65; }
 
 /* Reference dossiers share one editorial structure: argument first, apparatus beside it. */
-.reference-page { display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
-.reference-page > nav[aria-label="Breadcrumb"] { margin-bottom: calc(clamp(2.5rem, 6vw, 5rem) * -0.65); color: var(--muted); font-family: var(--apparatus); font-size: .72rem; line-height: 1.5; }
+.reference-page { display: grid; gap: var(--space-section); }
+.reference-page > nav[aria-label="Breadcrumb"] { margin-bottom: calc(var(--space-section) * -0.65); color: var(--muted); font-family: var(--apparatus); font-size: .72rem; line-height: 1.5; }
 .reference-page > header { max-width: var(--measure); }
 .reference-page > header h1, .site-main > header h1 { margin-top: .4rem; }
 .reference-page > header > p:not(.coordinate):not(.dek) { max-width: 68ch; font-family: var(--reading); line-height: 1.65; }
@@ -85,16 +87,16 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .reference-list > li p:not(.coordinate) { font-family: var(--reading); }
 .reference-list > li p:last-child { margin-bottom: 0; }
 .reference-list .evidence-badge { margin-bottom: 1rem; }
-.site-footer { margin-top: clamp(3rem,7vw,7rem); border-top: 1px solid var(--rule); }
+.site-footer { margin-top: var(--space-section); border-top: 1px solid var(--rule); }
 .site-footer__inner { display: flex; gap: 2rem; justify-content: space-between; padding-block: 2rem; font-size: .78rem; line-height: 1.5; }
 .site-footer__inner p { margin-bottom: 0; }
 .site-footer__note { color: var(--muted); text-align: right; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0,0,0,0); white-space: nowrap; }
 
 /* Replacement framework: questions lead, migrated assertions remain visibly provisional. */
-.framework-hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(17rem, .55fr); gap: 1.5rem clamp(2rem, 6vw, 6rem); align-items: end; margin-bottom: clamp(3rem, 8vw, 7rem); }
+.framework-hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(17rem, .55fr); gap: 1.5rem clamp(2rem, 6vw, 6rem); align-items: end; margin-bottom: var(--space-section); }
 .framework-hero > .coordinate { grid-column: 1 / -1; padding-bottom: .8rem; border-bottom: 1px solid var(--rule); }
-.framework-hero h1, .framework-index h1, .challenge-page h1, .tradition-page h1, .method-page h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.04; }
+.framework-hero h1, .framework-index h1, .challenge-page h1, .tradition-page h1, .method-page h1, .reading-page h1, .source-page h1, .canonical-index h1, .canonical-dossier h1, .compare-page h1 { margin: 0 0 1.25rem; font-size: var(--type-page-title); font-weight: 550; letter-spacing: -.045em; line-height: .99; }
 .framework-hero h1 span { color: var(--cobalt); font-family: var(--reading); font-size: .72em; font-style: italic; font-weight: 400; }
 .framework-hero .dek { margin: 0; }
 .draft-notice { padding: 1.25rem 0 0 1.25rem; border-top: 3px solid var(--amber); border-left: 1px solid var(--rule); font-family: var(--reading); font-size: .86rem; line-height: 1.6; }
@@ -115,14 +117,14 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .ledger-question { max-width: 62ch; font-family: var(--reading); font-size: clamp(.98rem, 1.4vw, 1.14rem); font-weight: 500; line-height: 1.45; }
 .ledger-count, .review-flag { color: var(--muted); font: 500 .62rem/1.4 var(--apparatus); letter-spacing: .04em; text-transform: uppercase; }
 .ledger-arrow { color: var(--cobalt); font-size: 1.25rem; }
-.framework-directory { display: grid; grid-template-columns: minmax(16rem, .65fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 7rem); margin-top: clamp(4rem, 9vw, 8rem); padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.framework-directory { display: grid; grid-template-columns: minmax(16rem, .65fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 7rem); margin-top: var(--space-section); padding-top: 1.5rem; border-top: 1px solid var(--rule); }
 .framework-directory > div > p:last-child { max-width: 38ch; color: var(--muted); font-family: var(--reading); line-height: 1.65; }
 .text-directory { display: grid; grid-template-columns: 1fr 1fr; }
 .text-directory li { border-bottom: 1px solid var(--rule); }
 .text-directory li:nth-child(odd) { border-right: 1px solid var(--rule); }
 .text-directory a { display: flex; gap: 1rem; justify-content: space-between; padding: 1rem; color: var(--night); font-weight: 500; text-decoration: none; }
 .text-directory a:hover { color: var(--cobalt); background: var(--sheet); }
-.framework-index, .challenge-page, .tradition-page, .method-page { display: grid; gap: clamp(3rem, 7vw, 6rem); }
+.framework-index, .challenge-page, .tradition-page, .method-page { display: grid; gap: var(--space-section); }
 .framework-index > header, .challenge-page > header, .tradition-page > header, .method-page > header { max-width: 64rem; }
 .framework-index .dek, .challenge-page .dek, .tradition-page .dek, .method-page .dek { margin-bottom: 0; }
 .indexed-list, .tradition-list { border-top: 3px solid var(--night); }
@@ -194,9 +196,8 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .criteria-section dd { margin-top: .35rem; font-family: var(--reading); font-size: .8rem; line-height: 1.55; }
 .migration-state { max-width: 62rem; padding-top: 1.5rem; border-top: 4px solid var(--amber); }
 .migration-state p:not(.coordinate) { max-width: 68ch; font-family: var(--reading); line-height: 1.7; }
-.reading-page, .source-page { display: grid; gap: clamp(3rem, 7vw, 6rem); }
+.reading-page, .source-page { display: grid; gap: var(--space-section); }
 .reading-page > header, .source-page > header { max-width: 64rem; }
-.reading-page h1, .source-page h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.04; }
 .section-jump { padding: 1.25rem; border-top: 3px solid var(--night); background: var(--sheet); }
 .section-jump ul { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1rem 0 0; padding: 0; list-style: none; }
 .section-jump a { font-size: .78rem; }
@@ -249,11 +250,11 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .case-overview footer a { color: #a8c0ff; }
 .case-context { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 4rem; }
 .case-dossier { gap: 0; }
-.case-dossier > nav { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
-.case-dossier > header .dek { margin-bottom: clamp(1.5rem, 2.5vw, 2rem); }
+.case-dossier > nav { margin-bottom: var(--space-section-tight); }
+.case-dossier > header .dek { margin-bottom: var(--space-section-tight); }
 .case-header__metadata { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .55fr); gap: 1rem; align-items: end; }
 .case-header__metadata .related-ideas, .case-header__metadata .external-references { max-width: none; margin-top: 0; }
-.case-overview { margin-block: clamp(2rem, 4vw, 3rem); }
+.case-overview { margin-block: var(--space-section-tight); }
 @media (max-width: 760px) { .case-header__metadata, .case-overview > div, .case-context { grid-template-columns: 1fr; } .case-overview { padding: 1.25rem; } .case-overview article, .case-overview article + article { padding: 1rem 0; border-right: 0; border-bottom: 1px solid #53606a; } }
 .source-links { padding-left: 1.2rem; }
 .claim-connections { padding-top: 1.5rem; border-top: 3px solid var(--night); }
@@ -261,9 +262,9 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .claim-connections ul { padding-left: 1.2rem; }
 
 /* Canonical graph preview: the evidence thread is the visual structure. */
-.canonical-index, .canonical-dossier, .compare-page { display: grid; gap: clamp(3rem, 7vw, 6rem); }
+.canonical-index, .canonical-dossier, .compare-page { display: grid; gap: var(--space-section); }
 .canonical-index > header, .canonical-dossier > header, .compare-page > header { max-width: 66rem; }
-.canonical-index h1, .canonical-dossier h1, .compare-page h1 { margin: .45rem 0 1.25rem; font-size: clamp(2.15rem, 5vw, 4.5rem); font-weight: 550; line-height: .98; }
+.canonical-index h1, .canonical-dossier h1, .compare-page h1 { margin-top: .45rem; }
 .slice-notice { display: grid; grid-template-columns: minmax(10rem, .3fr) 1fr; gap: 1.5rem; padding: 1.3rem; border-top: 3px solid var(--teal); background: var(--teal-wash); }
 .slice-notice strong { font: 600 .72rem/1.4 var(--apparatus); letter-spacing: .06em; text-transform: uppercase; }
 .slice-notice p { max-width: 65ch; margin: 0; font-family: var(--reading); line-height: 1.6; }
@@ -350,7 +351,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .dimension-table th, .dimension-table td, .dimension-table td:last-child { box-sizing: border-box; min-width: 0; border-right: 0; }
   .dimension-table th::before, .dimension-table td::before { display: block; margin-bottom: .5rem; color: var(--cobalt-dark); content: attr(data-label); font: 600 .62rem/1.4 var(--apparatus); text-transform: uppercase; }
 }
-.canonical-launch { margin-bottom: clamp(2.25rem, 4vw, 3.5rem); border-top: 4px solid var(--night); }
+.canonical-launch { margin-bottom: var(--space-section-tight); border-top: 4px solid var(--night); }
 .canonical-launch > header { display: flex; justify-content: space-between; gap: 2rem; align-items: end; padding: .9rem 0; border-bottom: 1px solid var(--rule); }
 .canonical-launch > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .canonical-launch article { padding: clamp(1.1rem, 2.25vw, 1.65rem); background: var(--sheet); }
@@ -368,8 +369,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .reference-layout { grid-template-columns: minmax(0, 1fr); }
   .reference-layout > aside { position: static; padding-left: 0; border-left: 0; }
   .framework-hero, .framework-directory { grid-template-columns: 1fr; }
-  .framework-hero h1, .framework-index h1, .challenge-page h1, .tradition-page h1, .method-page h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); overflow-wrap: anywhere; }
-  .reading-page h1, .source-page h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); overflow-wrap: anywhere; }
+  .framework-hero h1, .framework-index h1, .challenge-page h1, .tradition-page h1, .method-page h1, .reading-page h1, .source-page h1, .canonical-index h1, .canonical-dossier h1, .compare-page h1 { overflow-wrap: anywhere; }
   .question-ledger li a { grid-template-columns: 2.2rem minmax(0, 1fr) 1rem; }
   .ledger-count { grid-column: 2; }
   .ledger-arrow { grid-column: 3; grid-row: 1 / 3; }
