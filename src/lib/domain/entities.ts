@@ -1,4 +1,5 @@
 import type { EntityBase } from "./common";
+import type { EvidenceEntity } from "./cases";
 import type { VocabularyEntity } from "./vocabulary";
 
 export interface Approach extends EntityBase {
@@ -58,4 +59,4 @@ export interface Source extends EntityBase {
   resourceLinks?: ResourceLink[];
 }
 
-export type DomainEntity = VocabularyEntity | Approach | End | Means | Statement | Work | Source;
+export type DomainEntity = VocabularyEntity | EvidenceEntity | Approach | End | Means | Statement | Work | Source;
