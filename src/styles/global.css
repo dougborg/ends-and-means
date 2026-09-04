@@ -350,7 +350,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .dimension-table th, .dimension-table td, .dimension-table td:last-child { box-sizing: border-box; min-width: 0; border-right: 0; }
   .dimension-table th::before, .dimension-table td::before { display: block; margin-bottom: .5rem; color: var(--cobalt-dark); content: attr(data-label); font: 600 .62rem/1.4 var(--apparatus); text-transform: uppercase; }
 }
-.canonical-launch { margin-bottom: clamp(4rem, 9vw, 8rem); border-top: 4px solid var(--night); }
+.canonical-launch { margin-bottom: clamp(2.25rem, 4vw, 3.5rem); border-top: 4px solid var(--night); }
 .canonical-launch > header { display: flex; justify-content: space-between; gap: 2rem; align-items: end; padding: .9rem 0; border-bottom: 1px solid var(--rule); }
 .canonical-launch > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .canonical-launch article { padding: clamp(1.1rem, 2.25vw, 1.65rem); background: var(--sheet); }
