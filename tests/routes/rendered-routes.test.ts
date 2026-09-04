@@ -65,13 +65,13 @@ describe("generated reference routes", () => {
 
   it("renders the migrated framework through clean public routes", async () => {
     const routes = [
-      "/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
+      "/", "/explore/", "/explore/swedish-wage-earner-fund-program/", "/cases/", "/cases/swedish-wage-earner-funds/", "/compare/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
       ...framework.topics.map(({ id }) => `/topics/${id}/`),
       ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
       ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
       ...framework.sources.map(({ id }) => `/sources/${id}/`),
     ];
-    expect(routes).toHaveLength(79);
+    expect(routes).toHaveLength(84);
 
     for (const route of routes) {
       const html = await readFile(routeFile(route), "utf8");
@@ -85,10 +85,29 @@ describe("generated reference routes", () => {
 
     const home = await readFile(routeFile("/"), "utf8");
     expect(home.match(/class="tradition-card"/g)).toHaveLength(8);
-    expect(stripMarkup(home)).toContain("PRIMARY ENTRY POINT / 8 DOSSIERS");
+    expect(stripMarkup(home)).toContain("FIRST CANONICAL SLICE");
+    expect(stripMarkup(home)).toContain("Earlier working material");
     const primaryNav = home.match(/<nav aria-label="Primary navigation">([\s\S]*?)<\/nav>/)?.[1] ?? "";
-    expect(routeHrefs(primaryNav, "/traditions/")[0]).toBe("/traditions/");
-    expect(primaryNav.indexOf("Traditions")).toBeLessThan(primaryNav.indexOf("Challenges"));
+    expect(routeHrefs(primaryNav, "/explore/")[0]).toBe("/explore/");
+    expect(primaryNav.indexOf("Explore")).toBeLessThan(primaryNav.indexOf("Compare"));
+
+    const explore = await readFile(routeFile("/explore/swedish-wage-earner-fund-program/"), "utf8");
+    expect(stripMarkup(explore)).toContain("What the program said it was for");
+    expect(stripMarkup(explore)).toContain("Where the design met practice");
+    expect(explore.match(/class="canonical-claim"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(hrefs(explore)).toContain("https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/");
+
+    const canonicalCase = await readFile(routeFile("/cases/swedish-wage-earner-funds/"), "utf8");
+    expect(stripMarkup(canonicalCase)).toContain("Formal design");
+    expect(stripMarkup(canonicalCase)).toContain("Rules in use");
+    expect(stripMarkup(canonicalCase)).toContain("Observed outcomes");
+    expect(stripMarkup(canonicalCase)).toContain("From wage-earner fund boards to liquidation administration");
+    expect(stripMarkup(canonicalCase)).toContain("The event records what changed");
+
+    const compare = await readFile(routeFile("/compare/"), "utf8");
+    expect(stripMarkup(compare)).toContain("Do the Means deliver the Ends?");
+    expect(compare).toContain("<table>");
+    expect(stripMarkup(compare)).toContain("Why no score?");
 
     const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
     expect(challenge.match(/class="response-draft"/g)).toHaveLength(8);

@@ -94,6 +94,14 @@ implementation before researching the inherited dossiers in parallel:
 
 This implementation tests the content model, editorial workflow, temporal semantics, empirical/fictional boundary, and reader experience together. Once it survives review, use it as the template for researching the remaining valid dossiers and reclassifying inherited rows under #39.
 
+**Current checkpoint:** the first modular canonical slice now traces the Swedish
+wage-earner-fund program from attributed Ends through formal Means, bounded
+practice, criterion-specific assessments, and the 1991–1992 abolition
+Event/Transition. Explore, Case, and comparison views intentionally expose this
+single slice for reader feedback before the catalogue expands. Remaining
+Milestone 1 work broadens the model tests, adds placements and external
+identities, and retires the transitional framework once parity is demonstrated.
+
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.

@@ -2,11 +2,11 @@
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
 const navItems = [
-  { href: "/traditions/", label: "Traditions" },
-  { href: "/challenges/", label: "Challenges" },
-  { href: "/topics/", label: "Topics" },
+  { href: "/explore/", label: "Explore" },
+  { href: "/compare/", label: "Compare" },
+  { href: "/cases/", label: "Cases" },
+  { href: "/framework/", label: "Method" },
   { href: "/reading/", label: "Reading" },
-  { href: "/framework/", label: "Framework" },
 ];
 const isCurrent = (href: string) => currentPath.startsWith(href);
 ---

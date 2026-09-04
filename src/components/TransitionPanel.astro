@@ -1,0 +1,16 @@
+---
+import CanonicalStatement from "./CanonicalStatement.astro";
+import { entityById } from "../lib/domain/canonical";
+import type { Event, Transition } from "../lib/domain";
+
+interface Props { transition: Transition; }
+const { transition } = Astro.props;
+const events = transition.eventIds.map((id) => entityById(id) as Event | undefined).filter((value): value is Event => Boolean(value));
+---
+<section class="transition-panel">
+  <p class="coordinate">TRANSITION / {transition.boundaryStatus} BOUNDARY</p>
+  <h2>{transition.label}</h2>
+  <p>{transition.description}</p>
+  {events.map((event) => <article><p class="coordinate">EVENT / {event.startDate.year}</p><h3>{event.label}</h3>{event.descriptionStatementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}
+  <p class="scope-note"><strong>Interpretive caution:</strong> The event records what changed. Causal importance and longer-run meaning remain claims that require separate evidence and rival interpretations.</p>
+</section>

@@ -14,7 +14,7 @@
     "test": "vitest run tests/content tests/import tests/skills",
     "test:routes": "vitest run tests/routes",
     "import": "node --import tsx scripts/import-content.ts",
-    "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts",
+    "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts && node --import tsx scripts/validate-domain.ts",
     "migrate:framework": "npm run validate"
   },
   "dependencies": {

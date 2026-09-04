@@ -74,6 +74,25 @@ export interface CaseMeansRelationship extends RelationshipBase {
   implementation: "formal-design" | "rules-in-use" | "mixed" | "contested";
 }
 
+export interface ApproachChallengeRelationship extends RelationshipBase {
+  predicate: "responds-to";
+  subject: EntityRef & { kind: "approach" };
+  object: EntityRef & { kind: "challenge" };
+}
+
+export interface CriterionChallengeRelationship extends RelationshipBase {
+  predicate: "evaluates-response-to";
+  subject: EntityRef & { kind: "criterion" };
+  object: EntityRef & { kind: "challenge" };
+}
+
+export interface CaseCriterionRelationship extends RelationshipBase {
+  predicate: "assessed-by";
+  subject: EntityRef & { kind: "case" | "case-episode" };
+  object: EntityRef & { kind: "criterion" };
+  conclusion: "supports" | "mixed" | "challenges" | "inconclusive";
+}
+
 export interface StatementCitation {
   id: string;
   predicate: "cites";
@@ -84,4 +103,4 @@ export interface StatementCitation {
   note?: string;
 }
 
-export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | StatementCitation;
+export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | ApproachChallengeRelationship | CriterionChallengeRelationship | CaseCriterionRelationship | StatementCitation;

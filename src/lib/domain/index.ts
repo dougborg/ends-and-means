@@ -1,4 +1,5 @@
 export { compileDomainGraph, validateAuthoringDocuments } from "./compile";
+export type * from "./analysis";
 export type * from "./cases";
 export type * from "./common";
 export type * from "./entities";

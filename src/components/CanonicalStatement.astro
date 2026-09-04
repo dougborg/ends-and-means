@@ -1,0 +1,25 @@
+---
+import { citationsFor, entityById } from "../lib/domain/canonical";
+import type { Source, Statement } from "../lib/domain";
+
+interface Props { statementId: string; label?: string; }
+const { statementId, label } = Astro.props;
+const statement = entityById<Statement>(statementId);
+if (!statement || statement.kind !== "statement") throw new Error(`Unknown canonical Statement: ${statementId}`);
+const citations = citationsFor(statementId).map((citation) => ({ citation, source: entityById<Source>(citation.object.id) }));
+---
+<article class="canonical-claim" id={statement.id}>
+  <p class="coordinate">{label ?? statement.statementKind.replaceAll("-", " ")}</p>
+  <p class="canonical-claim__text">{statement.text}</p>
+  <footer>
+    <span class="claim-status">Source reviewed</span>
+    <ol aria-label="Sources">
+      {citations.map(({ citation, source }) => source && (
+        <li>
+          <a href={source.resourceLinks?.[0]?.url}>{source.contributorDisplay?.join(", ") ?? source.label}, {source.publicationYear}</a>
+          <span>{citation.locator} · {citation.role}</span>
+        </li>
+      ))}
+    </ol>
+  </footer>
+</article>
