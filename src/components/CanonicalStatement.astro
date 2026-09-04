@@ -6,17 +6,22 @@ interface Props { statementId: string; label?: string; }
 const { statementId, label } = Astro.props;
 const statement = entityById<Statement>(statementId);
 if (!statement || statement.kind !== "statement") throw new Error(`Unknown canonical Statement: ${statementId}`);
-const citations = citationsFor(statementId).map((citation) => ({ citation, source: entityById<Source>(citation.object.id) }));
+const citations = citationsFor(statementId).map((citation) => {
+  const source = entityById<Source>(citation.object.id);
+  const href = source?.resourceLinks?.[0]?.url;
+  const reference = source ? [source.contributorDisplay?.join(", ") ?? source.label, source.publicationYear].filter(Boolean).join(", ") : "Unresolved source";
+  return { citation, source, href, reference };
+});
 ---
 <article class="canonical-claim" id={statement.id}>
   <p class="coordinate">{label ?? statement.statementKind.replaceAll("-", " ")}</p>
   <p class="canonical-claim__text">{statement.text}</p>
   <footer>
-    <span class="claim-status">Source reviewed</span>
+    <span class="claim-status">{statement.publicationStatus === "reviewed" ? "Claim reviewed" : "Research needed"}</span>
     <ol aria-label="Sources">
-      {citations.map(({ citation, source }) => source && (
+      {citations.map(({ citation, source, href, reference }) => source && (
         <li>
-          <a href={source.resourceLinks?.[0]?.url}>{source.contributorDisplay?.join(", ") ?? source.label}, {source.publicationYear}</a>
+          {href ? <a href={href}>{reference}</a> : <span>{reference}</span>}
           <span>{citation.locator} · {citation.role}</span>
         </li>
       ))}

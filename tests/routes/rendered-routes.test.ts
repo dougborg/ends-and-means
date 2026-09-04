@@ -95,6 +95,8 @@ describe("generated reference routes", () => {
     expect(stripMarkup(explore)).toContain("What the program said it was for");
     expect(stripMarkup(explore)).toContain("Where the design met practice");
     expect(explore.match(/class="canonical-claim"/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(stripMarkup(explore)).toContain("Claim reviewed");
+    expect(stripMarkup(explore)).not.toContain("undefined");
     expect(hrefs(explore)).toContain("https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/");
 
     const canonicalCase = await readFile(routeFile("/cases/swedish-wage-earner-funds/"), "utf8");
