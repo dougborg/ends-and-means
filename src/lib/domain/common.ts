@@ -4,7 +4,7 @@ export type RelationshipStatus = "asserted" | "qualified" | "contested" | "resea
 export type EntityKind =
   | "concept-scheme" | "concept" | "collection" | "domain"
   | "approach" | "end" | "means" | "topic" | "challenge" | "criterion"
-  | "case" | "case-episode" | "event" | "transition" | "comparison-dimension"
+  | "place" | "case" | "case-episode" | "event" | "transition" | "comparison-dimension"
   | "statement" | "source" | "work" | "person" | "organization" | "depiction";
 
 export interface EntityRef {

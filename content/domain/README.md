@@ -20,3 +20,12 @@ consulted. Statement-to-Source citation relationships own evidentiary roles and
 locators. Publisher, library, authorized-reading, archive, and purchase links
 are secondary resource metadata; purchase links must disclose affiliate status
 and never serve as canonical identifiers.
+
+Cases represent bounded empirical settings; Case Episodes separate materially
+different institutional configurations within them. Places are referenced as
+entities rather than embedded country labels. Dates support exact, approximate,
+disputed, and unknown boundaries, including negative years for BCE material.
+Ongoing Cases must expose an `asOf` date, last review date, and freshness state.
+Episodes keep conditions, formal rules, rules-in-use, interactions, and outcomes
+in separate Statement collections so observation and causal interpretation do
+not collapse into one narrative field.

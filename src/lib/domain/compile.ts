@@ -1,4 +1,5 @@
 import type { EntityRef } from "./common";
+import type { HistoricalDate } from "./cases";
 import type { DomainEntity } from "./entities";
 import type { AuthoringDocument, CompiledDomainGraph } from "./graph";
 import type { DomainRelationship } from "./relationships";
@@ -19,6 +20,51 @@ function isHttpUrl(value: string) {
   } catch {
     return false;
   }
+}
+
+function validateHistoricalDate(ownerId: string, field: string, value: HistoricalDate, errors: string[]) {
+  if (value.year !== undefined && !Number.isInteger(value.year)) errors.push(`${ownerId}: ${field} year must be an integer`);
+  if (value.month !== undefined && (!Number.isInteger(value.month) || value.month < 1 || value.month > 12)) errors.push(`${ownerId}: ${field} month must be between 1 and 12`);
+  if (value.day !== undefined && (!Number.isInteger(value.day) || value.day < 1 || value.day > 31)) errors.push(`${ownerId}: ${field} day must be between 1 and 31`);
+  if ((value.month !== undefined || value.day !== undefined) && value.year === undefined) errors.push(`${ownerId}: ${field} month/day requires a year`);
+  if (value.day !== undefined && value.month === undefined) errors.push(`${ownerId}: ${field} day requires a month`);
+  if (value.certainty === "exact" && value.year === undefined) errors.push(`${ownerId}: exact ${field} requires a year`);
+  if (value.certainty !== "exact" && !value.note?.trim()) errors.push(`${ownerId}: ${field} with ${value.certainty} certainty requires a note`);
+  if (value.year !== undefined && value.month !== undefined && value.day !== undefined) {
+    const leapYear = value.year % 4 === 0 && (value.year % 100 !== 0 || value.year % 400 === 0);
+    const daysInMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][value.month - 1];
+    if (daysInMonth !== undefined && value.day > daysInMonth) errors.push(`${ownerId}: ${field} day is invalid for its month`);
+  }
+}
+
+function validateIsoDate(ownerId: string, field: string, value: string | undefined, errors: string[]) {
+  const match = value?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const year = Number(match?.[1]);
+  const month = Number(match?.[2]);
+  const day = Number(match?.[3]);
+  const parsed = match ? new Date(Date.UTC(year, month - 1, day)) : undefined;
+  if (!match || parsed?.getUTCFullYear() !== year || parsed.getUTCMonth() !== month - 1 || parsed.getUTCDate() !== day) {
+    errors.push(`${ownerId}: ${field} requires an ISO calendar date`);
+  }
+}
+
+function comparableDate(value: HistoricalDate, boundary: "start" | "end") {
+  if (value.year === undefined) return undefined;
+  const month = value.month ?? (boundary === "start" ? 1 : 12);
+  const day = value.day ?? (boundary === "start" ? 1 : 31);
+  return value.year * 10_000 + month * 100 + day;
+}
+
+function statementIdsForCase(entity: DomainEntity) {
+  if (entity.kind === "case") return entity.conditionStatementIds;
+  if (entity.kind === "case-episode") return [
+    ...entity.conditionStatementIds,
+    ...entity.formalRuleStatementIds,
+    ...entity.ruleInUseStatementIds,
+    ...entity.interactionStatementIds,
+    ...entity.outcomeStatementIds,
+  ];
+  return [];
 }
 
 function detectBroaderCycle(relationships: DomainRelationship[]) {
@@ -118,6 +164,46 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
         if (!isHttpUrl(link.url)) errors.push(`${entity.id}: resource link ${index} requires an HTTP(S) URL`);
         if (!link.label.trim()) errors.push(`${entity.id}: resource link ${index} requires a label`);
         if (link.purpose === "purchase" && typeof link.affiliate !== "boolean") errors.push(`${entity.id}: purchase link ${index} must declare affiliate true or false`);
+      }
+    }
+
+    if (entity.kind === "case" || entity.kind === "case-episode") {
+      validateHistoricalDate(entity.id, "startDate", entity.startDate, errors);
+      if (entity.endDate) validateHistoricalDate(entity.id, "endDate", entity.endDate, errors);
+      const start = comparableDate(entity.startDate, "start");
+      const end = entity.endDate && comparableDate(entity.endDate, "end");
+      if (start !== undefined && end !== undefined && start > end) {
+        errors.push(`${entity.id}: startDate must not be after endDate`);
+      }
+      if (!entity.locationIds.length) errors.push(`${entity.id}: Case scope requires at least one Place`);
+      if (!entity.scope.trim()) errors.push(`${entity.id}: Case scope is empty`);
+      for (const placeId of entity.locationIds) {
+        if (entityById.get(placeId)?.kind !== "place") errors.push(`${entity.id}: unresolved Place ${placeId}`);
+      }
+      for (const statementId of statementIdsForCase(entity)) {
+        if (entityById.get(statementId)?.kind !== "statement") errors.push(`${entity.id}: unresolved Statement ${statementId}`);
+      }
+    }
+
+    if (entity.kind === "case") {
+      if (!entity.selectionRationale.trim()) errors.push(`${entity.id}: selection rationale is empty`);
+      if (!entity.endDate) {
+        validateIsoDate(entity.id, "asOf", entity.asOf, errors);
+        validateIsoDate(entity.id, "lastReviewedAt", entity.lastReviewedAt, errors);
+        if (!entity.freshness) errors.push(`${entity.id}: ongoing Case requires freshness`);
+      }
+      for (const episodeId of entity.episodeIds) {
+        const episode = entityById.get(episodeId);
+        if (episode?.kind !== "case-episode" || episode.caseId !== entity.id) errors.push(`${entity.id}: unresolved or mismatched Case Episode ${episodeId}`);
+      }
+    }
+
+    if (entity.kind === "case-episode") {
+      const parent = entityById.get(entity.caseId);
+      if (parent?.kind !== "case") {
+        errors.push(`${entity.id}: unresolved parent Case ${entity.caseId}`);
+      } else if (!parent.episodeIds.includes(entity.id)) {
+        errors.push(`${entity.id}: parent Case ${entity.caseId} does not reference this episode`);
       }
     }
   }
