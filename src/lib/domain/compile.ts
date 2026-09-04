@@ -217,14 +217,19 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
       const start = comparableDate(entity.startDate, "start");
       const end = entity.endDate && comparableDate(entity.endDate, "end");
       if (start !== undefined && end !== undefined && start > end) errors.push(`${entity.id}: startDate must not be after endDate`);
-      if (!entity.locationIds.length) errors.push(`${entity.id}: Event requires at least one Place`);
-      validateEntityRefs(entityById, entity.id, "place", entity.locationIds, "Place", errors);
+      if (!entity.placeIds.length) errors.push(`${entity.id}: Event requires at least one Place`);
+      if (!entity.eventKindIds.length) errors.push(`${entity.id}: Event requires at least one event-kind Concept`);
+      if (!entity.descriptionStatementIds.length) errors.push(`${entity.id}: Event requires at least one description Statement`);
+      validateEntityRefs(entityById, entity.id, "place", entity.placeIds, "Place", errors);
+      validateEntityRefs(entityById, entity.id, "concept", entity.eventKindIds, "event-kind Concept", errors);
       validateEntityRefs(entityById, entity.id, "statement", entity.descriptionStatementIds, "Statement", errors);
     }
 
     if (entity.kind === "transition") {
       if (entityById.get(entity.caseId)?.kind !== "case") errors.push(`${entity.id}: unresolved Case ${entity.caseId}`);
       if (!entity.fromEpisodeIds.length || !entity.toEpisodeIds.length) errors.push(`${entity.id}: Transition requires before and after Case Episodes`);
+      if (!entity.eventIds.length) errors.push(`${entity.id}: Transition requires at least one Event`);
+      if (!entity.changedRelationshipIds.length) errors.push(`${entity.id}: Transition requires at least one changed Relationship`);
       validateEntityRefs(entityById, entity.id, "case-episode", entity.fromEpisodeIds, "from Case Episode", errors);
       validateEntityRefs(entityById, entity.id, "case-episode", entity.toEpisodeIds, "to Case Episode", errors);
       validateEntityRefs(entityById, entity.id, "event", entity.eventIds, "Event", errors);

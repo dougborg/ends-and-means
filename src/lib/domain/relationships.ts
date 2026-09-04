@@ -62,7 +62,7 @@ export interface ConceptCaseRelationship extends RelationshipBase {
 }
 
 export interface CaseApproachRelationship extends RelationshipBase {
-  predicate: "self-identified-with" | "influenced-by-approach" | "partially-instantiated" | "hybridized-with" | "departed-from";
+  predicate: "self-identified-with" | "influenced-by" | "partially-instantiated" | "hybridized-with" | "departed-from";
   subject: EntityRef & { kind: "case" | "case-episode" };
   object: EntityRef & { kind: "approach" };
 }

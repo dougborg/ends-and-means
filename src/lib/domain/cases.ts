@@ -41,8 +41,8 @@ export interface CaseEpisode extends CaseBase {
 
 export interface Event extends EntityBase {
   kind: "event";
-  eventType: "enactment" | "election" | "reform" | "strike" | "conflict" | "institutional-change" | "publication" | "other";
-  locationIds: string[];
+  eventKindIds: string[];
+  placeIds: string[];
   startDate: HistoricalDate;
   endDate?: HistoricalDate;
   descriptionStatementIds: string[];
