@@ -29,3 +29,11 @@ Ongoing Cases must expose an `asOf` date, last review date, and freshness state.
 Episodes keep conditions, formal rules, rules-in-use, interactions, and outcomes
 in separate Statement collections so observation and causal interpretation do
 not collapse into one narrative field.
+
+Collections are non-inheriting editorial groupings and may include concrete
+Means when a label describes an institutional family. Depictions remain tied to
+fictional Works. Fiction-derived Sources may provide context or qualification
+but cannot support or challenge promoted empirical Statements. Eligible
+support must resolve through the Source to an actual non-fiction Work. The
+compiler emits entities, relationships, and indexes in stable ID order;
+authoring-file order is not semantic.

@@ -25,9 +25,16 @@ export interface ConceptRelationship extends RelationshipBase {
 
 export interface CollectionMembership extends RelationshipBase {
   predicate: "member-of";
-  subject: EntityRef & { kind: "concept" | "approach" | "collection" };
+  subject: EntityRef & { kind: "concept" | "approach" | "collection" | "means" };
   object: EntityRef & { kind: "collection" };
   membership: "widely-accepted" | "qualified" | "contested";
+}
+
+export interface DepictionRelationship extends RelationshipBase {
+  predicate: "depicts";
+  subject: EntityRef & { kind: "depiction" };
+  object: EntityRef & { kind: "concept" | "approach" | "end" | "means" };
+  interpretation: string;
 }
 
 export interface DomainAssignment extends RelationshipBase {
@@ -54,6 +61,13 @@ export interface ApproachMeansRelationship extends RelationshipBase {
   predicate: "advocates-means" | "permits-means" | "rejects-means" | "internally-contests-means";
   subject: EntityRef & { kind: "approach" };
   object: EntityRef & { kind: "means" };
+}
+
+export interface MeansSpecificationRelationship extends RelationshipBase {
+  predicate: "specified-by";
+  subject: EntityRef & { kind: "means" };
+  object: EntityRef & { kind: "statement" };
+  facet: "authority" | "scope" | "information" | "targets" | "revision" | "enforcement" | "ownership";
 }
 
 export interface ConceptCaseRelationship extends RelationshipBase {
@@ -118,4 +132,4 @@ export interface StatementCitation {
   note?: string;
 }
 
-export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | ApproachChallengeRelationship | CriterionChallengeRelationship | CaseCriterionRelationship | Placement | StatementCitation;
+export type DomainRelationship = ConceptRelationship | CollectionMembership | DomainAssignment | ApproachConceptRelationship | ApproachEndRelationship | ApproachMeansRelationship | MeansSpecificationRelationship | ConceptCaseRelationship | CaseApproachRelationship | CaseMeansRelationship | ApproachChallengeRelationship | CriterionChallengeRelationship | CaseCriterionRelationship | DepictionRelationship | Placement | StatementCitation;

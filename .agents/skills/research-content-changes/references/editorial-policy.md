@@ -30,6 +30,11 @@ Do not infer completeness from absent links, force uniform coverage, collapse a
 country into an Approach, encode evaluation in an entity name, or render missing
 Placement data as a midpoint.
 
+Depictions interpret fictional Works and remain separate from empirical
+evidence. Fiction-derived Sources may contextualize or qualify empirical
+Statements but cannot support or challenge them. Eligible support must resolve
+through the Source to an actual non-fiction Work.
+
 ## Editorial authority
 
 A pull request is the proposed concrete change, not published truth. Human
