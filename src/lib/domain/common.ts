@@ -17,6 +17,8 @@ export interface ExternalReference {
   id?: string;
   url: string;
   purpose: "orientation" | "identity" | "access" | "evidence";
+  language?: string;
+  match?: "exact" | "close";
   checkedAt: string;
 }
 

@@ -448,6 +448,8 @@ interface ExternalReference {
   id?: string;
   url: string;
   purpose: "orientation" | "identity" | "access" | "evidence";
+  language?: string;            // required for Wikipedia
+  match?: "exact" | "close";   // required for Wikidata identity links
   checkedAt: ISODate;
 }
 ```
