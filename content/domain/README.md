@@ -13,4 +13,3 @@ inputs.
 
 Declarative records may use JSON. All executable repository code remains
 TypeScript.
-

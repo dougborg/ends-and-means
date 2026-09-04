@@ -26,4 +26,3 @@ export interface Domain extends EntityBase {
 }
 
 export type VocabularyEntity = ConceptScheme | Concept | Collection | Domain;
-

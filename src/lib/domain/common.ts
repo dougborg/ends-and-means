@@ -28,4 +28,3 @@ export interface EntityBase {
   publicationStatus: PublicationStatus;
   externalRefs?: ExternalReference[];
 }
-
