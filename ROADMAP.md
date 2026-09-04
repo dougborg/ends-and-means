@@ -85,10 +85,12 @@ implementation before researching the inherited dossiers in parallel:
 7. Add one Event and Transition across two Case episodes as a chronology and
    causal-interpretation boundary test (#22); expand timeline views later in
    #29.
-8. Define the first Comparison Dimension and sourced Placements, and render one
-   shared-Challenge comparison as part of the vertical slice (#4 and #26).
-9. Add Wikipedia and Wikidata orientation/identity references plus publisher,
-   library, and reading links; validate them continuously (#41 and #19).
+8. The first Comparison Dimension, sourced Placements, and one-dimensional
+   shared-Challenge view landed in #69; expand comparison only after the
+   reviewed slice establishes a stable boundary (#4 and #26).
+9. The external-reference contract, validation, shared rendering, and initial
+   Swedish mappings have landed. Complete the canonical-entity audit/backfill,
+   then add continuous link reporting (#41 and #19).
 10. Review the complete Challenge → attributed End → Means → bounded evidence →
    Criterion → assessment trace. Then migrate only inherited material that fits
    the new entities and relationships (#39).
@@ -99,33 +101,36 @@ This implementation tests the content model, editorial workflow, temporal semant
 wage-earner-fund program from attributed Ends through formal Means, bounded
 practice, criterion-specific assessments, and the 1991–1992 abolition
 Event/Transition. Explore, Case, and comparison views intentionally expose this
-single slice for reader feedback before the catalogue expands. Remaining
-Milestone 1 work broadens the model tests, adds placements and external
-identities, and retires the transitional framework once parity is demonstrated.
+single slice for reader feedback before the catalogue expands. The first
+Comparison Dimension and sourced Placements now render from the same graph.
+Remaining Milestone 1 work broadens the model-boundary tests, completes the
+external-identity audit and link reporting, and retires the transitional
+framework once parity is demonstrated.
 Rendered-page self-review now runs in CI and preserves desktop, tablet, and
 mobile screenshots; the first live pass repaired the Case overview contrast
 failure. Shared dossier hierarchy and responsive evidence-density refinements
 remain tracked in #67 rather than being treated as complete.
 
-**Next work package:** add first-class Comparison Dimension and Placement
-records to the canonical graph under #47, then publish one narrow, sourced,
-one-dimensional comparison from those records as the first delivery slice of
-#26. The slice must preserve missing data, scope, uncertainty, and the boundary
-between descriptive Dimensions and evaluative Criteria. After that, finish the
-remaining #47 model-boundary tests, complete #41 backfill, add #19 scheduled
-link checking, close #48 only after parity, and then take up #67 presentation
-refinement. This ordering is the active backlog priority.
+**Next work package:** finish #47 with focused schema-boundary fixtures and
+invariants for Democracy, communism/socialism, central planning, overlapping
+anarcho-communist Collection membership, and the empirical versus fictional
+evidence boundary. The Comparison Dimension/Placement slice and its first #26
+one-dimensional view merged in #69 and are awaiting deployed-page review.
+After #47 parity,
+complete the bounded #41 external-reference audit/backfill, add #19 scheduled
+link reporting, execute #48 transitional cleanup, and then take up #67
+presentation refinement. This ordering is the active backlog priority.
 
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.
 
-**Execution order:** #47 Comparison Dimension/Placement slice with the first
-#26 one-dimensional prototype → remaining #47 model-boundary tests → #41
-external-identity backfill → #19 continuous link checks → #48 final
-transitional cleanup. The Statement, bounded-Case, Event/Transition, and first
-external-identity foundations have landed; their broader content expansion
-remains tracked in #18, #13, #22, and #41. #48 closes only after parity is
+**Execution order:** remaining #47 model-boundary fixtures and invariants → #41
+canonical-entity external-reference audit/backfill → #19
+scheduled link reports → #48 final transitional cleanup. The Statement,
+bounded-Case, Event/Transition, external-reference, and Comparison
+Dimension/Placement foundations have landed; their broader content expansion
+remains tracked in #18, #13, #22, #41, and #26. #48 closes only after parity is
 demonstrated.
 
 - [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Milestone 1 model tests.
