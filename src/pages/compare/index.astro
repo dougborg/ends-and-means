@@ -19,7 +19,8 @@ const valueLabel = (placement: (typeof placements)[number]) => {
   return `${from}–${to}`;
 };
 const scopeLabel = (placement: (typeof placements)[number]) => {
-  const dates = [placement.scope.startDate, placement.scope.endDate].filter(Boolean).join("–");
+  const { startDate, endDate } = placement.scope;
+  const dates = startDate === endDate ? startDate : [startDate, endDate].filter(Boolean).join("–");
   const places = (placement.scope.placeIds ?? []).map((id) => requireEntityOfKind(id, "place").label).join(", ");
   return [dates, places, placement.scope.note].filter(Boolean).join(" · ");
 };
