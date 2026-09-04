@@ -31,6 +31,16 @@ describe("external references", () => {
     expect(errors).toContain("first: Wikidata references must be identity links");
     expect(errors).toContain("first: Wikidata references require exact or close match confidence");
     expect(errors).toContain("first: Wikidata reference 1 requires the canonical host");
-    expect(errors).toContain("second: external identity wikidata:123 already maps to first");
+    expect(errors.some((error) => error.includes("external identity wikidata:undefined"))).toBe(false);
+    expect(errors.some((error) => error.includes("external identity wikidata:123"))).toBe(false);
+  });
+
+  it("rejects duplicate well-formed external identities", () => {
+    const documents: AuthoringDocument[] = ["first", "second"].map((id) => ({ documentType: "entity", entity: {
+      id, kind: "concept-scheme", scope: "Fixture.", externalRefs: [
+        { system: "wikidata", id: "Q123", url: "https://www.wikidata.org/wiki/Q123", purpose: "identity", match: "exact", checkedAt: "2026-09-04" },
+      ], ...base,
+    } }));
+    expect(validateAuthoringDocuments(documents)).toContain("second: external identity wikidata:Q123 already maps to first");
   });
 });

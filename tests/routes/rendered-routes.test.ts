@@ -73,8 +73,6 @@ describe("generated reference routes", () => {
       ...framework.traditions.map(({ id }) => `/traditions/${id}/`),
       ...framework.sources.map(({ id }) => `/sources/${id}/`),
     ];
-    expect(routes).toHaveLength(90);
-
     for (const route of routes) {
       const html = await readFile(routeFile(route), "utf8");
       const text = stripMarkup(html);

@@ -56,7 +56,7 @@ function comparableDate(value: HistoricalDate, boundary: "start" | "end") {
 }
 
 function statementIdsForCase(entity: DomainEntity) {
-  if (entity.kind === "case") return [...entity.conditionStatementIds, ...entity.overview.flatMap(({ statementIds }) => statementIds)];
+  if (entity.kind === "case") return [...entity.conditionStatementIds, ...(entity.overview ?? []).flatMap(({ statementIds }) => statementIds)];
   if (entity.kind === "case-episode") return [
     ...entity.conditionStatementIds,
     ...entity.formalRuleStatementIds,
@@ -143,10 +143,12 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
         if (!reference.match) errors.push(`${entity.id}: Wikidata references require exact or close match confidence`);
         if (url && url.hostname !== "www.wikidata.org") errors.push(`${entity.id}: Wikidata reference ${index} requires the canonical host`);
         if (url && reference.id && url.pathname !== `/wiki/${reference.id}`) errors.push(`${entity.id}: Wikidata URL does not match ${reference.id}`);
-        const identityKey = `${reference.system}:${reference.id}`;
-        const existing = externalIdentities.get(identityKey);
-        if (existing) errors.push(`${entity.id}: external identity ${identityKey} already maps to ${existing}`);
-        else externalIdentities.set(identityKey, entity.id);
+        if (reference.id?.match(/^Q\d+$/)) {
+          const identityKey = `${reference.system}:${reference.id}`;
+          const existing = externalIdentities.get(identityKey);
+          if (existing) errors.push(`${entity.id}: external identity ${identityKey} already maps to ${existing}`);
+          else externalIdentities.set(identityKey, entity.id);
+        }
       }
     }
   }
@@ -230,8 +232,10 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     }
 
     if (entity.kind === "case") {
-      if (!entity.overview.length) errors.push(`${entity.id}: Case requires a plain-language overview`);
-      for (const [index, section] of entity.overview.entries()) {
+      const overview = entity.overview ?? [];
+      if (!entity.overviewTitle?.trim()) errors.push(`${entity.id}: Case requires a plain-language overview title`);
+      if (!overview.length) errors.push(`${entity.id}: Case requires a plain-language overview`);
+      for (const [index, section] of overview.entries()) {
         if (!section.heading.trim() || !section.text.trim()) errors.push(`${entity.id}: overview section ${index} requires a heading and text`);
         if (!section.statementIds.length) errors.push(`${entity.id}: overview section ${index} requires supporting Statements`);
       }

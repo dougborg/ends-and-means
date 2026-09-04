@@ -23,6 +23,7 @@ interface CaseBase extends EntityBase {
 
 export interface Case extends CaseBase {
   kind: "case";
+  overviewTitle: string;
   overview: Array<{
     heading: string;
     text: string;
