@@ -2,8 +2,8 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-interface Props { title?: string; description?: string; currentPath?: string; eyebrow?: string; fullBleed?: boolean; }
-const { title, description = "Political and economic systems in theory and practice.", currentPath = Astro.url.pathname, fullBleed = false } = Astro.props;
+interface Props { title?: string; description?: string; currentPath?: string; eyebrow?: string; fullBleed?: boolean; mainClass?: string; }
+const { title, description = "Political and economic systems in theory and practice.", currentPath = Astro.url.pathname, fullBleed = false, mainClass } = Astro.props;
 const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
 ---
 <!doctype html>
@@ -22,7 +22,7 @@ const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <SiteHeader currentPath={currentPath} />
-    <main id="main-content" class:list={["site-main", { "site-main--wide": fullBleed }]}>
+    <main id="main-content" class:list={["site-main", mainClass, { "site-main--wide": fullBleed }]}>
       <slot />
     </main>
     <SiteFooter />
