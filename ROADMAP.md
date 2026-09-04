@@ -107,25 +107,26 @@ mobile screenshots; the first live pass repaired the Case overview contrast
 failure. Shared dossier hierarchy and responsive evidence-density refinements
 remain tracked in #67 rather than being treated as complete.
 
-**Next work package:** add first-class Comparison Dimension and Placement
-records to the canonical graph under #47, then publish one narrow, sourced,
-one-dimensional comparison from those records as the first delivery slice of
-#26. The slice must preserve missing data, scope, uncertainty, and the boundary
-between descriptive Dimensions and evaluative Criteria. After that, finish the
-remaining #47 model-boundary tests, complete #41 backfill, add #19 scheduled
-link checking, close #48 only after parity, and then take up #67 presentation
-refinement. This ordering is the active backlog priority.
+**Next work package:** finish #47 with focused schema-boundary fixtures and
+invariants for Democracy, communism/socialism, central planning, overlapping
+anarcho-communist Collection membership, and the empirical versus fictional
+evidence boundary. The Comparison Dimension/Placement slice and its first #26
+one-dimensional view merged in #69 and are awaiting deployed-page review.
+After #47 parity,
+complete the bounded #41 external-reference audit/backfill, add #19 scheduled
+link reporting, execute #48 transitional cleanup, and then take up #67
+presentation refinement. This ordering is the active backlog priority.
 
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.
 
-**Execution order:** #47 Comparison Dimension/Placement slice with the first
-#26 one-dimensional prototype → remaining #47 model-boundary tests → #41
-external-identity backfill → #19 continuous link checks → #48 final
-transitional cleanup. The Statement, bounded-Case, Event/Transition, and first
-external-identity foundations have landed; their broader content expansion
-remains tracked in #18, #13, #22, and #41. #48 closes only after parity is
+**Execution order:** remaining #47 model-boundary fixtures and invariants → #41
+canonical-entity external-reference audit/backfill → #19
+scheduled link reports → #48 final transitional cleanup. The Statement,
+bounded-Case, Event/Transition, external-reference, and Comparison
+Dimension/Placement foundations have landed; their broader content expansion
+remains tracked in #18, #13, #22, #41, and #26. #48 closes only after parity is
 demonstrated.
 
 - [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Milestone 1 model tests.
