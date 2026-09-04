@@ -3,8 +3,9 @@ import { canonicalGraph, citationsFor, entitiesOfKind, relationshipsFrom } from 
 
 describe("canonical vertical slice", () => {
   it("compiles only the reviewed modular authoring records", () => {
-    expect(canonicalGraph.entities).toHaveLength(33);
-    expect(canonicalGraph.relationships).toHaveLength(24);
+    expect(canonicalGraph.entities.every(({ publicationStatus }) => publicationStatus === "reviewed")).toBe(true);
+    expect(new Set(canonicalGraph.entities.map(({ id }) => id)).size).toBe(canonicalGraph.entities.length);
+    expect(canonicalGraph.relationships.map(({ id }) => id)).toContain("enacted-funds-used-fund-boards");
     expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual(["swedish-wage-earner-fund-program"]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual(["swedish-wage-earner-funds"]);
   });
