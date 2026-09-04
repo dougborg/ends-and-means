@@ -313,7 +313,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .dimension-comparison { display: grid; gap: 2rem; padding-top: 2rem; border-top: 4px solid var(--cobalt); }
 .dimension-comparison > header { max-width: 72ch; }
 .dimension-comparison > header p:last-child, .dimension-method p, .dimension-method li { font-family: var(--reading); line-height: 1.65; }
-.dimension-scale { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--rule); background: var(--sheet); }
+.dimension-scale { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); border: 1px solid var(--rule); background: var(--sheet); }
 .dimension-scale div { padding: 1rem; }
 .dimension-scale div + div { border-left: 1px solid var(--rule); }
 .dimension-scale strong, .dimension-scale span { display: block; }

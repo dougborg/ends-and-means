@@ -129,6 +129,8 @@ describe("generated reference routes", () => {
     expect(stripMarkup(compare)).toContain("Collective wage-earner shareholding authority");
     expect(stripMarkup(compare)).toContain("Capped minority");
     expect(stripMarkup(compare)).toContain("Dimension, not Criterion.");
+    expect(stripMarkup(compare)).toContain("1984–1991 · Sweden");
+    expect(stripMarkup(compare)).not.toContain("undefined");
 
     const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
     expect(challenge.match(/class="response-draft"/g)).toHaveLength(8);

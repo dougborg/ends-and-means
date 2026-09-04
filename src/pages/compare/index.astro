@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
-import { entityById, placementsForDimension } from "../../lib/domain/canonical";
-import type { ComparisonDimension, Criterion } from "../../lib/domain";
+import { placementsForDimension, requireEntityOfKind } from "../../lib/domain/canonical";
+const distribution = requireEntityOfKind("distribution", "criterion");
+const accountability = requireEntityOfKind("accountability", "criterion");
 const rows = [
-  { question: "Who would gain ownership and influence?", promise: "funds-declared-ends", design: "funds-statutory-design", practice: "funds-limited-control", assessment: "funds-distribution-assessment", criterion: entityById("distribution") as Criterion },
-  { question: "How would delegated power remain accountable?", promise: "funds-declared-ends", design: "funds-statutory-design", practice: "funds-practice", assessment: "funds-accountability-assessment", criterion: entityById("accountability") as Criterion },
+  { question: "Who would gain ownership and influence?", promise: "funds-declared-ends", design: "funds-statutory-design", practice: "funds-limited-control", assessment: "funds-distribution-assessment", criterion: distribution },
+  { question: "How would delegated power remain accountable?", promise: "funds-declared-ends", design: "funds-statutory-design", practice: "funds-practice", assessment: "funds-accountability-assessment", criterion: accountability },
 ];
-const dimension = entityById("collective-wage-earner-shareholding-authority") as ComparisonDimension;
+const dimension = requireEntityOfKind("collective-wage-earner-shareholding-authority", "comparison-dimension");
 const placements = placementsForDimension(dimension.id);
 const valueLabel = (placement: (typeof placements)[number]) => {
   const value = placement.value;
@@ -16,6 +17,11 @@ const valueLabel = (placement: (typeof placements)[number]) => {
   const to = dimension.values.find(({ id }) => id === value.toCategoryId)?.label;
   return `${from}–${to}`;
 };
+const scopeLabel = (placement: (typeof placements)[number]) => {
+  const dates = [placement.scope.startDate, placement.scope.endDate].filter(Boolean).join("–");
+  const places = (placement.scope.placeIds ?? []).map((id) => requireEntityOfKind(id, "place").label).join(", ");
+  return [dates, places, placement.scope.note].filter(Boolean).join(" · ");
+};
 ---
 <BaseLayout title="Compare" description="Compare Ends, institutional Means, bounded practice, and criterion-specific judgments." fullBleed>
   <article class="compare-page"><header><p class="coordinate">COMPARE / FIRST CANONICAL TRACE</p><h1>Do the Means deliver the Ends?</h1><p class="dek">This view compares different stages of one argument. It does not score a winner or treat the Swedish case as proof of a universal system.</p></header><div class="comparison-table" role="region" aria-label="Promise and practice comparison" tabindex="0"><table><thead><tr><th scope="col">Question</th><th scope="col">Attributed End</th><th scope="col">Formal Means</th><th scope="col">Observed practice</th><th scope="col">Criterion-specific reading</th></tr></thead><tbody>{rows.map((row) => <tr><th scope="row"><strong>{row.question}</strong><span>{row.criterion.label}</span></th><td><CanonicalStatement statementId={row.promise} /></td><td><CanonicalStatement statementId={row.design} /></td><td><CanonicalStatement statementId={row.practice} /></td><td><CanonicalStatement statementId={row.assessment} /></td></tr>)}</tbody></table></div><p class="comparison-caveat"><strong>Why no score?</strong> Distribution and accountability are different Criteria with disclosed assumptions. Evidence about one cannot silently answer the other.</p>
@@ -23,7 +29,7 @@ const valueLabel = (placement: (typeof placements)[number]) => {
   <section class="dimension-comparison" aria-labelledby="dimension-heading">
     <header><p class="coordinate">DESCRIPTIVE DIMENSION / ONE-DIMENSIONAL PROTOTYPE</p><h2 id="dimension-heading">{dimension.label}</h2><p>{dimension.definition}</p></header>
     <div class="dimension-scale" aria-label="Ordered dimension categories">{dimension.values.map((value) => <div><strong>{value.label}</strong><span>{value.description}</span></div>)}</div>
-    <div class="dimension-table" role="region" aria-label={`${dimension.label} placements`} tabindex="0"><table><thead><tr><th scope="col">Bounded subject</th><th scope="col">Placement</th><th scope="col">Basis and scope</th><th scope="col">Uncertainty</th><th scope="col">Evidence</th></tr></thead><tbody>{placements.map((placement) => { const subject = entityById(placement.subject.id); return <tr><th scope="row" data-label="Bounded subject">{subject?.label}</th><td data-label="Placement"><strong>{valueLabel(placement)}</strong></td><td data-label="Basis and scope"><span class="placement-basis">{placement.basis.replaceAll("-", " ")}</span><p>{placement.scope.note}</p></td><td data-label="Uncertainty">{placement.uncertainty}</td><td data-label="Evidence">{placement.statementIds.map((statementId) => <CanonicalStatement statementId={statementId} />)}</td></tr>; })}</tbody></table></div>
+    <div class="dimension-table" role="region" aria-label={`${dimension.label} placements`} tabindex="0"><table><thead><tr><th scope="col">Bounded subject</th><th scope="col">Placement</th><th scope="col">Basis and scope</th><th scope="col">Uncertainty</th><th scope="col">Evidence</th></tr></thead><tbody>{placements.map((placement) => { const subject = requireEntityOfKind(placement.subject.id, placement.subject.kind); return <tr><th scope="row" data-label="Bounded subject">{subject.label}</th><td data-label="Placement"><strong>{valueLabel(placement)}</strong></td><td data-label="Basis and scope"><span class="placement-basis">{placement.basis.replaceAll("-", " ")}</span><p>{scopeLabel(placement)}</p></td><td data-label="Uncertainty">{placement.uncertainty}</td><td data-label="Evidence">{placement.statementIds.map((statementId) => <CanonicalStatement statementId={statementId} />)}</td></tr>; })}</tbody></table></div>
     <div class="dimension-method"><div><h3>Method</h3><p>{dimension.method}</p></div><div><h3>Analytical choices</h3><ul>{dimension.normativeChoices.map((choice) => <li>{choice}</li>)}</ul></div><div><h3>Limits</h3><ul>{dimension.limitations.map((limitation) => <li>{limitation}</li>)}</ul></div></div>
     <p class="comparison-caveat"><strong>Dimension, not Criterion.</strong> These placements describe bounded voting authority. They do not say whether that authority was desirable, accountable, effective, or distributively sufficient. Unplaced subjects remain missing—not halfway along the scale.</p>
   </section></article>
