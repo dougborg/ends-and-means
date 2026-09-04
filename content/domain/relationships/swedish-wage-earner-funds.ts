@@ -35,6 +35,14 @@ export const relationshipDocuments = [
       { id: "enacted-funds-used-fund-boards", predicate: "used-means", subject: { kind: "case-episode", id: "enacted-wage-earner-funds-1984-1991" }, object: { kind: "means", id: "regional-wage-earner-fund-boards" }, implementation: "mixed", status: "qualified", statementIds: ["funds-statutory-design", "funds-practice"] },
       { id: "enacted-funds-assessed-distribution", predicate: "assessed-by", subject: { kind: "case-episode", id: "enacted-wage-earner-funds-1984-1991" }, object: { kind: "criterion", id: "distribution" }, conclusion: "mixed", status: "qualified", statementIds: ["funds-distribution-assessment"] },
       { id: "enacted-funds-assessed-accountability", predicate: "assessed-by", subject: { kind: "case-episode", id: "enacted-wage-earner-funds-1984-1991" }, object: { kind: "criterion", id: "accountability" }, conclusion: "inconclusive", status: "qualified", statementIds: ["funds-accountability-assessment"] },
+      { id: "enacted-funds-shareholding-authority-placement", predicate: "placed-on", subject: { kind: "case-episode", id: "enacted-wage-earner-funds-1984-1991" }, object: { kind: "comparison-dimension", id: "collective-wage-earner-shareholding-authority" }, value: { kind: "category", categoryId: "capped-minority" }, basis: "case-observation", uncertainty: "High confidence in the statutory cap and noncontrolling outcome; this placement does not establish how much effective influence the funds exercised within that cap.", scope: { startDate: "1984", endDate: "1991", placeIds: ["sweden"], note: "The five enacted regional fund boards during their operating episode." }, status: "qualified", statementIds: ["funds-statutory-design", "funds-practice", "funds-limited-control"] },
+    ],
+  },
+  {
+    documentType: "relationships",
+    subject: { kind: "case-episode", id: "liquidation-board-period-1992" },
+    relationships: [
+      { id: "liquidation-period-shareholding-authority-placement", predicate: "placed-on", subject: { kind: "case-episode", id: "liquidation-board-period-1992" }, object: { kind: "comparison-dimension", id: "collective-wage-earner-shareholding-authority" }, value: { kind: "category", categoryId: "absent" }, basis: "case-observation", uncertainty: "High confidence that the five wage-earner fund boards had ended; residual asset administration is outside this dimension unless it retained collective wage-earner voting authority.", scope: { startDate: "1992", endDate: "1992", placeIds: ["sweden"], note: "The immediate liquidation-board episode after abolition of the five fund boards." }, status: "qualified", statementIds: ["funds-abolished"] },
     ],
   },
   ...([

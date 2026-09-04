@@ -150,23 +150,26 @@ interface ComparisonDimension {
   id: ComparisonDimensionId;
   label: string;
   definition: string;
-  valueType: "continuum" | "ordinal" | "categorical";
-  polesOrCategories: DimensionValueDefinition[];
-  eligibleSubjectTypes: EntityKind[];
+  valueType: "ordinal" | "categorical";
+  values: DimensionValueDefinition[];
+  eligibleSubjectKinds: ComparisonSubjectKind[];
   method: string;
   normativeChoices: string[];
-  knownCorrelations: ComparisonDimensionId[];
+  knownCorrelationIds: ComparisonDimensionId[];
   limitations: string[];
   statementIds: StatementId[];
 }
 
 interface Placement extends RelationshipBase {
-  subjectRef: EntityRef;
-  dimensionId: ComparisonDimensionId;
-  value: DimensionValue | DimensionRange;
+  predicate: "placed-on";
+  subject: EntityRef & { kind: ComparisonSubjectKind };
+  object: EntityRef & { kind: "comparison-dimension" };
+  value:
+    | { kind: "category"; categoryId: string }
+    | { kind: "range"; fromCategoryId: string; toCategoryId: string };
   basis: "declared-design" | "ideal-type-analysis" | "case-observation";
   uncertainty: string;
-  lensId?: InterpretationLensId;
+  scope: RelationshipScope;
 }
 ```
 
@@ -177,8 +180,10 @@ specific Approaches, Means, and dated Case episodes are more defensible units.
 Ideal-type placements and empirical observations must never be shown as though
 they were measured on the same basis.
 
-Multiple sourced lenses may define different dimensions or place the same
-subject differently. Placements do not determine a Criterion assessment,
+Multiple sourced analyses may define different Dimensions or place the same
+subject differently. In the current schema, rival Placements remain separate
+records with distinct supporting Statements and provenance; a dedicated lens
+entity is deferred. Placements do not determine a Criterion assessment,
 evidence quality, Collection membership, or any other relationship.
 
 ### Comparison specification

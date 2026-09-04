@@ -1,6 +1,6 @@
 ---
 name: research-content-changes
-description: Research and implement evidence-backed Ends and Means content changes for review in a pull request. Use for additions or substantial revisions to traditions, Ends, Means, Topics, Challenges, Criteria, statements, sources, or bounded cases.
+description: Research and implement evidence-backed changes to the Ends and Means canonical graph for review in a pull request. Use for additions or substantial revisions to vocabulary, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Comparison Dimensions, or Placements.
 ---
 
 # Research Content Changes
@@ -25,7 +25,7 @@ merge or publish without human approval.
 
 1. Read [references/editorial-policy.md](references/editorial-policy.md).
 2. Read each relevant entity route:
-   - [tradition](references/routes/tradition.md)
+   - [Approach](references/routes/approach.md)
    - [end](references/routes/end.md)
    - [means](references/routes/means.md)
    - [topic](references/routes/topic.md)
@@ -34,6 +34,7 @@ merge or publish without human approval.
    - [statement](references/routes/statement.md)
    - [source](references/routes/source.md)
    - [case](references/routes/case.md)
+   - [Comparison Dimension and Placement](references/routes/dimension-placement.md)
 
 For requests spanning entity types, keep entities independently addressable and
 connect them through explicit relationships instead of embedding duplicates.
@@ -41,12 +42,14 @@ connect them through explicit relationships instead of embedding duplicates.
 Use authoritative sources and browse every cited URL. Preserve URL-level
 provenance, distinguish observations from attributed values and editorial
 interpretations, and document conflicting evidence and limitations. Search the
-current framework and open changes for duplicates before writing. Record
-plausible candidates; do not silently merge concepts.
+canonical graph, transitional inputs, and open changes for duplicates before
+writing. Record plausible candidates; do not silently merge concepts.
 
-Do not recreate a fixed comparison matrix or require every tradition to answer
-every Challenge. Do not use retired entity names, abbreviated row IDs, verdicts,
-or evidence grades. Missing relationships are legitimate research gaps.
+Do not recreate a fixed comparison matrix or require every Approach to answer
+every Challenge. Keep Dimensions descriptive and Criteria evaluative; never let
+a Placement determine an assessment, Collection membership, or aggregate score.
+Do not use retired entity names, abbreviated row IDs, verdicts, or evidence
+grades. Missing relationships and placements are legitimate research gaps.
 
 Run before handoff:
 

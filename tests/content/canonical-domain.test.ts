@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canonicalGraph, citationsFor, entitiesOfKind, relationshipsFrom } from "../../src/lib/domain/canonical";
+import { canonicalGraph, citationsFor, entitiesOfKind, relationshipsFrom, requireEntityOfKind } from "../../src/lib/domain/canonical";
 
 describe("canonical vertical slice", () => {
   it("compiles only the reviewed modular authoring records", () => {
@@ -29,5 +29,17 @@ describe("canonical vertical slice", () => {
     expect(relations.some(({ predicate }) => predicate === "partially-instantiated")).toBe(true);
     expect(relations.some(({ predicate }) => predicate === "used-means")).toBe(true);
     expect(JSON.stringify(relations)).not.toContain('"predicate":"embodied"');
+  });
+
+  it("publishes a descriptive Dimension with scoped episode Placements", () => {
+    expect(entitiesOfKind("comparison-dimension").map(({ id }) => id)).toEqual(["collective-wage-earner-shareholding-authority"]);
+    const placements = canonicalGraph.relationships.filter(({ predicate }) => predicate === "placed-on");
+    expect(placements).toHaveLength(2);
+    expect(placements.map(({ subject }) => subject.id)).toEqual(["enacted-wage-earner-funds-1984-1991", "liquidation-board-period-1992"]);
+  });
+
+  it("fails clearly when a route requests a missing or mistyped canonical entity", () => {
+    expect(() => requireEntityOfKind("missing-dimension", "comparison-dimension")).toThrow("Expected canonical comparison-dimension missing-dimension");
+    expect(() => requireEntityOfKind("distribution", "comparison-dimension")).toThrow("Expected canonical comparison-dimension distribution");
   });
 });

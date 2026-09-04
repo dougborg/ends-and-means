@@ -107,15 +107,26 @@ mobile screenshots; the first live pass repaired the Case overview contrast
 failure. Shared dossier hierarchy and responsive evidence-density refinements
 remain tracked in #67 rather than being treated as complete.
 
+**Next work package:** add first-class Comparison Dimension and Placement
+records to the canonical graph under #47, then publish one narrow, sourced,
+one-dimensional comparison from those records as the first delivery slice of
+#26. The slice must preserve missing data, scope, uncertainty, and the boundary
+between descriptive Dimensions and evaluative Criteria. After that, finish the
+remaining #47 model-boundary tests, complete #41 backfill, add #19 scheduled
+link checking, close #48 only after parity, and then take up #67 presentation
+refinement. This ordering is the active backlog priority.
+
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
 This is the active phase. Finish it before widening the catalogue.
 
-**Execution order:** #47 schema and modular compiler → #18 Statements and
-Sources → #13 bounded Cases → #22 entity/Means/Case relationships plus the
-first Event/Transition → #41 external identities → #19 continuous link checks
-→ #48 final transitional cleanup. Some work can overlap after #47 establishes
-stable interfaces, but #48 closes only after parity is demonstrated.
+**Execution order:** #47 Comparison Dimension/Placement slice with the first
+#26 one-dimensional prototype → remaining #47 model-boundary tests → #41
+external-identity backfill → #19 continuous link checks → #48 final
+transitional cleanup. The Statement, bounded-Case, Event/Transition, and first
+external-identity foundations have landed; their broader content expansion
+remains tracked in #18, #13, #22, and #41. #48 closes only after parity is
+demonstrated.
 
 - [x] **Approve the analytical method and PR review boundary** ([#38](https://github.com/dougborg/ends-and-means/issues/38)). The analytical boundaries and pull-request review workflow are accepted; the ontology remains subject to the Milestone 1 model tests.
 - [ ] **Validate and consolidate one plural canonical graph** ([#47](https://github.com/dougborg/ends-and-means/issues/47)). Add Concepts, Collections, Domains, external identities, and typed sourced relationships; replace the monolithic authoring JSON with modular entity and relationship sources plus a generated read graph; prove the distinctions with Democracy, communism/socialism, central planning, anarcho-communism, and one complete evidence trace.
@@ -153,13 +164,16 @@ stable interfaces, but #48 closes only after parity is demonstrated.
 ## Milestone 2 — [Explore and Compare core](https://github.com/dougborg/ends-and-means/milestone/2)
 
 **Execution order:** #39 valid dossiers → #55 and #56 priority anarchism Cases →
-#3 evidence/reference routes → #4 static comparison core → #26 one-dimensional
-Placement prototype → #35 entity-neutral pairwise comparison → #9 public method
-→ #20 correction links → #67 shared dossier presentation refinement → #12
-accessibility and metadata release review.
+#59 gendered-power/social-reproduction graph coverage → #61 reusable FAQs and
+misconception corrections → #3 evidence/reference routes → #4 static comparison
+core → remaining #26 mapping work → #35 entity-neutral pairwise comparison → #9
+public method → #20 correction links → #67 shared dossier presentation
+refinement → #12 accessibility and metadata release review.
 
 - [ ] **Develop the Zapatistas as a principal anarchism Case** ([#55](https://github.com/dougborg/ends-and-means/issues/55)). Distinguish the EZLN, civilian communities, governance institutions, and bounded episodes of institutional change; retain Indigenous context, competing classifications, and ongoing-case freshness.
 - [ ] **Develop bounded Spanish Revolution anarchism Cases** ([#56](https://github.com/dougborg/ends-and-means/issues/56)). Distinguish the CNT, FAI, workplace and rural collectives, federations, militias, committees, regions, and wartime periods rather than treating Spain from 1936–1939 as one system.
+- [ ] **Model gendered power and social reproduction across the graph** ([#59](https://github.com/dougborg/ends-and-means/issues/59)). Ensure questions, Ends, Means, evidence, and assessments can represent unpaid care, household authority, dependency, and gendered distributions rather than treating them as an afterthought.
+- [ ] **Model reusable FAQs and misconception corrections** ([#61](https://github.com/dougborg/ends-and-means/issues/61)). Replace dossier-embedded FAQ prose with independently reviewable, reusable, sourced records after the canonical entity and Statement patterns stabilize.
 - [ ] **Build complete Source, Case, and Reading views** ([#3](https://github.com/dougborg/ends-and-means/issues/3)). Add useful backlinks, verification and source-type filters, case context, and transparent library/publisher/purchase actions.
 - [ ] **Build static, accessible comparisons** ([#4](https://github.com/dougborg/ends-and-means/issues/4)). Support shared-Challenge and factual-dimension comparisons generated from the graph, with sparse coverage and no aggregate winner.
 - [ ] **Build entity-neutral pairwise comparison** ([#35](https://github.com/dougborg/ends-and-means/issues/35)). Compare eligible Concepts, Approaches, Means, or Case episodes through only the relationships and dimensions they genuinely share.

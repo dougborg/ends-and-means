@@ -23,6 +23,18 @@ export function entityById<T extends DomainEntity = DomainEntity>(id: string) {
   return canonicalGraph.indexes.entitiesById[id] as T | undefined;
 }
 
+export function requireEntityOfKind<K extends DomainEntity["kind"]>(id: string, kind: K) {
+  const entity = entityById(id);
+  if (!entity || entity.kind !== kind) throw new Error(`Expected canonical ${kind} ${id}`);
+  return entity as Extract<DomainEntity, { kind: K }>;
+}
+
 export function citationsFor(statementId: string) {
   return relationshipsFrom(statementId).filter((relationship): relationship is Extract<DomainRelationship, { predicate: "cites" }> => relationship.predicate === "cites");
+}
+
+export function placementsForDimension(dimensionId: string) {
+  return canonicalGraph.relationships.filter((relationship): relationship is Extract<DomainRelationship, { predicate: "placed-on" }> =>
+    relationship.predicate === "placed-on" && relationship.object.id === dimensionId,
+  );
 }
