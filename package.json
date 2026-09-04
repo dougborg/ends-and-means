@@ -13,6 +13,8 @@
     "check": "astro check",
     "test": "vitest run tests/content tests/import tests/skills",
     "test:routes": "vitest run tests/routes",
+    "test:visual": "playwright test",
+    "review:visual": "npm run build && playwright test",
     "import": "node --import tsx scripts/import-content.ts",
     "validate": "npm run import && node --import tsx scripts/build-content.ts && node --import tsx scripts/migrate-framework-content.ts && node --import tsx scripts/validate-domain.ts",
     "migrate:framework": "npm run validate"
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@playwright/test": "^1.62.1",
     "@types/node": "24.10.4",
     "tsx": "4.23.13",
     "typescript": "6.0.3",

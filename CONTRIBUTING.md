@@ -10,9 +10,9 @@ substantial changes receive pull-request review before publication.
 2. Create a focused branch named `research/<type>-<stable-id>`.
 3. Implement the concrete candidate in the canonical content model or its
    deterministic source generator, including rendering and tests when needed.
-4. Run `npm run validate`, `npm run check`, `npm test`, `npm run build`, and
-   `npm run test:routes`.
-5. Open a draft pull request. The PR is the proposal: identify all claims,
+4. Run `npm run validate`, `npm run check`, `npm test`, `npm run build`,
+   `npm run test:routes`, and the rendered-page review described below.
+5. Open a pull request. The PR is the proposal: identify all claims,
    classifications, and judgments the reviewer must decide.
 6. Revise the concrete change in that PR. Merging records acceptance and
    publishes the result through the normal deployment workflow.
@@ -52,3 +52,29 @@ contracts and editorial evidence policy.
 Corrections and implementation work also use branches and pull requests. Keep
 unrelated changes separate and explain how the result was verified. Never push
 directly to `main`; repository rules require a reviewed pull request.
+
+## Rendered-page review
+
+An issue that changes public rendering is not implemented until its affected
+pages have been evaluated in a browser. Build the site and run:
+
+```sh
+npx playwright install chromium
+npm run review:visual
+```
+
+The review renders representative pages at desktop, tablet, and mobile widths;
+saves full-page screenshots under `.artifacts/visual-review`; and fails on
+browser errors, horizontal overflow, undefined CSS design tokens, or WCAG text
+contrast failures. To focus the review on changed routes, provide a
+comma-separated list:
+
+```sh
+REVIEW_ROUTES=/cases/example/,/concepts/example/ npm run review:visual
+```
+
+Automated checks cannot judge composition or whether the page explains its
+subject clearly. Inspect all generated screenshots for hierarchy, density,
+spacing, readable prose, empty states, and responsive behavior. Record that
+inspection in the pull-request checklist. CI repeats the automated portion and
+uploads its screenshots as the `rendered-page-review` artifact.

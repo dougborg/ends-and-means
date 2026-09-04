@@ -36,3 +36,17 @@ jobs:
 
       - name: Test rendered routes
         run: npm run test:routes
+
+      - name: Install browser for rendered-page review
+        run: npx playwright install --with-deps chromium
+
+      - name: Review rendered pages
+        run: npm run test:visual
+
+      - name: Upload rendered-page review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-page-review
+          path: .artifacts/visual-review
+          if-no-files-found: ignore

@@ -55,7 +55,15 @@ npm ci
 npm run check
 npm test
 npm run build
+npm run review:visual
 ```
+
+`npm run review:visual` performs the browser-based self-review required for
+public rendering changes. It checks representative pages at desktop, tablet,
+and mobile widths and writes screenshots to `.artifacts/visual-review`. Install
+its Chromium runtime once with `npx playwright install chromium`; see
+[`CONTRIBUTING.md`](CONTRIBUTING.md#rendered-page-review) for focused-route use
+and the completion criteria.
 
 `npm run import` parses the archived source documents into deterministic staging
 records and an editorial report. It intentionally does not guess verdict
