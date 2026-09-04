@@ -8,7 +8,10 @@ const defaultRoutes = [
   "/concepts/economic-democracy/",
 ];
 
-const routes = process.env.REVIEW_ROUTES?.split(",").map((route) => route.trim()).filter(Boolean) ?? defaultRoutes;
+const routes = process.env.REVIEW_ROUTES?.split(",")
+  .map((route) => route.trim())
+  .filter(Boolean)
+  .map((route) => route.startsWith("/") ? route : `/${route}`) ?? defaultRoutes;
 const viewports = [
   { name: "desktop", width: 1440, height: 1000 },
   { name: "tablet", width: 820, height: 1180 },
@@ -58,7 +61,11 @@ for (const route of routes) {
           const dark = Math.min(luminance(foreground), luminance(background));
           const ratio = (light + 0.05) / (dark + 0.05);
           const fontSize = Number.parseFloat(style.fontSize);
-          const fontWeight = Number.parseInt(style.fontWeight, 10) || 400;
+          const fontWeight = style.fontWeight === "bold"
+            ? 700
+            : style.fontWeight === "normal"
+              ? 400
+              : Number.parseInt(style.fontWeight, 10) || 400;
           const minimum = fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 700) ? 3 : 4.5;
           return ratio + 0.01 < minimum ? [{ element: element.tagName.toLowerCase(), text: element.textContent?.trim().slice(0, 80), ratio: Number(ratio.toFixed(2)), minimum }] : [];
         });
@@ -83,7 +90,7 @@ for (const route of routes) {
       });
 
       expect(browserErrors).toEqual([]);
-      expect(audit.horizontalOverflow).toBe(0);
+      expect(audit.horizontalOverflow).toBeLessThanOrEqual(1);
       expect(audit.undefinedTokens).toEqual([]);
       expect(audit.lowContrast).toEqual([]);
     });

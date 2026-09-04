@@ -13,7 +13,9 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "npm run preview -- --host 127.0.0.1",
+    // Astro otherwise auto-detects agent environments and backgrounds the server,
+    // which makes Playwright think its managed process exited prematurely.
+    command: "ASTRO_PREVIEW_BACKGROUND=0 npm run preview -- --host 127.0.0.1",
     url: "http://127.0.0.1:4321",
     reuseExistingServer: !process.env.CI,
   },
