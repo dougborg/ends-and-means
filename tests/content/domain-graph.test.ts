@@ -90,4 +90,42 @@ describe("plural domain graph", () => {
 
     expect(validateAuthoringDocuments(invalid)).toContain("communism: ID collides with an entity ID");
   });
+
+  it("refuses to compile invalid authoring documents with the collected contract failures", () => {
+    const invalid = [...documents, entity({
+      id: "Invalid ID",
+      kind: "means",
+      label: " ",
+      description: " ",
+      institutionalForm: "A deliberately malformed fixture.",
+      publicationStatus: "research-needed",
+    })];
+
+    expect(() => compileDomainGraph(invalid)).toThrow(
+      "Domain graph validation failed:\nInvalid ID: entity ID is not stable kebab-case\nInvalid ID: label is empty\nInvalid ID: description is empty",
+    );
+  });
+
+  it("accepts inverse hierarchy edges and shared descendants without false cycles", () => {
+    const hierarchical = [...documents,
+      relationships({ kind: "concept", id: "communism" }, [{
+        id: "communism-narrower-democracy",
+        predicate: "narrower-than",
+        subject: { kind: "concept", id: "communism" },
+        object: { kind: "concept", id: "democracy" },
+        status: "research-needed",
+        statementIds: [],
+      }]),
+      relationships({ kind: "concept", id: "anarchism" }, [{
+        id: "anarchism-broader-democracy",
+        predicate: "broader-than",
+        subject: { kind: "concept", id: "anarchism" },
+        object: { kind: "concept", id: "democracy" },
+        status: "research-needed",
+        statementIds: [],
+      }]),
+    ];
+
+    expect(validateAuthoringDocuments(hierarchical)).toEqual([]);
+  });
 });
