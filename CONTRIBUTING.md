@@ -72,9 +72,11 @@ directly to `main`; repository rules require a reviewed pull request.
 - V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 88%
   statements, 87% branches, 100% functions, and 90% lines. Raise thresholds as
   coverage improves; do not lower them to accommodate a change.
-- Dependabot checks npm and GitHub Actions weekly. Dependency Review blocks new
+- Dependabot checks npm and GitHub Actions weekly. The CI audit blocks
   moderate-or-higher known vulnerabilities; CodeQL scans JavaScript and
-  TypeScript; zizmor audits workflow definitions.
+  TypeScript; zizmor audits workflow definitions. GitHub's Dependency Review
+  remains unavailable unless Advanced Security is enabled for this private
+  repository.
 - GitHub Actions are pinned to immutable commit SHAs. Keep the release tag in
   the trailing comment so Dependabot updates remain readable.
 - Production Pages build and deployment jobs depend on successful main-branch
