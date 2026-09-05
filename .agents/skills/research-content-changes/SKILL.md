@@ -93,7 +93,9 @@ Name the exact existing Statements the obligation tests in
 Statement yet owns the limitation. Keep those triggers separate from result
 `statementIds`. Split questions whose outcomes can be researched or closed
 independently. Record and render lifecycle status; resolution and withdrawal
-require a rationale and closure date, while partial progress remains active.
+require a rationale and closure date, while partial progress remains active as
+`partially-addressed`; an obligation with reconciled Statements cannot remain
+`open`.
 
 Do not recreate a fixed comparison matrix or require every Approach to answer
 every Challenge. Keep Dimensions descriptive and Criteria evaluative; never let

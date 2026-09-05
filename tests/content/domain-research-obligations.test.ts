@@ -4,7 +4,9 @@ import {
   auditContent,
   compileDomainGraph,
   formatContentAttentionReport,
+  claimPublicationLabel,
   validateAuthoringDocuments,
+  workflowReferencesIn,
 } from "../../src/lib/domain";
 import {
   canonicalGraph,
@@ -116,6 +118,48 @@ const documents: AuthoringDocument[] = [
           traceStatus: "supported",
           statementIds: ["test-statement"],
         },
+        {
+          id: "other-section",
+          heading: "What did later evidence establish?",
+          body: "A second traceable test section.",
+          traceStatus: "supported",
+          statementIds: ["test-result-statement"],
+        },
+      ],
+      reviewedAt: "2026-09-05",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "other-concept",
+      kind: "concept",
+      label: "Other concept",
+      description: "An unrelated target fixture.",
+      schemeIds: [],
+      scopeNote: "Synthetic unrelated scope.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "other-concept-dossier",
+      kind: "dossier",
+      label: "Other concept dossier",
+      description: "An unrelated Statement-ownership fixture.",
+      subject: { kind: "concept", id: "other-concept" },
+      standfirst: "An unrelated traceable test summary.",
+      standfirstStatementIds: ["test-result-statement"],
+      sections: [
+        {
+          id: "unrelated-section",
+          heading: "What belongs elsewhere?",
+          body: "An unrelated traceable test section.",
+          traceStatus: "supported",
+          statementIds: ["test-result-statement"],
+        },
       ],
       reviewedAt: "2026-09-05",
       ...reviewed,
@@ -209,16 +253,12 @@ describe("research obligations", () => {
     );
   });
 
-  it("reports evidence attached before an open obligation is resolved", () => {
+  it("requires reconciled evidence to advance an open obligation", () => {
     const pending = structuredClone(documents);
     const obligation = obligationIn(pending);
     obligation.statementIds = ["test-result-statement"];
-    const report = auditContent(compileDomainGraph(pending));
-    expect(report).toMatchObject({
-      researchEvidenceAwaitingResolution: ["test-research-obligation"],
-    });
-    expect(formatContentAttentionReport(report)).toContain(
-      "Evidence awaiting resolution: 1\n- test-research-obligation",
+    expect(validateAuthoringDocuments(pending)).toContain(
+      "test-research-obligation: open research obligation cannot have reconciled Statements; use partially-addressed",
     );
   });
 
@@ -323,6 +363,42 @@ describe("research obligation targets and public text", () => {
     );
   });
 
+  it("rejects a Statement owned by an unrelated Dossier", () => {
+    const invalid = structuredClone(documents);
+    const obligation = obligationIn(invalid);
+    obligation.addressedStatementIds = ["test-result-statement"];
+    const dossier = invalid.find(
+      (item) =>
+        item.documentType === "entity" &&
+        item.entity.id === "test-concept-dossier",
+    );
+    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
+      throw new Error("Missing Dossier fixture");
+    dossier.entity.sections[1] = {
+      id: "other-section",
+      heading: "What did later evidence establish?",
+      body: "A second traceable test section.",
+      traceStatus: "supported",
+      statementIds: [],
+    };
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "test-research-obligation: addressed Statement test-result-statement is not owned by concept:test-concept",
+    );
+  });
+
+  it("rejects a Statement owned by the target Dossier but not its exact section", () => {
+    const invalid = structuredClone(documents);
+    const obligation = obligationIn(invalid);
+    obligation.targetSectionId = "test-section";
+    obligation.obligationStatus = "partially-addressed";
+    obligation.statementIds = ["test-result-statement"];
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "test-research-obligation: reconciled Statement test-result-statement is not owned by concept:test-concept#test-section",
+    );
+  });
+});
+
+describe("public research text", () => {
   it.each([
     "label",
     "description",
@@ -340,6 +416,32 @@ describe("research obligation targets and public text", () => {
     );
   });
 
+  it("detects repository workflow language without rejecting ordinary numbers", () => {
+    expect(workflowReferencesIn("Tracked in issue 97 on feature/research-work.")).toEqual([
+      "repository issue or pull request",
+      "repository branch",
+    ]);
+    expect(
+      workflowReferencesIn(
+        "See https://github.com/example/project/pull/12 during content migration.",
+      ),
+    ).toEqual([
+      "repository issue or pull request",
+      "migration or draft state",
+    ]);
+    expect(workflowReferencesIn("Article #12 examines migration policy.")).toEqual([]);
+  });
+
+  it("labels every Statement publication state truthfully", () => {
+    expect(claimPublicationLabel("published")).toBe("Claim published");
+    expect(claimPublicationLabel("reviewed")).toBe("Claim reviewed");
+    expect(claimPublicationLabel("in-review")).toBe("Claim in review");
+    expect(claimPublicationLabel("research-needed")).toBe("Research needed");
+    expect(claimPublicationLabel("deprecated")).toBe("Claim deprecated");
+  });
+});
+
+describe("research obligation routes", () => {
   it("builds section-aware routes for every supported target kind", () => {
     expect(
       researchTargetHref({
@@ -391,14 +493,14 @@ describe("canonical research agenda", () => {
       },
       {
         id: "social-democracy-postwar-conditions",
-        obligationType: "counterevidence",
+        obligationType: "research-gap",
         target: "concept:social-democracy#where-the-tradition-came-from",
         status: "open",
       },
       {
         id: "swedish-funds-investment-counterfactual",
         obligationType: "counterfactual",
-        target: "case:swedish-wage-earner-funds#what-they-did-in-practice",
+        target: "case:swedish-wage-earner-funds",
         status: "open",
       },
       {

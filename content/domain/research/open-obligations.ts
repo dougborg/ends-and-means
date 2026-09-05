@@ -158,7 +158,6 @@ export const openResearchObligationDocuments = [
       question:
         "How would Swedish capital formation and firms' investment financing have changed without the enacted funds?",
       target: { kind: "case", id: "swedish-wage-earner-funds" },
-      targetSectionId: "what-they-did-in-practice",
       addressedStatementIds: ["funds-statutory-design", "funds-practice"],
       currentLimitation:
         "The available account establishes the funds' financing and investment practice but not the investment path that would have occurred without them.",
@@ -203,7 +202,7 @@ export const openResearchObligationDocuments = [
       label: "Conditions for postwar social-democratic reform",
       description:
         "A comparative question prompted by competing accounts of social democracy's reform capacity.",
-      obligationType: "counterevidence",
+      obligationType: "research-gap",
       question:
         "Does social-democratic reform capacity decline when favorable postwar economic and institutional conditions are absent?",
       target: { kind: "concept", id: "social-democracy" },
