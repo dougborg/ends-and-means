@@ -58,8 +58,8 @@ directly to `main`; repository rules require a reviewed pull request.
 
 - Biome linting covers TypeScript, JavaScript, JSON, CSS, and Astro files. Its
   complexity rules cap cognitive complexity at 15 and function bodies at 80
-  nonblank lines. Existing hotspots use narrow, documented suppressions that
-  should be removed incrementally rather than raising the repository limit.
+  nonblank lines. Ratchet these limits downward as code is decomposed; do not
+  add broad suppressions or raise the repository limit to admit a change.
   The CSS descending-specificity heuristic is disabled because the shared
   stylesheet intentionally composes selectors across independent components;
   rendered browser tests cover the resulting cascade.
@@ -68,8 +68,8 @@ directly to `main`; repository rules require a reviewed pull request.
   exports alone.
 - Astro's strict type check, canonical graph validation, unit tests, route
   tests, production build, and browser review remain required.
-- V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 80%
-  statements, 80% branches, 85% functions, and 90% lines. Raise thresholds as
+- V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 88%
+  statements, 87% branches, 100% functions, and 90% lines. Raise thresholds as
   coverage improves; do not lower them to accommodate a change.
 - Dependabot checks npm and GitHub Actions weekly. Dependency Review blocks new
   moderate-or-higher known vulnerabilities; CodeQL scans JavaScript and
