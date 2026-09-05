@@ -73,6 +73,8 @@ directly to `main`; repository rules require a reviewed pull request.
   TypeScript; zizmor audits workflow definitions.
 - GitHub Actions are pinned to immutable commit SHAs. Keep the release tag in
   the trailing comment so Dependabot updates remain readable.
+- Production Pages build and deployment jobs depend on successful main-branch
+  verification; pull requests cannot enter the deployment path.
 
 ## Rendered-page review
 
