@@ -1,18 +1,12 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
-import { loadNarrative } from "./load-narrative";
+import { attachNarrative } from "./load-narrative";
 
 const reviewed = {
   publicationStatus: "reviewed" as const,
   reviewedAt: "2026-09-05",
 };
 
-const fundProgram = loadNarrative("swedish-wage-earner-fund-program.md", ["the-problem-it-addressed", "the-enacted-mechanism", "why-program-and-practice-differ", "a-contested-and-reversible-institution"]);
-const fundCase = loadNarrative("swedish-wage-earner-funds-case.md", ["what-the-funds-were", "what-they-were-meant-to-do", "what-they-did-in-practice", "why-the-case-matters"]);
-const rehnMeidner = loadNarrative("swedish-rehn-meidner-model.md", ["several-goals-at-once", "how-the-parts-were-meant-to-work", "a-model-not-a-name-for-sweden", "what-the-bounded-evidence-supports"]);
-const bargainingCase = loadNarrative("swedish-solidaristic-bargaining-case.md", ["the-institutional-arrangement", "its-place-in-the-model", "what-changed-and-when", "a-differentiated-productivity-result"]);
-const distributionChallenge = loadNarrative("distribution-of-gains-and-ownership.md", ["several-distributions-not-one", "a-wage-policy-response", "an-ownership-policy-response", "what-a-comparison-must-preserve"]);
-
-export const dossierDocuments = [
+const rawDossierDocuments = [
   {
     documentType: "entity",
     entity: {
@@ -22,12 +16,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the program's purposes, institutional mechanism, enacted limits, and end.",
       subject: { kind: "approach", id: "swedish-wage-earner-fund-program" },
-      standfirst: fundProgram.standfirst,
+      standfirst: "",
       sections: [
         {
           id: "the-problem-it-addressed",
           heading: "The problem it tried to address",
-          body: fundProgram.sections["the-problem-it-addressed"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["funds-declared-ends"],
           relatedEntityRefs: [
@@ -38,7 +32,7 @@ export const dossierDocuments = [
         {
           id: "the-enacted-mechanism",
           heading: "The mechanism that was enacted",
-          body: fundProgram.sections["the-enacted-mechanism"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["funds-statutory-design"],
           relatedEntityRefs: [
@@ -49,7 +43,7 @@ export const dossierDocuments = [
         {
           id: "why-program-and-practice-differ",
           heading: "Why the ambition and the outcome differ",
-          body: fundProgram.sections["why-program-and-practice-differ"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "funds-practice",
@@ -65,7 +59,7 @@ export const dossierDocuments = [
         {
           id: "a-contested-and-reversible-institution",
           heading: "A contested and reversible institution",
-          body: fundProgram.sections["a-contested-and-reversible-institution"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: ["funds-abolished", "funds-accountability-assessment"],
           relatedEntityRefs: [
@@ -86,12 +80,12 @@ export const dossierDocuments = [
       description:
         "A plain-language account of the bounded 1983–1992 wage-earner-fund case.",
       subject: { kind: "case", id: "swedish-wage-earner-funds" },
-      standfirst: fundCase.standfirst,
+      standfirst: "",
       sections: [
         {
           id: "what-the-funds-were",
           heading: "What the funds were",
-          body: fundCase.sections["what-the-funds-were"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["funds-statutory-design", "funds-declared-ends"],
           relatedEntityRefs: [
@@ -101,7 +95,7 @@ export const dossierDocuments = [
         {
           id: "what-they-were-meant-to-do",
           heading: "What they were meant to do",
-          body: fundCase.sections["what-they-were-meant-to-do"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["funds-declared-ends"],
           relatedEntityRefs: [
@@ -111,7 +105,7 @@ export const dossierDocuments = [
         {
           id: "what-they-did-in-practice",
           heading: "What they did in practice",
-          body: fundCase.sections["what-they-did-in-practice"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["funds-practice", "funds-limited-control"],
           relatedEntityRefs: [
@@ -124,7 +118,7 @@ export const dossierDocuments = [
         {
           id: "why-the-case-matters",
           heading: "Why the case matters",
-          body: fundCase.sections["why-the-case-matters"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "funds-distribution-assessment",
@@ -149,12 +143,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the model's joint objectives, policy mechanisms, partial application, and empirical limits.",
       subject: { kind: "approach", id: "swedish-rehn-meidner-model" },
-      standfirst: rehnMeidner.standfirst,
+      standfirst: "",
       sections: [
         {
           id: "several-goals-at-once",
           heading: "A model built around several goals at once",
-          body: rehnMeidner.sections["several-goals-at-once"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["rehn-meidner-declared-objectives"],
           relatedEntityRefs: [{ kind: "end", id: "equality-with-employment" }],
@@ -162,7 +156,7 @@ export const dossierDocuments = [
         {
           id: "how-the-parts-were-meant-to-work",
           heading: "How the parts were meant to work together",
-          body: rehnMeidner.sections["how-the-parts-were-meant-to-work"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: [
             "rehn-meidner-policy-combination",
@@ -181,7 +175,7 @@ export const dossierDocuments = [
         {
           id: "a-model-not-a-name-for-sweden",
           heading: "A model, not a name for Sweden",
-          body: rehnMeidner.sections["a-model-not-a-name-for-sweden"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-social-democratic-context",
@@ -196,7 +190,7 @@ export const dossierDocuments = [
         {
           id: "what-the-bounded-evidence-supports",
           heading: "What the bounded evidence supports",
-          body: rehnMeidner.sections["what-the-bounded-evidence-supports"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "solidaristic-wage-compression-timing",
@@ -223,12 +217,12 @@ export const dossierDocuments = [
       description:
         "A narrative account of Sweden's bounded 1956–1983 centralized bargaining episode.",
       subject: { kind: "case", id: "swedish-solidaristic-bargaining" },
-      standfirst: bargainingCase.standfirst,
+      standfirst: "",
       sections: [
         {
           id: "the-institutional-arrangement",
           heading: "The institutional arrangement",
-          body: bargainingCase.sections["the-institutional-arrangement"] ?? "",
+          body: "",
           traceStatus: "supported",
           statementIds: ["centralized-solidaristic-bargaining-form"],
           relatedEntityRefs: [
@@ -238,7 +232,7 @@ export const dossierDocuments = [
         {
           id: "its-place-in-the-model",
           heading: "Its place in the model",
-          body: bargainingCase.sections["its-place-in-the-model"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-policy-combination",
@@ -252,7 +246,7 @@ export const dossierDocuments = [
         {
           id: "what-changed-and-when",
           heading: "What changed—and when",
-          body: bargainingCase.sections["what-changed-and-when"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "solidaristic-wage-compression-timing",
@@ -262,7 +256,7 @@ export const dossierDocuments = [
         {
           id: "a-differentiated-productivity-result",
           heading: "A differentiated productivity result",
-          body: bargainingCase.sections["a-differentiated-productivity-result"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "interindustry-compression-productivity-result",
@@ -283,12 +277,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the distribution challenge across wages, wealth, ownership, and control.",
       subject: { kind: "challenge", id: "distribution-of-gains-and-ownership" },
-      standfirst: distributionChallenge.standfirst,
+      standfirst: "",
       sections: [
         {
           id: "several-distributions-not-one",
           heading: "Several distributions, not one",
-          body: distributionChallenge.sections["several-distributions-not-one"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-distribution-assessment",
@@ -299,7 +293,7 @@ export const dossierDocuments = [
         {
           id: "a-wage-policy-response",
           heading: "A response through wage policy",
-          body: distributionChallenge.sections["a-wage-policy-response"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-declared-objectives",
@@ -314,7 +308,7 @@ export const dossierDocuments = [
         {
           id: "an-ownership-policy-response",
           heading: "A response through collective ownership",
-          body: distributionChallenge.sections["an-ownership-policy-response"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "funds-declared-ends",
@@ -329,7 +323,7 @@ export const dossierDocuments = [
         {
           id: "what-a-comparison-must-preserve",
           heading: "What a comparison must preserve",
-          body: distributionChallenge.sections["what-a-comparison-must-preserve"] ?? "",
+          body: "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-distribution-assessment",
@@ -342,3 +336,31 @@ export const dossierDocuments = [
     },
   },
 ] satisfies AuthoringDocument[];
+
+const narrativeFileByDossierId = {
+  "swedish-wage-earner-fund-program-dossier":
+    "swedish-wage-earner-fund-program.md",
+  "swedish-wage-earner-funds-case-dossier": "swedish-wage-earner-funds-case.md",
+  "swedish-rehn-meidner-model-dossier": "swedish-rehn-meidner-model.md",
+  "swedish-solidaristic-bargaining-case-dossier":
+    "swedish-solidaristic-bargaining-case.md",
+  "distribution-of-gains-and-ownership-dossier":
+    "distribution-of-gains-and-ownership.md",
+} as const;
+
+function narrativeFileFor(dossierId: string): string {
+  if (dossierId in narrativeFileByDossierId) {
+    return narrativeFileByDossierId[
+      dossierId as keyof typeof narrativeFileByDossierId
+    ];
+  }
+  throw new Error(`No narrative file registered for Dossier ${dossierId}`);
+}
+
+export const dossierDocuments = rawDossierDocuments.map((document) => ({
+  ...document,
+  entity: attachNarrative(
+    narrativeFileFor(document.entity.id),
+    document.entity,
+  ),
+})) satisfies AuthoringDocument[];

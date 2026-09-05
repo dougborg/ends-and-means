@@ -20,8 +20,11 @@ action. The canonical site URL is `https://endsandmeans.info`; because this is a
 custom-domain root deployment, Astro does not use a repository-name `base`.
 Deployment CI remains separate from the pull-request verification workflow.
 
-Canonical content will be Markdown with structured frontmatter, one file per
-entity. Generated indexes and reports are build artifacts, never hand-edited.
+Canonical content uses typed TypeScript records. ADR 0003 supersedes the earlier
+plan to store every entity as one Markdown file with structured frontmatter:
+Dossier prose is Markdown, while graph metadata and relationships remain in
+typed manifests. Generated indexes and reports are build artifacts, never
+hand-edited.
 
 ## Consequences
 
