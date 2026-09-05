@@ -161,6 +161,7 @@ function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
 export function canPromote(snapshot: DeliverySnapshot, candidate: DeliveryItem) {
   if (!isReadyCandidate(candidate)) return false;
   const active = snapshot.items.filter((item) => item.status === "In progress");
+  if (active.some((item) => !item.workstream)) return false;
   return active.length < 3 && !active.some((item) => item.workstream === candidate.workstream);
 }
 
