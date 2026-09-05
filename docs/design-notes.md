@@ -461,6 +461,16 @@ instruction, not a hero slogan repeated across the site. “Start with a problem
 not an ideology” may still appear in explanatory copy, but “question” is less
 prescriptive and matches the Challenge model more precisely.
 
+## Content-counted comparison grids
+
+Use the shared comparison-grid primitive when peer records need equal visual
+weight. The grid derives its desktop and tablet column count from the records
+actually rendered, up to an explicit maximum, instead of reserving empty tracks
+for hypothetical content. At narrow widths it becomes one linear column. This
+keeps sparse comparisons compact while preserving source order and equal card
+widths; sequences, tables, and intentionally asymmetric layouts remain separate
+patterns.
+
 ## Accessibility baseline
 
 - Use semantic headings, lists, figures, tables, and disclosure controls.
