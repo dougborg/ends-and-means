@@ -47,6 +47,7 @@ npm run lint
 npm run static
 npm run check
 npm test
+npm run test:coverage
 npm run build
 npm run review:visual
 ```

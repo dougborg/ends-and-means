@@ -68,6 +68,9 @@ directly to `main`; repository rules require a reviewed pull request.
   exports alone.
 - Astro's strict type check, canonical graph validation, unit tests, route
   tests, production build, and browser review remain required.
+- V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 80%
+  statements, 80% branches, 85% functions, and 90% lines. Raise thresholds as
+  coverage improves; do not lower them to accommodate a change.
 - Dependabot checks npm and GitHub Actions weekly. Dependency Review blocks new
   moderate-or-higher known vulnerabilities; CodeQL scans JavaScript and
   TypeScript; zizmor audits workflow definitions.

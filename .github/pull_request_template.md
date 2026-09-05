@@ -20,6 +20,7 @@
 - [ ] `npm run static`
 - [ ] `npm run check`
 - [ ] `npm test`
+- [ ] `npm run test:coverage`
 - [ ] `npm run build`
 - [ ] `npm run test:routes`
 - [ ] `npm run review:visual` for changed or representative public routes

@@ -5,6 +5,7 @@
       "**",
       "!archive",
       "!dist",
+      "!coverage",
       "!.artifacts",
       "!.astro"
     ]
