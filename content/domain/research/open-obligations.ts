@@ -11,6 +11,55 @@ export const openResearchObligationDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "socialism-democratic-control-threshold",
+      kind: "research-obligation",
+      label: "Democratic-control threshold for socialism",
+      description:
+        "A focused institutional question about when nominally public or collective ownership provides effective social control.",
+      obligationType: "research-gap",
+      question:
+        "Which rights and accountability mechanisms are sufficient for productive assets to be under social and democratic control?",
+      target: { kind: "concept", id: "socialism" },
+      targetSectionId: "what-defines-socialism",
+      addressedStatementIds: [
+        "socialism-democratic-control-minimum",
+        "socialism-not-statism",
+      ],
+      currentLimitation:
+        "The definition distinguishes social control from undemocratic state control but does not establish a test across worker, community, public, cooperative, and delegated ownership arrangements.",
+      evidenceNeeded:
+        "Comparative institutional research specifying appointment, removal, participation, transparency, investment, use, and surplus-allocation rights in formal rules and practice.",
+      scope:
+        "Governance of productive assets; this question does not assume that one ownership form is sufficient or necessary in every socialist tradition.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "communism-claimed-identity-practice-gap",
+      kind: "research-obligation",
+      label: "Communist identity and bounded institutional practice",
+      description:
+        "A focused case-design question for comparing communist self-identification with institutions and rules in use.",
+      obligationType: "research-gap",
+      question:
+        "How should a bounded case compare communist self-identification with its actual property, class, distribution, authority, and state institutions?",
+      target: { kind: "concept", id: "communism" },
+      targetSectionId: "does-a-communist-label-settle-the-case",
+      addressedStatementIds: ["communist-label-non-embodiment"],
+      currentLimitation:
+        "The current boundary prevents embodiment claims but does not yet specify comparable observations for party identity, formal constitutional rules, administrative practice, social hierarchy, or ownership and distribution.",
+      evidenceNeeded:
+        "Official records and independent historical research for several explicitly bounded episodes, with the same institutional dimensions recorded separately from ideological claims.",
+      scope:
+        "Self-identified communist parties, governments, and states in named places and periods; not an aggregate verdict on communism or a country-wide timeless label.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "social-ownership-delegation-accountability-gap",
       kind: "research-obligation",
       label: "Delegated control and social-ownership accountability",
@@ -44,7 +93,9 @@ export const openResearchObligationDocuments = [
         "Should owners' property rights take priority over democratic participation in firms?",
       target: { kind: "concept", id: "economic-democracy" },
       targetSectionId: "what-can-democratic-designs-fail-to-achieve",
-      addressedStatementIds: ["economic-democracy-property-rights-objection-statement"],
+      addressedStatementIds: [
+        "economic-democracy-property-rights-objection-statement",
+      ],
       currentLimitation:
         "The current account identifies this objection through Herzog's synthesis but does not yet test its strongest independent formulation.",
       evidenceNeeded:
@@ -67,7 +118,9 @@ export const openResearchObligationDocuments = [
         "Can democratic firm governance coordinate specialized work without unacceptable decision costs?",
       target: { kind: "concept", id: "economic-democracy" },
       targetSectionId: "what-can-democratic-designs-fail-to-achieve",
-      addressedStatementIds: ["economic-democracy-decision-cost-objection-statement"],
+      addressedStatementIds: [
+        "economic-democracy-decision-cost-objection-statement",
+      ],
       currentLimitation:
         "The current account identifies decision cost and competence concerns but does not independently compare their strongest versions with specific democratic designs.",
       evidenceNeeded:
@@ -90,7 +143,9 @@ export const openResearchObligationDocuments = [
         "When can formal economic participation reproduce domination instead of redistributing authority?",
       target: { kind: "concept", id: "economic-democracy" },
       targetSectionId: "what-can-democratic-designs-fail-to-achieve",
-      addressedStatementIds: ["economic-democracy-futility-objection-statement"],
+      addressedStatementIds: [
+        "economic-democracy-futility-objection-statement",
+      ],
       currentLimitation:
         "Herzog surveys exclusion, informal hierarchy, and wider market constraints, but the current account does not test when those mechanisms defeat formal rights.",
       evidenceNeeded:

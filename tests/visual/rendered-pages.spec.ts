@@ -9,6 +9,8 @@ const defaultRoutes = [
   "/compare/",
   "/concepts/economic-democracy/",
   "/concepts/social-democracy/",
+  "/concepts/socialism/",
+  "/concepts/communism/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",
