@@ -109,7 +109,7 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   const requireRule = (condition: boolean, code: string, message: string) => {
     if (!condition) findings.push({ code, message });
   };
-  const workflowFiles = readdirSync(join(root, ".github/workflows")).filter((file) => file.endsWith(".yml"));
+  const workflowFiles = readdirSync(join(root, ".github/workflows")).filter((file) => /\.ya?ml$/.test(file));
   const workflows = new Map(workflowFiles.map((file) => [file, parseYaml(join(root, ".github/workflows", file), findings)]));
   const verifyAction = parseYaml(join(root, ".github/actions/verify/action.yml"), findings);
   const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8")) as { packageManager?: string; scripts?: Record<string, string> };
