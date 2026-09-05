@@ -331,6 +331,9 @@ describe("Dossier publication boundaries", () => {
     expect(validateAuthoringDocuments(invalid)).toContain(
       "test-concept-dossier:what-it-means: live Dossier requires reviewed or published Statement test-statement",
     );
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "test-concept-dossier:standfirst: live Dossier requires reviewed or published Statement test-statement",
+    );
   });
 
   it("rejects runtime-invalid subject kinds, trace statuses, and duplicate refs", () => {

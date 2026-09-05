@@ -1,11 +1,11 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
+import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
-import MarkdownProse from "../../components/MarkdownProse.astro";
-import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Approach, Case, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
+import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
 
 export function getStaticPaths() { return entitiesOfKind("approach").map((approach) => ({ params: { id: approach.id }, props: { approach } })); }
 const approach = Astro.props.approach as Approach;
@@ -21,7 +21,7 @@ const challenges = outgoing.filter((relation) => relation.predicate === "respond
 <BaseLayout title={approach.label} description={dossier?.standfirst ?? approach.description} fullBleed>
   <article class="canonical-dossier">
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Approach</nav>
-    <header><p class="coordinate">APPROACH</p><h1>{approach.label}</h1><MarkdownProse className="dek" content={dossier?.standfirst ?? approach.description} /></header>
+    <header><p class="coordinate">APPROACH</p><h1>{approach.label}</h1><DossierStandfirst content={dossier?.standfirst ?? approach.description} statementIds={dossier?.standfirstStatementIds} /></header>
     {dossier && <NarrativeDossier sections={dossier.sections} />}
     <section class="reference-apparatus" aria-labelledby="approach-reference-title">
       <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">Inspect the model</h2><p>Open the formal relationships and evidence behind the summary.</p></header>

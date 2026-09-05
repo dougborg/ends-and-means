@@ -173,12 +173,16 @@ async function verifyConceptRoutes() {
   );
   const socialDemocracyText = stripMarkup(socialDemocracy);
   expect(socialDemocracyText).toContain("Where did the tradition come from?");
+  expect(socialDemocracyText).toContain("How this summary is supported");
   expect(socialDemocracyText).toContain("Dylan Riley treats that genealogy");
   expect(hrefs(socialDemocracy)).toContain(
     "https://doi.org/10.1002/9781118474396.wbept0951",
   );
   expect(hrefs(socialDemocracy)).toContain(
     "https://newleftreview.org/issues/ii76/articles/dylan-riley-bernstein-s-heirs",
+  );
+  expect(hrefs(socialDemocracy)).toContain(
+    "https://plato.stanford.edu/archives/fall2024/entries/socialism/",
   );
   expect(hrefs(socialDemocracy)).toContain(
     "/explore/swedish-rehn-meidner-model/",
