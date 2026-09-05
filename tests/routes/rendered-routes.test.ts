@@ -27,10 +27,21 @@ function hrefs(html: string): string[] {
   ].map((match) => match[1] ?? match[2] ?? "");
 }
 
+function stripElement(html: string, tag: "script" | "style"): string {
+  let output = html;
+  while (true) {
+    const lower = output.toLowerCase();
+    const start = lower.indexOf(`<${tag}`);
+    if (start === -1) return output;
+    const close = lower.indexOf(`</${tag}`, start);
+    const end = close === -1 ? -1 : lower.indexOf(">", close);
+    if (end === -1) return output.slice(0, start);
+    output = `${output.slice(0, start)} ${output.slice(end + 1)}`;
+  }
+}
+
 function stripMarkup(html: string): string {
-  return html
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, " ")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, " ")
+  return stripElement(stripElement(html, "script"), "style")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
