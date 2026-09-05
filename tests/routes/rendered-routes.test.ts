@@ -63,7 +63,7 @@ describe("canonical public routes", () => {
     const home = await readFile(routeFile("/"), "utf8");
     expect(stripMarkup(home)).toContain("Research you can inspect");
     expect(stripMarkup(home)).not.toContain("Earlier working material");
-    expect(home).toMatch(/href="\/cases\/">Inspect the cases/);
+    expect(home).toMatch(/href="\/cases\/">Browse the case directory/);
 
     const explore = await readFile(routeFile("/explore/swedish-wage-earner-fund-program/"), "utf8");
     expect(stripMarkup(explore)).toContain("What the program said it was for");
@@ -112,6 +112,7 @@ describe("canonical public routes", () => {
     const challenge = await readFile(routeFile("/challenges/distribution-of-gains-and-ownership/"), "utf8");
     expect(stripMarkup(challenge)).toContain("How published approaches respond");
     expect(stripMarkup(challenge)).toContain("Swedish wage-earner fund program");
+    expect(stripMarkup(challenge)).toContain("APPROACH / Qualified");
     expect(stripMarkup(challenge)).not.toContain("research-needed");
 
     const reading = await readFile(routeFile("/reading/"), "utf8");

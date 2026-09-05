@@ -6,13 +6,14 @@ import type { Approach, Challenge, Criterion, DomainRelationship } from "../../l
 import "../../styles/challenge-topic.css";
 export function getStaticPaths() { return entitiesOfKind("challenge").map((challenge) => ({ params: { id: challenge.id }, props: { challenge } })); }
 const challenge = Astro.props.challenge as Challenge;
+const humanizeStatus = (status: string) => status.split("-").map((word) => word[0]?.toUpperCase() + word.slice(1)).join(" ");
 const incoming = relationshipsTo(challenge.id);
 const approaches = incoming.filter((relationship): relationship is Extract<DomainRelationship, { predicate: "responds-to" }> => relationship.predicate === "responds-to").flatMap((relationship) => { const entity = entityById(relationship.subject.id); return entity?.kind === "approach" ? [{ approach: entity as Approach, relationship }] : []; });
 const criteria = incoming.filter(({ predicate }) => predicate === "evaluates-response-to").flatMap((relationship) => { const entity = entityById(relationship.subject.id); return entity?.kind === "criterion" ? [entity as Criterion] : []; });
 ---
 <BaseLayout fullBleed title={challenge.question} description={challenge.rationale}>
   <article class="challenge-page challenge-topic-page"><nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> {challenge.label}</nav><header><p class="coordinate">CHALLENGE / OPEN QUESTION</p><h1>{challenge.question}</h1><p class="dek">{challenge.rationale}</p></header>
-    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">CONNECTED APPROACHES / {approaches.length}</p><h2 id="responses-title">How published approaches respond</h2></header>{approaches.map(({ approach, relationship }) => <article class="approach-response"><header><div><p class="coordinate">APPROACH / {relationship.status.replaceAll("-", " ")}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3></div></header><p>{approach.description}</p>{relationship.statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</section>
+    <section class="response-ledger" aria-labelledby="responses-title"><header><p class="coordinate">CONNECTED APPROACHES / {approaches.length}</p><h2 id="responses-title">How published approaches respond</h2></header>{approaches.map(({ approach, relationship }) => <article class="approach-response"><header><div><p class="coordinate">APPROACH / {humanizeStatus(relationship.status)}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3></div></header><p>{approach.description}</p>{relationship.statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</section>
     {criteria.length > 0 && <section class="question-overview" aria-labelledby="criteria-title"><div><p class="coordinate">CRITERIA / {criteria.length}</p><h2 id="criteria-title">How responses are evaluated</h2></div><div>{criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p></article>)}</div></section>}
   </article>
 </BaseLayout>
