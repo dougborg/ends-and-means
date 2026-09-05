@@ -10,8 +10,8 @@ substantial changes receive pull-request review before publication.
 2. Create a focused branch named `research/<type>-<stable-id>`.
 3. Implement the concrete candidate in the canonical content model or its
    deterministic source generator, including rendering and tests when needed.
-4. Run `npm run validate`, `npm run lint`, `npm run static`, `npm run check`,
-   `npm test`, `npm run build`, `npm run test:routes`, and the rendered-page
+4. Run `pnpm validate`, `pnpm lint`, `pnpm static`, `pnpm check`,
+   `pnpm test`, `pnpm build`, `pnpm test:routes`, and the rendered-page
    review described below.
 5. Open a pull request. The PR is the proposal: identify all claims,
    classifications, and judgments the reviewer must decide.
@@ -88,7 +88,7 @@ pages have been evaluated in a browser. Build the site and run:
 
 ```sh
 npx playwright install chromium
-npm run review:visual
+pnpm review:visual
 ```
 
 The review renders representative pages at desktop, tablet, and mobile widths;
@@ -98,7 +98,7 @@ contrast failures. To focus the review on changed routes, provide a
 comma-separated list:
 
 ```sh
-REVIEW_ROUTES=/cases/example/,/concepts/example/ npm run review:visual
+REVIEW_ROUTES=/cases/example/,/concepts/example/ pnpm review:visual
 ```
 
 Automated checks cannot judge composition or whether the page explains its

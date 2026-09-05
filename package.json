@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "engines": {
-    "node": ">=24 <25"
+    "node": ">=26 <27"
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate && astro build",
+    "build": "pnpm validate && astro build",
     "preview": "astro preview",
     "lint": "biome lint --error-on-warnings .",
     "lint:fix": "biome lint --write .",
@@ -18,25 +19,25 @@
     "test:coverage": "vitest run tests/content tests/skills --coverage",
     "test:routes": "vitest run tests/routes",
     "test:visual": "playwright test",
-    "review:visual": "npm run build && playwright test",
+    "review:visual": "pnpm build && playwright test",
     "validate": "node --import tsx scripts/validate-domain.ts",
     "audit:content": "node --import tsx scripts/audit-content.ts"
   },
   "dependencies": {
-    "astro": "7.2.10"
+    "astro": "^7.3.1"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.10",
-    "@biomejs/biome": "2.5.12",
-    "@emnapi/core": "1.11.3",
-    "@emnapi/runtime": "1.11.3",
-    "@playwright/test": "^1.62.1",
-    "@types/node": "24.10.4",
-    "@vitest/coverage-v8": "4.1.11",
-    "knip": "6.34.0",
-    "tsx": "4.23.13",
-    "typescript": "6.0.3",
-    "vitest": "4.1.11"
+    "@astrojs/check": "^0.9.10",
+    "@biomejs/biome": "^2.5.12",
+    "@emnapi/core": "^1.11.3",
+    "@emnapi/runtime": "^1.11.3",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.4.1",
+    "@vitest/coverage-v8": "^5.0.0",
+    "knip": "^6.34.0",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.0"
   },
   "knip": {
     "ignoreDependencies": [

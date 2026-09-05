@@ -10,10 +10,27 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    # @astrojs/check 0.9.10 supports TypeScript 5 and 6 only. Remove this
+    # temporary exception when its peer range includes TypeScript 7.
+    ignore:
+      - dependency-name: typescript
+        versions:
+          - ">=7 <8"
     groups:
       development-tooling:
         dependency-type: development
+        patterns:
+          - "*"
         update-types:
+          - major
+          - minor
+          - patch
+      runtime-dependencies:
+        dependency-type: production
+        patterns:
+          - "*"
+        update-types:
+          - major
           - minor
           - patch
 
@@ -27,3 +44,11 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - major
+          - minor
+          - patch
