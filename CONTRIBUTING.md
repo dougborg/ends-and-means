@@ -24,6 +24,21 @@ the PR preserve the candidate, discussion, revisions, and decision.
 The repo-local `research-content-changes` skill provides the detailed entity
 contracts and editorial evidence policy.
 
+### Narrative prose
+
+Read the [narrative style guide](docs/narrative-style.md) before adding or
+substantially revising reader-facing summaries.
+Draft from canonical Statements or closed-source notes, verify each factual
+clause against its evidence, and compare the draft with consulted sources for
+suspiciously close phrasing.
+The content audit reports objective attention signals; it does not replace
+human review for accuracy, fairness, plagiarism risk, focus, or publication.
+
+Narrative Dossiers currently remain typed TypeScript records.
+Their planned migration to Markdown will use semantic sentence-per-line source
+formatting: one sentence per source line without visual hard breaks or a prose
+line-length cap.
+
 ## Review standards
 
 - Prefer primary records, official statistics, peer-reviewed work, academic

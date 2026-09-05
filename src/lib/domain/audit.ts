@@ -11,6 +11,56 @@ export interface ContentAttentionReport {
   }>;
   researchGapSections: string[];
   researchNeededEntities: string[];
+  narrativeAttention: Array<{
+    location: string;
+    reason: string;
+  }>;
+}
+
+const fillerPatterns = [
+  /\bcomplex interplay\b/i,
+  /\bdelve(?:s|d)?\b/i,
+  /\bit is (?:important|worth) to note\b/i,
+  /\bmultifaceted\b/i,
+  /\bserves as a reminder\b/i,
+  /\bultimately\b/i,
+];
+
+function proseTokens(value: string) {
+  return new Set(value.toLowerCase().match(/[a-z0-9]+/g) ?? []);
+}
+
+function overlap(left: string, right: string) {
+  const a = proseTokens(left);
+  const b = proseTokens(right);
+  if (Math.min(a.size, b.size) < 8) return 0;
+  const shared = [...a].filter((token) => b.has(token)).length;
+  return shared / Math.min(a.size, b.size);
+}
+
+function narrativeFindings(dossiers: Dossier[]) {
+  return dossiers.flatMap((dossier) => {
+    const prefix = `${dossier.subject.kind}:${dossier.subject.id}`;
+    const passages = [
+      { location: `${prefix}#standfirst`, text: dossier.standfirst },
+      ...dossier.sections.map(({ id, body }) => ({ location: `${prefix}#${id}`, text: body })),
+    ];
+    const findings = passages.flatMap(({ location, text }) => {
+      const reasons: string[] = [];
+      if (fillerPatterns.some((pattern) => pattern.test(text))) reasons.push("generic filler phrase");
+      if (text.split(/(?<=[.!?])\s+/).length > 5) reasons.push("dense passage: more than five sentences");
+      if (text.length > 700) reasons.push("long passage: more than 700 characters");
+      return reasons.map((reason) => ({ location, reason }));
+    });
+    for (let left = 0; left < passages.length; left += 1) {
+      for (let right = left + 1; right < passages.length; right += 1) {
+        const a = passages[left];
+        const b = passages[right];
+        if (a && b && overlap(a.text, b.text) >= 0.8) findings.push({ location: `${a.location} ↔ ${b.location}`, reason: "high-confidence repeated vocabulary" });
+      }
+    }
+    return findings;
+  });
 }
 
 export function auditContent(
@@ -47,7 +97,7 @@ export function auditContent(
   const researchNeededEntities = graph.entities
     .filter(({ publicationStatus }) => publicationStatus === "research-needed")
     .map(({ kind, id }) => `${kind}:${id}`);
-  return { dossierCoverage, researchGapSections, researchNeededEntities };
+  return { dossierCoverage, researchGapSections, researchNeededEntities, narrativeAttention: narrativeFindings(dossiers) };
 }
 
 export function formatContentAttentionReport(report: ContentAttentionReport) {
@@ -66,5 +116,7 @@ export function formatContentAttentionReport(report: ContentAttentionReport) {
     `Research-needed entities: ${report.researchNeededEntities.length}`,
   );
   for (const entity of report.researchNeededEntities) lines.push(`- ${entity}`);
+  lines.push("", `Narrative attention: ${report.narrativeAttention.length}`);
+  for (const finding of report.narrativeAttention) lines.push(`- ${finding.location}: ${finding.reason}`);
   return lines.join("\n");
 }

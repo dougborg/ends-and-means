@@ -530,10 +530,14 @@ content/domain/
   relationships/              # subject-centered typed relationship sets
 ```
 
-JSON remains appropriate for declarative content; executable repository code
-remains TypeScript-only. Every file is validated against TypeScript types. If
-author ergonomics later justify Markdown for long prose, structured frontmatter
-must compile to exactly the same records rather than creating another model.
+Structured records remain appropriate for canonical entities and relationships;
+executable repository code remains TypeScript-only.
+Long-form Dossier prose will move to Markdown with typed frontmatter and compile
+to exactly the same records rather than creating another model.
+Markdown changes authoring ergonomics, review precision, and rendering—not the
+canonical publication boundary.
+Prose uses one semantic sentence per source line without inserting rendered
+hard breaks or imposing a prose line-length cap.
 
 Use one file per independently reviewed entity. For high-volume relationships,
 use one subject-centered relationship-set file rather than one tiny file per

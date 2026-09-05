@@ -84,10 +84,23 @@ describe("canonical narrative dossiers", () => {
         dossierCoverage: [],
         researchGapSections: ["concept:test#open-question"],
         researchNeededEntities: ["concept:test"],
+        narrativeAttention: [],
       }),
     ).toContain(
       "concept:test#open-question\n\nResearch-needed entities: 1\n- concept:test",
     );
+  });
+
+  it("reports objective narrative attention signals without scoring prose", () => {
+    const attentionGraph = structuredClone(canonicalGraph);
+    const dossier = attentionGraph.entities.find((entity) => entity.kind === "dossier");
+    if (dossier?.kind !== "dossier") throw new Error("Missing Dossier fixture");
+    dossier.standfirst = "It is worth to note this complex interplay. Ultimately, it is multifaceted.";
+    const report = auditContent(attentionGraph);
+    expect(report.narrativeAttention).toEqual(expect.arrayContaining([
+      expect.objectContaining({ location: `${dossier.subject.kind}:${dossier.subject.id}#standfirst`, reason: "generic filler phrase" }),
+    ]));
+    expect(formatContentAttentionReport(report)).toContain("Narrative attention:");
   });
 });
 const base = {

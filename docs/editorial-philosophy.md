@@ -9,6 +9,8 @@ in a verdict all involve judgment. We will not describe those choices as neutral
 when they are not.
 
 Our standard is fairness, transparency, and corrigibility.
+The project's reader-facing voice and prose review rules are defined in the
+[narrative style guide](narrative-style.md).
 
 Our analytical vocabulary separates **Ends** (values and promised outcomes),
 **Means** (formal institutions and rules-in-use), **Challenges** (recurring

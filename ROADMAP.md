@@ -74,8 +74,10 @@ This implementation tests the content model, editorial workflow, temporal semant
 **Current checkpoint:** the model-boundary contracts and two Swedish evidence
 traces establish the canonical publication surface. The #48 cleanup makes graph
 membership the public-content boundary and keeps earlier research solely in a
-non-runtime archive. Shared responsive dossier refinement remains tracked in
-#67; design-system and theme work is #77.
+non-runtime archive. Shared responsive dossier refinement is active. Before
+another researched Dossier is added, narrative authoring moves to typed, linted
+Markdown with sentence-per-line source formatting. Design-system and theme work
+follows the shared dossier rhythm.
 
 ## Milestone 1 — [Plural graph foundation](https://github.com/dougborg/ends-and-means/milestone/1)
 
@@ -124,7 +126,8 @@ demonstrated.
 
 ## Milestone 2 — [Explore and Compare core](https://github.com/dougborg/ends-and-means/milestone/2)
 
-**Execution order:** #39 valid dossiers → #55 and #56 priority anarchism Cases →
+**Execution order:** complete shared dossier presentation → move narrative
+authoring to typed, linted Markdown → #39 valid dossiers → #55 and #56 priority anarchism Cases →
 #59 gendered-power/social-reproduction graph coverage → #61 reusable FAQs and
 misconception corrections → #3 evidence/reference routes → #4 static comparison
 core → remaining #26 mapping work → #35 entity-neutral pairwise comparison → #9
@@ -142,6 +145,10 @@ refinement → #12 accessibility and metadata release review.
 - [ ] **Publish the method and contribution model** ([#9](https://github.com/dougborg/ends-and-means/issues/9)). Explain scope, evidence breadth, assessments, uncertainty, editorial review, and the pull-request review boundary in reader-facing language.
 - [ ] **Add statement-level correction links** ([#20](https://github.com/dougborg/ends-and-means/issues/20)). Prefill structured GitHub issue forms with the page, entity, and claim anchor.
 - [ ] **Refine dossier hierarchy and responsive evidence scanning** ([#67](https://github.com/dougborg/ends-and-means/issues/67)). Use the rendered-page workflow to reduce excessive spacing, improve dense evidence scanning, and unify related-idea and external-reference treatments across representative sparse and dense pages.
+- [ ] **Move narrative authoring to linted Markdown.** Preserve typed metadata
+  and canonical claim references while adding sentence-per-line linting, safe
+  rendering, contributor guidance, and objective prose-attention checks. This
+  gates further Dossier expansion.
 - [ ] **Complete accessibility and metadata review** ([#12](https://github.com/dougborg/ends-and-means/issues/12)). Verify keyboard use, focus, landmarks, contrast, reduced motion, metadata, social cards, structured data, and sitemap behavior.
 
 ### Milestone 2 exit criteria
