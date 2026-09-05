@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import type { AuthoringDocument, EntityRef } from "../../src/lib/domain";
 import {
   auditContent,
+  claimPublicationLabel,
   compileDomainGraph,
   formatContentAttentionReport,
-  claimPublicationLabel,
   validateAuthoringDocuments,
   workflowReferencesIn,
 } from "../../src/lib/domain";
@@ -201,7 +201,10 @@ function obligationIn(candidate: AuthoringDocument[]) {
       item.documentType === "entity" &&
       item.entity.kind === "research-obligation",
   );
-  if (document?.documentType !== "entity" || document.entity.kind !== "research-obligation")
+  if (
+    document?.documentType !== "entity" ||
+    document.entity.kind !== "research-obligation"
+  )
     throw new Error("Missing research obligation fixture");
   return document.entity;
 }
@@ -266,7 +269,9 @@ describe("research obligations", () => {
     const scoped = structuredClone(documents);
     const obligation = obligationIn(scoped);
     obligation.targetSectionId = "test-section";
-    expect(compileDomainGraph(scoped).indexes.entitiesById[obligation.id]).toMatchObject({
+    expect(
+      compileDomainGraph(scoped).indexes.entitiesById[obligation.id],
+    ).toMatchObject({
       targetSectionId: "test-section",
     });
   });
@@ -276,7 +281,8 @@ describe("research obligations", () => {
     const obligation = obligationIn(invalid);
     obligation.targetSectionId = "test-section";
     const dossier = invalid.find(
-      (item) => item.documentType === "entity" && item.entity.kind === "dossier",
+      (item) =>
+        item.documentType === "entity" && item.entity.kind === "dossier",
     );
     if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
       throw new Error("Missing Dossier fixture");
@@ -313,14 +319,16 @@ describe("research obligation lifecycles", () => {
     const resolvedObligation = obligationIn(resolved);
     resolvedObligation.obligationStatus = "resolved";
     resolvedObligation.statementIds = ["test-result-statement"];
-    resolvedObligation.resolutionRationale = "The new evidence answers the scoped question.";
+    resolvedObligation.resolutionRationale =
+      "The new evidence answers the scoped question.";
     resolvedObligation.closedAt = "2026-09-05";
     expect(() => compileDomainGraph(resolved)).not.toThrow();
 
     const withdrawn = structuredClone(documents);
     const withdrawnObligation = obligationIn(withdrawn);
     withdrawnObligation.obligationStatus = "withdrawn";
-    withdrawnObligation.resolutionRationale = "The question duplicates a better-scoped obligation.";
+    withdrawnObligation.resolutionRationale =
+      "The question duplicates a better-scoped obligation.";
     withdrawnObligation.closedAt = "2026-09-05";
     expect(() => compileDomainGraph(withdrawn)).not.toThrow();
   });
@@ -417,19 +425,17 @@ describe("public research text", () => {
   });
 
   it("detects repository workflow language without rejecting ordinary numbers", () => {
-    expect(workflowReferencesIn("Tracked in issue 97 on feature/research-work.")).toEqual([
-      "repository issue or pull request",
-      "repository branch",
-    ]);
+    expect(
+      workflowReferencesIn("Tracked in issue 97 on feature/research-work."),
+    ).toEqual(["repository issue or pull request", "repository branch"]);
     expect(
       workflowReferencesIn(
         "See https://github.com/example/project/pull/12 during content migration.",
       ),
-    ).toEqual([
-      "repository issue or pull request",
-      "migration or draft state",
-    ]);
-    expect(workflowReferencesIn("Article #12 examines migration policy.")).toEqual([]);
+    ).toEqual(["repository issue or pull request", "migration or draft state"]);
+    expect(
+      workflowReferencesIn("Article #12 examines migration policy."),
+    ).toEqual([]);
   });
 
   it("labels every Statement publication state truthfully", () => {
@@ -455,11 +461,7 @@ describe("research obligation routes", () => {
           target: { kind, id: "example" } as never,
         }),
       ),
-    ).toEqual([
-      "/explore/example/",
-      "/cases/example/",
-      "/challenges/example/",
-    ]);
+    ).toEqual(["/explore/example/", "/cases/example/", "/challenges/example/"]);
   });
 });
 
@@ -468,27 +470,37 @@ describe("canonical research agenda", () => {
     const report = auditContent(canonicalGraph);
     expect(report.openResearchObligations).toEqual([
       {
+        id: "communism-claimed-identity-practice-gap",
+        obligationType: "research-gap",
+        target: "concept:communism#does-a-communist-label-settle-the-case",
+        status: "open",
+      },
+      {
         id: "economic-democracy-causal-identification",
         obligationType: "research-gap",
-        target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+        target:
+          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
         status: "open",
       },
       {
         id: "economic-democracy-decision-cost-objection",
         obligationType: "counterargument",
-        target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+        target:
+          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
         status: "open",
       },
       {
         id: "economic-democracy-futility-objection",
         obligationType: "counterargument",
-        target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+        target:
+          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
         status: "open",
       },
       {
         id: "economic-democracy-property-rights-objection",
         obligationType: "counterargument",
-        target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+        target:
+          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
         status: "open",
       },
       {
@@ -501,6 +513,12 @@ describe("canonical research agenda", () => {
         id: "social-ownership-delegation-accountability-gap",
         obligationType: "counterargument",
         target: "concept:social-ownership#which-rights-must-be-separated",
+        status: "open",
+      },
+      {
+        id: "socialism-democratic-control-threshold",
+        obligationType: "research-gap",
+        target: "concept:socialism#what-defines-socialism",
         status: "open",
       },
       {
@@ -545,5 +563,4 @@ describe("canonical research agenda", () => {
       ),
     ).toEqual(["social-ownership-delegation-accountability-gap"]);
   });
-
 });
