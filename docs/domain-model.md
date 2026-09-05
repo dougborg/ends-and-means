@@ -346,9 +346,11 @@ intellectual object; a Source is the edition, article, dataset, archival record,
 or other citable manifestation used as evidence.
 
 A Statement is one challengeable proposition. Statements distinguish empirical
-observation, attributed value, definition, causal hypothesis, classification,
-and editorial interpretation. Citations attach through locators rather than
-only through page-level bibliographies.
+observation, attributed value, attributed institutional proposal, definition,
+causal hypothesis, classification, and editorial interpretation. An attributed
+proposal records what an identifiable actor or source proposes without treating
+that design as the project's recommendation or reducing it to an End. Citations
+attach through locators rather than only through page-level bibliographies.
 
 ## Relationship model
 

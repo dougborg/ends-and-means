@@ -54,6 +54,77 @@ const socialDemocracy = attachNarrative("social-democracy.md", {
   reviewedAt: "2026-09-05",
 });
 
+const economicDemocracy = attachNarrative("economic-democracy.md", {
+  id: "economic-democracy-dossier",
+  kind: "dossier" as const,
+  label: "Economic democracy dossier",
+  description:
+    "A concise orientation to economic democracy's contested scope, institutional families, control boundary, evidence limits, and bounded Swedish example.",
+  subject: { kind: "concept" as const, id: "economic-democracy" },
+  standfirst: "",
+  standfirstStatementIds: [
+    "economic-democracy-contested-scope",
+    "economic-democracy-ownership-is-not-control",
+    "economic-democracy-design-and-evidence-limits",
+  ],
+  sections: [
+    {
+      id: "what-question-does-it-ask",
+      heading: "What question does it ask?",
+      body: "",
+      traceStatus: "supported" as const,
+      statementIds: ["economic-democracy-contested-scope"],
+    },
+    {
+      id: "does-it-prescribe-one-model",
+      heading: "Does it prescribe one model?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "economic-democracy-workplace-institutions",
+        "economic-democracy-economy-wide-institutions",
+        "adamson-representative-firm-governance",
+      ],
+    },
+    {
+      id: "why-are-ownership-and-control-separate",
+      heading: "Why are ownership and control separate?",
+      body: "",
+      traceStatus: "supported" as const,
+      statementIds: ["economic-democracy-ownership-is-not-control"],
+    },
+    {
+      id: "what-can-democratic-designs-fail-to-achieve",
+      heading: "What can democratic designs fail to achieve?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "economic-democracy-beyond-workplace",
+        "economic-democracy-design-and-evidence-limits",
+        "economic-democracy-serious-objections",
+      ],
+    },
+    {
+      id: "how-do-the-swedish-funds-fit",
+      heading: "How do the Swedish funds fit?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "funds-declared-ends",
+        "funds-related-ideas-classification",
+        "funds-limited-control",
+      ],
+      relatedEntityRefs: [
+        { kind: "approach" as const, id: "swedish-wage-earner-fund-program" },
+        { kind: "case" as const, id: "swedish-wage-earner-funds" },
+      ],
+    },
+  ],
+  publicationStatus: "reviewed" as const,
+  reviewedAt: "2026-09-05",
+});
+
 export const foundationalConceptDossierDocuments = [
   { documentType: "entity", entity: socialDemocracy },
+  { documentType: "entity", entity: economicDemocracy },
 ] satisfies AuthoringDocument[];
