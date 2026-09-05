@@ -8,9 +8,9 @@ under explicit Criteria.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
-The static Astro build deploys through GitHub Pages. Pull-request verification
-and Pages deployment use separate GitHub Actions workflows; DNS configuration
-for the custom domain is a separate release step.
+The static Astro build deploys through GitHub Pages only after the main-branch
+CI verification job succeeds. DNS configuration for the custom domain is a
+separate release step.
 
 **Status:** the live site is generated exclusively from the plural canonical
 graph. Published Approach, Case, Challenge, Concept, Compare, Source, and Reading
