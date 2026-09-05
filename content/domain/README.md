@@ -1,9 +1,10 @@
 # Canonical domain authoring
 
-This directory will contain the modular authoring records for the plural graph
-defined in `docs/domain-model.md`. It intentionally contains no migrated records
-yet: the current framework data remains transitional until each item is
-reconciled rather than copied into a new shape.
+This directory contains the modular authoring records for the plural graph
+defined in `docs/domain-model.md`. Transitional framework material enters this
+directory only after record-by-record reconciliation, source review, and
+claim-level citation; legacy IDs and shapes are migration inputs, not canonical
+aliases or compatibility contracts.
 
 Authoring is organized by entity type and relationship family. Entity files own
 identity and intrinsic description; subject-centered relationship files own

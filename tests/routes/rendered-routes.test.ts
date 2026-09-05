@@ -66,7 +66,9 @@ describe("generated reference routes", () => {
 
   it("renders the migrated framework through clean public routes", async () => {
     const routes = [
-      "/", "/explore/", "/explore/swedish-wage-earner-fund-program/", "/cases/", "/cases/swedish-wage-earner-funds/", "/compare/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
+      "/", "/explore/", "/cases/", "/compare/", "/topics/", "/challenges/", "/traditions/", "/reading/", "/framework/",
+      ...entitiesOfKind("approach").map(({ id }) => `/explore/${id}/`),
+      ...entitiesOfKind("case").map(({ id }) => `/cases/${id}/`),
       ...entitiesOfKind("concept").map(({ id }) => `/concepts/${id}/`),
       ...framework.topics.map(({ id }) => `/topics/${id}/`),
       ...framework.challenges.map(({ id }) => `/challenges/${id}/`),
@@ -101,6 +103,9 @@ describe("generated reference routes", () => {
     expect(stripMarkup(explore)).toContain("Orientation and identity links are not evidence");
     expect(hrefs(explore)).toContain("https://en.wikipedia.org/wiki/Employee_funds");
     expect(hrefs(explore)).toContain("https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-lontagarfonder_g70350/html/");
+    const exploreContinue = explore.match(/<nav class="next-actions"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    expect(hrefs(exploreContinue)).toContain("/cases/swedish-wage-earner-funds/");
+    expect(hrefs(exploreContinue)).toContain("/compare/");
 
     const canonicalCase = await readFile(routeFile("/cases/swedish-wage-earner-funds/"), "utf8");
     expect(stripMarkup(canonicalCase)).toContain("Formal design");
@@ -116,6 +121,17 @@ describe("generated reference routes", () => {
     expect(hrefs(canonicalCase)).toContain("/concepts/economic-democracy/");
     expect(hrefs(canonicalCase)).toContain("https://en.wikipedia.org/wiki/Employee_funds");
     expect(hrefs(canonicalCase)).toContain("https://doi.org/10.1017/eso.2022.23");
+    const caseContinue = canonicalCase.match(/<nav class="next-actions"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    expect(hrefs(caseContinue)).toContain("/explore/swedish-wage-earner-fund-program/");
+    expect(hrefs(caseContinue)).toContain("/compare/");
+
+    const rehnMeidner = await readFile(routeFile("/explore/swedish-rehn-meidner-model/"), "utf8");
+    const rehnContinue = rehnMeidner.match(/<nav class="next-actions"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    expect(hrefs(rehnContinue)).toEqual(["/cases/swedish-solidaristic-bargaining/"]);
+
+    const bargainingCase = await readFile(routeFile("/cases/swedish-solidaristic-bargaining/"), "utf8");
+    const bargainingContinue = bargainingCase.match(/<nav class="next-actions"[\s\S]*?<\/nav>/)?.[0] ?? "";
+    expect(hrefs(bargainingContinue)).toEqual(["/explore/swedish-rehn-meidner-model/"]);
 
     const economicDemocracy = await readFile(routeFile("/concepts/economic-democracy/"), "utf8");
     expect(stripMarkup(economicDemocracy)).toContain("How this idea is being used here");

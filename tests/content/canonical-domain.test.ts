@@ -6,8 +6,8 @@ describe("canonical vertical slice", () => {
     expect(canonicalGraph.entities.every(({ publicationStatus }) => publicationStatus === "reviewed")).toBe(true);
     expect(new Set(canonicalGraph.entities.map(({ id }) => id)).size).toBe(canonicalGraph.entities.length);
     expect(canonicalGraph.relationships.map(({ id }) => id)).toContain("enacted-funds-used-fund-boards");
-    expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual(["swedish-wage-earner-fund-program"]);
-    expect(entitiesOfKind("case").map(({ id }) => id)).toEqual(["swedish-wage-earner-funds"]);
+    expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual(["swedish-rehn-meidner-model", "swedish-wage-earner-fund-program"]);
+    expect(entitiesOfKind("case").map(({ id }) => id)).toEqual(["swedish-solidaristic-bargaining", "swedish-wage-earner-funds"]);
   });
 
   it("publishes a sourced before/change/after sequence", () => {
