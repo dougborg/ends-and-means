@@ -31,25 +31,13 @@ runs:
       shell: bash
       run: pnpm install --frozen-lockfile
 
-    - name: Lint source and configuration
+    - name: Install browser for rendered-page review
       shell: bash
-      run: pnpm lint
+      run: pnpm exec playwright install --with-deps chromium
 
-    - name: Find unused files and dependencies
+    - name: Run full repository verification
       shell: bash
-      run: pnpm static
-
-    - name: Audit installed dependencies
-      shell: bash
-      run: pnpm audit --audit-level=moderate
-
-    - name: Check types and Astro files
-      shell: bash
-      run: pnpm check
-
-    - name: Run tests with coverage
-      shell: bash
-      run: pnpm test:coverage
+      run: pnpm verify
 
     - name: Upload coverage report
       if: always()
@@ -58,22 +46,6 @@ runs:
         name: coverage-report
         path: coverage
         if-no-files-found: error
-
-    - name: Build site
-      shell: bash
-      run: pnpm build
-
-    - name: Test rendered routes
-      shell: bash
-      run: pnpm test:routes
-
-    - name: Install browser for rendered-page review
-      shell: bash
-      run: pnpm exec playwright install --with-deps chromium
-
-    - name: Review rendered pages
-      shell: bash
-      run: pnpm test:visual
 
     - name: Upload rendered-page review artifacts
       if: always()

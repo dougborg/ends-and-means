@@ -17,13 +17,15 @@
     "lint:narrative": "node --import tsx scripts/lint-narratives.ts",
     "static": "knip --include files,dependencies,unlisted,binaries,unresolved,cycles",
     "check": "astro check",
-    "test": "vitest run tests/content tests/skills",
-    "test:coverage": "vitest run tests/content tests/skills --coverage",
+    "test": "vitest run tests/content tests/delivery tests/skills",
+    "test:coverage": "vitest run tests/content tests/delivery tests/skills --coverage",
     "test:routes": "vitest run tests/routes",
     "test:visual": "playwright test",
     "review:visual": "playwright test",
     "validate": "node --import tsx scripts/validate-domain.ts",
-    "audit:content": "node --import tsx scripts/audit-content.ts"
+    "audit:content": "node --import tsx scripts/audit-content.ts",
+    "audit:delivery": "node --import tsx scripts/audit-repository-delivery.ts && node --import tsx scripts/audit-skill-contracts.ts && node --import tsx scripts/audit-delivery.ts",
+    "verify": "pnpm audit:delivery -- --repository-only && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm test:routes && pnpm test:visual"
   },
   "dependencies": {
     "astro": "^7.3.1",

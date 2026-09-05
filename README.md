@@ -28,11 +28,13 @@ Sources and Method remain close at hand as a quieter trust layer.
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
 | [`docs/narrative-style.md`](docs/narrative-style.md) | Plain-spoken prose, attribution, source-similarity safeguards, and editorial review. |
+| [`docs/delivery-harness.md`](docs/delivery-harness.md) | Local/CI verification, Project-state diagnostics, stable checks, and review/integration gates. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
 | [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`docs/adr/0003-markdown-narrative-authoring.md`](docs/adr/0003-markdown-narrative-authoring.md) | Markdown prose, typed manifests, sentence-per-line linting, and safe rendering. |
 | [`docs/adr/0004-subject-guides-as-presentation-compositions.md`](docs/adr/0004-subject-guides-as-presentation-compositions.md) | Subject Guides as presentation compositions above entity-owned Dossiers. |
 | [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Source-backed workflow for concrete content changes reviewed in pull requests. |
+| [`.agents/skills/coordinate-project-delivery/SKILL.md`](.agents/skills/coordinate-project-delivery/SKILL.md) | Project-state, pull-request, CI, and rebase-integration coordination. |
 
 ## Develop locally
 
@@ -40,13 +42,8 @@ Requires Node 26 (currently 26.8.1; see `.node-version` and `.nvmrc`).
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm lint
-pnpm static
-pnpm check
-pnpm test
-pnpm test:coverage
-pnpm build
-pnpm review:visual
+pnpm exec playwright install chromium
+pnpm verify
 ```
 
 `pnpm review:visual` performs the browser-based self-review required for
