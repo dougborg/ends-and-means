@@ -100,6 +100,38 @@ describe("canonical narrative dossiers", () => {
   });
 });
 
+describe("social-ownership narrative dossier", () => {
+  it("publishes the social-ownership boundaries and related entities", () => {
+    const socialOwnership = dossierForSubject("concept", "social-ownership");
+    expect(socialOwnership?.sections).toHaveLength(4);
+    expect(socialOwnership?.standfirstStatementIds).toEqual([
+      "social-ownership-four-questions",
+      "social-ownership-control-boundary",
+    ]);
+    expect(
+      socialOwnership?.sections.flatMap(({ statementIds }) => statementIds),
+    ).toEqual(
+      expect.arrayContaining([
+        "social-ownership-four-questions",
+        "social-ownership-title-benefit-boundary",
+        "social-ownership-rights-are-divisible",
+        "social-ownership-control-boundary",
+        "social-ownership-returns-boundary",
+        "social-ownership-public-title-boundary",
+        "social-ownership-economic-democracy-relationship",
+        "social-ownership-market-socialism-relationship",
+        "rehn-meidner-social-ownership-boundary",
+      ]),
+    );
+    expect(socialOwnership?.sections[1]?.relatedEntityRefs).toEqual(
+      expect.arrayContaining([
+        { kind: "challenge", id: "authority-and-accountability" },
+        { kind: "criterion", id: "accountability" },
+      ]),
+    );
+  });
+});
+
 describe("canonical narrative coverage", () => {
   it("reports the exact subjects that still need narrative work", () => {
     const report = auditContent(canonicalGraph);
@@ -113,16 +145,15 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 2,
+      covered: 3,
       total: 6,
       missingIds: [
         "collective-capital-formation",
         "institutional-abolition",
         "market-socialism",
-        "social-ownership",
       ],
     });
-    expect(formatContentAttentionReport(report)).toContain(
+    expect(formatContentAttentionReport(report)).not.toContain(
       "missing: social-ownership",
     );
     const attentionGraph = structuredClone(canonicalGraph);

@@ -126,7 +126,87 @@ const economicDemocracy = attachNarrative("economic-democracy.md", {
   reviewedAt: "2026-09-05",
 });
 
+const socialOwnership = attachNarrative("social-ownership.md", {
+  id: "social-ownership-dossier",
+  kind: "dossier" as const,
+  label: "Social ownership dossier",
+  description:
+    "A concise orientation to social ownership's distinct legal, beneficial, control, and return dimensions, neighboring concepts, and bounded Swedish examples.",
+  subject: { kind: "concept" as const, id: "social-ownership" },
+  standfirst: "",
+  standfirstStatementIds: [
+    "social-ownership-four-questions",
+    "social-ownership-control-boundary",
+  ],
+  sections: [
+    {
+      id: "what-does-social-ownership-claim",
+      heading: "What does social ownership claim?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "social-ownership-four-questions",
+        "social-ownership-public-title-boundary",
+      ],
+    },
+    {
+      id: "which-rights-must-be-separated",
+      heading: "Which rights must be separated?",
+      body: "",
+      traceStatus: "supported" as const,
+      statementIds: [
+        "social-ownership-title-benefit-boundary",
+        "social-ownership-rights-are-divisible",
+        "social-ownership-control-boundary",
+        "social-ownership-returns-boundary",
+      ],
+      relatedEntityRefs: [
+        { kind: "challenge" as const, id: "authority-and-accountability" },
+        { kind: "criterion" as const, id: "accountability" },
+      ],
+    },
+    {
+      id: "how-do-neighboring-concepts-differ",
+      heading: "How do neighboring concepts differ?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "social-ownership-economic-democracy-relationship",
+        "social-ownership-market-socialism-relationship",
+      ],
+      relatedEntityRefs: [
+        { kind: "concept" as const, id: "economic-democracy" },
+        { kind: "concept" as const, id: "market-socialism" },
+      ],
+    },
+    {
+      id: "what-do-the-swedish-cases-show",
+      heading: "What do the Swedish cases show?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "rehn-meidner-social-ownership-boundary",
+        "funds-related-ideas-classification",
+        "funds-statutory-design",
+        "funds-limited-control",
+      ],
+      relatedEntityRefs: [
+        { kind: "approach" as const, id: "swedish-rehn-meidner-model" },
+        { kind: "case" as const, id: "swedish-solidaristic-bargaining" },
+        { kind: "approach" as const, id: "swedish-wage-earner-fund-program" },
+        { kind: "case" as const, id: "swedish-wage-earner-funds" },
+        { kind: "means" as const, id: "regional-wage-earner-fund-boards" },
+        { kind: "challenge" as const, id: "distribution-of-gains-and-ownership" },
+        { kind: "criterion" as const, id: "distribution" },
+      ],
+    },
+  ],
+  publicationStatus: "reviewed" as const,
+  reviewedAt: "2026-09-05",
+});
+
 export const foundationalConceptDossierDocuments = [
   { documentType: "entity", entity: socialDemocracy },
   { documentType: "entity", entity: economicDemocracy },
+  { documentType: "entity", entity: socialOwnership },
 ] satisfies AuthoringDocument[];
