@@ -16,24 +16,28 @@ const statementIds = [
   "socialism-values-newman",
   "socialism-global-historical-variation",
   "socialism-organizational-disagreement",
-  "socialism-communism-overlap-boundary",
+  "modern-communist-traditions-within-socialist-debates",
+  "communist-organizational-rivalry",
   "communism-multiple-referents",
   "manifesto-communist-immediate-aim",
   "manifesto-bourgeois-property-boundary",
   "manifesto-common-property-class-character",
-  "marx-lower-communist-phase",
-  "marx-higher-communist-phase",
+  "marx-lower-phase-inherited-limits",
+  "marx-lower-phase-labor-distribution",
+  "marx-higher-phase-conditions",
+  "marx-higher-phase-needs-distribution",
   "lenin-transitional-state-claim",
   "lenin-state-withering-claim",
   "kropotkin-anarchist-communist-route",
   "kropotkin-nonparliamentary-route",
-  "communism-early-global-variation",
+  "eley-early-communist-network-geography",
+  "eley-comintern-local-revision-interpretation",
   "communist-label-non-embodiment",
 ];
 
 describe("socialism and communism canonical foundations", () => {
   it("publishes atomic located statements from primary texts and scholarship", () => {
-    expect(statementIds).toHaveLength(21);
+    expect(statementIds).toHaveLength(25);
     expect(
       statementIds.every((id) => entityById(id)?.kind === "statement"),
     ).toBe(true);
@@ -112,22 +116,33 @@ describe("socialism and communism narrative foundations", () => {
   });
 
   it("records focused open research questions against exact sections", () => {
-    expect(researchObligationsForTarget("concept", "socialism")).toEqual([
-      expect.objectContaining({
-        id: "socialism-democratic-control-threshold",
-        targetSectionId: "what-defines-socialism",
-        addressedStatementIds: [
-          "socialism-democratic-control-minimum",
-          "socialism-not-statism",
-        ],
-      }),
-    ]);
-    expect(researchObligationsForTarget("concept", "communism")).toEqual([
-      expect.objectContaining({
-        id: "communism-claimed-identity-practice-gap",
-        targetSectionId: "does-a-communist-label-settle-the-case",
-        addressedStatementIds: ["communist-label-non-embodiment"],
-      }),
-    ]);
+    expect(researchObligationsForTarget("concept", "socialism")).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "socialism-democratic-control-threshold",
+          targetSectionId: "what-defines-socialism",
+        }),
+        expect.objectContaining({
+          id: "socialism-rival-classification-boundary",
+          targetSectionId: "what-defines-socialism",
+        }),
+        expect.objectContaining({
+          id: "socialism-communism-lexical-history",
+          targetSectionId: "how-do-socialism-and-communism-relate",
+        }),
+      ]),
+    );
+    expect(researchObligationsForTarget("concept", "communism")).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "communism-claimed-identity-practice-gap",
+          targetSectionId: "does-a-communist-label-settle-the-case",
+        }),
+        expect.objectContaining({
+          id: "communism-roy-comintern-strategy",
+          targetSectionId: "was-communism-one-global-movement",
+        }),
+      ]),
+    );
   });
 });

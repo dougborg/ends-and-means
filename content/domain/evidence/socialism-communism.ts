@@ -62,22 +62,26 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "communist-manifesto-avalon-source",
+      id: "communist-manifesto-progress-source",
       kind: "source",
-      label: "Manifesto of the Communist Party, part II",
+      label: "Manifesto of the Communist Party (1888 Moore translation)",
       description:
-        "The Yale Law School Avalon Project transcription consulted for Marx and Engels's stated aims and property distinctions.",
-      title:
-        "Manifesto of the Communist Party: II. Proletarians and Communists",
+        "The Marxists Internet Archive transcription of the 1969 Progress Publishers edition, translated by Samuel Moore with Engels in 1888 and proofed against that authorized English edition.",
+      title: "Manifesto of the Communist Party",
       sourceType: "archival-record",
       workId: "communist-manifesto-work",
-      contributorDisplay: ["Karl Marx", "Friedrich Engels"],
-      publisher: "The Avalon Project, Yale Law School",
+      contributorDisplay: [
+        "Karl Marx",
+        "Friedrich Engels",
+        "Samuel Moore (translator)",
+      ],
+      publicationYear: 1969,
+      publisher: "Progress Publishers",
       resourceLinks: [
         {
           purpose: "archive",
-          url: "https://avalon.law.yale.edu/19th_century/mantwo.asp",
-          label: "Read the archival transcription",
+          url: "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/",
+          label: "Access the edition transcription and provenance",
         },
       ],
       ...reviewed,
@@ -100,23 +104,26 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "marx-gotha-critique-progress-source",
+      id: "marx-gotha-critique-carver-source",
       kind: "source",
-      label:
-        "Critique of the Gotha Programme (Progress Publishers transcription)",
+      label: "Critique of the Gotha Programme (Carver translation)",
       description:
-        "The Marxists Internet Archive transcription of the 1970 Progress Publishers English edition consulted for Marx's account of communist phases and distribution.",
+        "Terrell Carver's translation in the 1996 Cambridge volume Marx: Later Political Writings, consulted for Marx's account of communist phases and distribution.",
       title: "Critique of the Gotha Programme",
-      sourceType: "archival-record",
+      sourceType: "edition",
       workId: "marx-gotha-critique-work",
-      contributorDisplay: ["Karl Marx"],
-      publicationYear: 1970,
-      publisher: "Progress Publishers",
+      contributorDisplay: ["Karl Marx", "Terrell Carver (translator/editor)"],
+      publicationYear: 1996,
+      publisher: "Cambridge University Press",
+      identifiers: {
+        doi: "10.1017/CBO9780511810695.011",
+        isbn13: "9780521367394",
+      },
       resourceLinks: [
         {
-          purpose: "archive",
-          url: "https://www.marxists.org/archive/marx/works/1875/gotha/index.htm",
-          label: "Access the edition transcription",
+          purpose: "publisher",
+          url: "https://www.cambridge.org/core/books/abs/marx-later-political-writings/critique-of-the-gotha-programme/532B2E4B120B43D349FB55424E5958CF",
+          label: "Publisher chapter record and text",
         },
       ],
       ...reviewed,
@@ -139,21 +146,26 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "lenin-state-revolution-progress-source",
+      id: "lenin-state-revolution-service-source",
       kind: "source",
-      label: "The State and Revolution (Collected Works transcription)",
+      label: "The State and Revolution (Service translation)",
       description:
-        "The Lenin Internet Archive transcription of Collected Works volume 25 consulted for Lenin's proposed revolutionary state and higher communist phase.",
+        "Robert Service's translated and edited Penguin Classics edition consulted for Lenin's proposed revolutionary state and higher communist phase.",
       title: "The State and Revolution",
-      sourceType: "archival-record",
+      sourceType: "edition",
       workId: "lenin-state-revolution-work",
-      contributorDisplay: ["Vladimir Ilyich Lenin"],
-      publisher: "Progress Publishers",
+      contributorDisplay: [
+        "Vladimir Ilyich Lenin",
+        "Robert Service (translator/editor)",
+      ],
+      publicationYear: 2009,
+      publisher: "Penguin Classics",
+      identifiers: { isbn13: "9780140184358" },
       resourceLinks: [
         {
-          purpose: "archive",
-          url: "https://www.marxists.org/archive/lenin/works/1917/staterev/index.htm",
-          label: "Access the Collected Works transcription",
+          purpose: "publisher",
+          url: "https://www.penguin.co.uk/books/17060/the-state-and-revolution-by-vilenintranslated-and-edited-with-an-introduction-and-glossary-by-robert-service/9780140184358",
+          label: "Publisher edition record",
         },
       ],
       ...reviewed,
@@ -176,21 +188,25 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "kropotkin-conquest-bread-source",
+      id: "kropotkin-conquest-bread-chapman-hall-source",
       kind: "source",
-      label: "The Conquest of Bread",
+      label: "The Conquest of Bread (Chapman and Hall translation)",
       description:
-        "The Anarchist Library transcription consulted for Kropotkin's distinct anarchist-communist institutional and distributive claims.",
+        "The Standard Ebooks edition of the historical English translation attributed to Chapman and Hall, consulted for Kropotkin's anarchist-communist proposals.",
       title: "The Conquest of Bread",
-      sourceType: "archival-record",
+      sourceType: "edition",
       workId: "kropotkin-conquest-bread-work",
-      contributorDisplay: ["Pëtr Kropotkin"],
-      publisher: "The Anarchist Library",
+      contributorDisplay: [
+        "Pëtr Kropotkin",
+        "Chapman and Hall (translator)",
+      ],
+      publicationYear: 2026,
+      publisher: "Standard Ebooks",
       resourceLinks: [
         {
-          purpose: "archive",
-          url: "https://theanarchistlibrary.org/library/petr-kropotkin-the-conquest-of-bread",
-          label: "Read the archival transcription",
+          purpose: "publisher",
+          url: "https://standardebooks.org/ebooks/peter-kropotkin/the-conquest-of-bread/chapman-and-hall",
+          label: "Read the edition and translation provenance",
         },
       ],
       ...reviewed,
@@ -205,7 +221,7 @@ export const socialismCommunismEvidenceDocuments = [
       description:
         "Geoff Eley's history of socialist organization and the globally varied formation of communist movements.",
       title: "Marxism and Socialist Revolution",
-      workType: "article",
+      workType: "other",
       originalPublicationYear: 2017,
       ...reviewed,
     },
@@ -217,14 +233,14 @@ export const socialismCommunismEvidenceDocuments = [
       kind: "source",
       label: "Marxism and Socialist Revolution (2017)",
       description:
-        "The Cambridge History of Communism chapter consulted for competing socialist organizations and early communism's international variation.",
+        "Chapter 1 of The Cambridge History of Communism, volume 1, consulted for competing socialist organizations and early communist networks.",
       title: "Marxism and Socialist Revolution",
-      sourceType: "article",
+      sourceType: "other",
       workId: "eley-marxism-socialist-revolution-work",
       contributorDisplay: ["Geoff Eley"],
       publicationYear: 2017,
       publisher: "Cambridge University Press",
-      identifiers: { doi: "10.1017/9781316137024" },
+      identifiers: { doi: "10.1017/9781316137024.004" },
       resourceLinks: [
         {
           purpose: "publisher",
@@ -342,13 +358,26 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "socialism-communism-overlap-boundary",
+      id: "modern-communist-traditions-within-socialist-debates",
       kind: "statement",
-      label: "Socialism and communism overlap without being synonyms",
+      label: "The represented modern communist traditions emerged within socialist debates",
       description:
-        "An editorial boundary based on their diverse ideals, organizations, and transition strategies.",
+        "A bounded genealogy restricted to the modern traditions represented by this source set.",
+      statementKind: "classification",
+      text: "The modern communist traditions represented in these sources formed within nineteenth- and early-twentieth-century socialist debates over class, property, political organization, and revolution.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "communist-organizational-rivalry",
+      kind: "statement",
+      label: "Lenin and Kropotkin propose rival communist political routes",
+      description:
+        "A bounded comparison of two opposed modern communist accounts of political organization.",
       statementKind: "editorial-interpretation",
-      text: "Communist traditions arose within the wider history of socialism, but socialism also includes non-communist traditions and communism includes mutually opposed Leninist and anarchist accounts of political organization.",
+      text: "Lenin and Kropotkin advance opposed communist accounts of revolutionary political organization: Lenin proposes a transitional proletarian state, while Kropotkin proposes stateless direct organization.",
       ...reviewed,
     },
   },
@@ -407,26 +436,52 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "marx-lower-communist-phase",
+      id: "marx-lower-phase-inherited-limits",
       kind: "statement",
       label: "Marx's lower communist phase retains inherited limits",
       description:
         "An attributed distinction between an initial post-capitalist society and a later ideal.",
       statementKind: "definition",
-      text: "Marx describes an initial communist society as emerging from capitalism with inherited economic and cultural limits, including distribution to producers in proportion to their contributed labor after common deductions.",
+      text: "Marx describes an initial communist society as emerging from capitalism with inherited economic, moral, and intellectual limits.",
       ...reviewed,
     },
   },
   {
     documentType: "entity",
     entity: {
-      id: "marx-higher-communist-phase",
+      id: "marx-lower-phase-labor-distribution",
+      kind: "statement",
+      label: "Marx's lower communist phase distributes consumption by labor",
+      description:
+        "An attributed distributive rule for the initial communist phase.",
+      statementKind: "attributed-proposal",
+      text: "Marx describes individual consumption in the initial communist phase as proportional to contributed labor after deductions for common funds.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "marx-higher-phase-conditions",
       kind: "statement",
       label: "Marx's higher communist phase distributes by need",
       description:
         "An attributed account of a later communist phase after material and social transformation.",
       statementKind: "attributed-proposal",
-      text: "Marx reserves distribution according to need for a higher communist phase in which productive capacity has expanded and subordination to the division of labor has ended.",
+      text: "Marx conditions a higher communist phase on expanded productive capacity and the end of people's subordination to the division of labor.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "marx-higher-phase-needs-distribution",
+      kind: "statement",
+      label: "Marx's higher communist phase distributes by need",
+      description:
+        "An attributed distributive rule reserved for a later communist phase.",
+      statementKind: "attributed-proposal",
+      text: "Marx reserves distribution according to need for the higher communist phase.",
       ...reviewed,
     },
   },
@@ -485,13 +540,26 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "communism-early-global-variation",
+      id: "eley-early-communist-network-geography",
       kind: "statement",
       label: "Early communist movements were globally varied",
       description:
         "A historical finding that resists treating one national path as the communist movement.",
       statementKind: "observation",
-      text: "Eley traces early communist organizing through Europe, East and Central Asia, the Middle East, and Latin America, where anti-colonial priorities and local political traditions produced substantial disagreement with Comintern direction.",
+      text: "Eley documents participants and organizations in early communist networks across Europe, East and Central Asia, the Middle East, and Latin America.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "eley-comintern-local-revision-interpretation",
+      kind: "statement",
+      label: "Eley interprets some organizers as revising Comintern strategy",
+      description:
+        "An attributed interpretation of selected organizers rather than a general regional causal claim.",
+      statementKind: "observation",
+      text: "Eley presents M. N. Roy and José Carlos Mariátegui as revising revolutionary programs while disputing aspects of Comintern direction.",
       ...reviewed,
     },
   },

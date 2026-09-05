@@ -14,15 +14,17 @@ They propose making capital common property so productive wealth loses its class
 
 ## did-communists-agree-on-the-path-or-destination
 
-Even closely related texts describe stages rather than one immediate arrangement.
-Marx's initial communist phase retains limits inherited from capitalism and distributes individual consumption in relation to contributed labor after common deductions; only a later phase distributes according to need.
-Lenin argues for a coercive proletarian state during a revolutionary transition and expects that state to become unnecessary only after class domination ends.
-Kropotkin instead joins communism to anarchism, common possession, and provision by need, and he proposes direct organization rather than waiting for parliamentary action.
+Marx's initial communist phase retains limits inherited from capitalism and relates individual consumption to contributed labor after common deductions.
+He conditions a higher phase on greater productive capacity and an end to subordination by the division of labor.
+Only then does he propose distribution according to need.
+Lenin argues for a coercive proletarian state during a transition and expects it to become unnecessary after class domination ends.
+Kropotkin instead joins communism to anarchism, common possession, provision by need, and direct organization outside parliament.
 
 ## was-communism-one-global-movement
 
-No single national story contains the early communist movement.
-Geoff Eley follows organizers across Europe, East and Central Asia, the Middle East, and Latin America whose anti-colonial priorities and local political traditions often produced disagreement with international direction from Moscow.
+Geoff Eley documents participants and organizations in early communist networks across Europe, East and Central Asia, the Middle East, and Latin America.
+He presents Manabendra Nath Roy and José Carlos Mariátegui as revising revolutionary programs while disputing aspects of Comintern direction.
+That interpretation does not substitute for locally authored scholarship about any region.
 
 ## does-a-communist-label-settle-the-case
 

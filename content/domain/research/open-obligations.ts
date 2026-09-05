@@ -11,6 +11,83 @@ export const openResearchObligationDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "socialism-rival-classification-boundary",
+      kind: "research-obligation",
+      label: "Rival classifications of socialism",
+      description:
+        "A focused challenge to treating one institutional threshold as the whole boundary of a diverse historical family.",
+      obligationType: "counterargument",
+      question:
+        "Does a social-and-democratic-control threshold exclude traditions historically classified as socialist chiefly through equality, cooperation, or state-led development?",
+      target: { kind: "concept", id: "socialism" },
+      targetSectionId: "what-defines-socialism",
+      addressedStatementIds: [
+        "socialism-democratic-control-minimum",
+        "socialism-values-newman",
+      ],
+      currentLimitation:
+        "The page contrasts Gilabert and O'Neill's institutional boundary with Newman's values-based history but does not yet test either classification against the strongest rival historical taxonomies.",
+      evidenceNeeded:
+        "Primary self-definitions and serious intellectual histories that classify ethical, cooperative, social-democratic, and state-development traditions, with explicit inclusion and exclusion criteria.",
+      scope:
+        "Named socialist traditions and classification rules in the nineteenth and twentieth centuries; not a verdict about whether every self-description is analytically decisive.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "socialism-communism-lexical-history",
+      kind: "research-obligation",
+      label: "Socialism and communism beyond the represented genealogy",
+      description:
+        "A bounded lexical-history question about meanings omitted by the current modern European source base.",
+      obligationType: "research-gap",
+      question:
+        "How did selected non-European writers and movements distinguish terms translated as socialism and communism before and outside the Marxist lineage represented here?",
+      target: { kind: "concept", id: "socialism" },
+      targetSectionId: "how-do-socialism-and-communism-relate",
+      addressedStatementIds: [
+        "modern-communist-traditions-within-socialist-debates",
+      ],
+      currentLimitation:
+        "The current genealogy is deliberately limited to modern traditions represented by English-language European primary texts and two synthetic histories.",
+      evidenceNeeded:
+        "Locally authored primary texts, specialist lexical histories, and scholarship attentive to translation in a small set of named languages and regions.",
+      scope:
+        "A comparative sample selected before research begins; it must not infer one universal prehistory from European vocabulary or translated communal practices.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "communism-roy-comintern-strategy",
+      kind: "research-obligation",
+      label: "M. N. Roy and Comintern strategy in India",
+      description:
+        "A regionally bounded test of a synthetic historian's interpretation using locally situated primary and scholarly accounts.",
+      obligationType: "research-gap",
+      question:
+        "Between 1920 and 1928, did M. N. Roy and communist organizers in India reject Comintern strategy for organizing anti-colonial revolution?",
+      target: { kind: "concept", id: "communism" },
+      targetSectionId: "was-communism-one-global-movement",
+      addressedStatementIds: [
+        "eley-early-communist-network-geography",
+        "eley-comintern-local-revision-interpretation",
+      ],
+      currentLimitation:
+        "The current page reports Eley's synthesis but does not test it against Roy's writings, Indian organizational records, or locally authored scholarship.",
+      evidenceNeeded:
+        "Roy's dated writings and correspondence, Indian communist and anti-colonial organizational records, and scholarship by historians grounded in the region and relevant languages.",
+      scope:
+        "India and Roy's Comintern relationship from 1920 through 1928; Mariátegui, other regions, and later party-state development require separate obligations.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "socialism-democratic-control-threshold",
       kind: "research-obligation",
       label: "Democratic-control threshold for socialism",
@@ -44,16 +121,16 @@ export const openResearchObligationDocuments = [
         "A focused case-design question for comparing communist self-identification with institutions and rules in use.",
       obligationType: "research-gap",
       question:
-        "How should a bounded case compare communist self-identification with its actual property, class, distribution, authority, and state institutions?",
+        "Between adoption of the 1936 Soviet Constitution and Stalin's death in 1953, did formal ownership and rules in use eliminate a class with privileged control over productive assets?",
       target: { kind: "concept", id: "communism" },
       targetSectionId: "does-a-communist-label-settle-the-case",
       addressedStatementIds: ["communist-label-non-embodiment"],
       currentLimitation:
-        "The current boundary prevents embodiment claims but does not yet specify comparable observations for party identity, formal constitutional rules, administrative practice, social hierarchy, or ownership and distribution.",
+        "The current boundary prevents an embodiment claim but supplies no evidence about who exercised effective control over productive assets in this bounded Soviet period.",
       evidenceNeeded:
-        "Official records and independent historical research for several explicitly bounded episodes, with the same institutional dimensions recorded separately from ideological claims.",
+        "The constitution and property law, administrative and enterprise records, evidence about appointment and removal powers and privileged benefits, and independent Soviet social and economic history.",
       scope:
-        "Self-identified communist parties, governments, and states in named places and periods; not an aggregate verdict on communism or a country-wide timeless label.",
+        "The Soviet Union from 1936 through 1953 and the single question of class control over productive assets; distribution, political repression, and later periods require separate obligations.",
       ...reviewed,
     },
   },

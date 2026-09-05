@@ -22,6 +22,7 @@ const socialism = attachNarrative("socialism.md", {
       statementIds: [
         "socialism-democratic-control-minimum",
         "socialism-not-statism",
+        "socialism-values-newman",
       ],
       relatedEntityRefs: [
         { kind: "concept" as const, id: "social-ownership" },
@@ -59,7 +60,10 @@ const socialism = attachNarrative("socialism.md", {
       heading: "How do socialism and communism relate?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["socialism-communism-overlap-boundary"],
+      statementIds: [
+        "modern-communist-traditions-within-socialist-debates",
+        "communist-organizational-rivalry",
+      ],
       relatedEntityRefs: [{ kind: "concept" as const, id: "communism" }],
     },
   ],
@@ -104,8 +108,10 @@ const communism = attachNarrative("communism.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "marx-lower-communist-phase",
-        "marx-higher-communist-phase",
+        "marx-lower-phase-inherited-limits",
+        "marx-lower-phase-labor-distribution",
+        "marx-higher-phase-conditions",
+        "marx-higher-phase-needs-distribution",
         "lenin-transitional-state-claim",
         "lenin-state-withering-claim",
         "kropotkin-anarchist-communist-route",
@@ -117,7 +123,10 @@ const communism = attachNarrative("communism.md", {
       heading: "Was communism one global movement?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["communism-early-global-variation"],
+      statementIds: [
+        "eley-early-communist-network-geography",
+        "eley-comintern-local-revision-interpretation",
+      ],
     },
     {
       id: "does-a-communist-label-settle-the-case",
