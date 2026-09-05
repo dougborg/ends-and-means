@@ -1,5 +1,5 @@
-Socialism is a broad and disputed family of efforts to replace capitalist control of production with social and democratic control.
-That minimum boundary does not dictate one owner, one coordination mechanism, or one path of change.
+Gilabert and O'Neill define socialism's minimum economic contrast with capitalism through social and democratic control of production.
+Newman's historical account instead identifies recurring egalitarian and cooperative commitments across varied traditions, so this page uses the control boundary as an attributed working definition rather than a universal test.
 
 ## what-defines-socialism
 
@@ -20,5 +20,5 @@ To understand a proposal, a reader still needs to ask who controls production an
 
 ## how-do-socialism-and-communism-relate
 
-Communist traditions developed within the wider history of socialism, but the words are not synonyms.
-Socialism also includes non-communist traditions, while communist writers have disagreed sharply over whether a revolutionary state, parliamentary action, or stateless self-organization provides a path forward.
+The modern communist traditions represented by these sources developed within nineteenth- and early-twentieth-century socialist debates, but that bounded genealogy does not make the words synonyms.
+The represented socialist traditions include non-communist positions, while Lenin and Kropotkin disagree sharply over a transitional revolutionary state and stateless direct organization.

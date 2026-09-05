@@ -465,14 +465,17 @@ describe("research obligation routes", () => {
   });
 });
 
-describe("canonical research agenda", () => {
-  it("publishes the exact initial obligations", () => {
-    const report = auditContent(canonicalGraph);
-    expect(report.openResearchObligations).toEqual([
+const expectedOpenResearchObligations = [
       {
         id: "communism-claimed-identity-practice-gap",
         obligationType: "research-gap",
         target: "concept:communism#does-a-communist-label-settle-the-case",
+        status: "open",
+      },
+      {
+        id: "communism-roy-comintern-strategy",
+        obligationType: "research-gap",
+        target: "concept:communism#was-communism-one-global-movement",
         status: "open",
       },
       {
@@ -516,8 +519,20 @@ describe("canonical research agenda", () => {
         status: "open",
       },
       {
+        id: "socialism-communism-lexical-history",
+        obligationType: "research-gap",
+        target: "concept:socialism#how-do-socialism-and-communism-relate",
+        status: "open",
+      },
+      {
         id: "socialism-democratic-control-threshold",
         obligationType: "research-gap",
+        target: "concept:socialism#what-defines-socialism",
+        status: "open",
+      },
+      {
+        id: "socialism-rival-classification-boundary",
+        obligationType: "counterargument",
         target: "concept:socialism#what-defines-socialism",
         status: "open",
       },
@@ -545,7 +560,14 @@ describe("canonical research agenda", () => {
         target: "case:swedish-wage-earner-funds#what-they-were-meant-to-do",
         status: "open",
       },
-    ]);
+];
+
+describe("canonical research agenda", () => {
+  it("publishes the exact initial obligations", () => {
+    const report = auditContent(canonicalGraph);
+    expect(report.openResearchObligations).toEqual(
+      expectedOpenResearchObligations,
+    );
     expect(
       researchObligationsForTarget("concept", "economic-democracy").map(
         ({ id }) => id,
