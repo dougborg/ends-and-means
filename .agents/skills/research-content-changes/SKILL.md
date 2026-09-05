@@ -71,6 +71,10 @@ Author them as `subject-guide` documents that select existing Dossier narrative,
 Statements, entities, relationships, and Research Obligations by ID.
 Do not add a guide `kind`, body prose, graph edges, or alternate labels, and do
 not revive the incomplete Topic contract.
+Use evidence progressive disclosure so supporting claims remain close at hand
+without displacing the learner narrative.
+Keep each Case bounded by place, period, and institutions; never present it as
+a pure embodiment of a subject or Approach.
 Treat entity alternate and hidden labels as names for the same canonical
 identity.
 Treat SubjectGuide `searchQueries` as non-identifying entry phrases;
@@ -103,6 +107,7 @@ canonical graph, `archive/legacy-research/`, and open changes for duplicates
 before writing. Archived material is a discovery lead only and must never be
 imported, rendered, or cited as evidence. Record plausible candidates; do not
 silently merge concepts.
+Keep substantive claims as atomic Statements with precise locators.
 
 For narrative prose, write plain-spoken analytical synthesis from the canonical
 Statement ledger or closed-source notes rather than by editing source wording.
@@ -125,9 +130,14 @@ Research bounded, society-specific formations, including Indigenous,
 kinship-based, stateless, nomadic or pastoral, maritime or island, city-state,
 imperial, colonial, and hybrid institutions, using the evidence traditions
 appropriate to each subject.
+Use community self-description and oral-history provenance where appropriate;
+distinguish them from imposed administrative names and external analysis.
 Do not impose universal “tribal,” “primitive,” or evolutionary-stage categories.
 
 When reconciling archived material:
+
+Treat `content/domain/` as the only publishable content source and preserve the
+canonical-only publication boundary.
 
 - search for semantic duplicates as well as exact ID collisions;
 - split compound Means and multi-proposition claims into independently

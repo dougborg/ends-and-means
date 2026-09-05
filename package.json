@@ -44,7 +44,9 @@
     "markdownlint-sentences-per-line": "^0.1.4",
     "tsx": "^4.23.13",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "yaml": "^2.9.0",
+    "zod": "^4.5.4"
   },
   "knip": {
     "ignoreDependencies": [

@@ -1,14 +1,15 @@
 {
-  "project": { "number": 7, "public": false },
+  "project": { "number": 7, "title": "Ends and Means — Delivery", "public": false },
   "capturedAt": "2026-09-05T12:00:00.000Z",
+  "repositoryLabels": ["track:product-ia", "track:anchor-guides", "track:organizational-diversity", "track:bounded-cases", "track:compare-questions", "track:trust-evidence", "track:visual-design", "track:depictions", "track:platform-process"],
   "items": [
-    { "number": 1, "title": "Reader work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Reader experience", "priority": "Now", "labels": ["track:product-ia"], "updatedAt": "2026-09-05T10:00:00.000Z", "linkedPullRequestStates": [] },
-    { "number": 2, "title": "Corpus work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Corpus", "priority": "Now", "labels": ["content"], "updatedAt": "2026-09-04T10:00:00.000Z", "linkedPullRequestStates": [] },
-    { "number": 3, "title": "Delivery work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Platform/process", "priority": "Now", "labels": ["track:platform-process", "process"], "updatedAt": "2026-09-03T10:00:00.000Z", "linkedPullRequestStates": [] },
-    { "number": 4, "title": "Ready now", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Reader experience", "priority": "Now", "labels": ["status:ready"], "linkedPullRequestStates": [] },
-    { "number": 5, "title": "Ready next", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Corpus", "priority": "Next", "labels": ["status:ready"], "linkedPullRequestStates": [] },
-    { "number": 6, "title": "Ready later", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Platform/process", "priority": "Later", "labels": ["status:ready"], "linkedPullRequestStates": [] },
-    { "number": 7, "title": "Review", "type": "Issue", "state": "OPEN", "status": "In review", "workstream": "Reader experience", "priority": "Now", "labels": [], "linkedPullRequestStates": ["OPEN"] },
+    { "number": 1, "title": "Reader work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Reader experience", "priority": "Now", "labels": ["track:product-ia"], "updatedAt": "2026-09-05T10:00:00.000Z", "linkedPullRequestStates": [], "ownership": { "owner": "reader-agent", "branch": "feat/reader", "worktree": "/tmp/reader" }, "baseCurrent": true, "historyLinear": true },
+    { "number": 2, "title": "Corpus work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Corpus", "priority": "Now", "labels": ["content"], "updatedAt": "2026-09-04T10:00:00.000Z", "linkedPullRequestStates": [], "ownership": { "owner": "corpus-agent", "branch": "research/corpus", "worktree": "/tmp/corpus" }, "baseCurrent": true, "historyLinear": true },
+    { "number": 3, "title": "Delivery work", "type": "Issue", "state": "OPEN", "status": "In progress", "workstream": "Platform/process", "priority": "Now", "labels": ["track:platform-process", "process"], "updatedAt": "2026-09-03T10:00:00.000Z", "linkedPullRequestStates": [], "ownership": { "owner": "delivery-agent", "branch": "chore/delivery", "worktree": "/tmp/delivery" }, "baseCurrent": true, "historyLinear": true },
+    { "number": 4, "title": "Ready now", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Reader experience", "priority": "Now", "labels": ["status:ready"], "body": "## Acceptance criteria\n\n- [ ] Deliver reader slice.", "linkedPullRequestStates": [] },
+    { "number": 5, "title": "Ready next", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Corpus", "priority": "Next", "labels": ["status:ready"], "body": "## Acceptance criteria\n\n- [ ] Deliver corpus slice.", "linkedPullRequestStates": [] },
+    { "number": 6, "title": "Ready later", "type": "Issue", "state": "OPEN", "status": "Ready", "workstream": "Platform/process", "priority": "Later", "labels": ["status:ready", "track:platform-process", "testing"], "body": "## Acceptance criteria\n\n- [ ] Deliver platform slice.", "linkedPullRequestStates": [] },
+    { "number": 7, "title": "Review", "type": "Issue", "state": "OPEN", "status": "In review", "workstream": "Reader experience", "priority": "Now", "labels": [], "linkedPullRequestStates": ["OPEN"], "baseCurrent": true, "historyLinear": true, "reviewEvidence": { "copilot": true, "adversarial": true } },
     { "number": 8, "title": "Blocked", "type": "Issue", "state": "OPEN", "status": "Blocked", "workstream": "Corpus", "priority": "Later", "labels": ["status:blocked"], "body": "Blocked on #42.", "linkedPullRequestStates": [] }
   ]
 }

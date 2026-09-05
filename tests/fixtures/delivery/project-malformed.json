@@ -1,0 +1,16 @@
+{
+  "project": { "number": 7, "title": "Ends and Means — Delivery", "public": false },
+  "capturedAt": "not-a-date",
+  "repositoryLabels": [],
+  "items": [
+    {
+      "number": "116",
+      "title": "Malformed",
+      "type": "Issue",
+      "state": "OPEN",
+      "status": "Building",
+      "labels": [],
+      "updatedAt": "yesterday"
+    }
+  ]
+}
