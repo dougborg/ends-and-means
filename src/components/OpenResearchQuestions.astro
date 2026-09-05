@@ -1,0 +1,29 @@
+---
+import ResearchObligationCard from "./ResearchObligationCard.astro";
+import type { ResearchObligation } from "../lib/domain";
+import { researchObligationsForTarget } from "../lib/domain/canonical";
+
+interface Props {
+  kind: ResearchObligation["target"]["kind"];
+  id: string;
+}
+
+const { kind, id } = Astro.props;
+const obligations = researchObligationsForTarget(kind, id);
+---
+
+{obligations.length > 0 && (
+  <section class="open-research" aria-labelledby={`open-research-${id}`}>
+    <header>
+      <p class="coordinate">OPEN QUESTIONS</p>
+      <h2 id={`open-research-${id}`}>Questions current evidence does not settle</h2>
+      <p>Missing evidence does not imply an answer.</p>
+    </header>
+    <ol>
+      {obligations.map((obligation) => (
+        <ResearchObligationCard obligation={obligation} />
+      ))}
+    </ol>
+    <a href="/research/">Browse the full research agenda</a>
+  </section>
+)}

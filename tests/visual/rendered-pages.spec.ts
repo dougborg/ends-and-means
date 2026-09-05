@@ -12,6 +12,7 @@ const defaultRoutes = [
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",
+  "/research/",
   "/sources/erixon-rehn-meidner-model-source/",
 ];
 
@@ -138,6 +139,17 @@ test("disclosures expose state and work from the keyboard", async ({ page }) => 
   await summary.focus();
   await page.keyboard.press("Enter");
   await expect(disclosure).toHaveAttribute("open", "");
+  await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
+});
+
+test("research obligations expose their claim ledger from the keyboard", async ({ page }) => {
+  await page.goto("/research/");
+  await expect(page.getByText("counterargument / open").first()).toBeVisible();
+  const disclosure = page.locator(".research-obligation details").first();
+  await disclosure.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(disclosure.getByText("Claims this question tests")).toBeVisible();
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
 });
 

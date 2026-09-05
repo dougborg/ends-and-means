@@ -28,6 +28,21 @@ const narrativeTraceStatuses = new Set([
   "qualified",
   "research-gap",
 ]);
+const researchObligationTypes = new Set([
+  "counterargument",
+  "counterevidence",
+  "counterfactual",
+  "research-gap",
+]);
+const researchObligationStatuses = new Set([
+  "open",
+  "partially-addressed",
+  "resolved",
+  "withdrawn",
+]);
+const researchTargetKinds = new Set(["approach", "case", "challenge", "concept"]);
+const internalWorkflowReference =
+  /(?:#\d+\b|github\.com\/[^\s/]+\/[^\s/]+\/(?:issues|pull)\/\d+|\bpull request\b|\bPR\s*#?\d+\b|\b(?:feature|fix|research)\/[a-z0-9._/-]+\b|\bmigration status\b|\bworking (?:tree|branch|material)\b)/iu;
 
 function refKey(ref: EntityRef) {
   return `${ref.kind}:${ref.id}`;
@@ -974,6 +989,175 @@ function validateDossier(
   }
 }
 
+function validateResearchTarget(
+  entity: EntityOf<"research-obligation">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  const target = entityById.get(entity.target.id);
+  if (!target || target.kind !== entity.target.kind)
+    errors.push(
+      `${entity.id}: unresolved or mistyped research target ${refKey(entity.target)}`,
+    );
+  if (!researchTargetKinds.has(entity.target.kind))
+    errors.push(
+      `${entity.id}: research obligations must target a reader-facing approach, case, challenge, or concept`,
+    );
+  if (
+    target &&
+    ["reviewed", "published"].includes(entity.publicationStatus) &&
+    !["reviewed", "published"].includes(target.publicationStatus)
+  )
+    errors.push(
+      `${entity.id}: live research obligation requires a reviewed or published target`,
+    );
+  if (!entity.targetSectionId) return;
+  const liveObligation = ["reviewed", "published"].includes(
+    entity.publicationStatus,
+  );
+  const ownsSection = [...entityById.values()].some(
+    (candidate) =>
+      candidate.kind === "dossier" &&
+      candidate.publicationStatus !== "deprecated" &&
+      (!liveObligation ||
+        ["reviewed", "published"].includes(candidate.publicationStatus)) &&
+      refKey(candidate.subject) === refKey(entity.target) &&
+      candidate.sections.some(({ id }) => id === entity.targetSectionId),
+  );
+  if (!ownsSection)
+    errors.push(
+      `${entity.id}: unresolved or unpublished Dossier section ${refKey(entity.target)}#${entity.targetSectionId}`,
+    );
+}
+
+function validateResearchResolution(
+  entity: EntityOf<"research-obligation">,
+  errors: string[],
+) {
+  const rationale = entity.resolutionRationale?.trim();
+  if (["resolved", "withdrawn"].includes(entity.obligationStatus) && !rationale)
+    errors.push(
+      `${entity.id}: ${entity.obligationStatus} research obligation requires a resolution rationale`,
+    );
+  if (entity.obligationStatus === "resolved" && !entity.statementIds.length)
+    errors.push(
+      `${entity.id}: resolved research obligation requires a reconciled Statement`,
+    );
+  if (["open", "partially-addressed"].includes(entity.obligationStatus) && rationale)
+    errors.push(
+      `${entity.id}: active research obligation cannot have a resolution rationale`,
+    );
+  if (entity.obligationStatus === "partially-addressed" && !entity.statementIds.length)
+    errors.push(
+      `${entity.id}: partially addressed research obligation requires a reconciled Statement`,
+    );
+  const closed = ["resolved", "withdrawn"].includes(entity.obligationStatus);
+  if (closed && !entity.closedAt)
+    errors.push(`${entity.id}: closed research obligation requires a closure date`);
+  if (!closed && entity.closedAt)
+    errors.push(`${entity.id}: active research obligation cannot have a closure date`);
+  if (entity.closedAt) validateIsoDate(entity.id, "closedAt", entity.closedAt, errors);
+}
+
+function validateResearchStatements(
+  entity: EntityOf<"research-obligation">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  validateEntityRefs(
+    entityById,
+    entity.id,
+    "statement",
+    entity.addressedStatementIds,
+    "addressed Statement",
+    errors,
+  );
+  validateEntityRefs(
+    entityById,
+    entity.id,
+    "statement",
+    entity.statementIds,
+    "Statement",
+    errors,
+  );
+  reportInvalid(
+    errors,
+    new Set(entity.statementIds).size !== entity.statementIds.length,
+    `${entity.id}: research obligation repeats a Statement`,
+  );
+  reportInvalid(
+    errors,
+    new Set(entity.addressedStatementIds).size !== entity.addressedStatementIds.length,
+    `${entity.id}: research obligation repeats an addressed Statement`,
+  );
+  reportInvalid(
+    errors,
+    entity.addressedStatementIds.some((id) => entity.statementIds.includes(id)),
+    `${entity.id}: addressed and reconciled Statements must be distinct`,
+  );
+  reportInvalid(
+    errors,
+    entity.addressedStatementIds.length === 0 && !entity.targetSectionId,
+    `${entity.id}: research obligation requires an addressed Statement or exact Dossier section`,
+  );
+  if (!["reviewed", "published"].includes(entity.publicationStatus)) return;
+  for (const statementId of [
+    ...entity.addressedStatementIds,
+    ...entity.statementIds,
+  ]) {
+    const statement = entityById.get(statementId);
+    if (
+      statement?.kind === "statement" &&
+      !["reviewed", "published"].includes(statement.publicationStatus)
+    )
+      errors.push(
+        `${entity.id}: live research obligation requires reviewed or published Statement ${statementId}`,
+      );
+  }
+}
+
+function validateResearchObligation(
+  entity: EntityOf<"research-obligation">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  validateResearchTarget(entity, entityById, errors);
+  reportInvalid(
+    errors,
+    !researchObligationTypes.has(entity.obligationType),
+    `${entity.id}: invalid research obligation type ${entity.obligationType}`,
+  );
+  reportInvalid(
+    errors,
+    !researchObligationStatuses.has(entity.obligationStatus),
+    `${entity.id}: invalid research obligation status ${entity.obligationStatus}`,
+  );
+  if (!entity.question.trim().endsWith("?"))
+    errors.push(`${entity.id}: research question must end with a question mark`);
+  for (const [field, value] of [
+    ["current limitation", entity.currentLimitation],
+    ["evidence needed", entity.evidenceNeeded],
+    ["scope", entity.scope],
+  ] as const)
+    if (!value.trim()) errors.push(`${entity.id}: ${field} is empty`);
+  for (const [field, value] of [
+    ["label", entity.label],
+    ["description", entity.description],
+    ["question", entity.question],
+    ["currentLimitation", entity.currentLimitation],
+    ["evidenceNeeded", entity.evidenceNeeded],
+    ["scope", entity.scope],
+    ["resolutionRationale", entity.resolutionRationale],
+  ] as const)
+    if (value && internalWorkflowReference.test(value))
+      errors.push(
+        `${entity.id}: reader-facing research text contains an internal workflow reference in ${field}`,
+      );
+  validateIsoDate(entity.id, "reviewedAt", entity.reviewedAt, errors);
+  validateResearchStatements(entity, entityById, errors);
+  validateResearchResolution(entity, errors);
+}
+
 function validateEntity(
   entity: DomainEntity,
   entityById: Map<string, DomainEntity>,
@@ -997,6 +1181,8 @@ function validateEntity(
   if (entity.kind === "transition")
     validateTransition(entity, entityById, relationshipIds, errors);
   if (entity.kind === "dossier") validateDossier(entity, entityById, errors);
+  if (entity.kind === "research-obligation")
+    validateResearchObligation(entity, entityById, errors);
 }
 
 function validateEntities(

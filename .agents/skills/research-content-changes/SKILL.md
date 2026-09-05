@@ -42,6 +42,7 @@ merge or publish without human approval.
    - [criterion](references/routes/criterion.md)
    - [statement](references/routes/statement.md)
    - [source](references/routes/source.md)
+   - [research obligation](references/routes/research-obligation.md)
    - [case](references/routes/case.md)
    - [Event and Transition](references/routes/event-transition.md)
    - [Depiction](references/routes/depiction.md)
@@ -80,6 +81,19 @@ When promoting transitional or legacy material:
 - route unresolved fragments to the relevant backlog issue, with an archive
   path when useful, rather than manufacturing canonical coverage or restoring
   an archive file to the production content tree.
+
+Search active Research Obligations for the subject before starting substantive
+research. Resolve or partially address an obligation only after new evidence is
+reconciled into the Statement ledger. When reviewed work exposes a material
+counterargument, counterevidence need, causal counterfactual, or other focused
+gap, record it as a Research Obligation rather than hiding it in vague caveat
+language or internal workflow notes.
+Name the exact existing Statements the obligation tests in
+`addressedStatementIds`, or attach it to an exact Dossier section when no
+Statement yet owns the limitation. Keep those triggers separate from result
+`statementIds`. Split questions whose outcomes can be researched or closed
+independently. Record and render lifecycle status; resolution and withdrawal
+require a rationale and closure date, while partial progress remains active.
 
 Do not recreate a fixed comparison matrix or require every Approach to answer
 every Challenge. Keep Dimensions descriptive and Criteria evaluative; never let

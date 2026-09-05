@@ -1,4 +1,4 @@
-import type { EntityBase } from "./common";
+import type { EntityBase, EntityRef } from "./common";
 import type { AnalysisEntity } from "./analysis";
 import type { EvidenceEntity } from "./cases";
 import type { VocabularyEntity } from "./vocabulary";
@@ -97,6 +97,30 @@ export interface Source extends EntityBase {
   resourceLinks?: ResourceLink[];
 }
 
+export interface ResearchObligation extends EntityBase {
+  kind: "research-obligation";
+  obligationType:
+    | "counterargument"
+    | "counterevidence"
+    | "counterfactual"
+    | "research-gap";
+  question: string;
+  target: EntityRef & {
+    kind: "approach" | "case" | "challenge" | "concept";
+  };
+  targetSectionId?: string;
+  /** Existing claims whose limits or implications create this obligation. */
+  addressedStatementIds: string[];
+  currentLimitation: string;
+  evidenceNeeded: string;
+  scope: string;
+  obligationStatus: "open" | "partially-addressed" | "resolved" | "withdrawn";
+  statementIds: string[];
+  resolutionRationale?: string;
+  closedAt?: string;
+  reviewedAt: string;
+}
+
 export type DomainEntity =
   | VocabularyEntity
   | EvidenceEntity
@@ -108,4 +132,5 @@ export type DomainEntity =
   | Statement
   | Work
   | Source
+  | ResearchObligation
   | Depiction;

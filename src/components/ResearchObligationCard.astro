@@ -1,0 +1,70 @@
+---
+import CanonicalStatement from "./CanonicalStatement.astro";
+import type { ResearchObligation } from "../lib/domain";
+import {
+  entityById,
+  researchTargetHref,
+} from "../lib/domain/canonical";
+
+interface Props {
+  obligation: ResearchObligation;
+  showTarget?: boolean;
+}
+
+const { obligation, showTarget = false } = Astro.props;
+const target = entityById(obligation.target.id);
+const status = obligation.obligationStatus.replaceAll("-", " ");
+const isClosed = ["resolved", "withdrawn"].includes(
+  obligation.obligationStatus,
+);
+---
+
+<li id={obligation.id} class="research-obligation">
+  <p class="coordinate">
+    {obligation.obligationType.replaceAll("-", " ")} / {status}
+  </p>
+  <h3>{obligation.question}</h3>
+  <p>{obligation.currentLimitation}</p>
+  <dl>
+    <div><dt>Evidence needed</dt><dd>{obligation.evidenceNeeded}</dd></div>
+    <div><dt>Scope</dt><dd>{obligation.scope}</dd></div>
+    {showTarget && (
+      <div>
+        <dt>Applies to</dt>
+        <dd>
+          <a href={researchTargetHref(obligation)}>{target?.label}</a>
+          {obligation.targetSectionId && " — exact section"}
+        </dd>
+      </div>
+    )}
+    {isClosed && (
+      <>
+        <div><dt>Closed</dt><dd><time datetime={obligation.closedAt}>{obligation.closedAt}</time></dd></div>
+        <div><dt>Decision</dt><dd>{obligation.resolutionRationale}</dd></div>
+      </>
+    )}
+  </dl>
+  <details class="reference-disclosure">
+    <summary>Claims and evidence record</summary>
+    <div class="reference-disclosure__body research-obligation__claims">
+      {obligation.addressedStatementIds.length > 0 ? (
+        <section>
+          <h4>Claims this question tests</h4>
+          {obligation.addressedStatementIds.map((id) => (
+            <CanonicalStatement statementId={id} anchored={false} />
+          ))}
+        </section>
+      ) : (
+        <p>This question is attached to an exact Dossier section rather than an existing Statement.</p>
+      )}
+      {obligation.statementIds.length > 0 && (
+        <section>
+          <h4>Reconciled evidence claims</h4>
+          {obligation.statementIds.map((id) => (
+            <CanonicalStatement statementId={id} anchored={false} />
+          ))}
+        </section>
+      )}
+    </div>
+  </details>
+</li>

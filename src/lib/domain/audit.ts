@@ -1,5 +1,6 @@
 import type { CompiledDomainGraph } from "./graph";
 import type { Dossier } from "./presentation";
+import type { ResearchObligation } from "./entities";
 const narratableKinds = ["approach", "case", "challenge", "concept"] as const;
 
 export interface ContentAttentionReport {
@@ -15,6 +16,13 @@ export interface ContentAttentionReport {
     location: string;
     reason: string;
   }>;
+  openResearchObligations: Array<{
+    id: string;
+    obligationType: ResearchObligation["obligationType"];
+    target: string;
+    status: ResearchObligation["obligationStatus"];
+  }>;
+  researchEvidenceAwaitingResolution: string[];
 }
 
 const fillerPatterns = [
@@ -100,7 +108,36 @@ export function auditContent(
   const researchNeededEntities = graph.entities
     .filter(({ publicationStatus }) => publicationStatus === "research-needed")
     .map(({ kind, id }) => `${kind}:${id}`);
-  return { dossierCoverage, researchGapSections, researchNeededEntities, narrativeAttention: narrativeFindings(dossiers) };
+  const obligations = graph.entities.filter(
+    (entity): entity is ResearchObligation =>
+      entity.kind === "research-obligation" &&
+      entity.publicationStatus !== "deprecated",
+  );
+  const openResearchObligations = obligations
+    .filter(({ obligationStatus }) =>
+      ["open", "partially-addressed"].includes(obligationStatus),
+    )
+    .map(({ id, obligationType, target, targetSectionId, obligationStatus }) => ({
+      id,
+      obligationType,
+      target: `${target.kind}:${target.id}${targetSectionId ? `#${targetSectionId}` : ""}`,
+      status: obligationStatus,
+    }));
+  const researchEvidenceAwaitingResolution = obligations
+    .filter(
+      ({ obligationStatus, statementIds }) =>
+        ["open", "partially-addressed"].includes(obligationStatus) &&
+        statementIds.length > 0,
+    )
+    .map(({ id }) => id);
+  return {
+    dossierCoverage,
+    researchGapSections,
+    researchNeededEntities,
+    narrativeAttention: narrativeFindings(dossiers),
+    openResearchObligations,
+    researchEvidenceAwaitingResolution,
+  };
 }
 
 export function formatContentAttentionReport(report: ContentAttentionReport) {
@@ -121,5 +158,19 @@ export function formatContentAttentionReport(report: ContentAttentionReport) {
   for (const entity of report.researchNeededEntities) lines.push(`- ${entity}`);
   lines.push("", `Narrative attention: ${report.narrativeAttention.length}`);
   for (const finding of report.narrativeAttention) lines.push(`- ${finding.location}: ${finding.reason}`);
+  lines.push(
+    "",
+    `Open research obligations: ${report.openResearchObligations.length}`,
+  );
+  for (const obligation of report.openResearchObligations)
+    lines.push(
+      `- ${obligation.id}: ${obligation.obligationType}; ${obligation.target}; ${obligation.status}`,
+    );
+  lines.push(
+    "",
+    `Evidence awaiting resolution: ${report.researchEvidenceAwaitingResolution.length}`,
+  );
+  for (const id of report.researchEvidenceAwaitingResolution)
+    lines.push(`- ${id}`);
   return lines.join("\n");
 }

@@ -1,6 +1,6 @@
 import { canonicalDocuments } from "../../../content/domain";
 import { compileDomainGraph } from "./compile";
-import type { DomainEntity } from "./entities";
+import type { DomainEntity, ResearchObligation } from "./entities";
 import type { DomainRelationship } from "./relationships";
 import type { DossierSubjectKind } from "./presentation";
 import type { CompiledDomainGraph } from "./graph";
@@ -67,6 +67,32 @@ export function dossierForSubject(
         dossier.subject.kind === kind &&
         dossier.subject.id === id,
     );
+}
+
+export function researchObligationsForTarget(
+  kind: ResearchObligation["target"]["kind"],
+  id: string,
+) {
+  return entitiesOfKind("research-obligation").filter(
+    ({ target, obligationStatus, publicationStatus }) =>
+      target.kind === kind &&
+      target.id === id &&
+      ["open", "partially-addressed"].includes(obligationStatus) &&
+      ["reviewed", "published"].includes(publicationStatus),
+  );
+}
+
+export function researchTargetHref({
+  target,
+  targetSectionId,
+}: Pick<ResearchObligation, "target" | "targetSectionId">) {
+  const base = {
+    approach: `/explore/${target.id}/`,
+    case: `/cases/${target.id}/`,
+    challenge: `/challenges/${target.id}/`,
+    concept: `/concepts/${target.id}/`,
+  }[target.kind];
+  return targetSectionId ? `${base}#${targetSectionId}` : base;
 }
 
 export function placementsForDimension(dimensionId: string) {

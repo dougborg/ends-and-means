@@ -352,6 +352,31 @@ proposal records what an identifiable actor or source proposes without treating
 that design as the project's recommendation or reducing it to an End. Citations
 attach through locators rather than only through page-level bibliographies.
 
+### Research obligations
+
+A Research Obligation records one focused question that reviewed evidence does
+not yet settle. It remains separate from a Statement because missing evidence is
+not itself a claim. Each obligation targets a canonical entity or exact Dossier
+section and records the current limitation, evidence needed, applicability
+scope, lifecycle status, and any Statements produced as research arrives.
+The `addressedStatementIds` field names the existing claims that create the
+question; `statementIds` separately names new claims reconciled from research.
+Those lists cannot overlap. An obligation must name at least one addressed
+Statement or an exact Dossier section, and its target is limited to a
+reader-facing Approach, Case, Challenge, or Concept so every target has a
+stable route and can display its open questions.
+
+The obligation type keeps four questions distinct: a `counterargument`
+challenges a reason or design; `counterevidence` could challenge an empirical
+claim; a `counterfactual` specifies an alternative causal path; and a general
+`research-gap` covers a focused unanswered question outside those categories.
+A partially addressed obligation requires at least one reconciled Statement
+but remains active. A resolved obligation requires reconciled Statements, a
+rationale, and `closedAt`; a withdrawn obligation requires a rationale and
+`closedAt` but does not manufacture evidence. Open and partially addressed
+obligations cannot carry closure metadata. Reader-facing text must not contain
+issue numbers, branch names, pull-request references, or migration status.
+
 ## Relationship model
 
 Relationships are records rather than embedded ID arrays when they express a

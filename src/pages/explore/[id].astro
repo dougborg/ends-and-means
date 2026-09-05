@@ -3,6 +3,7 @@ import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Approach, Case, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
@@ -23,6 +24,7 @@ const challenges = outgoing.filter((relation) => relation.predicate === "respond
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Approach</nav>
     <header><p class="coordinate">APPROACH</p><h1>{approach.label}</h1><DossierStandfirst content={dossier?.standfirst ?? approach.description} statementIds={dossier?.standfirstStatementIds} /></header>
     {dossier && <NarrativeDossier sections={dossier.sections} />}
+    <OpenResearchQuestions kind="approach" id={approach.id} />
     <section class="reference-apparatus" aria-labelledby="approach-reference-title">
       <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">Inspect the model</h2><p>Open the formal relationships and evidence behind the summary.</p></header>
       <details class="apparatus-group"><summary>Purpose and proposed institutions</summary><div class="apparatus-group__body"><section><h3>Attributed purposes</h3>{ends.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section><section><h3>Proposed institutions</h3>{means.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section></div></details>

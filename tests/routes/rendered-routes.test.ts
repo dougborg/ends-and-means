@@ -72,6 +72,7 @@ async function verifyEveryPublicRecordRenders() {
     "/compare/",
     "/challenges/",
     "/reading/",
+    "/research/",
     "/framework/",
     ...entitiesOfKind("approach").map(({ id }) => `/explore/${id}/`),
     ...entitiesOfKind("case").map(({ id }) => `/cases/${id}/`),
@@ -140,6 +141,10 @@ async function verifyExploreAndCaseRoutes() {
     "/explore/swedish-wage-earner-fund-program/",
   );
   expect(hrefs(canonicalCase)).toContain("/compare/");
+  expect(stripMarkup(canonicalCase)).toContain(
+    "How would Swedish listed-company ownership",
+  );
+  expect(hrefs(canonicalCase)).toContain("/research/");
   expect(stripMarkup(canonicalCase)).toContain("The argument in plain terms");
   expect(canonicalCase).toContain("<details");
 
@@ -183,6 +188,10 @@ async function verifyConceptRoutes() {
   );
   expect(stripMarkup(concept)).toContain("How this summary is supported");
   expect(stripMarkup(concept)).toContain("Swedish wage-earner fund program");
+  expect(stripMarkup(concept)).toContain(
+    "Under what conditions do codetermination or worker voice",
+  );
+  expect(hrefs(concept)).toContain("/research/");
   expect(hrefs(concept)).toContain(
     "https://en.wikipedia.org/wiki/Economic_democracy",
   );
@@ -228,6 +237,37 @@ async function verifyReferenceRoutes() {
     /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="2"/,
   );
   expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(1);
+
+  const research = await readFile(routeFile("/research/"), "utf8");
+  const researchText = stripMarkup(research);
+  const researchIds = [
+    ...research.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/gi),
+  ].map((match) => match[1] ?? match[2]);
+  expect(new Set(researchIds).size, "research page has duplicate element IDs").toBe(
+    researchIds.length,
+  );
+  expect(researchText).toContain("What the evidence does not yet settle.");
+  expect(researchText).toContain("Counterarguments");
+  expect(researchText).toContain("Counterevidence");
+  expect(researchText).toContain("Counterfactual questions");
+  expect(researchText).toContain(
+    "Can democratic firm governance coordinate specialized work",
+  );
+  expect(researchText).not.toMatch(
+    /pull request|\bPR\s*#?\d+\b|migration status|working (?:tree|branch|material)/i,
+  );
+  expect(researchText).toContain("counterargument / open");
+  expect(researchText).toContain("Claims this question tests");
+  expect(researchText).toContain("Evidence needed");
+  expect(hrefs(research)).toContain(
+    "/concepts/economic-democracy/#what-can-democratic-designs-fail-to-achieve",
+  );
+  expect(hrefs(research)).toContain(
+    "/concepts/social-democracy/#where-the-tradition-came-from",
+  );
+  expect(hrefs(research)).toContain(
+    "/cases/swedish-wage-earner-funds/#what-they-did-in-practice",
+  );
 
   const compare = await readFile(routeFile("/compare/"), "utf8");
   expect(compare).toContain("<table>");
