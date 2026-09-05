@@ -4,7 +4,7 @@ No single label for an owner answers all of those questions.
 ## what-does-social-ownership-claim
 
 For Erik Olin Wright, the relevant owners are members of an economically interdependent group who collectively hold disposal and net-income rights over productive property.
-Other accounts draw the constituency more narrowly or broadly, so the people included and their actual rights must be named.
+Wright allows that constituency to be more or less inclusive, so the people included and their actual rights still need to be named.
 Public title is one possible form, but title held by a state does not establish democratic control by the people for whom it claims to act.
 
 ## which-rights-must-be-separated
