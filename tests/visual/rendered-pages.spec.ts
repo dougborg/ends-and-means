@@ -8,6 +8,7 @@ const defaultRoutes = [
   "/cases/swedish-solidaristic-bargaining/",
   "/compare/",
   "/concepts/economic-democracy/",
+  "/concepts/social-democracy/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",

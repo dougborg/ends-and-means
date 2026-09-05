@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
+import type { AuthoringDocument, DomainEntity } from "../../src/lib/domain";
 import {
-  compileDomainGraph,
   auditContent,
+  compileDomainGraph,
   formatContentAttentionReport,
   validateAuthoringDocuments,
 } from "../../src/lib/domain";
-import type { AuthoringDocument, DomainEntity } from "../../src/lib/domain";
 import {
   canonicalGraph,
   dossierForSubject,
@@ -33,6 +33,7 @@ describe("canonical narrative dossiers", () => {
       dossierForSubject("case", "swedish-wage-earner-funds")?.sections.length,
     ).toBe(4);
     expect(dossierForSubject("concept", "economic-democracy")).toBeUndefined();
+    expect(dossierForSubject("concept", "social-democracy")?.sections).toHaveLength(4);
     expect(dossierForSubject("case", "missing-case")).toBeUndefined();
     expect(
       dossiers
@@ -54,7 +55,7 @@ describe("canonical narrative dossiers", () => {
         ?.missingIds,
     ).toEqual(["authority-and-accountability"]);
     expect(formatContentAttentionReport(report)).toContain(
-      "missing: social-democracy",
+      "missing: social-ownership",
     );
     const attentionGraph = structuredClone(canonicalGraph);
     const attentionDossier = attentionGraph.entities.find(
@@ -95,29 +96,51 @@ describe("canonical narrative dossiers", () => {
 describe("narrative attention signals", () => {
   it("reports objective narrative attention signals without scoring prose", () => {
     const attentionGraph = structuredClone(canonicalGraph);
-    const dossier = attentionGraph.entities.find((entity) => entity.kind === "dossier");
+    const dossier = attentionGraph.entities.find(
+      (entity) => entity.kind === "dossier",
+    );
     if (dossier?.kind !== "dossier") throw new Error("Missing Dossier fixture");
-    dossier.standfirst = "It is worth noting this complex interplay. Ultimately, it is multifaceted.";
+    dossier.standfirst =
+      "It is worth noting this complex interplay. Ultimately, it is multifaceted.";
     const report = auditContent(attentionGraph);
-    expect(report.narrativeAttention).toEqual(expect.arrayContaining([
-      expect.objectContaining({ location: `${dossier.subject.kind}:${dossier.subject.id}#standfirst`, reason: "generic filler phrase" }),
-    ]));
-    expect(formatContentAttentionReport(report)).toContain("Narrative attention:");
+    expect(report.narrativeAttention).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          location: `${dossier.subject.kind}:${dossier.subject.id}#standfirst`,
+          reason: "generic filler phrase",
+        }),
+      ]),
+    );
+    expect(formatContentAttentionReport(report)).toContain(
+      "Narrative attention:",
+    );
   });
 
   it("detects repeated phrasing across dossiers without flagging shared vocabulary", () => {
     const attentionGraph = structuredClone(canonicalGraph);
-    const dossiers = attentionGraph.entities.filter((entity) => entity.kind === "dossier");
+    const dossiers = attentionGraph.entities.filter(
+      (entity) => entity.kind === "dossier",
+    );
     const first = dossiers[0];
     const second = dossiers[1];
-    if (first?.kind !== "dossier" || second?.kind !== "dossier") throw new Error("Missing Dossier fixtures");
+    if (first?.kind !== "dossier" || second?.kind !== "dossier")
+      throw new Error("Missing Dossier fixtures");
     const section = second.sections[0];
     if (!section) throw new Error("Missing narrative section fixture");
-    first.standfirst = "Five appointed boards invested collectively financed capital under statutory ownership caps.";
-    section.body = "Five appointed boards invested collectively financed capital under statutory ownership caps during the period.";
-    expect(auditContent(attentionGraph).narrativeAttention).toContainEqual(expect.objectContaining({ reason: "possible repeated phrasing" }));
-    section.body = "The evidence discusses capital, boards, ownership, and statutory institutions in a different relationship.";
-    expect(auditContent(attentionGraph).narrativeAttention.filter(({ reason }) => reason === "possible repeated phrasing")).toEqual([]);
+    first.standfirst =
+      "Five appointed boards invested collectively financed capital under statutory ownership caps.";
+    section.body =
+      "Five appointed boards invested collectively financed capital under statutory ownership caps during the period.";
+    expect(auditContent(attentionGraph).narrativeAttention).toContainEqual(
+      expect.objectContaining({ reason: "possible repeated phrasing" }),
+    );
+    section.body =
+      "The evidence discusses capital, boards, ownership, and statutory institutions in a different relationship.";
+    expect(
+      auditContent(attentionGraph).narrativeAttention.filter(
+        ({ reason }) => reason === "possible repeated phrasing",
+      ),
+    ).toEqual([]);
   });
 });
 const base = {
