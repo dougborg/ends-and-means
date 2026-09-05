@@ -99,6 +99,12 @@ describe("delivery evidence and dependencies", () => {
     candidate.body = "Blocked on #42.\n\n## Acceptance criteria\n\n- [ ] Work.";
     expect(canPromote(snapshot, candidate)).toBe(false);
     expect(codes(snapshot)).toContain("READY_NOT_EXECUTABLE");
+    candidate.body = "## Acceptance criteria\n\n- [ ] Work.";
+    item(snapshot, 2).status = "In review";
+    item(snapshot, 2).linkedPullRequestStates = ["OPEN"];
+    item(snapshot, 2).reviewEvidence = { copilot: true, adversarial: true };
+    item(snapshot, 1).workstream = undefined;
+    expect(canPromote(snapshot, candidate)).toBe(false);
   });
 
   it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
