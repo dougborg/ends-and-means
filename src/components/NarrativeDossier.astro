@@ -1,0 +1,57 @@
+---
+import CanonicalStatement from "./CanonicalStatement.astro";
+import { entityById } from "../lib/domain/canonical";
+import type { EntityRef, NarrativeSection } from "../lib/domain";
+
+interface Props { sections: NarrativeSection[]; label?: string; }
+const { sections, label = "Summary" } = Astro.props;
+
+function hrefFor(ref: EntityRef): string | undefined {
+  if (ref.kind === "approach") return `/explore/${ref.id}/`;
+  if (ref.kind === "case") return `/cases/${ref.id}/`;
+  if (ref.kind === "concept") return `/concepts/${ref.id}/`;
+  if (ref.kind === "challenge") return `/challenges/${ref.id}/`;
+  if (ref.kind === "source") return `/sources/${ref.id}/`;
+  if (ref.kind === "case-episode") {
+    const episode = entityById(ref.id);
+    return episode?.kind === "case-episode" ? `/cases/${episode.caseId}/#${episode.id}` : undefined;
+  }
+  return undefined;
+}
+---
+
+<section class="narrative-dossier" aria-labelledby="narrative-title">
+  <header class="narrative-dossier__heading">
+    <p class="coordinate">{label}</p>
+    <h2 id="narrative-title">The argument in plain terms</h2>
+  </header>
+  <div class="narrative-dossier__sections">
+    {sections.map((section) => (
+      <section id={section.id} class="narrative-section">
+        <div class="narrative-section__marker" aria-hidden="true"></div>
+        <div class="narrative-section__content">
+          <h3>{section.heading}</h3>
+          <p>{section.body}</p>
+          {section.relatedEntityRefs && section.relatedEntityRefs.length > 0 && (
+            <nav aria-label={`Related to ${section.heading}`} class="narrative-links">
+              <span>Follow this thread</span>
+              {section.relatedEntityRefs.map((ref) => {
+                const entity = entityById(ref.id);
+                const href = hrefFor(ref);
+                return entity && (href ? <a href={href}>{entity.label}</a> : <span>{entity.label}</span>);
+              })}
+            </nav>
+          )}
+          {section.statementIds.length > 0 && (
+            <details class="reference-disclosure">
+              <summary>How this section is supported <span>{section.statementIds.length} {section.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
+              <div class="reference-disclosure__body">
+                {section.statementIds.map((id) => <CanonicalStatement statementId={id} />)}
+              </div>
+            </details>
+          )}
+        </div>
+      </section>
+    ))}
+  </div>
+</section>

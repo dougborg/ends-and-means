@@ -2,6 +2,13 @@
 
 **Status:** design direction for the clean analytical model; ready for screen prototypes, not production implementation
 
+Reader-facing Dossier pages follow the repository's
+[plain-spoken analytical narrative style](narrative-style.md).
+The visible reading path answers first; claim traces, definitions, external
+orientation, and formal model detail remain available through contextual links
+and native disclosures.
+This hierarchy is progressive disclosure, not evidence removal.
+
 ## Product thesis
 
 Ends and Means is a comparative instrument for examining political-economic

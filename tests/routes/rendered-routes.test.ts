@@ -53,8 +53,10 @@ async function verifyEveryPublicRecordRenders() {
   expect(home).toMatch(/href="\/cases\/">Browse the case directory/);
 
   const explore = await readFile(routeFile("/explore/swedish-wage-earner-fund-program/"), "utf8");
-  expect(stripMarkup(explore)).toContain("What the program said it was for");
-  expect(stripMarkup(explore)).toContain("Where the design met practice");
+  expect(stripMarkup(explore)).toContain("The problem it tried to address");
+  expect(stripMarkup(explore)).toContain("The mechanism that was enacted");
+  expect(stripMarkup(explore)).toContain("How this section is supported");
+  expect(explore).toContain("<details");
   expect(explore.match(/class="canonical-claim"/g)?.length).toBeGreaterThanOrEqual(2);
   expect(stripMarkup(explore)).toContain("Claim reviewed");
   expect(stripMarkup(explore)).not.toContain("undefined");
@@ -73,6 +75,8 @@ async function verifyEveryPublicRecordRenders() {
   expect(hrefs(canonicalCase)).toContain("https://doi.org/10.1017/eso.2022.23");
   expect(hrefs(canonicalCase)).toContain("/explore/swedish-wage-earner-fund-program/");
   expect(hrefs(canonicalCase)).toContain("/compare/");
+  expect(stripMarkup(canonicalCase)).toContain("The argument in plain terms");
+  expect(canonicalCase).toContain("<details");
 
   const rehnMeidner = await readFile(routeFile("/explore/swedish-rehn-meidner-model/"), "utf8");
   const rehnContinue = rehnMeidner.match(/<nav class="next-actions"[\s\S]*?<\/nav>/)?.[0] ?? "";

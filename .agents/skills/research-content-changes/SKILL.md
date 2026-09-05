@@ -30,7 +30,9 @@ merge or publish without human approval.
 ## Route the request
 
 1. Read [references/editorial-policy.md](references/editorial-policy.md).
-2. Read each relevant entity route:
+2. For Dossiers or other reader-facing narrative, read
+   [the narrative style guide](../../../docs/narrative-style.md).
+3. Read each relevant entity route:
    - [Concept](references/routes/concept.md)
    - [Collection](references/routes/collection.md)
    - [Approach](references/routes/approach.md)
@@ -59,6 +61,14 @@ before writing. Archived material is a discovery lead only and must never be
 imported, rendered, or cited as evidence. Record plausible candidates; do not
 silently merge concepts.
 
+For narrative prose, write plain-spoken analytical synthesis from the canonical
+Statement ledger or closed-source notes rather than by editing source wording.
+Verify every factual clause against its listed Statements, compare the draft
+against consulted sources for suspiciously close phrasing, and remove repeated
+explanations and generic filler. Treat automated prose findings as attention
+signals; accuracy, fairness, source similarity, and publication require human
+review.
+
 When promoting transitional or legacy material:
 
 - search for semantic duplicates as well as exact ID collisions;
@@ -85,11 +95,12 @@ non-fiction Work independently supports the empirical Statement.
 Run before handoff:
 
 ```bash
-npm run validate
-npm run check
-npm test
-npm run build
-npm run test:routes
+pnpm validate
+pnpm check
+pnpm test
+pnpm build
+pnpm test:routes
+pnpm audit:content
 ```
 
 Use the repository pull-request template. The PR must name the concrete changes,

@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
+import NarrativeDossier from "../../components/NarrativeDossier.astro";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
 import type { Approach, Case, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
 
@@ -19,13 +20,14 @@ const challenges = outgoing.filter((relation) => relation.predicate === "respond
 <BaseLayout title={approach.label} description={dossier?.standfirst ?? approach.description} fullBleed>
   <article class="canonical-dossier">
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Approach</nav>
-    <header><p class="coordinate">APPROACH / REVIEWED SLICE</p><h1>{approach.label}</h1><p class="dek">{dossier?.standfirst ?? approach.description}</p><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p><ExternalReferences references={approach.externalRefs} /></header>
-    <div class="trace-grid"><aside aria-label="Argument trace"><p class="coordinate">TRACE</p><ol><li>Attributed Ends</li><li>Proposed Means</li><li>Bounded practice</li><li>Evaluation</li></ol></aside><div class="claim-thread">
-      <section><header><p class="trace-marker">01</p><div><p class="coordinate">ENDS / ATTRIBUTED</p><h2>What the program said it was for</h2></div></header>{ends.map(({ entity, statementIds }) => entity && <div><h3>{entity.label}</h3>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section>
-      <section><header><p class="trace-marker">02</p><div><p class="coordinate">MEANS / PROPOSED</p><h2>What institutions were supposed to do</h2></div></header>{means.map(({ entity, statementIds }) => entity && <div><h3>{entity.label}</h3>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section>
-      <section><header><p class="trace-marker">03</p><div><p class="coordinate">CASES / BOUNDED</p><h2>Where the design met practice</h2></div></header>{cases.map(({ subject, predicate, status }) => <div class="case-link"><p class="coordinate">{status} / {predicate.replaceAll("-", " ")}</p><h3><a href={`/cases/${subject.kind === "case" ? subject.id : subject.caseId}/`}>{subject.label}</a></h3><p>{subject.description}</p></div>)}</section>
-      <section><header><p class="trace-marker">04</p><div><p class="coordinate">CHALLENGES / CRITERIA</p><h2>How the claims can be judged</h2></div></header><div class="evaluation-pairs">{challenges.map(({ challenge, criteria }) => challenge && <article><p class="coordinate">CHALLENGE</p><h3>{challenge.question}</h3><p>{challenge.rationale}</p>{criteria.map((criterion) => <p><strong>{criterion.label}:</strong> {criterion.definition}</p>)}</article>)}</div></section>
-    </div></div>
+    <header><p class="coordinate">APPROACH</p><h1>{approach.label}</h1><p class="dek">{dossier?.standfirst ?? approach.description}</p></header>
+    {dossier && <NarrativeDossier sections={dossier.sections} />}
+    <section class="reference-apparatus" aria-labelledby="approach-reference-title">
+      <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">Inspect the model</h2><p>Open the formal relationships and evidence behind the summary.</p></header>
+      <details class="apparatus-group"><summary>Purpose and proposed institutions</summary><div class="apparatus-group__body"><section><h3>Attributed purposes</h3>{ends.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section><section><h3>Proposed institutions</h3>{means.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section></div></details>
+      <details class="apparatus-group"><summary>Cases and evaluation</summary><div class="apparatus-group__body"><section><h3>Bounded practice</h3>{cases.map(({ subject, predicate, status }) => <div class="case-link"><p class="coordinate">{status} / {predicate.replaceAll("-", " ")}</p><h4><a href={`/cases/${subject.kind === "case" ? subject.id : subject.caseId}/`}>{subject.label}</a></h4><p>{subject.description}</p></div>)}</section><section><h3>Questions and criteria</h3>{challenges.map(({ challenge, criteria }) => challenge && <article><h4><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h4><p>{challenge.rationale}</p>{criteria.map((criterion) => <p><strong>{criterion.label}:</strong> {criterion.definition}</p>)}</article>)}</section></div></details>
+      <details class="apparatus-group"><summary>Scope and external orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p><ExternalReferences references={approach.externalRefs} /></div></details>
+    </section>
     {(relatedCaseLinks.length > 0 || hasComparison) && <nav class="next-actions" aria-label="Continue">{relatedCaseLinks.map((item) => <a href={`/cases/${item.id}/`}>Inspect {item.label}</a>)}{hasComparison && <a href="/compare/">Compare promise and practice</a>}</nav>}
   </article>
 </BaseLayout>
