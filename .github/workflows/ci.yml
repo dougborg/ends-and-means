@@ -40,8 +40,8 @@ jobs:
       - name: Check types and Astro files
         run: npm run check
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
       - name: Build site
         run: npm run build
