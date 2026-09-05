@@ -87,7 +87,7 @@ An issue that changes public rendering is not implemented until its affected
 pages have been evaluated in a browser. Build the site and run:
 
 ```sh
-npx playwright install chromium
+pnpm exec playwright install chromium
 pnpm review:visual
 ```
 

@@ -55,7 +55,7 @@ pnpm review:visual
 `pnpm review:visual` performs the browser-based self-review required for
 public rendering changes. It checks representative pages at desktop, tablet,
 and mobile widths and writes screenshots to `.artifacts/visual-review`. Install
-its Chromium runtime once with `npx playwright install chromium`; see
+its Chromium runtime once with `pnpm exec playwright install chromium`; see
 [`CONTRIBUTING.md`](CONTRIBUTING.md#rendered-page-review) for focused-route use
 and the completion criteria.
 
