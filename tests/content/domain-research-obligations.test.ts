@@ -498,6 +498,12 @@ describe("canonical research agenda", () => {
         status: "open",
       },
       {
+        id: "social-ownership-delegation-accountability-gap",
+        obligationType: "counterargument",
+        target: "concept:social-ownership#which-rights-must-be-separated",
+        status: "open",
+      },
+      {
         id: "swedish-funds-investment-counterfactual",
         obligationType: "counterfactual",
         target: "case:swedish-wage-earner-funds",
@@ -533,6 +539,11 @@ describe("canonical research agenda", () => {
       "economic-democracy-property-rights-objection",
     ]);
     expect(researchObligationsForTarget("concept", "missing")).toEqual([]);
+    expect(
+      researchObligationsForTarget("concept", "social-ownership").map(
+        ({ id }) => id,
+      ),
+    ).toEqual(["social-ownership-delegation-accountability-gap"]);
   });
 
 });

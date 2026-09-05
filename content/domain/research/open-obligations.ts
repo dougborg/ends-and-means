@@ -11,6 +11,29 @@ export const openResearchObligationDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "social-ownership-delegation-accountability-gap",
+      kind: "research-obligation",
+      label: "Delegated control and social-ownership accountability",
+      description:
+        "A focused objection concerning nominally social assets controlled by officials, trustees, or fund managers who may not remain answerable to the intended constituency.",
+      obligationType: "counterargument",
+      question:
+        "When does delegated control over collectively held assets cease to count as effective social ownership?",
+      target: { kind: "concept", id: "social-ownership" },
+      targetSectionId: "which-rights-must-be-separated",
+      addressedStatementIds: ["social-ownership-control-boundary"],
+      currentLimitation:
+        "The current account separates title, benefit, control, and returns but does not establish a threshold at which delegation becomes unaccountable control by managers or the state.",
+      evidenceNeeded:
+        "Strong primary critiques and comparative cases that trace appointment, removal, transparency, contestation, voting, and surplus-allocation rights in practice.",
+      scope:
+        "Delegated governance of productive assets claimed to be held for workers, communities, or the public; not a claim that every representative or professional manager defeats social ownership.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "economic-democracy-property-rights-objection",
       kind: "research-obligation",
       label: "Property-rights objection to economic democracy",

@@ -153,6 +153,21 @@ test("research obligations expose their claim ledger from the keyboard", async (
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
 });
 
+test("social ownership publishes a traceable dossier and focused research question", async ({ page }) => {
+  await page.goto("/concepts/social-ownership/");
+  await expect(page.getByRole("heading", { name: "Which rights must be separated?" })).toBeVisible();
+  await expect(page.getByText("Legal title names the recognized holder of an asset.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Economic democracy" }).first()).toHaveAttribute(
+    "href",
+    "/concepts/economic-democracy/",
+  );
+  await expect(page.getByRole("link", { name: "Swedish wage-earner funds" }).first()).toHaveAttribute(
+    "href",
+    "/cases/swedish-wage-earner-funds/",
+  );
+  await expect(page.getByText("counterargument / open")).toBeVisible();
+});
+
 test("case-episode fragment links reveal their target", async ({ page }) => {
   await page.goto("/cases/swedish-wage-earner-funds/");
   await page.locator('a[href$="#enacted-wage-earner-funds-1984-1991"]').first().click();

@@ -63,7 +63,7 @@ export const socialDemocracyEvidenceDocuments = [
       kind: "source",
       label: "Socialism, Stanford Encyclopedia of Philosophy (2024)",
       description:
-        "The Fall 2024 entry consulted for the boundary between socialist system change, welfare-state reforms, and social-democratic strategies.",
+        "The Fall 2024 entry consulted for socialist system boundaries, social and state control, market-socialist designs, welfare-state reforms, and social-democratic strategies.",
       title: "Socialism",
       sourceType: "web-page",
       workId: "gilabert-oneill-socialism-work",
