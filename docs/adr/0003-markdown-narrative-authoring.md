@@ -21,6 +21,9 @@ adjacent TypeScript manifest.
 The Markdown file begins with the standfirst and uses
 `## stable-section-id` headings to associate prose with manifest sections.
 Compilation rejects missing or unexpected section IDs.
+Narrative Markdown is deliberately limited to paragraphs and inline links or
+emphasis; page-level headings, lists, quotes, code blocks, and raw HTML belong in
+the presentation layer rather than prose files.
 Rendering uses a CommonMark parser with raw HTML disabled and unsafe link
 protocols removed.
 
@@ -31,6 +34,8 @@ Do not impose a prose line-length cap.
 
 Use `markdownlint-cli2` for maintained repository Markdown and
 `markdownlint-sentences-per-line` for Dossier narrative files.
+Pair that rule with a repository check requiring every prose line to end as a
+complete sentence, so a sentence cannot be manually wrapped across lines.
 Archived research remains outside lint scope because it is immutable provenance,
 not current authoring.
 
