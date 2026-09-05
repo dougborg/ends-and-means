@@ -1,6 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
-import { auditDeliverySnapshot, canPromote, type DeliverySnapshot } from "../../scripts/delivery-state.ts";
+import {
+  auditDeliverySnapshot,
+  canPromote,
+  deliverySnapshotSchema,
+  orderedReady,
+  type DeliverySnapshot,
+} from "../../scripts/delivery-state.ts";
 
 const fixtureUrl = new URL("../fixtures/delivery/project-valid.json", import.meta.url);
 
@@ -23,21 +29,19 @@ describe("delivery Project policy", () => {
   it("accepts a valid thin delivery queue and excludes review from WIP", async () => {
     const snapshot = await fixture();
     expect(auditDeliverySnapshot(snapshot)).toEqual([]);
-    expect(canPromote(snapshot, "Corpus")).toBe(false);
+    expect(canPromote(snapshot, item(snapshot, 5))).toBe(false);
     item(snapshot, 2).status = "In review";
     item(snapshot, 2).linkedPullRequestStates = ["OPEN"];
-    expect(canPromote(snapshot, "Corpus")).toBe(true);
+    expect(canPromote(snapshot, item(snapshot, 5))).toBe(true);
   });
 
-  it("rejects Ready outside 3–5 and missing or unordered Priority", async () => {
+  it("rejects Ready outside 3–5 and deterministically orders Priority independent of item-list order", async () => {
     const tooSmall = await fixture();
     tooSmall.items = tooSmall.items.filter((item) => item.status !== "Ready" || item.number === 4);
     expect(codes(tooSmall)).toContain("READY_SIZE");
     const unordered = await fixture();
-    item(unordered, 4).priority = "Later";
-    expect(codes(unordered)).toContain("READY_PRIORITY_ORDER");
-    item(unordered, 5).priority = undefined;
-    expect(codes(unordered)).toContain("READY_PRIORITY_MISSING");
+    unordered.items.reverse();
+    expect(orderedReady(unordered.items).map((candidate) => candidate.number)).toEqual([4, 5, 6]);
   });
 
   it("rejects excess WIP, duplicate workstreams, and non-delivery Platform work", async () => {
@@ -58,7 +62,9 @@ describe("delivery Project policy", () => {
     item(stale, 2).updatedAt = undefined;
     expect(codes(stale)).toContain("WIP_FRESHNESS_UNAVAILABLE");
   });
+});
 
+describe("delivery evidence and dependencies", () => {
   it("detects issue, PR, label, visibility, and Blocked drift", async () => {
     const snapshot = await fixture();
     snapshot.project.public = true;
@@ -72,6 +78,8 @@ describe("delivery Project policy", () => {
     const review = item(snapshot, 7);
     review.linkedPullRequestStates = [];
     review.state = "CLOSED";
+    const done = item(snapshot, 2);
+    done.status = "Done";
     expect(codes(snapshot)).toEqual(expect.objectContaining(new Set([
       "PROJECT_VISIBILITY",
       "STATUS_READY_LABEL",
@@ -80,13 +88,54 @@ describe("delivery Project policy", () => {
       "STATUS_BLOCKED_LABEL",
       "STATUS_REVIEW_WITHOUT_PR",
       "STATUS_CLOSED_NOT_DONE",
+      "STATUS_DONE_OPEN",
     ])));
   });
 
-  it("rejects promotion when the total or requested lane has no capacity", async () => {
+  it("requires executable dependency-free Ready candidates and lane capacity", async () => {
     const snapshot = await fixture();
-    expect(canPromote(snapshot, "Reader experience")).toBe(false);
-    expect(canPromote(snapshot, "Corpus")).toBe(false);
-    expect(canPromote(snapshot, "Platform/process")).toBe(false);
+    expect(canPromote(snapshot, item(snapshot, 4))).toBe(false);
+    const candidate = item(snapshot, 5);
+    candidate.body = "Blocked on #42.\n\n## Acceptance criteria\n\n- [ ] Work.";
+    expect(canPromote(snapshot, candidate)).toBe(false);
+    expect(codes(snapshot)).toContain("READY_NOT_EXECUTABLE");
+  });
+
+  it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
+    const snapshot = await fixture();
+    item(snapshot, 1).ownership = undefined;
+    item(snapshot, 1).baseCurrent = false;
+    item(snapshot, 2).historyLinear = false;
+    item(snapshot, 3).workstream = undefined;
+    item(snapshot, 7).reviewEvidence = { copilot: true, adversarial: false };
+    snapshot.repositoryLabels = snapshot.repositoryLabels.filter((label) => label !== "track:depictions");
+    expect(codes(snapshot)).toEqual(expect.objectContaining(new Set([
+      "WIP_OWNERSHIP",
+      "CURRENT_BASE",
+      "LINEAR_HISTORY",
+      "WIP_WORKSTREAM",
+      "REVIEW_EVIDENCE",
+      "TRACK_LABEL",
+    ])));
+  });
+
+  it("guards the learner-first dependency chain", async () => {
+    const snapshot = await fixture();
+    snapshot.items.push(
+      { number: 119, title: "Vision", type: "Issue", state: "OPEN", status: "Backlog", labels: [] },
+      { number: 120, title: "Contract", type: "Issue", state: "OPEN", status: "In progress", workstream: "Reader experience", labels: [], updatedAt: snapshot.capturedAt, ownership: { owner: "agent", branch: "feat/contract", worktree: "/tmp/contract" }, baseCurrent: true, historyLinear: true },
+      { number: 130, title: "Prototype", type: "Issue", state: "OPEN", status: "In review", workstream: "Reader experience", labels: [], linkedPullRequestStates: ["OPEN"], baseCurrent: true, historyLinear: true, reviewEvidence: { copilot: true, adversarial: true } },
+      { number: 121, title: "Explore", type: "Issue", state: "OPEN", status: "Done", labels: [] },
+    );
+    expect(auditDeliverySnapshot(snapshot).filter((finding) => finding.code === "LEARNER_SEQUENCE")).toHaveLength(3);
+  });
+
+  it("runtime-validates malformed snapshot fixtures", async () => {
+    const malformed = JSON.parse(await readFile(new URL("../fixtures/delivery/project-malformed.json", import.meta.url), "utf8"));
+    const result = deliverySnapshotSchema.safeParse(malformed);
+    expect(result.success).toBe(false);
+    if (result.success) throw new Error("Malformed fixture unexpectedly passed validation.");
+    const paths = result.error.issues.map((issue) => issue.path.join("."));
+    expect(paths).toEqual(expect.arrayContaining(["capturedAt", "items.0.number", "items.0.status", "items.0.updatedAt"]));
   });
 });

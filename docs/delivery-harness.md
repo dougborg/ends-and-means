@@ -29,7 +29,9 @@ pnpm audit:delivery -- --live-project
 
 The command is read-only and never changes Project visibility.
 It exits 0 for a clean readable snapshot, 1 for policy findings, and 2 when credentials, API access, or input is unavailable.
-Tests use a normalized snapshot fixture so Ready size and ordering, implementation WIP, workstream capacity, staleness, blocked conditions, and issue/PR/status reconciliation remain deterministic.
+Runtime schemas reject malformed API and snapshot data before policy analysis and distinguish invalid input, unavailable API access, and unexpected execution errors.
+Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.
+Ready reports are deterministically sorted by Priority (`Now`, `Next`, `Later`) and then issue number; they never infer order from GitHub's item-list response.
 
 For diagnosis or fixture development, pass a stored normalized snapshot:
 

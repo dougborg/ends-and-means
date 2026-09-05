@@ -21,5 +21,6 @@ Do not duplicate their ownership across workflows or rename them casually.
 
 When the base moves, rebase and rerun the gates affected by the new base.
 Use GitHub's rebase integration only—never squash, merge commits, force pushes to `main`, or admin bypasses.
+Confirm linear history before integration.
 After merge, verify the commit on `main`, required main checks, and Pages deployment when public output or its build path changed.
 Then reconcile the issue and Project item and safely remove only the merged branch/worktree owned by the task.

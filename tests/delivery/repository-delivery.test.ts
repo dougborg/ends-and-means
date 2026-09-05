@@ -25,7 +25,7 @@ describe("repository delivery configuration", () => {
   it("detects unsafe triggers, permissions, mutable actions, and checkout credentials", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/workflows/security.yml", "pull_request:", "pull_request_target:");
-    await replace(root, ".github/workflows/security.yml", "permissions: {}", "permissions: write-all");
+    await replace(root, ".github/workflows/ci.yml", "contents: read", "contents: write");
     await replace(root, ".github/workflows/security.yml", "@3d3c42e5aac5ba805825da76410c181273ba90b1", "@main");
     await replace(root, ".github/actions/verify/action.yml", "persist-credentials: false", "persist-credentials: true");
     const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
@@ -35,11 +35,12 @@ describe("repository delivery configuration", () => {
   it("detects cache, lockfile, artifact, required-name, and duplicate-owner drift", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/actions/verify/action.yml", "cache: pnpm", "cache: npm");
+    await replace(root, ".github/actions/verify/action.yml", "cache-dependency-path: pnpm-lock.yaml", "cache-dependency-path: package.json");
     await replace(root, ".github/actions/verify/action.yml", "pnpm install --frozen-lockfile", "pnpm install");
     await replace(root, ".github/actions/verify/action.yml", "run: pnpm verify", "run: pnpm verify\n\n    - shell: bash\n      run: pnpm lint");
     await replace(root, ".github/workflows/pages.yml", "needs: build-and-verify", "needs: []");
     await replace(root, ".github/workflows/ci.yml", "verify:", "changed-name:");
     const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
-    expect(codes).toEqual(expect.arrayContaining(["PNPM_CACHE", "FROZEN_INSTALL", "VERIFY_DUPLICATE", "PAGES_ARTIFACT", "REQUIRED_CHECK_NAME"]));
+    expect(codes).toEqual(expect.arrayContaining(["PNPM_CACHE", "PNPM_CACHE_KEY", "FROZEN_INSTALL", "VERIFY_DUPLICATE", "PAGES_ARTIFACT", "REQUIRED_CHECK_NAME"]));
   });
 });

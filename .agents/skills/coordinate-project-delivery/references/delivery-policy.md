@@ -21,7 +21,7 @@ Do not encode mutable issue or pull-request status in durable public documentati
 | Blocked | Open issue with `status:blocked` and a concrete named unblock condition. |
 | Done | Merged or closed authoritative work, with post-merge state reconciled. |
 
-Ready contains three to five items ordered Now, Next, then Later.
+Ready contains three to five items; audit output orders them deterministically by Priority (`Now`, `Next`, `Later`) and issue number rather than trusting API response order.
 In progress contains at most three implementation items and normally at most one per workstream.
 Platform/process consumes its slot only for delivery-enabling work.
 
