@@ -145,6 +145,7 @@ const socialOwnership = attachNarrative("social-ownership.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
+        "wright-social-ownership-definition",
         "social-ownership-four-questions",
         "social-ownership-public-title-boundary",
       ],
@@ -185,7 +186,8 @@ const socialOwnership = attachNarrative("social-ownership.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "rehn-meidner-social-ownership-boundary",
+        "rehn-meidner-original-ownership-boundary",
+        "meidner-1976-wage-earner-fund-connection",
         "funds-related-ideas-classification",
         "funds-statutory-design",
         "funds-limited-control",

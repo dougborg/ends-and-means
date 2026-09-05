@@ -9,6 +9,7 @@ import {
 } from "../../src/lib/domain/canonical";
 
 const statementIds = [
+  "wright-social-ownership-definition",
   "social-ownership-four-questions",
   "social-ownership-title-benefit-boundary",
   "social-ownership-rights-are-divisible",
@@ -17,7 +18,8 @@ const statementIds = [
   "social-ownership-public-title-boundary",
   "social-ownership-market-socialism-relationship",
   "social-ownership-economic-democracy-relationship",
-  "rehn-meidner-social-ownership-boundary",
+  "rehn-meidner-original-ownership-boundary",
+  "meidner-1976-wage-earner-fund-connection",
 ];
 
 describe("social-ownership corpus slice", () => {
@@ -40,7 +42,6 @@ describe("social-ownership corpus slice", () => {
       expect.arrayContaining([
         "wage-earner-program-interprets-social-ownership",
         "rehn-meidner-contested-social-ownership",
-        "solidaristic-bargaining-contested-social-ownership",
         "wage-earner-funds-contested-social-ownership",
       ]),
     );
