@@ -8,6 +8,7 @@ import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
+import { openResearchObligationDocuments } from "./research/open-obligations";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
@@ -24,6 +25,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialDemocracyEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
+  ...openResearchObligationDocuments,
   ...analysisDocuments,
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,

@@ -101,7 +101,9 @@ const economicDemocracy = attachNarrative("economic-democracy.md", {
       statementIds: [
         "economic-democracy-beyond-workplace",
         "economic-democracy-design-and-evidence-limits",
-        "economic-democracy-serious-objections",
+        "economic-democracy-property-rights-objection-statement",
+        "economic-democracy-decision-cost-objection-statement",
+        "economic-democracy-futility-objection-statement",
       ],
     },
     {

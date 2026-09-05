@@ -3,6 +3,7 @@ import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Approach, Concept } from "../../lib/domain";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
@@ -18,6 +19,7 @@ const narrativeSections = dossier?.sections ?? [{ id: "meaning", heading: "What 
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Concept</nav>
     <header><p class="coordinate">CONCEPT</p><h1>{concept.label}</h1><DossierStandfirst content={dossier?.standfirst ?? concept.description} statementIds={dossier?.standfirstStatementIds} /></header>
     <NarrativeDossier sections={narrativeSections} label="Definition" />
+    <OpenResearchQuestions kind="concept" id={concept.id} />
     <section class="reference-apparatus" aria-labelledby="concept-reference-title"><header><p class="coordinate">REFERENCE</p><h2 id="concept-reference-title">Usage and orientation</h2></header>{approaches.length > 0 && <details class="apparatus-group"><summary>How published approaches use this idea <span>{approaches.length}</span></summary><div class="apparatus-group__body apparatus-group__body--single">{approaches.map(({ approach, role, interpretation, statementIds }) => <article><p class="coordinate">{role}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3><p>{interpretation}</p>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</div></details>}<details class="apparatus-group"><summary>External orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><ExternalReferences references={concept.externalRefs} /></div></details></section>
   </article>
 </BaseLayout>

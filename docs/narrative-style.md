@@ -34,6 +34,18 @@ Fairness means presenting serious competing interpretations in their strongest
 supportable form; it does not mean inventing a dispute or giving weak evidence
 equal weight.
 
+When a limitation remains open, state it concretely and link it to a focused
+Research Obligation. Distinguish an argument against a claim, evidence that may
+challenge an observation, and a causal counterfactual. Do not use “more research
+is needed” as a substitute for naming the question, scope, and evidence that
+would address it.
+Link each question to the exact Statement it tests or the exact Dossier section
+where the limitation appears. Keep the claims that prompted the question
+separate from any new Statements produced while answering it. Split questions
+when ownership, distribution, investment, governance, or another outcome could
+be answered independently. State lifecycle status and closure reasoning plainly;
+never expose issue, branch, pull-request, or migration workflow in public prose.
+
 ## Synthesize without mimicking sources
 
 Draft from the canonical Statement ledger or closed-source notes, not by editing

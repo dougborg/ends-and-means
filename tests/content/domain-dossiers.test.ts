@@ -55,7 +55,9 @@ describe("canonical narrative dossiers", () => {
         "economic-democracy-beyond-workplace",
         "economic-democracy-ownership-is-not-control",
         "economic-democracy-design-and-evidence-limits",
-        "economic-democracy-serious-objections",
+        "economic-democracy-property-rights-objection-statement",
+        "economic-democracy-decision-cost-objection-statement",
+        "economic-democracy-futility-objection-statement",
       ]),
     );
     expect(economicDemocracy?.sections[4]?.statementIds).toEqual([
@@ -152,6 +154,8 @@ describe("canonical narrative coverage", () => {
         researchGapSections: ["concept:test#open-question"],
         researchNeededEntities: ["concept:test"],
         narrativeAttention: [],
+        openResearchObligations: [],
+        researchEvidenceAwaitingResolution: [],
       }),
     ).toContain(
       "concept:test#open-question\n\nResearch-needed entities: 1\n- concept:test",

@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ResearchObligationCard from "../../components/ResearchObligationCard.astro";
+import { entitiesOfKind } from "../../lib/domain/canonical";
+
+const obligations = entitiesOfKind("research-obligation").filter(
+  ({ publicationStatus }) => ["reviewed", "published"].includes(publicationStatus),
+);
+const active = obligations.filter(({ obligationStatus }) =>
+  ["open", "partially-addressed"].includes(obligationStatus),
+);
+const resolved = obligations.filter(({ obligationStatus }) =>
+  ["resolved", "withdrawn"].includes(obligationStatus),
+);
+const labels: Record<(typeof active)[number]["obligationType"], string> = {
+  counterargument: "Counterarguments",
+  counterevidence: "Counterevidence",
+  counterfactual: "Counterfactual questions",
+  "research-gap": "Research gaps",
+};
+---
+
+<BaseLayout title="Open research" description="Specific counterarguments, counterevidence, counterfactual questions, and research gaps that the current evidence does not settle." fullBleed>
+  <article class="research-agenda canonical-index">
+    <header>
+      <p class="coordinate">METHOD / OPEN QUESTIONS</p>
+      <h1>What the evidence does not yet settle.</h1>
+      <p class="dek">This agenda records specific limits as work to be tested. A counterargument challenges a reason or design; counterevidence challenges an empirical claim; a counterfactual asks what would likely happen under a specified alternative; and a research gap names another focused question the current record cannot answer.</p>
+    </header>
+    {Object.entries(labels).map(([type, label]) => {
+      const rows = active.filter(({ obligationType }) => obligationType === type);
+      return rows.length > 0 && (
+        <section class="research-agenda__group" aria-labelledby={`research-${type}`}>
+          <header><p class="coordinate">{rows.length} OPEN</p><h2 id={`research-${type}`}>{label}</h2></header>
+          <ol>{rows.map((obligation) => <ResearchObligationCard obligation={obligation} showTarget />)}</ol>
+        </section>
+      );
+    })}
+    {resolved.length > 0 && <details class="apparatus-group"><summary>Resolved or withdrawn questions <span>{resolved.length}</span></summary><div class="apparatus-group__body apparatus-group__body--single"><ol>{resolved.map((obligation) => <ResearchObligationCard obligation={obligation} showTarget />)}</ol></div></details>}
+  </article>
+</BaseLayout>

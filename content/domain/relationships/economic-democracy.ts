@@ -58,11 +58,25 @@ const citations = [
     "limits-herzog",
   ],
   [
-    "economic-democracy-serious-objections",
+    "economic-democracy-property-rights-objection-statement",
     "herzog-economic-democracy-source",
-    "sections 3.1–3.3",
+    "section 3.1",
     "supports",
-    "objections-herzog",
+    "property-objection-herzog",
+  ],
+  [
+    "economic-democracy-decision-cost-objection-statement",
+    "herzog-economic-democracy-source",
+    "section 3.2",
+    "supports",
+    "decision-cost-objection-herzog",
+  ],
+  [
+    "economic-democracy-futility-objection-statement",
+    "herzog-economic-democracy-source",
+    "section 3.3",
+    "supports",
+    "futility-objection-herzog",
   ],
 ] as const;
 

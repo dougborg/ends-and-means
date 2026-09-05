@@ -33,7 +33,8 @@ export type EntityKind =
   | "person"
   | "organization"
   | "depiction"
-  | "dossier";
+  | "dossier"
+  | "research-obligation";
 
 export interface EntityRef {
   kind: EntityKind;

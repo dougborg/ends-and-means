@@ -174,13 +174,39 @@ export const economicDemocracyEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "economic-democracy-serious-objections",
+      id: "economic-democracy-property-rights-objection-statement",
       kind: "statement",
-      label: "Serious objections to economic democracy",
+      label: "Property-rights objection to economic democracy",
       description:
-        "An attributed classification of the principal objections surveyed in the consulted reference work.",
+        "An attributed classification of the property and market-choice objection surveyed by Herzog.",
       statementKind: "classification",
-      text: "Herzog groups serious objections around the priority of property and market choice, the costs and competence of democratic decision-making, and the risk that formal participation will reproduce domination or fail under wider economic constraints.",
+      text: "Herzog identifies an objection that workplace democracy can conflict with owners' property rights and choices made through markets.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "economic-democracy-decision-cost-objection-statement",
+      kind: "statement",
+      label: "Decision-cost objection to economic democracy",
+      description:
+        "An attributed classification of the decision-cost and competence objection surveyed by Herzog.",
+      statementKind: "classification",
+      text: "Herzog identifies objections that democratic economic decisions can be costly and that participants may lack the information or competence required for specialized decisions.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "economic-democracy-futility-objection-statement",
+      kind: "statement",
+      label: "Futility objection to economic democracy",
+      description:
+        "An attributed classification of objections concerning exclusion, informal domination, and wider constraints surveyed by Herzog.",
+      statementKind: "classification",
+      text: "Herzog identifies objections that formal participation can preserve exclusion or informal domination and that wider economic pressures can limit democratic decisions.",
       ...reviewed,
     },
   },
