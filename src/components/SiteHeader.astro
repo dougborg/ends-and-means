@@ -1,23 +1,14 @@
 ---
+import { isCurrentPublicRoute, publicRoutes } from "../lib/public-navigation";
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
-const navItems = [
-  { href: "/explore/", label: "Explore" },
-  { href: "/compare/", label: "Compare" },
-  { href: "/cases/", label: "Cases" },
-  { href: "/challenges/", label: "Challenges" },
-  { href: "/framework/", label: "Method" },
-  { href: "/research/", label: "Open questions" },
-  { href: "/reading/", label: "Reading" },
-];
-const isCurrent = (href: string) => currentPath.startsWith(href);
 ---
 <header class="site-header">
   <div class="site-header__inner">
     <a class="wordmark" href="/" aria-label="Ends and Means, home"><span>Ends</span><span class="wordmark__hinge">and</span><span>Means</span></a>
-    <nav aria-label="Primary navigation">
+    <nav aria-label="Primary">
       <ul class="primary-nav">
-        {navItems.map(({ href, label }) => <li><a href={href} aria-current={isCurrent(href) ? "page" : undefined}>{label}</a></li>)}
+        {publicRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
       </ul>
     </nav>
   </div>

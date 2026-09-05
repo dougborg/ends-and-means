@@ -704,6 +704,14 @@ slug cannot become a query without explicit disambiguation.
 Retired guide paths require reviewed redirects to a stable guide or an explicit
 gone state; a redirect must not silently merge canonical identities.
 
+The wordmark is the only Home link in the primary landmark.
+One typed route registry supplies both global navigation and the compact footer
+site map, including descendant-route current-section mapping.
+Subject Guides and Concept reference pages both map to Explore while remaining
+distinct destinations within it.
+New public areas must define their reader-facing label and descendant route
+prefixes in that registry rather than editing the landmarks independently.
+
 Compare supports three initial modes:
 
 1. responses to a shared Challenge;
