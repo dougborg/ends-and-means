@@ -41,6 +41,25 @@ describe("repository delivery configuration", () => {
     expect(codes).toEqual(expect.arrayContaining(["WORKFLOW_PERMISSIONS", "ACTION_PIN"]));
   });
 
+  it("audits unsafe workflows with the .yaml extension", async () => {
+    const root = await repositoryFixture();
+    await writeFile(
+      join(root, ".github/workflows/unsafe.yaml"),
+      [
+        "name: Unsafe extension fixture",
+        "on:",
+        "  pull_request_target:",
+        "permissions: write-all",
+        "jobs:",
+        "  bypass:",
+        "    uses: actions/example-workflow@main",
+        "",
+      ].join("\n"),
+    );
+    const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
+    expect(codes).toEqual(expect.arrayContaining(["FORK_SAFETY", "WORKFLOW_PERMISSIONS", "ACTION_PIN"]));
+  });
+
   it("detects cache, lockfile, artifact, required-name, and duplicate-owner drift", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/actions/verify/action.yml", "cache: pnpm", "cache: npm");
