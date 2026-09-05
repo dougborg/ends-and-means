@@ -36,7 +36,6 @@ for (const route of routes) {
       expect(response?.ok()).toBe(true);
       await page.screenshot({ path: testInfo.outputPath("page.png"), fullPage: true });
 
-      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Browser-context audit is an existing baseline hotspot to split during ratcheting.
       const audit = await page.evaluate(() => {
         const parseColor = (value: string) => {
           const channels = value.match(/[\d.]+/g)?.map(Number) ?? [];
@@ -58,47 +57,66 @@ for (const route of routes) {
           }
           return parseColor(getComputedStyle(document.documentElement).backgroundColor);
         };
-        // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: DOM visibility and contrast checks form one existing browser-evaluation baseline.
-        const lowContrast = [...document.querySelectorAll("main h1, main h2, main h3, main h4, main p, main a, main summary, main strong, main small")].flatMap((element) => {
+        const isHidden = (style: CSSStyleDeclaration, bounds: DOMRect) => [
+          style.visibility === "hidden",
+          style.display === "none",
+          bounds.width === 0,
+          bounds.height === 0,
+        ].some(Boolean);
+        const numericFontWeight = (fontWeight: string) => {
+          if (fontWeight === "bold") return 700;
+          if (fontWeight === "normal") return 400;
+          return Number.parseInt(fontWeight, 10) || 400;
+        };
+        const minimumContrast = (fontSize: number, fontWeight: number) => {
+          if (fontSize >= 24) return 3;
+          if (fontSize >= 18.66 && fontWeight >= 700) return 3;
+          return 4.5;
+        };
+        const contrastIssue = (element: Element) => {
           const style = getComputedStyle(element);
           const bounds = element.getBoundingClientRect();
-          if (style.visibility === "hidden" || style.display === "none" || bounds.width === 0 || bounds.height === 0) return [];
+          if (isHidden(style, bounds)) return undefined;
           const foreground = parseColor(style.color);
           const background = backgroundFor(element);
           const light = Math.max(luminance(foreground), luminance(background));
           const dark = Math.min(luminance(foreground), luminance(background));
           const ratio = (light + 0.05) / (dark + 0.05);
           const fontSize = Number.parseFloat(style.fontSize);
-          const fontWeight = style.fontWeight === "bold"
-            ? 700
-            : style.fontWeight === "normal"
-              ? 400
-              : Number.parseInt(style.fontWeight, 10) || 400;
-          const minimum = fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 700) ? 3 : 4.5;
-          return ratio + 0.01 < minimum ? [{ element: element.tagName.toLowerCase(), text: element.textContent?.trim().slice(0, 80), ratio: Number(ratio.toFixed(2)), minimum }] : [];
-        });
+          const minimum = minimumContrast(fontSize, numericFontWeight(style.fontWeight));
+          if (ratio + 0.01 >= minimum) return undefined;
+          return { element: element.tagName.toLowerCase(), text: element.textContent?.trim().slice(0, 80), ratio: Number(ratio.toFixed(2)), minimum };
+        };
+        const lowContrast = [...document.querySelectorAll("main h1, main h2, main h3, main h4, main p, main a, main summary, main strong, main small")]
+          .map(contrastIssue)
+          .filter((issue) => issue !== undefined);
 
-        const declared = new Set<string>();
-        const used = new Set<string>();
-        for (const sheet of [...document.styleSheets]) {
-          let rules: CSSRuleList;
-          try { rules = sheet.cssRules; } catch { continue; }
-          for (const rule of [...rules]) {
-            const css = rule.cssText;
-            for (const match of css.matchAll(/(--[\w-]+)\s*:/g)) if (match[1]) declared.add(match[1]);
-            for (const match of css.matchAll(/var\((--[\w-]+)/g)) if (match[1]) used.add(match[1]);
-          }
-        }
+        const sheetRules = (sheet: CSSStyleSheet) => {
+          try { return [...sheet.cssRules]; } catch { return []; }
+        };
+        const matches = (css: string, pattern: RegExp) => [...css.matchAll(pattern)]
+          .map((match) => match[1])
+          .filter((token) => token !== undefined);
+        const undefinedTokens = () => {
+          const declared = new Set<string>();
+          const used = new Set<string>();
+          const cssTexts = [...document.styleSheets].flatMap(sheetRules).map((rule) => rule.cssText);
+          for (const css of cssTexts) for (const token of matches(css, /(--[\w-]+)\s*:/g)) declared.add(token);
+          for (const css of cssTexts) for (const token of matches(css, /var\((--[\w-]+)/g)) used.add(token);
+          return [...used].filter((token) => !declared.has(token)).sort();
+        };
+
+        const activeNavigationVisible = () => [...document.querySelectorAll('.primary-nav a[aria-current="page"]')].every((element) => {
+          const item = element.getBoundingClientRect();
+          const navigation = element.closest("nav")?.getBoundingClientRect();
+          return Boolean(navigation && item.left >= navigation.left - 1 && item.right <= navigation.right + 1);
+        });
 
         return {
           horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-          activeNavigationVisible: [...document.querySelectorAll('.primary-nav a[aria-current="page"]')].every((element) => {
-            const item = element.getBoundingClientRect();
-            const navigation = element.closest("nav")?.getBoundingClientRect();
-            return Boolean(navigation && item.left >= navigation.left - 1 && item.right <= navigation.right + 1);
-          }),
+          activeNavigationVisible: activeNavigationVisible(),
           lowContrast,
-          undefinedTokens: [...used].filter((token) => !declared.has(token)).sort(),
+          undefinedTokens: undefinedTokens(),
         };
       });
 
