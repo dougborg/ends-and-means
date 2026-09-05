@@ -3,6 +3,7 @@ import {
   attachNarrative,
   loadNarrative,
   parseNarrative,
+  resolveNarrativeDirectory,
   resolveNarrativePath,
 } from "../../content/domain/presentation/load-narrative";
 import { dossierForSubject } from "../../src/lib/domain/canonical";
@@ -56,6 +57,9 @@ describe("Markdown narrative contracts", () => {
     ).toBe(
       `${process.cwd()}/content/domain/presentation/narratives/swedish-wage-earner-funds-case.md`,
     );
+    expect(resolveNarrativeDirectory()).toBe(
+      `${process.cwd()}/content/domain/presentation/narratives`,
+    );
   });
 
   it("derives the Markdown section contract from the typed manifest", () => {
@@ -83,6 +87,12 @@ describe("Markdown narrative syntax", () => {
       "> quote",
       "```text",
       "<aside>Note</aside>",
+      "---",
+      "Heading\n===",
+      "    indented code",
+      "Body with <em>markup</em>.",
+      "Body with ![an image](image.svg).",
+      "Body with `inline code`.",
     ]) {
       expect(() =>
         parseNarrative(
