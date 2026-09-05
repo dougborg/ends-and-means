@@ -223,6 +223,12 @@ async function verifyConceptRoutes() {
 }
 
 async function verifyReferenceRoutes() {
+  const method = await readFile(routeFile("/framework/"), "utf8");
+  expect(method).toMatch(
+    /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="2"/,
+  );
+  expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(1);
+
   const compare = await readFile(routeFile("/compare/"), "utf8");
   expect(compare).toContain("<table>");
   expect(stripMarkup(compare)).toContain("Why no score?");

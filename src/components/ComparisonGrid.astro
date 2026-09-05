@@ -1,0 +1,22 @@
+---
+interface Props {
+  itemCount: number;
+  maxColumns?: number;
+  className?: string;
+}
+
+const { itemCount, maxColumns = 3, className } = Astro.props;
+const columns = Math.max(
+  1,
+  Math.min(Math.floor(itemCount), Math.floor(maxColumns)),
+);
+const classes = ["comparison-grid", className].filter(Boolean);
+---
+
+<div
+  class:list={classes}
+  data-comparison-columns={columns}
+  style={`--comparison-columns: ${columns}`}
+>
+  <slot />
+</div>
