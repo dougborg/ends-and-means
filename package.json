@@ -19,7 +19,8 @@
     "test:routes": "vitest run tests/routes",
     "test:visual": "playwright test",
     "review:visual": "npm run build && playwright test",
-    "validate": "node --import tsx scripts/validate-domain.ts"
+    "validate": "node --import tsx scripts/validate-domain.ts",
+    "audit:content": "node --import tsx scripts/audit-content.ts"
   },
   "dependencies": {
     "astro": "7.2.10"
@@ -38,6 +39,9 @@
     "vitest": "4.1.11"
   },
   "knip": {
-    "ignoreDependencies": ["@emnapi/core", "@emnapi/runtime"]
+    "ignoreDependencies": [
+      "@emnapi/core",
+      "@emnapi/runtime"
+    ]
   }
 }

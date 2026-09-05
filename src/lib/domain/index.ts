@@ -4,5 +4,7 @@ export type * from "./cases";
 export type * from "./common";
 export type * from "./entities";
 export type * from "./graph";
+export type * from "./presentation";
 export type * from "./relationships";
 export type * from "./vocabulary";
+export * from "./audit";

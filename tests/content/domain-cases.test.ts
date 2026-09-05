@@ -42,8 +42,6 @@ const documents: AuthoringDocument[] = [
   entity({
     id: "example-ongoing-case",
     kind: "case",
-    overviewTitle: "What is this fixture?",
-    overview: [{ heading: "What it was", text: "A fixture case overview.", statementIds: ["example-condition"] }],
     label: "Example ongoing case",
     locationIds: ["example-region"],
     startDate: { year: 1994, certainty: "exact" },
@@ -94,20 +92,6 @@ describe("bounded Case model", () => {
     expect(errors).toContain("example-ongoing-case: asOf requires an ISO calendar date");
     expect(errors).toContain("example-ongoing-case: lastReviewedAt requires an ISO calendar date");
     expect(errors).toContain("example-ongoing-case: ongoing Case requires freshness");
-  });
-
-  it("reports missing overview fields without crashing", () => {
-    const invalid = structuredClone(documents);
-    const ongoingCase = invalid[5];
-    if (ongoingCase?.documentType === "entity" && ongoingCase.entity.kind === "case") {
-      const malformed = ongoingCase.entity as unknown as { overview?: unknown; overviewTitle?: string };
-      delete malformed.overview;
-      delete malformed.overviewTitle;
-    }
-
-    const errors = validateAuthoringDocuments(invalid);
-    expect(errors).toContain("example-ongoing-case: Case requires a plain-language overview title");
-    expect(errors).toContain("example-ongoing-case: Case requires a plain-language overview");
   });
 
   it("rejects unresolved Places, Statements, episodes, and parent Cases", () => {
