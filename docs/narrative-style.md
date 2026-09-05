@@ -6,6 +6,14 @@ the evidence establishes, qualifies, or cannot establish.
 The prose should sound like a careful editor with command of the material, not
 like a report describing its own framework.
 
+Subject Guides begin with the familiar question or term that brought the reader
+to the site.
+They teach distinctions among concepts, traditions, proposals, institutions,
+movements, labels, and bounded Cases instead of requiring the reader to know
+those distinctions in advance.
+Evidence and formal model detail support that journey through progressive
+disclosure rather than competing with the answer for attention.
+
 ## Answer first
 
 A standfirst should identify the subject, mechanism, material place or period,
@@ -79,6 +87,10 @@ happened directly.
 ## Review checklist
 
 - Can a reader state the answer after the standfirst?
+- Can a newcomer enter through a familiar term without first knowing its
+  canonical entity kind?
+- Does the page offer a useful next step into an institution, bounded Case,
+  comparison, disagreement, or related subject?
 - Does each section answer one question, and do its headings form a useful
   capsule outline?
 - Does every factual clause trace to a listed Statement with appropriate Sources

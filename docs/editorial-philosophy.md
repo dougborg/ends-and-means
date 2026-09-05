@@ -12,6 +12,8 @@ Our standard is fairness, transparency, corrigibility, and continuous
 improvement.
 The project's reader-facing voice and prose review rules are defined in the
 [narrative style guide](narrative-style.md).
+Its learner-first purpose and organizing principles are defined in the
+[project vision](project-vision.md).
 
 Our analytical vocabulary separates **Ends** (values and promised outcomes),
 **Means** (formal institutions and rules-in-use), **Challenges** (recurring

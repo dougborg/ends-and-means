@@ -1,6 +1,6 @@
 # Design Notes: Ends and Means
 
-**Status:** design direction for the clean analytical model; ready for screen prototypes, not production implementation
+**Status:** learner-first design direction
 
 Reader-facing Dossier pages follow the repository's
 [plain-spoken analytical narrative style](narrative-style.md).
@@ -11,33 +11,30 @@ This hierarchy is progressive disclosure, not evidence removal.
 
 ## Product thesis
 
-Ends and Means is a comparative instrument for examining political-economic
-ideas, institutions, and historical practice. It gives a curious reader one
-place to ask what people sought, what arrangements they built, what happened,
-and which values shape an assessment.
+Ends and Means helps a curious reader understand a familiar subject, see why its
+meaning is disputed, connect proposals to institutions and bounded practice,
+and compare it with related subjects.
 
 It is not a campaign, newspaper, encyclopedia of ideologies, or ranking
 dashboard. The interface should feel intellectually confident without
 pretending to certainty. A reader can always distinguish a sourced observation,
 an inference, and a value judgment—and can follow each one to its support.
 
-The product has two equal modes. **Explore** helps readers understand systems,
-ideas, institutions, Cases, People, and Works. **Compare** examines shared
-Challenges, differences among selected subjects, political-economic dimensions,
-and change over time. The core reading experience preserves the chain of
-reasoning behind both descriptions and comparisons.
+**Explore** is the main learner entry point.
+**Cases**, **Compare**, and **Questions** are primary task-oriented paths.
+Sources and Method remain accessible as a quieter trust layer, while the core
+reading experience preserves the reasoning behind every explanation and
+comparison.
 
 ## Information architecture
 
 The target interface reflects the clean model rather than the exploratory
 matrix:
 
-- **Topics** are broad, familiar discovery labels such as ownership, work,
-  security, coordination, and power. They organize navigation but make no
-  analytical claim.
-- **Explore** is an entity-neutral entry point. “Systems & ideas” collects
-  familiar terms while each result identifies whether it is a Concept,
-  Approach, Means, Case, or another entity.
+- **Subject Guides** compose complete learning journeys around familiar terms
+  without becoming graph entities or duplicating factual claims.
+- **Explore** accepts familiar names, aliases, and common questions without
+  requiring readers to select an entity kind.
 - **Compare** is a first-class product mode, not a report added after dossiers.
   It supports shared Questions, pairwise/small-set views, dimensions, and
   transitions.
@@ -63,6 +60,12 @@ matrix:
   episodes; turning-point and causal significance remain attributed claims.
 - **Statements, sources, and interpretations** form the evidence layer beneath
   every summary.
+
+A Subject Guide should make the narrative and useful next steps visually
+primary.
+Definitions, evidence traces, source locators, unresolved questions, and model
+distinctions remain close at hand through contextual links and disclosures.
+This is progressive disclosure, not evidence removal.
 
 Political, economic, social, legal, and cultural spheres are overlapping
 facets. More precise Domains drive filters and context labels. Neither spheres
@@ -212,9 +215,10 @@ Major analytical stages need more separation than statements within a stage.
 Use square or 2–4px corners on functional surfaces. Reserve shadows for
 temporary overlays; use rules and background contrast for permanent structure.
 
-## Screen 1: home, Explore, and Compare
+## Screen 1: home and learner-first Explore
 
-The opening gives Explore and Compare equal visual weight. Search accepts
+The opening makes Explore the clearest entry point while keeping Cases, Compare,
+and Questions immediately available. Search accepts
 familiar terms without requiring the reader to know the ontology. A real
 Challenge provides a direct comparison path rather than serving as decoration.
 
@@ -238,10 +242,12 @@ Challenge provides a direct comparison path rather than serving as decoration.
 
 Rules:
 
-- Explore and Compare are peer actions in navigation and hierarchy.
+- Explore is the primary discovery action; Compare is a primary task once a
+  reader has a subject or question.
 - Search results expose entity kind, scope, and relevant discovery paths.
 - The selector label is always the complete Challenge question.
-- Topic selection filters; it does not navigate to a presumed conclusion.
+- Familiar subject labels filter discovery; they do not imply one canonical
+  classification or navigate to a presumed conclusion.
 - Result count and active filters are announced and encoded in the URL.
 - Results identify arrangements and bounded cases before Approach labels.
 - Empty results explain whether research is missing, scope excludes a result,

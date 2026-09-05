@@ -1,34 +1,25 @@
 # Ends and Means
 
-**Political and economic systems in theory and practice.**
+**Understand political, economic, and social ideas in theory and practice.**
 
-An evidence-forward reference for comparing political-economic
-Ends, institutional Means, recurring Challenges, and outcomes in bounded cases
-under explicit Criteria.
+Ends and Means begins with familiar subjects and questions, then connects plain
+explanations to proposed institutions, bounded implementations, comparisons,
+disagreements, and evidence.
+The typed canonical graph is trust infrastructure, not a prerequisite for
+learning.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
-Pull requests run one read-only verification job plus isolated dependency,
-CodeQL, and workflow-security checks. Superseded pull-request runs are cancelled.
-After a push to `main`, the separate Pages workflow runs the same verification,
-uploads its already-built `dist` directory, and gives only the deployment job
-Pages and OIDC write permissions. DNS configuration for the custom domain is a
-separate release step.
-
-**Status:** the live site is generated exclusively from the plural canonical
-graph. Published Approach, Case, Challenge, Concept, Compare, Source, and Reading
-pages expose independently citable Statements and typed, sourced relationships.
-
-Explore provides entity-neutral paths through systems and ideas, institutions,
-Questions, Cases, People, and Works. Compare examines the same graph through
-shared Challenges, pairwise views, and independently defined political-economic
-dimensions without implying a universal ranking. No public navigation label is
-the root type of the underlying ontology.
+Explore starts with recognizable ideas, ideologies, systems, and institutions.
+Cases show what happened in a bounded place and period, while Compare answers
+recognizable questions without implying a universal ranking.
+Sources and Method remain close at hand as a quieter trust layer.
 
 ## Contents
 
 | File | What it is |
 |---|---|
+| [`docs/project-vision.md`](docs/project-vision.md) | Learner-first purpose, organizing principles, work tracks, and delivery policy. |
 | [`docs/analytical-framework.md`](docs/analytical-framework.md) | Accepted concepts and analytical boundaries. |
 | [`docs/domain-model.md`](docs/domain-model.md) | Implementation contract for the plural graph and relationships. |
 | [`content/domain/`](content/domain/) | The only publishable content source. |
@@ -40,9 +31,10 @@ the root type of the underlying ontology.
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
 | [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`docs/adr/0003-markdown-narrative-authoring.md`](docs/adr/0003-markdown-narrative-authoring.md) | Markdown prose, typed manifests, sentence-per-line linting, and safe rendering. |
+| [`docs/adr/0004-subject-guides-as-presentation-compositions.md`](docs/adr/0004-subject-guides-as-presentation-compositions.md) | Subject Guides as presentation compositions above entity-owned Dossiers. |
 | [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Source-backed workflow for concrete content changes reviewed in pull requests. |
 
-## Next step
+## Develop locally
 
 Requires Node 26 (currently 26.8.1; see `.node-version` and `.nvmrc`).
 
@@ -63,7 +55,3 @@ and mobile widths and writes screenshots to `.artifacts/visual-review`. Install
 its Chromium runtime once with `pnpm exec playwright install chromium`; see
 [`CONTRIBUTING.md`](CONTRIBUTING.md#rendered-page-review) for focused-route use
 and the completion criteria.
-
-## Open decisions
-
-See §8 of the brief. Defaults apply if unanswered: content CC BY-SA 4.0, code MIT (no license files committed yet — confirm before adding).

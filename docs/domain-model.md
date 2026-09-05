@@ -1,18 +1,15 @@
 # Target domain model: a plural political-economy graph
 
-**Status:** working implementation contract. Validate it with a small vertical
-slice before treating the schema as settled.
+**Status:** implementation contract.
 
 Ends and Means needs to represent ideas that overlap, change meaning across
 contexts, and appear in theory, institutional design, historical practice, and
 fiction. The canonical model is therefore a **plural graph**, not a taxonomy of
 systems and not an Approach-shaped tree.
 
-Public navigation has two equal modes: **Explore** and **Compare**. Explore
-provides entity-neutral paths through familiar systems and ideas, institutions,
-Questions, Cases, People, and Works. Compare examines shared Challenges,
-pairwise differences, and political-economic dimensions. Neither mode nor any
-navigation label is an ontology root.
+Public navigation begins with familiar subjects and reader questions.
+The [project vision](project-vision.md) defines that experience; no navigation
+label is an ontology root.
 
 ## Design principles
 
@@ -35,6 +32,10 @@ navigation label is an ontology root.
    cautiously reasoned editorial interpretations—not to labels by fiat.
 8. **Sparse is honest.** Missing links are research gaps, not null positions in
    a required comparison matrix.
+9. **The semantic core changes only for demonstrated failures.** Try
+   presentation composition first. Change the canonical model only after
+   researched content exposes a representational failure, boundary fixtures
+   capture the required invariants, and an ADR records the decision.
 
 ## The layers
 
@@ -56,6 +57,12 @@ Presentation objects are canonical reader-facing records derived from the
 argument and evidence layers. They may own narrative synthesis, but never
 duplicate factual claims or graph relationships: each supported or qualified
 section traces to canonical Statements, while research gaps remain explicit.
+
+A future SubjectGuide composes a complete learning journey from several
+canonical records and entity-owned Dossiers without becoming a graph entity or
+duplicating claims.
+The boundary is recorded in
+[ADR 0004](adr/0004-subject-guides-as-presentation-compositions.md).
 
 ### Dossier
 
@@ -155,11 +162,10 @@ A shorthand such as “planning” is a Concept until a record specifies enough 
 the institutional form to be analyzed as a Means. Approaches may advocate,
 permit, reject, qualify, or disagree internally about a Means.
 
-### Challenge and Topic
+### Challenge
 
-A Challenge is a recurring open question about design or performance. A Topic
-is a reader-facing subject area used for discovery. Neither classifies an
-Approach as a whole, and neither requires complete coverage.
+A Challenge is a recurring open question about design or performance.
+It neither classifies an Approach as a whole nor requires complete coverage.
 
 ### Criterion
 
@@ -451,7 +457,7 @@ forcing editors to maintain RDF triples.
 |---|---|---|
 | Concept | `skos:Concept` | Stable URI/ID and independently addressable page |
 | Preferred label | `skos:prefLabel` | At most one per language |
-| Alternate/hidden label | `skos:altLabel` / `skos:hiddenLabel` | Synonyms, historical spellings, search aliases |
+| Alternate/hidden label | `skos:altLabel` / `skos:hiddenLabel` | Names for the same Concept identity, including synonyms and historical spellings |
 | Definition and scope | `skos:definition` / `skos:scopeNote` | Sourced scope and usage guidance |
 | Concept vocabulary | `skos:ConceptScheme` | Separate schemes may cover ideas, institutional domains, or other vocabularies |
 | Editorial umbrella | `skos:Collection` | Grouping does not itself assert a broader Concept |
@@ -639,22 +645,23 @@ a database later without changing content identity.
 
 ## Reader-facing information architecture
 
-The main navigation begins with two peer actions:
+Explore is the main subject directory.
+It accepts familiar terms and entry phrases without asking readers to choose an
+entity kind first.
+Cases, Compare, and Questions are primary task-oriented destinations; Sources
+and Method form a quieter trust layer.
+Collections, Domains, entity labels, and future SubjectGuide `searchQueries`
+support discovery without becoming ontology roots.
 
-```text
-Explore   Compare   Cases   People & Works   Method
-```
-
-Explore is an entity-neutral discovery layer:
-
-```text
-Systems & ideas   Institutions   Questions   Cases   People   Works
-```
-
-“Systems & ideas” is a reader-facing Collection of familiar entry terms, not an
-entity type. A result immediately identifies its actual kind and can appear in
-more than one discovery path. Topics and Collections support browsing without
-becoming ontology roots.
+An entity's preferred, alternate, and hidden labels name that same canonical
+identity.
+They must not absorb a broader learner question merely to improve search.
+A SubjectGuide's `searchQueries` are non-identifying entry phrases that route a
+question to a guide; they do not become entity labels or assert equivalence.
+Colliding entry phrases require explicit editorial disambiguation rather than
+first-match routing.
+Retired guide paths require reviewed redirects to a stable guide or an explicit
+gone state; a redirect must not silently merge canonical identities.
 
 Compare supports three initial modes:
 
@@ -664,22 +671,10 @@ Compare supports three initial modes:
 3. maps on independently defined Comparison Dimensions, with ranges,
    uncertainty, alternative lenses, and a complete nonvisual representation.
 
-An Approach dossier should contain:
-
-1. concise definition and scope;
-2. terminology and classification disputes;
-3. core, adjacent, and contested Concepts;
-4. attributed Ends;
-5. proposed, permitted, rejected, and disputed Means;
-6. schools, variants, overlaps, and historical development;
-7. bounded Cases with qualified relationship labels;
-8. major criticisms and rival interpretations;
-9. common questions and misconceptions;
-10. sources, further reading, and external orientation links.
-
-This borrows Wikipedia's useful progression from definition through history,
-variants, practice, and criticism while exposing stronger provenance and
-analytical distinctions.
+The [project vision's learner journey](project-vision.md#the-learner-journey)
+is the authoritative completeness guide.
+SubjectGuide selects entity-owned narrative and derived graph material but
+never owns duplicate factual claims or relationships.
 
 ## Implementation sequence
 

@@ -1,6 +1,6 @@
 ---
 name: research-content-changes
-description: Research and implement evidence-backed changes to the Ends and Means canonical graph and reader-facing narrative for review in a pull request. Use for additions or substantial revisions to Dossiers, vocabulary, Collections, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Depictions, Comparison Dimensions, or Placements.
+description: Research and implement evidence-backed changes to the Ends and Means canonical graph and learner-facing narrative for review in a pull request. Use for additions or substantial revisions to Subject Guides, Dossiers, vocabulary, Collections, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Depictions, Comparison Dimensions, or Placements.
 ---
 
 # Research Content Changes
@@ -8,6 +8,11 @@ description: Research and implement evidence-backed changes to the Ends and Mean
 Create the concrete candidate change on a focused branch. The pull request is
 the proposal and review boundary; do not create a parallel proposal artifact or
 staging tree.
+
+Begin with the reader's familiar subject or question.
+The primary product is a clear learning and comparison journey; the graph and
+evidence trace are its trust infrastructure.
+Do not require readers to choose an entity kind before learning.
 
 ## Branch and review boundary
 
@@ -26,6 +31,12 @@ Implement directly in the canonical content model or its deterministic source
 generator. Research, rendering, and tests may change together when they form one
 reviewable outcome. Push and open a draft pull request when authorized; do not
 merge or publish without human approval.
+
+Rebase onto the current base before final review and integration.
+Resolve automated review findings and obtain an independent adversarial review
+of the material content and model-boundary risks.
+Integrate with rebase-only linear history, then verify public output after
+deployment.
 
 ## Route the request
 
@@ -53,6 +64,21 @@ For schema, compiler, or model-boundary work, also read
 
 For requests spanning entity types, keep entities independently addressable and
 connect them through explicit relationships instead of embedding duplicates.
+Subject Guides are validated presentation compositions above entity-owned
+Dossiers and plural canonical records, not graph superclasses or new owners of
+factual claims.
+Until their schema exists, do not invent a route-local SubjectGuide or revive
+the incomplete Topic contract.
+Treat entity alternate and hidden labels as names for the same canonical
+identity.
+Treat future SubjectGuide `searchQueries` as non-identifying entry phrases;
+disambiguate collisions explicitly and never use a redirect to merge distinct
+canonical identities.
+
+Prefer presentation composition for new learner needs.
+Propose a canonical model change only when researched content demonstrates a
+representational failure, boundary fixtures capture the intended invariants,
+and an ADR records the decision.
 
 Use authoritative sources and browse every cited URL. Preserve URL-level
 provenance, distinguish observations from attributed values and editorial
@@ -70,7 +96,22 @@ explanations and generic filler. Treat automated prose findings as attention
 signals; accuracy, fairness, source similarity, and publication require human
 review.
 
-When promoting transitional or legacy material:
+For a high-level subject, assess learner completeness as well as graph coverage:
+a short answer and scope; important meanings and disputed uses; attributed
+purposes; proposed institutions; bounded practice; serious disagreements and
+limits; comparisons and related paths; relevant Depictions kept separate from
+empirical evidence; sources; and focused open questions.
+Do not manufacture a section to satisfy this sequence; record an exact research
+gap when evidence is not ready.
+
+Treat geographic and organizational diversity as foundational coverage.
+Research bounded, society-specific formations, including Indigenous,
+kinship-based, stateless, nomadic or pastoral, maritime or island, city-state,
+imperial, colonial, and hybrid institutions, using the evidence traditions
+appropriate to each subject.
+Do not impose universal “tribal,” “primitive,” or evolutionary-stage categories.
+
+When reconciling archived material:
 
 - search for semantic duplicates as well as exact ID collisions;
 - split compound Means and multi-proposition claims into independently
@@ -112,6 +153,8 @@ Run before handoff:
 
 ```bash
 pnpm validate
+pnpm lint
+pnpm static
 pnpm check
 pnpm test
 pnpm build

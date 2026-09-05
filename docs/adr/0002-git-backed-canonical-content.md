@@ -26,8 +26,9 @@ The canonical domain distinguishes five layers:
    formal rules, rules-in-use, outcomes, Statements, and Sources;
 4. interpretation: typed relationships, competing interpretations, response
    traces, and Criterion-specific assessments;
-5. presentation: dossiers, comparisons, timelines, reading paths, and a
-   separate fictional Depiction experience.
+5. presentation: entity-owned Dossiers, cross-entity Subject Guides,
+   comparisons, timelines, reading paths, and a separate fictional Depiction
+   experience.
 
 Approach is one domain entity within entity-neutral Explore and Compare views,
 not the graph's root type or universal public bucket. An Approach is a
@@ -67,6 +68,9 @@ make file-backed authoring inadequate.
 - Publication state lives on entities or relationships rather than requiring a
   parallel schema.
 - Runtime pages cannot introduce route-specific content models.
+- Subject Guides require a validated presentation contract and cannot become
+  graph superclasses or duplicate Statement and relationship ownership; see
+  [ADR 0004](0004-subject-guides-as-presentation-compositions.md).
 - Archived research is a discovery aid, never a production or import input.
 - Database adoption requires a new ADR tied to concrete interactive-write or
   scale requirements.
