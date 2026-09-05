@@ -42,4 +42,32 @@ describe("research-content-changes skill", () => {
     expect(skill).toContain("route unresolved fragments to the relevant backlog issue");
     expect(skill).not.toContain("references/routes/topic.md");
   });
+
+  it("preserves learner-first Subject Guide boundaries", async () => {
+    const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
+    expect(skill).toMatch(/familiar subject or question/);
+    expect(skill).toMatch(/Subject Guides.+presentation compositions/s);
+    expect(skill).toMatch(/not graph superclasses.+factual claims/s);
+    expect(skill).toMatch(/learner completeness.+graph coverage/s);
+    expect(skill).toMatch(/do not invent.+SubjectGuide/s);
+    expect(skill).toMatch(/searchQueries.+non-identifying entry phrases/s);
+    expect(skill).toMatch(/representational failure.+boundary fixtures.+ADR/s);
+    expect(skill).toMatch(/Indigenous.+stateless.+nomadic.+maritime.+city-state.+imperial.+colonial.+hybrid/s);
+
+    const handoffBlock = skill.match(/Run before handoff:\s+```bash\s+([\s\S]*?)```/)?.[1];
+    expect(handoffBlock).toBeDefined();
+    const commands = new Set(handoffBlock?.trim().split("\n"));
+    expect(commands).toEqual(
+      new Set([
+        "pnpm validate",
+        "pnpm lint",
+        "pnpm static",
+        "pnpm check",
+        "pnpm test",
+        "pnpm build",
+        "pnpm test:routes",
+        "pnpm audit:content",
+      ]),
+    );
+  });
 });

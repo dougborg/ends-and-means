@@ -57,6 +57,12 @@ that remain in `research-needed` status. Graph validation still fails the build
 for unresolved or mistyped entity, Statement, Source, and relationship
 references.
 
+A future SubjectGuide may compose several Dossiers and canonical record kinds
+into one learner journey.
+It is a validated presentation composition, not a canonical graph superclass or
+a new owner of factual claims and relationships.
+See `docs/adr/0004-subject-guides-as-presentation-compositions.md`.
+
 Collections are non-inheriting editorial groupings and may include concrete
 Means when a label describes an institutional family. Depictions remain tied to
 fictional Works. Fiction-derived Sources may provide context or qualification

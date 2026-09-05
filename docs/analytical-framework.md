@@ -1,8 +1,8 @@
 # Analytical Framework: Ends, Means, Challenges, and Criteria
 
-**Status:** accepted analytical method. The domain ontology remains under
-validation in the [target domain model](domain-model.md) and is tracked in
-[#47](https://github.com/dougborg/ends-and-means/issues/47).
+**Status:** accepted analytical method.
+The [domain model](domain-model.md) defines the semantic invariants, and its
+architectural decisions record changes to those boundaries.
 
 Ends and Means compares political-economic approaches by tracing the relationship
 between what they seek, how they organize action, and what happens in bounded
@@ -26,9 +26,10 @@ QUESTION / CHALLENGE
 
 **Criteria** are not a replacement name for Challenges: a challenge is the
 problem being examined; criteria are the declared lenses used to assess
-responses. The replacement schema should be modeled cleanly without aliases or
-compatibility fields from the exploratory matrix. One-time extraction and any
-necessary archival redirects belong outside the new content model.
+responses.
+Canonical records preserve their own identities and relationships; presentation
+composition cannot introduce compatibility identities or duplicate claim
+ownership.
 
 ## Ends
 
@@ -144,7 +145,8 @@ assessment can still need citation.
 
 ## Product implications
 
-- Explore and Compare are peer product modes; neither is an ontology root.
+- Explore begins with familiar subjects and reader questions; Cases, Compare,
+  and Questions provide task-oriented paths, and none is an ontology root.
 - Entity pages open with actual kind and scope rather than forcing every
   familiar term into Approach.
 - Challenge pages ask one common question across approaches.
@@ -175,8 +177,8 @@ that all political disagreement can be resolved empirically.
 
 **Concepts** are reusable but contested ideas. **Approaches** are recognizable
 configurations of Concepts, attributed Ends, diagnoses, and proposed Means.
-Entity-neutral Explore and Compare views may feature them without making
-Approach the public entry bucket or root type of the graph. Editorial
+Learner-first Subject Guides and comparison views may feature them without
+making Approach the public entry bucket or root type of the graph. Editorial
 Collections provide overlapping umbrella views; typed and sourced relationships
 represent membership, influence, advocacy, and disagreement. Political,
 economic, social, legal, and cultural spheres are overlapping facets rather

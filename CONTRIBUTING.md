@@ -3,26 +3,37 @@
 Ends and Means welcomes corrections, sources, and carefully bounded additions.
 Because the project makes contestable political and historical claims,
 substantial changes receive pull-request review before publication.
+The [project vision](docs/project-vision.md) defines the learner-first product,
+work tracks, and delivery policy.
 
 ## Research and content changes
 
-1. Start from an up-to-date `main` branch with a clean worktree.
-2. Create a focused branch named `research/<type>-<stable-id>`.
+1. Start from an up-to-date `main` branch in a clean, isolated worktree.
+2. Create a focused branch named `research/<type>-<stable-id>` and keep one
+   owner responsible for its mutations.
 3. Implement the concrete candidate in the canonical content model or its
    deterministic source generator, including rendering and tests when needed.
 4. Run `pnpm validate`, `pnpm lint`, `pnpm static`, `pnpm check`,
    `pnpm test`, `pnpm build`, `pnpm test:routes`, and the rendered-page
-   review described below.
-5. Open a pull request. The PR is the proposal: identify all claims,
+   review described below, plus `pnpm audit:content` for canonical content or
+   narrative changes.
+5. Rebase onto the current base, open a pull request, and identify all claims,
    classifications, and judgments the reviewer must decide.
-6. Revise the concrete change in that PR. Merging records acceptance and
-   publishes the result through the normal deployment workflow.
+6. Resolve automated review and obtain an independent adversarial review of the
+   material risks.
+7. Rebase again when required, integrate without a merge or squash commit, and
+   verify the resulting deployment when public output changes.
 
 Do not maintain a parallel proposal artifact or staging tree. Git history and
 the PR preserve the candidate, discussion, revisions, and decision.
 
 The repo-local `research-content-changes` skill provides the detailed entity
 contracts and editorial evidence policy.
+
+Subject Guides are learner-facing presentation compositions, not canonical
+graph superclasses.
+Until their contract is implemented, preserve entity-owned Dossiers and do not
+manufacture a route-local substitute.
 
 ### Narrative prose
 
@@ -76,6 +87,12 @@ the same review and add proportionate tests or documentation.
 Record larger, uncertain, or independently reviewable improvements in the
 backlog with the observed problem, desired outcome, dependencies, and
 acceptance criteria rather than silently widening the pull request.
+
+Issues and milestones are the authoritative backlog.
+The GitHub Project contains active reviews, concrete blockers, and only
+the next three to five implementation-ready items.
+Keep no more than three implementation items active, normally one each in the
+Corpus, Reader experience, and Platform/process tracks.
 
 ## Automated quality and security gates
 
