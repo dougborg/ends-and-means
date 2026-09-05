@@ -18,7 +18,6 @@ export type EntityKind =
   | "approach"
   | "end"
   | "means"
-  | "topic"
   | "challenge"
   | "criterion"
   | "place"

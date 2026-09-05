@@ -1,9 +1,15 @@
+import type { ResearchObligation } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import type { Dossier } from "./presentation";
-import type { ResearchObligation } from "./entities";
+
 const narratableKinds = ["approach", "case", "challenge", "concept"] as const;
 
 export interface ContentAttentionReport {
+  subjectGuides: {
+    live: number;
+    total: number;
+    liveIds: string[];
+  };
   dossierCoverage: Array<{
     kind: (typeof narratableKinds)[number];
     covered: number;
@@ -36,7 +42,11 @@ const fillerPatterns = [
 
 function proseShingles(value: string) {
   const words = value.toLowerCase().match(/[a-z0-9]+/g) ?? [];
-  return new Set(words.slice(0, -4).map((_, index) => words.slice(index, index + 5).join(" ")));
+  return new Set(
+    words
+      .slice(0, -4)
+      .map((_, index) => words.slice(index, index + 5).join(" ")),
+  );
 }
 
 function overlap(left: string, right: string) {
@@ -52,14 +62,20 @@ function narrativeFindings(dossiers: Dossier[]) {
     const prefix = `${dossier.subject.kind}:${dossier.subject.id}`;
     return [
       { location: `${prefix}#standfirst`, text: dossier.standfirst },
-      ...dossier.sections.map(({ id, body }) => ({ location: `${prefix}#${id}`, text: body })),
+      ...dossier.sections.map(({ id, body }) => ({
+        location: `${prefix}#${id}`,
+        text: body,
+      })),
     ];
   });
   const findings = passages.flatMap(({ location, text }) => {
     const reasons: string[] = [];
-    if (fillerPatterns.some((pattern) => pattern.test(text))) reasons.push("generic filler phrase");
-    if (text.split(/(?<=[.!?])\s+/).length > 5) reasons.push("dense passage: more than five sentences");
-    if (text.length > 700) reasons.push("long passage: more than 700 characters");
+    if (fillerPatterns.some((pattern) => pattern.test(text)))
+      reasons.push("generic filler phrase");
+    if (text.split(/(?<=[.!?])\s+/).length > 5)
+      reasons.push("dense passage: more than five sentences");
+    if (text.length > 700)
+      reasons.push("long passage: more than 700 characters");
     return reasons.map((reason) => ({ location, reason }));
   });
   for (let left = 0; left < passages.length; left += 1) {
@@ -67,7 +83,10 @@ function narrativeFindings(dossiers: Dossier[]) {
       const a = passages[left];
       const b = passages[right];
       if (a && b && overlap(a.text, b.text) >= 0.65) {
-        findings.push({ location: `${a.location} ↔ ${b.location}`, reason: "possible repeated phrasing" });
+        findings.push({
+          location: `${a.location} ↔ ${b.location}`,
+          reason: "possible repeated phrasing",
+        });
       }
     }
   }
@@ -82,6 +101,7 @@ export function auditContent(
       entity.kind === "dossier" &&
       ["reviewed", "published"].includes(entity.publicationStatus),
   );
+  const liveGuides = graph.subjectGuides;
   const dossierSubjects = new Set(
     dossiers.map(({ subject }) => `${subject.kind}:${subject.id}`),
   );
@@ -117,12 +137,14 @@ export function auditContent(
     .filter(({ obligationStatus }) =>
       ["open", "partially-addressed"].includes(obligationStatus),
     )
-    .map(({ id, obligationType, target, targetSectionId, obligationStatus }) => ({
-      id,
-      obligationType,
-      target: `${target.kind}:${target.id}${targetSectionId ? `#${targetSectionId}` : ""}`,
-      status: obligationStatus,
-    }));
+    .map(
+      ({ id, obligationType, target, targetSectionId, obligationStatus }) => ({
+        id,
+        obligationType,
+        target: `${target.kind}:${target.id}${targetSectionId ? `#${targetSectionId}` : ""}`,
+        status: obligationStatus,
+      }),
+    );
   const researchEvidenceAwaitingResolution = obligations
     .filter(
       ({ obligationStatus, statementIds }) =>
@@ -131,6 +153,11 @@ export function auditContent(
     )
     .map(({ id }) => id);
   return {
+    subjectGuides: {
+      live: liveGuides.length,
+      total: graph.subjectGuideRecords.length,
+      liveIds: liveGuides.map(({ id }) => id),
+    },
     dossierCoverage,
     researchGapSections,
     researchNeededEntities,
@@ -141,7 +168,14 @@ export function auditContent(
 }
 
 export function formatContentAttentionReport(report: ContentAttentionReport) {
-  const lines = ["Content attention report", "", "Dossier coverage:"];
+  const lines = [
+    "Content attention report",
+    "",
+    `Subject Guides: ${report.subjectGuides.live}/${report.subjectGuides.total} live`,
+    ...report.subjectGuides.liveIds.map((id) => `- ${id}`),
+    "",
+    "Dossier coverage:",
+  ];
   for (const row of report.dossierCoverage) {
     lines.push(`- ${row.kind}: ${row.covered}/${row.total}`);
     for (const id of row.missingIds) lines.push(`  - missing: ${id}`);
@@ -157,7 +191,8 @@ export function formatContentAttentionReport(report: ContentAttentionReport) {
   );
   for (const entity of report.researchNeededEntities) lines.push(`- ${entity}`);
   lines.push("", `Narrative attention: ${report.narrativeAttention.length}`);
-  for (const finding of report.narrativeAttention) lines.push(`- ${finding.location}: ${finding.reason}`);
+  for (const finding of report.narrativeAttention)
+    lines.push(`- ${finding.location}: ${finding.reason}`);
   lines.push(
     "",
     `Open research obligations: ${report.openResearchObligations.length}`,

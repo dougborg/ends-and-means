@@ -2,8 +2,10 @@ import type { HistoricalDate } from "./cases";
 import type { EntityRef } from "./common";
 import type { DomainEntity } from "./entities";
 import type { AuthoringDocument, CompiledDomainGraph } from "./graph";
-import type { DomainRelationship } from "./relationships";
+import type { SubjectGuide } from "./presentation";
 import { workflowReferencesIn } from "./public-text";
+import type { DomainRelationship } from "./relationships";
+import { validateSubjectGuides } from "./subject-guide-validation";
 
 const stableId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const dossierSubjectKinds = new Set([
@@ -41,7 +43,12 @@ const researchObligationStatuses = new Set([
   "resolved",
   "withdrawn",
 ]);
-const researchTargetKinds = new Set(["approach", "case", "challenge", "concept"]);
+const researchTargetKinds = new Set([
+  "approach",
+  "case",
+  "challenge",
+  "concept",
+]);
 
 function refKey(ref: EntityRef) {
   return `${ref.kind}:${ref.id}`;
@@ -241,11 +248,12 @@ function detectBroaderCycle(relationships: DomainRelationship[]) {
 function collectDocuments(documents: AuthoringDocument[], errors: string[]) {
   const entities: DomainEntity[] = [];
   const relationships: DomainRelationship[] = [];
+  const subjectGuides: SubjectGuide[] = [];
 
   for (const [index, document] of documents.entries()) {
     if (document.documentType === "entity") {
       entities.push(document.entity);
-    } else {
+    } else if (document.documentType === "relationships") {
       for (const relationship of document.relationships) {
         if (refKey(relationship.subject) !== refKey(document.subject)) {
           errors.push(
@@ -254,10 +262,12 @@ function collectDocuments(documents: AuthoringDocument[], errors: string[]) {
         }
         relationships.push(relationship);
       }
+    } else {
+      subjectGuides.push(document.guide);
     }
   }
 
-  return { entities, relationships };
+  return { entities, relationships, subjectGuides };
 }
 
 function validateExternalReference(
@@ -1054,20 +1064,31 @@ function validateResearchResolution(
     errors.push(
       `${entity.id}: open research obligation cannot have reconciled Statements; use partially-addressed`,
     );
-  if (["open", "partially-addressed"].includes(entity.obligationStatus) && rationale)
+  if (
+    ["open", "partially-addressed"].includes(entity.obligationStatus) &&
+    rationale
+  )
     errors.push(
       `${entity.id}: active research obligation cannot have a resolution rationale`,
     );
-  if (entity.obligationStatus === "partially-addressed" && !entity.statementIds.length)
+  if (
+    entity.obligationStatus === "partially-addressed" &&
+    !entity.statementIds.length
+  )
     errors.push(
       `${entity.id}: partially addressed research obligation requires a reconciled Statement`,
     );
   const closed = ["resolved", "withdrawn"].includes(entity.obligationStatus);
   if (closed && !entity.closedAt)
-    errors.push(`${entity.id}: closed research obligation requires a closure date`);
+    errors.push(
+      `${entity.id}: closed research obligation requires a closure date`,
+    );
   if (!closed && entity.closedAt)
-    errors.push(`${entity.id}: active research obligation cannot have a closure date`);
-  if (entity.closedAt) validateIsoDate(entity.id, "closedAt", entity.closedAt, errors);
+    errors.push(
+      `${entity.id}: active research obligation cannot have a closure date`,
+    );
+  if (entity.closedAt)
+    validateIsoDate(entity.id, "closedAt", entity.closedAt, errors);
 }
 
 function validateResearchStatements(
@@ -1098,7 +1119,8 @@ function validateResearchStatements(
   );
   reportInvalid(
     errors,
-    new Set(entity.addressedStatementIds).size !== entity.addressedStatementIds.length,
+    new Set(entity.addressedStatementIds).size !==
+      entity.addressedStatementIds.length,
     `${entity.id}: research obligation repeats an addressed Statement`,
   );
   reportInvalid(
@@ -1142,7 +1164,8 @@ function validateResearchStatementOwnership(
       ? section.statementIds
       : [
           ...(dossier?.standfirstStatementIds ?? []),
-          ...(dossier?.sections.flatMap(({ statementIds }) => statementIds) ?? []),
+          ...(dossier?.sections.flatMap(({ statementIds }) => statementIds) ??
+            []),
         ],
   );
   if (
@@ -1202,7 +1225,9 @@ function validateResearchObligation(
     `${entity.id}: invalid research obligation status ${entity.obligationStatus}`,
   );
   if (!entity.question.trim().endsWith("?"))
-    errors.push(`${entity.id}: research question must end with a question mark`);
+    errors.push(
+      `${entity.id}: research question must end with a question mark`,
+    );
   for (const [field, value] of [
     ["current limitation", entity.currentLimitation],
     ["evidence needed", entity.evidenceNeeded],
@@ -1479,7 +1504,10 @@ export function validateAuthoringDocuments(
   documents: AuthoringDocument[],
 ): string[] {
   const errors: string[] = [];
-  const { entities, relationships } = collectDocuments(documents, errors);
+  const { entities, relationships, subjectGuides } = collectDocuments(
+    documents,
+    errors,
+  );
   const entityById = indexAndValidateEntities(entities, errors);
   validateRelationshipDocuments(documents, entityById, errors);
   const relationshipIds = validateRelationships(
@@ -1492,6 +1520,7 @@ export function validateAuthoringDocuments(
   validateStatementCitations(entities, relationships, errors);
   validateEmpiricalStatements(entities, relationships, entityById, errors);
   validatePreferredLabels(entities, errors);
+  validateSubjectGuides(subjectGuides, entityById, relationships, errors);
   reportInvalid(
     errors,
     detectBroaderCycle(relationships),
@@ -1517,8 +1546,28 @@ export function compileDomainGraph(
       document.documentType === "relationships" ? document.relationships : [],
     )
     .sort(compareIds);
+  const subjectGuideRecords = documents
+    .flatMap((document) =>
+      document.documentType === "subject-guide" ? [document.guide] : [],
+    )
+    .sort(compareIds);
   const entitiesById = Object.fromEntries(
     entities.map((entity) => [entity.id, entity]),
+  );
+  const subjectGuides = subjectGuideRecords.filter(({ publicationStatus }) =>
+    ["reviewed", "published"].includes(publicationStatus),
+  );
+  const subjectGuidesById = Object.fromEntries(
+    subjectGuides.map((guide) => [guide.id, guide]),
+  );
+  const subjectGuideIdsBySlug = Object.fromEntries(
+    subjectGuides.map((guide) => [guide.slug, guide.id]),
+  );
+  const subjectGuideRecordsById = Object.fromEntries(
+    subjectGuideRecords.map((guide) => [guide.id, guide]),
+  );
+  const subjectGuideRecordIdsBySlug = Object.fromEntries(
+    subjectGuideRecords.map((guide) => [guide.slug, guide.id]),
   );
   const outgoingRelationshipIds: Record<string, string[]> = {};
   const incomingRelationshipIds: Record<string, string[]> = {};
@@ -1534,6 +1583,16 @@ export function compileDomainGraph(
     schemaVersion: "plural-graph-1",
     entities,
     relationships,
-    indexes: { entitiesById, outgoingRelationshipIds, incomingRelationshipIds },
+    subjectGuides,
+    subjectGuideRecords,
+    indexes: {
+      entitiesById,
+      subjectGuidesById,
+      subjectGuideIdsBySlug,
+      subjectGuideRecordsById,
+      subjectGuideRecordIdsBySlug,
+      outgoingRelationshipIds,
+      incomingRelationshipIds,
+    },
   };
 }
