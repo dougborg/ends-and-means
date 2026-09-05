@@ -8,6 +8,10 @@ const defaultRoutes = [
   "/cases/swedish-solidaristic-bargaining/",
   "/compare/",
   "/concepts/economic-democracy/",
+  "/challenges/distribution-of-gains-and-ownership/",
+  "/framework/",
+  "/reading/",
+  "/sources/erixon-rehn-meidner-model-source/",
 ];
 
 const routes = process.env.REVIEW_ROUTES?.split(",")
@@ -86,6 +90,11 @@ for (const route of routes) {
 
         return {
           horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          activeNavigationVisible: [...document.querySelectorAll('.primary-nav a[aria-current="page"]')].every((element) => {
+            const item = element.getBoundingClientRect();
+            const navigation = element.closest("nav")?.getBoundingClientRect();
+            return Boolean(navigation && item.left >= navigation.left - 1 && item.right <= navigation.right + 1);
+          }),
           lowContrast,
           undefinedTokens: [...used].filter((token) => !declared.has(token)).sort(),
         };
@@ -93,6 +102,7 @@ for (const route of routes) {
 
       expect(browserErrors).toEqual([]);
       expect(audit.horizontalOverflow).toBeLessThanOrEqual(1);
+      expect(audit.activeNavigationVisible).toBe(true);
       expect(audit.undefinedTokens).toEqual([]);
       expect(audit.lowContrast).toEqual([]);
     });

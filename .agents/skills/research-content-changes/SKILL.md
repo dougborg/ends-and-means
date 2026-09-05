@@ -36,7 +36,6 @@ merge or publish without human approval.
    - [Approach](references/routes/approach.md)
    - [end](references/routes/end.md)
    - [means](references/routes/means.md)
-   - [topic](references/routes/topic.md)
    - [challenge](references/routes/challenge.md)
    - [criterion](references/routes/criterion.md)
    - [statement](references/routes/statement.md)
@@ -55,8 +54,10 @@ connect them through explicit relationships instead of embedding duplicates.
 Use authoritative sources and browse every cited URL. Preserve URL-level
 provenance, distinguish observations from attributed values and editorial
 interpretations, and document conflicting evidence and limitations. Search the
-canonical graph, transitional inputs, and open changes for duplicates before
-writing. Record plausible candidates; do not silently merge concepts.
+canonical graph, `archive/legacy-research/`, and open changes for duplicates
+before writing. Archived material is a discovery lead only and must never be
+imported, rendered, or cited as evidence. Record plausible candidates; do not
+silently merge concepts.
 
 When promoting transitional or legacy material:
 
@@ -66,8 +67,9 @@ When promoting transitional or legacy material:
 - treat legacy prose and IDs as provenance, not aliases or canonical contracts;
 - require verified source metadata and precise locators before advancing a
   Statement beyond `research-needed`; and
-- leave unresolved fragments in the transitional inventory as explicit research
-  gaps rather than manufacturing canonical coverage.
+- route unresolved fragments to the relevant backlog issue, with an archive
+  path when useful, rather than manufacturing canonical coverage or restoring
+  an archive file to the production content tree.
 
 Do not recreate a fixed comparison matrix or require every Approach to answer
 every Challenge. Keep Dimensions descriptive and Criteria evaluative; never let

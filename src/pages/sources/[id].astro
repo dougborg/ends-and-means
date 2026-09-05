@@ -1,19 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import rawFramework from "../../../content/framework/draft.json";
-import type { FrameworkDraftGraph, FrameworkSource } from "../../lib/framework/model";
-const framework = rawFramework as FrameworkDraftGraph;
-export function getStaticPaths() { return rawFramework.sources.map((source) => ({ params: { id: source.id }, props: { source } })); }
-const source = Astro.props.source as FrameworkSource;
-const cleanNote = source.note?.replace(/\*\*/g, "").replace(/\*/g, "").replace(/^▶\s*/, "");
-const attachedStatements = framework.responses.flatMap((response) => [...response.means, ...response.failureHypotheses].filter(({ citations }) => citations.includes(source.id)).map((statement) => ({ statement, response })));
-const stateLabel = source.reviewStatus === "checked" ? "Citation checked" : source.reviewStatus === "confirmed-earlier" ? "Previously confirmed" : "From working knowledge";
+import { entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
+import type { Source, Statement, Work } from "../../lib/domain";
+export function getStaticPaths() { return entitiesOfKind("source").map((source) => ({ params: { id: source.id }, props: { source } })); }
+const source = Astro.props.source as Source;
+const work = source.workId ? entityById(source.workId) as Work | undefined : undefined;
+const claims = relationshipsTo(source.id).filter((relationship) => relationship.predicate === "cites").flatMap((citation) => { const statement = entityById(citation.subject.id); return statement?.kind === "statement" ? [{ statement: statement as Statement, citation }] : []; });
 ---
-<BaseLayout title={source.title} description={`Working source record for ${source.title}.`}>
-  <article class="source-page"><nav aria-label="Breadcrumb"><a href="/reading/">Reading</a> <span aria-hidden="true">/</span> Source record</nav><header><p class="coordinate">SOURCE / {stateLabel}</p><h1>{source.title}</h1><p class="source-byline">{source.authors.join(", ")}{source.year ? ` · ${source.year}` : ""}</p></header>
-    <div class="source-layout"><section><h2>Editorial note</h2><p>{cleanNote ?? "No editorial note has been migrated for this source."}</p>{source.links?.length ? <ul class="source-links">{source.links.map((link) => <li><a href={link.url}>{link.label ?? link.kind} <span aria-hidden="true">↗</span></a></li>)}</ul> : <p class="missing-link"><span aria-hidden="true">◇</span> A stable reading, library, publisher, or purchase link still needs verification.</p>}</section>
-      <aside><p class="coordinate">PROVENANCE STATUS</p><h2>{stateLabel}</h2><p>This status covers the bibliographic record only. It does not verify every claim in the editorial note.</p><dl><div><dt>Type</dt><dd>{source.kind}</dd></div><div><dt>Section</dt><dd>{source.section?.replaceAll("-", " ") ?? "Unsorted"}</dd></div></dl></aside>
-    </div>
-    <section class="claim-connections" aria-labelledby="connections-title"><p class="coordinate">CLAIM CONNECTIONS</p><h2 id="connections-title">Where this source is used</h2>{attachedStatements.length ? <ul>{attachedStatements.map(({ statement, response }) => <li><a href={`/challenges/${response.challengeId}/#${statement.id}`}>{statement.text}</a></li>)}</ul> : <p>No migrated claim currently cites this source. Connecting or rejecting that relationship is part of the claim-level research pass.</p>}</section>
+<BaseLayout title={source.title} description={source.description}>
+  <article class="source-page"><nav aria-label="Breadcrumb"><a href="/reading/">Reading</a> <span aria-hidden="true">/</span> Source</nav><header><p class="coordinate">SOURCE / {source.sourceType.replaceAll("-", " ")}</p><h1>{source.title}</h1><p class="source-byline">{source.contributorDisplay?.join(", ")}{source.publicationYear ? ` · ${source.publicationYear}` : ""}</p></header>
+    <div class="source-layout"><section><h2>About this source</h2><p>{source.description}</p>{source.resourceLinks?.length ? <ul class="source-links">{source.resourceLinks.map((link) => <li><a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a></li>)}</ul> : null}</section><aside><p class="coordinate">BIBLIOGRAPHIC RECORD</p><dl><div><dt>Type</dt><dd>{source.sourceType.replaceAll("-", " ")}</dd></div>{source.publisher && <div><dt>Publisher</dt><dd>{source.publisher}</dd></div>}{work && <div><dt>Work</dt><dd>{work.title}</dd></div>}{source.identifiers?.doi && <div><dt>DOI</dt><dd>{source.identifiers.doi}</dd></div>}</dl></aside></div>
+    <section class="claim-connections" aria-labelledby="connections-title"><p class="coordinate">CLAIM CONNECTIONS / {claims.length}</p><h2 id="connections-title">Where this source is used</h2>{claims.length > 0 ? <ul>{claims.map(({ statement, citation }) => <li id={statement.id}><p>{statement.text}</p><p>{citation.role} · {citation.locator}</p></li>)}</ul> : <p>No published Statement currently cites this source.</p>}</section>
   </article>
 </BaseLayout>

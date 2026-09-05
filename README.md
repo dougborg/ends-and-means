@@ -2,10 +2,9 @@
 
 **Political and economic systems in theory and practice.**
 
-An evidence-forward reference in development for comparing political-economic
+An evidence-forward reference for comparing political-economic
 Ends, institutional Means, recurring Challenges, and outcomes in bounded cases
-under explicit Criteria. The deployed matrix is an early exploration and
-research input, not the target ontology or a compatibility contract.
+under explicit Criteria.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
@@ -13,13 +12,9 @@ The static Astro build deploys through GitHub Pages. Pull-request verification
 and Pages deployment use separate GitHub Actions workflows; DNS configuration
 for the custom domain is a separate release step.
 
-**Status:** the current reference shell is live while an Explore / Compare
-reader experience is consolidated onto a plural canonical graph. Astro, CI, the
-portable graph validator, Topic and Challenge discovery, eight transitional
-dossiers, and the source inventory are in place. The active work is separating
-Concepts, Approaches, Means, Collections, and bounded Cases; consolidating the
-content schemas; and connecting independently citable Statements to typed,
-sourced relationships.
+**Status:** the live site is generated exclusively from the plural canonical
+graph. Published Approach, Case, Challenge, Concept, Compare, Source, and Reading
+pages expose independently citable Statements and typed, sourced relationships.
 
 Explore provides entity-neutral paths through systems and ideas, institutions,
 Questions, Cases, People, and Works. Compare examines the same graph through
@@ -31,14 +26,10 @@ the root type of the underlying ontology.
 
 | File | What it is |
 |---|---|
-| [`docs/website-brief.md`](docs/website-brief.md) | Superseded brief for the exploratory matrix site. |
 | [`docs/analytical-framework.md`](docs/analytical-framework.md) | Accepted concepts and analytical boundaries. |
-| [`docs/domain-model.md`](docs/domain-model.md) | Working implementation contract for the plural graph, relationships, and migration tests. |
-| [`prototypes/analytical-framework/`](prototypes/analytical-framework/) | Transitional model fixture retained only until its useful relationships move into the canonical graph in issue #47. |
-| [`content/framework/`](content/framework/) | Transitional framework data pending consolidation into the canonical graph tracked in issue #47. |
-| [`docs/system-comparison-by-crux-v2.md`](docs/system-comparison-by-crux-v2.md) | Archived eight-by-fourteen comparison input retained for provenance and migration checks. |
-| [`docs/political-economy-notes.md`](docs/political-economy-notes.md) | Part 1: narrative background on each topic. Part 2: reading list with verification status. Source of `sources`. |
-| [`docs/system-comparison-by-crux-v1.md`](docs/system-comparison-by-crux-v1.md) | Superseded 5×10 version; for cross-checking only. |
+| [`docs/domain-model.md`](docs/domain-model.md) | Implementation contract for the plural graph and relationships. |
+| [`content/domain/`](content/domain/) | The only publishable content source. |
+| [`archive/legacy-research/`](archive/legacy-research/) | Non-runtime research provenance routed to migration issues. |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones and issue-ready backlog, ordered by dependency. |
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
@@ -64,16 +55,6 @@ and mobile widths and writes screenshots to `.artifacts/visual-review`. Install
 its Chromium runtime once with `npx playwright install chromium`; see
 [`CONTRIBUTING.md`](CONTRIBUTING.md#rendered-page-review) for focused-route use
 and the completion criteria.
-
-`npm run import` parses the archived source documents into deterministic staging
-records and an editorial report. It intentionally does not guess verdict
-classes or citation mappings.
-
-`npm run migrate:framework` rebuilds the exploratory graph and migrates every
-comparison into the replacement draft structure. The generated coverage audit
-proves that no input was silently dropped. Public replacement-model routes show
-the migrated material with research warnings until its claims are reviewed and
-sourced.
 
 ## Open decisions
 

@@ -487,44 +487,15 @@ Canonical authoring remains small TypeScript-validated records in Git, grouped
 by entity type. “One canonical graph” means one logical schema and one compiled
 read model—not one hand-edited file.
 
-### Proposed source layout
+### Source layout
 
 ```text
-content/
-  vocabulary/
-    concepts/                 # one Concept per file
-    schemes/                  # Concept Scheme definitions
-    collections/              # editorial umbrellas and inclusion rules
-    domains/                  # spheres and precise institutional domains
-  approaches/                 # one Approach dossier core per file
-  ends/                       # normalized End definitions
-  means/                      # one institutional arrangement per file
-  questions/
-    topics/
-    challenges/
-    criteria/
-  actors/
-    people/
-    organizations/
-  works/                      # books, articles, constitutions, fictional works
-  evidence/
-    cases/
-      <case-id>/
-        case.json             # boundary, context, and selection rationale
-        episodes/             # meaningful changes within a larger case
-        observations/         # scoped empirical Statements
-    events/                    # sourced occurrences, independently reusable
-    transitions/               # bounded before/change/after analyses
-    sources/                  # citable manifestations and access metadata
-  depictions/                 # interpretations of fictional systems
-  relationships/
-    approach-concepts/        # subject-centered relationship sets
-    approach-ends/
-    approach-means/
-    collection-memberships/
-    case-approaches/
-    case-means/
-    statement-support/
+content/domain/
+  vocabulary/                 # Concepts, schemes, Collections, and Domains
+  approaches/                 # Approaches, attributed Ends, and proposed Means
+  evidence/                   # Statements, Works, Sources, Cases, and episodes
+  analysis/                   # Challenges, Criteria, Dimensions, and Placements
+  relationships/              # subject-centered typed relationship sets
 ```
 
 JSON remains appropriate for declarative content; executable repository code
@@ -640,9 +611,8 @@ analytical distinctions.
 1. Define Concept, Collection, Domain, typed Relationship, and external-reference
    primitives alongside the existing evidence primitives. Document and test the
    SKOS mapping for the vocabulary subset.
-2. Establish the modular authoring directories and compiler boundary. Move the
-   current monolithic `content/framework/graph.json` to generated output; no
-   route may treat it as hand-authored source.
+2. Keep modular authoring under `content/domain/` as the sole publication
+   source; no route may read archived research or hand-edited generated data.
 3. Convert central planning from an Approach to a Means family and preserve its
    old material only where it maps cleanly.
 4. Build a vertical slice around social democracy, democratic Concepts,
@@ -654,8 +624,8 @@ analytical distinctions.
 7. Add one Comparison Dimension and Placement stress test using selected V-Dem
    or International IDEA dimensions without importing a universal democracy
    score.
-8. Review the compiled graph and rendered dossiers. Only then migrate the other
-   inherited records and retire remaining transitional fixtures.
+8. Review the compiled graph and rendered dossiers. Research additional records
+   from their backlog issues; archived inputs remain discovery leads only.
 
 ## Research basis
 

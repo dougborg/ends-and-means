@@ -37,6 +37,9 @@ describe("research-content-changes skill", () => {
     expect(skill).toContain("semantic duplicates");
     expect(skill).toContain("split compound Means");
     expect(skill).toContain("precise locators");
-    expect(skill).toContain("gaps rather than manufacturing canonical coverage");
+    expect(skill).toContain("archive/legacy-research/");
+    expect(skill).toContain("discovery lead only");
+    expect(skill).toContain("route unresolved fragments to the relevant backlog issue");
+    expect(skill).not.toContain("references/routes/topic.md");
   });
 });
