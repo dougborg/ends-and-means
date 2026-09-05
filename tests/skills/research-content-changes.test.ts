@@ -49,7 +49,8 @@ describe("research-content-changes skill", () => {
     expect(skill).toMatch(/Subject Guides.+presentation compositions/s);
     expect(skill).toMatch(/not graph superclasses.+factual claims/s);
     expect(skill).toMatch(/learner completeness.+graph coverage/s);
-    expect(skill).toMatch(/do not invent.+SubjectGuide/s);
+    expect(skill).toMatch(/Author them as `subject-guide` documents.+by ID/s);
+    expect(skill).toMatch(/Do not add a guide `kind`, body prose, graph edges, or alternate labels/s);
     expect(skill).toMatch(/searchQueries.+non-identifying entry phrases/s);
     expect(skill).toMatch(/representational failure.+boundary fixtures.+ADR/s);
     expect(skill).toMatch(/Indigenous.+stateless.+nomadic.+maritime.+city-state.+imperial.+colonial.+hybrid/s);

@@ -1,11 +1,12 @@
-export { compileDomainGraph, validateAuthoringDocuments } from "./compile";
 export type * from "./analysis";
+export * from "./audit";
 export type * from "./cases";
 export type * from "./common";
+export { compileDomainGraph, validateAuthoringDocuments } from "./compile";
 export type * from "./entities";
 export type * from "./graph";
 export type * from "./presentation";
+export { publicRelationshipLabel } from "./presentation";
+export * from "./public-text";
 export type * from "./relationships";
 export type * from "./vocabulary";
-export * from "./audit";
-export * from "./public-text";

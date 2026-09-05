@@ -58,11 +58,50 @@ argument and evidence layers. They may own narrative synthesis, but never
 duplicate factual claims or graph relationships: each supported or qualified
 section traces to canonical Statements, while research gaps remain explicit.
 
-A future SubjectGuide composes a complete learning journey from several
+A SubjectGuide composes a complete learning journey from several
 canonical records and entity-owned Dossiers without becoming a graph entity or
 duplicating claims.
 The boundary is recorded in
 [ADR 0004](adr/0004-subject-guides-as-presentation-compositions.md).
+
+```ts
+interface SubjectGuide {
+  id: string;
+  slug: string;
+  label: string;
+  description: string;
+  publicationStatus: PublicationStatus;
+  primarySubject: EntityRef & { kind: DossierSubjectKind };
+  searchQueries: Array<{
+    query: string;
+    disambiguation?: string;
+  }>;
+  redirects?: Array<{ from: string; reviewedAt: string }>;
+  sections: SubjectGuideSection[];
+  reviewedAt: string;
+}
+```
+
+Guide sections have one typed learner-journey role and select existing Dossier
+standfirsts or sections, Statements, entities, relationships, and Research
+Obligations by ID.
+They have no prose body and assert no graph edge.
+The compiler emits all validated guide records beside `entities` and
+`relationships`, then derives a reader-safe projection containing only reviewed
+and published guides.
+Raw and live records have explicitly named stable-ID and public-slug indexes.
+Reader-facing code must use `subjectGuideById` or `subjectGuideBySlug`; raw
+record lookup is reserved for editorial audits and must never drive a route.
+The guide ID and primary-subject reference remain separate so composition does
+not imply identity or inheritance.
+
+The short-answer role selects one Dossier standfirst whose subject exactly
+matches `primarySubject`.
+Meanings and boundaries select traced narrative or Statements rather than bare
+related-record links.
+Live relationship selections require live endpoints and mature supporting
+Statements, while citation labels preserve support, challenge, qualification,
+and context roles in both reading directions.
 
 ### Dossier
 
@@ -650,7 +689,7 @@ It accepts familiar terms and entry phrases without asking readers to choose an
 entity kind first.
 Cases, Compare, and Questions are primary task-oriented destinations; Sources
 and Method form a quieter trust layer.
-Collections, Domains, entity labels, and future SubjectGuide `searchQueries`
+Collections, Domains, entity labels, and SubjectGuide `searchQueries`
 support discovery without becoming ontology roots.
 
 An entity's preferred, alternate, and hidden labels name that same canonical
@@ -660,6 +699,8 @@ A SubjectGuide's `searchQueries` are non-identifying entry phrases that route a
 question to a guide; they do not become entity labels or assert equivalence.
 Colliding entry phrases require explicit editorial disambiguation rather than
 first-match routing.
+Queries and active guide slugs share one resolution namespace: another guide's
+slug cannot become a query without explicit disambiguation.
 Retired guide paths require reviewed redirects to a stable guide or an explicit
 gone state; a redirect must not silently merge canonical identities.
 
@@ -675,6 +716,9 @@ The [project vision's learner journey](project-vision.md#the-learner-journey)
 is the authoritative completeness guide.
 SubjectGuide selects entity-owned narrative and derived graph material but
 never owns duplicate factual claims or relationships.
+The learner-first prototype in #130 must consume only the live SubjectGuide
+projection and public helpers; sparse and immature states belong in test or
+preview fixtures, not production route generation.
 
 ## Implementation sequence
 

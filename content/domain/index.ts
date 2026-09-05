@@ -10,6 +10,7 @@ import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-commun
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
+import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
@@ -35,6 +36,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...socialismCommunismDossierDocuments,
+  ...subjectGuideDocuments,
   ...openResearchObligationDocuments,
   ...analysisDocuments,
   ...relationshipDocuments,

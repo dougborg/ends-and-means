@@ -1,9 +1,9 @@
 import { canonicalDocuments } from "../../../content/domain";
 import { compileDomainGraph } from "./compile";
 import type { DomainEntity, ResearchObligation } from "./entities";
-import type { DomainRelationship } from "./relationships";
-import type { DossierSubjectKind } from "./presentation";
 import type { CompiledDomainGraph } from "./graph";
+import type { DossierSubjectKind } from "./presentation";
+import type { DomainRelationship } from "./relationships";
 
 export const canonicalGraph = compileDomainGraph(canonicalDocuments);
 
@@ -67,6 +67,28 @@ export function dossierForSubject(
         dossier.subject.kind === kind &&
         dossier.subject.id === id,
     );
+}
+
+export function subjectGuideById(
+  id: string,
+  graph: CompiledDomainGraph = canonicalGraph,
+) {
+  return graph.indexes.subjectGuidesById[id];
+}
+
+export function subjectGuideBySlug(
+  slug: string,
+  graph: CompiledDomainGraph = canonicalGraph,
+) {
+  const id = graph.indexes.subjectGuideIdsBySlug[slug];
+  return id ? subjectGuideById(id, graph) : undefined;
+}
+
+export function subjectGuideRecordById(
+  id: string,
+  graph: CompiledDomainGraph = canonicalGraph,
+) {
+  return graph.indexes.subjectGuideRecordsById[id];
 }
 
 export function researchObligationsForTarget(

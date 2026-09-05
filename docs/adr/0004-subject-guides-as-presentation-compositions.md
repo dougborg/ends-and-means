@@ -21,11 +21,16 @@ discovery.
 
 ## Decision
 
-Introduce **SubjectGuide** as the name of a future validated presentation
+Introduce **SubjectGuide** as a validated presentation
 composition above entity-owned Dossiers and plural canonical records.
 It is not a graph superclass, canonical subject kind, Collection, or replacement
 for Dossiers.
-This ADR defines the boundary but does not implement a schema.
+The compiler stores every validated record in the separate ordered
+`subjectGuideRecords` collection, not in `entities`.
+Only reviewed and published records enter the reader-safe `subjectGuides`
+projection and its stable-ID and public-slug indexes.
+Editorial tooling may inspect the raw record collection; routes and discovery
+must use the live projection or its public lookup helpers.
 
 A SubjectGuide may select and order material from several canonical subjects,
 Dossiers, Statements, Sources, Research Obligations, and derived relationship
@@ -47,7 +52,7 @@ sections and can be surfaced in a guide without changing ownership.
 
 Do not implement `Topic` as a canonical contract.
 Entity alternate and hidden labels name the same canonical identity.
-Familiar discovery queries that do not assert identity belong to a future
+Familiar discovery queries that do not assert identity belong to a
 SubjectGuide's `searchQueries`; Collections and Domains provide other browse
 paths.
 Query collisions require explicit disambiguation, and retired guide paths may
@@ -61,14 +66,43 @@ Existing prose that uses “topic” in its ordinary-language sense is unaffecte
   its plural boundaries.
 - High-level guides can teach ambiguity instead of hiding it.
 - Dossiers remain reusable, independently reviewable presentation records.
-- Search queries and guide composition need a validated contract before
-  implementation.
+- A guide has a stable internal ID, a unique public slug, one primary subject,
+  ordered typed sections, owned search queries, optional reviewed redirects,
+  and a substantive review date.
+- `short-answer`, `meanings-and-boundaries`, and
+  `comparisons-and-next-steps` are required exactly once.
+  Purpose, institution, bounded-practice, dispute, depiction, and open-question
+  sections are conditional and omitted when canonical material is not ready.
+- A short answer selects exactly one Dossier standfirst.
+  That Dossier must belong to the guide's `primarySubject`.
+  Other sections select Dossier passages, Statements, entities, relationships,
+  or Research Obligations; no guide section owns a free-standing prose body.
+- Meanings and boundaries must select traced Dossier narrative or a Statement;
+  bare related-record links cannot substitute for an explanation.
+- Live guides may select only reviewed or published canonical material.
+  Bounded-practice sections must select a Case or Case Episode, depiction
+  sections must select a Depiction, and open-question sections must select a
+  Research Obligation.
+- A relationship selected by a live guide must have reviewed or published
+  endpoints and supporting Statements wherever its predicate requires evidence.
+  Citation selections retain their exact support, challenge, qualification, or
+  context role and precise locator.
+- Relationship labels are derived for the subject or object reading direction.
+  They do not rename predicates or erase citation roles.
+- Search-query collisions require an explicit disambiguation from every guide
+  involved.
+  A query that matches another live guide's normalized slug also requires
+  disambiguation; a guide may own the direct query matching its own slug.
+  Redirects are reviewed aliases for retired guide slugs, not identity claims,
+  and cannot collide with an active slug or search query.
 - Completeness checks must evaluate learner journeys as well as canonical graph
   coverage.
 - Compare and discovery views remain derived from shared canonical records
   rather than owning duplicate prose.
-- A future SubjectGuide schema requires its own implementation issue, fixtures,
-  rendering tests, and model-boundary review.
+- The first reviewed composition is the Economic democracy guide.
+  A compiled structural Communism fixture owns synthetic test-local canonical
+  records and remains outside the live projection until real claims and
+  narrative have independent research review.
 - Presentation composition is the default response to a new learner need.
   A canonical model change requires a researched representational failure,
   boundary fixtures, and a new or superseding ADR.

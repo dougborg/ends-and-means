@@ -183,6 +183,7 @@ describe("canonical narrative coverage", () => {
     ).toBeUndefined();
     expect(
       formatContentAttentionReport({
+        subjectGuides: { live: 0, total: 0, liveIds: [] },
         dossierCoverage: [],
         researchGapSections: ["concept:test#open-question"],
         researchNeededEntities: ["concept:test"],

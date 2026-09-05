@@ -67,13 +67,29 @@ connect them through explicit relationships instead of embedding duplicates.
 Subject Guides are validated presentation compositions above entity-owned
 Dossiers and plural canonical records, not graph superclasses or new owners of
 factual claims.
-Until their schema exists, do not invent a route-local SubjectGuide or revive
-the incomplete Topic contract.
+Author them as `subject-guide` documents that select existing Dossier narrative,
+Statements, entities, relationships, and Research Obligations by ID.
+Do not add a guide `kind`, body prose, graph edges, or alternate labels, and do
+not revive the incomplete Topic contract.
 Treat entity alternate and hidden labels as names for the same canonical
 identity.
-Treat future SubjectGuide `searchQueries` as non-identifying entry phrases;
+Treat SubjectGuide `searchQueries` as non-identifying entry phrases;
 disambiguate collisions explicitly and never use a redirect to merge distinct
 canonical identities.
+Require the short answer, meanings and boundaries, and comparisons and next
+steps exactly once.
+The short answer must select the primary subject's Dossier standfirst, and the
+meanings section must select traced narrative or Statements rather than only
+related records.
+Omit unsupported conditional roles; a bounded-practice section must select a
+Case or Case Episode, a depiction section a Depiction, and an open-question
+section a Research Obligation.
+Treat `subjectGuideRecords` as editorial input.
+Reader-facing routes and discovery must use only the reviewed/published
+`subjectGuides` projection or its public lookup helpers.
+For a selected relationship, preserve its direction, status, scope, evidence,
+and citation role; use perspective-aware public labels without rewriting the
+canonical predicate.
 
 Prefer presentation composition for new learner needs.
 Propose a canonical model change only when researched content demonstrates a

@@ -57,10 +57,29 @@ that remain in `research-needed` status. Graph validation still fails the build
 for unresolved or mistyped entity, Statement, Source, and relationship
 references.
 
-A future SubjectGuide may compose several Dossiers and canonical record kinds
+A SubjectGuide may compose several Dossiers and canonical record kinds
 into one learner journey.
 It is a validated presentation composition, not a canonical graph superclass or
 a new owner of factual claims and relationships.
+Author guides as `subject-guide` documents under `presentation/`.
+Every guide section selects existing traced narrative or canonical records by
+ID; it never owns a prose body, entity aliases, graph relationships, or Research
+Obligations.
+Only the short answer, meanings and boundaries, and comparisons and next steps
+are structurally required.
+Omit other roles cleanly unless reviewed material supports them.
+Use `searchQueries` for familiar non-identifying entry phrases, add explicit
+disambiguation when a normalized query reaches several guides, and reserve
+entity `alternateLabels` for true lexical identity.
+The compiler's closed typed references make `content/domain/` the only possible
+guide input; archived research cannot be selected or rendered.
+The compiled `subjectGuideRecords` collection includes editorial states for
+audits, while `subjectGuides` and the public lookup helpers contain only reviewed
+or published records.
+Production routes and discovery must never consume the raw record collection.
+The short answer must use the primary subject's Dossier standfirst, and meanings
+and boundaries must select traced narrative or Statements.
+Selected live relationships require live endpoints and mature evidence.
 See `docs/adr/0004-subject-guides-as-presentation-compositions.md`.
 
 Collections are non-inheriting editorial groupings and may include concrete
