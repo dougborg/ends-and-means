@@ -33,6 +33,20 @@ Runtime schemas reject malformed API and snapshot data before policy analysis an
 Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.
 Ready reports are deterministically sorted by Priority (`Now`, `Next`, `Later`) and then issue number; they never infer order from GitHub's item-list response.
 
+Review evidence is valid only for the pull request's exact current head.
+Copilot must have submitted a review on that commit, and the independent reviewer must leave this machine-readable PR comment after completing review:
+
+```text
+Independent adversarial review: APPROVED
+Reviewer: /root/<independent-agent-name>
+Head: <full-40-character-commit-oid>
+```
+
+The pull-request template checkbox records human workflow completion but is deliberately not accepted as audit evidence by itself.
+A rebase or remediation commit invalidates both head-bound signals and requires fresh reviews.
+The reviewer agent path must differ from the implementation owner recorded on the issue; missing ownership fails closed.
+Because local agents share the repository owner's GitHub authentication, this marker is auditable process evidence, not cryptographic proof of identity or independence.
+
 For diagnosis or fixture development, pass a stored normalized snapshot:
 
 ```sh

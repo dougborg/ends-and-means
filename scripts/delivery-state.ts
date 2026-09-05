@@ -63,6 +63,29 @@ export interface DeliveryFinding {
   item?: number;
 }
 
+interface ReviewRecord {
+  author: { login: string };
+  commit: { oid: string };
+}
+
+interface ReviewComment {
+  body: string;
+}
+
+export function reviewEvidenceForHead(headOid: string, implementationOwner: string | undefined, reviews: ReviewRecord[], comments: ReviewComment[]) {
+  const marker = new RegExp(
+    String.raw`^Independent adversarial review: APPROVED\s*\nReviewer: (\/root\/[a-z0-9_/-]+)\s*\nHead: ${headOid}$`,
+    "im",
+  );
+  return {
+    copilot: reviews.some((review) => /copilot/i.test(review.author.login) && review.commit.oid === headOid),
+    adversarial: comments.some((comment) => {
+      const match = comment.body.match(marker);
+      return Boolean(implementationOwner && match?.[1] && match[1] !== implementationOwner);
+    }),
+  };
+}
+
 const priorityRank = new Map<Priority, number>(priorities.map((priority, index) => [priority, index]));
 
 function hasConcreteBlocker(body = "") {

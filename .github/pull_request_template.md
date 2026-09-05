@@ -30,7 +30,7 @@
 ## Review and integration
 
 - [ ] Applicable Copilot findings are resolved.
-- [ ] An independent adversarial review covered the material risks.
+- [ ] An independent adversarial review covered the material risks, with a head-bound reviewer comment recorded as described in `docs/delivery-harness.md`.
 - [ ] The branch is rebased on current `main` and will use rebase integration.
 
 ## Human decisions requested

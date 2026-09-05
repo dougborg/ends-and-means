@@ -13,6 +13,11 @@
 Copilot review and independent adversarial review are required by project process.
 GitHub branch protection intentionally has no required approving-review gate, so absence of that setting is not permission to skip review.
 Address or explicitly resolve every material finding, rerun affected checks, and resolve conversations.
+Record approval only after both reviewers inspect the exact current head.
+Copilot's GitHub review must be bound to that commit; the independent reviewer must add a PR comment in the exact format `Independent adversarial review: APPROVED`, `Reviewer: /root/<independent-agent-name>`, and `Head: <full-40-character-commit-oid>` on three lines.
+The PR-author checkbox is not independently attributable evidence, and any new commit makes earlier evidence stale.
+The named reviewer must differ from the issue's recorded implementation owner; absent ownership fails closed.
+Agents share GitHub authentication, so treat this as process evidence rather than cryptographic identity proof.
 
 Strict branch checks retain stable names: `verify`, `workflow-analysis`, `dependency-review`, and `codeql`.
 Do not duplicate their ownership across workflows or rename them casually.

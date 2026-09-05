@@ -19,11 +19,32 @@ describe("repository skill contract", () => {
         await mkdir(dirname(target), { recursive: true });
         await writeFile(target, await readFile(join(process.cwd(), path), "utf8"));
       }
-      for (const path of capability.paths) await writeFile(join(root, path), "Capability intentionally deleted by fixture.\n");
-      expect(auditSkillContracts(root)).toContainEqual({
+      const deletion = new RegExp(capability.deletion.pattern.source, `${capability.deletion.pattern.flags.replace("g", "")}g`);
+      let replacements = 0;
+      for (const path of capability.paths) {
+        const target = join(root, path);
+        const original = await readFile(target, "utf8");
+        const mutated = original.replace(deletion, () => {
+          replacements += 1;
+          return "capability intentionally deleted";
+        });
+        await writeFile(target, mutated);
+      }
+      expect(replacements).toBeGreaterThan(0);
+      const findings = auditSkillContracts(root);
+      expect(findings).toContainEqual({
         code: "SKILL_CAPABILITY",
         message: `${capability.owner} does not cover ${capability.name}.`,
       });
+      expect(findings.filter((finding) => finding.code === "SKILL_CAPABILITY")).toHaveLength(1);
     }
+  });
+
+  it("reports missing owner files as structured drift", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+    expect(auditSkillContracts(root)).toContainEqual({
+      code: "SKILL_FILE_MISSING",
+      message: "coordinate-project-delivery is missing .agents/skills/coordinate-project-delivery/SKILL.md.",
+    });
   });
 });

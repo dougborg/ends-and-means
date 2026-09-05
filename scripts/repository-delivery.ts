@@ -53,28 +53,43 @@ interface StepEntry {
   step: Node;
 }
 
+function auditJobPermissions(file: string, name: string, job: Node): RepositoryDeliveryFinding[] {
+  if (job.permissions === "write-all") {
+    return [{ code: "WORKFLOW_PERMISSIONS", message: `${file}:${name} grants write-all permission to pull-request code.` }];
+  }
+  const writes = Object.entries(record(job.permissions)).filter(([, access]) => access === "write").map(([scope]) => scope);
+  const allowed = ["codeql", "workflow-analysis"].includes(name) && writes.length === 1 && writes[0] === "security-events";
+  return writes.length && !allowed
+    ? [{ code: "WORKFLOW_PERMISSIONS", message: `${file}:${name} grants write permission to pull-request code.` }]
+    : [];
+}
+
 function auditWorkflowPermissions(workflows: Map<string, Node>, allJobs: JobEntry[]) {
   const findings: RepositoryDeliveryFinding[] = [];
   for (const [file, workflow] of workflows) {
     if (hasTrigger(workflow, "pull_request_target")) findings.push({ code: "FORK_SAFETY", message: `${file} must not use pull_request_target.` });
+    if (!Object.hasOwn(workflow, "permissions")) findings.push({ code: "WORKFLOW_PERMISSIONS", message: `${file} must declare top-level permissions explicitly.` });
     if (permissionWrites(workflow.permissions)) findings.push({ code: "WORKFLOW_PERMISSIONS", message: `${file} grants write permission to pull-request code at workflow scope.` });
     if (!hasTrigger(workflow, "pull_request")) continue;
     for (const { name, job } of allJobs.filter((candidate) => candidate.file === file)) {
-      const writes = Object.entries(record(job.permissions)).filter(([, access]) => access === "write").map(([scope]) => scope);
-      const allowed = ["codeql", "workflow-analysis"].includes(name) && writes.length === 1 && writes[0] === "security-events";
-      if (writes.length && !allowed) findings.push({ code: "WORKFLOW_PERMISSIONS", message: `${file}:${name} grants write permission to pull-request code.` });
+      findings.push(...auditJobPermissions(file, name, job));
     }
   }
   return findings;
 }
 
-function auditActionPins(allSteps: StepEntry[]) {
-  return allSteps.flatMap(({ file, name, step }): RepositoryDeliveryFinding[] => {
-    if (typeof step.uses !== "string" || step.uses.startsWith("$/") || step.uses.startsWith("./")) return [];
-    return /@[0-9a-f]{40}$/.test(step.uses)
+function mutableActionFinding(file: string, name: string, uses: unknown): RepositoryDeliveryFinding[] {
+    if (typeof uses !== "string" || uses.startsWith("$/") || uses.startsWith("./")) return [];
+    return /@[0-9a-f]{40}$/.test(uses)
       ? []
-      : [{ code: "ACTION_PIN", message: `${file}:${name} uses a mutable action reference ${step.uses}.` }];
-  });
+      : [{ code: "ACTION_PIN", message: `${file}:${name} uses a mutable action reference ${uses}.` }];
+}
+
+function auditActionPins(allSteps: StepEntry[], allJobs: JobEntry[]) {
+  return [
+    ...allSteps.flatMap(({ file, name, step }) => mutableActionFinding(file, name, step.uses)),
+    ...allJobs.flatMap(({ file, name, job }) => mutableActionFinding(file, name, job.uses)),
+  ];
 }
 
 function auditActionSetup(actionSteps: Node[]) {
@@ -118,7 +133,7 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   const duplicateCommands = allSteps.filter(({ step }) => typeof step.run === "string" && ownedCommands.some((command) => (step.run as string).startsWith(command)));
   requireRule(duplicateCommands.length === 0, "VERIFY_DUPLICATE", "Workflow steps must not duplicate commands owned by pnpm verify.");
 
-  findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps));
+  findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps, allJobs));
 
   const jobNames = allJobs.map(({ name }) => name);
   for (const name of ["verify", "dependency-review", "codeql", "workflow-analysis"]) {
@@ -131,6 +146,13 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   const pages = workflows.get("pages.yml") ?? {};
   const pagesJobs = record(pages.jobs);
   requireRule(record(pagesJobs.deploy).needs === "build-and-verify", "PAGES_ARTIFACT", "Pages deploy must depend on the verified build job.");
+  const pagesProducer = steps(pagesJobs["build-and-verify"]).some(
+    (step) => step.uses === "$/.github/actions/verify" && record(step.with)["upload-pages-artifact"] === "true",
+  );
+  const compositeProducer = steps(record(verifyAction.runs)).some(
+    (step) => String(step.uses).startsWith("actions/upload-pages-artifact@") && step.if === "inputs.upload-pages-artifact == 'true'",
+  );
+  requireRule(pagesProducer && compositeProducer, "PAGES_ARTIFACT", "Pages must request and produce the verified Pages artifact.");
   requireRule(record(record(pagesJobs.deploy).permissions).pages === "write" && record(record(pagesJobs.deploy).permissions)["id-token"] === "write", "PAGES_PERMISSIONS", "Only Pages deploy should receive Pages and OIDC write permissions.");
   const artifactNames = allSteps.flatMap(({ step }) => (String(step.uses).startsWith("actions/upload-artifact@") ? [record(step.with).name] : []));
   requireRule(artifactNames.every((name) => typeof name === "string" && !name.includes("${{")), "ARTIFACT_NAME", "Artifact names must be deterministic.");
