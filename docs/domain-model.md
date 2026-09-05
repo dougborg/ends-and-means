@@ -364,7 +364,10 @@ question; `statementIds` separately names new claims reconciled from research.
 Those lists cannot overlap. An obligation must name at least one addressed
 Statement or an exact Dossier section, and its target is limited to a
 reader-facing Approach, Case, Challenge, or Concept so every target has a
-stable route and can display its open questions.
+stable route and can display its open questions. At target level, linked
+Statements must belong to that target's Dossier; when a section is named, they
+must belong to that exact section. Questions spanning multiple sections remain
+target-level rather than claiming a misleading section owner.
 
 The obligation type keeps four questions distinct: a `counterargument`
 challenges a reason or design; `counterevidence` could challenge an empirical
@@ -373,9 +376,13 @@ claim; a `counterfactual` specifies an alternative causal path; and a general
 A partially addressed obligation requires at least one reconciled Statement
 but remains active. A resolved obligation requires reconciled Statements, a
 rationale, and `closedAt`; a withdrawn obligation requires a rationale and
-`closedAt` but does not manufacture evidence. Open and partially addressed
-obligations cannot carry closure metadata. Reader-facing text must not contain
-issue numbers, branch names, pull-request references, or migration status.
+`closedAt` but does not manufacture evidence. An open obligation cannot carry a
+reconciled Statement; adding one advances the obligation to
+`partially-addressed` or `resolved`. Open and partially addressed obligations
+cannot carry closure metadata. Reader-facing text must not contain issue or
+pull-request references, branch names, or migration and draft status. The
+compiler checks Research Obligation fields, and the rendered-route audit checks
+the complete public text of every built page with the same focused patterns.
 
 ## Relationship model
 

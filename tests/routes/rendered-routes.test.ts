@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { entitiesOfKind } from "../../src/lib/domain/canonical";
+import { workflowReferencesIn } from "../../src/lib/domain";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -87,9 +88,7 @@ async function verifyEveryPublicRecordRenders() {
     expect(html.match(/<h1\b/gi), route).toHaveLength(1);
     expect(text.length, route).toBeGreaterThan(200);
     expect(html, route).not.toMatch(/<astro-island\b/i);
-    expect(text, route).not.toMatch(
-      /transitional|migration status|research draft|working material|first canonical slice|canonical (?:graph|model|catalogue|sources)/i,
-    );
+    expect(workflowReferencesIn(text), route).toEqual([]);
   }
 
   await verifyExploreAndCaseRoutes();
@@ -248,13 +247,10 @@ async function verifyReferenceRoutes() {
   );
   expect(researchText).toContain("What the evidence does not yet settle.");
   expect(researchText).toContain("Counterarguments");
-  expect(researchText).toContain("Counterevidence");
   expect(researchText).toContain("Counterfactual questions");
+  expect(researchText).toContain("Research gaps");
   expect(researchText).toContain(
     "Can democratic firm governance coordinate specialized work",
-  );
-  expect(researchText).not.toMatch(
-    /pull request|\bPR\s*#?\d+\b|migration status|working (?:tree|branch|material)/i,
   );
   expect(researchText).toContain("counterargument / open");
   expect(researchText).toContain("Claims this question tests");

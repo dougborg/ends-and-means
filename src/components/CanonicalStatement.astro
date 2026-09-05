@@ -1,6 +1,6 @@
 ---
 import { citationsFor, entityById } from "../lib/domain/canonical";
-import type { Source, Statement } from "../lib/domain";
+import { claimPublicationLabel, type Source, type Statement } from "../lib/domain";
 
 interface Props { statementId: string; label?: string; anchored?: boolean; }
 const { statementId, label, anchored = true } = Astro.props;
@@ -17,7 +17,7 @@ const citations = citationsFor(statementId).map((citation) => {
   <p class="coordinate">{label ?? statement.statementKind.replaceAll("-", " ")}</p>
   <p class="canonical-claim__text">{statement.text}</p>
   <footer>
-    <span class="claim-status">{statement.publicationStatus === "reviewed" ? "Claim reviewed" : "Research needed"}</span>
+    <span class="claim-status">{claimPublicationLabel(statement.publicationStatus)}</span>
     <ol aria-label="Sources">
       {citations.map(({ citation, source, href, reference }) => source && (
         <li>

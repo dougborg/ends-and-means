@@ -8,3 +8,4 @@ export type * from "./presentation";
 export type * from "./relationships";
 export type * from "./vocabulary";
 export * from "./audit";
+export * from "./public-text";
