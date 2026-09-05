@@ -35,13 +35,21 @@ jobs:
         run: npm run static
 
       - name: Audit installed dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=moderate
 
       - name: Check types and Astro files
         run: npm run check
 
       - name: Run tests with coverage
         run: npm run test:coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coverage-report
+          path: coverage
+          if-no-files-found: error
 
       - name: Build site
         run: npm run build
@@ -64,7 +72,7 @@ jobs:
           if-no-files-found: ignore
 
   pages-build:
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main'
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -80,7 +88,7 @@ jobs:
         uses: withastro/action@e84f40bd8d2caa9e768ec82ad30dd81f0b280853 # v6.0.0
 
   pages-deploy:
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main'
     needs: pages-build
     runs-on: ubuntu-latest
     timeout-minutes: 10
