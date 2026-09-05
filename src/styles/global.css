@@ -294,9 +294,9 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .dimension-comparison { display: grid; gap: 2rem; padding-top: 2rem; border-top: 4px solid var(--cobalt); }
 .dimension-comparison > header { max-width: 72ch; }
 .dimension-comparison > header p:last-child, .dimension-method p, .dimension-method li { font-family: var(--reading); line-height: 1.65; }
-.dimension-scale { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); border: 1px solid var(--rule); background: var(--sheet); }
-.dimension-scale div { padding: 1rem; }
-.dimension-scale div + div { border-left: 1px solid var(--rule); }
+.dimension-scale { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); margin: 0; padding: 0; border: 1px solid var(--rule); background: var(--sheet); list-style: none; }
+.dimension-scale li { padding: 1rem; }
+.dimension-scale li + li { border-left: 1px solid var(--rule); }
 .dimension-scale strong, .dimension-scale span { display: block; }
 .dimension-scale strong, .placement-basis { color: var(--cobalt-dark); font: 600 .68rem/1.4 var(--apparatus); text-transform: uppercase; }
 .dimension-scale span { margin-top: .5rem; color: var(--muted); font-family: var(--reading); font-size: .82rem; line-height: 1.55; }
@@ -316,7 +316,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .dimension-method ul { padding-left: 1.1rem; }
 @media (max-width: 900px) {
   .dimension-scale, .dimension-method { grid-template-columns: 1fr; }
-  .dimension-scale div + div { border-top: 1px solid var(--rule); border-left: 0; }
+  .dimension-scale li + li { border-top: 1px solid var(--rule); border-left: 0; }
   .dimension-table { overflow: visible; }
   .dimension-table table, .dimension-table tbody, .dimension-table tr, .dimension-table th, .dimension-table td { display: block; width: 100%; min-width: 0; }
   .dimension-table table { border-top: 0; }

@@ -36,6 +36,7 @@ for (const route of routes) {
       expect(response?.ok()).toBe(true);
       await page.screenshot({ path: testInfo.outputPath("page.png"), fullPage: true });
 
+      // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Browser-context audit is an existing baseline hotspot to split during ratcheting.
       const audit = await page.evaluate(() => {
         const parseColor = (value: string) => {
           const channels = value.match(/[\d.]+/g)?.map(Number) ?? [];
@@ -57,6 +58,7 @@ for (const route of routes) {
           }
           return parseColor(getComputedStyle(document.documentElement).backgroundColor);
         };
+        // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: DOM visibility and contrast checks form one existing browser-evaluation baseline.
         const lowContrast = [...document.querySelectorAll("main h1, main h2, main h3, main h4, main p, main a, main summary, main strong, main small")].flatMap((element) => {
           const style = getComputedStyle(element);
           const bounds = element.getBoundingClientRect();

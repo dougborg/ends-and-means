@@ -10,6 +10,9 @@
     "dev": "astro dev",
     "build": "npm run validate && astro build",
     "preview": "astro preview",
+    "lint": "biome lint --error-on-warnings .",
+    "lint:fix": "biome lint --write .",
+    "static": "knip --include files,dependencies,unlisted,binaries,unresolved,cycles",
     "check": "astro check",
     "test": "vitest run tests/content tests/skills",
     "test:routes": "vitest run tests/routes",
@@ -22,8 +25,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@biomejs/biome": "2.5.12",
     "@playwright/test": "^1.62.1",
     "@types/node": "24.10.4",
+    "knip": "6.34.0",
     "tsx": "4.23.13",
     "typescript": "6.0.3",
     "vitest": "4.1.11"

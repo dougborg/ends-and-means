@@ -10,8 +10,9 @@ substantial changes receive pull-request review before publication.
 2. Create a focused branch named `research/<type>-<stable-id>`.
 3. Implement the concrete candidate in the canonical content model or its
    deterministic source generator, including rendering and tests when needed.
-4. Run `npm run validate`, `npm run check`, `npm test`, `npm run build`,
-   `npm run test:routes`, and the rendered-page review described below.
+4. Run `npm run validate`, `npm run lint`, `npm run static`, `npm run check`,
+   `npm test`, `npm run build`, `npm run test:routes`, and the rendered-page
+   review described below.
 5. Open a pull request. The PR is the proposal: identify all claims,
    classifications, and judgments the reviewer must decide.
 6. Revise the concrete change in that PR. Merging records acceptance and
@@ -52,6 +53,26 @@ contracts and editorial evidence policy.
 Corrections and implementation work also use branches and pull requests. Keep
 unrelated changes separate and explain how the result was verified. Never push
 directly to `main`; repository rules require a reviewed pull request.
+
+## Automated quality and security gates
+
+- Biome linting covers TypeScript, JavaScript, JSON, CSS, and Astro files. Its
+  complexity rules cap cognitive complexity at 15 and function bodies at 80
+  nonblank lines. Existing hotspots use narrow, documented suppressions that
+  should be removed incrementally rather than raising the repository limit.
+  The CSS descending-specificity heuristic is disabled because the shared
+  stylesheet intentionally composes selectors across independent components;
+  rendered browser tests cover the resulting cascade.
+- Knip rejects unused files, dependencies, unresolved imports, binaries, and
+  dependency cycles while leaving the domain model's intentional public type
+  exports alone.
+- Astro's strict type check, canonical graph validation, unit tests, route
+  tests, production build, and browser review remain required.
+- Dependabot checks npm and GitHub Actions weekly. Dependency Review blocks new
+  moderate-or-higher known vulnerabilities; CodeQL scans JavaScript and
+  TypeScript; zizmor audits workflow definitions.
+- GitHub Actions are pinned to immutable commit SHAs. Keep the release tag in
+  the trailing comment so Dependabot updates remain readable.
 
 ## Rendered-page review
 
