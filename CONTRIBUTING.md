@@ -65,7 +65,8 @@ directly to `main`; repository rules require a reviewed pull request.
   rendered browser tests cover the resulting cascade.
 - Knip rejects unused files, dependencies, unresolved imports, binaries, and
   dependency cycles while leaving the domain model's intentional public type
-  exports alone.
+  exports alone. The two ignored `@emnapi` packages are explicit portability
+  pins required for Linux clean installs of optional WASM dependencies.
 - Astro's strict type check, canonical graph validation, unit tests, route
   tests, production build, and browser review remain required.
 - V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 88%
