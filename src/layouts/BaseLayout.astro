@@ -26,5 +26,32 @@ const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
       <slot />
     </main>
     <SiteFooter />
+    <script is:inline>
+      (() => {
+        const openTarget = () => {
+          if (!location.hash) return;
+          const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          const disclosure = target?.closest("details") ?? (target instanceof HTMLDetailsElement ? target : null);
+          if (disclosure instanceof HTMLDetailsElement) disclosure.open = true;
+        };
+        openTarget();
+        addEventListener("hashchange", openTarget);
+
+        let printClosed = [];
+        const setPrintState = (printing) => {
+          if (printing) {
+            printClosed = [...document.querySelectorAll("details:not([open])")];
+            for (const disclosure of printClosed) disclosure.open = true;
+          } else {
+            for (const disclosure of printClosed) disclosure.open = false;
+            printClosed = [];
+          }
+        };
+        const printMedia = matchMedia("print");
+        printMedia.addEventListener("change", ({ matches }) => setPrintState(matches));
+        addEventListener("beforeprint", () => setPrintState(true));
+        addEventListener("afterprint", () => setPrintState(false));
+      })();
+    </script>
   </body>
 </html>

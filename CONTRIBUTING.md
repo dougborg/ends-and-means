@@ -69,6 +69,12 @@ Corrections and implementation work also use branches and pull requests. Keep
 unrelated changes separate and explain how the result was verified. Never push
 directly to `main`; repository rules require a reviewed pull request.
 
+If implementation exposes a small, clearly in-scope deficiency, address it in
+the same review and add proportionate tests or documentation.
+Record larger, uncertain, or independently reviewable improvements in the
+backlog with the observed problem, desired outcome, dependencies, and
+acceptance criteria rather than silently widening the pull request.
+
 ## Automated quality and security gates
 
 - Biome linting covers TypeScript, JavaScript, JSON, CSS, and Astro files. Its

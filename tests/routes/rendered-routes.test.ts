@@ -86,7 +86,7 @@ async function verifyEveryPublicRecordRenders() {
   expect(hrefs(bargainingContinue)).toEqual(["/explore/swedish-rehn-meidner-model/"]);
 
   const concept = await readFile(routeFile("/concepts/economic-democracy/"), "utf8");
-  expect(stripMarkup(concept)).toContain("How this idea is being used here");
+  expect(stripMarkup(concept)).toContain("How published approaches use this idea");
   expect(stripMarkup(concept)).toContain("Swedish wage-earner fund program");
   expect(hrefs(concept)).toContain("https://en.wikipedia.org/wiki/Economic_democracy");
 
