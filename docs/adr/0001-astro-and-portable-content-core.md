@@ -15,10 +15,13 @@ validation, backlink generation, and editorial reports in a framework-independen
 TypeScript module. Use Astro islands only for interactions that cannot be
 delivered well with HTML and CSS.
 
-Publish the static build with GitHub Pages using the official Astro deployment
-action. The canonical site URL is `https://endsandmeans.info`; because this is a
-custom-domain root deployment, Astro does not use a repository-name `base`.
-Deployment CI remains separate from the pull-request verification workflow.
+Publish the verified static build with GitHub Pages using the official Pages
+artifact and deployment actions. The canonical site URL is
+`https://endsandmeans.info`; because this is a custom-domain root deployment,
+Astro does not use a repository-name `base`. Pull-request verification and
+main-branch deployment are separate workflows that share one local verification
+action. The deployment workflow uploads the `dist` directory produced by its
+successful verification job rather than rebuilding it in a privileged job.
 
 Canonical content uses typed TypeScript records. ADR 0003 supersedes the earlier
 plan to store every entity as one Markdown file with structured frontmatter:
