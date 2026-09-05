@@ -25,6 +25,13 @@
 - [ ] `pnpm test:routes`
 - [ ] `pnpm review:visual` for changed or representative public routes
 - [ ] I inspected the desktop, tablet, and mobile screenshots for hierarchy, readability, spacing, and empty/broken states.
+- [ ] `pnpm verify` (the full local/CI path; the individual checks above remain useful for focused diagnosis)
+
+## Review and integration
+
+- [ ] Applicable Copilot findings are resolved.
+- [ ] An independent adversarial review covered the material risks.
+- [ ] The branch is rebased on current `main` and will use rebase integration.
 
 ## Human decisions requested
 

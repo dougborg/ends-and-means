@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coordinate project delivery"
+  short_description: "Audit and coordinate delivery state safely"
+  default_prompt: "Audit the repository delivery workflow and active Project state, then recommend or perform only the authorized coordination changes."

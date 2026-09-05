@@ -29,6 +29,8 @@ the PR preserve the candidate, discussion, revisions, and decision.
 
 The repo-local `research-content-changes` skill provides the detailed entity
 contracts and editorial evidence policy.
+The separate `coordinate-project-delivery` skill governs issue, Project,
+pull-request, verification, review, and rebase-only integration state.
 
 Subject Guides are learner-facing presentation compositions, not canonical
 graph superclasses.
@@ -93,6 +95,8 @@ The GitHub Project contains active reviews, concrete blockers, and only
 the next three to five implementation-ready items.
 Keep no more than three implementation items active, normally one each in the
 Corpus, Reader experience, and Platform/process tracks.
+Use `pnpm audit:delivery -- --live-project` when authenticated Project access is
+available; an unavailable API or credential result is not a clean audit.
 
 ## Automated quality and security gates
 
@@ -120,6 +124,13 @@ Corpus, Reader experience, and Platform/process tracks.
   the trailing comment so Dependabot updates remain readable.
 - Production Pages build and deployment jobs depend on successful main-branch
   verification; pull requests cannot enter the deployment path.
+- `pnpm verify` is the single full local and CI verification path. It includes
+  repository/skill drift checks, lint, static analysis, dependency audit, type
+  checks, coverage, build, route tests, and browser review. See the
+  [delivery harness](docs/delivery-harness.md).
+- Copilot and independent adversarial review are project-process requirements.
+  Branch protection does not require an approving review, but strict checks,
+  conversation resolution, and linear history remain enforced.
 
 ## Rendered-page review
 

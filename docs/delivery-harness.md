@@ -1,0 +1,54 @@
+# Delivery harness
+
+The delivery harness makes repository gates and the private active-delivery Project inspectable without turning the Project into a second backlog.
+Issues and milestones remain authoritative for scope and outcomes.
+
+## Full verification
+
+Install dependencies and the browser runtime once, then run the same verification path CI owns:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm verify
+```
+
+`pnpm verify` audits repository delivery configuration and skill coverage, then runs linting, static analysis, dependency audit, type checks, coverage, domain validation and build, rendered-route tests, and browser review.
+The shared CI composite action invokes this command once; Pages consumes the resulting verified `dist` artifact.
+
+Repository-only verification deliberately prints `Project state: UNAVAILABLE` because pull-request jobs do not receive credentials for the private user Project.
+This is an explicit unavailable result, not evidence that Project state is clean.
+
+## Project-state audit
+
+An authenticated coordinator with read access can audit live execution state separately:
+
+```sh
+pnpm audit:delivery -- --live-project
+```
+
+The command is read-only and never changes Project visibility.
+It exits 0 for a clean readable snapshot, 1 for policy findings, and 2 when credentials, API access, or input is unavailable.
+Tests use a normalized snapshot fixture so Ready size and ordering, implementation WIP, workstream capacity, staleness, blocked conditions, and issue/PR/status reconciliation remain deterministic.
+
+For diagnosis or fixture development, pass a stored normalized snapshot:
+
+```sh
+pnpm audit:delivery -- --project-snapshot tests/fixtures/delivery/project-valid.json
+```
+
+## Owned signals
+
+| Signal | Owner | Purpose |
+|---|---|---|
+| `verify` | CI shared verification action | pnpm-backed repository, skill, lint, analysis, dependency, type, coverage, build, route, and browser checks. |
+| `dependency-review` | Security workflow | Reject vulnerable dependency changes in pull requests. |
+| `codeql` | Security workflow | JavaScript and TypeScript static security analysis. |
+| `workflow-analysis` | Security workflow | Pinned-action and GitHub Actions security analysis. |
+
+The strict names are branch-protection interfaces and should not be renamed casually.
+Workflows use least-privilege permissions, immutable action SHAs, frozen pnpm installs and cache keys, non-persistent checkout credentials, and no `pull_request_target` execution.
+The Pages deploy job receives write permissions only after the read-only verified build succeeds.
+
+Copilot and an independent adversarial review remain process requirements even though branch protection does not require an approving review.
+Conversation resolution, strict checks, and linear history remain repository gates.
