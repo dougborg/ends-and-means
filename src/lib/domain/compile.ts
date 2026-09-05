@@ -898,6 +898,45 @@ function validateNarrativeRelatedEntities(
   }
 }
 
+function validateStandfirstTrace(
+  entity: EntityOf<"dossier">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  if (!entity.standfirst.trim())
+    errors.push(`${entity.id}: dossier standfirst is empty`);
+  if (!entity.standfirstStatementIds.length)
+    errors.push(
+      `${entity.id}: dossier standfirst requires supporting Statements`,
+    );
+  validateEntityRefs(
+    entityById,
+    `${entity.id}:standfirst`,
+    "statement",
+    entity.standfirstStatementIds,
+    "Statement",
+    errors,
+  );
+  reportInvalid(
+    errors,
+    new Set(entity.standfirstStatementIds).size !==
+      entity.standfirstStatementIds.length,
+    `${entity.id}: dossier standfirst repeats a Statement`,
+  );
+  if (!["reviewed", "published"].includes(entity.publicationStatus)) return;
+  for (const statementId of entity.standfirstStatementIds) {
+    const statement = entityById.get(statementId);
+    if (
+      statement?.kind === "statement" &&
+      !["reviewed", "published"].includes(statement.publicationStatus)
+    ) {
+      errors.push(
+        `${entity.id}:standfirst: live Dossier requires reviewed or published Statement ${statementId}`,
+      );
+    }
+  }
+}
+
 function validateDossier(
   entity: EntityOf<"dossier">,
   entityById: Map<string, DomainEntity>,
@@ -920,8 +959,7 @@ function validateDossier(
     errors.push(
       `${entity.id}: live Dossier requires a reviewed or published subject`,
     );
-  if (!entity.standfirst.trim())
-    errors.push(`${entity.id}: dossier standfirst is empty`);
+  validateStandfirstTrace(entity, entityById, errors);
   validateIsoDate(entity.id, "reviewedAt", entity.reviewedAt, errors);
   if (!entity.sections.length)
     errors.push(

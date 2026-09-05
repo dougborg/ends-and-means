@@ -9,20 +9,24 @@ const socialDemocracy = attachNarrative("social-democracy.md", {
     "A concise orientation to social democracy's historical formation, common reform institutions, contested endpoint, and bounded Swedish examples.",
   subject: { kind: "concept" as const, id: "social-democracy" },
   standfirst: "",
+  standfirstStatementIds: ["social-democracy-contested-definition"],
   sections: [
     {
       id: "where-the-tradition-came-from",
       heading: "Where did the tradition come from?",
       body: "",
       traceStatus: "supported" as const,
-      statementIds: ["social-democracy-democratic-revision"],
+      statementIds: [
+        "social-democracy-democratic-revision",
+        "social-democracy-genealogy-contested",
+      ],
     },
     {
       id: "what-it-often-does",
       heading: "What does it often do in practice?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["social-democracy-reform-institutions"],
+      statementIds: ["social-democracy-welfare-state-form"],
     },
     {
       id: "where-its-boundary-is-contested",

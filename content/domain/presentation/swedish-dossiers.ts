@@ -17,6 +17,11 @@ const rawDossierDocuments = [
         "A narrative orientation to the program's purposes, institutional mechanism, enacted limits, and end.",
       subject: { kind: "approach", id: "swedish-wage-earner-fund-program" },
       standfirst: "",
+      standfirstStatementIds: [
+        "funds-declared-ends",
+        "funds-statutory-design",
+        "funds-limited-control",
+      ],
       sections: [
         {
           id: "the-problem-it-addressed",
@@ -81,6 +86,11 @@ const rawDossierDocuments = [
         "A plain-language account of the bounded 1983–1992 wage-earner-fund case.",
       subject: { kind: "case", id: "swedish-wage-earner-funds" },
       standfirst: "",
+      standfirstStatementIds: [
+        "funds-statutory-design",
+        "funds-declared-ends",
+        "funds-limited-control",
+      ],
       sections: [
         {
           id: "what-the-funds-were",
@@ -144,6 +154,11 @@ const rawDossierDocuments = [
         "A narrative orientation to the model's joint objectives, policy mechanisms, partial application, and empirical limits.",
       subject: { kind: "approach", id: "swedish-rehn-meidner-model" },
       standfirst: "",
+      standfirstStatementIds: [
+        "rehn-meidner-declared-objectives",
+        "rehn-meidner-policy-combination",
+        "rehn-meidner-partial-swedish-application",
+      ],
       sections: [
         {
           id: "several-goals-at-once",
@@ -218,6 +233,10 @@ const rawDossierDocuments = [
         "A narrative account of Sweden's bounded 1956–1983 centralized bargaining episode.",
       subject: { kind: "case", id: "swedish-solidaristic-bargaining" },
       standfirst: "",
+      standfirstStatementIds: [
+        "centralized-solidaristic-bargaining-form",
+        "solidaristic-wage-compression-timing",
+      ],
       sections: [
         {
           id: "the-institutional-arrangement",
@@ -278,6 +297,10 @@ const rawDossierDocuments = [
         "A narrative orientation to the distribution challenge across wages, wealth, ownership, and control.",
       subject: { kind: "challenge", id: "distribution-of-gains-and-ownership" },
       standfirst: "",
+      standfirstStatementIds: [
+        "rehn-meidner-distribution-assessment",
+        "funds-distribution-assessment",
+      ],
       sections: [
         {
           id: "several-distributions-not-one",

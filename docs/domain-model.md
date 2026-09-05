@@ -62,13 +62,15 @@ section traces to canonical Statements, while research gaps remain explicit.
 A Dossier attaches readable narrative to one canonical subject without forcing
 presentation prose into every entity type. It supplies the shared standfirst
 used by directories and detail-page introductions, followed by ordered sections
-that carry stable IDs and an evidence status.
+that carry stable IDs and an evidence status. The standfirst has its own
+Statement trace because concise summary prose still makes substantive claims.
 
 ```ts
 interface Dossier {
   kind: "dossier";
   subject: EntityRef;
   standfirst: string;
+  standfirstStatementIds: string[];
   sections: Array<{
     id: string;
     heading: string;
@@ -82,7 +84,8 @@ interface Dossier {
 ```
 
 Only one non-deprecated Dossier may describe a subject. Reviewed narrative may
-only target reviewed or published subjects. A supported or qualified section
+only target reviewed or published subjects and Statements, including the
+standfirst trace. A supported or qualified section
 requires at least one Statement; a research-gap section cannot imply support by
 citing one. Dossiers can reference related entities for navigation, but those
 references do not assert canonical relationships.
