@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { entitiesOfKind } from "../../lib/domain/canonical";
+import { dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
 const approaches = entitiesOfKind("approach");
 ---
 <BaseLayout title="Explore" description="Explore approaches and institutions in Ends and Means." fullBleed>
-  <article class="canonical-index"><header><p class="coordinate">EXPLORE / APPROACHES</p><h1>Follow purposes into institutions and evidence.</h1><p class="dek">Each dossier connects attributed Ends, proposed Means, bounded cases, Challenges, Criteria, and the Statements that support the trace.</p></header><ol class="canonical-directory">{approaches.map((approach) => <li><p class="coordinate">APPROACH</p><h2><a href={`/explore/${approach.id}/`}>{approach.label}</a></h2><p>{approach.description}</p><a class="detail-link" href={`/explore/${approach.id}/`}>Follow the argument trace →</a></li>)}</ol></article>
+  <article class="canonical-index"><header><p class="coordinate">EXPLORE / APPROACHES</p><h1>Follow purposes into institutions and evidence.</h1><p class="dek">Each dossier connects attributed Ends, proposed Means, bounded cases, Challenges, Criteria, and the Statements that support the trace.</p></header><ol class="canonical-directory">{approaches.map((approach) => <li><p class="coordinate">APPROACH</p><h2><a href={`/explore/${approach.id}/`}>{approach.label}</a></h2><p>{dossierForSubject("approach", approach.id)?.standfirst ?? approach.description}</p><a class="detail-link" href={`/explore/${approach.id}/`}>Follow the argument trace →</a></li>)}</ol></article>
 </BaseLayout>

@@ -31,6 +31,22 @@ Episodes keep conditions, formal rules, rules-in-use, interactions, and outcomes
 in separate Statement collections so observation and causal interpretation do
 not collapse into one narrative field.
 
+Dossiers are the canonical presentation layer for readable, subject-led prose.
+Each active Dossier belongs to exactly one canonical subject and supplies one
+standfirst plus ordered narrative sections. Supported and qualified sections
+must cite canonical Statements; an explicit `research-gap` section must cite
+none. Related entity references provide navigation without duplicating graph
+relationships. Do not add overview or explainer prose to the subject entity: the
+the same Dossier should drive listing summaries, page introductions, and—where
+the route exposes narrative detail—its prose sections. Record the date of the
+latest substantive review in `reviewedAt`.
+Run `npm run audit:content` to see live-ready Dossier coverage for the primary
+page kinds currently in scope (Approach, Case, Challenge, and Concept), the exact
+subjects still missing narrative, explicit research-gap sections, and entities
+that remain in `research-needed` status. Graph validation still fails the build
+for unresolved or mistyped entity, Statement, Source, and relationship
+references.
+
 Collections are non-inheriting editorial groupings and may include concrete
 Means when a label describes an institutional family. Depictions remain tied to
 fictional Works. Fiction-derived Sources may provide context or qualification

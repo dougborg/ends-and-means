@@ -4,6 +4,7 @@ import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
 import { approachDocuments } from "./approaches/swedish-wage-earner-funds";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
+import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { vocabularyDocuments } from "./vocabulary/swedish-wage-earner-funds";
@@ -14,6 +15,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...rehnMeidnerApproachDocuments,
   ...evidenceDocuments,
   ...rehnMeidnerEvidenceDocuments,
+  ...dossierDocuments,
   ...analysisDocuments,
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,

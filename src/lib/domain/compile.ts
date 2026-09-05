@@ -5,6 +5,29 @@ import type { AuthoringDocument, CompiledDomainGraph } from "./graph";
 import type { DomainRelationship } from "./relationships";
 
 const stableId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const dossierSubjectKinds = new Set([
+  "concept",
+  "collection",
+  "approach",
+  "end",
+  "means",
+  "challenge",
+  "criterion",
+  "place",
+  "case",
+  "case-episode",
+  "event",
+  "transition",
+  "comparison-dimension",
+  "person",
+  "organization",
+  "depiction",
+]);
+const narrativeTraceStatuses = new Set([
+  "supported",
+  "qualified",
+  "research-gap",
+]);
 
 function refKey(ref: EntityRef) {
   return `${ref.kind}:${ref.id}`;
@@ -152,11 +175,7 @@ function comparableDate(value: HistoricalDate, boundary: "start" | "end") {
 }
 
 function statementIdsForCase(entity: DomainEntity) {
-  if (entity.kind === "case")
-    return [
-      ...entity.conditionStatementIds,
-      ...(entity.overview ?? []).flatMap(({ statementIds }) => statementIds),
-    ];
+  if (entity.kind === "case") return entity.conditionStatementIds;
   if (entity.kind === "case-episode")
     return [
       ...entity.conditionStatementIds,
@@ -639,24 +658,6 @@ function validateCase(
   entityById: Map<string, DomainEntity>,
   errors: string[],
 ) {
-  const overview = entity.overview ?? [];
-  if (!entity.overviewTitle?.trim())
-    errors.push(`${entity.id}: Case requires a plain-language overview title`);
-  reportInvalid(
-    errors,
-    !overview.length,
-    `${entity.id}: Case requires a plain-language overview`,
-  );
-  for (const [index, section] of overview.entries()) {
-    if (!section.heading.trim() || !section.text.trim())
-      errors.push(
-        `${entity.id}: overview section ${index} requires a heading and text`,
-      );
-    if (!section.statementIds.length)
-      errors.push(
-        `${entity.id}: overview section ${index} requires supporting Statements`,
-      );
-  }
   reportInvalid(
     errors,
     !entity.selectionRationale.trim(),
@@ -811,6 +812,130 @@ function validateTransition(
   }
 }
 
+function validateNarrativeSection(
+  entity: EntityOf<"dossier">,
+  section: EntityOf<"dossier">["sections"][number],
+  index: number,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  reportInvalid(
+    errors,
+    !narrativeTraceStatuses.has(section.traceStatus),
+    `${entity.id}: narrative section ${section.id} has an invalid trace status`,
+  );
+  if (!stableId.test(section.id))
+    errors.push(
+      `${entity.id}: narrative section ${index} ID is not stable kebab-case`,
+    );
+  if (!section.heading.trim() || !section.body.trim())
+    errors.push(
+      `${entity.id}: narrative section ${section.id} requires a heading and body`,
+    );
+  const isGap = section.traceStatus === "research-gap";
+  if (!isGap && !section.statementIds.length)
+    errors.push(
+      `${entity.id}: narrative section ${section.id} requires supporting Statements`,
+    );
+  if (isGap && section.statementIds.length)
+    errors.push(
+      `${entity.id}: research-gap section ${section.id} must not claim supporting Statements`,
+    );
+  validateNarrativeTraceMaturity(entity, section, entityById, errors);
+  validateEntityRefs(
+    entityById,
+    `${entity.id}:${section.id}`,
+    "statement",
+    section.statementIds,
+    "Statement",
+    errors,
+  );
+  reportInvalid(
+    errors,
+    new Set(section.statementIds).size !== section.statementIds.length,
+    `${entity.id}: narrative section ${section.id} repeats a Statement`,
+  );
+  validateNarrativeRelatedEntities(entity, section, entityById, errors);
+}
+
+function validateNarrativeTraceMaturity(
+  entity: EntityOf<"dossier">,
+  section: EntityOf<"dossier">["sections"][number],
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  if (!["reviewed", "published"].includes(entity.publicationStatus)) return;
+  for (const statementId of section.statementIds) {
+    const statement = entityById.get(statementId);
+    if (
+      statement?.kind === "statement" &&
+      !["reviewed", "published"].includes(statement.publicationStatus)
+    )
+      errors.push(
+        `${entity.id}:${section.id}: live Dossier requires reviewed or published Statement ${statementId}`,
+      );
+  }
+}
+
+function validateNarrativeRelatedEntities(
+  entity: EntityOf<"dossier">,
+  section: EntityOf<"dossier">["sections"][number],
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  const relatedKeys = (section.relatedEntityRefs ?? []).map(refKey);
+  reportInvalid(
+    errors,
+    new Set(relatedKeys).size !== relatedKeys.length,
+    `${entity.id}: narrative section ${section.id} repeats a related entity`,
+  );
+  for (const reference of section.relatedEntityRefs ?? []) {
+    const related = entityById.get(reference.id);
+    if (!related || related.kind !== reference.kind)
+      errors.push(
+        `${entity.id}:${section.id}: unresolved related entity ${refKey(reference)}`,
+      );
+  }
+}
+
+function validateDossier(
+  entity: EntityOf<"dossier">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  reportInvalid(
+    errors,
+    !dossierSubjectKinds.has(entity.subject.kind),
+    `${entity.id}: invalid dossier subject kind ${entity.subject.kind}`,
+  );
+  const subject = entityById.get(entity.subject.id);
+  if (!subject || subject.kind !== entity.subject.kind)
+    errors.push(
+      `${entity.id}: unresolved or mistyped dossier subject ${refKey(entity.subject)}`,
+    );
+  else if (
+    ["reviewed", "published"].includes(entity.publicationStatus) &&
+    !["reviewed", "published"].includes(subject.publicationStatus)
+  )
+    errors.push(
+      `${entity.id}: live Dossier requires a reviewed or published subject`,
+    );
+  if (!entity.standfirst.trim())
+    errors.push(`${entity.id}: dossier standfirst is empty`);
+  validateIsoDate(entity.id, "reviewedAt", entity.reviewedAt, errors);
+  if (!entity.sections.length)
+    errors.push(
+      `${entity.id}: dossier requires at least one narrative section`,
+    );
+  const sectionIds = new Set<string>();
+  for (const [index, section] of entity.sections.entries()) {
+    if (sectionIds.has(section.id))
+      errors.push(`${entity.id}: duplicate narrative section ${section.id}`);
+    sectionIds.add(section.id);
+    validateNarrativeSection(entity, section, index, entityById, errors);
+  }
+}
+
 function validateEntity(
   entity: DomainEntity,
   entityById: Map<string, DomainEntity>,
@@ -833,6 +958,7 @@ function validateEntity(
   if (entity.kind === "event") validateEvent(entity, entityById, errors);
   if (entity.kind === "transition")
     validateTransition(entity, entityById, relationshipIds, errors);
+  if (entity.kind === "dossier") validateDossier(entity, entityById, errors);
 }
 
 function validateEntities(
@@ -841,6 +967,18 @@ function validateEntities(
   relationshipIds: Set<string>,
   errors: string[],
 ) {
+  const dossierBySubject = new Map<string, string>();
+  for (const entity of entities) {
+    if (entity.kind !== "dossier" || entity.publicationStatus === "deprecated")
+      continue;
+    const subject = refKey(entity.subject);
+    const existing = dossierBySubject.get(subject);
+    if (existing)
+      errors.push(
+        `${entity.id}: dossier subject already belongs to ${existing}`,
+      );
+    else dossierBySubject.set(subject, entity.id);
+  }
   for (const entity of entities)
     validateEntity(entity, entityById, relationshipIds, errors);
 }

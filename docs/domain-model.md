@@ -52,8 +52,40 @@ Typed relationship    Work                      Comparison
 Rival interpretation  Interpretive claim        Timeline / reading path
 ```
 
-Presentation objects are compiled views. They do not own duplicate prose or
-relationships.
+Presentation objects are canonical reader-facing records derived from the
+argument and evidence layers. They may own narrative synthesis, but never
+duplicate factual claims or graph relationships: each supported or qualified
+section traces to canonical Statements, while research gaps remain explicit.
+
+### Dossier
+
+A Dossier attaches readable narrative to one canonical subject without forcing
+presentation prose into every entity type. It supplies the shared standfirst
+used by directories and detail-page introductions, followed by ordered sections
+that carry stable IDs and an evidence status.
+
+```ts
+interface Dossier {
+  kind: "dossier";
+  subject: EntityRef;
+  standfirst: string;
+  sections: Array<{
+    id: string;
+    heading: string;
+    body: string;
+    traceStatus: "supported" | "qualified" | "research-gap";
+    statementIds: string[];
+    relatedEntityRefs?: EntityRef[];
+  }>;
+  reviewedAt: string;
+}
+```
+
+Only one non-deprecated Dossier may describe a subject. Reviewed narrative may
+only target reviewed or published subjects. A supported or qualified section
+requires at least one Statement; a research-gap section cannot imply support by
+citing one. Dossiers can reference related entities for navigation, but those
+references do not assert canonical relationships.
 
 ## Core entities
 

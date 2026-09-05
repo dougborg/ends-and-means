@@ -2,6 +2,7 @@ import type { EntityBase } from "./common";
 import type { AnalysisEntity } from "./analysis";
 import type { EvidenceEntity } from "./cases";
 import type { VocabularyEntity } from "./vocabulary";
+import type { PresentationEntity } from "./presentation";
 
 export interface Approach extends EntityBase {
   kind: "approach";
@@ -20,11 +21,26 @@ export interface Means extends EntityBase {
 
 export interface Statement extends EntityBase {
   kind: "statement";
-  statementKind: "observation" | "attributed-value" | "definition" | "causal-hypothesis" | "classification" | "editorial-interpretation";
+  statementKind:
+    | "observation"
+    | "attributed-value"
+    | "definition"
+    | "causal-hypothesis"
+    | "classification"
+    | "editorial-interpretation";
   text: string;
 }
 
-export type WorkType = "book" | "article" | "report" | "dataset" | "law" | "constitution" | "archival-work" | "fiction" | "other";
+export type WorkType =
+  | "book"
+  | "article"
+  | "report"
+  | "dataset"
+  | "law"
+  | "constitution"
+  | "archival-work"
+  | "fiction"
+  | "other";
 
 export interface Work extends EntityBase {
   kind: "work";
@@ -47,7 +63,13 @@ export interface SourceIdentifiers {
 }
 
 export interface ResourceLink {
-  purpose: "publisher" | "library" | "authorized-reading" | "purchase" | "archive" | "other";
+  purpose:
+    | "publisher"
+    | "library"
+    | "authorized-reading"
+    | "purchase"
+    | "archive"
+    | "other";
   url: string;
   label: string;
   vendor?: string;
@@ -56,7 +78,15 @@ export interface ResourceLink {
 
 export interface Source extends EntityBase {
   kind: "source";
-  sourceType: "edition" | "article" | "report" | "dataset" | "legal-text" | "archival-record" | "web-page" | "other";
+  sourceType:
+    | "edition"
+    | "article"
+    | "report"
+    | "dataset"
+    | "legal-text"
+    | "archival-record"
+    | "web-page"
+    | "other";
   title: string;
   workId?: string;
   contributorDisplay?: string[];
@@ -66,4 +96,15 @@ export interface Source extends EntityBase {
   resourceLinks?: ResourceLink[];
 }
 
-export type DomainEntity = VocabularyEntity | EvidenceEntity | AnalysisEntity | Approach | End | Means | Statement | Work | Source | Depiction;
+export type DomainEntity =
+  | VocabularyEntity
+  | EvidenceEntity
+  | AnalysisEntity
+  | PresentationEntity
+  | Approach
+  | End
+  | Means
+  | Statement
+  | Work
+  | Source
+  | Depiction;

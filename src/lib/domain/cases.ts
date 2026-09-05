@@ -10,7 +10,14 @@ export interface HistoricalDate {
 
 export interface Place extends EntityBase {
   kind: "place";
-  placeType: "country" | "region" | "city" | "settlement" | "territory" | "institutional-jurisdiction" | "other";
+  placeType:
+    | "country"
+    | "region"
+    | "city"
+    | "settlement"
+    | "territory"
+    | "institutional-jurisdiction"
+    | "other";
 }
 
 interface CaseBase extends EntityBase {
@@ -23,12 +30,6 @@ interface CaseBase extends EntityBase {
 
 export interface Case extends CaseBase {
   kind: "case";
-  overviewTitle: string;
-  overview: Array<{
-    heading: string;
-    text: string;
-    statementIds: string[];
-  }>;
   selectionRationale: string;
   episodeIds: string[];
   asOf?: string;
