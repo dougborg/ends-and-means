@@ -173,10 +173,29 @@ async function verifyConceptRoutes() {
   expect(stripMarkup(concept)).toContain(
     "How published approaches use this idea",
   );
+  expect(stripMarkup(concept)).toContain("Does it prescribe one model?");
+  expect(stripMarkup(concept)).toContain(
+    "balances worker, shareholder, and community representation",
+  );
+  expect(stripMarkup(concept)).toContain("attributed proposal");
+  expect(stripMarkup(concept)).toContain(
+    "ownership, voice, representation, and practical decision power",
+  );
+  expect(stripMarkup(concept)).toContain("How this summary is supported");
   expect(stripMarkup(concept)).toContain("Swedish wage-earner fund program");
   expect(hrefs(concept)).toContain(
     "https://en.wikipedia.org/wiki/Economic_democracy",
   );
+  expect(hrefs(concept)).toContain(
+    "https://plato.stanford.edu/entries/economic-democracy/",
+  );
+  expect(hrefs(concept)).toContain(
+    "https://doi.org/10.1111/j.1467-9248.1990.tb00569.x",
+  );
+  expect(hrefs(concept)).toContain(
+    "/explore/swedish-wage-earner-fund-program/",
+  );
+  expect(hrefs(concept)).toContain("/cases/swedish-wage-earner-funds/");
 
   const socialDemocracy = await readFile(
     routeFile("/concepts/social-democracy/"),

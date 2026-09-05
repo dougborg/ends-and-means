@@ -32,7 +32,37 @@ describe("canonical narrative dossiers", () => {
     expect(
       dossierForSubject("case", "swedish-wage-earner-funds")?.sections.length,
     ).toBe(4);
-    expect(dossierForSubject("concept", "economic-democracy")).toBeUndefined();
+    const economicDemocracy = dossierForSubject(
+      "concept",
+      "economic-democracy",
+    );
+    expect(economicDemocracy?.sections).toHaveLength(5);
+    expect(economicDemocracy?.standfirstStatementIds).toEqual([
+      "economic-democracy-contested-scope",
+      "economic-democracy-ownership-is-not-control",
+      "economic-democracy-design-and-evidence-limits",
+    ]);
+    expect(
+      economicDemocracy?.sections
+        .slice(0, 4)
+        .flatMap(({ statementIds }) => statementIds),
+    ).toEqual(
+      expect.arrayContaining([
+        "economic-democracy-contested-scope",
+        "economic-democracy-workplace-institutions",
+        "economic-democracy-economy-wide-institutions",
+        "adamson-representative-firm-governance",
+        "economic-democracy-beyond-workplace",
+        "economic-democracy-ownership-is-not-control",
+        "economic-democracy-design-and-evidence-limits",
+        "economic-democracy-serious-objections",
+      ]),
+    );
+    expect(economicDemocracy?.sections[4]?.statementIds).toEqual([
+      "funds-declared-ends",
+      "funds-related-ideas-classification",
+      "funds-limited-control",
+    ]);
     expect(
       dossierForSubject("concept", "social-democracy")?.sections,
     ).toHaveLength(4);
@@ -78,6 +108,18 @@ describe("canonical narrative coverage", () => {
       report.dossierCoverage.find(({ kind }) => kind === "challenge")
         ?.missingIds,
     ).toEqual(["authority-and-accountability"]);
+    expect(
+      report.dossierCoverage.find(({ kind }) => kind === "concept"),
+    ).toMatchObject({
+      covered: 2,
+      total: 6,
+      missingIds: [
+        "collective-capital-formation",
+        "institutional-abolition",
+        "market-socialism",
+        "social-ownership",
+      ],
+    });
     expect(formatContentAttentionReport(report)).toContain(
       "missing: social-ownership",
     );

@@ -24,6 +24,7 @@ export interface Statement extends EntityBase {
   statementKind:
     | "observation"
     | "attributed-value"
+    | "attributed-proposal"
     | "definition"
     | "causal-hypothesis"
     | "classification"
