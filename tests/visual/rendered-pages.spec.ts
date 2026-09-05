@@ -165,7 +165,10 @@ test("social ownership publishes a traceable dossier and focused research questi
     "href",
     "/cases/swedish-wage-earner-funds/",
   );
-  await expect(page.getByText("counterargument / open")).toBeVisible();
+  const obligation = page.locator(".research-obligation").filter({
+    hasText: "When does delegated control over collectively held assets cease to count as effective social ownership?",
+  });
+  await expect(obligation.getByText("counterargument / open")).toBeVisible();
 });
 
 test("case-episode fragment links reveal their target", async ({ page }) => {
