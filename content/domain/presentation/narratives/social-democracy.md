@@ -1,20 +1,20 @@
-Social democracy is a contested political tradition that uses democratic organization and public power to pursue greater equality and freedom in economic as well as political life.
-Its programs have ranged from reforming capitalism to seeking a democratic path beyond it, so no single welfare state, party, or policy defines the tradition.
+Social democracy is a contested tradition of democratic reform with roots in socialist debates.
+Some accounts emphasize constraining capitalism through public institutions, while others leave open whether reform is the endpoint or a path toward deeper ownership change.
 
 ## where-the-tradition-came-from
 
-Sheri Berman traces social democracy's distinct formation to late-nineteenth-century revisionists who rejected the idea that history would mechanically produce socialism through class conflict.
-They argued that organized citizens could pursue change through democratic institutions and alliances broader than a single class.
+Sheri Berman traces social democracy's formation to revisionists who rejected the idea that history would mechanically produce socialism through class conflict.
+Dylan Riley treats that genealogy as one side of a larger dispute and contrasts Berman's favorable account with a more skeptical judgment of what social democracy achieved and when reform was economically possible.
 
 ## what-it-often-does
 
-One prominent strategy leaves substantial private ownership and market exchange in place while using elections, social insurance, public services, regulation, and collective bargaining to reduce insecurity and limit private economic power.
-Those institutions are common social-democratic means, but their presence does not by itself classify an entire political economy.
+Pablo Gilabert and Martin O'Neill describe one welfare-state model that pools major social risks and shifts some bargaining power away from private owners.
+It operates alongside markets and largely private ownership through public provision and organized labor rather than through one ownership formula.
 
 ## where-its-boundary-is-contested
 
-Some accounts present social democracy as a reformist alternative within the socialist tradition, while others describe its practical strategy as taming capitalism.
-The name therefore does not settle whether a program seeks to preserve private ownership, gradually transform it, or replace it altogether.
+Gilabert and O'Neill separate reforms that tame capitalism from socialist models intended to end capitalist class division.
+Berman instead presents social democracy as an alternative to orthodox Marxism, so these classifications do not supply one agreed ownership endpoint.
 
 ## how-the-swedish-material-fits
 

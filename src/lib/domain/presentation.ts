@@ -31,6 +31,7 @@ export interface Dossier extends EntityBase {
   kind: "dossier";
   subject: EntityRef & { kind: DossierSubjectKind };
   standfirst: string;
+  standfirstStatementIds: string[];
   sections: NarrativeSection[];
   reviewedAt: string;
 }

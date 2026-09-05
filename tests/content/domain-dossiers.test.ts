@@ -33,7 +33,29 @@ describe("canonical narrative dossiers", () => {
       dossierForSubject("case", "swedish-wage-earner-funds")?.sections.length,
     ).toBe(4);
     expect(dossierForSubject("concept", "economic-democracy")).toBeUndefined();
-    expect(dossierForSubject("concept", "social-democracy")?.sections).toHaveLength(4);
+    expect(
+      dossierForSubject("concept", "social-democracy")?.sections,
+    ).toHaveLength(4);
+    const socialDemocracy = dossierForSubject("concept", "social-democracy");
+    expect(socialDemocracy?.standfirstStatementIds).toEqual([
+      "social-democracy-contested-definition",
+    ]);
+    expect(
+      socialDemocracy?.sections
+        .slice(0, 3)
+        .flatMap(({ statementIds }) => statementIds),
+    ).toEqual(
+      expect.arrayContaining([
+        "social-democracy-democratic-revision",
+        "social-democracy-genealogy-contested",
+        "social-democracy-welfare-state-form",
+        "social-democracy-contested-capitalism-boundary",
+      ]),
+    );
+    expect(socialDemocracy?.sections[3]?.statementIds).toEqual([
+      "rehn-meidner-social-democratic-context",
+      "funds-partial-instantiation",
+    ]);
     expect(dossierForSubject("case", "missing-case")).toBeUndefined();
     expect(
       dossiers
@@ -44,7 +66,9 @@ describe("canonical narrative dossiers", () => {
         ),
     ).toBe(true);
   });
+});
 
+describe("canonical narrative coverage", () => {
   it("reports the exact subjects that still need narrative work", () => {
     const report = auditContent(canonicalGraph);
     expect(
@@ -172,6 +196,7 @@ const documents: AuthoringDocument[] = [
     label: "Test concept dossier",
     subject: { kind: "concept", id: "test-concept" },
     standfirst: "A readable introduction derived from reviewed claims.",
+    standfirstStatementIds: ["test-statement"],
     sections: [
       {
         id: "what-it-means",
@@ -233,6 +258,29 @@ describe("narrative Dossier model", () => {
     );
     expect(errors).toContain(
       "test-concept-dossier:what-it-means: unresolved related entity organization:missing-organization",
+    );
+  });
+});
+
+describe("Dossier standfirst and gap boundaries", () => {
+  it("requires a unique, resolved standfirst trace", () => {
+    const invalid = structuredClone(documents);
+    const dossier = invalid[2];
+    if (
+      dossier?.documentType === "entity" &&
+      dossier.entity.kind === "dossier"
+    ) {
+      dossier.entity.standfirstStatementIds = [
+        "missing-statement",
+        "missing-statement",
+      ];
+    }
+    const errors = validateAuthoringDocuments(invalid);
+    expect(errors).toContain(
+      "test-concept-dossier:standfirst: unresolved Statement missing-statement",
+    );
+    expect(errors).toContain(
+      "test-concept-dossier: dossier standfirst repeats a Statement",
     );
   });
 
