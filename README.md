@@ -8,8 +8,11 @@ under explicit Criteria.
 
 Intended home: **[endsandmeans.info](https://endsandmeans.info)**
 
-The static Astro build deploys through GitHub Pages only after the main-branch
-CI verification job succeeds. DNS configuration for the custom domain is a
+Pull requests run one read-only verification job plus isolated dependency,
+CodeQL, and workflow-security checks. Superseded pull-request runs are cancelled.
+After a push to `main`, the separate Pages workflow runs the same verification,
+uploads its already-built `dist` directory, and gives only the deployment job
+Pages and OIDC write permissions. DNS configuration for the custom domain is a
 separate release step.
 
 **Status:** the live site is generated exclusively from the plural canonical
