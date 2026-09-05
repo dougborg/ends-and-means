@@ -11,8 +11,9 @@
     "dev": "astro dev",
     "build": "pnpm validate && astro build",
     "preview": "astro preview",
-    "lint": "biome lint --error-on-warnings .",
-    "lint:fix": "biome lint --write .",
+    "lint": "biome lint --error-on-warnings . && pnpm lint:markdown",
+    "lint:fix": "biome lint --write . && pnpm lint:markdown --fix",
+    "lint:markdown": "markdownlint-cli2",
     "static": "knip --include files,dependencies,unlisted,binaries,unresolved,cycles",
     "check": "astro check",
     "test": "vitest run tests/content tests/skills",
@@ -24,7 +25,8 @@
     "audit:content": "node --import tsx scripts/audit-content.ts"
   },
   "dependencies": {
-    "astro": "^7.3.1"
+    "astro": "^7.3.1",
+    "micromark": "^4.0.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
@@ -35,6 +37,8 @@
     "@types/node": "^26.4.1",
     "@vitest/coverage-v8": "^5.0.0",
     "knip": "^6.34.0",
+    "markdownlint-cli2": "^0.23.2",
+    "markdownlint-sentences-per-line": "^0.1.4",
     "tsx": "^4.23.13",
     "typescript": "^6.0.3",
     "vitest": "^5.0.0"

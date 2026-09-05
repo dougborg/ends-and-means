@@ -128,7 +128,7 @@ demonstrated.
 
 **Execution order:** complete shared dossier presentation → move narrative
 authoring to typed, linted Markdown → #39 valid dossiers → #55 and #56 priority anarchism Cases →
-#59 gendered-power/social-reproduction graph coverage → #61 reusable FAQs and
+issue #59 gendered-power/social-reproduction graph coverage → #61 reusable FAQs and
 misconception corrections → #3 evidence/reference routes → #4 static comparison
 core → remaining #26 mapping work → #35 entity-neutral pairwise comparison → #9
 public method → #20 correction links → #67 shared dossier presentation
@@ -191,7 +191,7 @@ history.
 These features become valuable after the core model and evidence workflow are stable.
 
 **Execution order:** #27 classification method → #30 vocabulary expansion →
-#31 competing interpretations. Historical formations, People, Depictions,
+issue #31 competing interpretations. Historical formations, People, Depictions,
 reading paths, value profiles, and exports can then proceed in bounded slices
 according to research readiness rather than as one bulk migration.
 

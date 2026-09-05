@@ -1,9 +1,16 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
+import { loadNarrative } from "./load-narrative";
 
 const reviewed = {
   publicationStatus: "reviewed" as const,
   reviewedAt: "2026-09-05",
 };
+
+const fundProgram = loadNarrative("swedish-wage-earner-fund-program.md", ["the-problem-it-addressed", "the-enacted-mechanism", "why-program-and-practice-differ", "a-contested-and-reversible-institution"]);
+const fundCase = loadNarrative("swedish-wage-earner-funds-case.md", ["what-the-funds-were", "what-they-were-meant-to-do", "what-they-did-in-practice", "why-the-case-matters"]);
+const rehnMeidner = loadNarrative("swedish-rehn-meidner-model.md", ["several-goals-at-once", "how-the-parts-were-meant-to-work", "a-model-not-a-name-for-sweden", "what-the-bounded-evidence-supports"]);
+const bargainingCase = loadNarrative("swedish-solidaristic-bargaining-case.md", ["the-institutional-arrangement", "its-place-in-the-model", "what-changed-and-when", "a-differentiated-productivity-result"]);
+const distributionChallenge = loadNarrative("distribution-of-gains-and-ownership.md", ["several-distributions-not-one", "a-wage-policy-response", "an-ownership-policy-response", "what-a-comparison-must-preserve"]);
 
 export const dossierDocuments = [
   {
@@ -15,13 +22,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the program's purposes, institutional mechanism, enacted limits, and end.",
       subject: { kind: "approach", id: "swedish-wage-earner-fund-program" },
-      standfirst:
-        "Sweden's wage-earner fund program tried to turn a share of payroll and corporate profits into collectively held capital, joining practical investment policy to a contested ambition for broader ownership and wage-earner influence.",
+      standfirst: fundProgram.standfirst,
       sections: [
         {
           id: "the-problem-it-addressed",
           heading: "The problem it tried to address",
-          body: "The enacted proposal attributed several purposes to the funds: spreading wealth, giving wage earners influence through co-ownership, supplying investment capital, and supporting pensions.",
+          body: fundProgram.sections["the-problem-it-addressed"] ?? "",
           traceStatus: "supported",
           statementIds: ["funds-declared-ends"],
           relatedEntityRefs: [
@@ -32,7 +38,7 @@ export const dossierDocuments = [
         {
           id: "the-enacted-mechanism",
           heading: "The mechanism that was enacted",
-          body: "The compromise created five government-appointed boards inside the public pension-fund system. The boards invested collectively financed capital under statutory ownership and voting caps.",
+          body: fundProgram.sections["the-enacted-mechanism"] ?? "",
           traceStatus: "supported",
           statementIds: ["funds-statutory-design"],
           relatedEntityRefs: [
@@ -43,7 +49,7 @@ export const dossierDocuments = [
         {
           id: "why-program-and-practice-differ",
           heading: "Why the ambition and the outcome differ",
-          body: "The funds generally behaved as diversified long-term investors. Their holdings remained noncontrolling, so the enacted arrangement connected collective capital formation to economic democracy without achieving the stronger transfer of control associated with earlier proposals.",
+          body: fundProgram.sections["why-program-and-practice-differ"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "funds-practice",
@@ -59,7 +65,7 @@ export const dossierDocuments = [
         {
           id: "a-contested-and-reversible-institution",
           heading: "A contested and reversible institution",
-          body: "The five boards operated through 1991. The incoming center-right government abolished them at the turn of 1991–1992, making political durability a qualified part of the program's practical record.",
+          body: fundProgram.sections["a-contested-and-reversible-institution"] ?? "",
           traceStatus: "qualified",
           statementIds: ["funds-abolished", "funds-accountability-assessment"],
           relatedEntityRefs: [
@@ -80,13 +86,12 @@ export const dossierDocuments = [
       description:
         "A plain-language account of the bounded 1983–1992 wage-earner-fund case.",
       subject: { kind: "case", id: "swedish-wage-earner-funds" },
-      standfirst:
-        "From 1984 through 1991, five Swedish public pension-fund boards invested collectively financed capital under rules intended to widen ownership and wage-earner influence—but their holdings and authority remained deliberately limited.",
+      standfirst: fundCase.standfirst,
       sections: [
         {
           id: "what-the-funds-were",
           heading: "What the funds were",
-          body: "A rough modern analogy is a public investment fund: collectively financed money was pooled and invested in financial assets. The five government-appointed boards operated inside the public pension-fund system and were tied to stated purposes including wider ownership and wage-earner influence.",
+          body: fundCase.sections["what-the-funds-were"] ?? "",
           traceStatus: "supported",
           statementIds: ["funds-statutory-design", "funds-declared-ends"],
           relatedEntityRefs: [
@@ -96,7 +101,7 @@ export const dossierDocuments = [
         {
           id: "what-they-were-meant-to-do",
           heading: "What they were meant to do",
-          body: "The proposal presented collective shareholding as a way to distribute growing corporate wealth more evenly, strengthen wage-earner influence, provide risk capital, and reinforce the pension system.",
+          body: fundCase.sections["what-they-were-meant-to-do"] ?? "",
           traceStatus: "supported",
           statementIds: ["funds-declared-ends"],
           relatedEntityRefs: [
@@ -106,7 +111,7 @@ export const dossierDocuments = [
         {
           id: "what-they-did-in-practice",
           heading: "What they did in practice",
-          body: "The boards generally invested as diversified long-term shareholders. By 1991 their combined holdings represented about 2.6 percent of exchange value, and they had not become controlling owners.",
+          body: fundCase.sections["what-they-did-in-practice"] ?? "",
           traceStatus: "supported",
           statementIds: ["funds-practice", "funds-limited-control"],
           relatedEntityRefs: [
@@ -119,7 +124,7 @@ export const dossierDocuments = [
         {
           id: "why-the-case-matters",
           heading: "Why the case matters",
-          body: "The episode shows why a stated purpose, an institutional design, and an observed result must be kept separate. It created collective capital holdings, but the evidence here does not establish controlling ownership, broad wealth redistribution, or settled accountability—and the boards were abolished after a change of government.",
+          body: fundCase.sections["why-the-case-matters"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "funds-distribution-assessment",
@@ -144,13 +149,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the model's joint objectives, policy mechanisms, partial application, and empirical limits.",
       subject: { kind: "approach", id: "swedish-rehn-meidner-model" },
-      standfirst:
-        "The Rehn–Meidner model was a coordinated Swedish trade-union policy program: compress wages, help workers move toward more productive employment, and restrain inflation while pursuing full employment and growth.",
+      standfirst: rehnMeidner.standfirst,
       sections: [
         {
           id: "several-goals-at-once",
           heading: "A model built around several goals at once",
-          body: "Gösta Rehn and Rudolf Meidner sought to combine full employment and fairer wages with price stability and economic growth. The interest of the model lies in treating those aims as a joint institutional problem rather than choosing only one.",
+          body: rehnMeidner.sections["several-goals-at-once"] ?? "",
           traceStatus: "supported",
           statementIds: ["rehn-meidner-declared-objectives"],
           relatedEntityRefs: [{ kind: "end", id: "equality-with-employment" }],
@@ -158,7 +162,7 @@ export const dossierDocuments = [
         {
           id: "how-the-parts-were-meant-to-work",
           heading: "How the parts were meant to work together",
-          body: "Solidaristic bargaining would narrow wage differences; active labor-market measures would support employment and movement toward expanding activities; restrictive general macroeconomic policy would limit inflationary excess demand. The model depended on the combination, not on wage bargaining alone.",
+          body: rehnMeidner.sections["how-the-parts-were-meant-to-work"] ?? "",
           traceStatus: "supported",
           statementIds: [
             "rehn-meidner-policy-combination",
@@ -177,7 +181,7 @@ export const dossierDocuments = [
         {
           id: "a-model-not-a-name-for-sweden",
           heading: "A model, not a name for Sweden",
-          body: "The program became influential in a social-democratic setting shaped by organized labor, but Sweden never applied the complete package consistently. Its strongest period of influence combined only some of the model's components.",
+          body: rehnMeidner.sections["a-model-not-a-name-for-sweden"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-social-democratic-context",
@@ -192,7 +196,7 @@ export const dossierDocuments = [
         {
           id: "what-the-bounded-evidence-supports",
           heading: "What the bounded evidence supports",
-          body: "Swedish wages compressed sharply from the late 1960s, especially during the 1970s. Research supports a productivity contribution from narrower interindustry wage gaps, but not from wage leveling within industries and workplaces; another study also cautions against attributing Sweden's earlier restructuring peak to the later wage compression.",
+          body: rehnMeidner.sections["what-the-bounded-evidence-supports"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "solidaristic-wage-compression-timing",
@@ -219,13 +223,12 @@ export const dossierDocuments = [
       description:
         "A narrative account of Sweden's bounded 1956–1983 centralized bargaining episode.",
       subject: { kind: "case", id: "swedish-solidaristic-bargaining" },
-      standfirst:
-        "Between 1956 and 1983, Swedish peak labor and employer organizations negotiated central wage frameworks whose implementation and outcomes provide a bounded test of one part of the Rehn–Meidner model.",
+      standfirst: bargainingCase.standfirst,
       sections: [
         {
           id: "the-institutional-arrangement",
           heading: "The institutional arrangement",
-          body: "Peak labor and employer organizations negotiated central wage frameworks, while industry and workplace bargaining implemented them. The result was coordinated bargaining, not one wage imposed uniformly from the center.",
+          body: bargainingCase.sections["the-institutional-arrangement"] ?? "",
           traceStatus: "supported",
           statementIds: ["centralized-solidaristic-bargaining-form"],
           relatedEntityRefs: [
@@ -235,7 +238,7 @@ export const dossierDocuments = [
         {
           id: "its-place-in-the-model",
           heading: "Its place in the model",
-          body: "Solidaristic bargaining was one component of the Rehn–Meidner program. Sweden combined it with an expansion of active labor-market policy, but did not consistently apply the complete package.",
+          body: bargainingCase.sections["its-place-in-the-model"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-policy-combination",
@@ -249,7 +252,7 @@ export const dossierDocuments = [
         {
           id: "what-changed-and-when",
           heading: "What changed—and when",
-          body: "Wage inequality remained comparatively stable until the late 1960s and then declined rapidly. The timing matters because the strongest compression came after some of the structural changes often attributed to the policy had already occurred.",
+          body: bargainingCase.sections["what-changed-and-when"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "solidaristic-wage-compression-timing",
@@ -259,7 +262,7 @@ export const dossierDocuments = [
         {
           id: "a-differentiated-productivity-result",
           heading: "A differentiated productivity result",
-          body: "Evidence links narrower wage gaps between industries to aggregate output and productivity growth, while finding no comparable productivity effect from leveling wages within industries or workplaces. The case therefore supports a bounded mechanism, not a blanket verdict on wage compression.",
+          body: bargainingCase.sections["a-differentiated-productivity-result"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "interindustry-compression-productivity-result",
@@ -280,13 +283,12 @@ export const dossierDocuments = [
       description:
         "A narrative orientation to the distribution challenge across wages, wealth, ownership, and control.",
       subject: { kind: "challenge", id: "distribution-of-gains-and-ownership" },
-      standfirst:
-        "Productivity gains can appear as wages, profits, public revenue, investment, wealth, or control. This challenge asks who receives each kind of gain—and who bears the costs of producing it.",
+      standfirst: distributionChallenge.standfirst,
       sections: [
         {
           id: "several-distributions-not-one",
           heading: "Several distributions, not one",
-          body: "A narrower wage distribution does not by itself establish a narrower distribution of wealth or control. The current evidence therefore keeps wages, collective holdings, controlling ownership, benefits, and adjustment costs analytically separate.",
+          body: distributionChallenge.sections["several-distributions-not-one"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-distribution-assessment",
@@ -297,7 +299,7 @@ export const dossierDocuments = [
         {
           id: "a-wage-policy-response",
           heading: "A response through wage policy",
-          body: "The Rehn–Meidner program joined fairer wages to employment, price stability, and growth. In the bounded bargaining episode, wage gaps compressed—especially during the 1970s—but that result does not answer the wider questions of wealth, control, or who bore adjustment costs.",
+          body: distributionChallenge.sections["a-wage-policy-response"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-declared-objectives",
@@ -312,7 +314,7 @@ export const dossierDocuments = [
         {
           id: "an-ownership-policy-response",
           heading: "A response through collective ownership",
-          body: "The wage-earner fund program tried to redirect part of corporate gains into collectively held investments. It built collective capital, yet the holdings remained noncontrolling and the evidence here does not establish broad redistribution of private wealth.",
+          body: distributionChallenge.sections["an-ownership-policy-response"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "funds-declared-ends",
@@ -327,7 +329,7 @@ export const dossierDocuments = [
         {
           id: "what-a-comparison-must-preserve",
           heading: "What a comparison must preserve",
-          body: "The two responses operate through different institutions and produce evidence at different scales. Comparing them requires named measures and bounded Cases, not a single score that treats wages, wealth, ownership, and control as interchangeable.",
+          body: distributionChallenge.sections["what-a-comparison-must-preserve"] ?? "",
           traceStatus: "qualified",
           statementIds: [
             "rehn-meidner-distribution-assessment",

@@ -4,6 +4,7 @@ import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import RelatedIdeas from "../../components/RelatedIdeas.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import MarkdownProse from "../../components/MarkdownProse.astro";
 import TransitionPanel from "../../components/TransitionPanel.astro";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom } from "../../lib/domain/canonical";
 import type { Approach, Case, CaseEpisode, Concept, Criterion } from "../../lib/domain";
@@ -19,7 +20,7 @@ const hasComparison = episodes.some((episode) => relationshipsFrom(episode.id).s
 const relatedIdeas = [...approachIds].flatMap((approachId) => relationshipsFrom(approachId)).filter((relation) => relation.predicate === "interprets-concept").map((relation) => ({ concept: entityById(relation.object.id) as Concept | undefined, role: relation.role, interpretation: relation.interpretation })).filter((value): value is { concept: Concept; role: "core" | "adjacent" | "peripheral" | "contested"; interpretation: string } => Boolean(value.concept)).sort((a, b) => ["core", "adjacent", "contested", "peripheral"].indexOf(a.role) - ["core", "adjacent", "contested", "peripheral"].indexOf(b.role));
 ---
 <BaseLayout title={item.label} description={dossier?.standfirst ?? item.description} fullBleed>
-  <article class="canonical-dossier case-dossier"><nav aria-label="Breadcrumb"><a href="/cases/">Cases</a> / {item.endDate ? "Historical case" : "Ongoing case"}</nav><header><p class="coordinate">CASE / {item.startDate.year}–{item.endDate?.year ?? "ongoing"}</p><h1>{item.label}</h1><p class="dek">{dossier?.standfirst ?? item.description}</p></header>
+  <article class="canonical-dossier case-dossier"><nav aria-label="Breadcrumb"><a href="/cases/">Cases</a> / {item.endDate ? "Historical case" : "Ongoing case"}</nav><header><p class="coordinate">CASE / {item.startDate.year}–{item.endDate?.year ?? "ongoing"}</p><h1>{item.label}</h1><MarkdownProse className="dek" content={dossier?.standfirst ?? item.description} /></header>
     {dossier && <NarrativeDossier sections={dossier.sections} label="Case summary" />}
     <section class="reference-apparatus" aria-labelledby="case-reference-title"><header><p class="coordinate">REFERENCE</p><h2 id="case-reference-title">Inspect the case record</h2><p>Open the boundaries, related ideas, and institutional evidence behind the summary.</p></header>
     <details class="apparatus-group"><summary>Scope, related ideas, and external orientation</summary><div class="apparatus-group__body"><div><p class="scope-note"><strong>Boundary:</strong> {item.scope}</p><p class="scope-note"><strong>Why this case:</strong> {item.selectionRationale}</p></div><div><RelatedIdeas ideas={relatedIdeas} /><ExternalReferences references={item.externalRefs} /></div></div></details>

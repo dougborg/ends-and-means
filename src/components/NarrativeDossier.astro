@@ -2,6 +2,7 @@
 import CanonicalStatement from "./CanonicalStatement.astro";
 import { entityById } from "../lib/domain/canonical";
 import type { EntityRef, NarrativeSection } from "../lib/domain";
+import { renderSafeMarkdown } from "../lib/markdown";
 
 interface Props { sections: NarrativeSection[]; label?: string; }
 const { sections, label = "Summary" } = Astro.props;
@@ -31,7 +32,7 @@ function hrefFor(ref: EntityRef): string | undefined {
         <div class="narrative-section__marker" aria-hidden="true"></div>
         <div class="narrative-section__content">
           <h3>{section.heading}</h3>
-          <p>{section.body}</p>
+          <div class="narrative-section__prose" set:html={renderSafeMarkdown(section.body)}></div>
           {section.relatedEntityRefs && section.relatedEntityRefs.length > 0 && (
             <nav aria-label={`Related to ${section.heading}`} class="narrative-links">
               <span>Follow this thread</span>

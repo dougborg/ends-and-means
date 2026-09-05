@@ -34,10 +34,12 @@ suspiciously close phrasing.
 The content audit reports objective attention signals; it does not replace
 human review for accuracy, fairness, plagiarism risk, focus, or publication.
 
-Narrative Dossiers currently remain typed TypeScript records.
-Their planned migration to Markdown will use semantic sentence-per-line source
-formatting: one sentence per source line without visual hard breaks or a prose
-line-length cap.
+Narrative prose lives in one Markdown file per Dossier under
+`content/domain/presentation/narratives/`.
+The adjacent typed manifest owns identity, publication state, section order,
+trace status, Statement IDs, and related entities.
+Use one semantic sentence per source line without visual hard breaks or a prose
+line-length cap, then run `pnpm lint:markdown`.
 
 ## Review standards
 

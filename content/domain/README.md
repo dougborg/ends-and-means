@@ -40,6 +40,16 @@ relationships. Do not add overview or explainer prose to the subject entity:
 the same Dossier should drive listing summaries, page introductions, and—where
 the route exposes narrative detail—its prose sections. Record the date of the
 latest substantive review in `reviewedAt`.
+Write each Dossier's standfirst and section bodies in one matching file under
+`presentation/narratives/`.
+The first paragraph is the standfirst; each `## stable-section-id` begins the
+body for the section with that ID in the adjacent typed manifest.
+The loader rejects missing and unexpected sections.
+Markdown may use ordinary emphasis and links, but raw HTML is escaped and unsafe
+link protocols are removed during rendering.
+Write one semantic sentence per source line and do not add hard breaks merely
+to control source width.
+Run `pnpm lint:markdown` before review.
 Run `pnpm audit:content` to see live-ready Dossier coverage for the primary
 page kinds currently in scope (Approach, Case, Challenge, and Concept), the exact
 subjects still missing narrative, explicit research-gap sections, and entities

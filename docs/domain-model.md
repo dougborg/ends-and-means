@@ -532,12 +532,14 @@ content/domain/
 
 Structured records remain appropriate for canonical entities and relationships;
 executable repository code remains TypeScript-only.
-Long-form Dossier prose will move to Markdown with typed frontmatter and compile
-to exactly the same records rather than creating another model.
+Long-form Dossier prose lives in Markdown beside an adjacent typed manifest and
+compiles to exactly the same records rather than creating another model.
 Markdown changes authoring ergonomics, review precision, and rendering—not the
 canonical publication boundary.
 Prose uses one semantic sentence per source line without inserting rendered
 hard breaks or imposing a prose line-length cap.
+The accepted rationale and safety boundary are recorded in
+[ADR 0003](adr/0003-markdown-narrative-authoring.md).
 
 Use one file per independently reviewed entity. For high-volume relationships,
 use one subject-centered relationship-set file rather than one tiny file per
@@ -666,26 +668,21 @@ analytical distinctions.
 ## Research basis
 
 - Michael Freeden, *Ideologies and Political Theory*, on ideologies as changing
-  configurations of core, adjacent, and peripheral concepts:
-  https://academic.oup.com/book/3196
+  [configurations of core, adjacent, and peripheral concepts](https://academic.oup.com/book/3196).
 - David Collier and James E. Mahon, “Conceptual ‘Stretching’ Revisited,” on
-  classical, radial, and family-resemblance categories:
-  https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1747306
+  [classical, radial, and family-resemblance categories](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1747306).
 - W3C, *SKOS Simple Knowledge Organization System Reference*, on concept
-  schemes, collections, labels, and cautious broader/narrower/related links:
-  https://www.w3.org/TR/skos-reference/
+  [schemes, collections, labels, and cautious broader/narrower/related links](https://www.w3.org/TR/skos-reference/).
 - Margaret M. Polski and Elinor Ostrom, “An Institutional Framework for Policy
   Analysis and Design,” on rules-in-use, action situations, context, outcomes,
-  and evaluative criteria:
-  https://ostromworkshop.indiana.edu/doc/teaching/iad-for-policy-applications.pdf
+  and [evaluative criteria](https://ostromworkshop.indiana.edu/doc/teaching/iad-for-policy-applications.pdf).
 - V-Dem, on electoral, liberal, participatory, deliberative, and egalitarian
-  principles of democracy: https://v-dem.net/
+  [principles of democracy](https://v-dem.net/).
 - International IDEA, *Global State of Democracy Indices Methodology*, on
-  principles, attributes, subattributes, and indicators:
-  https://www.idea.int/publications/catalogue/html/global-state-democracy-indices-methodology-version-10-2026
+  [principles, attributes, subattributes, and indicators](https://www.idea.int/publications/catalogue/html/global-state-democracy-indices-methodology-version-10-2026).
 - Stanford Encyclopedia of Philosophy, “Democracy,” on the plurality of
   democratic arrangements and the distinction between definition and normative
-  evaluation: https://plato.stanford.edu/entries/democracy/
+  [evaluation](https://plato.stanford.edu/entries/democracy/).
 - Wikipedia's Democracy, Socialism, Anarchism, Communism, and Economic system
-  articles are navigation and terminology touchstones, not claim authority:
-  https://en.wikipedia.org/wiki/Democracy
+  [articles](https://en.wikipedia.org/wiki/Democracy) are navigation and
+  terminology touchstones, not claim authority.
