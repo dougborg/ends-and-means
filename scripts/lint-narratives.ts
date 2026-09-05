@@ -1,11 +1,9 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { resolveNarrativeDirectory } from "../content/domain/presentation/load-narrative";
 import { validateNarrativeLines } from "../src/lib/narrative-lines";
 
-const directory = resolve(
-  process.cwd(),
-  "content/domain/presentation/narratives",
-);
+const directory = resolveNarrativeDirectory();
 const failures = readdirSync(directory)
   .filter((filename) => filename.endsWith(".md"))
   .flatMap((filename) => {

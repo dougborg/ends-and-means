@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { basename, dirname, parse, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export interface LoadedNarrative {
   standfirst: string;
@@ -15,7 +16,9 @@ interface NarrativeManifest {
   sections: NarrativeSection[];
 }
 
-export function findProjectRoot(startDirectory = process.cwd()): string {
+const moduleDirectory = dirname(fileURLToPath(import.meta.url));
+
+export function findProjectRoot(startDirectory = moduleDirectory): string {
   let candidate = resolve(startDirectory);
   const filesystemRoot = parse(candidate).root;
   while (true) {
@@ -36,14 +39,19 @@ export function findProjectRoot(startDirectory = process.cwd()): string {
 
 export function resolveNarrativePath(
   filename: string,
-  startDirectory = process.cwd(),
+  startDirectory = moduleDirectory,
 ): string {
   if (filename !== basename(filename))
     throw new Error(`Narrative filename must not contain a path: ${filename}`);
+  return resolve(resolveNarrativeDirectory(startDirectory), filename);
+}
+
+export function resolveNarrativeDirectory(
+  startDirectory = moduleDirectory,
+): string {
   return resolve(
     findProjectRoot(startDirectory),
     "content/domain/presentation/narratives",
-    filename,
   );
 }
 
@@ -79,7 +87,10 @@ export function attachNarrative<T extends NarrativeManifest>(
 
 function assertRestrictedNarrative(markdown: string, location: string): void {
   const prose = markdown.replace(/^## [a-z0-9]+(?:-[a-z0-9]+)*$/gmu, "");
-  if (/^\s*(?:#{1,6}\s|[-+*]\s|\d+[.)]\s|>|```|~~~|<[^>]+>)/mu.test(prose)) {
+  const unsupportedBlock =
+    /^\s*(?:#{1,6}\s|[-+*]\s|\d+[.)]\s|>|```|~~~)|^(?: {4}|\t)\S|^\s{0,3}(?:(?:\*\s*){3,}|(?:-\s*){3,}|(?:_\s*){3,}|[=-]{2,})\s*$/mu;
+  const unsupportedInline = /(?:`|!\[|<\/?[A-Za-z][^>]*>|<!--)/u;
+  if (unsupportedBlock.test(prose) || unsupportedInline.test(prose)) {
     throw new Error(
       `${location}: narrative prose supports paragraphs and inline Markdown only`,
     );
