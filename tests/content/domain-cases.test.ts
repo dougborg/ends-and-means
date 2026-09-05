@@ -175,3 +175,24 @@ describe("bounded Case model", () => {
     );
   });
 });
+
+describe("historical date contracts", () => {
+  it("reports incomplete and non-integral historical dates", () => {
+    const invalid = structuredClone(documents);
+    const episode = invalid[6];
+    if (episode?.documentType === "entity" && episode.entity.kind === "case-episode") {
+      episode.entity.startDate = { year: 2000.5, month: 13, day: 32, certainty: "exact" };
+      episode.entity.endDate = { day: 4, certainty: "exact" };
+    }
+
+    const errors = validateAuthoringDocuments(invalid);
+    expect(errors).toEqual(expect.arrayContaining([
+      "example-case-episode: startDate year must be an integer",
+      "example-case-episode: startDate month must be between 1 and 12",
+      "example-case-episode: startDate day must be between 1 and 31",
+      "example-case-episode: endDate month/day requires a year",
+      "example-case-episode: endDate day requires a month",
+      "example-case-episode: exact endDate requires a year",
+    ]));
+  });
+});

@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { canonicalGraph, citationsFor, entitiesOfKind, relationshipsFrom, requireEntityOfKind } from "../../src/lib/domain/canonical";
+import {
+  canonicalGraph,
+  citationsFor,
+  entitiesOfKind,
+  entityById,
+  placementsForDimension,
+  relationshipsFrom,
+  relationshipsTo,
+  requireEntityOfKind,
+} from "../../src/lib/domain/canonical";
 
 describe("canonical vertical slice", () => {
   it("compiles only the reviewed modular authoring records", () => {
@@ -36,6 +45,24 @@ describe("canonical vertical slice", () => {
     const placements = canonicalGraph.relationships.filter(({ predicate }) => predicate === "placed-on");
     expect(placements).toHaveLength(2);
     expect(placements.map(({ subject }) => subject.id)).toEqual(["enacted-wage-earner-funds-1984-1991", "liquidation-board-period-1992"]);
+  });
+
+  it("looks up canonical entities and both sides of their indexed relationships", () => {
+    expect(entityById("collective-wage-earner-shareholding-authority")?.kind).toBe("comparison-dimension");
+    expect(entityById("missing-entity")).toBeUndefined();
+    expect(relationshipsFrom("missing-entity")).toEqual([]);
+    expect(relationshipsTo("missing-entity")).toEqual([]);
+
+    const incoming = relationshipsTo("swedish-wage-earner-fund-program");
+    expect(incoming.length).toBeGreaterThan(0);
+    expect(incoming.every(({ object }) => object.id === "swedish-wage-earner-fund-program")).toBe(true);
+  });
+
+  it("returns only Placements on the requested Dimension", () => {
+    const placements = placementsForDimension("collective-wage-earner-shareholding-authority");
+    expect(placements).toHaveLength(2);
+    expect(placements.every(({ predicate, object }) => predicate === "placed-on" && object.id === "collective-wage-earner-shareholding-authority")).toBe(true);
+    expect(placementsForDimension("missing-dimension")).toEqual([]);
   });
 
   it("fails clearly when a route requests a missing or mistyped canonical entity", () => {
