@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 
 const defaultRoutes = [
   "/",
@@ -265,4 +265,103 @@ test("criteria grid reflects its content count and stacks only on narrow screens
     expect(new Set(boxes.map(({ width }) => width)).size).toBe(1);
     expect(new Set(boxes.map(({ top }) => top)).size).toBe(viewport.rows);
   }
+});
+
+test("global navigation remains ordered, reachable, and legible across constraints", async ({
+  page,
+}) => {
+  const primaryLabels = [
+    "Approaches",
+    "Cases",
+    "Questions",
+    "Compare",
+    "Sources",
+    "Method",
+  ];
+  const siteMapLabels = ["Home", ...primaryLabels];
+
+  for (const route of [
+    "/explore/",
+    "/concepts/economic-democracy/",
+    "/sources/erixon-rehn-meidner-model-source/",
+  ]) {
+    await page.goto(route);
+    const primary = page.getByRole("navigation", { name: "Primary" });
+    const siteMap = page.getByRole("navigation", { name: "Site map" });
+    await expect(primary.getByRole("link")).toHaveText(primaryLabels);
+    await expect(siteMap.getByRole("link")).toHaveText(siteMapLabels);
+    await expect(primary.locator('[aria-current="page"]')).toHaveCount(1);
+    await expect(siteMap.locator('[aria-current="page"]')).toHaveCount(1);
+  }
+
+  await page.goto("/");
+  const expectFocusedTarget = async (link: Locator) => {
+    await expect(link).toBeFocused();
+    const focus = await link.evaluate((item) => {
+      const style = getComputedStyle(item);
+      return {
+        height: item.getBoundingClientRect().height,
+        outlineStyle: style.outlineStyle,
+        outlineWidth: Number.parseFloat(style.outlineWidth),
+      };
+    });
+    expect(focus.height).toBeGreaterThanOrEqual(44);
+    expect(focus.outlineStyle).not.toBe("none");
+    expect(focus.outlineWidth).toBeGreaterThanOrEqual(3);
+  };
+  const primaryLinks = page.locator(
+    '.wordmark, nav[aria-label="Primary"] a',
+  );
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+  for (let index = 0; index < (await primaryLinks.count()); index += 1) {
+    await page.keyboard.press("Tab");
+    await expectFocusedTarget(primaryLinks.nth(index));
+  }
+  const siteMapLinks = page.locator('nav[aria-label="Site map"] a');
+  await siteMapLinks.first().focus();
+  await expectFocusedTarget(siteMapLinks.first());
+  for (let index = 1; index < (await siteMapLinks.count()); index += 1) {
+    await page.keyboard.press("Tab");
+    await expectFocusedTarget(siteMapLinks.nth(index));
+  }
+
+  for (const width of [320, 390, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/concepts/economic-democracy/");
+    const result = await page.evaluate(() => ({
+      overflow:
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+      targets: [
+        ...document.querySelectorAll(".primary-nav a, .site-map a"),
+      ].map((link) => link.getBoundingClientRect().height),
+    }));
+    expect(result.overflow).toBeLessThanOrEqual(1);
+    expect(Math.min(...result.targets)).toBeGreaterThanOrEqual(44);
+  }
+
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.goto("/sources/erixon-rehn-meidner-model-source/");
+  await page.evaluate(() => {
+    document.documentElement.style.zoom = "2";
+  });
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
+
+  await page.emulateMedia({ forcedColors: "active", reducedMotion: "reduce" });
+  await page.goto("/concepts/economic-democracy/");
+  const currentLink = page
+    .getByRole("navigation", { name: "Primary" })
+    .locator('[aria-current="page"]');
+  expect(
+    await currentLink.evaluate(
+      (link) => getComputedStyle(link).textDecorationLine,
+    ),
+  ).toContain("underline");
 });

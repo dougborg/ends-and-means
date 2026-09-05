@@ -94,6 +94,49 @@ async function verifyEveryPublicRecordRenders() {
 
   await verifyExploreAndCaseRoutes();
   await verifyReferenceRoutes();
+  await verifyGlobalNavigation();
+}
+
+async function verifyGlobalNavigation() {
+  const expectedPrimary = [
+    ["Approaches", "/explore/"],
+    ["Cases", "/cases/"],
+    ["Questions", "/challenges/"],
+    ["Compare", "/compare/"],
+    ["Sources", "/reading/"],
+    ["Method", "/framework/"],
+  ];
+  const expectedSiteMap = [["Home", "/"], ...expectedPrimary];
+  const linksIn = (navigation: string) =>
+    [
+      ...navigation.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi),
+    ].map((match) => [stripMarkup(match[2] ?? ""), match[1] ?? ""]);
+  const navigationIn = (html: string, name: string) =>
+    html.match(
+      new RegExp(`<nav[^>]*aria-label="${name}"[^>]*>[\\s\\S]*?<\\/nav>`),
+    )?.[0] ?? "";
+
+  for (const [route, currentLabel] of [
+    ["/", "Home"],
+    ["/explore/", "Approaches"],
+    ["/concepts/economic-democracy/", "Approaches"],
+    ["/sources/erixon-rehn-meidner-model-source/", "Sources"],
+  ] as const) {
+    const html = await readFile(routeFile(route), "utf8");
+    const primary = navigationIn(html, "Primary");
+    const siteMap = navigationIn(html, "Site map");
+    expect(primary, route).not.toBe("");
+    expect(siteMap, route).not.toBe("");
+    expect(linksIn(primary), route).toEqual(expectedPrimary);
+    expect(linksIn(siteMap), route).toEqual(expectedSiteMap);
+    expect(primary.match(/aria-current="page"/g) ?? [], route).toHaveLength(
+      currentLabel === "Home" ? 0 : 1,
+    );
+    expect(siteMap.match(/aria-current="page"/g) ?? [], route).toHaveLength(1);
+    expect(siteMap, route).toMatch(
+      new RegExp(`aria-current="page"[^>]*>${currentLabel}<`),
+    );
+  }
 }
 
 async function verifyExploreAndCaseRoutes() {

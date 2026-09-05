@@ -1,6 +1,16 @@
+---
+import { homeRoute, isCurrentPublicRoute, publicRoutes } from "../lib/public-navigation";
+interface Props { currentPath?: string; }
+const { currentPath = "/" } = Astro.props;
+const siteMapRoutes = [homeRoute, ...publicRoutes];
+---
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <p><strong>Ends and Means</strong><br />Political and economic systems in theory and practice.</p>
-    <p class="site-footer__note">Fair in method, explicit about judgment.<br />Claims should lead to evidence and revision.</p>
+    <p class="site-footer__description"><strong>Ends and Means</strong><br />Political and economic systems in theory and practice.</p>
+    <nav class="site-map" aria-label="Site map">
+      <ul>
+        {siteMapRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
+      </ul>
+    </nav>
   </div>
 </footer>
