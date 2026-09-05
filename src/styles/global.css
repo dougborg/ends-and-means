@@ -163,7 +163,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .method-sequence strong { font-size: .8rem; }
 .method-sequence span { margin-top: .4rem; color: var(--muted); font-family: var(--reading); font-size: .72rem; line-height: 1.5; }
 .criteria-section > header { margin-bottom: 1.5rem; }
-.comparison-grid { display: grid; grid-template-columns: repeat(var(--comparison-columns), minmax(0, 1fr)); }
+.comparison-grid { display: grid; grid-template-columns: repeat(var(--comparison-columns, 1), minmax(0, 1fr)); }
 .criteria-grid { border-top: 3px solid var(--night); }
 .criteria-section article { padding: clamp(1rem, 2vw, 1.35rem); border-bottom: 1px solid var(--rule); }
 .criteria-section article + article { border-left: 1px solid var(--rule); }

@@ -104,7 +104,7 @@ for (const route of routes) {
           const cssTexts = [...document.styleSheets].flatMap(sheetRules).map((rule) => rule.cssText);
           const inlineCssTexts = [...document.querySelectorAll<HTMLElement>("[style]")].map((element) => element.style.cssText);
           for (const css of [...cssTexts, ...inlineCssTexts]) for (const token of matches(css, /(--[\w-]+)\s*:/g)) declared.add(token);
-          for (const css of cssTexts) for (const token of matches(css, /var\((--[\w-]+)/g)) used.add(token);
+          for (const css of cssTexts) for (const token of matches(css, /var\((--[\w-]+)\s*\)/g)) used.add(token);
           return [...used].filter((token) => !declared.has(token)).sort();
         };
 
@@ -173,18 +173,18 @@ test("criteria grid reflects its content count and stacks only on narrow screens
   await expect(grid).toHaveAttribute("data-comparison-columns", "2");
 
   for (const viewport of [
-    { width: 1440, height: 1000, columns: 2 },
-    { width: 820, height: 1180, columns: 2 },
-    { width: 390, height: 844, columns: 1 },
+    { width: 1440, height: 1000, rows: 1 },
+    { width: 820, height: 1180, rows: 1 },
+    { width: 390, height: 844, rows: 2 },
   ]) {
     await page.setViewportSize(viewport);
-    const widths = await grid.locator(":scope > article").evaluateAll((items) =>
-      items.map((item) => Math.round(item.getBoundingClientRect().width)),
+    const boxes = await grid.locator(":scope > article").evaluateAll((items) =>
+      items.map((item) => {
+        const bounds = item.getBoundingClientRect();
+        return { width: Math.round(bounds.width), top: Math.round(bounds.top) };
+      }),
     );
-    expect(new Set(widths).size).toBe(1);
-    const columns = await grid.evaluate((element) =>
-      getComputedStyle(element).gridTemplateColumns.split(" ").length,
-    );
-    expect(columns).toBe(viewport.columns);
+    expect(new Set(boxes.map(({ width }) => width)).size).toBe(1);
+    expect(new Set(boxes.map(({ top }) => top)).size).toBe(viewport.rows);
   }
 });
