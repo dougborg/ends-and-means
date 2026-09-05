@@ -249,6 +249,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .narrative-section__prose p:last-child { margin-bottom: 0; }
 .narrative-links { display: flex; flex-wrap: wrap; gap: .35rem .85rem; align-items: baseline; margin-bottom: .7rem; font-size: .75rem; }
 .narrative-links > span:first-child { color: var(--muted); font: 600 .62rem/1.4 var(--apparatus); letter-spacing: .04em; text-transform: uppercase; }
+.standfirst-evidence { max-width: 58rem; margin-top: .75rem; }
 .reference-disclosure, .apparatus-group { border-top: 1px solid var(--rule); }
 .reference-disclosure summary, .apparatus-group summary { display: flex; gap: 1rem; justify-content: space-between; padding: .72rem 0; color: var(--cobalt-dark); cursor: pointer; font: 600 .72rem/1.4 var(--apparatus); }
 .reference-disclosure summary::before, .apparatus-group > summary::before { flex: none; content: "+"; font-size: 1rem; line-height: .8; }
