@@ -20,7 +20,15 @@ const entity = (value: DomainEntity): AuthoringDocument => ({
 describe("canonical narrative dossiers", () => {
   it("publishes one traceable Dossier for each migrated subject", () => {
     const dossiers = entitiesOfKind("dossier");
-    expect(dossiers).toHaveLength(5);
+    expect(dossiers.map(({ id }) => id)).toEqual(
+      expect.arrayContaining([
+        "swedish-rehn-meidner-model-dossier",
+        "swedish-solidaristic-bargaining-case-dossier",
+        "swedish-wage-earner-fund-program-dossier",
+        "swedish-wage-earner-funds-case-dossier",
+        "distribution-of-gains-and-ownership-dossier",
+      ]),
+    );
     expect(
       dossierForSubject("case", "swedish-wage-earner-funds")?.sections.length,
     ).toBe(4);
@@ -208,7 +216,7 @@ describe("narrative Dossier model", () => {
       "test-concept-dossier: reviewedAt requires an ISO calendar date",
     );
     expect(errors).toContain(
-      "test-concept-dossier: narrative section 0 ID is not stable kebab-case",
+      'test-concept-dossier: narrative section 0 ID "Not stable" is not stable kebab-case',
     );
   });
 });
