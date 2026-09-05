@@ -32,6 +32,15 @@ describe("repository delivery configuration", () => {
     expect(codes).toEqual(expect.arrayContaining(["FORK_SAFETY", "WORKFLOW_PERMISSIONS", "ACTION_PIN", "CHECKOUT_CREDENTIALS"]));
   });
 
+  it("fails closed for omitted permissions, job write-all, and mutable reusable workflows", async () => {
+    const root = await repositoryFixture();
+    await replace(root, ".github/workflows/ci.yml", "permissions:\n  contents: read", "# permissions intentionally removed");
+    await replace(root, ".github/workflows/security.yml", "    permissions:\n      contents: read", "    permissions: write-all");
+    await replace(root, ".github/workflows/ci.yml", "    runs-on: ubuntu-latest\n", "    uses: actions/example-workflow@main\n");
+    const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
+    expect(codes).toEqual(expect.arrayContaining(["WORKFLOW_PERMISSIONS", "ACTION_PIN"]));
+  });
+
   it("detects cache, lockfile, artifact, required-name, and duplicate-owner drift", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/actions/verify/action.yml", "cache: pnpm", "cache: npm");
@@ -42,5 +51,11 @@ describe("repository delivery configuration", () => {
     await replace(root, ".github/workflows/ci.yml", "verify:", "changed-name:");
     const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
     expect(codes).toEqual(expect.arrayContaining(["PNPM_CACHE", "PNPM_CACHE_KEY", "FROZEN_INSTALL", "VERIFY_DUPLICATE", "PAGES_ARTIFACT", "REQUIRED_CHECK_NAME"]));
+  });
+
+  it("detects a missing Pages artifact producer", async () => {
+    const root = await repositoryFixture();
+    await replace(root, ".github/actions/verify/action.yml", "actions/upload-pages-artifact@", "actions/upload-artifact@");
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_ARTIFACT");
   });
 });

@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
-import { auditDeliverySnapshot, deliverySnapshotSchema, type DeliveryItem, type DeliverySnapshot } from "./delivery-state.ts";
+import { auditDeliverySnapshot, deliverySnapshotSchema, reviewEvidenceForHead, type DeliveryItem, type DeliverySnapshot } from "./delivery-state.ts";
 
 const projectViewSchema = z.object({ number: z.number().int().positive(), title: z.string().min(1), public: z.boolean() }).passthrough();
 const projectItemSchema = z
@@ -24,12 +24,24 @@ const issueViewSchema = z
     comments: z.array(z.object({ body: z.string() }).passthrough()),
   })
   .passthrough();
-const prViewSchema = z.object({ state: z.enum(["OPEN", "CLOSED", "MERGED"]), headRefName: z.string().min(1), body: z.string(), reviews: z.array(z.object({ author: z.object({ login: z.string() }) }).passthrough()) }).passthrough();
+const commitOidSchema = z.string().regex(/^[0-9a-f]{40}$/);
+const actorSchema = z.object({ login: z.string().min(1) }).passthrough();
+const prViewSchema = z
+  .object({
+    state: z.enum(["OPEN", "CLOSED", "MERGED"]),
+    headRefName: z.string().min(1),
+    headRefOid: commitOidSchema,
+    author: actorSchema,
+    reviews: z.array(z.object({ author: actorSchema, commit: z.object({ oid: commitOidSchema }), body: z.string() }).passthrough()),
+    comments: z.array(z.object({ author: actorSchema, body: z.string() }).passthrough()),
+  })
+  .passthrough();
 const compareSchema = z.object({ merge_base_commit: z.object({ sha: z.string().min(1) }), commits: z.array(z.object({ parents: z.array(z.unknown()) }).passthrough()) }).passthrough();
 const labelsSchema = z.array(z.object({ name: z.string().min(1) }).passthrough());
 
 class InputInvalidError extends Error {}
 class ApiUnavailableError extends Error {}
+const repository = "dougborg/ends-and-means";
 
 function gh(args: string[]) {
   try {
@@ -64,29 +76,30 @@ function branchEvidence(branch: string) {
   };
 }
 
-function prEvidence(url: string, analyzeBranch: boolean) {
-  const pr = parseJson(gh(["pr", "view", url, "--json", "state,headRefName,body,reviews"]), prViewSchema, `pull request ${url}`);
+function prEvidence(url: string, analyzeBranch: boolean, implementationOwner: string | undefined) {
+  const pr = parseJson(
+    gh(["pr", "view", url, "--repo", repository, "--json", "state,headRefName,headRefOid,author,reviews,comments"]),
+    prViewSchema,
+    `pull request ${url}`,
+  );
   const comparison = analyzeBranch ? branchEvidence(pr.headRefName) : undefined;
   return {
     state: pr.state,
     baseCurrent: comparison?.baseCurrent,
     historyLinear: comparison?.historyLinear,
-    reviewEvidence: {
-      copilot: pr.reviews.some((review) => /copilot/i.test(review.author.login)),
-      adversarial: /- \[x\] Independent adversarial review/i.test(pr.body),
-    },
+    reviewEvidence: reviewEvidenceForHead(pr.headRefOid, implementationOwner, pr.reviews, pr.comments),
   };
 }
 
 function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
   const issue = parseJson(
-    gh(["issue", "view", String(item.content.number), "--json", "state,updatedAt,body,comments"]),
+    gh(["issue", "view", String(item.content.number), "--repo", repository, "--json", "state,updatedAt,body,comments"]),
     issueViewSchema,
     `issue #${item.content.number}`,
   );
-  const links = item["linked pull requests"] ?? [];
-  const prs = links.map((url) => prEvidence(url, item.status === "In review"));
   const ownership = ownershipFrom(issue.comments);
+  const links = item["linked pull requests"] ?? [];
+  const prs = links.map((url) => prEvidence(url, item.status === "In review", ownership?.owner));
   const branch = item.status === "In progress" && ownership ? branchEvidence(ownership.branch) : undefined;
   return {
     number: item.content.number,
@@ -110,7 +123,7 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
 function loadLiveSnapshot(): DeliverySnapshot {
   const project = parseJson(gh(["project", "view", "7", "--owner", "dougborg", "--format", "json"]), projectViewSchema, "project view");
   const list = parseJson(gh(["project", "item-list", "7", "--owner", "dougborg", "--format", "json", "--limit", "200"]), projectListSchema, "project items");
-  const labels = parseJson(gh(["label", "list", "--limit", "200", "--json", "name"]), labelsSchema, "repository labels");
+  const labels = parseJson(gh(["label", "list", "--repo", repository, "--limit", "200", "--json", "name"]), labelsSchema, "repository labels");
   return deliverySnapshotSchema.parse({
     project: { number: project.number, title: project.title, public: project.public },
     capturedAt: new Date().toISOString(),
