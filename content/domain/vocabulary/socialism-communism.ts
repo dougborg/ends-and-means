@@ -10,7 +10,7 @@ export const socialismCommunismVocabularyDocuments = [
       kind: "concept",
       label: "Socialism",
       description:
-        "A contested family of ideas about overcoming capitalist class relations through social or democratic control of production.",
+        "A contested family of ideas about overcoming capitalist class relations through social and democratic control of production.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Use for the broad contested concept, not as a timeless label for a government, country, party, policy, or single institutional design.",
