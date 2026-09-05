@@ -36,7 +36,7 @@ Each active Dossier belongs to exactly one canonical subject and supplies one
 standfirst plus ordered narrative sections. Supported and qualified sections
 must cite canonical Statements; an explicit `research-gap` section must cite
 none. Related entity references provide navigation without duplicating graph
-relationships. Do not add overview or explainer prose to the subject entity: the
+relationships. Do not add overview or explainer prose to the subject entity:
 the same Dossier should drive listing summaries, page introductions, and—where
 the route exposes narrative detail—its prose sections. Record the date of the
 latest substantive review in `reviewedAt`.

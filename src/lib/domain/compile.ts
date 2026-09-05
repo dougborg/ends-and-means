@@ -826,7 +826,7 @@ function validateNarrativeSection(
   );
   if (!stableId.test(section.id))
     errors.push(
-      `${entity.id}: narrative section ${index} ID is not stable kebab-case`,
+      `${entity.id}: narrative section ${index} ID ${JSON.stringify(section.id)} is not stable kebab-case`,
     );
   if (!section.heading.trim() || !section.body.trim())
     errors.push(
