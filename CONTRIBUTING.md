@@ -73,9 +73,9 @@ directly to `main`; repository rules require a reviewed pull request.
   statements, 87% branches, 100% functions, and 90% lines. Raise thresholds as
   coverage improves; do not lower them to accommodate a change.
 - Dependabot checks npm and GitHub Actions weekly. The CI audit blocks
-  moderate-or-higher known vulnerabilities, and zizmor audits workflow
-  definitions. GitHub's CodeQL upload and Dependency Review remain unavailable
-  unless Advanced Security is enabled for this private repository.
+  moderate-or-higher known vulnerabilities, Dependency Review checks pull
+  request changes, CodeQL scans JavaScript and TypeScript, and zizmor audits
+  workflow definitions.
 - GitHub Actions are pinned to immutable commit SHAs. Keep the release tag in
   the trailing comment so Dependabot updates remain readable.
 - Production Pages build and deployment jobs depend on successful main-branch
