@@ -39,20 +39,20 @@ the root type of the underlying ontology.
 
 ## Next step
 
-Requires Node 24 (see `.node-version` and `.nvmrc`).
+Requires Node 26 (currently 26.8.1; see `.node-version` and `.nvmrc`).
 
 ```sh
-npm ci
-npm run lint
-npm run static
-npm run check
-npm test
-npm run test:coverage
-npm run build
-npm run review:visual
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm static
+pnpm check
+pnpm test
+pnpm test:coverage
+pnpm build
+pnpm review:visual
 ```
 
-`npm run review:visual` performs the browser-based self-review required for
+`pnpm review:visual` performs the browser-based self-review required for
 public rendering changes. It checks representative pages at desktop, tablet,
 and mobile widths and writes screenshots to `.artifacts/visual-review`. Install
 its Chromium runtime once with `npx playwright install chromium`; see

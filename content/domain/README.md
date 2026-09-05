@@ -40,7 +40,7 @@ relationships. Do not add overview or explainer prose to the subject entity:
 the same Dossier should drive listing summaries, page introductions, and—where
 the route exposes narrative detail—its prose sections. Record the date of the
 latest substantive review in `reviewedAt`.
-Run `npm run audit:content` to see live-ready Dossier coverage for the primary
+Run `pnpm audit:content` to see live-ready Dossier coverage for the primary
 page kinds currently in scope (Approach, Case, Challenge, and Concept), the exact
 subjects still missing narrative, explicit research-gap sections, and entities
 that remain in `research-needed` status. Graph validation still fails the build

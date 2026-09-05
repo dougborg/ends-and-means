@@ -16,14 +16,14 @@
 
 ## Verification
 
-- [ ] `npm run lint`
-- [ ] `npm run static`
-- [ ] `npm run check`
-- [ ] `npm test`
-- [ ] `npm run test:coverage`
-- [ ] `npm run build`
-- [ ] `npm run test:routes`
-- [ ] `npm run review:visual` for changed or representative public routes
+- [ ] `pnpm lint`
+- [ ] `pnpm static`
+- [ ] `pnpm check`
+- [ ] `pnpm test`
+- [ ] `pnpm test:coverage`
+- [ ] `pnpm build`
+- [ ] `pnpm test:routes`
+- [ ] `pnpm review:visual` for changed or representative public routes
 - [ ] I inspected the desktop, tablet, and mobile screenshots for hierarchy, readability, spacing, and empty/broken states.
 
 ## Human decisions requested
