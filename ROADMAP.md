@@ -145,7 +145,7 @@ refinement → #12 accessibility and metadata release review.
 - [ ] **Publish the method and contribution model** ([#9](https://github.com/dougborg/ends-and-means/issues/9)). Explain scope, evidence breadth, assessments, uncertainty, editorial review, and the pull-request review boundary in reader-facing language.
 - [ ] **Add statement-level correction links** ([#20](https://github.com/dougborg/ends-and-means/issues/20)). Prefill structured GitHub issue forms with the page, entity, and claim anchor.
 - [ ] **Refine dossier hierarchy and responsive evidence scanning** ([#67](https://github.com/dougborg/ends-and-means/issues/67)). Use the rendered-page workflow to reduce excessive spacing, improve dense evidence scanning, and unify related-idea and external-reference treatments across representative sparse and dense pages.
-- [ ] **Move narrative authoring to linted Markdown.** Preserve typed metadata
+- [ ] **Move narrative authoring to linted Markdown** ([#91](https://github.com/dougborg/ends-and-means/issues/91)). Preserve typed metadata
   and canonical claim references while adding sentence-per-line linting, safe
   rendering, contributor guidance, and objective prose-attention checks. This
   gates further Dossier expansion.

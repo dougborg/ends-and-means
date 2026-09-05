@@ -212,25 +212,9 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .concept-connections article { margin-top: 1rem; padding: 1rem; border: 1px solid var(--rule); background: var(--sheet); }
 .concept-connections h3 { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0; }
 .concept-connections h3 small { color: var(--muted); font: .65rem/1.4 var(--apparatus); text-transform: uppercase; }
-.case-overview { margin: 3rem 0; padding: 2rem; background: var(--night); color: var(--atmosphere); }
-.case-overview .coordinate { color: #91adff; }
-.case-overview > header { max-width: 60ch; }
-.case-overview > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 1.5rem; border-top: 1px solid #53606a; }
-.case-overview article { padding: 1.25rem 1.25rem 0 0; border-right: 1px solid #53606a; }
-.case-overview article + article { padding-left: 1.25rem; }
-.case-overview article:last-child { border-right: 0; }
-.case-overview article > p { font-family: var(--reading); line-height: 1.65; }
-.case-overview footer { display: flex; flex-wrap: wrap; gap: .35rem .7rem; padding-top: .8rem; border-top: 1px solid #53606a; font-family: var(--apparatus); font-size: .68rem; }
-.case-overview footer strong { width: 100%; color: var(--teal-light); text-transform: uppercase; }
-.case-overview footer a { color: #a8c0ff; }
-.case-context { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 4rem; }
 .case-dossier { gap: 0; }
 .case-dossier > nav { margin-bottom: var(--space-section-tight); }
 .case-dossier > header .dek { margin-bottom: var(--space-section-tight); }
-.case-header__metadata { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .55fr); gap: 1rem; align-items: end; }
-.case-header__metadata .related-ideas, .case-header__metadata .external-references { max-width: none; margin-top: 0; }
-.case-overview { margin-block: var(--space-section-tight); }
-@media (max-width: 760px) { .case-header__metadata, .case-overview > div, .case-context { grid-template-columns: 1fr; } .case-overview { padding: 1.25rem; } .case-overview article, .case-overview article + article { padding: 1rem 0; border-right: 0; border-bottom: 1px solid #53606a; } }
 .source-links { padding-left: 1.2rem; }
 .claim-connections { padding-top: 1.5rem; border-top: 3px solid var(--night); }
 .claim-connections > p:last-child, .claim-connections li { font-family: var(--reading); line-height: 1.65; }
@@ -264,6 +248,9 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .narrative-links > span:first-child { color: var(--muted); font: 600 .62rem/1.4 var(--apparatus); letter-spacing: .04em; text-transform: uppercase; }
 .reference-disclosure, .apparatus-group { border-top: 1px solid var(--rule); }
 .reference-disclosure summary, .apparatus-group summary { display: flex; gap: 1rem; justify-content: space-between; padding: .72rem 0; color: var(--cobalt-dark); cursor: pointer; font: 600 .72rem/1.4 var(--apparatus); }
+.reference-disclosure summary::before, .apparatus-group > summary::before { flex: none; content: "+"; font-size: 1rem; line-height: .8; }
+.reference-disclosure[open] summary::before, .apparatus-group[open] > summary::before { content: "−"; }
+.reference-disclosure summary > span, .apparatus-group > summary > span { margin-left: auto; }
 .reference-disclosure summary span, .apparatus-group summary span { color: var(--muted); font-weight: 400; }
 .reference-disclosure[open] summary, .apparatus-group[open] > summary { border-bottom: 1px solid var(--rule); }
 .reference-disclosure__body { padding-bottom: .8rem; }

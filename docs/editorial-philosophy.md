@@ -8,7 +8,8 @@ which problems count as Challenges, what evidence deserves weight, and what belo
 in a verdict all involve judgment. We will not describe those choices as neutral
 when they are not.
 
-Our standard is fairness, transparency, and corrigibility.
+Our standard is fairness, transparency, corrigibility, and continuous
+improvement.
 The project's reader-facing voice and prose review rules are defined in the
 [narrative style guide](narrative-style.md).
 
@@ -80,6 +81,21 @@ never determine source selection or evaluation.
 
 We expect the work to change. A correction is evidence that the process can
 learn, not an embarrassment to hide.
+
+## Continuous improvement
+
+The content model, evidence base, prose, interface, and editorial process are
+all revisable.
+When work exposes a small deficiency within the current review boundary, fix it
+and verify the result.
+When an improvement is larger, uncertain, or independently reviewable, record
+it in the backlog with the observed problem, intended outcome, dependencies,
+and acceptance criteria.
+
+Continuous improvement does not mean unbounded scope or permanent transition
+language on the public site.
+The published experience should present the best reviewed state currently
+available; repository history and the backlog carry the improvement process.
 
 ## Analysis and advocacy
 

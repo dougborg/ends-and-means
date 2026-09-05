@@ -1,6 +1,6 @@
 ---
 name: research-content-changes
-description: Research and implement evidence-backed changes to the Ends and Means canonical graph for review in a pull request. Use for additions or substantial revisions to vocabulary, Collections, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Depictions, Comparison Dimensions, or Placements.
+description: Research and implement evidence-backed changes to the Ends and Means canonical graph and reader-facing narrative for review in a pull request. Use for additions or substantial revisions to Dossiers, vocabulary, Collections, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Depictions, Comparison Dimensions, or Placements.
 ---
 
 # Research Content Changes

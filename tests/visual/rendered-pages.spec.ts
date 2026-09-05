@@ -128,3 +128,39 @@ for (const route of routes) {
     });
   }
 }
+
+test("disclosures expose state and work from the keyboard", async ({ page }) => {
+  await page.goto("/explore/swedish-wage-earner-fund-program/");
+  const disclosure = page.locator("details.reference-disclosure").first();
+  const summary = disclosure.locator("summary");
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
+});
+
+test("case-episode fragment links reveal their target", async ({ page }) => {
+  await page.goto("/cases/swedish-wage-earner-funds/");
+  await page.locator('a[href$="#enacted-wage-earner-funds-1984-1991"]').first().click();
+  const target = page.locator("#enacted-wage-earner-funds-1984-1991");
+  await expect(target).toHaveAttribute("open", "");
+  await expect(target.getByText("Formal design")).toBeVisible();
+});
+
+test("print exposes closed reference material", async ({ page }) => {
+  await page.goto("/cases/swedish-wage-earner-funds/");
+  const disclosure = page.locator("details.apparatus-group").filter({ has: page.locator(":scope > .apparatus-group__body") }).first();
+  const body = disclosure.locator(":scope > .apparatus-group__body");
+  await expect(body).toBeHidden();
+  await page.emulateMedia({ media: "print" });
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(body).toBeVisible();
+});
+
+test("sparse published records retain the narrative structure", async ({ page }) => {
+  for (const route of ["/concepts/institutional-abolition/", "/challenges/authority-and-accountability/"]) {
+    await page.goto(route);
+    await expect(page.locator(".narrative-dossier")).toHaveCount(1);
+    await expect(page.locator(".narrative-section").first()).toBeVisible();
+  }
+});

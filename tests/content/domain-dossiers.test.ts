@@ -90,17 +90,34 @@ describe("canonical narrative dossiers", () => {
       "concept:test#open-question\n\nResearch-needed entities: 1\n- concept:test",
     );
   });
+});
 
+describe("narrative attention signals", () => {
   it("reports objective narrative attention signals without scoring prose", () => {
     const attentionGraph = structuredClone(canonicalGraph);
     const dossier = attentionGraph.entities.find((entity) => entity.kind === "dossier");
     if (dossier?.kind !== "dossier") throw new Error("Missing Dossier fixture");
-    dossier.standfirst = "It is worth to note this complex interplay. Ultimately, it is multifaceted.";
+    dossier.standfirst = "It is worth noting this complex interplay. Ultimately, it is multifaceted.";
     const report = auditContent(attentionGraph);
     expect(report.narrativeAttention).toEqual(expect.arrayContaining([
       expect.objectContaining({ location: `${dossier.subject.kind}:${dossier.subject.id}#standfirst`, reason: "generic filler phrase" }),
     ]));
     expect(formatContentAttentionReport(report)).toContain("Narrative attention:");
+  });
+
+  it("detects repeated phrasing across dossiers without flagging shared vocabulary", () => {
+    const attentionGraph = structuredClone(canonicalGraph);
+    const dossiers = attentionGraph.entities.filter((entity) => entity.kind === "dossier");
+    const first = dossiers[0];
+    const second = dossiers[1];
+    if (first?.kind !== "dossier" || second?.kind !== "dossier") throw new Error("Missing Dossier fixtures");
+    const section = second.sections[0];
+    if (!section) throw new Error("Missing narrative section fixture");
+    first.standfirst = "Five appointed boards invested collectively financed capital under statutory ownership caps.";
+    section.body = "Five appointed boards invested collectively financed capital under statutory ownership caps during the period.";
+    expect(auditContent(attentionGraph).narrativeAttention).toContainEqual(expect.objectContaining({ reason: "possible repeated phrasing" }));
+    section.body = "The evidence discusses capital, boards, ownership, and statutory institutions in a different relationship.";
+    expect(auditContent(attentionGraph).narrativeAttention.filter(({ reason }) => reason === "possible repeated phrasing")).toEqual([]);
   });
 });
 const base = {
