@@ -28,8 +28,8 @@ describe("plural domain graph", () => {
     expect(graph.schemaVersion).toBe("plural-graph-1");
     expect(graph.indexes.entitiesById["central-planning"]?.kind).toBe("means");
     expect(graph.indexes.outgoingRelationshipIds["anarcho-communism"]).toEqual([
-      "anarcho-communism-member-communist",
       "anarcho-communism-member-anarchist",
+      "anarcho-communism-member-communist",
     ]);
   });
 

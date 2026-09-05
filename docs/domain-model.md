@@ -293,7 +293,15 @@ Transitions. It is not a fourth source of chronology.
 A Depiction describes a fictional political economy in a particular Work or
 series. It may illustrate, combine, or criticize Concepts, Ends, Means, and
 Approaches through attributed interpretation. It cannot support an empirical
-outcome claim.
+outcome claim. A Depiction identifies its fictional Work and interpretive
+scope; typed `depicts` relationships carry its readings of independently
+addressable Concepts, Approaches, Ends, or Means.
+
+A Source derived from a fictional Work may support an interpretation of that
+Work or contextualize or qualify an empirical Statement. It cannot support or
+challenge an empirical observation, Case outcome, or assessment; those claims
+require at least one supporting Source whose `workId` resolves to an actual
+non-fiction Work.
 
 ### Person, Organization, Work, Source, and Statement
 
@@ -353,6 +361,15 @@ Membership is many-to-many and may be contested. For example,
 anarcho-communism can appear in Communist, Socialist, Anarchist, and Stateless
 collections without choosing one exclusive parent. Collections must state
 their inclusion rule and editorial purpose.
+
+Collections may also group concrete institutional Means when a familiar label
+denotes a family rather than one fully specified arrangement. For example, a
+central-planning Collection can contain distinct Means records without making
+their authority, scope, information, revision, enforcement, or ownership rules
+inherit from the Collection. Each concrete Means carries those claims through
+focused Statements attached with typed `specified-by` relationships whose
+facets identify authority, scope, information, targets, revision, enforcement,
+or ownership.
 
 ## SKOS alignment
 
@@ -549,6 +566,10 @@ generated/
 Generated products must never live beside authoring records or be edited by
 hand. Astro pages consume the compiled graph or deterministic indexes; they do
 not scan and reinterpret source directories independently.
+
+Compiled entities, relationships, and relationship-ID indexes are ordered by
+stable ID. Authoring-file discovery order and relationship order carry no
+semantic meaning, so equivalent input permutations must serialize identically.
 
 This structure allows a single coherent graph at runtime while keeping pull
 requests small, ownership obvious, and merge conflicts localized.

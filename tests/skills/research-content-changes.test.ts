@@ -17,4 +17,18 @@ describe("research-content-changes skill", () => {
     expect(statement).toContain("through `cites` relationships");
     expect(statement).not.toContain("claimIds");
   });
+
+  it("routes model boundaries and protects safe parallel work", async () => {
+    const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
+    for (const route of ["concept", "collection", "event-transition", "depiction"]) {
+      await expect(readFile(new URL(`references/routes/${route}.md`, skillRoot), "utf8")).resolves.toBeTruthy();
+      expect(skill).toContain(`references/routes/${route}.md`);
+    }
+    const boundaries = await readFile(new URL("references/testing-model-boundaries.md", skillRoot), "utf8");
+    expect(boundaries).toContain("absence of inherited Ends, Means, domains, Placements, and assessments");
+    expect(boundaries).toContain("equivalent permutations");
+    expect(boundaries).toContain("`specified-by` relationships");
+    expect(skill).toContain("dedicated branch and worktree");
+    expect(skill).toMatch(/resolved\s+non-fiction Work/);
+  });
 });

@@ -33,6 +33,12 @@ export interface Work extends EntityBase {
   originalPublicationYear?: number;
 }
 
+export interface Depiction extends EntityBase {
+  kind: "depiction";
+  workId: string;
+  scope: string;
+}
+
 export interface SourceIdentifiers {
   doi?: string;
   isbn10?: string;
@@ -60,4 +66,4 @@ export interface Source extends EntityBase {
   resourceLinks?: ResourceLink[];
 }
 
-export type DomainEntity = VocabularyEntity | EvidenceEntity | AnalysisEntity | Approach | End | Means | Statement | Work | Source;
+export type DomainEntity = VocabularyEntity | EvidenceEntity | AnalysisEntity | Approach | End | Means | Statement | Work | Source | Depiction;

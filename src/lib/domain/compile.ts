@@ -14,6 +14,10 @@ function addIndex(index: Record<string, string[]>, key: string, relationshipId: 
   (index[key] ??= []).push(relationshipId);
 }
 
+function compareIds(left: { id: string }, right: { id: string }) {
+  return left.id < right.id ? -1 : left.id > right.id ? 1 : 0;
+}
+
 function isHttpUrl(value: string) {
   try {
     return ["http:", "https:"].includes(new URL(value).protocol);
@@ -181,6 +185,15 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
       for (const statementId of relationship.statementIds) {
         if (entityById.get(statementId)?.kind !== "statement") errors.push(`${relationship.id}: unresolved Statement ${statementId}`);
       }
+      if (relationship.predicate === "depicts") {
+        if (!relationship.interpretation.trim()) errors.push(`${relationship.id}: Depiction interpretation is empty`);
+        for (const statementId of relationship.statementIds) {
+          const statement = entityById.get(statementId);
+          if (statement?.kind === "statement" && statement.statementKind !== "editorial-interpretation") {
+            errors.push(`${relationship.id}: Depiction requires editorial-interpretation Statement ${statementId}`);
+          }
+        }
+      }
     }
   }
 
@@ -200,6 +213,13 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
         if (!link.label.trim()) errors.push(`${entity.id}: resource link ${index} requires a label`);
         if (link.purpose === "purchase" && typeof link.affiliate !== "boolean") errors.push(`${entity.id}: purchase link ${index} must declare affiliate true or false`);
       }
+    }
+
+    if (entity.kind === "depiction") {
+      const work = entityById.get(entity.workId);
+      if (work?.kind !== "work") errors.push(`${entity.id}: unresolved Work ${entity.workId}`);
+      else if (work.workType !== "fiction") errors.push(`${entity.id}: Depiction requires a fictional Work`);
+      if (!entity.scope.trim()) errors.push(`${entity.id}: Depiction scope is empty`);
     }
 
     if (entity.kind === "challenge") {
@@ -316,7 +336,6 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     }
   }
 
-
   for (const relationship of relationships) {
     if (relationship.predicate !== "placed-on") continue;
     const dimension = entityById.get(relationship.object.id);
@@ -354,6 +373,42 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
     }
   }
 
+
+  const empiricalStatementIds = new Set(
+    entities
+      .filter((entity): entity is Extract<DomainEntity, { kind: "statement" }> => entity.kind === "statement" && entity.statementKind === "observation")
+      .map(({ id }) => id),
+  );
+  for (const entity of entities) {
+    if (entity.kind === "case-episode") for (const id of entity.outcomeStatementIds) empiricalStatementIds.add(id);
+  }
+  for (const relationship of relationships) {
+    if (relationship.predicate === "assessed-by") for (const id of relationship.statementIds) empiricalStatementIds.add(id);
+  }
+  const citationsByStatement = new Map<string, Extract<DomainRelationship, { predicate: "cites" }>[]>();
+  for (const relationship of relationships) {
+    if (relationship.predicate !== "cites") continue;
+    (citationsByStatement.get(relationship.subject.id) ?? citationsByStatement.set(relationship.subject.id, []).get(relationship.subject.id)!).push(relationship);
+  }
+  for (const statementId of empiricalStatementIds) {
+    const statement = entityById.get(statementId);
+    if (statement?.kind !== "statement") continue;
+    const citations = citationsByStatement.get(statementId) ?? [];
+    const sourceWork = (citation: Extract<DomainRelationship, { predicate: "cites" }>) => {
+      const source = entityById.get(citation.object.id);
+      const work = source?.kind === "source" && source.workId ? entityById.get(source.workId) : undefined;
+      return work?.kind === "work" ? work : undefined;
+    };
+    for (const citation of citations) {
+      if (["supports", "challenges"].includes(citation.role) && sourceWork(citation)?.workType === "fiction") {
+        errors.push(`${citation.id}: fictional Work Source cannot ${citation.role.slice(0, -1)} empirical Statement ${statementId}`);
+      }
+    }
+    if (statement.publicationStatus !== "research-needed" && !citations.some((citation) => citation.role === "supports" && sourceWork(citation)?.workType !== undefined && sourceWork(citation)?.workType !== "fiction")) {
+      errors.push(`${statementId}: empirical outcome or assessment requires a non-fiction supporting Source`);
+    }
+  }
+
   const preferredLabels = new Map<string, string>();
   for (const entity of entities) {
     if (entity.kind !== "concept") continue;
@@ -373,8 +428,8 @@ export function compileDomainGraph(documents: AuthoringDocument[]): CompiledDoma
   const errors = validateAuthoringDocuments(documents);
   if (errors.length) throw new Error(`Domain graph validation failed:\n${errors.join("\n")}`);
 
-  const entities = documents.flatMap((document) => document.documentType === "entity" ? [document.entity] : []);
-  const relationships = documents.flatMap((document) => document.documentType === "relationships" ? document.relationships : []);
+  const entities = documents.flatMap((document) => document.documentType === "entity" ? [document.entity] : []).sort(compareIds);
+  const relationships = documents.flatMap((document) => document.documentType === "relationships" ? document.relationships : []).sort(compareIds);
   const entitiesById = Object.fromEntries(entities.map((entity) => [entity.id, entity]));
   const outgoingRelationshipIds: Record<string, string[]> = {};
   const incomingRelationshipIds: Record<string, string[]> = {};
@@ -382,6 +437,9 @@ export function compileDomainGraph(documents: AuthoringDocument[]): CompiledDoma
     addIndex(outgoingRelationshipIds, relationship.subject.id, relationship.id);
     addIndex(incomingRelationshipIds, relationship.object.id, relationship.id);
   }
+
+  for (const ids of Object.values(outgoingRelationshipIds)) ids.sort();
+  for (const ids of Object.values(incomingRelationshipIds)) ids.sort();
 
   return {
     schemaVersion: "plural-graph-1",
