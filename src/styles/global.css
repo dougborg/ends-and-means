@@ -228,7 +228,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .open-research li, .research-agenda__group li { padding: 1.1rem; border: 1px solid var(--rule); background: var(--sheet); }
 .open-research li + li, .research-agenda__group li + li { margin-top: .75rem; }
 .open-research h3, .research-agenda__group h3 { margin: .35rem 0 .65rem; font-family: var(--reading); }
-.open-research li > p:not(.coordinate), .research-agenda__group li > p { font-family: var(--reading); line-height: 1.6; }
+.open-research li > p:not(.coordinate), .research-agenda__group li > p:not(.coordinate) { font-family: var(--reading); line-height: 1.6; }
 .open-research details { margin-top: .8rem; }
 .research-agenda { max-width: 72rem; margin: 0 auto; padding: 2rem clamp(1rem, 3vw, 2rem) 5rem; }
 .research-agenda__group > header { display: flex; gap: 2rem; align-items: baseline; }
