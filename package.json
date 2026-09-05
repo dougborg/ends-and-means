@@ -19,7 +19,7 @@
     "test:coverage": "vitest run tests/content tests/skills --coverage",
     "test:routes": "vitest run tests/routes",
     "test:visual": "playwright test",
-    "review:visual": "pnpm build && playwright test",
+    "review:visual": "playwright test",
     "validate": "node --import tsx scripts/validate-domain.ts",
     "audit:content": "node --import tsx scripts/audit-content.ts"
   },
