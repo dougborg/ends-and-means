@@ -6,6 +6,45 @@ export const socialOwnershipEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "wright-envisioning-real-utopias-work",
+      kind: "work",
+      label: "Envisioning Real Utopias",
+      description:
+        "Erik Olin Wright's institutional account of social ownership, effective control, and allocation of productive surplus.",
+      title: "Envisioning Real Utopias",
+      workType: "book",
+      originalPublicationYear: 2010,
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "wright-envisioning-real-utopias-source",
+      kind: "source",
+      label: "Envisioning Real Utopias (2010)",
+      description:
+        "The Verso edition consulted for Wright's positive definition of social ownership and his distinction between ownership rights and effective control.",
+      title: "Envisioning Real Utopias",
+      sourceType: "edition",
+      workId: "wright-envisioning-real-utopias-work",
+      contributorDisplay: ["Erik Olin Wright"],
+      publicationYear: 2010,
+      publisher: "Verso",
+      identifiers: { isbn13: "9781844676170" },
+      resourceLinks: [
+        {
+          purpose: "publisher",
+          url: "https://www.versobooks.com/products/2143-envisioning-real-utopias",
+          label: "Publisher record",
+        },
+      ],
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "schlager-ostrom-property-rights-work",
       kind: "work",
       label: "Property-Rights Regimes and Natural Resources",
@@ -83,6 +122,19 @@ export const socialOwnershipEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "wright-social-ownership-definition",
+      kind: "statement",
+      label: "Wright's definition of social ownership",
+      description:
+        "An attributed definition that identifies a social constituency and its collective claims over productive property.",
+      statementKind: "definition",
+      text: "Wright treats productive property as socially owned when members of an economically interdependent group collectively hold rights over its disposition and net income.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "social-ownership-four-questions",
       kind: "statement",
       label: "Four questions for identifying social ownership",
@@ -128,7 +180,7 @@ export const socialOwnershipEvidenceDocuments = [
       description:
         "A boundary that prevents nominal ownership from proving practical authority.",
       statementKind: "definition",
-      text: "Effective control depends on enforceable powers to set rules, choose or replace decision-makers, and determine access or use; a title or financial claim does not establish those powers by itself.",
+      text: "Effective control concerns the practical capacity to direct how productive assets are used; legal title or a financial claim does not establish that capacity by itself.",
       ...reviewed,
     },
   },
@@ -141,7 +193,7 @@ export const socialOwnershipEvidenceDocuments = [
       description:
         "A boundary separating receipt of income or surplus from governance and title.",
       statementKind: "definition",
-      text: "The right to receive an asset's income, output, or surplus can be separated from legal title and from the authority to govern the asset.",
+      text: "Rights over the net income or surplus produced by an asset can be allocated separately from the effective capacity to direct how that asset is used.",
       ...reviewed,
     },
   },
@@ -187,13 +239,26 @@ export const socialOwnershipEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "rehn-meidner-social-ownership-boundary",
+      id: "rehn-meidner-original-ownership-boundary",
       kind: "statement",
-      label: "The Rehn–Meidner model did not specify social ownership",
+      label: "The original Rehn–Meidner package did not specify social ownership",
       description:
-        "A sourced boundary between the named policy model and later ownership proposals.",
+        "A sourced boundary between the original 1951 policy package and later ownership proposals.",
       statementKind: "editorial-interpretation",
-      text: "The documented Rehn–Meidner policy package combined wage bargaining, labor-market adjustment, and restrictive macroeconomic policy; that account does not make a transfer of productive-asset ownership one of the model's defining means.",
+      text: "Erixon's account of the original Rehn–Meidner package presented to the 1951 LO Congress identifies wage policy, labor-market policy, and restrictive macroeconomic policy, not a transfer of productive-asset ownership, as its defining means.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-1976-wage-earner-fund-connection",
+      kind: "statement",
+      label: "Meidner's later wage-earner-fund connection",
+      description:
+        "A chronological qualification connecting the later wage-earner-fund proposal to the solidaristic wage policy without folding it into the original package.",
+      statementKind: "observation",
+      text: "In 1976, LO adopted a wage-earner-fund proposal based on a Meidner report that advocated collective profit sharing partly to appropriate excess profits associated with solidaristic wage policy.",
       ...reviewed,
     },
   },

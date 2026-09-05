@@ -113,6 +113,7 @@ describe("social-ownership narrative dossier", () => {
     ).toEqual(
       expect.arrayContaining([
         "social-ownership-four-questions",
+        "wright-social-ownership-definition",
         "social-ownership-title-benefit-boundary",
         "social-ownership-rights-are-divisible",
         "social-ownership-control-boundary",
@@ -120,7 +121,8 @@ describe("social-ownership narrative dossier", () => {
         "social-ownership-public-title-boundary",
         "social-ownership-economic-democracy-relationship",
         "social-ownership-market-socialism-relationship",
-        "rehn-meidner-social-ownership-boundary",
+        "rehn-meidner-original-ownership-boundary",
+        "meidner-1976-wage-earner-fund-connection",
       ]),
     );
     expect(socialOwnership?.sections[1]?.relatedEntityRefs).toEqual(

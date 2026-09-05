@@ -3,16 +3,16 @@ No single label for an owner answers all of those questions.
 
 ## what-does-social-ownership-claim
 
-The concept covers arrangements that place claims over productive assets with workers, communities, or a wider public rather than leaving them solely with private owners.
-That description remains incomplete until the relevant constituency and its actual rights are named.
+For Erik Olin Wright, the relevant owners are members of an economically interdependent group who collectively hold disposal and net-income rights over productive property.
+Other accounts draw the constituency more narrowly or broadly, so the people included and their actual rights must be named.
 Public title is one possible form, but title held by a state does not establish democratic control by the people for whom it claims to act.
 
 ## which-rights-must-be-separated
 
 Legal title names the recognized holder of an asset.
 Beneficial ownership asks for whose benefit the property is held, while rights to income or surplus ask who actually receives its returns.
-Control is another question: who can set rules for the asset, appoint or remove decision-makers, and determine its use or access?
-These rights can be divided among institutions, so a financial stake may carry returns without control and a governing body may exercise control without keeping the returns for itself.
+Control is another question: who has the practical capacity to direct how productive assets are used?
+These rights can be divided among institutions, so a claim to net income or surplus need not carry effective control over the asset that generates it.
 
 ## how-do-neighboring-concepts-differ
 
@@ -22,7 +22,7 @@ Market socialism answers a different question by retaining extensive markets whi
 
 ## what-do-the-swedish-cases-show
 
-The documented Rehn–Meidner package joined solidaristic bargaining, labor-market adjustment, and restrictive macroeconomic policy without making an ownership transfer one of its defining means.
-Its bounded bargaining case therefore concerns wages and adjustment, not evidence of social ownership.
-The later wage-earner fund program did accumulate collectively financed shares through regional boards and explicitly sought wage-earner influence.
-Yet statutory caps and the funds' noncontrolling position show why collective holdings should not be treated as proof that workers controlled firms or received every return associated with them.
+The original 1951 Rehn–Meidner package combined wage, labor-market, and macroeconomic policies; ownership transfer was not one of its defining means.
+In 1976, LO adopted a later Meidner proposal linking collective profit sharing to excess profits under solidaristic wage policy.
+Sweden's later wage-earner funds accumulated collectively financed shares through regional boards and sought wage-earner influence.
+Statutory caps and their noncontrolling position show why collective holdings do not prove that workers controlled firms or received every return.
