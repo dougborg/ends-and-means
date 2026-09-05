@@ -43,6 +43,8 @@ Requires Node 24 (see `.node-version` and `.nvmrc`).
 
 ```sh
 npm ci
+npm run lint
+npm run static
 npm run check
 npm test
 npm run build

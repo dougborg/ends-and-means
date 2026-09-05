@@ -16,6 +16,8 @@
 
 ## Verification
 
+- [ ] `npm run lint`
+- [ ] `npm run static`
 - [ ] `npm run check`
 - [ ] `npm test`
 - [ ] `npm run build`

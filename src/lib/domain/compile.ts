@@ -11,7 +11,14 @@ function refKey(ref: EntityRef) {
 }
 
 function addIndex(index: Record<string, string[]>, key: string, relationshipId: string) {
-  (index[key] ??= []).push(relationshipId);
+  index[key] ??= [];
+  index[key].push(relationshipId);
+}
+
+function addMapValue<T>(map: Map<string, T[]>, key: string, value: T) {
+  const values = map.get(key);
+  if (values) values.push(value);
+  else map.set(key, [value]);
 }
 
 function compareIds(left: { id: string }, right: { id: string }) {
@@ -26,6 +33,7 @@ function isHttpUrl(value: string) {
   }
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Existing date-contract accumulator is tracked by the complexity-ratchet backlog.
 function validateHistoricalDate(ownerId: string, field: string, value: HistoricalDate, errors: string[]) {
   if (value.year !== undefined && !Number.isInteger(value.year)) errors.push(`${ownerId}: ${field} year must be an integer`);
   if (value.month !== undefined && (!Number.isInteger(value.month) || value.month < 1 || value.month > 12)) errors.push(`${ownerId}: ${field} month must be between 1 and 12`);
@@ -79,9 +87,9 @@ function detectBroaderCycle(relationships: DomainRelationship[]) {
   const edges = new Map<string, string[]>();
   for (const relationship of relationships) {
     if (relationship.predicate === "broader-than") {
-      (edges.get(relationship.subject.id) ?? edges.set(relationship.subject.id, []).get(relationship.subject.id)!).push(relationship.object.id);
+      addMapValue(edges, relationship.subject.id, relationship.object.id);
     } else if (relationship.predicate === "narrower-than") {
-      (edges.get(relationship.object.id) ?? edges.set(relationship.object.id, []).get(relationship.object.id)!).push(relationship.subject.id);
+      addMapValue(edges, relationship.object.id, relationship.subject.id);
     }
   }
 
@@ -99,6 +107,7 @@ function detectBroaderCycle(relationships: DomainRelationship[]) {
   return [...edges.keys()].some(visit);
 }
 
+// biome-ignore lint/complexity: Existing schema-validation dispatcher accumulates every contract violation; split it as the complexity ratchet advances.
 export function validateAuthoringDocuments(documents: AuthoringDocument[]): string[] {
   const errors: string[] = [];
   const entities: DomainEntity[] = [];
@@ -388,7 +397,7 @@ export function validateAuthoringDocuments(documents: AuthoringDocument[]): stri
   const citationsByStatement = new Map<string, Extract<DomainRelationship, { predicate: "cites" }>[]>();
   for (const relationship of relationships) {
     if (relationship.predicate !== "cites") continue;
-    (citationsByStatement.get(relationship.subject.id) ?? citationsByStatement.set(relationship.subject.id, []).get(relationship.subject.id)!).push(relationship);
+    addMapValue(citationsByStatement, relationship.subject.id, relationship);
   }
   for (const statementId of empiricalStatementIds) {
     const statement = entityById.get(statementId);

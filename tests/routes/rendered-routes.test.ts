@@ -28,6 +28,7 @@ async function resolves(pathname: string): Promise<boolean> {
   return false;
 }
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: Existing end-to-end route contract remains grouped while the complexity baseline is ratcheted down.
 describe("canonical public routes", () => {
   it("does not publish retired or archived route families", async () => {
     for (const route of ["/systems/", "/cruxes/", "/cells/", "/prototype/", "/traditions/", "/topics/"]) expect(await resolves(route), route).toBe(false);
@@ -118,7 +119,9 @@ describe("canonical public routes", () => {
     const reading = await readFile(routeFile("/reading/"), "utf8");
     expect((hrefs(reading).filter((href) => href.startsWith("/sources/")))).toHaveLength(entitiesOfKind("source").length);
     expect(stripMarkup(reading)).not.toContain("Every record here is connected");
-    const source = await readFile(routeFile(`/sources/${entitiesOfKind("source")[0]!.id}/`), "utf8");
+    const firstSource = entitiesOfKind("source")[0];
+    if (!firstSource) throw new Error("Expected at least one canonical Source");
+    const source = await readFile(routeFile(`/sources/${firstSource.id}/`), "utf8");
     expect(stripMarkup(source)).toContain("Where this source is used");
     expect(stripMarkup(source)).toMatch(/supports|qualifies|context|challenges/);
   });

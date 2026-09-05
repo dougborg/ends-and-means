@@ -5,7 +5,7 @@ import type { Source, Statement } from "../lib/domain";
 interface Props { statementId: string; label?: string; }
 const { statementId, label } = Astro.props;
 const statement = entityById<Statement>(statementId);
-if (!statement || statement.kind !== "statement") throw new Error(`Unknown canonical Statement: ${statementId}`);
+if (statement?.kind !== "statement") throw new Error(`Unknown canonical Statement: ${statementId}`);
 const citations = citationsFor(statementId).map((citation) => {
   const source = entityById<Source>(citation.object.id);
   const href = source?.resourceLinks?.[0]?.url;
