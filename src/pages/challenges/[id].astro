@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import MarkdownProse from "../../components/MarkdownProse.astro";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
 import type { Approach, Challenge, Criterion, DomainRelationship } from "../../lib/domain";
 import "../../styles/challenge-topic.css";
@@ -15,7 +16,7 @@ const criteria = incoming.filter(({ predicate }) => predicate === "evaluates-res
 const narrativeSections = dossier?.sections ?? [{ id: "why-it-matters", heading: "Why this question matters", body: challenge.rationale, traceStatus: "research-gap" as const, statementIds: [] }];
 ---
 <BaseLayout fullBleed title={challenge.question} description={dossier?.standfirst ?? challenge.rationale}>
-  <article class="challenge-page challenge-topic-page canonical-dossier"><nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> {challenge.label}</nav><header><p class="coordinate">CHALLENGE</p><h1>{challenge.question}</h1><p class="dek">{dossier?.standfirst ?? challenge.rationale}</p></header>
+  <article class="challenge-page challenge-topic-page canonical-dossier"><nav aria-label="Breadcrumb"><a href="/challenges/">Challenges</a> <span aria-hidden="true">/</span> {challenge.label}</nav><header><p class="coordinate">CHALLENGE</p><h1>{challenge.question}</h1><MarkdownProse className="dek" content={dossier?.standfirst ?? challenge.rationale} /></header>
     <NarrativeDossier sections={narrativeSections} label="Why this question matters" />
     <section class="reference-apparatus" aria-labelledby="challenge-reference-title"><header><p class="coordinate">REFERENCE</p><h2 id="challenge-reference-title">Inspect the responses</h2></header><details class="apparatus-group"><summary>How published approaches respond <span>{approaches.length}</span></summary><div class="apparatus-group__body apparatus-group__body--single response-ledger">{approaches.map(({ approach, relationship }) => <article class="approach-response"><header><div><p class="coordinate">APPROACH / {humanizeStatus(relationship.status)}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3></div></header><p>{approach.description}</p>{relationship.statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</div></details></section>
     {criteria.length > 0 && <section class="question-overview" aria-labelledby="criteria-title"><div><p class="coordinate">CRITERIA / {criteria.length}</p><h2 id="criteria-title">How responses are evaluated</h2></div><div>{criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p></article>)}</div></section>}

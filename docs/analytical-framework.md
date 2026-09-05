@@ -198,5 +198,5 @@ spoiler scope, and copyright-safe summaries.
 ## Foundational source
 
 Margaret M. Polski and Elinor Ostrom, “An Institutional Framework for Policy
-Analysis and Design,” hosted by the Indiana University Ostrom Workshop:
-https://ostromworkshop.indiana.edu/pdf/teaching/iad-for-policy-applications.pdf
+Analysis and Design,” hosted by the
+[Indiana University Ostrom Workshop](https://ostromworkshop.indiana.edu/pdf/teaching/iad-for-policy-applications.pdf).

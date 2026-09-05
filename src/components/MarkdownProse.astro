@@ -1,0 +1,8 @@
+---
+import { renderSafeMarkdown } from "../lib/markdown";
+
+interface Props { content: string; className?: string; }
+const { content, className } = Astro.props;
+---
+
+<div class={className} set:html={renderSafeMarkdown(content)}></div>
