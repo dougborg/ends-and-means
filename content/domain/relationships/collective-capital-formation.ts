@@ -124,7 +124,10 @@ export const collectiveCapitalFormationRelationshipDocuments = [
         subject: concept,
         object: { kind: "concept", id: "social-ownership" },
         status: "qualified",
-        statementIds: ["collective-capital-formation-rights-boundary"],
+        statementIds: [
+          "collective-capital-formation-individual-saving-boundary",
+          "collective-capital-formation-rights-boundary",
+        ],
       },
       {
         id: "collective-capital-formation-related-to-economic-democracy",

@@ -3,6 +3,7 @@ import {
   citationsFor,
   dossierForSubject,
   entityById,
+  relationshipsFrom,
   researchObligationsForTarget,
 } from "../../src/lib/domain/canonical";
 
@@ -105,6 +106,26 @@ describe("collective capital formation dossier", () => {
 });
 
 describe("collective capital formation locator precision", () => {
+  it("qualifies social ownership with both holding and control boundaries", () => {
+    expect(
+      relationshipsFrom("collective-capital-formation").find(
+        ({ id }) =>
+          id === "collective-capital-formation-related-to-social-ownership",
+      ),
+    ).toMatchObject({
+      statementIds: [
+        "collective-capital-formation-individual-saving-boundary",
+        "collective-capital-formation-rights-boundary",
+      ],
+    });
+    expect(
+      entityById("collective-capital-formation-rights-boundary"),
+    ).toMatchObject({
+      label: "Accumulation does not establish democratic investment control",
+      text: expect.stringContaining("democratic control"),
+    });
+  });
+
   it("keeps design and supporter objections tied to the exact supporting passages", () => {
     expect(
       citationsFor("collective-capital-formation-governing-constituency"),
