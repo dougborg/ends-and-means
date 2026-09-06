@@ -5,7 +5,7 @@ const dossier = {
   kind: "dossier",
   label: "Matriliny, property, and authority",
   description:
-    "An evidence-backed explanation of why maternal descent does not by itself determine ownership, management, office, or equality.",
+    "Maternal descent does not by itself determine ownership, management, office, or equality.",
   subject: { kind: "concept", id: "matriliny" },
   standfirst:
     "Matriliny traces descent or group membership through a maternal line. It does not, by itself, tell us where spouses live, who controls property, who holds office, or whether people experience equality.",
