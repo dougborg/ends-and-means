@@ -14,8 +14,12 @@ const fixtureUrl = new URL(
   import.meta.url,
 );
 
-async function fixture() {
+async function rawFixture() {
   return JSON.parse(await readFile(fixtureUrl, "utf8")) as DeliverySnapshot;
+}
+
+async function fixture() {
+  return deliverySnapshotSchema.parse(await rawFixture());
 }
 
 function codes(snapshot: DeliverySnapshot) {
@@ -32,6 +36,12 @@ function item(snapshot: DeliverySnapshot, number: number) {
 }
 
 describe("delivery Project policy", () => {
+  it("runtime-validates the untouched fixture before mutation tests", async () => {
+    expect(deliverySnapshotSchema.safeParse(await rawFixture()).success).toBe(
+      true,
+    );
+  });
+
   it("accepts a valid thin delivery queue and excludes review from WIP", async () => {
     const snapshot = await fixture();
     expect(auditDeliverySnapshot(snapshot)).toEqual([]);
