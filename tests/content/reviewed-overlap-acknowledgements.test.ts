@@ -185,6 +185,13 @@ describe("reviewed overlap fingerprints", () => {
         ),
       ]);
     }
+    const statementWithDisplayMetadata = {
+      ...statement,
+      label: "Non-governed display metadata",
+    };
+    expect(fingerprint({ statement: statementWithDisplayMetadata })).toBe(
+      fingerprint(),
+    );
   });
 });
 
@@ -257,5 +264,15 @@ describe("reviewed overlap resolution", () => {
       [signal()],
     );
     expect(reverse).toEqual(forward);
+  });
+
+  it("handles unsupported malformed values without throwing", () => {
+    const values = [undefined, Symbol("invalid"), () => "invalid"];
+    expect(() =>
+      resolveReviewedOverlapAcknowledgements(values, [signal()]),
+    ).not.toThrow();
+    expect(
+      resolveReviewedOverlapAcknowledgements(values, [signal()]).openSignals,
+    ).toEqual([signal()]);
   });
 });

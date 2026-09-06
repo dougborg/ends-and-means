@@ -37,6 +37,9 @@ The fingerprint is SHA-256 over deterministic JSON containing:
    Source ID, role, locator, and optional note; and
 4. every authored field of the cited Source, including identifiers and links.
 
+Other Statement metadata is deliberately outside the fingerprint; the selected
+Statement identity and claim text are the governed Statement inputs.
+
 Object keys are sorted recursively before hashing. Array order remains
 authored order because changing ordered evidence metadata is a governed input.
 The audit exposes the fingerprint for each open finding so a reviewer can
