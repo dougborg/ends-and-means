@@ -164,11 +164,14 @@ async function verifyGlobalNavigation() {
   ] as const) {
     const html = await readFile(routeFile(route), "utf8");
     const primary = navigationIn(html, "Primary");
+    const mobile = navigationIn(html, "Mobile navigation");
     const siteMap = navigationIn(html, "Site map");
     expect(primary, route).not.toBe("");
+    expect(mobile, route).not.toBe("");
     expect(siteMap, route).not.toBe("");
     expect(html, route).toContain('href="/third-party-notices.txt"');
     expect(linksIn(primary), route).toEqual(expectedPrimary);
+    expect(linksIn(mobile), route).toEqual(expectedSiteMap);
     expect(linksIn(siteMap), route).toEqual(expectedSiteMap);
     expect(primary.match(/aria-current="page"/g) ?? [], route).toHaveLength(
       ["Explore", "Cases", "Compare", "Questions"].includes(currentLabel)
@@ -176,6 +179,10 @@ async function verifyGlobalNavigation() {
         : 0,
     );
     expect(siteMap.match(/aria-current="page"/g) ?? [], route).toHaveLength(1);
+    expect(mobile.match(/aria-current="page"/g) ?? [], route).toHaveLength(1);
+    expect(mobile, route).toMatch(
+      new RegExp(`aria-current="page"[^>]*>${currentLabel}<`),
+    );
     expect(siteMap, route).toMatch(
       new RegExp(`aria-current="page"[^>]*>${currentLabel}<`),
     );

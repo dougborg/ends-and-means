@@ -32,11 +32,20 @@ comparison.
 
 The primary navigation uses one durable learner-task sequence:
 **Explore**, **Cases**, **Compare**, and **Questions**.
-**Sources** and **Method** remain in the compact footer as a quieter trust
+**Sources**, **Method**, and **Governance** remain in the compact footer as a quieter trust
 layer rather than competing with the main learner paths.
 The wordmark is the primary navigation's sole Home link.
 The footer's **Site map** repeats that sequence after **Home**, then adds the
-quieter **Sources** and **Method** trust paths.
+quieter **Sources**, **Method**, and **Governance** trust paths.
+
+At mobile widths, the wordmark and an explicit **Menu** control remain on one
+compact row.
+A native disclosure opens an anchored, full-width panel containing Home, all
+primary routes, and all trust routes; its closed label names the current
+section, while the open link also uses `aria-current` and a text underline.
+The disclosure works without JavaScript, with enhancement limited to Escape,
+outside-click, and navigation-close behavior.
+Desktop navigation and the footer site map retain their existing structures.
 
 Both landmarks consume the same typed public-route registry.
 The registry also owns current-section mapping: Subject Guides and Concept

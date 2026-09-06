@@ -1,15 +1,50 @@
 ---
-import { isCurrentPublicRoute, primaryRoutes } from "../lib/public-navigation";
+import { homeRoute, isCurrentPublicRoute, primaryRoutes, publicRoutes } from "../lib/public-navigation";
+
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
+const mobileRoutes = [homeRoute, ...publicRoutes];
+const currentRoute = mobileRoutes.find((route) =>
+  isCurrentPublicRoute(currentPath, route),
+);
 ---
 <header class="site-header">
   <div class="site-header__inner">
     <a class="wordmark" href="/" aria-label="Ends and Means, home"><span>Ends</span><span class="wordmark__hinge">and</span><span>Means</span></a>
-    <nav aria-label="Primary">
+    <nav class="desktop-navigation" aria-label="Primary">
       <ul class="primary-nav">
         {primaryRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
       </ul>
     </nav>
+    <details class="mobile-navigation">
+      <summary><span>Menu</span><span class="mobile-navigation__current">{currentRoute?.label ?? "Browse"}</span></summary>
+      <nav aria-label="Mobile navigation">
+        <ul>
+          {mobileRoutes.map((route) => <li class:list={{ "mobile-navigation__trust": route.level === "trust" }}><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
+        </ul>
+      </nav>
+    </details>
   </div>
 </header>
+
+<script>
+  const disclosure = document.querySelector<HTMLDetailsElement>(".mobile-navigation");
+  const summary = disclosure?.querySelector<HTMLElement>("summary");
+
+  if (disclosure && summary) {
+    const close = (restoreFocus = false) => {
+      disclosure.open = false;
+      if (restoreFocus) summary.focus();
+    };
+
+    disclosure.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && disclosure.open) close(true);
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (disclosure.open && !disclosure.contains(event.target as Node)) close();
+    });
+  }
+</script>
