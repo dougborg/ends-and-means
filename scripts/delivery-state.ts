@@ -88,6 +88,7 @@ export const deliveryItemSchema = z
     linkedPullRequestStates: z
       .array(z.enum(["OPEN", "CLOSED", "MERGED"]))
       .optional(),
+    linkedPullRequestDraft: z.boolean().optional(),
     linkedPullRequestAmbiguous: z.boolean().optional(),
     ownership: ownershipSchema.optional(),
     baseCurrent: z.boolean().optional(),
@@ -288,7 +289,11 @@ function labelStatusFindings(item: DeliveryItem): DeliveryFinding[] {
 function prStatusFindings(item: DeliveryItem): DeliveryFinding[] {
   const findings: DeliveryFinding[] = [];
   const openPr = item.linkedPullRequestStates?.includes("OPEN") ?? false;
-  if (item.status === "In progress" && openPr) {
+  if (
+    item.status === "In progress" &&
+    openPr &&
+    item.linkedPullRequestDraft !== true
+  ) {
     findings.push({
       code: "STATUS_PR_REVIEW_DRIFT",
       item: item.number,
@@ -300,6 +305,13 @@ function prStatusFindings(item: DeliveryItem): DeliveryFinding[] {
       code: "STATUS_REVIEW_WITHOUT_PR",
       item: item.number,
       message: `#${item.number} is In review without an open linked PR.`,
+    });
+  }
+  if (item.status === "In review" && item.linkedPullRequestDraft === true) {
+    findings.push({
+      code: "STATUS_REVIEW_DRAFT",
+      item: item.number,
+      message: `#${item.number} is In review while its selected pull request is still draft.`,
     });
   }
   if (item.linkedPullRequestAmbiguous) {

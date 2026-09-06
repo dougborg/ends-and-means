@@ -120,6 +120,7 @@
       "priority": "Now",
       "labels": [],
       "linkedPullRequestStates": ["OPEN"],
+      "linkedPullRequestDraft": false,
       "baseCurrent": true,
       "historyLinear": true,
       "reviewEvidence": { "copilot": "reviewed", "adversarial": true }

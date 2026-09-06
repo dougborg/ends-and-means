@@ -55,7 +55,9 @@ Run the single local/CI verification path:
 pnpm verify
 ```
 
-Open the pull request from a branch rebased on current `main`.
+Open a ready-for-review pull request from a completed, verified branch rebased on its current declared base (`main` for an unstacked pull request or the bottom stack layer).
+Use a draft only for an explicitly experimental approach or a deliberate early-feedback checkpoint with substantial work remaining, and keep its issue `In progress` until the pull request is marked ready.
+Use GitHub stacks selectively for true dependency chains, keep unrelated work parallel, merge the bottom layer first, and refresh exact-head evidence after automatic rebases or retargeting.
 Use the repository template, identify human decisions, request applicable Copilot review, and obtain an independent adversarial review.
 Record only the privacy-safe exact-head markers defined in the review reference; keep internal agent handles, worktree paths, quota state, and operational explanations in private coordination state.
 These reviews are project-process gates even though GitHub does not require an approving review.

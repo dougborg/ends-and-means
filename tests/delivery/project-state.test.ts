@@ -97,6 +97,24 @@ describe("delivery Project policy", () => {
 });
 
 describe("delivery evidence and dependencies", () => {
+  it("keeps exceptional drafts in progress and requires ready pull requests for review", async () => {
+    const snapshot = await fixture();
+    const active = item(snapshot, 1);
+    active.linkedPullRequestStates = ["OPEN"];
+    active.linkedPullRequestDraft = true;
+    expect(codes(snapshot)).not.toContain("STATUS_PR_REVIEW_DRIFT");
+
+    active.linkedPullRequestDraft = false;
+    expect(codes(snapshot)).toContain("STATUS_PR_REVIEW_DRIFT");
+
+    const review = item(snapshot, 7);
+    review.linkedPullRequestDraft = true;
+    expect(codes(snapshot)).toContain("STATUS_REVIEW_DRAFT");
+
+    review.linkedPullRequestDraft = false;
+    expect(codes(snapshot)).not.toContain("STATUS_REVIEW_DRAFT");
+  });
+
   it("detects issue, PR, label, visibility, and Blocked drift", async () => {
     const snapshot = await fixture();
     snapshot.project.public = true;

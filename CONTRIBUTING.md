@@ -17,8 +17,16 @@ work tracks, and delivery policy.
    `pnpm test`, `pnpm build`, `pnpm test:routes`, and the rendered-page
    review described below, plus `pnpm audit:content` for canonical content or
    narrative changes.
-5. Rebase onto the current base, open a pull request, and identify all claims,
-   classifications, and judgments the reviewer must decide.
+5. Rebase onto the current base, open a ready-for-review pull request, and
+   identify all claims, classifications, and judgments the reviewer must decide.
+   Use a draft only for an explicitly experimental approach or deliberate early
+   feedback while substantial work remains; keep that work `In progress` until
+   the pull request is marked ready.
+   Stack pull requests only when each upper branch genuinely depends on the
+   layer below it; keep unrelated work parallel and each layer independently
+   reviewable.
+   Treat cross-cutting audits as capstone sweeps: rerun them over the combined
+   baseline after their contributing content or interface tranche lands.
 6. Resolve automated review and obtain an independent adversarial review of the
    material risks. Record only the privacy-safe exact-head attestations defined
    in the [delivery harness](docs/delivery-harness.md); keep internal agent,
