@@ -1,63 +1,30 @@
-import { readdir, readFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { relative } from "node:path";
 import { canonicalDocuments } from "../content/domain";
 import { resolveNarrativeDirectory } from "../content/domain/presentation/load-narrative";
-import {
-  formatIntegrityResult,
-  type PublicationFile,
-  runContentIntegrity,
-} from "../src/lib/domain";
+import { formatIntegrityResult, runContentIntegrity } from "../src/lib/domain";
 import { canonicalGraph } from "../src/lib/domain/canonical";
 import { validateNarrativeLines } from "../src/lib/narrative-lines";
+import { loadPublicationFiles } from "./content-integrity-files";
 
 const root = process.cwd();
 
-async function walk(directory: string): Promise<string[]> {
-  const entries = await readdir(directory, { withFileTypes: true }).catch(
-    () => [],
-  );
-  const paths = await Promise.all(
-    entries
-      .toSorted((left, right) => left.name.localeCompare(right.name))
-      .map((entry) => {
-        const pathname = resolve(directory, entry.name);
-        return entry.isDirectory() ? walk(pathname) : [pathname];
-      }),
-  );
-  return paths.flat().sort((left, right) => left.localeCompare(right));
-}
-
-async function loadFiles(
-  directories: string[],
-  include: RegExp,
-): Promise<PublicationFile[]> {
-  const paths = (
-    await Promise.all(
-      directories.map((directory) => walk(resolve(root, directory))),
-    )
-  )
-    .flat()
-    .filter((pathname) => include.test(pathname))
-    .sort((left, right) => left.localeCompare(right));
-  return Promise.all(
-    paths.map(async (pathname) => ({
-      path: relative(root, pathname),
-      content: await readFile(pathname, "utf8"),
-    })),
-  );
-}
-
 const narratives = (
-  await loadFiles([relative(root, resolveNarrativeDirectory())], /\.md$/u)
+  await loadPublicationFiles(
+    root,
+    [relative(root, resolveNarrativeDirectory())],
+    /\.md$/u,
+  )
 ).map((file) => ({
   ...file,
   lineErrors: validateNarrativeLines(file.content),
 }));
-const runtimeFiles = await loadFiles(
+const runtimeFiles = await loadPublicationFiles(
+  root,
   ["src", "content/domain"],
   /\.(?:astro|css|js|json|md|ts)$/u,
 );
-const builtFiles = await loadFiles(
+const builtFiles = await loadPublicationFiles(
+  root,
   ["dist"],
   /\.(?:css|html|js|json|txt|xml)$/u,
 );

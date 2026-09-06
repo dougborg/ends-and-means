@@ -1,5 +1,12 @@
+import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { canonicalDocuments } from "../../content/domain";
+import {
+  loadPublicationFiles,
+  walkRequiredFiles,
+} from "../../scripts/content-integrity-files";
 import {
   type AuthoringDocument,
   type CompiledDomainGraph,
@@ -303,6 +310,21 @@ describe("deterministic integrity output", () => {
         findings: forward.findings.toReversed(),
       }),
     ).toBe(formatIntegrityResult(forward));
+  });
+
+  it("sorts filesystem input and fails closed when a scan root is absent", async () => {
+    const root = await mkdtemp(join(tmpdir(), "content-integrity-"));
+    await mkdir(join(root, "nested"));
+    await writeFile(join(root, "z.md"), "Z.");
+    await writeFile(join(root, "nested", "a.md"), "A.");
+
+    await expect(
+      loadPublicationFiles(root, [".", "missing"], /\.md$/u),
+    ).rejects.toThrow();
+    await expect(walkRequiredFiles(root)).resolves.toEqual([
+      join(root, "nested", "a.md"),
+      join(root, "z.md"),
+    ]);
   });
 });
 

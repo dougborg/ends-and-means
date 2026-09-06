@@ -191,7 +191,10 @@ function sourcePreflight(graph: CompiledDomainGraph) {
         missingMetadata.push("contributors");
       if (!source.publicationYear) missingMetadata.push("publication year");
       if (!source.publisher) missingMetadata.push("publisher");
-      if (!source.identifiers && !source.resourceLinks?.length)
+      const hasIdentifier = Object.values(source.identifiers ?? {}).some(
+        (value) => typeof value === "string" && value.trim().length > 0,
+      );
+      if (!hasIdentifier && !source.resourceLinks?.length)
         missingMetadata.push("identifier or access link");
       return {
         id: source.id,
