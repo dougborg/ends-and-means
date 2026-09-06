@@ -6,12 +6,11 @@ const dossier = attachNarrative("matriliny-property-authority.md", {
   kind: "dossier" as const,
   label: "Matriliny, property, and authority",
   description:
-    "Matriliny traces descent through a maternal line. The studies collected here separately document residence, land control, officeholding, and participation while limiting their findings to named Minangkabau communities and periods.",
+    "Matriliny traces descent through a maternal line. The studies collected here separately document land control, officeholding, and participation while limiting their findings to named Minangkabau communities and periods.",
   subject: { kind: "concept" as const, id: "matriliny" },
   standfirst: "",
   standfirstStatementIds: [
     "matriliny-maternal-descent-definition",
-    "matriliny-does-not-fix-residence",
     "matriliny-does-not-fix-property-control",
     "matriliny-does-not-fix-office",
     "matriliny-does-not-fix-equality",
@@ -19,23 +18,18 @@ const dossier = attachNarrative("matriliny-property-authority.md", {
   sections: [
     {
       id: "how-do-the-terms-differ",
-      heading: "How do matriliny, matrilocality, and matriarchy differ?",
+      heading: "How do matriliny and matriarchy differ?",
       body: "",
       traceStatus: "qualified",
       statementIds: [
         "matriliny-maternal-descent-definition",
-        "matrilocality-residence-distinction",
-        "matriliny-does-not-fix-residence",
         "matriliny-does-not-fix-property-control",
         "matriliny-does-not-fix-office",
         "matriliny-does-not-fix-equality",
         "matriarchy-rule-by-women-dispute",
         "matriarchy-sanday-maternal-centered-interpretation",
       ],
-      relatedEntityRefs: [
-        { kind: "concept", id: "matrilocality" },
-        { kind: "concept", id: "matriarchy" },
-      ],
+      relatedEntityRefs: [{ kind: "concept", id: "matriarchy" }],
     },
     {
       id: "what-counts-as-power",
@@ -97,7 +91,7 @@ const dossier = attachNarrative("matriliny-property-authority.md", {
         { kind: "case", id: "koto-tinggi-post-decentralization-governance" },
         {
           kind: "case-episode",
-          id: "koto-tinggi-governance-october-2016",
+          id: "koto-tinggi-governance-2016",
         },
       ],
     },

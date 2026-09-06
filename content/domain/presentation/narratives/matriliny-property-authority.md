@@ -1,10 +1,9 @@
 Matriliny traces descent or group membership through a maternal line.
-The studies collected here separately document residence, property control, officeholding, and participation; their findings do not establish a rule for every Minangkabau community.
+The studies collected here separately document property control, officeholding, and participation; their findings do not establish a rule for every Minangkabau community.
 
 ## how-do-the-terms-differ
 
 Matriliny is a descent principle.
-In Sanday’s account, maternal-line kin organization and a married man joining his wife’s domestic group were separate features.
 Matriarchy is a disputed interpretive category: some use it for women’s rule, while Sanday uses it to describe maternal meanings and women’s social centrality.
 These terms do not replace evidence about who decides, manages, works, benefits, or speaks in a particular setting.
 
@@ -25,7 +24,7 @@ In the Bonjol account, Bundo Kanduang could counsel customary leaders; that defi
 
 ## what-can-koto-tinggi-show
 
-In October 2016, Koto Tinggi’s formal design divided work among an elected executive, a representative council, and a customary council.
+In a study based on October 2016 fieldwork, Nurdin describes Koto Tinggi’s formal design as dividing work among an elected executive, a representative council, and a customary council.
 Meeting rules included women’s-group delegates and consensus procedures, but the study does not establish women’s influence in those meetings.
 Customary leaders disputed the dual-council arrangement, and one budget episode showed council members using postponement and consensus while administrative capacity remained limited.
 

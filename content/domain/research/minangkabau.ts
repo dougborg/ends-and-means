@@ -30,7 +30,7 @@ export const minangkabauResearchDocuments = [
       evidenceNeeded:
         "Period-appropriate meeting records and community publications, a complete methods appendix or author clarification, and separately attributed testimony from women’s-group delegates and other affected residents.",
       scope:
-        "Koto Tinggi’s nagari institutions and development meetings during the post-2001 period through October 2016; no inference to other nagari.",
+        "Koto Tinggi’s nagari institutions and development meetings documented in 2016; October dates the fieldwork, not every reported meeting, and no inference is made to other nagari.",
       ...base,
     },
   },
