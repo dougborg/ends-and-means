@@ -164,9 +164,11 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 10,
-      total: 19,
+      covered: 13,
+      total: 24,
       missingIds: [
+        "autocracy",
+        "dictatorship",
         "economic-planning",
         "indigenous-autonomy",
         "institutional-abolition",

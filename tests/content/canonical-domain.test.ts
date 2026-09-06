@@ -34,8 +34,8 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
-      "kahnawake-community-lawmaking",
       "italian-fascist-dictatorship-1925-1943",
+      "kahnawake-community-lawmaking",
       "nazi-consolidation-1933",
       "spanish-anarchist-initiatives-1936-1939",
       "swedish-solidaristic-bargaining",
