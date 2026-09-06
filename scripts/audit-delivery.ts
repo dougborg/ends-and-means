@@ -8,6 +8,7 @@ import {
   type DeliverySnapshot,
   deliverySnapshotSchema,
   githubComparePath,
+  parseAgentPath,
   reviewEvidenceForHead,
   selectRelevantPullRequest,
 } from "./delivery-state.ts";
@@ -146,8 +147,10 @@ function ownershipFrom(comments: Array<{ body: string }>) {
     const match = body.match(
       /worktree `([^`]+)` on branch `([^`]+)`\. Ownership: ([^;\n.]+)/i,
     );
-    if (match?.[1] && match[2] && match[3])
-      return { worktree: match[1], branch: match[2], owner: match[3].trim() };
+    if (match?.[1] && match[2] && match[3]) {
+      const owner = parseAgentPath(match[3].trim());
+      if (owner) return { worktree: match[1], branch: match[2], owner };
+    }
   }
   return undefined;
 }

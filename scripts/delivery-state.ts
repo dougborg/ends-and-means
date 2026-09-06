@@ -36,12 +36,20 @@ export function githubComparePath(base: string, head: string) {
 }
 
 const dateTime = z.string().datetime({ offset: true });
+export const agentPathPattern = /^\/root\/[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
+
+export function parseAgentPath(value: string | undefined) {
+  return value && agentPathPattern.test(value) ? value : undefined;
+}
+
 const reviewEvidenceSchema = z
   .object({ copilot: z.boolean(), adversarial: z.boolean() })
   .strict();
 const ownershipSchema = z
   .object({
-    owner: z.string().regex(/^\/root\/[a-z0-9_/-]+$/i),
+    owner: z.string().refine((value) => parseAgentPath(value) !== undefined, {
+      message: "Expected a canonical /root/<agent-path> identity",
+    }),
     branch: z.string().min(1),
     worktree: z.string().min(1),
   })
@@ -110,10 +118,9 @@ export function reviewEvidenceForHead(
   comments: ReviewComment[],
 ) {
   const marker = new RegExp(
-    String.raw`^Independent adversarial review: APPROVED\r?\nReviewer: (\/root\/[a-z0-9_/-]+)\r?\nHead: ${headOid}$`,
-    "i",
+    String.raw`^Independent adversarial review: APPROVED\r?\nReviewer: ([^\r\n]+)\r?\nHead: ${headOid}$`,
   );
-  const validOwner = implementationOwner?.match(/^\/root\/[a-z0-9_/-]+$/i)?.[0];
+  const validOwner = parseAgentPath(implementationOwner);
   return {
     copilot: reviews.some(
       (review) =>
@@ -121,7 +128,8 @@ export function reviewEvidenceForHead(
     ),
     adversarial: comments.some((comment) => {
       const match = comment.body.match(marker);
-      return Boolean(validOwner && match?.[1] && match[1] !== validOwner);
+      const reviewer = parseAgentPath(match?.[1]);
+      return Boolean(validOwner && reviewer && reviewer !== validOwner);
     }),
   };
 }
