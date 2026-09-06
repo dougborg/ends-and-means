@@ -10,7 +10,10 @@ import type {
 import { publicRelationshipLabel } from "../lib/domain";
 import { canonicalGraph, entityById } from "../lib/domain/canonical";
 import { hrefForEntity } from "../lib/public-routes";
-import { visibleSubjectGuideSections } from "../lib/subject-guide-presentation";
+import {
+  directSubjectGuideEvidence,
+  visibleSubjectGuideSections,
+} from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
 import MarkdownProse from "./MarkdownProse.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
@@ -144,12 +147,6 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
               <h2>{section.heading}</h2>
             </header>
 
-            {section.role === "bounded-practice" && (
-              <p class="subject-guide__scope">
-                This case shows what happened in a specific place and period. It does not make the case a pure example of the idea.
-              </p>
-            )}
-
             {narratives.map((selection) => {
               const statementIds = narrativeStatementIds(selection);
               return (
@@ -167,7 +164,14 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
               );
             })}
 
-            {(section.statementIds ?? []).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+            {directSubjectGuideEvidence(section).length > 0 && (
+              <details class="reference-disclosure subject-guide__evidence subject-guide__direct-evidence">
+                <summary>Examine the selected claims <span>{directSubjectGuideEvidence(section).length}</span></summary>
+                <div class="reference-disclosure__body">
+                  {directSubjectGuideEvidence(section).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+                </div>
+              </details>
+            )}
 
             {(section.entityRefs?.length ?? 0) > 0 && (
               <ul class="subject-guide__links" aria-label={`Continue from ${section.heading}`}>

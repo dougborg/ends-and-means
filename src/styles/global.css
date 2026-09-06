@@ -394,7 +394,6 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .subject-guide__passage + .subject-guide__passage { margin-top: 1.2rem; }
 .subject-guide__passage > div > p:last-child { margin-bottom: 0; }
 .subject-guide__evidence { margin-top: .7rem; font-family: var(--display); font-size: initial; }
-.subject-guide__scope { max-width: 68ch; margin-bottom: 1.2rem; padding: .85rem 1rem; border-left: 3px solid var(--teal); background: var(--teal-wash); font-family: var(--reading); font-size: .88rem; line-height: 1.55; }
 .subject-guide__links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin: 1.2rem 0 0; padding: 0; border-top: 1px solid var(--rule); list-style: none; }
 .subject-guide__links li { min-width: 0; padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--rule); }
 .subject-guide__links li + li { padding-left: 1rem; border-left: 1px solid var(--rule); }

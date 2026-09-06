@@ -13,3 +13,7 @@ export function subjectGuideSectionHasContent(section: SubjectGuideSection) {
 export function visibleSubjectGuideSections(guide: SubjectGuide) {
   return guide.sections.filter(subjectGuideSectionHasContent);
 }
+
+export function directSubjectGuideEvidence(section: SubjectGuideSection) {
+  return section.statementIds ?? [];
+}
