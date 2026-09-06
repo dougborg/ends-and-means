@@ -20,11 +20,84 @@ const ownedCommands = [
   "pnpm test:visual",
 ];
 
+function quotedToken(run: string, start: number) {
+  const quote = run[start] ?? "";
+  let token = quote;
+  let index = start + 1;
+  while (index < run.length) {
+    const character = run[index] ?? "";
+    token += character;
+    if (quote === '"' && character === "\\" && index + 1 < run.length) {
+      index += 1;
+      token += run[index] ?? "";
+    } else if (character === quote) {
+      return { token, end: index };
+    }
+    index += 1;
+  }
+  return { token, end: run.length - 1 };
+}
+
+function boundaryWidth(run: string, index: number) {
+  const character = run[index] ?? "";
+  if (character === "&") return run[index + 1] === "&" ? 2 : 1;
+  return character === "\n" || ";|()".includes(character) ? 1 : 0;
+}
+
+function startsComment(character: string, segment: string) {
+  return (
+    character === "#" &&
+    (segment.length === 0 || /\s/.test(segment.at(-1) ?? ""))
+  );
+}
+
+function shellCommandSegments(run: string) {
+  const segments: string[] = [];
+  let segment = "";
+
+  const finish = () => {
+    const command = segment.trim();
+    if (command) segments.push(command);
+    segment = "";
+  };
+
+  for (let index = 0; index < run.length; index += 1) {
+    const character = run[index] ?? "";
+    if (character === "'" || character === '"') {
+      const quoted = quotedToken(run, index);
+      segment += quoted.token;
+      index = quoted.end;
+      continue;
+    }
+    if (character === "\\" && index + 1 < run.length) {
+      segment += character + run[index + 1];
+      index += 1;
+      continue;
+    }
+    if (startsComment(character, segment)) {
+      const newline = run.indexOf("\n", index);
+      index = newline < 0 ? run.length : newline;
+      finish();
+      continue;
+    }
+    const width = boundaryWidth(run, index);
+    if (width) {
+      finish();
+      index += width - 1;
+      continue;
+    }
+    segment += character;
+  }
+  finish();
+  return segments;
+}
+
 function invokesOwnedCommand(run: string) {
-  return ownedCommands.some((command) => {
-    const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return new RegExp(`(?:^|[\\n;&|()])\\s*${escaped}(?:$|\\s)`).test(run);
-  });
+  return shellCommandSegments(run).some((segment) =>
+    ownedCommands.some(
+      (command) => segment === command || segment.startsWith(`${command} `),
+    ),
+  );
 }
 
 function record(value: unknown): Node {

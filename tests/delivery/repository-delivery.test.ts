@@ -123,6 +123,8 @@ describe("verify command ownership", () => {
     "echo setup\npnpm lint",
     "echo setup; pnpm lint",
     "cd app && pnpm lint",
+    "echo setup & pnpm lint",
+    "(pnpm lint)",
   ])("rejects owned command after a shell boundary: %s", async (run) => {
     const root = await repositoryFixture();
     await replace(
@@ -136,7 +138,17 @@ describe("verify command ownership", () => {
     );
   });
 
-  it.each(["echo pnpm lint", "# pnpm lint", "echo 'pnpm lint'"])(
+  it.each([
+    "echo pnpm lint",
+    "# pnpm lint",
+    "echo 'pnpm lint'",
+    "echo 'setup; pnpm lint'",
+    'echo "setup && pnpm lint"',
+    "echo 'setup | pnpm lint'",
+    "echo ok # ; pnpm lint",
+    "echo setup \\; pnpm lint",
+    "echo setup \\&\\& pnpm lint",
+  ])(
     "ignores non-command mention: %s",
     async (run) => {
       const root = await repositoryFixture();
