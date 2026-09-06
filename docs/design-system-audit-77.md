@@ -1,6 +1,7 @@
 # Design-system and theme checkpoint
 
-**Status:** design and audit checkpoint; no implementation has started
+**Status:** approved direction; Slice 1 Light-theme foundations implemented for
+review, with theme switching reserved for Slice 2
 
 This checkpoint proposes how to extract the existing editorial identity into a
 small system and add Light, Dark, and System themes. It is grounded in the
@@ -22,9 +23,10 @@ copy. The production build generated 114 pages. The existing visual suite passed
 - Reading: `/reading/`
 - sparse page: `/concepts/institutional-abolition/`
 
-The before screenshots are in `.artifacts/visual-review/`; each route has
-desktop, tablet, and mobile `page.png` output. This directory is intentionally
-ignored and is review evidence rather than a product asset.
+The exact-base before screenshots are in `.artifacts/slice1-before/`; matching
+Slice 1 screenshots are in `.artifacts/slice1-after/`. Each route has desktop,
+tablet, and mobile `page.png` output. These directories are intentionally ignored
+and are review evidence rather than product assets.
 
 ## Inventory
 

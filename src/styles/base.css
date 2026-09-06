@@ -1,0 +1,30 @@
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-display);
+    color: var(--text);
+    background: var(--canvas);
+  }
+
+  body { margin: 0; min-width: 18rem; }
+  button, a, summary { touch-action: manipulation; }
+  a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: .08em; }
+  a:hover { color: var(--link-hover); }
+
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, p { margin-top: 0; }
+  h1, h2, h3 { text-wrap: balance; }
+  h2[id], h3[id], li[id] { scroll-margin-top: var(--space-4); }
+  h1 { margin-bottom: var(--space-6); font-size: clamp(2.8rem, 8vw, 6.8rem); font-weight: 650; letter-spacing: -.065em; line-height: .92; }
+  h2 { margin-bottom: 0; font-size: clamp(1.45rem, 3vw, 2.25rem); letter-spacing: -.035em; line-height: 1.05; }
+  h3 { font-size: 1.2rem; letter-spacing: -.015em; }
+  code { font-family: var(--font-apparatus); font-size: .86em; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}
