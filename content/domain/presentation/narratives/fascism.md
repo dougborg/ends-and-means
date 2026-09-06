@@ -19,5 +19,5 @@ The bounded 1925–1943 case therefore tests institutions and chronology rather 
 ## variation
 
 No.
-The cited historical evidence concerns Italy and Germany.
-It does not classify movements elsewhere: cross-regional comparison requires separately located local, movement-produced, and independent evidence rather than resemblance to these European cases.
+Paxton's core comparison gives Italy and Germany predominant, but not exclusive, weight.
+This guide does not classify movements elsewhere: cross-regional comparison requires separately located local, movement-produced, and independent evidence rather than resemblance to these European cases.

@@ -49,7 +49,7 @@ export const authoritarianismFascismTotalitarianismResearchDocuments = [
         "fascism-evidence-region-limit",
       ],
       currentLimitation:
-        "The guide establishes rival definitions and variation within European reference cases but does not test transfer to a preselected cross-regional sample.",
+        "The guide establishes rival definitions and gives Italy and Germany predominant weight in its bounded evidence, but it does not test transfer to a preselected cross-regional sample.",
       evidenceNeeded:
         "Movement-produced records, organizational histories, political-practice evidence, local-language scholarship, and rival classifications for a preselected sample.",
       scope:
@@ -71,7 +71,8 @@ export const authoritarianismFascismTotalitarianismResearchDocuments = [
       target: { kind: "concept", id: "totalitarianism" },
       targetSectionId: "bounded-practice",
       addressedStatementIds: [
-        "nazi-control-limit",
+        "nazi-coordination-scope",
+        "nazi-christian-coordination-limit",
         "totalitarian-case-nonembodiment",
       ],
       currentLimitation:

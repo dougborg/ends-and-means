@@ -3,6 +3,7 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 const reviewed = { publicationStatus: "reviewed" as const };
 
 type SourceType = "article" | "report" | "web-page" | "edition";
+type ResourcePurpose = "publisher" | "library" | "authorized-reading" | "other";
 const source = (
   id: string,
   title: string,
@@ -13,6 +14,8 @@ const source = (
   url: string,
   identifiers: { doi?: string; isbn13?: string } = {},
   originalPublicationYear?: number,
+  resourcePurpose: ResourcePurpose = "publisher",
+  sourceTitle = title,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -41,9 +44,9 @@ const source = (
     entity: {
       id: `${id}-source`,
       kind: "source",
-      label: title,
-      description: `The consulted source for the authoritarianism, fascism, and totalitarianism guides: ${title}.`,
-      title,
+      label: sourceTitle,
+      description: `The consulted source for the authoritarianism, fascism, and totalitarianism guides: ${sourceTitle}.`,
+      title: sourceTitle,
       sourceType,
       workId: `${id}-work`,
       contributorDisplay: contributors,
@@ -51,7 +54,14 @@ const source = (
       publisher,
       identifiers,
       resourceLinks: [
-        { purpose: "publisher", url, label: "Open the source record" },
+        {
+          purpose: resourcePurpose,
+          url,
+          label:
+            resourcePurpose === "authorized-reading"
+              ? "Read the source"
+              : "Open the source record",
+        },
       ],
       ...reviewed,
     },
@@ -66,7 +76,9 @@ const claim = (
     | "definition"
     | "observation"
     | "causal-hypothesis"
+    | "attributed-value"
     | "attributed-proposal"
+    | "classification"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
   documentType: "entity",
@@ -165,6 +177,8 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
     "https://sourcebooks.web.fordham.edu/mod/mussolini-fascism.asp",
     {},
     1932,
+    "authorized-reading",
+    "Benito Mussolini: What is Fascism, 1932 (Sourcebook excerpts)",
   ),
   ...source(
     "ushmm-mussolini",
@@ -185,6 +199,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
     "https://books.google.com/books/about/The_Origins_of_Totalitarianism.html?id=SCUL0QEACAAJ",
     { isbn13: "9780844659947" },
     1951,
+    "library",
   ),
   ...source(
     "bunce-totalitarianism",
@@ -464,21 +479,21 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   ),
   claim(
     "fascism-self-description",
-    "Mussolini and Gentile rejected Marxian socialism",
-    "In the 1932 doctrine, Mussolini and Gentile rejected the Marxian account of history and class conflict.",
-    "attributed-proposal",
+    "The Fascist doctrine rejected Marxian socialism",
+    "The 1932 Fascist doctrine rejected the Marxian account of history and class conflict.",
+    "attributed-value",
   ),
   claim(
     "fascism-rejects-liberal-democracy",
-    "Mussolini and Gentile rejected majority rule",
-    "In the 1932 doctrine, Mussolini and Gentile denied that a numerical majority should direct society through periodic consultation.",
-    "attributed-proposal",
+    "The Fascist doctrine rejected majority rule",
+    "The 1932 Fascist doctrine denied that a numerical majority should direct society through periodic consultation.",
+    "attributed-value",
   ),
   claim(
     "fascism-rejects-liberal-individualism",
-    "Mussolini and Gentile rejected liberal individualism",
-    "In the 1932 doctrine, Mussolini and Gentile contrasted nineteenth-century liberal individualism with their proposed century of authority, collectivism, and the state.",
-    "attributed-proposal",
+    "The Fascist doctrine rejected liberal individualism",
+    "The 1932 Fascist doctrine contrasted nineteenth-century liberal individualism with a century of authority, collectivism, and the state.",
+    "attributed-value",
   ),
   claim(
     "fascism-state-organizes-nation",
@@ -518,9 +533,27 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   ),
   claim(
     "fascism-evidence-region-limit",
-    "The cited comparison has a European evidence boundary",
-    "The cited historical evidence concerns Italy and Germany; it does not classify movements in other regions, and any transfer requires separately located movement-produced and independent evidence.",
+    "Paxton's core comparison gives Italy and Germany predominant weight",
+    "Paxton examines a core set of movements and regimes generally accepted as fascist, with Italy and Germany predominant rather than exclusive in his sample.",
     "editorial-interpretation",
+  ),
+  claim(
+    "fascism-authoritarianism-distinction",
+    "Paxton distinguishes conservative authoritarianism from fascism",
+    "Paxton reports that conservative elites often preferred authoritarian rule to fascism even when some later collaborated with fascist movements.",
+    "observation",
+  ),
+  claim(
+    "fascism-totalitarianism-classification-dispute",
+    "Scholars dispute whether fascism belongs under totalitarianism",
+    "Paxton reports both a view of fascism as a subspecies of totalitarianism and postwar theories that exclude Italian Fascism from that category.",
+    "observation",
+  ),
+  claim(
+    "italian-fascism-external-classification",
+    "Paxton includes Italian Fascism in a generally accepted core sample",
+    "Paxton includes Italian Fascism in a core sample of movements and regimes generally accepted as fascist.",
+    "classification",
   ),
 
   claim(
@@ -554,9 +587,15 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
     "editorial-interpretation",
   ),
   claim(
-    "nazi-one-party-consolidation",
-    "Nazi rule became a one-party dictatorship in 1933",
-    "Between January and July 1933, Nazi leaders dismantled democratic institutions, suppressed rival parties, and established the Nazi Party as Germany's sole legal party.",
+    "nazi-democratic-destruction",
+    "Nazi leaders rapidly destroyed democratic government",
+    "Within two months of Hitler's January 1933 appointment, Nazi leaders destroyed the institutions of Germany's democratic government.",
+    "observation",
+  ),
+  claim(
+    "nazi-one-party-state-july-1933",
+    "The Nazi Party became Germany's sole legal party",
+    "By mid-July 1933, the Nazi Party was the only political party left in Germany after its rivals were outlawed or dissolved under pressure.",
     "observation",
   ),
   claim(
@@ -566,9 +605,15 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
     "observation",
   ),
   claim(
-    "nazi-control-limit",
-    "Nazi coordination pursued broad control without proving total control",
-    "The Nazi coordination drive aligned government, professional, cultural, labor, and leisure organizations, but the regime did not fully absorb every institution, including all Christian organizations.",
+    "nazi-coordination-scope",
+    "Nazi coordination reached across organized life",
+    "The Nazi coordination drive aligned political parties, state governments, cultural and professional organizations, and organized labor with Nazi goals.",
+    "observation",
+  ),
+  claim(
+    "nazi-christian-coordination-limit",
+    "Nazi coordination did not fully absorb Christian organizations",
+    "Nazi efforts to coordinate Christian denominations and their affiliated youth groups were not entirely successful.",
     "observation",
   ),
   claim(
@@ -593,7 +638,11 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "From the 1925 destruction of parliamentary responsibility to Mussolini's dismissal in July 1943; the earlier movement, 1922 coalition government, German occupation, and Italian Social Republic are context rather than the same episode.",
       selectionRationale:
         "The sequence separates movement, party, doctrine, entry into office, and consolidated regime rather than treating them as one timeless object.",
-      conditionStatementIds: ["italy-party-regime-boundary"],
+      conditionStatementIds: [
+        "italy-party-regime-boundary",
+        "italy-movement-party-sequence",
+        "italy-coalition-government-1922",
+      ],
       episodeIds: ["italian-fascist-consolidated-rule"],
       ...reviewed,
     },
@@ -612,7 +661,11 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       endDate: { year: 1943, month: 7, certainty: "exact" },
       scope:
         "The national regime and its party relationship; not every local practice or social outcome.",
-      conditionStatementIds: ["italy-party-regime-boundary"],
+      conditionStatementIds: [
+        "italy-party-regime-boundary",
+        "italy-movement-party-sequence",
+        "italy-coalition-government-1922",
+      ],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: ["italy-dictatorship-transition"],
       interactionStatementIds: [],
@@ -635,7 +688,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "The January–December 1933 consolidation sequence; later war, genocide, occupation, and the regime's full institutional history require their own evidence boundaries.",
       selectionRationale:
         "The short interval tests claims about movement, party, dictatorship, institutional coordination, and totalitarian classification without presenting Nazi Germany as an embodiment.",
-      conditionStatementIds: ["nazi-one-party-consolidation"],
+      conditionStatementIds: [],
       episodeIds: ["nazi-party-state-consolidation-1933"],
       ...reviewed,
     },
@@ -656,8 +709,14 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "National party and state institutions during 1933; does not claim complete control over German society.",
       conditionStatementIds: [],
       formalRuleStatementIds: ["nazi-party-state-law"],
-      ruleInUseStatementIds: ["nazi-one-party-consolidation"],
-      interactionStatementIds: ["nazi-control-limit"],
+      ruleInUseStatementIds: [
+        "nazi-democratic-destruction",
+        "nazi-one-party-state-july-1933",
+      ],
+      interactionStatementIds: [
+        "nazi-coordination-scope",
+        "nazi-christian-coordination-limit",
+      ],
       outcomeStatementIds: [],
       ...reviewed,
     },

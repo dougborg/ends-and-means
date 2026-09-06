@@ -190,9 +190,11 @@ const totalitarianism = dossier(
       body: "",
       traceStatus: "qualified",
       statementIds: [
-        "nazi-one-party-consolidation",
+        "nazi-democratic-destruction",
+        "nazi-one-party-state-july-1933",
         "nazi-party-state-law",
-        "nazi-control-limit",
+        "nazi-coordination-scope",
+        "nazi-christian-coordination-limit",
         "totalitarian-case-nonembodiment",
       ],
       relatedEntityRefs: [{ kind: "case", id: "nazi-consolidation-1933" }],
