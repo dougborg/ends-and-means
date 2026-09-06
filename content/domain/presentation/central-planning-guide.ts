@@ -9,7 +9,7 @@ const dossier = attachNarrative("central-planning.md", {
     "A bounded guide to planning design choices and the United States Controlled Materials Plan.",
   subject: { kind: "case" as const, id: "us-controlled-materials-plan" },
   standfirst: "",
-  standfirstStatementIds: ["central-planning-family-boundary", "cmp-operating-period"],
+  standfirstStatementIds: ["central-planning-family-boundary", "cmp-operating-period", "cmp-expiration"],
   sections: [
     {
       id: "what-does-central-planning-name",
@@ -68,7 +68,7 @@ const dossier = attachNarrative("central-planning.md", {
       heading: "Where does the boundary end?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["cmp-scope", "cmp-ownership", "cmp-operating-period"],
+      statementIds: ["cmp-scope", "cmp-ownership", "cmp-operating-period", "cmp-expiration"],
       relatedEntityRefs: [{ kind: "approach" as const, id: "us-wartime-production-mobilization" }],
     },
   ],
@@ -79,11 +79,11 @@ const dossier = attachNarrative("central-planning.md", {
 const approachDossier = attachNarrative("us-wartime-production-mobilization.md", {
   id: "us-wartime-production-mobilization-dossier",
   kind: "dossier" as const,
-  label: "United States wartime production mobilization dossier",
-  description: "A boundary note separating CMP from the wider wartime mobilization approach.",
+  label: "United States controlled-materials allocation dossier",
+  description: "A boundary note defining the CMP allocation approach without absorbing wider mobilization policy.",
   subject: { kind: "approach" as const, id: "us-wartime-production-mobilization" },
   standfirst: "",
-  standfirstStatementIds: ["cmp-operating-period", "cmp-scope", "cmp-ownership"],
+  standfirstStatementIds: ["cmp-operating-period", "cmp-expiration", "cmp-scope", "cmp-ownership"],
   sections: [
     { id: "how-did-materials-allocation-fit", heading: "How did materials allocation fit?", body: "", traceStatus: "qualified" as const, statementIds: ["cmp-scope", "cmp-distributed-administration", "cmp-operating-period"] },
     { id: "what-does-the-approach-not-prove", heading: "What does the approach not prove?", body: "", traceStatus: "qualified" as const, statementIds: ["cmp-ownership", "cmp-official-performance-account", "cmp-performance-rival", "cmp-power-rival"] },
