@@ -5,6 +5,7 @@ export type * from "./common";
 export { compileDomainGraph, validateAuthoringDocuments } from "./compile";
 export type * from "./entities";
 export type * from "./graph";
+export * from "./orientation-audit";
 export type * from "./presentation";
 export { publicRelationshipLabel } from "./presentation";
 export * from "./public-text";

@@ -12,6 +12,10 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
       description:
         "The Kanien’kehá:ka community and territory on the south shore of the St. Lawrence River near Montréal.",
       placeType: "territory",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Kahnawake", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q1014394", url: "https://www.wikidata.org/wiki/Q1014394", purpose: "identity", match: "close", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },

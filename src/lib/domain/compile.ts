@@ -309,9 +309,12 @@ function validateExternalReference(
       Boolean(
         url &&
           (url.hostname !== `${reference.language}.wikipedia.org` ||
-            !url.pathname.startsWith("/wiki/")),
+            !url.pathname.startsWith("/wiki/") ||
+            url.search !== "" ||
+            url.hash !== "" ||
+            url.pathname.endsWith("_(disambiguation)")),
       ),
-      `${entity.id}: Wikipedia reference ${index} does not match its language and article form`,
+      `${entity.id}: Wikipedia reference ${index} does not match its language and canonical article form`,
     );
   }
   if (reference.system !== "wikidata") return;
@@ -332,7 +335,12 @@ function validateExternalReference(
   );
   reportInvalid(
     errors,
-    Boolean(url && url.hostname !== "www.wikidata.org"),
+    Boolean(
+      url &&
+        (url.hostname !== "www.wikidata.org" ||
+          url.search !== "" ||
+          url.hash !== ""),
+    ),
     `${entity.id}: Wikidata reference ${index} requires the canonical host`,
   );
   reportInvalid(

@@ -4,8 +4,14 @@ import type { DomainEntity, ResearchObligation } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import type { DossierSubjectKind } from "./presentation";
 import type { DomainRelationship } from "./relationships";
+import { buildOrientationAudit, validateOrientationAudit } from "./orientation-audit";
 
 export const canonicalGraph = compileDomainGraph(canonicalDocuments);
+export const orientationAuditInventory = buildOrientationAudit(canonicalGraph);
+
+const orientationAuditErrors = validateOrientationAudit(canonicalGraph);
+if (orientationAuditErrors.length)
+  throw new Error(`Orientation audit failed:\n${orientationAuditErrors.join("\n")}`);
 
 export function entitiesOfKind<K extends DomainEntity["kind"]>(kind: K) {
   return canonicalGraph.entities.filter(

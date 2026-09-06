@@ -14,6 +14,10 @@ export const socialismCommunismVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Use for the broad contested concept, not as a timeless label for a government, country, party, policy, or single institutional design.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Socialism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q7272", url: "https://www.wikidata.org/wiki/Q7272", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },
@@ -28,6 +32,10 @@ export const socialismCommunismVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep the ideal, tradition, movement, party identity, state or regime label, and institutions of every bounded case distinct.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Communism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q6186", url: "https://www.wikidata.org/wiki/Q6186", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },

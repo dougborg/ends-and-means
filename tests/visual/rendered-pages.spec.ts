@@ -14,6 +14,7 @@ const defaultRoutes = [
   "/cases/jinst-postcollective-pastoral-governance/",
   "/compare/",
   "/concepts/economic-democracy/",
+  "/concepts/democracy/",
   "/concepts/social-democracy/",
   "/concepts/socialism/",
   "/concepts/communism/",
@@ -29,6 +30,20 @@ const defaultRoutes = [
   "/research/",
   "/sources/erixon-rehn-meidner-model-source/",
 ];
+
+test("external mappings remain a quiet, accessible trust aid", async ({ page }) => {
+  await page.goto("/concepts/democracy/");
+  await page.getByText("External orientation", { exact: true }).click();
+  const apparatus = page.getByRole("complementary", { name: "External references" });
+  await expect(apparatus).toContainText("not evidence");
+  await expect(apparatus.getByRole("link", { name: "Wikipedia" })).toHaveAttribute(
+    "href",
+    "https://en.wikipedia.org/wiki/Democracy",
+  );
+  await expect(apparatus.getByRole("link", { name: /Q7174/ })).toContainText(
+    "exact match",
+  );
+});
 
 const routes =
   process.env.REVIEW_ROUTES?.split(",")

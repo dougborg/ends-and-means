@@ -614,6 +614,18 @@ Wikipedia links orient readers and supply familiar neighboring terminology.
 Wikidata, VIAF, DOI, ISBN, and library identifiers help reconcile identity.
 Neither Wikipedia categories nor Wikidata `subclass of` claims are imported as
 editorial conclusions without review.
+Resolve redirects before authoring and reject search, category, and
+disambiguation pages.
+Record the canonical article URL, language, check date, and canonical QID; use
+`exact` only for the same authored identity and `close` when the external item
+is useful but broader, narrower, or differently bounded.
+The deterministic orientation audit covers every live Subject Guide and entity,
+including reasoned intentional absences and entity kinds for which external
+identity is not applicable.
+Guides reuse mappings owned by their primary canonical subjects rather than
+duplicating identity metadata.
+These references are never eligible evidence and remain secondary to the
+learner journey; periodic availability renewal is tracked separately.
 
 ## Authoring and compilation
 
