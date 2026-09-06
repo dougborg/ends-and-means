@@ -170,7 +170,7 @@ const exactSemanticRelationshipDigest =
 const exactPresentationDigest =
   "2e8afc648fceeea6d66211d86c63ad6a57f839a78f2a7a08335b8a5c129f668c";
 const exactBoundedEvidenceDigest =
-  "541e312f52ec85fc7f4fdc728bc71cd3f67e66b245fea9d3e3bc628025e1333d";
+  "b4190588290d955a7a606c890ef4200d14afcda40995ba0eb55e350715428fe3";
 const exactResearchDigest =
   "e3b192e8555c849d37493cfd68c51b3a311a9ad5437153a9c1448df2d3f59400";
 

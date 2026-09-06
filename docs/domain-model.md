@@ -619,6 +619,11 @@ disambiguation pages.
 Record the canonical article URL, language, check date, and canonical QID; use
 `exact` only for the same authored identity and `close` when the external item
 is useful but broader, narrower, or differently bounded.
+An orientation-only Wikipedia mapping is appropriate when its canonical article
+directly defines or situates the project target even though the two records do
+not share identity. Reserve an intentional absence for candidates that would
+materially mislead because of scope, historical specificity, a composite
+construct, kind mismatch, or the absence of a direct explanatory target.
 The deterministic orientation audit compares every live eligible Subject Guide
 and entity against a target-specific reviewed ledger. The ledger preserves the
 exact canonical label, disposition, complete mapping tuple, and direct
@@ -632,8 +637,8 @@ closed until reviewed. Inapplicable entity kinds are classified before their met
 so Sources, Works, Statements, and Dossiers cannot become orientation mappings.
 Guides reuse mappings owned by their primary canonical subjects rather than
 duplicating identity metadata.
-These references are never eligible evidence and remain secondary to the
-learner journey; periodic availability renewal is tracked separately.
+These references are never eligible evidence; periodic availability renewal is
+tracked separately.
 
 ## Authoring and compilation
 

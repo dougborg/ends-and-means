@@ -84,6 +84,7 @@ export const tawantinsuyuEvidenceDocuments = [
       description:
         "The multi-regional Andean polity conventionally called the Inka or Inca Empire, centered on Cusco and bounded here to its fifteenth- and early-sixteenth-century expansion.",
       placeType: "region",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Inca_Empire", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },

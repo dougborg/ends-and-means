@@ -367,7 +367,7 @@ export const anarchismEvidenceDocuments = [
       conditionStatementIds: ["spanish-case-plurality"],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: ["mujeres-libres-gender-counterevidence"],
-      interactionStatementIds: ["spanish-case-plurality"],
+      interactionStatementIds: [],
       outcomeStatementIds: [],
       ...reviewed,
     },

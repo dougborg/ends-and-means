@@ -14,6 +14,15 @@ exports[`Minangkabau bounded case categories > locks every Case, Case Episode, s
     "episodeIds": [
       "koto-tinggi-governance-2016",
     ],
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Minangkabau_people",
+      },
+    ],
     "id": "koto-tinggi-post-decentralization-governance",
     "kind": "case",
     "label": "Koto Tinggi nagari governance documented in 2016",
@@ -39,6 +48,15 @@ exports[`Minangkabau bounded case categories > locks every Case, Case Episode, s
       "certainty": "exact",
       "year": 2016,
     },
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Minangkabau_people",
+      },
+    ],
     "formalRuleStatementIds": [
       "koto-tinggi-three-institutions",
       "koto-tinggi-representative-council",
@@ -91,6 +109,15 @@ exports[`Minangkabau bounded case categories > locks every Case, Case Episode, s
     "episodeIds": [
       "bonjol-ulayat-governance-2000-2016",
     ],
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Minangkabau_people",
+      },
+    ],
     "id": "bonjol-melayu-ulayat-governance",
     "kind": "case",
     "label": "Melayu-clan ulayat governance in Nagari Bonjol",
@@ -119,6 +146,15 @@ exports[`Minangkabau bounded case categories > locks every Case, Case Episode, s
       "month": 4,
       "year": 2016,
     },
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Minangkabau_people",
+      },
+    ],
     "formalRuleStatementIds": [
       "bonjol-ulayat-formal-distinction",
       "bonjol-harta-pusaka-female-line",

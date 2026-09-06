@@ -125,6 +125,11 @@ link with its language, canonical article URL, and check date; record Wikidata
 only as an identity link with canonical QID/URL, check date, and exact or close
 confidence. Exact means the same authored identity; broader, narrower, or
 differently bounded items are close or remain intentionally unmatched. Keep a
+Wikipedia orientation without a Wikidata identity when the canonical article
+directly defines or situates the project target but the records do not share
+identity. Reserve unmatched for candidates that would materially mislead due to
+scope, historical specificity, a composite construct, kind mismatch, or no
+direct explanatory target. Keep a
 target-specific reviewed ledger entry for every eligible target, including the
 immutable canonical label, exact reference tuple, canonical-target resolution,
 and reason for every intentional absence. An unmatched decision must name each

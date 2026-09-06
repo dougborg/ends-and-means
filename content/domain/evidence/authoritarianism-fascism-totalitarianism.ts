@@ -369,6 +369,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "Include a movement only through an explicit, sourced, qualified relationship; resemblance or insult is insufficient.",
       editorialPurpose:
         "Compare movements without making fascism a regime superclass.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Fascism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },
@@ -384,6 +385,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "Include only an independently addressable analytical Approach with explicit evidence.",
       editorialPurpose:
         "Keep rival analytic uses visible without forcing consensus.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Totalitarianism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },
@@ -397,6 +399,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
         "The doctrine and political program advanced by Mussolini's Fascist movement and party in interwar Italy.",
       scope:
         "The movement's documented claims and governing project; not every feature of Italy from 1922 to 1943 and not a template inherited by other regimes.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Fascism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },

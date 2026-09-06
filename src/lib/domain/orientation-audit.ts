@@ -3,6 +3,10 @@ import type { DomainEntity } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import { reviewedOrientationLedger } from "./orientation-ledger";
 import { reviewedOrientationLabels } from "./orientation-labels";
+import {
+  reviewedOrientationOnlyGuideSubjects,
+  reviewedOrientationOnlyMappings,
+} from "./orientation-only-mappings";
 import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
 import type { SubjectGuide } from "./presentation";
 
@@ -199,6 +203,7 @@ function validateEntry(
     entry.identityIds.length === 0
   )
     errors.push(`${entry.targetType} ${entry.id}: mapped entry has no mapping`);
+  errors.push(...validateOrientationOnlyBoundary(key, entry));
   if (
     entry.disposition !== "mapped" &&
     (entry.orientationUrls.length > 0 || entry.identityIds.length > 0)
@@ -208,6 +213,29 @@ function validateEntry(
     );
   errors.push(...validateCandidateReview(key, entry));
   return errors;
+}
+
+function validateOrientationOnlyBoundary(
+  key: string,
+  entry: OrientationAuditEntry,
+) {
+  const isReviewedOrientationOnly =
+    entry.id in reviewedOrientationOnlyMappings ||
+    entry.id in reviewedOrientationOnlyGuideSubjects;
+  const hasBoundary =
+    entry.reason?.includes("directly") ||
+    entry.reason?.startsWith("Uses the reviewed orientation-only mapping");
+  if (
+    entry.disposition !== "mapped" ||
+    entry.orientationUrls.length === 0 ||
+    entry.identityIds.length > 0 ||
+    !isReviewedOrientationOnly ||
+    hasBoundary
+  )
+    return [];
+  return [
+    `${key}: orientation-only mapping lacks the reviewed explanatory-target boundary`,
+  ];
 }
 
 function validateCandidateReview(key: string, entry: OrientationAuditEntry) {

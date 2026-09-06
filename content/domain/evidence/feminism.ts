@@ -335,6 +335,7 @@ export const feminismEvidenceDocuments = [
         "Include only through a qualified, sourced relationship; membership transmits no end, means, position, subject, or case classification.",
       editorialPurpose:
         "Keep related traditions navigable without turning them into branches of a universal doctrine.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Feminism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },
@@ -466,6 +467,7 @@ export const feminismEvidenceDocuments = [
         "Paid leave reserves an individual entitlement for each parent instead of making every leave period transferable within a household.",
       institutionalForm:
         "A public fund replaces earnings during individual reserved periods and a separately shareable period, subject to eligibility and payment rules.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Parental_leave", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },

@@ -1,4 +1,7 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
+import {
+  reviewedOrientationOnlyMappings,
+} from "../../src/lib/domain/orientation-only-mappings";
 import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
 import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { centralPlanningApproachDocuments } from "./approaches/central-planning";
@@ -80,7 +83,7 @@ import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-co
 import { minangkabauVocabularyDocuments } from "./vocabulary/minangkabau";
 import { vocabularyDocuments } from "./vocabulary/swedish-wage-earner-funds";
 
-export const canonicalDocuments: AuthoringDocument[] = [
+const rawCanonicalDocuments: AuthoringDocument[] = [
   ...vocabularyDocuments,
   ...socialismCommunismVocabularyDocuments,
   ...minangkabauVocabularyDocuments,
@@ -162,3 +165,29 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...liberalismConservatismRelationshipDocuments,
   ...minangkabauRelationshipDocuments,
 ];
+
+export const canonicalDocuments: AuthoringDocument[] = rawCanonicalDocuments.map(
+  (document) => {
+    if (document.documentType !== "entity") return document;
+    const article =
+      reviewedOrientationOnlyMappings[
+        document.entity.id as keyof typeof reviewedOrientationOnlyMappings
+      ];
+    if (!article || document.entity.externalRefs?.length) return document;
+    return {
+      ...document,
+      entity: {
+        ...document.entity,
+        externalRefs: [
+          {
+            system: "wikipedia",
+            url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+            purpose: "orientation",
+            language: "en",
+            checkedAt: "2026-09-06",
+          },
+        ],
+      },
+    } as AuthoringDocument;
+  },
+);

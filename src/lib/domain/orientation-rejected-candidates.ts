@@ -1,4 +1,9 @@
-export const reviewedRejectedOrientationCandidates = {
+import {
+  reviewedOrientationOnlyGuideSubjects,
+  reviewedOrientationOnlyMappings,
+} from "./orientation-only-mappings";
+
+const allReviewedRejectedOrientationCandidates = {
   "entity:affected-community-accountability": {
     title: "Accountability",
     url: "https://en.wikipedia.org/wiki/Accountability",
@@ -10,12 +15,6 @@ export const reviewedRejectedOrientationCandidates = {
     url: "https://en.wikipedia.org/wiki/Anarchism",
     boundary:
       "Anarchism was the nearest canonical candidate opened, but it is not the same identity as Anarchist traditions: A non-inheriting collection of historically related but internally disputed anarchist traditions.",
-  },
-  "entity:andes-tawantinsuyu": {
-    title: "Inca Empire",
-    url: "https://en.wikipedia.org/wiki/Inca_Empire",
-    boundary:
-      "Inca Empire was the nearest canonical candidate opened, but it is not the same identity as Tawantinsuyu: The multi-regional Andean polity conventionally called the Inka or Inca Empire, centered on Cusco and bounded here to its fifteenth- and early-sixteenth-century expansion.",
   },
   "entity:authority-and-accountability": {
     title: "Accountability",
@@ -34,12 +33,6 @@ export const reviewedRejectedOrientationCandidates = {
     url: "https://en.wikipedia.org/wiki/Minangkabau_people",
     boundary:
       "Minangkabau people was the nearest canonical candidate opened, but it is not the same identity as Bonjol ulayat governance, 2000–2016: Observed Melayu-clan rules and practices concerning the claimed ulayat forest and smallholder plots; excludes other Bonjol clans and other Minangkabau communities.",
-  },
-  "entity:central-planning-arrangements": {
-    title: "Economic planning",
-    url: "https://en.wikipedia.org/wiki/Economic_planning",
-    boundary:
-      "Economic planning was the nearest canonical candidate opened, but it is not the same identity as Central planning: A Means family in which authorized bodies coordinate a substantial scope of production, investment, or allocation through plans.",
   },
   "entity:centralized-solidaristic-bargaining-1956-1983": {
     title: "Rehn–Meidner model",
@@ -191,18 +184,6 @@ export const reviewedRejectedOrientationCandidates = {
     boundary:
       "Social equality is broader than Equality with employment, the joint policy aim attributed here to the Rehn–Meidner program.",
   },
-  "entity:fascist-movements": {
-    title: "Fascism",
-    url: "https://en.wikipedia.org/wiki/Fascism",
-    boundary:
-      "Fascism was the nearest canonical candidate opened, but it is not the same identity as Fascist movements: An editorial grouping of historically evidenced fascist movements.",
-  },
-  "entity:feminist-traditions": {
-    title: "Feminism",
-    url: "https://en.wikipedia.org/wiki/Feminism",
-    boundary:
-      "Feminism was the nearest canonical candidate opened, but it is not the same identity as Feminist traditions: A non-exhaustive, non-inheriting grouping of historically situated and internally disputed feminist traditions.",
-  },
   "entity:freedom-as-nondomination": {
     title: "Republicanism",
     url: "https://en.wikipedia.org/wiki/Republicanism",
@@ -226,12 +207,6 @@ export const reviewedRejectedOrientationCandidates = {
     url: "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
     boundary:
       "Cocoa production in Ghana was the nearest canonical candidate opened, but it is not the same identity as Gold Coast cocoa take-off, c. 1890–1936: The supply-side transformation studied by Austin, not a complete welfare or political history.",
-  },
-  "entity:historical-italian-fascism": {
-    title: "Fascism",
-    url: "https://en.wikipedia.org/wiki/Fascism",
-    boundary:
-      "Fascism was the nearest canonical candidate opened, but it is not the same identity as Historical Italian Fascism: The movement's documented claims and governing project; not every feature of Italy from 1922 to 1943 and not a template inherited by other regimes.",
   },
   "entity:iceland-parental-leave-2000-2018": {
     title: "Parental leave",
@@ -353,12 +328,6 @@ export const reviewedRejectedOrientationCandidates = {
     boundary:
       "Rehn–Meidner model was the nearest canonical candidate opened, but it is not the same identity as Liquidation-board period, 1992: The immediate institutional configuration after the five boards ended; excludes the later distribution and institutional histories of all successor assets.",
   },
-  "entity:market-coordination": {
-    title: "Market economy",
-    url: "https://en.wikipedia.org/wiki/Market_economy",
-    boundary:
-      "Market economy was the nearest canonical candidate opened, but it is not the same identity as Market coordination: The idea of coordinating production and allocation through exchange, prices, and choices among buyers and sellers.",
-  },
   "entity:member-owned-cooperative-finance": {
     title: "Market economy",
     url: "https://en.wikipedia.org/wiki/Market_economy",
@@ -395,12 +364,6 @@ export const reviewedRejectedOrientationCandidates = {
     boundary:
       "Republicanism was the nearest canonical candidate opened, but it is not the same identity as Neo-republican non-domination: The contemporary non-domination approach synthesized by Lovett; not every historical republican argument or republic.",
   },
-  "entity:nontransferable-parental-leave": {
-    title: "Parental leave",
-    url: "https://en.wikipedia.org/wiki/Parental_leave",
-    boundary:
-      "Parental leave was the nearest canonical candidate opened, but it is not the same identity as Non-transferable paid parental leave: Paid leave reserves an individual entitlement for each parent instead of making every leave period transferable within a household.",
-  },
   "entity:planning-correctability": {
     title: "Economic planning",
     url: "https://en.wikipedia.org/wiki/Economic_planning",
@@ -424,12 +387,6 @@ export const reviewedRejectedOrientationCandidates = {
     url: "https://en.wikipedia.org/wiki/Democracy",
     boundary:
       "Democracy was the nearest canonical candidate opened, but it is not the same identity as Representative democratic government: Representative electoral arrangements; not a synonym for democracy, accountability, or every elected government.",
-  },
-  "entity:republican-traditions": {
-    title: "Republicanism",
-    url: "https://en.wikipedia.org/wiki/Republicanism",
-    boundary:
-      "Republicanism was the nearest canonical candidate opened, but it is not the same identity as Republican traditions: An editorial grouping of historically contested republican approaches.",
   },
   "entity:restrictive-macroeconomic-demand-management": {
     title: "Demand management",
@@ -509,12 +466,6 @@ export const reviewedRejectedOrientationCandidates = {
     boundary:
       "Anarchism was the nearest canonical candidate opened, but it is not the same identity as Anarchist initiatives during the Spanish Civil War: Selected institutions from July 1936 through 1939, with political plurality and uneven geography kept explicit.",
   },
-  "entity:statelessness": {
-    title: "Stateless society",
-    url: "https://en.wikipedia.org/wiki/Stateless_society",
-    boundary:
-      "Stateless society was the nearest canonical candidate opened, but it is not the same identity as Statelessness: The condition or ideal of social organization without a coercive state apparatus.",
-  },
   "entity:swatantra-early-opposition-episode": {
     title: "Swatantra Party",
     url: "https://en.wikipedia.org/wiki/Swatantra_Party",
@@ -544,12 +495,6 @@ export const reviewedRejectedOrientationCandidates = {
     url: "https://en.wikipedia.org/wiki/Inca_Empire",
     boundary:
       "Inca Empire was the nearest canonical candidate opened, but it is not the same identity as Succession war and invasion, c. 1527–1533: The crisis following Huayna Capac’s death through the seizure of Cusco, not the end of Inka political action or Andean history.",
-  },
-  "entity:totalitarianism-analyses": {
-    title: "Totalitarianism",
-    url: "https://en.wikipedia.org/wiki/Totalitarianism",
-    boundary:
-      "Totalitarianism was the nearest canonical candidate opened, but it is not the same identity as Totalitarianism analyses: An editorial grouping of distinct scholarly approaches to totalitarianism.",
   },
   "entity:us-controlled-materials-plan": {
     title: "Economic planning",
@@ -684,3 +629,19 @@ export const reviewedRejectedOrientationCandidates = {
       "Ruwallah was the nearest canonical candidate opened, but it does not identify the Ruwalla organization across post-Ottoman borders guide composition; that guide keeps identity with its primary subject ruwalla-borderland-organization.",
   },
 } as const;
+
+export const reviewedRejectedOrientationCandidates = Object.fromEntries(
+  Object.entries(allReviewedRejectedOrientationCandidates).filter(([key]) => {
+    if (key.startsWith("entity:"))
+      return !(key.slice("entity:".length) in reviewedOrientationOnlyMappings);
+    if (key.startsWith("subject-guide:"))
+      return !(
+        key.slice("subject-guide:".length) in
+        reviewedOrientationOnlyGuideSubjects
+      );
+    return true;
+  }),
+) as Record<
+  string,
+  { readonly title: string; readonly url: string; readonly boundary: string }
+>;

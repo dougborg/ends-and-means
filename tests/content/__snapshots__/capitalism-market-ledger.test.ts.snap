@@ -14,6 +14,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "episodeIds": [
         "english-agrarian-transformation-1450-1750",
       ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
+        },
+      ],
       "id": "english-agrarian-market-dependence",
       "kind": "case",
       "label": "Agrarian change in England, c. 1450–1750",
@@ -38,6 +47,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "note": "A conventional endpoint before industrialization.",
         "year": 1750,
       },
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
+        },
+      ],
       "formalRuleStatementIds": [],
       "id": "english-agrarian-transformation-1450-1750",
       "interactionStatementIds": [],
@@ -67,6 +85,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "episodeIds": [
         "gold-coast-cocoa-takeoff-1890-1936",
       ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
+        },
+      ],
       "id": "gold-coast-cocoa-expansion",
       "kind": "case",
       "label": "Gold Coast cocoa expansion, c. 1890–1936",
@@ -91,6 +118,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "note": "Austin’s analytical endpoint.",
         "year": 1936,
       },
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
+        },
+      ],
       "formalRuleStatementIds": [],
       "id": "gold-coast-cocoa-takeoff-1890-1936",
       "interactionStatementIds": [
@@ -124,6 +160,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "episodeIds": [
         "china-plan-market-coexistence-1978-1993",
       ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Reform_and_opening_up",
+        },
+      ],
       "id": "china-dual-track-market-reforms",
       "kind": "case",
       "label": "China’s economic reforms, 1978–1993",
@@ -146,6 +191,15 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "certainty": "exact",
         "year": 1993,
       },
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Reform_and_opening_up",
+        },
+      ],
       "formalRuleStatementIds": [],
       "id": "china-plan-market-coexistence-1978-1993",
       "interactionStatementIds": [
