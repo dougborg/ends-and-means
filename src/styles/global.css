@@ -433,7 +433,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .explore-directory .canonical-directory h3 { margin: .5rem 0 1rem; font-size: clamp(1.35rem, 2.4vw, 1.85rem); }
 @media (max-width: 48rem) {
   .site-header__inner { display: grid; gap: .65rem; padding-block: .8rem; }
-  .primary-nav { display: grid; grid-template-columns: repeat(3, max-content); gap: 0 clamp(.5rem, 4vw, 1.5rem); width: fit-content; padding-bottom: .15rem; }
+  .primary-nav { display: grid; grid-template-columns: repeat(2, max-content); gap: 0 clamp(.5rem, 4vw, 1.5rem); width: fit-content; padding-bottom: .15rem; }
   .masthead { grid-template-columns: 1fr; }
   .section-heading { display: grid; align-items: start; }
   .badge-row { justify-content: flex-start; }
