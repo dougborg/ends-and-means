@@ -93,12 +93,30 @@ function shellCommandSegments(run: string) {
   return segments;
 }
 
+function unquotedTokenSurface(segment: string) {
+  let surface = "";
+  for (let index = 0; index < segment.length; index += 1) {
+    const character = segment[index] ?? "";
+    if (character === "\\") {
+      surface += "¤";
+      index += 1;
+    } else if (character === "'" || character === '"') {
+      const quoted = quotedToken(segment, index);
+      surface += "¤";
+      index = quoted.end;
+    } else surface += character;
+  }
+  return surface;
+}
+
 function invokesOwnedCommand(run: string) {
-  return shellCommandSegments(run).some((segment) =>
-    ownedCommands.some(
-      (command) => segment === command || segment.startsWith(`${command} `),
-    ),
-  );
+  return shellCommandSegments(run).some((segment) => {
+    const surface = unquotedTokenSurface(segment);
+    return ownedCommands.some((command) => {
+      const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return new RegExp(`(?:^|\\s)${escaped}(?:$|\\s)`).test(surface);
+    });
+  });
 }
 
 function hasUnescapedSubstitution(text: string) {

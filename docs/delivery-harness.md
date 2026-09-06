@@ -29,7 +29,7 @@ pnpm audit:delivery -- --live-project
 ```
 
 The command is read-only and never changes Project visibility.
-It exits 0 for a clean readable snapshot, 1 for policy findings, and 2 when credentials, API access, or input is unavailable.
+It exits 0 for a clean readable snapshot, 1 for policy findings, and 2 for `INVALID`, `UNAVAILABLE`, or `ERROR` results, including invalid input, credentials or API access failures, and unexpected execution errors.
 Runtime schemas reject malformed API and snapshot data before policy analysis and distinguish invalid input, unavailable API access, and unexpected execution errors.
 Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.
 Ready reports are deterministically sorted by Priority (`Now`, `Next`, `Later`) and then issue number; they never infer order from GitHub's item-list response.
@@ -70,6 +70,7 @@ The strict names are branch-protection interfaces and should not be renamed casu
 Workflows use least-privilege permissions, immutable action SHAs, frozen pnpm installs and cache keys, non-persistent checkout credentials, and no `pull_request_target` execution.
 Workflow `run` scalars conservatively reject any unescaped `$(` sequence or backtick outside ordinary single-quoted or commented text, including arithmetic expansion and heredoc bodies.
 Express dynamic operations as explicit steps so command ownership remains auditable without relying on a partial shell parser.
+The audit likewise rejects any unquoted, unescaped verify-owned command token sequence anywhere in a run segment, including wrapper, environment-prefix, and control-flow forms; use the shared verification action instead.
 The Pages deploy job receives write permissions only after the read-only verified build succeeds.
 
 Copilot and an independent adversarial review remain process requirements even though branch protection does not require an approving review.
