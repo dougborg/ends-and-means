@@ -13,14 +13,14 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "matriliny-does-not-fix-authority",
     "blackwood-webs-power-source",
-    "chapter 1, pp. 1, 7–8",
+    "chapter 1, pp. 7–8, paragraphs describing women as heirs, household heads, and land controllers",
     "supports",
     "relation-specific-power",
   ],
   [
     "matriliny-does-not-fix-authority",
     "mutolib-bonjol-ulayat-source",
-    "pp. 31–33, sections ‘Lineages and Power in Minangkabau’ and ‘Women of the Melayu Clan in Ulayat Forest Management’",
+    "p. 32, paragraph beginning ‘Control over ulayat land’; p. 33, first paragraph",
     "supports",
     "bonjol-control-distinction",
   ],
@@ -34,21 +34,21 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "matriarchy-rule-by-women-dispute",
     "sanday-women-center-excerpt-source",
-    "‘From the Preface’, paragraphs beginning ‘My journey into the heart’ and ‘A number of feminist writers’",
+    "‘From the Preface’, paragraph beginning ‘A number of feminist writers’",
     "supports",
     "sanday-redefinition",
   ],
   [
     "minangkabau-power-varies-by-relation",
     "blackwood-webs-power-source",
-    "chapter 1, pp. 1 and 7–8",
+    "chapter 1, pp. 7–8, paragraphs describing relation-specific forms of power",
     "supports",
     "blackwood-gender-power",
   ],
   [
     "minangkabau-power-varies-by-relation",
     "mutolib-bonjol-ulayat-source",
-    "pp. 31–33 and 41–43",
+    "p. 41, ‘Discussion’, first paragraph",
     "qualifies",
     "bonjol-rival-case",
   ],
@@ -76,7 +76,7 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "nagari-translation-boundary",
     "nurdin-nagari-governance-source",
-    "pp. 108–111, ‘Institutional Setting in the Study Sites’ and ‘The Mechanism of Rural Development’",
+    "p. 109, paragraph beginning ‘Structure of Nagari Government’",
     "supports",
     "nagari-institutional-form",
   ],
@@ -90,7 +90,7 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "minangkabau-legal-orders-interact",
     "nurdin-nagari-governance-source",
-    "pp. 109–110, ‘The Mechanism of Rural Development’",
+    "p. 109, paragraph beginning ‘Structure of Nagari Government’; p. 110, paragraph beginning ‘Institutionally’",
     "supports",
     "legal-orders-nurdin",
   ],
@@ -111,7 +111,7 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "koto-tinggi-minangkabau-adat-context",
     "nurdin-nagari-governance-source",
-    "p. 106, opening section; pp. 108–109, ‘Institutional Setting in the Study Sites’",
+    "p. 106, opening paragraph; p. 109, paragraph beginning ‘Structure of Nagari Government’",
     "supports",
     "koto-adat-context",
   ],
@@ -132,9 +132,16 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "koto-tinggi-formal-participation-rules",
     "nurdin-nagari-governance-source",
-    "pp. 109–110, ‘The Mechanism of Rural Development’, first three paragraphs",
+    "p. 109, ‘The Mechanism of Rural Development’, paragraph beginning ‘The meeting was attended’",
     "supports",
     "koto-meeting-rules",
+  ],
+  [
+    "koto-tinggi-formal-decision-rule",
+    "nurdin-nagari-governance-source",
+    "p. 110, first paragraph",
+    "supports",
+    "koto-decision-rule",
   ],
   [
     "koto-tinggi-customary-council-contestation",
@@ -146,16 +153,30 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "koto-tinggi-budget-rules-in-use",
     "nurdin-nagari-governance-source",
-    "p. 111, first three paragraphs",
+    "p. 111, first paragraph",
     "supports",
     "koto-budget-practice",
   ],
   [
+    "koto-tinggi-budget-consensus",
+    "nurdin-nagari-governance-source",
+    "p. 111, second paragraph",
+    "supports",
+    "koto-budget-consensus",
+  ],
+  [
     "koto-tinggi-administrative-capacity-limit",
     "nurdin-nagari-governance-source",
-    "pp. 110–111, paragraph beginning ‘Looking at the stipulated mechanism’ and final paragraph",
+    "p. 110, paragraph beginning ‘Looking at the stipulated mechanism’",
     "supports",
     "koto-capacity-limit",
+  ],
+  [
+    "koto-tinggi-regulatory-preparation-limit",
+    "nurdin-nagari-governance-source",
+    "p. 111, final paragraph",
+    "supports",
+    "koto-regulatory-preparation",
   ],
   [
     "bonjol-study-method-and-voice",
@@ -167,28 +188,42 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "bonjol-new-nagari-forest-transition",
     "mutolib-bonjol-ulayat-source",
-    "pp. 28–29, ‘Description of Study Site’",
+    "p. 29, paragraph beginning ‘After the regional autonomy’",
     "supports",
     "bonjol-transition",
   ],
   [
+    "bonjol-concession-end-transition",
+    "mutolib-bonjol-ulayat-source",
+    "p. 29, paragraph beginning ‘The area was formerly’",
+    "supports",
+    "bonjol-concession-transition",
+  ],
+  [
     "bonjol-ulayat-formal-distinction",
     "mutolib-bonjol-ulayat-source",
-    "pp. 31–33, ‘Land Control in the Melayu Clan of Nagari Bonjol’ and ‘Women of the Melayu Clan in Ulayat Forest Management’",
+    "p. 31, ‘Land Control in the Melayu Clan of Nagari Bonjol’, first paragraph",
     "supports",
     "bonjol-ulayat-authority",
   ],
   [
+    "bonjol-ulayat-delegated-management",
+    "mutolib-bonjol-ulayat-source",
+    "p. 32, paragraph beginning ‘Control over ulayat land’",
+    "supports",
+    "bonjol-delegated-management",
+  ],
+  [
     "bonjol-harta-pusaka-transition",
     "mutolib-bonjol-ulayat-source",
-    "pp. 32–33, ‘Women of the Melayu Clan in Ulayat Forest Management’",
+    "p. 32, final paragraph continuing onto p. 33",
     "supports",
     "bonjol-property-transition",
   ],
   [
     "bonjol-bundo-kanduang-role",
     "mutolib-bonjol-ulayat-source",
-    "pp. 29–30, ‘Minangkabau Traditional Institutions’",
+    "p. 30, paragraph beginning ‘The most important role’",
     "supports",
     "bonjol-bundo-kanduang",
   ],
@@ -209,21 +244,35 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "bonjol-neshp-distribution-practice",
     "mutolib-bonjol-ulayat-source",
-    "pp. 35–36, ‘Manipulation of NESHP Plot Distribution’",
+    "p. 35, ‘Manipulation of NESHP Plot Distribution’, final paragraph",
     "supports",
     "bonjol-neshp-practice",
   ],
   [
+    "bonjol-neshp-exclusion-outcome",
+    "mutolib-bonjol-ulayat-source",
+    "p. 36, first two paragraphs",
+    "supports",
+    "bonjol-neshp-exclusion",
+  ],
+  [
     "bonjol-women-testimony-limit",
     "mutolib-bonjol-ulayat-source",
-    "pp. 36–38, ‘Melayu Women: When Matters Are More Precious Than Kinship’",
+    "p. 36, ‘Melayu Women: When Matters Are More Precious Than Kinship’, second paragraph",
     "supports",
     "bonjol-women-testimony",
   ],
   [
+    "bonjol-five-women-testimony",
+    "mutolib-bonjol-ulayat-source",
+    "pp. 36–37, block quotation attributed to five Melayu women",
+    "supports",
+    "bonjol-five-women",
+  ],
+  [
     "bonjol-authors-causal-interpretation",
     "mutolib-bonjol-ulayat-source",
-    "pp. 38–43, ‘Why are Melayu Women Oppressed?’, ‘Discussion’, and ‘Conclusion’",
+    "pp. 38–40, ‘Why are Melayu Women Oppressed?’, enumerated explanations",
     "supports",
     "bonjol-authors-explanation",
   ],
@@ -244,7 +293,7 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "nagari-law-changed-after-cases",
     "west-sumatra-nagari-law-2018-source",
-    "preamble paragraph c; articles 1–3 and 23–24",
+    "preamble paragraph c; articles 1–3 and 23",
     "supports",
     "post-case-law",
   ],
@@ -269,35 +318,6 @@ const citations = citationRows.map(
 
 export const minangkabauRelationshipDocuments = [
   ...citations,
-  {
-    documentType: "relationships",
-    subject: {
-      kind: "case-episode",
-      id: "koto-tinggi-governance-2001-2016",
-    },
-    relationships: [
-      {
-        id: "koto-tinggi-applies-matriliny",
-        predicate: "applies-to-case",
-        subject: {
-          kind: "case-episode",
-          id: "koto-tinggi-governance-2001-2016",
-        },
-        object: { kind: "concept", id: "matriliny" },
-        status: "qualified",
-        statementIds: [
-          "koto-tinggi-minangkabau-adat-context",
-          "minangkabau-practices-historically-changing",
-        ],
-        scope: {
-          startDate: "2001",
-          endDate: "2016-10",
-          placeIds: ["nagari-koto-tinggi-agam"],
-          note: "The relationship supplies kinship context but does not classify the public institutions or establish women’s authority in practice.",
-        },
-      },
-    ],
-  },
   {
     documentType: "relationships",
     subject: {

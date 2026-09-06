@@ -26,18 +26,25 @@ const statementIds = [
   "koto-tinggi-fieldwork-scope",
   "koto-tinggi-three-institutions",
   "koto-tinggi-formal-participation-rules",
+  "koto-tinggi-formal-decision-rule",
   "koto-tinggi-customary-council-contestation",
   "koto-tinggi-budget-rules-in-use",
+  "koto-tinggi-budget-consensus",
   "koto-tinggi-administrative-capacity-limit",
+  "koto-tinggi-regulatory-preparation-limit",
   "bonjol-study-method-and-voice",
   "bonjol-new-nagari-forest-transition",
+  "bonjol-concession-end-transition",
   "bonjol-ulayat-formal-distinction",
+  "bonjol-ulayat-delegated-management",
   "bonjol-harta-pusaka-transition",
   "bonjol-bundo-kanduang-role",
   "bonjol-ulayat-sales-rules-in-use",
   "bonjol-neshp-formal-promise",
   "bonjol-neshp-distribution-practice",
+  "bonjol-neshp-exclusion-outcome",
   "bonjol-women-testimony-limit",
+  "bonjol-five-women-testimony",
   "bonjol-authors-causal-interpretation",
   "bonjol-no-minangkabau-generalization",
   "nagari-law-changed-after-cases",
@@ -69,9 +76,58 @@ function relationshipIn(documents: AuthoringDocument[], id: string) {
   throw new Error(`Missing relationship ${id}`);
 }
 
+function exactStatementLedger() {
+  return statementIds.map((id) => {
+    const entity = canonicalGraph.indexes.entitiesById[id];
+    if (entity?.kind !== "statement")
+      throw new Error(`Missing Statement ${id}`);
+    return {
+      id: entity.id,
+      label: entity.label,
+      statementKind: entity.statementKind,
+      text: entity.text,
+    };
+  });
+}
+
+function exactSourceLedger() {
+  return sourceIds.map((id) => {
+    const entity = canonicalGraph.indexes.entitiesById[id];
+    if (entity?.kind !== "source") throw new Error(`Missing Source ${id}`);
+    return structuredClone(entity);
+  });
+}
+
+function exactCitationLedger() {
+  return statementIds.flatMap((statementId) =>
+    citationsFor(statementId).map(({ object, role, locator }) => ({
+      statementId,
+      sourceId: object.id,
+      role,
+      locator,
+    })),
+  );
+}
+
+function expectEveryFieldDriftDetected<T extends object>(
+  rows: T[],
+  fields: (keyof T)[],
+  ledgerName: string,
+) {
+  for (const index of rows.keys()) {
+    for (const field of fields) {
+      const changed = structuredClone(rows);
+      const row = changed[index];
+      if (!row) throw new Error(`Missing ${ledgerName} ledger row ${index}`);
+      Object.assign(row, { [field]: `${String(row[field])} [drift]` });
+      expect(changed).not.toEqual(rows);
+    }
+  }
+}
+
 describe("Minangkabau matriliny, property, and authority", () => {
   it("publishes the exact traced Statement and Source ledger", () => {
-    expect(statementIds).toHaveLength(29);
+    expect(statementIds).toHaveLength(36);
     expect(sourceIds).toHaveLength(8);
 
     for (const id of statementIds) {
@@ -91,6 +147,27 @@ describe("Minangkabau matriliny, property, and authority", () => {
       });
   });
 
+  it("locks every Statement, Source manifestation, and citation tuple", () => {
+    expect(exactStatementLedger()).toMatchSnapshot("statements");
+    expect(exactSourceLedger()).toMatchSnapshot("sources");
+    expect(exactCitationLedger()).toMatchSnapshot("citations");
+  });
+
+  it("detects arbitrary Statement and citation-field drift", () => {
+    const statements = exactStatementLedger();
+    const citations = exactCitationLedger();
+    expectEveryFieldDriftDetected(
+      statements,
+      ["label", "statementKind", "text"],
+      "Statement",
+    );
+    expectEveryFieldDriftDetected(
+      citations,
+      ["sourceId", "role", "locator"],
+      "citation",
+    );
+  });
+
   it("keeps the two cases and their evidence categories separately bounded", () => {
     expect(
       canonicalGraph.indexes.entitiesById[
@@ -99,19 +176,27 @@ describe("Minangkabau matriliny, property, and authority", () => {
     ).toMatchObject({
       kind: "case",
       locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
-      episodeIds: ["koto-tinggi-governance-2001-2016"],
+      episodeIds: ["koto-tinggi-governance-october-2016"],
     });
     expect(
-      canonicalGraph.indexes.entitiesById["koto-tinggi-governance-2001-2016"],
+      canonicalGraph.indexes.entitiesById[
+        "koto-tinggi-governance-october-2016"
+      ],
     ).toMatchObject({
       kind: "case-episode",
       formalRuleStatementIds: [
         "koto-tinggi-three-institutions",
         "koto-tinggi-formal-participation-rules",
+        "koto-tinggi-formal-decision-rule",
       ],
-      ruleInUseStatementIds: ["koto-tinggi-customary-council-contestation"],
-      interactionStatementIds: ["koto-tinggi-budget-rules-in-use"],
-      outcomeStatementIds: ["koto-tinggi-administrative-capacity-limit"],
+      interactionStatementIds: [
+        "koto-tinggi-budget-rules-in-use",
+        "koto-tinggi-budget-consensus",
+      ],
+      outcomeStatementIds: [
+        "koto-tinggi-administrative-capacity-limit",
+        "koto-tinggi-regulatory-preparation-limit",
+      ],
     });
     expect(
       canonicalGraph.indexes.entitiesById["bonjol-melayu-ulayat-governance"],
@@ -124,17 +209,10 @@ describe("Minangkabau matriliny, property, and authority", () => {
       canonicalGraph.indexes.entitiesById["bonjol-ulayat-governance-2000-2016"],
     ).toMatchObject({
       kind: "case-episode",
-      formalRuleStatementIds: [
-        "bonjol-ulayat-formal-distinction",
-        "bonjol-harta-pusaka-transition",
-        "bonjol-neshp-formal-promise",
-      ],
-      ruleInUseStatementIds: [
-        "bonjol-ulayat-sales-rules-in-use",
-        "bonjol-neshp-distribution-practice",
-      ],
-      interactionStatementIds: ["bonjol-women-testimony-limit"],
-      outcomeStatementIds: ["bonjol-authors-causal-interpretation"],
+      formalRuleStatementIds: ["bonjol-neshp-formal-promise"],
+      ruleInUseStatementIds: ["bonjol-ulayat-sales-rules-in-use"],
+      interactionStatementIds: ["bonjol-neshp-distribution-practice"],
+      outcomeStatementIds: ["bonjol-neshp-exclusion-outcome"],
     });
   });
 });
@@ -185,6 +263,11 @@ describe("Minangkabau guide and validation boundaries", () => {
       predicate: "commonly-confused-with",
       status: "asserted",
     });
+    expect(
+      canonicalGraph.relationships.find(
+        ({ id }) => id === "koto-tinggi-applies-matriliny",
+      ),
+    ).toBeUndefined();
   });
 
   it("keeps the graph deterministic across complete document permutations", () => {

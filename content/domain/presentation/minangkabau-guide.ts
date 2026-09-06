@@ -87,10 +87,7 @@ export const minangkabauGuideDocuments = [
             },
             { kind: "case", id: "bonjol-melayu-ulayat-governance" },
           ],
-          relationshipIds: [
-            "koto-tinggi-applies-matriliny",
-            "bonjol-applies-matriliny",
-          ],
+          relationshipIds: ["bonjol-applies-matriliny"],
         },
         {
           id: "variants-disputes-and-limits",
@@ -113,7 +110,10 @@ export const minangkabauGuideDocuments = [
             "nagari-law-changed-after-cases",
           ],
           entityRefs: [
-            { kind: "case-episode", id: "koto-tinggi-governance-2001-2016" },
+            {
+              kind: "case-episode",
+              id: "koto-tinggi-governance-october-2016",
+            },
             { kind: "case-episode", id: "bonjol-ulayat-governance-2000-2016" },
           ],
         },

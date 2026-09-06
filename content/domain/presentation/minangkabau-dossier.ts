@@ -66,13 +66,19 @@ const dossier = {
         "koto-tinggi-minangkabau-adat-context",
         "koto-tinggi-three-institutions",
         "koto-tinggi-formal-participation-rules",
+        "koto-tinggi-formal-decision-rule",
         "koto-tinggi-customary-council-contestation",
         "koto-tinggi-budget-rules-in-use",
+        "koto-tinggi-budget-consensus",
         "koto-tinggi-administrative-capacity-limit",
+        "koto-tinggi-regulatory-preparation-limit",
       ],
       relatedEntityRefs: [
         { kind: "case", id: "koto-tinggi-post-decentralization-governance" },
-        { kind: "case-episode", id: "koto-tinggi-governance-2001-2016" },
+        {
+          kind: "case-episode",
+          id: "koto-tinggi-governance-october-2016",
+        },
       ],
     },
     {
@@ -83,12 +89,15 @@ const dossier = {
       statementIds: [
         "bonjol-study-method-and-voice",
         "bonjol-ulayat-formal-distinction",
+        "bonjol-ulayat-delegated-management",
         "bonjol-harta-pusaka-transition",
         "bonjol-bundo-kanduang-role",
         "bonjol-ulayat-sales-rules-in-use",
         "bonjol-neshp-formal-promise",
         "bonjol-neshp-distribution-practice",
+        "bonjol-neshp-exclusion-outcome",
         "bonjol-women-testimony-limit",
+        "bonjol-five-women-testimony",
         "bonjol-authors-causal-interpretation",
       ],
       relatedEntityRefs: [
