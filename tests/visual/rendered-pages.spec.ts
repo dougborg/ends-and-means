@@ -159,6 +159,11 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   await page.keyboard.press("Enter");
   await expect(evidence).toHaveAttribute("open", "");
   await expect(evidence.locator(".canonical-claim").first()).toBeVisible();
+  const connection = page.locator('[data-relationship-id="enacted-funds-partially-instantiated-program"]');
+  const qualification = connection.locator("details.subject-guide__qualification");
+  await qualification.locator("summary").click();
+  await expect(qualification.getByText("Evidence status")).toBeVisible();
+  await expect(qualification.getByText("qualified", { exact: true })).toBeVisible();
   await context.close();
 });
 
