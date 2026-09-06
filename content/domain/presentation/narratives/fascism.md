@@ -4,7 +4,7 @@ Its doctrines, organizations, rise to power, and governing practices must be exa
 ## definitions
 
 Griffin centers a revolutionary myth of national rebirth expressed through populist ultranationalism.
-Paxton offers a rival emphasis on how movements develop, ally, mobilize, and exercise power rather than treating doctrine as sufficient.
+Paxton instead defines fascism through political behavior, including collaboration with traditional elites, abandonment of democratic liberties, and violent projects of internal cleansing and external expansion.
 
 ## self-description
 

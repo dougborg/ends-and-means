@@ -9,7 +9,8 @@ Glasius instead asks whether a pattern of action sabotages accountability, allow
 ## neighbors
 
 Regimes of the World uses autocracy as a measured category and distinguishes closed from electoral autocracies while marking uncertain boundaries.
-Comparative dictatorship research also separates party, military, monarchic, and personalist arrangements because rulers face different organized constraints.
+Geddes, Wright, and Frantz argue that how a seizure group organizes can persist after it takes power and shape who influences later decisions.
+Márquez distinguishes the bounded Roman emergency office from a modern concept concerned with political authority and legitimation.
 
 ## totalitarian-boundary
 

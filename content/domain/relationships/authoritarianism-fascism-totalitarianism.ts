@@ -22,13 +22,19 @@ const citations = [
   [
     "dictatorship-varied-institutions",
     "geddes-dictatorships-source",
-    "chapter 1, pp. 1–22, especially summary and pp. 3–5",
+    "chapter 1 online summary, paragraph 1",
     "supports",
   ],
   [
-    "dictatorship-history-boundary",
+    "dictatorship-roman-office-boundary",
     "marquez-dictatorship-source",
-    "pp. 67–70, 82–91",
+    "pp. 79–80, section ‘Dictatorship and Sovereignty,’ paragraphs 1–2",
+    "supports",
+  ],
+  [
+    "dictatorship-modern-legitimation-boundary",
+    "marquez-dictatorship-source",
+    "pp. 68–69, introduction, paragraphs 3–5",
     "supports",
   ],
   [
@@ -64,25 +70,43 @@ const citations = [
   [
     "fascism-label-boundary",
     "griffin-nature-source",
-    "introduction, pp. 1–26",
+    "introduction, p. 26, one-sentence ideal-type definition",
     "context",
   ],
   [
     "fascism-label-boundary",
     "paxton-anatomy-source",
-    "chapter 8, pp. 206–220",
+    "chapter 8, p. 218, concluding definition",
     "context",
   ],
   [
     "fascism-self-description",
     "mussolini-doctrine-source",
-    "sections ‘Political and Social Doctrine’ and ‘The Fascist State’",
+    "document paragraph 3 (‘complete opposite of Marxian Socialism’)",
+    "supports",
+  ],
+  [
+    "fascism-rejects-liberal-democracy",
+    "mussolini-doctrine-source",
+    "document paragraph 4 (‘denies that the majority ... can direct human society’)",
+    "supports",
+  ],
+  [
+    "fascism-rejects-liberal-individualism",
+    "mussolini-doctrine-source",
+    "document paragraph 6 (‘century of individualism’ through ‘century of the State’)",
+    "supports",
+  ],
+  [
+    "fascism-state-organizes-nation",
+    "mussolini-doctrine-source",
+    "document paragraphs 7–8 (‘foundation ... conception of the State’ through ‘organizes the nation’)",
     "supports",
   ],
   [
     "fascism-self-description-limit",
     "paxton-anatomy-source",
-    "chapter 1, pp. 3–23",
+    "chapter 1, p. 10, paragraph beginning ‘This book takes the position’",
     "qualifies",
   ],
   [
@@ -112,8 +136,8 @@ const citations = [
   [
     "fascism-evidence-region-limit",
     "paxton-anatomy-source",
-    "chapter 1, pp. 15–17, discussion of national cases and transfer limits",
-    "supports",
+    "chapter 1, p. 23, final two paragraphs on stages and comparison",
+    "context",
   ],
   [
     "totalitarian-linz-definition",
@@ -154,7 +178,7 @@ const citations = [
   [
     "nazi-party-state-law",
     "party-state-law-source",
-    "document 1395-PS, pp. 978–979, §§1–3; translation and edition note on PDF p. 2",
+    "GHDI reproduction, §§1–3; translation provenance note on PDF p. 2",
     "supports",
   ],
   [
@@ -212,7 +236,8 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           object: ref("concept", "dictatorship"),
           status: "qualified",
           statementIds: [
-            "dictatorship-history-boundary",
+            "dictatorship-roman-office-boundary",
+            "dictatorship-modern-legitimation-boundary",
             "dictatorship-varied-institutions",
           ],
         },
@@ -263,6 +288,9 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           status: "qualified",
           statementIds: [
             "fascism-self-description",
+            "fascism-rejects-liberal-democracy",
+            "fascism-rejects-liberal-individualism",
+            "fascism-state-organizes-nation",
             "fascism-self-description-limit",
           ],
         },

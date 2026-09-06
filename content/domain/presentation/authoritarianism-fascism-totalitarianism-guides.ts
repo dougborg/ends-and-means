@@ -48,7 +48,8 @@ const authoritarianism = dossier(
       statementIds: [
         "autocracy-operational-boundary",
         "dictatorship-varied-institutions",
-        "dictatorship-history-boundary",
+        "dictatorship-roman-office-boundary",
+        "dictatorship-modern-legitimation-boundary",
         "authoritarian-autocracy-nonsynonym",
       ],
       relatedEntityRefs: [
@@ -73,7 +74,7 @@ const authoritarianism = dossier(
       body: "",
       traceStatus: "qualified",
       statementIds: [
-        "dictatorship-history-boundary",
+        "dictatorship-modern-legitimation-boundary",
         "authoritarian-practice-boundary",
         "authoritarian-autocracy-nonsynonym",
       ],
@@ -106,6 +107,9 @@ const fascism = dossier(
       traceStatus: "qualified",
       statementIds: [
         "fascism-self-description",
+        "fascism-rejects-liberal-democracy",
+        "fascism-rejects-liberal-individualism",
+        "fascism-state-organizes-nation",
         "fascism-self-description-limit",
       ],
       relatedEntityRefs: [
@@ -202,6 +206,9 @@ const historicalItalianFascism = attachNarrative(
     standfirst: "",
     standfirstStatementIds: [
       "fascism-self-description",
+      "fascism-rejects-liberal-democracy",
+      "fascism-rejects-liberal-individualism",
+      "fascism-state-organizes-nation",
       "italy-party-regime-boundary",
       "italy-movement-party-sequence",
       "italy-coalition-government-1922",
@@ -214,6 +221,9 @@ const historicalItalianFascism = attachNarrative(
         traceStatus: "qualified" as const,
         statementIds: [
           "fascism-self-description",
+          "fascism-rejects-liberal-democracy",
+          "fascism-rejects-liberal-individualism",
+          "fascism-state-organizes-nation",
           "fascism-self-description-limit",
           "italy-party-regime-boundary",
           "italy-movement-party-sequence",
