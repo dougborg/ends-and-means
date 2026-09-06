@@ -193,9 +193,7 @@ describe("canonical narrative coverage", () => {
         sourcesWithoutCitations: ["source:test"],
         entitiesWithoutRelationships: ["concept:test"],
         dimensionsWithoutPlacements: ["dimension:test"],
-        researchGapSectionsWithoutObligations: [
-          "concept:test#open-question",
-        ],
+        researchGapSectionsWithoutObligations: ["concept:test#open-question"],
         sourcePreflight: [
           {
             id: "source:test",
@@ -216,6 +214,21 @@ describe("canonical narrative coverage", () => {
 });
 
 describe("narrative attention signals", () => {
+  it("reports an empty Source identifier object as missing access metadata", () => {
+    const graph = structuredClone(canonicalGraph);
+    const source = graph.entities.find((entity) => entity.kind === "source");
+    if (source?.kind !== "source") throw new Error("Missing Source fixture");
+    source.identifiers = {};
+    source.resourceLinks = [];
+
+    expect(auditContent(graph).sourcePreflight).toContainEqual(
+      expect.objectContaining({
+        id: source.id,
+        missingMetadata: expect.arrayContaining(["identifier or access link"]),
+      }),
+    );
+  });
+
   it("reports objective narrative attention signals without scoring prose", () => {
     const attentionGraph = structuredClone(canonicalGraph);
     const dossier = attentionGraph.entities.find(

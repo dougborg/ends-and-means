@@ -1,0 +1,39 @@
+import { readdir, readFile } from "node:fs/promises";
+import { relative, resolve } from "node:path";
+import type { PublicationFile } from "../src/lib/domain";
+
+export async function walkRequiredFiles(directory: string): Promise<string[]> {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const paths = await Promise.all(
+    entries
+      .toSorted((left, right) => left.name.localeCompare(right.name))
+      .map((entry) => {
+        const pathname = resolve(directory, entry.name);
+        return entry.isDirectory() ? walkRequiredFiles(pathname) : [pathname];
+      }),
+  );
+  return paths.flat().sort((left, right) => left.localeCompare(right));
+}
+
+export async function loadPublicationFiles(
+  root: string,
+  directories: string[],
+  include: RegExp,
+): Promise<PublicationFile[]> {
+  const paths = (
+    await Promise.all(
+      directories.map((directory) =>
+        walkRequiredFiles(resolve(root, directory)),
+      ),
+    )
+  )
+    .flat()
+    .filter((pathname) => include.test(pathname))
+    .sort((left, right) => left.localeCompare(right));
+  return Promise.all(
+    paths.map(async (pathname) => ({
+      path: relative(root, pathname),
+      content: await readFile(pathname, "utf8"),
+    })),
+  );
+}
