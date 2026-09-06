@@ -53,6 +53,40 @@ async function productionAstroFiles(
     .toSorted();
 }
 
+const namedLayers = "tokens|base|layout|components|pages";
+
+function astroStyleBlocks(source: string): string[] | undefined {
+  const openings = source.match(/<style(?:\s[^>]*)?>/giu) ?? [];
+  const closings = source.match(/<\/style>/giu) ?? [];
+  if (openings.length !== closings.length) return undefined;
+
+  return [...source.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/giu)]
+    .map((match) => match[1] ?? "");
+}
+
+function isWhollyWrappedInNamedLayer(css: string): boolean {
+  const source = css.replaceAll(/\/\*[\s\S]*?\*\//gu, "").trim();
+  const wrapper = source.match(
+    new RegExp(`^@layer\\s+(${namedLayers})\\s*\\{`, "iu"),
+  );
+  if (!wrapper) return false;
+
+  const openingBrace = wrapper[0].lastIndexOf("{");
+  const structuralSource = source.replaceAll(
+    /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/gu,
+    "''",
+  );
+  let depth = 0;
+  const closingOffset = [...structuralSource.slice(openingBrace)].findIndex(
+    (character, index) => {
+      depth += Number(character === "{") - Number(character === "}");
+      return index > 0 && depth === 0;
+    },
+  );
+  if (closingOffset < 0) return false;
+  return structuralSource.slice(openingBrace + closingOffset + 1).trim() === "";
+}
+
 describe("design-system foundations", () => {
   it("keeps every production stylesheet inside the declared cascade architecture", async () => {
     const contents = await stylesheetContents();
@@ -70,18 +104,41 @@ describe("design-system foundations", () => {
   it("rejects Astro style blocks that bypass the named cascade", async () => {
     for (const file of await productionAstroFiles()) {
       const source = await readFile(file, "utf8");
-      const styleBlocks = source.matchAll(
-        /<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/giu,
-      );
+      const styleBlocks = astroStyleBlocks(source);
 
-      for (const [, css] of styleBlocks) {
-        expect(css, path.relative(sourceDirectory, file)).toMatch(
-          /@layer (?:tokens|base|layout|components|pages)\s*{/,
-        );
+      expect(styleBlocks, path.relative(sourceDirectory, file)).toBeDefined();
+      for (const css of styleBlocks ?? []) {
+        expect(
+          isWhollyWrappedInNamedLayer(css),
+          path.relative(sourceDirectory, file),
+        ).toBe(true);
       }
     }
   });
 
+  it("detects mixed, spoofed, repeated, and malformed Astro style blocks", () => {
+    const invalid = [
+      ".bypass{} @layer components{.ok{}}",
+      "/* @layer components {.spoof{}} */ .bypass{}",
+      "@layer components{.ok{}} @layer pages{.also{}}",
+      "@layer components{.missing-close{}",
+      "@layer unknown{.wrong{}}",
+    ];
+    const valid = [
+      "@layer components{.ok{color:var(--text)}}",
+      "/* why this is local */ @layer pages { .quoted::after { content: '}'; } }",
+    ];
+
+    for (const css of invalid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(false);
+    for (const css of valid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(true);
+    expect(astroStyleBlocks("<style>@layer components{.ok{}}</style><style>broken"))
+      .toBeUndefined();
+    expect(astroStyleBlocks("<style is:global>@layer components{.ok{}}</style>"))
+      .toEqual(["@layer components{.ok{}}"]);
+  });
+});
+
+describe("design tokens and shared components", () => {
   it("keeps all color literals and color functions in the token layer", async () => {
     const contents = await stylesheetContents();
     const tokens =
