@@ -8,7 +8,7 @@ export const minangkabauGuideDocuments = [
       slug: "matriliny-property-authority",
       label: "Does matriliny mean women rule?",
       description:
-        "Matriliny traces descent through a maternal line; it does not settle where spouses live, who controls inherited or collective property, who holds customary or public office, or who benefits from shared resources. Two bounded West Sumatran cases show why residence, inheritance, management, representation, and equality must be examined separately.",
+        "Matriliny traces descent through a maternal line, while residence, property control, and officeholding are separate institutional questions. Studies of one village and two bounded West Sumatran cases document different distributions of land control, representation, and benefits without establishing a rule for every Minangkabau community.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "matriliny" },
       searchQueries: [

@@ -6,7 +6,7 @@ const dossier = attachNarrative("matriliny-property-authority.md", {
   kind: "dossier" as const,
   label: "Matriliny, property, and authority",
   description:
-    "Maternal descent does not by itself determine property control, management, office, or equality.",
+    "Matriliny traces descent through a maternal line. The studies collected here separately document residence, land control, officeholding, and participation while limiting their findings to named Minangkabau communities and periods.",
   subject: { kind: "concept" as const, id: "matriliny" },
   standfirst: "",
   standfirstStatementIds: [
@@ -44,6 +44,9 @@ const dossier = attachNarrative("matriliny-property-authority.md", {
       traceStatus: "qualified",
       statementIds: [
         "minangkabau-power-varies-by-relation",
+        "matriliny-does-not-fix-property-control",
+        "matriliny-does-not-fix-office",
+        "bonjol-inheritance-did-not-confer-office-authority",
         "bonjol-ulayat-formal-distinction",
         "bonjol-harta-pusaka-transition",
       ],

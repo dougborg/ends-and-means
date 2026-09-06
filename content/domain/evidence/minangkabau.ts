@@ -307,41 +307,41 @@ const entities = [
     label: "Matrilocality concerns residence after marriage",
     description:
       "A distinction between postmarital residence and maternal-line descent.",
-    statementKind: "definition",
+    statementKind: "observation",
     text: "Sanday describes husbands moving into their wives’ households in the community she studied.",
   },
   {
     id: "matriliny-does-not-fix-residence",
     kind: "statement",
-    label: "Matriliny does not establish residence",
-    description: "An analytical boundary between descent and residence.",
-    statementKind: "definition",
-    text: "Maternal-line descent does not by itself establish where spouses reside after marriage.",
+    label: "Sanday distinguishes descent from residence",
+    description: "A bounded distinction in Sanday’s Minangkabau account.",
+    statementKind: "observation",
+    text: "In Sanday’s account, maternal-line kin organization and husbands’ residence with their wives’ domestic groups are separately described features.",
   },
   {
     id: "matriliny-does-not-fix-property-control",
     kind: "statement",
-    label: "Matriliny does not establish property control",
+    label: "Property control varied within Blackwood’s village study",
     description:
-      "An analytical boundary between descent and effective control.",
-    statementKind: "definition",
-    text: "Maternal-line descent does not by itself establish who controls property.",
+      "A bounded observation about descent and effective control.",
+    statementKind: "observation",
+    text: "Blackwood reports senior women controlling land in the Minangkabau village she studied.",
   },
   {
     id: "matriliny-does-not-fix-office",
     kind: "statement",
-    label: "Matriliny does not establish political office",
-    description: "An analytical boundary between descent and officeholding.",
-    statementKind: "classification",
-    text: "Maternal-line descent does not by itself establish who holds political office.",
+    label: "Kin authority and land control differed in Blackwood’s study",
+    description: "A bounded observation about land control and formal kin authority.",
+    statementKind: "observation",
+    text: "Blackwood reports men claiming formal kin authority in the village where she observed senior women controlling land.",
   },
   {
     id: "matriliny-does-not-fix-equality",
     kind: "statement",
-    label: "Matriliny does not establish equality",
-    description: "An analytical boundary between descent and equality.",
-    statementKind: "editorial-interpretation",
-    text: "Maternal-line descent does not by itself establish gender equality.",
+    label: "Bonjol’s authors reject an equality inference",
+    description: "The Bonjol authors’ bounded interpretation of descent and equality.",
+    statementKind: "observation",
+    text: "The Bonjol authors caution that matrilineal inheritance in their case did not make women equal participants in decisions over communal forest resources.",
   },
   {
     id: "matriarchy-rule-by-women-dispute",
@@ -870,13 +870,7 @@ const cases = [
     endDate: { year: 2016, month: 10, certainty: "exact" },
     scope:
       "Nagari government, representative and customary councils, and development planning observed in Koto Tinggi during October 2016; decentralization from 2001 is background, and the cited formal design dates to Agam Regulation 12 of 2007.",
-    conditionStatementIds: [
-      "koto-tinggi-fieldwork-scope",
-      "koto-tinggi-participant-count-unreported",
-      "koto-tinggi-womens-voice-unidentified",
-      "koto-tinggi-descent-unobserved",
-      "koto-tinggi-residence-unobserved",
-    ],
+    conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
     selectionRationale:
       "Selected to separate maternal-line social organization from the public offices, representative bodies, customary council, and rules-in-use of one named nagari.",
     episodeIds: ["koto-tinggi-governance-october-2016"],
@@ -897,13 +891,7 @@ const cases = [
     endDate: { year: 2016, month: 10, certainty: "exact" },
     scope:
       "The institutions and development-planning interactions described for Koto Tinggi, not all Agam or Minangkabau nagari.",
-    conditionStatementIds: [
-      "koto-tinggi-fieldwork-scope",
-      "koto-tinggi-participant-count-unreported",
-      "koto-tinggi-womens-voice-unidentified",
-      "koto-tinggi-descent-unobserved",
-      "koto-tinggi-residence-unobserved",
-    ],
+    conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
     formalRuleStatementIds: [
       "koto-tinggi-three-institutions",
       "koto-tinggi-representative-council",
@@ -943,12 +931,8 @@ const cases = [
     scope:
       "Melayu-clan ulayat forest governance in Nagari Bonjol from the administrative and concession transition around 2000–2002 through fieldwork ending in April 2016.",
     conditionStatementIds: [
-      "bonjol-study-method-and-voice",
-      "bonjol-thirteen-key-informants",
-      "bonjol-agency-records",
-      "bonjol-twenty-seven-women-sample",
       "bonjol-new-nagari-forest-transition",
-      "bonjol-no-minangkabau-generalization",
+      "bonjol-concession-end-transition",
     ],
     selectionRationale:
       "Selected because the study distinguishes collective and inherited claims from practical management, negotiation, voice, and receipt of benefits in one named clan and nagari.",
@@ -971,18 +955,18 @@ const cases = [
     scope:
       "Observed Melayu-clan rules and practices concerning the claimed ulayat forest and smallholder plots; excludes other Bonjol clans and other Minangkabau communities.",
     conditionStatementIds: [
-      "bonjol-study-method-and-voice",
       "bonjol-new-nagari-forest-transition",
       "bonjol-concession-end-transition",
+    ],
+    formalRuleStatementIds: [
       "bonjol-ulayat-formal-distinction",
+      "bonjol-harta-pusaka-female-line",
+      "bonjol-neshp-formal-promise",
+    ],
+    ruleInUseStatementIds: [
       "bonjol-ulayat-delegated-management",
       "bonjol-harta-pusaka-transition",
-      "bonjol-harta-pusaka-female-line",
       "bonjol-inheritance-did-not-confer-office-authority",
-      "bonjol-no-minangkabau-generalization",
-    ],
-    formalRuleStatementIds: ["bonjol-neshp-formal-promise"],
-    ruleInUseStatementIds: [
       "bonjol-ulayat-sales-rules-in-use",
       "bonjol-ulayat-sales-contrary-to-custom",
     ],

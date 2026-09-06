@@ -1,5 +1,230 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Minangkabau bounded case categories > locks every Case, Case Episode, semantic relationship, and required absence > cases-and-episodes 1`] = `
+[
+  {
+    "conditionStatementIds": [
+      "koto-tinggi-minangkabau-adat-context",
+    ],
+    "description": "A bounded October 2016 study of formal institutions and development-planning practice in Koto Tinggi.",
+    "endDate": {
+      "certainty": "exact",
+      "month": 10,
+      "year": 2016,
+    },
+    "episodeIds": [
+      "koto-tinggi-governance-october-2016",
+    ],
+    "id": "koto-tinggi-post-decentralization-governance",
+    "kind": "case",
+    "label": "Koto Tinggi nagari governance observed in October 2016",
+    "locationIds": [
+      "nagari-koto-tinggi-agam",
+      "west-sumatra",
+    ],
+    "publicationStatus": "reviewed",
+    "scope": "Nagari government, representative and customary councils, and development planning observed in Koto Tinggi during October 2016; decentralization from 2001 is background, and the cited formal design dates to Agam Regulation 12 of 2007.",
+    "selectionRationale": "Selected to separate maternal-line social organization from the public offices, representative bodies, customary council, and rules-in-use of one named nagari.",
+    "startDate": {
+      "certainty": "exact",
+      "month": 10,
+      "year": 2016,
+    },
+  },
+  {
+    "caseId": "koto-tinggi-post-decentralization-governance",
+    "conditionStatementIds": [
+      "koto-tinggi-minangkabau-adat-context",
+    ],
+    "description": "The post-decentralization institutional arrangement observed in October 2016.",
+    "endDate": {
+      "certainty": "exact",
+      "month": 10,
+      "year": 2016,
+    },
+    "formalRuleStatementIds": [
+      "koto-tinggi-three-institutions",
+      "koto-tinggi-representative-council",
+      "koto-tinggi-customary-council",
+      "koto-tinggi-formal-participation-rules",
+      "koto-tinggi-formal-decision-rule",
+      "koto-tinggi-formal-speaking-rule",
+      "koto-tinggi-formal-consensus-rule",
+      "koto-tinggi-formal-vote-fallback",
+    ],
+    "id": "koto-tinggi-governance-october-2016",
+    "interactionStatementIds": [
+      "koto-tinggi-customary-council-contestation",
+    ],
+    "kind": "case-episode",
+    "label": "Koto Tinggi governance observed in October 2016",
+    "locationIds": [
+      "nagari-koto-tinggi-agam",
+      "west-sumatra",
+    ],
+    "outcomeStatementIds": [
+      "koto-tinggi-administrative-capacity-limit",
+      "koto-tinggi-unspent-funds",
+      "koto-tinggi-accounting-difficulty",
+      "koto-tinggi-regulatory-preparation-limit",
+    ],
+    "publicationStatus": "reviewed",
+    "ruleInUseStatementIds": [
+      "koto-tinggi-budget-rules-in-use",
+      "koto-tinggi-budget-postponement",
+      "koto-tinggi-budget-consensus",
+    ],
+    "scope": "The institutions and development-planning interactions described for Koto Tinggi, not all Agam or Minangkabau nagari.",
+    "startDate": {
+      "certainty": "exact",
+      "month": 10,
+      "year": 2016,
+    },
+  },
+  {
+    "conditionStatementIds": [
+      "bonjol-new-nagari-forest-transition",
+      "bonjol-concession-end-transition",
+    ],
+    "description": "A bounded study of communal-forest access, management, and oil-palm plot distribution in Nagari Bonjol.",
+    "endDate": {
+      "certainty": "exact",
+      "month": 4,
+      "year": 2016,
+    },
+    "episodeIds": [
+      "bonjol-ulayat-governance-2000-2016",
+    ],
+    "id": "bonjol-melayu-ulayat-governance",
+    "kind": "case",
+    "label": "Melayu-clan ulayat governance in Nagari Bonjol",
+    "locationIds": [
+      "nagari-bonjol-dharmasraya",
+      "west-sumatra",
+    ],
+    "publicationStatus": "reviewed",
+    "scope": "Melayu-clan ulayat forest governance in Nagari Bonjol from the administrative and concession transition around 2000–2002 through fieldwork ending in April 2016.",
+    "selectionRationale": "Selected because the study distinguishes collective and inherited claims from practical management, negotiation, voice, and receipt of benefits in one named clan and nagari.",
+    "startDate": {
+      "certainty": "approximate",
+      "note": "The authors date the new nagari and management transition to the period beginning around 2000, with the concession ending in 2002.",
+      "year": 2000,
+    },
+  },
+  {
+    "caseId": "bonjol-melayu-ulayat-governance",
+    "conditionStatementIds": [
+      "bonjol-new-nagari-forest-transition",
+      "bonjol-concession-end-transition",
+    ],
+    "description": "The Melayu-clan forest-management period examined by the 2016 field study.",
+    "endDate": {
+      "certainty": "exact",
+      "month": 4,
+      "year": 2016,
+    },
+    "formalRuleStatementIds": [
+      "bonjol-ulayat-formal-distinction",
+      "bonjol-harta-pusaka-female-line",
+      "bonjol-neshp-formal-promise",
+    ],
+    "id": "bonjol-ulayat-governance-2000-2016",
+    "interactionStatementIds": [
+      "bonjol-neshp-distribution-practice",
+    ],
+    "kind": "case-episode",
+    "label": "Bonjol ulayat governance, 2000–2016",
+    "locationIds": [
+      "nagari-bonjol-dharmasraya",
+      "west-sumatra",
+    ],
+    "outcomeStatementIds": [
+      "bonjol-neshp-exclusion-outcome",
+      "bonjol-neshp-member-exclusion",
+    ],
+    "publicationStatus": "reviewed",
+    "ruleInUseStatementIds": [
+      "bonjol-ulayat-delegated-management",
+      "bonjol-harta-pusaka-transition",
+      "bonjol-inheritance-did-not-confer-office-authority",
+      "bonjol-ulayat-sales-rules-in-use",
+      "bonjol-ulayat-sales-contrary-to-custom",
+    ],
+    "scope": "Observed Melayu-clan rules and practices concerning the claimed ulayat forest and smallholder plots; excludes other Bonjol clans and other Minangkabau communities.",
+    "startDate": {
+      "certainty": "approximate",
+      "note": "The authors date the new nagari and management transition to the period beginning around 2000, with the concession ending in 2002.",
+      "year": 2000,
+    },
+  },
+]
+`;
+
+exports[`Minangkabau bounded case categories > locks every Case, Case Episode, semantic relationship, and required absence > semantic-relationships 1`] = `
+[
+  {
+    "id": "bonjol-applies-matriliny",
+    "object": {
+      "id": "matriliny",
+      "kind": "concept",
+    },
+    "predicate": "applies-to-case",
+    "scope": {
+      "endDate": "2016-04",
+      "note": "Applies only to the Melayu-clan property and descent arrangements documented in this episode.",
+      "placeIds": [
+        "nagari-bonjol-dharmasraya",
+      ],
+      "startDate": "2000",
+    },
+    "statementIds": [
+      "bonjol-harta-pusaka-transition",
+      "bonjol-harta-pusaka-female-line",
+      "bonjol-no-minangkabau-generalization",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "bonjol-ulayat-governance-2000-2016",
+      "kind": "case-episode",
+    },
+  },
+  {
+    "id": "matriliny-related-to-matrilocality",
+    "object": {
+      "id": "matrilocality",
+      "kind": "concept",
+    },
+    "predicate": "related-to",
+    "statementIds": [
+      "matriliny-does-not-fix-residence",
+      "matrilocality-residence-distinction",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "matriliny",
+      "kind": "concept",
+    },
+  },
+  {
+    "id": "matriliny-commonly-confused-with-matriarchy",
+    "object": {
+      "id": "matriarchy",
+      "kind": "concept",
+    },
+    "predicate": "commonly-confused-with",
+    "statementIds": [
+      "matriarchy-rule-by-women-dispute",
+      "matriarchy-sanday-maternal-centered-interpretation",
+    ],
+    "status": "asserted",
+    "subject": {
+      "id": "matriliny",
+      "kind": "concept",
+    },
+  },
+]
+`;
+
 exports[`Minangkabau matriliny, property, and authority > locks every Statement, Work, Source manifestation, and citation tuple > citations 1`] = `
 [
   {
@@ -249,15 +474,15 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
     "statementId": "nagari-law-changed-after-cases",
   },
   {
-    "locator": "p. 32, paragraph beginning ‘Control over ulayat land’",
+    "locator": "chapter 1, pp. 7–8, paragraphs describing relation-specific forms of power",
     "role": "supports",
-    "sourceId": "mutolib-bonjol-ulayat-source",
+    "sourceId": "blackwood-webs-power-source",
     "statementId": "matriliny-does-not-fix-property-control",
   },
   {
-    "locator": "p. 33, first paragraph",
+    "locator": "chapter 1, pp. 7–8, paragraphs describing relation-specific forms of power",
     "role": "supports",
-    "sourceId": "mutolib-bonjol-ulayat-source",
+    "sourceId": "blackwood-webs-power-source",
     "statementId": "matriliny-does-not-fix-office",
   },
   {
@@ -658,14 +883,14 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
   {
     "id": "matrilocality-residence-distinction",
     "label": "Matrilocality concerns residence after marriage",
-    "statementKind": "definition",
+    "statementKind": "observation",
     "text": "Sanday describes husbands moving into their wives’ households in the community she studied.",
   },
   {
     "id": "matriliny-does-not-fix-residence",
-    "label": "Matriliny does not establish residence",
-    "statementKind": "definition",
-    "text": "Maternal-line descent does not by itself establish where spouses reside after marriage.",
+    "label": "Sanday distinguishes descent from residence",
+    "statementKind": "observation",
+    "text": "In Sanday’s account, maternal-line kin organization and husbands’ residence with their wives’ domestic groups are separately described features.",
   },
   {
     "id": "matriarchy-rule-by-women-dispute",
@@ -867,21 +1092,21 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
   },
   {
     "id": "matriliny-does-not-fix-property-control",
-    "label": "Matriliny does not establish property control",
-    "statementKind": "definition",
-    "text": "Maternal-line descent does not by itself establish who controls property.",
+    "label": "Property control varied within Blackwood’s village study",
+    "statementKind": "observation",
+    "text": "Blackwood reports senior women controlling land in the Minangkabau village she studied.",
   },
   {
     "id": "matriliny-does-not-fix-office",
-    "label": "Matriliny does not establish political office",
-    "statementKind": "classification",
-    "text": "Maternal-line descent does not by itself establish who holds political office.",
+    "label": "Kin authority and land control differed in Blackwood’s study",
+    "statementKind": "observation",
+    "text": "Blackwood reports men claiming formal kin authority in the village where she observed senior women controlling land.",
   },
   {
     "id": "matriliny-does-not-fix-equality",
-    "label": "Matriliny does not establish equality",
-    "statementKind": "editorial-interpretation",
-    "text": "Maternal-line descent does not by itself establish gender equality.",
+    "label": "Bonjol’s authors reject an equality inference",
+    "statementKind": "observation",
+    "text": "The Bonjol authors caution that matrilineal inheritance in their case did not make women equal participants in decisions over communal forest resources.",
   },
   {
     "id": "matriarchy-sanday-maternal-centered-interpretation",
