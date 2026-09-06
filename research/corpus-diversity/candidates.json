@@ -291,7 +291,7 @@
         "sourceLeads": []
       },
       "primaryMaterial": {
-        "availability": "partial",
+        "availability": "not-assessed",
         "notes": "Group rules and policy documents are referenced in scholarship but need direct retrieval.",
         "sourceLeads": []
       },
@@ -473,7 +473,7 @@
         ]
       },
       "oralHistory": {
-        "availability": "partial",
+        "availability": "not-assessed",
         "notes": "Oral transmission is central, but community authority and consent protocols must be established.",
         "sourceLeads": []
       },

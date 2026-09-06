@@ -1,4 +1,5 @@
 const forbiddenPublicationReferences = [
+  /research\/corpus-diversity(?:\/|$)/iu,
   /archive\/legacy-research(?:\/|$)/iu,
   /content\/framework(?:\/|$)/iu,
   /(?:lib|routes?)\/(?:framework|prototype|content)(?:\/|$)/iu,

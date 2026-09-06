@@ -1,18 +1,35 @@
 import { z } from "zod";
 
 const nonEmpty = z.string().trim().min(1);
-const feasibility = z.object({
-  availability: z.enum(["viable", "partial", "not-found", "not-assessed"]),
-  notes: nonEmpty,
-  sourceLeads: z.array(
-    z.object({
-      title: nonEmpty,
-      url: z.url(),
-      authority: nonEmpty,
-      checkedAt: z.iso.date(),
-    }),
-  ),
-});
+const feasibility = z
+  .object({
+    availability: z.enum(["viable", "partial", "not-found", "not-assessed"]),
+    notes: nonEmpty,
+    sourceLeads: z.array(
+      z.object({
+        title: nonEmpty,
+        url: z.url(),
+        authority: nonEmpty,
+        checkedAt: z.iso.date(),
+      }),
+    ),
+  })
+  .superRefine(({ availability, sourceLeads }, context) => {
+    const evidenceBearing =
+      availability === "viable" || availability === "partial";
+    if (evidenceBearing && sourceLeads.length === 0)
+      context.addIssue({
+        code: "custom",
+        path: ["sourceLeads"],
+        message: `${availability} availability requires at least one checked source lead`,
+      });
+    if (!evidenceBearing && sourceLeads.length > 0)
+      context.addIssue({
+        code: "custom",
+        path: ["sourceLeads"],
+        message: `${availability} availability cannot retain source leads; use partial or viable after checking them`,
+      });
+  });
 
 export const corpusCandidateSchema = z.strictObject({
   id: nonEmpty.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u),

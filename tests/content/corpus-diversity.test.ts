@@ -65,6 +65,32 @@ describe("corpus diversity candidate contract", () => {
       false,
     );
   });
+
+  it.each(["viable", "partial"] as const)(
+    "rejects evidence-bearing %s feasibility without a checked lead",
+    (availability) => {
+      const candidate = structuredClone(matrix[0]);
+      candidate.sourceFeasibility.communityAuthored = {
+        availability,
+        notes: "A claim of availability without a checked source.",
+        sourceLeads: [],
+      };
+      expect(corpusCandidateMatrixSchema.safeParse([candidate]).success).toBe(
+        false,
+      );
+    },
+  );
+
+  it.each(["not-found", "not-assessed"] as const)(
+    "rejects %s feasibility that incoherently retains a checked lead",
+    (availability) => {
+      const candidate = structuredClone(matrix[0]);
+      candidate.sourceFeasibility.communityAuthored.availability = availability;
+      expect(corpusCandidateMatrixSchema.safeParse([candidate]).success).toBe(
+        false,
+      );
+    },
+  );
 });
 
 describe("corpus diversity portfolio audit", () => {
