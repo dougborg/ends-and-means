@@ -18,7 +18,7 @@ const dossier = (
       id === "authoritarianism"
         ? "Authoritarianism can classify a regime by limited pluralism, restricted mobilization, and weak guiding ideology, or identify practices that undermine accountability across regime types. It is not a synonym for autocracy."
         : id === "fascism"
-          ? "Fascism is defined here through two rival scholarly approaches: Griffin emphasizes revolutionary ultranationalist rebirth, while Paxton emphasizes political behavior. Repression, nationalism, or dictatorship alone does not establish the classification."
+          ? "Griffin defines fascism through revolutionary ultranationalist rebirth, while Paxton defines it through political behavior. Repression, nationalism, or dictatorship alone does not establish the classification."
           : "Totalitarianism can describe an ideal type organized around a monistic power center, an exclusive guiding ideology, and extensive mobilization. Its validity and ideological uses remain disputed, and the label alone establishes none of those features.",
     subject: { kind: "concept" as const, id },
     standfirst: "",

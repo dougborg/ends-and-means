@@ -19,5 +19,5 @@ The bounded 1925–1943 case therefore tests institutions and chronology rather 
 ## variation
 
 No.
-The historical evidence assembled here is limited to Italy and Germany.
+The cited historical evidence concerns Italy and Germany.
 It does not classify movements elsewhere: cross-regional comparison requires separately located local, movement-produced, and independent evidence rather than resemblance to these European cases.

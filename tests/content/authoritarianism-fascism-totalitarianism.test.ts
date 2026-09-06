@@ -102,7 +102,7 @@ const statementIds = [
   "totalitarian-polemical-boundary",
 ] as const;
 const exactLedgerDigest =
-  "cb574d91e408f0065c10e0cc9946d91b0a501f36716c056671fa2e8e6cc5a590";
+  "982d7425849511536e38ec1df3f7198386125a3d0fb5f5086c0237af239a448d";
 
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: one exact tranche ledger and its model contracts belong together
 describe("authoritarianism, fascism, and totalitarianism tranche", () => {
