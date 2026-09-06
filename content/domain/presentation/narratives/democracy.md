@@ -10,7 +10,7 @@ The same word therefore carries normative, procedural, institutional, and empiri
 ## institutions
 
 Electoral representation authorizes officeholders to exercise bounded public power.
-Sortition instead selects participants by lot, often for a defined deliberative task.
+Sortition instead selects participants by lot for a specified public role.
 Neither mechanism alone answers who is included or how much authority participants hold.
 
 ## measurement

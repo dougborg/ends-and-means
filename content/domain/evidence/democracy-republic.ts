@@ -261,7 +261,7 @@ export const democracyRepublicEvidenceDocuments = [
       kind: "approach",
       label: "Representative democratic government",
       description:
-        "An approach in which voters choose officeholders through recurring elections.",
+        "An approach in which voters choose representatives to exercise public authority.",
       scope:
         "Representative electoral arrangements; not a synonym for democracy, accountability, or every elected government.",
       ...reviewed,
@@ -302,7 +302,7 @@ export const democracyRepublicEvidenceDocuments = [
       description:
         "A procedure in which voters choose people to exercise specified public authority.",
       institutionalForm:
-        "Recurring elections authorize representatives for bounded offices under rules for eligibility, competition, tenure, and replacement.",
+        "Voters select representatives who make public decisions under an electoral arrangement.",
       ...reviewed,
     },
   },
@@ -311,7 +311,7 @@ export const democracyRepublicEvidenceDocuments = [
     entity: {
       id: "sortition-deliberative-minipublic",
       kind: "means",
-      label: "Sortition and deliberative mini-publics",
+      label: "Selection by lot",
       description:
         "A procedure that selects people by lot for a defined public role.",
       institutionalForm:
