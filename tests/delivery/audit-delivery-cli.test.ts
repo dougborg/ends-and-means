@@ -54,6 +54,14 @@ describe("delivery audit result classes", () => {
     );
   });
 
+  it("does not consume another flag as a snapshot path", () => {
+    const result = run(["--project-snapshot", "--repository-only"]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain(
+      "Project state: INVALID (--project-snapshot requires a path.)",
+    );
+  });
+
   it("distinguishes unexpected input errors", () => {
     const result = run([
       "--project-snapshot",

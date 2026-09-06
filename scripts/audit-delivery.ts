@@ -300,7 +300,7 @@ function loadLiveSnapshot(): DeliverySnapshot {
 function loadSnapshot(args: string[]) {
   const pathIndex = args.indexOf("--project-snapshot");
   const snapshotPath = args[pathIndex + 1];
-  if (pathIndex >= 0 && !snapshotPath)
+  if (pathIndex >= 0 && (!snapshotPath || snapshotPath.startsWith("-")))
     throw new InputInvalidError("--project-snapshot requires a path.");
   if (pathIndex >= 0 && snapshotPath) {
     return parseJson(
