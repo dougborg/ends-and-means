@@ -1,10 +1,15 @@
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { auditSkillContracts, skillCapabilities } from "../../scripts/skill-contracts.ts";
+import {
+  auditSkillContracts,
+  skillCapabilities,
+} from "../../scripts/skill-contracts.ts";
 
-const paths = [...new Set(skillCapabilities.flatMap((capability) => capability.paths))];
+const paths = [
+  ...new Set(skillCapabilities.flatMap((capability) => capability.paths)),
+];
 
 describe("repository skill contract", () => {
   it("covers the cross-skill delivery and research capabilities", () => {
@@ -17,9 +22,15 @@ describe("repository skill contract", () => {
       for (const path of paths) {
         const target = join(root, path);
         await mkdir(dirname(target), { recursive: true });
-        await writeFile(target, await readFile(join(process.cwd(), path), "utf8"));
+        await writeFile(
+          target,
+          await readFile(join(process.cwd(), path), "utf8"),
+        );
       }
-      const deletion = new RegExp(capability.deletion.pattern.source, `${capability.deletion.pattern.flags.replace("g", "")}g`);
+      const deletion = new RegExp(
+        capability.deletion.pattern.source,
+        `${capability.deletion.pattern.flags.replace("g", "")}g`,
+      );
       let replacements = 0;
       for (const path of capability.paths) {
         const target = join(root, path);
@@ -36,15 +47,27 @@ describe("repository skill contract", () => {
         code: "SKILL_CAPABILITY",
         message: `${capability.owner} does not cover ${capability.name}.`,
       });
-      expect(findings.filter((finding) => finding.code === "SKILL_CAPABILITY")).toHaveLength(1);
+      expect(
+        findings.filter((finding) => finding.code === "SKILL_CAPABILITY"),
+      ).toHaveLength(1);
     }
   });
 
   it("reports missing owner files as structured drift", async () => {
     const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
-    expect(auditSkillContracts(root)).toContainEqual({
+    const findings = auditSkillContracts(root);
+    expect(findings).toContainEqual({
       code: "SKILL_FILE_MISSING",
-      message: "coordinate-project-delivery is missing .agents/skills/coordinate-project-delivery/SKILL.md.",
+      message:
+        "coordinate-project-delivery is missing .agents/skills/coordinate-project-delivery/SKILL.md.",
     });
+    expect(
+      findings
+        .filter(({ message }) => message.endsWith("/SKILL.md."))
+        .map(({ message }) => message),
+    ).toEqual([
+      "coordinate-project-delivery is missing .agents/skills/coordinate-project-delivery/SKILL.md.",
+      "research-content-changes is missing .agents/skills/research-content-changes/SKILL.md.",
+    ]);
   });
 });

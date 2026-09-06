@@ -2,10 +2,15 @@ import { spawnSync } from "node:child_process";
 import { chmodSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-const script = new URL("../../scripts/audit-delivery.ts", import.meta.url).pathname;
-const malformed = new URL("../fixtures/delivery/project-malformed.json", import.meta.url).pathname;
+const script = fileURLToPath(
+  new URL("../../scripts/audit-delivery.ts", import.meta.url),
+);
+const malformed = fileURLToPath(
+  new URL("../fixtures/delivery/project-malformed.json", import.meta.url),
+);
 
 function run(args: string[], path = process.env.PATH) {
   return spawnSync(process.execPath, ["--import", "tsx", script, ...args], {
@@ -30,7 +35,10 @@ describe("delivery audit result classes", () => {
   it("reports actionable gh failures as errors rather than unavailable API", () => {
     const bin = mkdtempSync(join(tmpdir(), "ends-means-gh-"));
     const executable = join(bin, "gh");
-    writeFileSync(executable, "#!/bin/sh\necho 'gh: Not Found (HTTP 404)' >&2\nexit 1\n");
+    writeFileSync(
+      executable,
+      "#!/bin/sh\necho 'gh: Not Found (HTTP 404)' >&2\nexit 1\n",
+    );
     chmodSync(executable, 0o755);
     const result = run(["--live-project"], bin);
     expect(result.status).toBe(2);
@@ -41,11 +49,16 @@ describe("delivery audit result classes", () => {
   it("reports an omitted snapshot path as specific invalid input", () => {
     const result = run(["--project-snapshot"]);
     expect(result.status).toBe(2);
-    expect(result.stderr).toContain("Project state: INVALID (--project-snapshot requires a path.)");
+    expect(result.stderr).toContain(
+      "Project state: INVALID (--project-snapshot requires a path.)",
+    );
   });
 
   it("distinguishes unexpected input errors", () => {
-    const result = run(["--project-snapshot", "/missing/delivery-snapshot.json"]);
+    const result = run([
+      "--project-snapshot",
+      "/missing/delivery-snapshot.json",
+    ]);
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: ERROR");
   });
