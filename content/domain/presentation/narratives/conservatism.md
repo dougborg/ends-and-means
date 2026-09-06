@@ -3,27 +3,29 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
 
 ## meanings
 
-Accounts of conservatism differ between a procedure of cautious change and substantive defenses of particular forms of authority and order.
-Hamilton distinguishes a prominent tradition of gradual reform from dogmatic reaction and from authoritarianism as a necessary commitment.
+Hamilton distinguishes broad and narrow senses, gradual reform from reaction, and procedural from substantive accounts.
+Huntington instead organizes rival definitions as aristocratic, autonomous, and situational theories.
+Those general taxonomies arise from European and North American debates; Balasubramanian's Indian account below supplies one locally grounded classification rather than a universal alternative.
 
 ## arguments
 
-Burke argued that a state needs a capacity for change in order to preserve itself.
+Burke wrote that a state “without the means of some change” lacks the means to conserve itself.
 He also defended inherited institutions and prescription against rebuilding government solely from abstract rights or present choice.
 Those arguments are historically influential without defining every later conservative movement.
 
 ## party-programmes
 
-The German CDU's 1947 Ahlen Programme rejected the existing capitalist order and combined Catholic social, cooperative, and ordoliberal currents.
-Its 1949 Düsseldorf Guidelines instead foregrounded a social market economy organized around competition, price formation, and social protections.
-The shift identifies change in one party's program, not the economic essence of conservatism.
+The German CDU's original 1947 Ahlen Programme rejected the existing capitalist order, while Christine Bach describes its formation as a compromise among competing currents.
+The original 1949 Düsseldorf Guidelines instead foregrounded a social market economy organized around competition, price formation, and social protections.
+These untranslated German program texts show change within Christian democracy but do not define conservatism or establish how the programs operated.
 
 ## bounded-practice
 
-Burke's 1790 publication is a bounded intervention in British debate about the French Revolution, not an institutional test of every claim he made.
-The CDU case is bounded to two economic programs in western Germany and does not establish how those commitments operated in practice.
+England and Wales's first statutory Right to Buy phase enacted a documented Conservative program through tenant purchase rights, discounts, local-authority duties, and central intervention powers.
+Reported access and effects varied by income and housing stock, so the case tests one program rather than defining conservative housing policy.
+In India, Balasubramanian classifies Swatantra's free-economy opposition as economic conservatism while documenting a regionally varied coalition, parliamentary and coalition practices, and women's subordinate organizational roles.
 
 ## comparisons
 
-Conserving an institution does not establish a conservative ideology, and accepting reform does not rule one out.
-Comparison must separate disposition, doctrine, movement, party, program, self-description, and external classification.
+Conservatism can name either a disposition or a self-conscious tradition, and procedural and substantive definitions produce different classifications.
+The Right to Buy and Swatantra cases therefore remain bounded tests, not models inherited by every conservative party or institution.

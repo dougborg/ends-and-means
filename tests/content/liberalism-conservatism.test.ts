@@ -17,8 +17,12 @@ const claims = [
   "mill-colonial-exclusion",
   "mehta-liberal-empire-tension",
   "pateman-contract-gender-boundary",
-  "india-rights-equality",
-  "japan-rights-equality-marriage",
+  "india-equality-before-law",
+  "india-discrimination-grounds",
+  "india-special-provisions",
+  "japan-legal-equality",
+  "japan-marriage-consent",
+  "japan-spousal-equality",
   "japan-rights-drafting-boundary",
   "conservatism-broad-narrow",
   "conservatism-tradition-reform",
@@ -31,11 +35,27 @@ const claims = [
   "ahlen-programme-compromise",
   "duesseldorf-social-market-shift",
   "cdu-programme-change-boundary",
+  "bell-rival-liberalism-methods",
+  "huntington-rival-conservatism-types",
+  "right-to-buy-conservative-programme",
+  "right-to-buy-statutory-rules",
+  "right-to-buy-distribution",
+  "swatantra-economic-conservatism",
+  "swatantra-ordered-progress",
+  "swatantra-gender-limit",
+  "swatantra-opposition-practices",
+  "india-liberal-rights-test",
+  "japan-liberal-rights-test",
+  "right-to-buy-conservatism-boundary",
+  "swatantra-conservatism-boundary",
+  "liberalism-exclusion-evidence-limit",
+  "liberalism-atlantic-taxonomy-limit",
+  "conservatism-genealogy-limit",
 ] as const;
 
 describe("Liberalism and Conservatism evidence", () => {
   it("keeps every substantive claim atomic and locator-backed", () => {
-    expect(claims).toHaveLength(23);
+    expect(claims).toHaveLength(43);
     const sources = new Set<string>();
     for (const id of claims) {
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({
@@ -62,8 +82,8 @@ describe("Liberalism and Conservatism evidence", () => {
     for (const id of [
       "india-constitutional-rights-settlement-1946-1950",
       "japan-constitutional-rights-settlement-1946-1947",
-      "burke-reflections-intervention-1790",
-      "cdu-economic-programmes-1947-1949",
+      "right-to-buy-england-wales-1980-1988",
+      "swatantra-opposition-organization-1959-1967",
     ])
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({
         kind: "case",
@@ -105,7 +125,9 @@ describe("Liberalism and Conservatism guides", () => {
         guide?.sections.find(({ role }) => role === "bounded-practice")
           ?.entityRefs,
       ).toHaveLength(2);
-      expect(researchObligationsForTarget("concept", id)).toHaveLength(2);
+      expect(researchObligationsForTarget("concept", id)).toHaveLength(
+        id === "liberalism" ? 3 : 2,
+      );
     }
   });
 });

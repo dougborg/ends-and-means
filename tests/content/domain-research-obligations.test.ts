@@ -470,6 +470,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "conservative-party-programme-drift",
+    obligationType: "research-gap",
+    target: "concept:conservatism#bounded-practice",
+    status: "open",
+  },
+  {
     id: "democracy-inclusion-measurement-boundary",
     obligationType: "counterevidence",
     target: "concept:democracy#measurement",
@@ -554,13 +560,7 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
-    id: "liberal-conservative-party-label-drift",
-    obligationType: "research-gap",
-    target: "concept:conservatism#party-programmes",
-    status: "open",
-  },
-  {
-    id: "liberalism-exclusion-domination",
+    id: "liberalism-gender-contract-boundary",
     obligationType: "counterargument",
     target: "concept:liberalism#exclusions",
     status: "open",
@@ -569,6 +569,12 @@ const expectedOpenResearchObligations = [
     id: "liberalism-geographic-translation",
     obligationType: "research-gap",
     target: "concept:liberalism#meanings",
+    status: "open",
+  },
+  {
+    id: "liberalism-imperial-domination",
+    obligationType: "counterargument",
+    target: "concept:liberalism#exclusions",
     status: "open",
   },
   {

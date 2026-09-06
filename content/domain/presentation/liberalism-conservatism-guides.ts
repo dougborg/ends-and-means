@@ -8,13 +8,18 @@ const liberalismDossier = attachNarrative("liberalism.md", {
   kind: "dossier" as const,
   label: "Liberalism dossier",
   description:
-    "Liberalism's rival accounts of liberty, justified authority, institutions, and social justice, together with imperial and gender exclusions that qualify universal claims.",
+    "Liberalism names competing traditions centered on liberty and justified authority, not one institutional package. British-imperial and gender critiques qualify the reach of those claims, while racial and class exclusions still require separate evidence.",
   subject: { kind: "concept" as const, id: "liberalism" },
   standfirst: "",
   standfirstStatementIds: [
     "liberalism-plural-traditions",
     "liberalism-authority-justification",
     "liberalism-label-insufficient",
+    "mill-colonial-exclusion",
+    "mehta-liberal-empire-tension",
+    "pateman-contract-gender-boundary",
+    "liberalism-exclusion-evidence-limit",
+    "liberalism-atlantic-taxonomy-limit",
   ],
   sections: [
     {
@@ -26,6 +31,8 @@ const liberalismDossier = attachNarrative("liberalism.md", {
         "liberalism-plural-traditions",
         "liberalism-liberty-disputes",
         "liberalism-old-new-boundary",
+        "bell-rival-liberalism-methods",
+        "liberalism-atlantic-taxonomy-limit",
       ],
     },
     {
@@ -47,6 +54,7 @@ const liberalismDossier = attachNarrative("liberalism.md", {
         "mill-colonial-exclusion",
         "mehta-liberal-empire-tension",
         "pateman-contract-gender-boundary",
+        "liberalism-exclusion-evidence-limit",
       ],
     },
     {
@@ -55,9 +63,15 @@ const liberalismDossier = attachNarrative("liberalism.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "india-rights-equality",
-        "japan-rights-equality-marriage",
+        "india-equality-before-law",
+        "india-discrimination-grounds",
+        "india-special-provisions",
+        "india-liberal-rights-test",
+        "japan-legal-equality",
+        "japan-marriage-consent",
+        "japan-spousal-equality",
         "japan-rights-drafting-boundary",
+        "japan-liberal-rights-test",
       ],
       relatedEntityRefs: [
         {
@@ -78,7 +92,6 @@ const liberalismDossier = attachNarrative("liberalism.md", {
       statementIds: [
         "liberalism-plural-traditions",
         "liberalism-label-insufficient",
-        "conservatism-broad-narrow",
       ],
     },
   ],
@@ -91,13 +104,17 @@ const conservatismDossier = attachNarrative("conservatism.md", {
   kind: "dossier" as const,
   label: "Conservatism dossier",
   description:
-    "Conservatism's disputed meanings, arguments for inheritance and prudent change, and variation between a canonical text and postwar party programs.",
+    "Conservatism can name a disposition or a self-conscious tradition, with rival procedural and substantive definitions. British housing and Indian opposition cases test two classified programs without making either a universal model.",
   subject: { kind: "concept" as const, id: "conservatism" },
   standfirst: "",
   standfirstStatementIds: [
     "conservatism-broad-narrow",
     "conservatism-tradition-reform",
     "conservatism-authoritarian-boundary",
+    "conservatism-procedural-substantive",
+    "right-to-buy-conservatism-boundary",
+    "swatantra-conservatism-boundary",
+    "conservatism-genealogy-limit",
   ],
   sections: [
     {
@@ -111,6 +128,8 @@ const conservatismDossier = attachNarrative("conservatism.md", {
         "conservatism-reaction-boundary",
         "conservatism-authoritarian-boundary",
         "conservatism-procedural-substantive",
+        "huntington-rival-conservatism-types",
+        "conservatism-genealogy-limit",
       ],
     },
     {
@@ -122,7 +141,7 @@ const conservatismDossier = attachNarrative("conservatism.md", {
     },
     {
       id: "party-programmes",
-      heading: "Can a conservative party change economic programs?",
+      heading: "How did one Christian-democratic program change?",
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
@@ -138,13 +157,22 @@ const conservatismDossier = attachNarrative("conservatism.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "burke-change-conservation",
-        "burke-inheritance-prudence",
-        "cdu-programme-change-boundary",
+        "right-to-buy-conservative-programme",
+        "right-to-buy-statutory-rules",
+        "right-to-buy-distribution",
+        "right-to-buy-conservatism-boundary",
+        "swatantra-economic-conservatism",
+        "swatantra-ordered-progress",
+        "swatantra-gender-limit",
+        "swatantra-opposition-practices",
+        "swatantra-conservatism-boundary",
       ],
       relatedEntityRefs: [
-        { kind: "case" as const, id: "burke-reflections-intervention-1790" },
-        { kind: "case" as const, id: "cdu-economic-programmes-1947-1949" },
+        { kind: "case" as const, id: "right-to-buy-england-wales-1980-1988" },
+        {
+          kind: "case" as const,
+          id: "swatantra-opposition-organization-1959-1967",
+        },
       ],
     },
     {
@@ -155,7 +183,8 @@ const conservatismDossier = attachNarrative("conservatism.md", {
       statementIds: [
         "conservatism-broad-narrow",
         "conservatism-procedural-substantive",
-        "cdu-programme-change-boundary",
+        "right-to-buy-conservatism-boundary",
+        "swatantra-conservatism-boundary",
       ],
     },
   ],
@@ -176,8 +205,8 @@ const guide = (
     label: id === "liberalism" ? "Liberalism" : "Conservatism",
     description:
       id === "liberalism"
-        ? "Distinguish liberal claims about liberty and justified authority from particular institutions, parties, and unequal historical applications."
-        : "Distinguish conservative dispositions and traditions from reaction, authoritarianism, and the changing programs of particular parties.",
+        ? "Liberalism contains competing accounts of liberty and justified authority whose institutional meanings and historical exclusions must be specified."
+        : "Conservatism can name a disposition or political tradition, and its relationship to reform, authority, and party programs remains disputed.",
     publicationStatus: "reviewed",
     primarySubject: { kind: "concept", id },
     searchQueries: [
@@ -257,7 +286,8 @@ export const liberalismConservatismGuideDocuments = [
       heading: "What remains open?",
       researchObligationIds: [
         "liberalism-geographic-translation",
-        "liberalism-exclusion-domination",
+        "liberalism-imperial-domination",
+        "liberalism-gender-contract-boundary",
       ],
     },
   ]),
@@ -287,7 +317,7 @@ export const liberalismConservatismGuideDocuments = [
     {
       id: "institutions-and-mechanisms",
       role: "institutions-and-mechanisms",
-      heading: "Can a party change economic programs?",
+      heading: "How did one Christian-democratic program change?",
       narrativeRefs: [
         { dossierId: "conservatism-dossier", sectionId: "party-programmes" },
       ],
@@ -300,8 +330,8 @@ export const liberalismConservatismGuideDocuments = [
         { dossierId: "conservatism-dossier", sectionId: "bounded-practice" },
       ],
       entityRefs: [
-        { kind: "case", id: "burke-reflections-intervention-1790" },
-        { kind: "case", id: "cdu-economic-programmes-1947-1949" },
+        { kind: "case", id: "right-to-buy-england-wales-1980-1988" },
+        { kind: "case", id: "swatantra-opposition-organization-1959-1967" },
       ],
     },
     {
@@ -326,7 +356,7 @@ export const liberalismConservatismGuideDocuments = [
       role: "open-questions",
       heading: "What remains open?",
       researchObligationIds: [
-        "liberal-conservative-party-label-drift",
+        "conservative-party-programme-drift",
         "conservatism-geographic-translation",
       ],
     },

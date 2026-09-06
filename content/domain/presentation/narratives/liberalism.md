@@ -3,27 +3,28 @@ It does not by itself specify a market system, welfare program, constitution, pa
 
 ## meanings
 
-Liberals disagree about negative, positive, and republican liberty and about how social justice and public action relate to freedom.
-The familiar split between classical and new liberalisms marks part of that disagreement rather than two exhaustive packages.
+Gaus, Courtland, and Schmidtz distinguish negative, positive, and republican liberty and contrast classical with new liberal traditions.
+Bell offers a rival taxonomy by separating prescriptive, comprehensive, and explanatory definitions of liberalism.
+Both taxonomies come from English-language scholarship; the constitutional cases below do not replace missing local intellectual histories.
 
 ## institutions
 
-Mill argued that preventing harm to others could justify coercion over an adult, while a person's own good could not.
+Mill argued that coercion over an adult requires preventing harm to others and that a person's own good is not enough.
 That argument is one influential liberal position, not a complete institutional design or the sole meaning of liberty.
 
 ## exclusions
 
-Mill expressly withheld his liberty principle from peoples he classified as barbarians.
-Mehta examines how British liberals joined commitments to liberty to arguments for imperial rule, while Pateman argues that social-contract traditions obscured political power over women.
-These critiques test who counted within formally general accounts of freedom.
+Mill expressly withheld his liberty principle from peoples he called “barbarians.”
+Mehta interprets British liberal justifications of empire through assumptions about reason and progress, while Pateman interprets social-contract narratives as obscuring men's political right over women.
+These sources establish British-imperial and gender critiques; they do not supply comparable evidence about racial and class exclusions or accounts from excluded people.
 
 ## bounded-practice
 
-India's Constitution separately specifies equality before the law and prohibitions on listed forms of discrimination.
-Japan's postwar Constitution specifies legal equality and equal rights in marriage, but its drafting also involved Japanese proposals and Allied occupation authority.
-Neither settlement makes an entire country or its later practice an embodiment of liberalism.
+India's Constitution separately specifies equality before law, listed discrimination grounds, and permitted special provisions.
+Japan's postwar Constitution separately specifies legal equality, mutual consent to marriage, and equal spousal rights; Japanese scholars trace these provisions through Japanese drafts and Allied occupation drafting.
+The cases test how rights debated within liberal traditions were formalized without classifying either settlement as a whole as liberal or establishing later practice.
 
 ## comparisons
 
-Liberalism and conservatism have changed through arguments with each other, but neither occupies one permanent position on a universal left–right line.
-A comparison must identify the particular doctrine, movement, institution, party program, place, and period at issue.
+Liberalism contains competing traditions, and a liberal label does not identify one institutional package.
+That boundary requires comparisons to name the particular doctrine, institution, or program at issue.
