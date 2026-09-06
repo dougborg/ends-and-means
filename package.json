@@ -25,6 +25,7 @@
     "validate": "node --import tsx scripts/validate-domain.ts",
     "audit:content": "node --import tsx scripts/audit-content.ts",
     "audit:provenance": "node --import tsx scripts/audit-provenance.ts",
+    "inventory:dependencies": "node --import tsx scripts/generate-lockfile-provenance.ts",
     "audit:delivery": "node --import tsx scripts/audit-repository-delivery.ts && node --import tsx scripts/audit-skill-contracts.ts && node --import tsx scripts/audit-delivery.ts",
     "audit:content-integrity": "node --import tsx scripts/verify-content-integrity.ts",
     "verify": "pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual"

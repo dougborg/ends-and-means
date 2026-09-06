@@ -15,19 +15,34 @@
     { "id": "provenance", "pathPrefix": "provenance/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" }
   ],
   "rootFiles": [
-    ".gitignore", ".markdownlint-cli2.mjs", ".node-version", ".nvmrc", "astro.config.ts", "biome.json", "CONTRIBUTING.md", "package.json", "playwright.config.ts", "pnpm-lock.yaml", "pnpm-workspace.yaml", "README.md", "ROADMAP.md", "SECURITY.md", "tsconfig.json", "vitest.config.ts"
+    { "path": ".gitignore", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": ".markdownlint-cli2.mjs", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "path": ".node-version", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": ".nvmrc", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": "astro.config.ts", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "path": "biome.json", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": "CONTRIBUTING.md", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "path": "package.json", "material": "mixed-third-party-metadata", "kind": "package-manifest", "distribution": "source-only" },
+    { "path": "playwright.config.ts", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "path": "pnpm-lock.yaml", "material": "generated-third-party-metadata", "kind": "dependency-lockfile", "distribution": "source-only" },
+    { "path": "pnpm-workspace.yaml", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": "README.md", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "path": "ROADMAP.md", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "path": "SECURITY.md", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "path": "tsconfig.json", "material": "repository-owned", "kind": "configuration", "distribution": "source-only" },
+    { "path": "vitest.config.ts", "material": "repository-owned", "kind": "code", "distribution": "source-only" }
   ],
   "assetClasses": [
-    { "class": "fonts", "extensions": [".otf", ".ttf", ".woff", ".woff2"], "state": "none", "note": "CSS uses system font stacks; no font files or remote font service are bundled." },
-    { "class": "icons", "extensions": [".ico"], "state": "none", "note": "No icon files are bundled." },
-    { "class": "flags", "extensions": [], "state": "none", "note": "No flags are bundled; design guidance discourages flag imagery." },
-    { "class": "logos", "extensions": [], "state": "none", "note": "The wordmark is authored text, not a third-party logo asset." },
-    { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "state": "none", "note": "No image files are bundled." },
-    { "class": "audio-video", "extensions": [".aac", ".m4a", ".mp3", ".mp4", ".ogg", ".wav", ".webm"], "state": "none", "note": "No audio or video files are bundled." },
-    { "class": "datasets", "extensions": [".csv", ".parquet"], "state": "none", "note": "Canonical TypeScript records cite datasets but do not copy dataset contents." },
-    { "class": "quotations", "extensions": [], "state": "present", "note": "Short attributed wording exists in authored canonical Statements and the non-public archive; cited Sources are references, not copied source works." },
-    { "class": "imported-metadata", "extensions": [], "state": "present", "note": "Legacy JSON import reports and overrides are non-public, provenance-preserving archive inputs with unresolved original authorship." },
-    { "class": "generated-artifacts", "extensions": [], "state": "generated", "note": "dist, coverage, screenshots, caches, and node_modules are reproducible outputs excluded from Git; they inherit inputs and third-party notices rather than becoming a new licensable source boundary." }
+    { "class": "fonts", "extensions": [".otf", ".ttf", ".woff", ".woff2"], "paths": [], "state": "none", "note": "CSS uses system font stacks; no font files or remote font service are bundled." },
+    { "class": "icons", "extensions": [".ico"], "paths": [], "state": "none", "note": "No icon files are bundled." },
+    { "class": "flags", "extensions": [], "paths": [], "state": "none", "note": "No flags are bundled; design guidance discourages flag imagery." },
+    { "class": "logos", "extensions": [], "paths": [], "state": "none", "note": "The wordmark is authored text, not a third-party logo asset." },
+    { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "paths": [], "state": "none", "note": "No image files are bundled." },
+    { "class": "audio-video", "extensions": [".aac", ".m4a", ".mp3", ".mp4", ".ogg", ".wav", ".webm"], "paths": [], "state": "none", "note": "No audio or video files are bundled." },
+    { "class": "datasets", "extensions": [".csv", ".parquet"], "paths": [], "state": "none", "note": "Canonical TypeScript records cite datasets but do not copy dataset contents." },
+    { "class": "quotations", "extensions": [], "paths": ["archive/legacy-research/docs/system-comparison-by-crux-v1.md"], "state": "present", "note": "A short attributed quotation exists in the non-public archive; cited Sources are references, not copied source works." },
+    { "class": "imported-metadata", "extensions": [], "paths": ["archive/legacy-research/content/import-overrides/overrides.json", "archive/legacy-research/reports/framework-migration.json", "archive/legacy-research/reports/import-report.json"], "state": "present", "note": "Legacy JSON import reports and overrides are non-public, provenance-preserving archive inputs with unresolved original authorship." },
+    { "class": "generated-artifacts", "extensions": [], "paths": [], "state": "generated", "note": "dist, coverage, screenshots, caches, and node_modules are reproducible outputs excluded from Git; they inherit inputs and third-party notices rather than becoming a new licensable source boundary." }
   ],
   "thirdPartyAssets": [
     {
