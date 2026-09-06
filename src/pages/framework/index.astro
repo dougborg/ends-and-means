@@ -1,5 +1,6 @@
 ---
 import ComparisonGrid from "../../components/ComparisonGrid.astro";
+import EditorialHeader from "../../components/EditorialHeader.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { publicEntitiesOfKind } from "../../lib/domain/canonical";
 
@@ -10,11 +11,9 @@ const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+c
 
 <BaseLayout title="Method" description="How Ends and Means researches, classifies, and explains contested political and economic subjects." fullBleed>
   <article class="editorial-page method-page">
-    <header class="editorial-header">
-      <p class="coordinate">METHOD</p>
-      <h1>How we research and classify.</h1>
+    <EditorialHeader coordinate="METHOD" title="How we research and classify.">
       <p class="dek measure-standfirst">Ends and Means starts with a familiar question, gives a plain answer, and keeps the evidence and uncertainty close enough to inspect. It separates what people wanted, what institutions promised, what happened in a particular setting, why it may have happened, and how anyone judges the result.</p>
-    </header>
+    </EditorialHeader>
 
     <section class="model-boundary" aria-labelledby="subjects-title">
       <p class="coordinate">WHAT THE SITE DOES</p>

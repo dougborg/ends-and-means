@@ -39,14 +39,22 @@ the token layer when they derive from the active semantic foreground.
 - `--measure-apparatus`: the 64rem evidence and reference region; and
 - `--measure-rail`: the 13–18rem on-page question rail.
 
-Local `ch` widths may balance a heading. They must not create a new page measure.
+Local `ch` widths may balance a heading.
+They must not create a new page measure.
 Structural grids may define minimum track widths according to their content.
+The design-system test rejects recreations of the established prose and
+apparatus widths in production stylesheets, so new page families use a named
+role instead of accumulating route-specific near-duplicates.
 
 Spacing follows a 4px base: 4, 8, 12, 16, 24, 32, 48, and 64px. Use
 `section-stack` for learner sections, `apparatus-stack` for denser evidence, and
 the named page/section spacing tokens for route compositions. Evidence may have
 a tighter internal rhythm, but its boundary from the narrative must remain
 clear.
+Subject Guide sections use the section token rather than a larger viewport-based
+padding value.
+At tablet widths the question rail becomes a native compact outline, reserving
+the available width for sustained reading without changing the document order.
 
 ## Shared components
 

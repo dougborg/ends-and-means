@@ -1,7 +1,7 @@
 # Design-system and theme checkpoint
 
-**Status:** approved direction; Slice 1 Light-theme foundations implemented for
-review, with theme switching reserved for Slice 2
+**Status:** approved direction; Slice 1 Light-theme foundations expanded across
+the current corpus for review, with theme switching reserved for Slice 2
 
 This checkpoint proposes how to extract the existing editorial identity into a
 small system and add Light, Dark, and System themes. It is grounded in the
@@ -11,22 +11,41 @@ competing for first attention.
 
 ## Baseline reviewed
 
-The review used current `origin/main` and the real published corpus, not fixture
-copy. The production build generated 114 pages. The existing visual suite passed
-21 selected desktop, tablet, and mobile checks for these representative routes:
+The post-corpus review rebased onto the current `main` and used the real
+published corpus, not fixture copy.
+The production build generated 245 pages.
+The expanded visual suite covers desktop, tablet, and mobile checks for the
+existing page families and representative additions from every completed corpus
+tranche, including:
 
 - Subject Guide: `/guides/economic-democracy/`
+- newer ideological guides: `/guides/authoritarianism/`,
+  `/guides/capitalism/`, `/guides/feminism/`, and `/guides/liberalism/`
+- organizational-diversity guide: `/guides/matriliny-property-authority/`
 - Case: `/cases/swedish-wage-earner-funds/`
+- newer bounded cases: `/cases/bonjol-melayu-ulayat-governance/`,
+  `/cases/iceland-parental-leave-2000-2018/`, and
+  `/cases/italian-fascist-dictatorship-1925-1943/`
 - Compare: `/compare/`
 - Question: `/challenges/authority-and-accountability/`
 - Method: `/framework/`
 - Reading: `/reading/`
 - sparse page: `/concepts/institutional-abolition/`
 
-The exact-base before screenshots are in `.artifacts/slice1-before/`; matching
-Slice 1 screenshots are in `.artifacts/slice1-after/`. Each route has desktop,
-tablet, and mobile `page.png` output. These directories are intentionally ignored
-and are review evidence rather than product assets.
+The original exact-base before screenshots are in `.artifacts/slice1-before/`;
+matching initial Slice 1 screenshots are in `.artifacts/slice1-after/`.
+The post-corpus pass additionally inspected the listed routes at 1440×1000,
+820×1180, and 390×844.
+Screenshot directories remain intentionally ignored review evidence rather than
+product assets.
+
+The capstone found two layout debts exposed by the larger corpus.
+The desktop question rail was still consuming too much of an 820px tablet
+viewport, and Subject Guide sections retained a legacy padding rule that could
+reach 3rem on both edges despite already having ruled boundaries.
+Slice 1 now collapses the rail to the native outline below 60rem, uses the shared
+section rhythm, and normalizes repeated 68–72ch and 46–64rem widths to the prose
+or apparatus roles.
 
 ## Inventory
 

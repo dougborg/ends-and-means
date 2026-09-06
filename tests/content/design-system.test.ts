@@ -50,6 +50,15 @@ describe("design-system foundations", () => {
     }
   });
 
+  it("uses named width roles instead of recreating the shared content measures", async () => {
+    const contents = await stylesheetContents();
+    const duplicatedMeasure = /max-width:\s*(?:68ch|70ch|72ch|46rem|48rem|58rem|64rem|78rem|90rem)\s*;/;
+
+    for (const { file, css } of contents) {
+      expect(css, file).not.toMatch(duplicatedMeasure);
+    }
+  });
+
   it("gives native summaries the same visible focus foundation", async () => {
     const base = await readFile(path.join(root, "src/styles/base.css"), "utf8");
     expect(base).toContain(":where(a, button, summary, [tabindex]):focus-visible");
