@@ -4,7 +4,7 @@ It describes how capital is accumulated institutionally, not who necessarily own
 ## what-does-collective-mean-here
 
 The assets stay in a common institution instead of becoming divisible personal accounts.
-That institution may represent workers, union members, citizens, or another stated constituency, but the label alone does not show whether those people can elect governors, direct investments, receive income, or withdraw capital.
+That institution may represent workers, union members, citizens, or another stated constituency, but the label alone does not establish democratic control over investment decisions.
 
 ## how-is-this-different-from-investment-statistics
 
@@ -16,7 +16,7 @@ Collective capital formation instead names an institutional arrangement for accu
 
 Meidner's original proposal transferred newly issued shares into collective funds.
 The 1981 revision instead funded share purchases with a levy on excess profits.
-Neither financing method determines governance, so analysis must separately identify the group a fund represents and how that group selects, directs, or removes decision-makers.
+Neither financing method determines governance, so analysis must separately identify the group a fund represents and the authority that group holds.
 Other rules determine voting authority, beneficiaries, use of returns, transfer rights, and whether contributors have personal claims.
 These choices can connect the arrangement to social ownership or economic democracy, but accumulation alone does not establish either one.
 

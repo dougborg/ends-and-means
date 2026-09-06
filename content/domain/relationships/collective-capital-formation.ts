@@ -44,14 +44,14 @@ const citations = [
   [
     "collective-capital-formation-financing-governance-boundary",
     "furendal-oneill-collective-capital-source",
-    "section 2, pp. 310–312",
+    "section 2, p. 310",
     "supports",
     "financing-governance-boundary",
   ],
   [
     "collective-capital-formation-governing-constituency",
     "furendal-oneill-collective-capital-source",
-    "sections 2 and 4.2, pp. 310–312 and 322–325",
+    "section 5, pp. 319–320",
     "supports",
     "governing-constituency",
   ],
@@ -65,7 +65,7 @@ const citations = [
   [
     "collective-capital-formation-rights-boundary",
     "furendal-oneill-collective-capital-source",
-    "sections 2 and 4.2, pp. 310–312 and 322–325",
+    "section 5, pp. 319–320",
     "supports",
     "rights-boundary-furendal",
   ],
@@ -100,7 +100,7 @@ const citations = [
   [
     "collective-capital-formation-unclear-benefits-objection",
     "warner-asymmetric-mobilisation-source",
-    "section ‘Theoretical implications: Asymmetries in everyday experience and mobilisation’, pp. 518–519",
+    "section ‘1978–1981: Muted support, vigorous opposition and the watering down of wage-earner funds’, pp. 513–514",
     "supports",
     "unclear-benefits-objection",
   ],
@@ -146,7 +146,9 @@ export const collectiveCapitalFormationRelationshipDocuments = [
         subject: { kind: "case", id: "swedish-wage-earner-funds" },
         object: concept,
         status: "qualified",
-        statementIds: ["collective-capital-formation-swedish-case-classification"],
+        statementIds: [
+          "collective-capital-formation-swedish-case-classification",
+        ],
       },
     ],
   },

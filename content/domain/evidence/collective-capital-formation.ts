@@ -238,9 +238,9 @@ export const collectiveCapitalFormationEvidenceDocuments = [
       kind: "statement",
       label: "A collective fund must identify its governing constituency",
       description:
-        "A governance boundary requiring the represented group and its authority to be stated separately.",
-      statementKind: "editorial-interpretation",
-      text: "Calling an institution collective does not identify its governing constituency: analysis must state which group the fund represents and how that group selects, directs, or removes decision-makers.",
+        "A governance boundary showing that collective-capital designs can represent different groups.",
+      statementKind: "attributed-proposal",
+      text: "Furendal and O'Neill argue that a collective-capital institution can be designed to represent different constituencies, including workers within a firm or sector, citizens in a region, and other social stakeholders.",
       ...reviewed,
     },
   },
@@ -264,9 +264,9 @@ export const collectiveCapitalFormationEvidenceDocuments = [
       kind: "statement",
       label: "Accumulation does not settle ownership rights",
       description:
-        "A boundary separating the existence of a collective fund from control and benefit rights.",
+        "A boundary separating the existence of a collective fund from democratic control over investment.",
       statementKind: "editorial-interpretation",
-      text: "Evidence that a fund accumulates assets does not by itself establish who can direct investments, exercise shareholder votes, receive returns, replace governors, or claim the underlying capital.",
+      text: "Evidence that a fund accumulates assets does not by itself establish democratic control over its investment decisions.",
       ...reviewed,
     },
   },
@@ -314,7 +314,8 @@ export const collectiveCapitalFormationEvidenceDocuments = [
     entity: {
       id: "collective-capital-formation-purpose-objection",
       kind: "statement",
-      label: "Some activists objected to capital formation displacing worker influence",
+      label:
+        "Some activists objected to capital formation displacing worker influence",
       description:
         "A distinct objection about which purpose the proposal placed first.",
       statementKind: "observation",
