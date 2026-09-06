@@ -138,7 +138,7 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       contributorDisplay: ["María E. Fernández-Giménez"],
       publicationYear: 2002,
       publisher: "Human Ecology",
-      identifiers: { doi: "10.1023/A:1014562911434" },
+      identifiers: { doi: "10.1023/A:1014562913014" },
       resourceLinks: [
         {
           purpose: "authorized-reading",

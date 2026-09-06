@@ -46,6 +46,27 @@ const evidenceTuples = [
 ] as const;
 
 describe("bounded Ruwalla and Jinst cases", () => {
+  it("pins the Fernández-Giménez article to its exact manifestation metadata", () => {
+    const source = entityById("fernandez-gimenez-pastoral-tenure-source");
+    expect(source).toMatchObject({
+      kind: "source",
+      title: "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure: A Case Study From Postsocialist Mongolia",
+      sourceType: "article",
+      workId: "fernandez-gimenez-pastoral-tenure-work",
+      contributorDisplay: ["María E. Fernández-Giménez"],
+      publicationYear: 2002,
+      publisher: "Human Ecology",
+      identifiers: { doi: "10.1023/A:1014562913014" },
+      resourceLinks: [
+        {
+          purpose: "authorized-reading",
+          url: "https://cdn.greensoft.mn/uploads/users/1277/files/Greenmongolia/%D0%93%D0%B0%D0%B4%D0%B0%D0%B0%D0%B4/Mongolian_steppe_studies/Article_Gadaad_PDF/FernandezGimenez_spatialsocialboundarieslandtenureMongolia_HE_2002.pdf",
+          label: "Read the full article",
+        },
+      ],
+    });
+  });
+
   it("publishes exact case and episode boundaries without retrojection", () => {
     expect(entityById("ruwalla-borderland-organization")).toMatchObject({
       kind: "case",
