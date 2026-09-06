@@ -243,12 +243,17 @@ describe("SubjectGuide publication boundaries", () => {
 
   it.each([
     "A learner path through the subject.",
+    "Learner paths through the subject.",
     "A learner-path through the subject.",
     "A learner journey through the subject.",
+    "Learner journeys through the subject.",
     "A learner-first account of the subject.",
     "A learning path through the subject.",
+    "Learning paths through the subject.",
     "A learning journey through the subject.",
+    "Learning journeys through the subject.",
     "A reader journey through the subject.",
+    "Reader journeys through the subject.",
   ])("rejects internal audience framing in public guide identity: %s", (description) => {
     const errors = errorsAfter((guide) => {
       guide.description = description;
