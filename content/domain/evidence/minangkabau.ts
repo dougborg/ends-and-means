@@ -384,7 +384,7 @@ const entities = [
     label: "Adat is broader than a single rulebook",
     description: "A translation note for a retained local term.",
     statementKind: "definition",
-    text: "In this guide, adat retains the local term for customs, beliefs, norms, and laws; translating it only as ‘customary law’ would narrow the practices examined by the sources.",
+    text: "Adat can encompass customs, beliefs, norms, and laws; translating it only as ‘customary law’ would narrow the practices examined by the sources.",
   },
   {
     id: "nagari-translation-boundary",
