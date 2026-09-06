@@ -738,10 +738,10 @@ test("global navigation remains ordered, reachable, and legible across constrain
     await page.goto("/concepts/economic-democracy/");
     const result = await page.evaluate(() => ({
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      targets: [...document.querySelectorAll(".primary-nav a, .site-map a")].map((link) => link.getBoundingClientRect().height),
+      targets: [...document.querySelectorAll(".primary-nav a, .mobile-navigation a, .site-map a")].map((link) => link.getBoundingClientRect().height),
     }));
     expect(result.overflow).toBeLessThanOrEqual(1);
-    expect(Math.min(...result.targets)).toBeGreaterThanOrEqual(44);
+    expect(result.targets.filter((height) => height > 0).every((height) => height >= 44)).toBe(true);
   }
 
   await page.setViewportSize({ width: 640, height: 900 });
@@ -751,10 +751,64 @@ test("global navigation remains ordered, reachable, and legible across constrain
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
 
+});
+
+test("mobile current route survives forced colors and reduced motion", async ({ page }) => {
   await page.emulateMedia({ forcedColors: "active", reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/concepts/economic-democracy/");
-  const currentLink = page.getByRole("navigation", { name: "Primary" }).locator('[aria-current="page"]');
+  await page.locator("details.mobile-navigation summary").click();
+  const currentLink = page.getByRole("navigation", { name: "Mobile navigation" }).locator('[aria-current="page"]');
   expect(await currentLink.evaluate((link) => getComputedStyle(link).textDecorationLine)).toContain("underline");
+});
+
+test("mobile menu is compact, complete, and predictably enhanced", async ({ page }) => {
+  for (const width of [320, 390, 430]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/concepts/economic-democracy/");
+    const header = page.locator(".site-header");
+    const disclosure = page.locator("details.mobile-navigation");
+    const summary = disclosure.locator("summary");
+    const height = await header.evaluate((element) => element.getBoundingClientRect().height);
+    expect(height).toBeGreaterThanOrEqual(56);
+    expect(height).toBeLessThanOrEqual(64);
+    await expect(summary).toContainText("Menu");
+    await expect(summary).toContainText("Explore");
+    await summary.focus();
+    await page.keyboard.press("Enter");
+    await expect(disclosure).toHaveAttribute("open", "");
+    await expect(page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link")).toHaveCount(8);
+    await page.keyboard.press("Escape");
+    await expect(disclosure).not.toHaveAttribute("open", "");
+    await expect(summary).toBeFocused();
+    await summary.click();
+    await page.mouse.click(5, 880);
+    await expect(disclosure).not.toHaveAttribute("open", "");
+  }
+
+  // A 1280px layout viewport resolves to these CSS widths at 200% and 400% zoom.
+  for (const width of [640, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/sources/erixon-rehn-meidner-model-source/");
+    const disclosure = page.locator("details.mobile-navigation");
+    await disclosure.locator("summary").click();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+    await expect(disclosure.locator('[aria-current="page"]')).toHaveText(/Sources/);
+  }
+});
+
+test("mobile menu retains native navigation without JavaScript", async ({ browser }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport: { width: 320, height: 900 } });
+  const page = await context.newPage();
+  await page.goto("/guides/economic-democracy/");
+  const disclosure = page.locator("details.mobile-navigation");
+  await disclosure.locator("summary").click();
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(disclosure.getByRole("link")).toHaveCount(8);
+  await expect(disclosure.locator('[aria-current="page"]')).toHaveText(/Explore/);
+  await context.close();
 });
 
 test("homepage purpose and evidence trail survive no JavaScript, zoom, and keyboard use", async ({ browser, page }, testInfo) => {
