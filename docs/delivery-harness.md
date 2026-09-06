@@ -46,6 +46,19 @@ Ready reports are deterministically sorted by Priority (`Now`, `Next`, `Later`) 
 An active In-progress branch must have a successful base comparison, but `main` advancing during implementation is not a failure and does not trigger rebase churn.
 Current-base evidence becomes blocking at In-review handoff and remains required for integration.
 
+Completed, locally verified work opens as ready for review by default.
+Draft pull requests are reserved for explicitly experimental approaches or deliberate early-feedback checkpoints with substantial known work remaining.
+Their linked issues remain `In progress`; the live audit rejects both a non-draft open pull request left `In progress` and a draft pull request represented as `In review`.
+Mark the pull request ready before moving its issue to `In review`.
+
+Stack pull requests only for a real dependency chain in the same repository.
+The bottom layer targets `main`; each upper layer targets the branch directly below it and stays independently reviewable.
+Unrelated work remains parallel.
+The live audit verifies a pull request against its declared base branch rather than assuming every reviewed branch targets `main`.
+Merge stacks bottom-up with rebase integration, and repeat exact-head checks and attestations whenever GitHub automatically rebases or retargets an upper layer.
+Cross-cutting audits are capstone sweeps rather than default stack layers.
+After a contributing content or interface tranche lands, rebase and rerun the applicable corpus-integrity, presentation-consistency, navigation, accessibility, and delivery audits over the combined baseline before integrating their findings.
+
 Review evidence is valid only for the pull request's exact current head.
 An actual Copilot review is accepted only when GitHub reports the trusted bot identity and that exact reviewed commit.
 After a separately assigned review, a repository owner, member, or collaborator records this machine-readable, privacy-safe PR comment:
@@ -73,8 +86,8 @@ It cannot prove which internal agent performed the independent review or why Cop
 The public marker is therefore the repository coordinator's accountable assertion that a separately assigned review occurred, not cryptographic proof of internal-agent independence.
 Keep internal agent handles, assignments, worktree paths, quota state, and operational explanations in private coordination state rather than public review evidence.
 
-For open pull requests created under the earlier contract, request Copilot normally, then add the two-line adversarial marker for the exact current head.
-Add the two-line unavailable marker only if no Copilot review appears.
+For open pull requests created under the earlier contract, add the two-line adversarial marker for the exact current head after independent review.
+When Copilot is known to be unavailable for the delivery window, do not repeat requests on every pull request; add the two-line unavailable marker instead.
 Do not rewrite unrelated review history; after any rebase, repeat review and replace the stale evidence with new exact-head markers.
 
 For diagnosis or fixture development, pass a stored normalized snapshot:

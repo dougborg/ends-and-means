@@ -65,8 +65,10 @@ const actorSchema = z.object({ login: z.string().min(1) }).passthrough();
 const prViewSchema = z
   .object({
     state: z.enum(["OPEN", "CLOSED", "MERGED"]),
+    baseRefName: z.string().min(1),
     headRefName: z.string().min(1),
     headRefOid: commitOidSchema,
+    isDraft: z.boolean(),
     author: actorSchema,
     reviews: z.array(
       z
@@ -159,19 +161,19 @@ function ownershipFrom(comments: Array<{ body: string }>) {
   return undefined;
 }
 
-function branchEvidence(branch: string) {
+function branchEvidence(base: string, branch: string) {
   const comparison = parseJson(
-    gh(["api", githubComparePath("main", branch)]),
+    gh(["api", githubComparePath(base, branch)]),
     compareSchema,
     `branch ${branch}`,
   );
-  const main = parseJson(
-    gh(["api", "repos/dougborg/ends-and-means/git/ref/heads/main"]),
+  const baseRef = parseJson(
+    gh(["api", `repos/dougborg/ends-and-means/git/ref/heads/${base}`]),
     mainRefSchema,
-    "main ref",
+    `base ref ${base}`,
   );
   return {
-    baseCurrent: comparison.merge_base_commit.sha === main.object.sha,
+    baseCurrent: comparison.merge_base_commit.sha === baseRef.object.sha,
     historyLinear: comparison.commits.every(
       (commit) => commit.parents.length === 1,
     ),
@@ -187,14 +189,16 @@ function prEvidence(url: string) {
       "--repo",
       repository,
       "--json",
-      "state,headRefName,headRefOid,author,reviews,comments",
+      "state,baseRefName,headRefName,headRefOid,isDraft,author,reviews,comments",
     ]),
     prViewSchema,
     `pull request ${url}`,
   );
   return {
     state: pr.state,
+    baseRefName: pr.baseRefName,
     headRefName: pr.headRefName,
+    isDraft: pr.isDraft,
     reviewEvidence: reviewEvidenceForHead(
       pr.headRefOid,
       pr.reviews,
@@ -221,13 +225,16 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
   const links = item["linked pull requests"] ?? [];
   const prs = links.map((url) => prEvidence(url));
   const relevantPr = selectRelevantPullRequest(prs);
-  const reviewBranch =
-    item.status === "In review" && relevantPr.selected
-      ? branchEvidence(relevantPr.selected.headRefName)
+  const pullRequestBranch =
+    ["In progress", "In review"].includes(item.status) && relevantPr.selected
+      ? branchEvidence(
+          relevantPr.selected.baseRefName,
+          relevantPr.selected.headRefName,
+        )
       : undefined;
   const branch =
     item.status === "In progress" && ownership
-      ? branchEvidence(ownership.branch)
+      ? branchEvidence("main", ownership.branch)
       : undefined;
   return {
     number: item.content.number,
@@ -242,9 +249,10 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
     updatedAt: issue.updatedAt,
     linkedPullRequestStates: prs.map((pr) => pr.state),
     linkedPullRequestAmbiguous: relevantPr.ambiguous,
+    linkedPullRequestDraft: relevantPr.selected?.isDraft,
     ownership,
-    baseCurrent: reviewBranch?.baseCurrent ?? branch?.baseCurrent,
-    historyLinear: reviewBranch?.historyLinear ?? branch?.historyLinear,
+    baseCurrent: pullRequestBranch?.baseCurrent ?? branch?.baseCurrent,
+    historyLinear: pullRequestBranch?.historyLinear ?? branch?.historyLinear,
     reviewEvidence: relevantPr.selected?.reviewEvidence,
   };
 }
