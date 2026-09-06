@@ -121,6 +121,12 @@ phrasing with source-backed Statements and the cited Sources that require compar
 only as a review location: inspect the actual source passages before judging
 quotation, attribution, or improper copying risk.
 
+When the content audit reports narrative–Statement overlap, inspect the actual
+cited passage before adding a reviewed-overlap acknowledgement. Follow
+`docs/reviewed-overlap-acknowledgements.md`; never use an acknowledgement as
+proof of independent authorship, copy a fingerprint without source review, or
+replace its exact governed-input hash with a broad suppression.
+
 For a high-level subject, assess learner completeness as well as graph coverage:
 a short answer and scope; important meanings and disputed uses; attributed
 purposes; proposed institutions; bounded practice; serious disagreements and

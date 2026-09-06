@@ -10,3 +10,4 @@ export { publicRelationshipLabel } from "./presentation";
 export * from "./public-text";
 export type * from "./relationships";
 export type * from "./vocabulary";
+export * from "./reviewed-overlaps";
