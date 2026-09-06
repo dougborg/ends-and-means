@@ -1,6 +1,6 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import ComparisonGrid from "../../components/ComparisonGrid.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { publicEntitiesOfKind } from "../../lib/domain/canonical";
 
 const criteria = publicEntitiesOfKind("criterion");
@@ -52,11 +52,45 @@ const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+c
       </section>
     </section>
 
+    <section class="method-records" aria-labelledby="records-title">
+      <header>
+        <p class="coordinate">FROM A SOURCE TO AN EXPLANATION</p>
+        <h2 id="records-title">What does the evidence trail contain?</h2>
+        <p>The site keeps the material being studied, the copy actually consulted, and the claim drawn from it as separate records. That makes it possible to correct one part without quietly changing the others.</p>
+      </header>
+      <div>
+        <section>
+          <h3>Works and sources</h3>
+          <p>A work is the underlying book, article, law, speech, dataset, image, or other creation. A source is the particular edition, archive record, translation, scan, or webpage consulted here. A citation points to that source and names the page, table, section, timestamp, or other location when one is available.</p>
+        </section>
+        <section>
+          <h3>Claims and citations</h3>
+          <p>Each substantial factual proposition is recorded as a focused claim rather than hidden inside a long paragraph. Its wording distinguishes observation, attributed purpose, proposed design, classification, causal hypothesis, and editorial interpretation. Citations support or qualify that exact claim; a background reading link does neither.</p>
+        </section>
+        <section>
+          <h3>Relationships and qualifications</h3>
+          <p>Connections among ideas, institutions, cases, and claims have a direction and a stated scope. Their evidence can support the connection, challenge it, or limit where it applies. A missing connection is not treated as proof that no relationship exists.</p>
+        </section>
+        <section>
+          <h3>Names and external identities</h3>
+          <p>Wikipedia links can help a reader recognize a subject, while identifiers such as Wikidata records can help distinguish one identity from another. These links are orientation aids, not evidence. They cannot support a claim, import an outside classification, or erase a disagreement about what a term means.</p>
+        </section>
+      </div>
+    </section>
+
     <section class="model-boundary" aria-labelledby="cases-title">
       <p class="coordinate">BOUNDED CASES</p>
       <h2 id="cases-title">A case shows a setting, not a perfect example.</h2>
       <p>Each case bounds the place and period and identifies the people and institutions its evidence addresses. Where possible, it separates written rules from rules in use, interactions, and outcomes. A country is not treated as one timeless system, and an institution found in a case does not make the whole case an embodiment of an ideology.</p>
+      <p>Within a case, an episode narrows attention to a particular phase or institutional arrangement. Its evidence is sorted by what it can show: formal design, practice, interactions, outcomes, context, and limits. Empty categories remain empty rather than being filled by inference, and dates describe the episode being examined rather than the lifetime of every institution involved.</p>
       <p>Case selection and sources create limits. Records may preserve official voices better than ordinary experience, cover one region unevenly, or describe a translated term through colonial categories. Those gaps narrow what the case can establish and what can be transferred elsewhere.</p>
+    </section>
+
+    <section class="model-boundary" aria-labelledby="questions-title">
+      <p class="coordinate">OPEN QUESTIONS</p>
+      <h2 id="questions-title">What happens when the evidence is not enough?</h2>
+      <p>A specific unresolved question stays attached to the claim or explanation that exposed it. It may ask for a serious counterargument, contrary evidence, a missing comparison, or a causal counterfactual. The question names what evidence could address it instead of using “more research is needed” as a general disclaimer.</p>
+      <p>An open question can be partly answered, resolved with new claims, or withdrawn with an explanation. Until then, it remains a visible limit on the conclusion. Uncertainty does not assign a numerical confidence score; it narrows the language, period, place, or population to what the available evidence can sustain.</p>
     </section>
 
     <section class="model-boundary" aria-labelledby="uncertainty-title">
@@ -64,6 +98,7 @@ const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+c
       <h2 id="uncertainty-title">Human judgment remains accountable.</h2>
       <p>Researchers and reviewers decide which questions matter, how a claim is worded, which sources are relevant, and whether a classification is fair. Checks can catch missing links, unsupported publication states, and malformed citations; they cannot make those choices neutral.</p>
       <p>Uncertainty should change the wording and scope of a conclusion. Fairness does not give every account equal weight when their relevance or evidentiary quality differs. Consequential objections, conflicting evidence, causal alternatives, and unanswered questions remain visible as <a href="/research/">open research questions</a>. Better evidence can revise a claim, a classification, or the method itself.</p>
+      <p>Only material reconciled into the site’s reviewed collection appears as site content. Earlier notes and unused research can inform later work, but they do not appear as claims, citations, or pages unless they are checked against the current evidence and definitions.</p>
       <p>To <a href={correctionUrl}>suggest a correction</a>, name the page or claim, explain what should change, and link the evidence and exact passage when possible. A person reviews the proposal and its sources before publication. Accepted material changes remain inspectable in the public repository history.</p>
     </section>
 

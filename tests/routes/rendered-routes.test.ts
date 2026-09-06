@@ -395,6 +395,14 @@ async function verifyMethodRoute() {
   expect(methodText).toContain("Explanations of why it happened");
   expect(methodText).toContain("Judgments about whether it was good");
   expect(methodText).toContain("A case shows a setting, not a perfect example.");
+  expect(methodText).toContain("What does the evidence trail contain?");
+  expect(methodText).toContain("A work is the underlying book");
+  expect(methodText).toContain("A source is the particular edition");
+  expect(methodText).toContain("Citations support or qualify that exact claim");
+  expect(methodText).toContain("These links are orientation aids, not evidence.");
+  expect(methodText).toContain("Within a case, an episode narrows attention");
+  expect(methodText).toContain("What happens when the evidence is not enough?");
+  expect(methodText).toContain("Only material reconciled into the site’s reviewed collection");
   expect(methodText).toContain("No score or automated rule settles a contested identity.");
   expect(methodText).toContain("Human judgment remains accountable.");
   expect(methodText).toContain("Fairness does not give every account equal weight");
