@@ -65,6 +65,7 @@ const claim = (
   statementKind:
     | "definition"
     | "observation"
+    | "causal-hypothesis"
     | "attributed-proposal"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
@@ -223,22 +224,20 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       id: "party-state-law-source",
       kind: "source",
       label:
-        "Law to Safeguard the Unity of Party and State (Nuremberg English translation)",
+        "Law to Safeguard the Unity of Party and State (GHDI reproduction)",
       description:
-        "The 1946 Nuremberg staff English translation, document 1395-PS, as reproduced and edited by German History in Documents and Images.",
+        "The undated German History in Documents and Images reproduction of the Nuremberg staff English translation first published in the 1946 GPO volume Nazi Conspiracy and Aggression III, document 1395-PS, pp. 978–979.",
       title: "Law to Safeguard the Unity of Party and State",
-      sourceType: "edition",
+      sourceType: "web-page",
       workId: "party-state-law-work",
       contributorDisplay: [
-        "United States Chief Counsel for the Prosecution of Axis Criminality",
         "Nuremberg translation staff",
-        "German Historical Institute editors",
+        "German Historical Institute staff",
       ],
-      publicationYear: 1946,
-      publisher: "United States Government Printing Office",
+      publisher: "German Historical Institute Washington",
       resourceLinks: [
         {
-          purpose: "publisher",
+          purpose: "authorized-reading",
           url: "https://germanhistorydocs.org/en/nazi-germany-1933-1945/law-to-safeguard-the-unity-of-party-and-state-december-1-1933.pdf",
           label: "Open the GHDI reproduction",
         },
@@ -416,14 +415,20 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   ),
   claim(
     "dictatorship-varied-institutions",
-    "Dictatorships have varied ruling institutions",
-    "Geddes, Wright, and Frantz distinguish party, military, monarchic, and personalist features because different seizure groups leave different decision-making and constraint patterns.",
+    "Seizure groups shape later dictatorial decisions",
+    "Geddes, Wright, and Frantz argue that differences in how groups that initiate dictatorships organize and make decisions persist after seizure and shape who influences later decisions.",
+    "causal-hypothesis",
+  ),
+  claim(
+    "dictatorship-roman-office-boundary",
+    "Roman dictatorship was a bounded emergency office",
+    "Márquez describes early Roman dictatorship as an office with enlarged powers for a specific emergency, constrained by customary expectations that the holder resign after completing the task.",
     "definition",
   ),
   claim(
-    "dictatorship-history-boundary",
-    "Dictatorship has changed meaning",
-    "Márquez traces dictatorship from a bounded emergency office toward a modern generic label for nondemocratic rule, while noting that scholars do not use the term uniformly.",
+    "dictatorship-modern-legitimation-boundary",
+    "Modern dictatorship foregrounds authority and legitimation",
+    "Márquez argues that the modern idea of dictatorship shifted attention from a ruler's character toward the authority and legitimation of political rule.",
     "definition",
   ),
   claim(
@@ -448,7 +453,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   claim(
     "fascism-paxton-rival",
     "Paxton centers fascist political behavior",
-    "Paxton argues that fascism should be identified through a movement's development, alliances, exercise of power, and political behavior rather than doctrine alone.",
+    "Paxton defines fascism as political behavior in which a mass-based nationalist party collaborates with traditional elites, abandons democratic liberties, and pursues internal cleansing and external expansion without legal or ethical restraint.",
     "definition",
   ),
   claim(
@@ -459,8 +464,26 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   ),
   claim(
     "fascism-self-description",
-    "Mussolini presented Fascism as a doctrine of state and nation",
-    "In the 1932 doctrine, Mussolini and Gentile presented Fascism as anti-liberal and anti-Marxist and assigned the state authority to organize the nation.",
+    "Mussolini and Gentile rejected Marxian socialism",
+    "In the 1932 doctrine, Mussolini and Gentile rejected the Marxian account of history and class conflict.",
+    "attributed-proposal",
+  ),
+  claim(
+    "fascism-rejects-liberal-democracy",
+    "Mussolini and Gentile rejected majority rule",
+    "In the 1932 doctrine, Mussolini and Gentile denied that a numerical majority should direct society through periodic consultation.",
+    "attributed-proposal",
+  ),
+  claim(
+    "fascism-rejects-liberal-individualism",
+    "Mussolini and Gentile rejected liberal individualism",
+    "In the 1932 doctrine, Mussolini and Gentile contrasted nineteenth-century liberal individualism with their proposed century of authority, collectivism, and the state.",
+    "attributed-proposal",
+  ),
+  claim(
+    "fascism-state-organizes-nation",
+    "Mussolini and Gentile assigned the state authority over national life",
+    "In the 1932 doctrine, Mussolini and Gentile said that the Fascist state organizes the nation and decides which individual freedoms are essential.",
     "attributed-proposal",
   ),
   claim(
@@ -590,7 +613,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       scope:
         "The national regime and its party relationship; not every local practice or social outcome.",
       conditionStatementIds: ["italy-party-regime-boundary"],
-      formalRuleStatementIds: ["fascism-self-description"],
+      formalRuleStatementIds: [],
       ruleInUseStatementIds: ["italy-dictatorship-transition"],
       interactionStatementIds: [],
       outcomeStatementIds: [],

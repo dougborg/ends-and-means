@@ -19,9 +19,13 @@ const exactEvidence = {
     "vdem-regimes-source",
     "pp. 60–62, Table 1",
   ],
-  "dictatorship-history-boundary": [
+  "dictatorship-roman-office-boundary": [
     "marquez-dictatorship-source",
-    "pp. 67–70, 82–91",
+    "pp. 79–80, section ‘Dictatorship and Sovereignty,’ paragraphs 1–2",
+  ],
+  "dictatorship-modern-legitimation-boundary": [
+    "marquez-dictatorship-source",
+    "pp. 68–69, introduction, paragraphs 3–5",
   ],
   "fascism-griffin-definition": [
     "griffin-nature-source",
@@ -29,7 +33,19 @@ const exactEvidence = {
   ],
   "fascism-self-description": [
     "mussolini-doctrine-source",
-    "sections ‘Political and Social Doctrine’ and ‘The Fascist State’",
+    "document paragraph 3 (‘complete opposite of Marxian Socialism’)",
+  ],
+  "fascism-rejects-liberal-democracy": [
+    "mussolini-doctrine-source",
+    "document paragraph 4 (‘denies that the majority ... can direct human society’)",
+  ],
+  "fascism-rejects-liberal-individualism": [
+    "mussolini-doctrine-source",
+    "document paragraph 6 (‘century of individualism’ through ‘century of the State’)",
+  ],
+  "fascism-state-organizes-nation": [
+    "mussolini-doctrine-source",
+    "document paragraphs 7–8 (‘foundation ... conception of the State’ through ‘organizes the nation’)",
   ],
   "italy-dictatorship-transition": [
     "ushmm-mussolini-source",
@@ -45,7 +61,7 @@ const exactEvidence = {
   ],
   "nazi-party-state-law": [
     "party-state-law-source",
-    "document 1395-PS, pp. 978–979, §§1–3; translation and edition note on PDF p. 2",
+    "GHDI reproduction, §§1–3; translation provenance note on PDF p. 2",
   ],
   "nazi-control-limit": [
     "ushmm-nazi-state-source",
@@ -59,14 +75,18 @@ const statementIds = [
   "authoritarian-not-totalitarian",
   "authoritarian-practice-boundary",
   "autocracy-operational-boundary",
-  "dictatorship-history-boundary",
+  "dictatorship-modern-legitimation-boundary",
+  "dictatorship-roman-office-boundary",
   "dictatorship-varied-institutions",
   "fascism-evidence-region-limit",
   "fascism-griffin-definition",
   "fascism-label-boundary",
   "fascism-paxton-rival",
+  "fascism-rejects-liberal-democracy",
+  "fascism-rejects-liberal-individualism",
   "fascism-self-description",
   "fascism-self-description-limit",
+  "fascism-state-organizes-nation",
   "italy-coalition-government-1922",
   "italy-dictatorship-transition",
   "italy-movement-party-sequence",
@@ -82,7 +102,7 @@ const statementIds = [
   "totalitarian-polemical-boundary",
 ] as const;
 const exactLedgerDigest =
-  "c82c8bedc7cd58c1f95cdfd97fe1bf7d2286fdebe5b904d0fabe0e68a8a295d9";
+  "cb574d91e408f0065c10e0cc9946d91b0a501f36716c056671fa2e8e6cc5a590";
 
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: one exact tranche ledger and its model contracts belong together
 describe("authoritarianism, fascism, and totalitarianism tranche", () => {
@@ -105,27 +125,50 @@ describe("authoritarianism, fascism, and totalitarianism tranche", () => {
     expect(trancheStatements.map(({ id }) => id)).toEqual(statementIds);
     for (const { id } of trancheStatements)
       expect(citationsFor(id).length, id).toBeGreaterThan(0);
-    const ledger = statementIds.map((id) => [
-      id,
-      citationsFor(id).map(({ object, locator, role }) => [
-        object.id,
-        locator,
-        role,
-      ]),
-    ]);
+    const ledger = statementIds.map((id) => {
+      const statement = entityById(id);
+      if (statement?.kind !== "statement")
+        throw new Error(`${id} is not a Statement`);
+      return [
+        id,
+        statement.statementKind,
+        statement.text,
+        citationsFor(id).map(({ object, locator, role }) => [
+          object.id,
+          locator,
+          role,
+        ]),
+      ];
+    });
     expect(
       createHash("sha256").update(JSON.stringify(ledger)).digest("hex"),
     ).toBe(exactLedgerDigest);
+    expect(citationsFor("fascism-evidence-region-limit")).toContainEqual(
+      expect.objectContaining({
+        object: { kind: "source", id: "paxton-anatomy-source" },
+        role: "context",
+      }),
+    );
   });
 
   it("keeps concepts, editorial collections, scholarly approaches, and cases distinct", () => {
     expect(entityById("party-state-law-source")).toMatchObject({
-      publicationYear: 1946,
-      publisher: "United States Government Printing Office",
+      sourceType: "web-page",
+      workId: "party-state-law-work",
+      publisher: "German Historical Institute Washington",
       contributorDisplay: expect.arrayContaining([
         "Nuremberg translation staff",
       ]),
+      resourceLinks: [
+        expect.objectContaining({
+          purpose: "authorized-reading",
+          url: "https://germanhistorydocs.org/en/nazi-germany-1933-1945/law-to-safeguard-the-unity-of-party-and-state-december-1-1933.pdf",
+        }),
+      ],
     });
+    expect(entityById("party-state-law-source")).not.toHaveProperty(
+      "publicationYear",
+    );
     expect(entityById("ushmm-nazi-state-source")).not.toHaveProperty(
       "publicationYear",
     );
