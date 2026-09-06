@@ -1,8 +1,10 @@
 ---
 import ComparisonGrid from "../../components/ComparisonGrid.astro";
 import EditorialHeader from "../../components/EditorialHeader.astro";
+import PublicCommitments from "../../components/PublicCommitments.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { publicEntitiesOfKind } from "../../lib/domain/canonical";
+import "../../styles/homepage.css";
 
 const criteria = publicEntitiesOfKind("criterion");
 const repository = "https://github.com/dougborg/ends-and-means";
@@ -14,6 +16,8 @@ const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+c
     <EditorialHeader coordinate="METHOD" title="How we research and classify.">
       <p class="dek measure-standfirst">Ends and Means starts with a familiar question, gives a plain answer, and keeps the evidence and uncertainty close enough to inspect. It separates what people wanted, what institutions promised, what happened in a particular setting, why it may have happened, and how anyone judges the result.</p>
     </EditorialHeader>
+
+    <PublicCommitments heading="The commitments behind each explanation" showProtocols />
 
     <section class="model-boundary" aria-labelledby="subjects-title">
       <p class="coordinate">WHAT THE SITE DOES</p>
@@ -97,7 +101,7 @@ const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+c
     <section class="model-boundary" aria-labelledby="uncertainty-title">
       <p class="coordinate">UNCERTAINTY AND CORRECTION</p>
       <h2 id="uncertainty-title">Human judgment remains accountable.</h2>
-      <p>Researchers and reviewers decide which questions matter, how a claim is worded, which sources are relevant, and whether a classification is fair. Checks can catch missing links, unsupported publication states, and malformed citations; they cannot make those choices neutral.</p>
+      <p>AI may assist discovery, synthesis, drafting, and consistency checks, but it is not evidence or authority. Researchers and reviewers decide which questions matter, how a claim is worded, which sources are relevant, and whether a classification is fair. Checks can catch missing links, unsupported publication states, and malformed citations; they cannot make those choices neutral.</p>
       <p>Uncertainty should change the wording and scope of a conclusion. Fairness does not give every account equal weight when their relevance or evidentiary quality differs. Consequential objections, conflicting evidence, causal alternatives, and unanswered questions remain visible as <a href="/research/">open research questions</a>. Better evidence can revise a claim, a classification, or the method itself.</p>
       <p>The live site includes only material that has been checked against its sources, fitted to the current definitions, and accepted for publication. Earlier notes and unused research may inform later work, but readers do not encounter them as published claims, citations, or pages.</p>
       <p>To <a href={correctionUrl}>suggest a correction</a>, name the page or claim, explain what should change, and link the evidence and exact passage when possible. A person reviews the proposal and its sources before publication. Accepted material changes remain inspectable in the public repository history. The <a href="/governance/">editorial governance policy</a> explains who decides, how corrections and reconsideration work, and which safeguards apply to sensitive subjects.</p>

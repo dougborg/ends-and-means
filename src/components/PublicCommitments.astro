@@ -1,0 +1,37 @@
+---
+import { publicCommitments, publicProtocolLinks } from "../lib/public-commitments";
+
+interface Props {
+  heading?: string;
+  showProtocols?: boolean;
+}
+
+const {
+  heading = "What should you expect from this project?",
+  showProtocols = false,
+} = Astro.props;
+---
+
+<section class="public-commitments" aria-labelledby="public-commitments-title">
+  <header>
+    <p class="coordinate">PUBLIC COMMITMENTS</p>
+    <h2 id="public-commitments-title">{heading}</h2>
+  </header>
+  <div class="public-commitments__list">
+    {publicCommitments.map((commitment) => (
+      <article id={commitment.id}>
+        <h3>{commitment.heading}</h3>
+        <p>{commitment.summary}</p>
+      </article>
+    ))}
+  </div>
+  {showProtocols && (
+    <details class="public-commitments__protocols">
+      <summary>Read the technical protocols</summary>
+      <p>These repository documents give researchers and reviewers the detailed rules behind the public commitments.</p>
+      <ul>
+        {publicProtocolLinks.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}
+      </ul>
+    </details>
+  )}
+</section>

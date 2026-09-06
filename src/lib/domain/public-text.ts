@@ -25,6 +25,11 @@ const workflowPatterns = [
     pattern:
       /\b(?:learner(?:-first|[- ](?:paths?|journeys?|workflow))|learning (?:paths?|journeys?)|reader(?:-first|[- ](?:paths?|journeys?)))\b/iu,
   },
+  {
+    name: "internal delivery mechanics",
+    pattern:
+      /\b(?:agent handles?|worktrees?|delivery workflow|editorial workflow)\b/iu,
+  },
 ] as const;
 
 export function workflowReferencesIn(value: string): string[] {

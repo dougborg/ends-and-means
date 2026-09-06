@@ -1,0 +1,62 @@
+---
+import type { ResearchObligation, Source, Statement } from "../lib/domain";
+import { citationsFor, dossierForSubject, entityById } from "../lib/domain/canonical";
+import { homepageTrace } from "../lib/public-commitments";
+import Glyph from "./Glyph.astro";
+
+const statement = entityById<Statement>(homepageTrace.statementId);
+const obligation = entityById<ResearchObligation>(homepageTrace.obligationId);
+const dossier = dossierForSubject(homepageTrace.subject.kind, homepageTrace.subject.id);
+const section = dossier?.sections.find(({ id }) => id === homepageTrace.sectionId);
+const prose = section?.body.split("\n").find((paragraph) => paragraph.includes(homepageTrace.proseSelection));
+if (!prose || !section?.statementIds.includes(homepageTrace.statementId))
+  throw new Error(`Homepage trace requires prose and Statement in ${homepageTrace.sectionId}`);
+if (statement?.kind !== "statement" || !["reviewed", "published"].includes(statement.publicationStatus))
+  throw new Error(`Homepage trace requires live Statement ${homepageTrace.statementId}`);
+if (obligation?.kind !== "research-obligation" || !["open", "partially-addressed"].includes(obligation.obligationStatus) || !obligation.addressedStatementIds.includes(statement.id))
+  throw new Error(`Homepage trace requires an active question addressing ${statement.id}`);
+const citations = citationsFor(statement.id).map((citation) => ({
+  citation,
+  source: entityById<Source>(citation.object.id),
+}));
+if (citations.length === 0 || citations.some(({ source }) => source?.kind !== "source"))
+  throw new Error(`Homepage trace requires resolved citations for ${statement.id}`);
+---
+
+<section class="homepage-trace" aria-labelledby="homepage-trace-title">
+  <header>
+    <p class="coordinate">ONE EXPLANATION, OPENED UP</p>
+    <h2 id="homepage-trace-title">See what sits behind a sentence.</h2>
+    <p>A readable explanation stays in view while its claim, evidence, and unresolved limit remain available for inspection.</p>
+  </header>
+  <div class="homepage-trace__flow">
+    <article class="homepage-trace__prose">
+      <p class="coordinate">EXPLANATION</p>
+      <p>{prose}</p>
+      <a href={`/concepts/${homepageTrace.subject.id}/#${homepageTrace.sectionId}`}>Read it in context <span aria-hidden="true">→</span></a>
+    </article>
+    <article class="homepage-trace__claim" id={statement.id}>
+      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />CLAIM / {statement.statementKind.replaceAll("-", " ")}</p>
+      <p>{statement.text}</p>
+      <a href={`/#${statement.id}`}>Open the addressable claim <span aria-hidden="true">→</span></a>
+    </article>
+    <article class="homepage-trace__source">
+      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />SOURCE &amp; ROLE</p>
+      {citations.map(({ citation, source }) => source && (
+        <div>
+          <h3><a href={`/sources/${source.id}/`}>{source.title}</a></h3>
+          <dl>
+            <div><dt>Exact location</dt><dd>{citation.locator}</dd></div>
+            <div><dt>Role</dt><dd>{citation.role}</dd></div>
+          </dl>
+        </div>
+      ))}
+    </article>
+    <article class="homepage-trace__limit" id={`trace-${obligation.id}`}>
+      <p class="coordinate glyph-label"><Glyph glyph="question-disagreement" tone="warning" />OPEN LIMIT</p>
+      <h3>{obligation.question}</h3>
+      <p>{obligation.currentLimitation}</p>
+      <a href={`/research/#${obligation.id}`}>Inspect the open question <span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+</section>

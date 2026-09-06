@@ -1,7 +1,8 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import EditorialHeader from "../../components/EditorialHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { citationsFor, entitiesOfKind } from "../../lib/domain/canonical";
+
 const sources = entitiesOfKind("source").sort((a, b) => (b.publicationYear ?? 0) - (a.publicationYear ?? 0) || a.title.localeCompare(b.title));
 const usageCounts = new Map<string, number>();
 for (const statement of entitiesOfKind("statement")) {
@@ -9,6 +10,6 @@ for (const statement of entitiesOfKind("statement")) {
 }
 const usageCount = (sourceId: string) => usageCounts.get(sourceId) ?? 0;
 ---
-<BaseLayout title="Reading" description="Read the books, articles, records, and other sources used to support claims in Ends and Means." fullBleed>
-  <article class="editorial-page reading-page"><EditorialHeader coordinate="READING" title="Reading"><p class="dek measure-standfirst">Browse the books, articles, laws, and records used across the site. The claim count shows where each source contributes evidence; open a source for bibliographic details and exact connections.</p></EditorialHeader><section class="reading-section" aria-labelledby="sources-title"><header><p class="coordinate">{sources.length} SOURCES</p><h2 id="sources-title">Which sources support the explanations?</h2></header><ol>{sources.map((source) => { const count = usageCount(source.id); return <li><div><p class="source-authors">{source.contributorDisplay?.join(", ") ?? source.publisher ?? "Source"}</p><h3><a href={`/sources/${source.id}/`}>{source.title}</a></h3></div><span class="source-state">Supports {count} {count === 1 ? "claim" : "claims"}</span></li>; })}</ol></section></article>
+<BaseLayout title="Reading" description="Read the books, articles, records, and other sources connected to claims in Ends and Means." fullBleed>
+  <article class="editorial-page reading-page"><EditorialHeader coordinate="READING" title="Reading"><p class="dek measure-standfirst">Browse the books, articles, laws, and records used across the site. The claim count shows where each source has a citation connection; open a source to see whether it supports, challenges, qualifies, or contextualizes a claim.</p></EditorialHeader><section class="reading-section" aria-labelledby="sources-title"><header><p class="coordinate">{sources.length} SOURCES</p><h2 id="sources-title">Which sources connect to the explanations?</h2></header><ol>{sources.map((source) => { const count = usageCount(source.id); return <li><div><p class="source-authors">{source.contributorDisplay?.join(", ") ?? source.publisher ?? "Source"}</p><h3><a href={`/sources/${source.id}/`}>{source.title}</a></h3></div><span class="source-state">Cited by {count} {count === 1 ? "claim" : "claims"}</span></li>; })}</ol></section></article>
 </BaseLayout>

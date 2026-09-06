@@ -77,6 +77,9 @@ rewrite suspiciously close phrase sequences.
 For translations, record the translator and edition and do not present a
 distinctive translated phrase as the project's own prose.
 Combine sources only when they genuinely support the same proposition.
+AI-assisted discovery or drafting does not change these requirements. AI is
+not a source or authority; a person must inspect the cited material and remains
+responsible for every factual clause, synthesis choice, and published word.
 
 ## Remove repetition and filler
 

@@ -1,8 +1,8 @@
 # Project vision
 
 Ends and Means helps curious readers understand and compare political,
-economic, and social ideas, institutions, systems, movements, implementations,
-and depictions.
+economic, social, legal, cultural, and organizational ideas, institutions,
+systems, movements, implementations, and depictions.
 It begins with the question a reader actually has, not with the internal shape
 of the data.
 
@@ -53,6 +53,10 @@ learn the technical model.
    Content, the model, the interface, and the delivery process improve together.
    Safe findings within scope are fixed; larger findings become focused backlog
    work.
+10. **Tools assist; people remain accountable.**
+   AI may assist discovery, synthesis, drafting, and consistency checks, but it
+   is not evidence or authority. People remain responsible for source fitness,
+   framing, interpretation, wording, and publication.
 
 ## The learner journey
 

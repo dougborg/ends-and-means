@@ -369,12 +369,12 @@ test("representative pages have learner-first outlines and unique disclosure nam
       route: "/framework/",
       h1: "How we research and classify.",
       h2: "How can I check an explanation?",
-      hasDisclosures: false,
+      hasDisclosures: true,
     },
     {
       route: "/reading/",
       h1: "Reading",
-      h2: "Which sources support the explanations?",
+      h2: "Which sources connect to the explanations?",
       hasDisclosures: false,
     },
   ];
@@ -755,6 +755,31 @@ test("global navigation remains ordered, reachable, and legible across constrain
   await page.goto("/concepts/economic-democracy/");
   const currentLink = page.getByRole("navigation", { name: "Primary" }).locator('[aria-current="page"]');
   expect(await currentLink.evaluate((link) => getComputedStyle(link).textDecorationLine)).toContain("underline");
+});
+
+test("homepage purpose and evidence trail survive no JavaScript, zoom, and keyboard use", async ({ browser, page }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const noScriptContext = await browser.newContext({ baseURL, javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto("/");
+  await expect(noScriptPage.getByRole("heading", { level: 1, name: "The label is only the beginning." })).toBeVisible();
+  await expect(noScriptPage.getByRole("link", { name: /Explore the subjects/ })).toBeVisible();
+  await expect(noScriptPage.getByText("Exact location", { exact: true })).toBeVisible();
+  await expect(noScriptPage.getByText("Role", { exact: true })).toBeVisible();
+  await noScriptContext.close();
+
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.goto("/");
+  await page.evaluate(() => {
+    document.documentElement.style.zoom = "2";
+  });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  const primary = page.getByRole("link", { name: /Explore the subjects/ });
+  await primary.focus();
+  await expect(primary).toBeFocused();
+  const outline = await primary.evaluate((element) => getComputedStyle(element).outlineStyle);
+  expect(outline).not.toBe("none");
 });
 
 test("Explore search preserves owned meanings and explicit research gaps", async ({ page }) => {
