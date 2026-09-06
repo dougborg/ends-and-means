@@ -478,7 +478,7 @@ export const capitalismMarketEvidenceDocuments = [
   statement(
     "england-case-period-boundary",
     "The England case uses an analytical period",
-    "This guide uses approximately 1450–1750 as analytical bounds for England’s long agrarian transformation, not as dates of a single transition event.",
+    "Approximately 1450–1750 bounds England’s long agrarian transformation analytically; those years are not dates of a single transition event.",
     "editorial-interpretation",
   ),
   statement(
