@@ -252,12 +252,16 @@ describe("parser-backed publication boundary", () => {
           path: "src/pages/example.astro",
           content: [
             "---",
+            'const openingCommentExample = "<!--";',
+            'const closingCommentExample = "-->";',
             'import data from "../archive/data";',
             'const example = `<script>require("../archive/frontmatter-string")</script>`;',
             "---",
             '<!-- <script>require("../archive/comment")</script> -->',
+            "<div data-example={'<script>require(\"../archive/attribute\")</script>'} />",
             '<script src="../archive/external"></script>',
             '<script>require("../archive/client")</script>',
+            '<script>require("../archive/spaced")</script >',
           ].join("\n"),
         },
       ]).map(({ message }) => message),
@@ -265,7 +269,24 @@ describe("parser-backed publication boundary", () => {
       expect.stringContaining("../archive/client"),
       expect.stringContaining("../archive/data"),
       expect.stringContaining("../archive/external"),
+      expect.stringContaining("../archive/spaced"),
     ]);
+  });
+
+  it("fails closed on non-static Astro script sources", () => {
+    expect(
+      publicationBoundaryFindings([
+        {
+          path: "src/pages/example.astro",
+          content: '<script src={dynamicSource}></script>',
+        },
+      ]),
+    ).toContainEqual(
+      expect.objectContaining({
+        category: "archive-exclusion",
+        message: expect.stringContaining("could not prove a static boundary"),
+      }),
+    );
   });
 });
 
