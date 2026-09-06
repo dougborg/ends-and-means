@@ -26,7 +26,7 @@ export const capitalismMarketResearchDocuments = [
         "wage-labor-boundary",
       ],
       currentLimitation:
-        "The present guide distinguishes wage labor from other labor relations but does not yet reconcile scholarship on their simultaneous use within connected production and financial systems.",
+        "Definitions centered on formally free wage labor do not by themselves reconcile scholarship on the simultaneous use of wage and coerced labor within connected production and financial systems.",
       evidenceNeeded:
         "Preselected enterprise, plantation, merchant, and financial records paired with independent histories that trace ownership, labor control, contracts, credit, and profits without treating coerced labor as external by definition.",
       scope:
