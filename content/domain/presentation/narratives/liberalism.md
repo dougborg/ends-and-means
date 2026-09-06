@@ -15,7 +15,7 @@ That argument is one influential liberal position, not a complete institutional 
 ## exclusions
 
 Mill called some peoples “barbarians” and expressly withheld his liberty principle from them.
-Mehta interprets British liberal justifications of empire through assumptions about reason and progress, while Pateman interprets social-contract narratives as obscuring men's political right over women.
+Mehta argues that British liberal justifications placed colonized peoples within a staged account of human development, while Pateman interprets social-contract narratives as obscuring men's political right over women.
 These sources establish British-imperial and gender critiques.
 They do not supply comparable evidence about racial and class exclusions or accounts from excluded people.
 

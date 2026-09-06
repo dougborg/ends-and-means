@@ -1,4 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { canonicalDocuments } from "../../content/domain";
+import type { AuthoringDocument } from "../../src/lib/domain";
+import { compileDomainGraph } from "../../src/lib/domain";
 import {
   canonicalGraph,
   citationsFor,
@@ -60,6 +63,153 @@ const claims = [
   "liberalism-atlantic-taxonomy-limit",
   "conservatism-genealogy-limit",
 ] as const;
+
+const sourceBases = [
+  "sep-liberalism",
+  "mill-on-liberty",
+  "mehta-liberalism-empire",
+  "pateman-sexual-contract",
+  "japan-constitution",
+  "nakanishi-japan-rights",
+  "sep-conservatism",
+  "burke-reflections",
+  "cdu-ahlen-programme",
+  "cdu-duesseldorf-guidelines",
+  "bell-what-is-liberalism",
+  "huntington-conservatism-ideology",
+  "commons-right-to-buy",
+  "housing-act-1980",
+  "balasubramanian-free-economy",
+  "swatantra-statement-principles",
+  "bach-ahlen-history",
+] as const;
+
+const caseIds = [
+  "india-constitutional-rights-settlement-1946-1950",
+  "india-constitutional-rights-episode",
+  "japan-constitutional-rights-settlement-1946-1947",
+  "japan-constitutional-rights-episode",
+  "right-to-buy-england-wales-1980-1998",
+  "right-to-buy-initial-operation",
+  "swatantra-opposition-organization-1959-1967",
+  "swatantra-early-opposition-episode",
+] as const;
+
+const obligationIds = [
+  "liberalism-geographic-translation",
+  "liberalism-imperial-domination",
+  "liberalism-gender-contract-boundary",
+  "conservative-party-programme-drift",
+  "conservatism-geographic-translation",
+] as const;
+
+function exactLedger(documents: AuthoringDocument[]) {
+  const graph = compileDomainGraph(documents);
+  const ids = new Set<string>(claims);
+  const entity = (id: string) => {
+    const value = graph.indexes.entitiesById[id];
+    if (!value) throw new Error(`Missing ledger entity ${id}`);
+    return value;
+  };
+  const citations = graph.relationships.filter(
+    ({ predicate, subject }) => predicate === "cites" && ids.has(subject.id),
+  );
+  return {
+    statements: claims.map((id) => entity(id)),
+    citations,
+    works: sourceBases.map((id) => entity(`${id}-work`)),
+    sources: sourceBases.map((id) => entity(`${id}-source`)),
+    relationships: graph.relationships.filter(
+      ({ predicate, subject }) =>
+        predicate !== "cites" &&
+        (["liberalism", "conservatism"] as string[]).includes(subject.id),
+    ),
+    forbiddenCaseClassifications: graph.relationships.filter(
+      ({ predicate, subject }) =>
+        (caseIds as readonly string[]).includes(subject.id) &&
+        ["applies-to-case", "contested-in-case", "embodied"].includes(
+          predicate,
+        ),
+    ),
+    cases: caseIds.map(entity),
+    guides: ["guide-liberalism", "guide-conservatism"].map((id) =>
+      graph.subjectGuides.find((guide) => guide.id === id),
+    ),
+    dossiers: ["liberalism-dossier", "conservatism-dossier"].map(entity),
+    obligations: obligationIds.map(entity),
+  };
+}
+
+function mutateEntity(
+  documents: AuthoringDocument[],
+  id: string,
+  mutate: (entity: Record<string, unknown>) => void,
+) {
+  const document = documents.find(
+    (candidate) =>
+      candidate.documentType === "entity" && candidate.entity.id === id,
+  );
+  if (document?.documentType !== "entity") throw new Error(`Missing ${id}`);
+  mutate(document.entity as unknown as Record<string, unknown>);
+}
+
+describe("Liberalism and Conservatism exact ledgers", () => {
+  it("pins the complete public evidence, relationship, Case, guide, Dossier, and research ledgers", () => {
+    expect(exactLedger(canonicalDocuments)).toMatchSnapshot();
+  });
+
+  it.each([
+    ["Statement", "liberalism-plural-traditions", "text"],
+    ["Work", "cdu-ahlen-programme-work", "workType"],
+    ["Source", "cdu-ahlen-programme-source", "publicationYear"],
+    ["Case", "right-to-buy-initial-operation", "conditionStatementIds"],
+    ["Dossier", "liberalism-dossier", "description"],
+    ["Research Obligation", "liberalism-geographic-translation", "description"],
+  ] as const)("detects %s ledger mutation", (_label, id, field) => {
+    const documents = structuredClone(canonicalDocuments);
+    mutateEntity(documents, id, (entity) => {
+      entity[field] = field.endsWith("Ids")
+        ? []
+        : `${String(entity[field])} drift`;
+    });
+    expect(exactLedger(documents)).not.toEqual(exactLedger(canonicalDocuments));
+  });
+
+  it.each(["object", "role", "locator"] as const)(
+    "detects citation %s mutation",
+    (field) => {
+      const documents = structuredClone(canonicalDocuments);
+      const document = documents.find(
+        (candidate) =>
+          candidate.documentType === "relationships" &&
+          candidate.subject.id === "liberalism-plural-traditions",
+      );
+      if (document?.documentType !== "relationships")
+        throw new Error("Missing citation");
+      const citation = document.relationships[0];
+      if (citation?.predicate !== "cites") throw new Error("Missing citation");
+      if (field === "object") citation.object.id = "sep-conservatism-source";
+      if (field === "role") citation.role = "context";
+      if (field === "locator") citation.locator = "section drift";
+      expect(exactLedger(documents)).not.toEqual(
+        exactLedger(canonicalDocuments),
+      );
+    },
+  );
+
+  it("detects SubjectGuide composition mutation", () => {
+    const documents = structuredClone(canonicalDocuments);
+    const document = documents.find(
+      (candidate) =>
+        candidate.documentType === "subject-guide" &&
+        candidate.guide.id === "guide-liberalism",
+    );
+    if (document?.documentType !== "subject-guide")
+      throw new Error("Missing guide");
+    document.guide.description = `${document.guide.description} drift`;
+    expect(exactLedger(documents)).not.toEqual(exactLedger(canonicalDocuments));
+  });
+});
 
 describe("Liberalism and Conservatism evidence", () => {
   it("keeps every substantive claim atomic and locator-backed", () => {
