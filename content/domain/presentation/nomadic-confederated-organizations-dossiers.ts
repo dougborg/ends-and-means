@@ -10,17 +10,25 @@ const ruwalla = attachNarrative("ruwalla-borderland-organization.md", {
   id: "ruwalla-borderland-organization-dossier",
   kind: "dossier" as const,
   label: "Ruwalla borderland organization dossier",
-  description: "A bounded account of Ruwalla mobility, leadership, territorial access, and state negotiation from 1918 to 1936.",
+  description:
+    "From 1918 to 1936, Ruwalla organization joined mobile pastoral production, layered kin affiliation, Al Shaʿlan representation, and bargaining with rival states over cross-border access. The reviewed archive does not yet establish how Ruwalla women and non-elite pastoralists described those decisions.",
   subject: { kind: "case" as const, id: "ruwalla-borderland-organization" },
   standfirst: "",
-  standfirstStatementIds: ["ruwalla-mobility-corridor", "ruwalla-case-transfer-limit"],
+  standfirstStatementIds: [
+    "ruwalla-mobility-corridor",
+    "ruwalla-case-transfer-limit",
+  ],
   sections: [
     {
       id: "whose-terms-describe-the-formation",
       heading: "Whose terms describe this formation?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["ruwalla-scholarly-classification", "ruwalla-classification-limit", "ruwalla-anaza-affiliation"],
+      statementIds: [
+        "ruwalla-scholarly-classification",
+        "ruwalla-classification-limit",
+        "ruwalla-anaza-affiliation",
+      ],
     },
     {
       id: "how-did-leadership-work",
@@ -34,7 +42,10 @@ const ruwalla = attachNarrative("ruwalla-borderland-organization.md", {
       heading: "Why did mobility and territory matter?",
       body: "",
       traceStatus: "supported" as const,
-      statementIds: ["ruwalla-mobility-corridor", "ruwalla-dira-not-sovereignty"],
+      statementIds: [
+        "ruwalla-mobility-corridor",
+        "ruwalla-dira-not-sovereignty",
+      ],
     },
     {
       id: "how-did-new-states-change-the-relationship",
@@ -48,14 +59,20 @@ const ruwalla = attachNarrative("ruwalla-borderland-organization.md", {
       heading: "What can the sources establish?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["ruwalla-archive-source-base", "ruwalla-archive-voice-limit"],
+      statementIds: [
+        "ruwalla-archive-source-base",
+        "ruwalla-archive-voice-limit",
+      ],
     },
     {
       id: "how-should-this-case-be-compared",
       heading: "How should this case be compared?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["ruwalla-case-transfer-limit", "ruwalla-jinst-non-equivalence"],
+      statementIds: [
+        "ruwalla-case-transfer-limit",
+        "ruwalla-jinst-non-equivalence",
+      ],
     },
   ],
   ...reviewed,
@@ -65,34 +82,52 @@ const jinst = attachNarrative("jinst-postcollective-pastoral-governance.md", {
   id: "jinst-postcollective-pastoral-governance-dossier",
   kind: "dossier" as const,
   label: "Jinst post-collective pastoral governance dossier",
-  description: "A bounded account of Jinst-specific 1995 observations through the 1999 follow-up, separated from pooled two-community findings.",
+  description:
+    "After Mongolia dismantled collectives and privatized livestock in 1992, households assumed responsibility for movement, labor, transport, inputs, marketing, and risk while pasture remained state-owned. Jinst-specific observations from 1995 must remain separate from findings pooled across Jinst and Bayan-Ovoo and do not define a universal pastoral government.",
   subject: {
     kind: "case" as const,
     id: "jinst-postcollective-pastoral-governance",
   },
   standfirst: "",
-  standfirstStatementIds: ["mongolia-postcollective-change", "jinst-case-transfer-limit"],
+  standfirstStatementIds: [
+    "mongolia-postcollective-change",
+    "jinst-case-transfer-limit",
+  ],
   sections: [
     {
       id: "whose-terms-and-boundaries-apply",
       heading: "Whose terms and boundaries apply?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["mongolia-administrative-boundary", "study-sites-khot-ail", "study-sites-neg-nutgiinkhan-boundary"],
+      statementIds: [
+        "mongolia-administrative-boundary",
+        "study-sites-khot-ail",
+        "study-sites-neg-nutgiinkhan-boundary",
+      ],
     },
     {
       id: "what-changed-after-the-collectives",
       heading: "What changed after the collectives?",
       body: "",
       traceStatus: "supported" as const,
-      statementIds: ["mongolia-postcollective-change", "jinst-bag-leader-election", "jinst-1995-campsite-use", "jinst-1995-winter-pasture-incursion", "study-sites-1998-campsite-certificates"],
+      statementIds: [
+        "mongolia-postcollective-change",
+        "jinst-bag-leader-election",
+        "jinst-1995-campsite-use",
+        "jinst-1995-winter-pasture-incursion",
+        "study-sites-1998-campsite-certificates",
+      ],
     },
     {
       id: "how-were-resources-coordinated",
       heading: "How were resources coordinated?",
       body: "",
       traceStatus: "supported" as const,
-      statementIds: ["study-sites-khot-ail", "study-sites-campsite-rights", "study-sites-resource-rights-differed"],
+      statementIds: [
+        "study-sites-khot-ail",
+        "study-sites-campsite-rights",
+        "study-sites-resource-rights-differed",
+      ],
     },
     {
       id: "why-were-boundaries-permeable",
@@ -113,14 +148,22 @@ const jinst = attachNarrative("jinst-postcollective-pastoral-governance.md", {
       heading: "What does the evidence not show?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["jinst-fieldwork-provenance", "fernandez-gimenez-seasonal-regulation-proposal", "jinst-formalization-caution", "mongolia-later-study-transfer"],
+      statementIds: [
+        "jinst-fieldwork-provenance",
+        "fernandez-gimenez-seasonal-regulation-proposal",
+        "jinst-formalization-caution",
+        "mongolia-later-study-transfer",
+      ],
     },
     {
       id: "how-should-this-case-be-compared",
       heading: "How should this case be compared?",
       body: "",
       traceStatus: "qualified" as const,
-      statementIds: ["jinst-case-transfer-limit", "ruwalla-jinst-non-equivalence"],
+      statementIds: [
+        "jinst-case-transfer-limit",
+        "ruwalla-jinst-non-equivalence",
+      ],
     },
   ],
   ...reviewed,

@@ -7,22 +7,26 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
       id: "guide-ruwalla-borderland-organization",
       slug: "ruwalla-borderland-organization",
       label: "Ruwalla organization across post-Ottoman borders",
-      description: "A bounded guide to Ruwalla mobility, Al Shaʿlan representation, resource access, and border negotiation from 1918 to 1936.",
+      description:
+        "From 1918 to 1936, Ruwalla camel-pastoral groups used mobile resource corridors, Al Shaʿlan representation, and bargaining with governments to sustain cross-border access. Official archives and political intermediaries preserve that negotiation more clearly than the perspectives of Ruwalla women and non-elite pastoralists.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "case", id: "ruwalla-borderland-organization" },
       searchQueries: [
         { query: "Ruwalla" },
         {
           query: "Bedouin confederation",
-          disambiguation: "A bounded Ruwalla case, not a universal Bedouin or confederated political type.",
+          disambiguation:
+            "A bounded Ruwalla case, not a universal Bedouin or confederated political type.",
         },
         {
           query: "Arabian tribal organization",
-          disambiguation: "One Ruwalla borderland episode with society-specific terms and institutions.",
+          disambiguation:
+            "One Ruwalla borderland episode with society-specific terms and institutions.",
         },
         {
           query: "nomadic government",
-          disambiguation: "A case about mobile pastoral organization that does not treat mobility as a type of government.",
+          disambiguation:
+            "A case about mobile pastoral organization that does not treat mobility as a type of government.",
         },
       ],
       sections: [
@@ -30,7 +34,9 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
           id: "short-answer",
           role: "short-answer",
           heading: "How were Ruwalla groups organized across new borders?",
-          narrativeRefs: [{ dossierId: "ruwalla-borderland-organization-dossier" }],
+          narrativeRefs: [
+            { dossierId: "ruwalla-borderland-organization-dossier" },
+          ],
         },
         {
           id: "meanings-and-boundaries",
@@ -42,7 +48,11 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
               sectionId: "whose-terms-describe-the-formation",
             },
           ],
-          statementIds: ["ruwalla-scholarly-classification", "ruwalla-classification-limit", "ruwalla-anaza-affiliation"],
+          statementIds: [
+            "ruwalla-scholarly-classification",
+            "ruwalla-classification-limit",
+            "ruwalla-anaza-affiliation",
+          ],
         },
         {
           id: "institutions-and-mechanisms",
@@ -84,7 +94,10 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
               sectionId: "what-can-the-sources-establish",
             },
           ],
-          statementIds: ["ruwalla-archive-source-base", "ruwalla-archive-voice-limit"],
+          statementIds: [
+            "ruwalla-archive-source-base",
+            "ruwalla-archive-voice-limit",
+          ],
         },
         {
           id: "comparisons-and-next-steps",
@@ -102,7 +115,11 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
           id: "open-questions",
           role: "open-questions",
           heading: "What remains unresolved?",
-          researchObligationIds: ["ruwalla-nonelite-oral-perspectives", "ruwalla-shaykh-authority-variation", "ruwalla-border-distribution"],
+          researchObligationIds: [
+            "ruwalla-nonelite-oral-perspectives",
+            "ruwalla-shaykh-authority-variation",
+            "ruwalla-border-distribution",
+          ],
         },
       ],
       reviewedAt: "2026-09-07",
@@ -114,7 +131,8 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
       id: "guide-jinst-postcollective-pastoral-governance",
       slug: "jinst-postcollective-pastoral-governance",
       label: "Jinst post-collective pastoral governance",
-      description: "A bounded guide to Jinst-specific 1995 observations, the 1999 follow-up boundary, and separately labeled two-community findings.",
+      description:
+        "After livestock privatization, Jinst households coordinated labor and resource access through changeable camps, customary claims, state administration, and an open bag-leader election. The evidence separates Jinst-specific 1995 observations from pooled two-community findings and cannot establish a universal pastoral or nomadic government.",
       publicationStatus: "reviewed",
       primarySubject: {
         kind: "case",
@@ -125,23 +143,29 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
         { query: "Mongolian pastoral governance" },
         {
           query: "pastoral government",
-          disambiguation: "A bounded Jinst case, not a universal political type derived from livelihood.",
+          disambiguation:
+            "A bounded Jinst case, not a universal political type derived from livelihood.",
         },
         {
           query: "nomadic government",
-          disambiguation: "A case about resource coordination and mobility, not a definition of government by mobility.",
+          disambiguation:
+            "A case about resource coordination and mobility, not a definition of government by mobility.",
         },
         {
           query: "Mongolian pasture commons",
-          disambiguation: "Jinst institutions during a specific post-collective transition.",
+          disambiguation:
+            "Jinst institutions during a specific post-collective transition.",
         },
       ],
       sections: [
         {
           id: "short-answer",
           role: "short-answer",
-          heading: "How did Jinst herders coordinate pasture after the collectives?",
-          narrativeRefs: [{ dossierId: "jinst-postcollective-pastoral-governance-dossier" }],
+          heading:
+            "How did Jinst herders coordinate pasture after the collectives?",
+          narrativeRefs: [
+            { dossierId: "jinst-postcollective-pastoral-governance-dossier" },
+          ],
         },
         {
           id: "meanings-and-boundaries",
@@ -216,7 +240,11 @@ export const nomadicConfederatedOrganizationGuideDocuments = [
           id: "open-questions",
           role: "open-questions",
           heading: "What remains unresolved?",
-          researchObligationIds: ["jinst-translation-oral-provenance", "jinst-access-inequality", "jinst-post-1999-continuity"],
+          researchObligationIds: [
+            "jinst-translation-oral-provenance",
+            "jinst-access-inequality",
+            "jinst-post-1999-continuity",
+          ],
         },
       ],
       reviewedAt: "2026-09-07",
