@@ -88,19 +88,31 @@ const citations = [
   [
     "italy-dictatorship-transition",
     "ushmm-mussolini-source",
-    "section ‘Rise to Power’, paragraphs 4–6",
+    "section ‘Italian Fascism,’ paragraph 6",
     "supports",
   ],
   [
     "italy-party-regime-boundary",
     "ushmm-mussolini-source",
-    "section ‘Rise to Power’, paragraphs 1–6",
+    "section ‘Italian Fascism,’ paragraph 1, first sentence",
     "supports",
   ],
   [
-    "fascism-crossnational-variation",
+    "italy-movement-party-sequence",
+    "ushmm-mussolini-source",
+    "section ‘Italian Fascism,’ paragraph 1, first sentence",
+    "supports",
+  ],
+  [
+    "italy-coalition-government-1922",
+    "ushmm-mussolini-source",
+    "section ‘Italian Fascism,’ paragraph 3, first sentence",
+    "supports",
+  ],
+  [
+    "fascism-evidence-region-limit",
     "paxton-anatomy-source",
-    "chapters 3–5, pp. 41–148; chapter 8, pp. 206–220",
+    "chapter 1, pp. 15–17, discussion of national cases and transfer limits",
     "supports",
   ],
   [
@@ -142,7 +154,7 @@ const citations = [
   [
     "nazi-party-state-law",
     "party-state-law-source",
-    "articles 1–3",
+    "document 1395-PS, pp. 978–979, §§1–3; translation and edition note on PDF p. 2",
     "supports",
   ],
   [

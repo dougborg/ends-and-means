@@ -9,7 +9,7 @@ const source = (
   contributors: string[],
   publisher: string,
   sourceType: SourceType,
-  year: number,
+  year: number | undefined,
   url: string,
   identifiers: { doi?: string; isbn13?: string } = {},
   originalPublicationYear?: number,
@@ -27,9 +27,9 @@ const source = (
           ? "article"
           : sourceType === "report"
             ? "report"
-          : sourceType === "web-page"
-            ? "other"
-            : "book",
+            : sourceType === "web-page"
+              ? "other"
+              : "book",
       ...(originalPublicationYear === undefined
         ? {}
         : { originalPublicationYear }),
@@ -47,7 +47,7 @@ const source = (
       sourceType,
       workId: `${id}-work`,
       contributorDisplay: contributors,
-      publicationYear: year,
+      ...(year === undefined ? {} : { publicationYear: year }),
       publisher,
       identifiers,
       resourceLinks: [
@@ -201,20 +201,51 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
     ["United States Holocaust Memorial Museum"],
     "United States Holocaust Memorial Museum",
     "web-page",
-    2025,
+    undefined,
     "https://encyclopedia.ushmm.org/content/en/article/foundations-of-the-nazi-state",
   ),
-  ...source(
-    "party-state-law",
-    "Law to Safeguard the Unity of Party and State",
-    ["German Reich government"],
-    "German History in Documents and Images",
-    "web-page",
-    2025,
-    "https://germanhistorydocs.org/en/nazi-germany-1933-1945/law-to-safeguard-the-unity-of-party-and-state-december-1-1933.pdf",
-    {},
-    1933,
-  ),
+  {
+    documentType: "entity",
+    entity: {
+      id: "party-state-law-work",
+      kind: "work",
+      label: "Law to Safeguard the Unity of Party and State",
+      description: "The German law promulgated on December 1, 1933.",
+      title: "Gesetz zur Sicherung der Einheit von Partei und Staat",
+      workType: "other",
+      originalPublicationYear: 1933,
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "party-state-law-source",
+      kind: "source",
+      label:
+        "Law to Safeguard the Unity of Party and State (Nuremberg English translation)",
+      description:
+        "The 1946 Nuremberg staff English translation, document 1395-PS, as reproduced and edited by German History in Documents and Images.",
+      title: "Law to Safeguard the Unity of Party and State",
+      sourceType: "edition",
+      workId: "party-state-law-work",
+      contributorDisplay: [
+        "United States Chief Counsel for the Prosecution of Axis Criminality",
+        "Nuremberg translation staff",
+        "German Historical Institute editors",
+      ],
+      publicationYear: 1946,
+      publisher: "United States Government Printing Office",
+      resourceLinks: [
+        {
+          purpose: "publisher",
+          url: "https://germanhistorydocs.org/en/nazi-germany-1933-1945/law-to-safeguard-the-unity-of-party-and-state-december-1-1933.pdf",
+          label: "Open the GHDI reproduction",
+        },
+      ],
+      ...reviewed,
+    },
+  },
 
   {
     documentType: "entity",
@@ -441,20 +472,32 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   claim(
     "italy-dictatorship-transition",
     "Mussolini dismantled parliamentary responsibility during 1925",
-    "During 1925 Mussolini's government ended parliamentary responsibility and consolidated a personal dictatorship, after governing through a coalition from 1922.",
+    "During 1925 Mussolini's government ended parliamentary responsibility and consolidated a personal dictatorship.",
     "observation",
   ),
   claim(
     "italy-party-regime-boundary",
-    "The Fascist movement, party, and dictatorship were not one event",
-    "The Italian Fascist movement began in 1919, became the National Fascist Party, entered government in 1922, and consolidated dictatorship in 1925; these organizational and regime changes require separate dates.",
+    "The Italian Fascist movement began in 1919",
+    "Mussolini founded the Italian Fascist movement in 1919.",
     "observation",
   ),
   claim(
-    "fascism-crossnational-variation",
-    "Fascist movements did not produce identical regimes",
-    "Paxton treats Italian Fascism and German Nazism as connected but historically different trajectories, so a generic definition does not erase institutional or racial-policy differences.",
+    "italy-movement-party-sequence",
+    "The movement preceded the National Fascist Party",
+    "The Italian Fascist movement subsequently became the National Fascist Party.",
     "observation",
+  ),
+  claim(
+    "italy-coalition-government-1922",
+    "Mussolini initially governed through a coalition",
+    "After becoming prime minister in 1922, Mussolini depended on a coalition government to remain in power.",
+    "observation",
+  ),
+  claim(
+    "fascism-evidence-region-limit",
+    "The present comparison has a European evidence boundary",
+    "The present guide's historical evidence concerns Italy and Germany; it does not classify movements in other regions, and any transfer requires separately located movement-produced and independent evidence.",
+    "editorial-interpretation",
   ),
 
   claim(

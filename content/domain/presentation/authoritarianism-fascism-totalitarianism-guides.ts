@@ -119,6 +119,8 @@ const fascism = dossier(
       traceStatus: "qualified",
       statementIds: [
         "italy-party-regime-boundary",
+        "italy-movement-party-sequence",
+        "italy-coalition-government-1922",
         "italy-dictatorship-transition",
       ],
       relatedEntityRefs: [
@@ -130,10 +132,7 @@ const fascism = dossier(
       heading: "Can one definition erase variation?",
       body: "",
       traceStatus: "qualified",
-      statementIds: [
-        "fascism-crossnational-variation",
-        "fascism-label-boundary",
-      ],
+      statementIds: ["fascism-evidence-region-limit", "fascism-label-boundary"],
     },
   ],
 );
@@ -204,6 +203,8 @@ const historicalItalianFascism = attachNarrative(
     standfirstStatementIds: [
       "fascism-self-description",
       "italy-party-regime-boundary",
+      "italy-movement-party-sequence",
+      "italy-coalition-government-1922",
     ],
     sections: [
       {
@@ -215,6 +216,8 @@ const historicalItalianFascism = attachNarrative(
           "fascism-self-description",
           "fascism-self-description-limit",
           "italy-party-regime-boundary",
+          "italy-movement-party-sequence",
+          "italy-coalition-government-1922",
         ],
       },
       {
@@ -225,6 +228,8 @@ const historicalItalianFascism = attachNarrative(
         statementIds: [
           "italy-dictatorship-transition",
           "italy-party-regime-boundary",
+          "italy-movement-party-sequence",
+          "italy-coalition-government-1922",
         ],
         relatedEntityRefs: [
           {
@@ -305,21 +310,27 @@ const guideSections = (id: string): Guide["guide"]["sections"] => [
     heading: "Which meanings must stay separate?",
     narrativeRefs: [{ dossierId: `${id}-dossier`, sectionId: "definitions" }],
   },
-  {
-    id: "bounded-practice",
-    role: "bounded-practice",
-    heading: "What can bounded evidence establish?",
-    narrativeRefs: [
-      {
-        dossierId: `${id}-dossier`,
-        sectionId: id === "authoritarianism" ? "neighbors" : "bounded-practice",
-      },
-    ],
-    entityRefs:
-      id === "totalitarianism"
-        ? [{ kind: "case", id: "nazi-consolidation-1933" }]
-        : [{ kind: "case", id: "italian-fascist-dictatorship-1925-1943" }],
-  },
+  ...(id === "authoritarianism"
+    ? []
+    : [
+        {
+          id: "bounded-practice",
+          role: "bounded-practice" as const,
+          heading: "What can bounded evidence establish?",
+          narrativeRefs: [
+            { dossierId: `${id}-dossier`, sectionId: "bounded-practice" },
+          ],
+          entityRefs:
+            id === "totalitarianism"
+              ? [{ kind: "case" as const, id: "nazi-consolidation-1933" }]
+              : [
+                  {
+                    kind: "case" as const,
+                    id: "italian-fascist-dictatorship-1925-1943",
+                  },
+                ],
+        },
+      ]),
   {
     id: "variants-disputes-and-limits",
     role: "variants-and-disputes",

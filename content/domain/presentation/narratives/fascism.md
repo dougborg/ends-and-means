@@ -13,10 +13,11 @@ That primary text records a self-description; it does not prove that practice ma
 
 ## bounded-practice
 
-The movement founded in 1919, the later National Fascist Party, the coalition government formed in 1922, and the dictatorship consolidated in 1925 were related but distinct developments.
+Mussolini founded a movement in 1919; it later became the National Fascist Party, and his 1922 government still depended on a coalition before dictatorship consolidated in 1925.
 The bounded 1925–1943 case therefore tests institutions and chronology rather than presenting Italy as a pure embodiment.
 
 ## variation
 
 No.
-Italian Fascism and German Nazism followed connected but different trajectories, and their institutional and racial programs cannot be inferred from a generic label alone.
+This guide's historical evidence is limited to Italy and Germany.
+It does not classify movements elsewhere: cross-regional comparison requires separately located local, movement-produced, and independent evidence rather than resemblance to these European cases.
