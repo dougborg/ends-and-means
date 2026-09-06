@@ -24,11 +24,13 @@ describe("canonical vertical slice", () => {
       "enacted-funds-used-fund-boards",
     );
     expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual([
+      "anarcho-syndicalist-organizing",
       "swedish-rehn-meidner-model",
       "swedish-wage-earner-fund-program",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "kahnawake-community-lawmaking",
+      "spanish-anarchist-initiatives-1936-1939",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",

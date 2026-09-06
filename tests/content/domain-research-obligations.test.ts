@@ -466,6 +466,18 @@ describe("research obligation routes", () => {
 });
 
 const expectedOpenResearchObligations = [
+  {
+    id: "anarchism-property-exchange-boundaries",
+    obligationType: "research-gap",
+    target: "concept:anarchism#disputes",
+    status: "open",
+  },
+  {
+    id: "anarchism-spanish-participation-boundary",
+    obligationType: "counterevidence",
+    target: "concept:anarchism#spain",
+    status: "open",
+  },
   ...[
     ["collective-capital-formation-benefit-allocation", "counterargument"],
     ["collective-capital-formation-durable-support", "counterargument"],
