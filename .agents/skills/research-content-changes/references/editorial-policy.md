@@ -47,8 +47,16 @@ corrections, reconsideration, conflicts and recusal, sensitive subjects,
 moderation, privacy, AI assistance, exceptions, and policy amendments. Read it
 before changing those commitments or content involving a living person,
 restricted community knowledge, contested identity, or harmful terminology.
-Do not send private submissions, restricted community knowledge, or unnecessary
-personal data to an external AI service. Treat automated structural and source-
-similarity output as an attention signal; a person remains accountable for
-source fitness, framing, interpretation, wording, fairness, consent, harm, and
-publication.
+No private editorial intake currently exists. Do not route editorial concerns
+through security reporting or imply that a public correction is confidential.
+Do not send restricted community knowledge, nonpublic material obtained outside
+the editorial form, or unnecessary personal data to an external AI service.
+Treat automated structural and source-similarity output as an attention signal;
+a person remains accountable for source fitness, framing, interpretation,
+wording, fairness, consent, harm, and publication.
+
+For community-authored and oral-history evidence, record recorder, source,
+translator, access, and publication-permission provenance when available and
+safe. Never equate access or publication permission with authority to represent
+a community, and permit privacy-protective non-attribution when it preserves
+safety without obscuring evidence fitness.

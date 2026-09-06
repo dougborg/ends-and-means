@@ -5,6 +5,7 @@ import {
   primaryRoutes,
   publicRoutes,
 } from "../../src/lib/public-navigation";
+import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
 
 describe("public navigation", () => {
   it("publishes the agreed vocabulary, order, and destinations", () => {
@@ -50,5 +51,15 @@ describe("public navigation", () => {
   it("marks Home only at the site root", () => {
     expect(isCurrentPublicRoute("/", homeRoute)).toBe(true);
     expect(isCurrentPublicRoute("/explore/", homeRoute)).toBe(false);
+  });
+});
+
+describe("editorial governance semantics", () => {
+  it("keeps machine-checkable boundaries distinct", () => {
+    expect(editorialGovernanceContract).toEqual({
+      editorialIntake: "public-only",
+      conflictedDecision: "independent-binding",
+      recordBoundary: "site-github-uncontrolled-copies",
+    });
   });
 });

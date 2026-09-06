@@ -148,7 +148,7 @@ export const skillCapabilities: SkillCapability[] = [
     ],
     deletion: {
       path: `${researchRoot}/SKILL.md`,
-      pattern: /source similarity/i,
+      pattern: /plagiarism|source[-\s]similarity/i,
     },
   },
   {

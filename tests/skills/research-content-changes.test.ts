@@ -96,21 +96,31 @@ describe("research-content-changes skill", () => {
     expect(skill).toContain("archive-exclusion");
     expect(skill).toContain("where absence may be legitimate");
   });
-
 });
 
 describe("editorial governance contract", () => {
-  it("binds sensitive and AI-assisted work to public governance", async () => {
-    const policy = await readFile(
-      new URL("references/editorial-policy.md", skillRoot),
-      "utf8",
-    );
-    expect(policy).toContain("src/pages/governance/index.astro");
-    expect(policy).toContain("living person");
-    expect(policy).toContain("restricted community knowledge");
-    expect(policy).toContain("Do not send private submissions");
-    expect(policy).toMatch(/automated structural and source-\s*similarity output/);
-    expect(policy).toContain("a person remains accountable");
+  it("keeps channel, recusal, provenance, and enforcement boundaries aligned", async () => {
+    const [policy, notes, philosophy] = await Promise.all([
+      readFile(new URL("references/editorial-policy.md", skillRoot), "utf8"),
+      readFile(new URL("../../../docs/editorial-governance.md", skillRoot), "utf8"),
+      readFile(new URL("../../../docs/editorial-philosophy.md", skillRoot), "utf8"),
+    ]);
+    const normalize = (text: string) => text.replace(/\s+/g, " ");
+    for (const text of [policy, notes].map(normalize)) {
+      expect(text).toMatch(/only current editorial intake|No private editorial intake currently exists/);
+      expect(text).toMatch(/security reporting.+not.+editorial\s+channel|not.+route editorial concerns.+security reporting/is);
+    }
+    for (const text of [notes, philosophy].map(normalize)) {
+      expect(text).toMatch(/independent reviewer makes the binding merits decision/i);
+      expect(text).toMatch(/editor.+only publish or record|only.+administrative/is);
+      expect(text).toMatch(/decision is deferred/i);
+    }
+    expect(normalize(notes)).toMatch(/CODEOWNERS.+does not itself create a GitHub approval requirement/is);
+    expect(normalize(notes)).toMatch(/independent review.+project process.+not by a GitHub approval-required/is);
+    expect(normalize(policy)).toMatch(/recorder, source, translator, access, and publication-permission provenance/);
+    expect(normalize(policy)).toMatch(/Never equate access or publication permission with authority/);
+    expect(normalize(policy)).toMatch(/privacy-protective non-attribution/);
+    expect(normalize(policy)).toMatch(/automated structural and source-similarity output/);
   });
 });
 

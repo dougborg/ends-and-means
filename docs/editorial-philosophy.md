@@ -91,8 +91,11 @@ never determine source selection or evaluation.
 We expect the work to change. A correction is evidence that the process can
 learn, not an embarrassment to hide.
 
-The project editor makes the final publication decision and remains responsible
-for framing, source fitness, interpretation, wording, fairness, and publication.
+Ordinarily, the project editor makes the final publication decision and remains
+responsible for framing, source fitness, interpretation, wording, fairness, and
+publication. When the editor is conflicted, an eligible independent reviewer
+makes the binding merits decision; the editor may only publish or record it
+administratively. Without an eligible reviewer, the decision is deferred.
 Tools can assist discovery, synthesis, drafting, and checking, but their output
 is never evidence and their signals never replace human judgment.
 
