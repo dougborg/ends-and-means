@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { canonicalDocuments } from "../../content/domain";
 import {
   loadPublicationFiles,
+  normalizePublicationPath,
   walkRequiredFiles,
 } from "../../scripts/content-integrity-files";
 import {
@@ -174,6 +175,9 @@ describe("safe-publication boundary", () => {
     'const resolved = require.resolve("../archive/data");',
     'import data = require("../archive/data");',
     `const deferred = \`${"${"}require("../archive/data")}\`;`,
+    `const nested = \`${"${"}flag ? { ok: true } : require("../archive/data")}\`;`,
+    `const nestedTemplate = \`${"${"}\`value ${"${"}require("../archive/data")}\`}` +
+      "`;",
   ])("rejects executable dependency syntax: %s", (content) => {
     expect(
       publicationBoundaryFindings([{ path: "src/example.ts", content }]),
@@ -190,6 +194,10 @@ describe("safe-publication boundary", () => {
     '/* const data = require("../archive/data"); */',
     "const example = 'import \"../archive/data\"';",
     'const example = `require("../archive/data")`;',
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: literal scanner fixture
+    'const example = `escaped \\${require("../archive/data")}`;',
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: literal scanner fixture
+    'const example = `${"}"} remains ordinary text`;',
   ])("ignores non-executable dependency examples: %s", (content) => {
     expect(
       publicationBoundaryFindings([{ path: "src/example.ts", content }]),
@@ -380,6 +388,21 @@ describe("deterministic integrity output", () => {
       join(root, "A.md"),
       join(root, "nested", "a.md"),
       join(root, "z.md"),
+    ]);
+  });
+
+  it("normalizes platform-specific publication paths before boundary checks", () => {
+    const pathname = normalizePublicationPath(
+      "content\\archive\\legacy-research\\example.ts",
+    );
+    expect(pathname).toBe("content/archive/legacy-research/example.ts");
+    expect(
+      publicationBoundaryFindings([{ path: pathname, content: "" }]),
+    ).toEqual([
+      expect.objectContaining({
+        category: "archive-exclusion",
+        location: pathname,
+      }),
     ]);
   });
 });

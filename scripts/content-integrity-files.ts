@@ -2,6 +2,10 @@ import { readdir, readFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import { compareCodeUnits, type PublicationFile } from "../src/lib/domain";
 
+export function normalizePublicationPath(pathname: string) {
+  return pathname.replaceAll("\\", "/");
+}
+
 export async function walkRequiredFiles(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });
   const paths = await Promise.all(
@@ -32,7 +36,7 @@ export async function loadPublicationFiles(
     .sort(compareCodeUnits);
   return Promise.all(
     paths.map(async (pathname) => ({
-      path: relative(root, pathname),
+      path: normalizePublicationPath(relative(root, pathname)),
       content: await readFile(pathname, "utf8"),
     })),
   );
