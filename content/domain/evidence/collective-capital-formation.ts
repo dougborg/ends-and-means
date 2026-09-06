@@ -71,7 +71,7 @@ export const collectiveCapitalFormationEvidenceDocuments = [
         "Work, Justice, and Collective Capital Institutions: Revisiting Rudolf Meidner and the Case for Wage-Earner Funds",
       sourceType: "article",
       workId: "furendal-oneill-collective-capital-work",
-      contributorDisplay: ["Markus Furendal", "Martin O’Neill"],
+      contributorDisplay: ["Markus Furendal", "Martin O'Neill"],
       publicationYear: 2024,
       publisher: "Wiley",
       identifiers: { doi: "10.1111/japp.12631" },

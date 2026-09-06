@@ -43,6 +43,9 @@ describe("collective capital formation dossier", () => {
   });
 
   it("locates at least six atomic claims across four authoritative sources", () => {
+    expect(entityById("furendal-oneill-collective-capital-source")).toMatchObject({
+      contributorDisplay: ["Markus Furendal", "Martin O'Neill"],
+    });
     expect(statementIds.length).toBeGreaterThanOrEqual(6);
     expect(
       statementIds.every((id) => entityById(id)?.kind === "statement"),
