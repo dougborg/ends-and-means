@@ -70,7 +70,7 @@ const citations = [
   [
     "india-special-provisions",
     "india-constitution-source",
-    "article 15(3)–(5)",
+    "article 15(3)",
     "supports",
   ],
   [
@@ -250,19 +250,19 @@ const citations = [
   [
     "swatantra-coalition-practice",
     "balasubramanian-free-economy-source",
-    "introduction, printed pp. 17–18",
+    "introduction, printed pp. 7–8",
     "supports",
   ],
   [
     "swatantra-parliamentary-practice",
     "balasubramanian-free-economy-source",
-    "introduction, printed pp. 17–18",
+    "introduction, printed pp. 7–8",
     "supports",
   ],
   [
     "swatantra-court-practice",
     "balasubramanian-free-economy-source",
-    "introduction, printed pp. 17–18",
+    "introduction, printed pp. 7–8",
     "supports",
   ],
   [
@@ -311,6 +311,18 @@ const citations = [
     "liberalism-atlantic-taxonomy-limit",
     "bell-what-is-liberalism-source",
     "pp. 682–689",
+    "context",
+  ],
+  [
+    "conservatism-genealogy-limit",
+    "sep-conservatism-source",
+    "sections 1.2 and 2.5",
+    "context",
+  ],
+  [
+    "conservatism-genealogy-limit",
+    "huntington-conservatism-ideology-source",
+    "pp. 454–457",
     "context",
   ],
   [

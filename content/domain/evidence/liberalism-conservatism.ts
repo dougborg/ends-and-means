@@ -40,7 +40,7 @@ const sourceCopy: Record<
     purpose: "publisher",
   },
   "nakanishi-japan-rights": {
-    work: "A Japanese scholarly account of the drafting of the Constitution's human-rights provisions.",
+    work: "A Japanese scholarly account of how Beate Shirota Gordon's drafts shaped Articles 24 and 26 of Japan's Constitution.",
     source:
       "The Journal of Home Economics of Japan article page and full text.",
     purpose: "publisher",
@@ -251,8 +251,8 @@ export const liberalismConservatismEvidenceDocuments = [
   ),
   ...source(
     "nakanishi-japan-rights",
-    "The Process of Making the Human Rights Articles in the Constitution of Japan",
-    ["Yuki Nakanishi", "Akiko Onose", "Yukiko Kusano"],
+    "Formation Process of the Human Rights Articles, the Third Chapter of the Constitution of Japan (Part 1): Circumstances under Which the Articles Drafted by Beate Shirota Gordon Became the Constitution of Japan",
+    ["Haruka Nakanishi", "Hiroko Onose", "Atsuko Kusano"],
     "Journal of Home Economics of Japan",
     "article",
     "https://www.jstage.jst.go.jp/article/jhej1987/49/11/49_11_1185/_article",
@@ -503,8 +503,8 @@ export const liberalismConservatismEvidenceDocuments = [
   ),
   statement(
     "india-special-provisions",
-    "India's Constitution permits specified special provisions",
-    "Article 15 permits specified special provisions for women, children, and socially and educationally backward classes and for Scheduled Castes and Scheduled Tribes.",
+    "India's original Constitution permitted special provisions for women and children",
+    "Article 15(3) of India's Constitution permits the state to make special provisions for women and children.",
     "observation",
   ),
   statement(
@@ -528,7 +528,7 @@ export const liberalismConservatismEvidenceDocuments = [
   statement(
     "japan-rights-drafting-boundary",
     "Japan's rights settlement had an occupation-era drafting context",
-    "Nakanishi, Onose, and Kusano trace the human-rights provisions of Japan's Constitution through Japanese drafts and the Allied occupation drafting process rather than attributing them to one national tradition.",
+    "Nakanishi, Onose, and Kusano trace how Beate Shirota Gordon's occupation-era drafts shaped Articles 24 and 26 alongside Japanese deliberation and revision.",
     "observation",
   ),
   statement(
@@ -850,10 +850,10 @@ export const liberalismConservatismEvidenceDocuments = [
       kind: "case-episode",
       label: "Japanese constitutional-rights adoption and commencement",
       description:
-        "The bounded promulgation-to-commencement interval for the postwar Constitution.",
+        "The bounded drafting-to-commencement interval for selected equality and marriage provisions in the postwar Constitution.",
       caseId: "japan-constitutional-rights-settlement-1946-1947",
       locationIds: ["japan"],
-      startDate: { year: 1946, month: 11, day: 3, certainty: "exact" },
+      startDate: { year: 1946, certainty: "exact" },
       endDate: { year: 1947, month: 5, day: 3, certainty: "exact" },
       scope:
         "Articles 14 and 24 and their drafting context; not their full implementation history.",
