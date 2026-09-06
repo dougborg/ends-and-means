@@ -36,6 +36,8 @@ Their exact mappings and fallbacks live in `src/lib/presentation-glyphs.ts`.
 - Use an informative glyph only when no adjacent text names it; provide an accessible label, which also becomes the missing-glyph fallback.
 - Omit a glyph when it repeats a stronger structural cue or competes with narrative or evidence.
 - Keep shape legible at 12 pixels, in Light and Dark themes, forced colors, monochrome, and print; color may reinforce but never carry meaning alone.
+- Keep glyph styling in the shared `components` cascade layer.
+  Production Astro style blocks must not bypass the named cascade architecture.
 - Accept only registry keys in the shared component.
   Never accept or render caller-provided SVG or HTML.
 - Treat entity-kind mappings as optional presentation metadata.

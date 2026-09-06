@@ -1,7 +1,7 @@
 ---
 import {
-  glyphs,
   type GlyphName,
+  glyphs,
 } from "../lib/presentation-glyphs";
 
 type Size = "small" | "medium" | "large";
@@ -52,73 +52,3 @@ const accessibleLabel = decorative ? undefined : label;
 ) : !decorative && label ? (
   <span class="glyph-fallback">{label}</span>
 ) : null}
-
-<style is:global>
-  .glyph-label {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .glyph {
-    display: inline-grid;
-    width: 1.15em;
-    height: 1.15em;
-    flex: none;
-    place-items: center;
-    color: var(--text);
-    font-size: 1rem;
-    line-height: 1;
-  }
-
-  .glyph > svg {
-    display: block;
-    width: 1em;
-    height: 1em;
-    overflow: visible;
-    fill: none;
-    stroke: currentColor;
-  }
-
-  .glyph--small {
-    font-size: 0.8rem;
-  }
-
-  .glyph--large {
-    font-size: 1.2rem;
-  }
-
-  .glyph--accent {
-    color: var(--link);
-  }
-
-  .glyph--evidence {
-    color: var(--evidence);
-  }
-
-  .glyph--warning {
-    color: var(--caution);
-  }
-
-  .glyph-fallback {
-    font-family: var(--font-apparatus);
-    font-size: 0.72rem;
-  }
-
-  @media (forced-colors: active) {
-    .glyph {
-      color: CanvasText;
-      forced-color-adjust: auto;
-    }
-  }
-
-  @media print {
-    .glyph {
-      color: currentColor;
-    }
-
-    .glyph > svg {
-      stroke-width: 2.2;
-    }
-  }
-</style>
