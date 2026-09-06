@@ -35,6 +35,7 @@ const dossier = attachNarrative("kahnawake-community-lawmaking.md", {
         "kahnawake-consensus-process-definition",
         "kahnawake-cdmrp-type-one-design",
         "kahnawake-cdmrp-2024-hearing-rule-change",
+        "kahnawake-cdmrp-2024-revised-hearing-rule",
         "kahnawake-cdmrp-type-two-design",
       ],
     },
@@ -69,6 +70,7 @@ const dossier = attachNarrative("kahnawake-community-lawmaking.md", {
       statementIds: [
         "kahnawake-cdmrp-consultative-development",
         "kahnawake-cdmrp-2024-hearing-rule-change",
+        "kahnawake-cdmrp-2024-revised-hearing-rule",
         "kahnawake-case-not-tribal-embodiment",
         "tribe-colonial-evolutionary-history",
       ],

@@ -70,6 +70,7 @@ export const kahnawakeCommunityDecisionMakingGuideDocuments = [
             "kahnawake-consensus-process-definition",
             "kahnawake-cdmrp-type-one-design",
             "kahnawake-cdmrp-2024-hearing-rule-change",
+            "kahnawake-cdmrp-2024-revised-hearing-rule",
             "kahnawake-cdmrp-type-two-design",
           ],
         },
@@ -114,6 +115,7 @@ export const kahnawakeCommunityDecisionMakingGuideDocuments = [
           role: "open-questions",
           heading: "What remains unresolved?",
           researchObligationIds: [
+            "kahnawake-cdmrp-current-hearing-rules",
             "kahnawake-cdmrp-participation-representativeness",
             "kahnawake-governing-authority-legitimacy",
             "kahnawake-cdmrp-jurisdiction-enforcement",

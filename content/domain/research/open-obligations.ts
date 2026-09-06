@@ -11,6 +11,32 @@ export const openResearchObligationDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "kahnawake-cdmrp-current-hearing-rules",
+      kind: "research-obligation",
+      label: "Current Kahnawà:ke hearing rules",
+      description:
+        "A focused freshness check for formal hearing rules after the documented April 2024 revision.",
+      obligationType: "research-gap",
+      question:
+        "Which CDMRP hearing-continuation rules were formally in force after April 18, 2024, and which later revisions were adopted through September 2026?",
+      target: { kind: "case", id: "kahnawake-community-lawmaking" },
+      targetSectionId: "how-does-the-process-work",
+      addressedStatementIds: [
+        "kahnawake-cdmrp-2024-hearing-rule-change",
+        "kahnawake-cdmrp-2024-revised-hearing-rule",
+      ],
+      currentLimitation:
+        "The dated January and April 2024 notices establish successive changes, while the commission’s public process page says revisions remain underway; the available record does not establish a complete current rule set through the review date.",
+      evidenceNeeded:
+        "Subsequent Kahnawà:ke Legislative Commission decisions, adopted CDMRP regulations or flowcharts with effective dates, and community notices identifying whether later proposals were adopted.",
+      scope:
+        "Formal CDMRP hearing-continuation rules from April 18, 2024 through September 5, 2026; not an inference about community assent or informal practice.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "kahnawake-cdmrp-participation-representativeness",
       kind: "research-obligation",
       label: "Participation and representation in Kahnawà:ke law-making",

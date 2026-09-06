@@ -10,11 +10,11 @@ Neither term can substitute for the other, and neither identifies one universal 
 
 ## how-does-the-process-work
 
-Kahnawà:ke approved the process in 2005 after calls for more direct participation in making community laws.
-In 2013, Horn-Miller described public groups reviewing mandates and drafts until they could consent before Council enacted a law.
-In January 2024, the Legislative Commission added pre-registration and a ten-participant threshold; after two under-attended attempts, a draft may proceed without another hearing.
-For sector-specific or administrative laws, Council sets the initial mandate before consultation and public review.
-In Horn-Miller’s account, consensus requires access to deliberation, responses to concerns, recorded dissent, and consent—not unanimity.
+Kahnawà:ke approved the process in 2005 to widen direct participation in law-making.
+Horn-Miller’s 2013 account defines consensus as responsive deliberation rather than unanimity, with public review before Council enactment.
+In January 2024, the Legislative Commission required pre-registration and ten participants and allowed advancement after two under-attended attempts; in April it instead required a drafting-committee recommendation and commission decision on next steps.
+Its process page says revisions remain underway, so these notices do not establish every rule now in force.
+For sector-specific or administrative laws, Council sets the mandate before consultation and public review.
 
 ## is-this-simply-traditional-government
 
