@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 
@@ -8,7 +8,17 @@ export interface RepositoryDeliveryFinding {
 }
 
 type Node = Record<string, unknown>;
-const ownedCommands = ["pnpm lint", "pnpm static", "pnpm audit ", "pnpm check", "pnpm test:coverage", "pnpm build", "pnpm test:routes", "pnpm test:visual"];
+const ownedCommands = [
+  "pnpm audit:delivery",
+  "pnpm lint",
+  "pnpm static",
+  "pnpm audit ",
+  "pnpm check",
+  "pnpm test:coverage",
+  "pnpm build",
+  "pnpm test:routes",
+  "pnpm test:visual",
+];
 
 function record(value: unknown): Node {
   return value && typeof value === "object" && !Array.isArray(value) ? (value as Node) : {};
