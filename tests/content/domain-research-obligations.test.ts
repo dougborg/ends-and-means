@@ -393,8 +393,20 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "capitalism-business-firm-relation",
+    obligationType: "research-gap",
+    target: "concept:capitalism#which-institutions-work-together",
+    status: "open",
+  },
+  {
     id: "capitalism-coerced-labor-boundary",
     obligationType: "counterargument",
+    target: "concept:capitalism#what-defines-capitalism",
+    status: "open",
+  },
+  {
+    id: "capitalism-commodity-production-relation",
+    obligationType: "research-gap",
     target: "concept:capitalism#what-defines-capitalism",
     status: "open",
   },

@@ -199,6 +199,18 @@ export const capitalismMarketCitations = [
     "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     "supports",
   ],
+  [
+    "market-economy-firm-relation",
+    "sep-markets-2026-source",
+    "section 1, paragraph 3",
+    "supports",
+  ],
+  [
+    "capitalism-market-economy-relation",
+    "hodgson-conceptualizing-capitalism-source",
+    "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
+    "supports",
+  ],
 ] as const;
 
 const capitalism = { kind: "concept" as const, id: "capitalism" };
@@ -222,8 +234,7 @@ export const capitalismMarketRelationshipDocuments = [
     subject: capitalism,
     relationships: [
       related(capitalism, "market-economy", [
-        "capitalism-market-boundary",
-        "market-ownership-boundary",
+        "capitalism-market-economy-relation",
       ]),
       related(capitalism, "private-property", [
         "capitalism-private-property-relation",
@@ -231,14 +242,6 @@ export const capitalismMarketRelationshipDocuments = [
       related(capitalism, "wage-labor", [
         "capitalism-institutional-definition",
         "wage-labor-history-limit",
-      ]),
-      related(capitalism, "commodity-production", [
-        "capitalism-marx-definition",
-        "commodity-production-boundary",
-      ]),
-      related(capitalism, "business-firm", [
-        "capitalism-institutional-definition",
-        "firm-market-boundary",
       ]),
       related(capitalism, "finance", [
         "capitalism-institutional-definition",
@@ -251,19 +254,8 @@ export const capitalismMarketRelationshipDocuments = [
     documentType: "relationships",
     subject: marketEconomy,
     relationships: [
-      related(marketEconomy, "market-coordination", [
-        "market-definition-exchange",
-      ]),
-      related(marketEconomy, "mixed-economy", [
-        "market-economy-plural-allocation",
-      ]),
-      related(marketEconomy, "business-firm", ["firm-market-boundary"]),
-      related(marketEconomy, "finance", ["market-finance-relation"]),
+      related(marketEconomy, "business-firm", ["market-economy-firm-relation"]),
       related(marketEconomy, "legal-order", ["market-state-boundary"]),
-      related(marketEconomy, "economic-planning", [
-        "china-dual-track-coordination",
-      ]),
-      related(marketEconomy, "social-ownership", ["market-ownership-boundary"]),
     ],
   },
   ...capitalismMarketCitations.map(

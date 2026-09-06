@@ -211,6 +211,12 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     ],
     [
+      "capitalism-market-economy-relation",
+      "hodgson-conceptualizing-capitalism-source",
+      "supports",
+      "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
+    ],
+    [
       "capitalism-marx-definition",
       "marx-capital-volume-one-source",
       "supports",
@@ -319,6 +325,12 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "section 1, paragraph 1",
     ],
     [
+      "market-economy-firm-relation",
+      "sep-markets-2026-source",
+      "supports",
+      "section 1, paragraph 3",
+    ],
+    [
       "market-economy-plural-allocation",
       "sep-markets-2026-source",
       "supports",
@@ -381,40 +393,6 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
   ],
   "conceptRelationships": [
     {
-      "id": "capitalism-related-to-business-firm",
-      "object": {
-        "id": "business-firm",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "capitalism-institutional-definition",
-        "firm-market-boundary",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "capitalism",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "capitalism-related-to-commodity-production",
-      "object": {
-        "id": "commodity-production",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "capitalism-marx-definition",
-        "commodity-production-boundary",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "capitalism",
-        "kind": "concept",
-      },
-    },
-    {
       "id": "capitalism-related-to-finance",
       "object": {
         "id": "finance",
@@ -455,8 +433,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       },
       "predicate": "related-to",
       "statementIds": [
-        "capitalism-market-boundary",
-        "market-ownership-boundary",
+        "capitalism-market-economy-relation",
       ],
       "status": "qualified",
       "subject": {
@@ -505,39 +482,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       },
       "predicate": "related-to",
       "statementIds": [
-        "firm-market-boundary",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "market-economy",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "market-economy-related-to-economic-planning",
-      "object": {
-        "id": "economic-planning",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "china-dual-track-coordination",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "market-economy",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "market-economy-related-to-finance",
-      "object": {
-        "id": "finance",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "market-finance-relation",
+        "market-economy-firm-relation",
       ],
       "status": "qualified",
       "subject": {
@@ -554,54 +499,6 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "predicate": "related-to",
       "statementIds": [
         "market-state-boundary",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "market-economy",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "market-economy-related-to-market-coordination",
-      "object": {
-        "id": "market-coordination",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "market-definition-exchange",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "market-economy",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "market-economy-related-to-mixed-economy",
-      "object": {
-        "id": "mixed-economy",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "market-economy-plural-allocation",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "market-economy",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "market-economy-related-to-social-ownership",
-      "object": {
-        "id": "social-ownership",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "market-ownership-boundary",
       ],
       "status": "qualified",
       "subject": {
@@ -903,9 +800,9 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     ],
     [
       "market-state-boundary",
-      "Markets require supporting legal rules",
+      "A market economy requires supporting legal rules",
       "definition",
-      "Functioning markets require legal rules that protect property rights and enforce contracts.",
+      "A functioning market economy requires legal rules that protect property rights and enforce contracts.",
     ],
     [
       "market-ownership-boundary",
@@ -1005,7 +902,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     ],
     [
       "capitalism-legal-order-relation",
-      "Capitalist institutions depend on law",
+      "Hodgson’s definition requires a legal system",
       "definition",
       "Hodgson’s definition of capitalism treats a legal system supporting property and contract as a necessary institution.",
     ],
@@ -1014,6 +911,18 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "Hodgson includes private property in capitalism’s definition",
       "definition",
       "Hodgson includes private property among the institutions in his definition of capitalism.",
+    ],
+    [
+      "market-economy-firm-relation",
+      "Market economies combine inter-firm exchange with intra-firm hierarchy",
+      "definition",
+      "A market economy can coordinate transactions between firms while firms coordinate their internal activity through hierarchy.",
+    ],
+    [
+      "capitalism-market-economy-relation",
+      "Hodgson finds markets insufficient to define capitalism",
+      "definition",
+      "Hodgson argues that markets are insufficient to define capitalism.",
     ],
   ],
 }
