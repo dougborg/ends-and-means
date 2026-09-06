@@ -23,7 +23,8 @@ It tells a reviewer which cited Sources to compare, but it is not a plagiarism v
 Human review remains responsible for checking the actual source passages, attribution, quotation, fairness, and independent synthesis.
 Signals remain open until that comparison is possible; matching internal trace prose alone is not evidence that source mimicry has been cleared.
 The harness uses locale-independent code-unit sorting for scanned paths and findings so identical inputs produce stable output regardless of filesystem, locale, or caller ordering.
-Dependency scanning tokenizes executable files so comments and string or template examples do not masquerade as runtime imports.
+Dependency scanning uses the TypeScript compiler parser for JavaScript and TypeScript modules and for Astro frontmatter and script regions, so comments, regular-expression literals, and string or template examples do not masquerade as runtime imports.
+Malformed executable syntax and non-static dynamic dependency calls fail closed because the scanner cannot prove their publication boundary.
 Scanned filesystem paths are normalized to forward slashes before publication-boundary checks so the same exclusions apply on every supported platform.
 
 ## Source preflight
