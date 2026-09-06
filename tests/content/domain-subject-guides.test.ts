@@ -16,6 +16,7 @@ import {
 import {
   canonicalGraph,
   citationsFor,
+  relationshipsFrom,
   subjectGuideById,
   subjectGuideBySlug,
   subjectGuideRecordById,
@@ -133,11 +134,12 @@ describe("SubjectGuide content attention", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 14,
-      total: 14,
+      live: 16,
+      total: 16,
       liveIds: [
         "guide-anarchism",
         "guide-authoritarianism",
+        "guide-capitalism",
         "guide-central-planning",
         "guide-communism",
         "guide-democracy",
@@ -145,6 +147,7 @@ describe("SubjectGuide content attention", () => {
         "guide-fascism",
         "guide-jinst-postcollective-pastoral-governance",
         "guide-kahnawake-community-lawmaking",
+        "guide-market-economy",
         "guide-republic",
         "guide-ruwalla-borderland-organization",
         "guide-socialism",
@@ -166,16 +169,18 @@ describe("compiled SubjectGuide publication boundaries", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(14);
+      expect(graph.subjectGuideRecords).toHaveLength(16);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
         "guide-anarchism",
         "guide-authoritarianism",
+        "guide-capitalism",
         "guide-central-planning",
         "guide-communism",
         "guide-democracy",
         "guide-fascism",
         "guide-jinst-postcollective-pastoral-governance",
         "guide-kahnawake-community-lawmaking",
+        "guide-market-economy",
         "guide-republic",
         "guide-ruwalla-borderland-organization",
         "guide-socialism",
@@ -186,7 +191,9 @@ describe("compiled SubjectGuide publication boundaries", () => {
       expect(subjectGuideBySlug(guide.slug, graph)).toBeUndefined();
     },
   );
+});
 
+describe("compiled SubjectGuide determinism", () => {
   it("compiles presentation records deterministically across document order", () => {
     const graph = compileDomainGraph(canonicalDocuments);
     const reversed = compileDomainGraph([...canonicalDocuments].reverse());
@@ -203,6 +210,85 @@ describe("compiled SubjectGuide publication boundaries", () => {
   it("selects the economic-democracy mutation fixture independent of document order", () => {
     const documents = clonedDocuments().reverse();
     expect(guideDocument(documents).guide.id).toBe("guide-economic-democracy");
+  });
+});
+
+describe("capitalism and market-economy guide boundaries", () => {
+  it("keeps the subjects distinct and fully traced", () => {
+    const capitalism = subjectGuideById("guide-capitalism");
+    const marketEconomy = subjectGuideById("guide-market-economy");
+    if (!capitalism || !marketEconomy)
+      throw new Error("Missing capitalism or market-economy guide");
+
+    expect(capitalism.primarySubject).toEqual({
+      kind: "concept",
+      id: "capitalism",
+    });
+    expect(marketEconomy.primarySubject).toEqual({
+      kind: "concept",
+      id: "market-economy",
+    });
+    expect(capitalism.description).toContain(
+      "Markets or private possessions alone",
+    );
+    expect(marketEconomy.description).toContain(
+      "neither requires private ownership",
+    );
+
+    for (const guide of [capitalism, marketEconomy]) {
+      expect(selectedStatementIds(guide).length).toBeGreaterThanOrEqual(16);
+      for (const statementId of selectedStatementIds(guide))
+        expect(citationsFor(statementId).length).toBeGreaterThan(0);
+    }
+
+    expect(
+      sectionWithRole(capitalism, "bounded-practice").entityRefs?.map(
+        ({ id }) => id,
+      ),
+    ).toEqual([
+      "english-agrarian-market-dependence",
+      "gold-coast-cocoa-expansion",
+      "china-dual-track-market-reforms",
+    ]);
+
+    expect(
+      relationshipsFrom("capitalism")
+        .filter(({ predicate }) => predicate === "related-to")
+        .map(({ object }) => object.id),
+    ).toEqual([
+      "business-firm",
+      "commodity-production",
+      "economic-planning",
+      "finance",
+      "legal-order",
+      "market-coordination",
+      "market-economy",
+      "private-property",
+      "social-ownership",
+      "state-capacity",
+      "wage-labor",
+    ]);
+    for (const caseId of [
+      "english-agrarian-market-dependence",
+      "gold-coast-cocoa-expansion",
+      "china-dual-track-market-reforms",
+    ]) {
+      const conceptLinks = relationshipsFrom(caseId).filter(
+        (relationship) =>
+          relationship.predicate === "applies-to-case" ||
+          relationship.predicate === "contested-in-case",
+      );
+      expect(conceptLinks.map(({ object }) => object.id).sort()).toEqual([
+        "capitalism",
+        "market-economy",
+      ]);
+      expect(
+        conceptLinks.every(
+          (relationship) =>
+            "status" in relationship && relationship.status === "qualified",
+        ),
+      ).toBe(true);
+    }
   });
 });
 

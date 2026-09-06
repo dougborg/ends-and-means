@@ -149,16 +149,24 @@ describe("social-ownership narrative dossier", () => {
 
 const expectedMissingConceptDossiers = [
   "autocracy",
+  "business-firm",
+  "commodity-production",
   "dictatorship",
   "economic-planning",
+  "finance",
   "indigenous-autonomy",
   "institutional-abolition",
   "institutional-formation",
   "institutional-reorganization",
+  "legal-order",
   "market-coordination",
   "market-socialism",
+  "mixed-economy",
+  "private-property",
   "social-class",
+  "state-capacity",
   "statelessness",
+  "wage-labor",
 ];
 
 describe("canonical narrative coverage", () => {
@@ -178,8 +186,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 13,
-      total: 24,
+      covered: 15,
+      total: 34,
       missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(

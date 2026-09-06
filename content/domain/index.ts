@@ -1,12 +1,13 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
-import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
+import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { centralPlanningApproachDocuments } from "./approaches/central-planning";
 import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
 import { approachDocuments } from "./approaches/swedish-wage-earner-funds";
 import { anarchismEvidenceDocuments } from "./evidence/anarchism";
-import { collectiveCapitalFormationEvidenceDocuments } from "./evidence/collective-capital-formation";
+import { capitalismMarketEvidenceDocuments } from "./evidence/capitalism-market-economy";
 import { centralPlanningEvidenceDocuments } from "./evidence/central-planning";
+import { collectiveCapitalFormationEvidenceDocuments } from "./evidence/collective-capital-formation";
 import { democracyRepublicEvidenceDocuments } from "./evidence/democracy-republic";
 import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evidence/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
@@ -20,8 +21,9 @@ import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { zapatistaCaracolesEvidenceDocuments } from "./evidence/zapatista-caracoles";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
-import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
+import { capitalismMarketGuideDocuments } from "./presentation/capitalism-market-economy-guides";
 import { centralPlanningGuideDocuments } from "./presentation/central-planning-guide";
+import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
 import { democracyRepublicGuideDocuments } from "./presentation/democracy-republic-guides";
 import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
@@ -36,8 +38,9 @@ import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossie
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
 import { zapatistaCaracolesDossierDocuments } from "./presentation/zapatista-caracoles-dossier";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
-import { collectiveCapitalFormationRelationshipDocuments } from "./relationships/collective-capital-formation";
+import { capitalismMarketRelationshipDocuments } from "./relationships/capitalism-market-economy";
 import { centralPlanningRelationshipDocuments } from "./relationships/central-planning";
+import { collectiveCapitalFormationRelationshipDocuments } from "./relationships/collective-capital-formation";
 import { democracyRepublicRelationshipDocuments } from "./relationships/democracy-republic";
 import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
@@ -51,8 +54,9 @@ import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { zapatistaCaracolesRelationshipDocuments } from "./relationships/zapatista-caracoles";
 import { anarchismResearchDocuments } from "./research/anarchism";
-import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
+import { capitalismMarketResearchDocuments } from "./research/capitalism-market-economy";
 import { centralPlanningResearchDocuments } from "./research/central-planning";
+import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
@@ -73,6 +77,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...economicDemocracyEvidenceDocuments,
   ...collectiveCapitalFormationEvidenceDocuments,
   ...centralPlanningEvidenceDocuments,
+  ...capitalismMarketEvidenceDocuments,
   ...democracyRepublicEvidenceDocuments,
   ...authoritarianismFascismTotalitarianismEvidenceDocuments,
   ...socialOwnershipEvidenceDocuments,
@@ -87,6 +92,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...foundationalConceptDossierDocuments,
   ...collectiveCapitalFormationDossierDocuments,
   ...centralPlanningGuideDocuments,
+  ...capitalismMarketGuideDocuments,
   ...democracyRepublicGuideDocuments,
   ...authoritarianismFascismTotalitarianismGuideDocuments,
   ...socialismCommunismDossierDocuments,
@@ -102,6 +108,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
+  ...capitalismMarketResearchDocuments,
   ...democracyRepublicResearchDocuments,
   ...authoritarianismFascismTotalitarianismResearchDocuments,
   ...tawantinsuyuResearchDocuments,
@@ -115,6 +122,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...economicDemocracyRelationshipDocuments,
   ...collectiveCapitalFormationRelationshipDocuments,
   ...centralPlanningRelationshipDocuments,
+  ...capitalismMarketRelationshipDocuments,
   ...democracyRepublicRelationshipDocuments,
   ...authoritarianismFascismTotalitarianismRelationshipDocuments,
   ...socialDemocracyRelationshipDocuments,

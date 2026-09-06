@@ -34,6 +34,9 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
+      "china-dual-track-market-reforms",
+      "english-agrarian-market-dependence",
+      "gold-coast-cocoa-expansion",
       "italian-fascist-dictatorship-1925-1943",
       "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
