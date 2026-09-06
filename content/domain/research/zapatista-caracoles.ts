@@ -1,7 +1,90 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
-const common = { publicationStatus: "reviewed" as const, obligationStatus: "open" as const, statementIds: [], reviewedAt: "2026-09-06" };
+const common = {
+  publicationStatus: "reviewed" as const,
+  obligationStatus: "open" as const,
+  statementIds: [],
+  reviewedAt: "2026-09-06",
+};
 export const zapatistaCaracolesResearchDocuments = [
-  { documentType: "entity", entity: { id: "zapatista-post-2023-rules-in-use", kind: "research-obligation", label: "Post-2023 Zapatista autonomy in practice", description: "A freshness and implementation question about the declared successor structure.", obligationType: "counterevidence", question: "From November 2023 through September 6, 2026, how did GAL, CGAZ, and ACGAZ selection, accountability, coordination, and resource rules operate across different Zapatista communities?", target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" }, targetSectionId: "what-changed-in-2023", addressedStatementIds: ["zapatista-2023-reorganization-declaration", "zapatista-2023-caracoles-continuity", "zapatista-2023-practice-open"], currentLimitation: "The available communiqué specifies the successor design but explicitly defers fuller evaluation and does not provide cross-community evidence of implementation.", evidenceNeeded: "Community-authorized local accounts, dated selection and reporting records, observations from multiple regions, and independent research that protects participants under current security conditions.", scope: "Named Zapatista communities and successor bodies in Chiapas from November 2023 through September 6, 2026; not all Indigenous autonomous institutions in Mexico.", ...common } },
-  { documentType: "entity", entity: { id: "zapatista-participation-gender-authority", kind: "research-obligation", label: "Participation, gender, and effective authority in the council episode", description: "A serious counterevidence question about who exercised and contested authority.", obligationType: "counterevidence", question: "Across the 2003–2023 caracol and Good Government Council episode, who served, declined, was excluded, contested decisions, or remained subject to EZLN political-military authority?", target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" }, targetSectionId: "how-did-it-work", addressedStatementIds: ["jbg-rotation-rules-in-use", "jbg-gender-participation-limit", "jbg-civil-military-authority-limit", "zapatista-accountability-assessment"], currentLimitation: "Participant teaching materials document learning and uneven participation, while the critical account identifies continuing command authority; neither establishes population-wide patterns across zones and years.", evidenceNeeded: "Zone- and period-specific service records, community-authorized interviews including women and nonparticipants, decision appeals, recall cases, and evidence capable of distinguishing civilian from military authority in practice.", scope: "Good Government Councils and constituent municipalities in Zapatista regions of Chiapas, August 2003–November 2023; no inference about every community or member.", ...common } },
-  { documentType: "entity", entity: { id: "zapatista-external-coercion-effects", kind: "research-obligation", label: "Effects of external coercion on autonomous governance", description: "A bounded causal counterfactual about security pressure and institutional practice.", obligationType: "counterfactual", question: "How would participation, mobility, service provision, and institutional redesign likely have differed without the armed, criminal, land, and state pressures reported in Zapatista regions from 2003 through 2023?", target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" }, addressedStatementIds: ["zapatista-reach-limit", "zapatista-2023-practice-open"], currentLimitation: "Current sources establish overlapping authority and reported external threats but do not identify their causal effect on particular governance outcomes or the 2023 redesign.", evidenceNeeded: "Preselected within-region comparisons over time, event-level security records, service and participation measures, and rival explanations for institutional change.", scope: "Selected Zapatista regions in Chiapas during 2003–2023; it does not presume external coercion was the sole or primary cause of redesign.", ...common } },
+  {
+    documentType: "entity",
+    entity: {
+      id: "zapatista-post-2023-rules-in-use",
+      kind: "research-obligation",
+      label: "Post-2023 Zapatista autonomy in practice",
+      description:
+        "A freshness and implementation question about the declared successor structure.",
+      obligationType: "counterevidence",
+      question:
+        "From November 2023 through September 6, 2026, how did GAL, CGAZ, and ACGAZ selection, accountability, coordination, and resource rules operate across different Zapatista communities?",
+      target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" },
+      targetSectionId: "what-changed-in-2023",
+      addressedStatementIds: [
+        "zapatista-2023-reorganization-declaration",
+        "zapatista-2023-caracoles-continuity",
+        "zapatista-2023-practice-open",
+      ],
+      currentLimitation:
+        "The available communiqué specifies the successor design but explicitly defers fuller evaluation and does not provide cross-community evidence of implementation.",
+      evidenceNeeded:
+        "Community-authorized local accounts, dated selection and reporting records, observations from multiple regions, and independent research that protects participants under current security conditions.",
+      scope:
+        "Named Zapatista communities and successor bodies in Chiapas from November 2023 through September 6, 2026; not all Indigenous autonomous institutions in Mexico.",
+      ...common,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "zapatista-participation-gender-authority",
+      kind: "research-obligation",
+      label:
+        "Participation, gender, and effective authority in the council episode",
+      description:
+        "A serious counterevidence question about who exercised and contested authority.",
+      obligationType: "counterevidence",
+      question:
+        "Across the 2003–2023 caracol and Good Government Council episode, who served, declined, was excluded, contested decisions, or remained subject to EZLN political-military authority?",
+      target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" },
+      targetSectionId: "how-did-it-work",
+      addressedStatementIds: [
+        "jbg-rotation-rules-in-use",
+        "jbg-gender-participation-limit",
+        "jbg-civil-military-authority-limit",
+        "zapatista-accountability-assessment",
+      ],
+      currentLimitation:
+        "Participant teaching materials document learning and uneven participation, while the critical account identifies continuing command authority; neither establishes population-wide patterns across zones and years.",
+      evidenceNeeded:
+        "Zone- and period-specific service records, community-authorized interviews including women and nonparticipants, decision appeals, recall cases, and evidence capable of distinguishing civilian from military authority in practice.",
+      scope:
+        "Good Government Councils and constituent municipalities in Zapatista regions of Chiapas, August 2003–November 2023; no inference about every community or member.",
+      ...common,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "zapatista-external-coercion-effects",
+      kind: "research-obligation",
+      label: "Effects of external coercion on autonomous governance",
+      description:
+        "A bounded causal counterfactual about security pressure and institutional practice.",
+      obligationType: "counterfactual",
+      question:
+        "Under a counterfactual of materially lower external security pressure, how might participation, mobility, service provision, and institutional redesign have differed during the bounded episode?",
+      target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" },
+      addressedStatementIds: [
+        "zapatista-reach-limit",
+        "zapatista-2023-practice-open",
+      ],
+      currentLimitation:
+        "Current sources establish overlapping authority and leave successor practice open, but they do not identify how lower external security pressure would have changed particular governance outcomes or the 2023 redesign.",
+      evidenceNeeded:
+        "Preselected within-region comparisons over time, event-level security records, service and participation measures, and rival explanations for institutional change.",
+      scope:
+        "Selected Zapatista regions in Chiapas during 2003–2023; it does not presume external coercion was the sole or primary cause of redesign.",
+      ...common,
+    },
+  },
 ] satisfies AuthoringDocument[];
