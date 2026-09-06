@@ -17,7 +17,7 @@ The same declaration gave the EZLN’s Indigenous Revolutionary Clandestine Comm
 ## how-did-it-work
 
 Accounts by Zapatista participants describe rotating service, collective reporting, and learning government by doing it.
-Andrews found that the councils also required outside organizations to seek permission and accept Zapatista control over projects and allocations.
+Andrews found that the councils also required outside organizations to seek permission and accept community control over projects and resource allocation.
 Those practices created avenues for accountability, but they did not distribute participation evenly: participants reported persistent gaps for women in some councils even where parity was a stated rule.
 Gunderson’s critical account further shows why rotating civilian delegates cannot be treated as proof that central political-military authority disappeared.
 
