@@ -6,13 +6,13 @@ export const kahnawakeCommunityDecisionMakingGuideDocuments = [
     guide: {
       id: "guide-kahnawake-community-lawmaking",
       slug: "kahnawake-community-lawmaking",
-      label: "Kahnawà:ke community lawmaking",
+      label: "Kahnawà:ke community law-making",
       description:
-        "A bounded guide to one Kahnawà:ke lawmaking process, the terms used to describe it, and the evidence that limits broader claims about Indigenous or so-called tribal organization.",
+        "A bounded guide to one Kahnawà:ke law-making process, the terms used to describe it, and the evidence that limits broader claims about Indigenous or so-called tribal organization.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "case", id: "kahnawake-community-lawmaking" },
       searchQueries: [
-        { query: "Kahnawà:ke community lawmaking" },
+        { query: "Kahnawà:ke community law-making" },
         { query: "Kahnawà:ke decision making" },
         {
           query: "tribal organization",
@@ -30,7 +30,8 @@ export const kahnawakeCommunityDecisionMakingGuideDocuments = [
         {
           id: "short-answer",
           role: "short-answer",
-          heading: "What is the Kahnawà:ke Community Decision Making Process?",
+          heading:
+            "What is the Kahnawà:ke Community Decision Making and Review Process?",
           narrativeRefs: [{ dossierId: "kahnawake-community-lawmaking-dossier" }],
         },
         {
