@@ -3726,10 +3726,10 @@
       "version": "1.33.0",
       "origin": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/1.33.0",
       "terms": "https://www.npmjs.com/package/lightningcss-linux-x64-gnu/v/1.33.0?activeTab=code",
-      "source": "git+https://github.com/parcel-bundler/lightningcss.git",
+      "source": "https://github.com/parcel-bundler/lightningcss.git",
       "license": "MPL-2.0",
       "metadataStatus": "resolved",
-      "evidenceDigest": "b77518903253be624c0ec9f648c7a52de38f5a02c37b495359ec99b4ded8b7c1"
+      "evidenceDigest": "5562298cfd128544b2b1a1fb7ff2b2430f2f8af7e8eaf2f62611a56f4fc18db1"
     },
     {
       "key": "lightningcss-linux-x64-musl@1.33.0",

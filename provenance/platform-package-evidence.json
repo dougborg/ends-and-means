@@ -10,6 +10,6 @@
     { "key": "@oxc-parser/binding-linux-x64-gnu@0.147.0", "platform": "linux-x64-gnu", "license": "MIT", "source": "git+https://github.com/oxc-project/oxc.git" },
     { "key": "@oxc-resolver/binding-linux-x64-gnu@11.24.2", "platform": "linux-x64-gnu", "license": "MIT", "source": "git+https://github.com/oxc-project/oxc-resolver.git" },
     { "key": "@rolldown/binding-linux-x64-gnu@1.2.7", "platform": "linux-x64-gnu", "license": "MIT", "source": "git+https://github.com/rolldown/rolldown.git" },
-    { "key": "lightningcss-linux-x64-gnu@1.33.0", "platform": "linux-x64-gnu", "license": "MPL-2.0", "source": "git+https://github.com/parcel-bundler/lightningcss.git" }
+    { "key": "lightningcss-linux-x64-gnu@1.33.0", "platform": "linux-x64-gnu", "license": "MPL-2.0", "source": "https://github.com/parcel-bundler/lightningcss.git" }
   ]
 }
