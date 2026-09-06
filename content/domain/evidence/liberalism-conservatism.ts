@@ -108,7 +108,9 @@ const sourceCopy: Record<
 function workTypeFor(
   id: string,
   sourceType: "web-page" | "article" | "report" | "edition" | "legal-text",
+  workType?: "article" | "book" | "constitution" | "law" | "other" | "report",
 ) {
+  if (workType) return workType;
   if (id === "japan-constitution") return "constitution" as const;
   if (sourceType === "article") return "article" as const;
   if (sourceType === "report") return "report" as const;
@@ -127,6 +129,7 @@ const source = (
   publicationYear?: number,
   originalPublicationYear?: number,
   identifiers?: { doi?: string; isbn13?: string },
+  workType?: "article" | "book" | "constitution" | "law" | "other" | "report",
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -136,7 +139,7 @@ const source = (
       label: title,
       description: sourceCopy[id]?.work ?? title,
       title,
-      workType: workTypeFor(id, sourceType),
+      workType: workTypeFor(id, sourceType, workType),
       ...(originalPublicationYear === undefined
         ? {}
         : { originalPublicationYear }),
@@ -177,6 +180,7 @@ const statement = (
     | "definition"
     | "observation"
     | "attributed-value"
+    | "attributed-proposal"
     | "classification"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
@@ -285,6 +289,8 @@ export const liberalismConservatismEvidenceDocuments = [
     "https://www.kas.de/c/document_library/get_file?groupId=252038&uuid=76a77614-6803-0750-c7a7-5d3ff7c46206",
     1947,
     1947,
+    undefined,
+    "other",
   ),
   ...source(
     "cdu-duesseldorf-guidelines",
@@ -295,6 +301,8 @@ export const liberalismConservatismEvidenceDocuments = [
     "https://www.kas.de/documents/252038/253252/1949_Duesseldorfer-Leitsaetze.pdf/e96f38a1-b923-a79e-c5a3-11569de3f64e",
     1949,
     1949,
+    undefined,
+    "other",
   ),
   ...source(
     "bell-what-is-liberalism",
@@ -358,6 +366,8 @@ export const liberalismConservatismEvidenceDocuments = [
     "https://indianliberals.in/swatantra-party/statement-of-principles-of-the-swatantra-party-aug2-1959.pdf",
     1959,
     1959,
+    undefined,
+    "other",
   ),
   {
     documentType: "entity",
@@ -567,7 +577,7 @@ export const liberalismConservatismEvidenceDocuments = [
     "ahlen-programme-economic-order",
     "The Ahlen Programme rejected the existing capitalist order",
     "The CDU's 1947 Ahlen Programme declared that the capitalist economic system had not served the German people's vital interests and called for a new social and economic order.",
-    "attributed-value",
+    "attributed-proposal",
   ),
   statement(
     "ahlen-programme-compromise",
@@ -579,7 +589,7 @@ export const liberalismConservatismEvidenceDocuments = [
     "duesseldorf-social-market-shift",
     "The Düsseldorf Guidelines foregrounded a social market economy",
     "The CDU's 1949 Düsseldorf Guidelines presented a social market economy based on competition, price formation, and social protections as its economic program.",
-    "attributed-value",
+    "attributed-proposal",
   ),
   statement(
     "cdu-programme-change-boundary",
@@ -828,7 +838,7 @@ export const liberalismConservatismEvidenceDocuments = [
         "The constitutional drafting, promulgation, and commencement interval; not a complete account of Japanese liberal traditions or equality in practice.",
       selectionRationale:
         "The settlement supplies a non-Atlantic constitutional example while making occupation power and gender-specific provisions visible.",
-      conditionStatementIds: ["japan-rights-drafting-boundary"],
+      conditionStatementIds: [],
       episodeIds: ["japan-constitutional-rights-episode"],
       ...reviewed,
     },
@@ -847,7 +857,7 @@ export const liberalismConservatismEvidenceDocuments = [
       endDate: { year: 1947, month: 5, day: 3, certainty: "exact" },
       scope:
         "Articles 14 and 24 and their drafting context; not their full implementation history.",
-      conditionStatementIds: ["japan-rights-drafting-boundary"],
+      conditionStatementIds: [],
       formalRuleStatementIds: [
         "japan-legal-equality",
         "japan-marriage-consent",
@@ -878,10 +888,7 @@ export const liberalismConservatismEvidenceDocuments = [
         "The statutory scheme in England and Wales from commencement through the latest sales and stock figures reviewed in the 1999 Commons Library paper; Scotland had separate legislation, and later policy is excluded.",
       selectionRationale:
         "The episode connects an explicitly documented Conservative program to enacted authority, distributional effects, and a geographic transfer limit without defining conservatism by the program.",
-      conditionStatementIds: [
-        "right-to-buy-conservative-programme",
-        "right-to-buy-rules-changed",
-      ],
+      conditionStatementIds: ["right-to-buy-conservative-programme"],
       episodeIds: ["right-to-buy-initial-operation"],
       ...reviewed,
     },
@@ -903,11 +910,8 @@ export const liberalismConservatismEvidenceDocuments = [
         note: "The Commons Library paper reports annual sales and stock through the late 1990s; 1998 bounds this review interval rather than a statutory phase.",
       },
       scope:
-        "The formal-rule fields record the enacted 1980 scheme, not unchanged rules through 1998; the conditions record later amendments, and no causal estimate separates Right to Buy from falling social-housing investment.",
-      conditionStatementIds: [
-        "right-to-buy-conservative-programme",
-        "right-to-buy-rules-changed",
-      ],
+        "The formal-rule fields record the enacted 1980 scheme, not unchanged rules through 1998; later amendments remain contextual evidence rather than a Case-slot claim, and no causal estimate separates Right to Buy from falling social-housing investment.",
+      conditionStatementIds: ["right-to-buy-conservative-programme"],
       formalRuleStatementIds: [
         "right-to-buy-purchase-right",
         "right-to-buy-discounts",
@@ -938,7 +942,7 @@ export const liberalismConservatismEvidenceDocuments = [
         "Swatantra's formation and early opposition activity through the 1967 general election; not every member, later party history, or a universal Indian conservatism.",
       selectionRationale:
         "The episode provides a locally grounded, non-Atlantic classification while exposing regional, gender, and organizational differences within a free-economy coalition.",
-      conditionStatementIds: ["swatantra-economic-conservatism"],
+      conditionStatementIds: [],
       episodeIds: ["swatantra-early-opposition-episode"],
       ...reviewed,
     },
@@ -957,11 +961,7 @@ export const liberalismConservatismEvidenceDocuments = [
       endDate: { year: 1967, certainty: "exact" },
       scope:
         "Organizational aims and practices documented in the publisher-authorized introduction; later decline and the full record of parliamentary action remain outside this episode.",
-      conditionStatementIds: [
-        "swatantra-economic-conservatism",
-        "swatantra-ordered-progress",
-        "swatantra-formal-principles",
-      ],
+      conditionStatementIds: [],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: ["swatantra-parliamentary-practice"],
       interactionStatementIds: [
