@@ -15,10 +15,19 @@ The global stylesheet declares a stable cascade order:
 4. `components.css` owns reusable content and interface primitives; and
 5. `global.css` retains page compositions and responsive exceptions.
 
+Route-specific production stylesheets also join the named `pages` layer. An
+unlayered stylesheet would outrank every declared layer, so the design-system
+tests discover all CSS under `src` and reject files that do not participate in
+this architecture.
+
 Components and page compositions consume semantic tokens such as `--canvas`,
 `--surface`, `--text`, `--link`, `--evidence`, and `--caution`. Literal palette
 values belong only in the token layer. Theme mappings will be added separately;
 the current semantic map intentionally preserves the established Light design.
+Permanent-surface shadows likewise use semantic shadow tokens; their color
+functions remain centralized with the palette rather than bypassing it in page
+CSS. The system keywords `currentColor` and `transparent` remain valid outside
+the token layer when they derive from the active semantic foreground.
 
 ## Measures and rhythm
 

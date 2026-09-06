@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { describe, expect, it } from "vitest";
@@ -6,22 +6,47 @@ import EditorialHeader from "../../src/components/EditorialHeader.astro";
 import Notice from "../../src/components/Notice.astro";
 
 const root = path.resolve(import.meta.dirname, "../..");
+const sourceDirectory = path.join(root, "src");
+
+async function productionStylesheets(directory = sourceDirectory): Promise<string[]> {
+  const entries = await readdir(directory, { withFileTypes: true });
+  return (await Promise.all(entries.map((entry) => {
+    const candidate = path.join(directory, entry.name);
+    if (entry.isDirectory()) return productionStylesheets(candidate);
+    return entry.isFile() && entry.name.endsWith(".css") ? [candidate] : [];
+  }))).flat().toSorted();
+}
+
+async function stylesheetContents() {
+  return Promise.all((await productionStylesheets()).map(async (file) => ({
+    file: path.relative(sourceDirectory, file),
+    css: await readFile(file, "utf8"),
+  })));
+}
 
 describe("design-system foundations", () => {
-  it("keeps palette literals in the token layer and page CSS on semantic roles", async () => {
-    const [tokens, global, homepage, challenge] = await Promise.all([
-      readFile(path.join(root, "src/styles/tokens.css"), "utf8"),
-      readFile(path.join(root, "src/styles/global.css"), "utf8"),
-      readFile(path.join(root, "src/styles/homepage.css"), "utf8"),
-      readFile(path.join(root, "src/styles/challenge-topic.css"), "utf8"),
-    ]);
+  it("keeps every production stylesheet inside the declared cascade architecture", async () => {
+    const contents = await stylesheetContents();
+    const global = contents.find(({ file }) => file === "styles/global.css")?.css ?? "";
+
+    expect(global).toContain("@layer tokens, base, layout, components, pages;");
+    for (const { file, css } of contents) {
+      expect(css, file).toMatch(/@layer (?:tokens|base|layout|components|pages)\s*{/);
+    }
+  });
+
+  it("keeps all color literals and color functions in the token layer", async () => {
+    const contents = await stylesheetContents();
+    const tokens = contents.find(({ file }) => file === "styles/tokens.css")?.css ?? "";
 
     expect(tokens).toContain("--canvas:");
     expect(tokens).toContain("--measure-page: 90rem");
     expect(tokens).toContain("--space-1: 0.25rem");
-    for (const stylesheet of [global, homepage, challenge]) {
-      expect(stylesheet).not.toMatch(/#[0-9a-f]{3,8}\b/i);
-      expect(stylesheet).not.toMatch(/var\(--(?:night|sheet|cobalt|amber|teal|muted|display|reading|apparatus|measure|page)\)/);
+    expect(tokens).toContain("--shadow-panel:");
+    for (const { file, css } of contents.filter(({ file }) => file !== "styles/tokens.css")) {
+      expect(css, file).not.toMatch(/#[0-9a-f]{3,8}\b/i);
+      expect(css, file).not.toMatch(/\b(?:rgb|rgba|hsl|hsla|hwb|lab|lch|oklab|oklch|color|color-mix)\(/i);
+      expect(css, file).not.toMatch(/var\(--(?:night|sheet|cobalt|amber|teal|muted|display|reading|apparatus|measure|page)\)/);
     }
   });
 
