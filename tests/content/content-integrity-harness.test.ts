@@ -129,6 +129,25 @@ describe("content-integrity harness", () => {
 });
 
 describe("safe-publication boundary", () => {
+  it("rejects Astro imports of the private corpus candidate matrix", () => {
+    expect(
+      publicationBoundaryFindings([
+        {
+          path: "src/pages/research.astro",
+          content:
+            '---\nimport candidates from "../../research/corpus-diversity/candidates.json";\n---\n<ul>{candidates.map((candidate) => <li>{candidate.namedPeopleOrCommunity}</li>)}</ul>',
+        },
+      ]),
+    ).toContainEqual(
+      expect.objectContaining({
+        category: "archive-exclusion",
+        severity: "violation",
+        location: "src/pages/research.astro",
+        message: expect.stringContaining("research/corpus-diversity"),
+      }),
+    );
+  });
+
   it("rejects runtime imports and build references to excluded material", () => {
     expect(
       publicationBoundaryFindings([
