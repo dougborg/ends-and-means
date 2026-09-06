@@ -48,6 +48,37 @@ const statementIds = [
   "bonjol-authors-causal-interpretation",
   "bonjol-no-minangkabau-generalization",
   "nagari-law-changed-after-cases",
+  "matriliny-does-not-fix-property-control",
+  "matriliny-does-not-fix-office",
+  "matriliny-does-not-fix-equality",
+  "matriarchy-sanday-maternal-centered-interpretation",
+  "koto-tinggi-descent-unobserved",
+  "koto-tinggi-residence-unobserved",
+  "koto-tinggi-participant-count-unreported",
+  "koto-tinggi-womens-voice-unidentified",
+  "koto-tinggi-formal-speaking-rule",
+  "koto-tinggi-formal-consensus-rule",
+  "koto-tinggi-formal-vote-fallback",
+  "bonjol-harta-pusaka-female-line",
+  "bonjol-inheritance-did-not-confer-office-authority",
+  "bonjol-bundo-kanduang-not-universal-authority",
+  "bonjol-authors-early-marriage-hypothesis",
+  "bonjol-authors-gender-norms-hypothesis",
+  "bonjol-authors-forum-hypothesis",
+  "bonjol-authors-representation-dependence-hypothesis",
+  "bonjol-causal-identification-limit",
+  "koto-tinggi-representative-council",
+  "koto-tinggi-customary-council",
+  "koto-tinggi-budget-postponement",
+  "koto-tinggi-unspent-funds",
+  "koto-tinggi-accounting-difficulty",
+  "bonjol-thirteen-key-informants",
+  "bonjol-agency-records",
+  "bonjol-twenty-seven-women-sample",
+  "bonjol-ulayat-sales-contrary-to-custom",
+  "bonjol-neshp-member-exclusion",
+  "bonjol-five-women-income-loss",
+  "bonjol-five-women-weak-influence",
 ] as const;
 
 const sourceIds = [
@@ -127,7 +158,7 @@ function expectEveryFieldDriftDetected<T extends object>(
 
 describe("Minangkabau matriliny, property, and authority", () => {
   it("publishes the exact traced Statement and Source ledger", () => {
-    expect(statementIds).toHaveLength(36);
+    expect(statementIds).toHaveLength(67);
     expect(sourceIds).toHaveLength(8);
 
     for (const id of statementIds) {
@@ -167,7 +198,9 @@ describe("Minangkabau matriliny, property, and authority", () => {
       "citation",
     );
   });
+});
 
+describe("Minangkabau bounded case categories", () => {
   it("keeps the two cases and their evidence categories separately bounded", () => {
     expect(
       canonicalGraph.indexes.entitiesById[
@@ -186,15 +219,23 @@ describe("Minangkabau matriliny, property, and authority", () => {
       kind: "case-episode",
       formalRuleStatementIds: [
         "koto-tinggi-three-institutions",
+        "koto-tinggi-representative-council",
+        "koto-tinggi-customary-council",
         "koto-tinggi-formal-participation-rules",
         "koto-tinggi-formal-decision-rule",
+        "koto-tinggi-formal-speaking-rule",
+        "koto-tinggi-formal-consensus-rule",
+        "koto-tinggi-formal-vote-fallback",
       ],
       interactionStatementIds: [
         "koto-tinggi-budget-rules-in-use",
+        "koto-tinggi-budget-postponement",
         "koto-tinggi-budget-consensus",
       ],
       outcomeStatementIds: [
         "koto-tinggi-administrative-capacity-limit",
+        "koto-tinggi-unspent-funds",
+        "koto-tinggi-accounting-difficulty",
         "koto-tinggi-regulatory-preparation-limit",
       ],
     });
@@ -210,9 +251,15 @@ describe("Minangkabau matriliny, property, and authority", () => {
     ).toMatchObject({
       kind: "case-episode",
       formalRuleStatementIds: ["bonjol-neshp-formal-promise"],
-      ruleInUseStatementIds: ["bonjol-ulayat-sales-rules-in-use"],
+      ruleInUseStatementIds: [
+        "bonjol-ulayat-sales-rules-in-use",
+        "bonjol-ulayat-sales-contrary-to-custom",
+      ],
       interactionStatementIds: ["bonjol-neshp-distribution-practice"],
-      outcomeStatementIds: ["bonjol-neshp-exclusion-outcome"],
+      outcomeStatementIds: [
+        "bonjol-neshp-exclusion-outcome",
+        "bonjol-neshp-member-exclusion",
+      ],
     });
   });
 });
