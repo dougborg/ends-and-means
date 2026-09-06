@@ -3,6 +3,7 @@ import type { SubjectGuide, SubjectGuideSection } from "../../src/lib/domain";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 import {
   directSubjectGuideEvidence,
+  hasSubjectGuideDirectory,
   subjectGuideSectionHasContent,
   visibleSubjectGuideSections,
 } from "../../src/lib/subject-guide-presentation";
@@ -30,6 +31,11 @@ const fixture = (sections: SubjectGuideSection[]): SubjectGuide => ({
 });
 
 describe("SubjectGuide presentation states", () => {
+  it("omits the guide directory when the live projection is empty", () => {
+    expect(hasSubjectGuideDirectory([])).toBe(false);
+    expect(hasSubjectGuideDirectory(canonicalGraph.subjectGuides)).toBe(true);
+  });
+
   it.each([
     ["narrative", { narrativeRefs: [{ dossierId: "test-dossier" }] }],
     ["statement", { statementIds: ["test-statement"] }],

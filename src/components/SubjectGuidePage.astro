@@ -66,8 +66,12 @@ function narrativeStatementIds(
     : selection.narrative.statementIds;
 }
 
+const relationshipsById = new Map(
+  canonicalGraph.relationships.map((relationship) => [relationship.id, relationship]),
+);
+
 function selectedRelationship(id: string) {
-  return canonicalGraph.relationships.find((relationship) => relationship.id === id);
+  return relationshipsById.get(id);
 }
 
 function relationshipEnds(relationship: DomainRelationship) {

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { canonicalGraph, dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
+import { hasSubjectGuideDirectory } from "../../lib/subject-guide-presentation";
 
 const approaches = entitiesOfKind("approach");
 const guides = canonicalGraph.subjectGuides;
@@ -12,7 +13,7 @@ const guides = canonicalGraph.subjectGuides;
       <h1>Start with what you want to understand.</h1>
       <p class="dek">Get a direct answer, see where meanings diverge, and follow the idea into institutions, bounded cases, disagreements, and evidence.</p>
     </header>
-    <section aria-labelledby="subject-guides-title">
+    {hasSubjectGuideDirectory(guides) && <section aria-labelledby="subject-guides-title">
       <header class="explore-directory__heading">
         <p class="coordinate">SUBJECT GUIDES</p>
         <h2 id="subject-guides-title">Learn a subject from the question outward</h2>
@@ -27,7 +28,7 @@ const guides = canonicalGraph.subjectGuides;
           </li>
         ))}
       </ol>
-    </section>
+    </section>}
     {approaches.length > 0 && (
       <section aria-labelledby="approach-paths-title" class="explore-directory__secondary">
         <header class="explore-directory__heading">

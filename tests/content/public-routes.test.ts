@@ -77,4 +77,38 @@ describe("public entity routes", () => {
       }),
     ).toBeUndefined();
   });
+
+  it("requires a live parent Case before routing a Case episode", () => {
+    const reference = {
+      kind: "case-episode",
+      id: "enacted-wage-earner-funds-1984-1991",
+    } as const;
+    const episode = canonicalGraph.indexes.entitiesById[reference.id];
+    if (episode?.kind !== "case-episode")
+      throw new Error("Missing episode fixture");
+    const parent = canonicalGraph.indexes.entitiesById[episode.caseId];
+    if (parent?.kind !== "case") throw new Error("Missing parent Case fixture");
+
+    const withoutParent = {
+      ...canonicalGraph,
+      indexes: {
+        ...canonicalGraph.indexes,
+        entitiesById: { ...canonicalGraph.indexes.entitiesById },
+      },
+    };
+    delete withoutParent.indexes.entitiesById[parent.id];
+    expect(hrefForEntity(reference, withoutParent)).toBeUndefined();
+
+    const withNonLiveParent = {
+      ...canonicalGraph,
+      indexes: {
+        ...canonicalGraph.indexes,
+        entitiesById: {
+          ...canonicalGraph.indexes.entitiesById,
+          [parent.id]: { ...parent, publicationStatus: "in-review" as const },
+        },
+      },
+    };
+    expect(hrefForEntity(reference, withNonLiveParent)).toBeUndefined();
+  });
 });
