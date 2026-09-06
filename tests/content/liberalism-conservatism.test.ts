@@ -38,12 +38,19 @@ const claims = [
   "bell-rival-liberalism-methods",
   "huntington-rival-conservatism-types",
   "right-to-buy-conservative-programme",
-  "right-to-buy-statutory-rules",
-  "right-to-buy-distribution",
+  "right-to-buy-purchase-right",
+  "right-to-buy-discounts",
+  "right-to-buy-mortgage-duty",
+  "right-to-buy-ministerial-intervention",
+  "right-to-buy-buyer-distribution",
+  "right-to-buy-residual-sector",
   "swatantra-economic-conservatism",
   "swatantra-ordered-progress",
   "swatantra-gender-limit",
-  "swatantra-opposition-practices",
+  "swatantra-coalition-practice",
+  "swatantra-parliamentary-practice",
+  "swatantra-court-practice",
+  "swatantra-formal-principles",
   "india-liberal-rights-test",
   "japan-liberal-rights-test",
   "right-to-buy-conservatism-boundary",
@@ -55,7 +62,7 @@ const claims = [
 
 describe("Liberalism and Conservatism evidence", () => {
   it("keeps every substantive claim atomic and locator-backed", () => {
-    expect(claims).toHaveLength(43);
+    expect(claims).toHaveLength(50);
     const sources = new Set<string>();
     for (const id of claims) {
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({
@@ -82,7 +89,7 @@ describe("Liberalism and Conservatism evidence", () => {
     for (const id of [
       "india-constitutional-rights-settlement-1946-1950",
       "japan-constitutional-rights-settlement-1946-1947",
-      "right-to-buy-england-wales-1980-1988",
+      "right-to-buy-england-wales-1980-1998",
       "swatantra-opposition-organization-1959-1967",
     ])
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({

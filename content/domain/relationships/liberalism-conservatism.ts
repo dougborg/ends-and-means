@@ -172,13 +172,13 @@ const citations = [
   [
     "bell-rival-liberalism-methods",
     "bell-what-is-liberalism-source",
-    "pp. 682–689",
+    "abstract, sentences 2–3",
     "supports",
   ],
   [
     "huntington-rival-conservatism-types",
     "huntington-conservatism-ideology-source",
-    "pp. 454–461",
+    "publisher extract, first paragraph",
     "supports",
   ],
   [
@@ -188,21 +188,39 @@ const citations = [
     "supports",
   ],
   [
-    "right-to-buy-statutory-rules",
+    "right-to-buy-purchase-right",
     "housing-act-1980-source",
-    "sections 1–2, 7, 16–17, 35",
+    "section 1",
     "supports",
   ],
   [
-    "right-to-buy-statutory-rules",
-    "commons-right-to-buy-source",
-    "printed pp. 7–8, ‘The Housing Act 1980’",
-    "context",
+    "right-to-buy-discounts",
+    "housing-act-1980-source",
+    "section 7",
+    "supports",
   ],
   [
-    "right-to-buy-distribution",
+    "right-to-buy-mortgage-duty",
+    "housing-act-1980-source",
+    "section 16",
+    "supports",
+  ],
+  [
+    "right-to-buy-ministerial-intervention",
+    "housing-act-1980-source",
+    "section 23",
+    "supports",
+  ],
+  [
+    "right-to-buy-buyer-distribution",
     "commons-right-to-buy-source",
-    "summary, printed p. 5; printed pp. 12–15",
+    "printed pp. 12–13",
+    "supports",
+  ],
+  [
+    "right-to-buy-residual-sector",
+    "commons-right-to-buy-source",
+    "printed pp. 14–15",
     "supports",
   ],
   [
@@ -224,9 +242,27 @@ const citations = [
     "supports",
   ],
   [
-    "swatantra-opposition-practices",
+    "swatantra-coalition-practice",
     "balasubramanian-free-economy-source",
     "introduction, printed pp. 17–18",
+    "supports",
+  ],
+  [
+    "swatantra-parliamentary-practice",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 17–18",
+    "supports",
+  ],
+  [
+    "swatantra-court-practice",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 17–18",
+    "supports",
+  ],
+  [
+    "swatantra-formal-principles",
+    "swatantra-statement-principles-source",
+    "title page and principles 1–21",
     "supports",
   ],
   [
@@ -280,41 +316,6 @@ const citations = [
 ] as const;
 
 export const liberalismConservatismRelationshipDocuments = [
-  ...[
-    [
-      "india-constitutional-rights-settlement-1946-1950",
-      "liberalism",
-      "india-liberal-rights-test",
-    ],
-    [
-      "japan-constitutional-rights-settlement-1946-1947",
-      "liberalism",
-      "japan-liberal-rights-test",
-    ],
-    [
-      "right-to-buy-england-wales-1980-1988",
-      "conservatism",
-      "right-to-buy-conservatism-boundary",
-    ],
-    [
-      "swatantra-opposition-organization-1959-1967",
-      "conservatism",
-      "swatantra-conservatism-boundary",
-    ],
-  ].map(([caseId, conceptId, statementId]) => ({
-    documentType: "relationships" as const,
-    subject: { kind: "case" as const, id: caseId },
-    relationships: [
-      {
-        id: `${caseId}-contests-${conceptId}`,
-        predicate: "contested-in-case" as const,
-        subject: { kind: "case" as const, id: caseId },
-        object: { kind: "concept" as const, id: conceptId },
-        status: "qualified" as const,
-        statementIds: [statementId],
-      },
-    ],
-  })),
   ...citations.map(([statementId, sourceId, locator, role], index) => ({
     documentType: "relationships" as const,
     subject: { kind: "statement" as const, id: statementId },

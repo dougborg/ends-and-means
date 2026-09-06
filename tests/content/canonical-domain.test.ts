@@ -45,7 +45,7 @@ describe("canonical vertical slice", () => {
       "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
       "nazi-consolidation-1933",
-      "right-to-buy-england-wales-1980-1988",
+      "right-to-buy-england-wales-1980-1998",
       "ruwalla-borderland-organization",
       "spanish-anarchist-initiatives-1936-1939",
       "swatantra-opposition-organization-1959-1967",
