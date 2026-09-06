@@ -34,6 +34,7 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
+      "bonjol-melayu-ulayat-governance",
       "china-dual-track-market-reforms",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
@@ -42,6 +43,7 @@ describe("canonical vertical slice", () => {
       "japan-constitutional-rights-settlement-1946-1947",
       "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
+      "koto-tinggi-post-decentralization-governance",
       "nazi-consolidation-1933",
       "right-to-buy-england-wales-1980-1998",
       "ruwalla-borderland-organization",
