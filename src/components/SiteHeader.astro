@@ -40,6 +40,13 @@ const currentRoute = mobileRoutes.find((route) =>
     disclosure.addEventListener("click", (event) => {
       if (event.target instanceof Element && event.target.closest("a")) close();
     });
+    disclosure.addEventListener("focusout", () => {
+      queueMicrotask(() => {
+        if (disclosure.open && !disclosure.contains(document.activeElement)) {
+          close();
+        }
+      });
+    });
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && disclosure.open) close(true);
     });
