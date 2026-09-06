@@ -93,6 +93,27 @@ function relationshipIn(documents: AuthoringDocument[], id: string) {
   throw new Error(`Missing Relationship ${id}`);
 }
 
+const liveGuideIds = [
+  "guide-anarchism",
+  "guide-authoritarianism",
+  "guide-capitalism",
+  "guide-central-planning",
+  "guide-communism",
+  "guide-conservatism",
+  "guide-democracy",
+  "guide-economic-democracy",
+  "guide-fascism",
+  "guide-jinst-postcollective-pastoral-governance",
+  "guide-kahnawake-community-lawmaking",
+  "guide-liberalism",
+  "guide-market-economy",
+  "guide-republic",
+  "guide-ruwalla-borderland-organization",
+  "guide-socialism",
+  "guide-tawantinsuyu-imperial-organization",
+  "guide-totalitarianism",
+];
+
 describe("compiled learner SubjectGuide composition", () => {
   it("compiles reviewed guides beside, rather than into, the plural graph", () => {
     const guide = subjectGuideBySlug("economic-democracy");
@@ -134,26 +155,9 @@ describe("SubjectGuide content attention", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 16,
-      total: 16,
-      liveIds: [
-        "guide-anarchism",
-        "guide-authoritarianism",
-        "guide-capitalism",
-        "guide-central-planning",
-        "guide-communism",
-        "guide-democracy",
-        "guide-economic-democracy",
-        "guide-fascism",
-        "guide-jinst-postcollective-pastoral-governance",
-        "guide-kahnawake-community-lawmaking",
-        "guide-market-economy",
-        "guide-republic",
-        "guide-ruwalla-borderland-organization",
-        "guide-socialism",
-        "guide-tawantinsuyu-imperial-organization",
-        "guide-totalitarianism",
-      ],
+      live: 18,
+      total: 18,
+      liveIds: liveGuideIds,
     });
   });
 });
@@ -169,24 +173,10 @@ describe("compiled SubjectGuide publication boundaries", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(16);
-      expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
-        "guide-anarchism",
-        "guide-authoritarianism",
-        "guide-capitalism",
-        "guide-central-planning",
-        "guide-communism",
-        "guide-democracy",
-        "guide-fascism",
-        "guide-jinst-postcollective-pastoral-governance",
-        "guide-kahnawake-community-lawmaking",
-        "guide-market-economy",
-        "guide-republic",
-        "guide-ruwalla-borderland-organization",
-        "guide-socialism",
-        "guide-tawantinsuyu-imperial-organization",
-        "guide-totalitarianism",
-      ]);
+      expect(graph.subjectGuideRecords).toHaveLength(18);
+      expect(graph.subjectGuides.map(({ id }) => id)).toEqual(
+        liveGuideIds.filter((id) => id !== guide.id),
+      );
       expect(subjectGuideById(guide.id, graph)).toBeUndefined();
       expect(subjectGuideBySlug(guide.slug, graph)).toBeUndefined();
     },

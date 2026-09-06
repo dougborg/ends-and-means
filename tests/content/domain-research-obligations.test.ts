@@ -464,6 +464,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "conservatism-geographic-translation",
+    obligationType: "research-gap",
+    target: "concept:conservatism#meanings",
+    status: "open",
+  },
+  {
     id: "democracy-inclusion-measurement-boundary",
     obligationType: "counterevidence",
     target: "concept:democracy#measurement",
@@ -545,6 +551,24 @@ const expectedOpenResearchObligations = [
     id: "kahnawake-governing-authority-legitimacy",
     obligationType: "research-gap",
     target: "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
+    status: "open",
+  },
+  {
+    id: "liberal-conservative-party-label-drift",
+    obligationType: "research-gap",
+    target: "concept:conservatism#party-programmes",
+    status: "open",
+  },
+  {
+    id: "liberalism-exclusion-domination",
+    obligationType: "counterargument",
+    target: "concept:liberalism#exclusions",
+    status: "open",
+  },
+  {
+    id: "liberalism-geographic-translation",
+    obligationType: "research-gap",
+    target: "concept:liberalism#meanings",
     status: "open",
   },
   {

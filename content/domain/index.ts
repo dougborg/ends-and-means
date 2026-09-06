@@ -12,6 +12,7 @@ import { democracyRepublicEvidenceDocuments } from "./evidence/democracy-republi
 import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evidence/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
+import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
@@ -29,6 +30,7 @@ import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presenta
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
+import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
 import { nomadicConfederatedOrganizationDossierDocuments } from "./presentation/nomadic-confederated-organizations-dossiers";
 import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/nomadic-confederated-organizations-guides";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
@@ -45,6 +47,7 @@ import { democracyRepublicRelationshipDocuments } from "./relationships/democrac
 import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
+import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
@@ -59,6 +62,7 @@ import { centralPlanningResearchDocuments } from "./research/central-planning";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
+import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
@@ -88,6 +92,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...kahnawakeCommunityDecisionMakingEvidenceDocuments,
   ...zapatistaCaracolesEvidenceDocuments,
   ...nomadicConfederatedOrganizationEvidenceDocuments,
+  ...liberalismConservatismEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...collectiveCapitalFormationDossierDocuments,
@@ -105,12 +110,14 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...zapatistaCaracolesDossierDocuments,
   ...nomadicConfederatedOrganizationDossierDocuments,
   ...nomadicConfederatedOrganizationGuideDocuments,
+  ...liberalismConservatismGuideDocuments,
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...capitalismMarketResearchDocuments,
   ...democracyRepublicResearchDocuments,
   ...authoritarianismFascismTotalitarianismResearchDocuments,
+  ...liberalismConservatismResearchDocuments,
   ...tawantinsuyuResearchDocuments,
   ...anarchismResearchDocuments,
   ...zapatistaCaracolesResearchDocuments,
@@ -133,4 +140,5 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...kahnawakeCommunityDecisionMakingRelationshipDocuments,
   ...zapatistaCaracolesRelationshipDocuments,
   ...nomadicConfederatedOrganizationRelationshipDocuments,
+  ...liberalismConservatismRelationshipDocuments,
 ];
