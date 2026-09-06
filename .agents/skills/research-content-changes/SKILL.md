@@ -98,6 +98,9 @@ Reader-facing routes and discovery must use only the reviewed/published
 For a selected relationship, preserve its direction, status, scope, evidence,
 and citation role; use perspective-aware public labels without rewriting the
 canonical predicate.
+Select relationship continuations deliberately: use only typed live endpoints,
+preserve authored direction and qualifications, and do not repeat the same
+destination in an adjacent generic entity list.
 
 Prefer presentation composition for new learner needs.
 Propose a canonical model change only when researched content demonstrates a

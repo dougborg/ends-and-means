@@ -46,6 +46,16 @@ Each selected narrative passage keeps its supporting canonical Statements in a
 native `details` disclosure immediately after the passage.
 Selected relationships use their public directional label and keep supporting
 Statements in an adjacent disclosure.
+When a selected relationship offers a public destination, the guide presents it
+as a contextual pathway rather than a generic related-content card.
+The controlled pathway headings are Related subject, Institutional pathway,
+Bounded case, Question to test, Purpose, Comparison, Depiction, and Evidence.
+The card states the canonical relationship in its authored direction; its
+native disclosure retains status, scope, and predicate-specific qualifications.
+Both endpoints and supporting Statements must be live, and the chosen
+destination must have a public route.
+An entity already explained by a contextual pathway is omitted from the
+adjacent generic continuation list so the same next step is not repeated.
 Statements selected directly by a guide section likewise remain in a native
 disclosure rather than entering the default narrative path.
 Research Obligations appear as concrete open questions with their scope,

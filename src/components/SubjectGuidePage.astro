@@ -7,7 +7,10 @@ import type {
   SubjectGuide,
   SubjectGuideSection,
 } from "../lib/domain";
-import { publicRelationshipLabel } from "../lib/domain";
+import {
+  contextualPathwayForRelationship,
+  relationshipEndpointKeys,
+} from "../lib/contextual-pathways";
 import { canonicalGraph, entityById } from "../lib/domain/canonical";
 import { hrefForEntity } from "../lib/public-routes";
 import {
@@ -15,10 +18,10 @@ import {
   visibleSubjectGuideSections,
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
+import ContextualPathways from "./ContextualPathways.astro";
 import MarkdownProse from "./MarkdownProse.astro";
 import OnPageNavigation from "./OnPageNavigation.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
-import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
 
 interface Props {
   guide: SubjectGuide;
@@ -76,13 +79,6 @@ function selectedRelationship(id: string) {
   return relationshipsById.get(id);
 }
 
-function relationshipEnds(relationship: DomainRelationship) {
-  return {
-    subject: entityById(relationship.subject.id),
-    object: entityById(relationship.object.id),
-  };
-}
-
 function placementValueLabel(
   relationship: Extract<DomainRelationship, { predicate: "placed-on" }>,
 ) {
@@ -117,10 +113,17 @@ const referenceLink = primary && primaryHref
   ? { href: primaryHref, label: `Open the ${primary.label} reference page` }
   : undefined;
 const anchoredObligationIds = new Set<string>();
+const renderedRelationshipIds = new Set<string>();
 
 function ownsObligationAnchor(id: string) {
   if (anchoredObligationIds.has(id)) return false;
   anchoredObligationIds.add(id);
+  return true;
+}
+
+function ownsRelationshipPath(id: string) {
+  if (renderedRelationshipIds.has(id)) return false;
+  renderedRelationshipIds.add(id);
   return true;
 }
 ---
@@ -164,6 +167,22 @@ function ownsObligationAnchor(id: string) {
         const relationships = (section.relationshipIds ?? [])
           .map(selectedRelationship)
           .filter((relationship): relationship is DomainRelationship => Boolean(relationship));
+        const relationshipKeys = relationshipEndpointKeys(
+          relationships,
+          canonicalGraph,
+        );
+        const entityRefs = (section.entityRefs ?? []).filter(
+          ({ kind, id }) => !relationshipKeys.has(`${kind}:${id}`),
+        );
+        const pathways = relationships.flatMap((relationship) => {
+          if (!ownsRelationshipPath(relationship.id)) return [];
+          const pathway = contextualPathwayForRelationship(
+            relationship,
+            guide.primarySubject,
+            canonicalGraph,
+          );
+          return pathway ? [pathway] : [];
+        });
         const obligations = (section.researchObligationIds ?? [])
           .map(selectedObligation)
           .filter((obligation): obligation is ResearchObligation => Boolean(obligation));
@@ -203,9 +222,9 @@ function ownsObligationAnchor(id: string) {
               </details>
             )}
 
-            {(section.entityRefs?.length ?? 0) > 0 && (
+            {entityRefs.length > 0 && (
               <ul class="subject-guide__links" aria-label={`Continue from ${section.heading}`}>
-                {section.entityRefs?.map((reference) => {
+                {entityRefs.map((reference) => {
                   const entity = entityById(reference.id);
                   const href = hrefForEntity(reference);
                   return entity && (
@@ -219,41 +238,15 @@ function ownsObligationAnchor(id: string) {
               </ul>
             )}
 
-            {relationships.length > 0 && (
-              <section class="subject-guide__relationships" aria-labelledby={`${section.id}-connections`}>
-                <h3 class="sr-only" id={`${section.id}-connections`}>Connections for {section.heading}</h3>
-                {relationships.map((relationship) => {
-                  const { subject, object } = relationshipEnds(relationship);
-                  const subjectHref = hrefForEntity(relationship.subject);
-                  const objectHref = hrefForEntity(relationship.object);
-                  return subject && object && (
-                    <article data-relationship-id={relationship.id}>
-                      <p>
-                        {subjectHref ? <a href={subjectHref}>{subject.label}</a> : <strong>{subject.label}</strong>}
-                        <span>{publicRelationshipLabel(relationship, "subject")}</span>
-                        {objectHref ? <a href={objectHref}>{object.label}</a> : <strong>{object.label}</strong>}
-                      </p>
-                      <SubjectGuideRelationshipDetails
-                        relationship={relationship}
-                        summary={`How to read the connection between ${subject.label} and ${object.label}`}
-                        entityLabel={(id) => entityById(id)?.label}
-                        {...(relationship.predicate === "placed-on"
-                          ? { placementValueLabel: () => placementValueLabel(relationship) }
-                          : {})}
-                      />
-                      {"statementIds" in relationship && relationship.statementIds.length > 0 && (
-                        <details class="reference-disclosure subject-guide__evidence">
-                          <summary>Sources for the connection between {subject.label} and {object.label} <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
-                          <div class="reference-disclosure__body">
-                            {relationship.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
-                          </div>
-                        </details>
-                      )}
-                    </article>
-                  );
-                })}
-              </section>
-            )}
+            <ContextualPathways
+              pathways={pathways}
+              headingId={`${section.id}-connections`}
+              sectionLabel={section.heading}
+              placementValueLabel={(relationship) =>
+                relationship.predicate === "placed-on"
+                  ? placementValueLabel(relationship)
+                  : undefined}
+            />
 
             {obligations.length > 0 && (
               <ol class="subject-guide__questions">

@@ -268,9 +268,18 @@ async function verifySubjectGuideRoutes() {
   expect(text).toContain("What remains open?");
   expect(text).not.toContain("Depictions");
   expect(text).not.toMatch(/research-needed|in-review|deprecated/i);
+  expect(text).toContain("Institutional pathway");
+  expect(text).toContain("Bounded case");
+  expect(text).toContain(
+    "Continue from “How might economic authority be reorganized?”",
+  );
+  expect(text).toContain("Why Swedish wage-earner fund program is connected");
   expect(guide).not.toContain("<astro-island");
   expect(hrefs(guide)).toContain("/concepts/economic-democracy/");
-  expect(hrefs(guide)).toContain("/cases/swedish-wage-earner-funds/");
+  expect(hrefs(guide)).toContain(
+    "/cases/swedish-wage-earner-funds/#enacted-wage-earner-funds-1984-1991",
+  );
+  expect(hrefs(guide)).not.toContain("/cases/swedish-wage-earner-funds/");
   expect(hrefs(guide)).toContain("#meanings-and-boundaries");
 
   const socialism = await readFile(routeFile("/guides/socialism/"), "utf8");
@@ -279,9 +288,19 @@ async function verifySubjectGuideRoutes() {
   expect(stripMarkup(socialism)).toContain(
     "do not show how socialist institutions would work elsewhere",
   );
-  expect(hrefs(socialism)).toContain("/cases/swedish-wage-earner-funds/");
+  expect(stripMarkup(socialism)).toContain("Related subject");
+  expect(hrefs(socialism)).toContain(
+    "/cases/swedish-wage-earner-funds/#enacted-wage-earner-funds-1984-1991",
+  );
   expect(hrefs(socialism)).toContain("/concepts/economic-planning/");
   expect(hrefs(socialism)).toContain("/concepts/market-coordination/");
+  for (const id of [
+    "socialism-related-to-economic-planning",
+    "socialism-related-to-market-coordination",
+    "socialism-related-to-social-class",
+  ]) {
+    expect(socialism.match(new RegExp(`data-relationship-id="${id}"`, "g"))).toHaveLength(1);
+  }
 
   const communism = await readFile(routeFile("/guides/communism/"), "utf8");
   expect(stripMarkup(communism)).toContain("What does communism mean?");

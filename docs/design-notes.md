@@ -84,6 +84,11 @@ matrix:
 
 A Subject Guide should make the narrative and useful next steps visually
 primary.
+Contextual next steps use a compact ruled index: the pathway kind names why the
+reader might continue, the linked heading names the destination, and one plain
+sentence states the actual directional relationship.
+Dense status, scope, and evidence remain adjacent in native disclosures rather
+than competing with the learner path.
 Definitions, evidence traces, source locators, unresolved questions, and model
 distinctions remain close at hand through contextual links and disclosures.
 This is progressive disclosure, not evidence removal.

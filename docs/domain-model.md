@@ -479,6 +479,11 @@ Initial relationship families:
 Only genuinely transitive relationships may be traversed transitively. In
 particular, influence, overlap, collection membership, and `related-to` are not
 transitive.
+Reader-facing continuation modules map predicates to a closed vocabulary
+without changing the stored predicate, direction, status, scope, or typed
+qualification.
+They fail closed when an endpoint or supporting Statement is unpublished or the
+selected destination has no public route.
 
 ## Collections instead of umbrella types
 

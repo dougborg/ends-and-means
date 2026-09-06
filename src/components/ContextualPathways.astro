@@ -1,0 +1,56 @@
+---
+import type { ContextualPathway } from "../lib/contextual-pathways";
+import { relationshipSentence } from "../lib/contextual-pathways";
+import { entityById } from "../lib/domain/canonical";
+import CanonicalStatement from "./CanonicalStatement.astro";
+import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
+
+interface Props {
+  pathways: ContextualPathway[];
+  headingId: string;
+  sectionLabel: string;
+  placementValueLabel?: (
+    relationship: ContextualPathway["relationship"],
+  ) => string | undefined;
+}
+
+const { pathways, headingId, sectionLabel, placementValueLabel } = Astro.props;
+---
+
+{pathways.length > 0 && (
+  <nav class="contextual-pathways" aria-labelledby={headingId}>
+    <h3 id={headingId}>Continue from “{sectionLabel}”</h3>
+    <ol>
+      {pathways.map((pathway) => (
+        <li data-relationship-id={pathway.relationship.id}>
+          <article>
+            <p class="coordinate">{pathway.kind}</p>
+            <h4><a href={pathway.href}>{pathway.destinationLabel}</a></h4>
+            <p>{relationshipSentence(pathway)}</p>
+            <SubjectGuideRelationshipDetails
+              relationship={pathway.relationship}
+              summary={`Why ${pathway.destinationLabel} is connected`}
+              entityLabel={(id) => entityById(id)?.label}
+              {...(pathway.relationship.predicate === "placed-on" && placementValueLabel
+                ? { placementValueLabel: () => placementValueLabel(pathway.relationship) }
+                : {})}
+            />
+            {pathway.statementIds.length > 0 && (
+              <details class="reference-disclosure subject-guide__evidence">
+                <summary>
+                  Sources for “{relationshipSentence(pathway)}”
+                  <span>{pathway.statementIds.length} {pathway.statementIds.length === 1 ? "claim" : "claims"}</span>
+                </summary>
+                <div class="reference-disclosure__body">
+                  {pathway.statementIds.map((id) => (
+                    <CanonicalStatement statementId={id} anchored={false} />
+                  ))}
+                </div>
+              </details>
+            )}
+          </article>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

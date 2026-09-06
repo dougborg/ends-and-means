@@ -720,3 +720,60 @@ test("central planning guide, case, and approach remain readable across viewport
     }
   }
 });
+
+test("Subject guides present typed contextual paths without duplicate generic links", async ({ page }) => {
+  await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
+  const institutionalPathways = page.getByRole("navigation", {
+    name: "Continue from “How might economic authority be reorganized?”",
+  });
+  const casePathways = page.getByRole("navigation", {
+    name: "Continue from “What can the Swedish funds show?”",
+  });
+  await expect(institutionalPathways.getByText("Institutional pathway", { exact: true })).toBeVisible();
+  await expect(casePathways.getByText("Bounded case", { exact: true })).toBeVisible();
+  await expect(institutionalPathways.getByRole("link", { name: "Swedish wage-earner fund program" })).toHaveAttribute(
+    "href",
+    "/explore/swedish-wage-earner-fund-program/",
+  );
+  await expect(
+    page.getByRole("list", { name: "Continue from What can the Swedish funds show?" }),
+  ).toHaveCount(0);
+
+  const qualification = casePathways.getByText(
+    "Why Enacted fund-board period, 1984–1991 is connected",
+    { exact: true },
+  );
+  await qualification.focus();
+  await page.keyboard.press("Enter");
+  await expect(casePathways.getByText("qualified", { exact: true })).toBeVisible();
+
+  await page.goto("/guides/socialism/", { waitUntil: "networkidle" });
+  await expect(
+    page.getByRole("navigation", { name: /Continue from/ }).getByText(
+      "Related subject",
+      { exact: true },
+    ).first(),
+  ).toBeVisible();
+});
+
+test("Contextual paths remain native and reflow without scripting", async ({ browser }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    for (const width of [320, 640]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
+      if (width === 640) await page.evaluate(() => { document.documentElement.style.zoom = "2"; });
+      await expect(page.getByRole("link", { name: "Swedish wage-earner fund program" })).toBeVisible();
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        ),
+      ).toBeLessThanOrEqual(1);
+    }
+  } finally {
+    await context.close();
+  }
+});
