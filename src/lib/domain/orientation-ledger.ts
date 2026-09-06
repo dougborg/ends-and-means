@@ -1889,91 +1889,91 @@ const reviewedMappingOverrides: Record<
   "entity:west-sumatra": mapped("West Sumatra", "Q2772"),
 };
 
-const specificCandidate = (id: string) => {
-  const candidates: Array<[RegExp, string, string]> = [
-    [/kahnawake/, "Kahnawake", "https://en.wikipedia.org/wiki/Kahnawake"],
-    [/ruwalla/, "Ruwallah", "https://en.wikipedia.org/wiki/Ruwallah"],
-    [/jinst/, "Mongolia", "https://en.wikipedia.org/wiki/Mongolia"],
-    [
-      /cmp-|controlled-material|us-wartime|us-controlled/,
-      "War Production Board",
-      "https://en.wikipedia.org/wiki/War_Production_Board",
-    ],
-    [
-      /wage-earner|solidaristic|rehn-meidner/,
-      "Rehn–Meidner model",
-      "https://en.wikipedia.org/wiki/Rehn%E2%80%93Meidner_model",
-    ],
-    [
-      /right-to-buy/,
-      "Right to Buy",
-      "https://en.wikipedia.org/wiki/Right_to_Buy",
-    ],
-    [
-      /combahee/,
-      "Combahee River Collective",
-      "https://en.wikipedia.org/wiki/Combahee_River_Collective",
-    ],
-    [
-      /swatantra/,
-      "Swatantra Party",
-      "https://en.wikipedia.org/wiki/Swatantra_Party",
-    ],
-    [
-      /zapatista/,
-      "Zapatista Army of National Liberation",
-      "https://en.wikipedia.org/wiki/Zapatista_Army_of_National_Liberation",
-    ],
-    [
-      /tawantinsuyu|andes-/,
-      "Inca Empire",
-      "https://en.wikipedia.org/wiki/Inca_Empire",
-    ],
-    [
-      /india-constitutional/,
-      "Constitution of India",
-      "https://en.wikipedia.org/wiki/Constitution_of_India",
-    ],
-    [
-      /japan-constitutional/,
-      "Constitution of Japan",
-      "https://en.wikipedia.org/wiki/Constitution_of_Japan",
-    ],
-    [
-      /bonjol|koto-tinggi|nagari-/,
-      "Minangkabau people",
-      "https://en.wikipedia.org/wiki/Minangkabau_people",
-    ],
-    [
-      /gold-coast|colonial-gold/,
-      "Cocoa production in Ghana",
-      "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
-    ],
-    [
-      /english-agrarian/,
-      "British Agricultural Revolution",
-      "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
-    ],
-    [
-      /china-/,
-      "Reform and opening up",
-      "https://en.wikipedia.org/wiki/Reform_and_opening_up",
-    ],
-    [
-      /italian-fascist|historical-italian/,
-      "Fascist Italy",
-      "https://en.wikipedia.org/wiki/Fascist_Italy",
-    ],
-    [
-      /nazi-/,
-      "Adolf Hitler's rise to power",
-      "https://en.wikipedia.org/wiki/Adolf_Hitler%27s_rise_to_power",
-    ],
-  ];
-  return candidates.find(([pattern]) => pattern.test(id))?.slice(1) as
+const specificCandidates: Array<[RegExp, string, string]> = [
+  [/kahnawake/, "Kahnawake", "https://en.wikipedia.org/wiki/Kahnawake"],
+  [/ruwalla/, "Ruwallah", "https://en.wikipedia.org/wiki/Ruwallah"],
+  [/jinst/, "Mongolia", "https://en.wikipedia.org/wiki/Mongolia"],
+  [
+    /cmp-|controlled-material|us-wartime|us-controlled/,
+    "War Production Board",
+    "https://en.wikipedia.org/wiki/War_Production_Board",
+  ],
+  [
+    /wage-earner|solidaristic|rehn-meidner/,
+    "Rehn–Meidner model",
+    "https://en.wikipedia.org/wiki/Rehn%E2%80%93Meidner_model",
+  ],
+  [
+    /right-to-buy/,
+    "Right to Buy",
+    "https://en.wikipedia.org/wiki/Right_to_Buy",
+  ],
+  [
+    /combahee/,
+    "Combahee River Collective",
+    "https://en.wikipedia.org/wiki/Combahee_River_Collective",
+  ],
+  [
+    /swatantra/,
+    "Swatantra Party",
+    "https://en.wikipedia.org/wiki/Swatantra_Party",
+  ],
+  [
+    /zapatista/,
+    "Zapatista Army of National Liberation",
+    "https://en.wikipedia.org/wiki/Zapatista_Army_of_National_Liberation",
+  ],
+  [
+    /tawantinsuyu|andes-/,
+    "Inca Empire",
+    "https://en.wikipedia.org/wiki/Inca_Empire",
+  ],
+  [
+    /india-constitutional/,
+    "Constitution of India",
+    "https://en.wikipedia.org/wiki/Constitution_of_India",
+  ],
+  [
+    /japan-constitutional/,
+    "Constitution of Japan",
+    "https://en.wikipedia.org/wiki/Constitution_of_Japan",
+  ],
+  [
+    /bonjol|koto-tinggi|nagari-/,
+    "Minangkabau people",
+    "https://en.wikipedia.org/wiki/Minangkabau_people",
+  ],
+  [
+    /gold-coast|colonial-gold/,
+    "Cocoa production in Ghana",
+    "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
+  ],
+  [
+    /english-agrarian/,
+    "British Agricultural Revolution",
+    "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
+  ],
+  [
+    /china-/,
+    "Reform and opening up",
+    "https://en.wikipedia.org/wiki/Reform_and_opening_up",
+  ],
+  [
+    /italian-fascist|historical-italian/,
+    "Fascist Italy",
+    "https://en.wikipedia.org/wiki/Fascist_Italy",
+  ],
+  [
+    /nazi-/,
+    "Adolf Hitler's rise to power",
+    "https://en.wikipedia.org/wiki/Adolf_Hitler%27s_rise_to_power",
+  ],
+];
+
+const specificCandidate = (id: string) =>
+  specificCandidates.find(([pattern]) => pattern.test(id))?.slice(1) as
     | [string, string]
     | undefined;
-};
 
 const broaderCandidate = (reason = ""): [string, string] => {
   if (reason.includes("organization"))

@@ -197,6 +197,12 @@ function validateEntry(
     errors.push(
       `${entry.targetType} ${entry.id}: absent entry contains a mapping`,
     );
+  errors.push(...validateCandidateReview(key, entry));
+  return errors;
+}
+
+function validateCandidateReview(key: string, entry: OrientationAuditEntry) {
+  const errors: string[] = [];
   if (
     entry.disposition === "intentionally-unmatched" &&
     entry.consideredCandidates.length === 0
@@ -217,20 +223,26 @@ function validateEntry(
   return errors;
 }
 
+function validateReviewedLabel(key: string, entry: OrientationAuditEntry) {
+  const errors: string[] = [];
+  const reviewedLabel =
+    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
+  if (reviewedLabel === undefined)
+    errors.push(`${key}: missing immutable reviewed label`);
+  else if (entry.label !== reviewedLabel)
+    errors.push(`${key}: canonical label changed from reviewed ledger`);
+  return errors;
+}
+
 function validateReviewedDecision(
   key: string,
   entry: OrientationAuditEntry,
   decision: (typeof reviewedOrientationLedger)[number] | undefined,
 ) {
   const errors: string[] = [];
-  const reviewedLabel =
-    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
   if (entry.disposition !== "not-applicable" && !decision)
     errors.push(`${key}: missing target-specific reviewed decision`);
-  if (decision && reviewedLabel === undefined)
-    errors.push(`${key}: missing immutable reviewed label`);
-  if (reviewedLabel !== undefined && entry.label !== reviewedLabel)
-    errors.push(`${key}: canonical label changed from reviewed ledger`);
+  if (decision) errors.push(...validateReviewedLabel(key, entry));
   if (decision && entry.disposition !== decision.disposition)
     errors.push(`${key}: reviewed disposition changed`);
   if (decision && entry.reason !== decision.reason)
