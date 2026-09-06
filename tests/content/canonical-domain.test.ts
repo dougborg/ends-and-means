@@ -35,9 +35,11 @@ describe("canonical vertical slice", () => {
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "bonjol-melayu-ulayat-governance",
+      "combahee-river-collective-1974-1980",
       "china-dual-track-market-reforms",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
+      "iceland-parental-leave-2000-2018",
       "india-constitutional-rights-settlement-1946-1950",
       "italian-fascist-dictatorship-1925-1943",
       "japan-constitutional-rights-settlement-1946-1947",
@@ -47,6 +49,7 @@ describe("canonical vertical slice", () => {
       "nazi-consolidation-1933",
       "right-to-buy-england-wales-1980-1998",
       "ruwalla-borderland-organization",
+      "sewa-ahmedabad-1972-1977",
       "spanish-anarchist-initiatives-1936-1939",
       "swatantra-opposition-organization-1959-1967",
       "swedish-solidaristic-bargaining",
