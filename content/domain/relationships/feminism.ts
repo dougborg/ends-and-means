@@ -1,17 +1,17 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
 
-const feminism = { kind: "concept" as const, id: "feminism" };
 const traditions = [
   "liberal-feminism",
   "socialist-feminism",
   "marxist-feminism",
   "radical-feminism",
-  "black-feminism",
-  "postcolonial-decolonial-feminisms",
-  "indigenous-feminisms",
-  "transfeminism",
-  "queer-feminisms",
 ] as const;
+const traditionEvidence = {
+  "liberal-feminism": "liberal-feminism-tradition",
+  "socialist-feminism": "socialist-feminism-tradition",
+  "marxist-feminism": "marxist-feminism-tradition",
+  "radical-feminism": "radical-feminism-tradition",
+} as const;
 const citationRows = [
   [
     "feminism-contested-family",
@@ -34,9 +34,13 @@ const citationRows = [
   [
     "feminism-traditions-nonexhaustive",
     "sep-feminist-political-philosophy-source",
-    "section 1, paragraphs 10–29; sections 2.1–2.8",
+    "sections 1–2.8, headings and introductory classifications",
     "supports",
   ],
+  ["liberal-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.1, paragraphs 1–18", "supports"],
+  ["radical-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.2, paragraphs 1–12", "supports"],
+  ["socialist-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.3, paragraphs 1–18", "supports"],
+  ["marxist-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.3, paragraphs 1–18", "supports"],
   [
     "liberal-feminism-autonomy",
     "sep-feminist-political-philosophy-source",
@@ -76,7 +80,7 @@ const citationRows = [
   [
     "moreton-robinson-indigenous-boundary",
     "moreton-robinson-talkin-up-source",
-    "20th anniversary ed., introduction and chapters 1–2; publisher synopsis",
+    "publisher page, Description paragraphs 1–4",
     "supports",
   ],
   [
@@ -94,7 +98,7 @@ const citationRows = [
   [
     "sex-gender-trans-boundary",
     "koyama-transfeminist-manifesto-source",
-    "pp. 1–2, operational definitions and stated exclusions",
+    "p. 1, operational definitions of sex and gender",
     "supports",
   ],
   [
@@ -112,7 +116,13 @@ const citationRows = [
   [
     "combahee-self-description",
     "combahee-statement-source",
-    "statement sections 1–2, Genesis and Beliefs",
+    "PDF pp. 1–3, opening and sections 1–2",
+    "supports",
+  ],
+  [
+    "combahee-opposed-interlocking-oppressions",
+    "combahee-statement-source",
+    "PDF p. 1, opening paragraph",
     "supports",
   ],
   [
@@ -123,6 +133,12 @@ const citationRows = [
   ],
   [
     "combahee-organizing-practice",
+    "taylor-combahee-reader-source",
+    "pp. 109–130, interview with Barbara Smith, Beverly Smith, and Demita Frazier",
+    "supports",
+  ],
+  [
+    "combahee-selected-campaigns",
     "taylor-combahee-reader-source",
     "pp. 109–130, interview with Barbara Smith, Beverly Smith, and Demita Frazier",
     "supports",
@@ -143,6 +159,12 @@ const citationRows = [
     "sewa-union-registration",
     "sewa-history-source",
     "Birth of SEWA, paragraphs 1–8",
+    "supports",
+  ],
+  [
+    "sewa-worker-definition-contest",
+    "sewa-history-source",
+    "Birth of SEWA, paragraphs 3–8",
     "supports",
   ],
   [
@@ -178,31 +200,49 @@ const citationRows = [
   [
     "iceland-leave-enacted-design",
     "iceland-parental-leave-law-source",
-    "original 1 October 2000 text, Articles 2, 4, 8, 13, and 36",
+    "archived consolidation dated 1 October 2000, Articles 2, 4, 8, 13, and 36",
     "supports",
   ],
   [
     "iceland-leave-enacted-design",
     "gislason-iceland-leave-source",
-    "chapter 18, pp. 330–334",
+    "chapter 18, pp. 370–387, Abstract and Introduction",
     "context",
   ],
   [
     "iceland-fathers-uptake",
     "gislason-iceland-leave-source",
-    "chapter 18, Programmatic success, pp. 336–339",
+    "chapter 18, pp. 370–387, A Policy Success? § Programmatic success, paragraphs 1–5 and Figure 18.1",
     "supports",
   ],
   [
     "iceland-care-work-outcomes",
     "arnalds-eydal-gislason-leave-source",
-    "abstract; pp. 168–183, results and discussion",
+    "printed pp. 247–249, section 5.1 and Figures 2–4",
+    "supports",
+  ],
+  [
+    "iceland-labor-force-participation-gap",
+    "arnalds-eydal-gislason-leave-source",
+    "printed p. 250, section 5.2 and Figure 5",
+    "supports",
+  ],
+  [
+    "iceland-working-hours-gap",
+    "arnalds-eydal-gislason-leave-source",
+    "printed pp. 250–251, section 5.2 and Figure 6",
     "supports",
   ],
   [
     "iceland-causal-transfer-limit",
     "gislason-iceland-leave-source",
-    "chapter 18, pp. 338–345, austerity and assessment",
+    "chapter 18, pp. 370–387, A Policy Success? §§ Programmatic success and Counterclaims to success",
+    "supports",
+  ],
+  [
+    "iceland-payment-cuts-uptake",
+    "gislason-iceland-leave-source",
+    "chapter 18, pp. 370–387, Programmatic success, Figure 18.1, and An Enduring System § Coping with a financial crisis",
     "supports",
   ],
 ] as const;
@@ -219,64 +259,10 @@ export const feminismRelationshipDocuments = [
         object: { kind: "collection" as const, id: "feminist-traditions" },
         membership: "qualified" as const,
         status: "qualified" as const,
-        statementIds: ["feminism-traditions-nonexhaustive"],
+        statementIds: [traditionEvidence[id], "feminism-traditions-nonexhaustive"],
       },
     ],
   })),
-  {
-    documentType: "relationships",
-    subject: { kind: "case-episode", id: "combahee-organizing-episode" },
-    relationships: [
-      {
-        id: "combahee-episode-contested-feminism",
-        predicate: "contested-in-case",
-        subject: { kind: "case-episode", id: "combahee-organizing-episode" },
-        object: feminism,
-        status: "qualified",
-        statementIds: ["combahee-self-description", "combahee-case-boundary"],
-      },
-    ],
-  },
-  {
-    documentType: "relationships",
-    subject: {
-      kind: "case-episode",
-      id: "sewa-ahmedabad-institutions-episode",
-    },
-    relationships: [
-      {
-        id: "sewa-episode-contested-feminism",
-        predicate: "contested-in-case",
-        subject: {
-          kind: "case-episode",
-          id: "sewa-ahmedabad-institutions-episode",
-        },
-        object: feminism,
-        status: "qualified",
-        statementIds: ["sewa-case-boundary"],
-      },
-    ],
-  },
-  {
-    documentType: "relationships",
-    subject: {
-      kind: "case-episode",
-      id: "iceland-parental-leave-outcomes-episode",
-    },
-    relationships: [
-      {
-        id: "iceland-leave-episode-contested-feminism",
-        predicate: "contested-in-case",
-        subject: {
-          kind: "case-episode",
-          id: "iceland-parental-leave-outcomes-episode",
-        },
-        object: feminism,
-        status: "qualified",
-        statementIds: ["iceland-causal-transfer-limit"],
-      },
-    ],
-  },
   ...citationRows.map(([statementId, sourceId, locator, role], index) => ({
     documentType: "relationships" as const,
     subject: { kind: "statement" as const, id: statementId },
