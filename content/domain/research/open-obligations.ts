@@ -18,7 +18,7 @@ export const openResearchObligationDocuments = [
         "A focused freshness check for formal hearing rules after the documented April 2024 revision.",
       obligationType: "research-gap",
       question:
-        "Which CDMRP hearing-continuation rules were formally in force after April 18, 2024, and which later revisions were adopted through September 2026?",
+        "Which CDMRP hearing-continuation rules were formally in force after April 18, 2024, and which later revisions had been adopted as of September 5, 2026?",
       target: { kind: "case", id: "kahnawake-community-lawmaking" },
       targetSectionId: "how-does-the-process-work",
       addressedStatementIds: [
