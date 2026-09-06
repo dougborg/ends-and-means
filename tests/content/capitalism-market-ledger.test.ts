@@ -126,6 +126,25 @@ function ledger(documents: AuthoringDocument[]) {
 }
 
 describe("capitalism and market-economy evidence ledger", () => {
+  it("states the coerced-labor research limit without artifact framing", () => {
+    const document = canonicalDocuments.find(
+      (candidate) =>
+        candidate.documentType === "entity" &&
+        candidate.entity.id === "capitalism-coerced-labor-boundary",
+    );
+    if (
+      document?.documentType !== "entity" ||
+      document.entity.kind !== "research-obligation"
+    )
+      throw new Error("Missing coerced-labor research obligation");
+    expect(document.entity.currentLimitation).toBe(
+      "Definitions centered on formally free wage labor do not by themselves reconcile scholarship on the simultaneous use of wage and coerced labor within connected production and financial systems.",
+    );
+    expect(document.entity.currentLimitation).not.toMatch(
+      /\b(?:guide|page|site|artifact)\b/i,
+    );
+  });
+
   it("freezes every statement, citation tuple, source record, case slot, and concept relationship", () => {
     expect(ledger(canonicalDocuments)).toMatchSnapshot();
   });
