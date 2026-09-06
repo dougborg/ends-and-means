@@ -99,6 +99,30 @@ function acknowledgement(
   } satisfies ReviewedOverlapAcknowledgement;
 }
 
+describe("reviewed overlap fingerprint serialization", () => {
+  it("distinguishes undefined fields from lookalike objects and fails closed on unsupported values", () => {
+    const { publisher: _publisher, ...sourceWithoutPublisher } = source;
+    const withoutPublisher = fingerprint({
+      source: sourceWithoutPublisher,
+    });
+    const objectPublisher = {
+      ...source,
+      publisher: { unsupportedType: "undefined" },
+    } as unknown as typeof source;
+    expect(fingerprint({ source: objectPublisher })).not.toBe(withoutPublisher);
+
+    for (const unsupported of [() => undefined, Symbol("publisher")]) {
+      const malformed = {
+        ...source,
+        publisher: unsupported,
+      } as unknown as typeof source;
+      expect(() => fingerprint({ source: malformed })).toThrow(
+        /do not support (?:function|symbol) values/u,
+      );
+    }
+  });
+});
+
 describe("reviewed overlap fingerprints", () => {
   it("governs every narrative, Statement, citation, and Source input", () => {
     const mutations = [

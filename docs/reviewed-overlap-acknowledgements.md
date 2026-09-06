@@ -40,8 +40,12 @@ The fingerprint is SHA-256 over deterministic JSON containing:
 Other Statement metadata is deliberately outside the fingerprint; the selected
 Statement identity and claim text are the governed Statement inputs.
 
-Object keys are sorted recursively before hashing. Array order remains
-authored order because changing ordered evidence metadata is a governed input.
+Values use a type-tagged canonical encoding and object keys are sorted
+recursively before hashing, so an absent optional value cannot collide with an
+authored lookalike object. Array order remains authored order because changing
+ordered evidence metadata is a governed input. Values outside the governed
+JSON-compatible domain, such as functions, symbols, or non-finite numbers,
+fail closed instead of receiving a fallback fingerprint.
 The audit exposes the fingerprint for each open finding so a reviewer can
 create a record only after inspecting the cited material.
 
