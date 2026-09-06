@@ -4,6 +4,7 @@ import { canonicalGraph } from "../../lib/domain/canonical";
 import { buildExploreApproaches } from "../../lib/explore-approaches";
 import { buildExploreDirectory, normalizeExploreQuery } from "../../lib/explore-discovery";
 import { hasSubjectGuideDirectory } from "../../lib/subject-guide-presentation";
+import Glyph from "../../components/Glyph.astro";
 
 const approaches = buildExploreApproaches(canonicalGraph);
 const guides = canonicalGraph.subjectGuides;
@@ -43,7 +44,7 @@ const directory = buildExploreDirectory(guides);
       <ol class="subject-guide-directory" id="subject-guide-results">
         {directory.map(({ guide, aliases, searchText }) => (
           <li data-subject-result data-search-text={searchText} data-guide-id={guide.id}>
-            <p class="coordinate">START HERE</p>
+            <p class="coordinate glyph-label"><Glyph glyph="idea-definition" tone="accent" />START HERE</p>
             <div class="subject-guide-directory__summary">
               <h3><a href={`/guides/${guide.slug}/`}>{guide.label}</a></h3>
               <p>{guide.description}</p>
@@ -74,7 +75,7 @@ const directory = buildExploreDirectory(guides);
         <ol class="canonical-directory">
           {approaches.map(({ approach, href, standfirst }) => (
             <li>
-              <p class="coordinate">APPROACH</p>
+              <p class="coordinate glyph-label"><Glyph glyph="institution-mechanism" tone="accent" />APPROACH</p>
               <h3><a href={href}>{approach.label}</a></h3>
               <p>{standfirst}</p>
               <a class="detail-link" href={`/explore/${approach.id}/`}>Follow this proposal →</a>

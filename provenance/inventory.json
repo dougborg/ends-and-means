@@ -35,7 +35,7 @@
   ],
   "assetClasses": [
     { "class": "fonts", "extensions": [".otf", ".ttf", ".woff", ".woff2"], "paths": [], "state": "none", "note": "CSS uses system font stacks; no font files or remote font service are bundled." },
-    { "class": "icons", "extensions": [".ico"], "paths": [], "state": "none", "note": "No icon files are bundled." },
+    { "class": "icons", "extensions": [".ico"], "paths": [], "state": "generated", "note": "Selected @lucide/astro components emit static inline SVG in built pages; no standalone icon files are copied into the repository." },
     { "class": "flags", "extensions": [], "paths": [], "state": "none", "note": "No flags are bundled; design guidance discourages flag imagery." },
     { "class": "logos", "extensions": [], "paths": [], "state": "none", "note": "The wordmark is authored text, not a third-party logo asset." },
     { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "paths": [], "state": "none", "note": "No image files are bundled." },
@@ -61,6 +61,7 @@
     }
   ],
   "dependencies": [
+    { "name": "@lucide/astro", "scope": "runtime", "license": "ISC", "source": "https://github.com/lucide-icons/lucide/tree/main/packages/astro", "terms": "https://github.com/lucide-icons/lucide/blob/main/LICENSE" },
     { "name": "astro", "scope": "runtime", "license": "MIT", "source": "https://github.com/withastro/astro/tree/main/packages/astro", "terms": "https://github.com/withastro/astro/blob/main/LICENSE" },
     { "name": "micromark", "scope": "runtime", "license": "MIT", "source": "https://github.com/micromark/micromark/tree/main/packages/micromark", "terms": "https://github.com/micromark/micromark/blob/main/license" },
     { "name": "@astrojs/check", "scope": "development", "license": "MIT", "source": "https://github.com/withastro/language-tools/tree/main/packages/astro-check", "terms": "https://github.com/withastro/language-tools/blob/main/LICENSE" },

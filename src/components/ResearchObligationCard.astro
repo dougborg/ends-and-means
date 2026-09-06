@@ -5,6 +5,7 @@ import {
   entityById,
   researchTargetHref,
 } from "../lib/domain/canonical";
+import Glyph from "./Glyph.astro";
 
 interface Props {
   obligation: ResearchObligation;
@@ -21,7 +22,8 @@ const isClosed = ["resolved", "withdrawn"].includes(
 ---
 
 <li id={anchored ? obligation.id : undefined} class="research-obligation">
-  <p class="coordinate">
+  <p class="coordinate glyph-label">
+    <Glyph glyph="question-disagreement" tone="warning" />
     {obligation.obligationType.replaceAll("-", " ")} / {status}
   </p>
   <h3>{obligation.question}</h3>

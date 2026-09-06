@@ -15,10 +15,12 @@ import {
   visibleSubjectGuideSections,
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
+import Glyph from "./Glyph.astro";
 import MarkdownProse from "./MarkdownProse.astro";
 import OnPageNavigation from "./OnPageNavigation.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
 import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
+import { glyphForSubjectGuideSection } from "../lib/presentation-glyphs";
 
 interface Props {
   guide: SubjectGuide;
@@ -170,7 +172,7 @@ function ownsObligationAnchor(id: string) {
         return (
           <section id={section.id} class:list={["subject-guide__section", `subject-guide__section--${section.role}`]}>
             <header>
-              <p class="coordinate">QUESTION</p>
+              <p class="coordinate glyph-label"><Glyph glyph={glyphForSubjectGuideSection(section.role)} size="large" tone={section.role === "bounded-practice" ? "evidence" : section.role === "open-questions" || section.role === "variants-and-disputes" ? "warning" : "accent"} />QUESTION</p>
               <h2>{section.heading}</h2>
             </header>
 

@@ -1290,6 +1290,17 @@
       "evidenceDigest": "cd2b1cacb06233a7fbfaa65793111a55af08b723c8f3ca1e7e058377d55bcfb0"
     },
     {
+      "key": "@lucide/astro@1.41.0",
+      "name": "@lucide/astro",
+      "version": "1.41.0",
+      "origin": "https://registry.npmjs.org/%40lucide%2Fastro/1.41.0",
+      "terms": "https://www.npmjs.com/package/%40lucide%2Fastro/v/1.41.0?activeTab=code",
+      "source": "https://github.com/lucide-icons/lucide.git",
+      "license": "ISC",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "d55f1b03ea3c5dce6a37679d2c6b4e620d5076311f6de42601fa4fe3a33cbf3a"
+    },
+    {
       "key": "@napi-rs/wasm-runtime@1.2.3",
       "name": "@napi-rs/wasm-runtime",
       "version": "1.2.3",
