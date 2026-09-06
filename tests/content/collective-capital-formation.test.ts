@@ -89,6 +89,9 @@ describe("collective capital formation evidence", () => {
     ).toMatchObject({
       contributorDisplay: ["Markus Furendal", "Martin O'Neill"],
     });
+    expect(
+      entityById("furendal-oneill-collective-capital-source"),
+    ).not.toHaveProperty("reviewedAt");
     expect(statementIds.length).toBeGreaterThanOrEqual(6);
     expect(
       statementIds.every((id) => entityById(id)?.kind === "statement"),
