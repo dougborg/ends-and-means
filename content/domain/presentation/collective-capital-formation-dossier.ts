@@ -44,6 +44,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
+        "collective-capital-formation-individual-saving-boundary",
         "collective-capital-formation-rights-boundary",
       ],
       relatedEntityRefs: [
@@ -76,6 +77,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
         "collective-capital-formation-supporter-distance",
         "collective-capital-formation-unclear-benefits-objection",
         "collective-capital-formation-purpose-objection",
+        "collective-capital-formation-individual-saving-boundary",
       ],
     },
   ],

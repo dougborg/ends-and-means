@@ -50,8 +50,39 @@ describe("collective capital formation dossier", () => {
       "collective-capital-formation-governing-constituency",
       "collective-capital-formation-rights-boundary",
     ]);
+    expect(dossier?.sections.map(({ statementIds }) => statementIds)).toEqual([
+      [
+        "collective-capital-formation-working-definition",
+        "collective-capital-formation-individual-saving-boundary",
+        "collective-capital-formation-governing-constituency",
+        "collective-capital-formation-rights-boundary",
+      ],
+      ["collective-capital-formation-national-accounts-boundary"],
+      [
+        "meidner-collective-funds-proposal",
+        "swedish-1981-funds-cash-financing",
+        "collective-capital-formation-financing-governance-boundary",
+        "collective-capital-formation-governing-constituency",
+        "collective-capital-formation-individual-saving-boundary",
+        "collective-capital-formation-rights-boundary",
+      ],
+      [
+        "meidner-collective-funds-proposal",
+        "funds-statutory-design",
+        "funds-abolished",
+        "collective-capital-formation-swedish-case-classification",
+      ],
+      [
+        "collective-capital-formation-supporter-distance",
+        "collective-capital-formation-unclear-benefits-objection",
+        "collective-capital-formation-purpose-objection",
+        "collective-capital-formation-individual-saving-boundary",
+      ],
+    ]);
   });
+});
 
+describe("collective capital formation evidence", () => {
   it("locates at least six atomic claims across four authoritative sources", () => {
     expect(
       entityById("furendal-oneill-collective-capital-source"),
@@ -106,6 +137,16 @@ describe("collective capital formation dossier", () => {
 });
 
 describe("collective capital formation locator precision", () => {
+  it("uses the printed OECD definition page", () => {
+    expect(
+      citationsFor("collective-capital-formation-national-accounts-boundary"),
+    ).toEqual([
+      expect.objectContaining({
+        locator: "chapter 5, p. 143, ‘Gross fixed capital formation’",
+      }),
+    ]);
+  });
+
   it("qualifies social ownership with both holding and control boundaries", () => {
     expect(
       relationshipsFrom("collective-capital-formation").find(
@@ -129,9 +170,7 @@ describe("collective capital formation locator precision", () => {
   it("keeps design and supporter objections tied to the exact supporting passages", () => {
     expect(
       citationsFor("collective-capital-formation-governing-constituency"),
-    ).toEqual([
-      expect.objectContaining({ locator: "section 5, pp. 319–320" }),
-    ]);
+    ).toEqual([expect.objectContaining({ locator: "section 5, pp. 319–320" })]);
     expect(
       citationsFor("collective-capital-formation-rights-boundary"),
     ).toEqual(
