@@ -6,6 +6,10 @@ import {
   findForbiddenPublicationReference,
   hasDiscoveryOnlyPath,
 } from "./publication-boundary";
+import {
+  narrativeOverlapSignals,
+  resolveReviewedOverlapAcknowledgements,
+} from "./reviewed-overlaps";
 import { scanRuntimeDependencies } from "./runtime-dependencies";
 
 export interface PublicationFile {
@@ -22,6 +26,7 @@ export interface IntegrityFinding {
     | "archive-exclusion"
     | "domain-validation"
     | "narrative-lines"
+    | "reviewed-overlap-acknowledgement"
     | "source-similarity";
   severity: "attention" | "violation";
   location: string;
@@ -146,56 +151,37 @@ export function publicationBoundaryFindings(
   return sortedFindings(findings);
 }
 
-function sourceSimilarityFindings(graph: CompiledDomainGraph) {
-  const statements = new Map(
-    graph.entities
-      .filter((entity) => entity.kind === "statement")
-      .map((statement) => [statement.id, statement]),
-  );
-  const citationsByStatement = new Map<string, Set<string>>();
-  for (const relationship of graph.relationships) {
-    if (relationship.predicate !== "cites") continue;
-    const sources =
-      citationsByStatement.get(relationship.subject.id) ?? new Set<string>();
-    sources.add(relationship.object.id);
-    citationsByStatement.set(relationship.subject.id, sources);
-  }
+function sourceSimilarityFindings(
+  graph: CompiledDomainGraph,
+  reviewedOverlapAcknowledgements: readonly unknown[],
+) {
   const dossiers = graph.entities.filter(
     (entity): entity is Dossier =>
       entity.kind === "dossier" &&
       ["reviewed", "published"].includes(entity.publicationStatus),
   );
-  return dossiers.flatMap((dossier) => {
-    const passages = [
-      {
-        id: "standfirst",
-        body: dossier.standfirst,
-        statementIds: dossier.standfirstStatementIds,
-      },
-      ...dossier.sections,
-    ];
-    return passages.flatMap((passage) =>
-      passage.statementIds.flatMap((statementId) => {
-        const statement = statements.get(statementId);
-        const sourceIds = [
-          ...(citationsByStatement.get(statementId) ?? new Set<string>()),
-        ].sort(compareCodeUnits);
-        if (!statement || sourceIds.length === 0) return [];
-        const score = shingleOverlap(passage.body, statement.text);
-        if (score < 0.45) return [];
-        return [
-          {
-            category: "source-similarity" as const,
-            severity: "attention" as const,
-            location: `${dossier.id}#${passage.id}`,
-            message: `possible close phrasing with source-backed Statement ${statementId} (${Math.round(score * 100)}% five-word overlap); compare against Sources ${sourceIds.join(", ")}`,
-            remediation:
-              "review the narrative beside the cited source passages; quote and attribute necessary wording or rewrite independently",
-          },
-        ];
-      }),
-    );
-  });
+  const resolution = resolveReviewedOverlapAcknowledgements(
+    reviewedOverlapAcknowledgements,
+    narrativeOverlapSignals(graph, dossiers, shingleOverlap),
+  );
+  return [
+    ...resolution.errors.map((message) => ({
+      category: "reviewed-overlap-acknowledgement" as const,
+      severity: "violation" as const,
+      location: "content/domain/reviewed-overlap-acknowledgements.ts",
+      message,
+      remediation:
+        "inspect the current cited passage and replace or remove the invalid acknowledgement; never weaken the similarity audit",
+    })),
+    ...resolution.openSignals.map((signal) => ({
+      category: "source-similarity" as const,
+      severity: "attention" as const,
+      location: `${signal.dossierId}#${signal.passageId}`,
+      message: `possible close phrasing with source-backed Statement ${signal.statementId} (${Math.round(signal.score * 100)}% five-word overlap); compare against Source ${signal.sourceId}; acknowledgement target ${signal.citationId}; fingerprint ${signal.fingerprint}`,
+      remediation:
+        "review the narrative beside the cited source passage; quote and attribute necessary wording, rewrite independently, or record a narrowly scoped reviewed-overlap acknowledgement after inspection",
+    })),
+  ];
 }
 
 export function runContentIntegrity({
@@ -204,12 +190,14 @@ export function runContentIntegrity({
   narratives,
   runtimeFiles,
   builtFiles = [],
+  reviewedOverlapAcknowledgements = [],
 }: {
   documents: AuthoringDocument[];
   graph: CompiledDomainGraph;
   narratives: NarrativeFile[];
   runtimeFiles: PublicationFile[];
   builtFiles?: PublicationFile[];
+  reviewedOverlapAcknowledgements?: readonly unknown[];
 }): ContentIntegrityResult {
   const findings: IntegrityFinding[] = validateAuthoringDocuments(
     documents,
@@ -236,7 +224,9 @@ export function runContentIntegrity({
     );
   }
   findings.push(...publicationBoundaryFindings(runtimeFiles, builtFiles));
-  findings.push(...sourceSimilarityFindings(graph));
+  findings.push(
+    ...sourceSimilarityFindings(graph, reviewedOverlapAcknowledgements),
+  );
   return { findings: sortedFindings(findings), attention: auditContent(graph) };
 }
 

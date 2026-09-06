@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { Source, Statement } from "./entities";
+import type { DomainEntity, Source, Statement } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import type { Dossier } from "./presentation";
 import type { StatementCitation } from "./relationships";
@@ -26,7 +26,19 @@ export interface NarrativeOverlapSignal {
   passageId: string;
   statementId: string;
   citationId: string;
+  sourceId: string;
+  score: number;
   fingerprint: string;
+}
+
+export interface ReviewedOverlapResolution {
+  openSignals: NarrativeOverlapSignal[];
+  acknowledgedSignals: NarrativeOverlapSignal[];
+  errors: string[];
+}
+
+function compareCodeUnits(left: string, right: string) {
+  return left < right ? -1 : left > right ? 1 : 0;
 }
 
 function stableJson(value: unknown): string {
@@ -34,7 +46,7 @@ function stableJson(value: unknown): string {
   if (value && typeof value === "object") {
     const entries = Object.entries(value as Record<string, unknown>)
       .filter(([, child]) => child !== undefined)
-      .sort(([left], [right]) => left.localeCompare(right));
+      .sort(([left], [right]) => compareCodeUnits(left, right));
     return `{${entries.map(([key, child]) => `${JSON.stringify(key)}:${stableJson(child)}`).join(",")}}`;
   }
   return JSON.stringify(value);
@@ -45,7 +57,7 @@ export function reviewedOverlapFingerprint(input: {
   statement: Pick<Statement, "id" | "text">;
   citation: StatementCitation;
   source: Source;
-}) {
+}): `sha256:${string}` {
   const digest = createHash("sha256").update(stableJson(input)).digest("hex");
   return `sha256:${digest}`;
 }
@@ -62,7 +74,9 @@ function isIsoDate(value: unknown): value is string {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value))
     return false;
   const parsed = new Date(`${value}T00:00:00Z`);
-  return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().startsWith(value);
+  return (
+    !Number.isNaN(parsed.valueOf()) && parsed.toISOString().startsWith(value)
+  );
 }
 
 function validateAcknowledgement(
@@ -106,21 +120,29 @@ function validateAcknowledgement(
 export function validateReviewedOverlapAcknowledgements(
   values: readonly unknown[],
 ) {
-  const records: ReviewedOverlapAcknowledgement[] = [];
+  const candidates: ReviewedOverlapAcknowledgement[] = [];
   const errors: string[] = [];
-  const targets = new Set<string>();
-  for (const [index, candidate] of values.entries()) {
+  const sortedValues = [...values].sort((left, right) =>
+    compareCodeUnits(stableJson(left), stableJson(right)),
+  );
+  for (const [index, candidate] of sortedValues.entries()) {
     if (!validateAcknowledgement(candidate, index, errors)) continue;
-    const target = overlapTarget(candidate);
-    if (targets.has(target)) {
-      errors.push(
-        `reviewed overlap acknowledgement ${index}: duplicate acknowledgement target ${target}`,
-      );
-      continue;
-    }
-    targets.add(target);
-    records.push(candidate);
+    candidates.push(candidate);
   }
+  const targetCounts = new Map<string, number>();
+  for (const candidate of candidates) {
+    const target = overlapTarget(candidate);
+    targetCounts.set(target, (targetCounts.get(target) ?? 0) + 1);
+  }
+  const duplicateTargets = [...targetCounts]
+    .filter(([, count]) => count > 1)
+    .map(([target]) => target)
+    .sort();
+  for (const target of duplicateTargets)
+    errors.push(`duplicate reviewed overlap acknowledgement target ${target}`);
+  const records = candidates.filter(
+    (candidate) => targetCounts.get(overlapTarget(candidate)) === 1,
+  );
   return { records, errors: errors.sort() };
 }
 
@@ -135,69 +157,145 @@ function citationsByStatement(graph: CompiledDomainGraph) {
   return result;
 }
 
+function dossierPassages(dossier: Dossier) {
+  return [
+    {
+      passageId: "standfirst",
+      text: dossier.standfirst,
+      statementIds: dossier.standfirstStatementIds,
+    },
+    ...dossier.sections.map(({ id, body, statementIds }) => ({
+      passageId: id,
+      text: body,
+      statementIds,
+    })),
+  ];
+}
+
+function signalsForPassage(
+  dossier: Dossier,
+  passage: ReturnType<typeof dossierPassages>[number],
+  entitiesById: Map<string, DomainEntity>,
+  citations: Map<string, StatementCitation[]>,
+  similarity: (left: string, right: string) => number,
+  threshold: number,
+) {
+  return passage.statementIds.flatMap((statementId) => {
+    const statement = entitiesById.get(statementId);
+    if (statement?.kind !== "statement") return [];
+    const score = similarity(passage.text, statement.text);
+    if (score < threshold) return [];
+    return (citations.get(statementId) ?? []).flatMap((citation) => {
+      const source = entitiesById.get(citation.object.id);
+      if (source?.kind !== "source") return [];
+      return [
+        {
+          location: `${dossier.subject.kind}:${dossier.subject.id}#${passage.passageId}`,
+          dossierId: dossier.id,
+          passageId: passage.passageId,
+          statementId,
+          citationId: citation.id,
+          sourceId: source.id,
+          score,
+          fingerprint: reviewedOverlapFingerprint({
+            passage: {
+              dossierId: dossier.id,
+              passageId: passage.passageId,
+              text: passage.text,
+            },
+            statement,
+            citation,
+            source,
+          }),
+        } satisfies NarrativeOverlapSignal,
+      ];
+    });
+  });
+}
+
 export function narrativeOverlapSignals(
   graph: CompiledDomainGraph,
   dossiers: Dossier[],
   similarity: (left: string, right: string) => number,
+  threshold = 0.45,
 ) {
   const citations = citationsByStatement(graph);
-  const signals: NarrativeOverlapSignal[] = [];
-  for (const dossier of dossiers) {
-    const passages = [
-      {
-        passageId: "standfirst",
-        text: dossier.standfirst,
-        statementIds: dossier.standfirstStatementIds,
-      },
-      ...dossier.sections.map(({ id, body, statementIds }) => ({
-        passageId: id,
-        text: body,
-        statementIds,
-      })),
-    ];
-    for (const passage of passages) {
-      for (const statementId of passage.statementIds) {
-        const statement = graph.indexes.entitiesById[statementId];
-        if (
-          statement?.kind !== "statement" ||
-          similarity(passage.text, statement.text) < 0.65
-        )
-          continue;
-        for (const citation of citations.get(statementId) ?? []) {
-          const source = graph.indexes.entitiesById[citation.object.id];
-          if (source?.kind !== "source") continue;
-          signals.push({
-            location: `${dossier.subject.kind}:${dossier.subject.id}#${passage.passageId}`,
-            dossierId: dossier.id,
-            passageId: passage.passageId,
-            statementId,
-            citationId: citation.id,
-            fingerprint: reviewedOverlapFingerprint({
-              passage: {
-                dossierId: dossier.id,
-                passageId: passage.passageId,
-                text: passage.text,
-              },
-              statement,
-              citation,
-              source,
-            }),
-          });
-        }
-      }
-    }
-  }
-  return signals.sort((left, right) =>
-    overlapTarget({
+  const entitiesById = new Map(
+    graph.entities.map((entity) => [entity.id, entity]),
+  );
+  const signals = dossiers.flatMap((dossier) =>
+    dossierPassages(dossier).flatMap((passage) =>
+      signalsForPassage(
+        dossier,
+        passage,
+        entitiesById,
+        citations,
+        similarity,
+        threshold,
+      ),
+    ),
+  );
+  return signals.sort((left, right) => {
+    const leftTarget = overlapTarget({
       passage: left,
       statementId: left.statementId,
       citationId: left.citationId,
-    }).localeCompare(
+    });
+    const rightTarget = overlapTarget({
+      passage: right,
+      statementId: right.statementId,
+      citationId: right.citationId,
+    });
+    return compareCodeUnits(leftTarget, rightTarget);
+  });
+}
+
+export function resolveReviewedOverlapAcknowledgements(
+  values: readonly unknown[],
+  signals: NarrativeOverlapSignal[],
+): ReviewedOverlapResolution {
+  const { records, errors } = validateReviewedOverlapAcknowledgements(values);
+  const signalByTarget = new Map(
+    signals.map((signal) => [
       overlapTarget({
-        passage: right,
-        statementId: right.statementId,
-        citationId: right.citationId,
+        passage: signal,
+        statementId: signal.statementId,
+        citationId: signal.citationId,
       }),
-    ),
+      signal,
+    ]),
   );
+  const acknowledgedTargets = new Set<string>();
+  for (const record of records) {
+    const target = overlapTarget(record);
+    const signal = signalByTarget.get(target);
+    if (!signal) {
+      errors.push(
+        `${target}: invalidated; no current overlap signal matches this acknowledgement`,
+      );
+      continue;
+    }
+    if (record.fingerprint !== signal.fingerprint) {
+      errors.push(
+        `${target}: invalidated; governed narrative, Statement, citation, or Source input changed`,
+      );
+      continue;
+    }
+    acknowledgedTargets.add(target);
+  }
+  const targetForSignal = (signal: NarrativeOverlapSignal) =>
+    overlapTarget({
+      passage: signal,
+      statementId: signal.statementId,
+      citationId: signal.citationId,
+    });
+  return {
+    openSignals: signals.filter(
+      (signal) => !acknowledgedTargets.has(targetForSignal(signal)),
+    ),
+    acknowledgedSignals: signals.filter((signal) =>
+      acknowledgedTargets.has(targetForSignal(signal)),
+    ),
+    errors: errors.sort(),
+  };
 }

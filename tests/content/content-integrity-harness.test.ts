@@ -9,6 +9,7 @@ import {
   normalizePublicationPath,
   walkRequiredFiles,
 } from "../../scripts/content-integrity-files";
+import { canonicalGraph } from "../../src/lib/domain/canonical";
 import {
   compareCodeUnits,
   formatIntegrityResult,
@@ -20,7 +21,6 @@ import type {
   AuthoringDocument,
   CompiledDomainGraph,
 } from "../../src/lib/domain/graph";
-import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 function verify(
   overrides: Partial<Parameters<typeof runContentIntegrity>[0]> = {},
@@ -315,7 +315,7 @@ describe("parser-backed publication boundary", () => {
       publicationBoundaryFindings([
         {
           path: "src/pages/example.astro",
-          content: '<script src={dynamicSource}></script>',
+          content: "<script src={dynamicSource}></script>",
         },
       ]),
     ).toContainEqual(
@@ -399,7 +399,7 @@ describe("editorial similarity signals", () => {
         severity: "attention",
         location: "fixture-dossier#answer",
         message: expect.stringContaining(
-          "compare against Sources fixture-source",
+          "compare against Source fixture-source",
         ),
       }),
     );
@@ -407,43 +407,49 @@ describe("editorial similarity signals", () => {
   });
 });
 
+function standfirstSimilarityFixture() {
+  const graph = structuredClone(canonicalGraph);
+  const statement = graph.entities.find(
+    (entity) => entity.kind === "statement",
+  );
+  const source = graph.entities.find((entity) => entity.kind === "source");
+  if (statement?.kind !== "statement" || source?.kind !== "source")
+    throw new Error("Missing canonical similarity fixtures");
+  const fixtureStatement = {
+    ...statement,
+    id: "standfirst-similarity-statement",
+    text: "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
+  };
+  graph.entities.push(fixtureStatement, {
+    id: "standfirst-similarity-dossier",
+    kind: "dossier",
+    label: "Standfirst similarity dossier",
+    description: "Synthetic fixture.",
+    publicationStatus: "reviewed",
+    subject: { kind: "concept", id: "fixture-subject" },
+    standfirst: fixtureStatement.text,
+    standfirstStatementIds: [fixtureStatement.id],
+    reviewedAt: "2026-09-05",
+    sections: [],
+  });
+  graph.relationships.push({
+    id: "standfirst-similarity-citation",
+    predicate: "cites",
+    subject: { kind: "statement", id: fixtureStatement.id },
+    object: { kind: "source", id: source.id },
+    role: "supports",
+    locator: "p. 1",
+  });
+  return { graph, fixtureStatement, source };
+}
+
 describe("standfirst similarity signals", () => {
   it("checks a Dossier standfirst against its traced Statements", () => {
-    const graph = structuredClone(canonicalGraph);
-    const statement = graph.entities.find(
-      (entity) => entity.kind === "statement",
+    const { graph } = standfirstSimilarityFixture();
+    const openFinding = verify({ graph }).findings.find(
+      ({ location }) => location === "standfirst-similarity-dossier#standfirst",
     );
-    const source = graph.entities.find((entity) => entity.kind === "source");
-    if (statement?.kind !== "statement" || source?.kind !== "source")
-      throw new Error("Missing canonical similarity fixtures");
-    const fixtureStatement = {
-      ...statement,
-      id: "standfirst-similarity-statement",
-      text: "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
-    };
-    graph.entities.push(fixtureStatement, {
-      id: "standfirst-similarity-dossier",
-      kind: "dossier",
-      label: "Standfirst similarity dossier",
-      description: "Synthetic fixture.",
-      publicationStatus: "reviewed",
-      subject: { kind: "concept", id: "fixture-subject" },
-      standfirst:
-        "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
-      standfirstStatementIds: [fixtureStatement.id],
-      reviewedAt: "2026-09-05",
-      sections: [],
-    });
-    graph.relationships.push({
-      id: "standfirst-similarity-citation",
-      predicate: "cites",
-      subject: { kind: "statement", id: fixtureStatement.id },
-      object: { kind: "source", id: source.id },
-      role: "supports",
-      locator: "p. 1",
-    });
-
-    expect(verify({ graph }).findings).toContainEqual(
+    expect(openFinding).toEqual(
       expect.objectContaining({
         category: "source-similarity",
         location: "standfirst-similarity-dossier#standfirst",
@@ -460,6 +466,56 @@ describe("standfirst similarity signals", () => {
       expect.objectContaining({
         location: "standfirst-similarity-dossier#standfirst",
       }),
+    );
+  });
+
+  it("clears only exact reviewed input and reopens changed Source input", () => {
+    const { graph, fixtureStatement, source } = standfirstSimilarityFixture();
+    const openFinding = verify({ graph }).findings.find(
+      ({ location }) => location === "standfirst-similarity-dossier#standfirst",
+    );
+    const fingerprint = openFinding?.message.match(/sha256:[a-f0-9]{64}/u)?.[0];
+    if (!fingerprint) throw new Error("Missing overlap fingerprint");
+    const reviewed = {
+      schemaVersion: "reviewed-overlap-1" as const,
+      fingerprint: fingerprint as `sha256:${string}`,
+      passage: {
+        dossierId: "standfirst-similarity-dossier",
+        passageId: "standfirst",
+      },
+      statementId: fixtureStatement.id,
+      citationId: "standfirst-similarity-citation",
+      reviewer: "Fixture reviewer",
+      reviewedAt: "2026-09-05",
+      rationale: "The actual cited fixture page was inspected.",
+      disposition: "acknowledged-synthesis" as const,
+    };
+    expect(
+      verify({ graph, reviewedOverlapAcknowledgements: [reviewed] }).findings,
+    ).not.toContainEqual(
+      expect.objectContaining({
+        location: "standfirst-similarity-dossier#standfirst",
+      }),
+    );
+
+    const citedSource = graph.entities.find(({ id }) => id === source.id);
+    if (citedSource?.kind !== "source")
+      throw new Error("Missing cited Source fixture");
+    citedSource.title = `${citedSource.title} revised`;
+    expect(
+      verify({ graph, reviewedOverlapAcknowledgements: [reviewed] }).findings,
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          category: "reviewed-overlap-acknowledgement",
+          severity: "violation",
+          message: expect.stringContaining("invalidated"),
+        }),
+        expect.objectContaining({
+          category: "source-similarity",
+          location: "standfirst-similarity-dossier#standfirst",
+        }),
+      ]),
     );
   });
 });
