@@ -203,6 +203,18 @@ describe("material-change Event freshness metadata", () => {
     }
   });
 
+  it("rejects a resolved citation Source that is not public", () => {
+    const invalid = reviewedDocuments();
+    const source = invalid[8];
+    if (source?.documentType === "entity" && source.entity.kind === "source") {
+      source.entity.publicationStatus = "in-review";
+    }
+
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "example-ongoing-case: material-change Event example-material-change requires an Event-owned reviewed description Statement citing a reviewed or published Source",
+    );
+  });
+
   it("rejects freshness pointers on ended Cases and compiles deterministically across input permutations", () => {
     const ended = reviewedDocuments();
     const value = ended[5];
