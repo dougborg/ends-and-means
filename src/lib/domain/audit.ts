@@ -119,7 +119,7 @@ function relationshipAttention(
         publicationStatus !== "deprecated" &&
         !citedSourceIds.has(id),
     )
-    .map(({ id }) => id);
+    .map(({ id }) => `source:${id}`);
   const relatedIds = new Set(
     graph.relationships.flatMap(({ subject, object }) => [
       subject.id,
@@ -157,7 +157,7 @@ function relationshipAttention(
         publicationStatus !== "deprecated" &&
         !placedDimensionIds.has(id),
     )
-    .map(({ id }) => id);
+    .map(({ id }) => `comparison-dimension:${id}`);
   const obligationTargets = new Set(
     obligations
       .filter(({ obligationStatus }) =>
