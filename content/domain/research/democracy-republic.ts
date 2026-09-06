@@ -47,6 +47,7 @@ export const democracyRepublicResearchDocuments = [
       addressedStatementIds: [
         "republic-democracy-distinction",
         "republic-nondomination-end",
+        "us-republic-elector-boundary",
       ],
       currentLimitation:
         "The present sources establish that popular derivation and democratic inclusion are distinct but do not yet compare exclusions across republics on common terms.",
