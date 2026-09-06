@@ -171,13 +171,18 @@ describe("verify command ownership", () => {
   });
 });
 
-describe("workflow command substitution", () => {
+describe("workflow dynamic shell syntax", () => {
   it.each([
     "echo $(pnpm lint)",
     "echo `pnpm lint`",
     'echo "$(pnpm lint)"',
     'echo "`pnpm lint`"',
-  ])("rejects executable substitution: %s", async (run) => {
+    "echo $((1+2))",
+    "cat <<EOF\n$(pnpm lint)\nEOF",
+    "cat <<'EOF'\n$(pnpm lint)\nEOF",
+    "cat <<EOF\n`pnpm lint`\nEOF",
+    "cat <<'EOF'\n`pnpm lint`\nEOF",
+  ])("rejects dynamic syntax: %s", async (run) => {
     const root = await repositoryFixture();
     await replace(
       root,
@@ -186,7 +191,7 @@ describe("workflow command substitution", () => {
       `      - run: ${JSON.stringify(run)}\n      - name: Verify and build\n        uses: $/.github/actions/verify`,
     );
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
-      "COMMAND_SUBSTITUTION",
+      "DYNAMIC_SHELL_SYNTAX",
     );
   });
 
@@ -209,6 +214,6 @@ describe("workflow command substitution", () => {
     );
     expect(
       auditRepositoryDelivery(root).map((finding) => finding.code),
-    ).not.toContain("COMMAND_SUBSTITUTION");
+    ).not.toContain("DYNAMIC_SHELL_SYNTAX");
   });
 });

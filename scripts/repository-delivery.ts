@@ -110,7 +110,7 @@ function hasUnescapedSubstitution(text: string) {
   return false;
 }
 
-function segmentHasExecutableSubstitution(segment: string) {
+function segmentHasDynamicShellSyntax(segment: string) {
   for (let index = 0; index < segment.length; index += 1) {
     if (segment[index] === "\\") {
       index += 1;
@@ -136,8 +136,8 @@ function segmentHasExecutableSubstitution(segment: string) {
   return false;
 }
 
-function hasExecutableCommandSubstitution(run: string) {
-  return shellCommandSegments(run).some(segmentHasExecutableSubstitution);
+function hasDynamicShellSyntax(run: string) {
+  return shellCommandSegments(run).some(segmentHasDynamicShellSyntax);
 }
 
 function record(value: unknown): Node {
@@ -265,15 +265,15 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
       typeof step.run === "string" && invokesOwnedCommand(step.run),
   );
   requireRule(duplicateCommands.length === 0, "VERIFY_DUPLICATE", "Workflow steps must not duplicate commands owned by pnpm verify.");
-  const substitutions = allSteps.filter(
+  const dynamicShellSteps = allSteps.filter(
     ({ step }) =>
       typeof step.run === "string" &&
-      hasExecutableCommandSubstitution(step.run),
+      hasDynamicShellSyntax(step.run),
   );
   requireRule(
-    substitutions.length === 0,
-    "COMMAND_SUBSTITUTION",
-    "Workflow run blocks must not use executable command substitution; use explicit steps instead.",
+    dynamicShellSteps.length === 0,
+    "DYNAMIC_SHELL_SYNTAX",
+    "Workflow run blocks must not contain unescaped $( or backticks outside ordinary single quotes or comments; use explicit steps instead.",
   );
 
   findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps, allJobs));
