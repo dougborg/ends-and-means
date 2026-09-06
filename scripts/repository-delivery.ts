@@ -21,9 +21,10 @@ const ownedCommands = [
 ];
 
 function invokesOwnedCommand(run: string) {
-  return ownedCommands.some(
-    (command) => run === command || run.startsWith(`${command} `),
-  );
+  return ownedCommands.some((command) => {
+    const escaped = command.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(?:^|[\\n;&|()])\\s*${escaped}(?:$|\\s)`).test(run);
+  });
 }
 
 function record(value: unknown): Node {

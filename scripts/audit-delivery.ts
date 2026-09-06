@@ -3,6 +3,11 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
 import {
+  commitOidSchema,
+  compareSchema,
+  mainRefSchema,
+} from "./delivery-api-schema.ts";
+import {
   auditDeliverySnapshot,
   type DeliveryItem,
   type DeliverySnapshot,
@@ -56,7 +61,6 @@ const issueViewSchema = z
     comments: z.array(z.object({ body: z.string() }).passthrough()),
   })
   .passthrough();
-const commitOidSchema = z.string().regex(/^[0-9a-f]{40}$/);
 const actorSchema = z.object({ login: z.string().min(1) }).passthrough();
 const prViewSchema = z
   .object({
@@ -76,12 +80,6 @@ const prViewSchema = z
     comments: z.array(
       z.object({ author: actorSchema, body: z.string() }).passthrough(),
     ),
-  })
-  .passthrough();
-const compareSchema = z
-  .object({
-    merge_base_commit: z.object({ sha: z.string().min(1) }),
-    commits: z.array(z.object({ parents: z.array(z.unknown()) }).passthrough()),
   })
   .passthrough();
 const labelsSchema = z.array(
@@ -163,7 +161,7 @@ function branchEvidence(branch: string) {
   );
   const main = parseJson(
     gh(["api", "repos/dougborg/ends-and-means/git/ref/heads/main"]),
-    z.object({ object: z.object({ sha: z.string() }) }),
+    mainRefSchema,
     "main ref",
   );
   return {
@@ -298,22 +296,35 @@ function loadLiveSnapshot(): DeliverySnapshot {
 }
 
 function loadSnapshot(args: string[]) {
-  const pathIndex = args.indexOf("--project-snapshot");
-  const snapshotPath = args[pathIndex + 1];
-  if (pathIndex >= 0 && (!snapshotPath || snapshotPath.startsWith("-")))
-    throw new InputInvalidError("--project-snapshot requires a path.");
-  if (pathIndex >= 0 && snapshotPath) {
+  const normalizedArgs = args.filter((arg) => arg !== "--");
+  const modes = new Set(["--project-snapshot", "--live-project", "--repository-only"]);
+  const unknown = normalizedArgs.filter(
+    (arg) => arg.startsWith("-") && !modes.has(arg),
+  );
+  if (unknown.length)
+    throw new InputInvalidError(`Unknown option: ${unknown[0]}.`);
+  const selectedModes = normalizedArgs.filter((arg) => modes.has(arg));
+  if (selectedModes.length !== 1)
+    throw new InputInvalidError("Select exactly one project-state mode.");
+  const mode = selectedModes[0];
+  if (mode === "--project-snapshot") {
+    const pathIndex = normalizedArgs.indexOf(mode);
+    const snapshotPath = normalizedArgs[pathIndex + 1];
+    if (
+      !snapshotPath ||
+      snapshotPath.startsWith("-") ||
+      normalizedArgs.length !== 2
+    )
+      throw new InputInvalidError("--project-snapshot requires exactly one path.");
     return parseJson(
       readFileSync(resolve(snapshotPath), "utf8"),
       deliverySnapshotSchema,
       snapshotPath,
     );
   }
-  if (args.includes("--live-project")) return loadLiveSnapshot();
-  if (args.includes("--repository-only")) return undefined;
-  throw new InputInvalidError(
-    "Expected --project-snapshot <path>, --live-project, or --repository-only.",
-  );
+  if (normalizedArgs.length !== 1)
+    throw new InputInvalidError(`Unexpected argument: ${normalizedArgs[1]}.`);
+  return mode === "--live-project" ? loadLiveSnapshot() : undefined;
 }
 
 try {
