@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Minangkabau matriliny, property, and authority > locks every Statement, Source manifestation, and citation tuple > citations 1`] = `
+exports[`Minangkabau matriliny, property, and authority > locks every Statement, Work, Source manifestation, and citation tuple > citations 1`] = `
 [
   {
     "locator": "opening section, paragraph beginning ‘Sistem matrilineal diartikan’",
@@ -15,16 +15,10 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
     "statementId": "matrilocality-residence-distinction",
   },
   {
-    "locator": "p. 32, paragraph beginning ‘Control over ulayat land’; p. 33, first paragraph",
+    "locator": "‘From the Preface’, paragraph beginning ‘A number of feminist writers’",
     "role": "supports",
-    "sourceId": "mutolib-bonjol-ulayat-source",
-    "statementId": "matriliny-does-not-fix-authority",
-  },
-  {
-    "locator": "chapter 1, pp. 7–8, paragraphs describing women as heirs, household heads, and land controllers",
-    "role": "supports",
-    "sourceId": "blackwood-webs-power-source",
-    "statementId": "matriliny-does-not-fix-authority",
+    "sourceId": "sanday-women-center-excerpt-source",
+    "statementId": "matriliny-does-not-fix-residence",
   },
   {
     "locator": "‘From the Preface’, paragraph beginning ‘A number of feminist writers’",
@@ -443,7 +437,7 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
 ]
 `;
 
-exports[`Minangkabau matriliny, property, and authority > locks every Statement, Source manifestation, and citation tuple > sources 1`] = `
+exports[`Minangkabau matriliny, property, and authority > locks every Statement, Work, Source manifestation, and citation tuple > sources 1`] = `
 [
   {
     "contributorDisplay": [
@@ -653,7 +647,7 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
 ]
 `;
 
-exports[`Minangkabau matriliny, property, and authority > locks every Statement, Source manifestation, and citation tuple > statements 1`] = `
+exports[`Minangkabau matriliny, property, and authority > locks every Statement, Work, Source manifestation, and citation tuple > statements 1`] = `
 [
   {
     "id": "matriliny-maternal-descent-definition",
@@ -668,9 +662,9 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
     "text": "Sanday describes husbands moving into their wives’ households in the community she studied.",
   },
   {
-    "id": "matriliny-does-not-fix-authority",
+    "id": "matriliny-does-not-fix-residence",
     "label": "Matriliny does not establish residence",
-    "statementKind": "editorial-interpretation",
+    "statementKind": "definition",
     "text": "Maternal-line descent does not by itself establish where spouses reside after marriage.",
   },
   {
@@ -874,13 +868,13 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
   {
     "id": "matriliny-does-not-fix-property-control",
     "label": "Matriliny does not establish property control",
-    "statementKind": "editorial-interpretation",
+    "statementKind": "definition",
     "text": "Maternal-line descent does not by itself establish who controls property.",
   },
   {
     "id": "matriliny-does-not-fix-office",
     "label": "Matriliny does not establish political office",
-    "statementKind": "editorial-interpretation",
+    "statementKind": "classification",
     "text": "Maternal-line descent does not by itself establish who holds political office.",
   },
   {
@@ -1056,6 +1050,91 @@ exports[`Minangkabau matriliny, property, and authority > locks every Statement,
     "label": "Five women described weak influence over representatives",
     "statementKind": "observation",
     "text": "A group of five Melayu women described being unable to influence male kin who represented the clan publicly.",
+  },
+]
+`;
+
+exports[`Minangkabau matriliny, property, and authority > locks every Statement, Work, Source manifestation, and citation tuple > works 1`] = `
+[
+  {
+    "description": "Ismail Nurdin’s public-administration case study of adat revival and local capacity in Koto Tinggi.",
+    "id": "nurdin-nagari-governance-work",
+    "kind": "work",
+    "label": "New Value Within Old Structure",
+    "originalPublicationYear": 2017,
+    "publicationStatus": "reviewed",
+    "title": "New Value Within Old Structure: The Creation of Organizational Culture of Nagari in Indonesian Decentralization Era",
+    "workType": "article",
+  },
+  {
+    "description": "A field study of communal-forest management within the Melayu clan of Nagari Bonjol.",
+    "id": "mutolib-bonjol-ulayat-work",
+    "kind": "work",
+    "label": "Gender Inequality in Nagari Bonjol Ulayat Management",
+    "originalPublicationYear": 2016,
+    "publicationStatus": "reviewed",
+    "title": "Gender Inequality and the Oppression of Women within Minangkabau Matrilineal Society: A Case Study of the Management of Ulayat Forest Land in Nagari Bonjol, Dharmasraya District, West Sumatra Province, Indonesia",
+    "workType": "article",
+  },
+  {
+    "description": "Evelyn Blackwood’s ethnography of gender, kinship, and power in one rural Minangkabau village.",
+    "id": "blackwood-webs-power-work",
+    "kind": "work",
+    "label": "Webs of Power",
+    "originalPublicationYear": 2000,
+    "publicationStatus": "reviewed",
+    "title": "Webs of Power: Women, Kin, and Community in a Sumatran Village",
+    "workType": "book",
+  },
+  {
+    "description": "Peggy Reeves Sanday’s ethnography and proposed redefinition of matriarchy in a Minangkabau setting.",
+    "id": "sanday-women-center-work",
+    "kind": "work",
+    "label": "Women at the Center",
+    "originalPublicationYear": 2002,
+    "publicationStatus": "reviewed",
+    "title": "Women at the Center: Life in a Modern Matriarchy",
+    "workType": "book",
+  },
+  {
+    "description": "Aleena Sebastian’s ethnographic study of changing Minangkabau matrilineal practices.",
+    "id": "sebastian-matrilineal-muslims-work",
+    "kind": "work",
+    "label": "Matrilineal Practices among Muslims",
+    "originalPublicationYear": 2022,
+    "publicationStatus": "reviewed",
+    "title": "Matrilineal Practices among Muslims: An Ethnographic Study of the Minangkabau of West Sumatra",
+    "workType": "article",
+  },
+  {
+    "description": "An Indonesian-language account of the West Sumatra cultural-preservation office’s matrilineal data center.",
+    "id": "mardoni-matrilineal-data-center-work",
+    "kind": "work",
+    "label": "Pusat Data Matrilineal",
+    "originalPublicationYear": 2019,
+    "publicationStatus": "reviewed",
+    "title": "Pusat Data Matrilineal Sebagai Sumber Sejarah dan Budaya Minangkabau",
+    "workType": "other",
+  },
+  {
+    "description": "The provincial regulation governing nagari as customary-law community government after the two case periods.",
+    "id": "west-sumatra-nagari-law-2018-work",
+    "kind": "work",
+    "label": "West Sumatra Nagari Regulation (2018)",
+    "originalPublicationYear": 2018,
+    "publicationStatus": "reviewed",
+    "title": "Peraturan Daerah Provinsi Sumatera Barat Nomor 7 Tahun 2018 tentang Nagari",
+    "workType": "law",
+  },
+  {
+    "description": "Freek Colombijn’s study of landownership and property categories in 1990s Padang.",
+    "id": "colombijn-padang-landownership-work",
+    "kind": "work",
+    "label": "Dynamics and Dynamite",
+    "originalPublicationYear": 1992,
+    "publicationStatus": "reviewed",
+    "title": "Dynamics and Dynamite: Minangkabau Urban Landownership in the 1990s",
+    "workType": "article",
   },
 ]
 `;

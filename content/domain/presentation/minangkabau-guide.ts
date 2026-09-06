@@ -105,7 +105,7 @@ export const minangkabauGuideDocuments = [
           role: "comparisons-and-next-steps",
           heading: "What should a comparison keep separate?",
           statementIds: [
-            "matriliny-does-not-fix-authority",
+            "matriliny-does-not-fix-residence",
             "matriliny-does-not-fix-property-control",
             "matriliny-does-not-fix-office",
             "matriliny-does-not-fix-equality",

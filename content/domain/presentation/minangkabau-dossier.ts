@@ -1,17 +1,17 @@
 import type { AuthoringDocument, Dossier } from "../../../src/lib/domain";
+import { attachNarrative } from "./load-narrative";
 
-const dossier = {
+const dossier = attachNarrative("matriliny-property-authority.md", {
   id: "matriliny-property-authority-dossier",
-  kind: "dossier",
+  kind: "dossier" as const,
   label: "Matriliny, property, and authority",
   description:
     "Maternal descent does not by itself determine property control, management, office, or equality.",
-  subject: { kind: "concept", id: "matriliny" },
-  standfirst:
-    "Matriliny traces descent or group membership through a maternal line. It does not, by itself, tell us where spouses live, who controls property, who holds office, or whether people experience equality.",
+  subject: { kind: "concept" as const, id: "matriliny" },
+  standfirst: "",
   standfirstStatementIds: [
     "matriliny-maternal-descent-definition",
-    "matriliny-does-not-fix-authority",
+    "matriliny-does-not-fix-residence",
     "matriliny-does-not-fix-property-control",
     "matriliny-does-not-fix-office",
     "matriliny-does-not-fix-equality",
@@ -20,12 +20,12 @@ const dossier = {
     {
       id: "how-do-the-terms-differ",
       heading: "How do matriliny, matrilocality, and matriarchy differ?",
-      body: "Matriliny is a descent principle. Matrilocality concerns postmarital household location; in Sanday’s account, a married man joined his wife’s domestic group. Matriarchy is a disputed interpretive category: some use it for women’s rule, while Sanday uses it to describe maternal meanings, cooperation, and women’s social centrality. None of these terms can substitute for evidence about who decides, manages, works, benefits, or speaks in a particular setting.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "matriliny-maternal-descent-definition",
         "matrilocality-residence-distinction",
-        "matriliny-does-not-fix-authority",
+        "matriliny-does-not-fix-residence",
         "matriliny-does-not-fix-property-control",
         "matriliny-does-not-fix-office",
         "matriliny-does-not-fix-equality",
@@ -40,7 +40,7 @@ const dossier = {
     {
       id: "what-counts-as-power",
       heading: "Can formal office tell us who has power?",
-      body: "Not on its own. Blackwood found senior women acting as heirs, household heads, and land controllers in one village even where men claimed formal kin authority. The Bonjol evidence points the other way in a different relationship: women’s inherited claims did not give them practical authority over communal-forest transactions. Power must therefore be traced across specific relationships rather than assigned to all women or all men.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "minangkabau-power-varies-by-relation",
@@ -51,7 +51,7 @@ const dossier = {
     {
       id: "how-are-local-terms-used",
       heading: "What do the retained local terms mean here?",
-      body: "Adat refers here to customs, beliefs, norms, and laws rather than one code. Nagari names both a community and a territorial jurisdiction entangled with Indonesian administration. Adat, Islamic authority, and state administration remain distinct even where they interact. Ulayat describes collective territorial and resource claims. Harta pusaka—rendered harato pusako in the Bonjol article—names ancestral property, while harta pencaharian names property acquired through a person’s own efforts in Colombijn’s 1990s Padang study. In the Bonjol account, Bundo Kanduang could counsel customary leaders; that defined position cannot be projected onto all women.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "adat-translation-boundary",
@@ -66,7 +66,7 @@ const dossier = {
     {
       id: "what-can-koto-tinggi-show",
       heading: "What can Koto Tinggi show about public authority?",
-      body: "In October 2016, Koto Tinggi’s formal design divided work among an elected executive, a representative council, and a customary council. Meeting rules included women’s-group delegates and consensus procedures, but the study does not establish women’s influence in those meetings. Customary leaders disputed the dual-council arrangement, and one budget episode showed council members using postponement and consensus while administrative capacity remained limited.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "koto-tinggi-fieldwork-scope",
@@ -76,6 +76,8 @@ const dossier = {
         "koto-tinggi-residence-unobserved",
         "koto-tinggi-minangkabau-adat-context",
         "koto-tinggi-three-institutions",
+        "koto-tinggi-representative-council",
+        "koto-tinggi-customary-council",
         "koto-tinggi-formal-participation-rules",
         "koto-tinggi-formal-decision-rule",
         "koto-tinggi-formal-speaking-rule",
@@ -83,6 +85,7 @@ const dossier = {
         "koto-tinggi-formal-vote-fallback",
         "koto-tinggi-customary-council-contestation",
         "koto-tinggi-budget-rules-in-use",
+        "koto-tinggi-budget-postponement",
         "koto-tinggi-budget-consensus",
         "koto-tinggi-administrative-capacity-limit",
         "koto-tinggi-regulatory-preparation-limit",
@@ -98,7 +101,7 @@ const dossier = {
     {
       id: "what-can-bonjol-show",
       heading: "What can Bonjol show about inheritance and control?",
-      body: "The Bonjol study distinguishes collective ulayat claims, access to land, inherited harta pusaka, delegated management, and the receipt of benefits. It reports that male customary officeholders enabled outsider transactions and controlled an oil-palm recipient list even though the agreement promised plots to 500 households. Some women declined to discuss the dispute; five women who did speak described anger and an inability to influence the men representing the clan.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "bonjol-study-method-and-voice",
@@ -115,6 +118,7 @@ const dossier = {
         "bonjol-neshp-exclusion-outcome",
         "bonjol-women-testimony-limit",
         "bonjol-five-women-testimony",
+        "bonjol-five-women-weak-influence",
         "bonjol-authors-causal-interpretation",
         "bonjol-authors-early-marriage-hypothesis",
         "bonjol-authors-gender-norms-hypothesis",
@@ -130,7 +134,7 @@ const dossier = {
     {
       id: "why-cant-the-cases-be-generalized",
       heading: "Why can’t these cases stand for all Minangkabau communities?",
-      body: "They examine different institutions in two places through limited studies conducted in 2016. The Bonjol authors expressly reject a society-wide generalization, and the Koto Tinggi article does not identify whose testimony represents women’s experience. Other scholarship documents historically changing relations among kinship, markets, religion, and the state. Provincial nagari law also changed after both field studies.",
+      body: "",
       traceStatus: "qualified",
       statementIds: [
         "koto-tinggi-fieldwork-scope",
@@ -144,7 +148,7 @@ const dossier = {
   ],
   publicationStatus: "reviewed",
   reviewedAt: "2026-09-06",
-} satisfies Dossier;
+} satisfies Dossier);
 
 export const minangkabauDossierDocuments = [
   { documentType: "entity", entity: dossier },
