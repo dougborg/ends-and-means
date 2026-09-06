@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from "@playwright/test";
+import { expect, type Locator, test } from "@playwright/test";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -620,6 +620,7 @@ test("Explore search preserves owned meanings and explicit research gaps", async
   const results = page.locator("[data-subject-result]:visible");
 
   await search.fill("communist countries");
+  await expect.poll(() => new URL(page.url()).searchParams.get("q")).toBe("communist countries");
   await expect(results).toHaveCount(1);
   await expect(results.getByRole("heading", { name: "Communism" })).toBeVisible();
   await expect(results.getByText(/A country or party label does not establish one institutional model/)).toBeVisible();
@@ -634,6 +635,25 @@ test("Explore search preserves owned meanings and explicit research gaps", async
   await expect(results).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "No subject guide matches that phrase." })).toBeVisible();
   await expect(page.locator("#subject-search-status")).toContainText("No reviewed guides match");
+
+  await search.fill("");
+  await expect.poll(() => new URL(page.url()).searchParams.has("q")).toBe(false);
+  await expect(results).toHaveCount(canonicalGraph.subjectGuides.length);
+});
+
+test("Explore restores query state from initial URLs and browser history", async ({ page }) => {
+  await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
+  const search = page.getByRole("searchbox", { name: "What do you want to understand?" });
+  const results = page.locator("[data-subject-result]:visible");
+  await expect(search).toHaveValue("communism");
+  await expect(results).toHaveCount(1);
+
+  await page.evaluate(() => history.pushState(null, "", "/explore/?q=socialism"));
+  await page.evaluate(() => history.back());
+  await expect(search).toHaveValue("communism");
+  await page.evaluate(() => history.forward());
+  await expect(search).toHaveValue("socialism");
+  await expect(results.getByRole("heading", { name: "Socialism" })).toBeVisible();
 });
 
 test("Explore directory remains complete without JavaScript", async ({ browser }, testInfo) => {
