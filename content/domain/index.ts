@@ -1,9 +1,12 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
 import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
+import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
+import { centralPlanningApproachDocuments } from "./approaches/central-planning";
 import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
 import { approachDocuments } from "./approaches/swedish-wage-earner-funds";
 import { anarchismEvidenceDocuments } from "./evidence/anarchism";
 import { collectiveCapitalFormationEvidenceDocuments } from "./evidence/collective-capital-formation";
+import { centralPlanningEvidenceDocuments } from "./evidence/central-planning";
 import { democracyRepublicEvidenceDocuments } from "./evidence/democracy-republic";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
@@ -15,6 +18,7 @@ import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
 import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
+import { centralPlanningGuideDocuments } from "./presentation/central-planning-guide";
 import { democracyRepublicGuideDocuments } from "./presentation/democracy-republic-guides";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
@@ -26,6 +30,7 @@ import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossie
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
 import { collectiveCapitalFormationRelationshipDocuments } from "./relationships/collective-capital-formation";
+import { centralPlanningRelationshipDocuments } from "./relationships/central-planning";
 import { democracyRepublicRelationshipDocuments } from "./relationships/democracy-republic";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
@@ -37,6 +42,7 @@ import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { anarchismResearchDocuments } from "./research/anarchism";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
+import { centralPlanningResearchDocuments } from "./research/central-planning";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
@@ -48,10 +54,12 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialismCommunismVocabularyDocuments,
   ...approachDocuments,
   ...rehnMeidnerApproachDocuments,
+  ...centralPlanningApproachDocuments,
   ...evidenceDocuments,
   ...rehnMeidnerEvidenceDocuments,
   ...economicDemocracyEvidenceDocuments,
   ...collectiveCapitalFormationEvidenceDocuments,
+  ...centralPlanningEvidenceDocuments,
   ...democracyRepublicEvidenceDocuments,
   ...socialOwnershipEvidenceDocuments,
   ...socialDemocracyEvidenceDocuments,
@@ -62,6 +70,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...collectiveCapitalFormationDossierDocuments,
+  ...centralPlanningGuideDocuments,
   ...democracyRepublicGuideDocuments,
   ...socialismCommunismDossierDocuments,
   ...tawantinsuyuDossierDocuments,
@@ -72,14 +81,17 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...kahnawakeCommunityDecisionMakingDossierDocuments,
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
+  ...centralPlanningResearchDocuments,
   ...democracyRepublicResearchDocuments,
   ...tawantinsuyuResearchDocuments,
   ...anarchismResearchDocuments,
   ...analysisDocuments,
+  ...centralPlanningAnalysisDocuments,
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,
   ...economicDemocracyRelationshipDocuments,
   ...collectiveCapitalFormationRelationshipDocuments,
+  ...centralPlanningRelationshipDocuments,
   ...democracyRepublicRelationshipDocuments,
   ...socialDemocracyRelationshipDocuments,
   ...socialOwnershipRelationshipDocuments,

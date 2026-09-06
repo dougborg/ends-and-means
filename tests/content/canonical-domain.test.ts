@@ -29,6 +29,7 @@ describe("canonical vertical slice", () => {
       "representative-democratic-government",
       "swedish-rehn-meidner-model",
       "swedish-wage-earner-fund-program",
+      "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "kahnawake-community-lawmaking",
@@ -36,6 +37,7 @@ describe("canonical vertical slice", () => {
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",
+      "us-controlled-materials-plan",
     ]);
   });
 
