@@ -8,6 +8,8 @@ const source = (
   year: number,
   publisher: string,
   url: string,
+  sourceYear = year,
+  sourcePublisher = publisher,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -33,8 +35,8 @@ const source = (
       sourceType: "edition",
       workId: `${id}-work`,
       contributorDisplay: [author],
-      publicationYear: year,
-      publisher,
+      publicationYear: sourceYear,
+      publisher: sourcePublisher,
       resourceLinks: [{ purpose: "publisher", url, label: "Source record" }],
       ...reviewed,
     },
@@ -86,6 +88,8 @@ export const anarchismEvidenceDocuments = [
     1938,
     "Martin Secker and Warburg",
     "https://books.google.com/books?id=dblzAdMMtX0C",
+    2004,
+    "AK Press",
   ),
   ...source(
     "graham-spanish-republic",
@@ -103,6 +107,20 @@ export const anarchismEvidenceDocuments = [
     "Indiana University Press",
     "https://iupress.org/9780253116178/free-women-of-spain/",
   ),
+  {
+    documentType: "entity",
+    entity: {
+      id: "anarcho-syndicalism",
+      kind: "concept",
+      label: "Anarcho-syndicalism",
+      description:
+        "A historical anarchist tradition joining revolutionary union organization to a proposed federated social order.",
+      schemeIds: ["political-economic-ideas"],
+      scopeNote:
+        "Keep this historically named tradition distinct from the broader anarchism concept and from any concrete organizing approach or union.",
+      ...reviewed,
+    },
+  },
   {
     documentType: "entity",
     entity: {
@@ -161,13 +179,13 @@ export const anarchismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "recallable-delegation-and-federation",
+      id: "worker-union-federation",
       kind: "means",
-      label: "Recallable delegation and federation",
+      label: "Worker-union federation",
       description:
-        "Assemblies coordinate across groups through mandated, recallable delegates rather than representatives with independent governing authority.",
+        "Worker unions coordinate production and collective action through federated organization.",
       institutionalForm:
-        "Local assemblies issue mandates to recallable delegates and coordinate through federations with bounded authority.",
+        "Worker unions join federations that coordinate industrial action and, in Rocker's proposal, prepare administration of production.",
       ...reviewed,
     },
   },
@@ -180,7 +198,17 @@ export const anarchismEvidenceDocuments = [
   claim(
     "anarchism-opposes-domination",
     "Anarchists oppose governing domination",
-    "Across major historical currents, anarchists opposed the state and other durable relations of domination while disagreeing about property, markets, organization, and strategy.",
+    "Across major historical currents, anarchists opposed the state's claim to governing authority.",
+  ),
+  claim(
+    "anarchism-opposes-other-domination",
+    "Anarchist criticism extends beyond the state",
+    "Anarchist traditions have also challenged durable economic and social relations of domination.",
+  ),
+  claim(
+    "anarchism-property-strategy-disagreement",
+    "Anarchists disagree about property and strategy",
+    "Historical anarchist currents disagreed about property, markets, formal organization, and revolutionary strategy.",
   ),
   claim(
     "anarchism-not-disorganization",
@@ -213,7 +241,17 @@ export const anarchismEvidenceDocuments = [
   claim(
     "mujeres-libres-gender-counterevidence",
     "Mujeres Libres exposed gender limits",
-    "Ackelsberg shows that Mujeres Libres organized autonomously because formal commitments to emancipation did not remove women's subordination inside the wider anarchist movement.",
+    "Mujeres Libres formed an autonomous women's organization within the Spanish libertarian movement.",
+  ),
+  claim(
+    "spanish-anarchist-gender-subordination",
+    "Anarchist commitments did not end women's subordination",
+    "Ackelsberg finds that formal commitments to emancipation did not remove women's subordination inside the wider Spanish anarchist movement.",
+  ),
+  claim(
+    "anarchosyndicalist-self-identification",
+    "Anarcho-syndicalism was a historically named tradition",
+    "Rocker described anarcho-syndicalism as a libertarian-socialist current with its own aims and methods.",
   ),
   claim(
     "anarchist-case-nonembodiment",

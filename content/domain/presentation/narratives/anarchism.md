@@ -2,7 +2,7 @@ Anarchism is a disputed family of ideas and movements that oppose governing domi
 
 ## meaning
 
-Anarchists have challenged the state and other durable hierarchies while disagreeing about property, markets, formal organization, and revolutionary strategy.
+Anarchists have challenged the state and other durable hierarchies while offering conflicting answers about ownership, exchange, durable organization, and routes to social change.
 The shared name marks a field of argument, not one institutional blueprint.
 
 ## organization

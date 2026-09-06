@@ -46,6 +46,7 @@ export const anarchismResearchDocuments = [
       addressedStatementIds: [
         "spanish-case-plurality",
         "mujeres-libres-gender-counterevidence",
+        "spanish-anarchist-gender-subordination",
         "anarchist-case-nonembodiment",
       ],
       currentLimitation:

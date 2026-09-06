@@ -8,14 +8,27 @@ import {
 const claims = [
   "anarchism-contested-family",
   "anarchism-opposes-domination",
+  "anarchism-opposes-other-domination",
+  "anarchism-property-strategy-disagreement",
   "anarchism-not-disorganization",
   "anarchism-tradition-boundary",
   "rocker-syndicalist-double-aim",
   "baker-strategy-disagreement",
   "spanish-case-plurality",
   "mujeres-libres-gender-counterevidence",
+  "spanish-anarchist-gender-subordination",
+  "anarchosyndicalist-self-identification",
   "anarchist-case-nonembodiment",
 ];
+const exactLocators = {
+  "rocker-syndicalist-double-aim": "chapter 4, pp. 58–61",
+  "baker-strategy-disagreement":
+    "chapter 7, pp. 239–242; chapter 10, pp. 335–339",
+  "spanish-case-plurality": "chapter 2, pp. 53–57",
+  "mujeres-libres-gender-counterevidence": "chapter IV, pp. 115–119",
+  "spanish-anarchist-gender-subordination": "chapter VI, pp. 186–190",
+  "anarchosyndicalist-self-identification": "chapter 1, pp. 14–16",
+} as const;
 describe("Anarchism learner guide", () => {
   it("publishes a complete traced journey", () => {
     const guide = subjectGuideBySlug("anarchism");
@@ -38,23 +51,66 @@ describe("Anarchism learner guide", () => {
       ).toBe(true);
       expect(citationsFor(id).length).toBeGreaterThan(0);
     }
+    for (const [id, locator] of Object.entries(exactLocators))
+      expect(citationsFor(id).map((citation) => citation.locator)).toEqual([
+        locator,
+      ]);
   });
+});
+
+describe("Anarchism relationship and identity boundaries", () => {
   it("keeps overlap qualified and non-inheriting", () => {
     for (const id of [
       "anarchism-related-to-socialism",
       "anarchism-related-to-communism",
       "anarchism-related-to-statelessness",
-    ])
-      {
-        const relationship = canonicalGraph.relationships.find(
-          ({ id: candidate }) => candidate === id,
-        );
-        expect(
-          relationship && relationship.predicate !== "cites"
-            ? relationship.status
-            : undefined,
-        ).toBe("qualified");
-      }
+    ]) {
+      const relationship = canonicalGraph.relationships.find(
+        ({ id: candidate }) => candidate === id,
+      );
+      expect(
+        relationship && relationship.predicate !== "cites"
+          ? relationship.status
+          : undefined,
+      ).toBe("qualified");
+    }
+    expect(
+      canonicalGraph.indexes.entitiesById["rocker-anarchosyndicalism-work"],
+    ).toMatchObject({ kind: "work", originalPublicationYear: 1938 });
+    expect(
+      canonicalGraph.indexes.entitiesById["rocker-anarchosyndicalism-source"],
+    ).toMatchObject({
+      kind: "source",
+      publicationYear: 2004,
+      publisher: "AK Press",
+    });
+    expect(
+      canonicalGraph.indexes.entitiesById["anarcho-syndicalism"],
+    ).toMatchObject({ kind: "concept" });
+    expect(
+      canonicalGraph.indexes.entitiesById["anarcho-syndicalist-organizing"],
+    ).toMatchObject({ kind: "approach" });
+    expect(
+      canonicalGraph.indexes.entitiesById["anarchist-traditions"],
+    ).toMatchObject({ kind: "collection" });
+    expect(
+      canonicalGraph.relationships.find(
+        ({ id }) => id === "anarchosyndicalism-tradition-member",
+      ),
+    ).toMatchObject({
+      predicate: "member-of",
+      membership: "widely-accepted",
+      status: "qualified",
+    });
+    expect(
+      canonicalGraph.relationships.filter(
+        ({ subject, predicate }) =>
+          subject.id === "anarchist-traditions" &&
+          ["advances-end", "advocates-means", "interprets-concept"].includes(
+            predicate,
+          ),
+      ),
+    ).toEqual([]);
     expect(
       canonicalGraph.indexes.entitiesById[
         "spanish-anarchist-initiatives-1936-1939"

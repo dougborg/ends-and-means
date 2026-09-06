@@ -10,55 +10,79 @@ const cited = [
   [
     "anarchism-contested-family",
     "prichard-anarchism-vsi-source",
-    "chapters 1–3",
+    "chapter 1, pp. 1–4",
     "supports",
   ],
   [
     "anarchism-opposes-domination",
     "prichard-anarchism-vsi-source",
-    "chapters 1 and 3",
+    "chapter 1, pp. 4–8",
+    "supports",
+  ],
+  [
+    "anarchism-opposes-other-domination",
+    "prichard-anarchism-vsi-source",
+    "chapter 3, pp. 39–43",
+    "supports",
+  ],
+  [
+    "anarchism-property-strategy-disagreement",
+    "baker-means-ends-source",
+    "chapter 5, pp. 173–176",
     "supports",
   ],
   [
     "anarchism-not-disorganization",
     "prichard-anarchism-vsi-source",
-    "chapters 4–6",
+    "chapter 4, pp. 59–63",
     "supports",
   ],
   [
     "anarchism-tradition-boundary",
     "baker-means-ends-source",
-    "chapter 5, pp. 173–196",
+    "chapter 5, pp. 173–176",
     "supports",
   ],
   [
     "rocker-syndicalist-double-aim",
     "rocker-anarchosyndicalism-source",
-    "chapter 4, pp. 54–72",
+    "chapter 4, pp. 58–61",
     "supports",
   ],
   [
     "baker-strategy-disagreement",
     "baker-means-ends-source",
-    "chapters 6–10, pp. 197–366",
+    "chapter 7, pp. 239–242; chapter 10, pp. 335–339",
     "supports",
   ],
   [
     "spanish-case-plurality",
     "graham-spanish-republic-source",
-    "chapters 1–3, pp. 1–130",
+    "chapter 2, pp. 53–57",
     "supports",
   ],
   [
     "mujeres-libres-gender-counterevidence",
     "ackelsberg-free-women-source",
-    "chapters IV and VI, pp. 113–147 and 186–208",
+    "chapter IV, pp. 115–119",
+    "supports",
+  ],
+  [
+    "spanish-anarchist-gender-subordination",
+    "ackelsberg-free-women-source",
+    "chapter VI, pp. 186–190",
+    "supports",
+  ],
+  [
+    "anarchosyndicalist-self-identification",
+    "rocker-anarchosyndicalism-source",
+    "chapter 1, pp. 14–16",
     "supports",
   ],
   [
     "anarchist-case-nonembodiment",
     "graham-spanish-republic-source",
-    "introduction and chapters 1–3, pp. 1–130",
+    "introduction, pp. 1–4",
     "context",
   ],
 ] as const;
@@ -108,8 +132,37 @@ export const anarchismRelationshipDocuments = [
   },
   {
     documentType: "relationships",
+    subject: { kind: "concept", id: "anarcho-syndicalism" },
+    relationships: [
+      {
+        id: "anarchosyndicalism-tradition-member",
+        predicate: "member-of",
+        subject: { kind: "concept", id: "anarcho-syndicalism" },
+        object: { kind: "collection", id: "anarchist-traditions" },
+        membership: "widely-accepted",
+        status: "qualified",
+        statementIds: ["anarchosyndicalist-self-identification"],
+      },
+    ],
+  },
+  {
+    documentType: "relationships",
     subject: approach,
     relationships: [
+      {
+        id: "anarchosyndicalist-approach-interprets-tradition",
+        predicate: "interprets-concept",
+        subject: approach,
+        object: { kind: "concept", id: "anarcho-syndicalism" },
+        role: "core",
+        interpretation:
+          "The approach gives institutional form to the historically named tradition through worker organization and federation.",
+        status: "qualified",
+        statementIds: [
+          "anarchosyndicalist-self-identification",
+          "rocker-syndicalist-double-aim",
+        ],
+      },
       {
         id: "anarchosyndicalism-member-of-anarchist-traditions",
         predicate: "member-of",
@@ -148,7 +201,7 @@ export const anarchismRelationshipDocuments = [
         id: "anarchosyndicalism-advocates-federation",
         predicate: "advocates-means",
         subject: approach,
-        object: { kind: "means", id: "recallable-delegation-and-federation" },
+        object: { kind: "means", id: "worker-union-federation" },
         status: "qualified",
         statementIds: [
           "anarchism-not-disorganization",
