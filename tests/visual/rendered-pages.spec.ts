@@ -7,6 +7,7 @@ const defaultRoutes = [
   "/explore/swedish-rehn-meidner-model/",
   "/cases/swedish-wage-earner-funds/",
   "/cases/swedish-solidaristic-bargaining/",
+  "/cases/kahnawake-community-lawmaking/",
   "/compare/",
   "/concepts/economic-democracy/",
   "/concepts/social-democracy/",

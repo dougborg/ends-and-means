@@ -30,6 +30,13 @@ Ongoing Cases must expose an `asOf` date, last review date, and freshness state.
 Episodes keep conditions, formal rules, rules-in-use, interactions, and outcomes
 in separate Statement collections so observation and causal interpretation do
 not collapse into one narrative field.
+Broad labels for political organization do not override those bounds.
+Keep community self-description, translations, scholarly categories, and
+colonial or administrative classifications distinct; do not encode a universal
+band–tribe–chiefdom–state sequence.
+Living-community research should include appropriately authorized community
+records or oral histories where available, with the speaker, capacity,
+publication context, permissions, and limits kept visible.
 
 Dossiers are the canonical presentation layer for readable, subject-led prose.
 Each active Dossier belongs to exactly one canonical subject and supplies one

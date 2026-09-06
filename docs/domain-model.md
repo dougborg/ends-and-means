@@ -37,6 +37,18 @@ label is an ontology root.
    researched content exposes a representational failure, boundary fixtures
    capture the required invariants, and an ADR records the decision.
 
+### Society-specific political organization
+
+Terms such as *tribe*, *band*, *clan*, *chiefdom*, *council*, *confederacy*,
+*customary law*, *nomadic*, and *pastoral* do not form a canonical sequence or
+name interchangeable political systems.
+Model the people, place, period, authority, relationships, and institutions that
+the evidence supports; keep community self-description separate from translated,
+scholarly, colonial, and statutory classifications.
+Common search language may route to a reviewed society-specific guide without
+becoming a canonical Concept or alternate label.
+See [ADR 0005](adr/0005-society-specific-political-organization.md).
+
 ## The layers
 
 ```text
