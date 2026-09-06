@@ -518,8 +518,8 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
   ),
   claim(
     "fascism-evidence-region-limit",
-    "The present comparison has a European evidence boundary",
-    "The present guide's historical evidence concerns Italy and Germany; it does not classify movements in other regions, and any transfer requires separately located movement-produced and independent evidence.",
+    "The cited comparison has a European evidence boundary",
+    "The cited historical evidence concerns Italy and Germany; it does not classify movements in other regions, and any transfer requires separately located movement-produced and independent evidence.",
     "editorial-interpretation",
   ),
 
