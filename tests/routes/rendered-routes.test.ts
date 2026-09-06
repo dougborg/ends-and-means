@@ -400,12 +400,16 @@ async function verifyMethodRoute() {
   expect(methodText).toContain("Fairness does not give every account equal weight");
   expect(methodText).toContain("A counterfactual makes the comparison explicit");
   expect(methodText).toContain("Go to the passage");
+  expect(methodText).toContain("name the page or claim");
+  expect(methodText).toContain("A person reviews the proposal");
+  expect(methodText).toContain("public repository history");
+  expect(methodText).not.toMatch(/technical apparatus|learner path|pull request|migration/i);
   expect(hrefs(method)).toEqual(expect.arrayContaining([
     "/research/",
     "https://github.com/dougborg/ends-and-means/blob/main/docs/project-vision.md",
     "https://github.com/dougborg/ends-and-means/blob/main/docs/editorial-philosophy.md",
     "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
-    "https://github.com/dougborg/ends-and-means/issues/new",
+    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
     "https://github.com/dougborg/ends-and-means/blob/main/docs/domain-model.md",
   ]));
 }
