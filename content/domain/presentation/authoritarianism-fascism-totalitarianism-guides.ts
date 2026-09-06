@@ -14,7 +14,12 @@ const dossier = (
     id: `${id}-dossier`,
     kind: "dossier" as const,
     label: `${id[0]?.toUpperCase()}${id.slice(1)} dossier`,
-    description: `A learner-first guide to the meanings and boundaries of ${id}.`,
+    description:
+      id === "authoritarianism"
+        ? "Authoritarianism can classify a regime by limited pluralism, restricted mobilization, and weak guiding ideology, or identify practices that undermine accountability across regime types. It is not a synonym for autocracy."
+        : id === "fascism"
+          ? "Fascism is defined here through two rival scholarly approaches: Griffin emphasizes revolutionary ultranationalist rebirth, while Paxton emphasizes political behavior. Repression, nationalism, or dictatorship alone does not establish the classification."
+          : "Totalitarianism can describe an ideal type organized around a monistic power center, an exclusive guiding ideology, and extensive mobilization. Its validity and ideological uses remain disputed, and the label alone establishes none of those features.",
     subject: { kind: "concept" as const, id },
     standfirst: "",
     standfirstStatementIds,
@@ -201,7 +206,7 @@ const historicalItalianFascism = attachNarrative(
     kind: "dossier" as const,
     label: "Historical Italian Fascism dossier",
     description:
-      "A bounded account of doctrine, organization, and consolidated rule.",
+      "The 1932 Fascist doctrine recorded anti-liberal and anti-Marxian claims centered on state and nation, but those claims do not establish how the regime worked. The movement founded in 1919, the later party, and Mussolini’s 1922 coalition government were distinct stages.",
     subject: { kind: "approach" as const, id: "historical-italian-fascism" },
     standfirst: "",
     standfirstStatementIds: [
@@ -256,7 +261,8 @@ const linzRegimeAnalysis = attachNarrative("linz-regime-analysis.md", {
   id: "linz-regime-analysis-dossier",
   kind: "dossier" as const,
   label: "Linz regime analysis dossier",
-  description: "A bounded account of Linz's contrasting regime ideal types.",
+  description:
+    "Linz distinguishes an authoritarian ideal type marked by limited pluralism and restricted mobilization from a totalitarian type with a monistic power center, exclusive guiding ideology, and extensive mobilization. These are analytical categories, not automatic labels for a country.",
   subject: { kind: "approach" as const, id: "linz-regime-analysis" },
   standfirst: "",
   standfirstStatementIds: [
@@ -295,7 +301,12 @@ const guide = (
     id: `guide-${id}`,
     slug: id,
     label: id.charAt(0).toUpperCase() + id.slice(1),
-    description: `Distinguish the scholarly, historical, organizational, and polemical uses of ${id}.`,
+    description:
+      id === "authoritarianism"
+        ? "Authoritarianism can classify political regimes or identify practices that undermine accountability across regime types. Those uses overlap without making authoritarianism, autocracy, and dictatorship synonyms."
+        : id === "fascism"
+          ? "Fascism names a disputed revolutionary ultranationalist ideology and historically connected political behavior, not every repressive or nationalist government. Rival definitions and the bounded Italian evidence separate doctrine, organization, seizure of power, and rule."
+          : "Totalitarianism is a contested category for rule organized around a monistic power center, an exclusive ideology, and extensive mobilization. Its Cold War history and polemical use mean that applying the label does not prove that a regime achieved total control.",
     publicationStatus: "reviewed",
     primarySubject: { kind: "concept", id },
     searchQueries: [
