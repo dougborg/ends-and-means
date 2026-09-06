@@ -3,7 +3,7 @@ It is neither a neutral synonym for dictatorship nor proof that any regime achie
 
 ## definitions
 
-Linz's ideal type combines a monistic power center, an exclusive guiding ideology, and extensive mobilization.
+Linz distinguishes this ideal type by asking how concentrated the political center is, how doctrine authorizes rule, and how rulers organize participation.
 Arendt's different analysis treats Nazi and Stalinist domination as a novel form rather than merely a stronger traditional dictatorship.
 
 ## disputes

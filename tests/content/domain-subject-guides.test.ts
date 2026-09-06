@@ -92,6 +92,7 @@ function relationshipIn(documents: AuthoringDocument[], id: string) {
   throw new Error(`Missing Relationship ${id}`);
 }
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: the exact canonical guide inventory belongs in one integration contract
 describe("compiled learner SubjectGuide composition", () => {
   it("compiles reviewed guides beside, rather than into, the plural graph", () => {
     const guide = subjectGuideBySlug("economic-democracy");
