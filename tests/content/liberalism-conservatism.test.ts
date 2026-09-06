@@ -44,6 +44,7 @@ const claims = [
   "right-to-buy-ministerial-intervention",
   "right-to-buy-buyer-distribution",
   "right-to-buy-residual-sector",
+  "right-to-buy-rules-changed",
   "swatantra-economic-conservatism",
   "swatantra-ordered-progress",
   "swatantra-gender-limit",
@@ -62,7 +63,7 @@ const claims = [
 
 describe("Liberalism and Conservatism evidence", () => {
   it("keeps every substantive claim atomic and locator-backed", () => {
-    expect(claims).toHaveLength(50);
+    expect(claims).toHaveLength(51);
     const sources = new Set<string>();
     for (const id of claims) {
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({

@@ -279,10 +279,7 @@ export const liberalismConservatismEvidenceDocuments = [
   ...source(
     "cdu-ahlen-programme",
     "Ahlen Programme",
-    [
-      "Christian Democratic Union",
-      "Ends and Means (English summary translation)",
-    ],
+    ["Christian Democratic Union"],
     "Konrad Adenauer Foundation",
     "edition",
     "https://www.kas.de/c/document_library/get_file?groupId=252038&uuid=76a77614-6803-0750-c7a7-5d3ff7c46206",
@@ -292,10 +289,7 @@ export const liberalismConservatismEvidenceDocuments = [
   ...source(
     "cdu-duesseldorf-guidelines",
     "Düsseldorf Guidelines",
-    [
-      "Christian Democratic Union",
-      "Ends and Means (English summary translation)",
-    ],
+    ["Christian Democratic Union", "Christian Social Union"],
     "Konrad Adenauer Foundation",
     "edition",
     "https://www.kas.de/documents/252038/253252/1949_Duesseldorfer-Leitsaetze.pdf/e96f38a1-b923-a79e-c5a3-11569de3f64e",
@@ -648,6 +642,12 @@ export const liberalismConservatismEvidenceDocuments = [
     "observation",
   ),
   statement(
+    "right-to-buy-rules-changed",
+    "Later legislation changed the 1980 rules",
+    "The House of Commons Library records amendments from 1984 through 1996 that changed eligibility, discounts, resale penalties, mortgages, and related purchase schemes.",
+    "observation",
+  ),
+  statement(
     "swatantra-economic-conservatism",
     "Balasubramanian classifies Swatantra's project as economic conservatism",
     "Balasubramanian describes Swatantra's opposition project as a conservative alternative and its free-economy program as economic conservatism in postcolonial India.",
@@ -866,7 +866,7 @@ export const liberalismConservatismEvidenceDocuments = [
       kind: "case",
       label: "Right to Buy in England and Wales, 1980–1998",
       description:
-        "The first statutory phase of a Conservative housing program that gave qualifying council tenants purchase rights while overriding parts of local housing discretion.",
+        "An evidence-review interval for a Conservative housing program that began by giving qualifying council tenants purchase rights and was repeatedly amended through the 1990s.",
       locationIds: ["england-and-wales"],
       startDate: { year: 1980, month: 10, day: 3, certainty: "exact" },
       endDate: {
@@ -878,7 +878,10 @@ export const liberalismConservatismEvidenceDocuments = [
         "The statutory scheme in England and Wales from commencement through the latest sales and stock figures reviewed in the 1999 Commons Library paper; Scotland had separate legislation, and later policy is excluded.",
       selectionRationale:
         "The episode connects an explicitly documented Conservative program to enacted authority, distributional effects, and a geographic transfer limit without defining conservatism by the program.",
-      conditionStatementIds: ["right-to-buy-conservative-programme"],
+      conditionStatementIds: [
+        "right-to-buy-conservative-programme",
+        "right-to-buy-rules-changed",
+      ],
       episodeIds: ["right-to-buy-initial-operation"],
       ...reviewed,
     },
@@ -888,9 +891,9 @@ export const liberalismConservatismEvidenceDocuments = [
     entity: {
       id: "right-to-buy-initial-operation",
       kind: "case-episode",
-      label: "Initial Right to Buy operation",
+      label: "Right to Buy evidence review",
       description:
-        "The operating interval from the statutory scheme's commencement through the report's late-1990s evidence.",
+        "The 1980 enacted rules and the report's evidence about later amendments, sales, and the remaining housing sector.",
       caseId: "right-to-buy-england-wales-1980-1998",
       locationIds: ["england-and-wales"],
       startDate: { year: 1980, month: 10, day: 3, certainty: "exact" },
@@ -900,8 +903,11 @@ export const liberalismConservatismEvidenceDocuments = [
         note: "The Commons Library paper reports annual sales and stock through the late 1990s; 1998 bounds this review interval rather than a statutory phase.",
       },
       scope:
-        "Statutory purchase rights and reported distributional changes in England and Wales; no causal estimate separates Right to Buy from falling social-housing investment.",
-      conditionStatementIds: ["right-to-buy-conservative-programme"],
+        "The formal-rule fields record the enacted 1980 scheme, not unchanged rules through 1998; the conditions record later amendments, and no causal estimate separates Right to Buy from falling social-housing investment.",
+      conditionStatementIds: [
+        "right-to-buy-conservative-programme",
+        "right-to-buy-rules-changed",
+      ],
       formalRuleStatementIds: [
         "right-to-buy-purchase-right",
         "right-to-buy-discounts",
@@ -954,8 +960,9 @@ export const liberalismConservatismEvidenceDocuments = [
       conditionStatementIds: [
         "swatantra-economic-conservatism",
         "swatantra-ordered-progress",
+        "swatantra-formal-principles",
       ],
-      formalRuleStatementIds: ["swatantra-formal-principles"],
+      formalRuleStatementIds: [],
       ruleInUseStatementIds: ["swatantra-parliamentary-practice"],
       interactionStatementIds: [
         "swatantra-gender-limit",

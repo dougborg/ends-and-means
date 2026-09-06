@@ -22,7 +22,7 @@ These untranslated German program texts show change within Christian democracy b
 
 ## bounded-practice
 
-England and Wales's first statutory Right to Buy phase enacted a documented Conservative program through tenant purchase rights, discounts, local-authority duties, and central intervention powers.
+The Right to Buy evidence review connects a documented Conservative program to its enacted 1980 purchase rules and to later amendments.
 Reported access and effects varied by income and housing stock, so the case tests one program rather than defining conservative housing policy.
 In India, Balasubramanian classifies Swatantra's free-economy opposition as economic conservatism while documenting a regionally varied coalition, parliamentary and coalition practices, and women's subordinate organizational roles.
 
