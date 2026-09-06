@@ -130,6 +130,17 @@ describe("diverse political-organization model boundaries", () => {
   });
 });
 
+describe("Kahnawà:ke Type II procedure", () => {
+  it("preserves consultation before and after the mandate decision", () => {
+    expect(entityById("kahnawake-cdmrp-type-two-design")).toMatchObject({
+      kind: "statement",
+      text: expect.stringMatching(
+        /initial stakeholder consultation.+before the chiefs or Council are asked to establish.+further community and stakeholder consultation follows/,
+      ),
+    });
+  });
+});
+
 describe("Kahnawà:ke evidence and narrative", () => {
   it("attributes the January 2024 rule without converting procedure into community assent", () => {
     const ruleChange = entityById("kahnawake-cdmrp-2024-hearing-rule-change");

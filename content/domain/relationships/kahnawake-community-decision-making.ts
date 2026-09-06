@@ -88,7 +88,7 @@ const citations = [
   [
     "kahnawake-cdmrp-type-two-design",
     "horn-miller-indigenous-participatory-democracy-source",
-    "pp. 122–124 and 127–128",
+    "pp. 125–127",
     "supports",
     "cdmrp-type-two-design",
   ],
