@@ -1,7 +1,10 @@
 import { relative } from "node:path";
 import { canonicalDocuments } from "../content/domain";
 import { resolveNarrativeDirectory } from "../content/domain/presentation/load-narrative";
-import { formatIntegrityResult, runContentIntegrity } from "../src/lib/domain";
+import {
+  formatIntegrityResult,
+  runContentIntegrity,
+} from "../src/lib/domain/content-integrity";
 import { canonicalGraph } from "../src/lib/domain/canonical";
 import { validateNarrativeLines } from "../src/lib/narrative-lines";
 import { loadPublicationFiles } from "./content-integrity-files";

@@ -2,6 +2,10 @@ import { auditContent, type ContentAttentionReport } from "./audit";
 import { validateAuthoringDocuments } from "./compile";
 import type { AuthoringDocument, CompiledDomainGraph } from "./graph";
 import type { Dossier } from "./presentation";
+import {
+  findForbiddenPublicationReference,
+  hasDiscoveryOnlyPath,
+} from "./publication-boundary";
 import { scanRuntimeDependencies } from "./runtime-dependencies";
 
 export interface PublicationFile {
@@ -30,10 +34,7 @@ export interface ContentIntegrityResult {
   attention: ContentAttentionReport;
 }
 
-const forbiddenRuntimePath = /(?:^|\/)(?:archive|legacy|drafts?)(?:\/|$)/iu;
 const executableRuntimePath = /\.(?:astro|cjs|cts|js|jsx|mjs|mts|ts|tsx)$/iu;
-const forbiddenBuildText =
-  /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
 
 export function compareCodeUnits(left: string, right: string) {
   return left < right ? -1 : left > right ? 1 : 0;
@@ -92,7 +93,11 @@ function runtimeDependencyFindings(file: PublicationFile): IntegrityFinding[] {
       "repair executable syntax and use literal module specifiers so publication dependencies can be audited",
   }));
   const dependencyFindings: IntegrityFinding[] = scan.specifiers
-    .filter((specifier) => forbiddenRuntimePath.test(specifier))
+    .filter(
+      (specifier) =>
+        findForbiddenPublicationReference(specifier) ||
+        hasDiscoveryOnlyPath(specifier),
+    )
     .map((specifier) => ({
       category: "archive-exclusion",
       severity: "violation",
@@ -110,7 +115,10 @@ export function publicationBoundaryFindings(
 ): IntegrityFinding[] {
   const findings: IntegrityFinding[] = [];
   for (const file of runtimeFiles) {
-    if (forbiddenRuntimePath.test(file.path)) {
+    if (
+      findForbiddenPublicationReference(file.path) ||
+      hasDiscoveryOnlyPath(file.path)
+    ) {
       findings.push({
         category: "archive-exclusion",
         severity: "violation",
@@ -124,13 +132,13 @@ export function publicationBoundaryFindings(
     findings.push(...runtimeDependencyFindings(file));
   }
   for (const file of builtFiles) {
-    const match = file.content.match(forbiddenBuildText);
+    const match = findForbiddenPublicationReference(file.content);
     if (!match) continue;
     findings.push({
       category: "archive-exclusion",
       severity: "violation",
       location: file.path,
-      message: `public build contains an excluded runtime reference: ${match[0]}`,
+      message: `public build contains an excluded runtime reference: ${match}`,
       remediation:
         "trace the reference to its production import and remove the legacy or archived dependency",
     });

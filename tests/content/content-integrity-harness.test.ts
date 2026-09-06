@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -9,14 +9,16 @@ import {
   walkRequiredFiles,
 } from "../../scripts/content-integrity-files";
 import {
-  type AuthoringDocument,
-  type CompiledDomainGraph,
   compareCodeUnits,
   formatIntegrityResult,
   publicationBoundaryFindings,
   runContentIntegrity,
   validationFindingLocation,
-} from "../../src/lib/domain";
+} from "../../src/lib/domain/content-integrity";
+import type {
+  AuthoringDocument,
+  CompiledDomainGraph,
+} from "../../src/lib/domain/graph";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 function verify(
@@ -32,6 +34,11 @@ function verify(
 }
 
 describe("content-integrity harness", () => {
+  it("keeps parser-backed audit modules out of the runtime domain barrel", async () => {
+    const barrel = await readFile("src/lib/domain/index.ts", "utf8");
+    expect(barrel).not.toMatch(/content-integrity|runtime-dependencies/u);
+  });
+
   it("accepts the canonical graph and reports research attention separately", () => {
     const result = verify();
     expect(
@@ -169,6 +176,32 @@ describe("safe-publication boundary", () => {
     ).toEqual([]);
   });
 
+  it.each([
+    "lib/framework/example",
+    "lib/prototype/example",
+    "lib/content/example",
+  ])("uses the shared retired-library boundary for %s", (reference) => {
+    const findings = publicationBoundaryFindings(
+      [
+        {
+          path: "src/example.ts",
+          content: `import value from "../${reference}";`,
+        },
+      ],
+      [{ path: "dist/index.js", content: `bundle:${reference}` }],
+    );
+    expect(findings.map(({ location }) => location)).toEqual([
+      "dist/index.js",
+      "src/example.ts",
+    ]);
+    expect(findings.map(({ message }) => message)).toEqual([
+      expect.stringContaining(reference.replace(/example$/u, "")),
+      expect.stringContaining(reference),
+    ]);
+  });
+});
+
+describe("runtime dependency syntax", () => {
   it.each([
     'import "../archive/data";',
     'const data = require("../archive/data");',

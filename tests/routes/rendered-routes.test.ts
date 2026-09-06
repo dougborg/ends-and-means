@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { workflowReferencesIn } from "../../src/lib/domain";
 import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
+import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -397,9 +398,10 @@ describe("canonical public routes", () => {
     );
     for (const file of productionFiles) {
       const source = await readFile(file, "utf8");
-      expect(source, path.relative(root, file)).not.toMatch(
-        /archive\/legacy-research|content\/framework|lib\/(?:framework|prototype|content)/,
-      );
+      expect(
+        findForbiddenPublicationReference(source),
+        path.relative(root, file),
+      ).toBeUndefined();
     }
   });
 
