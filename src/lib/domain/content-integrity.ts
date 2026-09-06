@@ -31,6 +31,7 @@ export interface ContentIntegrityResult {
 
 const forbiddenRuntimePath = /(?:^|\/)(?:archive|legacy|drafts?)(?:\/|$)/iu;
 const moduleSpecifier = /(?:\bfrom\s*|\bimport\s*\(\s*)["']([^"']+)["']/gu;
+const executableRuntimePath = /\.(?:astro|cjs|cts|js|jsx|mjs|mts|ts|tsx)$/iu;
 const forbiddenBuildText =
   /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
 
@@ -92,6 +93,7 @@ export function publicationBoundaryFindings(
           "move discovery-only material outside runtime roots and author reviewed records under content/domain",
       });
     }
+    if (!executableRuntimePath.test(file.path)) continue;
     for (const match of file.content.matchAll(moduleSpecifier)) {
       const specifier = match[1] ?? "";
       if (!forbiddenRuntimePath.test(specifier)) continue;
@@ -126,14 +128,14 @@ function sourceSimilarityFindings(graph: CompiledDomainGraph) {
       .filter((entity) => entity.kind === "statement")
       .map((statement) => [statement.id, statement]),
   );
-  const citationsByStatement = new Map<string, string[]>();
+  const citationsByStatement = new Map<string, Set<string>>();
   for (const relationship of graph.relationships) {
     if (relationship.predicate !== "cites") continue;
-    const sources = citationsByStatement.get(relationship.subject.id) ?? [];
-    sources.push(relationship.object.id);
+    const sources =
+      citationsByStatement.get(relationship.subject.id) ?? new Set<string>();
+    sources.add(relationship.object.id);
     citationsByStatement.set(relationship.subject.id, sources);
   }
-  for (const sources of citationsByStatement.values()) sources.sort();
   const dossiers = graph.entities.filter(
     (entity): entity is Dossier =>
       entity.kind === "dossier" &&
@@ -151,7 +153,9 @@ function sourceSimilarityFindings(graph: CompiledDomainGraph) {
     return passages.flatMap((passage) =>
       passage.statementIds.flatMap((statementId) => {
         const statement = statements.get(statementId);
-        const sourceIds = citationsByStatement.get(statementId) ?? [];
+        const sourceIds = [
+          ...(citationsByStatement.get(statementId) ?? new Set<string>()),
+        ].sort();
         if (!statement || sourceIds.length === 0) return [];
         const score = shingleOverlap(passage.body, statement.text);
         if (score < 0.45) return [];
