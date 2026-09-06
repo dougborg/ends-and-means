@@ -248,6 +248,12 @@ async function verifySubjectGuideRoutes() {
   expect(hrefs(explore)).toContain("/guides/economic-democracy/");
   expect(hrefs(explore)).toContain("/guides/socialism/");
   expect(hrefs(explore)).toContain("/guides/communism/");
+  expect(stripMarkup(explore)).toContain("What do you want to understand?");
+  expect(stripMarkup(explore)).toContain("communist countries");
+  expect(stripMarkup(explore)).toContain("worker ownership");
+  expect(stripMarkup(explore)).toContain("direct democracy");
+  expect(stripMarkup(explore)).toContain("Research gap");
+  expect(explore).not.toMatch(/research-needed|in-review|deprecated/i);
 
   const guide = await readFile(
     routeFile("/guides/economic-democracy/"),

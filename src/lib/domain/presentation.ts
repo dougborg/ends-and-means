@@ -65,6 +65,8 @@ export interface SubjectGuideSearchQuery {
   query: string;
   /** Required on every owner when the normalized query belongs to several guides. */
   disambiguation?: string;
+  /** Marks an entry phrase whose nearest reviewed guide does not fully answer it. */
+  resultStatus?: "guide" | "research-gap";
 }
 
 export interface SubjectGuideRedirect {

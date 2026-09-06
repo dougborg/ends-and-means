@@ -1,4 +1,5 @@
 import { expect, test, type Locator } from "@playwright/test";
+import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
   "/",
@@ -611,4 +612,53 @@ test("global navigation remains ordered, reachable, and legible across constrain
       (link) => getComputedStyle(link).textDecorationLine,
     ),
   ).toContain("underline");
+});
+
+test("Explore search preserves owned meanings and explicit research gaps", async ({ page }) => {
+  await page.goto("/explore/", { waitUntil: "networkidle" });
+  const search = page.getByRole("searchbox", { name: "What do you want to understand?" });
+  const results = page.locator("[data-subject-result]:visible");
+
+  await search.fill("communist countries");
+  await expect(results).toHaveCount(1);
+  await expect(results.getByRole("heading", { name: "Communism" })).toBeVisible();
+  await expect(results.getByText(/A country or party label does not establish one institutional model/)).toBeVisible();
+
+  await search.fill("direct democracy");
+  await expect(results).toHaveCount(1);
+  await expect(results.getByRole("heading", { name: "Economic democracy" })).toBeVisible();
+  await expect(results.getByText("Research gap", { exact: true })).toBeVisible();
+  await expect(results.getByText(/not a general account of direct democracy/)).toBeVisible();
+
+  await search.fill("a subject that is not here");
+  await expect(results).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "No subject guide matches that phrase." })).toBeVisible();
+  await expect(page.locator("#subject-search-status")).toContainText("No reviewed guides match");
+});
+
+test("Explore directory remains complete without JavaScript", async ({ browser }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
+    await expect(page.locator("[data-subject-result]")).toHaveCount(canonicalGraph.subjectGuides.length);
+    expect(await page.locator("noscript").textContent()).toContain("Use your browser's Find command");
+    await expect(page.getByText("communist countries", { exact: true })).toBeAttached();
+    await expect(page.getByRole("link", { name: "Learn about Communism →" })).toHaveAttribute("href", "/guides/communism/");
+  } finally {
+    await context.close();
+  }
+});
+
+test("Explore search reflows for mobile and text zoom", async ({ page }) => {
+  for (const width of [320, 390, 640]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/explore/", { waitUntil: "networkidle" });
+    if (width === 640) await page.evaluate(() => { document.documentElement.style.zoom = "2"; });
+    await page.getByRole("searchbox", { name: "What do you want to understand?" }).fill("worker ownership");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+    await expect(page.getByRole("link", { name: "Learn about Socialism →" })).toBeVisible();
+  }
 });

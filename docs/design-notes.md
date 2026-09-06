@@ -53,6 +53,9 @@ matrix:
   without becoming graph entities or duplicating factual claims.
 - **Explore** accepts familiar names, aliases, and common questions without
   requiring readers to select an entity kind.
+  Search progressively narrows the complete reviewed-guide directory, while
+  owned entry phrases expose contested meanings and explicit research gaps.
+  The complete directory remains the no-JavaScript fallback.
 - **Compare** is a first-class product mode, not a report added after dossiers.
   It supports shared Questions, pairwise/small-set views, dimensions, and
   transitions.
