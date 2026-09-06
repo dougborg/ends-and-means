@@ -17,6 +17,8 @@ dossiers as distinct institutional paths, not incomplete Subject Guides.
 
 The page answers the guide's short-answer question first from its exact Dossier
 standfirst.
+The subject itself is the H1, and the standfirst follows it immediately without
+an intervening heading.
 The remaining authored section headings form both the visible narrative and a
 compact on-page outline.
 Unsupported optional sections are omitted instead of leaving headings,
@@ -38,6 +40,9 @@ evidence need, and tested claims available on the same page.
 
 Evidence disclosures work without JavaScript, open from the keyboard, expand
 for printing, and retain exact citation roles and locators.
+Their accessible names identify the exact overview, section, selected claim
+set, or relationship they support; generic repeated labels such as “Check the
+evidence” are not sufficient.
 
 ## Responsive behavior
 

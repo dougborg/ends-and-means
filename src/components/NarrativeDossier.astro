@@ -5,15 +5,15 @@ import { renderSafeMarkdown } from "../lib/markdown";
 import { hrefForEntity } from "../lib/public-routes";
 import CanonicalStatement from "./CanonicalStatement.astro";
 
-interface Props { sections: NarrativeSection[]; label?: string; }
-const { sections, label = "Summary" } = Astro.props;
+interface Props { sections: NarrativeSection[]; label?: string; heading?: string; }
+const { sections, label = "Overview", heading = "What should you know?" } = Astro.props;
 
 ---
 
 <section class="narrative-dossier" aria-labelledby="narrative-title">
   <header class="narrative-dossier__heading">
     <p class="coordinate">{label}</p>
-    <h2 id="narrative-title">The argument in plain terms</h2>
+    <h2 id="narrative-title">{heading}</h2>
   </header>
   <div class="narrative-dossier__sections">
     {sections.map((section) => (
@@ -34,7 +34,7 @@ const { sections, label = "Summary" } = Astro.props;
           )}
           {section.statementIds.length > 0 && (
             <details class="reference-disclosure">
-              <summary>How this section is supported <span>{section.statementIds.length} {section.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
+              <summary>Sources for “{section.heading}” <span>{section.statementIds.length} {section.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
               <div class="reference-disclosure__body">
                 {section.statementIds.map((id) => <CanonicalStatement statementId={id} />)}
               </div>

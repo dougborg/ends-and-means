@@ -29,6 +29,7 @@ describe("SubjectGuide relationship detail component", () => {
       container.renderToString(SubjectGuideRelationshipDetails, {
         props: {
           relationship,
+          summary: `How to read the ${relationship.id} connection`,
           entityLabel: (id: string) => id === "sweden" ? "Sweden" : undefined,
           placementValueLabel: () => "Low to high",
         },
@@ -37,7 +38,9 @@ describe("SubjectGuide relationship detail component", () => {
     const html = rendered.join("\n");
 
     expect(html.match(/<details/g)).toHaveLength(relationships.length);
-    expect(html).toContain("How to read this connection");
+    for (const relationship of relationships) {
+      expect(html).toContain(`How to read the ${relationship.id} connection`);
+    }
     for (const value of [
       "contested",
       "Membership",

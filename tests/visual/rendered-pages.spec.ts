@@ -174,6 +174,25 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   }
 });
 
+test("representative pages have learner-first outlines and unique disclosure names", async ({ page }) => {
+  const expected = [
+    { route: "/guides/economic-democracy/", h1: "Economic democracy", h2: "Does it mean one institutional model?" },
+    { route: "/cases/swedish-wage-earner-funds/", h1: "Swedish wage-earner funds", h2: "What happened in this case?" },
+    { route: "/compare/", h1: "Compare promise with practice", h2: "Did the design deliver what its advocates sought?" },
+    { route: "/framework/", h1: "Method", h2: "How does an argument connect to evidence?" },
+    { route: "/reading/", h1: "Reading", h2: "Which sources support the explanations?" },
+  ];
+  for (const { route, h1, h2 } of expected) {
+    await page.goto(route);
+    await expect(page.getByRole("heading", { level: 1, name: h1 })).toHaveCount(1);
+    await expect(page.getByRole("heading", { level: 2, name: h2 })).toHaveCount(1);
+    const outline = await page.locator("main h1, main h2, main h3").allTextContents();
+    expect(outline.every((heading) => heading.trim().length > 0)).toBe(true);
+    const summaries = (await page.locator("main details > summary").allTextContents()).map((value) => value.replace(/\s+/g, " ").trim());
+    expect(new Set(summaries).size).toBe(summaries.length);
+  }
+});
+
 test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) => {
   await page.goto("/guides/kahnawake-community-lawmaking/");
   await expect(

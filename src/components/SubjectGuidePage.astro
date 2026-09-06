@@ -118,14 +118,13 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
   <header class="subject-guide__hero" id="short-answer">
     <p class="coordinate">LEARN ABOUT</p>
     <h1>{guide.label}</h1>
-    {shortAnswer && <h2>{shortAnswer.heading}</h2>}
     {shortAnswerSelections.map((selection) => (
       <div class="subject-guide__answer">
         <MarkdownProse content={narrativeBody(selection)} />
         {narrativeStatementIds(selection).length > 0 && (
           <details class="reference-disclosure subject-guide__evidence">
             <summary>
-              Check the evidence
+              Sources for the short answer
               <span>{narrativeStatementIds(selection).length} {narrativeStatementIds(selection).length === 1 ? "claim" : "claims"}</span>
             </summary>
             <div class="reference-disclosure__body">
@@ -163,18 +162,21 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
         return (
           <section id={section.id} class:list={["subject-guide__section", `subject-guide__section--${section.role}`]}>
             <header>
-              <p class="coordinate">{section.role.replaceAll("-", " ")}</p>
+              <p class="coordinate">QUESTION</p>
               <h2>{section.heading}</h2>
             </header>
 
             {narratives.map((selection) => {
               const statementIds = narrativeStatementIds(selection);
+              const evidenceSubject = selection.standfirst
+                ? section.heading
+                : selection.narrative.heading;
               return (
                 <div class="subject-guide__passage">
                   <MarkdownProse content={narrativeBody(selection)} />
                   {statementIds.length > 0 && (
                     <details class="reference-disclosure subject-guide__evidence">
-                      <summary>Check the evidence <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
+                      <summary>Sources for “{evidenceSubject}” <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
                       <div class="reference-disclosure__body">
                         {statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
                       </div>
@@ -186,7 +188,7 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
 
             {directSubjectGuideEvidence(section).length > 0 && (
               <details class="reference-disclosure subject-guide__evidence subject-guide__direct-evidence">
-                <summary>Examine the selected claims <span>{directSubjectGuideEvidence(section).length}</span></summary>
+                <summary>Sources for selected claims in “{section.heading}” <span>{directSubjectGuideEvidence(section).length}</span></summary>
                 <div class="reference-disclosure__body">
                   {directSubjectGuideEvidence(section).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
                 </div>
@@ -225,6 +227,7 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
                       </p>
                       <SubjectGuideRelationshipDetails
                         relationship={relationship}
+                        summary={`How to read the connection between ${subject.label} and ${object.label}`}
                         entityLabel={(id) => entityById(id)?.label}
                         {...(relationship.predicate === "placed-on"
                           ? { placementValueLabel: () => placementValueLabel(relationship) }
@@ -232,7 +235,7 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
                       />
                       {"statementIds" in relationship && relationship.statementIds.length > 0 && (
                         <details class="reference-disclosure subject-guide__evidence">
-                          <summary>Check this connection <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
+                          <summary>Sources for the connection between {subject.label} and {object.label} <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
                           <div class="reference-disclosure__body">
                             {relationship.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
                           </div>
