@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { canonicalDocuments } from "../../content/domain";
-import type { AuthoringDocument } from "../../src/lib/domain";
+import type {
+  AuthoringDocument,
+  DomainRelationship,
+} from "../../src/lib/domain";
 import {
   compileDomainGraph,
   validateAuthoringDocuments,
@@ -167,7 +170,12 @@ function exactCitationLedger(
   return statementIds.flatMap((statementId) =>
     graph.relationships
       .filter(
-        (relationship) =>
+        (
+          relationship,
+        ): relationship is Extract<
+          DomainRelationship,
+          { predicate: "cites" }
+        > =>
           relationship.predicate === "cites" &&
           relationship.subject.kind === "statement" &&
           relationship.subject.id === statementId,
@@ -197,7 +205,9 @@ function exactRelationshipLedger(
 ) {
   const graph = compileDomainGraph(documents);
   return semanticRelationshipIds.map((id) => {
-    const relationship = graph.relationships.find((candidate) => candidate.id === id);
+    const relationship = graph.relationships.find(
+      (candidate) => candidate.id === id,
+    );
     if (!relationship) throw new Error(`Missing relationship ${id}`);
     return structuredClone(relationship);
   });
@@ -219,7 +229,8 @@ function exactPresentationLedger() {
   const guide = subjectGuideBySlug("matriliny-property-authority");
   if (dossier?.kind !== "dossier")
     throw new Error("Missing Dossier matriliny-property-authority-dossier");
-  if (!guide) throw new Error("Missing Subject Guide guide-matriliny-property-authority");
+  if (!guide)
+    throw new Error("Missing Subject Guide guide-matriliny-property-authority");
   return [structuredClone(dossier), structuredClone(guide)];
 }
 
@@ -319,7 +330,10 @@ describe("Minangkabau bounded case categories", () => {
         document.documentType === "entity" &&
         document.entity.id === "koto-tinggi-governance-2016",
     );
-    if (episode?.documentType !== "entity" || episode.entity.kind !== "case-episode")
+    if (
+      episode?.documentType !== "entity" ||
+      episode.entity.kind !== "case-episode"
+    )
       throw new Error("Missing Koto Tinggi Case Episode fixture");
     episode.entity.conditionStatementIds = ["koto-tinggi-fieldwork-scope"];
     expect(exactCaseLedger(caseDocuments)).not.toEqual(exactCaseLedger());
@@ -363,9 +377,7 @@ describe("Minangkabau bounded case assignments", () => {
       episodeIds: ["koto-tinggi-governance-2016"],
     });
     expect(
-      canonicalGraph.indexes.entitiesById[
-        "koto-tinggi-governance-2016"
-      ],
+      canonicalGraph.indexes.entitiesById["koto-tinggi-governance-2016"],
     ).toMatchObject({
       kind: "case-episode",
       conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
@@ -384,9 +396,7 @@ describe("Minangkabau bounded case assignments", () => {
         "koto-tinggi-budget-postponement",
         "koto-tinggi-budget-consensus",
       ],
-      interactionStatementIds: [
-        "koto-tinggi-customary-council-contestation",
-      ],
+      interactionStatementIds: ["koto-tinggi-customary-council-contestation"],
       outcomeStatementIds: [
         "koto-tinggi-administrative-capacity-limit",
         "koto-tinggi-unspent-funds",
