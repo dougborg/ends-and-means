@@ -132,6 +132,19 @@ describe("exact lockfile package inventory", () => {
     changedPackage.evidenceDigest = packageEvidenceDigest(changedPackage);
     expect(auditLockfilePackages(changed, ["example@1.0.0"], new Map([["example@1.0.0", { license: "MIT", source: "https://example.test/source" }]]))).toContain("example@1.0.0: license or source differs from the installed package manifest");
   });
+
+  it("rejects downgrading installed evidence to unresolved metadata", () => {
+    const changed = structuredClone(locked);
+    const changedPackage = changed.packages[0];
+    if (!changedPackage) throw new Error("Missing lockfile fixture");
+    changedPackage.license = "unresolved";
+    changedPackage.source = null;
+    changedPackage.metadataStatus = "unresolved";
+    changedPackage.evidenceDigest = packageEvidenceDigest(changedPackage);
+    expect(auditLockfilePackages(changed, ["example@1.0.0"], new Map([["example@1.0.0", { license: "MIT", source: "https://example.test/source" }]]))).toContain(
+      "example@1.0.0: installed package evidence must be recorded as resolved",
+    );
+  });
 });
 
 describe("tracked-file discovery", () => {
