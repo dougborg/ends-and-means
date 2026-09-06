@@ -93,6 +93,36 @@ describe("corpus diversity candidate contract", () => {
   );
 });
 
+describe("corpus diversity nested strictness", () => {
+  it.each([
+    [
+      "feasibility",
+      (candidate: (typeof matrix)[number]) => {
+        candidate.sourceFeasibility.communityAuthored = {
+          ...candidate.sourceFeasibility.communityAuthored,
+          typoAvailabilityNote: "must not be stripped",
+        };
+      },
+    ],
+    [
+      "source lead",
+      (candidate: (typeof matrix)[number]) => {
+        candidate.sourceFeasibility.communityAuthored.sourceLeads[0] = {
+          ...candidate.sourceFeasibility.communityAuthored.sourceLeads[0],
+          typoAuthorityNote: "must not be stripped",
+        };
+      },
+    ],
+  ] as const)("rejects an unknown key in a %s record", (_label, mutate) => {
+    const candidate = structuredClone(matrix[0]);
+    mutate(candidate);
+    const findings = auditCorpusCandidateMatrix([candidate]);
+    expect(findings).toContainEqual(
+      expect.objectContaining({ severity: "violation" }),
+    );
+  });
+});
+
 describe("corpus diversity portfolio audit", () => {
   it("reports missing contexts and material relationship concentration without scoring", () => {
     const concentrated = structuredClone(matrix.slice(0, 5));
