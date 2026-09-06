@@ -1,4 +1,4 @@
-Capitalism is not simply trade, markets, private belongings, or the pursuit of profit.
+Capitalism is not simply trade, markets, or private belongings.
 It is a disputed name whose definitions emphasize different combinations of property, employment, firms, finance, and production for exchange.
 
 ## what-defines-capitalism

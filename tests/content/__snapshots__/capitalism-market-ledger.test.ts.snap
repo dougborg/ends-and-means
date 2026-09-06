@@ -8,7 +8,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "capitalism-market-boundary",
         "england-case-period-boundary",
       ],
-      "description": "A contested case about agrarian class relations, leasing, labor, and market dependence before industrialization.",
+      "description": "A bounded case for comparing Brenner’s agrarian-class explanation with the historical dispute it prompted.",
       "endDate": {
         "certainty": "approximate",
         "note": "A conventional upper bound before industrialization.",
@@ -19,13 +19,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       ],
       "id": "english-agrarian-market-dependence",
       "kind": "case",
-      "label": "Agrarian market dependence in England, c. 1450–1750",
+      "label": "Agrarian change in England, c. 1450–1750",
       "locationIds": [
         "agrarian-england",
       ],
       "publicationStatus": "reviewed",
       "scope": "Agrarian England from approximately 1450 to 1750; not Britain’s whole economy, a single-origin account, or a universal transition sequence.",
-      "selectionRationale": "The dispute tests whether markets and private property alone explain capitalism or whether changing class and tenancy relations matter.",
+      "selectionRationale": "The case preserves a prominent explanation of agrarian development together with disagreement about that explanation.",
       "startDate": {
         "certainty": "approximate",
         "note": "A conventional lower bound for the long agrarian transformation.",
@@ -37,7 +37,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "conditionStatementIds": [
         "england-case-period-boundary",
       ],
-      "description": "The bounded period in which rival explanations trace changes in agrarian property, tenancy, labor, and markets.",
+      "description": "An analytically bounded period for Brenner’s account of English agrarian development.",
       "endDate": {
         "certainty": "approximate",
         "note": "A conventional endpoint before industrialization.",
@@ -47,15 +47,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "id": "english-agrarian-transformation-1450-1750",
       "interactionStatementIds": [],
       "kind": "case-episode",
-      "label": "English agrarian transformation, c. 1450–1750",
+      "label": "English agrarian change, c. 1450–1750",
       "locationIds": [
         "agrarian-england",
       ],
       "outcomeStatementIds": [],
       "publicationStatus": "reviewed",
-      "ruleInUseStatementIds": [
-        "england-brenner-class-thesis",
-      ],
+      "ruleInUseStatementIds": [],
       "scope": "Agrarian institutions in England, with regional and chronological variation retained.",
       "startDate": {
         "certainty": "approximate",
@@ -67,7 +65,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "conditionStatementIds": [
         "ghana-case-period-boundary",
       ],
-      "description": "A bounded case of African smallholder commodity production within colonial rule and global markets.",
+      "description": "A bounded case from Austin’s study of African producer-led cocoa expansion and resource reallocation.",
       "endDate": {
         "certainty": "approximate",
         "note": "Austin’s analytical endpoint.",
@@ -84,7 +82,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       ],
       "publicationStatus": "reviewed",
       "scope": "Cocoa-growing regions of Asante and the Gold Coast from about 1890 to 1936; not all households, crops, or colonial Africa.",
-      "selectionRationale": "The case separates commodity and market expansion from plantation ownership and uniform wage labor.",
+      "selectionRationale": "The case records Austin’s finding that expansion reallocated resources from other market activities.",
       "startDate": {
         "certainty": "approximate",
         "note": "Approximate beginning of sustained cocoa expansion.",
@@ -96,7 +94,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "conditionStatementIds": [
         "ghana-case-period-boundary",
       ],
-      "description": "African producer-led adoption and expansion of cocoa for export under colonial rule.",
+      "description": "The producer-led cocoa expansion dated approximately 1890–1936 by Austin.",
       "endDate": {
         "certainty": "approximate",
         "note": "Austin’s analytical endpoint.",
@@ -105,6 +103,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "formalRuleStatementIds": [],
       "id": "gold-coast-cocoa-takeoff-1890-1936",
       "interactionStatementIds": [
+        "ghana-cocoa-smallholder-expansion",
         "ghana-cocoa-resource-reallocation",
       ],
       "kind": "case-episode",
@@ -116,9 +115,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "ghana-cocoa-classification-limit",
       ],
       "publicationStatus": "reviewed",
-      "ruleInUseStatementIds": [
-        "ghana-cocoa-smallholder-expansion",
-      ],
+      "ruleInUseStatementIds": [],
       "scope": "The supply-side transformation studied by Austin, not a complete welfare or political history.",
       "startDate": {
         "certainty": "approximate",
@@ -130,7 +127,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "conditionStatementIds": [
         "china-case-period-boundary",
       ],
-      "description": "A bounded case of market expansion alongside planning, state organizations, and mixed ownership claims.",
+      "description": "A bounded case of greater enterprise autonomy, continued planning, and non-state-sector growth.",
       "endDate": {
         "certainty": "exact",
         "year": 1993,
@@ -140,13 +137,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       ],
       "id": "china-dual-track-market-reforms",
       "kind": "case",
-      "label": "China’s dual-track market reforms, 1978–1993",
+      "label": "China’s economic reforms, 1978–1993",
       "locationIds": [
         "reform-era-china",
       ],
       "publicationStatus": "reviewed",
       "scope": "Economic reforms in the People’s Republic of China from 1978 through 1993; not a classification of China before or after those dates.",
-      "selectionRationale": "The case tests whether marketization, privatization, and capitalism can be treated as interchangeable transitions.",
+      "selectionRationale": "The case records institutional changes that Naughton describes as growing out of the plan rather than ending it at once.",
       "startDate": {
         "certainty": "exact",
         "year": 1978,
@@ -157,20 +154,16 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "conditionStatementIds": [
         "china-case-period-boundary",
       ],
-      "description": "Incremental reform through enterprise autonomy, dual-track allocation, and non-state entry.",
+      "description": "A period of enterprise reform, continued planning, and non-state market entry.",
       "endDate": {
         "certainty": "exact",
         "year": 1993,
       },
-      "formalRuleStatementIds": [
-        "china-dual-track-coordination",
-      ],
+      "formalRuleStatementIds": [],
       "id": "china-plan-market-coexistence-1978-1993",
-      "interactionStatementIds": [
-        "china-tve-ownership-boundary",
-      ],
+      "interactionStatementIds": [],
       "kind": "case-episode",
-      "label": "Plan–market coexistence, 1978–1993",
+      "label": "Enterprise reform and non-state growth, 1978–1993",
       "locationIds": [
         "reform-era-china",
       ],
@@ -178,9 +171,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
         "china-nonstate-sector-growth",
       ],
       "publicationStatus": "reviewed",
-      "ruleInUseStatementIds": [
-        "china-marketization-classification-limit",
-      ],
+      "ruleInUseStatementIds": [],
       "scope": "The reform sequence analyzed by Naughton, ending before later ownership and corporate reforms.",
       "startDate": {
         "certainty": "exact",
@@ -193,7 +184,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "capital-finance-boundary",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 6 abstract, paragraph 1",
+      "chapter 6 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0006",
     ],
     [
       "capitalism-definition-contested",
@@ -205,19 +196,19 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "capitalism-institutional-definition",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 10 abstract, paragraph 1",
+      "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     ],
     [
       "capitalism-legal-order-relation",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 10 abstract, paragraph 1",
+      "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     ],
     [
       "capitalism-market-boundary",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 10 abstract, paragraph 1",
+      "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     ],
     [
       "capitalism-marx-definition",
@@ -355,7 +346,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "property-possession-boundary",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 4 abstract, paragraph 1",
+      "chapter 4 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0004",
     ],
     [
       "property-rights-plural",
@@ -373,13 +364,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "wage-labor-boundary",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 9 abstract, paragraph 1",
+      "chapter 9 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0009",
     ],
     [
       "wage-labor-history-limit",
       "hodgson-conceptualizing-capitalism-source",
       "supports",
-      "chapter 9 abstract, paragraph 1",
+      "chapter 9 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0009",
     ],
   ],
   "conceptRelationships": [
@@ -460,22 +451,6 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "statementIds": [
         "capitalism-market-boundary",
         "market-ownership-boundary",
-      ],
-      "status": "qualified",
-      "subject": {
-        "id": "capitalism",
-        "kind": "concept",
-      },
-    },
-    {
-      "id": "capitalism-related-to-private-property",
-      "object": {
-        "id": "private-property",
-        "kind": "concept",
-      },
-      "predicate": "related-to",
-      "statementIds": [
-        "property-possession-boundary",
       ],
       "status": "qualified",
       "subject": {
@@ -681,13 +656,14 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       2015,
       "University of Chicago Press",
       {
+        "doi": "10.7208/chicago/9780226168142.001.0001",
         "isbn13": "9780226168142",
       },
       [
         {
           "label": "Open the source record",
           "purpose": "publisher",
-          "url": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo18523749.html",
+          "url": "https://academic.oup.com/chicago-scholarship-online/book/17328",
         },
       ],
     ],
@@ -736,7 +712,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       1995,
       "Cambridge University Press",
       {
-        "isbn13": "9780521574624",
+        "isbn13": "9780521470551",
       },
       [
         {

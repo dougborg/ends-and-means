@@ -227,7 +227,7 @@ const guide = (
     label: id === "capitalism" ? "Capitalism" : "Market Economy",
     description:
       id === "capitalism"
-        ? "Capitalism names contested combinations of private productive property, employment, firms, finance, investment, and markets. Markets or private possessions alone do not establish that classification, and historical cases combine these institutions with public authority and varied labor relations."
+        ? "Capitalism has rival definitions that assign different weight to employment, firms, finance, production for exchange, and legal property. Markets existed before modern capitalism, so exchange alone does not establish that classification."
         : "A market economy relies substantially on price-mediated exchange, but it also includes firms, households, law, public authority, and non-market allocation. Market exchange neither requires private ownership nor proves laissez-faire policy or capitalism.",
     publicationStatus: "reviewed",
     primarySubject: { kind: "concept", id },
