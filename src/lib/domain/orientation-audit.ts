@@ -1,8 +1,8 @@
+import type { ExternalReference } from "./common";
 import type { DomainEntity } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
-import type { SubjectGuide } from "./presentation";
-import type { ExternalReference } from "./common";
 import { reviewedOrientationLedger } from "./orientation-ledger";
+import type { SubjectGuide } from "./presentation";
 
 export type OrientationAuditEntry = {
   targetType: "entity" | "subject-guide";
@@ -44,10 +44,13 @@ const reviewedDecisions = new Map(
 );
 
 const notApplicableReasons: Partial<Record<DomainEntity["kind"], string>> = {
-  "concept-scheme": "Internal vocabulary container, not an externally reconciled subject.",
+  "concept-scheme":
+    "Internal vocabulary container, not an externally reconciled subject.",
   domain: "Internal browsing facet, not an externally reconciled subject.",
-  dossier: "Presentation composition; identity remains with its canonical subject.",
-  "research-obligation": "Editorial research question, not an external identity.",
+  dossier:
+    "Presentation composition; identity remains with its canonical subject.",
+  "research-obligation":
+    "Editorial research question, not an external identity.",
   source: "Source identifiers and access links remain in source-owned fields.",
   statement: "Atomic project claim, not an external identity.",
   work: "Work identifiers remain in work- and source-owned fields.",
@@ -132,14 +135,19 @@ export function buildOrientationAudit(
 ): OrientationAuditEntry[] {
   return [
     ...graph.entities.filter(live).map(entityEntry),
-    ...graph.subjectGuides.filter(live).map((guide) => guideEntry(guide, graph)),
+    ...graph.subjectGuides
+      .filter(live)
+      .map((guide) => guideEntry(guide, graph)),
   ].sort((left, right) =>
-    `${left.targetType}:${left.id}`.localeCompare(`${right.targetType}:${right.id}`),
+    `${left.targetType}:${left.id}`.localeCompare(
+      `${right.targetType}:${right.id}`,
+    ),
   );
 }
 
 function validateEntry(
   entry: OrientationAuditEntry,
+  expected: OrientationAuditEntry | undefined,
   expectedKeys: Set<string>,
   seen: Set<string>,
 ) {
@@ -148,6 +156,19 @@ function validateEntry(
   if (seen.has(key)) errors.push(`${key}: duplicate audit entry`);
   seen.add(key);
   if (!expectedKeys.has(key)) errors.push(`${key}: target is not published`);
+  if (expected && entry.label !== expected.label)
+    errors.push(`${key}: projected label changed`);
+  if (
+    expected &&
+    JSON.stringify(entry.orientationUrls) !==
+      JSON.stringify(expected.orientationUrls)
+  )
+    errors.push(`${key}: projected orientation URLs changed`);
+  if (
+    expected &&
+    JSON.stringify(entry.identityIds) !== JSON.stringify(expected.identityIds)
+  )
+    errors.push(`${key}: projected identity IDs changed`);
   const decision = reviewedDecisions.get(key);
   errors.push(...validateReviewedDecision(key, entry, decision));
   if (entry.disposition !== "mapped" && !entry.reason?.trim())
@@ -162,7 +183,9 @@ function validateEntry(
     entry.disposition !== "mapped" &&
     (entry.orientationUrls.length > 0 || entry.identityIds.length > 0)
   )
-    errors.push(`${entry.targetType} ${entry.id}: absent entry contains a mapping`);
+    errors.push(
+      `${entry.targetType} ${entry.id}: absent entry contains a mapping`,
+    );
   return errors;
 }
 
@@ -197,7 +220,12 @@ export function validateOrientationAudit(
 ): string[] {
   const errors: string[] = [];
   const expected = buildOrientationAudit(graph);
-  const expectedKeys = new Set(expected.map(({ targetType, id }) => `${targetType}:${id}`));
+  const expectedEntries = new Map(
+    expected.map((entry) => [`${entry.targetType}:${entry.id}`, entry]),
+  );
+  const expectedKeys = new Set(
+    expected.map(({ targetType, id }) => `${targetType}:${id}`),
+  );
   const expectedReviewedKeys = new Set(
     expected
       .filter((entry) => {
@@ -214,7 +242,14 @@ export function validateOrientationAudit(
       errors.push(`${key}: stale reviewed decision`);
   const seen = new Set<string>();
   for (const entry of inventory)
-    errors.push(...validateEntry(entry, expectedKeys, seen));
+    errors.push(
+      ...validateEntry(
+        entry,
+        expectedEntries.get(`${entry.targetType}:${entry.id}`),
+        expectedKeys,
+        seen,
+      ),
+    );
   for (const key of expectedKeys)
     if (!seen.has(key)) errors.push(`${key}: missing audit entry`);
   return errors;
