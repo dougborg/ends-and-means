@@ -19,6 +19,11 @@ export interface Means extends EntityBase {
   institutionalForm: string;
 }
 
+export interface Organization extends EntityBase {
+  kind: "organization";
+  scope: string;
+}
+
 export interface Statement extends EntityBase {
   kind: "statement";
   statementKind:
@@ -129,6 +134,7 @@ export type DomainEntity =
   | Approach
   | End
   | Means
+  | Organization
   | Statement
   | Work
   | Source
