@@ -393,6 +393,24 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "capitalism-coerced-labor-boundary",
+    obligationType: "counterargument",
+    target: "concept:capitalism#what-defines-capitalism",
+    status: "open",
+  },
+  {
+    id: "capitalism-household-reproduction-boundary",
+    obligationType: "counterargument",
+    target: "concept:capitalism#which-institutions-work-together",
+    status: "open",
+  },
+  {
+    id: "china-tve-effective-control",
+    obligationType: "research-gap",
+    target: "concept:market-economy#what-do-bounded-cases-show",
+    status: "open",
+  },
+  {
     id: "authoritarian-practice-regime-transfer",
     obligationType: "counterevidence",
     target: "concept:authoritarianism#definitions",
@@ -485,6 +503,12 @@ const expectedOpenResearchObligations = [
     id: "jinst-translation-oral-provenance",
     obligationType: "research-gap",
     target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
+    id: "gold-coast-cocoa-labor-distribution",
+    obligationType: "counterevidence",
+    target: "concept:market-economy#what-do-bounded-cases-show",
     status: "open",
   },
   {
