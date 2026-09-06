@@ -47,7 +47,7 @@ Head: <full-40-character-commit-oid>
 
 The pull-request template checkbox records human workflow completion but is deliberately not accepted as audit evidence by itself.
 A rebase or remediation commit invalidates both head-bound signals and requires fresh reviews.
-The reviewer agent path must differ from the implementation owner recorded on the issue; missing ownership fails closed.
+The implementation owner and reviewer must both use documented `/root/<agent-path>` identities, and the paths must differ; missing or malformed ownership fails closed.
 Because local agents share the repository owner's GitHub authentication, this marker is auditable process evidence, not cryptographic proof of identity or independence.
 
 For diagnosis or fixture development, pass a stored normalized snapshot:

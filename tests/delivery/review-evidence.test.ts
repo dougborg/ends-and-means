@@ -10,8 +10,17 @@ describe("review evidence", () => {
       reviewEvidenceForHead(
         head,
         "/root/implementation_133",
-        [{ author: { login: "copilot-pull-request-reviewer" }, commit: { oid: head } }],
-        [{ body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}` }],
+        [
+          {
+            author: { login: "copilot-pull-request-reviewer" },
+            commit: { oid: head },
+          },
+        ],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
+          },
+        ],
       ),
     ).toEqual({ copilot: true, adversarial: true });
   });
@@ -21,12 +30,25 @@ describe("review evidence", () => {
       reviewEvidenceForHead(
         head,
         "/root/adversarial_133",
-        [{ author: { login: "copilot-pull-request-reviewer" }, commit: { oid: stale } }],
         [
-          { body: "- [x] An independent adversarial review covered the material risks." },
-          { body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}` },
-          { body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${stale}` },
-          { body: `Independent adversarial review: APPROVED\nReviewer: /root/other_reviewer\nHead: ${head}\nAdditional unstructured text.` },
+          {
+            author: { login: "copilot-pull-request-reviewer" },
+            commit: { oid: stale },
+          },
+        ],
+        [
+          {
+            body: "- [x] An independent adversarial review covered the material risks.",
+          },
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
+          },
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${stale}`,
+          },
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/other_reviewer\nHead: ${head}\nAdditional unstructured text.`,
+          },
         ],
       ),
     ).toEqual({ copilot: false, adversarial: false });
@@ -37,8 +59,37 @@ describe("review evidence", () => {
       reviewEvidenceForHead(
         head,
         undefined,
-        [{ author: { login: "copilot-pull-request-reviewer" }, commit: { oid: head } }],
-        [{ body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}` }],
+        [
+          {
+            author: { login: "copilot-pull-request-reviewer" },
+            commit: { oid: head },
+          },
+        ],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
+          },
+        ],
+      ).adversarial,
+    ).toBe(false);
+  });
+
+  it("rejects review evidence when implementation ownership is not a documented agent path", () => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        "implementation_133",
+        [
+          {
+            author: { login: "copilot-pull-request-reviewer" },
+            commit: { oid: head },
+          },
+        ],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
+          },
+        ],
       ).adversarial,
     ).toBe(false);
   });
