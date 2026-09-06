@@ -25,6 +25,7 @@ describe("canonical vertical slice", () => {
     );
     expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual([
       "anarcho-syndicalist-organizing",
+      "neo-republican-nondomination",
       "representative-democratic-government",
       "swedish-rehn-meidner-model",
       "swedish-wage-earner-fund-program",

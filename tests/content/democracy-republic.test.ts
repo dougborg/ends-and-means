@@ -23,7 +23,7 @@ const expectedCitations = {
   ],
   "democracy-representation-mechanism": [
     "sep-democracy-source",
-    "section 4.2, paragraphs 1–5",
+    "section 5, introductory paragraph; section 5.2, paragraphs 1–4",
   ],
   "democracy-sortition-alternative": [
     "sep-democracy-source",
@@ -42,16 +42,16 @@ const expectedCitations = {
     "section 3.3, paragraphs 1–9",
   ],
   "republic-form-boundary": [
-    "sep-republicanism-source",
-    "section 1, paragraphs 1–6",
+    "nabulsi-republicanism-source",
+    "abstract, paragraphs 1–2; pp. 701–711",
   ],
   "republic-democracy-distinction": [
-    "federalist-39-source",
-    "paragraphs beginning “What, then, are the distinctive characters” and “It is sufficient for such a government”",
+    "keyssar-right-to-vote-source",
+    "chapter 1, pp. 3–25",
   ],
   "republicanism-tradition-boundary": [
-    "sep-republicanism-source",
-    "section 1, paragraphs 1–6",
+    "nabulsi-republicanism-source",
+    "abstract, paragraphs 1–2; pp. 701–711",
   ],
   "republic-nondomination-end": [
     "sep-republicanism-source",
@@ -65,36 +65,55 @@ const expectedCitations = {
     "us-constitution-source",
     "Article I, section 2, clause 1",
   ],
-  "india-democratic-republic-self-description": [
+  "india-democratic-republic-preamble": [
     "india-constitution-source",
-    "Preamble; article 326",
+    "Preamble",
   ],
-  "republic-kahnawake-divergence": [
+  "india-adult-suffrage-rule": ["india-constitution-source", "article 326"],
+  "kahnawake-cdmrp-bridge": [
     "horn-miller-indigenous-participatory-democracy-source",
     "pp. 111–118, community and institutional account of the CDMP",
+  ],
+  "republic-kahnawake-transfer-limit": [
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 111–118, community-specific framing of the CDMP",
   ],
 } as const;
 
 describe("democracy and republic evidence", () => {
   it("pins every atomic statement to its exact source and locator", () => {
-    expect(Object.keys(expectedCitations)).toHaveLength(16);
+    expect(Object.keys(expectedCitations)).toHaveLength(18);
     for (const [statementId, [sourceId, locator]] of Object.entries(
       expectedCitations,
     )) {
       expect(entityById(statementId), statementId).toMatchObject({
         kind: "statement",
       });
-      expect(citationsFor(statementId), statementId).toEqual([
-        expect.objectContaining({
-          object: { kind: "source", id: sourceId },
-          locator,
-        }),
-      ]);
+      expect(citationsFor(statementId), statementId).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            object: { kind: "source", id: sourceId },
+            locator,
+          }),
+        ]),
+      );
     }
     expect(
       new Set(Object.values(expectedCitations).map(([sourceId]) => sourceId))
         .size,
     ).toBeGreaterThanOrEqual(6);
+    expect(citationsFor("india-democratic-republic-preamble")).toEqual([
+      expect.objectContaining({ object: { kind: "source", id: "india-constitution-source" }, locator: "Preamble", role: "supports" }),
+      expect.objectContaining({ object: { kind: "source", id: "khosla-indias-founding-moment-source" }, locator: "introduction, pp. 1–26", role: "context" }),
+    ]);
+    expect(citationsFor("india-adult-suffrage-rule")).toEqual([
+      expect.objectContaining({ object: { kind: "source", id: "india-constitution-source" }, locator: "article 326", role: "supports" }),
+      expect.objectContaining({ object: { kind: "source", id: "khosla-indias-founding-moment-source" }, locator: "introduction, pp. 1–26", role: "context" }),
+    ]);
+    expect(citationsFor("us-republic-elector-boundary")).toEqual([
+      expect.objectContaining({ object: { kind: "source", id: "us-constitution-source" }, locator: "Article I, section 2, clause 1", role: "supports" }),
+      expect.objectContaining({ object: { kind: "source", id: "keyssar-right-to-vote-source" }, locator: "chapter 1, pp. 3–25", role: "context" }),
+    ]);
   });
 
   it("keeps concepts, traditions, approaches, ends, means, and evidence distinct", () => {
@@ -102,6 +121,15 @@ describe("democracy and republic evidence", () => {
     expect(entityById("republic")).toMatchObject({ kind: "concept" });
     expect(entityById("representative-democratic-government")).toMatchObject({
       kind: "approach",
+    });
+    expect(entityById("neo-republican-nondomination")).toMatchObject({
+      kind: "approach",
+    });
+    expect(entityById("democratic-traditions")).toMatchObject({
+      kind: "collection",
+    });
+    expect(entityById("republican-traditions")).toMatchObject({
+      kind: "collection",
     });
     expect(entityById("equal-political-standing")).toMatchObject({
       kind: "end",
@@ -125,6 +153,18 @@ describe("democracy and republic evidence", () => {
         ["advances-end", "advocates-means", "member-of"].includes(predicate),
       ),
     ).toBe(false);
+    expect(relationshipsFrom("neo-republican-nondomination")).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          predicate: "member-of",
+          object: { kind: "collection", id: "republican-traditions" },
+        }),
+        expect.objectContaining({
+          predicate: "advances-end",
+          object: { kind: "end", id: "freedom-as-nondomination" },
+        }),
+      ]),
+    );
   });
 });
 

@@ -25,7 +25,7 @@ const citations = [
   [
     "democracy-representation-mechanism",
     "sep-democracy-source",
-    "section 4.2, paragraphs 1–5",
+    "section 5, introductory paragraph; section 5.2, paragraphs 1–4",
     "supports",
     "representation",
   ],
@@ -59,22 +59,22 @@ const citations = [
   ],
   [
     "republic-form-boundary",
-    "sep-republicanism-source",
-    "section 1, paragraphs 1–6",
+    "nabulsi-republicanism-source",
+    "abstract, paragraphs 1–2; pp. 701–711",
     "supports",
     "form",
   ],
   [
     "republic-democracy-distinction",
-    "federalist-39-source",
-    "paragraphs beginning “What, then, are the distinctive characters” and “It is sufficient for such a government”",
-    "supports",
+    "keyssar-right-to-vote-source",
+    "chapter 1, pp. 3–25",
+    "qualifies",
     "democracy-boundary",
   ],
   [
     "republicanism-tradition-boundary",
-    "sep-republicanism-source",
-    "section 1, paragraphs 1–6",
+    "nabulsi-republicanism-source",
+    "abstract, paragraphs 1–2; pp. 701–711",
     "supports",
     "tradition",
   ],
@@ -93,11 +93,32 @@ const citations = [
     "madison",
   ],
   [
-    "india-democratic-republic-self-description",
+    "india-democratic-republic-preamble",
     "india-constitution-source",
-    "Preamble; article 326",
+    "Preamble",
     "supports",
-    "india",
+    "india-preamble",
+  ],
+  [
+    "india-democratic-republic-preamble",
+    "khosla-indias-founding-moment-source",
+    "introduction, pp. 1–26",
+    "context",
+    "india-preamble-context",
+  ],
+  [
+    "india-adult-suffrage-rule",
+    "india-constitution-source",
+    "article 326",
+    "supports",
+    "india-suffrage",
+  ],
+  [
+    "india-adult-suffrage-rule",
+    "khosla-indias-founding-moment-source",
+    "introduction, pp. 1–26",
+    "context",
+    "india-suffrage-context",
   ],
   [
     "us-republic-elector-boundary",
@@ -107,11 +128,25 @@ const citations = [
     "elector-boundary",
   ],
   [
-    "republic-kahnawake-divergence",
+    "us-republic-elector-boundary",
+    "keyssar-right-to-vote-source",
+    "chapter 1, pp. 3–25",
+    "context",
+    "elector-boundary-context",
+  ],
+  [
+    "kahnawake-cdmrp-bridge",
     "horn-miller-indigenous-participatory-democracy-source",
     "pp. 111–118, community and institutional account of the CDMP",
+    "supports",
+    "kahnawake-bridge",
+  ],
+  [
+    "republic-kahnawake-transfer-limit",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 111–118, community-specific framing of the CDMP",
     "context",
-    "kahnawake-divergence",
+    "kahnawake-transfer",
   ],
 ] as const;
 
@@ -120,6 +155,10 @@ const republic = { kind: "concept" as const, id: "republic" };
 const approach = {
   kind: "approach" as const,
   id: "representative-democratic-government",
+};
+const neoRepublican = {
+  kind: "approach" as const,
+  id: "neo-republican-nondomination",
 };
 
 export const democracyRepublicRelationshipDocuments = [
@@ -135,7 +174,7 @@ export const democracyRepublicRelationshipDocuments = [
         status: "qualified",
         statementIds: [
           "republic-democracy-distinction",
-          "india-democratic-republic-self-description",
+          "india-democratic-republic-preamble",
         ],
       },
     ],
@@ -144,6 +183,15 @@ export const democracyRepublicRelationshipDocuments = [
     documentType: "relationships",
     subject: approach,
     relationships: [
+      {
+        id: "representative-government-member-democratic-traditions",
+        predicate: "member-of",
+        subject: approach,
+        object: { kind: "collection", id: "democratic-traditions" },
+        membership: "qualified",
+        status: "qualified",
+        statementIds: ["democracy-representation-mechanism"],
+      },
       {
         id: "representative-government-interprets-democracy",
         predicate: "interprets-concept",
@@ -179,6 +227,59 @@ export const democracyRepublicRelationshipDocuments = [
           "democracy-representation-mechanism",
           "democracy-voting-boundary",
         ],
+      },
+    ],
+  },
+  {
+    documentType: "relationships",
+    subject: { kind: "means", id: "electoral-representation" },
+    relationships: [
+      {
+        id: "electoral-representation-member-selection-means",
+        predicate: "member-of",
+        subject: { kind: "means", id: "electoral-representation" },
+        object: { kind: "collection", id: "democratic-selection-means" },
+        membership: "qualified",
+        status: "qualified",
+        statementIds: ["democracy-representation-mechanism"],
+      },
+    ],
+  },
+  {
+    documentType: "relationships",
+    subject: { kind: "means", id: "sortition-deliberative-minipublic" },
+    relationships: [
+      {
+        id: "sortition-member-selection-means",
+        predicate: "member-of",
+        subject: { kind: "means", id: "sortition-deliberative-minipublic" },
+        object: { kind: "collection", id: "democratic-selection-means" },
+        membership: "qualified",
+        status: "qualified",
+        statementIds: ["democracy-sortition-alternative"],
+      },
+    ],
+  },
+  {
+    documentType: "relationships",
+    subject: neoRepublican,
+    relationships: [
+      {
+        id: "neo-republican-member-republican-traditions",
+        predicate: "member-of",
+        subject: neoRepublican,
+        object: { kind: "collection", id: "republican-traditions" },
+        membership: "qualified",
+        status: "qualified",
+        statementIds: ["republicanism-tradition-boundary"],
+      },
+      {
+        id: "neo-republican-advances-nondomination",
+        predicate: "advances-end",
+        subject: neoRepublican,
+        object: { kind: "end", id: "freedom-as-nondomination" },
+        status: "asserted",
+        statementIds: ["republic-nondomination-end"],
       },
     ],
   },

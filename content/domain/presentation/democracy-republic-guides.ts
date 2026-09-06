@@ -78,7 +78,8 @@ const democracyDossier = attachNarrative("democracy.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "republic-democracy-distinction",
-        "india-democratic-republic-self-description",
+        "india-democratic-republic-preamble",
+        "india-adult-suffrage-rule",
       ],
     },
   ],
@@ -119,6 +120,8 @@ const republicDossier = attachNarrative("republic.md", {
       statementIds: ["republic-nondomination-end"],
       relatedEntityRefs: [
         { kind: "end" as const, id: "freedom-as-nondomination" },
+        { kind: "approach" as const, id: "neo-republican-nondomination" },
+        { kind: "collection" as const, id: "republican-traditions" },
       ],
     },
     {
@@ -138,8 +141,10 @@ const republicDossier = attachNarrative("republic.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "india-democratic-republic-self-description",
-        "republic-kahnawake-divergence",
+        "india-democratic-republic-preamble",
+        "india-adult-suffrage-rule",
+        "kahnawake-cdmrp-bridge",
+        "republic-kahnawake-transfer-limit",
       ],
       relatedEntityRefs: [
         { kind: "case" as const, id: "kahnawake-community-lawmaking" },
@@ -211,6 +216,33 @@ const representativeGovernmentDossier = attachNarrative(
     reviewedAt: "2026-09-06",
   },
 );
+const neoRepublicanDossier = attachNarrative(
+  "neo-republican-nondomination.md",
+  {
+    id: "neo-republican-nondomination-dossier",
+    kind: "dossier" as const,
+    label: "Neo-republican non-domination dossier",
+    description:
+      "A concise account of the contemporary non-domination approach.",
+    subject: { kind: "approach" as const, id: "neo-republican-nondomination" },
+    standfirst: "",
+    standfirstStatementIds: ["republic-nondomination-end"],
+    sections: [
+      {
+        id: "what-the-approach-claims",
+        heading: "What does the approach claim?",
+        body: "",
+        traceStatus: "supported" as const,
+        statementIds: [
+          "republic-nondomination-end",
+          "republicanism-tradition-boundary",
+        ],
+      },
+    ],
+    publicationStatus: "reviewed" as const,
+    reviewedAt: "2026-09-06",
+  },
+);
 const guide = (
   id: "democracy" | "republic",
   sections: SubjectGuideDocument["guide"]["sections"],
@@ -264,6 +296,7 @@ export const democracyRepublicGuideDocuments = [
   { documentType: "entity", entity: democracyDossier },
   { documentType: "entity", entity: republicDossier },
   { documentType: "entity", entity: representativeGovernmentDossier },
+  { documentType: "entity", entity: neoRepublicanDossier },
   guide("democracy", [
     ...commonEnd("democracy", "democracy-dossier"),
     {

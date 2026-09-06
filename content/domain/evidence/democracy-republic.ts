@@ -7,7 +7,7 @@ const source = (
   title: string,
   contributors: string[],
   publisher: string,
-  sourceType: "web-page" | "report",
+  sourceType: "web-page" | "report" | "article" | "edition",
   url: string,
   publicationYear?: number,
   originalPublicationYear?: number,
@@ -20,7 +20,14 @@ const source = (
       label: title,
       description: `The non-fiction work underlying the cited source: ${title}.`,
       title,
-      workType: sourceType === "report" ? "report" : "other",
+      workType:
+        sourceType === "report"
+          ? "report"
+          : sourceType === "article"
+            ? "article"
+            : sourceType === "edition"
+              ? "book"
+              : "other",
       ...(originalPublicationYear === undefined
         ? {}
         : { originalPublicationYear }),
@@ -108,7 +115,7 @@ export const democracyRepublicEvidenceDocuments = [
     "Founders Online, National Archives",
     "web-page",
     "https://founders.archives.gov/documents/Madison/01-10-02-0234",
-    1788,
+    undefined,
     1788,
   ),
   ...source(
@@ -131,6 +138,94 @@ export const democracyRepublicEvidenceDocuments = [
     undefined,
     1787,
   ),
+  ...source(
+    "nabulsi-republicanism",
+    "Republicanism",
+    ["Karma Nabulsi"],
+    "Oxford University Press",
+    "article",
+    "https://academic.oup.com/edited-volume/34508/chapter-abstract/292823540",
+    2011,
+    2011,
+  ),
+  ...source(
+    "keyssar-right-to-vote",
+    "The Right to Vote: The Contested History of Democracy in the United States",
+    ["Alexander Keyssar"],
+    "Basic Books",
+    "edition",
+    "https://www.basicbooks.com/titles/alexander-keyssar/the-right-to-vote/9780465010141/",
+    2009,
+    2000,
+  ),
+  ...source(
+    "khosla-indias-founding-moment",
+    "India's Founding Moment",
+    ["Madhav Khosla"],
+    "Harvard University Press",
+    "edition",
+    "https://www.hup.harvard.edu/books/9780674980877",
+    2020,
+    2020,
+  ),
+  {
+    documentType: "entity",
+    entity: {
+      id: "democratic-traditions",
+      kind: "collection",
+      label: "Democratic traditions",
+      description:
+        "An editorial grouping of approaches that explicitly interpret democracy.",
+      inclusionRule:
+        "Include an Approach only through an explicit, sourced, qualified membership relationship.",
+      editorialPurpose:
+        "Support comparison without inheriting democratic Ends, Means, or performance claims.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "democratic-selection-means",
+      kind: "collection",
+      label: "Democratic selection means",
+      description:
+        "An editorial grouping of distinct procedures used to select public decision-makers.",
+      inclusionRule:
+        "Include only a concrete Means with located evidence connecting its selection rule to democratic institutional debate.",
+      editorialPurpose:
+        "Compare electoral and random selection without treating either as sufficient proof of democracy.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "republican-traditions",
+      kind: "collection",
+      label: "Republican traditions",
+      description:
+        "An editorial grouping of historically contested republican approaches.",
+      inclusionRule:
+        "Include an Approach only through an explicit, sourced, qualified membership relationship.",
+      editorialPurpose:
+        "Keep republican traditions distinct from states bearing a republic label.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "neo-republican-nondomination",
+      kind: "approach",
+      label: "Neo-republican non-domination",
+      description:
+        "A contemporary republican approach that treats freedom as protection from arbitrary or uncontrolled power.",
+      scope:
+        "The contemporary non-domination approach synthesized by Lovett; not every historical republican argument or republic.",
+      ...reviewed,
+    },
+  },
   {
     documentType: "entity",
     entity: {
@@ -152,7 +247,7 @@ export const democracyRepublicEvidenceDocuments = [
       kind: "concept",
       label: "Republic",
       description:
-        "A contested constitutional and governmental-form concept in which public office is not held as hereditary monarchy.",
+        "A contested constitutional and governmental-form concept often contrasted with hereditary monarchy.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep a republic, republican traditions, democratic procedures, attributed popular sovereignty, and measured practice distinct.",
@@ -166,9 +261,9 @@ export const democracyRepublicEvidenceDocuments = [
       kind: "approach",
       label: "Representative democratic government",
       description:
-        "An approach in which voters authorize officeholders through recurring elections and institutions make those officeholders answerable.",
+        "An approach in which voters choose officeholders through recurring elections.",
       scope:
-        "Representative arrangements with competitive authorization and accountability; not a synonym for democracy or every elected government.",
+        "Representative electoral arrangements; not a synonym for democracy, accountability, or every elected government.",
       ...reviewed,
     },
   },
@@ -218,9 +313,9 @@ export const democracyRepublicEvidenceDocuments = [
       kind: "means",
       label: "Sortition and deliberative mini-publics",
       description:
-        "A procedure that selects a bounded group by lot to learn, deliberate, and formulate judgments or recommendations.",
+        "A procedure that selects people by lot for a defined public role.",
       institutionalForm:
-        "A defined population supplies a randomly selected body whose remit, information, facilitation, decision rule, and authority are specified in advance.",
+        "Eligible participants have an equal chance of random selection for a specified role.",
       ...reviewed,
     },
   },
@@ -238,14 +333,14 @@ export const democracyRepublicEvidenceDocuments = [
   ),
   statement(
     "democracy-voting-boundary",
-    "Voting is a procedure, not proof",
-    "Holding a vote does not by itself establish equal influence, meaningful choice, or accountable rule.",
+    "A vote does not establish political equality",
+    "Holding a vote does not by itself establish that citizens had an equal say in the decision process.",
     "editorial-interpretation",
   ),
   statement(
     "democracy-representation-mechanism",
-    "Representation delegates authority",
-    "Electoral representation delegates bounded public authority to chosen officeholders.",
+    "Representation assigns decisions to chosen officeholders",
+    "Electoral representation assigns public decisions to officeholders selected by voters.",
     "definition",
   ),
   statement(
@@ -274,14 +369,14 @@ export const democracyRepublicEvidenceDocuments = [
   ),
   statement(
     "republic-form-boundary",
-    "Republic names a form, not a performance result",
-    "Republic can name a non-monarchical constitutional form without describing how equally or effectively people govern.",
+    "Republic is often contrasted with monarchy",
+    "Nabulsi describes opposition to monarchy as a common, but not sufficient, feature of republican traditions.",
     "definition",
   ),
   statement(
     "republic-democracy-distinction",
-    "A republic need not be democratic",
-    "Calling a government a republic does not establish competitive participation, inclusive citizenship, or public accountability.",
+    "A republic label does not establish inclusive citizenship",
+    "Calling a government a republic does not establish that citizenship or political participation is inclusive.",
     "editorial-interpretation",
   ),
   statement(
@@ -299,7 +394,7 @@ export const democracyRepublicEvidenceDocuments = [
   statement(
     "madison-republic-popular-source",
     "Madison located republican authority in the people",
-    "Madison defined a republic by government deriving its powers directly or indirectly from the people.",
+    "Madison argued that republican power must originate in the broader public rather than a small favored class.",
     "attributed-value",
   ),
   statement(
@@ -309,15 +404,27 @@ export const democracyRepublicEvidenceDocuments = [
     "observation",
   ),
   statement(
-    "india-democratic-republic-self-description",
-    "India joins democratic and republic as distinct claims",
-    "The Constitution of India describes India as both a democratic republic and separately establishes elections on the basis of adult suffrage.",
+    "india-democratic-republic-preamble",
+    "India's Preamble uses democratic and republic together",
+    "The Constitution of India's Preamble describes India as a democratic republic.",
     "observation",
   ),
   statement(
-    "republic-kahnawake-divergence",
-    "Democratic practice does not require a republic label",
-    "Horn-Miller documents Kahnawà:ke's law-making process as a community-specific bridge between Haudenosaunee and elected-council systems; this guide does not reclassify that process as a republic.",
+    "india-adult-suffrage-rule",
+    "India's Constitution separately specifies adult suffrage",
+    "Article 326 establishes adult suffrage as the basis for elections to the House of the People and state legislative assemblies, subject to its stated qualifications.",
+    "observation",
+  ),
+  statement(
+    "kahnawake-cdmrp-bridge",
+    "Horn-Miller describes the CDMRP as a bridge",
+    "Horn-Miller describes Kahnawà:ke's law-making process as a community-specific bridge between Haudenosaunee and elected-council systems.",
+    "observation",
+  ),
+  statement(
+    "republic-kahnawake-transfer-limit",
+    "The guide does not impose a republic classification",
+    "This guide uses the Kahnawà:ke process to compare participation while withholding the externally imposed classification of republic.",
     "editorial-interpretation",
   ),
 ] satisfies AuthoringDocument[];

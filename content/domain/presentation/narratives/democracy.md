@@ -4,7 +4,6 @@ No vote, constitution, or public label establishes all of those meanings by itse
 ## meanings
 
 Some arguments justify democracy because people subject to collective decisions should stand as political equals.
-Other democratic arguments emphasize collective self-government, participation, and the accountability of decision-makers.
 Other uses identify procedures or institutions, including voting and representation.
 The same word therefore carries normative, procedural, institutional, and empirical claims that must be examined separately.
 
@@ -12,8 +11,7 @@ The same word therefore carries normative, procedural, institutional, and empiri
 
 Electoral representation authorizes officeholders to exercise bounded public power.
 Sortition instead selects participants by lot, often for a defined deliberative task.
-Direct voting, public deliberation, recall and oversight rules, and voice in workplaces or other organizations are further mechanisms whose scope and authority must be specified.
-Neither mechanism alone answers who is included, how much authority participants hold, or whether officials remain accountable.
+Neither mechanism alone answers who is included or how much authority participants hold.
 
 ## measurement
 
