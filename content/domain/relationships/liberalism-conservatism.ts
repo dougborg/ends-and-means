@@ -28,7 +28,7 @@ const citations = [
   [
     "liberalism-label-insufficient",
     "sep-liberalism-source",
-    "introduction; sections 1–4",
+    "introduction, paragraphs 1–2",
     "supports",
   ],
   [
@@ -46,49 +46,67 @@ const citations = [
   [
     "mehta-liberal-empire-tension",
     "mehta-liberalism-empire-source",
-    "introduction, pp. 1–28",
+    "publisher synopsis, paragraphs 1–2",
     "supports",
   ],
   [
     "pateman-contract-gender-boundary",
     "pateman-sexual-contract-source",
-    "chapter 1, pp. 1–18",
+    "publisher synopsis, paragraph 1",
     "supports",
   ],
   [
-    "india-rights-equality",
+    "india-equality-before-law",
     "india-constitution-source",
-    "articles 14–15",
+    "article 14",
     "supports",
   ],
   [
-    "india-rights-equality",
-    "khosla-indias-founding-moment-source",
-    "introduction, pp. 1–26",
-    "context",
+    "india-discrimination-grounds",
+    "india-constitution-source",
+    "article 15(1)",
+    "supports",
   ],
   [
-    "japan-rights-equality-marriage",
+    "india-special-provisions",
+    "india-constitution-source",
+    "article 15(3)–(5)",
+    "supports",
+  ],
+  [
+    "japan-legal-equality",
     "japan-constitution-source",
-    "articles 14 and 24",
+    "article 14",
+    "supports",
+  ],
+  [
+    "japan-marriage-consent",
+    "japan-constitution-source",
+    "article 24(1), first sentence",
+    "supports",
+  ],
+  [
+    "japan-spousal-equality",
+    "japan-constitution-source",
+    "article 24(1), second sentence",
     "supports",
   ],
   [
     "japan-rights-drafting-boundary",
     "nakanishi-japan-rights-source",
-    "pp. 1185–1198",
+    "pp. 1185–1186 and 1191–1195",
     "supports",
   ],
   [
     "conservatism-broad-narrow",
     "sep-conservatism-source",
-    "section 1.1, paragraphs 1–4",
+    "section 1.1, paragraphs 1–3",
     "supports",
   ],
   [
     "conservatism-tradition-reform",
     "sep-conservatism-source",
-    "section 1.3, paragraphs 1–4",
+    "section 1.3, paragraphs 1–3",
     "supports",
   ],
   [
@@ -106,7 +124,7 @@ const citations = [
   [
     "conservatism-procedural-substantive",
     "sep-conservatism-source",
-    "section 1.4, paragraphs 1–6",
+    "section 1.4, paragraphs 1–5",
     "supports",
   ],
   [
@@ -129,8 +147,8 @@ const citations = [
   ],
   [
     "ahlen-programme-compromise",
-    "cdu-ahlen-programme-source",
-    "editorial introduction, paragraphs 1–3",
+    "bach-ahlen-history-source",
+    "paragraphs 1–5",
     "supports",
   ],
   [
@@ -141,8 +159,8 @@ const citations = [
   ],
   [
     "cdu-programme-change-boundary",
-    "cdu-ahlen-programme-source",
-    "editorial introduction, paragraphs 1–3",
+    "bach-ahlen-history-source",
+    "paragraphs 1–5",
     "supports",
   ],
   [
@@ -151,26 +169,152 @@ const citations = [
     "pp. 1–4, principles 1–8",
     "context",
   ],
+  [
+    "bell-rival-liberalism-methods",
+    "bell-what-is-liberalism-source",
+    "pp. 682–689",
+    "supports",
+  ],
+  [
+    "huntington-rival-conservatism-types",
+    "huntington-conservatism-ideology-source",
+    "pp. 454–461",
+    "supports",
+  ],
+  [
+    "right-to-buy-conservative-programme",
+    "commons-right-to-buy-source",
+    "printed p. 7, paragraphs 2–3",
+    "supports",
+  ],
+  [
+    "right-to-buy-statutory-rules",
+    "housing-act-1980-source",
+    "sections 1–2, 7, 16–17, 35",
+    "supports",
+  ],
+  [
+    "right-to-buy-statutory-rules",
+    "commons-right-to-buy-source",
+    "printed pp. 7–8, ‘The Housing Act 1980’",
+    "context",
+  ],
+  [
+    "right-to-buy-distribution",
+    "commons-right-to-buy-source",
+    "summary, printed p. 5; printed pp. 12–15",
+    "supports",
+  ],
+  [
+    "swatantra-economic-conservatism",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 5–6",
+    "supports",
+  ],
+  [
+    "swatantra-ordered-progress",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 3–4 and 17–18",
+    "supports",
+  ],
+  [
+    "swatantra-gender-limit",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 15–16",
+    "supports",
+  ],
+  [
+    "swatantra-opposition-practices",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 17–18",
+    "supports",
+  ],
+  [
+    "india-liberal-rights-test",
+    "india-constitution-source",
+    "articles 14–15",
+    "context",
+  ],
+  [
+    "japan-liberal-rights-test",
+    "nakanishi-japan-rights-source",
+    "pp. 1185–1186 and 1191–1195",
+    "context",
+  ],
+  [
+    "right-to-buy-conservatism-boundary",
+    "commons-right-to-buy-source",
+    "printed pp. 7–8",
+    "context",
+  ],
+  [
+    "swatantra-conservatism-boundary",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 3–6 and 15–18",
+    "supports",
+  ],
+  [
+    "liberalism-exclusion-evidence-limit",
+    "mehta-liberalism-empire-source",
+    "publisher synopsis, paragraphs 1–2",
+    "context",
+  ],
+  [
+    "liberalism-exclusion-evidence-limit",
+    "pateman-sexual-contract-source",
+    "publisher synopsis, paragraph 1",
+    "context",
+  ],
+  [
+    "liberalism-atlantic-taxonomy-limit",
+    "bell-what-is-liberalism-source",
+    "pp. 682–689",
+    "context",
+  ],
+  [
+    "conservatism-genealogy-limit",
+    "balasubramanian-free-economy-source",
+    "introduction, printed pp. 3–6",
+    "context",
+  ],
 ] as const;
 
 export const liberalismConservatismRelationshipDocuments = [
-  {
-    documentType: "relationships",
-    subject: { kind: "concept", id: "liberalism" },
+  ...[
+    [
+      "india-constitutional-rights-settlement-1946-1950",
+      "liberalism",
+      "india-liberal-rights-test",
+    ],
+    [
+      "japan-constitutional-rights-settlement-1946-1947",
+      "liberalism",
+      "japan-liberal-rights-test",
+    ],
+    [
+      "right-to-buy-england-wales-1980-1988",
+      "conservatism",
+      "right-to-buy-conservatism-boundary",
+    ],
+    [
+      "swatantra-opposition-organization-1959-1967",
+      "conservatism",
+      "swatantra-conservatism-boundary",
+    ],
+  ].map(([caseId, conceptId, statementId]) => ({
+    documentType: "relationships" as const,
+    subject: { kind: "case" as const, id: caseId },
     relationships: [
       {
-        id: "liberalism-related-to-conservatism",
-        predicate: "related-to",
-        subject: { kind: "concept", id: "liberalism" },
-        object: { kind: "concept", id: "conservatism" },
-        status: "qualified",
-        statementIds: [
-          "liberalism-plural-traditions",
-          "conservatism-broad-narrow",
-        ],
+        id: `${caseId}-contests-${conceptId}`,
+        predicate: "contested-in-case" as const,
+        subject: { kind: "case" as const, id: caseId },
+        object: { kind: "concept" as const, id: conceptId },
+        status: "qualified" as const,
+        statementIds: [statementId],
       },
     ],
-  },
+  })),
   ...citations.map(([statementId, sourceId, locator, role], index) => ({
     documentType: "relationships" as const,
     subject: { kind: "statement" as const, id: statementId },
