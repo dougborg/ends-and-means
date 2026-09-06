@@ -9,7 +9,7 @@ const source = (
   publisher: string,
   sourceType: "edition" | "article" | "web-page" | "report",
   url: string,
-  originalPublicationYear = publicationYear,
+  originalPublicationYear: number | null = publicationYear,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -27,7 +27,9 @@ const source = (
             : sourceType === "edition"
               ? "book"
               : "other",
-      originalPublicationYear,
+      ...(originalPublicationYear === null
+        ? {}
+        : { originalPublicationYear }),
       ...reviewed,
     },
   },
@@ -124,8 +126,8 @@ export const tawantinsuyuEvidenceDocuments = [
   ...source(
     "upenn-tawantinsuyu-map",
     "The Tawantinsuyu in the 1530s—Territory of the Inca State",
-    ["Digital Archaeological Record, University of Pennsylvania"],
-    2026,
+    ["Carmen Medeiros", "Celina Grisi", "Radek Sánchez Patzy"],
+    2024,
     "University of Pennsylvania Museum of Archaeology and Anthropology",
     "web-page",
     "https://dia.upenn.edu/en/content/BOL0001Y/",
@@ -206,11 +208,11 @@ export const tawantinsuyuEvidenceDocuments = [
     "cieza-chronicle-peru",
     "Segunda parte de la Crónica del Perú, que trata del señorío de los incas yupanquis",
     ["Pedro de Cieza de León"],
-    1880,
+    2010,
     "Biblioteca Virtual Miguel de Cervantes",
     "web-page",
     "https://www.cervantesvirtual.com/obra/segunda-parte-de-la-cronica-del-peru-que-trata-del-senorio-de-los-incas-yupanquis-y-de-sus-grandes-hechos-y-gobernacion--0/",
-    1553,
+    null,
   ),
   statement(
     "tawantinsuyu-name-boundary",
