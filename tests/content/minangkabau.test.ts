@@ -13,8 +13,6 @@ import {
 
 const statementIds = [
   "matriliny-maternal-descent-definition",
-  "matrilocality-residence-distinction",
-  "matriliny-does-not-fix-residence",
   "matriarchy-rule-by-women-dispute",
   "minangkabau-power-varies-by-relation",
   "minangkabau-practices-historically-changing",
@@ -105,14 +103,13 @@ const workIds = [
 
 const caseIds = [
   "koto-tinggi-post-decentralization-governance",
-  "koto-tinggi-governance-october-2016",
+  "koto-tinggi-governance-2016",
   "bonjol-melayu-ulayat-governance",
   "bonjol-ulayat-governance-2000-2016",
 ] as const;
 
 const semanticRelationshipIds = [
   "bonjol-applies-matriliny",
-  "matriliny-related-to-matrilocality",
   "matriliny-commonly-confused-with-matriarchy",
 ] as const;
 
@@ -163,14 +160,25 @@ function exactWorkLedger() {
   });
 }
 
-function exactCitationLedger() {
+function exactCitationLedger(
+  documents: AuthoringDocument[] = canonicalDocuments,
+) {
+  const graph = compileDomainGraph(documents);
   return statementIds.flatMap((statementId) =>
-    citationsFor(statementId).map(({ object, role, locator }) => ({
-      statementId,
-      sourceId: object.id,
-      role,
-      locator,
-    })),
+    graph.relationships
+      .filter(
+        (relationship) =>
+          relationship.predicate === "cites" &&
+          relationship.subject.kind === "statement" &&
+          relationship.subject.id === statementId,
+      )
+      .map(({ id, object, role, locator }) => ({
+        id,
+        statementId,
+        sourceId: object.id,
+        role,
+        locator,
+      })),
   );
 }
 
@@ -223,7 +231,7 @@ function expectEveryFieldDriftDetected<T extends object>(
 
 describe("Minangkabau matriliny, property, and authority", () => {
   it("publishes the exact traced Statement and Source ledger", () => {
-    expect(statementIds).toHaveLength(67);
+    expect(statementIds).toHaveLength(65);
     expect(sourceIds).toHaveLength(8);
     expect(workIds).toHaveLength(8);
 
@@ -278,7 +286,7 @@ describe("Minangkabau matriliny, property, and authority", () => {
     );
     expectEveryFieldDriftDetected(
       citations,
-      ["sourceId", "role", "locator"],
+      ["id", "sourceId", "role", "locator"],
       "citation",
     );
   });
@@ -298,7 +306,7 @@ describe("Minangkabau bounded case categories", () => {
     const episode = caseDocuments.find(
       (document) =>
         document.documentType === "entity" &&
-        document.entity.id === "koto-tinggi-governance-october-2016",
+        document.entity.id === "koto-tinggi-governance-2016",
     );
     if (episode?.documentType !== "entity" || episode.entity.kind !== "case-episode")
       throw new Error("Missing Koto Tinggi Case Episode fixture");
@@ -308,13 +316,25 @@ describe("Minangkabau bounded case categories", () => {
     const relationshipDocuments = clonedDocuments();
     const relationship = relationshipIn(
       relationshipDocuments,
-      "matriliny-related-to-matrilocality",
+      "matriliny-commonly-confused-with-matriarchy",
     );
-    if (relationship.predicate !== "related-to")
-      throw new Error("Missing matriliny/matrilocality relationship fixture");
-    relationship.statementIds = ["matrilocality-residence-distinction"];
+    if (relationship.predicate !== "commonly-confused-with")
+      throw new Error("Missing matriliny/matriarchy relationship fixture");
+    relationship.statementIds = ["matriarchy-rule-by-women-dispute"];
     expect(exactRelationshipLedger(relationshipDocuments)).not.toEqual(
       exactRelationshipLedger(),
+    );
+
+    const citationDocuments = clonedDocuments();
+    const citation = relationshipIn(
+      citationDocuments,
+      "citation-local-definition",
+    );
+    if (citation.predicate !== "cites")
+      throw new Error("Missing citation relationship fixture");
+    citation.id = "local-definition-drift";
+    expect(exactCitationLedger(citationDocuments)).not.toEqual(
+      exactCitationLedger(),
     );
   });
 });
@@ -329,11 +349,11 @@ describe("Minangkabau bounded case assignments", () => {
       kind: "case",
       locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
       conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
-      episodeIds: ["koto-tinggi-governance-october-2016"],
+      episodeIds: ["koto-tinggi-governance-2016"],
     });
     expect(
       canonicalGraph.indexes.entitiesById[
-        "koto-tinggi-governance-october-2016"
+        "koto-tinggi-governance-2016"
       ],
     ).toMatchObject({
       kind: "case-episode",
@@ -433,14 +453,6 @@ describe("Minangkabau guide and validation boundaries", () => {
     expect(canonicalGraph.indexes.entitiesById.matriarchy).not.toHaveProperty(
       "alternateLabels",
     );
-    expect(
-      canonicalGraph.indexes.entitiesById.matrilocality,
-    ).not.toHaveProperty("alternateLabels");
-    expect(
-      canonicalGraph.relationships.find(
-        ({ id }) => id === "matriliny-related-to-matrilocality",
-      ),
-    ).toMatchObject({ predicate: "related-to", status: "qualified" });
     expect(
       canonicalGraph.relationships.find(
         ({ id }) => id === "matriliny-commonly-confused-with-matriarchy",

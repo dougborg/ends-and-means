@@ -8,7 +8,7 @@ export const minangkabauGuideDocuments = [
       slug: "matriliny-property-authority",
       label: "Does matriliny mean women rule?",
       description:
-        "Matriliny traces descent through a maternal line, while residence, property control, and officeholding are separate institutional questions. Studies of one village and two bounded West Sumatran cases document different distributions of land control, representation, and benefits without establishing a rule for every Minangkabau community.",
+        "Matriliny traces descent through a maternal line, while property control and officeholding are separate institutional questions. Studies of one village and two bounded West Sumatran cases document different distributions of land control, representation, and benefits without establishing a rule for every Minangkabau community.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "matriliny" },
       searchQueries: [
@@ -46,14 +46,8 @@ export const minangkabauGuideDocuments = [
               sectionId: "how-are-local-terms-used",
             },
           ],
-          entityRefs: [
-            { kind: "concept", id: "matrilocality" },
-            { kind: "concept", id: "matriarchy" },
-          ],
-          relationshipIds: [
-            "matriliny-related-to-matrilocality",
-            "matriliny-commonly-confused-with-matriarchy",
-          ],
+          entityRefs: [{ kind: "concept", id: "matriarchy" }],
+          relationshipIds: ["matriliny-commonly-confused-with-matriarchy"],
         },
         {
           id: "institutions-and-mechanisms",
@@ -105,7 +99,6 @@ export const minangkabauGuideDocuments = [
           role: "comparisons-and-next-steps",
           heading: "What should a comparison keep separate?",
           statementIds: [
-            "matriliny-does-not-fix-residence",
             "matriliny-does-not-fix-property-control",
             "matriliny-does-not-fix-office",
             "matriliny-does-not-fix-equality",
@@ -115,7 +108,7 @@ export const minangkabauGuideDocuments = [
           entityRefs: [
             {
               kind: "case-episode",
-              id: "koto-tinggi-governance-october-2016",
+              id: "koto-tinggi-governance-2016",
             },
             { kind: "case-episode", id: "bonjol-ulayat-governance-2000-2016" },
           ],

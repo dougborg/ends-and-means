@@ -302,23 +302,6 @@ const entities = [
     text: "Mardoni defines Minangkabau matriliny as a kinship system in which people trace descent through their mother and earlier women in that maternal line.",
   },
   {
-    id: "matrilocality-residence-distinction",
-    kind: "statement",
-    label: "Matrilocality concerns residence after marriage",
-    description:
-      "A distinction between postmarital residence and maternal-line descent.",
-    statementKind: "observation",
-    text: "Sanday describes husbands moving into their wives’ households in the community she studied.",
-  },
-  {
-    id: "matriliny-does-not-fix-residence",
-    kind: "statement",
-    label: "Sanday distinguishes descent from residence",
-    description: "A bounded distinction in Sanday’s Minangkabau account.",
-    statementKind: "observation",
-    text: "In Sanday’s account, maternal-line kin organization and husbands’ residence with their wives’ domestic groups are separately described features.",
-  },
-  {
     id: "matriliny-does-not-fix-property-control",
     kind: "statement",
     label: "Property control varied within Blackwood’s village study",
@@ -433,7 +416,7 @@ const entities = [
     id: "koto-tinggi-residence-unobserved",
     kind: "statement",
     label: "The Koto Tinggi study does not document postmarital residence",
-    description: "A limit on the case’s relevance to matrilocality.",
+    description: "A limit on what the case establishes about postmarital residence.",
     statementKind: "observation",
     text: "Nurdin’s Koto Tinggi study does not separately document postmarital residence.",
   },
@@ -858,39 +841,37 @@ const cases = [
   {
     id: "koto-tinggi-post-decentralization-governance",
     kind: "case",
-    label: "Koto Tinggi nagari governance observed in October 2016",
+    label: "Koto Tinggi nagari governance documented in 2016",
     description:
-      "A bounded October 2016 study of formal institutions and development-planning practice in Koto Tinggi.",
+      "A bounded 2016 study of formal institutions and development-planning practice in Koto Tinggi.",
     locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
     startDate: {
       year: 2016,
-      month: 10,
       certainty: "exact",
     },
-    endDate: { year: 2016, month: 10, certainty: "exact" },
+    endDate: { year: 2016, certainty: "exact" },
     scope:
-      "Nagari government, representative and customary councils, and development planning observed in Koto Tinggi during October 2016; decentralization from 2001 is background, and the cited formal design dates to Agam Regulation 12 of 2007.",
+      "Nagari government, representative and customary councils, and development planning documented for Koto Tinggi in 2016; the study’s fieldwork occurred in October, while the cited budget meeting is dated only to 2016. Decentralization from 2001 is background, and the cited formal design dates to Agam Regulation 12 of 2007.",
     conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
     selectionRationale:
       "Selected to separate maternal-line social organization from the public offices, representative bodies, customary council, and rules-in-use of one named nagari.",
-    episodeIds: ["koto-tinggi-governance-october-2016"],
+    episodeIds: ["koto-tinggi-governance-2016"],
   },
   {
-    id: "koto-tinggi-governance-october-2016",
+    id: "koto-tinggi-governance-2016",
     kind: "case-episode",
     caseId: "koto-tinggi-post-decentralization-governance",
-    label: "Koto Tinggi governance observed in October 2016",
+    label: "Koto Tinggi governance documented in 2016",
     description:
-      "The post-decentralization institutional arrangement observed in October 2016.",
+      "The post-decentralization institutional arrangement and budget practice documented for 2016.",
     locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
     startDate: {
       year: 2016,
-      month: 10,
       certainty: "exact",
     },
-    endDate: { year: 2016, month: 10, certainty: "exact" },
+    endDate: { year: 2016, certainty: "exact" },
     scope:
-      "The institutions and development-planning interactions described for Koto Tinggi, not all Agam or Minangkabau nagari.",
+      "The institutions and development-planning interactions described for Koto Tinggi in 2016, not all Agam or Minangkabau nagari; October dates the fieldwork, not every reported interaction.",
     conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
     formalRuleStatementIds: [
       "koto-tinggi-three-institutions",

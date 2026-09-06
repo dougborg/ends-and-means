@@ -20,20 +20,6 @@ export const minangkabauVocabularyDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "matrilocality",
-      kind: "concept",
-      label: "Matrilocality",
-      description:
-        "A postmarital residence pattern in which a couple lives with or near the wife’s maternal kin.",
-      schemeIds: ["political-economic-ideas"],
-      scopeNote:
-        "Residence after marriage is analytically separate from maternal-line descent and does not by itself establish ownership or authority.",
-      ...reviewed,
-    },
-  },
-  {
-    documentType: "entity",
-    entity: {
       id: "matriarchy",
       kind: "concept",
       label: "Matriarchy",
