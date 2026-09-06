@@ -13,7 +13,7 @@ The label does not by itself mean capitalism or laissez-faire.
 
 Markets require legal rules protecting property and enforcing contracts.
 Hohfeld distinguishes several legal positions rather than one indivisible form of ownership.
-Firms participate in markets but often coordinate work internally through managerial authority.
+An economy can contain markets and corporations even though corporations often coordinate internally through managerial authority.
 For Adam Smith, specialization cannot outrun the available field of exchange.
 
 ## how-markets-differ-from-capitalism

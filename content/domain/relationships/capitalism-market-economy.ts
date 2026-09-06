@@ -182,12 +182,6 @@ export const capitalismMarketCitations = [
     "supports",
   ],
   [
-    "market-finance-relation",
-    "sep-markets-2026-source",
-    "section 1, paragraph 2",
-    "supports",
-  ],
-  [
     "capitalism-legal-order-relation",
     "hodgson-conceptualizing-capitalism-source",
     "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",

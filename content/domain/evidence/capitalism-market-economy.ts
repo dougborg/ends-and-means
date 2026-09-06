@@ -500,12 +500,6 @@ export const capitalismMarketEvidenceDocuments = [
     "observation",
   ),
   statement(
-    "market-finance-relation",
-    "Financial markets are markets",
-    "Financial markets organize exchange in financial assets.",
-    "definition",
-  ),
-  statement(
     "capitalism-legal-order-relation",
     "Hodgson’s definition requires a legal system",
     "Hodgson’s definition of capitalism treats a legal system supporting property and contract as a necessary institution.",
@@ -519,8 +513,8 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "market-economy-firm-relation",
-    "Market economies combine inter-firm exchange with intra-firm hierarchy",
-    "A market economy can coordinate transactions between firms while firms coordinate their internal activity through hierarchy.",
+    "Economies can contain markets and hierarchical corporations",
+    "An economy can include both markets and corporations while corporations coordinate their internal activity through hierarchy.",
     "definition",
   ),
   statement(
