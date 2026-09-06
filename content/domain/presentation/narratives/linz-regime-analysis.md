@@ -6,5 +6,5 @@ The authoritarian ideal type combines limited pluralism, restricted mobilization
 
 ## totalitarian-type
 
-The contrasting totalitarian ideal type combines a monistic power center, an exclusive guiding ideology, and extensive mobilization.
+For the contrasting type, Linz asks whether rule converges around one political center, demands fidelity to an encompassing doctrine, and organizes participation from above.
 Historical cases can fit either type incompletely, so the categories do not transfer all properties to every classified regime.

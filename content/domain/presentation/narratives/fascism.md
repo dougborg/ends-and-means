@@ -8,7 +8,7 @@ Paxton offers a rival emphasis on how movements develop, ally, mobilize, and exe
 
 ## self-description
 
-Mussolini and Gentile described Fascism as anti-liberal and anti-Marxist and assigned the state authority to organize the nation.
+The 1932 doctrine rejected liberal and Marxist rivals while making the state the organizing frame for its account of national life.
 That primary text records a self-description; it does not prove that practice matched doctrine or classify movements elsewhere.
 
 ## bounded-practice

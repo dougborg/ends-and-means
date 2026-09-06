@@ -587,6 +587,10 @@ flows, target formation, revision, enforcement, and ownership. Cases record
 formal plans and rules-in-use. Multiple Approaches may advocate different
 planning arrangements, and non-socialist cases may use planning mechanisms.
 
+Authoritarianism, fascism, and totalitarianism require the same non-inheritance discipline as other contested families.
+The canonical graph keeps each scholarly Concept distinct from historical movements and parties, regime forms and practices, editorial Collections, scholarly Approaches, self-descriptions, external classifications, and polemical labels.
+A bounded Case may partially instantiate a sourced Approach, but it does not embody the Concept or transfer its attributes to another regime.
+
 If central planning remains a peer dossier to socialism solely because both
 were rows in the old matrix, the migration has preserved a category error.
 
