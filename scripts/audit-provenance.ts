@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { parse } from "yaml";
-import { readInstalledPackageEvidence } from "./package-provenance.ts";
+import { mergePackageEvidence, readCommittedPackageEvidence, readInstalledPackageEvidence } from "./package-provenance.ts";
 import { auditLockfilePackages, auditProvenance, type LockfilePackageInventory, type ProvenanceInventory, trackedFilesFromGit } from "./provenance.ts";
 
 function main() {
@@ -14,7 +14,8 @@ function main() {
   const lockedInventory = JSON.parse(readFileSync("provenance/pnpm-lock-packages.json", "utf8")) as LockfilePackageInventory;
   const lockfile = parse(readFileSync("pnpm-lock.yaml", "utf8")) as { packages?: Record<string, unknown> };
   const trackedFiles = trackedFilesFromGit(() => execFileSync("git", ["ls-files", "-z"], { encoding: "utf8" }));
-  const findings = [...auditProvenance(inventory, trackedFiles, manifest, existsSync), ...auditLockfilePackages(lockedInventory, Object.keys(lockfile.packages ?? {}), readInstalledPackageEvidence())];
+  const evidence = mergePackageEvidence(readCommittedPackageEvidence(), readInstalledPackageEvidence());
+  const findings = [...auditProvenance(inventory, trackedFiles, manifest, existsSync), ...auditLockfilePackages(lockedInventory, Object.keys(lockfile.packages ?? {}), evidence)];
 
   if (findings.length > 0) {
     console.error(["Repository provenance: findings", ...findings.map((finding) => `- ${finding}`)].join("\n"));

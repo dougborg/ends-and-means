@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { packageEvidenceDigest } from "../../scripts/package-provenance.ts";
+import { mergePackageEvidence, packageEvidenceDigest } from "../../scripts/package-provenance.ts";
 import { auditLockfilePackages, auditProvenance, type LockfilePackageInventory, type ProvenanceInventory, trackedFilesFromGit } from "../../scripts/provenance.ts";
 
 const inventory: ProvenanceInventory = {
@@ -93,6 +93,18 @@ describe("repository provenance inventory", () => {
       "unknown: unresolved material cannot be published",
     ]));
   });
+
+  it("rejects a free-form distribution string that tries to bypass publication blocking", () => {
+    const changed = structuredClone(inventory);
+    changed.thirdPartyAssets.push({ id: "bypass", paths: ["src/asset.png"], origin: "unknown", authorOrProvider: "unknown", licenseOrTerms: "unresolved", termsLocator: "https://example.test", modified: false, distribution: "site", attribution: "notice", resolution: "ask owner" });
+    const record = changed.thirdPartyAssets[0];
+    if (!record) throw new Error("Missing third-party fixture");
+    (record as unknown as { distribution: string }).distribution = "site; source-only exception";
+    expect(auditProvenance(changed, ["src/asset.png"], { dependencies: { runtime: "1" } }, () => true)).toEqual(expect.arrayContaining([
+      "bypass: third-party provenance record is incomplete",
+      "bypass: unresolved material cannot be published",
+    ]));
+  });
 });
 
 describe("exact lockfile package inventory", () => {
@@ -151,5 +163,16 @@ describe("tracked-file discovery", () => {
   it("returns paths and converts git failure into actionable output", () => {
     expect(trackedFilesFromGit(() => "one\0two\r\ninside\0")).toEqual(["one", "two\r\ninside"]);
     expect(() => trackedFilesFromGit(() => { throw new Error("missing git"); })).toThrow("Run pnpm audit:provenance inside a Git checkout with git available");
+  });
+});
+
+describe("cross-platform package evidence", () => {
+  it("merges matching observations and rejects platform conflicts", () => {
+    const mac = new Map([["native@1.0.0", { license: "MIT", source: "https://example.test/native" }]]);
+    const linux = new Map([["linux-native@1.0.0", { license: "Apache-2.0", source: "https://example.test/linux" }]]);
+    expect([...mergePackageEvidence(mac, linux).keys()]).toEqual(["native@1.0.0", "linux-native@1.0.0"]);
+    expect(() => mergePackageEvidence(mac, new Map([["native@1.0.0", { license: "GPL-3.0-only", source: "https://example.test/native" }]]))).toThrow(
+      "native@1.0.0: installed manifest conflicts with committed platform evidence",
+    );
   });
 });

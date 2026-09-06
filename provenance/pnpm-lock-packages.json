@@ -63,10 +63,10 @@
       "version": "0.4.0",
       "origin": "https://registry.npmjs.org/%40astrojs%2Fcompiler-binding-linux-x64-gnu/0.4.0",
       "terms": "https://www.npmjs.com/package/%40astrojs%2Fcompiler-binding-linux-x64-gnu/v/0.4.0?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "f808b920b96b2e7d838106729f005516dfb4b5eb582c62fbe5e0946af503f43b"
+      "source": "git+https://github.com/withastro/compiler-rs.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "427e9f077b997887d730e02d9cc8df38271634d698a60f31a0966b11bab1987e"
     },
     {
       "key": "@astrojs/compiler-binding-linux-x64-musl@0.4.0",
@@ -349,10 +349,10 @@
       "version": "2.5.12",
       "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-x64/2.5.12",
       "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-x64/v/2.5.12?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "edef0534ef939709880f9107ce4a7ab6fb4b7f4a9e4841c5fdeee71e779060e2"
+      "source": "git+https://github.com/biomejs/biome.git",
+      "license": "MIT OR Apache-2.0",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "7b0faa36e939406ce95a07e925dbe624113f569be3503e316a26828806b8968e"
     },
     {
       "key": "@biomejs/cli-win32-arm64@2.5.12",
@@ -426,10 +426,10 @@
       "version": "0.10.5",
       "origin": "https://registry.npmjs.org/%40bruits%2Fsatteri-linux-x64-gnu/0.10.5",
       "terms": "https://www.npmjs.com/package/%40bruits%2Fsatteri-linux-x64-gnu/v/0.10.5?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "10d8620e458a414f7f46f76b9de6bedcf82d739babc24db5a71c098b43d4f18f"
+      "source": "git+https://github.com/bruits/satteri.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "e3bad1fa55edfa5c1a99a573bc51f2da740ec5378059a71cd48b87f7320b37f3"
     },
     {
       "key": "@bruits/satteri-linux-x64-musl@0.10.5",
@@ -855,10 +855,10 @@
       "version": "0.28.2",
       "origin": "https://registry.npmjs.org/%40esbuild%2Flinux-x64/0.28.2",
       "terms": "https://www.npmjs.com/package/%40esbuild%2Flinux-x64/v/0.28.2?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "143e7e4dddae2c31bf7def0bd80b4a3344c6df85b5fb93ff4a8892fe323c03a8"
+      "source": "git+https://github.com/evanw/esbuild.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "cf3057207ff4002048641ad90c63c69478959726d072111aa4da7058cc8e3207"
     },
     {
       "key": "@esbuild/netbsd-arm64@0.28.2",
@@ -1086,10 +1086,10 @@
       "version": "1.3.3",
       "origin": "https://registry.npmjs.org/%40img%2Fsharp-libvips-linux-x64/1.3.3",
       "terms": "https://www.npmjs.com/package/%40img%2Fsharp-libvips-linux-x64/v/1.3.3?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "0ad35e61d579835785851cb04d871a106b80ef81db7a00439b0dfa6b9091b274"
+      "source": "git+https://github.com/lovell/sharp-libvips.git",
+      "license": "LGPL-3.0-or-later",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "442206f6b60eb11dd0107e9509fac86923a74289bfdaa53a8e9930278bd88088"
     },
     {
       "key": "@img/sharp-libvips-linuxmusl-arm64@1.3.3",
@@ -1174,10 +1174,10 @@
       "version": "0.35.4",
       "origin": "https://registry.npmjs.org/%40img%2Fsharp-linux-x64/0.35.4",
       "terms": "https://www.npmjs.com/package/%40img%2Fsharp-linux-x64/v/0.35.4?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "5626df4b5d706f2a091dee95d6515cb706d7d6a053ce2fb5891e28a1e1d0b356"
+      "source": "git+https://github.com/lovell/sharp.git",
+      "license": "Apache-2.0",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "8e897121ae8595b377fdc24cbfe39fd0b66438c360488f6cfadfb220566497ee"
     },
     {
       "key": "@img/sharp-linuxmusl-arm64@0.35.4",
@@ -1493,10 +1493,10 @@
       "version": "0.147.0",
       "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-x64-gnu/0.147.0",
       "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-x64-gnu/v/0.147.0?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "e111c1a9abf5a512be3ee1aba1d8ff7a952581aefcd73dfa95fa9ce56328475a"
+      "source": "git+https://github.com/oxc-project/oxc.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "97fad2d25f5b27d6bfc0e2e6ed7f14c6391fd2b872f7eaf71f02cd53fa8ef8e7"
     },
     {
       "key": "@oxc-parser/binding-linux-x64-musl@0.147.0",
@@ -1724,10 +1724,10 @@
       "version": "11.24.2",
       "origin": "https://registry.npmjs.org/%40oxc-resolver%2Fbinding-linux-x64-gnu/11.24.2",
       "terms": "https://www.npmjs.com/package/%40oxc-resolver%2Fbinding-linux-x64-gnu/v/11.24.2?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "b8b0f33f0dbb0a5bab954d9d8533afd1cf4a1991b97d9f5144e3dcdace492534"
+      "source": "git+https://github.com/oxc-project/oxc-resolver.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "1489128788b3c6c750a52bc4417dc5ecba0ae2b2e34f2281219df216282971dc"
     },
     {
       "key": "@oxc-resolver/binding-linux-x64-musl@11.24.2",
@@ -1911,10 +1911,10 @@
       "version": "1.2.7",
       "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-x64-gnu/1.2.7",
       "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-x64-gnu/v/1.2.7?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "63d73bbfac86065f6a7d6c7f9eb9fd11ebdbd98d0011cc9ea2b02d71d67ca01d"
+      "source": "git+https://github.com/rolldown/rolldown.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "373893a765be9bdaa7bc8a4e16dccdc367da7d13fdff0286eb5f3b9fbe7e338c"
     },
     {
       "key": "@rolldown/binding-linux-x64-musl@1.2.7",
@@ -3726,10 +3726,10 @@
       "version": "1.33.0",
       "origin": "https://registry.npmjs.org/lightningcss-linux-x64-gnu/1.33.0",
       "terms": "https://www.npmjs.com/package/lightningcss-linux-x64-gnu/v/1.33.0?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "e249393ed0a7a2a06e527e80076b8e4d34391178bbd7b89cd5bdda2a189d34a3"
+      "source": "git+https://github.com/parcel-bundler/lightningcss.git",
+      "license": "MPL-2.0",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "b77518903253be624c0ec9f648c7a52de38f5a02c37b495359ec99b4ded8b7c1"
     },
     {
       "key": "lightningcss-linux-x64-musl@1.33.0",
