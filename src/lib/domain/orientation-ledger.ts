@@ -895,5 +895,3 @@ export const reviewedOrientationLedger: ReviewedOrientationDecision[] = [
     "resolution": "direct-canonical-target"
   }
 ];
-
-
