@@ -132,6 +132,47 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "kahnawake-cdmrp-2024-revised-hearing-modification-work",
+      kind: "work",
+      label:
+        "Revised Modification to Community Decision Making & Review Process Hearing",
+      description:
+        "The Kahnawà:ke Legislative Commission’s April 2024 clarification and revision of the January hearing-continuation rule.",
+      title:
+        "Revised Modification to Community Decision Making & Review Process (CDMRP) Hearing",
+      workType: "other",
+      originalPublicationYear: 2024,
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "kahnawake-cdmrp-2024-revised-hearing-modification-source",
+      kind: "source",
+      label: "Revised CDMRP hearing modification notice (2024)",
+      description:
+        "The Kahnawà:ke Legislative Commission’s April 18 notice replacing automatic advancement after two under-attended hearing attempts with a commission decision on next steps.",
+      title:
+        "Revised Modification to Community Decision Making & Review Process (CDMRP) Hearing",
+      sourceType: "web-page",
+      workId: "kahnawake-cdmrp-2024-revised-hearing-modification-work",
+      contributorDisplay: ["Kahnawà:ke Legislative Commission"],
+      publicationYear: 2024,
+      publisher: "Kahnawà:ke Legislative Commission",
+      resourceLinks: [
+        {
+          purpose: "publisher",
+          url: "https://www.kahnawakemakingdecisions.com/news/news_text.asp?ID=702",
+          label: "Read the revised hearing modification notice",
+        },
+      ],
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "kahnawake-cdmrp-2023-survey-analysis-work",
       kind: "work",
       label: "Analysis of 2023 CDMRP Evaluation Survey",
@@ -369,11 +410,24 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
     entity: {
       id: "kahnawake-cdmrp-2024-hearing-rule-change",
       kind: "statement",
-      label: "Kahnawà:ke modified its hearing continuation rule in 2024",
+      label: "Kahnawà:ke announced a hearing continuation rule in January 2024",
       description:
-        "A dated formal change that prevents the 2013 Type I description from being projected unchanged to the present.",
+        "A dated formal change that was itself superseded by the Legislative Commission’s April 2024 revision.",
       statementKind: "observation",
-      text: "On January 16, 2024, the Kahnawà:ke Legislative Commission announced that hearings require pre-registration and at least ten participants; after two under-attended attempts, no further hearing is held, and the procedure treats the draft or amendments as acceptable for advancing the law to the next step.",
+      text: "On January 16, 2024, the Kahnawà:ke Legislative Commission announced a procedure requiring pre-registration and at least ten participants; after two under-attended attempts, it provided for no further hearing and for advancing the draft or amendments to the next step.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "kahnawake-cdmrp-2024-revised-hearing-rule",
+      kind: "statement",
+      label: "Kahnawà:ke revised its hearing continuation rule in April 2024",
+      description:
+        "The Legislative Commission’s dated replacement for automatic advancement after two under-attended hearing attempts.",
+      statementKind: "observation",
+      text: "On April 18, 2024, the Kahnawà:ke Legislative Commission replaced the January rule’s automatic advancement after two under-attended hearing attempts: the Technical Drafting Committee instead forwards the draft or amendments with a recommendation, and the Commission decides whether they may advance or whether additional measures are needed, then informs the community of its decision and rationale.",
       ...reviewed,
     },
   },
@@ -492,7 +546,7 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
       episodeIds: ["kahnawake-cdmrp-2005-present"],
       asOf: "2026-09-05",
       lastReviewedAt: "2026-09-05",
-      freshness: "current",
+      freshness: "review-needed",
       ...reviewed,
     },
   },
@@ -517,6 +571,7 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
         "kahnawake-consensus-process-definition",
         "kahnawake-cdmrp-type-one-design",
         "kahnawake-cdmrp-2024-hearing-rule-change",
+        "kahnawake-cdmrp-2024-revised-hearing-rule",
         "kahnawake-cdmrp-type-two-design",
       ],
       ruleInUseStatementIds: [

@@ -79,6 +79,13 @@ const citations = [
     "cdmrp-2024-hearing-modification",
   ],
   [
+    "kahnawake-cdmrp-2024-revised-hearing-rule",
+    "kahnawake-cdmrp-2024-revised-hearing-modification-source",
+    "notice dated April 18, 2024, paragraphs 1–3 and the quoted replacement for the final January section",
+    "supports",
+    "cdmrp-2024-revised-hearing-modification",
+  ],
+  [
     "kahnawake-cdmrp-type-two-design",
     "horn-miller-indigenous-participatory-democracy-source",
     "pp. 122–124 and 127–128",

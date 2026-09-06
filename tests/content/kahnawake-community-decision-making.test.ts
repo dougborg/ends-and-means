@@ -19,6 +19,7 @@ const statementIds = [
   "kahnawake-consensus-process-definition",
   "kahnawake-cdmrp-type-one-design",
   "kahnawake-cdmrp-2024-hearing-rule-change",
+  "kahnawake-cdmrp-2024-revised-hearing-rule",
   "kahnawake-cdmrp-type-two-design",
   "kahnawake-cdmrp-hybrid-classification",
   "kahnawake-cdmrp-trust-contestation",
@@ -34,7 +35,7 @@ describe("Kahnawà:ke community law-making case", () => {
       kind: "case",
       startDate: { year: 2005, month: 10, day: 14, certainty: "exact" },
       asOf: "2026-09-05",
-      freshness: "current",
+      freshness: "review-needed",
       episodeIds: ["kahnawake-cdmrp-2005-present"],
     });
     expect(entityById("kahnawake-cdmrp-2005-present")).toMatchObject({
@@ -43,6 +44,7 @@ describe("Kahnawà:ke community law-making case", () => {
         "kahnawake-consensus-process-definition",
         "kahnawake-cdmrp-type-one-design",
         "kahnawake-cdmrp-2024-hearing-rule-change",
+        "kahnawake-cdmrp-2024-revised-hearing-rule",
         "kahnawake-cdmrp-type-two-design",
       ],
       interactionStatementIds: ["kahnawake-cdmrp-trust-contestation"],
@@ -129,21 +131,43 @@ describe("diverse political-organization model boundaries", () => {
 });
 
 describe("Kahnawà:ke evidence and narrative", () => {
-  it("attributes the 2024 hearing rule to the announced procedure, not community assent", () => {
+  it("attributes the January 2024 rule without converting procedure into community assent", () => {
     const ruleChange = entityById("kahnawake-cdmrp-2024-hearing-rule-change");
-    expect(ruleChange).toMatchObject({
+    if (ruleChange?.kind !== "statement")
+      throw new Error("Missing January 2024 rule-change Statement");
+    const normalized = ruleChange.text
+      .normalize("NFKD")
+      .replace(/\p{M}/gu, "")
+      .toLocaleLowerCase("en")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+
+    expect(normalized).toContain("kahnawa ke legislative commission announced");
+    expect(normalized).toContain("after two under attended attempts");
+    expect(normalized).toContain("no further hearing");
+    expect(normalized).toMatch(/advanc\w* the draft or amendments to the next step/);
+    expect(normalized).not.toMatch(
+      /community (accepted|approved|consented|agreed|endorsed)/,
+    );
+    expect(normalized).not.toMatch(/acceptable to (the )?community/);
+  });
+
+  it("records the April successor rule and leaves current-rule freshness open", () => {
+    expect(entityById("kahnawake-cdmrp-2024-revised-hearing-rule")).toMatchObject({
       kind: "statement",
       text: expect.stringContaining(
-        "the procedure treats the draft or amendments as acceptable for advancing the law",
+        "the Commission decides whether they may advance or whether additional measures are needed",
       ),
     });
-    expect(ruleChange).not.toMatchObject({
-      text: expect.stringContaining("acceptable to the community"),
-    });
+    expect(
+      researchObligationsForTarget("case", "kahnawake-community-lawmaking").map(
+        ({ id }) => id,
+      ),
+    ).toContain("kahnawake-cdmrp-current-hearing-rules");
   });
 
   it("locates every atomic claim and includes community, legal, and external analytical sources", () => {
-    expect(statementIds).toHaveLength(17);
+    expect(statementIds).toHaveLength(18);
     expect(statementIds.every((id) => entityById(id)?.kind === "statement")).toBe(
       true,
     );
@@ -165,6 +189,7 @@ describe("Kahnawà:ke evidence and narrative", () => {
         "horn-miller-indigenous-participatory-democracy-source",
         "kahnawake-cdmrp-2023-survey-analysis-source",
         "kahnawake-cdmrp-2024-hearing-modification-source",
+        "kahnawake-cdmrp-2024-revised-hearing-modification-source",
         "kahnawake-cdmrp-public-description-source",
         "sneath-tribe-source",
       ]),
@@ -185,6 +210,7 @@ describe("Kahnawà:ke evidence and narrative", () => {
         ({ id }) => id,
       ),
     ).toEqual([
+      "kahnawake-cdmrp-current-hearing-rules",
       "kahnawake-cdmrp-jurisdiction-enforcement",
       "kahnawake-cdmrp-participation-representativeness",
       "kahnawake-governing-authority-legitimacy",

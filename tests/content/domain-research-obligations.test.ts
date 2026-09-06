@@ -507,6 +507,12 @@ const expectedOpenResearchObligations = [
         status: "open",
       },
       {
+        id: "kahnawake-cdmrp-current-hearing-rules",
+        obligationType: "research-gap",
+        target: "case:kahnawake-community-lawmaking#how-does-the-process-work",
+        status: "open",
+      },
+      {
         id: "kahnawake-cdmrp-jurisdiction-enforcement",
         obligationType: "research-gap",
         target: "case:kahnawake-community-lawmaking",
