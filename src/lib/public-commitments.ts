@@ -1,12 +1,22 @@
-export type CommitmentAccountability =
-  | { kind: "check"; owner: string; evidence: string }
-  | { kind: "human-review"; owner: string; evidence: string };
+export type PublicationCheck =
+  | "validate"
+  | "audit:content-preflight"
+  | "audit:content-integrity"
+  | "test:routes";
+
+export type HumanReviewOwner =
+  | "author"
+  | "independent reviewer"
+  | "project editor";
 
 export interface PublicCommitment {
   id: string;
   heading: string;
   summary: string;
-  accountability: CommitmentAccountability[];
+  verification: {
+    automated: { script: PublicationCheck; rejects: string }[];
+    human: { owner: HumanReviewOwner; decides: string }[];
+  };
 }
 
 export const publicCommitments = [
@@ -15,60 +25,67 @@ export const publicCommitments = [
     heading: "Keep claims close to their evidence",
     summary:
       "Substantial factual claims remain individually addressable and connect to the particular source consulted, an exact passage or table, and the source’s role in the claim.",
-    accountability: [
-      {
-        kind: "check",
-        owner: "content validation",
-        evidence:
-          "Live claims require resolved sources, precise locators, permitted citation roles, and durable public routes.",
-      },
-      {
-        kind: "human-review",
-        owner: "research editor",
-        evidence:
-          "A person judges whether the cited passage supports, challenges, qualifies, or only contextualizes the claim.",
-      },
-    ],
+    verification: {
+      automated: [
+        {
+          script: "validate",
+          rejects: "Unresolved Sources, missing locators, and invalid citation roles.",
+        },
+        {
+          script: "test:routes",
+          rejects: "Published claims without durable links in rendered pages.",
+        },
+      ],
+      human: [
+        {
+          owner: "independent reviewer",
+          decides: "Whether the cited passage actually has the role assigned to it.",
+        },
+      ],
+    },
   },
   {
     id: "bounded-synthesis",
     heading: "Preserve differences and limits",
     summary:
       "Ideas, traditions, institutions, movements, labels, and bounded cases can overlap without becoming interchangeable. Place, period, actors, disagreement, and missing evidence limit each conclusion.",
-    accountability: [
-      {
-        kind: "check",
-        owner: "content validation",
-        evidence:
-          "Typed records, explicit relationships, bounded cases, and open-question targets are validated before publication.",
-      },
-      {
-        kind: "human-review",
-        owner: "research editor",
-        evidence:
-          "A person reviews classification, scope, counterevidence, community self-description, and transfer limits.",
-      },
-    ],
+    verification: {
+      automated: [
+        {
+          script: "audit:content-preflight",
+          rejects: "Invalid record boundaries, relationships, case bounds, and open-question targets.",
+        },
+      ],
+      human: [
+        {
+          owner: "author",
+          decides: "How evidence supports the proposed classification and scope.",
+        },
+        {
+          owner: "independent reviewer",
+          decides: "Whether counterevidence, self-description, and transfer limits are represented fairly.",
+        },
+      ],
+    },
   },
   {
     id: "accountable-assistance",
     heading: "Use tools without surrendering judgment",
     summary:
       "AI may assist discovery, synthesis, drafting, and consistency checks. It is never a source or authority. People remain responsible for source fitness, framing, interpretation, wording, and publication.",
-    accountability: [
-      {
-        kind: "check",
-        owner: "publication boundary",
-        evidence:
-          "Published claims must cite eligible source records; generated text cannot satisfy an evidence relationship.",
-      },
-      {
-        kind: "human-review",
-        owner: "research editor and publisher",
-        evidence:
-          "People inspect the cited material and accept responsibility for every editorial judgment before publication.",
-      },
-    ],
+    verification: {
+      automated: [],
+      human: [
+        {
+          owner: "author",
+          decides: "Which sources, framing, interpretation, and wording to propose.",
+        },
+        {
+          owner: "project editor",
+          decides: "Whether the reviewed proposal is accepted for publication.",
+        },
+      ],
+    },
   },
 ] satisfies PublicCommitment[];
 

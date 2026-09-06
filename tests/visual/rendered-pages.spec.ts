@@ -767,6 +767,10 @@ test("homepage purpose and evidence trail survive no JavaScript, zoom, and keybo
   await expect(noScriptPage.getByRole("link", { name: /Explore the subjects/ })).toBeVisible();
   await expect(noScriptPage.getByText("Exact location", { exact: true })).toBeVisible();
   await expect(noScriptPage.getByText("Role", { exact: true })).toBeVisible();
+  await expect(noScriptPage.locator(".homepage-trace__map")).toHaveCSS(
+    "grid-template-columns",
+    /^\d+(?:\.\d+)?px$/,
+  );
   await noScriptContext.close();
 
   await page.setViewportSize({ width: 640, height: 900 });
@@ -780,6 +784,28 @@ test("homepage purpose and evidence trail survive no JavaScript, zoom, and keybo
   await expect(primary).toBeFocused();
   const outline = await primary.evaluate((element) => getComputedStyle(element).outlineStyle);
   expect(outline).not.toBe("none");
+
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/");
+  const traceMap = page.locator(".homepage-trace__map");
+  await expect(traceMap).toHaveCSS(
+    "grid-template-columns",
+    /^\d+(?:\.\d+)?px \d+(?:\.\d+)?px$/,
+  );
+  await page.getByRole("link", { name: /Open the claim and its citations/ }).click();
+  await expect(page).toHaveURL(/\/guides\/capitalism\/#capitalism-marx-definition$/);
+  const claim = page.locator("#capitalism-marx-definition");
+  await expect(claim).toBeVisible();
+  await expect(claim.getByText("chapter 7, section 2", { exact: false })).toBeVisible();
+
+  await page.goto("/");
+  await page.emulateMedia({ forcedColors: "active" });
+  await expect(page.locator(".homepage-trace")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await page.emulateMedia({ media: "print", forcedColors: "none" });
+  const correctionLink = page.getByRole("link", { name: "suggest a correction" });
+  const printedSuffix = await correctionLink.evaluate((element) => getComputedStyle(element, "::after").content);
+  expect(printedSuffix).toContain("github.com/dougborg/ends-and-means/issues/new");
+  expect(printedSuffix).not.toContain("%3A");
 });
 
 test("Explore search preserves owned meanings and explicit research gaps", async ({ page }) => {

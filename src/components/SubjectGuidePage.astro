@@ -9,6 +9,7 @@ import type {
 } from "../lib/domain";
 import { publicRelationshipLabel } from "../lib/domain";
 import { canonicalGraph, entityById } from "../lib/domain/canonical";
+import { glyphForSubjectGuideSection } from "../lib/presentation-glyphs";
 import { hrefForEntity } from "../lib/public-routes";
 import {
   directSubjectGuideEvidence,
@@ -20,7 +21,6 @@ import MarkdownProse from "./MarkdownProse.astro";
 import OnPageNavigation from "./OnPageNavigation.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
 import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
-import { glyphForSubjectGuideSection } from "../lib/presentation-glyphs";
 
 interface Props {
   guide: SubjectGuide;
@@ -119,6 +119,13 @@ const referenceLink = primary && primaryHref
   ? { href: primaryHref, label: `Open the ${primary.label} reference page` }
   : undefined;
 const anchoredObligationIds = new Set<string>();
+const anchoredStatementIds = new Set<string>();
+
+function ownsStatementAnchor(id: string) {
+  if (anchoredStatementIds.has(id)) return false;
+  anchoredStatementIds.add(id);
+  return true;
+}
 
 function ownsObligationAnchor(id: string) {
   if (anchoredObligationIds.has(id)) return false;
@@ -145,7 +152,7 @@ function ownsObligationAnchor(id: string) {
               <span>{narrativeStatementIds(selection).length} {narrativeStatementIds(selection).length === 1 ? "claim" : "claims"}</span>
             </summary>
             <div class="reference-disclosure__body">
-              {narrativeStatementIds(selection).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+              {narrativeStatementIds(selection).map((id) => <CanonicalStatement statementId={id} anchored={ownsStatementAnchor(id)} />)}
             </div>
           </details>
         )}
@@ -188,7 +195,7 @@ function ownsObligationAnchor(id: string) {
                     <details class="reference-disclosure subject-guide__evidence">
                       <summary>Sources for “{evidenceSubject}” <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
                       <div class="reference-disclosure__body">
-                        {statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+                        {statementIds.map((id) => <CanonicalStatement statementId={id} anchored={ownsStatementAnchor(id)} />)}
                       </div>
                     </details>
                   )}
@@ -200,7 +207,7 @@ function ownsObligationAnchor(id: string) {
               <details class="reference-disclosure subject-guide__evidence subject-guide__direct-evidence">
                 <summary>Sources for selected claims in “{section.heading}” <span>{directSubjectGuideEvidence(section).length}</span></summary>
                 <div class="reference-disclosure__body">
-                  {directSubjectGuideEvidence(section).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+                  {directSubjectGuideEvidence(section).map((id) => <CanonicalStatement statementId={id} anchored={ownsStatementAnchor(id)} />)}
                 </div>
               </details>
             )}
@@ -247,7 +254,7 @@ function ownsObligationAnchor(id: string) {
                         <details class="reference-disclosure subject-guide__evidence">
                           <summary>Sources for the connection between {subject.label} and {object.label} <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
                           <div class="reference-disclosure__body">
-                            {relationship.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+                            {relationship.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={ownsStatementAnchor(id)} />)}
                           </div>
                         </details>
                       )}
