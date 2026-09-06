@@ -3,10 +3,12 @@ import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import OnPageNavigation from "../../components/OnPageNavigation.astro";
 import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Approach, Case, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
-import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo } from "../../lib/domain/canonical";
+import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo, researchObligationsForTarget } from "../../lib/domain/canonical";
+import { hasUsefulOnPageNavigation } from "../../lib/on-page-navigation";
 
 export function getStaticPaths() { return entitiesOfKind("approach").map((approach) => ({ params: { id: approach.id }, props: { approach } })); }
 const approach = Astro.props.approach as Approach;
@@ -18,19 +20,39 @@ const cases = relationshipsTo(approach.id).filter((relation) => relation.predica
 const relatedCaseLinks = [...new Map(cases.map(({ subject }) => { const caseId = subject.kind === "case" ? subject.id : subject.caseId; const item = entityById(caseId) as Case | undefined; return item ? [item.id, item] : undefined; }).filter((entry): entry is [string, Case] => Boolean(entry))).values()];
 const hasComparison = cases.some(({ subject }) => subject.kind === "case-episode" && relationshipsFrom(subject.id).some(({ predicate }) => predicate === "placed-on"));
 const challenges = outgoing.filter((relation) => relation.predicate === "responds-to").map((relation) => { const challenge = entityById(relation.object.id) as Challenge | undefined; const criteria = challenge ? relationshipsTo(challenge.id).filter((candidate) => candidate.predicate === "evaluates-response-to").map((candidate) => entityById(candidate.subject.id) as Criterion | undefined).filter((value): value is Criterion => Boolean(value)) : []; return { challenge, criteria }; });
+const hasOpenResearch = researchObligationsForTarget("approach", approach.id).length > 0;
+const openResearchSection = { id: "open-questions", label: "Questions current evidence does not settle" };
+const referenceSection = { id: "approach-reference", label: "Inspect the model" };
+const outlineItems = [
+  ...(dossier?.sections.map(({ id, heading }) => ({ id, label: heading })) ?? []),
+  ...(hasOpenResearch ? [openResearchSection] : []),
+  referenceSection,
+];
+const hasOutline = hasUsefulOnPageNavigation(outlineItems);
+const anchoredStatementIds = new Set<string>();
+const claimStatementAnchor = (id: string) => {
+  if (anchoredStatementIds.has(id)) return false;
+  anchoredStatementIds.add(id);
+  return true;
+};
 ---
 <BaseLayout title={approach.label} description={dossier?.standfirst ?? approach.description} fullBleed>
   <article class="canonical-dossier">
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Approach</nav>
     <header><p class="coordinate">APPROACH</p><h1>{approach.label}</h1><DossierStandfirst content={dossier?.standfirst ?? approach.description} statementIds={dossier?.standfirstStatementIds} /></header>
+    <div class:list={["page-outline-layout", { "page-outline-layout--active": hasOutline }]}>
+      <OnPageNavigation pageLabel={approach.label} items={outlineItems} />
+      <div class="page-outline-layout__content">
     {dossier && <NarrativeDossier sections={dossier.sections} />}
-    <OpenResearchQuestions kind="approach" id={approach.id} />
-    <section class="reference-apparatus" aria-labelledby="approach-reference-title">
-      <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">Inspect the model</h2><p>Open the formal relationships and evidence behind the summary.</p></header>
-      <details class="apparatus-group"><summary>Purpose and proposed institutions</summary><div class="apparatus-group__body"><section><h3>Attributed purposes</h3>{ends.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section><section><h3>Proposed institutions</h3>{means.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>)}</section></div></details>
+    <OpenResearchQuestions kind="approach" id={approach.id} sectionId={openResearchSection.id} heading={openResearchSection.label} />
+    <section id={referenceSection.id} class="reference-apparatus" aria-labelledby="approach-reference-title">
+      <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">{referenceSection.label}</h2><p>Open the formal relationships and evidence behind the summary.</p></header>
+      <details class="apparatus-group"><summary>Purpose and proposed institutions</summary><div class="apparatus-group__body"><section><h3>Attributed purposes</h3>{ends.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</div>)}</section><section><h3>Proposed institutions</h3>{means.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</div>)}</section></div></details>
       <details class="apparatus-group"><summary>Cases and evaluation</summary><div class="apparatus-group__body"><section><h3>Bounded practice</h3>{cases.map(({ subject, predicate, status }) => <div class="case-link"><p class="coordinate">{status} / {predicate.replaceAll("-", " ")}</p><h4><a href={`/cases/${subject.kind === "case" ? subject.id : subject.caseId}/`}>{subject.label}</a></h4><p>{subject.description}</p></div>)}</section><section><h3>Questions and criteria</h3>{challenges.map(({ challenge, criteria }) => challenge && <article><h4><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h4><p>{challenge.rationale}</p>{criteria.map((criterion) => <p><strong>{criterion.label}:</strong> {criterion.definition}</p>)}</article>)}</section></div></details>
       <details class="apparatus-group"><summary>Scope and external orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p><ExternalReferences references={approach.externalRefs} /></div></details>
     </section>
+      </div>
+    </div>
     {(relatedCaseLinks.length > 0 || hasComparison) && <nav class="next-actions" aria-label="Continue">{relatedCaseLinks.map((item) => <a href={`/cases/${item.id}/`}>Inspect {item.label}</a>)}{hasComparison && <a href="/compare/">Compare promise with practice</a>}</nav>}
   </article>
 </BaseLayout>

@@ -1,22 +1,30 @@
 ---
-import ResearchObligationCard from "./ResearchObligationCard.astro";
 import type { ResearchObligation } from "../lib/domain";
 import { researchObligationsForTarget } from "../lib/domain/canonical";
+import ResearchObligationCard from "./ResearchObligationCard.astro";
 
 interface Props {
   kind: ResearchObligation["target"]["kind"];
   id: string;
+  sectionId?: string;
+  heading?: string;
 }
 
-const { kind, id } = Astro.props;
+const openResearchHeading = "Questions current evidence does not settle";
+const {
+  kind,
+  id,
+  sectionId = `open-research-${id}`,
+  heading = openResearchHeading,
+} = Astro.props;
 const obligations = researchObligationsForTarget(kind, id);
 ---
 
 {obligations.length > 0 && (
-  <section class="open-research" aria-labelledby={`open-research-${id}`}>
+  <section id={sectionId} class="open-research" aria-labelledby={`${sectionId}-title`}>
     <header>
       <p class="coordinate">OPEN QUESTIONS</p>
-      <h2 id={`open-research-${id}`}>Questions current evidence does not settle</h2>
+      <h2 id={`${sectionId}-title`}>{heading}</h2>
       <p>Missing evidence does not imply an answer.</p>
     </header>
     <ol>

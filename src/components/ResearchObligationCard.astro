@@ -8,10 +8,11 @@ import {
 
 interface Props {
   obligation: ResearchObligation;
+  anchored?: boolean;
   showTarget?: boolean;
 }
 
-const { obligation, showTarget = false } = Astro.props;
+const { obligation, anchored = true, showTarget = false } = Astro.props;
 const target = entityById(obligation.target.id);
 const status = obligation.obligationStatus.replaceAll("-", " ");
 const isClosed = ["resolved", "withdrawn"].includes(
@@ -19,7 +20,7 @@ const isClosed = ["resolved", "withdrawn"].includes(
 );
 ---
 
-<li id={obligation.id} class="research-obligation">
+<li id={anchored ? obligation.id : undefined} class="research-obligation">
   <p class="coordinate">
     {obligation.obligationType.replaceAll("-", " ")} / {status}
   </p>

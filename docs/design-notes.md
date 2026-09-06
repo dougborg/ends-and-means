@@ -85,11 +85,11 @@ Definitions, evidence traces, source locators, unresolved questions, and model
 distinctions remain close at hand through contextual links and disclosures.
 This is progressive disclosure, not evidence removal.
 
-The first implemented Subject Guide uses a compact question rail as its
-signature.
-The rail repeats authored section questions only as navigation, while the wide
+Long learner pages use a shared compact question rail as their on-page
+navigation.
+The rail repeats rendered section questions only as navigation, while the wide
 reading column answers them in order.
-It remains in normal flow on narrow screens and under text zoom.
+It becomes a native compact disclosure on narrow screens and under text zoom.
 The short answer occupies the hero without viewport-height staging, and
 unsupported sections disappear without empty headings or side columns.
 See the [Subject Guide experience contract](subject-guide-experience.md).

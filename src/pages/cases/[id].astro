@@ -3,12 +3,14 @@ import CanonicalStatement from "../../components/CanonicalStatement.astro";
 import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
+import OnPageNavigation from "../../components/OnPageNavigation.astro";
 import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import RelatedIdeas from "../../components/RelatedIdeas.astro";
 import TransitionPanel from "../../components/TransitionPanel.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { Approach, Case, CaseEpisode, Concept, Criterion } from "../../lib/domain";
-import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom } from "../../lib/domain/canonical";
+import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, researchObligationsForTarget } from "../../lib/domain/canonical";
+import { hasUsefulOnPageNavigation } from "../../lib/on-page-navigation";
 export function getStaticPaths() { return entitiesOfKind("case").map((item) => ({ params: { id: item.id }, props: { item } })); }
 const item = Astro.props.item as Case;
 const dossier = dossierForSubject("case", item.id);
@@ -19,15 +21,35 @@ const approachIds = new Set(episodes.flatMap((episode) => relationshipsFrom(epis
 const approaches = [...approachIds].map((id) => entityById(id)).filter((value): value is Approach => value?.kind === "approach");
 const hasComparison = episodes.some((episode) => relationshipsFrom(episode.id).some(({ predicate }) => predicate === "placed-on"));
 const relatedIdeas = [...approachIds].flatMap((approachId) => relationshipsFrom(approachId)).filter((relation) => relation.predicate === "interprets-concept").map((relation) => ({ concept: entityById(relation.object.id) as Concept | undefined, role: relation.role, interpretation: relation.interpretation })).filter((value): value is { concept: Concept; role: "core" | "adjacent" | "peripheral" | "contested"; interpretation: string } => Boolean(value.concept)).sort((a, b) => ["core", "adjacent", "contested", "peripheral"].indexOf(a.role) - ["core", "adjacent", "contested", "peripheral"].indexOf(b.role));
+const hasOpenResearch = researchObligationsForTarget("case", item.id).length > 0;
+const openResearchSection = { id: "open-questions", label: "Questions current evidence does not settle" };
+const recordSection = { id: "case-record", label: "What are the case boundaries and records?" };
+const outlineItems = [
+  ...(dossier?.sections.map(({ id, heading }) => ({ id, label: heading })) ?? []),
+  ...(hasOpenResearch ? [openResearchSection] : []),
+  recordSection,
+];
+const hasOutline = hasUsefulOnPageNavigation(outlineItems);
+const anchoredStatementIds = new Set<string>();
+const claimStatementAnchor = (id: string) => {
+  if (anchoredStatementIds.has(id)) return false;
+  anchoredStatementIds.add(id);
+  return true;
+};
 ---
 <BaseLayout title={item.label} description={dossier?.standfirst ?? item.description} fullBleed>
   <article class="canonical-dossier case-dossier"><nav aria-label="Breadcrumb"><a href="/cases/">Cases</a> / {item.endDate ? "Historical case" : "Ongoing case"}</nav><header><p class="coordinate">CASE / {item.startDate.year}–{item.endDate?.year ?? "ongoing"}</p><h1>{item.label}</h1><DossierStandfirst content={dossier?.standfirst ?? item.description} statementIds={dossier?.standfirstStatementIds} /></header>
+    <div class:list={["page-outline-layout", { "page-outline-layout--active": hasOutline }]}>
+      <OnPageNavigation pageLabel={item.label} items={outlineItems} />
+      <div class="page-outline-layout__content">
     {dossier && <NarrativeDossier sections={dossier.sections} label="THE CASE" heading="What happened in this case?" />}
-    <OpenResearchQuestions kind="case" id={item.id} />
-    <section class="reference-apparatus" aria-labelledby="case-reference-title"><header><p class="coordinate">DETAILS</p><h2 id="case-reference-title">What are the case boundaries and records?</h2><p>Check the scope, related ideas, and institutional evidence behind the overview.</p></header>
+    <OpenResearchQuestions kind="case" id={item.id} sectionId={openResearchSection.id} heading={openResearchSection.label} />
+    <section id={recordSection.id} class="reference-apparatus" aria-labelledby="case-reference-title"><header><p class="coordinate">DETAILS</p><h2 id="case-reference-title">{recordSection.label}</h2><p>Check the scope, related ideas, and institutional evidence behind the overview.</p></header>
     <details class="apparatus-group"><summary>Scope, selection, and background links</summary><div class="apparatus-group__body"><div><p class="scope-note"><strong>Boundary:</strong> {item.scope}</p><p class="scope-note"><strong>Why this case:</strong> {item.selectionRationale}</p></div><div><RelatedIdeas ideas={relatedIdeas} /><ExternalReferences references={item.externalRefs} /></div></div></details>
-    {episodeViews.map(({ episode, assessments }) => <><details class="apparatus-group" id={episode.id}><summary>{episode.label} <span>{episode.startDate.year}–{episode.endDate?.year}</span></summary><div class="apparatus-group__body apparatus-group__body--single"><section class="episode"><p>{episode.scope}</p><div class="evidence-columns"><section><h3>Formal design</h3>{episode.formalRuleStatementIds.map((id) => <CanonicalStatement statementId={id} />)}</section><section><h3>Rules in use</h3>{episode.ruleInUseStatementIds.map((id) => <CanonicalStatement statementId={id} />)}</section><section><h3>Observed outcomes</h3>{episode.outcomeStatementIds.map((id) => <CanonicalStatement statementId={id} />)}</section></div>{assessments.length > 0 && <section class="case-assessments"><p class="coordinate">Criterion-specific assessments</p>{assessments.map(({ criterion, conclusion, statementIds }) => criterion && <article><h3>{criterion.label}<small>{conclusion}</small></h3><div>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div></article>)}</section>}</section></div></details>{transitions.filter((transition) => transition.fromEpisodeIds.includes(episode.id)).map((transition) => <details class="apparatus-group"><summary>Change over time: {transition.label}</summary><div class="apparatus-group__body apparatus-group__body--single"><TransitionPanel transition={transition} /></div></details>)}</>)}
+    {episodeViews.map(({ episode, assessments }) => <><details class="apparatus-group" id={episode.id}><summary>{episode.label} <span>{episode.startDate.year}–{episode.endDate?.year}</span></summary><div class="apparatus-group__body apparatus-group__body--single"><section class="episode"><p>{episode.scope}</p><div class="evidence-columns"><section><h3>Formal design</h3>{episode.formalRuleStatementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</section><section><h3>Rules in use</h3>{episode.ruleInUseStatementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</section><section><h3>Observed outcomes</h3>{episode.outcomeStatementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</section></div>{assessments.length > 0 && <section class="case-assessments"><p class="coordinate">Criterion-specific assessments</p>{assessments.map(({ criterion, conclusion, statementIds }) => criterion && <article><h3>{criterion.label}<small>{conclusion}</small></h3><div>{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</div></article>)}</section>}</section></div></details>{transitions.filter((transition) => transition.fromEpisodeIds.includes(episode.id)).map((transition) => <details class="apparatus-group"><summary>Change over time: {transition.label}</summary><div class="apparatus-group__body apparatus-group__body--single"><TransitionPanel transition={transition} anchorForStatement={claimStatementAnchor} /></div></details>)}</>)}
     </section>
+      </div>
+    </div>
     {(approaches.length > 0 || hasComparison) && <nav class="next-actions" aria-label="Continue">{approaches.map((approach) => <a href={`/explore/${approach.id}/`}>Return to {approach.label}</a>)}{hasComparison && <a href="/compare/">Compare promise with practice</a>}</nav>}
   </article>
 </BaseLayout>

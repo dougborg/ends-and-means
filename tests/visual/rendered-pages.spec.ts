@@ -169,9 +169,127 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
     await qualification.locator("summary").click();
     await expect(qualification.getByText("Evidence status")).toBeVisible();
     await expect(qualification.getByText("qualified", { exact: true })).toBeVisible();
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    const mobileOutline = page.locator("details.page-outline__mobile");
+    await mobileOutline.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(mobileOutline).toHaveAttribute("open", "");
+    const noScriptLink = mobileOutline.getByRole("link", { name: "Does it mean one institutional model?" });
+    await expect(noScriptLink).toHaveAttribute("href", "#meanings-and-boundaries");
+    await noScriptLink.click({ force: true });
+    await expect(page).toHaveURL(/#meanings-and-boundaries$/);
   } finally {
     await context.close();
   }
+});
+
+test("generated outlines navigate long pages and collapse natively on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
+  const desktopOutline = page.locator(".page-outline__desktop");
+  await expect(desktopOutline).toBeVisible();
+  await expect(page.locator(".page-outline")).toHaveCSS("position", "sticky");
+  await page.evaluate(() => window.scrollTo(0, 1_400));
+  const stickyTop = await page.locator(".page-outline").evaluate((element) => element.getBoundingClientRect().top);
+  expect(stickyTop).toBeGreaterThanOrEqual(0);
+  expect(stickyTop).toBeLessThan(32);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await desktopOutline.getByRole("link", { name: "Does it mean one institutional model?" }).click();
+  await expect(page).toHaveURL(/#meanings-and-boundaries$/);
+  const target = page.locator("#meanings-and-boundaries");
+  await expect(target).toBeInViewport();
+  expect(await target.evaluate((element) => element.getBoundingClientRect().top)).toBeGreaterThanOrEqual(0);
+  await expect(target).toBeFocused();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(desktopOutline).toBeHidden();
+  const mobileOutline = page.locator("details.page-outline__mobile");
+  await expect(mobileOutline).toBeVisible();
+  await mobileOutline.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(mobileOutline).toHaveAttribute("open", "");
+  await expect(mobileOutline.getByRole("link", { name: "Does it mean one institutional model?" })).toBeVisible();
+});
+
+test("qualifying routes derive exact ordered links from rendered targets", async ({ page }) => {
+  for (const route of [
+    "/guides/economic-democracy/",
+    "/explore/swedish-rehn-meidner-model/",
+    "/cases/swedish-wage-earner-funds/",
+    "/challenges/authority-and-accountability/",
+  ]) {
+    await page.goto(route, { waitUntil: "networkidle" });
+    const links = page.locator(".page-outline__desktop li a");
+    const count = await links.count();
+    expect(count).toBeGreaterThanOrEqual(3);
+    expect(await page.locator(".page-outline").getAttribute("data-item-count")).toBe(String(count));
+    const targets: string[] = [];
+    for (let index = 0; index < count; index += 1) {
+      const link = links.nth(index);
+      const href = await link.getAttribute("href");
+      expect(href).toMatch(/^#[a-z0-9-]+$/);
+      const id = href?.slice(1) ?? "";
+      targets.push(id);
+      const target = page.locator(`#${id}`);
+      await expect(target).toHaveCount(1);
+      const label = (await link.textContent())?.replace(/^\d+/, "").trim();
+      const targetLabel = id === "short-answer"
+        ? await target.getAttribute("aria-label")
+        : (await target.locator("h1, h2, h3").first().textContent())?.trim();
+      expect(label).toBe(targetLabel);
+    }
+    expect(new Set(targets).size).toBe(targets.length);
+  }
+});
+
+test("short and out-of-scope real routes omit on-page navigation", async ({ page }) => {
+  for (const route of ["/concepts/institutional-abolition/", "/reading/"]) {
+    await page.goto(route, { waitUntil: "networkidle" });
+    await expect(page.locator(".page-outline")).toHaveCount(0);
+  }
+});
+
+test("generated learner pages contain no duplicate fragment identifiers", async ({ page }) => {
+  for (const route of [
+    "/guides/economic-democracy/",
+    "/guides/socialism/",
+    "/guides/communism/",
+    "/guides/kahnawake-community-lawmaking/",
+    "/explore/swedish-rehn-meidner-model/",
+    "/cases/swedish-solidaristic-bargaining/",
+    "/challenges/authority-and-accountability/",
+  ]) {
+    await page.goto(route, { waitUntil: "networkidle" });
+    const duplicates = await page.locator("[id]").evaluateAll((elements) => {
+      const counts = new Map<string, number>();
+      for (const element of elements) counts.set(element.id, (counts.get(element.id) ?? 0) + 1);
+      return [...counts].filter(([, count]) => count > 1).map(([id]) => id);
+    });
+    expect(duplicates).toEqual([]);
+  }
+});
+
+test("repeated guide research questions have one fragment owner", async ({ page }) => {
+  await page.goto("/guides/socialism/", { waitUntil: "networkidle" });
+  const obligationId = "socialism-democratic-control-threshold";
+  const repeatedQuestion = page.locator(".research-obligation").filter({
+    has: page.getByRole("heading", {
+      name: "Which rights and accountability mechanisms are sufficient for productive assets to be under social and democratic control?",
+    }),
+  });
+
+  await expect(repeatedQuestion).toHaveCount(2);
+  await expect(page.locator(`#${obligationId}`)).toHaveCount(1);
+  expect(await repeatedQuestion.evaluateAll((cards) => cards.map(({ id }) => id))).toEqual([
+    obligationId,
+    "",
+  ]);
+  await expect(page.locator(`#${obligationId}`).getByRole("heading")).toHaveText(
+    "Which rights and accountability mechanisms are sufficient for productive assets to be under social and democratic control?",
+  );
 });
 
 test("representative pages have learner-first outlines and unique disclosure names", async ({ page }) => {
@@ -208,21 +326,27 @@ test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) =
 test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 1000 });
   await page.goto("/guides/economic-democracy/");
-  await expect(page.locator(".subject-guide__rail")).toHaveCSS("position", "sticky");
+  await expect(page.locator(".page-outline")).toHaveCSS("position", "sticky");
   // Browser zoom reduces the effective CSS viewport. Model 200% zoom by halving
   // the viewport while scaling text, after proving the same page begins above
   // the responsive breakpoint at 100%.
   await page.setViewportSize({ width: 640, height: 1000 });
   await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
   const audit = await page.evaluate(() => {
-    const rail = document.querySelector(".subject-guide__rail");
+    const outline = document.querySelector(".page-outline");
+    const desktop = document.querySelector(".page-outline__desktop");
+    const mobile = document.querySelector(".page-outline__mobile");
     return {
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      railPosition: rail ? getComputedStyle(rail).position : "missing",
+      outlinePosition: outline ? getComputedStyle(outline).position : "missing",
+      desktopDisplay: desktop ? getComputedStyle(desktop).display : "missing",
+      mobileDisplay: mobile ? getComputedStyle(mobile).display : "missing",
     };
   });
   expect(audit.overflow).toBeLessThanOrEqual(1);
-  expect(audit.railPosition).toBe("static");
+  expect(audit.outlinePosition).toBe("static");
+  expect(audit.desktopDisplay).toBe("none");
+  expect(audit.mobileDisplay).not.toBe("none");
 });
 
 test("research obligations expose their claim ledger from the keyboard", async ({ page }) => {

@@ -16,6 +16,7 @@ import {
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
 import MarkdownProse from "./MarkdownProse.astro";
+import OnPageNavigation from "./OnPageNavigation.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
 import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
 
@@ -108,6 +109,20 @@ const journeySections = visibleSubjectGuideSections(guide).filter(
 const primary = entityById(guide.primarySubject.id);
 const primaryHref = hrefForEntity(guide.primarySubject);
 const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
+const outlineItems = [
+  { id: "short-answer", label: shortAnswer?.heading ?? `About ${guide.label}` },
+  ...journeySections.map(({ id, heading }) => ({ id, label: heading })),
+];
+const referenceLink = primary && primaryHref
+  ? { href: primaryHref, label: `Open the ${primary.label} reference page` }
+  : undefined;
+const anchoredObligationIds = new Set<string>();
+
+function ownsObligationAnchor(id: string) {
+  if (anchoredObligationIds.has(id)) return false;
+  anchoredObligationIds.add(id);
+  return true;
+}
 ---
 
 <article class="subject-guide">
@@ -115,7 +130,7 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
     <a href="/explore/">Explore</a><span aria-hidden="true">/</span><span aria-current="page">{guide.label}</span>
   </nav>
 
-  <header class="subject-guide__hero" id="short-answer">
+  <section class="subject-guide__hero" id="short-answer" aria-label={outlineItems[0]?.label}>
     <p class="coordinate">LEARN ABOUT</p>
     <h1>{guide.label}</h1>
     {shortAnswerSelections.map((selection) => (
@@ -134,21 +149,14 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
         )}
       </div>
     ))}
-  </header>
+  </section>
 
   <div class="subject-guide__layout">
-    <nav class="subject-guide__rail" aria-label={`On this page: ${guide.label}`}>
-      <p class="coordinate">ON THIS PAGE</p>
-      <ol>
-        <li><a href="#short-answer">{shortAnswer?.heading ?? `About ${guide.label}`}</a></li>
-        {journeySections.map((section) => <li><a href={`#${section.id}`}>{section.heading}</a></li>)}
-      </ol>
-      {primary && primaryHref && (
-        <a class="subject-guide__reference-link" href={primaryHref}>
-          Open the {primary.label} reference page
-        </a>
-      )}
-    </nav>
+    <OnPageNavigation
+      pageLabel={guide.label}
+      items={outlineItems}
+      {...(referenceLink ? { referenceLink } : {})}
+    />
 
     <div class="subject-guide__journey">
       {journeySections.map((section) => {
@@ -249,7 +257,12 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
 
             {obligations.length > 0 && (
               <ol class="subject-guide__questions">
-                {obligations.map((obligation) => <ResearchObligationCard obligation={obligation} />)}
+                {obligations.map((obligation) => (
+                  <ResearchObligationCard
+                    obligation={obligation}
+                    anchored={ownsObligationAnchor(obligation.id)}
+                  />
+                ))}
               </ol>
             )}
           </section>

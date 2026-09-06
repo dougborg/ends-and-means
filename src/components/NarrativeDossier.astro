@@ -37,7 +37,7 @@ const heading = suppliedHeading ?? (label === "Overview" ? "What should you know
             <details class="reference-disclosure">
               <summary>Sources for “{section.heading}” <span>{section.statementIds.length} {section.statementIds.length === 1 ? "claim" : "claims"}</span></summary>
               <div class="reference-disclosure__body">
-                {section.statementIds.map((id) => <CanonicalStatement statementId={id} />)}
+                {section.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
               </div>
             </details>
           )}
