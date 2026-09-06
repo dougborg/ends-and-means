@@ -797,6 +797,51 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
   }
 });
 
+test("mobile menu yields focus and closes at its keyboard boundary", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/concepts/economic-democracy/");
+
+  const disclosure = page.locator("details.mobile-navigation");
+  const summary = disclosure.locator("summary");
+  const menuLinks = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link");
+  const breadcrumb = page
+    .getByRole("navigation", { name: "Breadcrumb" })
+    .getByRole("link");
+
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await menuLinks.last().focus();
+  await page.keyboard.press("Tab");
+
+  await expect(disclosure).not.toHaveAttribute("open", "");
+  await expect(breadcrumb).toBeFocused();
+  const focusPresentation = await breadcrumb.evaluate((link) => {
+    const bounds = link.getBoundingClientRect();
+    const topmost = document.elementFromPoint(
+      bounds.left + bounds.width / 2,
+      bounds.top + bounds.height / 2,
+    );
+    const style = getComputedStyle(link);
+    return {
+      unobscured: topmost === link || link.contains(topmost),
+      outlineStyle: style.outlineStyle,
+      outlineWidth: Number.parseFloat(style.outlineWidth),
+    };
+  });
+  expect(focusPresentation.unobscured).toBe(true);
+  expect(focusPresentation.outlineStyle).not.toBe("none");
+  expect(focusPresentation.outlineWidth).toBeGreaterThanOrEqual(3);
+
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await expect(disclosure).toHaveAttribute("open", "");
+  await page.keyboard.press("Escape");
+  await expect(disclosure).not.toHaveAttribute("open", "");
+  await expect(summary).toBeFocused();
+});
+
 test("mobile menu retains native navigation without JavaScript", async ({ browser }, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
   if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");

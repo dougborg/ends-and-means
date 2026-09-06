@@ -44,7 +44,9 @@ A native disclosure opens an anchored, full-width panel containing Home, all
 primary routes, and all trust routes; its closed label names the current
 section, while the open link also uses `aria-current` and a text underline.
 The disclosure works without JavaScript, with enhancement limited to Escape,
-outside-click, and navigation-close behavior.
+outside-click, navigation-close, and focus-leave behavior.
+When keyboard focus advances beyond the last menu link, the panel closes without
+moving focus away from the next page control.
 Desktop navigation and the footer site map retain their existing structures.
 
 Both landmarks consume the same typed public-route registry.
