@@ -5,6 +5,7 @@ import {
   entitiesOfKind,
   entityById,
   placementsForDimension,
+  publicEntitiesOfKind,
   relationshipsFrom,
   relationshipsTo,
   requireEntityOfKind,
@@ -97,6 +98,23 @@ describe("canonical vertical slice", () => {
 });
 
 describe("canonical comparison and lookup helpers", () => {
+  it("keeps nonlive entities out of public kind projections", () => {
+    const reviewed = requireEntityOfKind("distribution", "criterion");
+    const researchNeeded = {
+      ...reviewed,
+      id: "test-nonlive-criterion",
+      publicationStatus: "research-needed" as const,
+    };
+    const graph = {
+      ...canonicalGraph,
+      entities: [...canonicalGraph.entities, researchNeeded],
+    };
+
+    expect(publicEntitiesOfKind("criterion", graph).map(({ id }) => id)).not.toContain(
+      researchNeeded.id,
+    );
+  });
+
   it("publishes a descriptive Dimension with scoped episode Placements", () => {
     expect(entitiesOfKind("comparison-dimension").map(({ id }) => id)).toEqual([
       "collective-wage-earner-shareholding-authority",

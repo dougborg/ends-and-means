@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ComparisonGrid from "../../components/ComparisonGrid.astro";
-import { entitiesOfKind } from "../../lib/domain/canonical";
+import { publicEntitiesOfKind } from "../../lib/domain/canonical";
 
-const criteria = entitiesOfKind("criterion");
+const criteria = publicEntitiesOfKind("criterion");
 const repository = "https://github.com/dougborg/ends-and-means";
+const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+claim%5D&body=Page+or+claim%3A%0A%0AWhat+should+change%3A%0A%0AEvidence+and+exact+passage%3A`;
 ---
 
 <BaseLayout title="Method" description="How Ends and Means researches, classifies, and explains contested political and economic subjects." fullBleed>
@@ -26,9 +27,9 @@ const repository = "https://github.com/dougborg/ends-and-means";
       <h2 id="sequence-title">How can I check an explanation?</h2>
       <ol>
         <li><strong>Ask</strong><span>Begin with the subject or question you recognize.</span></li>
-        <li><strong>Read</strong><span>Get the explanation before the technical apparatus.</span></li>
-        <li><strong>Open a claim</strong><span>Reveal the evidence beside a factual sentence.</span></li>
-        <li><strong>Check the source</strong><span>See the author, title, edition, and publication details.</span></li>
+        <li><strong>Read</strong><span>Get the explanation before the supporting claims and sources.</span></li>
+        <li><strong>Open a claim</strong><span>Reveal supporting claims and citations near the explanation.</span></li>
+        <li><strong>Check the citation</strong><span>See the contributor, year, exact location, and link to the source.</span></li>
         <li><strong>Go to the passage</strong><span>Use the page, article, chapter, or section named in the citation.</span></li>
         <li><strong>Keep the limits</strong><span>Read qualifications and open questions with the claim.</span></li>
       </ol>
@@ -54,7 +55,7 @@ const repository = "https://github.com/dougborg/ends-and-means";
     <section class="model-boundary" aria-labelledby="cases-title">
       <p class="coordinate">BOUNDED CASES</p>
       <h2 id="cases-title">A case shows a setting, not a perfect example.</h2>
-      <p>Each case names the place, period, people, and institutions the evidence actually covers. Where possible, it separates written rules from rules in use, interactions, and outcomes. A country is not treated as one timeless system, and an institution found in a case does not make the whole case an embodiment of an ideology.</p>
+      <p>Each case bounds the place and period and identifies the people and institutions its evidence addresses. Where possible, it separates written rules from rules in use, interactions, and outcomes. A country is not treated as one timeless system, and an institution found in a case does not make the whole case an embodiment of an ideology.</p>
       <p>Case selection and sources create limits. Records may preserve official voices better than ordinary experience, cover one region unevenly, or describe a translated term through colonial categories. Those gaps narrow what the case can establish and what can be transferred elsewhere.</p>
     </section>
 
@@ -63,6 +64,7 @@ const repository = "https://github.com/dougborg/ends-and-means";
       <h2 id="uncertainty-title">Human judgment remains accountable.</h2>
       <p>Researchers and reviewers decide which questions matter, how a claim is worded, which sources are relevant, and whether a classification is fair. Checks can catch missing links, unsupported publication states, and malformed citations; they cannot make those choices neutral.</p>
       <p>Uncertainty should change the wording and scope of a conclusion. Fairness does not give every account equal weight when their relevance or evidentiary quality differs. Consequential objections, conflicting evidence, causal alternatives, and unanswered questions remain visible as <a href="/research/">open research questions</a>. Better evidence can revise a claim, a classification, or the method itself.</p>
+      <p>To <a href={correctionUrl}>suggest a correction</a>, name the page or claim, explain what should change, and link the evidence and exact passage when possible. A person reviews the proposal and its sources before publication. Accepted material changes remain inspectable in the public repository history.</p>
     </section>
 
     <section class="criteria-section" aria-labelledby="criteria-title">
@@ -75,7 +77,7 @@ const repository = "https://github.com/dougborg/ends-and-means";
     <section class="model-boundary" aria-labelledby="details-title">
       <p class="coordinate">FURTHER DETAILS</p>
       <h2 id="details-title">Read the commitments and technical definitions.</h2>
-      <p>The <a href={`${repository}/blob/main/docs/project-vision.md`}>project vision</a> describes the site’s purpose. The <a href={`${repository}/blob/main/docs/editorial-philosophy.md`}>editorial principles</a> explain fairness, governance, judgment, and correction. The <a href={`${repository}/blob/main/CONTRIBUTING.md`}>contribution guide</a> explains how to <a href={`${repository}/issues/new`}>suggest a correction</a> or offer evidence. Researchers can also inspect the <a href={`${repository}/blob/main/docs/domain-model.md`}>technical definitions</a> used to keep records distinct.</p>
+      <p>The <a href={`${repository}/blob/main/docs/project-vision.md`}>project vision</a> describes the site’s purpose. The <a href={`${repository}/blob/main/docs/editorial-philosophy.md`}>editorial principles</a> explain fairness, governance, judgment, and correction. The <a href={`${repository}/blob/main/CONTRIBUTING.md`}>contribution guide</a> gives further detail for offering evidence. Researchers can also inspect the <a href={`${repository}/blob/main/docs/domain-model.md`}>technical definitions</a> used to keep records distinct.</p>
     </section>
   </article>
 </BaseLayout>

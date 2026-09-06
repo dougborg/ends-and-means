@@ -14,6 +14,17 @@ export function entitiesOfKind<K extends DomainEntity["kind"]>(kind: K) {
   );
 }
 
+export function publicEntitiesOfKind<K extends DomainEntity["kind"]>(
+  kind: K,
+  graph: CompiledDomainGraph = canonicalGraph,
+) {
+  return graph.entities.filter(
+    (entity): entity is Extract<DomainEntity, { kind: K }> =>
+      entity.kind === kind &&
+      ["reviewed", "published"].includes(entity.publicationStatus),
+  );
+}
+
 export function relationshipsFrom(id: string) {
   const ids = new Set(canonicalGraph.indexes.outgoingRelationshipIds[id] ?? []);
   return canonicalGraph.relationships.filter((relationship) =>
