@@ -390,20 +390,31 @@ describe("editorial similarity signals", () => {
         },
       ],
     };
-    const finding = verify({ graph }).findings.find(
-      ({ location }) => location === "fixture-dossier#answer",
+    const findings = verify({ graph }).findings.filter(
+      ({ category, location }) =>
+        category === "source-similarity" &&
+        location === "fixture-dossier#answer",
     );
-    expect(finding).toEqual(
-      expect.objectContaining({
+    expect(findings).toHaveLength(2);
+    expect(findings.map(({ message }) => message)).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining(
+          "acknowledgement target fixture-dossier#answer|fixture-statement|fixture-statement-cites-source;",
+        ),
+        expect.stringContaining(
+          "acknowledgement target fixture-dossier#answer|fixture-statement|fixture-statement-cites-source-again;",
+        ),
+      ]),
+    );
+    for (const finding of findings) {
+      expect(finding).toMatchObject({
         category: "source-similarity",
         severity: "attention",
         location: "fixture-dossier#answer",
-        message: expect.stringContaining(
-          "compare against Source fixture-source",
-        ),
-      }),
-    );
-    expect(finding?.message.match(/fixture-source/gu)).toHaveLength(1);
+      });
+      expect(finding.message).toContain("compare against Source fixture-source");
+      expect(finding.message.match(/compare against Source fixture-source/gu)).toHaveLength(1);
+    }
   });
 });
 
