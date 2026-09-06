@@ -15,7 +15,7 @@ const common = {
 };
 
 const relationships = [
-  { ...common, id: "membership", predicate: "member-of", subject: { kind: "concept", id: "concept" }, object: { kind: "collection", id: "collection" }, membership: "contested" },
+  { ...common, id: "membership", predicate: "member-of", subject: { kind: "concept", id: "concept" }, object: { kind: "collection", id: "collection" }, membership: "widely-accepted" },
   { ...common, id: "implementation", predicate: "used-means", subject: { kind: "case", id: "case" }, object: { kind: "means", id: "means" }, implementation: "rules-in-use" },
   { ...common, id: "conclusion", predicate: "assessed-by", subject: { kind: "case", id: "case" }, object: { kind: "criterion", id: "criterion" }, conclusion: "mixed" },
   { ...common, id: "interpretation", predicate: "interprets-concept", subject: { kind: "approach", id: "approach" }, object: { kind: "concept", id: "concept" }, role: "contested", interpretation: "A bounded synthetic interpretation." },
@@ -40,6 +40,8 @@ describe("SubjectGuide relationship detail component", () => {
     expect(html).toContain("How to read this connection");
     for (const value of [
       "contested",
+      "Membership",
+      "widely accepted",
       "1984–1991",
       "Sweden",
       "Only the enacted regional program.",
