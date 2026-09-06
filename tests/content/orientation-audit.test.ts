@@ -21,7 +21,7 @@ describe("orientation audit", () => {
         ["reviewed", "published"].includes(publicationStatus),
       ).length;
     expect(inventory).toHaveLength(expectedCount);
-    expect(inventory).toHaveLength(447);
+    expect(inventory).toHaveLength(1024);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
     ).toHaveLength(21);
@@ -29,10 +29,13 @@ describe("orientation audit", () => {
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(61);
+    ).toHaveLength(169);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
-    ).toHaveLength(365);
+    ).toHaveLength(834);
+    expect(
+      inventory.filter(({ disposition }) => disposition !== "not-applicable"),
+    ).toMatchSnapshot("eligible-target-decisions");
     expect(validateOrientationAudit(graph, inventory)).toEqual([]);
     expect(
       inventory.find(({ id }) => id === "guide-kahnawake-community-lawmaking"),
