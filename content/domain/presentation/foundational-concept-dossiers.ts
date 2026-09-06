@@ -6,7 +6,7 @@ const socialDemocracy = attachNarrative("social-democracy.md", {
   kind: "dossier" as const,
   label: "Social democracy dossier",
   description:
-    "A concise orientation to social democracy's historical formation, common reform institutions, contested endpoint, and bounded Swedish examples.",
+    "Social democracy developed through democratic revisions within socialist politics and is also used for strategies that constrain capitalism through democratic institutions. Welfare-state reforms recur across the tradition, but the term does not specify one fixed ownership endpoint.",
   subject: { kind: "concept" as const, id: "social-democracy" },
   standfirst: "",
   standfirstStatementIds: ["social-democracy-contested-definition"],
@@ -59,7 +59,7 @@ const economicDemocracy = attachNarrative("economic-democracy.md", {
   kind: "dossier" as const,
   label: "Economic democracy dossier",
   description:
-    "A concise orientation to economic democracy's contested scope, institutional families, control boundary, evidence limits, and bounded Swedish example.",
+    "Economic democracy asks how people subject to economic power can share in governing it across workplaces and the wider economy. Financial ownership, representation, and effective decision authority must be examined separately.",
   subject: { kind: "concept" as const, id: "economic-democracy" },
   standfirst: "",
   standfirstStatementIds: [
@@ -131,7 +131,7 @@ const socialOwnership = attachNarrative("social-ownership.md", {
   kind: "dossier" as const,
   label: "Social ownership dossier",
   description:
-    "A concise orientation to social ownership's distinct legal, beneficial, control, and return dimensions, neighboring concepts, and bounded Swedish examples.",
+    "Social ownership concerns who holds productive assets, benefits from them, governs their use, and receives their returns. Legal title or a financial claim does not by itself establish effective social control.",
   subject: { kind: "concept" as const, id: "social-ownership" },
   standfirst: "",
   standfirstStatementIds: [

@@ -11,6 +11,7 @@ import {
   compileDomainGraph,
   publicRelationshipLabel,
   validateAuthoringDocuments,
+  workflowReferencesIn,
 } from "../../src/lib/domain";
 import {
   canonicalGraph,
@@ -214,6 +215,14 @@ describe("SubjectGuide model boundaries", () => {
 });
 
 describe("SubjectGuide publication boundaries", () => {
+  it("keeps internal audience framing out of every compiled public guide identity", () => {
+    for (const guide of canonicalGraph.subjectGuides) {
+      expect(workflowReferencesIn(`${guide.label} ${guide.description}`)).toEqual(
+        [],
+      );
+    }
+  });
+
   it("rejects invalid status and internal workflow language from public text", () => {
     const errors = errorsAfter((guide) => {
       guide.publicationStatus = "ready" as SubjectGuide["publicationStatus"];
@@ -229,6 +238,35 @@ describe("SubjectGuide publication boundaries", () => {
         "guide-economic-democracy:short-answer: heading contains an internal workflow reference",
         "guide-economic-democracy: search-query disambiguation contains an internal workflow reference",
       ]),
+    );
+  });
+
+  it.each([
+    "A learner path through the subject.",
+    "A learner-path through the subject.",
+    "A learner journey through the subject.",
+    "A learner-first account of the subject.",
+    "A learning path through the subject.",
+    "A learning journey through the subject.",
+    "A reader journey through the subject.",
+  ])("rejects internal audience framing in public guide identity: %s", (description) => {
+    const errors = errorsAfter((guide) => {
+      guide.description = description;
+    });
+
+    expect(errors).toContain(
+      "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
+    );
+  });
+
+  it("allows substantive political pathways in public guide identity", () => {
+    const errors = errorsAfter((guide) => {
+      guide.description =
+        "The guide compares parliamentary and nonparliamentary political pathways.";
+    });
+
+    expect(errors).not.toContain(
+      "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
     );
   });
 

@@ -73,7 +73,7 @@ describe("learner-first Explore guide discovery", () => {
   it("falls back to deterministic all-token matching when no alias is exact", () => {
     const matches = matchExploreDirectory(
       buildExploreDirectory(canonicalGraph.subjectGuides),
-      "economic limitations",
+      "formal participation",
     );
 
     expect(matches.map(({ guide }) => guide.id)).toEqual([
@@ -85,9 +85,9 @@ describe("learner-first Explore guide discovery", () => {
     const directory = buildExploreDirectory(canonicalGraph.subjectGuides);
 
     expect(
-      matchExploreDirectory(directory, "economic limitations"),
+      matchExploreDirectory(directory, "formal participation"),
     ).toHaveLength(1);
-    expect(matchExploreDirectory(directory, "economic limit")).toEqual([]);
+    expect(matchExploreDirectory(directory, "formal participate")).toEqual([]);
     expect(matchExploreDirectory(directory, "comm")).toEqual([]);
   });
 

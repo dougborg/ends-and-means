@@ -8,7 +8,7 @@ export const kahnawakeCommunityDecisionMakingGuideDocuments = [
       slug: "kahnawake-community-lawmaking",
       label: "Kahnawà:ke community law-making",
       description:
-        "A bounded guide to one Kahnawà:ke law-making process, the terms used to describe it, and the evidence that limits broader claims about Indigenous or so-called tribal organization.",
+        "Kahnawà:ke’s Community Decision Making and Review Process combines hearings and consensus with an elected council and legislative commission. It is an evolving arrangement shaped by Kanien’kehá:ka commitments and Canadian colonial law, not evidence for a universal Indigenous or ‘tribal’ system.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "case", id: "kahnawake-community-lawmaking" },
       searchQueries: [

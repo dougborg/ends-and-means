@@ -20,6 +20,11 @@ const workflowPatterns = [
     name: "internal canonical-model narration",
     pattern: /\bcanonical (?:catalogue|graph|model|sources)\b/iu,
   },
+  {
+    name: "internal audience framing",
+    pattern:
+      /\b(?:learner(?:-first|[- ](?:path|journey|workflow))|learning (?:path|journey)|reader journey)\b/iu,
+  },
 ] as const;
 
 export function workflowReferencesIn(value: string): string[] {

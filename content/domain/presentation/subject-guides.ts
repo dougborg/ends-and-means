@@ -8,7 +8,7 @@ export const subjectGuideDocuments = [
       slug: "economic-democracy",
       label: "Economic democracy",
       description:
-        "A learner path through the meanings, institutional proposals, limitations, and bounded Swedish evidence connected with economic democracy.",
+        "Economic democracy groups proposals for making decisions about work, production, and investment answerable to the people they affect. Its institutions range from workplace participation to economy-wide governance, but ownership or formal participation alone does not establish effective democratic control.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "economic-democracy" },
       searchQueries: [
@@ -128,7 +128,7 @@ export const subjectGuideDocuments = [
       slug: "socialism",
       label: "Socialism",
       description:
-        "A learner path through socialism's disputed meanings, purposes, institutional choices, political strategies, and relationship to bounded practice.",
+        "Socialism is a contested family of traditions commonly concerned with social and democratic control of production and with egalitarian or cooperative aims. Socialists disagree over ownership, planning, markets, and political strategy, and neither state ownership nor one historical case settles the boundary.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "socialism" },
       searchQueries: [
@@ -278,7 +278,7 @@ export const subjectGuideDocuments = [
       slug: "communism",
       label: "Communism",
       description:
-        "A learner path separating communist ideals, programs, political routes, movements, organizational labels, and the evidence needed for bounded practice claims.",
+        "Communism can name an intended social order, a revolutionary tradition, a movement, a party identity, or institutions claimed by a government. Competing transition proposals and organizational histories must be kept separate, and a communist label does not establish how a bounded case worked.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "communism" },
       searchQueries: [

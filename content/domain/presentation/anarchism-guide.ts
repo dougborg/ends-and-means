@@ -1,11 +1,12 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
 import { attachNarrative } from "./load-narrative";
+
 const dossier = attachNarrative("anarchism.md", {
   id: "anarchism-dossier",
   kind: "dossier" as const,
   label: "Anarchism dossier",
   description:
-    "An evidence-backed orientation to anarchism's meanings, organizations, disputes, and bounded Spanish evidence.",
+    "Anarchism names a disputed family of ideas and movements opposed to governing domination. Its proposals use voluntary association, assemblies, delegation, and federation rather than rejecting organization itself.",
   subject: { kind: "concept" as const, id: "anarchism" },
   standfirst: "",
   standfirstStatementIds: [
@@ -75,7 +76,7 @@ const syndicalism = attachNarrative("anarcho-syndicalism.md", {
   id: "anarcho-syndicalist-organizing-dossier",
   kind: "dossier" as const,
   label: "Anarcho-syndicalist organizing dossier",
-  description: "A focused account of one anarchist organizational approach.",
+  description: "Anarcho-syndicalist organizing uses revolutionary unions both to defend workers under existing conditions and to prepare federated administration of production.",
   subject: { kind: "approach" as const, id: "anarcho-syndicalist-organizing" },
   standfirst: "",
   standfirstStatementIds: ["rocker-syndicalist-double-aim"],
@@ -98,7 +99,7 @@ const tradition = attachNarrative("anarcho-syndicalism-tradition.md", {
   id: "anarcho-syndicalism-dossier",
   kind: "dossier" as const,
   label: "Anarcho-syndicalism dossier",
-  description: "A boundary note for the historical tradition.",
+  description: "Anarcho-syndicalism is a historical tradition within libertarian or anarchist socialism that links union organization to wider social transformation.",
   subject: { kind: "concept" as const, id: "anarcho-syndicalism" },
   standfirst: "",
   standfirstStatementIds: ["anarchosyndicalist-self-identification"],
@@ -128,7 +129,7 @@ export const anarchismGuideDocuments = [
       slug: "anarchism",
       label: "Anarchism",
       description:
-        "A learner path through anarchism's meanings, institutions, disputes, overlaps, and bounded evidence.",
+        "Anarchism is a disputed family of ideas and movements opposed to governing domination, not to organization itself. Its traditions propose different institutions and strategies, and the mixed record of Republican Spain cannot represent anarchism as a whole.",
       publicationStatus: "reviewed",
       primarySubject: { kind: "concept", id: "anarchism" },
       searchQueries: [

@@ -14,7 +14,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish wage-earner fund program dossier",
       description:
-        "A narrative orientation to the program's purposes, institutional mechanism, enacted limits, and end.",
+        "Sweden’s wage-earner fund program sought more even wealth distribution and greater wage-earner influence through five publicly appointed investment boards. Statutory caps and the funds’ small market share limited their control before liquidation.",
       subject: { kind: "approach", id: "swedish-wage-earner-fund-program" },
       standfirst: "",
       standfirstStatementIds: [
@@ -83,7 +83,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish wage-earner funds case dossier",
       description:
-        "A plain-language account of the bounded 1983–1992 wage-earner-fund case.",
+        "From 1983 to 1992, five Swedish public boards invested payroll- and profit-tax receipts under statutory ownership and voting caps. The funds created collective holdings but never became controlling owners.",
       subject: { kind: "case", id: "swedish-wage-earner-funds" },
       standfirst: "",
       standfirstStatementIds: [
@@ -151,7 +151,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish Rehn–Meidner model dossier",
       description:
-        "A narrative orientation to the model's joint objectives, policy mechanisms, partial application, and empirical limits.",
+        "The Rehn–Meidner model combined solidaristic wage policy, active labor-market policy, and restrictive macroeconomic policy to pursue employment, fair wages, price stability, and growth. Sweden applied that package only partially and inconsistently.",
       subject: { kind: "approach", id: "swedish-rehn-meidner-model" },
       standfirst: "",
       standfirstStatementIds: [
@@ -230,7 +230,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish solidaristic bargaining case dossier",
       description:
-        "A narrative account of Sweden's bounded 1956–1983 centralized bargaining episode.",
+        "From 1956 to 1983, Swedish peak organizations coordinated wage bargaining while industry and workplace actors implemented agreements. Wage inequality fell rapidly in the 1970s, but the episode cannot by itself establish wider changes in wealth or control.",
       subject: { kind: "case", id: "swedish-solidaristic-bargaining" },
       standfirst: "",
       standfirstStatementIds: [
@@ -294,7 +294,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Distribution of gains and ownership dossier",
       description:
-        "A narrative orientation to the distribution challenge across wages, wealth, ownership, and control.",
+        "Distribution includes wages and income as well as wealth, ownership, control, benefits, and adjustment costs. Evidence of wage compression or collective holdings does not by itself establish equality across those other dimensions.",
       subject: { kind: "challenge", id: "distribution-of-gains-and-ownership" },
       standfirst: "",
       standfirstStatementIds: [

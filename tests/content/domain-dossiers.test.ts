@@ -5,6 +5,7 @@ import {
   compileDomainGraph,
   formatContentAttentionReport,
   validateAuthoringDocuments,
+  workflowReferencesIn,
 } from "../../src/lib/domain";
 import {
   canonicalGraph,
@@ -15,6 +16,18 @@ import {
 const entity = (value: DomainEntity): AuthoringDocument => ({
   documentType: "entity",
   entity: value,
+});
+
+it("keeps internal audience framing out of compiled live Dossier identity", () => {
+  for (const dossier of entitiesOfKind("dossier")) {
+    if (!["reviewed", "published"].includes(dossier.publicationStatus))
+      continue;
+    expect(
+      workflowReferencesIn(
+        `${dossier.label} ${dossier.description} ${dossier.standfirst}`,
+      ),
+    ).toEqual([]);
+  }
 });
 
 describe("canonical narrative dossiers", () => {
@@ -375,6 +388,40 @@ describe("narrative Dossier model", () => {
     );
     expect(errors).toContain(
       "test-concept-dossier:what-it-means: unresolved related entity organization:missing-organization",
+    );
+  });
+
+  it.each(["label", "description", "standfirst"] as const)(
+    "rejects internal audience framing in live Dossier %s",
+    (field) => {
+      const invalid = structuredClone(documents);
+      const dossier = invalid[2];
+      if (
+        dossier?.documentType !== "entity" ||
+        dossier.entity.kind !== "dossier"
+      )
+        throw new Error("Missing dossier fixture");
+      dossier.entity.publicationStatus = "reviewed";
+      dossier.entity[field] = "A learner journey through the evidence.";
+
+      expect(validateAuthoringDocuments(invalid)).toContain(
+        "test-concept-dossier: live Dossier identity contains an internal workflow reference",
+      );
+    },
+  );
+
+  it("allows internal audience framing in non-live Dossier records", () => {
+    const invalid = structuredClone(documents);
+    const dossier = invalid[2];
+    if (
+      dossier?.documentType !== "entity" ||
+      dossier.entity.kind !== "dossier"
+    )
+      throw new Error("Missing dossier fixture");
+    dossier.entity.description = "An internal learner journey fixture.";
+
+    expect(validateAuthoringDocuments(invalid)).not.toContain(
+      "test-concept-dossier: live Dossier identity contains an internal workflow reference",
     );
   });
 });

@@ -8,7 +8,7 @@ export const tawantinsuyuGuideDocuments = [
       slug: "tawantinsuyu-imperial-organization",
       label: "Tawantinsuyu (Inka Empire)",
       description:
-        "A bounded guide to how Tawantinsuyu organized authority, labor, provisioning, and incorporated peoples during its imperial expansion.",
+        "Tawantinsuyu was an expanding Andean empire whose rulers combined ranked authority and local government with compulsory labor, roads, stored provisions, negotiation, warfare, and resettlement. Regional variation and mediated colonial accounts limit any claim that it embodied a single communal economy or modern ideology.",
       publicationStatus: "reviewed",
       primarySubject: {
         kind: "case",

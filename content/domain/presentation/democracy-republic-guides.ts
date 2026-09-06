@@ -6,7 +6,7 @@ const democracyDossier = attachNarrative("democracy.md", {
   kind: "dossier" as const,
   label: "Democracy dossier",
   description:
-    "A learner-first distinction among democratic values, procedures, institutions, measurements, and bounded practice.",
+    "Democracy can describe political equality, decision procedures, institutions, or assessments of political systems. A vote alone does not establish that citizens had an equal say.",
   subject: { kind: "concept" as const, id: "democracy" },
   standfirst: "",
   standfirstStatementIds: [
@@ -92,7 +92,7 @@ const republicDossier = attachNarrative("republic.md", {
   kind: "dossier" as const,
   label: "Republic dossier",
   description:
-    "A learner-first distinction among republic, republican traditions, democracy, and bounded institutional evidence.",
+    "A republic is a governmental or constitutional form, while republicanism names related traditions of political argument. Neither label by itself establishes inclusive citizenship or political participation.",
   subject: { kind: "concept" as const, id: "republic" },
   standfirst: "",
   standfirstStatementIds: [
@@ -186,7 +186,7 @@ const representativeGovernmentDossier = attachNarrative(
     id: "representative-democratic-government-dossier",
     kind: "dossier" as const,
     label: "Representative democratic government dossier",
-    description: "Electoral authorization and its democratic limits.",
+    description: "Representative democratic government assigns public decisions to officeholders selected by voters. Elections authorize representatives but do not by themselves establish equal participation or constrain majority power.",
     subject: {
       kind: "approach" as const,
       id: "representative-democratic-government",
@@ -223,7 +223,7 @@ const neoRepublicanDossier = attachNarrative(
     kind: "dossier" as const,
     label: "Neo-republican non-domination dossier",
     description:
-      "A concise account of the contemporary non-domination approach.",
+      "Neo-republican theory treats freedom from arbitrary or uncontrolled power as a central political aim and connects that aim to older republican traditions.",
     subject: { kind: "approach" as const, id: "neo-republican-nondomination" },
     standfirst: "",
     standfirstStatementIds: ["republic-nondomination-end"],
@@ -254,8 +254,8 @@ const guide = (
     label: id === "democracy" ? "Democracy" : "Republic",
     description:
       id === "democracy"
-        ? "Distinguish democratic values, procedures, institutions, measurements, and bounded practice."
-        : "Distinguish republic, republican traditions, democracy, and bounded institutional evidence.",
+        ? "Democracy can name political equality, decision procedures, institutions, or a measured feature of a political system. Elections, sortition, and other arrangements distribute authority differently, and no vote, constitution, or public label proves equal participation or accountable rule."
+        : "A republic is a claim about constitutional or governmental form, while republicanism names related political traditions that may value freedom from domination. Neither term is interchangeable with democracy, and a republican label alone does not establish equal participation or accountability.",
     publicationStatus: "reviewed" as const,
     primarySubject: { kind: "concept" as const, id },
     searchQueries: [
