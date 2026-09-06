@@ -60,7 +60,7 @@ describe("content-integrity harness", () => {
     expect(finding).toMatchObject({
       category: "domain-validation",
       severity: "violation",
-      location: "document 273",
+      location: `document ${invalid.length - 1}`,
       remediation: expect.stringContaining("reference"),
     });
     expect(finding?.message).toContain(
