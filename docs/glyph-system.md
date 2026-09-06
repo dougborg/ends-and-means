@@ -38,6 +38,7 @@ Their exact mappings and fallbacks live in `src/lib/presentation-glyphs.ts`.
 - Keep shape legible at 12 pixels, in Light and Dark themes, forced colors, monochrome, and print; color may reinforce but never carry meaning alone.
 - Keep glyph styling in the shared `components` cascade layer.
   Every production Astro style block must be wholly wrapped in exactly one named cascade layer, with no unlayered rules before or after it.
+  The ratchet reads actual style elements through the Astro compiler AST, rejects malformed CSS through PostCSS, and proves the outer layer through css-tree’s grammar AST and identifier decoder; these syntax-aware dev dependencies are intentional because regular expressions cannot distinguish frontmatter strings, quoted attributes, comments, escaped identifiers, or nested CSS safely.
 - Accept only registry keys in the shared component.
   Never accept or render caller-provided SVG or HTML.
 - Treat entity-kind mappings as optional presentation metadata.

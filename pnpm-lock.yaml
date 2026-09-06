@@ -36,12 +36,18 @@ importers:
       '@playwright/test':
         specifier: ^1.63.0
         version: 1.63.0
+      '@types/css-tree':
+        specifier: ^3.2.0
+        version: 3.2.0
       '@types/node':
         specifier: ^26.4.1
         version: 26.4.1
       '@vitest/coverage-v8':
         specifier: ^5.0.0
         version: 5.0.0(vitest@5.0.0)
+      css-tree:
+        specifier: ^3.2.1
+        version: 3.2.1
       knip:
         specifier: ^6.34.0
         version: 6.34.0
@@ -51,6 +57,9 @@ importers:
       markdownlint-sentences-per-line:
         specifier: ^0.1.4
         version: 0.1.4(markdownlint@0.41.1)
+      postcss:
+        specifier: ^8.5.28
+        version: 8.5.28
       tsx:
         specifier: ^4.23.13
         version: 4.23.13
@@ -1089,6 +1098,9 @@ packages:
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
+
+  '@types/css-tree@3.2.0':
+    resolution: {integrity: sha512-J5KXmk6BFIepOT7280FdFyNs4c5fh0Uee0otjKEvzchrRs38Ii9qminqc4ds0L19X8Zd/rT+brR9jkBthygjWw==}
 
   '@types/debug@4.1.13':
     resolution: {integrity: sha512-KSVgmQmzMwPlmtljOomayoR89W4FynCAi3E8PPs7vmDVPe84hT+vGPKkJfThkmXs0x0jAaa9U8uW8bbfyS2fWw==}
@@ -3279,6 +3291,8 @@ snapshots:
     dependencies:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
+
+  '@types/css-tree@3.2.0': {}
 
   '@types/debug@4.1.13':
     dependencies:
