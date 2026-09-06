@@ -10,6 +10,7 @@ export interface RepositoryDeliveryFinding {
 type Node = Record<string, unknown>;
 const ownedCommands = [
   "pnpm audit:delivery",
+  "pnpm audit:content-preflight",
   "pnpm audit:content-integrity",
   "pnpm lint",
   "pnpm static",
@@ -267,7 +268,7 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   requireRule(existsSync(join(root, "pnpm-lock.yaml")), "PNPM_LOCK", "pnpm-lock.yaml is required.");
   requireRule(
     packageJson.scripts?.verify ===
-      "pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm audit:corpus-diversity && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual",
+      "pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm audit:corpus-diversity && pnpm audit:content-preflight && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual",
     "VERIFY_PATH",
     "pnpm verify must remain the single full local/CI verification path.",
   );
