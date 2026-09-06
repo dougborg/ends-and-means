@@ -185,9 +185,22 @@ export const collectiveCapitalFormationEvidenceDocuments = [
       kind: "statement",
       label: "National-accounts capital formation is a different concept",
       description:
-        "A boundary between an institutional ownership proposal and a measured investment aggregate.",
+        "The statistical definition of a measured investment aggregate.",
       statementKind: "definition",
-      text: "In national accounts, gross fixed capital formation measures net acquisitions of produced fixed assets used in production for more than one year; it does not identify who owns, governs, or benefits from those assets.",
+      text: "In national accounts, gross fixed capital formation measures net acquisitions of produced fixed assets used in production for more than one year.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "collective-capital-formation-statistical-governance-boundary",
+      kind: "statement",
+      label: "An investment measure does not establish institutional rights",
+      description:
+        "An explicit inference separating a measured asset flow from ownership, governance, and benefit rules.",
+      statementKind: "editorial-interpretation",
+      text: "A statistic measuring acquisitions of produced fixed assets does not by itself establish who owns or governs those assets or who receives their benefits.",
       ...reviewed,
     },
   },
@@ -246,13 +259,26 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "meidner-collective-funds-proposal",
+      id: "meidner-profit-share-financing-proposal",
       kind: "statement",
-      label: "Meidner proposed collectively owned wage-earner funds",
+      label: "Meidner proposed profit-linked share financing",
       description:
-        "The original Swedish proposal used recurring share transfers to pursue accumulation, ownership change, and employee influence together.",
+        "The original proposal's contribution formula and payment instrument.",
       statementKind: "attributed-proposal",
-      text: "Meidner's LO proposal required larger firms to transfer shares tied to profits into collectively owned funds administered by employees and their organizations, allowing the funds' holdings and voting claims to grow over time.",
+      text: "Meidner's account of the original LO proposal called for a share of company profits, suggested at 20 percent, to be paid into a central fund through wage-earner shares rather than cash.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-union-fund-governance-proposal",
+      kind: "statement",
+      label: "Meidner described union-elected fund governance",
+      description:
+        "The original proposal's board-selection and shareholder-vote allocation rules.",
+      statementKind: "attributed-proposal",
+      text: "Meidner reports that the original proposal assigned election of the central fund board to unions and divided the fund's shareholder voting rights between union locals and industry funds.",
       ...reviewed,
     },
   },

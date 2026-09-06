@@ -28,6 +28,13 @@ const citations = [
     "national-accounts-boundary",
   ],
   [
+    "collective-capital-formation-statistical-governance-boundary",
+    "oecd-understanding-national-accounts-source",
+    "chapter 5, p. 143, ‘Gross fixed capital formation’",
+    "qualifies",
+    "statistical-governance-boundary",
+  ],
+  [
     "collective-capital-formation-individual-saving-boundary",
     "meidner-collective-asset-formation-source",
     "pp. 303–305 and 311–313",
@@ -56,11 +63,18 @@ const citations = [
     "governing-constituency",
   ],
   [
-    "meidner-collective-funds-proposal",
+    "meidner-profit-share-financing-proposal",
     "meidner-collective-asset-formation-source",
-    "pp. 303–310",
+    "section ‘The essential features of the LO proposal for wage-earner funds’, p. 309",
     "supports",
-    "meidner-proposal",
+    "meidner-profit-share-financing",
+  ],
+  [
+    "meidner-union-fund-governance-proposal",
+    "meidner-collective-asset-formation-source",
+    "section ‘The essential features of the LO proposal for wage-earner funds’, p. 310",
+    "supports",
+    "meidner-union-fund-governance",
   ],
   [
     "collective-capital-formation-rights-boundary",
