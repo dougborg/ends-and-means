@@ -248,7 +248,9 @@ describe("feminism evidence ledgers", () => {
     });
     expect(ledger).toMatchSnapshot();
   });
+});
 
+describe("feminism exact model ledgers", () => {
   it("pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation", () => {
     expect(exactRelationshipLedger()).toMatchSnapshot("relationships");
     expect(exactEntityLedger(feminismCaseIds)).toMatchSnapshot(
@@ -331,7 +333,9 @@ describe("foundational feminism boundaries", () => {
       JSON.stringify(relationshipsFrom("feminist-traditions")),
     ).not.toMatch(/advances-end|advocates-means|applies-to-case/);
   });
+});
 
+describe("foundational feminism Case and research boundaries", () => {
   it("keeps three cases bounded and distinguishes rule, use, and outcome slots", () => {
     const cases = [
       "combahee-river-collective-1974-1980",
