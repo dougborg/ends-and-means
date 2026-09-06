@@ -258,14 +258,10 @@ describe("capitalism and market-economy guide boundaries", () => {
     ).toEqual([
       "business-firm",
       "commodity-production",
-      "economic-planning",
       "finance",
       "legal-order",
-      "market-coordination",
       "market-economy",
       "private-property",
-      "social-ownership",
-      "state-capacity",
       "wage-labor",
     ]);
     for (const caseId of [

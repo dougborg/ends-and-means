@@ -164,7 +164,6 @@ const expectedMissingConceptDossiers = [
   "mixed-economy",
   "private-property",
   "social-class",
-  "state-capacity",
   "statelessness",
   "wage-labor",
 ];
