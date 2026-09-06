@@ -1,8 +1,50 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
+import { canonicalGraph, dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
+
 const approaches = entitiesOfKind("approach");
+const guides = canonicalGraph.subjectGuides;
 ---
-<BaseLayout title="Explore" description="Explore approaches and institutions in Ends and Means." fullBleed>
-  <article class="canonical-index"><header><p class="coordinate">EXPLORE / APPROACHES</p><h1>Follow purposes into institutions and evidence.</h1><p class="dek">Each dossier connects attributed Ends, proposed Means, bounded cases, Challenges, Criteria, and the Statements that support the trace.</p></header><ol class="canonical-directory">{approaches.map((approach) => <li><p class="coordinate">APPROACH</p><h2><a href={`/explore/${approach.id}/`}>{approach.label}</a></h2><p>{dossierForSubject("approach", approach.id)?.standfirst ?? approach.description}</p><a class="detail-link" href={`/explore/${approach.id}/`}>Follow the argument trace →</a></li>)}</ol></article>
+<BaseLayout title="Explore" description="Start with a subject, then follow its meanings, institutions, cases, disagreements, and evidence." fullBleed>
+  <article class="canonical-index explore-directory">
+    <header>
+      <p class="coordinate">EXPLORE</p>
+      <h1>Start with what you want to understand.</h1>
+      <p class="dek">Get a direct answer, see where meanings diverge, and follow the idea into institutions, bounded cases, disagreements, and evidence.</p>
+    </header>
+    <section aria-labelledby="subject-guides-title">
+      <header class="explore-directory__heading">
+        <p class="coordinate">SUBJECT GUIDES</p>
+        <h2 id="subject-guides-title">Learn a subject from the question outward</h2>
+      </header>
+      <ol class="subject-guide-directory">
+        {guides.map((guide) => (
+          <li>
+            <p class="coordinate">START HERE</p>
+            <h3><a href={`/guides/${guide.slug}/`}>{guide.label}</a></h3>
+            <p>{guide.description}</p>
+            <a class="detail-link" href={`/guides/${guide.slug}/`}>Learn about {guide.label} →</a>
+          </li>
+        ))}
+      </ol>
+    </section>
+    {approaches.length > 0 && (
+      <section aria-labelledby="approach-paths-title" class="explore-directory__secondary">
+        <header class="explore-directory__heading">
+          <p class="coordinate">INSTITUTIONAL PATHS</p>
+          <h2 id="approach-paths-title">Follow a specific proposal or program</h2>
+        </header>
+        <ol class="canonical-directory">
+          {approaches.map((approach) => (
+            <li>
+              <p class="coordinate">APPROACH</p>
+              <h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3>
+              <p>{dossierForSubject("approach", approach.id)?.standfirst ?? approach.description}</p>
+              <a class="detail-link" href={`/explore/${approach.id}/`}>Follow this proposal →</a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+  </article>
 </BaseLayout>

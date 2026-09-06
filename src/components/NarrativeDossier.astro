@@ -1,24 +1,13 @@
 ---
-import CanonicalStatement from "./CanonicalStatement.astro";
+import type { NarrativeSection } from "../lib/domain";
 import { entityById } from "../lib/domain/canonical";
-import type { EntityRef, NarrativeSection } from "../lib/domain";
 import { renderSafeMarkdown } from "../lib/markdown";
+import { hrefForEntity } from "../lib/public-routes";
+import CanonicalStatement from "./CanonicalStatement.astro";
 
 interface Props { sections: NarrativeSection[]; label?: string; }
 const { sections, label = "Summary" } = Astro.props;
 
-function hrefFor(ref: EntityRef): string | undefined {
-  if (ref.kind === "approach") return `/explore/${ref.id}/`;
-  if (ref.kind === "case") return `/cases/${ref.id}/`;
-  if (ref.kind === "concept") return `/concepts/${ref.id}/`;
-  if (ref.kind === "challenge") return `/challenges/${ref.id}/`;
-  if (ref.kind === "source") return `/sources/${ref.id}/`;
-  if (ref.kind === "case-episode") {
-    const episode = entityById(ref.id);
-    return episode?.kind === "case-episode" ? `/cases/${episode.caseId}/#${episode.id}` : undefined;
-  }
-  return undefined;
-}
 ---
 
 <section class="narrative-dossier" aria-labelledby="narrative-title">
@@ -38,7 +27,7 @@ function hrefFor(ref: EntityRef): string | undefined {
               <span>Follow this thread</span>
               {section.relatedEntityRefs.map((ref) => {
                 const entity = entityById(ref.id);
-                const href = hrefFor(ref);
+                const href = hrefForEntity(ref);
                 return entity && (href ? <a href={href}>{entity.label}</a> : <span>{entity.label}</span>);
               })}
             </nav>
