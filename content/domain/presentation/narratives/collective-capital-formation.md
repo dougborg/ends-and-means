@@ -18,6 +18,8 @@ Meidner's account says the original proposal would take a share of company profi
 The report suggested a 20 percent rate.
 The contributions would go to a central fund.
 Firms would pay through wage-earner shares rather than cash.
+Unions would elect the central fund's board.
+Shareholder voting authority would be divided between local union branches and industry-wide funds.
 The 1981 revision instead used an excess-profits levy.
 Neither financing method determines governance, so analysis must separately identify the group a fund represents and the authority that group holds.
 Separate rules determine whether contributors receive personal claims and whether the represented constituency gains democratic control over investment.
