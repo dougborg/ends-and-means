@@ -41,11 +41,12 @@ The lockfile controls the full transitive dependency graph.
 The committed exact-lockfile inventory records all 525 package/version keys in
 the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
-declared licenses for 386 packages installed on the audit platform.
-The other 139 entries were unavailable in the audit platform's installed
+declared licenses for 396 packages observed in installed manifests on macOS or
+captured from the exact-version npm registry manifests for Linux packages.
+The remaining 129 unresolved entries were unavailable in the audit platform's installed
 package store; their exact registry/terms locators are recorded and their
 license metadata is explicitly unresolved rather than guessed. This count is
-an observation about locally available manifests, not a claim that every entry
+an observation about available manifest evidence, not a claim that every entry
 has the same optional-dependency role in the lockfile graph.
 `pnpm inventory:dependencies` deterministically regenerates this evidence from
 the lockfile and installed package manifests, while `pnpm audit:provenance`

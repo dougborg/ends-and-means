@@ -22,7 +22,8 @@ export interface ProvenanceInventory {
     licenseOrTerms: string;
     termsLocator: string;
     modified: boolean;
-    distribution: string;
+    distribution: "source-only" | "source-and-site" | "site";
+    distributionNote?: string;
     attribution: string;
     resolution: string;
   }>;
@@ -58,7 +59,7 @@ export interface LockfilePackageInventory {
 }
 
 function completeThirdPartyRecord(record: ProvenanceInventory["thirdPartyAssets"][number]) {
-  return record.paths.length > 0 && [record.origin, record.authorOrProvider, record.licenseOrTerms, record.termsLocator, record.distribution, record.attribution, record.resolution].every(Boolean);
+  return record.paths.length > 0 && ["source-only", "source-and-site", "site"].includes(record.distribution) && [record.origin, record.authorOrProvider, record.licenseOrTerms, record.termsLocator, record.attribution, record.resolution].every(Boolean);
 }
 
 function validPath(path: string, prefix: boolean) {
@@ -128,7 +129,7 @@ function auditThirdPartyAssets(inventory: ProvenanceInventory, trackedFiles: str
     if (!completeThirdPartyRecord(record)) findings.push(`${record.id}: third-party provenance record is incomplete`);
     for (const path of record.paths) if (!validPath(path, path.endsWith("/")) || !trackedFiles.some((file) => pathMatches(path, file))) findings.push(`${record.id}: ${path} does not match a safe tracked path or directory prefix`);
     if (!record.termsLocator.startsWith("http") && !locatorExists(record.termsLocator)) findings.push(`${record.id}: terms locator does not exist`);
-    if (record.licenseOrTerms === "unresolved" && /site/.test(record.distribution) && !/source-only/.test(record.distribution)) findings.push(`${record.id}: unresolved material cannot be published`);
+    if (record.licenseOrTerms === "unresolved" && record.distribution !== "source-only") findings.push(`${record.id}: unresolved material cannot be published`);
   }
   return findings;
 }

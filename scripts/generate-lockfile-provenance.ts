@@ -1,10 +1,10 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { parse } from "yaml";
-import { packageEvidenceDigest, packageIdentity, packageLocators, readInstalledPackageEvidence } from "./package-provenance.ts";
+import { mergePackageEvidence, packageEvidenceDigest, packageIdentity, packageLocators, readCommittedPackageEvidence, readInstalledPackageEvidence } from "./package-provenance.ts";
 import type { LockfilePackageInventory } from "./provenance.ts";
 
 const lockfile = parse(readFileSync("pnpm-lock.yaml", "utf8")) as { packages?: Record<string, unknown> };
-const installed = readInstalledPackageEvidence();
+const installed = mergePackageEvidence(readCommittedPackageEvidence(), readInstalledPackageEvidence());
 const packages = Object.keys(lockfile.packages ?? {}).sort().map((key) => {
   const { name, version } = packageIdentity(key);
   const evidence = installed.get(key);

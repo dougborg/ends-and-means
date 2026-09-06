@@ -53,7 +53,8 @@
       "licenseOrTerms": "unresolved",
       "termsLocator": "archive/legacy-research/README.md",
       "modified": true,
-      "distribution": "source-only; mechanically excluded from public builds",
+      "distribution": "source-only",
+      "distributionNote": "Mechanically excluded from public builds.",
       "attribution": "Preserve cited author/work references; do not relicense or publish archive material until rights and provenance are reviewed.",
       "resolution": "Owner must decide whether to retain as all-rights-reserved working material, replace/rewrite items from verified sources, or remove them before any broad repository-content license is applied."
     }
