@@ -217,30 +217,68 @@ describe("SubjectGuide model boundaries", () => {
 describe("SubjectGuide publication boundaries", () => {
   it("keeps internal audience framing out of every compiled public guide identity", () => {
     for (const guide of canonicalGraph.subjectGuides) {
-      expect(workflowReferencesIn(`${guide.label} ${guide.description}`)).toEqual(
-        [],
-      );
+      expect(
+        workflowReferencesIn(`${guide.label} ${guide.description}`),
+      ).toEqual([]);
     }
   });
 
-  it("rejects invalid status and internal workflow language from public text", () => {
+  it.each(["reviewed", "published"] as const)(
+    "rejects internal workflow language from a live %s guide",
+    (publicationStatus) => {
+      const errors = errorsAfter((guide) => {
+        guide.publicationStatus = publicationStatus;
+        guide.label = "Guide in PR #120";
+        sectionAt(guide, 0).heading = "Migration status";
+        firstQuery(guide).disambiguation = "See branch feature/guide.";
+      });
+
+      expect(errors).toEqual(
+        expect.arrayContaining([
+          "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
+          "guide-economic-democracy:short-answer: heading contains an internal workflow reference",
+          "guide-economic-democracy: search-query disambiguation contains an internal workflow reference",
+        ]),
+      );
+    },
+  );
+
+  it("rejects invalid publication status independently", () => {
     const errors = errorsAfter((guide) => {
       guide.publicationStatus = "ready" as SubjectGuide["publicationStatus"];
-      guide.label = "Guide in PR #120";
-      sectionAt(guide, 0).heading = "Migration status";
-      firstQuery(guide).disambiguation = "See branch feature/guide.";
     });
 
-    expect(errors).toEqual(
-      expect.arrayContaining([
-        "guide-economic-democracy: invalid publication status ready",
-        "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
-        "guide-economic-democracy:short-answer: heading contains an internal workflow reference",
-        "guide-economic-democracy: search-query disambiguation contains an internal workflow reference",
-      ]),
+    expect(errors).toContain(
+      "guide-economic-democracy: invalid publication status ready",
     );
   });
 
+  it.each(["research-needed", "in-review", "deprecated"] as const)(
+    "allows internal authoring language throughout a non-live %s guide",
+    (publicationStatus) => {
+      const errors = errorsAfter((guide) => {
+        guide.publicationStatus = publicationStatus;
+        guide.label = "Learner-first research draft";
+        guide.description = "A learner journey through working material.";
+        sectionAt(guide, 0).heading = "Reader path through the evidence";
+        firstQuery(guide).disambiguation =
+          "Internal workflow notes for issue #120.";
+      });
+
+      expect(errors).not.toContain(
+        "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
+      );
+      expect(errors).not.toContain(
+        "guide-economic-democracy:short-answer: heading contains an internal workflow reference",
+      );
+      expect(errors).not.toContain(
+        "guide-economic-democracy: search-query disambiguation contains an internal workflow reference",
+      );
+    },
+  );
+});
+
+describe("SubjectGuide audience framing", () => {
   it.each([
     "A learner path through the subject.",
     "Learner paths through the subject.",
@@ -257,15 +295,18 @@ describe("SubjectGuide publication boundaries", () => {
     "Reader paths through the subject.",
     "A reader journey through the subject.",
     "Reader journeys through the subject.",
-  ])("rejects internal audience framing in public guide identity: %s", (description) => {
-    const errors = errorsAfter((guide) => {
-      guide.description = description;
-    });
+  ])(
+    "rejects internal audience framing in public guide identity: %s",
+    (description) => {
+      const errors = errorsAfter((guide) => {
+        guide.description = description;
+      });
 
-    expect(errors).toContain(
-      "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
-    );
-  });
+      expect(errors).toContain(
+        "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
+      );
+    },
+  );
 
   it("allows substantive political pathways in public guide identity", () => {
     const errors = errorsAfter((guide) => {
@@ -277,7 +318,9 @@ describe("SubjectGuide publication boundaries", () => {
       "guide-economic-democracy: reader-facing guide identity contains an internal workflow reference",
     );
   });
+});
 
+describe("SubjectGuide query boundaries", () => {
   it("requires a reader-facing explanation for research-gap entry phrases", () => {
     const errors = errorsAfter((guide) => {
       firstQuery(guide).resultStatus = "research-gap";
