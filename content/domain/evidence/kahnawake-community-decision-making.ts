@@ -373,7 +373,7 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
       description:
         "A dated formal change that prevents the 2013 Type I description from being projected unchanged to the present.",
       statementKind: "observation",
-      text: "On January 16, 2024, the Kahnawà:ke Legislative Commission announced that hearings require pre-registration and at least ten participants; after two under-attended attempts, no further hearing is held, the draft or amendments are considered acceptable to the community, and the law proceeds to the next step.",
+      text: "On January 16, 2024, the Kahnawà:ke Legislative Commission announced that hearings require pre-registration and at least ten participants; after two under-attended attempts, no further hearing is held, and the procedure treats the draft or amendments as acceptable for advancing the law to the next step.",
       ...reviewed,
     },
   },
