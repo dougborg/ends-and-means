@@ -106,6 +106,9 @@ export const minangkabauGuideDocuments = [
           heading: "What should a comparison keep separate?",
           statementIds: [
             "matriliny-does-not-fix-authority",
+            "matriliny-does-not-fix-property-control",
+            "matriliny-does-not-fix-office",
+            "matriliny-does-not-fix-equality",
             "minangkabau-power-varies-by-relation",
             "nagari-law-changed-after-cases",
           ],
