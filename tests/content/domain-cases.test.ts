@@ -52,6 +52,7 @@ const documents: AuthoringDocument[] = [
     asOf: "2026-09-04",
     lastReviewedAt: "2026-09-04",
     freshness: "current",
+    materialChangeEventIds: ["example-material-change"],
     ...base,
   }),
   entity({
@@ -69,6 +70,10 @@ const documents: AuthoringDocument[] = [
     outcomeStatementIds: ["example-outcome"],
     ...base,
   }),
+  entity({ id: "example-change-kind", kind: "concept", label: "Synthetic institutional change", schemeIds: [], scopeNote: "Synthetic Event-kind fixture only.", ...base }),
+  entity({ id: "example-material-source", kind: "source", label: "Synthetic material-change source", title: "Synthetic source", sourceType: "other", publicationStatus: "reviewed", description: "A synthetic source used only for a model-boundary test." }),
+  entity({ id: "example-material-change", kind: "event", label: "Synthetic material change", description: "A synthetic reviewed Event used only for model-boundary tests.", eventKindIds: ["example-change-kind"], placeIds: ["example-region"], startDate: { year: 2026, certainty: "exact" }, descriptionStatementIds: ["example-outcome"], publicationStatus: "reviewed" }),
+  { documentType: "relationships", subject: { kind: "statement", id: "example-outcome" }, relationships: [{ id: "example-outcome-cites-material-source", predicate: "cites", subject: { kind: "statement", id: "example-outcome" }, object: { kind: "source", id: "example-material-source" }, role: "supports", locator: "synthetic locator" }] },
 ];
 
 describe("bounded Case model", () => {
@@ -157,6 +162,17 @@ describe("bounded Case model", () => {
     expect(validateAuthoringDocuments(invalid)).toContain(
       "example-case-episode: parent Case example-ongoing-case does not reference this episode",
     );
+  });
+
+  it("validates material-change pointers as cited, deterministic freshness metadata", () => {
+    expect(validateAuthoringDocuments(documents)).toEqual([]);
+    const invalid = structuredClone(documents);
+    const ongoingCase = invalid[5];
+    if (ongoingCase?.documentType === "entity" && ongoingCase.entity.kind === "case") ongoingCase.entity.materialChangeEventIds = ["missing-event", "missing-event"];
+    expect(validateAuthoringDocuments(invalid)).toEqual(expect.arrayContaining([
+      "example-ongoing-case: material-change Event IDs must be unique",
+      "example-ongoing-case: unresolved material-change Event missing-event",
+    ]));
   });
 });
 

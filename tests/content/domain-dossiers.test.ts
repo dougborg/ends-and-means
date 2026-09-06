@@ -159,15 +159,19 @@ describe("canonical narrative coverage", () => {
     ).toEqual([
       "authority-and-accountability",
       "planning-information-and-coordination",
+      "zapatista-external-coercion",
     ]);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
       covered: 10,
-      total: 16,
+      total: 19,
       missingIds: [
         "economic-planning",
+        "indigenous-autonomy",
         "institutional-abolition",
+        "institutional-formation",
+        "institutional-reorganization",
         "market-coordination",
         "market-socialism",
         "social-class",

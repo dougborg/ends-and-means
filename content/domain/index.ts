@@ -16,6 +16,7 @@ import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
 import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-communism";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
+import { zapatistaCaracolesEvidenceDocuments } from "./evidence/zapatista-caracoles";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
 import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
 import { centralPlanningGuideDocuments } from "./presentation/central-planning-guide";
@@ -28,6 +29,7 @@ import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossier";
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
+import { zapatistaCaracolesDossierDocuments } from "./presentation/zapatista-caracoles-dossier";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
 import { collectiveCapitalFormationRelationshipDocuments } from "./relationships/collective-capital-formation";
 import { centralPlanningRelationshipDocuments } from "./relationships/central-planning";
@@ -40,12 +42,14 @@ import { socialOwnershipRelationshipDocuments } from "./relationships/social-own
 import { socialismCommunismRelationshipDocuments } from "./relationships/socialism-communism";
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
+import { zapatistaCaracolesRelationshipDocuments } from "./relationships/zapatista-caracoles";
 import { anarchismResearchDocuments } from "./research/anarchism";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
 import { centralPlanningResearchDocuments } from "./research/central-planning";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
+import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
 import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
 import { vocabularyDocuments } from "./vocabulary/swedish-wage-earner-funds";
 
@@ -67,6 +71,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...tawantinsuyuEvidenceDocuments,
   ...anarchismEvidenceDocuments,
   ...kahnawakeCommunityDecisionMakingEvidenceDocuments,
+  ...zapatistaCaracolesEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...collectiveCapitalFormationDossierDocuments,
@@ -79,12 +84,14 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...anarchismGuideDocuments,
   ...kahnawakeCommunityDecisionMakingGuideDocuments,
   ...kahnawakeCommunityDecisionMakingDossierDocuments,
+  ...zapatistaCaracolesDossierDocuments,
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...democracyRepublicResearchDocuments,
   ...tawantinsuyuResearchDocuments,
   ...anarchismResearchDocuments,
+  ...zapatistaCaracolesResearchDocuments,
   ...analysisDocuments,
   ...centralPlanningAnalysisDocuments,
   ...relationshipDocuments,
@@ -99,4 +106,5 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...tawantinsuyuRelationshipDocuments,
   ...anarchismRelationshipDocuments,
   ...kahnawakeCommunityDecisionMakingRelationshipDocuments,
+  ...zapatistaCaracolesRelationshipDocuments,
 ];

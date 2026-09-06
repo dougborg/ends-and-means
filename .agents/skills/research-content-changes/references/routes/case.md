@@ -6,7 +6,10 @@ usually too broad.
 
 Create a Case with explicit place and overall scope, then use Case Episodes for
 the periods actually compared. Represent uncertain boundaries explicitly and
-give ongoing Cases `asOf`, review, and freshness metadata. Keep conditions,
+give ongoing Cases `asOf`, review, and freshness metadata. When a documented
+institutional change triggered the latest review, point to its cited Event with
+`materialChangeEventIds`; treat this only as editorial freshness metadata and
+never as a claim of historical importance or causation. Keep conditions,
 formal rules, rules-in-use, interactions, and outcomes in distinct Statements
 referenced by the episode. Link Approaches cautiously and link institutional
 Means only through typed, sourced relationships. Use Events for chronology and

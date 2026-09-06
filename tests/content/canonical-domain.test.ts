@@ -38,20 +38,22 @@ describe("canonical vertical slice", () => {
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",
       "us-controlled-materials-plan",
+      "zapatista-autonomy-chiapas-1994-present",
     ]);
   });
 
   it("publishes a sourced before/change/after sequence", () => {
-    const transitions = entitiesOfKind("transition");
-    expect(transitions).toHaveLength(1);
-    expect(transitions[0]?.fromEpisodeIds).toEqual([
+    const transition = entitiesOfKind("transition").find(({ id }) => id === "wage-earner-funds-to-liquidation");
+    expect(transition?.fromEpisodeIds).toEqual([
       "enacted-wage-earner-funds-1984-1991",
     ]);
-    expect(transitions[0]?.toEpisodeIds).toEqual([
+    expect(transition?.toEpisodeIds).toEqual([
       "liquidation-board-period-1992",
     ]);
     expect(entitiesOfKind("event").map(({ id }) => id)).toEqual([
       "wage-earner-fund-board-abolition",
+      "zapatista-autonomy-reorganization-2023",
+      "zapatista-caracoles-jbg-formation-2003",
     ]);
   });
 

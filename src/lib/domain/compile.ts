@@ -702,6 +702,51 @@ function validateCase(
         `${entity.id}: unresolved or mismatched Case Episode ${episodeId}`,
       );
   }
+  validateMaterialChangeEvents(entity, entityById, errors);
+}
+
+function validateMaterialChangeEvents(
+  entity: EntityOf<"case">,
+  entityById: Map<string, DomainEntity>,
+  errors: string[],
+) {
+  const changeIds = entity.materialChangeEventIds ?? [];
+  if (new Set(changeIds).size !== changeIds.length)
+    errors.push(`${entity.id}: material-change Event IDs must be unique`);
+  if (changeIds.some((id, index) => index > 0 && (changeIds[index - 1] ?? "") > id))
+    errors.push(`${entity.id}: material-change Event IDs must be sorted`);
+  for (const eventId of changeIds) {
+    const event = entityById.get(eventId);
+    if (event?.kind !== "event") {
+      errors.push(`${entity.id}: unresolved material-change Event ${eventId}`);
+      continue;
+    }
+    if (["research-needed", "in-review", "deprecated"].includes(event.publicationStatus))
+      errors.push(`${entity.id}: material-change Event ${eventId} must be reviewed or published`);
+    const eventStart = comparableDate(event.startDate, "start");
+    const caseStart = comparableDate(entity.startDate, "start");
+    const asOf = entity.asOf ? Number(entity.asOf.replaceAll("-", "")) : undefined;
+    if ((eventStart !== undefined && caseStart !== undefined && eventStart < caseStart) || (eventStart !== undefined && asOf !== undefined && eventStart > asOf))
+      errors.push(`${entity.id}: material-change Event ${eventId} falls outside the Case review period`);
+  }
+}
+
+function validateMaterialChangeEvidence(
+  entities: DomainEntity[],
+  relationships: DomainRelationship[],
+  errors: string[],
+) {
+  const citedStatementIds = new Set(relationships.filter(({ predicate }) => predicate === "cites").map(({ subject }) => subject.id));
+  const entityById = new Map(entities.map((entity) => [entity.id, entity]));
+  for (const entity of entities) {
+    if (entity.kind !== "case") continue;
+    for (const eventId of entity.materialChangeEventIds ?? []) {
+      const event = entityById.get(eventId);
+      if (event?.kind !== "event") continue;
+      if (!event.descriptionStatementIds.some((id) => citedStatementIds.has(id)))
+        errors.push(`${entity.id}: material-change Event ${eventId} requires a cited description Statement`);
+    }
+  }
 }
 
 function validateCaseEpisode(
@@ -1536,6 +1581,7 @@ export function validateAuthoringDocuments(
   validateEntities(entities, entityById, relationshipIds, errors);
   validatePlacements(relationships, entityById, errors);
   validateStatementCitations(entities, relationships, errors);
+  validateMaterialChangeEvidence(entities, relationships, errors);
   validateEmpiricalStatements(entities, relationships, entityById, errors);
   validatePreferredLabels(entities, errors);
   validateSubjectGuides(subjectGuides, entityById, relationships, errors);
