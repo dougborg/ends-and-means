@@ -74,6 +74,8 @@ describe("collective capital formation dossier", () => {
         "meidner-profit-share-rate-suggestion",
         "meidner-central-fund-destination-proposal",
         "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -92,6 +94,15 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-individual-saving-boundary",
       ],
     ]);
+  });
+});
+
+describe("collective capital formation narrative trace", () => {
+  it("renders proposal governance once and keeps the enacted case bounded", () => {
+    const dossier = dossierForSubject(
+      "concept",
+      "collective-capital-formation",
+    );
     expect(dossier?.sections[1]?.body).not.toContain("machinery");
     expect(dossier?.sections[1]?.body).toContain(
       "additions to long-lived productive assets after disposals",
@@ -103,6 +114,18 @@ describe("collective capital formation dossier", () => {
     expect(dossier?.sections[3]?.body).not.toContain("wage-earner shares");
     expect(dossier?.sections[2]?.body).toContain("20 percent");
     expect(dossier?.sections[2]?.body).toContain("wage-earner shares");
+    expect(dossier?.sections[2]?.body).toContain(
+      "Unions would elect the central fund's board",
+    );
+    expect(dossier?.sections[2]?.body).toContain(
+      "local union branches and industry-wide funds",
+    );
+    expect(dossier?.sections[3]?.body).not.toContain(
+      "central fund's board",
+    );
+    expect(dossier?.sections[3]?.body).not.toContain(
+      "industry-wide funds",
+    );
     expect(dossier?.sections[3]?.body).toContain(
       "ended the boards across the 1991–1992 year boundary",
     );

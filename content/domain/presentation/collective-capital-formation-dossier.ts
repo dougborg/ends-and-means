@@ -49,6 +49,8 @@ const dossier = attachNarrative("collective-capital-formation.md", {
         "meidner-profit-share-rate-suggestion",
         "meidner-central-fund-destination-proposal",
         "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
