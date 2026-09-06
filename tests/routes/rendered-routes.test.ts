@@ -461,7 +461,12 @@ async function verifyGovernanceRoute() {
   expect(links.filter((href) => /title=Correction/.test(href))).toHaveLength(1);
   expect(links.filter((href) => /title=Reconsideration/.test(href))).toHaveLength(1);
   expect(links.some((href) => /security\/advisories|private.*report/i.test(href))).toBe(false);
-  expect(stripMarkup(governance)).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
+  const text = stripMarkup(governance);
+  expect(text).toMatch(/only editorial intake channel, and it is public.+No private editorial intake currently exists.+security reporting is not an editorial channel/i);
+  expect(text).toMatch(/editor takes no part in judging the merits.+independent reviewer makes the binding merits decision.+editor may then perform only the administrative steps.+If no eligible reviewer is available, the decision is deferred/i);
+  expect(text).toMatch(/provenance identifies the recorder, source, translator, access conditions, and permission to access or publish.+permission is not treated as authority to represent a whole community.+Privacy-protective non-attribution remains possible/i);
+  expect(text).toMatch(/editor can remove or redact the live site.+GitHub-hosted discussion can be moderated only through available platform controls.+Git history ordinarily remains; rewriting it is an exceptional response.+Forks, caches, archives, and copies held by others are outside the project’s control/i);
+  expect(text).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
 }
 
 async function verifyReferenceRoutes() {
