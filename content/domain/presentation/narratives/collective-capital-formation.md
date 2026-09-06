@@ -8,7 +8,7 @@ That institution may represent workers, union members, citizens, or another stat
 
 ## how-is-this-different-from-investment-statistics
 
-National accountants use *gross fixed capital formation* for net acquisitions of produced assets such as machinery, buildings, software, and research and development.
+National accountants use *gross fixed capital formation* for net acquisitions of produced fixed assets used in production for more than one year.
 That statistic measures investment activity without answering who owns or governs the assets.
 Collective capital formation instead names an institutional arrangement for accumulating and governing capital claims.
 
@@ -24,7 +24,7 @@ Those distinctions help analyze connections to social ownership and economic dem
 
 Meidner proposed recurring transfers of company shares into funds administered by employees and their organizations so collective holdings and influence would grow over time.
 The enacted arrangement used five government-appointed boards and capped their voting authority in listed companies.
-Those boards operated from 1984 through 1991 before abolition.
+A center-right administration ended the boards across the 1991–1992 year boundary.
 This bounded case does not define or completely realize the broader concept.
 
 ## why-can-collective-funds-lose-support

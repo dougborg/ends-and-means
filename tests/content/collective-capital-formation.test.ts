@@ -79,6 +79,16 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-individual-saving-boundary",
       ],
     ]);
+    expect(dossier?.sections[1]?.body).not.toContain("machinery");
+    expect(dossier?.sections[1]?.body).toContain(
+      "produced fixed assets used in production for more than one year",
+    );
+    expect(dossier?.sections[3]?.body).not.toContain(
+      "operated from 1984 through 1991",
+    );
+    expect(dossier?.sections[3]?.body).toContain(
+      "ended the boards across the 1991–1992 year boundary",
+    );
   });
 });
 
