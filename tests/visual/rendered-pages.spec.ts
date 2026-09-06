@@ -9,6 +9,7 @@ const defaultRoutes = [
   "/cases/swedish-wage-earner-funds/",
   "/cases/swedish-solidaristic-bargaining/",
   "/cases/kahnawake-community-lawmaking/",
+  "/cases/zapatista-autonomy-chiapas-1994-present/",
   "/compare/",
   "/concepts/economic-democracy/",
   "/concepts/social-democracy/",
@@ -397,6 +398,19 @@ test("print exposes closed reference material", async ({ page }) => {
   await expect(body).toBeVisible();
 });
 
+test("Zapatista case exposes freshness, interactions, evidence, and print disclosures", async ({ page }) => {
+  await page.goto("/cases/zapatista-autonomy-chiapas-1994-present/");
+  await page.locator("details.apparatus-group").first().locator("summary").click();
+  await expect(page.getByText("Evidence current through:")).toBeVisible();
+  await expect(page.getByText("This pointer records why the case was re-reviewed")).toBeVisible();
+  const episode = page.locator("#zapatista-caracol-jbg-episode-2003-2023");
+  await episode.locator("summary").click();
+  await expect(episode.getByRole("heading", { name: "Interactions" })).toBeVisible();
+  expect(await episode.locator(".canonical-claim").count()).toBeGreaterThanOrEqual(8);
+  await page.emulateMedia({ media: "print" });
+  await expect(page.locator("details.apparatus-group").first()).toHaveAttribute("open", "");
+});
+
 test("sparse published records retain the narrative structure", async ({ page }) => {
   for (const route of ["/concepts/institutional-abolition/", "/challenges/authority-and-accountability/"]) {
     await page.goto(route);
@@ -411,9 +425,9 @@ test("criteria grid reflects its content count and stacks only on narrow screens
   await expect(grid).toHaveAttribute("data-comparison-columns", "3");
 
   for (const viewport of [
-    { width: 1440, height: 1000, rows: 1 },
-    { width: 820, height: 1180, rows: 1 },
-    { width: 390, height: 844, rows: 3 },
+    { width: 1440, height: 1000, rows: 2 },
+    { width: 820, height: 1180, rows: 2 },
+    { width: 390, height: 844, rows: 4 },
   ]) {
     await page.setViewportSize(viewport);
     const boxes = await grid.locator(":scope > article").evaluateAll((items) =>

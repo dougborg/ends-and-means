@@ -35,6 +35,8 @@ export interface Case extends CaseBase {
   asOf?: string;
   lastReviewedAt?: string;
   freshness?: "current" | "stale" | "review-needed";
+  /** Events that triggered the latest editorial freshness review; not a claim of causal or historical importance. */
+  materialChangeEventIds?: string[];
 }
 
 export interface CaseEpisode extends CaseBase {
