@@ -74,8 +74,8 @@ interface ReviewComment {
 
 export function reviewEvidenceForHead(headOid: string, implementationOwner: string | undefined, reviews: ReviewRecord[], comments: ReviewComment[]) {
   const marker = new RegExp(
-    String.raw`^Independent adversarial review: APPROVED\s*\nReviewer: (\/root\/[a-z0-9_/-]+)\s*\nHead: ${headOid}$`,
-    "im",
+    String.raw`^Independent adversarial review: APPROVED\r?\nReviewer: (\/root\/[a-z0-9_/-]+)\r?\nHead: ${headOid}$`,
+    "i",
   );
   return {
     copilot: reviews.some((review) => /copilot/i.test(review.author.login) && review.commit.oid === headOid),

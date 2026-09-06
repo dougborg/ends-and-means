@@ -59,7 +59,16 @@ function gh(args: string[]) {
 
 function parseJson<T>(raw: string, schema: z.ZodType<T>, source: string): T {
   try {
-    return schema.parse(JSON.parse(raw));
+    return parseInput(JSON.parse(raw), schema, source);
+  } catch (error) {
+    if (error instanceof InputInvalidError) throw error;
+    throw new InputInvalidError(`${source}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+function parseInput<T>(value: unknown, schema: z.ZodType<T>, source: string): T {
+  try {
+    return schema.parse(value);
   } catch (error) {
     throw new InputInvalidError(`${source}: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -130,12 +139,12 @@ function loadLiveSnapshot(): DeliverySnapshot {
   const project = parseJson(gh(["project", "view", "7", "--owner", "dougborg", "--format", "json"]), projectViewSchema, "project view");
   const list = parseJson(gh(["project", "item-list", "7", "--owner", "dougborg", "--format", "json", "--limit", "200"]), projectListSchema, "project items");
   const labels = parseJson(gh(["label", "list", "--repo", repository, "--limit", "200", "--json", "name"]), labelsSchema, "repository labels");
-  return deliverySnapshotSchema.parse({
+  return parseInput({
     project: { number: project.number, title: project.title, public: project.public },
     capturedAt: new Date().toISOString(),
     repositoryLabels: labels.map((label) => label.name),
     items: list.items.map(loadLiveItem),
-  });
+  }, deliverySnapshotSchema, "normalized live Project snapshot");
 }
 
 function loadSnapshot(args: string[]) {
