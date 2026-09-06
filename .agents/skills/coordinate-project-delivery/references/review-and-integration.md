@@ -24,7 +24,8 @@ Do not duplicate their ownership across workflows or rename them casually.
 
 ## Integration
 
-When the base moves, rebase and rerun the gates affected by the new base.
+Do not continuously rebase active implementation merely because the base moves.
+Rebase at review handoff and again before integration when necessary, then rerun the gates affected by the new base.
 Use GitHub's rebase integration only—never squash, merge commits, force pushes to `main`, or admin bypasses.
 Confirm linear history before integration.
 After merge, verify the commit on `main`, required main checks, and Pages deployment when public output or its build path changed.

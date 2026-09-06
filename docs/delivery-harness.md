@@ -32,6 +32,8 @@ It exits 0 for a clean readable snapshot, 1 for policy findings, and 2 when cred
 Runtime schemas reject malformed API and snapshot data before policy analysis and distinguish invalid input, unavailable API access, and unexpected execution errors.
 Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.
 Ready reports are deterministically sorted by Priority (`Now`, `Next`, `Later`) and then issue number; they never infer order from GitHub's item-list response.
+An active In-progress branch must have a successful base comparison, but `main` advancing during implementation is not a failure and does not trigger rebase churn.
+Current-base evidence becomes blocking at In-review handoff and remains required for integration.
 
 Review evidence is valid only for the pull request's exact current head.
 Copilot must have submitted a review on that commit, and the independent reviewer must leave this machine-readable PR comment after completing review:
