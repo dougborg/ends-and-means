@@ -20,14 +20,59 @@ const claims = [
   "anarchosyndicalist-self-identification",
   "anarchist-case-nonembodiment",
 ];
-const exactLocators = {
-  "rocker-syndicalist-double-aim": "chapter 4, pp. 58–61",
-  "baker-strategy-disagreement":
+const exactCitations = {
+  "anarchism-contested-family": [
+    "prichard-anarchism-vsi-source",
+    "chapter 1, pp. 1–4",
+  ],
+  "anarchism-opposes-domination": [
+    "prichard-anarchism-vsi-source",
+    "chapter 1, pp. 4–8",
+  ],
+  "anarchism-opposes-other-domination": [
+    "prichard-anarchism-vsi-source",
+    "chapter 3, pp. 39–43",
+  ],
+  "anarchism-property-strategy-disagreement": [
+    "baker-means-ends-source",
+    "chapter 5, pp. 173–176",
+  ],
+  "anarchism-not-disorganization": [
+    "prichard-anarchism-vsi-source",
+    "chapter 4, pp. 59–63",
+  ],
+  "anarchism-tradition-boundary": [
+    "baker-means-ends-source",
+    "chapter 5, pp. 173–176",
+  ],
+  "rocker-syndicalist-double-aim": [
+    "rocker-anarchosyndicalism-source",
+    "chapter 4, pp. 58–61",
+  ],
+  "baker-strategy-disagreement": [
+    "baker-means-ends-source",
     "chapter 7, pp. 239–242; chapter 10, pp. 335–339",
-  "spanish-case-plurality": "chapter 2, pp. 53–57",
-  "mujeres-libres-gender-counterevidence": "chapter IV, pp. 115–119",
-  "spanish-anarchist-gender-subordination": "chapter VI, pp. 186–190",
-  "anarchosyndicalist-self-identification": "chapter 1, pp. 14–16",
+  ],
+  "spanish-case-plurality": [
+    "graham-spanish-republic-source",
+    "chapter 2, pp. 53–57",
+  ],
+  "mujeres-libres-gender-counterevidence": [
+    "ackelsberg-free-women-source",
+    "chapter IV, pp. 115–119",
+  ],
+  "spanish-anarchist-gender-subordination": [
+    "ackelsberg-free-women-source",
+    "chapter VI, pp. 186–190",
+  ],
+  "anarchosyndicalist-self-identification": [
+    "rocker-anarchosyndicalism-source",
+    "chapter 4, pp. 54–55",
+  ],
+  "anarchist-case-nonembodiment": [
+    "graham-spanish-republic-source",
+    "introduction, pp. 1–4",
+  ],
 } as const;
 describe("Anarchism learner guide", () => {
   it("publishes a complete traced journey", () => {
@@ -51,10 +96,13 @@ describe("Anarchism learner guide", () => {
       ).toBe(true);
       expect(citationsFor(id).length).toBeGreaterThan(0);
     }
-    for (const [id, locator] of Object.entries(exactLocators))
-      expect(citationsFor(id).map((citation) => citation.locator)).toEqual([
-        locator,
-      ]);
+    for (const [id, [sourceId, locator]] of Object.entries(exactCitations))
+      expect(
+        citationsFor(id).map((citation) => ({
+          sourceId: citation.object.id,
+          locator: citation.locator,
+        })),
+      ).toEqual([{ sourceId, locator }]);
   });
 });
 

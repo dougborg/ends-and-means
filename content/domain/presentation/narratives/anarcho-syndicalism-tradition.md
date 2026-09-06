@@ -2,5 +2,5 @@ Anarcho-syndicalism is a historically named anarchist tradition; it is distinct 
 
 ## tradition-and-approach
 
-In Rocker's account, adherents joined libertarian socialism to a recognizable program and repertoire.
+Rocker places modern anarcho-syndicalism within libertarian socialism while describing its organizational form separately.
 The separately modeled approach identifies one institutional pathway through worker organization and federation without making every collection member inherit it.

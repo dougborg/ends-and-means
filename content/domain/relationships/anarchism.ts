@@ -76,7 +76,7 @@ const cited = [
   [
     "anarchosyndicalist-self-identification",
     "rocker-anarchosyndicalism-source",
-    "chapter 1, pp. 14–16",
+    "chapter 4, pp. 54–55",
     "supports",
   ],
   [
