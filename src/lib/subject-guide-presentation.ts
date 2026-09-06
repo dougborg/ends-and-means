@@ -17,3 +17,7 @@ export function visibleSubjectGuideSections(guide: SubjectGuide) {
 export function directSubjectGuideEvidence(section: SubjectGuideSection) {
   return section.statementIds ?? [];
 }
+
+export function hasSubjectGuideDirectory(guides: readonly SubjectGuide[]) {
+  return guides.length > 0;
+}
