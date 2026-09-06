@@ -5,6 +5,9 @@ Because the project makes contestable political and historical claims,
 substantial changes receive pull-request review before publication.
 The [project vision](docs/project-vision.md) defines the learner-first product,
 work tracks, and delivery policy.
+The public [research and classification method](https://endsandmeans.info/framework/)
+explains what readers should expect from claims, cases, classifications,
+uncertainty, and judgment.
 
 ## Research and content changes
 

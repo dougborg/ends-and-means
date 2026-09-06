@@ -376,7 +376,7 @@ async function verifyConceptRoutes() {
   );
 }
 
-async function verifyReferenceRoutes() {
+async function verifyMethodRoute() {
   const method = await readFile(routeFile("/framework/"), "utf8");
   expect(method).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
   expect(hasElementWithClasses(method, "article", ["editorial-page", "method-page"])).toBe(true);
@@ -387,10 +387,31 @@ async function verifyReferenceRoutes() {
   expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(
     1,
   );
-  expect(stripMarkup(method)).toContain("How does an argument connect to evidence?");
-  expect(stripMarkup(method)).toContain("Which assumptions shape a judgment?");
-  expect(stripMarkup(method)).toContain("These capitalized terms name distinct parts");
+  const methodText = stripMarkup(method);
+  expect(methodText).toContain("How we research and classify.");
+  expect(methodText).toContain("How can I check an explanation?");
+  expect(methodText).toContain("What kinds of judgment stay separate?");
+  expect(methodText).toContain("Evidence about what happened");
+  expect(methodText).toContain("Explanations of why it happened");
+  expect(methodText).toContain("Judgments about whether it was good");
+  expect(methodText).toContain("A case shows a setting, not a perfect example.");
+  expect(methodText).toContain("No score or automated rule settles a contested identity.");
+  expect(methodText).toContain("Human judgment remains accountable.");
+  expect(methodText).toContain("Fairness does not give every account equal weight");
+  expect(methodText).toContain("A counterfactual makes the comparison explicit");
+  expect(methodText).toContain("Go to the passage");
+  expect(hrefs(method)).toEqual(expect.arrayContaining([
+    "/research/",
+    "https://github.com/dougborg/ends-and-means/blob/main/docs/project-vision.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/docs/editorial-philosophy.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
+    "https://github.com/dougborg/ends-and-means/issues/new",
+    "https://github.com/dougborg/ends-and-means/blob/main/docs/domain-model.md",
+  ]));
+}
 
+async function verifyReferenceRoutes() {
+  await verifyMethodRoute();
   const research = await readFile(routeFile("/research/"), "utf8");
   const researchText = stripMarkup(research);
   const researchIds = [
