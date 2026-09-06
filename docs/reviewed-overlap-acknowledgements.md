@@ -19,7 +19,7 @@ Acknowledgements live in
 interface ReviewedOverlapAcknowledgement {
   schemaVersion: "reviewed-overlap-1";
   fingerprint: `sha256:${string}`;
-  passage: { dossierId: string; passageId: "standfirst" | string };
+  passage: { dossierId: string; passageId: string }; // "standfirst" or section ID
   statementId: string;
   citationId: string;
   reviewer: string;
