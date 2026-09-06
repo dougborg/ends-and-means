@@ -105,6 +105,8 @@ export const feminismResearchDocuments = [
         "iceland-leave-enacted-design",
         "iceland-fathers-uptake",
         "iceland-care-work-outcomes",
+        "iceland-labor-force-participation-gap",
+        "iceland-working-hours-gap",
         "iceland-causal-transfer-limit",
       ],
       currentLimitation:

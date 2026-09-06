@@ -8,16 +8,25 @@ type SourceType =
   | "report"
   | "legal-text"
   | "archival-record";
+type WorkType = "book" | "article" | "report" | "law" | "other";
+const defaultLinkPurpose = (sourceType: SourceType) => {
+  if (sourceType === "legal-text") return "authorized-reading" as const;
+  if (sourceType === "archival-record") return "archive" as const;
+  return "publisher" as const;
+};
 const source = (
   id: string,
   title: string,
   contributors: string[],
-  year: number,
+  workYear: number | undefined,
+  sourceYear: number | undefined,
   publisher: string,
   url: string,
+  workType: WorkType,
   sourceType: SourceType,
   doi?: string,
   isbn13?: string,
+  linkPurpose?: "publisher" | "authorized-reading" | "archive",
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -27,17 +36,8 @@ const source = (
       label: title,
       description: `The non-fiction work used for evidence about feminism and its bounded institutional contexts: ${title}.`,
       title,
-      workType:
-        sourceType === "edition"
-          ? "book"
-          : sourceType === "legal-text"
-            ? "law"
-            : sourceType === "report"
-              ? "report"
-              : sourceType === "article"
-                ? "article"
-                : "other",
-      originalPublicationYear: year,
+      workType,
+      ...(workYear === undefined ? {} : { originalPublicationYear: workYear }),
       ...reviewed,
     },
   },
@@ -52,7 +52,7 @@ const source = (
       sourceType,
       workId: `${id}-work`,
       contributorDisplay: contributors,
-      publicationYear: year,
+      ...(sourceYear === undefined ? {} : { publicationYear: sourceYear }),
       publisher,
       ...(doi
         ? { identifiers: { doi } }
@@ -61,10 +61,7 @@ const source = (
           : {}),
       resourceLinks: [
         {
-          purpose:
-            sourceType === "legal-text" || sourceType === "archival-record"
-              ? "authorized-reading"
-              : "publisher",
+          purpose: linkPurpose ?? defaultLinkPurpose(sourceType),
           url,
           label: "Open the consulted source",
         },
@@ -80,7 +77,10 @@ const claim = (
   statementKind:
     | "definition"
     | "observation"
+    | "attributed-value"
     | "attributed-proposal"
+    | "causal-hypothesis"
+    | "classification"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
   documentType: "entity",
@@ -117,9 +117,11 @@ export const feminismEvidenceDocuments = [
     "sep-feminist-political-philosophy",
     "Feminist Political Philosophy",
     ["Noëlle McAfee", "Katie B. Howard"],
-    2026,
+    2009,
+    2023,
     "Stanford Encyclopedia of Philosophy",
     "https://plato.stanford.edu/entries/feminism-political/",
+    "article",
     "web-page",
   ),
   ...source(
@@ -127,9 +129,14 @@ export const feminismEvidenceDocuments = [
     "The Combahee River Collective Statement",
     ["Combahee River Collective"],
     1977,
-    "Library of Congress",
-    "https://www.loc.gov/item/lcwaN0028151/",
-    "archival-record",
+    undefined,
+    "LGBTQ History Digital Collaboratory",
+    "https://www.lgbtqhistory.org/wp-content/uploads/2019/04/Combahee_River_Collective_Statement.pdf",
+    "other",
+    "edition",
+    undefined,
+    undefined,
+    "archive",
   ),
   ...source(
     "taylor-combahee-reader",
@@ -141,8 +148,10 @@ export const feminismEvidenceDocuments = [
       "Demita Frazier",
     ],
     2017,
+    2017,
     "Haymarket Books",
     "https://www.haymarketbooks.org/books/1108-how-we-get-free",
+    "book",
     "edition",
     undefined,
     "9781608468553",
@@ -152,17 +161,24 @@ export const feminismEvidenceDocuments = [
     "Demarginalizing the Intersection of Race and Sex",
     ["Kimberlé W. Crenshaw"],
     1989,
+    1989,
     "University of Chicago Legal Forum",
     "https://scholarship.law.columbia.edu/faculty_scholarship/3007/",
     "article",
+    "article",
+    undefined,
+    undefined,
+    "authorized-reading",
   ),
   ...source(
     "harris-kennedy-combahee",
     "From the Kennedy Commission to the Combahee Collective: Black Feminist Organizing, 1960–80",
     ["Duchess Harris"],
     2001,
+    2001,
     "New York University Press",
     "https://www.degruyterbrill.com/document/doi/10.18574/nyu/9780814790380.003.0019/html?lang=en",
+    "article",
     "article",
     "10.18574/nyu/9780814790380.003.0019",
   ),
@@ -171,8 +187,10 @@ export const feminismEvidenceDocuments = [
     "Under Western Eyes Revisited: Feminist Solidarity through Anticapitalist Struggles",
     ["Chandra Talpade Mohanty"],
     2003,
+    2003,
     "Signs",
     "https://www.jstor.org/stable/10.1086/342914",
+    "article",
     "article",
     "10.1086/342914",
   ),
@@ -180,29 +198,38 @@ export const feminismEvidenceDocuments = [
     "moreton-robinson-talkin-up",
     "Talkin’ Up to the White Woman: Indigenous Women and Feminism",
     ["Aileen Moreton-Robinson"],
-    2020,
-    "University of Queensland Press",
-    "https://www.uqp.com.au/books/talkin-up-to-the-white-woman-indigenous-women-and-feminism-20th-anniversary-edition",
+    2000,
+    2021,
+    "University of Minnesota Press",
+    "https://www.upress.umn.edu/9781452966892/talkin-up-to-the-white-woman/",
+    "book",
     "edition",
     undefined,
-    "9780702263101",
+    "9781452966892",
   ),
   ...source(
     "koyama-transfeminist-manifesto",
     "The Transfeminist Manifesto",
     ["Emi Koyama"],
     2001,
+    2001,
     "eminism.org",
     "https://eminism.org/readings/pdf-rdg/tfmanifesto.pdf",
+    "other",
     "edition",
+    undefined,
+    undefined,
+    "authorized-reading",
   ),
   ...source(
     "fraser-capital-care",
     "Contradictions of Capital and Care",
     ["Nancy Fraser"],
     2016,
+    2016,
     "New Left Review",
     "https://newleftreview.org/issues/ii100/articles/nancy-fraser-contradictions-of-capital-and-care",
+    "article",
     "article",
     "10.64590/nt2",
   ),
@@ -210,9 +237,11 @@ export const feminismEvidenceDocuments = [
     "sewa-history",
     "History of SEWA",
     ["Self Employed Women's Association"],
-    2026,
+    undefined,
+    undefined,
     "Self Employed Women's Association",
     "https://www.sewa.org/about-us/history/",
+    "other",
     "web-page",
   ),
   ...source(
@@ -220,8 +249,10 @@ export const feminismEvidenceDocuments = [
     "Advancing cooperation among women workers in the informal economy: The SEWA way",
     ["Tara Sinha"],
     2018,
+    2018,
     "International Labour Organization",
     "https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40ed_emp/%40emp_ent/%40coop/documents/publication/wcms_633752.pdf",
+    "report",
     "report",
   ),
   ...source(
@@ -229,8 +260,10 @@ export const feminismEvidenceDocuments = [
     "Lög um fæðingar- og foreldraorlof, nr. 95/2000",
     ["Alþingi"],
     2000,
+    2000,
     "Alþingi",
     "https://www.althingi.is/lagas/125b/2000095.html",
+    "law",
     "legal-text",
   ),
   ...source(
@@ -238,9 +271,11 @@ export const feminismEvidenceDocuments = [
     "Paid Parental Leave in Iceland: Increasing Gender Equality at Home and on the Labour Market",
     ["Ásdís Aðalbjörg Arnalds", "Guðný Björk Eydal", "Ingólfur V. Gíslason"],
     2022,
+    2022,
     "Oxford University Press",
     "https://academic.oup.com/book/44441/chapter/376663976",
-    "article",
+    "other",
+    "edition",
     "10.1093/oso/9780192856296.003.0018",
   ),
   ...source(
@@ -248,8 +283,10 @@ export const feminismEvidenceDocuments = [
     "Maternity, paternity, and parental leave: Origin, changes, and impact of a law that aims at encouraging leave use of both parents",
     ["Ásdís A. Arnalds", "Guðný Björk Eydal", "Ingólfur V. Gíslason"],
     2021,
+    2021,
     "Icelandic Review of Politics & Administration",
     "https://irpa.is/index.php/irpa/article/view/a.2021.17.2.5",
+    "article",
     "article",
     "10.13177/irpa.a.2021.17.2.5",
   ),
@@ -299,37 +336,6 @@ export const feminismEvidenceDocuments = [
     "A disputed feminist tradition locating gender domination in basic social structures rather than only unequal legal treatment.",
     "Historical radical-feminist theories differ, including over sexuality, biology, race, class, and trans inclusion; the label supplies no inherited position.",
   ),
-  concept(
-    "black-feminism",
-    "Black feminism",
-    "Situated analyses and movements developed by Black women confronting inseparable racial, gendered, sexual, and economic power.",
-    "No organization, national setting, or later analytic term exhausts Black feminist traditions.",
-  ),
-  concept(
-    "postcolonial-decolonial-feminisms",
-    "Postcolonial and decolonial feminisms",
-    "Distinct feminist critiques of colonial power, Eurocentric universals, and the politics of knowledge and representation.",
-    "The paired navigation label does not merge postcolonial and decolonial traditions or substitute for situated self-description.",
-  ),
-  concept(
-    "indigenous-feminisms",
-    "Indigenous feminisms",
-    "Plural, place- and people-specific analyses and movements engaging gender, colonial power, sovereignty, and Indigenous social relations.",
-    "Do not absorb Indigenous women into Western taxonomies, infer feminism from matriliny, or erase self-description and intellectual sovereignty.",
-  ),
-  concept(
-    "transfeminism",
-    "Transfeminism",
-    "A feminist movement and analysis centered on trans women's liberation, bodily autonomy, and coalition against gendered coercion.",
-    "Koyama's manifesto is one situated formulation, not a definition imposed on every trans person or feminist.",
-  ),
-  concept(
-    "queer-feminisms",
-    "Queer feminisms",
-    "Plural feminist engagements with sexuality, gender normativity, and queer politics.",
-    "The label is non-exhaustive and does not merge queer, trans, lesbian, or feminist movements.",
-  ),
-
   {
     documentType: "entity",
     entity: {
@@ -380,7 +386,7 @@ export const feminismEvidenceDocuments = [
     "feminism-analysis-action-distinction",
     "Analysis and political project are distinct",
     "Feminist political philosophy both analyzes gendered power and proposes changes to collective institutions, but an analysis does not by itself identify a movement, organization, or program.",
-    "definition",
+    "editorial-interpretation",
   ),
   claim(
     "feminism-public-private-boundary",
@@ -390,9 +396,13 @@ export const feminismEvidenceDocuments = [
   claim(
     "feminism-traditions-nonexhaustive",
     "Tradition labels are non-exhaustive",
-    "Liberal, radical, socialist, Marxist, intersectional, postcolonial, decolonial, Indigenous, trans, and queer feminisms are overlapping and internally disputed formations, not an exhaustive taxonomy or inherited package.",
+    "The selected tradition labels are a non-exhaustive navigation aid and transmit no shared doctrine, political subject, or institutional program.",
     "editorial-interpretation",
   ),
+  claim("liberal-feminism-tradition", "Liberal feminism is a named current", "The Stanford Encyclopedia identifies liberal feminism as a current in feminist political thought organized around disputed accounts of personal and political autonomy."),
+  claim("radical-feminism-tradition", "Radical feminism is a named current", "The Stanford Encyclopedia identifies radical feminism as a current that seeks structural change and disputes liberal emphasis on individual choice."),
+  claim("socialist-feminism-tradition", "Socialist feminism is a named current", "The Stanford Encyclopedia identifies socialist feminism as a current concerned with material conditions, class relations, labor, and social reproduction."),
+  claim("marxist-feminism-tradition", "Marxist feminism is a named current", "The Stanford Encyclopedia identifies Marxist feminism as a related but distinct current that analyzes gendered institutions through modes and relations of production and reproduction."),
   claim(
     "liberal-feminism-autonomy",
     "Liberal feminism emphasizes autonomy",
@@ -405,13 +415,13 @@ export const feminismEvidenceDocuments = [
   ),
   claim(
     "socialist-feminism-material-boundary",
-    "Socialist and Marxist feminisms analyze material relations",
-    "Socialist, Marxist, and materialist feminist work connects gender hierarchy to labor, class, capitalist organization, household relations, and social reproduction without producing one shared institutional program.",
+    "Socialist feminism analyzes material relations",
+    "Socialist feminist work connects gender hierarchy to class, labor, household relations, and social reproduction.",
   ),
   claim(
     "formal-substantive-equality-boundary",
     "Formal equality does not establish material equality",
-    "Equal legal status and representation do not by themselves establish equal control over income, property, time, care, bodily decisions, safety, or working conditions.",
+    "Formal equality in law does not by itself establish substantive equality in material and social conditions.",
     "editorial-interpretation",
   ),
   claim(
@@ -427,47 +437,59 @@ export const feminismEvidenceDocuments = [
   claim(
     "moreton-robinson-indigenous-boundary",
     "Moreton-Robinson centers an Indigenous standpoint",
-    "Moreton-Robinson argues from her position as a Goenpul woman that white Australian feminist representation has treated whiteness as an unmarked norm and has conflicted with Indigenous women's self-representation.",
+    "Moreton-Robinson argues that white Australian feminists' social position affects their authority to represent Indigenous women.",
   ),
   claim(
     "koyama-transfeminist-self-description",
     "Koyama defines transfeminism through trans women's liberation",
     "Koyama describes transfeminism as a movement led principally by and for trans women whose liberation is linked with the liberation of other women and wider coalitions.",
-    "attributed-proposal",
+    "definition",
   ),
   claim(
     "koyama-body-autonomy",
     "Koyama attributes bodily autonomy to transfeminism",
     "Koyama's manifesto claims individual authority over gender identity, expression, and bodily decisions against political, medical, or religious coercion.",
-    "attributed-proposal",
+    "attributed-value",
   ),
   claim(
     "sex-gender-trans-boundary",
     "Sex, gender, and trans identity are not interchangeable",
-    "Koyama distinguishes sex assignment at birth from gender identity and expression while acknowledging that her operational terms do not include every nonbinary or otherwise trans experience.",
+    "Koyama distinguishes sex assignment at birth from gender identity and gender expression.",
     "definition",
   ),
   claim(
     "fraser-social-reproduction-definition",
     "Fraser defines social reproduction broadly",
     "Fraser uses social reproduction for material and affective work that sustains people, households, communities, and social bonds, much of it historically assigned to women and unpaid.",
+    "definition",
   ),
   claim(
     "fraser-care-capitalism-claim",
     "Fraser attributes care pressures to capitalist organization",
     "Fraser argues that capitalist accumulation depends on social-reproductive activity while tending to destabilize it; this is a situated theoretical claim, not an observed effect of every market institution.",
-    "attributed-proposal",
+    "causal-hypothesis",
   ),
   claim(
     "combahee-self-description",
     "Combahee articulated Black feminist coalition politics",
-    "The Combahee River Collective described its politics as Black feminist and socialist and opposed racial, sexual, heterosexual, and class oppression without claiming to speak for all women.",
-    "attributed-proposal",
+    "The Combahee River Collective described its politics as Black feminist and socialist.",
+    "classification",
+  ),
+  claim(
+    "combahee-opposed-interlocking-oppressions",
+    "Combahee opposed multiple forms of oppression",
+    "The Combahee River Collective stated a commitment to struggle against racial, sexual, heterosexual, and class oppression.",
+    "attributed-value",
   ),
   claim(
     "combahee-organizing-practice",
     "Combahee combined reflection with organizing",
-    "Between 1974 and 1980, the Boston collective used political education and coalition work and organized around reproductive freedom, violence against women, health care, and the 1979 murders of Black women.",
+    "Between 1974 and 1980, the Boston collective used political education and coalition organizing.",
+  ),
+  claim(
+    "combahee-selected-campaigns",
+    "Combahee organized around selected campaigns",
+    "The collective organized around reproductive freedom, health care, violence against women, and the 1979 murders of Black women in Boston.",
   ),
   claim(
     "combahee-case-boundary",
@@ -478,22 +500,27 @@ export const feminismEvidenceDocuments = [
   claim(
     "sewa-union-registration",
     "SEWA registered as a trade union",
-    "SEWA grew from organizing by self-employed women in Ahmedabad and registered as a trade union on 12 April 1972 after contesting the view that a union required a conventional employer.",
+    "SEWA registered as a trade union on 12 April 1972.",
+  ),
+  claim(
+    "sewa-worker-definition-contest",
+    "SEWA contested a conventional worker definition",
+    "SEWA's organizers challenged the claim that workers required a conventional employer before they could register a union.",
   ),
   claim(
     "sewa-cooperative-bank",
     "SEWA members capitalized a cooperative bank",
-    "In 1974, 4,000 SEWA members each contributed ten rupees in share capital to establish the SEWA Cooperative Bank after mainstream banks treated them as unbankable.",
+    "In 1974, 4,000 SEWA members each contributed ten rupees in share capital to establish the SEWA Cooperative Bank.",
   ),
   claim(
     "sewa-quilt-cooperative",
     "Quilt workers formed a producer cooperative",
-    "After contractors withheld work from Ahmedabad quilt makers who demanded minimum wages, participating SEWA members formed a cooperative in 1977 to market their products.",
+    "Ahmedabad quilt makers participating in SEWA formed a producer cooperative in 1977 to market their products.",
   ),
   claim(
     "sewa-case-boundary",
     "SEWA joined several movement traditions",
-    "SEWA combined labor, women's-movement, Gandhian, and cooperative organizing; its union and cooperative institutions are not an embodiment of feminism or a model for all informal workers.",
+    "SEWA's selected Ahmedabad union and cooperative institutions do not represent all informal workers or establish a general model of feminism.",
     "editorial-interpretation",
   ),
   claim(
@@ -508,13 +535,28 @@ export const feminismEvidenceDocuments = [
   ),
   claim(
     "iceland-care-work-outcomes",
-    "Later surveys found narrower care and work gaps",
-    "Surveys of first-time Icelandic parents across roughly twenty years found increased paternal care and narrower gaps between parents' labor-force participation and working hours after the law.",
+    "Later surveys found increased paternal care",
+    "Surveys of Icelandic first-time parents found that fathers performed a larger share of care after the leave reform.",
+  ),
+  claim(
+    "iceland-labor-force-participation-gap",
+    "Later surveys found a narrower employment gap",
+    "Across the surveyed cohorts, the difference between mothers' and fathers' employment rates three years after their first child's birth became smaller.",
+  ),
+  claim(
+    "iceland-working-hours-gap",
+    "Later surveys found a narrower working-hours gap",
+    "Across the surveyed cohorts, mothers' average paid working hours increased while fathers' average paid working hours decreased.",
   ),
   claim(
     "iceland-causal-transfer-limit",
     "The Iceland evidence has causal and transfer limits",
-    "The Iceland studies do not isolate the leave design from every concurrent social change, and payment cuts during the financial crisis were associated with reduced use by fathers, especially those with lower incomes.",
+    "The selected Iceland studies do not isolate the leave design from every concurrent social change.",
+  ),
+  claim(
+    "iceland-payment-cuts-uptake",
+    "Payment cuts changed fathers' leave use",
+    "Payment cuts during Iceland's financial crisis were associated with reduced leave use by fathers, especially fathers with lower incomes.",
   ),
 
   {
@@ -567,7 +609,7 @@ export const feminismEvidenceDocuments = [
         "The collective's Boston-area organization and selected campaigns from 1974 to 1980; not all Black feminism, identity politics, or intersectionality.",
       selectionRationale:
         "The case tests coalition against a presumed universal womanhood through an organization's own account and independent oral history.",
-      conditionStatementIds: ["combahee-self-description"],
+      conditionStatementIds: [],
       episodeIds: ["combahee-organizing-episode"],
       ...reviewed,
     },
@@ -585,10 +627,10 @@ export const feminismEvidenceDocuments = [
       endDate: { year: 1980, certainty: "exact" },
       scope:
         "Selected organizing documented in the collective statement and members' oral histories.",
-      conditionStatementIds: ["combahee-self-description"],
+      conditionStatementIds: [],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: ["combahee-organizing-practice"],
-      interactionStatementIds: ["combahee-self-description"],
+      interactionStatementIds: [],
       outcomeStatementIds: [],
       ...reviewed,
     },
@@ -596,19 +638,19 @@ export const feminismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "sewa-ahmedabad-1972-1981",
+      id: "sewa-ahmedabad-1972-1977",
       kind: "case",
-      label: "SEWA institutions in Ahmedabad, 1972–1981",
+      label: "SEWA institutions in Ahmedabad, 1972–1977",
       description:
         "A bounded study of trade-union recognition and member-owned cooperative finance for self-employed women workers.",
       locationIds: ["ahmedabad"],
       startDate: { year: 1972, certainty: "exact" },
-      endDate: { year: 1981, certainty: "exact" },
+      endDate: { year: 1977, certainty: "exact" },
       scope:
-        "Selected Ahmedabad union and cooperative institutions through SEWA's 1981 separation from the Textile Labour Association; not all SEWA affiliates or informal workers.",
+        "Selected Ahmedabad union and cooperative institutions formed from 1972 through 1977; not later SEWA affiliates or informal workers generally.",
       selectionRationale:
         "The case connects labor, credit, and women's organizing while preserving organizational and geographic limits.",
-      conditionStatementIds: ["sewa-case-boundary"],
+      conditionStatementIds: [],
       episodeIds: ["sewa-ahmedabad-institutions-episode"],
       ...reviewed,
     },
@@ -620,20 +662,17 @@ export const feminismEvidenceDocuments = [
       kind: "case-episode",
       label: "SEWA union and cooperative formation",
       description:
-        "The 1972–1981 interval in which the union, cooperative bank, and selected producer cooperative formed.",
-      caseId: "sewa-ahmedabad-1972-1981",
+        "The 1972–1977 interval in which the union, cooperative bank, and selected producer cooperative formed.",
+      caseId: "sewa-ahmedabad-1972-1977",
       locationIds: ["ahmedabad"],
       startDate: { year: 1972, certainty: "exact" },
-      endDate: { year: 1981, certainty: "exact" },
+      endDate: { year: 1977, certainty: "exact" },
       scope:
         "Documented Ahmedabad institutions, without generalizing later national membership or outcomes backward.",
-      conditionStatementIds: ["sewa-case-boundary"],
-      formalRuleStatementIds: [
-        "sewa-union-registration",
-        "sewa-cooperative-bank",
-      ],
-      ruleInUseStatementIds: ["sewa-quilt-cooperative"],
-      interactionStatementIds: ["sewa-union-registration"],
+      conditionStatementIds: [],
+      formalRuleStatementIds: [],
+      ruleInUseStatementIds: [],
+      interactionStatementIds: [],
       outcomeStatementIds: [],
       ...reviewed,
     },
@@ -641,19 +680,19 @@ export const feminismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "iceland-parental-leave-2000-2013",
+      id: "iceland-parental-leave-2000-2018",
       kind: "case",
-      label: "Iceland paid parental leave, 2000–2013",
+      label: "Iceland paid parental leave evidence, 2000–2018",
       description:
         "A bounded study of the 2000 leave design, phased implementation, take-up, care practices, and crisis-era payment changes.",
       locationIds: ["iceland-modern-state"],
       startDate: { year: 2000, certainty: "exact" },
-      endDate: { year: 2013, certainty: "exact" },
+      endDate: { year: 2018, certainty: "exact" },
       scope:
-        "The law enacted in 2000 and selected outcomes through 2013; not current Icelandic law or proof that one policy caused every observed gender change.",
+        "The law enacted in 2000 and observations collected through 2018, including a 2014 birth cohort; not current Icelandic law or proof that one policy caused every observed gender change.",
       selectionRationale:
         "The case distinguishes enacted entitlement, actual uptake, observed outcomes, and causal limits for a care-related institution.",
-      conditionStatementIds: ["iceland-causal-transfer-limit"],
+      conditionStatementIds: [],
       episodeIds: ["iceland-parental-leave-outcomes-episode"],
       ...reviewed,
     },
@@ -665,18 +704,22 @@ export const feminismEvidenceDocuments = [
       kind: "case-episode",
       label: "Iceland leave design and early outcomes",
       description:
-        "The enacted design and evidence window from 2000 through 2013.",
-      caseId: "iceland-parental-leave-2000-2013",
+        "The enacted design and evidence window from 2000 through 2018.",
+      caseId: "iceland-parental-leave-2000-2018",
       locationIds: ["iceland-modern-state"],
       startDate: { year: 2000, certainty: "exact" },
-      endDate: { year: 2013, certainty: "exact" },
+      endDate: { year: 2018, certainty: "exact" },
       scope:
-        "Formal rules, uptake, survey findings, and crisis-era qualification within the stated window.",
-      conditionStatementIds: ["iceland-causal-transfer-limit"],
+        "Formal rules, uptake, and observations collected through 2018, with causal limits kept explicit.",
+      conditionStatementIds: [],
       formalRuleStatementIds: ["iceland-leave-enacted-design"],
       ruleInUseStatementIds: ["iceland-fathers-uptake"],
       interactionStatementIds: [],
-      outcomeStatementIds: ["iceland-care-work-outcomes"],
+      outcomeStatementIds: [
+        "iceland-care-work-outcomes",
+        "iceland-labor-force-participation-gap",
+        "iceland-working-hours-gap",
+      ],
       ...reviewed,
     },
   },

@@ -33,6 +33,10 @@ const dossier = attachNarrative("feminism.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "feminism-traditions-nonexhaustive",
+        "liberal-feminism-tradition",
+        "radical-feminism-tradition",
+        "socialist-feminism-tradition",
+        "marxist-feminism-tradition",
         "liberal-feminism-autonomy",
         "radical-feminism-structural-boundary",
         "socialist-feminism-material-boundary",
@@ -78,6 +82,7 @@ const dossier = attachNarrative("feminism.md", {
       statementIds: [
         "combahee-self-description",
         "combahee-organizing-practice",
+        "combahee-selected-campaigns",
         "combahee-case-boundary",
       ],
       relatedEntityRefs: [
@@ -96,7 +101,7 @@ const dossier = attachNarrative("feminism.md", {
         "sewa-case-boundary",
       ],
       relatedEntityRefs: [
-        { kind: "case" as const, id: "sewa-ahmedabad-1972-1981" },
+        { kind: "case" as const, id: "sewa-ahmedabad-1972-1977" },
         { kind: "means" as const, id: "self-employed-worker-unionism" },
         { kind: "means" as const, id: "member-owned-cooperative-finance" },
       ],
@@ -110,10 +115,13 @@ const dossier = attachNarrative("feminism.md", {
         "iceland-leave-enacted-design",
         "iceland-fathers-uptake",
         "iceland-care-work-outcomes",
+        "iceland-labor-force-participation-gap",
+        "iceland-working-hours-gap",
         "iceland-causal-transfer-limit",
+        "iceland-payment-cuts-uptake",
       ],
       relatedEntityRefs: [
-        { kind: "case" as const, id: "iceland-parental-leave-2000-2013" },
+        { kind: "case" as const, id: "iceland-parental-leave-2000-2018" },
         { kind: "means" as const, id: "nontransferable-parental-leave" },
       ],
     },
@@ -220,13 +228,8 @@ export const feminismGuideDocuments = [
           ],
           entityRefs: [
             { kind: "case", id: "combahee-river-collective-1974-1980" },
-            { kind: "case", id: "sewa-ahmedabad-1972-1981" },
-            { kind: "case", id: "iceland-parental-leave-2000-2013" },
-          ],
-          relationshipIds: [
-            "combahee-episode-contested-feminism",
-            "sewa-episode-contested-feminism",
-            "iceland-leave-episode-contested-feminism",
+            { kind: "case", id: "sewa-ahmedabad-1972-1977" },
+            { kind: "case", id: "iceland-parental-leave-2000-2018" },
           ],
         },
         {
