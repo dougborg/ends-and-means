@@ -121,9 +121,12 @@ function validateAcknowledgement(
     errors.push(`${label}: unsupported schemaVersion`);
   if (!/^sha256:[a-f0-9]{64}$/.test(value.fingerprint ?? ""))
     errors.push(`${label}: fingerprint must be a full lowercase SHA-256 value`);
-  for (const [field, fieldValue] of Object.entries(fields))
+  for (const [field, fieldValue] of Object.entries(fields)) {
     if (typeof fieldValue !== "string" || !fieldValue.trim())
       errors.push(`${label}: ${field} is empty or invalid`);
+    else if (fieldValue !== fieldValue.trim())
+      errors.push(`${label}: ${field} has leading or trailing whitespace`);
+  }
   if (!isIsoDate(value.reviewedAt))
     errors.push(`${label}: reviewedAt requires an ISO calendar date`);
   if (
