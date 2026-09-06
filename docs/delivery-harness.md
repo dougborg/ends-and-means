@@ -13,7 +13,15 @@ pnpm exec playwright install chromium
 pnpm verify
 ```
 
-`pnpm verify` audits repository delivery configuration and skill coverage, then runs linting, static analysis, dependency audit, type checks, coverage, the `pnpm build` script, content-integrity audit, rendered-route tests, and browser review.
+`pnpm verify` audits repository delivery configuration, skill coverage, and the
+asset/provenance inventory, then runs linting, static analysis, dependency
+audit, type checks, coverage, the `pnpm build` script, content-integrity audit,
+rendered-route tests, and browser review.
+The provenance gate classifies every tracked path, reconciles every direct
+package dependency, rejects unregistered governed asset types, and prevents
+unresolved third-party material from being marked for site distribution.
+See [the licensing audit](licensing-audit.md) for the inventory boundary and
+owner decisions; the harness does not select a license.
 Domain validation runs transitively through `pnpm build`, which is defined as `pnpm validate && astro build` in `package.json`.
 The shared CI composite action invokes this command once; Pages consumes the resulting verified `dist` artifact.
 

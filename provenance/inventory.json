@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-09-06",
+  "scope": "Tracked repository inputs and classes that may be bundled into the public site; generated and installed outputs are recorded but not committed.",
+  "boundaries": [
+    { "id": "application-code", "pathPrefix": "src/", "material": "repository-owned", "kind": "code", "distribution": "source-and-site" },
+    { "id": "canonical-data", "pathPrefix": "content/domain/", "material": "repository-owned", "kind": "canonical-data", "distribution": "source-and-site" },
+    { "id": "documentation", "pathPrefix": "docs/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "id": "archive", "pathPrefix": "archive/legacy-research/", "material": "mixed-unresolved", "kind": "archive", "distribution": "source-only" },
+    { "id": "automation", "pathPrefix": "scripts/", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "id": "tests", "pathPrefix": "tests/", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "id": "workflows", "pathPrefix": ".github/", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
+    { "id": "agent-instructions", "pathPrefix": ".agents/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "id": "public-inputs", "pathPrefix": "public/", "material": "repository-owned", "kind": "site-input", "distribution": "site" },
+    { "id": "provenance", "pathPrefix": "provenance/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" }
+  ],
+  "rootFiles": [
+    ".gitignore", ".markdownlint-cli2.mjs", ".node-version", ".nvmrc", "astro.config.ts", "biome.json", "CONTRIBUTING.md", "package.json", "playwright.config.ts", "pnpm-lock.yaml", "pnpm-workspace.yaml", "README.md", "ROADMAP.md", "SECURITY.md", "tsconfig.json", "vitest.config.ts"
+  ],
+  "assetClasses": [
+    { "class": "fonts", "extensions": [".otf", ".ttf", ".woff", ".woff2"], "state": "none", "note": "CSS uses system font stacks; no font files or remote font service are bundled." },
+    { "class": "icons", "extensions": [".ico"], "state": "none", "note": "No icon files are bundled." },
+    { "class": "flags", "extensions": [], "state": "none", "note": "No flags are bundled; design guidance discourages flag imagery." },
+    { "class": "logos", "extensions": [], "state": "none", "note": "The wordmark is authored text, not a third-party logo asset." },
+    { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "state": "none", "note": "No image files are bundled." },
+    { "class": "audio-video", "extensions": [".aac", ".m4a", ".mp3", ".mp4", ".ogg", ".wav", ".webm"], "state": "none", "note": "No audio or video files are bundled." },
+    { "class": "datasets", "extensions": [".csv", ".parquet"], "state": "none", "note": "Canonical TypeScript records cite datasets but do not copy dataset contents." },
+    { "class": "quotations", "extensions": [], "state": "present", "note": "Short attributed wording exists in authored canonical Statements and the non-public archive; cited Sources are references, not copied source works." },
+    { "class": "imported-metadata", "extensions": [], "state": "present", "note": "Legacy JSON import reports and overrides are non-public, provenance-preserving archive inputs with unresolved original authorship." },
+    { "class": "generated-artifacts", "extensions": [], "state": "generated", "note": "dist, coverage, screenshots, caches, and node_modules are reproducible outputs excluded from Git; they inherit inputs and third-party notices rather than becoming a new licensable source boundary." }
+  ],
+  "thirdPartyAssets": [
+    {
+      "id": "legacy-research-archive",
+      "paths": ["archive/legacy-research/"],
+      "origin": "Retired pre-canonical research corpus imported from the project owner's earlier working materials; original per-passage authorship was not recorded.",
+      "authorOrProvider": "Unresolved; contains project notes, citations, paraphrases, and at least one attributed short quotation.",
+      "licenseOrTerms": "unresolved",
+      "termsLocator": "archive/legacy-research/README.md",
+      "modified": true,
+      "distribution": "source-only; mechanically excluded from public builds",
+      "attribution": "Preserve cited author/work references; do not relicense or publish archive material until rights and provenance are reviewed.",
+      "resolution": "Owner must decide whether to retain as all-rights-reserved working material, replace/rewrite items from verified sources, or remove them before any broad repository-content license is applied."
+    }
+  ],
+  "dependencies": [
+    { "name": "astro", "scope": "runtime", "license": "MIT", "source": "https://github.com/withastro/astro/tree/main/packages/astro", "terms": "https://github.com/withastro/astro/blob/main/LICENSE" },
+    { "name": "micromark", "scope": "runtime", "license": "MIT", "source": "https://github.com/micromark/micromark/tree/main/packages/micromark", "terms": "https://github.com/micromark/micromark/blob/main/license" },
+    { "name": "@astrojs/check", "scope": "development", "license": "MIT", "source": "https://github.com/withastro/language-tools/tree/main/packages/astro-check", "terms": "https://github.com/withastro/language-tools/blob/main/LICENSE" },
+    { "name": "@astrojs/compiler", "scope": "development", "license": "MIT", "source": "https://github.com/withastro/compiler", "terms": "https://github.com/withastro/compiler/blob/main/LICENSE" },
+    { "name": "@biomejs/biome", "scope": "development", "license": "MIT OR Apache-2.0", "source": "https://github.com/biomejs/biome", "terms": "https://github.com/biomejs/biome/blob/main/LICENSE-APACHE" },
+    { "name": "@emnapi/core", "scope": "development", "license": "MIT", "source": "https://github.com/toyobayashi/emnapi", "terms": "https://github.com/toyobayashi/emnapi/blob/main/LICENSE" },
+    { "name": "@emnapi/runtime", "scope": "development", "license": "MIT", "source": "https://github.com/toyobayashi/emnapi", "terms": "https://github.com/toyobayashi/emnapi/blob/main/LICENSE" },
+    { "name": "@playwright/test", "scope": "development", "license": "Apache-2.0", "source": "https://github.com/microsoft/playwright", "terms": "https://github.com/microsoft/playwright/blob/main/LICENSE" },
+    { "name": "@types/node", "scope": "development", "license": "MIT", "source": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node", "terms": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/LICENSE" },
+    { "name": "@vitest/coverage-v8", "scope": "development", "license": "MIT", "source": "https://github.com/vitest-dev/vitest/tree/main/packages/coverage-v8", "terms": "https://github.com/vitest-dev/vitest/blob/main/LICENSE" },
+    { "name": "knip", "scope": "development", "license": "ISC", "source": "https://github.com/webpro-nl/knip/tree/main/packages/knip", "terms": "https://github.com/webpro-nl/knip/blob/main/LICENSE" },
+    { "name": "markdownlint-cli2", "scope": "development", "license": "MIT", "source": "https://github.com/DavidAnson/markdownlint-cli2", "terms": "https://github.com/DavidAnson/markdownlint-cli2/blob/main/LICENSE" },
+    { "name": "markdownlint-sentences-per-line", "scope": "development", "license": "MIT", "source": "https://github.com/JoshuaKGoldberg/sentences-per-line/tree/main/packages/markdownlint-sentences-per-line", "terms": "https://github.com/JoshuaKGoldberg/sentences-per-line/blob/main/LICENSE" },
+    { "name": "tsx", "scope": "development", "license": "MIT", "source": "https://github.com/privatenumber/tsx", "terms": "https://github.com/privatenumber/tsx/blob/master/LICENSE" },
+    { "name": "typescript", "scope": "development", "license": "Apache-2.0", "source": "https://github.com/microsoft/TypeScript", "terms": "https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt" },
+    { "name": "vitest", "scope": "development", "license": "MIT", "source": "https://github.com/vitest-dev/vitest/tree/main/packages/vitest", "terms": "https://github.com/vitest-dev/vitest/blob/main/LICENSE" },
+    { "name": "yaml", "scope": "development", "license": "ISC", "source": "https://github.com/eemeli/yaml", "terms": "https://github.com/eemeli/yaml/blob/main/LICENSE" },
+    { "name": "zod", "scope": "development", "license": "MIT", "source": "https://github.com/colinhacks/zod", "terms": "https://github.com/colinhacks/zod/blob/main/LICENSE" }
+  ]
+}

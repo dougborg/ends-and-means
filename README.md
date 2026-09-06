@@ -31,6 +31,7 @@ Sources and Method remain close at hand as a quieter trust layer.
 | [`docs/narrative-style.md`](docs/narrative-style.md) | Plain-spoken prose, attribution, source-similarity safeguards, and editorial review. |
 | [`docs/delivery-harness.md`](docs/delivery-harness.md) | Local/CI verification, Project-state diagnostics, stable checks, and review/integration gates. |
 | [`docs/content-integrity-harness.md`](docs/content-integrity-harness.md) | Deterministic publication checks, actionable research attention, and safe-publication boundaries. |
+| [`docs/licensing-audit.md`](docs/licensing-audit.md) | Asset/provenance inventory, candidate licensing boundaries, and owner decisions; no license is selected. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
 | [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`docs/adr/0003-markdown-narrative-authoring.md`](docs/adr/0003-markdown-narrative-authoring.md) | Markdown prose, typed manifests, sentence-per-line linting, and safe rendering. |
