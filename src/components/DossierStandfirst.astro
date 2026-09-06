@@ -7,7 +7,7 @@ const { content, statementIds = [] } = Astro.props;
 ---
 
 <div class="dossier-standfirst">
-  <MarkdownProse className="dek" content={content} />
+  <MarkdownProse className="dek measure-standfirst" content={content} />
   {statementIds.length > 0 && (
     <details class="standfirst-evidence reference-disclosure">
       <summary>How this summary is supported <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>

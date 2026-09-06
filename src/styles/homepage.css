@@ -4,7 +4,7 @@
 .homepage-hero > .coordinate { grid-column:1/-1; padding-bottom:.8rem; border-bottom:1px solid var(--rule); }
 .homepage-hero h1 { margin:0 0 clamp(.8rem,1.5vw,1.15rem); font-size:clamp(2.25rem,4.1vw,4.1rem); font-weight:560; letter-spacing:-.055em; line-height:.96; }
 .homepage-hero h1 span { color:var(--cobalt); font-family:var(--reading); font-size:.66em; font-style:italic; font-weight:400; letter-spacing:-.035em; }
-.homepage-hero .dek { max-width:54ch; margin:0; font-size:clamp(1.05rem,1.65vw,1.28rem); line-height:1.42; }
+.homepage-hero .dek { margin:0; font-size:clamp(1.05rem,1.65vw,1.28rem); line-height:1.42; }
 .homepage-hero__guide { padding:1rem 0 0 1.1rem; border-top:3px solid var(--cobalt); border-left:1px solid var(--rule); font-family:var(--reading); font-size:.83rem; line-height:1.52; }
 .homepage-hero__guide p:not(.coordinate) { margin:.55rem 0 .75rem; }
 

@@ -25,7 +25,7 @@ const labels: Record<(typeof active)[number]["obligationType"], string> = {
     <header>
       <p class="coordinate">METHOD / OPEN QUESTIONS</p>
       <h1>What the evidence does not yet settle.</h1>
-      <p class="dek">This agenda records specific limits as work to be tested. A counterargument challenges a reason or design; counterevidence challenges an empirical claim; a counterfactual asks what would likely happen under a specified alternative; and a research gap names another focused question the current record cannot answer.</p>
+      <p class="dek measure-standfirst">This agenda records specific limits as work to be tested. A counterargument challenges a reason or design; counterevidence challenges an empirical claim; a counterfactual asks what would likely happen under a specified alternative; and a research gap names another focused question the current record cannot answer.</p>
     </header>
     {Object.entries(labels).map(([type, label]) => {
       const rows = active.filter(({ obligationType }) => obligationType === type);
