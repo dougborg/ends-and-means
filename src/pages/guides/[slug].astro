@@ -1,0 +1,21 @@
+---
+import SubjectGuidePage from "../../components/SubjectGuidePage.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { SubjectGuide } from "../../lib/domain";
+import { canonicalGraph, subjectGuideBySlug } from "../../lib/domain/canonical";
+
+export function getStaticPaths() {
+  return canonicalGraph.subjectGuides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+
+const guide = Astro.props.guide as SubjectGuide;
+if (subjectGuideBySlug(guide.slug)?.id !== guide.id)
+  throw new Error(`SubjectGuide ${guide.slug} is not in the live projection`);
+---
+
+<BaseLayout title={guide.label} description={guide.description} fullBleed>
+  <SubjectGuidePage guide={guide} />
+</BaseLayout>

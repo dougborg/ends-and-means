@@ -1,0 +1,213 @@
+---
+import type {
+  DomainRelationship,
+  Dossier,
+  NarrativeSection,
+  ResearchObligation,
+  SubjectGuide,
+  SubjectGuideSection,
+} from "../lib/domain";
+import { publicRelationshipLabel } from "../lib/domain";
+import { canonicalGraph, entityById } from "../lib/domain/canonical";
+import { hrefForEntity } from "../lib/public-routes";
+import CanonicalStatement from "./CanonicalStatement.astro";
+import MarkdownProse from "./MarkdownProse.astro";
+import ResearchObligationCard from "./ResearchObligationCard.astro";
+
+interface Props {
+  guide: SubjectGuide;
+}
+
+const { guide } = Astro.props;
+
+function dossierFor(id: string) {
+  const entity = entityById(id);
+  return entity?.kind === "dossier" ? entity : undefined;
+}
+
+type NarrativeSelection =
+  | { narrative: Dossier; standfirst: true }
+  | { narrative: NarrativeSection; standfirst: false };
+
+function selectedNarrative(
+  section: SubjectGuideSection,
+): NarrativeSelection[] {
+  const selections: NarrativeSelection[] = [];
+  for (const reference of section.narrativeRefs ?? []) {
+    const dossier = dossierFor(reference.dossierId);
+    if (!dossier) continue;
+    if (!reference.sectionId) {
+      selections.push({ narrative: dossier, standfirst: true });
+      continue;
+    }
+    const narrative = dossier.sections.find(({ id }) => id === reference.sectionId);
+    if (narrative) selections.push({ narrative, standfirst: false });
+  }
+  return selections;
+}
+
+function narrativeBody(
+  selection: ReturnType<typeof selectedNarrative>[number],
+) {
+  return selection.standfirst
+    ? selection.narrative.standfirst
+    : selection.narrative.body;
+}
+
+function narrativeStatementIds(
+  selection: ReturnType<typeof selectedNarrative>[number],
+) {
+  return selection.standfirst
+    ? selection.narrative.standfirstStatementIds
+    : selection.narrative.statementIds;
+}
+
+function selectedRelationship(id: string) {
+  return canonicalGraph.relationships.find((relationship) => relationship.id === id);
+}
+
+function relationshipEnds(relationship: DomainRelationship) {
+  return {
+    subject: entityById(relationship.subject.id),
+    object: entityById(relationship.object.id),
+  };
+}
+
+function selectedObligation(id: string) {
+  const entity = entityById(id);
+  return entity?.kind === "research-obligation" ? entity : undefined;
+}
+
+const shortAnswer = guide.sections.find(({ role }) => role === "short-answer");
+const journeySections = guide.sections.filter(({ role }) => role !== "short-answer");
+const primary = entityById(guide.primarySubject.id);
+const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
+---
+
+<article class="subject-guide">
+  <nav class="subject-guide__breadcrumb" aria-label="Breadcrumb">
+    <a href="/explore/">Explore</a><span aria-hidden="true">/</span><span>{guide.label}</span>
+  </nav>
+
+  <header class="subject-guide__hero" id="short-answer">
+    <p class="coordinate">LEARN ABOUT</p>
+    <h1>{guide.label}</h1>
+    {shortAnswer && <h2>{shortAnswer.heading}</h2>}
+    {shortAnswerSelections.map((selection) => (
+      <div class="subject-guide__answer">
+        <MarkdownProse content={narrativeBody(selection)} />
+        {narrativeStatementIds(selection).length > 0 && (
+          <details class="reference-disclosure subject-guide__evidence">
+            <summary>
+              Check the evidence
+              <span>{narrativeStatementIds(selection).length} {narrativeStatementIds(selection).length === 1 ? "claim" : "claims"}</span>
+            </summary>
+            <div class="reference-disclosure__body">
+              {narrativeStatementIds(selection).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+            </div>
+          </details>
+        )}
+      </div>
+    ))}
+  </header>
+
+  <div class="subject-guide__layout">
+    <nav class="subject-guide__rail" aria-label={`On this page: ${guide.label}`}>
+      <p class="coordinate">ON THIS PAGE</p>
+      <ol>
+        <li><a href="#short-answer">{shortAnswer?.heading ?? `About ${guide.label}`}</a></li>
+        {journeySections.map((section) => <li><a href={`#${section.id}`}>{section.heading}</a></li>)}
+      </ol>
+      {primary && (
+        <a class="subject-guide__reference-link" href={hrefForEntity(guide.primarySubject)}>
+          Open the {primary.label} reference page
+        </a>
+      )}
+    </nav>
+
+    <div class="subject-guide__journey">
+      {journeySections.map((section) => {
+        const narratives = selectedNarrative(section);
+        const relationships = (section.relationshipIds ?? [])
+          .map(selectedRelationship)
+          .filter((relationship): relationship is DomainRelationship => Boolean(relationship));
+        const obligations = (section.researchObligationIds ?? [])
+          .map(selectedObligation)
+          .filter((obligation): obligation is ResearchObligation => Boolean(obligation));
+        return (
+          <section id={section.id} class:list={["subject-guide__section", `subject-guide__section--${section.role}`]}>
+            <header>
+              <p class="coordinate">{section.role.replaceAll("-", " ")}</p>
+              <h2>{section.heading}</h2>
+            </header>
+
+            {section.role === "bounded-practice" && (
+              <p class="subject-guide__scope">
+                This case shows what happened in a specific place and period. It does not make the case a pure example of the idea.
+              </p>
+            )}
+
+            {narratives.map((selection) => {
+              const statementIds = narrativeStatementIds(selection);
+              return (
+                <div class="subject-guide__passage">
+                  <MarkdownProse content={narrativeBody(selection)} />
+                  {statementIds.length > 0 && (
+                    <details class="reference-disclosure subject-guide__evidence">
+                      <summary>Check the evidence <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
+                      <div class="reference-disclosure__body">
+                        {statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+                      </div>
+                    </details>
+                  )}
+                </div>
+              );
+            })}
+
+            {(section.statementIds ?? []).map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+
+            {(section.entityRefs?.length ?? 0) > 0 && (
+              <ul class="subject-guide__links" aria-label={`Continue from ${section.heading}`}>
+                {section.entityRefs?.map((reference) => {
+                  const entity = entityById(reference.id);
+                  const href = hrefForEntity(reference);
+                  return entity && (
+                    <li>
+                      <span>{entity.kind.replaceAll("-", " ")}</span>
+                      {href ? <a href={href}>{entity.label}</a> : <strong>{entity.label}</strong>}
+                      <p>{entity.description}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {relationships.length > 0 && (
+              <section class="subject-guide__relationships" aria-labelledby={`${section.id}-connections`}>
+                <h3 class="sr-only" id={`${section.id}-connections`}>Connections for {section.heading}</h3>
+                {relationships.map((relationship) => {
+                  const { subject, object } = relationshipEnds(relationship);
+                  const subjectHref = hrefForEntity(relationship.subject);
+                  const objectHref = hrefForEntity(relationship.object);
+                  return subject && object && (
+                    <p>
+                      {subjectHref ? <a href={subjectHref}>{subject.label}</a> : <strong>{subject.label}</strong>}
+                      <span>{publicRelationshipLabel(relationship, "subject")}</span>
+                      {objectHref ? <a href={objectHref}>{object.label}</a> : <strong>{object.label}</strong>}
+                    </p>
+                  );
+                })}
+              </section>
+            )}
+
+            {obligations.length > 0 && (
+              <ol class="subject-guide__questions">
+                {obligations.map((obligation) => <ResearchObligationCard obligation={obligation} />)}
+              </ol>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</article>
