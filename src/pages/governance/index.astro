@@ -1,15 +1,15 @@
 ---
 import EditorialHeader from "../../components/EditorialHeader.astro";
+import { editorialGovernanceContract } from "../../lib/editorial-governance";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const repository = "https://github.com/dougborg/ends-and-means";
 const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+claim%5D&body=Page+or+claim%3A%0A%0AWhat+should+change%3A%0A%0AEvidence+and+exact+passage%3A`;
 const reconsiderationUrl = `${repository}/issues/new?title=Reconsideration%3A+%5Bdecision+or+page%5D&body=Decision+or+page%3A%0A%0AReason+for+reconsideration%3A%0A%0ANew+evidence+or+overlooked+policy%3A`;
-const privateSecurityUrl = `${repository}/security/advisories/new`;
 ---
 
 <BaseLayout title="Editorial governance" description="Who is accountable for Ends and Means, and how corrections, appeals, conflicts, sensitive material, and AI-assisted work are handled." fullBleed>
-  <article class="editorial-page governance-page">
+  <article class="editorial-page governance-page" data-editorial-intake={editorialGovernanceContract.editorialIntake}>
     <EditorialHeader coordinate="EDITORIAL GOVERNANCE" title="Who decides, and how can a decision change?">
       <p class="dek measure-standfirst">Ends and Means is a small, independently maintained project. A person is accountable for every publication decision, and evidence-backed disagreement can lead to correction or reconsideration.</p>
     </EditorialHeader>
@@ -30,23 +30,23 @@ const privateSecurityUrl = `${repository}/security/advisories/new`;
 
     <section class="model-boundary" id="responsibility" aria-labelledby="responsibility-title">
       <p class="coordinate">RESPONSIBILITY</p>
-      <h2 id="responsibility-title">The project editor holds final authority and final responsibility.</h2>
-      <p>Contributors can propose evidence and wording. Reviewers test source fitness, interpretation, fairness, and presentation. The project editor decides what is published and remains answerable for the framing, wording, and decision reasons; a contributor, tool, or source does not inherit that responsibility.</p>
+      <h2 id="responsibility-title">The project editor is accountable; a conflict transfers the merits decision.</h2>
+      <p>Contributors can propose evidence and wording. Reviewers test source fitness, interpretation, fairness, and presentation. Ordinarily, the project editor makes the final decision and remains answerable for its framing, wording, and reasons; a contributor, tool, or source does not inherit that responsibility.</p>
       <p>No change is accepted only because a contributor is prominent, a view is popular, or an automated check passes. Structural checks must pass, but a person decides whether the evidence supports the claim and whether the treatment is fair.</p>
-      <p>If the editor has a personal, financial, professional, or close advocacy conflict, it is disclosed and the editor does not perform the substantive review. An independent reviewer should recommend an outcome. If no suitable reviewer is available, publication or reconsideration waits rather than presenting a conflicted judgment as independent. The editor still records the final accountable decision.</p>
+      <p data-recusal-authority={editorialGovernanceContract.conflictedDecision}>If the editor has a personal, financial, professional, or close advocacy conflict, it is disclosed and the editor takes no part in judging the merits. An eligible independent reviewer makes the binding merits decision. The editor may then perform only the administrative steps needed to publish or record that decision. If no eligible reviewer is available, the decision is deferred.</p>
     </section>
 
     <section class="method-records" id="corrections" aria-labelledby="corrections-title">
       <header>
         <p class="coordinate">CORRECTIONS</p>
         <h2 id="corrections-title">What happens after a correction is suggested?</h2>
-        <p><a href={correctionUrl}>Send a correction</a> with the affected page or claim, the proposed change, and a source with an exact passage when possible. The form is public; do not include private or sensitive personal information.</p>
+        <p><a href={correctionUrl}>Send a correction</a> with the affected page or claim, the proposed change, and a source with an exact passage when possible. This is the project’s only editorial intake channel, and it is public. No private editorial intake currently exists, so do not submit private, restricted, or sensitive personal information.</p>
       </header>
       <div>
         <section><h3>1. Received</h3><p>The editor checks that the concern is understandable and requests missing information when needed. The project aims to acknowledge a usable submission within seven days, but this is a target, not a guarantee.</p></section>
         <section><h3>2. Assessed</h3><p>The claim, cited passage, contrary evidence, scope, and likely harm are reviewed. A correction does not need to share the project’s conclusion, but it must identify a checkable factual, evidentiary, interpretive, or policy concern.</p></section>
         <section><h3>3. Decided</h3><p>The outcome is accepted, accepted in part, declined, or held for more evidence. The public reason identifies the governing evidence or policy and the material limitation. The project aims to give an outcome or a progress update within thirty days.</p></section>
-        <section><h3>4. Published or closed</h3><p>A routine accepted correction publishes after source and quality checks. An urgent error may be removed or narrowly corrected before the full review finishes when leaving it visible could cause material harm; the reason and durable correction follow as soon as practical.</p></section>
+        <section><h3>4. Published or closed</h3><p>A routine accepted correction publishes after source and quality checks. A clear factual error or immediate safety concern may justify temporarily removing material from the live site while review continues, but there is no separate urgent channel or guaranteed urgent response time.</p></section>
       </div>
     </section>
 
@@ -54,13 +54,13 @@ const privateSecurityUrl = `${repository}/security/advisories/new`;
       <p class="coordinate">RECONSIDERATION</p>
       <h2 id="appeals-title">A decision can be challenged with new evidence or an overlooked rule.</h2>
       <p>An appeal is handled as a request for reconsideration. <a href={reconsiderationUrl}>Request reconsideration</a> by identifying the decision and explaining the material evidence, reasoning, conflict, or policy that may have been missed. Repeating the original submission without a specific error or new basis may be closed with that reason.</p>
-      <p>Someone other than the original substantive reviewer should assess the request when an eligible person is available. In this small project that may not always be possible; the editor will disclose that limitation, review the decision afresh, and explain the result, or defer it until independent review is available. One reconsideration is normally final unless materially new evidence appears.</p>
+      <p>Someone other than the original substantive reviewer assesses the request. If the editor is conflicted, an eligible independent reviewer makes the binding merits decision and the editor performs only administrative publication or recording. If no eligible reviewer is available, reconsideration is deferred. One reconsideration is normally final unless materially new evidence appears.</p>
     </section>
 
     <section class="research-notes" id="sensitive-subjects" aria-labelledby="sensitive-title">
       <h2 id="sensitive-title">Which subjects receive heightened care?</h2>
-      <section><h3>Living people</h3><p>Claims that could materially affect a living person require strong, directly relevant sourcing, careful attribution, and a clear public-interest reason. Unnecessary personal details, speculation about motives, and disproportionate repetition of allegations are excluded. Credible safety, privacy, and accuracy concerns receive urgent review.</p></section>
-      <section><h3>Communities and Indigenous peoples</h3><p>The project seeks community self-description and community-authored or oral-history evidence where appropriate, records who supplied and authorized that knowledge, and distinguishes it from government, colonial, translated, or outside scholarly labels. A community is not treated as internally uniform. Requests about names, consent, restricted knowledge, present-day risk, and who has authority to speak receive substantive review rather than cosmetic relabeling.</p></section>
+      <section><h3>Living people</h3><p>Claims that could materially affect a living person require strong, directly relevant sourcing, careful attribution, and a clear public-interest reason. Unnecessary personal details, speculation about motives, and disproportionate repetition of allegations are excluded. Credible safety, privacy, and accuracy concerns are prioritized, without promising a response deadline the project cannot guarantee.</p></section>
+      <section><h3>Communities and Indigenous peoples</h3><p>The project seeks community self-description and community-authored or oral-history evidence where appropriate. When available and safe, provenance identifies the recorder, source, translator, access conditions, and permission to access or publish. That permission is not treated as authority to represent a whole community. Privacy-protective non-attribution remains possible, and outside, government, colonial, or translated labels stay visibly distinguished from community self-description. A community is not treated as internally uniform.</p></section>
       <section><h3>Contested and harmful terms</h3><p>Historical or harmful language appears only when identification, quotation, or analysis requires it. The page explains who used the term, in what setting, and why it matters; the project does not silently adopt a slur, imposed identity, or evolutionary category as its own classification. Searchability does not override dignity or safety.</p></section>
       <section><h3>Contentious history</h3><p>Accounts distinguish documented events, participant claims, later interpretations, and current disputes. Harm is neither sensationalized nor hidden to make a system look cleaner. Source survival, state archives, translation, and unequal power to leave records are treated as limits on what can be concluded.</p></section>
     </section>
@@ -69,7 +69,7 @@ const privateSecurityUrl = `${repository}/security/advisories/new`;
       <p class="coordinate">INDEPENDENCE AND MODERATION</p>
       <h2 id="independence-title">Evidence is considered without a commercial or personal veto.</h2>
       <p>Sponsors, donors, advertisers, and affiliate relationships cannot select sources, suppress findings, choose classifications, or shape conclusions. A relevant relationship is disclosed beside the affected work. The project does not currently sell favorable coverage; any future commercial arrangement must preserve this rule.</p>
-      <p>Evidence-backed disagreement, forceful criticism, and challenges to editorial assumptions are welcome. Harassment, threats, dehumanizing attacks, doxxing, spam, coordinated disruption, and repeated bad-faith demands are not. Material may be limited or removed to protect people and keep discussion usable; the moderation reason should be stated without republishing abuse or private information.</p>
+      <p>Evidence-backed disagreement, forceful criticism, and challenges to editorial assumptions are welcome. Harassment, threats, dehumanizing attacks, doxxing, spam, coordinated disruption, and repeated bad-faith demands are not. The editor can remove material from the live site. GitHub-hosted submissions and discussion can be closed, hidden, edited, deleted, or reported only through the controls and policies GitHub makes available. A moderation reason should be stated when safe without republishing abuse or private information.</p>
     </section>
 
     <section class="method-records" id="ai" aria-labelledby="ai-title">
@@ -82,15 +82,15 @@ const privateSecurityUrl = `${repository}/security/advisories/new`;
         <section><h3>Discovery and synthesis</h3><p>A person opens and evaluates every cited source, checks the exact passage, seeks serious alternatives, and decides whether it fits the claim. An AI summary is a lead, not provenance.</p></section>
         <section><h3>Drafting and checking</h3><p>A person remains responsible for framing, interpretation, wording, fairness, source similarity, and publication. Machine-generated prose receives the same source and originality review as any other draft.</p></section>
         <section><h3>Automated signals</h3><p>Checks can detect missing fields, broken relationships, malformed citations, or similar strings. These are attention signals. They do not determine plagiarism, truth, source quality, identity, balance, or harm.</p></section>
-        <section><h3>Privacy and disclosure</h3><p>Private submissions, restricted community knowledge, and unnecessary personal data must not be sent to external AI services. Material AI assistance is disclosed when it helps readers understand how an explanation was produced or limited; routine spelling and structural checks do not require a label.</p></section>
+        <section><h3>Privacy and disclosure</h3><p>Restricted community knowledge, nonpublic material obtained outside the editorial form, and unnecessary personal data must not be sent to external AI services. Material AI assistance is disclosed when it helps readers understand how an explanation was produced or limited; routine spelling and structural checks do not require a label.</p></section>
       </div>
     </section>
 
-    <section class="model-boundary" id="privacy" aria-labelledby="privacy-title">
+    <section class="model-boundary" id="privacy" aria-labelledby="privacy-title" data-record-boundary={editorialGovernanceContract.recordBoundary}>
       <p class="coordinate">PRIVACY, CONSENT, AND RECORDS</p>
       <h2 id="privacy-title">Collect less, attribute with permission, and state what cannot be erased.</h2>
-      <p>Public submissions should contain only information needed to evaluate the proposed change. A contributor is credited only with permission; otherwise the public record may describe the evidence without naming the submitter. Consent to be named can be withdrawn for future display, though copies already distributed and repository history may persist.</p>
-      <p>Public discussion and revision history are retained as long as they remain part of the project record. Unnecessary personal data, doxxing, or material published without valid consent may be redacted from the site and active discussion. Because public history and third-party copies may remain, the project cannot promise complete deletion. Security vulnerabilities belong in the <a href={privateSecurityUrl}>private security report</a>, not the public correction form.</p>
+      <p>The public correction channel should contain only information needed to evaluate the proposed change. A contributor is credited only with permission; otherwise evidence may be described without naming the submitter. Consent to display a name can be withdrawn from future versions of the live site.</p>
+      <p>These records have different boundaries. The editor can remove or redact the live site. GitHub-hosted discussion can be moderated only through available platform controls. Public Git history ordinarily remains; rewriting it is an exceptional response to a serious privacy or security need, not a routine deletion tool. Forks, caches, archives, and copies held by others are outside the project’s control. The project therefore offers neither a fixed retention schedule nor a promise of complete deletion. Because no private editorial channel exists, sensitive information should not be submitted for editorial review.</p>
     </section>
 
     <section class="model-boundary" id="changes" aria-labelledby="changes-title">

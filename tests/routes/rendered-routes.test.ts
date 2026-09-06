@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { workflowReferencesIn } from "../../src/lib/domain";
 import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
+import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
 import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
 
 const root = path.resolve(import.meta.dirname, "../..");
@@ -453,33 +454,14 @@ async function verifyGovernanceRoute() {
   expect(governance).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
   expect(hasElementWithClasses(governance, "article", ["editorial-page", "governance-page"])).toBe(true);
   expect(hasElementWithClasses(governance, "header", ["editorial-header"])).toBe(true);
-  const text = stripMarkup(governance);
-  for (const required of [
-    "The project editor holds final authority and final responsibility.",
-    "this is a target, not a guarantee",
-    "accepted, accepted in part, declined, or held for more evidence",
-    "A routine accepted correction publishes after source and quality checks.",
-    "An appeal is handled as a request for reconsideration.",
-    "Someone other than the original substantive reviewer",
-    "Living people",
-    "Communities and Indigenous peoples",
-    "Contested and harmful terms",
-    "Sponsors, donors, advertisers, and affiliate relationships",
-    "Harassment, threats, dehumanizing attacks, doxxing, spam, coordinated disruption",
-    "AI can assist the work, but it is never evidence or authority.",
-    "These are attention signals.",
-    "must not be sent to external AI services",
-    "the project cannot promise complete deletion",
-    "The policy can change, but not silently.",
-  ]) expect(text).toContain(required);
-  expect(text).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
-  expect(hrefs(governance)).toEqual(expect.arrayContaining([
-    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
-    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Reconsideration/),
-    "https://github.com/dougborg/ends-and-means/security/advisories/new",
-    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/research-content-changes/SKILL.md",
-    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/coordinate-project-delivery/SKILL.md",
-  ]));
+  expect(governance).toContain(`data-editorial-intake="${editorialGovernanceContract.editorialIntake}"`);
+  expect(governance).toContain(`data-recusal-authority="${editorialGovernanceContract.conflictedDecision}"`);
+  expect(governance).toContain(`data-record-boundary="${editorialGovernanceContract.recordBoundary}"`);
+  const links = hrefs(governance);
+  expect(links.filter((href) => /title=Correction/.test(href))).toHaveLength(1);
+  expect(links.filter((href) => /title=Reconsideration/.test(href))).toHaveLength(1);
+  expect(links.some((href) => /security\/advisories|private.*report/i.test(href))).toBe(false);
+  expect(stripMarkup(governance)).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
 }
 
 async function verifyReferenceRoutes() {

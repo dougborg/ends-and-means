@@ -15,15 +15,23 @@ repeating the full policy:
 > their output is never evidence and their signals never make editorial
 > decisions.
 
+Ordinarily the project editor makes the final decision. If the editor is
+conflicted, an eligible independent reviewer makes the binding merits decision;
+the editor may only publish or record it administratively. Without an eligible
+reviewer, the decision is deferred.
+
 Link “editorial decisions” or adjacent copy to `/governance/`. Do not shorten the
 summary in a way that makes AI a source, implies automatic publication, or
 removes human responsibility for source fitness.
 
 ## Repository enforcement
 
-- `CODEOWNERS` requires the project owner to review repository changes.
+- `CODEOWNERS` identifies the project owner as responsible and requests that
+  reviewer; it does not itself create a GitHub approval requirement.
 - The pull-request template requires authors to identify human judgments,
   source review, similarity review, and exact-head independent review.
+- Exact-head independent review is enforced by project process and the delivery
+  audit, not by a GitHub approval-required branch setting.
 - Canonical publication states, source locators, workflow-language guards,
   structural validation, route checks, and browser checks fail closed in
   `pnpm verify`.
@@ -35,6 +43,12 @@ removes human responsibility for source fitness.
 These controls can expose omissions and inconsistencies. They do not establish
 truth, fairness, source quality, identity, consent, or acceptable harm; those
 remain human decisions governed by the public policy.
+
+The only current editorial intake is the public correction form. It must not be
+described as private, and security reporting must not be offered as an editorial
+channel. Live-site removal, GitHub moderation, exceptional Git-history rewriting,
+and uncontrollable forks or caches are distinct capabilities; no fixed retention
+schedule or complete deletion is promised.
 
 ## Policy maintenance
 
