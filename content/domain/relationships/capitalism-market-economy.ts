@@ -22,7 +22,7 @@ export const capitalismMarketCitations = [
   [
     "capitalism-marx-definition",
     "marx-capital-volume-one-source",
-    "chapter 6, paragraph beginning ‘In order to be able to extract value’",
+    "chapter 7, section 2, paragraphs beginning ‘Therefore, the value of labour-power’ and ‘This metamorphosis’",
     "supports",
   ],
   [

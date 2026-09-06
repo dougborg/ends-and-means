@@ -182,17 +182,20 @@ async function verifyGlobalNavigation() {
   }
 }
 
-async function verifyExploreAndCaseRoutes() {
+async function verifyHomepage() {
   const home = await readFile(routeFile("/"), "utf8");
   const homeText = stripMarkup(home);
   expect(homeText).toContain("The label is only the beginning.");
+  expect(homeText).toContain(
+    "Political, economic, social, legal, cultural, and organizational ideas in theory and practice.",
+  );
   expect(homeText).toContain("political, economic, social, legal, cultural, and organizational life");
   expect(homeText).toContain("AI can assist discovery, synthesis, drafting, and consistency checks");
   expect(homeText).toContain("It is not evidence");
   expect(homeText).toContain("See what sits behind a sentence.");
   expect(homeText).toContain("Karl Marx locates the capitalist’s increment");
   expect(homeText).toContain("Marx describes the capitalist’s purchase of labor-power");
-  expect(homeText).toContain("chapter 6, paragraph beginning");
+  expect(homeText).toContain("chapter 7, section 2, paragraphs beginning");
   expect(homeText).toContain("supports");
   expect(homeText).toContain("How should definitions centered on wage labor classify");
   expect(homeText).toContain("A person reviews the proposal");
@@ -203,9 +206,16 @@ async function verifyExploreAndCaseRoutes() {
     "/guides/democracy/", "/guides/capitalism/", "/guides/kahnawake-community-lawmaking/",
     "/sources/marx-capital-volume-one-source/",
     "/research/#capitalism-coerced-labor-boundary",
-    "/#capitalism-marx-definition",
+    "/guides/capitalism/#capitalism-marx-definition",
   ]));
 
+  const capitalismGuide = await readFile(routeFile("/guides/capitalism/"), "utf8");
+  expect(capitalismGuide).toMatch(/<details[^>]*>[\s\S]*<article class="canonical-claim" id="capitalism-marx-definition">/);
+  expect(stripMarkup(capitalismGuide)).toContain("chapter 7, section 2, paragraphs beginning");
+}
+
+async function verifyExploreAndCaseRoutes() {
+  await verifyHomepage();
   const explore = await readFile(
     routeFile("/explore/swedish-wage-earner-fund-program/"),
     "utf8",
@@ -424,6 +434,9 @@ async function verifyMethodRoute() {
     1,
   );
   const methodText = stripMarkup(method);
+  expect(method).toContain(
+    'name="description" content="How Ends and Means researches, classifies, and explains contested political, economic, social, legal, cultural, and organizational subjects."',
+  );
   expect(methodText).toContain("How we research and classify.");
   expect(methodText).toContain("The commitments behind each explanation");
   expect(methodText).toContain("AI may assist discovery, synthesis, drafting, and consistency checks");

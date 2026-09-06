@@ -1,12 +1,13 @@
 ---
 import { homeRoute, isCurrentPublicRoute, publicRoutes } from "../lib/public-navigation";
+
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
 const siteMapRoutes = [homeRoute, ...publicRoutes];
 ---
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <p class="site-footer__description"><strong>Ends and Means</strong><br />Political and economic systems in theory and practice.<br /><a href="/third-party-notices.txt">Third-party notices</a></p>
+    <p class="site-footer__description"><strong>Ends and Means</strong><br />Political, economic, social, legal, cultural, and organizational ideas in theory and practice.<br /><a href="/third-party-notices.txt">Third-party notices</a></p>
     <nav class="site-map" aria-label="Site map">
       <ul>
         {siteMapRoutes.map((route) => <li class:list={{ "site-map__trust": route.level === "trust" }}><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}

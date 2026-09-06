@@ -29,19 +29,19 @@ if (citations.length === 0 || citations.some(({ source }) => source?.kind !== "s
     <h2 id="homepage-trace-title">See what sits behind a sentence.</h2>
     <p>A readable explanation stays in view while its claim, evidence, and unresolved limit remain available for inspection.</p>
   </header>
-  <div class="homepage-trace__flow">
+  <section class="homepage-trace__map" aria-label="Connected parts of one explanation">
     <article class="homepage-trace__prose">
-      <p class="coordinate">EXPLANATION</p>
+      <p class="coordinate">PUBLIC EXPLANATION</p>
       <p>{prose}</p>
       <a href={`/concepts/${homepageTrace.subject.id}/#${homepageTrace.sectionId}`}>Read it in context <span aria-hidden="true">→</span></a>
     </article>
-    <article class="homepage-trace__claim" id={statement.id}>
-      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />CLAIM / {statement.statementKind.replaceAll("-", " ")}</p>
+    <article class="homepage-trace__claim">
+      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />CANONICAL CLAIM / {statement.statementKind.replaceAll("-", " ")}</p>
       <p>{statement.text}</p>
-      <a href={`/#${statement.id}`}>Open the addressable claim <span aria-hidden="true">→</span></a>
+      <a href={`/guides/${homepageTrace.subject.id}/#${statement.id}`}>Open the claim and its citations <span aria-hidden="true">→</span></a>
     </article>
     <article class="homepage-trace__source">
-      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />SOURCE &amp; ROLE</p>
+      <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />CITED EVIDENCE</p>
       {citations.map(({ citation, source }) => source && (
         <div>
           <h3><a href={`/sources/${source.id}/`}>{source.title}</a></h3>
@@ -53,10 +53,10 @@ if (citations.length === 0 || citations.some(({ source }) => source?.kind !== "s
       ))}
     </article>
     <article class="homepage-trace__limit" id={`trace-${obligation.id}`}>
-      <p class="coordinate glyph-label"><Glyph glyph="question-disagreement" tone="warning" />OPEN LIMIT</p>
+      <p class="coordinate glyph-label"><Glyph glyph="question-disagreement" tone="warning" />UNRESOLVED QUALIFICATION</p>
       <h3>{obligation.question}</h3>
       <p>{obligation.currentLimitation}</p>
       <a href={`/research/#${obligation.id}`}>Inspect the open question <span aria-hidden="true">→</span></a>
     </article>
-  </div>
+  </section>
 </section>

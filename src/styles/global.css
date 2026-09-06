@@ -529,5 +529,6 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .apparatus-group:not([open]) > .reference-disclosure__body { display: block; }
   .narrative-dossier__heading { position: static; }
   a[href^="http"]::after { content: " (" attr(href) ")"; overflow-wrap: anywhere; }
+  a.print-short-url[href^="http"]::after { content: " (github.com/dougborg/ends-and-means/issues/new)"; }
 }
 }
