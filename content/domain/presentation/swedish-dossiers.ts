@@ -83,7 +83,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish wage-earner funds case dossier",
       description:
-        "The case spans legislative adoption in 1983 through liquidation in 1992; the five Swedish public boards invested from 1984 through 1991 under statutory ownership and voting caps. The funds created collective holdings but never became controlling owners.",
+        "From 1984 through 1991, the five Swedish public boards invested payroll- and profit-tax receipts under statutory ownership and voting caps. The funds created collective holdings but never became controlling owners.",
       subject: { kind: "case", id: "swedish-wage-earner-funds" },
       standfirst: "",
       standfirstStatementIds: [
