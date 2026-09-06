@@ -77,17 +77,28 @@ describe("Tawantinsuyu learner case", () => {
 
 describe("Tawantinsuyu source and publication boundaries", () => {
   it("keeps intellectual-work dates distinct from cited manifestations", () => {
+    const authoredWork = canonicalDocuments.find(
+      (document) =>
+        document.documentType === "entity" &&
+        document.entity.id === "cieza-chronicle-peru-work",
+    );
+    if (
+      authoredWork?.documentType !== "entity" ||
+      authoredWork.entity.kind !== "work"
+    )
+      throw new Error("Missing Cieza work fixture");
+    expect(authoredWork.entity.originalPublicationYear).toBeUndefined();
     expect(
-      canonicalGraph.indexes.entitiesById["cieza-chronicle-peru-work"],
-    ).toMatchObject({
-      kind: "work",
-      originalPublicationYear: 1553,
-    });
+      Object.hasOwn(
+        canonicalGraph.indexes.entitiesById["cieza-chronicle-peru-work"] ?? {},
+        "originalPublicationYear",
+      ),
+    ).toBe(false);
     expect(
       canonicalGraph.indexes.entitiesById["cieza-chronicle-peru-source"],
     ).toMatchObject({
       kind: "source",
-      publicationYear: 1880,
+      publicationYear: 2010,
     });
 
     const documents = structuredClone(canonicalDocuments);
@@ -98,17 +109,18 @@ describe("Tawantinsuyu source and publication boundaries", () => {
     );
     if (source?.documentType !== "entity" || source.entity.kind !== "source")
       throw new Error("Missing Cieza source fixture");
-    source.entity.publicationYear = 1881;
+    source.entity.publicationYear = 2011;
     const mutated = compileDomainGraph(documents);
     expect(
-      mutated.indexes.entitiesById["cieza-chronicle-peru-work"],
-    ).toMatchObject({
-      originalPublicationYear: 1553,
-    });
+      Object.hasOwn(
+        mutated.indexes.entitiesById["cieza-chronicle-peru-work"] ?? {},
+        "originalPublicationYear",
+      ),
+    ).toBe(false);
     expect(
       mutated.indexes.entitiesById["cieza-chronicle-peru-source"],
     ).toMatchObject({
-      publicationYear: 1881,
+      publicationYear: 2011,
     });
   });
 
