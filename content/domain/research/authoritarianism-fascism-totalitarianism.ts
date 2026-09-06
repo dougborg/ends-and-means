@@ -46,7 +46,7 @@ export const authoritarianismFascismTotalitarianismResearchDocuments = [
       targetSectionId: "variation",
       addressedStatementIds: [
         "fascism-label-boundary",
-        "fascism-crossnational-variation",
+        "fascism-evidence-region-limit",
       ],
       currentLimitation:
         "The guide establishes rival definitions and variation within European reference cases but does not test transfer to a preselected cross-regional sample.",
