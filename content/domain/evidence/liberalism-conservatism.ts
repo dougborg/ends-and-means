@@ -60,24 +60,25 @@ const sourceCopy: Record<
   "cdu-ahlen-programme": {
     work: "The British-zone CDU's 1947 economic and social program.",
     source:
-      "The Konrad Adenauer Foundation's reproduction of the original German Ahlen Programme.",
+      "The Konrad Adenauer Foundation's PDF reproduction of the original German Ahlen Programme; English summaries are Ends and Means translations.",
     purpose: "publisher",
   },
   "cdu-duesseldorf-guidelines": {
     work: "The CDU and CSU's 1949 economic, agricultural, social-policy, and housing guidelines.",
     source:
-      "The Konrad Adenauer Foundation's scan of the original German Düsseldorf Guidelines.",
+      "The Konrad Adenauer Foundation's scan of the original German Düsseldorf Guidelines; English summaries are Ends and Means translations.",
     purpose: "publisher",
   },
   "bell-what-is-liberalism": {
     work: "Duncan Bell's rival account of how liberalism is defined and historically reconstructed.",
-    source: "The Political Theory article identified by its publisher DOI.",
+    source:
+      "The SAGE article page, including the abstract's account of Bell's three definitional approaches.",
     purpose: "publisher",
   },
   "huntington-conservatism-ideology": {
     work: "Samuel P. Huntington's rival taxonomy of aristocratic, autonomous, and situational definitions of conservatism.",
     source:
-      "The American Political Science Review article identified by its JSTOR DOI.",
+      "The Cambridge Core article page and extract identifying Huntington's three conflicting conceptions.",
     purpose: "publisher",
   },
   "commons-right-to-buy": {
@@ -94,6 +95,12 @@ const sourceCopy: Record<
   "balasubramanian-free-economy": {
     work: "Aditya Balasubramanian's history of Swatantra and economic conservatism in postcolonial India.",
     source: "The publisher-authorized introduction to Toward a Free Economy.",
+    purpose: "authorized-reading",
+  },
+  "swatantra-statement-principles": {
+    work: "The twenty-one principles adopted by Swatantra's preparatory convention in August 1959.",
+    source:
+      "A scan of the party's English-language Statement of Principles preserved by Indian Liberals.",
     purpose: "authorized-reading",
   },
 };
@@ -221,20 +228,20 @@ export const liberalismConservatismEvidenceDocuments = [
     "pateman-sexual-contract",
     "The Sexual Contract",
     ["Carole Pateman"],
-    "Stanford University Press",
+    "Polity Press",
     "edition",
     "https://www.wiley-vch.de/en/areas-interest/humanities-social-sciences/the-sexual-contract-978-0-7456-0432-9",
     1988,
     1988,
-    { isbn13: "9780804714778" },
+    { isbn13: "9780745604329" },
   ),
   ...source(
     "japan-constitution",
     "The Constitution of Japan",
     ["Government of Japan"],
-    "Prime Minister's Office of Japan",
+    "National Diet Library of Japan",
     "legal-text",
-    "https://japan.kantei.go.jp/policy/koshitsu/051124_e.pdf",
+    "https://www.ndl.go.jp/constitution/e/etc/c01.html",
     1946,
     1946,
   ),
@@ -272,9 +279,12 @@ export const liberalismConservatismEvidenceDocuments = [
   ...source(
     "cdu-ahlen-programme",
     "Ahlen Programme",
-    ["Christian Democratic Union"],
+    [
+      "Christian Democratic Union",
+      "Ends and Means (English summary translation)",
+    ],
     "Konrad Adenauer Foundation",
-    "web-page",
+    "edition",
     "https://www.kas.de/c/document_library/get_file?groupId=252038&uuid=76a77614-6803-0750-c7a7-5d3ff7c46206",
     1947,
     1947,
@@ -282,7 +292,10 @@ export const liberalismConservatismEvidenceDocuments = [
   ...source(
     "cdu-duesseldorf-guidelines",
     "Düsseldorf Guidelines",
-    ["Christian Democratic Union"],
+    [
+      "Christian Democratic Union",
+      "Ends and Means (English summary translation)",
+    ],
     "Konrad Adenauer Foundation",
     "edition",
     "https://www.kas.de/documents/252038/253252/1949_Duesseldorfer-Leitsaetze.pdf/e96f38a1-b923-a79e-c5a3-11569de3f64e",
@@ -341,6 +354,16 @@ export const liberalismConservatismEvidenceDocuments = [
     2023,
     2023,
     { isbn13: "9780691205243" },
+  ),
+  ...source(
+    "swatantra-statement-principles",
+    "Statement of Principles of the Swatantra Party",
+    ["Swatantra Party"],
+    "Inland Printers, Bombay; digital copy preserved by Indian Liberals",
+    "edition",
+    "https://indianliberals.in/swatantra-party/statement-of-principles-of-the-swatantra-party-aug2-1959.pdf",
+    1959,
+    1959,
   ),
   {
     documentType: "entity",
@@ -453,13 +476,13 @@ export const liberalismConservatismEvidenceDocuments = [
   statement(
     "mehta-liberal-empire-tension",
     "Mehta examines liberal arguments for empire",
-    "Mehta interprets nineteenth-century British liberal justifications of empire as drawing on liberal assumptions about reason and historical progress.",
+    "Mehta argues that nineteenth-century British liberals made imperial rule intelligible by placing colonized peoples within a staged account of human development.",
     "classification",
   ),
   statement(
     "pateman-contract-gender-boundary",
     "Pateman challenges gender-neutral contract",
-    "Pateman interprets classic social-contract narratives as obscuring a sexual contract that structures men's political right over women.",
+    "Pateman argues that canonical contract theories hide a gendered settlement in which civil freedom for men depends on women's subordination.",
     "classification",
   ),
   statement(
@@ -589,15 +612,39 @@ export const liberalismConservatismEvidenceDocuments = [
     "observation",
   ),
   statement(
-    "right-to-buy-statutory-rules",
-    "Right to Buy overrode local discretion",
-    "The 1980 scheme gave qualifying tenants a statutory purchase right with discounts, local-authority mortgage duties, and powers for the Secretary of State to intervene.",
+    "right-to-buy-purchase-right",
+    "Qualifying tenants received a purchase right",
+    "Section 1 of the Housing Act 1980 gave qualifying secure tenants the right to buy their dwelling-house.",
     "observation",
   ),
   statement(
-    "right-to-buy-distribution",
-    "Right to Buy opportunities and effects were unequal",
-    "The House of Commons Library reports that the most desirable council properties tended to be purchased by more affluent tenants and that the remaining sector had a narrower and lower-income social base.",
+    "right-to-buy-discounts",
+    "The statute specified purchase discounts",
+    "Section 7 of the Housing Act 1980 specified how the tenant's purchase discount was calculated.",
+    "observation",
+  ),
+  statement(
+    "right-to-buy-mortgage-duty",
+    "Local authorities had a mortgage duty",
+    "Section 16 of the Housing Act 1980 required a local authority to provide a mortgage in specified Right to Buy sales.",
+    "observation",
+  ),
+  statement(
+    "right-to-buy-ministerial-intervention",
+    "The minister could intervene",
+    "Section 23 of the Housing Act 1980 empowered the Secretary of State to intervene when a landlord appeared unable or unwilling to complete a Right to Buy sale.",
+    "observation",
+  ),
+  statement(
+    "right-to-buy-buyer-distribution",
+    "Purchases favored more desirable properties",
+    "The House of Commons Library reports that more desirable council properties tended to be bought by relatively affluent tenants.",
+    "observation",
+  ),
+  statement(
+    "right-to-buy-residual-sector",
+    "The remaining sector had a narrower social base",
+    "The House of Commons Library reports that the remaining council sector acquired a narrower and lower-income social base.",
     "observation",
   ),
   statement(
@@ -610,7 +657,7 @@ export const liberalismConservatismEvidenceDocuments = [
     "swatantra-ordered-progress",
     "Swatantra joined free economy to ordered progress",
     "Balasubramanian finds that the constituencies behind Swatantra sought ordered progress and limits on centralized economic regulation rather than a wholesale rejection of the state.",
-    "observation",
+    "attributed-value",
   ),
   statement(
     "swatantra-gender-limit",
@@ -619,9 +666,27 @@ export const liberalismConservatismEvidenceDocuments = [
     "observation",
   ),
   statement(
-    "swatantra-opposition-practices",
-    "Swatantra used parliamentary and coalition practices",
-    "Balasubramanian describes Swatantra pursuing opposition through coalitions, parliamentary procedure, and appeals to courts as checks on Congress power.",
+    "swatantra-coalition-practice",
+    "Swatantra built opposition coalitions",
+    "Balasubramanian describes Swatantra forming coalitions to oppose Congress power.",
+    "observation",
+  ),
+  statement(
+    "swatantra-parliamentary-practice",
+    "Swatantra used parliamentary procedure",
+    "Balasubramanian describes Swatantra using parliamentary procedure as an opposition practice.",
+    "observation",
+  ),
+  statement(
+    "swatantra-court-practice",
+    "Swatantra appealed to courts",
+    "Balasubramanian describes Swatantra appealing to courts as a check on Congress power.",
+    "observation",
+  ),
+  statement(
+    "swatantra-formal-principles",
+    "Swatantra adopted a formal statement of principles",
+    "Swatantra's preparatory convention adopted twenty-one numbered principles on 1–2 August 1959.",
     "observation",
   ),
   statement(
@@ -797,16 +862,20 @@ export const liberalismConservatismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "right-to-buy-england-wales-1980-1988",
+      id: "right-to-buy-england-wales-1980-1998",
       kind: "case",
-      label: "Right to Buy in England and Wales, 1980–1988",
+      label: "Right to Buy in England and Wales, 1980–1998",
       description:
         "The first statutory phase of a Conservative housing program that gave qualifying council tenants purchase rights while overriding parts of local housing discretion.",
       locationIds: ["england-and-wales"],
       startDate: { year: 1980, month: 10, day: 3, certainty: "exact" },
-      endDate: { year: 1988, certainty: "exact" },
+      endDate: {
+        year: 1998,
+        certainty: "approximate",
+        note: "The Commons Library paper reports annual sales and stock through the late 1990s; 1998 bounds this review interval rather than a statutory phase.",
+      },
       scope:
-        "The statutory scheme in England and Wales from commencement through the 1988 rule changes; Scotland had separate legislation, and later reforms and present policy are excluded.",
+        "The statutory scheme in England and Wales from commencement through the latest sales and stock figures reviewed in the 1999 Commons Library paper; Scotland had separate legislation, and later policy is excluded.",
       selectionRationale:
         "The episode connects an explicitly documented Conservative program to enacted authority, distributional effects, and a geographic transfer limit without defining conservatism by the program.",
       conditionStatementIds: ["right-to-buy-conservative-programme"],
@@ -821,18 +890,30 @@ export const liberalismConservatismEvidenceDocuments = [
       kind: "case-episode",
       label: "Initial Right to Buy operation",
       description:
-        "The operating interval from the statutory scheme's commencement through the 1988 changes.",
-      caseId: "right-to-buy-england-wales-1980-1988",
+        "The operating interval from the statutory scheme's commencement through the report's late-1990s evidence.",
+      caseId: "right-to-buy-england-wales-1980-1998",
       locationIds: ["england-and-wales"],
       startDate: { year: 1980, month: 10, day: 3, certainty: "exact" },
-      endDate: { year: 1988, certainty: "exact" },
+      endDate: {
+        year: 1998,
+        certainty: "approximate",
+        note: "The Commons Library paper reports annual sales and stock through the late 1990s; 1998 bounds this review interval rather than a statutory phase.",
+      },
       scope:
         "Statutory purchase rights and reported distributional changes in England and Wales; no causal estimate separates Right to Buy from falling social-housing investment.",
       conditionStatementIds: ["right-to-buy-conservative-programme"],
-      formalRuleStatementIds: ["right-to-buy-statutory-rules"],
+      formalRuleStatementIds: [
+        "right-to-buy-purchase-right",
+        "right-to-buy-discounts",
+        "right-to-buy-mortgage-duty",
+        "right-to-buy-ministerial-intervention",
+      ],
       ruleInUseStatementIds: [],
       interactionStatementIds: [],
-      outcomeStatementIds: ["right-to-buy-distribution"],
+      outcomeStatementIds: [
+        "right-to-buy-buyer-distribution",
+        "right-to-buy-residual-sector",
+      ],
       ...reviewed,
     },
   },
@@ -850,7 +931,7 @@ export const liberalismConservatismEvidenceDocuments = [
       scope:
         "Swatantra's formation and early opposition activity through the 1967 general election; not every member, later party history, or a universal Indian conservatism.",
       selectionRationale:
-        "The episode provides a locally grounded, non-Atlantic classification while exposing regional, caste, gender, and organizational differences within a free-economy coalition.",
+        "The episode provides a locally grounded, non-Atlantic classification while exposing regional, gender, and organizational differences within a free-economy coalition.",
       conditionStatementIds: ["swatantra-economic-conservatism"],
       episodeIds: ["swatantra-early-opposition-episode"],
       ...reviewed,
@@ -870,12 +951,16 @@ export const liberalismConservatismEvidenceDocuments = [
       endDate: { year: 1967, certainty: "exact" },
       scope:
         "Organizational aims and practices documented in the publisher-authorized introduction; later decline and the full record of parliamentary action remain outside this episode.",
-      conditionStatementIds: ["swatantra-economic-conservatism"],
-      formalRuleStatementIds: [],
-      ruleInUseStatementIds: ["swatantra-ordered-progress"],
+      conditionStatementIds: [
+        "swatantra-economic-conservatism",
+        "swatantra-ordered-progress",
+      ],
+      formalRuleStatementIds: ["swatantra-formal-principles"],
+      ruleInUseStatementIds: ["swatantra-parliamentary-practice"],
       interactionStatementIds: [
         "swatantra-gender-limit",
-        "swatantra-opposition-practices",
+        "swatantra-coalition-practice",
+        "swatantra-court-practice",
       ],
       outcomeStatementIds: [],
       ...reviewed,
