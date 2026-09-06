@@ -597,6 +597,26 @@ const expectedOpenResearchObligations = [
     target: "case:swedish-wage-earner-funds#what-they-were-meant-to-do",
     status: "open",
   },
+  {
+    id: "tawantinsuyu-colonial-translation",
+    obligationType: "research-gap",
+    target:
+      "case:tawantinsuyu-imperial-organization#how-should-colonial-accounts-be-read",
+    status: "open",
+  },
+  {
+    id: "tawantinsuyu-provincial-variation",
+    obligationType: "counterevidence",
+    target: "case:tawantinsuyu-imperial-organization#who-ruled",
+    status: "open",
+  },
+  {
+    id: "tawantinsuyu-reciprocity-extraction-test",
+    obligationType: "counterargument",
+    target:
+      "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
+    status: "open",
+  },
 ];
 
 describe("canonical research agenda", () => {

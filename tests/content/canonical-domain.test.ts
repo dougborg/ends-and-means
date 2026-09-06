@@ -31,6 +31,7 @@ describe("canonical vertical slice", () => {
       "kahnawake-community-lawmaking",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
+      "tawantinsuyu-imperial-organization",
     ]);
   });
 
