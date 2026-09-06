@@ -53,7 +53,7 @@ describe("canonical vertical slice", () => {
     expect(entitiesOfKind("event").map(({ id }) => id)).toEqual([
       "wage-earner-fund-board-abolition",
       "zapatista-autonomy-reorganization-2023",
-      "zapatista-caracoles-jbg-formation-2003",
+      "zapatista-caracoles-jbg-formation-announced-2003",
     ]);
   });
 

@@ -403,6 +403,10 @@ test("Zapatista case exposes freshness, interactions, evidence, and print disclo
   await page.locator("details.apparatus-group").first().locator("summary").click();
   await expect(page.getByText("Evidence current through:")).toBeVisible();
   await expect(page.getByText("This pointer records why the case was re-reviewed")).toBeVisible();
+  await page.locator('a[href="#zapatista-autonomy-reorganization-2023"]').click();
+  const freshnessTarget = page.locator("#zapatista-autonomy-reorganization-2023");
+  await expect(freshnessTarget).toBeVisible();
+  await expect(freshnessTarget).toBeFocused();
   const episode = page.locator("#zapatista-caracol-jbg-episode-2003-2023");
   await episode.locator("summary").click();
   await expect(episode.getByRole("heading", { name: "Interactions" })).toBeVisible();

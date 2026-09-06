@@ -27,7 +27,7 @@ different institutional configurations within them. Places are referenced as
 entities rather than embedded country labels. Dates support exact, approximate,
 disputed, and unknown boundaries, including negative years for BCE material.
 Ongoing Cases must expose an `asOf` date, last review date, and freshness state.
-They may identify the Event that triggered the latest review with sorted, unique `materialChangeEventIds`; this is editorial freshness metadata, not a turning-point or causal claim, and the Event must have cited description evidence.
+Ongoing Cases may identify the Event that triggered the latest review with sorted, unique `materialChangeEventIds`; this is editorial freshness metadata, not a turning-point or causal claim. Each Event must own a reviewed description Statement that cites a resolved reviewed or published Source; ended Cases cannot use the field.
 Episodes keep conditions, formal rules, rules-in-use, interactions, and outcomes
 in separate Statement collections so observation and causal interpretation do
 not collapse into one narrative field.

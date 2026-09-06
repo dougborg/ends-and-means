@@ -33,6 +33,7 @@ const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
           const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
           const disclosure = target?.closest("details") ?? (target instanceof HTMLDetailsElement ? target : null);
           if (disclosure instanceof HTMLDetailsElement) disclosure.open = true;
+          if (target instanceof HTMLElement && target.tabIndex >= 0) target.focus({ preventScroll: true });
         };
         openTarget();
         addEventListener("hashchange", openTarget);
