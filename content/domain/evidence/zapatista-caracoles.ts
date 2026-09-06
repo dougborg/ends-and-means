@@ -134,6 +134,23 @@ export const zapatistaCaracolesEvidenceDocuments = [
         "The political-military organization whose command issued public communiqués and remained distinct from civilian autonomous government.",
       scope:
         "The EZLN and its CCRI-CG command; not a synonym for every Zapatista support-base community or civilian authority.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Zapatista_Army_of_National_Liberation",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q188590",
+          url: "https://www.wikidata.org/wiki/Q188590",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

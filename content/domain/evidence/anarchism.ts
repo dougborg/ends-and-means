@@ -133,8 +133,21 @@ export const anarchismEvidenceDocuments = [
       scopeNote:
         "Keep the concept, historical movements, approaches, ends, means, self-identification, and bounded cases distinct.",
       externalRefs: [
-        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Anarchism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
-        { system: "wikidata", id: "Q6199", url: "https://www.wikidata.org/wiki/Q6199", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Anarchism",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q6199",
+          url: "https://www.wikidata.org/wiki/Q6199",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
       ],
       ...reviewed,
     },
@@ -271,6 +284,23 @@ export const anarchismEvidenceDocuments = [
       label: "Spain",
       description: "The geographic boundary for the 1936–1939 case.",
       placeType: "country",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Spain",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q29",
+          url: "https://www.wikidata.org/wiki/Q29",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

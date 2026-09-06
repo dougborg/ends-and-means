@@ -1,6 +1,27 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
 
 const reviewed = { publicationStatus: "reviewed" as const };
+const orientationRefs = (
+  article: string,
+  id: string,
+  match: "exact" | "close",
+) => [
+  {
+    system: "wikipedia" as const,
+    url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+    purpose: "orientation" as const,
+    language: "en",
+    checkedAt: "2026-09-06",
+  },
+  {
+    system: "wikidata" as const,
+    id,
+    url: `https://www.wikidata.org/wiki/${id}`,
+    purpose: "identity" as const,
+    match,
+    checkedAt: "2026-09-06",
+  },
+];
 
 type SourceType = "article" | "report" | "web-page" | "edition";
 type ResourcePurpose = "publisher" | "library" | "authorized-reading" | "other";
@@ -272,6 +293,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer a complete regime type from one coercive act, a leader's style, or the everyday meaning of authority.",
+      externalRefs: orientationRefs("Authoritarianism", "Q6229", "exact"),
       ...reviewed,
     },
   },
@@ -286,6 +308,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep scholarly definitions, self-description, movements, parties, regimes, and polemical uses separate.",
+      externalRefs: orientationRefs("Fascism", "Q6223", "exact"),
       ...reviewed,
     },
   },
@@ -300,6 +323,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not use totalitarian as an automatic intensifier for repression or as an uncontested classification of every dictatorship.",
+      externalRefs: orientationRefs("Totalitarianism", "Q128135", "exact"),
       ...reviewed,
     },
   },
@@ -395,6 +419,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       label: "Italy",
       description: "The geographic boundary for the Fascist dictatorship case.",
       placeType: "country",
+      externalRefs: orientationRefs("Italy", "Q38", "exact"),
       ...reviewed,
     },
   },
@@ -406,6 +431,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       label: "Germany",
       description: "The geographic boundary for the Nazi consolidation case.",
       placeType: "country",
+      externalRefs: orientationRefs("Germany", "Q183", "exact"),
       ...reviewed,
     },
   },

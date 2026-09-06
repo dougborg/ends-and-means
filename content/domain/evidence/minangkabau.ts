@@ -9,6 +9,23 @@ const entities = [
     label: "West Sumatra",
     description: "An Indonesian province on the island of Sumatra.",
     placeType: "region",
+    externalRefs: [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/West_Sumatra",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q2772",
+        url: "https://www.wikidata.org/wiki/Q2772",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   },
   {
     id: "nagari-koto-tinggi-agam",
@@ -305,8 +322,7 @@ const entities = [
     id: "matriliny-does-not-fix-property-control",
     kind: "statement",
     label: "Property control varied within Blackwood’s village study",
-    description:
-      "A bounded observation about descent and effective control.",
+    description: "A bounded observation about descent and effective control.",
     statementKind: "observation",
     text: "Blackwood reports senior women controlling land in the Minangkabau village she studied.",
   },
@@ -314,7 +330,8 @@ const entities = [
     id: "matriliny-does-not-fix-office",
     kind: "statement",
     label: "Kin authority and land control differed in Blackwood’s study",
-    description: "A bounded observation about land control and formal kin authority.",
+    description:
+      "A bounded observation about land control and formal kin authority.",
     statementKind: "observation",
     text: "Blackwood reports men claiming formal kin authority in the village where she observed senior women controlling land.",
   },
@@ -322,7 +339,8 @@ const entities = [
     id: "matriliny-does-not-fix-equality",
     kind: "statement",
     label: "Bonjol’s authors reject an equality inference",
-    description: "The Bonjol authors’ bounded interpretation of descent and equality.",
+    description:
+      "The Bonjol authors’ bounded interpretation of descent and equality.",
     statementKind: "observation",
     text: "The Bonjol authors caution that matrilineal inheritance in their case did not make women equal participants in decisions over communal forest resources.",
   },
@@ -416,7 +434,8 @@ const entities = [
     id: "koto-tinggi-residence-unobserved",
     kind: "statement",
     label: "The Koto Tinggi study does not document postmarital residence",
-    description: "A limit on what the case establishes about postmarital residence.",
+    description:
+      "A limit on what the case establishes about postmarital residence.",
     statementKind: "observation",
     text: "Nurdin’s Koto Tinggi study does not separately document postmarital residence.",
   },

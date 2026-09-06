@@ -2,6 +2,7 @@ import type { ExternalReference } from "./common";
 import type { DomainEntity } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import { reviewedOrientationLedger } from "./orientation-ledger";
+import { reviewedOrientationLabels } from "./orientation-labels";
 import type { SubjectGuide } from "./presentation";
 
 export type OrientationAuditEntry = {
@@ -13,6 +14,11 @@ export type OrientationAuditEntry = {
   orientationUrls: string[];
   identityIds: string[];
   references: ExternalReference[];
+  consideredCandidates: Array<{
+    title: string;
+    url: string;
+    boundary: string;
+  }>;
 };
 
 const live = ({ publicationStatus }: DomainEntity | SubjectGuide) =>
@@ -76,6 +82,7 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
       orientationUrls,
       identityIds,
       references,
+      consideredCandidates: [],
     };
   const decision = reviewedDecisions.get(`entity:${entity.id}`);
   if (decision?.disposition === "mapped")
@@ -87,6 +94,7 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
       orientationUrls,
       identityIds,
       references,
+      consideredCandidates: [],
     };
   return {
     targetType: "entity",
@@ -97,6 +105,7 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
     orientationUrls,
     identityIds,
     references,
+    consideredCandidates: decision?.consideredCandidates ?? [],
   };
 }
 
@@ -117,6 +126,7 @@ function guideEntry(
       orientationUrls: mapped.orientationUrls,
       identityIds: mapped.identityIds,
       references: mapped.references,
+      consideredCandidates: [],
     };
   return {
     targetType: "subject-guide",
@@ -127,6 +137,7 @@ function guideEntry(
     orientationUrls: [],
     identityIds: [],
     references: [],
+    consideredCandidates: decision?.consideredCandidates ?? [],
   };
 }
 
@@ -186,6 +197,23 @@ function validateEntry(
     errors.push(
       `${entry.targetType} ${entry.id}: absent entry contains a mapping`,
     );
+  if (
+    entry.disposition === "intentionally-unmatched" &&
+    entry.consideredCandidates.length === 0
+  )
+    errors.push(`${key}: unmatched decision lacks a reviewed candidate`);
+  for (const candidate of entry.consideredCandidates) {
+    if (!candidate.title.trim() || !candidate.boundary.includes(entry.label))
+      errors.push(
+        `${key}: rejected candidate lacks a target-specific boundary`,
+      );
+    if (
+      !/^https:\/\/en\.wikipedia\.org\/wiki\/[A-Za-z0-9%_'()\-.]+$/.test(
+        candidate.url,
+      )
+    )
+      errors.push(`${key}: rejected candidate is not a canonical article URL`);
+  }
   return errors;
 }
 
@@ -195,8 +223,14 @@ function validateReviewedDecision(
   decision: (typeof reviewedOrientationLedger)[number] | undefined,
 ) {
   const errors: string[] = [];
+  const reviewedLabel =
+    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
   if (entry.disposition !== "not-applicable" && !decision)
     errors.push(`${key}: missing target-specific reviewed decision`);
+  if (decision && reviewedLabel === undefined)
+    errors.push(`${key}: missing immutable reviewed label`);
+  if (reviewedLabel !== undefined && entry.label !== reviewedLabel)
+    errors.push(`${key}: canonical label changed from reviewed ledger`);
   if (decision && entry.disposition !== decision.disposition)
     errors.push(`${key}: reviewed disposition changed`);
   if (decision && entry.reason !== decision.reason)
@@ -206,6 +240,12 @@ function validateReviewedDecision(
     JSON.stringify(entry.references) !== JSON.stringify(decision.references)
   )
     errors.push(`${key}: reviewed reference tuple changed`);
+  if (
+    decision &&
+    JSON.stringify(entry.consideredCandidates) !==
+      JSON.stringify(decision.consideredCandidates ?? [])
+  )
+    errors.push(`${key}: reviewed rejected-candidate decision changed`);
   if (
     decision?.disposition === "mapped" &&
     decision.resolution !== "direct-canonical-target"
@@ -240,6 +280,9 @@ export function validateOrientationAudit(
   for (const key of reviewedDecisions.keys())
     if (!expectedReviewedKeys.has(key))
       errors.push(`${key}: stale reviewed decision`);
+  for (const key of Object.keys(reviewedOrientationLabels))
+    if (!expectedReviewedKeys.has(key))
+      errors.push(`${key}: stale immutable reviewed label`);
   const seen = new Set<string>();
   for (const entry of inventory)
     errors.push(
