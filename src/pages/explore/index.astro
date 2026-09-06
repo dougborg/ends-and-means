@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { canonicalGraph, dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
+import { canonicalGraph } from "../../lib/domain/canonical";
+import { buildExploreApproaches } from "../../lib/explore-approaches";
 import { buildExploreDirectory, normalizeExploreQuery } from "../../lib/explore-discovery";
 import { hasSubjectGuideDirectory } from "../../lib/subject-guide-presentation";
 
-const approaches = entitiesOfKind("approach");
+const approaches = buildExploreApproaches(canonicalGraph);
 const guides = canonicalGraph.subjectGuides;
 const directory = buildExploreDirectory(guides);
 ---
@@ -71,11 +72,11 @@ const directory = buildExploreDirectory(guides);
           <h2 id="approach-paths-title">Follow a specific proposal or program</h2>
         </header>
         <ol class="canonical-directory">
-          {approaches.map((approach) => (
+          {approaches.map(({ approach, href, standfirst }) => (
             <li>
               <p class="coordinate">APPROACH</p>
-              <h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3>
-              <p>{dossierForSubject("approach", approach.id)?.standfirst ?? approach.description}</p>
+              <h3><a href={href}>{approach.label}</a></h3>
+              <p>{standfirst}</p>
               <a class="detail-link" href={`/explore/${approach.id}/`}>Follow this proposal →</a>
             </li>
           ))}
@@ -110,6 +111,14 @@ const directory = buildExploreDirectory(guides);
       if (status) status.textContent = statusMessage(input.value, query, matches.length, results.length);
     };
 
+    const syncUrl = () => {
+      if (!(input instanceof HTMLInputElement)) return;
+      const url = new URL(window.location.href);
+      if (input.value.trim()) url.searchParams.set("q", input.value.trim());
+      else url.searchParams.delete("q");
+      history.replaceState(null, "", url);
+    };
+
     const updateResult = (result: Element, matches: Element[], query: string) => {
         result.toggleAttribute("hidden", !matches.includes(result));
         const aliases = [...result.querySelectorAll("[data-alias-normalized]")];
@@ -126,15 +135,22 @@ const directory = buildExploreDirectory(guides);
           : `${matchCount} reviewed ${matchCount === 1 ? "guide matches" : "guides match"} “${value.trim()}”.`;
 
     if (input instanceof HTMLInputElement) {
+      let pendingUrlUpdate: number | undefined;
       const initial = new URLSearchParams(window.location.search).get("q");
       if (initial) input.value = initial;
-      input.addEventListener("input", update);
+      input.addEventListener("input", () => {
+        update();
+        window.clearTimeout(pendingUrlUpdate);
+        pendingUrlUpdate = window.setTimeout(syncUrl, 150);
+      });
       form?.addEventListener("submit", (event) => {
         event.preventDefault();
-        const url = new URL(window.location.href);
-        if (input.value.trim()) url.searchParams.set("q", input.value.trim());
-        else url.searchParams.delete("q");
-        history.replaceState(null, "", url);
+        window.clearTimeout(pendingUrlUpdate);
+        syncUrl();
+        update();
+      });
+      window.addEventListener("popstate", () => {
+        input.value = new URLSearchParams(window.location.search).get("q") ?? "";
         update();
       });
       update();

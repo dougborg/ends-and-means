@@ -10,7 +10,10 @@ export interface ExploreGuideEntry {
   searchText: string;
 }
 
-export type ExploreSearchEntry = Pick<ExploreGuideEntry, "aliases" | "searchText"> & {
+export type ExploreSearchEntry = Pick<
+  ExploreGuideEntry,
+  "aliases" | "searchText"
+> & {
   guide: Pick<SubjectGuide, "id">;
 };
 
@@ -45,61 +48,114 @@ export function auditExploreAliases(
     const guide = guides.get(alias.guideId);
     findings.push(...auditAliasOwner(alias, guide));
     if (!guide) continue;
+    const owned = guide.searchQueries.find(
+      (entry) => normalizeExploreQuery(entry.query) === query,
+    );
+    if (!aliasMatchesOwnedEntry(alias, owned)) {
+      findings.push(
+        `${alias.guideId}: discovery alias ${JSON.stringify(alias.query)} does not exactly match its Subject Guide entry`,
+      );
+    }
     const existing = owners.get(query);
     if (existing) existing.push(alias);
     else owners.set(query, [alias]);
   }
 
+  findings.push(...auditAliasCollisions(owners));
+
+  return findings.sort();
+}
+
+function auditAliasCollisions(owners: ReadonlyMap<string, ExploreAlias[]>) {
+  const findings: string[] = [];
   for (const [query, entries] of owners) {
     const distinctOwners = new Set(entries.map(({ guideId }) => guideId));
     if (distinctOwners.size < 2) continue;
     for (const entry of entries) {
       if (!entry.disambiguation?.trim()) {
-        findings.push(`${entry.guideId}: colliding discovery alias ${JSON.stringify(query)} requires disambiguation`);
+        findings.push(
+          `${entry.guideId}: colliding discovery alias ${JSON.stringify(query)} requires disambiguation`,
+        );
       }
     }
   }
+  return findings;
+}
 
-  return findings.sort();
+function aliasMatchesOwnedEntry(
+  alias: ExploreAlias,
+  owned: SubjectGuideSearchQuery | undefined,
+) {
+  return (
+    owned !== undefined &&
+    owned.query === alias.query &&
+    owned.disambiguation === alias.disambiguation &&
+    owned.resultStatus === alias.resultStatus
+  );
 }
 
 function auditAliasOwner(alias: ExploreAlias, guide: SubjectGuide | undefined) {
   if (!guide) {
-    return [`${alias.guideId}: discovery alias ${JSON.stringify(alias.query)} has no Subject Guide owner`];
+    return [
+      `${alias.guideId}: discovery alias ${JSON.stringify(alias.query)} has no Subject Guide owner`,
+    ];
   }
   if (!liveStatuses.has(guide.publicationStatus)) {
-    return [`${alias.guideId}: discovery alias ${JSON.stringify(alias.query)} targets a non-public Subject Guide`];
+    return [
+      `${alias.guideId}: discovery alias ${JSON.stringify(alias.query)} targets a non-public Subject Guide`,
+    ];
   }
   return [];
 }
 
-export function buildExploreDirectory(
-  guides: readonly SubjectGuide[],
-  aliases?: readonly ExploreAlias[],
-) {
+export function buildExploreDirectory(guides: readonly SubjectGuide[]) {
   const liveGuides = guides.filter(({ publicationStatus }) =>
     liveStatuses.has(publicationStatus),
   );
-  const discoveryAliases = aliases ?? ownedExploreAliases(liveGuides);
+  const discoveryAliases = ownedExploreAliases(liveGuides);
   const findings = auditExploreAliases(guides, discoveryAliases);
   if (findings.length > 0) {
-    throw new Error(`Invalid Explore discovery aliases:\n${findings.join("\n")}`);
+    throw new Error(
+      `Invalid Explore discovery aliases:\n${findings.join("\n")}`,
+    );
   }
 
   return liveGuides
     .map((guide): ExploreGuideEntry => {
-      const ownedAliases = discoveryAliases.filter(({ guideId }) => guideId === guide.id);
+      const ownedAliases = discoveryAliases.filter(
+        ({ guideId }) => guideId === guide.id,
+      );
       return {
         guide,
         aliases: ownedAliases,
-        searchText: normalizeExploreQuery([
-          guide.label,
-          guide.description,
-          ...ownedAliases.map(({ query }) => query),
-        ].join(" ")),
+        searchText: normalizeExploreQuery(
+          [
+            guide.label,
+            guide.description,
+            ...ownedAliases.map(({ query }) => query),
+          ].join(" "),
+        ),
       };
     })
-    .sort((left, right) => left.guide.label.localeCompare(right.guide.label));
+    .sort((left, right) => compareGuideEntries(left, right));
+}
+
+function compareCodeUnits(left: string, right: string) {
+  if (left < right) return -1;
+  if (left > right) return 1;
+  return 0;
+}
+
+function compareGuideEntries(
+  left: ExploreGuideEntry,
+  right: ExploreGuideEntry,
+) {
+  return (
+    compareCodeUnits(
+      normalizeExploreQuery(left.guide.label),
+      normalizeExploreQuery(right.guide.label),
+    ) || compareCodeUnits(left.guide.id, right.guide.id)
+  );
 }
 
 export function matchExploreDirectory(
@@ -113,7 +169,8 @@ export function matchExploreDirectory(
   );
   if (exact.length > 0) return exact;
   const words = query.split(" ");
-  return directory.filter(({ searchText }) =>
-    words.every((word) => searchText.includes(word)),
-  );
+  return directory.filter(({ searchText }) => {
+    const indexedWords = new Set(searchText.split(" "));
+    return words.every((word) => indexedWords.has(word));
+  });
 }

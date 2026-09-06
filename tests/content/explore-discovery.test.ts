@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { SubjectGuide } from "../../src/lib/domain";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
+import { buildExploreApproaches } from "../../src/lib/explore-approaches";
 import {
   auditExploreAliases,
   buildExploreDirectory,
@@ -13,7 +14,7 @@ function clonedGuides() {
   return structuredClone(canonicalGraph.subjectGuideRecords);
 }
 
-describe("learner-first Explore discovery", () => {
+describe("learner-first Explore guide discovery", () => {
   it("builds only from the reviewed and published guide projection", () => {
     const records = clonedGuides();
     const first = records[0];
@@ -37,18 +38,21 @@ describe("learner-first Explore discovery", () => {
     ["worker ownership", "guide-socialism", "guide"],
     ["direct democracy", "guide-economic-democracy", "research-gap"],
     ["planned economy", "guide-socialism", "research-gap"],
-  ])("routes %s to an owned reviewed destination", (query, guideId, resultStatus) => {
-    const matches = matchExploreDirectory(
-      buildExploreDirectory(canonicalGraph.subjectGuides),
-      query,
-    );
+  ])(
+    "routes %s to an owned reviewed destination",
+    (query, guideId, resultStatus) => {
+      const matches = matchExploreDirectory(
+        buildExploreDirectory(canonicalGraph.subjectGuides),
+        query,
+      );
 
-    expect(matches.map(({ guide }) => guide.id)).toEqual([guideId]);
-    expect(
-      matches[0]?.aliases.find((alias) => alias.query === query)?.resultStatus ??
-        "guide",
-    ).toBe(resultStatus);
-  });
+      expect(matches.map(({ guide }) => guide.id)).toEqual([guideId]);
+      expect(
+        matches[0]?.aliases.find((alias) => alias.query === query)
+          ?.resultStatus ?? "guide",
+      ).toBe(resultStatus);
+    },
+  );
 
   it("falls back to deterministic all-token matching when no alias is exact", () => {
     const matches = matchExploreDirectory(
@@ -59,6 +63,37 @@ describe("learner-first Explore discovery", () => {
     expect(matches.map(({ guide }) => guide.id)).toEqual([
       "guide-economic-democracy",
     ]);
+  });
+
+  it("matches whole normalized tokens without fragment false positives", () => {
+    const directory = buildExploreDirectory(canonicalGraph.subjectGuides);
+
+    expect(
+      matchExploreDirectory(directory, "economic limitations"),
+    ).toHaveLength(1);
+    expect(matchExploreDirectory(directory, "economic limit")).toEqual([]);
+    expect(matchExploreDirectory(directory, "comm")).toEqual([]);
+  });
+
+  it("returns every fuzzy token match rather than selecting a first owner", () => {
+    const directory = [
+      {
+        guide: { id: "guide-b" },
+        aliases: [],
+        searchText: "shared institutional question",
+      },
+      {
+        guide: { id: "guide-a" },
+        aliases: [],
+        searchText: "shared historical question",
+      },
+    ];
+
+    expect(
+      matchExploreDirectory(directory, "shared question").map(
+        ({ guide }) => guide.id,
+      ),
+    ).toEqual(["guide-b", "guide-a"]);
   });
 
   it("returns every explicitly disambiguated owner for an ambiguous phrase", () => {
@@ -76,7 +111,9 @@ describe("learner-first Explore discovery", () => {
       ),
     ).toHaveLength(2);
   });
+});
 
+describe("Explore discovery publication boundaries", () => {
   it("fails closed on orphaned, non-public, and ambiguous aliases", () => {
     const guides = clonedGuides();
     const first = guides[0];
@@ -98,11 +135,88 @@ describe("learner-first Explore discovery", () => {
       expect.arrayContaining([
         'guide-missing: discovery alias "orphan fixture" has no Subject Guide owner',
         'guide-unpublished-fixture: discovery alias "unpublished fixture" targets a non-public Subject Guide',
-        expect.stringContaining('colliding discovery alias "ambiguous fixture" requires disambiguation'),
+        expect.stringContaining(
+          'colliding discovery alias "ambiguous fixture" requires disambiguation',
+        ),
       ]),
     );
-    expect(() => buildExploreDirectory([...guides, unpublished], aliases)).toThrow(
-      /Invalid Explore discovery aliases/,
+  });
+
+  it("rejects forged aliases and altered editorial boundaries", () => {
+    const guides = clonedGuides();
+    const aliases = ownedExploreAliases(guides);
+    const first = aliases[0];
+    const second = aliases[1];
+    if (!first || !second) throw new Error("Missing alias fixtures");
+    const alteredQuery = second.query;
+    first.query = "forged query";
+    second.disambiguation = "A boundary that the owning guide did not approve.";
+    second.resultStatus = "research-gap";
+
+    expect(auditExploreAliases(guides, aliases)).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining(
+          'discovery alias "forged query" does not exactly match',
+        ),
+        expect.stringContaining(
+          `discovery alias ${JSON.stringify(alteredQuery)} does not exactly match`,
+        ),
+      ]),
     );
+  });
+
+  it("sorts by normalized code units with an ID tie-breaker regardless of input order", () => {
+    const guides = clonedGuides().slice(0, 3);
+    const first = guides[0];
+    const second = guides[1];
+    const third = guides[2];
+    if (!first || !second || !third) throw new Error("Missing guide fixtures");
+    first.label = "Álpha";
+    first.id = "guide-alpha-z";
+    second.label = "alpha";
+    second.id = "guide-alpha-a";
+    third.label = "Beta";
+
+    const expected = ["guide-alpha-a", "guide-alpha-z", third.id];
+    expect(
+      buildExploreDirectory([first, second, third]).map(
+        ({ guide }) => guide.id,
+      ),
+    ).toEqual(expected);
+    expect(
+      buildExploreDirectory([third, first, second]).map(
+        ({ guide }) => guide.id,
+      ),
+    ).toEqual(expected);
+  });
+});
+
+describe("Explore secondary destinations", () => {
+  it("lists only live approaches with a live dossier and resolvable public route", () => {
+    const graph = structuredClone(canonicalGraph);
+    const approaches = buildExploreApproaches(graph);
+    const removed = approaches[0];
+    if (!removed) throw new Error("Missing Approach fixture");
+    const record = graph.indexes.entitiesById[removed.approach.id];
+    if (!record) throw new Error("Missing indexed Approach fixture");
+    record.publicationStatus = "in-review";
+
+    expect(
+      buildExploreApproaches(graph).map(({ approach }) => approach.id),
+    ).not.toContain(removed.approach.id);
+
+    record.publicationStatus = "reviewed";
+    const dossier = graph.entities.find(
+      (entity) =>
+        entity.kind === "dossier" &&
+        entity.subject.kind === "approach" &&
+        entity.subject.id === record.id,
+    );
+    if (dossier?.kind !== "dossier")
+      throw new Error("Missing Approach dossier fixture");
+    dossier.publicationStatus = "research-needed";
+    expect(
+      buildExploreApproaches(graph).map(({ approach }) => approach.id),
+    ).not.toContain(record.id);
   });
 });

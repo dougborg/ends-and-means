@@ -14,6 +14,9 @@ Explore likewise lists only the live projection and presents existing Approach
 dossiers as distinct institutional paths, not incomplete Subject Guides.
 Its subject search is a deterministic projection of guide labels,
 descriptions, and guide-owned `searchQueries`; it has no separate alias index.
+Fallback search requires complete normalized tokens rather than substring
+fragments, and directory order uses normalized code-unit keys with the guide ID
+as a stable tie-breaker.
 Exact ambiguous phrases return every explicitly disambiguated owner.
 Queries whose nearest guide leaves the general subject unsettled are visibly
 marked as research gaps rather than silently conflated with that guide.
