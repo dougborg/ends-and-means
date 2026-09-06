@@ -156,6 +156,342 @@ exports[`Minangkabau bounded case categories > locks every Case, Case Episode, s
 ]
 `;
 
+exports[`Minangkabau bounded case categories > locks every Case, Case Episode, semantic relationship, and required absence > public-presentation 1`] = `
+[
+  {
+    "description": "Matriliny traces descent through a maternal line. The studies collected here separately document land control, officeholding, and participation while limiting their findings to named Minangkabau communities and periods.",
+    "id": "matriliny-property-authority-dossier",
+    "kind": "dossier",
+    "label": "Matriliny, property, and authority",
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "sections": [
+      {
+        "body": "Matriliny is a descent principle.
+Matriarchy is a disputed interpretive category: some use it for women’s rule, while Sanday uses it to describe maternal meanings and women’s social centrality.
+These terms do not replace evidence about who decides, manages, works, benefits, or speaks in a particular setting.",
+        "heading": "How do matriliny and matriarchy differ?",
+        "id": "how-do-the-terms-differ",
+        "relatedEntityRefs": [
+          {
+            "id": "matriarchy",
+            "kind": "concept",
+          },
+        ],
+        "statementIds": [
+          "matriliny-maternal-descent-definition",
+          "matriliny-does-not-fix-property-control",
+          "matriliny-does-not-fix-office",
+          "matriliny-does-not-fix-equality",
+          "matriarchy-rule-by-women-dispute",
+          "matriarchy-sanday-maternal-centered-interpretation",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Blackwood reports senior women controlling land in one village even as men claimed formal kin authority.
+In the Bonjol study, women’s inherited claims did not give them the forest-negotiation authority exercised by male customary officeholders.
+Power must therefore be traced across specific relationships rather than assigned to all women or all men.",
+        "heading": "Can formal office tell us who has power?",
+        "id": "what-counts-as-power",
+        "statementIds": [
+          "minangkabau-power-varies-by-relation",
+          "matriliny-does-not-fix-property-control",
+          "matriliny-does-not-fix-office",
+          "bonjol-inheritance-did-not-confer-office-authority",
+          "bonjol-ulayat-formal-distinction",
+          "bonjol-harta-pusaka-transition",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Adat refers here to customs, beliefs, norms, and laws rather than one code.
+Nagari names both a community and a territorial jurisdiction entangled with Indonesian administration.
+Adat, Islamic authority, and state administration remain distinct even where they interact.
+Ulayat describes collective territorial and resource claims.
+Harta pusaka—rendered harato pusako in the Bonjol article—names ancestral property, while harta pencaharian names property acquired through a person’s own efforts in Colombijn’s 1990s Padang study.
+In the Bonjol account, Bundo Kanduang could counsel customary leaders; that defined position cannot be projected onto all women.",
+        "heading": "What do the retained local terms mean here?",
+        "id": "how-are-local-terms-used",
+        "statementIds": [
+          "adat-translation-boundary",
+          "nagari-translation-boundary",
+          "minangkabau-legal-orders-interact",
+          "minangkabau-ancestral-acquired-property-distinction",
+          "bonjol-ulayat-formal-distinction",
+          "bonjol-harta-pusaka-transition",
+          "bonjol-bundo-kanduang-role",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "In a study based on October 2016 fieldwork, Nurdin describes Koto Tinggi’s formal design as dividing work among an elected executive, a representative council, and a customary council.
+Meeting rules included women’s-group delegates and consensus procedures, but the study does not establish women’s influence in those meetings.
+Customary leaders disputed the dual-council arrangement, and one budget episode showed council members using postponement and consensus while administrative capacity remained limited.",
+        "heading": "What can Koto Tinggi show about public authority?",
+        "id": "what-can-koto-tinggi-show",
+        "relatedEntityRefs": [
+          {
+            "id": "koto-tinggi-post-decentralization-governance",
+            "kind": "case",
+          },
+          {
+            "id": "koto-tinggi-governance-2016",
+            "kind": "case-episode",
+          },
+        ],
+        "statementIds": [
+          "koto-tinggi-fieldwork-scope",
+          "koto-tinggi-participant-count-unreported",
+          "koto-tinggi-womens-voice-unidentified",
+          "koto-tinggi-descent-unobserved",
+          "koto-tinggi-residence-unobserved",
+          "koto-tinggi-minangkabau-adat-context",
+          "koto-tinggi-three-institutions",
+          "koto-tinggi-representative-council",
+          "koto-tinggi-customary-council",
+          "koto-tinggi-formal-participation-rules",
+          "koto-tinggi-formal-decision-rule",
+          "koto-tinggi-formal-speaking-rule",
+          "koto-tinggi-formal-consensus-rule",
+          "koto-tinggi-formal-vote-fallback",
+          "koto-tinggi-customary-council-contestation",
+          "koto-tinggi-budget-rules-in-use",
+          "koto-tinggi-budget-postponement",
+          "koto-tinggi-budget-consensus",
+          "koto-tinggi-administrative-capacity-limit",
+          "koto-tinggi-regulatory-preparation-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "The Bonjol study distinguishes collective ulayat claims, access to land, inherited harta pusaka, delegated management, and the receipt of benefits.
+It reports that male customary officeholders enabled outsider transactions and controlled an oil-palm recipient list even though the agreement promised plots to 500 households.
+Some women declined to discuss the dispute; five women who did speak described anger and an inability to influence the men representing the clan.",
+        "heading": "What can Bonjol show about inheritance and control?",
+        "id": "what-can-bonjol-show",
+        "relatedEntityRefs": [
+          {
+            "id": "bonjol-melayu-ulayat-governance",
+            "kind": "case",
+          },
+          {
+            "id": "bonjol-ulayat-governance-2000-2016",
+            "kind": "case-episode",
+          },
+        ],
+        "statementIds": [
+          "bonjol-study-method-and-voice",
+          "bonjol-ulayat-formal-distinction",
+          "bonjol-ulayat-delegated-management",
+          "bonjol-harta-pusaka-transition",
+          "bonjol-harta-pusaka-female-line",
+          "bonjol-inheritance-did-not-confer-office-authority",
+          "bonjol-bundo-kanduang-role",
+          "bonjol-bundo-kanduang-not-universal-authority",
+          "bonjol-ulayat-sales-rules-in-use",
+          "bonjol-neshp-formal-promise",
+          "bonjol-neshp-distribution-practice",
+          "bonjol-neshp-exclusion-outcome",
+          "bonjol-women-testimony-limit",
+          "bonjol-five-women-testimony",
+          "bonjol-five-women-weak-influence",
+          "bonjol-authors-causal-interpretation",
+          "bonjol-authors-early-marriage-hypothesis",
+          "bonjol-authors-gender-norms-hypothesis",
+          "bonjol-authors-forum-hypothesis",
+          "bonjol-authors-representation-dependence-hypothesis",
+          "bonjol-causal-identification-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "They examine different institutions in two places through limited studies conducted in 2016.
+The Bonjol authors expressly reject a society-wide generalization, and the Koto Tinggi article does not identify whose testimony represents women’s experience.
+Other scholarship documents historically changing relations among kinship, markets, religion, and the state.
+Provincial nagari law also changed after both field studies.",
+        "heading": "Why can’t these cases stand for all Minangkabau communities?",
+        "id": "why-cant-the-cases-be-generalized",
+        "statementIds": [
+          "koto-tinggi-fieldwork-scope",
+          "bonjol-study-method-and-voice",
+          "bonjol-new-nagari-forest-transition",
+          "bonjol-no-minangkabau-generalization",
+          "minangkabau-practices-historically-changing",
+          "nagari-law-changed-after-cases",
+        ],
+        "traceStatus": "qualified",
+      },
+    ],
+    "standfirst": "Matriliny traces descent or group membership through a maternal line.
+The studies collected here separately document property control, officeholding, and participation; their findings do not establish a rule for every Minangkabau community.",
+    "standfirstStatementIds": [
+      "matriliny-maternal-descent-definition",
+      "matriliny-does-not-fix-property-control",
+      "matriliny-does-not-fix-office",
+      "matriliny-does-not-fix-equality",
+    ],
+    "subject": {
+      "id": "matriliny",
+      "kind": "concept",
+    },
+  },
+  {
+    "description": "Matriliny traces descent through a maternal line, while property control and officeholding are separate institutional questions. Studies of one village and two bounded West Sumatran cases document different distributions of land control, representation, and benefits without establishing a rule for every Minangkabau community.",
+    "id": "guide-matriliny-property-authority",
+    "label": "Does matriliny mean women rule?",
+    "primarySubject": {
+      "id": "matriliny",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "searchQueries": [
+      {
+        "query": "matriliny",
+      },
+      {
+        "query": "matrilineal society",
+      },
+      {
+        "query": "does matriliny mean women rule",
+      },
+      {
+        "query": "Minangkabau women",
+      },
+      {
+        "query": "Minangkabau property",
+      },
+      {
+        "disambiguation": "Maternal-line descent and disputed meanings of matriarchy are distinct rather than aliases.",
+        "query": "matriarchy",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "Does matriliny mean women rule?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "matriarchy",
+            "kind": "concept",
+          },
+        ],
+        "heading": "Which distinctions matter first?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "how-do-the-terms-differ",
+          },
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "how-are-local-terms-used",
+          },
+        ],
+        "relationshipIds": [
+          "matriliny-commonly-confused-with-matriarchy",
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "heading": "How should power and property be traced?",
+        "id": "institutions-and-mechanisms",
+        "narrativeRefs": [
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "what-counts-as-power",
+          },
+        ],
+        "role": "institutions-and-mechanisms",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "koto-tinggi-post-decentralization-governance",
+            "kind": "case",
+          },
+          {
+            "id": "bonjol-melayu-ulayat-governance",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do two named nagari show?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "what-can-koto-tinggi-show",
+          },
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "what-can-bonjol-show",
+          },
+        ],
+        "relationshipIds": [
+          "bonjol-applies-matriliny",
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "heading": "What do these studies leave unsettled?",
+        "id": "variants-disputes-and-limits",
+        "narrativeRefs": [
+          {
+            "dossierId": "matriliny-property-authority-dossier",
+            "sectionId": "why-cant-the-cases-be-generalized",
+          },
+        ],
+        "role": "variants-and-disputes",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "koto-tinggi-governance-2016",
+            "kind": "case-episode",
+          },
+          {
+            "id": "bonjol-ulayat-governance-2000-2016",
+            "kind": "case-episode",
+          },
+        ],
+        "heading": "What should a comparison keep separate?",
+        "id": "comparisons-and-next-steps",
+        "role": "comparisons-and-next-steps",
+        "statementIds": [
+          "matriliny-does-not-fix-property-control",
+          "matriliny-does-not-fix-office",
+          "matriliny-does-not-fix-equality",
+          "minangkabau-power-varies-by-relation",
+          "nagari-law-changed-after-cases",
+        ],
+      },
+      {
+        "heading": "What evidence is still missing?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "koto-tinggi-community-voices",
+          "bonjol-inheritance-effective-control",
+          "minangkabau-migration-class-generation",
+          "minangkabau-religious-authority",
+          "minangkabau-state-administration-effects",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "matriliny-property-authority",
+  },
+]
+`;
+
 exports[`Minangkabau bounded case categories > locks every Case, Case Episode, semantic relationship, and required absence > semantic-relationships 1`] = `
 [
   {
