@@ -223,7 +223,7 @@ describe("narrative attention signals", () => {
 
     expect(auditContent(graph).sourcePreflight).toContainEqual(
       expect.objectContaining({
-        id: source.id,
+        id: `source:${source.id}`,
         missingMetadata: expect.arrayContaining(["identifier or access link"]),
       }),
     );
