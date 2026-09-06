@@ -8,7 +8,7 @@ Keeping those referents separate makes disagreements within communism visible an
 
 ## what-did-marx-and-engels-propose
 
-In the 1848 *Manifesto*, Marx and Engels call for workers to organize as a class, defeat bourgeois political supremacy, and take political power.
+For Marx and Engels in 1848, communist politics shared a near-term objective with other workers' parties: political rule by the proletariat after it had organized as a class and displaced bourgeois supremacy.
 Their property claim targets capital used to command wage labor, not personal appropriation for a person's own life.
 They propose making capital common property so productive wealth loses its class character.
 
