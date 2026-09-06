@@ -13,7 +13,8 @@ pnpm exec playwright install chromium
 pnpm verify
 ```
 
-`pnpm verify` audits repository delivery configuration and skill coverage, then runs linting, static analysis, dependency audit, type checks, coverage, domain validation and build, rendered-route tests, and browser review.
+`pnpm verify` audits repository delivery configuration and skill coverage, then runs linting, static analysis, dependency audit, type checks, coverage, the `pnpm build` script, rendered-route tests, and browser review.
+Domain validation runs transitively through `pnpm build`, which is defined as `pnpm validate && astro build` in `package.json`.
 The shared CI composite action invokes this command once; Pages consumes the resulting verified `dist` artifact.
 
 Repository-only verification deliberately prints `Project state: UNAVAILABLE` because pull-request jobs do not receive credentials for the private user Project.

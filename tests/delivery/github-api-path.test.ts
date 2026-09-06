@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { githubComparePath } from "../../scripts/delivery-state";
+import { githubComparePath } from "../../scripts/delivery-state.ts";
 
 describe("GitHub compare API paths", () => {
   it("encodes slash-containing refs as individual path components", () => {
