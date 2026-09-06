@@ -479,6 +479,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "authoritarian-practice-regime-transfer",
+    obligationType: "counterevidence",
+    target: "concept:authoritarianism#definitions",
+    status: "open",
+  },
+  {
     id: "cmp-causal-performance-counterfactual",
     obligationType: "counterfactual",
     target: "case:us-controlled-materials-plan#what-can-the-episode-show",
@@ -546,6 +552,12 @@ const expectedOpenResearchObligations = [
     obligationType: "counterargument",
     target:
       "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    status: "open",
+  },
+  {
+    id: "fascism-crossregional-boundary",
+    obligationType: "counterargument",
+    target: "concept:fascism#variation",
     status: "open",
   },
   {
@@ -651,6 +663,12 @@ const expectedOpenResearchObligations = [
     obligationType: "counterargument",
     target:
       "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
+    status: "open",
+  },
+  {
+    id: "totalitarian-control-evidence",
+    obligationType: "counterevidence",
+    target: "concept:totalitarianism#bounded-practice",
     status: "open",
   },
   {
