@@ -22,8 +22,8 @@ Kropotkin instead joins communism to anarchism, common possession, provision by 
 
 ## was-communism-one-global-movement
 
-Geoff Eley documents participants and organizations in early communist networks across Europe, East and Central Asia, the Middle East, and Latin America.
-He presents Manabendra Nath Roy and José Carlos Mariátegui as revising revolutionary programs while disputing aspects of Comintern direction.
+Geoff Eley's account follows early communist organizing across several regions, including parts of Asia, the Middle East, Latin America, and Europe.
+In his interpretation, Manabendra Nath Roy and José Carlos Mariátegui adapted revolutionary programs while challenging parts of Comintern strategy.
 That interpretation does not substitute for locally authored scholarship about any region.
 
 ## does-a-communist-label-settle-the-case

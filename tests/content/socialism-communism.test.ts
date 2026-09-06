@@ -5,6 +5,7 @@ import {
   entityById,
   relationshipsFrom,
   researchObligationsForTarget,
+  subjectGuideById,
 } from "../../src/lib/domain/canonical";
 
 const statementIds = [
@@ -90,7 +91,7 @@ describe("socialism and communism canonical foundations", () => {
 });
 
 describe("socialism and communism narrative foundations", () => {
-  it("provides traceable dossiers without publishing a SubjectGuide", () => {
+  it("provides traceable dossiers for the published Subject Guides", () => {
     const socialism = dossierForSubject("concept", "socialism");
     const communism = dossierForSubject("concept", "communism");
     expect(socialism?.sections.map(({ id }) => id)).toEqual([
@@ -111,8 +112,34 @@ describe("socialism and communism narrative foundations", () => {
         dossier?.sections.every(({ statementIds: ids }) => ids.length > 0),
       ),
     ).toBe(true);
-    expect(entityById("socialism-guide")).toBeUndefined();
-    expect(entityById("communism-guide")).toBeUndefined();
+    expect(subjectGuideById("guide-socialism")?.primarySubject).toEqual({
+      kind: "concept",
+      id: "socialism",
+    });
+    expect(subjectGuideById("guide-communism")?.primarySubject).toEqual({
+      kind: "concept",
+      id: "communism",
+    });
+  });
+
+  it("composes learner paths without turning guides into graph entities", () => {
+    const socialism = subjectGuideById("guide-socialism");
+    const communism = subjectGuideById("guide-communism");
+    if (!socialism || !communism) throw new Error("Missing reviewed guide");
+
+    expect(socialism.sections.map(({ role }) => role)).toContain(
+      "bounded-practice",
+    );
+    expect(
+      socialism.sections.find(({ role }) => role === "bounded-practice")
+        ?.entityRefs,
+    ).toContainEqual({ kind: "case", id: "swedish-wage-earner-funds" });
+    expect(
+      communism.sections.find(({ role }) => role === "open-questions")
+        ?.researchObligationIds,
+    ).toContain("communism-claimed-identity-practice-gap");
+    expect(entityById("guide-socialism")).toBeUndefined();
+    expect(entityById("guide-communism")).toBeUndefined();
   });
 
   it("records focused open research questions against exact sections", () => {

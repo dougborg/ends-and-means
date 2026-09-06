@@ -115,4 +115,221 @@ export const subjectGuideDocuments = [
       reviewedAt: "2026-09-05",
     },
   },
+  {
+    documentType: "subject-guide",
+    guide: {
+      id: "guide-socialism",
+      slug: "socialism",
+      label: "Socialism",
+      description:
+        "A learner path through socialism's disputed meanings, purposes, institutional choices, political strategies, and relationship to bounded practice.",
+      publicationStatus: "reviewed",
+      primarySubject: { kind: "concept", id: "socialism" },
+      searchQueries: [
+        { query: "socialism" },
+        { query: "what is socialism" },
+        { query: "socialist ideas" },
+        { query: "socialist economy" },
+      ],
+      sections: [
+        {
+          id: "short-answer",
+          role: "short-answer",
+          heading: "What does socialism mean?",
+          narrativeRefs: [{ dossierId: "socialism-dossier" }],
+        },
+        {
+          id: "meanings-and-boundaries",
+          role: "meanings-and-boundaries",
+          heading: "Why does the word cover different things?",
+          narrativeRefs: [
+            {
+              dossierId: "socialism-dossier",
+              sectionId: "why-is-the-term-so-broad",
+            },
+            {
+              dossierId: "socialism-dossier",
+              sectionId: "how-do-socialism-and-communism-relate",
+            },
+          ],
+        },
+        {
+          id: "purposes-and-diagnoses",
+          role: "purposes-and-diagnoses",
+          heading: "Which purposes recur across socialist traditions?",
+          narrativeRefs: [
+            {
+              dossierId: "socialism-dossier",
+              sectionId: "what-defines-socialism",
+            },
+          ],
+        },
+        {
+          id: "institutions-and-mechanisms",
+          role: "institutions-and-mechanisms",
+          heading: "Which institutions and routes do socialists dispute?",
+          narrativeRefs: [
+            {
+              dossierId: "socialism-dossier",
+              sectionId: "which-institutions-and-paths-are-disputed",
+            },
+          ],
+          entityRefs: [
+            { kind: "concept", id: "social-ownership" },
+            { kind: "concept", id: "economic-democracy" },
+            { kind: "concept", id: "market-socialism" },
+            { kind: "concept", id: "social-democracy" },
+          ],
+          relationshipIds: [
+            "socialism-related-to-social-ownership",
+            "socialism-related-to-economic-democracy",
+            "socialism-related-to-market-socialism",
+            "socialism-related-to-social-democracy",
+          ],
+        },
+        {
+          id: "bounded-practice",
+          role: "bounded-practice",
+          heading: "What can one Swedish experiment show?",
+          narrativeRefs: [
+            { dossierId: "swedish-wage-earner-funds-case-dossier" },
+          ],
+          entityRefs: [
+            { kind: "case", id: "swedish-wage-earner-funds" },
+            { kind: "approach", id: "swedish-wage-earner-fund-program" },
+          ],
+          relationshipIds: ["enacted-funds-partially-instantiated-program"],
+        },
+        {
+          id: "variants-disputes-and-limits",
+          role: "variants-and-disputes",
+          heading: "Where do the strongest boundary disputes remain?",
+          researchObligationIds: [
+            "socialism-rival-classification-boundary",
+            "socialism-democratic-control-threshold",
+          ],
+        },
+        {
+          id: "comparisons-and-next-steps",
+          role: "comparisons-and-next-steps",
+          heading: "Which distinctions should you follow next?",
+          entityRefs: [
+            { kind: "concept", id: "communism" },
+            { kind: "concept", id: "social-ownership" },
+            { kind: "concept", id: "economic-democracy" },
+            { kind: "concept", id: "social-democracy" },
+            { kind: "concept", id: "market-socialism" },
+            { kind: "approach", id: "swedish-wage-earner-fund-program" },
+          ],
+          relationshipIds: ["socialism-related-to-communism"],
+        },
+        {
+          id: "open-questions",
+          role: "open-questions",
+          heading: "What remains open?",
+          researchObligationIds: [
+            "socialism-communism-lexical-history",
+            "socialism-democratic-control-threshold",
+          ],
+        },
+      ],
+      reviewedAt: "2026-09-06",
+    },
+  },
+  {
+    documentType: "subject-guide",
+    guide: {
+      id: "guide-communism",
+      slug: "communism",
+      label: "Communism",
+      description:
+        "A learner path separating communist ideals, programs, political routes, movements, organizational labels, and the evidence needed for bounded practice claims.",
+      publicationStatus: "reviewed",
+      primarySubject: { kind: "concept", id: "communism" },
+      searchQueries: [
+        { query: "communism" },
+        { query: "what is communism" },
+        { query: "communist society" },
+        { query: "communist state" },
+      ],
+      sections: [
+        {
+          id: "short-answer",
+          role: "short-answer",
+          heading: "What does communism mean?",
+          narrativeRefs: [{ dossierId: "communism-dossier" }],
+        },
+        {
+          id: "meanings-and-boundaries",
+          role: "meanings-and-boundaries",
+          heading: "Why is the same word used for an ideal, movement, and state label?",
+          narrativeRefs: [
+            {
+              dossierId: "communism-dossier",
+              sectionId: "what-can-communism-mean",
+            },
+          ],
+        },
+        {
+          id: "purposes-and-diagnoses",
+          role: "purposes-and-diagnoses",
+          heading: "What did Marx and Engels propose?",
+          narrativeRefs: [
+            {
+              dossierId: "communism-dossier",
+              sectionId: "what-did-marx-and-engels-propose",
+            },
+          ],
+        },
+        {
+          id: "institutions-and-mechanisms",
+          role: "institutions-and-mechanisms",
+          heading: "Did communists agree on institutions or transition?",
+          narrativeRefs: [
+            {
+              dossierId: "communism-dossier",
+              sectionId: "did-communists-agree-on-the-path-or-destination",
+            },
+          ],
+          entityRefs: [{ kind: "concept", id: "social-ownership" }],
+          relationshipIds: ["communism-related-to-social-ownership"],
+        },
+        {
+          id: "variants-disputes-and-limits",
+          role: "variants-and-disputes",
+          heading: "Was communism one organization or one global movement?",
+          narrativeRefs: [
+            {
+              dossierId: "communism-dossier",
+              sectionId: "was-communism-one-global-movement",
+            },
+            {
+              dossierId: "communism-dossier",
+              sectionId: "does-a-communist-label-settle-the-case",
+            },
+          ],
+        },
+        {
+          id: "comparisons-and-next-steps",
+          role: "comparisons-and-next-steps",
+          heading: "Which distinction should you examine next?",
+          entityRefs: [
+            { kind: "concept", id: "socialism" },
+            { kind: "concept", id: "social-ownership" },
+          ],
+          relationshipIds: ["communism-related-to-socialism"],
+        },
+        {
+          id: "open-questions",
+          role: "open-questions",
+          heading: "Which bounded cases still need evidence?",
+          researchObligationIds: [
+            "communism-claimed-identity-practice-gap",
+            "communism-roy-comintern-strategy",
+          ],
+        },
+      ],
+      reviewedAt: "2026-09-06",
+    },
+  },
 ] satisfies AuthoringDocument[];

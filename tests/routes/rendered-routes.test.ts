@@ -240,6 +240,8 @@ async function verifySubjectGuideRoutes() {
     "Start with what you want to understand",
   );
   expect(hrefs(explore)).toContain("/guides/economic-democracy/");
+  expect(hrefs(explore)).toContain("/guides/socialism/");
+  expect(hrefs(explore)).toContain("/guides/communism/");
 
   const guide = await readFile(
     routeFile("/guides/economic-democracy/"),
@@ -257,6 +259,19 @@ async function verifySubjectGuideRoutes() {
   expect(hrefs(guide)).toContain("/concepts/economic-democracy/");
   expect(hrefs(guide)).toContain("/cases/swedish-wage-earner-funds/");
   expect(hrefs(guide)).toContain("#meanings-and-boundaries");
+
+  const socialism = await readFile(routeFile("/guides/socialism/"), "utf8");
+  expect(stripMarkup(socialism)).toContain("What does socialism mean?");
+  expect(stripMarkup(socialism)).toContain("What can one Swedish experiment show?");
+  expect(hrefs(socialism)).toContain("/cases/swedish-wage-earner-funds/");
+
+  const communism = await readFile(routeFile("/guides/communism/"), "utf8");
+  expect(stripMarkup(communism)).toContain("What does communism mean?");
+  expect(stripMarkup(communism)).toContain(
+    "Why is the same word used for an ideal, movement, and state label?",
+  );
+  expect(stripMarkup(communism)).toContain("Which bounded cases still need evidence?");
+  expect(hrefs(communism)).toContain("/concepts/socialism/");
 }
 
 async function verifyConceptRoutes() {
