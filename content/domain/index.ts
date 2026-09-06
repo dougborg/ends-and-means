@@ -9,6 +9,7 @@ import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
 import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-communism";
+import { anarchismEvidenceDocuments } from "./evidence/anarchism";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
@@ -17,6 +18,7 @@ import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
 import { subjectGuideDocuments } from "./presentation/subject-guides";
+import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossier";
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
@@ -27,9 +29,11 @@ import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-m
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
 import { socialOwnershipRelationshipDocuments } from "./relationships/social-ownership";
 import { socialismCommunismRelationshipDocuments } from "./relationships/socialism-communism";
+import { anarchismRelationshipDocuments } from "./relationships/anarchism";
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
+import { anarchismResearchDocuments } from "./research/anarchism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
@@ -48,6 +52,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialDemocracyEvidenceDocuments,
   ...socialismCommunismEvidenceDocuments,
   ...tawantinsuyuEvidenceDocuments,
+  ...anarchismEvidenceDocuments,
   ...kahnawakeCommunityDecisionMakingEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
@@ -56,11 +61,13 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...tawantinsuyuDossierDocuments,
   ...tawantinsuyuGuideDocuments,
   ...subjectGuideDocuments,
+  ...anarchismGuideDocuments,
   ...kahnawakeCommunityDecisionMakingGuideDocuments,
   ...kahnawakeCommunityDecisionMakingDossierDocuments,
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...tawantinsuyuResearchDocuments,
+  ...anarchismResearchDocuments,
   ...analysisDocuments,
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,
@@ -70,5 +77,6 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialOwnershipRelationshipDocuments,
   ...socialismCommunismRelationshipDocuments,
   ...tawantinsuyuRelationshipDocuments,
+  ...anarchismRelationshipDocuments,
   ...kahnawakeCommunityDecisionMakingRelationshipDocuments,
 ];
