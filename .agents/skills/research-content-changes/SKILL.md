@@ -125,7 +125,10 @@ link with its language, canonical article URL, and check date; record Wikidata
 only as an identity link with canonical QID/URL, check date, and exact or close
 confidence. Exact means the same authored identity; broader, narrower, or
 differently bounded items are close or remain intentionally unmatched. Keep a
-reason for every intentional absence, reuse an entity-owned mapping for its
+target-specific reviewed ledger entry for every eligible target, including the
+exact reference tuple, canonical-target resolution, and reason for every
+intentional absence. New eligible targets must fail closed rather than inherit
+a kind-level reason. Reuse an entity-owned mapping for its
 Subject Guide, and never treat these links or imported taxonomy as evidence.
 
 For narrative prose, write plain-spoken analytical synthesis from the canonical

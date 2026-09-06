@@ -40,12 +40,14 @@ describe("external references", () => {
       id: "example", kind: "concept-scheme", scope: "Fixture.", externalRefs: [
         { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Example_(disambiguation)", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
         { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Example?redirect=no", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Special:Search", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Category:Examples", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
         { system: "wikidata", id: "Q123", url: "https://www.wikidata.org/wiki/Q123#claims", purpose: "identity", match: "close", checkedAt: "2026-09-06" },
       ], ...base,
     } }];
     const errors = validateAuthoringDocuments(documents);
-    expect(errors.filter((error) => error.includes("canonical article form"))).toHaveLength(2);
-    expect(errors).toContain("example: Wikidata reference 2 requires the canonical host");
+    expect(errors.filter((error) => error.includes("canonical article form"))).toHaveLength(4);
+    expect(errors).toContain("example: Wikidata reference 4 requires the canonical host");
   });
 
   it("rejects duplicate well-formed external identities", () => {
