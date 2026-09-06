@@ -34,8 +34,6 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
-      "burke-reflections-intervention-1790",
-      "cdu-economic-programmes-1947-1949",
       "china-dual-track-market-reforms",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
