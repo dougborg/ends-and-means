@@ -43,7 +43,7 @@ Iceland's 2000 law phased in three paid months reserved for each parent and thre
 Fathers' uptake rose sharply.
 Later surveys separately found more paternal care and a smaller difference between mothers' and fathers' employment rates three years after birth.
 Across the surveyed cohorts, mothers' average paid working hours rose while fathers' fell.
-Those changes do not prove that feminism was the policy's sole source or that the leave design caused every outcome: other changes occurred, and payment cuts during the financial crisis reduced fathers' use, especially among lower-income fathers.
+Those changes do not prove that feminism was the policy's sole source or that the leave design caused every outcome: other changes occurred, and payment cuts during the financial crisis reduced fathers' use, with the largest drop among high-income fathers.
 
 ## comparisons
 

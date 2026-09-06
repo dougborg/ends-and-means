@@ -462,14 +462,14 @@ exports[`feminism evidence ledgers > pins every Statement, kind, source, role, a
   {
     "citations": [
       {
-        "locator": "chapter 18, pp. 370–387, Programmatic success, Figure 18.1, and An Enduring System § Coping with a financial crisis",
+        "locator": "chapter 18, pp. 378–379, ‘An Enduring System’, subsection ‘Coping with a financial crisis’, especially the paragraph reporting the largest decrease among high-income fathers",
         "role": "supports",
         "sourceId": "gislason-iceland-leave-source",
       },
     ],
     "id": "iceland-payment-cuts-uptake",
     "statementKind": "observation",
-    "text": "Payment cuts during Iceland's financial crisis were associated with reduced leave use by fathers, especially fathers with lower incomes.",
+    "text": "Payment cuts during Iceland's financial crisis were associated with reduced leave use by fathers, with the largest drop among fathers with high incomes.",
   },
 ]
 `;
@@ -756,7 +756,9 @@ exports[`feminism evidence ledgers > pins the complete Work and Source manifesta
       "contributorDisplay": [
         "Tara Sinha",
       ],
-      "identifiers": undefined,
+      "identifiers": {
+        "isbn13": "9789220309766",
+      },
       "publicationYear": 2018,
       "publisher": "International Labour Organization",
       "resourceLinks": [
