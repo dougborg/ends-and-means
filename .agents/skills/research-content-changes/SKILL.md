@@ -206,9 +206,15 @@ Install Playwright's Chromium runtime once.
 Run before handoff:
 
 ```bash
+pnpm audit:content-preflight
 pnpm verify
 ```
 
+Use focused affected checks while authoring and remediating findings, then run
+the semantic preflight before the single full handoff verification. Rerun the
+full gate after a later change or rebase only when it can affect the verified
+surface; exact-head hosted CI, independent review, and post-merge verification
+remain mandatory.
 The final command is the CI-parity publication gate. It rejects structural,
 narrative-line, workflow-language, route, browser, and archive-exclusion
 violations while reporting missing dossiers, entities, references,

@@ -79,16 +79,13 @@ describe("research-content-changes skill", () => {
     expect(skill).toMatch(/not graph superclasses.+factual claims/s);
     expect(skill).toMatch(/learner completeness.+graph coverage/s);
     expect(skill).toMatch(/Author them as `subject-guide` documents.+by ID/s);
-    expect(skill).toMatch(/Do not add a guide `kind`, body prose, graph edges, or alternate labels/s);
+    expect(skill).toMatch(
+      /Do not add a guide `kind`, body prose, graph edges, or alternate labels/s,
+    );
     expect(skill).toMatch(/searchQueries.+non-identifying entry phrases/s);
     expect(skill).toMatch(/representational failure.+boundary fixtures.+ADR/s);
-    expect(skill).toMatch(/Indigenous.+stateless.+nomadic.+maritime.+city-state.+imperial.+colonial.+hybrid/s);
-
-    const handoffBlock = skill.match(/Run before handoff:\s+```bash\s+([\s\S]*?)```/)?.[1];
-    expect(handoffBlock).toBeDefined();
-    const commands = new Set(handoffBlock?.trim().split("\n"));
-    expect(commands).toEqual(
-      new Set(["pnpm verify"]),
+    expect(skill).toMatch(
+      /Indigenous.+stateless.+nomadic.+maritime.+city-state.+imperial.+colonial.+hybrid/s,
     );
   });
 
@@ -101,12 +98,25 @@ describe("research-content-changes skill", () => {
   });
 });
 
+describe("semantic preflight handoff", () => {
+  it("runs focused remediation before one full handoff gate", async () => {
+    const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
+    const handoffBlock = skill.match(
+      /Run before handoff:\s+```bash\s+([\s\S]*?)```/,
+    )?.[1];
+    expect(new Set(handoffBlock?.trim().split("\n"))).toEqual(
+      new Set(["pnpm audit:content-preflight", "pnpm verify"]),
+    );
+    expect(skill).toMatch(
+      /focused affected checks.+single full handoff verification/s,
+    );
+  });
+});
+
 describe("public subject copy guidance", () => {
   it("keeps internal journey framing out of published identity copy", async () => {
     const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
-    expect(skill).toMatch(
-      /audience\s+framing as internal\s+product language/,
-    );
+    expect(skill).toMatch(/audience\s+framing as internal\s+product language/);
     expect(skill).toMatch(
       /Public guide and Dossier identity text must describe the subject directly/,
     );

@@ -55,6 +55,12 @@ Run the single local/CI verification path:
 pnpm verify
 ```
 
+For a changed canonical tranche, first run `pnpm audit:content-preflight` and
+remediate with focused affected checks. Run the full `pnpm verify` once at final
+handoff, and again after a later change or rebase only when it can affect the
+verified surface. This efficiency rule never replaces exact-head hosted CI,
+independent review, rebase-only integration, or post-merge verification.
+
 Open a ready-for-review pull request from a completed, verified branch rebased on its current declared base (`main` for an unstacked pull request or the bottom stack layer).
 Use a draft only for an explicitly experimental approach or a deliberate early-feedback checkpoint with substantial work remaining, and keep its issue `In progress` until the pull request is marked ready.
 Use GitHub stacks selectively for true dependency chains, keep unrelated work parallel, merge the bottom layer first, and refresh exact-head evidence after automatic rebases or retargeting.

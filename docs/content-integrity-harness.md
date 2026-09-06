@@ -33,6 +33,28 @@ Scanned filesystem paths are normalized to forward slashes before publication-bo
 
 ## Source preflight
 
+Before exact-head review of a canonical tranche, run:
+
+```sh
+pnpm audit:content-preflight
+```
+
+The report compares the branch with its merge base against `origin/main` (or
+an explicit `--base=<commit>` / `CONTENT_PREFLIGHT_BASE`) and inventories each
+changed Work, Source manifestation, Statement and citation tuple,
+proposition-backed relationship, Case/Episode slot, Dossier, Subject Guide,
+and Research Obligation. Mechanically defensible failures—such as incomplete
+Source manifestations, uncited reviewed Statements, unresolved Case slots,
+missing relationship support, or artifact-centered public wording—are
+violations. Potentially interpretive support and incomplete exact-ledger or
+mutation coverage are human-review signals, never automated verdicts.
+
+The report cannot verify source passages, statement atomicity, interpretive
+fairness, case transfer, or whether counterevidence is sufficient. Reviewers
+retain those decisions. During remediation, run focused affected checks; run
+the full `CI=true pnpm verify` once at final handoff and again after a change or
+rebase that can affect that surface. Exact-head CI and review remain required.
+
 Before advancing a Statement beyond `research-needed`, verify every cited URL in a browser and confirm the Source metadata, authority, claim support, and precise locator.
 Network availability and publisher behavior are not stable enough to make live URL requests a deterministic CI gate, so the automated validator checks recorded HTTP(S) form and evidence contracts while the pull-request checklist records the human verification.
 
