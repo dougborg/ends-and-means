@@ -94,3 +94,64 @@ describe("review evidence", () => {
     ).toBe(false);
   });
 });
+
+describe("canonical review agent paths", () => {
+  it.each([
+    "/root//",
+    "/root/agent/",
+    "/root/agent//reviewer",
+    "/root/agent-name",
+    "/root/-",
+    "/root/Agent",
+  ])("rejects noncanonical implementation owner %s", (owner) => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        owner,
+        [],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
+          },
+        ],
+      ).adversarial,
+    ).toBe(false);
+  });
+
+  it.each([
+    "/root//",
+    "/root/agent/",
+    "/root/agent//reviewer",
+    "/root/agent-name",
+    "/root/-",
+    "/root/Agent",
+  ])("rejects noncanonical reviewer %s", (reviewer) => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        "/root/agent",
+        [],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: ${reviewer}\nHead: ${head}`,
+          },
+        ],
+      ).adversarial,
+    ).toBe(false);
+  });
+
+  it("does not permit case variation to evade same-owner rejection", () => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        "/root/agent",
+        [],
+        [
+          {
+            body: `Independent adversarial review: APPROVED\nReviewer: /root/Agent\nHead: ${head}`,
+          },
+        ],
+      ).adversarial,
+    ).toBe(false);
+  });
+});

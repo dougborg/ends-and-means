@@ -266,6 +266,21 @@ describe("delivery evidence schema", () => {
     expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
   });
 
+  it.each([
+    "/root//",
+    "/root/agent/",
+    "/root/agent//reviewer",
+    "/root/agent-name",
+    "/root/-",
+    "/root/Agent",
+  ])("rejects noncanonical owner %s", async (owner) => {
+    const snapshot = await fixture();
+    const ownership = item(snapshot, 1).ownership;
+    if (!ownership) throw new Error("Missing ownership fixture");
+    ownership.owner = owner;
+    expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
+  });
+
   it("runtime-validates malformed snapshot fixtures", async () => {
     const malformed = JSON.parse(
       await readFile(
