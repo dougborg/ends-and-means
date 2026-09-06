@@ -26,6 +26,7 @@ describe("review evidence", () => {
           { body: "- [x] An independent adversarial review covered the material risks." },
           { body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}` },
           { body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${stale}` },
+          { body: `Independent adversarial review: APPROVED\nReviewer: /root/other_reviewer\nHead: ${head}\nAdditional unstructured text.` },
         ],
       ),
     ).toEqual({ copilot: false, adversarial: false });
