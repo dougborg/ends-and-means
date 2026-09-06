@@ -79,7 +79,9 @@ async function astroStyleBlocks(source: string): Promise<string[] | undefined> {
   if (styles.some((style) => style.children.some((child) => child.type !== "text"))) {
     return undefined;
   }
-  return styles.map((style) => style.children.map((child) => child.value).join(""));
+  return styles.map((style) => style.children
+    .map((child) => child.type === "text" ? child.value : "")
+    .join(""));
 }
 
 function isAllowedLayer(node: CssNode): node is Atrule {
