@@ -42,15 +42,27 @@ function compareCodeUnits(left: string, right: string) {
 }
 
 function stableJson(value: unknown): string {
-  if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
+  if (value === null) return `["null"]`;
+  if (value === undefined) return `["undefined"]`;
+  if (typeof value === "string")
+    return `["string",${JSON.stringify(value)}]`;
+  if (typeof value === "boolean") return `["boolean",${value}]`;
+  if (typeof value === "number") {
+    if (!Number.isFinite(value))
+      throw new TypeError("Overlap fingerprint inputs require finite numbers");
+    return `["number",${Object.is(value, -0) ? '"-0"' : String(value)}]`;
+  }
+  if (Array.isArray(value))
+    return `["array",[${value.map(stableJson).join(",")}]]`;
   if (value && typeof value === "object") {
     const entries = Object.entries(value as Record<string, unknown>).sort(
       ([left], [right]) => compareCodeUnits(left, right),
     );
-    return `{${entries.map(([key, child]) => `${JSON.stringify(key)}:${stableJson(child)}`).join(",")}}`;
+    return `["object",[${entries.map(([key, child]) => `[${JSON.stringify(key)},${stableJson(child)}]`).join(",")}]]`;
   }
-  const json = JSON.stringify(value);
-  return json ?? JSON.stringify({ unsupportedType: typeof value });
+  throw new TypeError(
+    `Overlap fingerprint inputs do not support ${typeof value} values`,
+  );
 }
 
 export function reviewedOverlapFingerprint(input: {
