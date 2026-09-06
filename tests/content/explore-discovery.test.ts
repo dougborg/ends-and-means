@@ -14,6 +14,19 @@ function clonedGuides() {
   return structuredClone(canonicalGraph.subjectGuideRecords);
 }
 
+function expectPlannedEconomyRouting() {
+  const matches = matchExploreDirectory(
+    buildExploreDirectory(canonicalGraph.subjectGuides),
+    "planned economy",
+  );
+  expect(matches.map(({ guide }) => guide.id)).toEqual([
+    "guide-central-planning",
+    "guide-socialism",
+  ]);
+  expect(matches[0]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus ?? "guide").toBe("guide");
+  expect(matches[1]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus).toBe("research-gap");
+}
+
 describe("learner-first Explore guide discovery", () => {
   it("builds only from the reviewed and published guide projection", () => {
     const records = clonedGuides();
@@ -37,7 +50,6 @@ describe("learner-first Explore guide discovery", () => {
     ["communist countries", "guide-communism", "guide"],
     ["worker ownership", "guide-socialism", "guide"],
     ["direct democracy", "guide-economic-democracy", "research-gap"],
-    ["planned economy", "guide-socialism", "research-gap"],
   ])(
     "routes %s to an owned reviewed destination",
     (query, guideId, resultStatus) => {
@@ -53,6 +65,10 @@ describe("learner-first Explore guide discovery", () => {
       ).toBe(resultStatus);
     },
   );
+
+  it("routes planned economy first to the bounded guide while preserving the socialism gap", () => {
+    expectPlannedEconomyRouting();
+  });
 
   it("falls back to deterministic all-token matching when no alias is exact", () => {
     const matches = matchExploreDirectory(

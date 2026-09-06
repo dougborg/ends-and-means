@@ -139,11 +139,14 @@ describe("canonical narrative coverage", () => {
     const report = auditContent(canonicalGraph);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "approach"),
-    ).toMatchObject({ covered: 5, total: 5, missingIds: [] });
+    ).toMatchObject({ covered: 6, total: 6, missingIds: [] });
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "challenge")
         ?.missingIds,
-    ).toEqual(["authority-and-accountability"]);
+    ).toEqual([
+      "authority-and-accountability",
+      "planning-information-and-coordination",
+    ]);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({

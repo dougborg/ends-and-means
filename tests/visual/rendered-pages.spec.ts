@@ -408,12 +408,12 @@ test("sparse published records retain the narrative structure", async ({ page })
 test("criteria grid reflects its content count and stacks only on narrow screens", async ({ page }) => {
   await page.goto("/framework/");
   const grid = page.locator(".criteria-grid");
-  await expect(grid).toHaveAttribute("data-comparison-columns", "2");
+  await expect(grid).toHaveAttribute("data-comparison-columns", "3");
 
   for (const viewport of [
     { width: 1440, height: 1000, rows: 1 },
     { width: 820, height: 1180, rows: 1 },
-    { width: 390, height: 844, rows: 2 },
+    { width: 390, height: 844, rows: 3 },
   ]) {
     await page.setViewportSize(viewport);
     const boxes = await grid.locator(":scope > article").evaluateAll((items) =>

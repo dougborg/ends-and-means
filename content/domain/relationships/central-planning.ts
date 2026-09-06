@@ -7,25 +7,26 @@ const facets = [
   ["authority", "cmp-authority"], ["scope", "cmp-scope"], ["information", "cmp-information"], ["targets", "cmp-targets"], ["revision", "cmp-revision"], ["enforcement", "cmp-enforcement"], ["ownership", "cmp-ownership"],
 ] as const;
 const citations = [
-  ["central-planning-family-boundary", "landon-lane-rockoff-cmp-source", "pp. 1–4", "context"],
-  ["cmp-authority", "wpb-controlled-materials-plan-source", "summary pp. II–III; sections 2–4", "supports"],
-  ["cmp-scope", "wpb-controlled-materials-plan-source", "summary p. II; sections 1 and 5", "supports"],
-  ["cmp-information", "wpb-controlled-materials-plan-source", "sections 3–8", "supports"],
-  ["cmp-targets", "wpb-controlled-materials-plan-source", "summary pp. II–III; sections 9–14", "supports"],
-  ["cmp-revision", "wpb-war-production-1944-source", "‘The Controlled Materials Plan in 1944’, pp. 1–5", "supports"],
-  ["cmp-enforcement", "wpb-controlled-materials-plan-source", "summary p. III; sections 15–18", "supports"],
+  ["central-planning-family-boundary", "landon-lane-rockoff-cmp-source", "abstract; pp. 1–4", "context"],
+  ["cmp-authority", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73–74", "supports"],
+  ["cmp-scope", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73–74", "supports"],
+  ["cmp-information", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73–75", "supports"],
+  ["cmp-targets", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 74–75", "supports"],
+  ["cmp-revision", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 78–85", "supports"],
+  ["cmp-enforcement", "wpb-controlled-materials-plan-source", "sections 23–24, pp. 17–18", "supports"],
   ["cmp-ownership", "koistinen-arsenal-source", "chapters 12–13, pp. 302–369", "qualifies"],
-  ["cmp-operating-period", "millett-army-service-forces-source", "chapter VI, pp. 108–113", "supports"],
-  ["cmp-distributed-administration", "wpb-war-production-1944-source", "‘The Controlled Materials Plan in 1944’, pp. 1–5", "supports"],
-  ["cmp-success-interpretation", "landon-lane-rockoff-cmp-source", "pp. 1–4 and 24–27", "supports"],
-  ["cmp-power-rival", "koistinen-arsenal-source", "chapter 8, pp. 195–217; chapter 12, pp. 302–339", "supports"],
-  ["cmp-correctability-assessment", "wpb-war-production-1944-source", "‘The Controlled Materials Plan in 1944’, pp. 1–5", "supports"],
+  ["cmp-operating-period", "bureau-budget-united-states-war-source", "chapter X, pp. 305–306; chapter XV, p. 491", "supports"],
+  ["cmp-distributed-administration", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73–75", "supports"],
+  ["cmp-official-performance-account", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73, 79–85", "supports"],
+  ["cmp-performance-rival", "landon-lane-rockoff-cmp-source", "abstract; pp. 24–27", "supports"],
+  ["cmp-power-rival", "koistinen-arsenal-source", "publisher description, paragraphs 2–3; chapters 8 and 12–13", "supports"],
+  ["cmp-correctability-assessment", "wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 79–85", "supports"],
 ] as const;
 
 export const centralPlanningRelationshipDocuments = [
   { documentType: "relationships", subject: means, relationships: [
     { id: "cmp-member-central-planning", predicate: "member-of", subject: means, object: { kind: "collection", id: "central-planning-arrangements" }, membership: "qualified", status: "qualified", statementIds: ["central-planning-family-boundary"] },
-    ...facets.map(([facet, id]) => ({ id: `cmp-specified-${facet}`, predicate: "specified-by" as const, subject: means, object: { kind: "statement" as const, id }, facet, status: "asserted" as const, statementIds: [] })),
+    ...facets.map(([facet, id]) => ({ id: `cmp-specified-${facet}`, predicate: "specified-by" as const, subject: means, object: { kind: "statement" as const, id }, facet, status: "asserted" as const, statementIds: [id] })),
   ] },
   { documentType: "relationships", subject: approach, relationships: [
     { id: "us-mobilization-advocates-cmp", predicate: "advocates-means", subject: approach, object: means, status: "qualified", statementIds: ["cmp-operating-period", "cmp-distributed-administration"] },
@@ -34,8 +35,8 @@ export const centralPlanningRelationshipDocuments = [
   ] },
   { documentType: "relationships", subject: episode, relationships: [
     { id: "cmp-episode-partially-instantiated-mobilization", predicate: "partially-instantiated", subject: episode, object: approach, status: "qualified", statementIds: ["cmp-operating-period"] },
-    { id: "cmp-episode-used-controlled-materials", predicate: "used-means", subject: episode, object: means, implementation: "strong", status: "asserted", statementIds: ["cmp-authority", "cmp-enforcement", "cmp-distributed-administration"] },
-    { id: "cmp-episode-assessed-correctability", predicate: "assessed-by", subject: episode, object: { kind: "criterion", id: "planning-correctability" }, conclusion: "mixed", status: "qualified", statementIds: ["cmp-revision", "cmp-correctability-assessment"] },
+    { id: "cmp-episode-used-controlled-materials", predicate: "used-means", subject: episode, object: means, implementation: "mixed", status: "asserted", statementIds: ["cmp-authority", "cmp-enforcement", "cmp-distributed-administration"] },
+    { id: "cmp-episode-assessed-correctability", predicate: "assessed-by", subject: episode, object: { kind: "criterion", id: "planning-correctability" }, conclusion: "mixed", status: "qualified", statementIds: ["cmp-revision", "cmp-correctability-assessment", "cmp-performance-rival"] },
   ] },
   ...citations.map(([statementId, sourceId, locator, role], index) => ({ documentType: "relationships" as const, subject: { kind: "statement" as const, id: statementId }, relationships: [{ id: `${statementId}-citation-${index + 1}`, predicate: "cites" as const, subject: { kind: "statement" as const, id: statementId }, object: { kind: "source" as const, id: sourceId }, role, locator }] })),
 ] satisfies AuthoringDocument[];

@@ -361,6 +361,8 @@ function indexAndValidateEntity(
   if (!entity.label.trim()) errors.push(`${entity.id}: label is empty`);
   if (!entity.description.trim())
     errors.push(`${entity.id}: description is empty`);
+  if (entity.kind === "organization" && !entity.scope.trim())
+    errors.push(`${entity.id}: Organization scope is empty`);
   if (entityById.has(entity.id))
     errors.push(`${entity.id}: duplicate global entity ID`);
   entityById.set(entity.id, entity);

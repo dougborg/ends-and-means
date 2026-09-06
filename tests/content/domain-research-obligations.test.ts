@@ -478,6 +478,18 @@ const expectedOpenResearchObligations = [
     target: "concept:anarchism#spain",
     status: "open",
   },
+  {
+    id: "cmp-causal-performance-counterfactual",
+    obligationType: "counterfactual",
+    target: "case:us-controlled-materials-plan#what-can-the-episode-show",
+    status: "open",
+  },
+  {
+    id: "cmp-civilian-priority-counterevidence",
+    obligationType: "counterevidence",
+    target: "case:us-controlled-materials-plan#who-held-which-authority",
+    status: "open",
+  },
   ...[
     ["collective-capital-formation-benefit-allocation", "counterargument"],
     ["collective-capital-formation-durable-support", "counterargument"],

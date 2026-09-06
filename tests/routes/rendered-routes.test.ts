@@ -382,7 +382,7 @@ async function verifyReferenceRoutes() {
   expect(hasElementWithClasses(method, "article", ["editorial-page", "method-page"])).toBe(true);
   expect(hasElementWithClasses(method, "header", ["editorial-header"])).toBe(true);
   expect(method).toMatch(
-    /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="2"/,
+    /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="3"/,
   );
   expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(
     1,

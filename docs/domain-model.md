@@ -398,10 +398,13 @@ non-fiction Work.
 
 ### Person, Organization, Work, Source, and Statement
 
-People and Organizations participate through typed roles: author, advocate,
-critic, designer, officeholder, participant, or interpreter. A Work is the
-intellectual object; a Source is the edition, article, dataset, archival record,
-or other citable manifestation used as evidence.
+People and Organizations are independently addressable actors rather than
+labels embedded in prose. An Organization records a bounded `scope`; sourced
+Statements establish the particular authority or activity attributed to it.
+Do not infer an Organization's powers from its name or from another entity's
+relationship. A Work is the intellectual object; a Source is the edition,
+article, dataset, archival record, or other citable manifestation used as
+evidence.
 
 A Statement is one challengeable proposition. Statements distinguish empirical
 observation, attributed value, attributed institutional proposal, definition,
