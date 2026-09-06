@@ -105,6 +105,7 @@ async function verifyEveryPublicRecordRenders() {
     "/reading/",
     "/research/",
     "/framework/",
+    "/governance/",
     ...entitiesOfKind("approach").map(({ id }) => `/explore/${id}/`),
     ...entitiesOfKind("case").map(({ id }) => `/cases/${id}/`),
     ...entitiesOfKind("concept").map(({ id }) => `/concepts/${id}/`),
@@ -142,6 +143,7 @@ async function verifyGlobalNavigation() {
   const expectedSiteMap = [["Home", "/"], ...expectedPrimary,
     ["Sources", "/reading/"],
     ["Method", "/framework/"],
+    ["Governance", "/governance/"],
   ];
   const linksIn = (navigation: string) =>
     [
@@ -437,6 +439,7 @@ async function verifyMethodRoute() {
   expect(methodText).not.toMatch(/technical apparatus|learner path|pull request|migration/i);
   expect(hrefs(method)).toEqual(expect.arrayContaining([
     "/research/",
+    "/governance/",
     "https://github.com/dougborg/ends-and-means/blob/main/docs/project-vision.md",
     "https://github.com/dougborg/ends-and-means/blob/main/docs/editorial-philosophy.md",
     "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
@@ -445,8 +448,43 @@ async function verifyMethodRoute() {
   ]));
 }
 
+async function verifyGovernanceRoute() {
+  const governance = await readFile(routeFile("/governance/"), "utf8");
+  expect(governance).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
+  expect(hasElementWithClasses(governance, "article", ["editorial-page", "governance-page"])).toBe(true);
+  expect(hasElementWithClasses(governance, "header", ["editorial-header"])).toBe(true);
+  const text = stripMarkup(governance);
+  for (const required of [
+    "The project editor holds final authority and final responsibility.",
+    "this is a target, not a guarantee",
+    "accepted, accepted in part, declined, or held for more evidence",
+    "A routine accepted correction publishes after source and quality checks.",
+    "An appeal is handled as a request for reconsideration.",
+    "Someone other than the original substantive reviewer",
+    "Living people",
+    "Communities and Indigenous peoples",
+    "Contested and harmful terms",
+    "Sponsors, donors, advertisers, and affiliate relationships",
+    "Harassment, threats, dehumanizing attacks, doxxing, spam, coordinated disruption",
+    "AI can assist the work, but it is never evidence or authority.",
+    "These are attention signals.",
+    "must not be sent to external AI services",
+    "the project cannot promise complete deletion",
+    "The policy can change, but not silently.",
+  ]) expect(text).toContain(required);
+  expect(text).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
+  expect(hrefs(governance)).toEqual(expect.arrayContaining([
+    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
+    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Reconsideration/),
+    "https://github.com/dougborg/ends-and-means/security/advisories/new",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/research-content-changes/SKILL.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/coordinate-project-delivery/SKILL.md",
+  ]));
+}
+
 async function verifyReferenceRoutes() {
   await verifyMethodRoute();
+  await verifyGovernanceRoute();
   const research = await readFile(routeFile("/research/"), "utf8");
   const researchText = stripMarkup(research);
   const researchIds = [

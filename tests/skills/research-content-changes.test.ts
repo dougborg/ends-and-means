@@ -96,6 +96,22 @@ describe("research-content-changes skill", () => {
     expect(skill).toContain("archive-exclusion");
     expect(skill).toContain("where absence may be legitimate");
   });
+
+});
+
+describe("editorial governance contract", () => {
+  it("binds sensitive and AI-assisted work to public governance", async () => {
+    const policy = await readFile(
+      new URL("references/editorial-policy.md", skillRoot),
+      "utf8",
+    );
+    expect(policy).toContain("src/pages/governance/index.astro");
+    expect(policy).toContain("living person");
+    expect(policy).toContain("restricted community knowledge");
+    expect(policy).toContain("Do not send private submissions");
+    expect(policy).toMatch(/automated structural and source-\s*similarity output/);
+    expect(policy).toContain("a person remains accountable");
+  });
 });
 
 describe("semantic preflight handoff", () => {
