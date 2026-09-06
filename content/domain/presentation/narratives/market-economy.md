@@ -1,5 +1,6 @@
-A market economy uses price-mediated exchange to coordinate a substantial share of production or allocation, but no economy is made of markets alone.
-Firms, legal rules, reciprocity, and redistribution coexist with market exchange.
+Markets provide recurring settings for exchanging goods and services.
+Economies also allocate goods through reciprocity and redistribution.
+Market exchange can coexist with ownership other than private ownership, and functioning markets require legal rules for property and contract.
 
 ## what-is-a-market-economy
 

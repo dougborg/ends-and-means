@@ -36,6 +36,7 @@ const statementIds = [
   "china-nonstate-sector-growth",
   "market-finance-relation",
   "capitalism-legal-order-relation",
+  "capitalism-private-property-relation",
 ] as const;
 
 const caseIds = [
@@ -61,7 +62,7 @@ function ledger(documents: AuthoringDocument[]) {
       const entity = graph.indexes.entitiesById[id];
       if (entity?.kind !== "statement")
         throw new Error(`Missing statement ${id}`);
-      return [id, entity.statementKind, entity.text];
+      return [id, entity.label, entity.statementKind, entity.text];
     }),
     citations: citations
       .map((relationship) => {
@@ -121,6 +122,22 @@ describe("capitalism and market-economy evidence ledger", () => {
       throw new Error("Missing mutation fixture");
     document.entity.text = `${document.entity.text} drift`;
     document.entity.statementKind = "editorial-interpretation";
+    expect(ledger(documents)).not.toEqual(ledger(canonicalDocuments));
+  });
+
+  it("detects public statement label mutations", () => {
+    const documents = structuredClone(canonicalDocuments);
+    const document = documents.find(
+      (candidate) =>
+        candidate.documentType === "entity" &&
+        candidate.entity.id === statementIds[0],
+    );
+    if (
+      document?.documentType !== "entity" ||
+      document.entity.kind !== "statement"
+    )
+      throw new Error("Missing label mutation fixture");
+    document.entity.label = `${document.entity.label} drift`;
     expect(ledger(documents)).not.toEqual(ledger(canonicalDocuments));
   });
 

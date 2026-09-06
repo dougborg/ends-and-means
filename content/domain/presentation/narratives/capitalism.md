@@ -1,5 +1,5 @@
-Capitalism is not simply trade, markets, or private belongings.
-It is a disputed name whose definitions emphasize different combinations of property, employment, firms, finance, and production for exchange.
+Capitalism has no generally accepted definition.
+Hodgson distinguishes it from older markets by adding widespread employment and developed financial institutions.
 
 ## what-defines-capitalism
 

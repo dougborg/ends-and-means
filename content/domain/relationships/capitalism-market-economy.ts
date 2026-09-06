@@ -193,6 +193,12 @@ export const capitalismMarketCitations = [
     "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     "supports",
   ],
+  [
+    "capitalism-private-property-relation",
+    "hodgson-conceptualizing-capitalism-source",
+    "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
+    "supports",
+  ],
 ] as const;
 
 const capitalism = { kind: "concept" as const, id: "capitalism" };
@@ -218,6 +224,9 @@ export const capitalismMarketRelationshipDocuments = [
       related(capitalism, "market-economy", [
         "capitalism-market-boundary",
         "market-ownership-boundary",
+      ]),
+      related(capitalism, "private-property", [
+        "capitalism-private-property-relation",
       ]),
       related(capitalism, "wage-labor", [
         "capitalism-institutional-definition",
