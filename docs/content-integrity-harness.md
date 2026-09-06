@@ -25,6 +25,7 @@ Signals remain open until that comparison is possible; matching internal trace p
 The harness uses locale-independent code-unit sorting for scanned paths and findings so identical inputs produce stable output regardless of filesystem, locale, or caller ordering.
 Dependency scanning uses the TypeScript compiler parser for JavaScript and TypeScript modules and for Astro frontmatter and script regions, so comments, regular-expression literals, and string or template examples do not masquerade as runtime imports.
 The Astro compiler is a direct development dependency because the standalone audit must own and version its parser contract rather than rely on Astro's transitive dependency graph.
+Parser-backed integrity modules are imported only by audit tooling and its tests, not re-exported from the site's runtime domain barrel.
 Malformed executable syntax and non-static dynamic dependency calls fail closed because the scanner cannot prove their publication boundary.
 Scanned filesystem paths are normalized to forward slashes before publication-boundary checks so the same exclusions apply on every supported platform.
 

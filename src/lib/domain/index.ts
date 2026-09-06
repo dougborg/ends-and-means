@@ -3,8 +3,6 @@ export * from "./audit";
 export type * from "./cases";
 export type * from "./common";
 export { compileDomainGraph, validateAuthoringDocuments } from "./compile";
-export * from "./content-integrity";
-export * from "./runtime-dependencies";
 export type * from "./entities";
 export type * from "./graph";
 export type * from "./presentation";

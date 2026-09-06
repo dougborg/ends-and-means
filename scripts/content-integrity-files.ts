@@ -1,6 +1,9 @@
 import { readdir, readFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
-import { compareCodeUnits, type PublicationFile } from "../src/lib/domain";
+import {
+  compareCodeUnits,
+  type PublicationFile,
+} from "../src/lib/domain/content-integrity";
 
 export function normalizePublicationPath(pathname: string) {
   return pathname.replaceAll("\\", "/");
