@@ -72,10 +72,23 @@ Mark the pull request ready before moving its issue to `In review`.
 Stack pull requests only for a real dependency chain in the same repository.
 The bottom layer targets `main`; each upper layer targets the branch directly below it and stays independently reviewable.
 Unrelated work remains parallel.
-For an active item with one open linked pull request, the live audit verifies
-the PR head against that PR's declared base and requires the private assignment
-branch to match the PR head. Without an open PR, an In-progress branch is
-compared with `main`. Multiple open linked PRs remain ambiguous and fail closed.
+For an active item with one open linked pull request, the live audit uses
+GitHub's declared head and base as authoritative and requires the private
+assignment branch to match the PR head. Without an open pull request, it does
+not publish or query the private branch through GitHub. It instead checks the
+assigned local worktree, checked-out branch and ref, expected `origin`, and
+linear commits after the branch's unique merge base with a locally stored
+`origin/main`. A read-only `git ls-remote` proves that local tracking ref is not
+stale. If `main` advanced after implementation began, the audit reports the
+branch as not current but does not fail In-progress work or require constant
+rebases; current-base evidence becomes mandatory at review handoff.
+
+Missing or mismatched worktrees, branches, refs, and remotes; unavailable or
+stale `origin/main`; unrelated or ambiguous histories; merge commits; and Git
+command failures all fail closed with actionable classifications. Output names
+only the issue and classification, never the assignment owner or worktree path.
+Multiple open linked pull requests remain ambiguous and fail closed without
+falling back to local evidence.
 Merge stacks bottom-up with rebase integration, and repeat exact-head checks and attestations whenever GitHub automatically rebases or retargets an upper layer.
 Cross-cutting audits are capstone sweeps rather than default stack layers.
 After a contributing content or interface tranche lands, rebase and rerun the applicable corpus-integrity, presentation-consistency, navigation, accessibility, and delivery audits over the combined baseline before integrating their findings.

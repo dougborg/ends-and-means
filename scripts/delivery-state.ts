@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { localGitFailureCodes } from "./delivery-local-git.ts";
 
 export const projectStatuses = [
   "Backlog",
@@ -78,6 +79,7 @@ export const deliveryItemSchema = z
     assignmentBranchMatches: z.boolean().optional(),
     baseCurrent: z.boolean().optional(),
     historyLinear: z.boolean().optional(),
+    localGitFailure: z.enum(localGitFailureCodes).optional(),
     reviewEvidence: reviewEvidenceSchema.optional(),
   })
   .strict();
@@ -311,6 +313,27 @@ function prStatusFindings(item: DeliveryItem): DeliveryFinding[] {
 
 function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
   const findings: DeliveryFinding[] = [];
+  if (item.localGitFailure) {
+    const remediation = {
+      WORKTREE_UNAVAILABLE: "restore or correct the assigned isolated worktree",
+      WORKTREE_BRANCH_MISMATCH:
+        "check out the assigned branch in its assigned worktree",
+      BRANCH_REF_MISMATCH:
+        "repair the assigned branch ref so it matches the worktree HEAD",
+      ORIGIN_REMOTE_MISMATCH: "configure origin for the expected repository",
+      ORIGIN_MAIN_UNAVAILABLE:
+        "restore network access and a readable origin/main ref",
+      ORIGIN_MAIN_STALE: "fetch origin/main before rerunning the live audit",
+      HISTORY_UNRELATED: "recreate the branch from an origin/main ancestor",
+      GIT_COMMAND_FAILED:
+        "repair the local Git repository and rerun the live audit",
+    }[item.localGitFailure];
+    findings.push({
+      code: item.localGitFailure,
+      item: item.number,
+      message: `#${item.number} local branch evidence failed; ${remediation}.`,
+    });
+  }
   if (item.status === "In progress" && !item.ownershipEvidence) {
     findings.push({
       code: "WIP_OWNERSHIP",
@@ -325,7 +348,11 @@ function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
       message: `#${item.number}'s private assignment branch does not match its linked pull request head.`,
     });
   }
-  if (item.status === "In progress" && item.baseCurrent === undefined) {
+  if (
+    item.status === "In progress" &&
+    item.baseCurrent === undefined &&
+    !item.localGitFailure
+  ) {
     findings.push({
       code: "STARTING_BASE",
       item: item.number,
@@ -341,6 +368,7 @@ function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
   }
   if (
     ["In progress", "In review"].includes(item.status) &&
+    !item.localGitFailure &&
     item.historyLinear !== true
   ) {
     findings.push({

@@ -8,7 +8,12 @@
 - Rebase onto the pull request's current declared base; that base is `main` for an unstacked pull request or the bottom stack layer, and the directly lower branch for an upper layer.
 - Keep the private assignment branch equal to the linked pull request head. The
   live audit compares the head with that pull request's declared base; it uses
-  `main` only when an In-progress assignment has no open linked pull request.
+  privacy-safe local worktree and Git evidence against a verified
+  `origin/main` only when an In-progress assignment has no open linked pull
+  request. Do not publish a branch merely to make the audit inspectable.
+- Treat an advancing `main` during active implementation as information, not a
+  reason for continuous rebase churn. Current-base evidence becomes mandatory
+  when handing completed work into review.
 - Never merge the declared base into the branch.
 - Confirm the diff stays inside the issue and ownership boundary.
 - Synchronize tests, documentation, and applicable repository skills.
