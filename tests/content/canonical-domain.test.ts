@@ -34,10 +34,14 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
+      "burke-reflections-intervention-1790",
+      "cdu-economic-programmes-1947-1949",
       "china-dual-track-market-reforms",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
+      "india-constitutional-rights-settlement-1946-1950",
       "italian-fascist-dictatorship-1925-1943",
+      "japan-constitutional-rights-settlement-1946-1947",
       "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
       "nazi-consolidation-1933",
