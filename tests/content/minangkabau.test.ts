@@ -14,7 +14,7 @@ import {
 const statementIds = [
   "matriliny-maternal-descent-definition",
   "matrilocality-residence-distinction",
-  "matriliny-does-not-fix-authority",
+  "matriliny-does-not-fix-residence",
   "matriarchy-rule-by-women-dispute",
   "minangkabau-power-varies-by-relation",
   "minangkabau-practices-historically-changing",
@@ -92,6 +92,17 @@ const sourceIds = [
   "colombijn-padang-landownership-source",
 ] as const;
 
+const workIds = [
+  "nurdin-nagari-governance-work",
+  "mutolib-bonjol-ulayat-work",
+  "blackwood-webs-power-work",
+  "sanday-women-center-work",
+  "sebastian-matrilineal-muslims-work",
+  "mardoni-matrilineal-data-center-work",
+  "west-sumatra-nagari-law-2018-work",
+  "colombijn-padang-landownership-work",
+] as const;
+
 function clonedDocuments() {
   return structuredClone(canonicalDocuments);
 }
@@ -129,6 +140,14 @@ function exactSourceLedger() {
   });
 }
 
+function exactWorkLedger() {
+  return workIds.map((id) => {
+    const entity = canonicalGraph.indexes.entitiesById[id];
+    if (entity?.kind !== "work") throw new Error(`Missing Work ${id}`);
+    return structuredClone(entity);
+  });
+}
+
 function exactCitationLedger() {
   return statementIds.flatMap((statementId) =>
     citationsFor(statementId).map(({ object, role, locator }) => ({
@@ -160,6 +179,7 @@ describe("Minangkabau matriliny, property, and authority", () => {
   it("publishes the exact traced Statement and Source ledger", () => {
     expect(statementIds).toHaveLength(67);
     expect(sourceIds).toHaveLength(8);
+    expect(workIds).toHaveLength(8);
 
     for (const id of statementIds) {
       expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({
@@ -176,21 +196,39 @@ describe("Minangkabau matriliny, property, and authority", () => {
         kind: "source",
         publicationStatus: "reviewed",
       });
+    for (const id of workIds)
+      expect(canonicalGraph.indexes.entitiesById[id]).toMatchObject({
+        kind: "work",
+        publicationStatus: "reviewed",
+      });
   });
 
-  it("locks every Statement, Source manifestation, and citation tuple", () => {
+  it("locks every Statement, Work, Source manifestation, and citation tuple", () => {
     expect(exactStatementLedger()).toMatchSnapshot("statements");
+    expect(exactWorkLedger()).toMatchSnapshot("works");
     expect(exactSourceLedger()).toMatchSnapshot("sources");
     expect(exactCitationLedger()).toMatchSnapshot("citations");
   });
 
-  it("detects arbitrary Statement and citation-field drift", () => {
+  it("detects arbitrary Statement, Work, Source, and citation-field drift", () => {
     const statements = exactStatementLedger();
+    const works = exactWorkLedger();
+    const sources = exactSourceLedger();
     const citations = exactCitationLedger();
     expectEveryFieldDriftDetected(
       statements,
       ["label", "statementKind", "text"],
       "Statement",
+    );
+    expectEveryFieldDriftDetected(
+      works,
+      ["title", "workType", "originalPublicationYear"],
+      "Work",
+    );
+    expectEveryFieldDriftDetected(
+      sources,
+      ["title", "sourceType", "workId", "publicationYear"],
+      "Source",
     );
     expectEveryFieldDriftDetected(
       citations,
@@ -227,10 +265,13 @@ describe("Minangkabau bounded case categories", () => {
         "koto-tinggi-formal-consensus-rule",
         "koto-tinggi-formal-vote-fallback",
       ],
-      interactionStatementIds: [
+      ruleInUseStatementIds: [
         "koto-tinggi-budget-rules-in-use",
         "koto-tinggi-budget-postponement",
         "koto-tinggi-budget-consensus",
+      ],
+      interactionStatementIds: [
+        "koto-tinggi-customary-council-contestation",
       ],
       outcomeStatementIds: [
         "koto-tinggi-administrative-capacity-limit",

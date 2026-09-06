@@ -11,13 +11,6 @@ const citationRows: [string, string, string, CitationRole, string][] = [
     "local-definition",
   ],
   [
-    "matriliny-does-not-fix-authority",
-    "blackwood-webs-power-source",
-    "chapter 1, pp. 7–8, paragraphs describing women as heirs, household heads, and land controllers",
-    "supports",
-    "relation-specific-power",
-  ],
-  [
     "matriliny-does-not-fix-property-control",
     "mutolib-bonjol-ulayat-source",
     "p. 32, paragraph beginning ‘Control over ulayat land’",
@@ -39,18 +32,18 @@ const citationRows: [string, string, string, CitationRole, string][] = [
     "descent-equality-boundary",
   ],
   [
-    "matriliny-does-not-fix-authority",
-    "mutolib-bonjol-ulayat-source",
-    "p. 32, paragraph beginning ‘Control over ulayat land’; p. 33, first paragraph",
-    "supports",
-    "bonjol-control-distinction",
-  ],
-  [
     "matrilocality-residence-distinction",
     "sanday-women-center-excerpt-source",
     "‘From the Preface’, paragraph beginning ‘A number of feminist writers’",
     "supports",
     "matrilocal-residence",
+  ],
+  [
+    "matriliny-does-not-fix-residence",
+    "sanday-women-center-excerpt-source",
+    "‘From the Preface’, paragraph beginning ‘A number of feminist writers’",
+    "supports",
+    "descent-residence-boundary",
   ],
   [
     "matriarchy-rule-by-women-dispute",
@@ -576,7 +569,7 @@ export const minangkabauRelationshipDocuments = [
         object: { kind: "concept", id: "matrilocality" },
         status: "qualified",
         statementIds: [
-          "matriliny-does-not-fix-authority",
+          "matriliny-does-not-fix-residence",
           "matrilocality-residence-distinction",
         ],
       },
@@ -587,7 +580,6 @@ export const minangkabauRelationshipDocuments = [
         object: { kind: "concept", id: "matriarchy" },
         status: "asserted",
         statementIds: [
-          "matriliny-does-not-fix-authority",
           "matriarchy-rule-by-women-dispute",
           "matriarchy-sanday-maternal-centered-interpretation",
         ],

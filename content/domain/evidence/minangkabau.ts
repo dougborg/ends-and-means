@@ -311,11 +311,11 @@ const entities = [
     text: "Sanday describes husbands moving into their wives’ households in the community she studied.",
   },
   {
-    id: "matriliny-does-not-fix-authority",
+    id: "matriliny-does-not-fix-residence",
     kind: "statement",
     label: "Matriliny does not establish residence",
     description: "An analytical boundary between descent and residence.",
-    statementKind: "editorial-interpretation",
+    statementKind: "definition",
     text: "Maternal-line descent does not by itself establish where spouses reside after marriage.",
   },
   {
@@ -324,7 +324,7 @@ const entities = [
     label: "Matriliny does not establish property control",
     description:
       "An analytical boundary between descent and effective control.",
-    statementKind: "editorial-interpretation",
+    statementKind: "definition",
     text: "Maternal-line descent does not by itself establish who controls property.",
   },
   {
@@ -332,7 +332,7 @@ const entities = [
     kind: "statement",
     label: "Matriliny does not establish political office",
     description: "An analytical boundary between descent and officeholding.",
-    statementKind: "editorial-interpretation",
+    statementKind: "classification",
     text: "Maternal-line descent does not by itself establish who holds political office.",
   },
   {
@@ -914,12 +914,12 @@ const cases = [
       "koto-tinggi-formal-consensus-rule",
       "koto-tinggi-formal-vote-fallback",
     ],
-    ruleInUseStatementIds: [],
-    interactionStatementIds: [
+    ruleInUseStatementIds: [
       "koto-tinggi-budget-rules-in-use",
       "koto-tinggi-budget-postponement",
       "koto-tinggi-budget-consensus",
     ],
+    interactionStatementIds: ["koto-tinggi-customary-council-contestation"],
     outcomeStatementIds: [
       "koto-tinggi-administrative-capacity-limit",
       "koto-tinggi-unspent-funds",
