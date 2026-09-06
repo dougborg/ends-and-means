@@ -401,10 +401,26 @@ export const feminismEvidenceDocuments = [
     "The selected tradition labels are a non-exhaustive navigation aid and transmit no shared doctrine, political subject, or institutional program.",
     "editorial-interpretation",
   ),
-  claim("liberal-feminism-tradition", "Liberal feminism is a named current", "The Stanford Encyclopedia identifies liberal feminism as a current in feminist political thought organized around disputed accounts of personal and political autonomy."),
-  claim("radical-feminism-tradition", "Radical feminism is a named current", "The Stanford Encyclopedia identifies radical feminism as a current that seeks structural change and disputes liberal emphasis on individual choice."),
-  claim("socialist-feminism-tradition", "Socialist feminism is a named current", "The Stanford Encyclopedia identifies socialist feminism as a current concerned with material conditions, class relations, labor, and social reproduction."),
-  claim("marxist-feminism-tradition", "Marxist feminism is a named current", "The Stanford Encyclopedia identifies Marxist feminism as a related but distinct current that analyzes gendered institutions through modes and relations of production and reproduction."),
+  claim(
+    "liberal-feminism-tradition",
+    "Liberal feminism is a named current",
+    "The Stanford Encyclopedia identifies liberal feminism as a current in feminist political thought organized around disputed accounts of personal and political autonomy.",
+  ),
+  claim(
+    "radical-feminism-tradition",
+    "Radical feminism is a named current",
+    "The Stanford Encyclopedia identifies radical feminism as a current that seeks structural change and disputes liberal emphasis on individual choice.",
+  ),
+  claim(
+    "socialist-feminism-tradition",
+    "Socialist feminism is a named current",
+    "The Stanford Encyclopedia identifies socialist feminism as a current concerned with material conditions, class relations, labor, and social reproduction.",
+  ),
+  claim(
+    "marxist-feminism-tradition",
+    "Marxist feminism is a named current",
+    "The Stanford Encyclopedia identifies Marxist feminism as a related but distinct current that analyzes gendered institutions through modes and relations of production and reproduction.",
+  ),
   claim(
     "liberal-feminism-autonomy",
     "Liberal feminism emphasizes autonomy",

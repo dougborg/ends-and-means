@@ -37,10 +37,30 @@ const citationRows = [
     "sections 1–2.8, headings and introductory classifications",
     "supports",
   ],
-  ["liberal-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.1, paragraphs 1–18", "supports"],
-  ["radical-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.2, paragraphs 1–12", "supports"],
-  ["socialist-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.3, paragraphs 1–18", "supports"],
-  ["marxist-feminism-tradition", "sep-feminist-political-philosophy-source", "section 2.3, paragraphs 1–18", "supports"],
+  [
+    "liberal-feminism-tradition",
+    "sep-feminist-political-philosophy-source",
+    "section 2.1, paragraphs 1–18",
+    "supports",
+  ],
+  [
+    "radical-feminism-tradition",
+    "sep-feminist-political-philosophy-source",
+    "section 2.2, paragraphs 1–12",
+    "supports",
+  ],
+  [
+    "socialist-feminism-tradition",
+    "sep-feminist-political-philosophy-source",
+    "section 2.3, paragraphs 1–18",
+    "supports",
+  ],
+  [
+    "marxist-feminism-tradition",
+    "sep-feminist-political-philosophy-source",
+    "section 2.3, paragraphs 1–18",
+    "supports",
+  ],
   [
     "liberal-feminism-autonomy",
     "sep-feminist-political-philosophy-source",
@@ -259,7 +279,10 @@ export const feminismRelationshipDocuments = [
         object: { kind: "collection" as const, id: "feminist-traditions" },
         membership: "qualified" as const,
         status: "qualified" as const,
-        statementIds: [traditionEvidence[id], "feminism-traditions-nonexhaustive"],
+        statementIds: [
+          traditionEvidence[id],
+          "feminism-traditions-nonexhaustive",
+        ],
       },
     ],
   })),
@@ -279,21 +302,33 @@ export const feminismRelationshipDocuments = [
   })),
   {
     documentType: "relationships",
-    subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+    subject: {
+      kind: "case-episode",
+      id: "sewa-ahmedabad-institutions-episode",
+    },
     relationships: [
       {
         id: "sewa-episode-used-self-employed-worker-unionism",
         predicate: "used-means",
-        subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+        subject: {
+          kind: "case-episode",
+          id: "sewa-ahmedabad-institutions-episode",
+        },
         object: { kind: "means", id: "self-employed-worker-unionism" },
         implementation: "mixed",
         status: "qualified",
-        statementIds: ["sewa-union-registration", "sewa-worker-definition-contest"],
+        statementIds: [
+          "sewa-union-registration",
+          "sewa-worker-definition-contest",
+        ],
       },
       {
         id: "sewa-episode-used-member-owned-cooperative-finance",
         predicate: "used-means",
-        subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+        subject: {
+          kind: "case-episode",
+          id: "sewa-ahmedabad-institutions-episode",
+        },
         object: { kind: "means", id: "member-owned-cooperative-finance" },
         implementation: "mixed",
         status: "qualified",
@@ -303,12 +338,18 @@ export const feminismRelationshipDocuments = [
   },
   {
     documentType: "relationships",
-    subject: { kind: "case-episode", id: "iceland-parental-leave-outcomes-episode" },
+    subject: {
+      kind: "case-episode",
+      id: "iceland-parental-leave-outcomes-episode",
+    },
     relationships: [
       {
         id: "iceland-episode-used-nontransferable-parental-leave",
         predicate: "used-means",
-        subject: { kind: "case-episode", id: "iceland-parental-leave-outcomes-episode" },
+        subject: {
+          kind: "case-episode",
+          id: "iceland-parental-leave-outcomes-episode",
+        },
         object: { kind: "means", id: "nontransferable-parental-leave" },
         implementation: "mixed",
         status: "qualified",
