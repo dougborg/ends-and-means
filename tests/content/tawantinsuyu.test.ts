@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { canonicalDocuments } from "../../content/domain";
+import { compileDomainGraph } from "../../src/lib/domain";
 import {
   canonicalGraph,
   citationsFor,
@@ -8,6 +9,8 @@ import {
 
 const statementIds = [
   "tawantinsuyu-name-boundary",
+  "tawantinsuyu-inka-usage-boundary",
+  "tawantinsuyu-inca-spelling-boundary",
   "tawantinsuyu-chronology-boundary",
   "tawantinsuyu-ruler-kin-authority",
   "tawantinsuyu-provincial-indirect-rule",
@@ -35,7 +38,7 @@ describe("Tawantinsuyu learner case", () => {
       kind: "case",
       id: "tawantinsuyu-imperial-organization",
     });
-    expect(statementIds).toHaveLength(18);
+    expect(statementIds).toHaveLength(20);
     for (const id of statementIds) {
       const statement = canonicalGraph.indexes.entitiesById[id];
       expect(statement?.kind).toBe("statement");
@@ -57,6 +60,8 @@ describe("Tawantinsuyu learner case", () => {
       "rostworowski-inca-realm-source",
       "julien-reading-inca-history-source",
       "adorno-guaman-poma-source",
+      "valdeon-cieza-voices-source",
+      "upenn-tawantinsuyu-map-source",
     ];
     for (const id of requiredSources)
       expect(canonicalGraph.indexes.entitiesById[id]?.kind).toBe("source");
@@ -67,6 +72,44 @@ describe("Tawantinsuyu learner case", () => {
     expect(citationsFor("tawantinsuyu-extraction-rival")[0]?.object.id).toBe(
       "daltroy-earle-staple-finance-source",
     );
+  });
+});
+
+describe("Tawantinsuyu source and publication boundaries", () => {
+  it("keeps intellectual-work dates distinct from cited manifestations", () => {
+    expect(
+      canonicalGraph.indexes.entitiesById["cieza-chronicle-peru-work"],
+    ).toMatchObject({
+      kind: "work",
+      originalPublicationYear: 1553,
+    });
+    expect(
+      canonicalGraph.indexes.entitiesById["cieza-chronicle-peru-source"],
+    ).toMatchObject({
+      kind: "source",
+      publicationYear: 1880,
+    });
+
+    const documents = structuredClone(canonicalDocuments);
+    const source = documents.find(
+      (document) =>
+        document.documentType === "entity" &&
+        document.entity.id === "cieza-chronicle-peru-source",
+    );
+    if (source?.documentType !== "entity" || source.entity.kind !== "source")
+      throw new Error("Missing Cieza source fixture");
+    source.entity.publicationYear = 1881;
+    const mutated = compileDomainGraph(documents);
+    expect(
+      mutated.indexes.entitiesById["cieza-chronicle-peru-work"],
+    ).toMatchObject({
+      originalPublicationYear: 1553,
+    });
+    expect(
+      mutated.indexes.entitiesById["cieza-chronicle-peru-source"],
+    ).toMatchObject({
+      publicationYear: 1881,
+    });
   });
 
   it("publishes three focused research obligations and a non-embodiment limit", () => {

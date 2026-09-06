@@ -9,6 +9,7 @@ const source = (
   publisher: string,
   sourceType: "edition" | "article" | "web-page" | "report",
   url: string,
+  originalPublicationYear = publicationYear,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -26,7 +27,7 @@ const source = (
             : sourceType === "edition"
               ? "book"
               : "other",
-      originalPublicationYear: publicationYear,
+      originalPublicationYear,
       ...reviewed,
     },
   },
@@ -91,7 +92,7 @@ export const tawantinsuyuEvidenceDocuments = [
     2015,
     "Smithsonian National Museum of the American Indian",
     "web-page",
-    "https://americanindian.si.edu/inkaroad/",
+    "https://americanindian.si.edu/nk360/inka/pdf/Inka-poster.pdf",
   ),
   ...source(
     "oxford-handbook-incas",
@@ -118,7 +119,16 @@ export const tawantinsuyuEvidenceDocuments = [
     1999,
     "Cambridge University Press",
     "edition",
-    "https://doi.org/10.1017/CBO9780511612503",
+    "https://assets.cambridge.org/97805216/37596/frontmatter/9780521637596_frontmatter.pdf",
+  ),
+  ...source(
+    "upenn-tawantinsuyu-map",
+    "The Tawantinsuyu in the 1530s—Territory of the Inca State",
+    ["Digital Archaeological Record, University of Pennsylvania"],
+    2026,
+    "University of Pennsylvania Museum of Archaeology and Anthropology",
+    "web-page",
+    "https://dia.upenn.edu/en/content/BOL0001Y/",
   ),
   ...source(
     "murra-economic-organization",
@@ -128,6 +138,15 @@ export const tawantinsuyuEvidenceDocuments = [
     "JAI Press",
     "edition",
     "https://search.worldcat.org/title/6627638",
+  ),
+  ...source(
+    "valdeon-cieza-voices",
+    "The Voices of Cieza de León in English",
+    ["Roberto A. Valdeón"],
+    2017,
+    "John Benjamins Publishing Company",
+    "article",
+    "https://doi.org/10.1075/btl.137.12val",
   ),
   ...source(
     "daltroy-hastorf-storehouses",
@@ -191,12 +210,25 @@ export const tawantinsuyuEvidenceDocuments = [
     "Biblioteca Virtual Miguel de Cervantes",
     "web-page",
     "https://www.cervantesvirtual.com/obra/segunda-parte-de-la-cronica-del-peru-que-trata-del-senorio-de-los-incas-yupanquis-y-de-sus-grandes-hechos-y-gobernacion--0/",
+    1553,
   ),
   statement(
     "tawantinsuyu-name-boundary",
     "Tawantinsuyu and Inka naming boundary",
-    "Tawantinsuyu names a polity organized in four named quarters; Inka can name a ruler, privileged people, a language-associated identity, or the polity, while Inca is a conventional Spanish and English spelling.",
+    "Tawantinsuyu names the Inka polity as four joined regions centered on Cusco.",
     "definition",
+  ),
+  statement(
+    "tawantinsuyu-inka-usage-boundary",
+    "Inka usage boundary",
+    "Historical and scholarly uses of Inka can refer to rulers, royal and privileged groups, or the wider polity, so the term does not identify every incorporated person in the same way.",
+    "definition",
+  ),
+  statement(
+    "tawantinsuyu-inca-spelling-boundary",
+    "Inka and Inca spelling boundary",
+    "This guide uses Inka for Quechua names and retains Inca in conventional English titles and search terms; spelling alone does not settle political identity.",
+    "editorial-interpretation",
   ),
   statement(
     "tawantinsuyu-chronology-boundary",
