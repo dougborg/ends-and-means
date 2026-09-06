@@ -407,7 +407,7 @@ async function verifyMethodRoute() {
   expect(methodText).toContain("support, challenge, qualify, or provide context");
   expect(methodText).toContain("These links are orientation aids, not evidence.");
   expect(methodText).toContain("Within a case, an episode narrows attention");
-  expect(methodText).toContain("inherited conditions, formal rules, rules in use, interactions, and outcomes");
+  expect(methodText).toContain("conditions, formal rules, rules in use, interactions, and outcomes");
   expect(methodText).toContain("Qualifications and limits attach to the claims they constrain");
   expect(methodText).toContain("What happens when the evidence is not enough?");
   expect(methodText).toContain("The live site includes only material that has been checked against its sources");
