@@ -135,8 +135,11 @@ available; an unavailable API or credential result is not a clean audit.
   media, datasets, quotations, and imported metadata—must be registered in
   `provenance/inventory.json` with their source, provider, license or terms
   locator, modification state, distribution path, and attribution requirement.
-  `pnpm audit:provenance` fails on unregistered governed file types and direct
-  dependency drift. Unresolved third-party material cannot enter the live site.
+  `pnpm audit:provenance` fails on unregistered governed file types, stale asset
+  states, direct/optional manifest drift, and exact-lockfile package drift.
+  Regenerate lockfile evidence with `pnpm inventory:dependencies` after an
+  intentional dependency change. Unresolved third-party material cannot enter
+  the live site.
 - Copilot and independent adversarial review are project-process requirements.
   Branch protection does not require an approving review, but strict checks,
   conversation resolution, and linear history remain enforced.
