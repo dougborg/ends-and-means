@@ -344,14 +344,6 @@ export const liberalismConservatismGuideDocuments = [
       ],
     },
     {
-      id: "variants-disputes-and-limits",
-      role: "variants-and-disputes",
-      heading: "What does the label leave unsettled?",
-      narrativeRefs: [
-        { dossierId: "conservatism-dossier", sectionId: "meanings" },
-      ],
-    },
-    {
       id: "comparisons-and-next-steps",
       role: "comparisons-and-next-steps",
       heading: "How should conservatism be compared?",

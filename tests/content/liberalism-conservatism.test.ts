@@ -118,17 +118,18 @@ describe("Liberalism and Conservatism guides", () => {
       expect(
         dossier?.sections.every(({ statementIds }) => statementIds.length > 0),
       ).toBe(true);
-      expect(guide?.sections.map(({ role }) => role)).toEqual(
+      const roles = guide?.sections.map(({ role }) => role) ?? [];
+      expect(roles).toEqual(
         expect.arrayContaining([
           "short-answer",
           "meanings-and-boundaries",
           "institutions-and-mechanisms",
           "bounded-practice",
-          "variants-and-disputes",
           "comparisons-and-next-steps",
           "open-questions",
         ]),
       );
+      expect(roles.includes("variants-and-disputes")).toBe(id === "liberalism");
       expect(
         guide?.sections.find(({ role }) => role === "bounded-practice")
           ?.entityRefs,
