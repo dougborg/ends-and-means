@@ -21,6 +21,8 @@ const dossier = attachNarrative("tawantinsuyu.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "tawantinsuyu-name-boundary",
+        "tawantinsuyu-inka-usage-boundary",
+        "tawantinsuyu-inca-spelling-boundary",
         "tawantinsuyu-chronology-boundary",
       ],
     },

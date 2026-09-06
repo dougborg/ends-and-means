@@ -3,10 +3,24 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 const citations = [
   [
     "tawantinsuyu-name-boundary",
-    "guaman-poma-coronica-source",
-    "‘The chapter of the Inkas’, manuscript pp. 79–119",
+    "upenn-tawantinsuyu-map-source",
+    "map note ‘The Tawantinsuyu in the 1530s’, paragraphs 1–2",
     "supports",
     "naming",
+  ],
+  [
+    "tawantinsuyu-inka-usage-boundary",
+    "daltroy-incas-source",
+    "chapter 1, pp. 1–20",
+    "supports",
+    "inka-usage",
+  ],
+  [
+    "tawantinsuyu-inca-spelling-boundary",
+    "rostworowski-inca-realm-source",
+    "front matter, title and translator's note",
+    "context",
+    "spelling",
   ],
   [
     "tawantinsuyu-chronology-boundary",
@@ -53,7 +67,7 @@ const citations = [
   [
     "tawantinsuyu-road-labor",
     "nmai-great-inka-road-source",
-    "‘Building the Road’ and ‘Mit’a and Ayni—Labor and Reciprocity’",
+    "Q’eswachaka poster, pp. 1–2, road network and community bridge-building sections",
     "supports",
     "road-labor",
   ],
@@ -112,6 +126,13 @@ const citations = [
     "pp. 187–206, especially pp. 190–197",
     "supports",
     "staple-finance",
+  ],
+  [
+    "tawantinsuyu-chronicle-mediation",
+    "valdeon-cieza-voices-source",
+    "pp. 223–240, especially sections 1–3",
+    "supports",
+    "cieza-criticism",
   ],
   [
     "tawantinsuyu-chronicle-mediation",
