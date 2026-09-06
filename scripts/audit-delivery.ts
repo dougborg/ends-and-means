@@ -7,13 +7,18 @@ import {
   compareSchema,
   mainRefSchema,
 } from "./delivery-api-schema.ts";
+import { branchTargetForActiveItem } from "./delivery-live-evidence.ts";
+import {
+  assignmentForIssue,
+  type PrivateDeliveryState,
+  readPrivateDeliveryState,
+} from "./delivery-private-state.ts";
 import {
   auditDeliverySnapshot,
   type DeliveryItem,
   type DeliverySnapshot,
   deliverySnapshotSchema,
   githubComparePath,
-  parseAgentPath,
   reviewEvidenceForHead,
   selectRelevantPullRequest,
 } from "./delivery-state.ts";
@@ -58,7 +63,6 @@ const issueViewSchema = z
     state: z.enum(["OPEN", "CLOSED", "MERGED"]),
     updatedAt: z.string().datetime({ offset: true }),
     body: z.string(),
-    comments: z.array(z.object({ body: z.string() }).passthrough()),
   })
   .passthrough();
 const actorSchema = z.object({ login: z.string().min(1) }).passthrough();
@@ -148,19 +152,6 @@ function parseInput<T>(
   }
 }
 
-function ownershipFrom(comments: Array<{ body: string }>) {
-  for (const { body } of comments.toReversed()) {
-    const match = body.match(
-      /worktree `([^`]+)` on branch `([^`]+)`\. Ownership: ([^;\n.]+)/i,
-    );
-    if (match?.[1] && match[2] && match[3]) {
-      const owner = parseAgentPath(match[3].trim());
-      if (owner) return { worktree: match[1], branch: match[2], owner };
-    }
-  }
-  return undefined;
-}
-
 function branchEvidence(base: string, branch: string) {
   const comparison = parseJson(
     gh(["api", githubComparePath(base, branch)]),
@@ -207,7 +198,10 @@ function prEvidence(url: string) {
   };
 }
 
-function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
+function loadLiveItem(
+  item: z.infer<typeof projectItemSchema>,
+  privateState: PrivateDeliveryState,
+): DeliveryItem {
   const issue = parseJson(
     gh([
       "issue",
@@ -216,25 +210,25 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
       "--repo",
       repository,
       "--json",
-      "state,updatedAt,body,comments",
+      "state,updatedAt,body",
     ]),
     issueViewSchema,
     `issue #${item.content.number}`,
   );
-  const ownership = ownershipFrom(issue.comments);
+  const assignment = assignmentForIssue(privateState, item.content.number);
   const links = item["linked pull requests"] ?? [];
   const prs = links.map((url) => prEvidence(url));
   const relevantPr = selectRelevantPullRequest(prs);
-  const pullRequestBranch =
-    ["In progress", "In review"].includes(item.status) && relevantPr.selected
-      ? branchEvidence(
-          relevantPr.selected.baseRefName,
-          relevantPr.selected.headRefName,
-        )
-      : undefined;
+  const target = ["In progress", "In review"].includes(item.status)
+    ? branchTargetForActiveItem(
+        item.status as "In progress" | "In review",
+        assignment?.branch,
+        prs,
+      )
+    : undefined;
   const branch =
-    item.status === "In progress" && ownership
-      ? branchEvidence("main", ownership.branch)
+    target?.base && target.head
+      ? branchEvidence(target.base, target.head)
       : undefined;
   return {
     number: item.content.number,
@@ -250,14 +244,29 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
     linkedPullRequestStates: prs.map((pr) => pr.state),
     linkedPullRequestAmbiguous: relevantPr.ambiguous,
     linkedPullRequestDraft: relevantPr.selected?.isDraft,
-    ownership,
-    baseCurrent: pullRequestBranch?.baseCurrent ?? branch?.baseCurrent,
-    historyLinear: pullRequestBranch?.historyLinear ?? branch?.historyLinear,
+    ownershipEvidence: assignment ? true : undefined,
+    assignmentBranchMatches: target?.assignmentMatches,
+    baseCurrent:
+      target?.assignmentMatches === false ? false : branch?.baseCurrent,
+    historyLinear: branch?.historyLinear,
     reviewEvidence: relevantPr.selected?.reviewEvidence,
   };
 }
 
-function loadLiveSnapshot(): DeliverySnapshot {
+function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
+  let privateState: PrivateDeliveryState;
+  try {
+    privateState = readPrivateDeliveryState(privateStatePath);
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code;
+    if (code === "ENOENT" || code === "EACCES")
+      throw new ApiUnavailableError(
+        "the explicitly supplied private delivery state is unreadable",
+      );
+    throw new InputInvalidError(
+      `private delivery state: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
   const project = parseJson(
     gh(["project", "view", "7", "--owner", "dougborg", "--format", "json"]),
     projectViewSchema,
@@ -301,7 +310,7 @@ function loadLiveSnapshot(): DeliverySnapshot {
       },
       capturedAt: new Date().toISOString(),
       repositoryLabels: labels.map((label) => label.name),
-      items: list.items.map(loadLiveItem),
+      items: list.items.map((item) => loadLiveItem(item, privateState)),
     },
     deliverySnapshotSchema,
     "normalized live Project snapshot",
@@ -314,13 +323,16 @@ function loadSnapshot(args: string[]) {
     "--project-snapshot",
     "--live-project",
     "--repository-only",
+    "--private-state",
   ]);
   const unknown = normalizedArgs.filter(
     (arg) => arg.startsWith("-") && !modes.has(arg),
   );
   if (unknown.length)
     throw new InputInvalidError(`Unknown option: ${unknown[0]}.`);
-  const selectedModes = normalizedArgs.filter((arg) => modes.has(arg));
+  const selectedModes = normalizedArgs.filter(
+    (arg) => arg !== "--private-state" && modes.has(arg),
+  );
   if (selectedModes.length !== 1)
     throw new InputInvalidError("Select exactly one project-state mode.");
   const mode = selectedModes[0];
@@ -341,9 +353,23 @@ function loadSnapshot(args: string[]) {
       snapshotPath,
     );
   }
+  if (mode === "--live-project") {
+    const privateIndex = normalizedArgs.indexOf("--private-state");
+    const privatePath = normalizedArgs[privateIndex + 1];
+    if (
+      privateIndex === -1 ||
+      !privatePath ||
+      privatePath.startsWith("-") ||
+      normalizedArgs.length !== 3
+    )
+      throw new InputInvalidError(
+        "--live-project requires --private-state <path>.",
+      );
+    return loadLiveSnapshot(privatePath);
+  }
   if (normalizedArgs.length !== 1)
     throw new InputInvalidError(`Unexpected argument: ${normalizedArgs[1]}.`);
-  return mode === "--live-project" ? loadLiveSnapshot() : undefined;
+  return undefined;
 }
 
 try {

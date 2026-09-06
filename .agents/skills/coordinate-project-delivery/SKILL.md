@@ -14,7 +14,10 @@ Before opening, reviewing, or integrating a pull request, also read [review and 
 ## Establish authoritative state
 
 Inspect the current base, worktrees, issue, linked pull request, required checks, unresolved conversations, and Project item rather than relying on conversational status.
-Record one owner, branch, and isolated worktree for active implementation.
+Record one owner, branch, and isolated worktree for active implementation in
+the expiring private delivery-state file described by the delivery policy.
+Never put owner identities or filesystem paths in public issue or pull-request
+text. Pass the private file explicitly; do not infer it from public comments.
 Do not mutate another owner's worktree or preserved paused work.
 
 Run the repository audit without credentials in normal verification:
@@ -26,7 +29,7 @@ pnpm audit:delivery -- --repository-only
 When authenticated access to the private Project is available and the user has authorized external coordination, run:
 
 ```bash
-pnpm audit:delivery -- --live-project
+pnpm audit:delivery -- --live-project --private-state /secure/path/delivery-state.json
 ```
 
 `UNAVAILABLE` is not a clean Project result.
