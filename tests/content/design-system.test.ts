@@ -1,6 +1,15 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import { parse as parseAstro } from "@astrojs/compiler";
+import type { ElementNode, Node as AstroNode } from "@astrojs/compiler/types";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import {
+  ident,
+  parse as parseCss,
+  type Atrule,
+  type CssNode,
+} from "css-tree";
+import { parse as parsePostCss } from "postcss";
 import { describe, expect, it } from "vitest";
 import EditorialHeader from "../../src/components/EditorialHeader.astro";
 import Notice from "../../src/components/Notice.astro";
@@ -53,38 +62,48 @@ async function productionAstroFiles(
     .toSorted();
 }
 
-const namedLayers = "tokens|base|layout|components|pages";
+const namedLayers = new Set(["tokens", "base", "layout", "components", "pages"]);
 
-function astroStyleBlocks(source: string): string[] | undefined {
-  const openings = source.match(/<style(?:\s[^>]*)?>/giu) ?? [];
-  const closings = source.match(/<\/style>/giu) ?? [];
-  if (openings.length !== closings.length) return undefined;
+function findStyleElements(node: AstroNode): ElementNode[] {
+  const own = node.type === "element" && node.name === "style" ? [node] : [];
+  if (!("children" in node)) return own;
+  return own.concat(node.children.flatMap(findStyleElements));
+}
 
-  return [...source.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/giu)]
-    .map((match) => match[1] ?? "");
+async function astroStyleBlocks(source: string): Promise<string[] | undefined> {
+  const result = await parseAstro(source, { position: true });
+  if (result.diagnostics.length > 0) return undefined;
+
+  const styles = findStyleElements(result.ast);
+  if (styles.some((style) => !style.position?.end)) return undefined;
+  if (styles.some((style) => style.children.some((child) => child.type !== "text"))) {
+    return undefined;
+  }
+  return styles.map((style) => style.children.map((child) => child.value).join(""));
+}
+
+function isAllowedLayer(node: CssNode): node is Atrule {
+  if (node.type !== "Atrule" || node.name.toLowerCase() !== "layer") return false;
+  if (!node.block || node.prelude?.type !== "AtrulePrelude") return false;
+  const prelude = node.prelude.children.toArray();
+  const layerList = prelude.length === 1 ? prelude[0] : undefined;
+  if (layerList?.type !== "LayerList") return false;
+  const layers = layerList.children.toArray();
+  return layers.length === 1
+    && layers[0]?.type === "Layer"
+    && namedLayers.has(ident.decode(layers[0].name));
 }
 
 function isWhollyWrappedInNamedLayer(css: string): boolean {
-  const source = css.replaceAll(/\/\*[\s\S]*?\*\//gu, "").trim();
-  const wrapper = source.match(
-    new RegExp(`^@layer\\s+(${namedLayers})\\s*\\{`, "iu"),
-  );
-  if (!wrapper) return false;
-
-  const openingBrace = wrapper[0].lastIndexOf("{");
-  const structuralSource = source.replaceAll(
-    /"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/gu,
-    "''",
-  );
-  let depth = 0;
-  const closingOffset = [...structuralSource.slice(openingBrace)].findIndex(
-    (character, index) => {
-      depth += Number(character === "{") - Number(character === "}");
-      return index > 0 && depth === 0;
-    },
-  );
-  if (closingOffset < 0) return false;
-  return structuralSource.slice(openingBrace + closingOffset + 1).trim() === "";
+  try {
+    parsePostCss(css, { from: undefined });
+    const stylesheet = parseCss(css, { context: "stylesheet" });
+    return stylesheet.type === "StyleSheet"
+      && stylesheet.children.size === 1
+      && isAllowedLayer(stylesheet.children.first as CssNode);
+  } catch {
+    return false;
+  }
 }
 
 describe("design-system foundations", () => {
@@ -104,7 +123,7 @@ describe("design-system foundations", () => {
   it("rejects Astro style blocks that bypass the named cascade", async () => {
     for (const file of await productionAstroFiles()) {
       const source = await readFile(file, "utf8");
-      const styleBlocks = astroStyleBlocks(source);
+      const styleBlocks = await astroStyleBlocks(source);
 
       expect(styleBlocks, path.relative(sourceDirectory, file)).toBeDefined();
       for (const css of styleBlocks ?? []) {
@@ -116,7 +135,7 @@ describe("design-system foundations", () => {
     }
   });
 
-  it("detects mixed, spoofed, repeated, and malformed Astro style blocks", () => {
+  it("detects mixed, spoofed, repeated, and malformed Astro style blocks", async () => {
     const invalid = [
       ".bypass{} @layer components{.ok{}}",
       "/* @layer components {.spoof{}} */ .bypass{}",
@@ -127,14 +146,29 @@ describe("design-system foundations", () => {
     const valid = [
       "@layer components{.ok{color:var(--text)}}",
       "/* why this is local */ @layer pages { .quoted::after { content: '}'; } }",
+      "@layer compon\\65 nts { .escaped { color: var(--text); } }",
     ];
 
     for (const css of invalid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(false);
     for (const css of valid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(true);
-    expect(astroStyleBlocks("<style>@layer components{.ok{}}</style><style>broken"))
+    expect(await astroStyleBlocks("<style>@layer components{.ok{}}</style><style>broken"))
       .toBeUndefined();
-    expect(astroStyleBlocks("<style is:global>@layer components{.ok{}}</style>"))
+    expect(await astroStyleBlocks(`---
+const example = "<style>.frontmatter-bypass{}</style>";
+---
+<style is:global data-example=">">@layer components{.ok{}}</style>
+<style>@layer pages{.also-ok{content:"}"}}</style>`))
+      .toEqual([
+        "@layer components{.ok{}}",
+        '@layer pages{.also-ok{content:"}"}}',
+      ]);
+    expect(await astroStyleBlocks("<style is:global>@layer components{.ok{}}</style>"))
       .toEqual(["@layer components{.ok{}}"]);
+    const mixedNodes = await astroStyleBlocks(
+      "<style>@layer components{.ok{}}</style><style>.bypass{}</style>",
+    );
+    expect(mixedNodes).toHaveLength(2);
+    expect(mixedNodes?.map(isWhollyWrappedInNamedLayer)).toEqual([true, false]);
   });
 });
 

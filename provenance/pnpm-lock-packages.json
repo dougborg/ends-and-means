@@ -2104,6 +2104,17 @@
       "evidenceDigest": "b721129782571314202e6ee70b67c89849457f964f80a7b8cbfa2c33ae4c6b86"
     },
     {
+      "key": "@types/css-tree@3.2.0",
+      "name": "@types/css-tree",
+      "version": "3.2.0",
+      "origin": "https://registry.npmjs.org/%40types%2Fcss-tree/3.2.0",
+      "terms": "https://www.npmjs.com/package/%40types%2Fcss-tree/v/3.2.0?activeTab=code",
+      "source": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "aaf28889b04a7bb43a93380dc04ad98544499f9e730b3da4a5719573b3162b72"
+    },
+    {
       "key": "@types/debug@4.1.13",
       "name": "@types/debug",
       "version": "4.1.13",
