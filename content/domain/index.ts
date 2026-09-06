@@ -67,16 +67,19 @@ import { collectiveCapitalFormationResearchDocuments } from "./research/collecti
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
 import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
+import { minangkabauResearchDocuments } from "./research/minangkabau";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
 import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nomadic-confederated-organizations";
 import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
+import { minangkabauVocabularyDocuments } from "./vocabulary/minangkabau";
 import { vocabularyDocuments } from "./vocabulary/swedish-wage-earner-funds";
 
 export const canonicalDocuments: AuthoringDocument[] = [
   ...vocabularyDocuments,
   ...socialismCommunismVocabularyDocuments,
+  ...minangkabauVocabularyDocuments,
   ...approachDocuments,
   ...rehnMeidnerApproachDocuments,
   ...centralPlanningApproachDocuments,
@@ -119,6 +122,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...minangkabauDossierDocuments,
   ...minangkabauGuideDocuments,
   ...openResearchObligationDocuments,
+  ...minangkabauResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...capitalismMarketResearchDocuments,
