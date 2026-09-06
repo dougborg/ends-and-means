@@ -467,6 +467,13 @@ describe("research obligation routes", () => {
 
 const expectedOpenResearchObligations = [
       {
+        id: "collective-capital-formation-accountability-design",
+        obligationType: "counterargument",
+        target:
+          "concept:collective-capital-formation#why-can-collective-funds-lose-support",
+        status: "open",
+      },
+      {
         id: "communism-claimed-identity-practice-gap",
         obligationType: "research-gap",
         target: "concept:communism#does-a-communist-label-settle-the-case",
