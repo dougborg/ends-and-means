@@ -194,6 +194,8 @@ describe("material-change Event freshness metadata", () => {
       ["unresolved material-change Event", (docs) => { const value = docs[5]; if (value?.documentType === "entity" && value.entity.kind === "case") value.entity.materialChangeEventIds = ["example-material-source"]; }],
       ["requires an Event-owned reviewed description Statement", (docs) => { docs.splice(10, 1); }],
       ["requires an Event-owned reviewed description Statement", (docs) => { const value = docs[8]; if (value?.documentType === "entity") value.entity.publicationStatus = "research-needed"; }],
+      ["requires an Event-owned reviewed description Statement", (docs) => { const relation = docs[10]; if (relation?.documentType === "relationships" && relation.relationships[0]?.predicate === "cites") relation.relationships[0].object.id = "missing-source"; }],
+      ["requires an Event-owned reviewed description Statement", (docs) => { docs.splice(8, 1); }],
     ];
     for (const [message, mutate] of variants) {
       const invalid = reviewedDocuments(); mutate(invalid);
@@ -208,7 +210,7 @@ describe("material-change Event freshness metadata", () => {
     expect(validateAuthoringDocuments(ended)).toContain("example-ongoing-case: ended Case must not declare material-change Event IDs");
     const forward = compileDomainGraph(reviewedDocuments());
     const reverse = compileDomainGraph(reviewedDocuments().reverse());
-    expect(reverse.indexes.entitiesById["example-ongoing-case"]).toEqual(forward.indexes.entitiesById["example-ongoing-case"]);
+    expect(JSON.stringify(reverse)).toBe(JSON.stringify(forward));
   });
 });
 
