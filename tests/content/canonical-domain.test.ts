@@ -35,8 +35,10 @@ describe("canonical vertical slice", () => {
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "italian-fascist-dictatorship-1925-1943",
+      "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
       "nazi-consolidation-1933",
+      "ruwalla-borderland-organization",
       "spanish-anarchist-initiatives-1936-1939",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",

@@ -561,6 +561,24 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "jinst-access-inequality",
+    obligationType: "counterevidence",
+    target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
+    id: "jinst-post-1997-continuity",
+    obligationType: "research-gap",
+    target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
+    id: "jinst-translation-oral-provenance",
+    obligationType: "research-gap",
+    target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
     id: "kahnawake-cdmrp-current-hearing-rules",
     obligationType: "research-gap",
     target: "case:kahnawake-community-lawmaking#how-does-the-process-work",
@@ -589,6 +607,24 @@ const expectedOpenResearchObligations = [
     id: "republic-self-description-exclusion-boundary",
     obligationType: "counterargument",
     target: "concept:republic#disputes",
+    status: "open",
+  },
+  {
+    id: "ruwalla-border-distribution",
+    obligationType: "counterargument",
+    target: "case:ruwalla-borderland-organization#how-did-new-states-change-the-relationship",
+    status: "open",
+  },
+  {
+    id: "ruwalla-nonelite-oral-perspectives",
+    obligationType: "research-gap",
+    target: "case:ruwalla-borderland-organization#what-can-the-sources-establish",
+    status: "open",
+  },
+  {
+    id: "ruwalla-shaykh-authority-variation",
+    obligationType: "counterevidence",
+    target: "case:ruwalla-borderland-organization#how-did-leadership-work",
     status: "open",
   },
   {
