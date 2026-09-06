@@ -157,6 +157,14 @@ describe("safe-publication boundary", () => {
         [{ path: "dist/index.html", content: "Reviewed public material" }],
       ),
     ).toEqual([]);
+    expect(
+      publicationBoundaryFindings([
+        {
+          path: "content/domain/presentation/narratives/example.md",
+          content: 'A prose example says from "../archive/source".',
+        },
+      ]),
+    ).toEqual([]);
   });
 
   it("rejects publishable files stored inside excluded trees", () => {
@@ -226,9 +234,20 @@ describe("editorial similarity signals", () => {
           role: "supports",
           locator: "p. 1",
         },
+        {
+          id: "fixture-statement-cites-source-again",
+          predicate: "cites",
+          subject: { kind: "statement", id: statement.id },
+          object: { kind: "source", id: source.id },
+          role: "supports",
+          locator: "p. 2",
+        },
       ],
     };
-    expect(verify({ graph }).findings).toContainEqual(
+    const finding = verify({ graph }).findings.find(
+      ({ location }) => location === "fixture-dossier#answer",
+    );
+    expect(finding).toEqual(
       expect.objectContaining({
         category: "source-similarity",
         severity: "attention",
@@ -238,6 +257,7 @@ describe("editorial similarity signals", () => {
         ),
       }),
     );
+    expect(finding?.message.match(/fixture-source/gu)).toHaveLength(1);
   });
 });
 
