@@ -147,8 +147,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 7,
-      total: 13,
+      covered: 8,
+      total: 14,
       missingIds: [
         "economic-planning",
         "institutional-abolition",

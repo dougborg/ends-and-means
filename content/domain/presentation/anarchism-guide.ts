@@ -21,6 +21,8 @@ const dossier = attachNarrative("anarchism.md", {
       statementIds: [
         "anarchism-contested-family",
         "anarchism-opposes-domination",
+        "anarchism-opposes-other-domination",
+        "anarchism-property-strategy-disagreement",
       ],
     },
     {
@@ -33,7 +35,7 @@ const dossier = attachNarrative("anarchism.md", {
         "rocker-syndicalist-double-aim",
       ],
       relatedEntityRefs: [
-        { kind: "means" as const, id: "recallable-delegation-and-federation" },
+        { kind: "means" as const, id: "worker-union-federation" },
       ],
     },
     {
@@ -43,6 +45,7 @@ const dossier = attachNarrative("anarchism.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "anarchism-tradition-boundary",
+        "anarchosyndicalist-self-identification",
         "baker-strategy-disagreement",
       ],
     },
@@ -54,6 +57,7 @@ const dossier = attachNarrative("anarchism.md", {
       statementIds: [
         "spanish-case-plurality",
         "mujeres-libres-gender-counterevidence",
+        "spanish-anarchist-gender-subordination",
         "anarchist-case-nonembodiment",
       ],
       relatedEntityRefs: [
@@ -90,9 +94,33 @@ const syndicalism = attachNarrative("anarcho-syndicalism.md", {
   publicationStatus: "reviewed" as const,
   reviewedAt: "2026-09-06",
 });
+const tradition = attachNarrative("anarcho-syndicalism-tradition.md", {
+  id: "anarcho-syndicalism-dossier",
+  kind: "dossier" as const,
+  label: "Anarcho-syndicalism dossier",
+  description: "A boundary note for the historical tradition.",
+  subject: { kind: "concept" as const, id: "anarcho-syndicalism" },
+  standfirst: "",
+  standfirstStatementIds: ["anarchosyndicalist-self-identification"],
+  sections: [
+    {
+      id: "tradition-and-approach",
+      heading: "How do the tradition and approach differ?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "anarchosyndicalist-self-identification",
+        "rocker-syndicalist-double-aim",
+      ],
+    },
+  ],
+  publicationStatus: "reviewed" as const,
+  reviewedAt: "2026-09-06",
+});
 export const anarchismGuideDocuments = [
   { documentType: "entity", entity: dossier },
   { documentType: "entity", entity: syndicalism },
+  { documentType: "entity", entity: tradition },
   {
     documentType: "subject-guide",
     guide: {
@@ -134,7 +162,7 @@ export const anarchismGuideDocuments = [
           ],
           entityRefs: [
             { kind: "approach", id: "anarcho-syndicalist-organizing" },
-            { kind: "means", id: "recallable-delegation-and-federation" },
+            { kind: "means", id: "worker-union-federation" },
           ],
           relationshipIds: ["anarchosyndicalism-advocates-federation"],
         },
@@ -164,6 +192,7 @@ export const anarchismGuideDocuments = [
             "anarchism-tradition-boundary",
             "baker-strategy-disagreement",
             "mujeres-libres-gender-counterevidence",
+            "spanish-anarchist-gender-subordination",
           ],
           researchObligationIds: [
             "anarchism-property-exchange-boundaries",
