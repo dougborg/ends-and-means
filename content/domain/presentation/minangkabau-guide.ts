@@ -20,7 +20,7 @@ export const minangkabauGuideDocuments = [
         {
           query: "matriarchy",
           disambiguation:
-            "This guide distinguishes maternal-line descent from disputed meanings of matriarchy rather than treating the terms as aliases.",
+            "Maternal-line descent and disputed meanings of matriarchy are distinct rather than aliases.",
         },
       ],
       sections: [
