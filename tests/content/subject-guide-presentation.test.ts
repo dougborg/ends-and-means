@@ -64,7 +64,9 @@ describe("SubjectGuide presentation states", () => {
   });
 
   it("preserves dense, long-label, disagreement, and open-research selections in authored order", () => {
-    const source = canonicalGraph.subjectGuides[0];
+    const source = canonicalGraph.subjectGuides.find(
+      ({ slug }) => slug === "economic-democracy",
+    );
     if (!source) throw new Error("Missing real SubjectGuide fixture");
     const dense = structuredClone(source);
     const comparison = dense.sections.find(

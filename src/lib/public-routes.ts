@@ -1,8 +1,8 @@
-import type { EntityRef } from "./domain";
+import type { EntityRef, PublicationStatus } from "./domain";
 import { canonicalGraph } from "./domain/canonical";
 import type { CompiledDomainGraph } from "./domain/graph";
 
-function isLive(publicationStatus: string) {
+function isLive(publicationStatus: PublicationStatus) {
   return ["reviewed", "published"].includes(publicationStatus);
 }
 

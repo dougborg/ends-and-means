@@ -161,8 +161,13 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
 });
 
 test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {
-  await page.setViewportSize({ width: 640, height: 1000 });
+  await page.setViewportSize({ width: 1280, height: 1000 });
   await page.goto("/guides/economic-democracy/");
+  await expect(page.locator(".subject-guide__rail")).toHaveCSS("position", "sticky");
+  // Browser zoom reduces the effective CSS viewport. Model 200% zoom by halving
+  // the viewport while scaling text, after proving the same page begins above
+  // the responsive breakpoint at 100%.
+  await page.setViewportSize({ width: 640, height: 1000 });
   await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
   const audit = await page.evaluate(() => {
     const rail = document.querySelector(".subject-guide__rail");
