@@ -2,6 +2,7 @@ import type { DomainEntity } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import type { SubjectGuide } from "./presentation";
 import type { ExternalReference } from "./common";
+import { reviewedOrientationLedger } from "./orientation-ledger";
 
 export type OrientationAuditEntry = {
   targetType: "entity" | "subject-guide";
@@ -35,6 +36,13 @@ const eligibleKinds = new Set<DomainEntity["kind"]>([
   "transition",
 ]);
 
+const reviewedDecisions = new Map(
+  reviewedOrientationLedger.map((decision) => [
+    `${decision.targetType}:${decision.id}`,
+    decision,
+  ]),
+);
+
 const notApplicableReasons: Partial<Record<DomainEntity["kind"], string>> = {
   "concept-scheme": "Internal vocabulary container, not an externally reconciled subject.",
   domain: "Internal browsing facet, not an externally reconciled subject.",
@@ -45,24 +53,6 @@ const notApplicableReasons: Partial<Record<DomainEntity["kind"], string>> = {
   work: "Work identifiers remain in work- and source-owned fields.",
 };
 
-const unmatchedReasons: Partial<Record<DomainEntity["kind"], string>> = {
-  approach: "No reviewed external page matches this scoped project approach closely enough.",
-  case: "No reviewed external page matches this bounded case and period closely enough.",
-  "case-episode": "No reviewed external page matches this bounded episode closely enough.",
-  challenge: "Project-defined analytical question; no external identity is asserted.",
-  collection: "Project-defined non-inheriting collection; no external identity is asserted.",
-  "comparison-dimension": "Project-defined comparison lens; no external identity is asserted.",
-  concept: "No reviewed external page matches this concept's authored boundary closely enough.",
-  criterion: "Project-defined evaluative criterion; no external identity is asserted.",
-  depiction: "No reviewed external page matches this project-owned interpretation.",
-  end: "Attributed project record; no external identity is asserted.",
-  event: "No reviewed external page matches this bounded event closely enough.",
-  means: "No reviewed external page matches this specified institutional arrangement closely enough.",
-  organization: "No reviewed external page matches this scoped organization closely enough.",
-  place: "No reviewed external page matches this authored place boundary closely enough.",
-  transition: "Project-defined before/change/after sequence; no external identity is asserted.",
-};
-
 function entityEntry(entity: DomainEntity): OrientationAuditEntry {
   const references = entity.externalRefs ?? [];
   const orientationUrls = references
@@ -71,7 +61,21 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
   const identityIds = references
     .filter(({ purpose }) => purpose === "identity")
     .flatMap(({ id }) => (id ? [id] : []));
-  if (orientationUrls.length || identityIds.length)
+  if (!eligibleKinds.has(entity.kind))
+    return {
+      targetType: "entity",
+      id: entity.id,
+      label: entity.label,
+      disposition: "not-applicable",
+      reason:
+        notApplicableReasons[entity.kind] ??
+        "This entity kind does not carry external orientation or identity mappings.",
+      orientationUrls,
+      identityIds,
+      references,
+    };
+  const decision = reviewedDecisions.get(`entity:${entity.id}`);
+  if (decision?.disposition === "mapped")
     return {
       targetType: "entity",
       id: entity.id,
@@ -81,27 +85,12 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
       identityIds,
       references,
     };
-  if (eligibleKinds.has(entity.kind))
-    return {
-      targetType: "entity",
-      id: entity.id,
-      label: entity.label,
-      disposition: "intentionally-unmatched",
-      reason:
-        unmatchedReasons[entity.kind] ??
-        "No reviewed external page matches this canonical boundary closely enough.",
-      orientationUrls,
-      identityIds,
-      references,
-    };
   return {
     targetType: "entity",
     id: entity.id,
     label: entity.label,
-    disposition: "not-applicable",
-    reason:
-      notApplicableReasons[entity.kind] ??
-      "This entity kind does not carry external orientation or identity mappings.",
+    disposition: "intentionally-unmatched",
+    ...(decision?.reason ? { reason: decision.reason } : {}),
     orientationUrls,
     identityIds,
     references,
@@ -114,13 +103,14 @@ function guideEntry(
 ): OrientationAuditEntry {
   const subject = graph.indexes.entitiesById[guide.primarySubject.id];
   const mapped = subject ? entityEntry(subject) : undefined;
-  if (mapped?.disposition === "mapped" && subject)
+  const decision = reviewedDecisions.get(`subject-guide:${guide.id}`);
+  if (decision?.disposition === "mapped" && mapped && subject)
     return {
       targetType: "subject-guide",
       id: guide.id,
       label: guide.label,
       disposition: "mapped",
-      reason: `Uses the reviewed mapping owned by ${subject.id}.`,
+      ...(decision.reason ? { reason: decision.reason } : {}),
       orientationUrls: mapped.orientationUrls,
       identityIds: mapped.identityIds,
       references: mapped.references,
@@ -130,7 +120,7 @@ function guideEntry(
     id: guide.id,
     label: guide.label,
     disposition: "intentionally-unmatched",
-    reason: `Its primary subject ${guide.primarySubject.id} has no defensible reviewed mapping.`,
+    ...(decision?.reason ? { reason: decision.reason } : {}),
     orientationUrls: [],
     identityIds: [],
     references: [],
@@ -158,6 +148,8 @@ function validateEntry(
   if (seen.has(key)) errors.push(`${key}: duplicate audit entry`);
   seen.add(key);
   if (!expectedKeys.has(key)) errors.push(`${key}: target is not published`);
+  const decision = reviewedDecisions.get(key);
+  errors.push(...validateReviewedDecision(key, entry, decision));
   if (entry.disposition !== "mapped" && !entry.reason?.trim())
     errors.push(`${entry.targetType} ${entry.id}: absence requires a reason`);
   if (
@@ -174,6 +166,31 @@ function validateEntry(
   return errors;
 }
 
+function validateReviewedDecision(
+  key: string,
+  entry: OrientationAuditEntry,
+  decision: (typeof reviewedOrientationLedger)[number] | undefined,
+) {
+  const errors: string[] = [];
+  if (entry.disposition !== "not-applicable" && !decision)
+    errors.push(`${key}: missing target-specific reviewed decision`);
+  if (decision && entry.disposition !== decision.disposition)
+    errors.push(`${key}: reviewed disposition changed`);
+  if (decision && entry.reason !== decision.reason)
+    errors.push(`${key}: reviewed reason changed`);
+  if (
+    decision &&
+    JSON.stringify(entry.references) !== JSON.stringify(decision.references)
+  )
+    errors.push(`${key}: reviewed reference tuple changed`);
+  if (
+    decision?.disposition === "mapped" &&
+    decision.resolution !== "direct-canonical-target"
+  )
+    errors.push(`${key}: canonical-target resolution is not reviewed`);
+  return errors;
+}
+
 export function validateOrientationAudit(
   graph: CompiledDomainGraph,
   inventory: OrientationAuditEntry[] = buildOrientationAudit(graph),
@@ -181,6 +198,20 @@ export function validateOrientationAudit(
   const errors: string[] = [];
   const expected = buildOrientationAudit(graph);
   const expectedKeys = new Set(expected.map(({ targetType, id }) => `${targetType}:${id}`));
+  const expectedReviewedKeys = new Set(
+    expected
+      .filter((entry) => {
+        if (entry.targetType === "subject-guide") return true;
+        const entity = graph.indexes.entitiesById[entry.id];
+        return Boolean(entity && eligibleKinds.has(entity.kind));
+      })
+      .map(({ targetType, id }) => `${targetType}:${id}`),
+  );
+  if (reviewedDecisions.size !== reviewedOrientationLedger.length)
+    errors.push("reviewed orientation ledger contains duplicate targets");
+  for (const key of reviewedDecisions.keys())
+    if (!expectedReviewedKeys.has(key))
+      errors.push(`${key}: stale reviewed decision`);
   const seen = new Set<string>();
   for (const entry of inventory)
     errors.push(...validateEntry(entry, expectedKeys, seen));

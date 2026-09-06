@@ -312,7 +312,10 @@ function validateExternalReference(
             !url.pathname.startsWith("/wiki/") ||
             url.search !== "" ||
             url.hash !== "" ||
-            url.pathname.endsWith("_(disambiguation)")),
+            url.pathname.endsWith("_(disambiguation)") ||
+            /^\/wiki\/(?:Special|Category|File|Talk|User|Wikipedia|Template|Help|Portal|Draft|Module|Media)(?::|%3A)/iu.test(
+              url.pathname,
+            )),
       ),
       `${entity.id}: Wikipedia reference ${index} does not match its language and canonical article form`,
     );

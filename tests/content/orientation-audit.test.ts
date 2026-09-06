@@ -6,15 +6,21 @@ import {
   validateOrientationAudit,
 } from "../../src/lib/domain/orientation-audit";
 
+const canonicalGraph = () => compileDomainGraph(structuredClone(canonicalDocuments));
+
 describe("orientation audit", () => {
   it("inventories every live guide and canonical entity", () => {
-    const graph = compileDomainGraph(canonicalDocuments);
+    const graph = canonicalGraph();
     const inventory = buildOrientationAudit(graph);
     const expectedCount =
       graph.entities.filter(({ publicationStatus }) =>
         ["reviewed", "published"].includes(publicationStatus),
       ).length + graph.subjectGuides.length;
     expect(inventory).toHaveLength(expectedCount);
+    expect(inventory).toHaveLength(447);
+    expect(inventory.filter(({ disposition }) => disposition === "mapped")).toHaveLength(21);
+    expect(inventory.filter(({ disposition }) => disposition === "intentionally-unmatched")).toHaveLength(61);
+    expect(inventory.filter(({ disposition }) => disposition === "not-applicable")).toHaveLength(365);
     expect(validateOrientationAudit(graph, inventory)).toEqual([]);
     expect(
       inventory.find(({ id }) => id === "guide-kahnawake-community-lawmaking"),
@@ -43,8 +49,8 @@ describe("orientation audit", () => {
     );
   });
 
-  it("detects missing, duplicate, and unpublished inventory targets", () => {
-    const graph = compileDomainGraph(canonicalDocuments);
+  it("detects missing, duplicate, and actual unpublished graph targets", () => {
+    const graph = canonicalGraph();
     const inventory = buildOrientationAudit(graph);
     const first = inventory[0];
     expect(first).toBeDefined();
@@ -53,22 +59,68 @@ describe("orientation audit", () => {
       ...inventory.slice(1),
       first,
       first,
-      { ...first, id: "unpublished-fixture" },
     ]);
     expect(errors).toContain(`${first.targetType}:${first.id}: duplicate audit entry`);
-    expect(errors).toContain("entity:unpublished-fixture: target is not published");
+    const unpublished = graph.indexes.entitiesById["sep-democracy-source"];
+    expect(unpublished).toBeDefined();
+    if (!unpublished) return;
+    unpublished.publicationStatus = "in-review";
+    expect(buildOrientationAudit(graph).some(({ id }) => id === unpublished.id)).toBe(false);
+    expect(validateOrientationAudit(graph)).not.toContain(
+      "entity:sep-democracy-source: stale reviewed decision",
+    );
   });
 
-  it("changes disposition when an external mapping is removed", () => {
-    const graph = compileDomainGraph(canonicalDocuments);
-    const democracy = graph.indexes.entitiesById.democracy;
-    expect(democracy?.externalRefs).toBeDefined();
+  it("rejects a mapped target downgraded to an arbitrary absence", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const democracy = inventory.find(({ id }) => id === "democracy");
+    expect(democracy).toBeDefined();
     if (!democracy) return;
-    democracy.externalRefs = [];
-    expect(buildOrientationAudit(graph).find(({ id }) => id === "democracy")).toMatchObject({
-      disposition: "intentionally-unmatched",
-      orientationUrls: [],
-      identityIds: [],
-    });
+    Object.assign(democracy, { disposition: "intentionally-unmatched", reason: "arbitrary", references: [], orientationUrls: [], identityIds: [] });
+    expect(validateOrientationAudit(graph, inventory)).toEqual(expect.arrayContaining([
+      "entity:democracy: reviewed disposition changed",
+      "entity:democracy: reviewed reason changed",
+      "entity:democracy: reviewed reference tuple changed",
+    ]));
+  });
+
+  it("rejects stale/conflicting tuples and mappings on inapplicable kinds", () => {
+    const graph = canonicalGraph();
+    const democracy = graph.indexes.entitiesById.democracy;
+    const source = graph.indexes.entitiesById["sep-democracy-source"];
+    const wikipedia = democracy?.externalRefs?.[0];
+    if (!democracy || !source || !wikipedia) return;
+    democracy.externalRefs = [{ ...wikipedia, checkedAt: "2026-09-05" }, ...(democracy.externalRefs?.slice(1) ?? [])];
+    source.externalRefs = [{ system: "wikidata", id: "Q1", url: "https://www.wikidata.org/wiki/Q1", purpose: "identity", match: "exact", checkedAt: "2026-09-06" }];
+    const errors = validateOrientationAudit(graph);
+    expect(errors).toContain("entity:democracy: reviewed reference tuple changed");
+    expect(errors.join("\n")).toContain("sep-democracy-source: absent entry contains a mapping");
+  });
+
+});
+
+describe("orientation audit closed-world behavior", () => {
+  it("rejects stale reviewed decisions", () => {
+    const graph = canonicalGraph();
+    const target = graph.indexes.entitiesById.accountability;
+    if (!target) return;
+    target.publicationStatus = "in-review";
+    expect(validateOrientationAudit(graph)).toContain(
+      "entity:accountability: stale reviewed decision",
+    );
+  });
+
+  it("fails closed for a new eligible target and is permutation deterministic", () => {
+    const graph = canonicalGraph();
+    const template = graph.indexes.entitiesById.democracy;
+    if (template?.kind !== "concept") return;
+    const added = { ...template, id: "new-reviewed-concept", label: "New reviewed concept", externalRefs: [] };
+    graph.entities.push(added);
+    graph.indexes.entitiesById[added.id] = added;
+    expect(validateOrientationAudit(graph)).toContain("entity:new-reviewed-concept: missing target-specific reviewed decision");
+    const forward = buildOrientationAudit(canonicalGraph());
+    const reversed = buildOrientationAudit(compileDomainGraph(structuredClone([...canonicalDocuments].reverse())));
+    expect(reversed).toEqual(forward);
   });
 });

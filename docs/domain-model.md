@@ -619,9 +619,12 @@ disambiguation pages.
 Record the canonical article URL, language, check date, and canonical QID; use
 `exact` only for the same authored identity and `close` when the external item
 is useful but broader, narrower, or differently bounded.
-The deterministic orientation audit covers every live Subject Guide and entity,
-including reasoned intentional absences and entity kinds for which external
-identity is not applicable.
+The deterministic orientation audit compares every live eligible Subject Guide
+and entity against a target-specific reviewed ledger. The ledger preserves the
+exact disposition, intentional-absence reason, complete mapping tuple, and
+direct canonical-target resolution check; a new eligible target fails closed
+until reviewed. Inapplicable entity kinds are classified before their metadata,
+so Sources, Works, Statements, and Dossiers cannot become orientation mappings.
 Guides reuse mappings owned by their primary canonical subjects rather than
 duplicating identity metadata.
 These references are never eligible evidence and remain secondary to the
