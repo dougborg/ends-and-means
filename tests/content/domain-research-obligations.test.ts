@@ -393,6 +393,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "authoritarian-practice-regime-transfer",
+    obligationType: "counterevidence",
+    target: "concept:authoritarianism#definitions",
+    status: "open",
+  },
+  {
     id: "capitalism-business-firm-relation",
     obligationType: "research-gap",
     target: "concept:capitalism#which-institutions-work-together",
@@ -420,12 +426,6 @@ const expectedOpenResearchObligations = [
     id: "china-tve-effective-control",
     obligationType: "research-gap",
     target: "concept:market-economy#what-do-bounded-cases-show",
-    status: "open",
-  },
-  {
-    id: "authoritarian-practice-regime-transfer",
-    obligationType: "counterevidence",
-    target: "concept:authoritarianism#definitions",
     status: "open",
   },
   {
@@ -500,6 +500,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "gold-coast-cocoa-labor-distribution",
+    obligationType: "counterevidence",
+    target: "concept:market-economy#what-do-bounded-cases-show",
+    status: "open",
+  },
+  {
     id: "jinst-access-inequality",
     obligationType: "counterevidence",
     target: "case:jinst-postcollective-pastoral-governance",
@@ -515,12 +521,6 @@ const expectedOpenResearchObligations = [
     id: "jinst-translation-oral-provenance",
     obligationType: "research-gap",
     target: "case:jinst-postcollective-pastoral-governance",
-    status: "open",
-  },
-  {
-    id: "gold-coast-cocoa-labor-distribution",
-    obligationType: "counterevidence",
-    target: "concept:market-economy#what-do-bounded-cases-show",
     status: "open",
   },
   {
