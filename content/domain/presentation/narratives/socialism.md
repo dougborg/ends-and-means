@@ -14,7 +14,7 @@ The label therefore names a field of arguments, not a complete institutional pla
 
 ## which-institutions-and-paths-are-disputed
 
-Some socialist designs replace markets with planning, while market socialists retain extensive exchange and price coordination under changed ownership or control.
+Some socialist designs propose central or participatory planning, while market socialists retain extensive exchange and price coordination under changed ownership or control.
 Political routes have been just as disputed: Geoff Eley traces conflicts among parliamentary mass parties, centralist organizations, anarchists, syndicalists, and other movements.
 To understand a proposal, a reader still needs to ask who controls production and investment, how coordination works, and how change is supposed to occur.
 
@@ -22,3 +22,8 @@ To understand a proposal, a reader still needs to ask who controls production an
 
 The modern communist traditions represented by these sources developed within nineteenth- and early-twentieth-century socialist debates, but that bounded genealogy does not make the words synonyms.
 The represented socialist traditions include non-communist positions, while Lenin and Kropotkin disagree sharply over a transitional revolutionary state and stateless direct organization.
+
+## what-can-the-swedish-funds-show
+
+Sweden's five wage-earner fund boards provide evidence about one contested social-democratic program in operation from 1984 through 1991.
+Their design and limited ownership transfer do not show how socialist institutions would work elsewhere or make this program representative of socialism as a whole.

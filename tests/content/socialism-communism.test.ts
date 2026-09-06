@@ -13,6 +13,7 @@ const statementIds = [
   "socialism-democratic-control-minimum",
   "socialism-not-statism",
   "socialism-market-boundary",
+  "socialism-planning-designs",
   "socialism-three-distinct-questions",
   "socialism-values-newman",
   "socialism-global-historical-variation",
@@ -38,7 +39,7 @@ const statementIds = [
 
 describe("socialism and communism canonical foundations", () => {
   it("publishes atomic located statements from primary texts and scholarship", () => {
-    expect(statementIds).toHaveLength(25);
+    expect(statementIds).toHaveLength(26);
     expect(
       statementIds.every((id) => entityById(id)?.kind === "statement"),
     ).toBe(true);
@@ -91,7 +92,7 @@ describe("socialism and communism canonical foundations", () => {
 });
 
 describe("socialism and communism narrative foundations", () => {
-  it("provides traceable dossiers for the published Subject Guides", () => {
+  it("provides traceable dossiers for the reviewed Subject Guides", () => {
     const socialism = dossierForSubject("concept", "socialism");
     const communism = dossierForSubject("concept", "communism");
     expect(socialism?.sections.map(({ id }) => id)).toEqual([
@@ -99,6 +100,7 @@ describe("socialism and communism narrative foundations", () => {
       "why-is-the-term-so-broad",
       "which-institutions-and-paths-are-disputed",
       "how-do-socialism-and-communism-relate",
+      "what-can-the-swedish-funds-show",
     ]);
     expect(communism?.sections.map(({ id }) => id)).toEqual([
       "what-can-communism-mean",
@@ -112,6 +114,11 @@ describe("socialism and communism narrative foundations", () => {
         dossier?.sections.every(({ statementIds: ids }) => ids.length > 0),
       ),
     ).toBe(true);
+    expect(
+      socialism?.sections.find(
+        ({ id }) => id === "which-institutions-and-paths-are-disputed",
+      )?.statementIds,
+    ).toContain("socialism-planning-designs");
     expect(subjectGuideById("guide-socialism")?.primarySubject).toEqual({
       kind: "concept",
       id: "socialism",
@@ -140,6 +147,75 @@ describe("socialism and communism narrative foundations", () => {
     ).toContain("communism-claimed-identity-practice-gap");
     expect(entityById("guide-socialism")).toBeUndefined();
     expect(entityById("guide-communism")).toBeUndefined();
+  });
+
+});
+
+describe("socialism and communism learner paths", () => {
+  it("offers qualified planning, market, class, and statelessness paths", () => {
+    expect(entityById("economic-planning")).toMatchObject({ kind: "concept" });
+    expect(entityById("market-coordination")).toMatchObject({ kind: "concept" });
+    expect(entityById("social-class")).toMatchObject({ kind: "concept" });
+    expect(entityById("statelessness")).toMatchObject({ kind: "concept" });
+
+    expect(relationshipsFrom("socialism")).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "socialism-related-to-economic-planning",
+          status: "qualified",
+          statementIds: ["socialism-planning-designs"],
+        }),
+        expect.objectContaining({
+          id: "socialism-related-to-market-coordination",
+          status: "qualified",
+          statementIds: ["socialism-market-boundary"],
+        }),
+        expect.objectContaining({
+          id: "socialism-related-to-social-class",
+          status: "qualified",
+        }),
+      ]),
+    );
+    expect(relationshipsFrom("communism")).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "communism-related-to-social-class",
+          status: "qualified",
+        }),
+        expect.objectContaining({
+          id: "communism-related-to-statelessness",
+          status: "contested",
+        }),
+      ]),
+    );
+  });
+
+  it("traces the planning path to a precisely located planning claim", () => {
+    expect(entityById("socialism-planning-designs")).toMatchObject({
+      kind: "statement",
+      statementKind: "classification",
+    });
+    expect(citationsFor("socialism-planning-designs")).toEqual([
+      expect.objectContaining({
+        locator: "section 4.1, paragraphs 1–2 and 9–12",
+        role: "supports",
+      }),
+    ]);
+  });
+
+});
+
+describe("socialism and communism review boundaries", () => {
+  it("states the Swedish case transfer limit as a located atomic claim", () => {
+    const transfer = entityById("swedish-funds-socialism-transfer-limit");
+    expect(transfer).toMatchObject({
+      kind: "statement",
+      statementKind: "editorial-interpretation",
+    });
+    expect(citationsFor(transfer?.id ?? "")).toHaveLength(2);
+    expect(
+      citationsFor(transfer?.id ?? "").every(({ locator }) => locator.length > 0),
+    ).toBe(true);
   });
 
   it("records focused open research questions against exact sections", () => {

@@ -263,7 +263,12 @@ async function verifySubjectGuideRoutes() {
   const socialism = await readFile(routeFile("/guides/socialism/"), "utf8");
   expect(stripMarkup(socialism)).toContain("What does socialism mean?");
   expect(stripMarkup(socialism)).toContain("What can one Swedish experiment show?");
+  expect(stripMarkup(socialism)).toContain(
+    "do not show how socialist institutions would work elsewhere",
+  );
   expect(hrefs(socialism)).toContain("/cases/swedish-wage-earner-funds/");
+  expect(hrefs(socialism)).toContain("/concepts/economic-planning/");
+  expect(hrefs(socialism)).toContain("/concepts/market-coordination/");
 
   const communism = await readFile(routeFile("/guides/communism/"), "utf8");
   expect(stripMarkup(communism)).toContain("What does communism mean?");
@@ -272,6 +277,8 @@ async function verifySubjectGuideRoutes() {
   );
   expect(stripMarkup(communism)).toContain("Which bounded cases still need evidence?");
   expect(hrefs(communism)).toContain("/concepts/socialism/");
+  expect(hrefs(communism)).toContain("/concepts/social-class/");
+  expect(hrefs(communism)).toContain("/concepts/statelessness/");
 }
 
 async function verifyConceptRoutes() {

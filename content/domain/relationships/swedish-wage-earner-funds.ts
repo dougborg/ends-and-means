@@ -53,6 +53,8 @@ export const relationshipDocuments = [
     ["funds-abolished", "abolition-wage-earner-funds-proposition", "proposal summary and sections 2–3", "supports"],
     ["funds-partial-instantiation", "swedish-wage-earner-funds-proposition", "sections 2.1–2.3", "supports"],
     ["funds-partial-instantiation", "westerberg-marxist-venture-source", "pp. 1014–1037", "qualifies"],
+    ["swedish-funds-socialism-transfer-limit", "swedish-wage-earner-funds-proposition", "sections 2.1–2.3 and proposed statutes", "context"],
+    ["swedish-funds-socialism-transfer-limit", "westerberg-marxist-venture-source", "pp. 1014–1037", "context"],
     ["funds-related-ideas-classification", "swedish-wage-earner-funds-proposition", "sections 2.1–2.3", "supports"],
     ["funds-related-ideas-classification", "pontusson-kuruvilla-economic-democracy-source", "abstract and pp. 779–796", "qualifies"],
     ["funds-related-ideas-classification", "westerberg-marxist-venture-source", "pp. 1014–1037", "qualifies"],

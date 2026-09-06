@@ -47,6 +47,7 @@ const socialism = attachNarrative("socialism.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
+        "socialism-planning-designs",
         "socialism-market-boundary",
         "socialism-organizational-disagreement",
       ],
@@ -65,6 +66,23 @@ const socialism = attachNarrative("socialism.md", {
         "communist-organizational-rivalry",
       ],
       relatedEntityRefs: [{ kind: "concept" as const, id: "communism" }],
+    },
+    {
+      id: "what-can-the-swedish-funds-show",
+      heading: "What can the Swedish funds show?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "funds-partial-instantiation",
+        "swedish-funds-socialism-transfer-limit",
+      ],
+      relatedEntityRefs: [
+        { kind: "case" as const, id: "swedish-wage-earner-funds" },
+        {
+          kind: "approach" as const,
+          id: "swedish-wage-earner-fund-program",
+        },
+      ],
     },
   ],
   publicationStatus: "reviewed" as const,
