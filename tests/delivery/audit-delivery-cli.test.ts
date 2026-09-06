@@ -50,16 +50,29 @@ describe("delivery audit result classes", () => {
     const result = run(["--project-snapshot"]);
     expect(result.status).toBe(2);
     expect(result.stderr).toContain(
-      "Project state: INVALID (--project-snapshot requires a path.)",
+      "Project state: INVALID (--project-snapshot requires exactly one path.)",
     );
   });
 
   it("does not consume another flag as a snapshot path", () => {
     const result = run(["--project-snapshot", "--repository-only"]);
     expect(result.status).toBe(2);
-    expect(result.stderr).toContain(
-      "Project state: INVALID (--project-snapshot requires a path.)",
-    );
+    expect(result.stderr).toContain("Project state: INVALID");
+  });
+
+  it.each([
+    ["--repository-only", "--live-project"],
+    ["--live-project", "--repository-only"],
+  ])("rejects conflicting modes %s %s", (...args) => {
+    const result = run(args);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: INVALID (Select exactly one project-state mode.)");
+  });
+
+  it("rejects unknown flags", () => {
+    const result = run(["--repository-only", "--unexpected"]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: INVALID (Unknown option: --unexpected.)");
   });
 
   it("distinguishes unexpected input errors", () => {

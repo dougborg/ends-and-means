@@ -119,6 +119,39 @@ describe("verify command ownership", () => {
     );
   });
 
+  it.each([
+    "echo setup\npnpm lint",
+    "echo setup; pnpm lint",
+    "cd app && pnpm lint",
+  ])("rejects owned command after a shell boundary: %s", async (run) => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      `      - run: ${JSON.stringify(run)}\n      - name: Verify and build\n        uses: $/.github/actions/verify`,
+    );
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
+      "VERIFY_DUPLICATE",
+    );
+  });
+
+  it.each(["echo pnpm lint", "# pnpm lint", "echo 'pnpm lint'"])(
+    "ignores non-command mention: %s",
+    async (run) => {
+      const root = await repositoryFixture();
+      await replace(
+        root,
+        ".github/workflows/ci.yml",
+        "      - name: Verify and build\n        uses: $/.github/actions/verify",
+        `      - run: ${JSON.stringify(run)}\n      - name: Verify and build\n        uses: $/.github/actions/verify`,
+      );
+      expect(
+        auditRepositoryDelivery(root).map((finding) => finding.code),
+      ).not.toContain("VERIFY_DUPLICATE");
+    },
+  );
+
   it("rejects additional Pages deploy write scopes", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/workflows/pages.yml", "      pages: write", "      pages: write\n      contents: write");
