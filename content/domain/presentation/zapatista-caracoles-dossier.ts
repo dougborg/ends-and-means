@@ -5,7 +5,7 @@ const dossier = attachNarrative("zapatista-caracoles.md", {
   id: "zapatista-caracoles-dossier",
   kind: "dossier" as const,
   label: "Zapatista caracoles and Good Government Councils dossier",
-  description: "A bounded account of Zapatista civilian autonomy from the 2003 regional council design through its 2023 reorganization.",
+  description: "Beginning in 2003, Zapatista caracoles seated regional Good Government Councils composed of delegates from autonomous municipalities. Participants and researchers described rotating service, community reporting, receipt-based accounting, and council control over outside projects, while uneven participation and continuing EZLN political-military authority limited claims of fully civilian or evenly shared governance. In 2023 the EZLN declared a shift to community-level Local Autonomous Governments, but their rules in use and outcomes remain unverified.",
   subject: { kind: "case" as const, id: "zapatista-autonomy-chiapas-1994-present" },
   standfirst: "",
   standfirstStatementIds: ["zapatista-autonomy-indigenous-context", "zapatista-2023-reorganization-declaration", "zapatista-2023-practice-open"],
