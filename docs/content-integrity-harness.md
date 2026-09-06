@@ -39,15 +39,20 @@ Before exact-head review of a canonical tranche, run:
 pnpm audit:content-preflight
 ```
 
-The report compares the branch with its merge base against `origin/main` (or
-an explicit `--base=<commit>` / `CONTENT_PREFLIGHT_BASE`) and inventories each
-changed Work, Source manifestation, Statement and citation tuple,
+The report serializes the canonical graph at the branch and its merge base
+against `origin/main` (or an explicit `--base=<commit>` /
+`CONTENT_PREFLIGHT_BASE`) and inventories every added, modified, or removed
+Work, Source manifestation, Statement and citation tuple,
 proposition-backed relationship, Case/Episode slot, Dossier, Subject Guide,
-and Research Obligation. Mechanically defensible failures—such as incomplete
-Source manifestations, uncited reviewed Statements, unresolved Case slots,
-missing relationship support, or artifact-centered public wording—are
-violations. Potentially interpretive support and incomplete exact-ledger or
-mutation coverage are human-review signals, never automated verdicts.
+and Research Obligation. Comparing compiled graph output makes deletions and
+changes flowing through Markdown, shared helpers, and registry/index files
+visible. Mechanically defensible failures—such as uncited reviewed Statements,
+unresolved or duplicate Case slots, missing relationship support, or
+artifact-centered public wording—are violations. Optional Source metadata,
+potentially interpretive support, ID-presence ledger coverage, and coarse
+mutation-fixture detection are human-review signals, never automated verdicts
+or proof of semantic completeness.
+Removed canonical IDs participate in both signals, and deleted test or snapshot files are treated as absent coverage rather than causing the preflight itself to fail.
 
 The report cannot verify source passages, statement atomicity, interpretive
 fairness, case transfer, or whether counterevidence is sufficient. Reviewers

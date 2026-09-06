@@ -215,6 +215,10 @@ the semantic preflight before the single full handoff verification. Rerun the
 full gate after a later change or rebase only when it can affect the verified
 surface; exact-head hosted CI, independent review, and post-merge verification
 remain mandatory.
+The preflight uses a deletion-safe base-versus-head compiled-graph comparison,
+so shared helpers, Markdown narrative, and registry changes cannot rely on file
+export discovery. Treat optional Source metadata and coarse ledger/mutation
+coverage as review signals; they are not evidence of semantic completeness.
 The final command is the CI-parity publication gate. It rejects structural,
 narrative-line, workflow-language, route, browser, and archive-exclusion
 violations while reporting missing dossiers, entities, references,

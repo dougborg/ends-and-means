@@ -1,9 +1,9 @@
 import { execFileSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { mkdtemp, readFile, rm, symlink } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import type {
-  AuthoringDocument,
   CompiledDomainGraph,
   DomainEntity,
   DomainRelationship,
@@ -21,9 +21,13 @@ export interface PreflightFinding {
 
 export interface PreflightInput {
   graph: CompiledDomainGraph;
+  baseGraph?: CompiledDomainGraph;
   changedEntityIds: string[];
   changedRelationshipIds: string[];
   changedGuideIds: string[];
+  removedEntityIds?: string[];
+  removedRelationshipIds?: string[];
+  removedGuideIds?: string[];
   changedFiles: string[];
   changedTestText?: string;
 }
@@ -34,11 +38,14 @@ export interface PreflightResult {
   entities: DomainEntity[];
   relationships: DomainRelationship[];
   guides: SubjectGuide[];
+  removedEntityIds: string[];
+  removedRelationshipIds: string[];
+  removedGuideIds: string[];
   findings: PreflightFinding[];
 }
 
 const artifactLanguage =
-  /\b(?:present|this)\s+(?:guide|page|site|dossier|artifact)\b|\blearner\s+(?:path|journey)\b/iu;
+  /\b(?:(?:the|this|our|a)\s+(?:guide|dossier|page|site|artifact)|(?:learner|reader)[-\s]+(?:paths?|journeys?))\b/iu;
 const strongPredicates = new Set([
   "advances-end",
   "rejects-end",
@@ -69,6 +76,8 @@ function duplicates(ids: string[]) {
 function publicText(entity: DomainEntity): string[] {
   if (entity.kind === "dossier")
     return [
+      entity.label,
+      entity.description,
       entity.standfirst,
       ...entity.sections.flatMap(({ heading, body }) => [heading, body]),
     ];
@@ -103,20 +112,27 @@ function sourceFindings(
   entityById: Record<string, DomainEntity>,
 ) {
   const findings: PreflightFinding[] = [];
+  if (!["reviewed", "published"].includes(entity.publicationStatus))
+    return findings;
   const fields = [
     ["workId", entity.workId],
     ["contributorDisplay", entity.contributorDisplay?.length],
+    ["publicationYear", entity.publicationYear],
     ["publisher", entity.publisher],
+    [
+      "identifiers",
+      entity.identifiers && Object.keys(entity.identifiers).length,
+    ],
     ["resourceLinks", entity.resourceLinks?.length],
   ] as const;
   for (const [field, value] of fields)
     if (!value)
       findings.push(
         finding(
-          "violation",
+          "human-review",
           "source-manifestation-field",
           entity.id,
-          `Record Source manifestation field ${field}; do not derive it from the Work.`,
+          `Optional manifestation field ${field} is unavailable; confirm that omission is accurate and never derive it from the Work.`,
         ),
       );
   if (entity.workId && entityById[entity.workId]?.kind !== "work")
@@ -126,15 +142,6 @@ function sourceFindings(
         "source-work-resolution",
         entity.id,
         `workId ${entity.workId} must resolve to a Work.`,
-      ),
-    );
-  if (!entity.publicationYear)
-    findings.push(
-      finding(
-        "human-review",
-        "source-manifestation-date",
-        entity.id,
-        "Manifestation year is unavailable; confirm the source is genuinely undated rather than copying the Work origin year.",
       ),
     );
   return findings;
@@ -212,6 +219,7 @@ function episodeFindings(
     ["interactionStatementIds", entity.interactionStatementIds],
     ["outcomeStatementIds", entity.outcomeStatementIds],
   ] as const;
+  const slotNamesByStatement = new Map<string, string[]>();
   for (const [slot, ids] of slots) {
     const repeated = duplicates(ids);
     if (repeated.length)
@@ -233,7 +241,22 @@ function episodeFindings(
             `${slot} entry ${id} must resolve to a Statement.`,
           ),
         );
+      else
+        slotNamesByStatement.set(id, [
+          ...(slotNamesByStatement.get(id) ?? []),
+          slot,
+        ]);
   }
+  for (const [id, slotNames] of slotNamesByStatement)
+    if (new Set(slotNames).size > 1)
+      findings.push(
+        finding(
+          "violation",
+          "cross-case-slot-duplicate",
+          entity.id,
+          `${id} appears in distinct semantic slots: ${slotNames.join(", ")}. Split the propositions or select the correct slot.`,
+        ),
+      );
   return findings;
 }
 
@@ -306,13 +329,22 @@ function coverageFindings(input: PreflightInput, substantive: boolean) {
   const findings: PreflightFinding[] = [];
   const subject = input.changedFiles.join(", ") || "changed tranche";
   const tests = input.changedTestText ?? "";
-  if (substantive && !/toMatchSnapshot|digest\(|exact.+ledger/isu.test(tests))
+  const changedIds = [
+    ...input.changedEntityIds,
+    ...input.changedRelationshipIds,
+    ...input.changedGuideIds,
+    ...(input.removedEntityIds ?? []),
+    ...(input.removedRelationshipIds ?? []),
+    ...(input.removedGuideIds ?? []),
+  ];
+  const uncoveredIds = changedIds.filter((id) => !tests.includes(id));
+  if (substantive && uncoveredIds.length > 0)
     findings.push(
       finding(
         "human-review",
         "exact-ledger-coverage",
-        subject,
-        "Add or identify a deterministic exact ledger covering the changed Work/Source/Statement/citation/relationship/Case/presentation records.",
+        uncoveredIds.join(", "),
+        "These changed or removed IDs do not appear in changed tests or snapshots. This is an ID-presence signal, not proof that an existing ledger is semantically complete.",
       ),
     );
   if (substantive && !/mutation|drift|not\.toEqual|not\.toMatch/isu.test(tests))
@@ -321,7 +353,7 @@ function coverageFindings(input: PreflightInput, substantive: boolean) {
         "human-review",
         "mutation-coverage",
         subject,
-        "Add a negative fixture proving a meaningful semantic mutation fails.",
+        "No coarse negative-fixture syntax was found in changed tests. This heuristic does not prove whether existing mutation coverage exercises the changed IDs.",
       ),
     );
   if (
@@ -375,7 +407,13 @@ export function runContentSemanticPreflight(
   findings.push(
     ...coverageFindings(
       input,
-      entities.length + relationships.length + guides.length > 0,
+      entities.length +
+        relationships.length +
+        guides.length +
+        (input.removedEntityIds?.length ?? 0) +
+        (input.removedRelationshipIds?.length ?? 0) +
+        (input.removedGuideIds?.length ?? 0) >
+        0,
     ),
   );
 
@@ -391,6 +429,9 @@ export function runContentSemanticPreflight(
     entities,
     relationships,
     guides,
+    removedEntityIds: [...(input.removedEntityIds ?? [])].sort(),
+    removedRelationshipIds: [...(input.removedRelationshipIds ?? [])].sort(),
+    removedGuideIds: [...(input.removedGuideIds ?? [])].sort(),
     findings,
   };
 }
@@ -399,30 +440,105 @@ function git(args: string[]) {
   return execFileSync("git", args, { encoding: "utf8" }).trim();
 }
 
-async function documentsFromFiles(files: string[]) {
-  const documents: AuthoringDocument[] = [];
-  for (const file of files.filter(
-    (path) =>
-      path.startsWith("content/domain/") &&
-      path.endsWith(".ts") &&
-      path !== "content/domain/index.ts",
-  )) {
-    const module = await import(pathToFileURL(resolve(file)).href);
-    for (const value of Object.values(module)) {
-      if (!Array.isArray(value)) continue;
-      for (const candidate of value)
-        if (
-          candidate &&
-          typeof candidate === "object" &&
-          "documentType" in candidate
-        )
-          documents.push(candidate as AuthoringDocument);
-    }
-  }
-  return documents;
+function changedIds<T extends { id: string }>(base: T[], head: T[]) {
+  const baseById = new Map(base.map((value) => [value.id, value]));
+  return head
+    .filter(
+      (value) =>
+        JSON.stringify(value) !== JSON.stringify(baseById.get(value.id)),
+    )
+    .map(({ id }) => id)
+    .sort();
 }
 
-export async function runCli(argv = process.argv.slice(2)) {
+function removedIds<T extends { id: string }>(base: T[], head: T[]) {
+  const headIds = new Set(head.map(({ id }) => id));
+  return base
+    .map(({ id }) => id)
+    .filter((id) => !headIds.has(id))
+    .sort();
+}
+
+export function discoverGraphChanges(
+  base: CompiledDomainGraph,
+  head: CompiledDomainGraph,
+) {
+  return {
+    changedEntityIds: changedIds(base.entities, head.entities),
+    changedRelationshipIds: changedIds(base.relationships, head.relationships),
+    changedGuideIds: changedIds(
+      base.subjectGuideRecords,
+      head.subjectGuideRecords,
+    ),
+    removedEntityIds: removedIds(base.entities, head.entities),
+    removedRelationshipIds: removedIds(base.relationships, head.relationships),
+    removedGuideIds: removedIds(
+      base.subjectGuideRecords,
+      head.subjectGuideRecords,
+    ),
+  };
+}
+
+async function loadGraph(path: string) {
+  const module = await import(
+    `${pathToFileURL(resolve(path)).href}?preflight=${Date.now()}`
+  );
+  return module.canonicalGraph as CompiledDomainGraph;
+}
+
+async function loadBaseGraph(base: string) {
+  const directory = await mkdtemp(join(tmpdir(), "ends-means-preflight-"));
+  try {
+    const archive = execFileSync("git", ["archive", "--format=tar", base], {
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    execFileSync("tar", ["-xf", "-", "-C", directory], { input: archive });
+    await symlink(
+      resolve("node_modules"),
+      join(directory, "node_modules"),
+      "dir",
+    );
+    return await loadGraph(join(directory, "src/lib/domain/canonical.ts"));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+}
+
+async function readChangedTests(files: string[]) {
+  const testFiles = files.filter((file) =>
+    /^(?:tests\/|.*\.snap$)/u.test(file),
+  );
+  return (
+    await Promise.all(
+      testFiles.map(async (file) => {
+        try {
+          return await readFile(file, "utf8");
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            "code" in error &&
+            error.code === "ENOENT"
+          )
+            return "";
+          throw error;
+        }
+      }),
+    )
+  ).join("\n");
+}
+
+interface CliDependencies {
+  baseGraph: CompiledDomainGraph;
+  headGraph: CompiledDomainGraph;
+  files: string[];
+  changedTestText?: string;
+  log: (message: string) => void;
+}
+
+export async function runCli(
+  argv = process.argv.slice(2),
+  dependencies?: CliDependencies,
+) {
   const baseArg = argv
     .find((argument) => argument.startsWith("--base="))
     ?.slice("--base=".length);
@@ -430,43 +546,28 @@ export async function runCli(argv = process.argv.slice(2)) {
     baseArg ||
     process.env.CONTENT_PREFLIGHT_BASE ||
     git(["merge-base", "HEAD", "origin/main"]);
-  const files = git(["diff", "--name-only", `${base}...HEAD`])
-    .split("\n")
-    .filter(Boolean);
-  const documents = await documentsFromFiles(files);
-  const changedEntityIds = documents.flatMap((document) =>
-    document.documentType === "entity" ? [document.entity.id] : [],
-  );
-  const changedRelationshipIds = documents.flatMap((document) =>
-    document.documentType === "relationships"
-      ? document.relationships.map(({ id }) => id)
-      : [],
-  );
-  const changedGuideIds = documents.flatMap((document) =>
-    document.documentType === "subject-guide" ? [document.guide.id] : [],
-  );
-  const changedTestText = (
-    await Promise.all(
-      files
-        .filter((file) => file.startsWith("tests/") && file.endsWith(".ts"))
-        .map((file) => readFile(file, "utf8")),
-    )
-  ).join("\n");
-  const { canonicalGraph } = await import(
-    pathToFileURL(resolve("src/lib/domain/canonical.ts")).href
-  );
+  const files =
+    dependencies?.files ??
+    git(["diff", "--name-only", `${base}...HEAD`])
+      .split("\n")
+      .filter(Boolean);
+  const canonicalGraph =
+    dependencies?.headGraph ?? (await loadGraph("src/lib/domain/canonical.ts"));
+  const baseGraph = dependencies?.baseGraph ?? (await loadBaseGraph(base));
+  const changes = discoverGraphChanges(baseGraph, canonicalGraph);
+  const changedTestText =
+    dependencies?.changedTestText ?? (await readChangedTests(files));
   const result = runContentSemanticPreflight(
     {
       graph: canonicalGraph,
-      changedEntityIds,
-      changedRelationshipIds,
-      changedGuideIds,
+      baseGraph,
+      ...changes,
       changedFiles: files,
       changedTestText,
     },
     base,
   );
-  console.log(formatContentSemanticPreflight(result));
+  (dependencies?.log ?? console.log)(formatContentSemanticPreflight(result));
   if (result.findings.some(({ severity }) => severity === "violation"))
     process.exitCode = 1;
 }
@@ -499,7 +600,14 @@ export function formatContentSemanticPreflight(result: PreflightResult) {
     `Base: ${result.base}`,
     `Changed files: ${result.files.length}`,
     `Inventory: ${result.entities.length} entities; ${result.relationships.length} relationships; ${result.guides.length} Subject Guides`,
+    `Removed: ${result.removedEntityIds.length} entities; ${result.removedRelationshipIds.length} relationships; ${result.removedGuideIds.length} Subject Guides`,
   ];
+  for (const id of result.removedEntityIds)
+    lines.push(`- Removed entity ${id}`);
+  for (const id of result.removedRelationshipIds)
+    lines.push(`- Removed relationship ${id}`);
+  for (const id of result.removedGuideIds)
+    lines.push(`- Removed Subject Guide ${id}`);
   for (const entity of result.entities) {
     const line = entityInventoryLine(entity);
     if (line) lines.push(line);
