@@ -30,19 +30,27 @@ export interface ContentIntegrityResult {
 }
 
 const forbiddenRuntimePath = /(?:^|\/)(?:archive|legacy|drafts?)(?:\/|$)/iu;
-const moduleSpecifier = /(?:\bfrom\s*|\bimport\s*\(\s*)["']([^"']+)["']/gu;
+const moduleSpecifiers = [
+  /\bfrom\s*["']([^"']+)["']/gu,
+  /\bimport\s*(?:\(\s*)?["']([^"']+)["']/gu,
+  /\brequire(?:\.resolve)?\s*\(\s*["']([^"']+)["']/gu,
+];
 const executableRuntimePath = /\.(?:astro|cjs|cts|js|jsx|mjs|mts|ts|tsx)$/iu;
 const forbiddenBuildText =
   /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
+
+export function compareCodeUnits(left: string, right: string) {
+  return left < right ? -1 : left > right ? 1 : 0;
+}
 
 function compareFindings(left: IntegrityFinding, right: IntegrityFinding) {
   return (
     Number(right.severity === "violation") -
       Number(left.severity === "violation") ||
-    left.category.localeCompare(right.category) ||
-    left.location.localeCompare(right.location) ||
-    left.message.localeCompare(right.message) ||
-    left.remediation.localeCompare(right.remediation)
+    compareCodeUnits(left.category, right.category) ||
+    compareCodeUnits(left.location, right.location) ||
+    compareCodeUnits(left.message, right.message) ||
+    compareCodeUnits(left.remediation, right.remediation)
   );
 }
 
@@ -76,6 +84,23 @@ function shingleOverlap(left: string, right: string, width = 5) {
   );
 }
 
+function runtimeDependencyFindings(file: PublicationFile): IntegrityFinding[] {
+  if (!executableRuntimePath.test(file.path)) return [];
+  return moduleSpecifiers
+    .flatMap((pattern) =>
+      [...file.content.matchAll(pattern)].map((match) => match[1] ?? ""),
+    )
+    .filter((specifier) => forbiddenRuntimePath.test(specifier))
+    .map((specifier) => ({
+      category: "archive-exclusion",
+      severity: "violation",
+      location: file.path,
+      message: `runtime import reaches excluded material: ${specifier}`,
+      remediation:
+        "remove the import; archive and draft material may be used only as a discovery lead",
+    }));
+}
+
 export function publicationBoundaryFindings(
   runtimeFiles: PublicationFile[],
   builtFiles: PublicationFile[] = [],
@@ -93,19 +118,7 @@ export function publicationBoundaryFindings(
           "move discovery-only material outside runtime roots and author reviewed records under content/domain",
       });
     }
-    if (!executableRuntimePath.test(file.path)) continue;
-    for (const match of file.content.matchAll(moduleSpecifier)) {
-      const specifier = match[1] ?? "";
-      if (!forbiddenRuntimePath.test(specifier)) continue;
-      findings.push({
-        category: "archive-exclusion",
-        severity: "violation",
-        location: file.path,
-        message: `runtime import reaches excluded material: ${specifier}`,
-        remediation:
-          "remove the import; archive and draft material may be used only as a discovery lead",
-      });
-    }
+    findings.push(...runtimeDependencyFindings(file));
   }
   for (const file of builtFiles) {
     const match = file.content.match(forbiddenBuildText);
@@ -155,7 +168,7 @@ function sourceSimilarityFindings(graph: CompiledDomainGraph) {
         const statement = statements.get(statementId);
         const sourceIds = [
           ...(citationsByStatement.get(statementId) ?? new Set<string>()),
-        ].sort();
+        ].sort(compareCodeUnits);
         if (!statement || sourceIds.length === 0) return [];
         const score = shingleOverlap(passage.body, statement.text);
         if (score < 0.45) return [];

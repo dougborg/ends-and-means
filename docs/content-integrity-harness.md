@@ -22,7 +22,7 @@ Close phrasing between a Dossier standfirst or section and its source-backed Sta
 It tells a reviewer which cited Sources to compare, but it is not a plagiarism verdict.
 Human review remains responsible for checking the actual source passages, attribution, quotation, fairness, and independent synthesis.
 Signals remain open until that comparison is possible; matching internal trace prose alone is not evidence that source mimicry has been cleared.
-The harness sorts scanned paths and findings so identical inputs produce stable output regardless of filesystem or caller ordering.
+The harness uses locale-independent code-unit sorting for scanned paths and findings so identical inputs produce stable output regardless of filesystem, locale, or caller ordering.
 
 ## Source preflight
 

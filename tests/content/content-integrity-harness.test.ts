@@ -10,6 +10,7 @@ import {
 import {
   type AuthoringDocument,
   type CompiledDomainGraph,
+  compareCodeUnits,
   formatIntegrityResult,
   publicationBoundaryFindings,
   runContentIntegrity,
@@ -165,6 +166,22 @@ describe("safe-publication boundary", () => {
         },
       ]),
     ).toEqual([]);
+  });
+
+  it.each([
+    'import "../archive/data";',
+    'const data = require("../archive/data");',
+    'const resolved = require.resolve("../archive/data");',
+    'import data = require("../archive/data");',
+  ])("rejects executable dependency syntax: %s", (content) => {
+    expect(
+      publicationBoundaryFindings([{ path: "src/example.ts", content }]),
+    ).toContainEqual(
+      expect.objectContaining({
+        category: "archive-exclusion",
+        message: expect.stringContaining("../archive/data"),
+      }),
+    );
   });
 
   it("rejects publishable files stored inside excluded trees", () => {
@@ -334,11 +351,13 @@ describe("deterministic integrity output", () => {
         findings: forward.findings.toReversed(),
       }),
     ).toBe(formatIntegrityResult(forward));
+    expect(["ä", "a", "Z"].toSorted(compareCodeUnits)).toEqual(["Z", "a", "ä"]);
   });
 
   it("sorts filesystem input and fails closed when a scan root is absent", async () => {
     const root = await mkdtemp(join(tmpdir(), "content-integrity-"));
     await mkdir(join(root, "nested"));
+    await writeFile(join(root, "A.md"), "A.");
     await writeFile(join(root, "z.md"), "Z.");
     await writeFile(join(root, "nested", "a.md"), "A.");
 
@@ -346,6 +365,7 @@ describe("deterministic integrity output", () => {
       loadPublicationFiles(root, [".", "missing"], /\.md$/u),
     ).rejects.toThrow();
     await expect(walkRequiredFiles(root)).resolves.toEqual([
+      join(root, "A.md"),
       join(root, "nested", "a.md"),
       join(root, "z.md"),
     ]);
