@@ -4,11 +4,12 @@ import { subjectGuideRelationshipDetails } from "../lib/subject-guide-presentati
 
 interface Props {
   relationship: DomainRelationship;
+  summary: string;
   entityLabel?: (id: string) => string | undefined;
   placementValueLabel?: (value: PlacementValue) => string | undefined;
 }
 
-const { relationship, entityLabel, placementValueLabel } = Astro.props;
+const { relationship, summary, entityLabel, placementValueLabel } = Astro.props;
 const details = subjectGuideRelationshipDetails(relationship, {
   ...(entityLabel ? { entityLabel } : {}),
   ...(placementValueLabel ? { placementValueLabel } : {}),
@@ -17,7 +18,7 @@ const details = subjectGuideRelationshipDetails(relationship, {
 
 {details.length > 0 && (
   <details class="subject-guide__qualification">
-    <summary>How to read this connection</summary>
+    <summary>{summary}</summary>
     <dl>
       {details.map(({ label, value }) => (
         <div><dt>{label}</dt><dd>{value}</dd></div>

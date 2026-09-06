@@ -190,12 +190,12 @@ async function verifyExploreAndCaseRoutes() {
   );
   expect(stripMarkup(explore)).toContain("The problem it tried to address");
   expect(stripMarkup(explore)).toContain("The mechanism that was enacted");
-  expect(stripMarkup(explore)).toContain("How this section is supported");
+  expect(stripMarkup(explore)).toContain("Sources for “The problem it tried to address”");
   expect(explore).toContain("<details");
   expect(
     explore.match(/class="canonical-claim"/g)?.length,
   ).toBeGreaterThanOrEqual(2);
-  expect(stripMarkup(explore)).toContain("Claim reviewed");
+  expect(stripMarkup(explore)).toContain("Evidence checked");
   expect(stripMarkup(explore)).not.toContain("undefined");
   expect(hrefs(explore)).toContain(
     "https://en.wikipedia.org/wiki/Employee_funds",
@@ -227,7 +227,8 @@ async function verifyExploreAndCaseRoutes() {
     "How would Swedish listed-company ownership",
   );
   expect(hrefs(canonicalCase)).toContain("/research/");
-  expect(stripMarkup(canonicalCase)).toContain("The argument in plain terms");
+  expect(stripMarkup(canonicalCase)).toContain("What happened in this case?");
+  expect(stripMarkup(canonicalCase)).toContain("What are the case boundaries and records?");
   expect(canonicalCase).toContain("<details");
 
   await verifyConceptRoutes();
@@ -251,7 +252,8 @@ async function verifySubjectGuideRoutes() {
   expect(text).toContain("What does economic democracy mean?");
   expect(text).toContain("Does it mean one institutional model?");
   expect(text).toContain("making them a bounded test of one mechanism");
-  expect(text).toContain("Check the evidence");
+  expect(text).toContain("Sources for the short answer");
+  expect(text).toContain("Sources for “What question does it ask?”");
   expect(text).toContain("What remains open?");
   expect(text).not.toContain("Depictions");
   expect(text).not.toMatch(/research-needed|in-review|deprecated/i);
@@ -316,7 +318,7 @@ async function verifyConceptRoutes() {
   expect(stripMarkup(concept)).toContain(
     "ownership, voice, representation, and practical decision power",
   );
-  expect(stripMarkup(concept)).toContain("How this summary is supported");
+  expect(stripMarkup(concept)).toContain("Sources for this overview");
   expect(stripMarkup(concept)).toContain("Swedish wage-earner fund program");
   expect(stripMarkup(concept)).toContain(
     "Under what conditions do codetermination or worker voice",
@@ -342,7 +344,7 @@ async function verifyConceptRoutes() {
   );
   const socialDemocracyText = stripMarkup(socialDemocracy);
   expect(socialDemocracyText).toContain("Where did the tradition come from?");
-  expect(socialDemocracyText).toContain("How this summary is supported");
+  expect(socialDemocracyText).toContain("Sources for this overview");
   expect(socialDemocracyText).toContain("Dylan Riley treats that genealogy");
   expect(hrefs(socialDemocracy)).toContain(
     "https://doi.org/10.1002/9781118474396.wbept0951",
@@ -372,6 +374,9 @@ async function verifyReferenceRoutes() {
   expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(
     1,
   );
+  expect(stripMarkup(method)).toContain("How does an argument connect to evidence?");
+  expect(stripMarkup(method)).toContain("Which assumptions shape a judgment?");
+  expect(stripMarkup(method)).toContain("These capitalized terms name distinct parts");
 
   const research = await readFile(routeFile("/research/"), "utf8");
   const researchText = stripMarkup(research);
@@ -404,11 +409,13 @@ async function verifyReferenceRoutes() {
 
   const compare = await readFile(routeFile("/compare/"), "utf8");
   expect(compare).toContain("<table>");
+  expect(stripMarkup(compare)).toContain("Compare promise with practice");
+  expect(stripMarkup(compare)).toContain("Did the design deliver what its advocates sought?");
   expect(stripMarkup(compare)).toContain("Why no score?");
   expect(stripMarkup(compare)).toContain(
     "Collective wage-earner shareholding authority",
   );
-  expect(stripMarkup(compare)).toContain("Dimension, not Criterion.");
+  expect(stripMarkup(compare)).toContain("This scale describes; it does not judge.");
   expect(stripMarkup(compare)).toContain("1984–1991 · Sweden");
   expect(stripMarkup(compare)).toContain("1992 · Sweden");
   expect(stripMarkup(compare)).not.toContain("1992–1992");
@@ -427,6 +434,8 @@ async function verifyReferenceRoutes() {
   expect(reading).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
   expect(hasElementWithClasses(reading, "article", ["editorial-page", "reading-page"])).toBe(true);
   expect(hasElementWithClasses(reading, "header", ["editorial-header"])).toBe(true);
+  expect(stripMarkup(reading)).toContain("Which sources support the explanations?");
+  expect(stripMarkup(reading)).not.toMatch(/published source records|published evidence/i);
   expect(
     hrefs(reading).filter((href) => href.startsWith("/sources/")),
   ).toHaveLength(entitiesOfKind("source").length);
