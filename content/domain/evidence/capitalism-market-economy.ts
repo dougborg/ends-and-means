@@ -3,6 +3,15 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 const reviewed = { publicationStatus: "reviewed" as const };
 
 type SourceType = "article" | "edition" | "web-page";
+type WorkType = "article" | "book" | "other";
+type LinkPurpose = "archive" | "authorized-reading" | "publisher";
+type SourceOptions = {
+  sourcePublicationYear?: number | null;
+  sourceContributors?: string[];
+  sourcePublisher?: string;
+  workType?: WorkType;
+  linkPurpose?: LinkPurpose;
+};
 
 const source = (
   id: string,
@@ -14,6 +23,7 @@ const source = (
   url: string,
   identifiers: { doi?: string; isbn13?: string } = {},
   originalPublicationYear: number | null = publicationYear,
+  options: SourceOptions = {},
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -24,11 +34,12 @@ const source = (
       description: `The non-fiction work underlying the cited source: ${title}.`,
       title,
       workType:
-        sourceType === "article"
+        options.workType ??
+        (sourceType === "article"
           ? "article"
           : sourceType === "edition"
             ? "book"
-            : "other",
+            : "other"),
       ...(originalPublicationYear === null ? {} : { originalPublicationYear }),
       ...reviewed,
     },
@@ -43,12 +54,18 @@ const source = (
       title,
       sourceType,
       workId: `${id}-work`,
-      contributorDisplay: contributors,
-      publicationYear,
-      publisher,
+      contributorDisplay: options.sourceContributors ?? contributors,
+      ...(options.sourcePublicationYear === null
+        ? {}
+        : { publicationYear: options.sourcePublicationYear ?? publicationYear }),
+      publisher: options.sourcePublisher ?? publisher,
       ...(Object.keys(identifiers).length ? { identifiers } : {}),
       resourceLinks: [
-        { purpose: "publisher", url, label: "Open the source record" },
+        {
+          purpose: options.linkPurpose ?? "publisher",
+          url,
+          label: "Open the source record",
+        },
       ],
       ...reviewed,
     },
@@ -62,6 +79,7 @@ const statement = (
   statementKind:
     | "definition"
     | "observation"
+    | "causal-hypothesis"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
   documentType: "entity",
@@ -98,6 +116,7 @@ export const capitalismMarketEvidenceDocuments = [
     "https://plato.stanford.edu/archives/sum2026/entries/markets/",
     {},
     2013,
+    { sourcePublicationYear: 2026 },
   ),
   ...source(
     "hodgson-conceptualizing-capitalism",
@@ -119,6 +138,10 @@ export const capitalismMarketEvidenceDocuments = [
     "https://oll.libertyfund.org/titles/smith-an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-cannan-ed-vol-1",
     {},
     1776,
+    {
+      sourcePublicationYear: null,
+      linkPurpose: "authorized-reading",
+    },
   ),
   ...source(
     "marx-capital-volume-one",
@@ -130,6 +153,16 @@ export const capitalismMarketEvidenceDocuments = [
     "https://www.marxists.org/archive/marx/works/1867-c1/",
     {},
     1867,
+    {
+      sourcePublicationYear: null,
+      sourceContributors: [
+        "Karl Marx",
+        "Samuel Moore",
+        "Edward Aveling",
+        "Friedrich Engels",
+      ],
+      linkPurpose: "archive",
+    },
   ),
   ...source(
     "polanyi-great-transformation",
@@ -171,6 +204,8 @@ export const capitalismMarketEvidenceDocuments = [
     "edition",
     "https://www.cambridge.org/core/books/brenner-debate/A44B7FC72563D885578E901E188924EF",
     { isbn13: "9780521349338" },
+    1985,
+    { sourcePublicationYear: 2009 },
   ),
   ...source(
     "austin-ghana-cocoa",
@@ -191,6 +226,8 @@ export const capitalismMarketEvidenceDocuments = [
     "edition",
     "https://www.cambridge.org/core/books/growing-out-of-the-plan/4500F9826731A4765F9B6C2EFCE7AD53",
     { isbn13: "9780521470551" },
+    1995,
+    { sourcePublicationYear: 2010 },
   ),
 
   {
@@ -425,13 +462,13 @@ export const capitalismMarketEvidenceDocuments = [
     "smith-exchange-division-labor",
     "Smith on market extent and the division of labor",
     "Adam Smith argues that the extent of the market limits the division of labor.",
-    "observation",
+    "causal-hypothesis",
   ),
   statement(
     "england-brenner-class-thesis",
     "Brenner’s agrarian class thesis",
     "Robert Brenner attributes England’s agrarian development to its structure of agrarian class relations.",
-    "observation",
+    "causal-hypothesis",
   ),
   statement(
     "england-brenner-rival-explanations",
@@ -582,10 +619,7 @@ export const capitalismMarketEvidenceDocuments = [
         "Agrarian England from approximately 1450 to 1750; not Britain’s whole economy, a single-origin account, or a universal transition sequence.",
       selectionRationale:
         "The case preserves a prominent explanation of agrarian development together with disagreement about that explanation.",
-      conditionStatementIds: [
-        "capitalism-market-boundary",
-        "england-case-period-boundary",
-      ],
+      conditionStatementIds: [],
       episodeIds: ["english-agrarian-transformation-1450-1750"],
       ...reviewed,
     },
@@ -612,7 +646,7 @@ export const capitalismMarketEvidenceDocuments = [
       },
       scope:
         "Agrarian institutions in England, with regional and chronological variation retained.",
-      conditionStatementIds: ["england-case-period-boundary"],
+      conditionStatementIds: [],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: [],
       interactionStatementIds: [],
@@ -643,7 +677,7 @@ export const capitalismMarketEvidenceDocuments = [
         "Cocoa-growing regions of Asante and the Gold Coast from about 1890 to 1936; not all households, crops, or colonial Africa.",
       selectionRationale:
         "The case records Austin’s finding that expansion reallocated resources from other market activities.",
-      conditionStatementIds: ["ghana-case-period-boundary"],
+      conditionStatementIds: [],
       episodeIds: ["gold-coast-cocoa-takeoff-1890-1936"],
       ...reviewed,
     },
@@ -670,7 +704,7 @@ export const capitalismMarketEvidenceDocuments = [
       },
       scope:
         "The supply-side transformation studied by Austin, not a complete welfare or political history.",
-      conditionStatementIds: ["ghana-case-period-boundary"],
+      conditionStatementIds: [],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: [],
       interactionStatementIds: [
@@ -696,7 +730,7 @@ export const capitalismMarketEvidenceDocuments = [
         "Economic reforms in the People’s Republic of China from 1978 through 1993; not a classification of China before or after those dates.",
       selectionRationale:
         "The case records institutional changes that Naughton describes as growing out of the plan rather than ending it at once.",
-      conditionStatementIds: ["china-case-period-boundary"],
+      conditionStatementIds: [],
       episodeIds: ["china-plan-market-coexistence-1978-1993"],
       ...reviewed,
     },
@@ -715,10 +749,13 @@ export const capitalismMarketEvidenceDocuments = [
       endDate: { year: 1993, certainty: "exact" },
       scope:
         "The reform sequence analyzed by Naughton, ending before later ownership and corporate reforms.",
-      conditionStatementIds: ["china-case-period-boundary"],
+      conditionStatementIds: [],
       formalRuleStatementIds: [],
       ruleInUseStatementIds: [],
-      interactionStatementIds: [],
+      interactionStatementIds: [
+        "china-dual-track-coordination",
+        "china-tve-ownership-boundary",
+      ],
       outcomeStatementIds: ["china-nonstate-sector-growth"],
       ...reviewed,
     },

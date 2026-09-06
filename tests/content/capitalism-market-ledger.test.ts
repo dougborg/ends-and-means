@@ -58,6 +58,17 @@ function ledger(documents: AuthoringDocument[]) {
       selected.has(relationship.subject.id),
   );
   const sourceIds = new Set(citations.map(({ object }) => object.id));
+  const sources = [...sourceIds].sort().map((id) => {
+    const entity = graph.indexes.entitiesById[id];
+    if (entity?.kind !== "source") throw new Error(`Missing source ${id}`);
+    return entity;
+  });
+  const workIds = new Set(
+    sources.map(({ id, workId }) => {
+      if (!workId) throw new Error(`Source ${id} has no Work`);
+      return workId;
+    }),
+  );
   return {
     statements: statementIds.map((id) => {
       const entity = graph.indexes.entitiesById[id];
@@ -77,12 +88,22 @@ function ledger(documents: AuthoringDocument[]) {
         ];
       })
       .sort((a, b) => a.join("|").localeCompare(b.join("|"))),
-    sources: [...sourceIds].sort().map((id) => {
+    works: [...workIds].sort().map((id) => {
       const entity = graph.indexes.entitiesById[id];
-      if (entity?.kind !== "source") throw new Error(`Missing source ${id}`);
+      if (entity?.kind !== "work") throw new Error(`Missing work ${id}`);
       return [
         id,
         entity.title,
+        entity.workType,
+        entity.originalPublicationYear,
+      ];
+    }),
+    sources: sources.map((entity) => {
+      return [
+        entity.id,
+        entity.title,
+        entity.sourceType,
+        entity.workId,
         entity.contributorDisplay,
         entity.publicationYear,
         entity.publisher,
@@ -163,6 +184,52 @@ describe("capitalism and market-economy evidence ledger", () => {
       if (field === "object") citation.object.id = "sep-markets-2026-source";
       if (field === "role") citation.role = "context";
       if (field === "locator") citation.locator = "section 9";
+      expect(ledger(documents)).not.toEqual(ledger(canonicalDocuments));
+    },
+  );
+});
+
+describe("capitalism Work and Source mutation coverage", () => {
+  it.each(["workType", "originalPublicationYear"] as const)(
+    "detects Work %s mutations",
+    (field) => {
+      const documents = structuredClone(canonicalDocuments);
+      const document = documents.find(
+        (candidate) =>
+          candidate.documentType === "entity" &&
+          candidate.entity.id === "sep-capitalism-work",
+      );
+      if (document?.documentType !== "entity" || document.entity.kind !== "work")
+        throw new Error("Missing Work mutation fixture");
+      if (field === "workType") document.entity.workType = "book";
+      if (field === "originalPublicationYear")
+        document.entity.originalPublicationYear = 2025;
+      expect(ledger(documents)).not.toEqual(ledger(canonicalDocuments));
+    },
+  );
+
+  it.each(["sourceType", "workId", "publicationYear", "resourceLinks"] as const)(
+    "detects Source %s mutations",
+    (field) => {
+      const documents = structuredClone(canonicalDocuments);
+      const document = documents.find(
+        (candidate) =>
+          candidate.documentType === "entity" &&
+          candidate.entity.id === "sep-capitalism-source",
+      );
+      if (document?.documentType !== "entity" || document.entity.kind !== "source")
+        throw new Error("Missing Source mutation fixture");
+      if (field === "sourceType") document.entity.sourceType = "edition";
+      if (field === "workId") document.entity.workId = "sep-markets-2026-work";
+      if (field === "publicationYear") document.entity.publicationYear = 2025;
+      if (field === "resourceLinks")
+        document.entity.resourceLinks = [
+          {
+            purpose: "archive",
+            url: "https://example.com/drift",
+            label: "Drift",
+          },
+        ];
       expect(ledger(documents)).not.toEqual(ledger(canonicalDocuments));
     },
   );
