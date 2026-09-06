@@ -57,7 +57,6 @@ const statement = (
   statementKind:
     | "observation"
     | "definition"
-    | "causal-claim"
     | "editorial-interpretation" = "observation",
 ): AuthoringDocument => ({
   documentType: "entity",

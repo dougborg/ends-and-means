@@ -15,6 +15,9 @@ The Kahnawà:ke Community Decision Making and Review Process exposes the represe
 Community self-description, Canadian legal categories, Haudenosaunee principles, an elected council, a legislative commission, public hearings, and rival claims about authority coexist in one bounded case.
 No single broad label represents that combination honestly.
 
+The Tawantinsuyu guide applies the same rule to a historical empire.
+It keeps Quechua names, colonial spellings, state institutions, local authorities, reciprocal claims, compulsory labor, conquest, and regional variation visible instead of translating the whole arrangement into a modern ideological category.
+
 ## Decision
 
 Model the named people, place, institution, and period that the evidence supports before assigning a broad political category.
@@ -48,6 +51,7 @@ External scholarship and state records remain necessary when they support differ
 
 The canonical graph gains a bounded Kahnawà:ke Case and atomic evidence without gaining a universal tribe, band, clan, chiefdom, council, confederacy, customary-law, nomadic, or pastoral system entity.
 Tests protect those absences as intentional model boundaries rather than missing content.
+The bounded Tawantinsuyu Case likewise supports comparison among particular institutions without treating the empire as an embodiment of socialism, communism, statelessness, or a timeless Andean collectivism.
 Future research can add society-specific entities and relationships without inheriting a rank, stage, or presumed package of institutions.
 
 This decision favors sparse, explainable records over premature comparability.
