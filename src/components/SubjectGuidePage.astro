@@ -87,6 +87,7 @@ const journeySections = visibleSubjectGuideSections(guide).filter(
   ({ role }) => role !== "short-answer",
 );
 const primary = entityById(guide.primarySubject.id);
+const primaryHref = hrefForEntity(guide.primarySubject);
 const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
 ---
 
@@ -124,8 +125,8 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
         <li><a href="#short-answer">{shortAnswer?.heading ?? `About ${guide.label}`}</a></li>
         {journeySections.map((section) => <li><a href={`#${section.id}`}>{section.heading}</a></li>)}
       </ol>
-      {primary && (
-        <a class="subject-guide__reference-link" href={hrefForEntity(guide.primarySubject)}>
+      {primary && primaryHref && (
+        <a class="subject-guide__reference-link" href={primaryHref}>
           Open the {primary.label} reference page
         </a>
       )}
