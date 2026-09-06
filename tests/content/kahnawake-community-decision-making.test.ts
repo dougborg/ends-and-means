@@ -141,6 +141,19 @@ describe("Kahnawà:ke Type II procedure", () => {
   });
 });
 
+describe("Kahnawà:ke research freshness", () => {
+  it("bounds the current-rule question to the exact review date", () => {
+    expect(entityById("kahnawake-cdmrp-current-hearing-rules")).toMatchObject({
+      kind: "research-obligation",
+      question: expect.stringContaining("as of September 5, 2026"),
+      scope: expect.stringContaining("through September 5, 2026"),
+    });
+    expect(
+      entityById("kahnawake-cdmrp-current-hearing-rules"),
+    ).not.toMatchObject({ question: expect.stringContaining("through September 2026") });
+  });
+});
+
 describe("Kahnawà:ke evidence and narrative", () => {
   it("attributes the January 2024 rule without converting procedure into community assent", () => {
     const ruleChange = entityById("kahnawake-cdmrp-2024-hearing-rule-change");
