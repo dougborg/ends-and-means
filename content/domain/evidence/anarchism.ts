@@ -250,8 +250,8 @@ export const anarchismEvidenceDocuments = [
   ),
   claim(
     "anarchosyndicalist-self-identification",
-    "Anarcho-syndicalism was a historically named tradition",
-    "Rocker described anarcho-syndicalism as a libertarian-socialist current with its own aims and methods.",
+    "Rocker situated anarcho-syndicalism within libertarian socialism",
+    "Rocker situates modern anarcho-syndicalism within libertarian or anarchist socialism.",
   ),
   claim(
     "anarchist-case-nonembodiment",
