@@ -6,7 +6,8 @@ import { hrefForEntity } from "../lib/public-routes";
 import CanonicalStatement from "./CanonicalStatement.astro";
 
 interface Props { sections: NarrativeSection[]; label?: string; heading?: string; }
-const { sections, label = "Overview", heading = "What should you know?" } = Astro.props;
+const { sections, label = "Overview", heading: suppliedHeading } = Astro.props;
+const heading = suppliedHeading ?? (label === "Overview" ? "What should you know?" : label);
 
 ---
 

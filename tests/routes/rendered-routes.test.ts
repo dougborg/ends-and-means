@@ -189,6 +189,7 @@ async function verifyExploreAndCaseRoutes() {
     "utf8",
   );
   expect(stripMarkup(explore)).toContain("The problem it tried to address");
+  expect(stripMarkup(explore)).toContain("What should you know?");
   expect(stripMarkup(explore)).toContain("The mechanism that was enacted");
   expect(stripMarkup(explore)).toContain("Sources for “The problem it tried to address”");
   expect(explore).toContain("<details");
@@ -205,6 +206,8 @@ async function verifyExploreAndCaseRoutes() {
   );
   expect(hrefs(explore)).toContain("/cases/swedish-wage-earner-funds/");
   expect(hrefs(explore)).toContain("/compare/");
+  expect(stripMarkup(explore)).toContain("Compare promise with practice");
+  expect(stripMarkup(explore)).not.toContain("Compare promise and practice");
 
   const canonicalCase = await readFile(
     routeFile("/cases/swedish-wage-earner-funds/"),
@@ -223,6 +226,8 @@ async function verifyExploreAndCaseRoutes() {
     "/explore/swedish-wage-earner-fund-program/",
   );
   expect(hrefs(canonicalCase)).toContain("/compare/");
+  expect(stripMarkup(canonicalCase)).toContain("Compare promise with practice");
+  expect(stripMarkup(canonicalCase)).not.toContain("Compare promise and practice");
   expect(stripMarkup(canonicalCase)).toContain(
     "How would Swedish listed-company ownership",
   );
@@ -310,6 +315,8 @@ async function verifyConceptRoutes() {
   expect(stripMarkup(concept)).toContain(
     "How published approaches use this idea",
   );
+  expect(stripMarkup(concept)).toContain("Definition");
+  expect(stripMarkup(concept)).not.toContain("What should you know?");
   expect(stripMarkup(concept)).toContain("Does it prescribe one model?");
   expect(stripMarkup(concept)).toContain(
     "balances worker, shareholder, and community representation",
@@ -425,7 +432,7 @@ async function verifyReferenceRoutes() {
     routeFile("/challenges/distribution-of-gains-and-ownership/"),
     "utf8",
   );
-  expect(stripMarkup(challenge)).toContain("How published approaches respond");
+  expect(stripMarkup(challenge)).toMatch(/^(?![\s\S]*What should you know\?)[\s\S]*Why this question matters[\s\S]*How published approaches respond/u);
   expect(stripMarkup(challenge)).toContain("Swedish wage-earner fund program");
   expect(stripMarkup(challenge)).toContain("APPROACH / Qualified");
   expect(stripMarkup(challenge)).not.toContain("research-needed");
