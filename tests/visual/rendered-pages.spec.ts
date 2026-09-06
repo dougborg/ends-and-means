@@ -326,8 +326,8 @@ test("representative pages have learner-first outlines and unique disclosure nam
     },
     {
       route: "/framework/",
-      h1: "Method",
-      h2: "How does an argument connect to evidence?",
+      h1: "How we research and classify.",
+      h2: "How can I check an explanation?",
       hasDisclosures: false,
     },
     {

@@ -13,6 +13,9 @@ were attempted, what happened in bounded cases, and where interpretations or
 evidence remain disputed.
 The canonical graph and evidence traces make those explanations trustworthy;
 learning and comparison are the primary usable features.
+The public [research and classification method](https://endsandmeans.info/framework/)
+explains how those commitments appear on the site without requiring readers to
+learn the technical model.
 
 ## Organizing principles
 

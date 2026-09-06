@@ -2,12 +2,80 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ComparisonGrid from "../../components/ComparisonGrid.astro";
 import { entitiesOfKind } from "../../lib/domain/canonical";
+
 const criteria = entitiesOfKind("criterion");
+const repository = "https://github.com/dougborg/ends-and-means";
 ---
-<BaseLayout title="Method" description="How Ends and Means separates questions, proposed institutions, evidence, and judgment." fullBleed>
-  <article class="editorial-page method-page"><header class="editorial-header"><p class="coordinate">METHOD</p><h1>Method</h1><p class="dek measure-standfirst">Ends and Means separates what people sought, what institutions were supposed to do, what happened in bounded cases, and how evidence is judged. The method does not score a winner or flatten a country into one system.</p></header>
-    <section class="method-sequence" aria-labelledby="sequence-title"><h2 id="sequence-title">How does an argument connect to evidence?</h2><ol><li><strong>Challenge</strong><span>The recurring question being asked</span></li><li><strong>End</strong><span>What a named actor sought</span></li><li><strong>Means</strong><span>The proposed roles, rules, authority, and incentives</span></li><li><strong>Case</strong><span>What operated where, when, and for whom</span></li><li><strong>Outcome</strong><span>A sourced result with stated limits</span></li><li><strong>Criterion</strong><span>The stated assumptions used to judge it</span></li></ol><p>These capitalized terms name distinct parts of the project’s evidence model; keeping them separate prevents a proposal from being mistaken for an observed result.</p></section>
-    <section class="criteria-section" aria-labelledby="criteria-title"><header><p class="coordinate">JUDGMENT</p><h2 id="criteria-title">Which assumptions shape a judgment?</h2></header><ComparisonGrid itemCount={criteria.length} className="criteria-grid">{criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p><dl><div><dt>Assumption</dt><dd>{criterion.normativeAssumptions.join(" ")}</dd></div><div><dt>Evidence needed</dt><dd>{criterion.evidenceRequirements.join(" ")}</dd></div><div><dt>Limit</dt><dd>{criterion.limitations.join(" ")}</dd></div></dl></article>)}</ComparisonGrid></section>
-    <section class="model-boundary"><p class="coordinate">LIMITS</p><h2>What happens when evidence is missing?</h2><p>Each claim keeps its sources, exact location, scope, uncertainty, and relationship status. Missing coverage stays blank instead of becoming a conclusion. Specific limitations remain visible in the <a href="/research/">open research questions</a>, where objections, conflicting observations, and causal alternatives remain distinct.</p></section>
+
+<BaseLayout title="Method" description="How Ends and Means researches, classifies, and explains contested political and economic subjects." fullBleed>
+  <article class="editorial-page method-page">
+    <header class="editorial-header">
+      <p class="coordinate">METHOD</p>
+      <h1>How we research and classify.</h1>
+      <p class="dek measure-standfirst">Ends and Means starts with a familiar question, gives a plain answer, and keeps the evidence and uncertainty close enough to inspect. It separates what people wanted, what institutions promised, what happened in a particular setting, why it may have happened, and how anyone judges the result.</p>
+    </header>
+
+    <section class="model-boundary" aria-labelledby="subjects-title">
+      <p class="coordinate">WHAT THE SITE DOES</p>
+      <h2 id="subjects-title">One subject can involve several different things.</h2>
+      <p>A name such as democracy, socialism, or monarchy may refer to an ideology or idea, a family of traditions, a proposed institution, a movement’s own description, or a label applied by someone else. A subject guide brings those meanings together without declaring them identical. It also keeps fictional depictions separate from evidence about the world.</p>
+      <p>The site records disagreement instead of choosing a classification by word matching or party name. When serious sources classify the same subject differently, each view should name who made it, what they meant, and what evidence and period they considered. No score or automated rule settles a contested identity.</p>
+    </section>
+
+    <section class="method-sequence" aria-labelledby="sequence-title">
+      <h2 id="sequence-title">How can I check an explanation?</h2>
+      <ol>
+        <li><strong>Ask</strong><span>Begin with the subject or question you recognize.</span></li>
+        <li><strong>Read</strong><span>Get the explanation before the technical apparatus.</span></li>
+        <li><strong>Open a claim</strong><span>Reveal the evidence beside a factual sentence.</span></li>
+        <li><strong>Check the source</strong><span>See the author, title, edition, and publication details.</span></li>
+        <li><strong>Go to the passage</strong><span>Use the page, article, chapter, or section named in the citation.</span></li>
+        <li><strong>Keep the limits</strong><span>Read qualifications and open questions with the claim.</span></li>
+      </ol>
+      <p>The main explanation stays readable while details remain available on demand. A citation is not enough by itself: the named passage must support the particular claim, and a source used for background must not be presented as direct proof.</p>
+    </section>
+
+    <section class="research-notes" aria-labelledby="judgments-title">
+      <h2 id="judgments-title">What kinds of judgment stay separate?</h2>
+      <section>
+        <h3>Evidence about what happened</h3>
+        <p>Descriptions of rules, actions, participation, outputs, and outcomes need sources. The site distinguishes a stated aim or formal design from reports of how people acted under those rules. Missing or conflicting evidence remains visible.</p>
+      </section>
+      <section>
+        <h3>Explanations of why it happened</h3>
+        <p>A sequence is not automatically a cause. Causal accounts remain attributed and should face serious alternatives. A counterfactual makes the comparison explicit by asking what would likely have happened if a named condition or institution had differed.</p>
+      </section>
+      <section>
+        <h3>Judgments about whether it was good</h3>
+        <p>An assessment depends on values and priorities as well as evidence. The site states the standard being used, the assumptions behind it, and the evidence it would require. It does not turn several standards into a hidden overall score.</p>
+      </section>
+    </section>
+
+    <section class="model-boundary" aria-labelledby="cases-title">
+      <p class="coordinate">BOUNDED CASES</p>
+      <h2 id="cases-title">A case shows a setting, not a perfect example.</h2>
+      <p>Each case names the place, period, people, and institutions the evidence actually covers. Where possible, it separates written rules from rules in use, interactions, and outcomes. A country is not treated as one timeless system, and an institution found in a case does not make the whole case an embodiment of an ideology.</p>
+      <p>Case selection and sources create limits. Records may preserve official voices better than ordinary experience, cover one region unevenly, or describe a translated term through colonial categories. Those gaps narrow what the case can establish and what can be transferred elsewhere.</p>
+    </section>
+
+    <section class="model-boundary" aria-labelledby="uncertainty-title">
+      <p class="coordinate">UNCERTAINTY AND CORRECTION</p>
+      <h2 id="uncertainty-title">Human judgment remains accountable.</h2>
+      <p>Researchers and reviewers decide which questions matter, how a claim is worded, which sources are relevant, and whether a classification is fair. Checks can catch missing links, unsupported publication states, and malformed citations; they cannot make those choices neutral.</p>
+      <p>Uncertainty should change the wording and scope of a conclusion. Fairness does not give every account equal weight when their relevance or evidentiary quality differs. Consequential objections, conflicting evidence, causal alternatives, and unanswered questions remain visible as <a href="/research/">open research questions</a>. Better evidence can revise a claim, a classification, or the method itself.</p>
+    </section>
+
+    <section class="criteria-section" aria-labelledby="criteria-title">
+      <header><p class="coordinate">JUDGMENT</p><h2 id="criteria-title">Which assumptions shape an assessment?</h2></header>
+      <ComparisonGrid itemCount={criteria.length} className="criteria-grid">
+        {criteria.map((criterion) => <article><h3>{criterion.label}</h3><p>{criterion.definition}</p><dl><div><dt>Assumption</dt><dd>{criterion.normativeAssumptions.join(" ")}</dd></div><div><dt>Evidence needed</dt><dd>{criterion.evidenceRequirements.join(" ")}</dd></div><div><dt>Limit</dt><dd>{criterion.limitations.join(" ")}</dd></div></dl></article>)}
+      </ComparisonGrid>
+    </section>
+
+    <section class="model-boundary" aria-labelledby="details-title">
+      <p class="coordinate">FURTHER DETAILS</p>
+      <h2 id="details-title">Read the commitments and technical definitions.</h2>
+      <p>The <a href={`${repository}/blob/main/docs/project-vision.md`}>project vision</a> describes the site’s purpose. The <a href={`${repository}/blob/main/docs/editorial-philosophy.md`}>editorial principles</a> explain fairness, governance, judgment, and correction. The <a href={`${repository}/blob/main/CONTRIBUTING.md`}>contribution guide</a> explains how to <a href={`${repository}/issues/new`}>suggest a correction</a> or offer evidence. Researchers can also inspect the <a href={`${repository}/blob/main/docs/domain-model.md`}>technical definitions</a> used to keep records distinct.</p>
+    </section>
   </article>
 </BaseLayout>
