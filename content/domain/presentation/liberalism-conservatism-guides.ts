@@ -165,6 +165,7 @@ const conservatismDossier = attachNarrative("conservatism.md", {
         "right-to-buy-ministerial-intervention",
         "right-to-buy-buyer-distribution",
         "right-to-buy-residual-sector",
+        "right-to-buy-rules-changed",
         "right-to-buy-conservatism-boundary",
         "swatantra-economic-conservatism",
         "swatantra-ordered-progress",

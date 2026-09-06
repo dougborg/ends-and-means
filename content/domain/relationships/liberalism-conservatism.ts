@@ -142,7 +142,7 @@ const citations = [
   [
     "ahlen-programme-economic-order",
     "cdu-ahlen-programme-source",
-    "preamble, paragraphs 1–2",
+    "preamble, paragraphs 1–2; Ends and Means English summary translated from the cited German",
     "supports",
   ],
   [
@@ -154,7 +154,7 @@ const citations = [
   [
     "duesseldorf-social-market-shift",
     "cdu-duesseldorf-guidelines-source",
-    "pp. 1–4, ‘Soziale Marktwirtschaft’ and principles 1–8",
+    "pp. 1–4, ‘Soziale Marktwirtschaft’ and principles 1–8; Ends and Means English summary translated from the cited German",
     "supports",
   ],
   [
@@ -221,6 +221,12 @@ const citations = [
     "right-to-buy-residual-sector",
     "commons-right-to-buy-source",
     "printed pp. 14–15",
+    "supports",
+  ],
+  [
+    "right-to-buy-rules-changed",
+    "commons-right-to-buy-source",
+    "printed pp. 8–9, ‘Further legislation on the Right to Buy’",
     "supports",
   ],
   [
