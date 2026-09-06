@@ -66,6 +66,11 @@ references.
 
 A SubjectGuide may compose several Dossiers and canonical record kinds
 into one learner journey.
+
+“Learner journey” is internal design language.
+Published Subject Guide and live Dossier identity fields describe the subject,
+its material mechanisms, and an evidence-backed boundary directly; they do not
+advertise a learner path or narrate the site’s presentation framework.
 It is a validated presentation composition, not a canonical graph superclass or
 a new owner of factual claims and relationships.
 Author guides as `subject-guide` documents under `presentation/`.

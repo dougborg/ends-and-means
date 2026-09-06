@@ -13,6 +13,11 @@ movements, labels, and bounded Cases instead of requiring the reader to know
 those distinctions in advance.
 Evidence and formal model detail support that journey through progressive
 disclosure rather than competing with the answer for attention.
+This product framing remains internal.
+Public labels, descriptions, headings, and summaries should never call
+themselves a “learner path,” “learner journey,” or “learner-first” experience.
+Describe the subject instead of describing the page: name its important
+meanings or mechanisms and a supported boundary that prevents overclaiming.
 
 ## Answer first
 
@@ -20,6 +25,8 @@ A standfirst should identify the subject, mechanism, material place or period,
 and central limitation in one or two sentences.
 Do not begin with throat-clearing such as “This page explores” or “It is
 important to note.”
+Metadata descriptions follow the same rule; phrases such as “a guide,” “an
+orientation,” and “an account” consume space without explaining the topic.
 
 Give each section one job and frame that job as a reader question.
 The first sentence answers it; the next one to three sentences explain the

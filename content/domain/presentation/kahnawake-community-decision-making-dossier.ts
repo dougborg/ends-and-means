@@ -6,7 +6,7 @@ const dossier = attachNarrative("kahnawake-community-lawmaking.md", {
   kind: "dossier" as const,
   label: "Kahnawà:ke community law-making dossier",
   description:
-    "A reader-first account of Kahnawà:ke’s community law-making process, its institutional combination, and its participation and terminology limits.",
+    "Kahnawà:ke’s Community Decision Making and Review Process adapts Haudenosaunee principles within elected-council and legislative institutions. Its specific colonial, legal, and community conditions limit broader claims about Indigenous government.",
   subject: { kind: "case" as const, id: "kahnawake-community-lawmaking" },
   standfirst: "",
   standfirstStatementIds: [

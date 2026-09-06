@@ -13,6 +13,11 @@ Begin with the reader's familiar subject or question.
 The primary product is a clear learning and comparison journey; the graph and
 evidence trace are its trust infrastructure.
 Do not require readers to choose an entity kind before learning.
+Treat “learner-first,” “learner path,” “learner journey,” and similar audience
+framing as internal product language, not published copy.
+Public guide and Dossier identity text must describe the subject directly:
+state what it can mean, identify important institutions or mechanisms, and name
+a central boundary that the cited Statements support.
 
 ## Branch and review boundary
 
@@ -120,6 +125,9 @@ against consulted sources for suspiciously close phrasing, and remove repeated
 explanations and generic filler. Treat automated prose findings as attention
 signals; accuracy, fairness, source similarity, and publication require human
 review.
+Apply the same standard to short metadata.
+Do not substitute framework labels such as “a guide,” “an orientation,” or “an
+account” for a substantive description of the subject.
 The `pnpm audit:content-integrity` stage inside `pnpm verify` surfaces close
 phrasing with source-backed Statements and the cited Sources that require comparison. Treat that output
 only as a review location: inspect the actual source passages before judging

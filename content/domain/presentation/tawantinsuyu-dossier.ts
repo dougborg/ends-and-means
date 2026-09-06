@@ -6,7 +6,7 @@ const dossier = attachNarrative("tawantinsuyu.md", {
   kind: "dossier" as const,
   label: "Tawantinsuyu imperial organization dossier",
   description:
-    "A bounded account of authority, labor, resources, regional variation, and evidence during Tawantinsuyu’s expansion.",
+    "Tawantinsuyu joined communal institutions and reciprocal idioms to ranked authority, conquest, compulsory labor, royal estates, and varied local arrangements. Its fifteenth-century expansion and the Spanish seizure of Cusco in 1533 bound this case, while chronology and colonial mediation remain disputed.",
   subject: { kind: "case" as const, id: "tawantinsuyu-imperial-organization" },
   standfirst: "",
   standfirstStatementIds: [

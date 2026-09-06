@@ -6,7 +6,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
   kind: "dossier" as const,
   label: "Collective capital formation dossier",
   description:
-    "A concise guide to collective accumulation, its national-accounts and individual-saving boundaries, institutional choices, and bounded Swedish example.",
+    "Collective capital formation places recurring contributions or asset transfers into an enduring institution that holds capital for a defined constituency. Asset accumulation alone does not establish who governs the institution or receives its benefits.",
   subject: { kind: "concept" as const, id: "collective-capital-formation" },
   standfirst: "",
   standfirstStatementIds: [

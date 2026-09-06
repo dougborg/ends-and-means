@@ -970,6 +970,14 @@ function validateDossier(
 ) {
   reportInvalid(
     errors,
+    ["reviewed", "published"].includes(entity.publicationStatus) &&
+      [entity.label, entity.description, entity.standfirst].some(
+        (value) => workflowReferencesIn(value).length > 0,
+      ),
+    `${entity.id}: live Dossier identity contains an internal workflow reference`,
+  );
+  reportInvalid(
+    errors,
     !dossierSubjectKinds.has(entity.subject.kind),
     `${entity.id}: invalid dossier subject kind ${entity.subject.kind}`,
   );

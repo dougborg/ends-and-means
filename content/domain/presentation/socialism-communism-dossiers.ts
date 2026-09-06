@@ -6,7 +6,7 @@ const socialism = attachNarrative("socialism.md", {
   kind: "dossier" as const,
   label: "Socialism dossier",
   description:
-    "An evidence-backed orientation to socialism's minimum boundary, recurring values, institutional disagreements, and relationship to communism.",
+    "Socialism names a contested family of ideals, institutional proposals, and strategies commonly concerned with social and democratic control of production. Its traditions disagree about ownership, planning, markets, organization, and their relationship to communism.",
   subject: { kind: "concept" as const, id: "socialism" },
   standfirst: "",
   standfirstStatementIds: [
@@ -94,7 +94,7 @@ const communism = attachNarrative("communism.md", {
   kind: "dossier" as const,
   label: "Communism dossier",
   description:
-    "An evidence-backed orientation separating communist ideals, property claims, transition proposals, movements, labels, and bounded practice.",
+    "Communism can name a classless social ideal, a revolutionary tradition or movement, a party identity, or institutions claimed by a government. Those meanings, their property claims, and their competing proposals for transition require separate evaluation.",
   subject: { kind: "concept" as const, id: "communism" },
   standfirst: "",
   standfirstStatementIds: [
