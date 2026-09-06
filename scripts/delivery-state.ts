@@ -45,12 +45,6 @@ export function githubComparePath(base: string, head: string) {
 }
 
 const dateTime = z.string().datetime({ offset: true });
-export const agentPathPattern = /^\/root\/[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
-
-export function parseAgentPath(value: string | undefined) {
-  return value && agentPathPattern.test(value) ? value : undefined;
-}
-
 export const copilotReviewStatuses = [
   "reviewed",
   "unavailable",
@@ -63,16 +57,6 @@ const reviewEvidenceSchema = z
     adversarial: z.boolean(),
   })
   .strict();
-const ownershipSchema = z
-  .object({
-    owner: z.string().refine((value) => parseAgentPath(value) !== undefined, {
-      message: "Expected a canonical /root/<agent-path> identity",
-    }),
-    branch: z.string().min(1),
-    worktree: z.string().min(1),
-  })
-  .strict();
-
 export const deliveryItemSchema = z
   .object({
     number: z.number().int().positive(),
@@ -90,7 +74,8 @@ export const deliveryItemSchema = z
       .optional(),
     linkedPullRequestDraft: z.boolean().optional(),
     linkedPullRequestAmbiguous: z.boolean().optional(),
-    ownership: ownershipSchema.optional(),
+    ownershipEvidence: z.literal(true).optional(),
+    assignmentBranchMatches: z.boolean().optional(),
     baseCurrent: z.boolean().optional(),
     historyLinear: z.boolean().optional(),
     reviewEvidence: reviewEvidenceSchema.optional(),
@@ -326,11 +311,18 @@ function prStatusFindings(item: DeliveryItem): DeliveryFinding[] {
 
 function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
   const findings: DeliveryFinding[] = [];
-  if (item.status === "In progress" && !item.ownership) {
+  if (item.status === "In progress" && !item.ownershipEvidence) {
     findings.push({
       code: "WIP_OWNERSHIP",
       item: item.number,
       message: `#${item.number} lacks owner, branch, and worktree evidence.`,
+    });
+  }
+  if (item.status === "In progress" && item.assignmentBranchMatches === false) {
+    findings.push({
+      code: "WIP_ASSIGNMENT_BRANCH",
+      item: item.number,
+      message: `#${item.number}'s private assignment branch does not match its linked pull request head.`,
     });
   }
   if (item.status === "In progress" && item.baseCurrent === undefined) {

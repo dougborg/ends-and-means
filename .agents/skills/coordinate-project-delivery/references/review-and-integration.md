@@ -6,6 +6,9 @@
 - Use a draft only when an experimental approach needs early feedback or substantial known work remains; keep the linked issue `In progress` and state the early decision sought.
 - Move the issue to `In review` only after the pull request is marked ready.
 - Rebase onto the pull request's current declared base; that base is `main` for an unstacked pull request or the bottom stack layer, and the directly lower branch for an upper layer.
+- Keep the private assignment branch equal to the linked pull request head. The
+  live audit compares the head with that pull request's declared base; it uses
+  `main` only when an In-progress assignment has no open linked pull request.
 - Never merge the declared base into the branch.
 - Confirm the diff stays inside the issue and ownership boundary.
 - Synchronize tests, documentation, and applicable repository skills.

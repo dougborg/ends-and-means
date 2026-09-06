@@ -6,9 +6,15 @@
 - Milestones describe learner-visible outcomes.
 - The delivery Project owns only execution status, coarse workstream, and near-term priority.
 - Git, pull requests, checks, and review conversations prove implementation and integration state.
+- An explicitly supplied, expiring private delivery-state JSON file owns active
+  owner, branch, and worktree assignments. Its schema and remediation are
+  documented in `docs/delivery-harness.md`.
 
 Do not copy the full backlog into the Project.
 Do not encode mutable issue or pull-request status in durable public documentation.
+Do not publish internal owner identities or filesystem worktree paths in
+issues, pull requests, comments, fixtures, or logs. Missing, unreadable,
+expired, duplicate, or malformed private evidence never passes implicitly.
 
 ## State transitions
 
@@ -16,7 +22,7 @@ Do not encode mutable issue or pull-request status in durable public documentati
 |---|---|
 | Backlog | Valid issue, but not in the small execution queue. |
 | Ready | Open, dependency-free issue with `status:ready`, a workstream, Priority, and executable acceptance criteria. |
-| In progress | Named owner, current branch, isolated worktree, and an open workstream slot; remove `status:ready`. |
+| In progress | Named owner, current branch, and isolated worktree in fresh private state, plus an open workstream slot; remove `status:ready`. |
 | In review | Coherent open pull request; implementation WIP slot is released. |
 | Blocked | Open issue with `status:blocked` and a concrete named unblock condition. |
 | Done | Merged or closed authoritative work, with post-merge state reconciled. |
@@ -35,6 +41,6 @@ They classify issues; they do not create model inheritance.
 
 ## Audit interpretation
 
-`pnpm audit:delivery -- --live-project` exits 0 only for a clean readable Project, 1 for policy drift, and 2 when credentials, the API, or input are unavailable.
+`pnpm audit:delivery -- --live-project --private-state /secure/path/delivery-state.json` exits 0 only for a clean readable Project and fresh private state, 1 for policy drift, and 2 when credentials, the API, private state, or input are unavailable or invalid.
 The audit is read-only.
 Fix state only when authorized, then rerun it.

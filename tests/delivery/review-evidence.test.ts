@@ -113,7 +113,7 @@ describe("rejected review evidence", () => {
     `Independent adversarial review: APPROVED\nHead: ${stale}`,
     "Independent adversarial review: APPROVED\nHead: short",
     `Independent adversarial review: APPROVED\nHead: ${head}\nExtra`,
-    `Independent adversarial review: APPROVED\nReviewer: /root/reviewer\nHead: ${head}`,
+    `Independent adversarial review: APPROVED\nReviewer: internal-identity\nHead: ${head}`,
   ])("rejects malformed or stale adversarial marker %s", (body) => {
     expect(reviewEvidenceForHead(head, [], [trusted(body)]).adversarial).toBe(
       false,

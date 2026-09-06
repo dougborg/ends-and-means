@@ -28,11 +28,7 @@
       "labels": ["track:product-ia"],
       "updatedAt": "2026-09-05T10:00:00.000Z",
       "linkedPullRequestStates": [],
-      "ownership": {
-        "owner": "/root/reader_agent",
-        "branch": "feat/reader",
-        "worktree": "/tmp/reader"
-      },
+      "ownershipEvidence": true,
       "baseCurrent": true,
       "historyLinear": true
     },
@@ -47,11 +43,7 @@
       "labels": ["content"],
       "updatedAt": "2026-09-04T10:00:00.000Z",
       "linkedPullRequestStates": [],
-      "ownership": {
-        "owner": "/root/corpus_agent",
-        "branch": "research/corpus",
-        "worktree": "/tmp/corpus"
-      },
+      "ownershipEvidence": true,
       "baseCurrent": true,
       "historyLinear": true
     },
@@ -66,11 +58,7 @@
       "labels": ["track:platform-process", "process"],
       "updatedAt": "2026-09-03T10:00:00.000Z",
       "linkedPullRequestStates": [],
-      "ownership": {
-        "owner": "/root/delivery_agent",
-        "branch": "chore/delivery",
-        "worktree": "/tmp/delivery"
-      },
+      "ownershipEvidence": true,
       "baseCurrent": true,
       "historyLinear": true
     },

@@ -205,7 +205,8 @@ describe("Copilot delivery evidence states", () => {
 describe("delivery evidence completeness", () => {
   it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
     const snapshot = await fixture();
-    item(snapshot, 1).ownership = undefined;
+    item(snapshot, 1).ownershipEvidence = undefined;
+    item(snapshot, 2).assignmentBranchMatches = false;
     item(snapshot, 1).baseCurrent = undefined;
     item(snapshot, 7).baseCurrent = false;
     item(snapshot, 2).historyLinear = false;
@@ -219,6 +220,7 @@ describe("delivery evidence completeness", () => {
     );
     for (const code of [
       "WIP_OWNERSHIP",
+      "WIP_ASSIGNMENT_BRANCH",
       "STARTING_BASE",
       "CURRENT_BASE",
       "LINEAR_HISTORY",
@@ -249,11 +251,7 @@ describe("delivery evidence completeness", () => {
         workstream: "Reader experience",
         labels: [],
         updatedAt: snapshot.capturedAt,
-        ownership: {
-          owner: "/root/contract_agent",
-          branch: "feat/contract",
-          worktree: "/tmp/contract",
-        },
+        ownershipEvidence: true,
         baseCurrent: true,
         historyLinear: true,
       },
@@ -334,26 +332,14 @@ describe("delivery evidence schema", () => {
     expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
   });
 
-  it("rejects implementation owners outside the documented agent namespace", async () => {
+  it("rejects private ownership details in normalized snapshots", async () => {
     const snapshot = await fixture();
-    const ownership = item(snapshot, 1).ownership;
-    if (!ownership) throw new Error("Missing ownership fixture");
-    ownership.owner = "reader-agent";
-    expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
-  });
-
-  it.each([
-    "/root//",
-    "/root/agent/",
-    "/root/agent//reviewer",
-    "/root/agent-name",
-    "/root/-",
-    "/root/Agent",
-  ])("rejects noncanonical owner %s", async (owner) => {
-    const snapshot = await fixture();
-    const ownership = item(snapshot, 1).ownership;
-    if (!ownership) throw new Error("Missing ownership fixture");
-    ownership.owner = owner;
+    const active = item(snapshot, 1) as unknown as Record<string, unknown>;
+    active.ownership = {
+      owner: "private",
+      branch: "private",
+      worktree: "private",
+    };
     expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
   });
 

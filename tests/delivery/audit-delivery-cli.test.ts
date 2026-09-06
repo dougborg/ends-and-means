@@ -11,6 +11,9 @@ const script = fileURLToPath(
 const malformed = fileURLToPath(
   new URL("../fixtures/delivery/project-malformed.json", import.meta.url),
 );
+const privateState = fileURLToPath(
+  new URL("../fixtures/delivery/private-state.example.json", import.meta.url),
+);
 
 function run(args: string[], path = process.env.PATH) {
   return spawnSync(process.execPath, ["--import", "tsx", script, ...args], {
@@ -33,7 +36,7 @@ describe("delivery audit result classes", () => {
   });
 
   it("distinguishes unavailable API credentials or executable", () => {
-    const result = run(["--live-project"], "");
+    const result = run(["--live-project", "--private-state", privateState], "");
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: UNAVAILABLE");
   });
@@ -46,7 +49,10 @@ describe("delivery audit result classes", () => {
       "#!/bin/sh\necho 'gh: Not Found (HTTP 404)' >&2\nexit 1\n",
     );
     chmodSync(executable, 0o755);
-    const result = run(["--live-project"], bin);
+    const result = run(
+      ["--live-project", "--private-state", privateState],
+      bin,
+    );
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: ERROR");
     expect(result.stderr).toContain("HTTP 404");
@@ -58,6 +64,25 @@ describe("delivery audit result classes", () => {
     expect(result.stderr).toContain(
       "Project state: INVALID (--project-snapshot requires exactly one path.)",
     );
+  });
+
+  it("requires an explicit private state path for live mode", () => {
+    const result = run(["--live-project"]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain(
+      "Project state: INVALID (--live-project requires --private-state <path>.)",
+    );
+  });
+
+  it("reports an unreadable private state source as unavailable", () => {
+    const result = run([
+      "--live-project",
+      "--private-state",
+      "/missing/private-delivery-state.json",
+    ]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: UNAVAILABLE");
+    expect(result.stderr).toContain("private delivery state");
   });
 
   it("does not consume another flag as a snapshot path", () => {
@@ -72,13 +97,17 @@ describe("delivery audit result classes", () => {
   ])("rejects conflicting modes %s %s", (...args) => {
     const result = run(args);
     expect(result.status).toBe(2);
-    expect(result.stderr).toContain("Project state: INVALID (Select exactly one project-state mode.)");
+    expect(result.stderr).toContain(
+      "Project state: INVALID (Select exactly one project-state mode.)",
+    );
   });
 
   it("rejects unknown flags", () => {
     const result = run(["--repository-only", "--unexpected"]);
     expect(result.status).toBe(2);
-    expect(result.stderr).toContain("Project state: INVALID (Unknown option: --unexpected.)");
+    expect(result.stderr).toContain(
+      "Project state: INVALID (Unknown option: --unexpected.)",
+    );
   });
 
   it("distinguishes unexpected input errors", () => {
