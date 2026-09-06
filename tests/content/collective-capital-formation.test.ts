@@ -74,8 +74,6 @@ describe("collective capital formation dossier", () => {
         "meidner-profit-share-rate-suggestion",
         "meidner-central-fund-destination-proposal",
         "meidner-share-payment-instrument-proposal",
-        "meidner-union-board-election-proposal",
-        "meidner-shareholder-vote-allocation-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -83,12 +81,6 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-rights-boundary",
       ],
       [
-        "meidner-profit-share-contribution-proposal",
-        "meidner-profit-share-rate-suggestion",
-        "meidner-central-fund-destination-proposal",
-        "meidner-share-payment-instrument-proposal",
-        "meidner-union-board-election-proposal",
-        "meidner-shareholder-vote-allocation-proposal",
         "funds-statutory-design",
         "funds-abolished",
         "collective-capital-formation-swedish-case-classification",
@@ -107,6 +99,10 @@ describe("collective capital formation dossier", () => {
     expect(dossier?.sections[3]?.body).not.toContain(
       "operated from 1984 through 1991",
     );
+    expect(dossier?.sections[3]?.body).not.toContain("20 percent");
+    expect(dossier?.sections[3]?.body).not.toContain("wage-earner shares");
+    expect(dossier?.sections[2]?.body).toContain("20 percent");
+    expect(dossier?.sections[2]?.body).toContain("wage-earner shares");
     expect(dossier?.sections[3]?.body).toContain(
       "ended the boards across the 1991–1992 year boundary",
     );
