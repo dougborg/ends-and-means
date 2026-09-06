@@ -36,6 +36,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       statementIds: [
         "collective-capital-formation-national-accounts-boundary",
         "collective-capital-formation-statistical-governance-boundary",
+        "collective-capital-formation-working-definition",
       ],
     },
     {
@@ -44,8 +45,12 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "meidner-profit-share-financing-proposal",
-        "meidner-union-fund-governance-proposal",
+        "meidner-profit-share-contribution-proposal",
+        "meidner-profit-share-rate-suggestion",
+        "meidner-central-fund-destination-proposal",
+        "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -63,8 +68,12 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "meidner-profit-share-financing-proposal",
-        "meidner-union-fund-governance-proposal",
+        "meidner-profit-share-contribution-proposal",
+        "meidner-profit-share-rate-suggestion",
+        "meidner-central-fund-destination-proposal",
+        "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "funds-statutory-design",
         "funds-abolished",
         "collective-capital-formation-swedish-case-classification",

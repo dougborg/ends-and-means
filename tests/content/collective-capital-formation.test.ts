@@ -15,8 +15,12 @@ const statementIds = [
   "swedish-1981-funds-cash-financing",
   "collective-capital-formation-financing-governance-boundary",
   "collective-capital-formation-governing-constituency",
-  "meidner-profit-share-financing-proposal",
-  "meidner-union-fund-governance-proposal",
+  "meidner-profit-share-contribution-proposal",
+  "meidner-profit-share-rate-suggestion",
+  "meidner-central-fund-destination-proposal",
+  "meidner-share-payment-instrument-proposal",
+  "meidner-union-board-election-proposal",
+  "meidner-shareholder-vote-allocation-proposal",
   "collective-capital-formation-rights-boundary",
   "collective-capital-formation-swedish-case-classification",
   "collective-capital-formation-supporter-distance",
@@ -63,10 +67,15 @@ describe("collective capital formation dossier", () => {
       [
         "collective-capital-formation-national-accounts-boundary",
         "collective-capital-formation-statistical-governance-boundary",
+        "collective-capital-formation-working-definition",
       ],
       [
-        "meidner-profit-share-financing-proposal",
-        "meidner-union-fund-governance-proposal",
+        "meidner-profit-share-contribution-proposal",
+        "meidner-profit-share-rate-suggestion",
+        "meidner-central-fund-destination-proposal",
+        "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -74,8 +83,12 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-rights-boundary",
       ],
       [
-        "meidner-profit-share-financing-proposal",
-        "meidner-union-fund-governance-proposal",
+        "meidner-profit-share-contribution-proposal",
+        "meidner-profit-share-rate-suggestion",
+        "meidner-central-fund-destination-proposal",
+        "meidner-share-payment-instrument-proposal",
+        "meidner-union-board-election-proposal",
+        "meidner-shareholder-vote-allocation-proposal",
         "funds-statutory-design",
         "funds-abolished",
         "collective-capital-formation-swedish-case-classification",
@@ -190,19 +203,33 @@ describe("collective capital formation locator precision", () => {
     ]);
   });
 
-  it("keeps Meidner's financing and governance proposals atomic", () => {
-    expect(citationsFor("meidner-profit-share-financing-proposal")).toEqual([
-      expect.objectContaining({
-        locator:
-          "section ‘The essential features of the LO proposal for wage-earner funds’, p. 309",
-      }),
-    ]);
-    expect(citationsFor("meidner-union-fund-governance-proposal")).toEqual([
-      expect.objectContaining({
-        locator:
-          "section ‘The essential features of the LO proposal for wage-earner funds’, p. 310",
-      }),
-    ]);
+  it("keeps each Meidner financing and governance rule atomic", () => {
+    const page309Ids = [
+      "meidner-profit-share-contribution-proposal",
+      "meidner-profit-share-rate-suggestion",
+      "meidner-central-fund-destination-proposal",
+      "meidner-share-payment-instrument-proposal",
+    ];
+    const page310Ids = [
+      "meidner-union-board-election-proposal",
+      "meidner-shareholder-vote-allocation-proposal",
+    ];
+    for (const id of page309Ids) {
+      expect(citationsFor(id)).toEqual([
+        expect.objectContaining({
+          locator:
+            "section ‘The essential features of the LO proposal for wage-earner funds’, p. 309",
+        }),
+      ]);
+    }
+    for (const id of page310Ids) {
+      expect(citationsFor(id)).toEqual([
+        expect.objectContaining({
+          locator:
+            "section ‘The essential features of the LO proposal for wage-earner funds’, p. 310",
+        }),
+      ]);
+    }
   });
 
   it("qualifies social ownership with both holding and control boundaries", () => {

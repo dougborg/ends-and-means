@@ -226,7 +226,7 @@ export const collectiveCapitalFormationEvidenceDocuments = [
       description:
         "A sourced observation about the revised proposal's asset-acquisition mechanism.",
       statementKind: "observation",
-      text: "The 1981 Swedish wage-earner-fund proposal replaced compulsory share issuance with a levy on excess profits that funds would use to buy shares.",
+      text: "The 1981 Swedish wage-earner-fund proposal financed the funds through a levy on excess profits.",
       ...reviewed,
     },
   },
@@ -259,26 +259,74 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "meidner-profit-share-financing-proposal",
+      id: "meidner-profit-share-contribution-proposal",
       kind: "statement",
-      label: "Meidner proposed profit-linked share financing",
-      description:
-        "The original proposal's contribution formula and payment instrument.",
+      label: "Meidner described a profit-share contribution",
+      description: "The original proposal's contribution base.",
       statementKind: "attributed-proposal",
-      text: "Meidner's account of the original LO proposal called for a share of company profits, suggested at 20 percent, to be paid into a central fund through wage-earner shares rather than cash.",
+      text: "Meidner's account of the original LO proposal called for companies to contribute a share of their profits.",
       ...reviewed,
     },
   },
   {
     documentType: "entity",
     entity: {
-      id: "meidner-union-fund-governance-proposal",
+      id: "meidner-profit-share-rate-suggestion",
       kind: "statement",
-      label: "Meidner described union-elected fund governance",
-      description:
-        "The original proposal's board-selection and shareholder-vote allocation rules.",
+      label: "Meidner reported a suggested 20 percent rate",
+      description: "The rate suggested as an example for the profit share.",
       statementKind: "attributed-proposal",
-      text: "Meidner reports that the original proposal assigned election of the central fund board to unions and divided the fund's shareholder voting rights between union locals and industry funds.",
+      text: "Meidner reports that the original LO proposal suggested a 20 percent profit-share rate.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-central-fund-destination-proposal",
+      kind: "statement",
+      label: "Meidner proposed a central-fund destination",
+      description:
+        "The original proposal's destination for company contributions.",
+      statementKind: "attributed-proposal",
+      text: "Meidner reports that company contributions under the original LO proposal would be paid into a central fund.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-share-payment-instrument-proposal",
+      kind: "statement",
+      label: "Meidner proposed payment through shares",
+      description: "The original proposal's non-cash payment instrument.",
+      statementKind: "attributed-proposal",
+      text: "Meidner reports that firms would make the proposed payments through wage-earner shares rather than cash.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-union-board-election-proposal",
+      kind: "statement",
+      label: "Meidner described union election of the central board",
+      description: "The original proposal's central-board selection rule.",
+      statementKind: "attributed-proposal",
+      text: "Meidner reports that unions would elect the board of the central fund.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "meidner-shareholder-vote-allocation-proposal",
+      kind: "statement",
+      label: "Meidner described allocation of shareholder voting rights",
+      description:
+        "The original proposal's rule for exercising fund voting rights.",
+      statementKind: "attributed-proposal",
+      text: "Meidner reports that the fund's shareholder voting rights would be divided between union locals and industry funds.",
       ...reviewed,
     },
   },
