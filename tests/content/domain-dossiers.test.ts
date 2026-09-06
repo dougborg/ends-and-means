@@ -147,6 +147,20 @@ describe("social-ownership narrative dossier", () => {
   });
 });
 
+const expectedMissingConceptDossiers = [
+  "autocracy",
+  "dictatorship",
+  "economic-planning",
+  "indigenous-autonomy",
+  "institutional-abolition",
+  "institutional-formation",
+  "institutional-reorganization",
+  "market-coordination",
+  "market-socialism",
+  "social-class",
+  "statelessness",
+];
+
 describe("canonical narrative coverage", () => {
   it("reports the exact subjects that still need narrative work", () => {
     const report = auditContent(canonicalGraph);
@@ -166,19 +180,7 @@ describe("canonical narrative coverage", () => {
     ).toMatchObject({
       covered: 13,
       total: 24,
-      missingIds: [
-        "autocracy",
-        "dictatorship",
-        "economic-planning",
-        "indigenous-autonomy",
-        "institutional-abolition",
-        "institutional-formation",
-        "institutional-reorganization",
-        "market-coordination",
-        "market-socialism",
-        "social-class",
-        "statelessness",
-      ],
+      missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(
       "missing: social-ownership",
