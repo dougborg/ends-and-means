@@ -12,6 +12,7 @@ import { canonicalGraph, entityById } from "../lib/domain/canonical";
 import { hrefForEntity } from "../lib/public-routes";
 import {
   directSubjectGuideEvidence,
+  subjectGuideRelationshipDetails,
   visibleSubjectGuideSections,
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
@@ -79,6 +80,20 @@ function relationshipEnds(relationship: DomainRelationship) {
     subject: entityById(relationship.subject.id),
     object: entityById(relationship.object.id),
   };
+}
+
+function placementValueLabel(
+  relationship: Extract<DomainRelationship, { predicate: "placed-on" }>,
+) {
+  const dimension = entityById(relationship.object.id);
+  if (dimension?.kind !== "comparison-dimension") return undefined;
+  const label = (id: string) => dimension.values.find((value) => value.id === id)?.label;
+  const value = relationship.value.kind === "category"
+    ? label(relationship.value.categoryId)
+    : [label(relationship.value.fromCategoryId), label(relationship.value.toCategoryId)]
+      .filter(Boolean)
+      .join(" to ");
+  return value || undefined;
 }
 
 function selectedObligation(id: string) {
@@ -201,13 +216,29 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
                   const { subject, object } = relationshipEnds(relationship);
                   const subjectHref = hrefForEntity(relationship.subject);
                   const objectHref = hrefForEntity(relationship.object);
+                  const details = subjectGuideRelationshipDetails(relationship, {
+                    entityLabel: (id) => entityById(id)?.label,
+                    ...(relationship.predicate === "placed-on"
+                      ? { placementValueLabel: () => placementValueLabel(relationship) }
+                      : {}),
+                  });
                   return subject && object && (
-                    <article>
+                    <article data-relationship-id={relationship.id}>
                       <p>
                         {subjectHref ? <a href={subjectHref}>{subject.label}</a> : <strong>{subject.label}</strong>}
                         <span>{publicRelationshipLabel(relationship, "subject")}</span>
                         {objectHref ? <a href={objectHref}>{object.label}</a> : <strong>{object.label}</strong>}
                       </p>
+                      {details.length > 0 && (
+                        <details class="subject-guide__qualification">
+                          <summary>How to read this connection</summary>
+                          <dl>
+                            {details.map(({ label, value }) => (
+                              <div><dt>{label}</dt><dd>{value}</dd></div>
+                            ))}
+                          </dl>
+                        </details>
+                      )}
                       {"statementIds" in relationship && relationship.statementIds.length > 0 && (
                         <details class="reference-disclosure subject-guide__evidence">
                           <summary>Check this connection <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>

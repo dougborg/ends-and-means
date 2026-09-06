@@ -404,6 +404,12 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .subject-guide__relationships p { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; font-size: .8rem; line-height: 1.5; }
 .subject-guide__relationships article + article { margin-top: .7rem; }
 .subject-guide__relationships span { color: var(--muted); font-family: var(--reading); }
+.subject-guide__qualification { margin-top: .45rem; color: var(--muted); font-size: .7rem; }
+.subject-guide__qualification summary { width: fit-content; cursor: pointer; font-family: var(--apparatus); font-weight: 650; }
+.subject-guide__qualification dl { display: grid; grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr); gap: .35rem 1rem; max-width: 42rem; margin: .65rem 0 0; padding-top: .65rem; border-top: 1px solid var(--rule); }
+.subject-guide__qualification dl > div { display: contents; }
+.subject-guide__qualification dt { color: var(--night); font-family: var(--apparatus); font-weight: 650; }
+.subject-guide__qualification dd { margin: 0; font-family: var(--reading); line-height: 1.45; }
 .subject-guide__questions { margin: 1rem 0 0; padding: 0; list-style: none; }
 .subject-guide__questions > li { padding: 1rem; border: 1px solid var(--rule); background: var(--sheet); }
 .subject-guide__questions > li + li { margin-top: .75rem; }
