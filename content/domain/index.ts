@@ -13,6 +13,7 @@ import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evide
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
+import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
@@ -31,6 +32,8 @@ import { foundationalConceptDossierDocuments } from "./presentation/foundational
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
 import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
+import { minangkabauDossierDocuments } from "./presentation/minangkabau-dossier";
+import { minangkabauGuideDocuments } from "./presentation/minangkabau-guide";
 import { nomadicConfederatedOrganizationDossierDocuments } from "./presentation/nomadic-confederated-organizations-dossiers";
 import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/nomadic-confederated-organizations-guides";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
@@ -48,6 +51,7 @@ import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./r
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
+import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
@@ -93,6 +97,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...zapatistaCaracolesEvidenceDocuments,
   ...nomadicConfederatedOrganizationEvidenceDocuments,
   ...liberalismConservatismEvidenceDocuments,
+  ...minangkabauEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...collectiveCapitalFormationDossierDocuments,
@@ -111,6 +116,8 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...nomadicConfederatedOrganizationDossierDocuments,
   ...nomadicConfederatedOrganizationGuideDocuments,
   ...liberalismConservatismGuideDocuments,
+  ...minangkabauDossierDocuments,
+  ...minangkabauGuideDocuments,
   ...openResearchObligationDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
@@ -141,4 +148,5 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...zapatistaCaracolesRelationshipDocuments,
   ...nomadicConfederatedOrganizationRelationshipDocuments,
   ...liberalismConservatismRelationshipDocuments,
+  ...minangkabauRelationshipDocuments,
 ];
