@@ -30,16 +30,18 @@ comparison.
 
 ### Global route vocabulary
 
-The primary navigation uses one durable, reader-facing sequence:
-**Approaches**, **Cases**, **Questions**, **Compare**, **Sources**, and
-**Method**.
+The primary navigation uses one durable learner-task sequence:
+**Explore**, **Cases**, **Compare**, and **Questions**.
+**Sources** and **Method** remain in the compact footer as a quieter trust
+layer rather than competing with the main learner paths.
 The wordmark is the primary navigation's sole Home link.
-The footer's **Site map** repeats that sequence after **Home**, giving readers
-a compact way onward at the end of every page.
+The footer's **Site map** repeats that sequence after **Home**, then adds the
+quieter **Sources** and **Method** trust paths.
 
 Both landmarks consume the same typed public-route registry.
-The registry also owns current-section mapping: Concept records belong to
-Approaches, and individual Source records belong to Sources.
+The registry also owns current-section mapping: Subject Guides and Concept
+reference pages belong to Explore, and
+individual Source records belong to Sources.
 When adding a public area, update that registry rather than either component,
 provide a reader-facing label and all descendant route prefixes, and test its
 order and current-page behavior in both landmarks.
@@ -248,7 +250,7 @@ familiar terms without requiring the reader to know the ontology. A real
 Challenge provides a direct comparison path rather than serving as decoration.
 
 ```text
-┌ Ends and Means ── Approaches  Cases  Questions  Compare  Sources  Method ┐
+┌ Ends and Means ── Explore  Cases  Compare  Questions ┐
 │                                                                      │
 │ Explore systems and ideas. Compare what they value, how they work,   │
 │ and what happens in practice.                                       │

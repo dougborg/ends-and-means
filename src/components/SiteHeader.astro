@@ -1,5 +1,5 @@
 ---
-import { isCurrentPublicRoute, publicRoutes } from "../lib/public-navigation";
+import { isCurrentPublicRoute, primaryRoutes } from "../lib/public-navigation";
 interface Props { currentPath?: string; }
 const { currentPath = "/" } = Astro.props;
 ---
@@ -8,7 +8,7 @@ const { currentPath = "/" } = Astro.props;
     <a class="wordmark" href="/" aria-label="Ends and Means, home"><span>Ends</span><span class="wordmark__hinge">and</span><span>Means</span></a>
     <nav aria-label="Primary">
       <ul class="primary-nav">
-        {publicRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
+        {primaryRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
       </ul>
     </nav>
   </div>

@@ -2,22 +2,29 @@ import { describe, expect, it } from "vitest";
 import {
   homeRoute,
   isCurrentPublicRoute,
+  primaryRoutes,
   publicRoutes,
 } from "../../src/lib/public-navigation";
 
 describe("public navigation", () => {
   it("publishes the agreed vocabulary, order, and destinations", () => {
     expect(publicRoutes.map(({ label, href }) => ({ label, href }))).toEqual([
-      { label: "Approaches", href: "/explore/" },
+      { label: "Explore", href: "/explore/" },
       { label: "Cases", href: "/cases/" },
-      { label: "Questions", href: "/challenges/" },
       { label: "Compare", href: "/compare/" },
+      { label: "Questions", href: "/challenges/" },
       { label: "Sources", href: "/reading/" },
       { label: "Method", href: "/framework/" },
     ]);
     expect(new Set(publicRoutes.map(({ href }) => href)).size).toBe(
       publicRoutes.length,
     );
+    expect(primaryRoutes.map(({ label }) => label)).toEqual([
+      "Explore",
+      "Cases",
+      "Compare",
+      "Questions",
+    ]);
   });
 
   it("maps directories and descendant records to their public section", () => {
@@ -25,11 +32,12 @@ describe("public navigation", () => {
       publicRoutes.find((route) => isCurrentPublicRoute(pathname, route))
         ?.label;
 
-    expect(currentLabel("/explore/")).toBe("Approaches");
+    expect(currentLabel("/explore/")).toBe("Explore");
     expect(currentLabel("/explore/swedish-rehn-meidner-model/")).toBe(
-      "Approaches",
+      "Explore",
     );
-    expect(currentLabel("/concepts/economic-democracy/")).toBe("Approaches");
+    expect(currentLabel("/guides/economic-democracy/")).toBe("Explore");
+    expect(currentLabel("/concepts/economic-democracy/")).toBe("Explore");
     expect(currentLabel("/sources/erixon-rehn-meidner-model-source/")).toBe(
       "Sources",
     );

@@ -271,14 +271,12 @@ test("global navigation remains ordered, reachable, and legible across constrain
   page,
 }) => {
   const primaryLabels = [
-    "Approaches",
+    "Explore",
     "Cases",
-    "Questions",
     "Compare",
-    "Sources",
-    "Method",
+    "Questions",
   ];
-  const siteMapLabels = ["Home", ...primaryLabels];
+  const siteMapLabels = ["Home", ...primaryLabels, "Sources", "Method"];
 
   for (const route of [
     "/explore/",
@@ -290,7 +288,9 @@ test("global navigation remains ordered, reachable, and legible across constrain
     const siteMap = page.getByRole("navigation", { name: "Site map" });
     await expect(primary.getByRole("link")).toHaveText(primaryLabels);
     await expect(siteMap.getByRole("link")).toHaveText(siteMapLabels);
-    await expect(primary.locator('[aria-current="page"]')).toHaveCount(1);
+    await expect(primary.locator('[aria-current="page"]')).toHaveCount(
+      route.startsWith("/sources/") ? 0 : 1,
+    );
     await expect(siteMap.locator('[aria-current="page"]')).toHaveCount(1);
   }
 

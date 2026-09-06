@@ -99,14 +99,15 @@ async function verifyEveryPublicRecordRenders() {
 
 async function verifyGlobalNavigation() {
   const expectedPrimary = [
-    ["Approaches", "/explore/"],
+    ["Explore", "/explore/"],
     ["Cases", "/cases/"],
-    ["Questions", "/challenges/"],
     ["Compare", "/compare/"],
+    ["Questions", "/challenges/"],
+  ];
+  const expectedSiteMap = [["Home", "/"], ...expectedPrimary,
     ["Sources", "/reading/"],
     ["Method", "/framework/"],
   ];
-  const expectedSiteMap = [["Home", "/"], ...expectedPrimary];
   const linksIn = (navigation: string) =>
     [
       ...navigation.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi),
@@ -118,8 +119,9 @@ async function verifyGlobalNavigation() {
 
   for (const [route, currentLabel] of [
     ["/", "Home"],
-    ["/explore/", "Approaches"],
-    ["/concepts/economic-democracy/", "Approaches"],
+    ["/explore/", "Explore"],
+    ["/guides/economic-democracy/", "Explore"],
+    ["/concepts/economic-democracy/", "Explore"],
     ["/sources/erixon-rehn-meidner-model-source/", "Sources"],
   ] as const) {
     const html = await readFile(routeFile(route), "utf8");
@@ -130,7 +132,9 @@ async function verifyGlobalNavigation() {
     expect(linksIn(primary), route).toEqual(expectedPrimary);
     expect(linksIn(siteMap), route).toEqual(expectedSiteMap);
     expect(primary.match(/aria-current="page"/g) ?? [], route).toHaveLength(
-      currentLabel === "Home" ? 0 : 1,
+      ["Explore", "Cases", "Compare", "Questions"].includes(currentLabel)
+        ? 1
+        : 0,
     );
     expect(siteMap.match(/aria-current="page"/g) ?? [], route).toHaveLength(1);
     expect(siteMap, route).toMatch(
