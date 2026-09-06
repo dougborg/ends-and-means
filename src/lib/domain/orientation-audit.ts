@@ -19,6 +19,13 @@ export type OrientationAuditEntry = {
     title: string;
     url: string;
     boundary: string;
+    resolution: {
+      canonicalArticleTitle: string;
+      canonicalArticleUrl: string;
+      pageKind: "article";
+      checkedAt: string;
+      wikidataId?: string;
+    };
   }>;
 };
 
@@ -92,6 +99,7 @@ function entityEntry(entity: DomainEntity): OrientationAuditEntry {
       id: entity.id,
       label: entity.label,
       disposition: "mapped",
+      ...(decision.reason ? { reason: decision.reason } : {}),
       orientationUrls,
       identityIds,
       references,
@@ -232,6 +240,19 @@ function validateCandidateReview(key: string, entry: OrientationAuditEntry) {
       )
     )
       errors.push(`${key}: rejected candidate is not a canonical article URL`);
+    if (
+      candidate.resolution.pageKind !== "article" ||
+      candidate.resolution.checkedAt !== "2026-09-06" ||
+      candidate.resolution.canonicalArticleTitle !== candidate.title ||
+      candidate.resolution.canonicalArticleUrl !== candidate.url
+    )
+      errors.push(
+        `${key}: rejected candidate lacks checked canonical resolution`,
+      );
+    if (
+      /\/wiki\/(?:Category:|List_of_|.*\(disambiguation\)$)/.test(candidate.url)
+    )
+      errors.push(`${key}: rejected candidate resolves to a non-article page`);
   }
   return errors;
 }
@@ -273,9 +294,14 @@ function validateReviewedDecision(
     errors.push(`${key}: reviewed rejected-candidate decision changed`);
   if (
     decision?.disposition === "mapped" &&
-    decision.resolution !== "direct-canonical-target"
+    (!decision.resolution ||
+      typeof decision.resolution === "string" ||
+      decision.resolution.pageKind !== "article" ||
+      decision.resolution.checkedAt !== "2026-09-06" ||
+      decision.resolution.canonicalArticleUrl !== entry.orientationUrls[0] ||
+      decision.resolution.wikidataId !== entry.identityIds[0])
   )
-    errors.push(`${key}: canonical-target resolution is not reviewed`);
+    errors.push(`${key}: canonical-target resolution is not reviewed or stale`);
   return errors;
 }
 

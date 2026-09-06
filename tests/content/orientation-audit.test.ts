@@ -24,12 +24,12 @@ describe("orientation audit", () => {
     expect(inventory).toHaveLength(1024);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(65);
+    ).toHaveLength(76);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(125);
+    ).toHaveLength(114);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
     ).toHaveLength(834);
@@ -151,14 +151,16 @@ describe("orientation rejected-candidate enforcement", () => {
   it("rejects an unmatched decision with its candidate review erased", () => {
     const graph = canonicalGraph();
     const inventory = buildOrientationAudit(graph);
-    const accountability = inventory.find(({ id }) => id === "accountability");
+    const accountability = inventory.find(
+      ({ id }) => id === "affected-community-accountability",
+    );
     expect(accountability).toBeDefined();
     if (!accountability) return;
     accountability.consideredCandidates = [];
     expect(validateOrientationAudit(graph, inventory)).toEqual(
       expect.arrayContaining([
-        "entity:accountability: unmatched decision lacks a reviewed candidate",
-        "entity:accountability: reviewed rejected-candidate decision changed",
+        "entity:affected-community-accountability: unmatched decision lacks a reviewed candidate",
+        "entity:affected-community-accountability: reviewed rejected-candidate decision changed",
       ]),
     );
   });
@@ -174,10 +176,36 @@ describe("orientation rejected-candidate enforcement", () => {
         title: "Concept",
         url: "https://en.wikipedia.org/wiki/Concept",
         boundary: `Concept is broader than ${accountability.label}.`,
+        resolution: {
+          canonicalArticleTitle: "Concept",
+          canonicalArticleUrl: "https://en.wikipedia.org/wiki/Concept",
+          pageKind: "article",
+          checkedAt: "2026-09-06",
+        },
       },
     ];
     expect(validateOrientationAudit(graph, inventory)).toContain(
       "entity:accountability: rejected candidate is a category placeholder",
+    );
+  });
+
+  it("rejects stale canonical resolution and non-article candidates", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const candidate = inventory.find(
+      ({ id }) => id === "affected-community-accountability",
+    );
+    expect(candidate).toBeDefined();
+    if (!candidate?.consideredCandidates[0]) return;
+    candidate.consideredCandidates[0].resolution.canonicalArticleTitle =
+      "Changed";
+    candidate.consideredCandidates[0].url =
+      "https://en.wikipedia.org/wiki/List_of_political_concepts";
+    expect(validateOrientationAudit(graph, inventory)).toEqual(
+      expect.arrayContaining([
+        "entity:affected-community-accountability: rejected candidate lacks checked canonical resolution",
+        "entity:affected-community-accountability: rejected candidate resolves to a non-article page",
+      ]),
     );
   });
 });

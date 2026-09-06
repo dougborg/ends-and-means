@@ -194,6 +194,15 @@ export const anarchismEvidenceDocuments = [
         "An approach that treats worker organization and direct industrial action as both present struggle and preparation for federated worker administration.",
       scope:
         "Historically self-described anarcho-syndicalist proposals and organizations; not every militant or federated union.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Anarcho-syndicalism",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

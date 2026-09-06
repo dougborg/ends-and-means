@@ -366,6 +366,23 @@ export const feminismEvidenceDocuments = [
     "Socialist feminism",
     "Feminist analyses connecting gendered oppression with class, labor, ownership, care, and social reproduction.",
     "Do not collapse socialist, Marxist, and materialist feminisms or infer a shared program from the label.",
+    [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/Socialist_feminism",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q2225347",
+        url: "https://www.wikidata.org/wiki/Q2225347",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   ),
   concept(
     "marxist-feminism",

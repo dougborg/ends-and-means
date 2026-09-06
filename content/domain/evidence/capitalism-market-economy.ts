@@ -353,6 +353,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Identify legal form, ownership, control, employment, finance, and internal coordination rather than treating every firm as privately owned or internally market-organized.",
+      externalRefs: orientationRefs("Business", "Q4830453", "close"),
       ...reviewed,
     },
   },
@@ -367,6 +368,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep finance distinct from money, physical assets, wealth, productive activity, and capital while identifying the legal claims and institutions involved.",
+      externalRefs: orientationRefs("Finance", "Q43015"),
       ...reviewed,
     },
   },
@@ -381,6 +383,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not reduce law to state legislation alone or infer effective enforcement from a formal rule; identify institutions and practice in a bounded setting.",
+      externalRefs: orientationRefs("Legal system", "Q858700", "close"),
       ...reviewed,
     },
   },

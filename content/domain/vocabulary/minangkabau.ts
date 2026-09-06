@@ -45,6 +45,23 @@ export const minangkabauVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Never use as an alias for matriliny; attribute the definition in use and keep symbolic centrality separate from authority in a bounded setting.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Matriarchy",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q185681",
+          url: "https://www.wikidata.org/wiki/Q185681",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },
