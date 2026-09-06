@@ -25,6 +25,8 @@ describe("canonical vertical slice", () => {
     );
     expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual([
       "anarcho-syndicalist-organizing",
+      "historical-italian-fascism",
+      "linz-regime-analysis",
       "neo-republican-nondomination",
       "representative-democratic-government",
       "swedish-rehn-meidner-model",
@@ -33,6 +35,8 @@ describe("canonical vertical slice", () => {
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "kahnawake-community-lawmaking",
+      "italian-fascist-dictatorship-1925-1943",
+      "nazi-consolidation-1933",
       "spanish-anarchist-initiatives-1936-1939",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
