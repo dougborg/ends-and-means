@@ -19,6 +19,11 @@ export type ProjectStatus = (typeof projectStatuses)[number];
 export type Workstream = (typeof workstreams)[number];
 export type Priority = (typeof priorities)[number];
 
+/** Build GitHub's compare route without allowing ref separators/reserved characters to alter the path. */
+export function githubComparePath(base: string, head: string) {
+  return `repos/dougborg/ends-and-means/compare/${encodeURIComponent(base)}...${encodeURIComponent(head)}`;
+}
+
 const dateTime = z.string().datetime({ offset: true });
 const reviewEvidenceSchema = z.object({ copilot: z.boolean(), adversarial: z.boolean() }).strict();
 const ownershipSchema = z
