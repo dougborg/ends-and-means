@@ -1,0 +1,799 @@
+[
+  {
+    "id": "ainu-association-hokkaido-governance",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Ainu Association of Hokkaido and its Ainu membership",
+    "place": "Hokkaido, Japan",
+    "period": {
+      "start": "1946",
+      "end": "present",
+      "boundaryNotes": "Association governance after its founding; historical Ainu institutions require separate periods."
+    },
+    "learnerQuestion": "How has an Ainu membership association represented collective priorities while responding to Japanese state policy?",
+    "contextTags": ["east-asian"],
+    "politicalRelationships": ["state", "colonial"],
+    "organizationAndAuthority": [
+      "membership association",
+      "delegate assembly",
+      "policy advocacy"
+    ],
+    "institutionalQuestions": ["land", "labor", "redistribution"],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Ainu",
+      "provenanceNotes": "Use the Association's self-description and distinguish it from historical Japanese administrative labels."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "viable",
+        "notes": "The Association publishes its mission and history in Japanese and some English.",
+        "sourceLeads": [
+          {
+            "title": "About the Ainu people",
+            "url": "https://www.ainu-assn.or.jp/english/ainupeople.html",
+            "authority": "Ainu Association of Hokkaido",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "oralHistory": {
+        "availability": "not-assessed",
+        "notes": "Repositories and community access protocols require consultation.",
+        "sourceLeads": []
+      },
+      "primaryMaterial": {
+        "availability": "partial",
+        "notes": "The Association chronology identifies resolutions and policy interventions, but underlying records need access review.",
+        "sourceLeads": [
+          {
+            "title": "Ainu historical events",
+            "url": "https://www.ainu-assn.or.jp/english/history.html",
+            "authority": "Ainu Association chronology",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "not-assessed",
+        "notes": "A focused literature search must separate scholarship about Ainu history from study of Association governance.",
+        "sourceLeads": []
+      },
+      "permissions": "Confirm quotation and image terms directly with the Association.",
+      "access": "Public web pages are accessible; organizational archives are not yet located.",
+      "translation": "Japanese-language records require qualified translation and preservation of Ainu terms.",
+      "freshness": "Living-community descriptions require a new check when research begins."
+    },
+    "evidenceRisks": [
+      "Association positions cannot stand for every Ainu person or community.",
+      "Administrative and community periodizations may conflict."
+    ],
+    "researchObligations": [
+      {
+        "question": "Which decisions are made by delegates, staff, local branches, or the general membership?",
+        "evidenceNeeded": "Current bylaws, meeting records, and member accounts."
+      }
+    ]
+  },
+  {
+    "id": "mendha-lekha-gram-sabha-forest-governance",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Mendha-Lekha village Gram Sabha",
+    "place": "Gadchiroli district, Maharashtra, India",
+    "period": {
+      "start": "1987",
+      "end": "present",
+      "boundaryNotes": "Community forest organizing through recognition and implementation of forest rights."
+    },
+    "learnerQuestion": "How does the Gram Sabha combine village decision-making with legally recognized community forest rights?",
+    "contextTags": ["south-asian"],
+    "politicalRelationships": ["state", "non-state"],
+    "organizationAndAuthority": [
+      "Gram Sabha",
+      "consensus practice",
+      "community forest governance"
+    ],
+    "institutionalQuestions": [
+      "land",
+      "commons",
+      "labor",
+      "redistribution",
+      "ecology"
+    ],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Mendha-Lekha Gram Sabha",
+      "provenanceNotes": "Confirm Gond self-description and village naming with community-controlled material before publication."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "not-found",
+        "notes": "No stable community-controlled publication was verified in preflight.",
+        "sourceLeads": []
+      },
+      "oralHistory": {
+        "availability": "partial",
+        "notes": "Published case studies report interviews, but consent and original-language access need review.",
+        "sourceLeads": [
+          {
+            "title": "Forest Reserve Act case study of Mendha Lekha",
+            "url": "https://nidm.gov.in/pdf/trgReports/2021/November/Report_22-26November2021sg.pdf",
+            "authority": "National Institute of Disaster Management training report",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "primaryMaterial": {
+        "availability": "partial",
+        "notes": "Government releases document forest-right implementation but not internal deliberation.",
+        "sourceLeads": [
+          {
+            "title": "Community forest rights and bamboo transit passes",
+            "url": "https://www.pib.gov.in/newsite/erelcontent.aspx?lang=2&reg=48&relid=77840",
+            "authority": "Government of India Press Information Bureau",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "partial",
+        "notes": "Case literature exists; methods and community voice need appraisal.",
+        "sourceLeads": [
+          {
+            "title": "Towards Self-Rule and Forest Conservation in Mendha-Lekha Village",
+            "url": "https://www.researchgate.net/publication/228439993_Towards_Self-Rule_and_Forest_Conservation_in_Mendha-Lekha_Village_Gadchiroli",
+            "authority": "Scholarly case-study discovery record",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Community consultation is required for non-public deliberative or oral material.",
+      "access": "Government and secondary reports are online; community records are not yet accessible.",
+      "translation": "Gondi, Marathi, or Hindi evidence requires qualified translation.",
+      "freshness": "Verify current Gram Sabha practice rather than extending older case reports."
+    },
+    "evidenceRisks": [
+      "Celebratory case accounts may understate internal disagreement.",
+      "Legal recognition does not establish day-to-day community control."
+    ],
+    "researchObligations": [
+      {
+        "question": "Whose participation and dissent are visible in Gram Sabha decisions?",
+        "evidenceNeeded": "Community-authorized minutes or interviews disaggregated by gender and livelihood."
+      }
+    ]
+  },
+  {
+    "id": "koto-tinggi-nagari-governance",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Residents and institutions of Nagari Koto Tinggi",
+    "place": "Agam Regency, West Sumatra, Indonesia",
+    "period": {
+      "start": "2001",
+      "end": "present",
+      "boundaryNotes": "Post-decentralization interaction of nagari executive, representative, customary, and religious authority."
+    },
+    "learnerQuestion": "How do Minangkabau customary institutions, Islamic authority, and Indonesian village administration share and contest authority in one nagari?",
+    "contextTags": ["southeast-asian", "islamic"],
+    "politicalRelationships": ["state", "non-state", "colonial"],
+    "organizationAndAuthority": [
+      "nagari government",
+      "customary institutions",
+      "religious authority",
+      "representative body"
+    ],
+    "institutionalQuestions": ["land", "commons", "trade", "redistribution"],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "religion",
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Minangkabau nagari",
+      "provenanceNotes": "Confirm local usage in Koto Tinggi and do not treat a scholarly regional category as community self-description."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "not-assessed",
+        "notes": "A current nagari site or locally controlled record has not been verified.",
+        "sourceLeads": []
+      },
+      "oralHistory": {
+        "availability": "partial",
+        "notes": "Published fieldwork used interviews and focus groups; original materials are not public.",
+        "sourceLeads": [
+          {
+            "title": "Model Pemerintahan Adat pada Nagari di Sumatera Barat",
+            "url": "https://jurnal.kemendagri.go.id/index.php/jbp/id/article/view/658",
+            "authority": "Peer-reviewed Indonesian governance journal",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "primaryMaterial": {
+        "availability": "not-assessed",
+        "notes": "Local regulations and minutes require an Indonesian-language records search.",
+        "sourceLeads": []
+      },
+      "independentScholarship": {
+        "availability": "viable",
+        "notes": "A bounded Koto Tinggi case study addresses institutional interaction and unstable transition.",
+        "sourceLeads": [
+          {
+            "title": "New Value Within Old Structure",
+            "url": "https://journals.unpad.ac.id/sosiohumaniora/article/view/11398",
+            "authority": "University-hosted scholarly journal",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Seek consent for unpublished interview or customary material.",
+      "access": "Articles are discoverable online; local records may require field access.",
+      "translation": "Indonesian and Minangkabau terminology needs qualified contextual translation.",
+      "freshness": "Update institutional arrangements and local leadership before use."
+    },
+    "evidenceRisks": [
+      "Nagari institutions vary within West Sumatra.",
+      "Formal institutional descriptions may hide gendered or informal power."
+    ],
+    "researchObligations": [
+      {
+        "question": "How do matrilineal authority and gendered participation operate in present decisions?",
+        "evidenceNeeded": "Community voices and scholarship centered on women and lineage institutions."
+      }
+    ]
+  },
+  {
+    "id": "mongolian-herder-pasture-governance",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Herder households and pasture-user groups in Jinst soum",
+    "place": "Bayankhongor Province, Mongolia",
+    "period": {
+      "start": "1990",
+      "end": "present",
+      "boundaryNotes": "Post-socialist mobile pastoral governance under changing tenure and rangeland policy."
+    },
+    "learnerQuestion": "How do mobile herders coordinate seasonal pasture use across informal relations, user groups, and state tenure proposals?",
+    "contextTags": ["central-inner-asian"],
+    "politicalRelationships": ["state", "non-state"],
+    "organizationAndAuthority": [
+      "mobile household networks",
+      "pasture-user groups",
+      "soum administration"
+    ],
+    "institutionalQuestions": ["land", "commons", "trade", "labor", "ecology"],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": ["customary-law", "informal-authority"],
+    "selfDescription": {
+      "term": "herder households and pasture-user groups",
+      "provenanceNotes": "Do not infer a single ethnic identity; establish participant self-description in the bounded study."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "not-found",
+        "notes": "No community-controlled online source was verified.",
+        "sourceLeads": []
+      },
+      "oralHistory": {
+        "availability": "not-assessed",
+        "notes": "Field interviews may exist but access and consent are unknown.",
+        "sourceLeads": []
+      },
+      "primaryMaterial": {
+        "availability": "partial",
+        "notes": "Group rules and policy documents are referenced in scholarship but need direct retrieval.",
+        "sourceLeads": []
+      },
+      "independentScholarship": {
+        "availability": "viable",
+        "notes": "Recent open research compares competing governance theories using Mongolian household evidence.",
+        "sourceLeads": [
+          {
+            "title": "Context matters: Rethinking resource governance theories for Mongolian pastoral systems",
+            "url": "https://doi.org/10.1016/j.landusepol.2024.107170",
+            "authority": "Peer-reviewed Land Use Policy article",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Community rules and interview reuse require author and participant permission review.",
+      "access": "Independent scholarship is open; local records are not yet secured.",
+      "translation": "Mongolian terminology and interviews require qualified translation.",
+      "freshness": "Rangeland policy and group membership must be checked for the research period."
+    },
+    "evidenceRisks": [
+      "Formal pasture groups may not capture mobile social relations.",
+      "One soum cannot represent Mongolian pastoral governance."
+    ],
+    "researchObligations": [
+      {
+        "question": "Which rules are locally enforced rather than inferred from formal tenure?",
+        "evidenceNeeded": "Group rules, observed decisions, and herder accounts across seasons."
+      }
+    ]
+  },
+  {
+    "id": "waikato-tainui-marae-representation",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Waikato-Tainui iwi and its marae",
+    "place": "Waikato region, Aotearoa New Zealand",
+    "period": {
+      "start": "1995",
+      "end": "present",
+      "boundaryNotes": "Post-settlement governance, with earlier Kīngitanga and raupatu histories treated separately."
+    },
+    "learnerQuestion": "How does marae-based representation structure iwi-wide governance after settlement?",
+    "contextTags": ["pacific-oceanian"],
+    "politicalRelationships": ["state", "confederated", "colonial"],
+    "organizationAndAuthority": [
+      "marae representation",
+      "iwi governance body",
+      "Kīngitanga relationship"
+    ],
+    "institutionalQuestions": [
+      "land",
+      "commons",
+      "trade",
+      "redistribution",
+      "ecology"
+    ],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Waikato-Tainui",
+      "provenanceNotes": "Use iwi-controlled spelling, whakapapa, and governance descriptions."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "viable",
+        "notes": "The iwi publishes current governance structure and strategy.",
+        "sourceLeads": [
+          {
+            "title": "Governance",
+            "url": "https://waikatotainui.com/about-us/governance/",
+            "authority": "Official Waikato-Tainui website",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "oralHistory": {
+        "availability": "partial",
+        "notes": "Iwi and university projects exist; tikanga and permission protocols govern use.",
+        "sourceLeads": [
+          {
+            "title": "Tikanga Tainui: Tikanga whare wānanga",
+            "url": "https://doi.org/10.15663/K10.14101",
+            "authority": "Waikato-Tainui consultation-based university research",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "primaryMaterial": {
+        "availability": "viable",
+        "notes": "Governance plans and settlement-related instruments are publicly available.",
+        "sourceLeads": [
+          {
+            "title": "Waikato-Tainui Five Year Plan 2025",
+            "url": "https://waikatotainui.com/wp-content/uploads/2024/07/Waikato-Tainui-Five-Year-Plan-2025.pdf",
+            "authority": "Iwi-authored strategy",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "partial",
+        "notes": "Legal scholarship exists, but iwi-centered and critical work must be balanced.",
+        "sourceLeads": [
+          {
+            "title": "Tainui: A Case Study of Direct Negotiations",
+            "url": "https://doi.org/10.26686/vuwlr.v25i2.6203",
+            "authority": "Peer-reviewed legal scholarship",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Follow Waikato-Tainui tikanga and rights statements for cultural material.",
+      "access": "Public governance material is strong; internal deliberation is not assumed accessible.",
+      "translation": "Retain te reo Māori terms and use iwi-authorized explanations.",
+      "freshness": "Refresh elected structures and strategy documents before research."
+    },
+    "evidenceRisks": [
+      "Corporate settlement governance is not the whole of Waikato-Tainui political life.",
+      "Public organizational charts may conceal contested authority."
+    ],
+    "researchObligations": [
+      {
+        "question": "How do marae representatives remain answerable to members between elections?",
+        "evidenceNeeded": "Rules, meeting practices, and member perspectives."
+      }
+    ]
+  },
+  {
+    "id": "oromo-gadaa-borana-practice",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Borana Oromo communities practicing Gadaa",
+    "place": "Borana Zone, Ethiopia",
+    "period": {
+      "start": "1991",
+      "end": "present",
+      "boundaryNotes": "Living Gadaa practice under Ethiopia's present federal order; historical reconstruction is separate."
+    },
+    "learnerQuestion": "How are authority rotation, customary law, and participation practiced and contested in contemporary Borana Gadaa?",
+    "contextTags": ["african"],
+    "politicalRelationships": ["state", "non-state", "confederated"],
+    "organizationAndAuthority": [
+      "Gadaa grades",
+      "assemblies",
+      "customary office"
+    ],
+    "institutionalQuestions": [
+      "land",
+      "commons",
+      "labor",
+      "redistribution",
+      "ecology"
+    ],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "religion",
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Borana Oromo and Gadaa",
+      "provenanceNotes": "Confirm spelling and community-specific usage; UNESCO's label is not a substitute for self-description."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "partial",
+        "notes": "UNESCO nomination material reports community participation but authorship and representation need inspection.",
+        "sourceLeads": [
+          {
+            "title": "Gada system nomination",
+            "url": "https://ich.unesco.org/en/RL/gada-system-an-indigenous-democratic-socio-political-system-of-the-oromo-01164",
+            "authority": "UNESCO record with nomination materials",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "oralHistory": {
+        "availability": "partial",
+        "notes": "Oral transmission is central, but community authority and consent protocols must be established.",
+        "sourceLeads": []
+      },
+      "primaryMaterial": {
+        "availability": "partial",
+        "notes": "Nomination files and Ethiopian legal context are accessible; assembly records are uncertain.",
+        "sourceLeads": [
+          {
+            "title": "Gada system nomination",
+            "url": "https://ich.unesco.org/en/RL/gada-system-an-indigenous-democratic-socio-political-system-of-the-oromo-01164",
+            "authority": "UNESCO documentation portal",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "not-assessed",
+        "notes": "Independent and Oromo-authored scholarship must be located beyond heritage summaries.",
+        "sourceLeads": []
+      },
+      "permissions": "Oral knowledge and ceremonial material require community authorization.",
+      "access": "UNESCO materials are public; locally controlled evidence may require partnership.",
+      "translation": "Afaan Oromo evidence requires qualified translation.",
+      "freshness": "Living practice and state relations require current community verification."
+    },
+    "evidenceRisks": [
+      "Heritage recognition can freeze a changing institution.",
+      "Claims of democracy may obscure exclusions, especially gendered ones."
+    ],
+    "researchObligations": [
+      {
+        "question": "Who participates in which assemblies and offices today?",
+        "evidenceNeeded": "Community-authorized accounts including women, youth, and excluded participants."
+      }
+    ]
+  },
+  {
+    "id": "accompong-maroon-land-authority",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Accompong Maroon community",
+    "place": "Cockpit Country, Jamaica",
+    "period": {
+      "start": "1962",
+      "end": "present",
+      "boundaryNotes": "Relations with the independent Jamaican state; the 1739 treaty and slavery require distinct historical treatment."
+    },
+    "learnerQuestion": "How does Accompong authority over land and community institutions interact with Jamaican sovereignty and treaty claims?",
+    "contextTags": ["caribbean-diasporic"],
+    "politicalRelationships": ["state", "non-state", "colonial", "diasporic"],
+    "organizationAndAuthority": [
+      "elected Colonel",
+      "Maroon Council",
+      "treaty-based authority"
+    ],
+    "institutionalQuestions": ["land", "commons", "trade", "labor", "ecology"],
+    "powerQuestions": [
+      "slavery-unfree-labor",
+      "class",
+      "gendered-power",
+      "social-reproduction"
+    ],
+    "lawAndDisruptionQuestions": [
+      "religion",
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Accompong Maroons",
+      "provenanceNotes": "Verify community-controlled usage and contested leadership claims directly."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "not-assessed",
+        "notes": "A stable, verifiably community-controlled site was not established in preflight.",
+        "sourceLeads": []
+      },
+      "oralHistory": {
+        "availability": "not-assessed",
+        "notes": "Oral-history repositories and community protocols need discovery.",
+        "sourceLeads": []
+      },
+      "primaryMaterial": {
+        "availability": "partial",
+        "notes": "Treaty and colonial records exist but cannot represent current community positions.",
+        "sourceLeads": [
+          {
+            "title": "The Rule of Law and the Public Transcript",
+            "url": "https://doi.org/10.1080/00086495.2020.1840055",
+            "authority": "Peer-reviewed study locating colonial records",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "viable",
+        "notes": "Recent open scholarship examines autonomy, ecology, and state relations.",
+        "sourceLeads": [
+          {
+            "title": "From displacement to statehood",
+            "url": "https://doi.org/10.1016/j.worlddev.2025.106948",
+            "authority": "Peer-reviewed open World Development article",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Community authorization is needed for oral, ceremonial, and internal governance material.",
+      "access": "Scholarship is accessible; community-controlled records remain a gap.",
+      "translation": "Jamaican language and Maroon terms require locally grounded interpretation.",
+      "freshness": "Current leadership and state disputes are volatile and require date-specific verification."
+    },
+    "evidenceRisks": [
+      "Treaty narratives are contested and cannot settle present jurisdiction.",
+      "Leadership statements may not represent community consensus."
+    ],
+    "researchObligations": [
+      {
+        "question": "Which current institutions and decisions are recognized across the community?",
+        "evidenceNeeded": "Community-controlled rules, diverse resident accounts, and current Jamaican legal analysis."
+      }
+    ]
+  },
+  {
+    "id": "sami-parliament-norway-representation",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Sámi electorate and Sámi Parliament in Norway",
+    "place": "Norway, including the Parliament's electoral constituencies",
+    "period": {
+      "start": "1989",
+      "end": "present",
+      "boundaryNotes": "Elected Sámi parliamentary representation after establishment; older siida institutions remain distinct."
+    },
+    "learnerQuestion": "What authority and accountability does the Sámi Parliament exercise within the Norwegian state?",
+    "contextTags": ["european"],
+    "politicalRelationships": [
+      "state",
+      "non-state",
+      "colonial",
+      "transitional"
+    ],
+    "organizationAndAuthority": [
+      "elected parliament",
+      "administrative delegation",
+      "consultation with state bodies"
+    ],
+    "institutionalQuestions": [
+      "land",
+      "commons",
+      "taxation",
+      "redistribution",
+      "ecology"
+    ],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Sámi",
+      "provenanceNotes": "Use Sámi Parliament language and preserve distinctions among Sámi languages and communities."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "viable",
+        "notes": "The Parliament publishes an English institutional self-description.",
+        "sourceLeads": [
+          {
+            "title": "About the Sámi Parliament",
+            "url": "https://sametinget.no/about-the-sami-parliament/",
+            "authority": "Official Sámi Parliament website",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "oralHistory": {
+        "availability": "not-assessed",
+        "notes": "Community and archival protocols require focused discovery.",
+        "sourceLeads": []
+      },
+      "primaryMaterial": {
+        "availability": "viable",
+        "notes": "The Sami Act provides the state-law boundary for the Parliament.",
+        "sourceLeads": [
+          {
+            "title": "Act on the Sami Parliament and other Sami legal matters",
+            "url": "https://lovdata.no/dokument/NLE/lov/1987-06-12-56/%C2%A72-12",
+            "authority": "Official Norwegian legal database",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "not-assessed",
+        "notes": "Research must include Sámi scholarship and rival assessments of representative authority.",
+        "sourceLeads": []
+      },
+      "permissions": "Public institutional texts are accessible; cultural and oral materials need separate permissions.",
+      "access": "Official English materials are available, while much scholarship may be in Nordic or Sámi languages.",
+      "translation": "Use qualified translation across Sámi and Norwegian sources.",
+      "freshness": "Election, consultation, and delegated-authority details require current checking."
+    },
+    "evidenceRisks": [
+      "The Parliament does not encompass all Sámi authority or every Sámi community.",
+      "State-law powers and political influence must not be conflated."
+    ],
+    "researchObligations": [
+      {
+        "question": "Where do formal powers end and consultation or political influence begin?",
+        "evidenceNeeded": "Current statutes, agreements, decisions, and critical Sámi scholarship."
+      }
+    ]
+  },
+  {
+    "id": "kahnawake-community-lawmaking-revision",
+    "status": "research-possibility",
+    "namedPeopleOrCommunity": "Kahnawa'kehró:non and Kahnawà:ke lawmaking bodies",
+    "place": "Kahnawà:ke Mohawk Territory, Québec, Canada",
+    "period": {
+      "start": "1995",
+      "end": "present",
+      "boundaryNotes": "Development and revision of the Community Decision Making and Review Process."
+    },
+    "learnerQuestion": "How do community participation, elected council authority, and aspirations for traditional government interact in Kahnawà:ke lawmaking?",
+    "contextTags": ["american"],
+    "politicalRelationships": [
+      "state",
+      "non-state",
+      "confederated",
+      "colonial",
+      "transitional"
+    ],
+    "organizationAndAuthority": [
+      "community lawmaking process",
+      "elected council",
+      "Rotinonhsón:ni relationships",
+      "traditional-government aspiration"
+    ],
+    "institutionalQuestions": [
+      "land",
+      "commons",
+      "trade",
+      "labor",
+      "taxation",
+      "redistribution",
+      "ecology"
+    ],
+    "powerQuestions": ["class", "gendered-power", "social-reproduction"],
+    "lawAndDisruptionQuestions": [
+      "customary-law",
+      "informal-authority",
+      "colonial-disruption"
+    ],
+    "selfDescription": {
+      "term": "Kahnawa'kehró:non",
+      "provenanceNotes": "Follow community sources for Kanien'kéha forms and distinguish them from Canadian administrative terminology."
+    },
+    "sourceFeasibility": {
+      "communityAuthored": {
+        "availability": "viable",
+        "notes": "The community lawmaking site publishes process history, revisions, and documents.",
+        "sourceLeads": [
+          {
+            "title": "What is the Community Decision Making and Review Process?",
+            "url": "https://kahnawakemakingdecisions.com/cdmp/",
+            "authority": "Kahnawà:ke community lawmaking portal",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "oralHistory": {
+        "availability": "partial",
+        "notes": "Community engagement reports synthesize participant voices; reuse must respect community ownership.",
+        "sourceLeads": [
+          {
+            "title": "Kahnawà:ke Governance Project community engagement executive summary",
+            "url": "https://kgov.ca/wp-content/uploads/2024/06/report-on-kgov-community-engagement-executive-summary.pdf",
+            "authority": "Community governance project report",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "primaryMaterial": {
+        "availability": "viable",
+        "notes": "Current process rules, flowcharts, hearings, and enacted laws are publicly available.",
+        "sourceLeads": [
+          {
+            "title": "Recent CDMRP news",
+            "url": "https://www.kahnawakemakingdecisions.com/news/",
+            "authority": "Official community process updates",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "independentScholarship": {
+        "availability": "partial",
+        "notes": "Published scholarship exists, but current process revision needs updated independent analysis.",
+        "sourceLeads": [
+          {
+            "title": "Indigenous Participatory Democracy: A Model of Kahnawà:ke",
+            "url": "https://doi.org/10.1111/j.1541-0064.2012.00418.x",
+            "authority": "Peer-reviewed scholarship by a Kahnawà:ke scholar",
+            "checkedAt": "2026-09-06"
+          }
+        ]
+      },
+      "permissions": "Community ownership and quotation expectations must be confirmed beyond public linking.",
+      "access": "Strong public community materials exist; internal deliberation is not presumed available.",
+      "translation": "Retain Kanien'kéha terminology and use community-authorized glosses.",
+      "freshness": "The process is under revision, so dates and superseded documents must remain explicit."
+    },
+    "evidenceRisks": [
+      "The current process is not equivalent to traditional government.",
+      "Consultation records do not automatically establish representativeness."
+    ],
+    "researchObligations": [
+      {
+        "question": "How do proposed revisions change participation, authority, and accountability?",
+        "evidenceNeeded": "Final revised rules, hearing records, and diverse community responses."
+      }
+    ]
+  }
+]

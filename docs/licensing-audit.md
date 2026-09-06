@@ -66,7 +66,7 @@ the target platform and preserve every required license or notice text.
 | Software | `src/`, `scripts/`, tests, configuration, workflows | Choose one code license and state whether examples and test fixtures follow it. |
 | Canonical data | `content/domain/` typed entities, Statements, Sources, and relationships | Decide whether database-like reuse should follow the narrative license, a separate data license/tool, or both database and record-content terms. |
 | Narrative | `content/domain/presentation/narratives/` and other authored explanatory prose | Choose a content license only after confirming the owner controls all included wording. |
-| Documentation | `docs/`, `README.md`, `CONTRIBUTING.md`, and repository skills | Decide whether documentation follows code or narrative terms; say so rather than relying on inference. |
+| Documentation and research planning | `docs/`, `research/`, `README.md`, `CONTRIBUTING.md`, and repository skills | Decide whether documentation and non-public research-planning metadata follow code or narrative terms; say so rather than relying on inference. |
 | Generated artifacts | deployed HTML, CSS, and JavaScript in `dist/` | State that outputs inherit the applicable input boundaries and preserve third-party notices. |
 | Legacy archive | `archive/legacy-research/` | Exclude unless and until provenance is resolved item by item. |
 | Future third-party assets | fonts, icons, flags, logos, images, media, datasets, quotations, imported metadata | Require an inventory record before commit or publication, including source, provider, terms, modifications, distribution, and attribution. |

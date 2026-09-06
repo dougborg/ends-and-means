@@ -8,6 +8,8 @@ pnpm verify
 
 The same command runs in CI and invokes `pnpm audit:content-integrity` exactly once after the production build.
 It validates the canonical graph, sentence-per-line narrative source, fixture-backed integrity rules, the production build, archive exclusion, the content-attention audit, every rendered route, and representative browser checks.
+It also runs `pnpm audit:corpus-diversity` against the non-public research-candidate matrix before application checks.
+That audit fails on malformed candidate scope or feasibility data and reports portfolio omissions or concentration as attention, without creating scores, quotas, rankings, or live records.
 
 ## Failures and attention signals
 

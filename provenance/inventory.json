@@ -6,6 +6,7 @@
     { "id": "application-code", "pathPrefix": "src/", "material": "repository-owned", "kind": "code", "distribution": "source-and-site" },
     { "id": "canonical-data", "pathPrefix": "content/domain/", "material": "repository-owned", "kind": "canonical-data", "distribution": "source-and-site" },
     { "id": "documentation", "pathPrefix": "docs/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
+    { "id": "research-planning", "pathPrefix": "research/", "material": "repository-owned", "kind": "documentation", "distribution": "source-only" },
     { "id": "archive", "pathPrefix": "archive/legacy-research/", "material": "mixed-unresolved", "kind": "archive", "distribution": "source-only" },
     { "id": "automation", "pathPrefix": "scripts/", "material": "repository-owned", "kind": "code", "distribution": "source-only" },
     { "id": "tests", "pathPrefix": "tests/", "material": "repository-owned", "kind": "code", "distribution": "source-only" },

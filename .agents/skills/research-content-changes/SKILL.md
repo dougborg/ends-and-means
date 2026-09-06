@@ -136,6 +136,10 @@ Do not manufacture a section to satisfy this sequence; record an exact research
 gap when evidence is not ready.
 
 Treat geographic and organizational diversity as foundational coverage.
+Use the non-public candidate matrix described in
+`docs/corpus-diversity-matrix.md` to inspect multidimensional source feasibility;
+never turn its context tags into quotas, rankings, regional essences, or live
+canonical records.
 Research bounded, society-specific formations, including Indigenous,
 kinship-based, stateless, nomadic or pastoral, maritime or island, city-state,
 imperial, colonial, and hybrid institutions, using the evidence traditions
