@@ -38,7 +38,9 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "collective-capital-formation-financing-methods",
+        "meidner-collective-funds-proposal",
+        "swedish-1981-funds-cash-financing",
+        "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
         "collective-capital-formation-rights-boundary",
       ],
@@ -54,7 +56,9 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "meidner-collective-funds-proposal",
-        "collective-capital-formation-swedish-case-boundary",
+        "funds-statutory-design",
+        "funds-abolished",
+        "collective-capital-formation-swedish-case-classification",
       ],
       relatedEntityRefs: [
         { kind: "approach" as const, id: "swedish-wage-earner-fund-program" },
@@ -67,8 +71,9 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "collective-capital-formation-beneficiary-distance",
-        "collective-capital-formation-activist-purpose-objection",
+        "collective-capital-formation-supporter-distance",
+        "collective-capital-formation-unclear-benefits-objection",
+        "collective-capital-formation-purpose-objection",
       ],
     },
   ],

@@ -208,13 +208,26 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-financing-methods",
+      id: "swedish-1981-funds-cash-financing",
       kind: "statement",
-      label: "Collective funds can acquire assets through different financing methods",
+      label: "The 1981 Swedish proposal used cash financing",
       description:
-        "A narrow distinction between share transfers and cash-financed asset purchases.",
+        "A sourced observation about the revised proposal's asset-acquisition mechanism.",
+      statementKind: "observation",
+      text: "The 1981 Swedish wage-earner-fund proposal replaced compulsory share issuance with a levy on excess profits that funds would use to buy shares.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "collective-capital-formation-financing-governance-boundary",
+      kind: "statement",
+      label: "A financing method does not establish collective governance",
+      description:
+        "A boundary between how a fund acquires assets and how authority over them is allocated.",
       statementKind: "editorial-interpretation",
-      text: "A collective-capital institution can receive newly issued shares or use contributed cash to purchase shares; either method can accumulate collective holdings, but the method does not by itself determine who governs the fund.",
+      text: "How a fund acquires assets does not establish who governs the resulting holdings.",
       ...reviewed,
     },
   },
@@ -260,39 +273,52 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-swedish-case-boundary",
+      id: "collective-capital-formation-swedish-case-classification",
       kind: "statement",
       label: "Sweden's enacted funds were one constrained design",
       description:
         "A non-embodiment boundary between the broad concept and one bounded Case.",
       statementKind: "classification",
-      text: "Sweden's enacted wage-earner funds accumulated collectively financed shareholdings, but statutory voting caps and their limited operating period made them one constrained instance rather than a complete realization of collective capital formation or collective control.",
+      text: "Sweden's enacted wage-earner funds are one bounded case related to collective capital formation, not a definition or complete realization of the concept.",
       ...reviewed,
     },
   },
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-beneficiary-distance",
+      id: "collective-capital-formation-supporter-distance",
       kind: "statement",
       label: "Collective funds can feel remote from intended beneficiaries",
       description:
         "A mass-support and accountability objection drawn from the Swedish fund debate.",
       statementKind: "observation",
-      text: "Warner finds that most Social Democratic voters and union members treated wage-earner funds as abstract and distant from everyday concerns, while the funds' tangible benefits remained unclear to many intended supporters.",
+      text: "Warner argues that most Social Democratic voters and union members treated wage-earner funds as distant from their everyday concerns.",
       ...reviewed,
     },
   },
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-activist-purpose-objection",
+      id: "collective-capital-formation-unclear-benefits-objection",
       kind: "statement",
-      label: "Some labor activists opposed making capital accumulation the dominant purpose",
+      label: "Intended supporters could not identify tangible benefits",
       description:
-        "A distinct objection about displacement of worker influence as the proposal's purpose.",
+        "A distinct objection about the proposal's material legibility to beneficiaries.",
       statementKind: "observation",
-      text: "Warner finds that activist enthusiasm waned as Swedish fund proposals emphasized capital accumulation over worker influence and a transition to socialism, and that disappointment with this shift recurred at the 1981 LO and Social Democratic congresses.",
+      text: "Warner reports recurring complaints that the tangible benefits of wage-earner funds were unclear to intended supporters.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "collective-capital-formation-purpose-objection",
+      kind: "statement",
+      label: "Some activists objected to capital formation displacing worker influence",
+      description:
+        "A distinct objection about which purpose the proposal placed first.",
+      statementKind: "observation",
+      text: "Warner reports that objections to capital formation displacing worker power and influence recurred at the 1981 LO and Social Democratic congresses.",
       ...reviewed,
     },
   },
