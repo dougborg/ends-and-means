@@ -32,6 +32,6 @@ Schema failures are violations; missing-context and concentration findings remai
 
 ## Publication boundary
 
-The matrix lives under `research/`, outside `content/domain/` and every page or runtime import; the content-integrity gate scans Astro and other runtime modules and fails an import from `research/corpus-diversity`.
+The matrix lives under `research/`, outside `content/domain/` and every page or runtime import; the content-integrity gate scans Astro and other runtime modules and fails imports from every private `research/` subtree.
 It cannot create a public entity, Dossier, Subject Guide, route, or search result.
 Moving a candidate into canonical research requires a separate evidence-backed pull request under the normal source and model contracts.
