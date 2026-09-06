@@ -35,8 +35,8 @@ describe("canonical vertical slice", () => {
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "bonjol-melayu-ulayat-governance",
-      "combahee-river-collective-1974-1980",
       "china-dual-track-market-reforms",
+      "combahee-river-collective-1974-1980",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
       "iceland-parental-leave-2000-2018",

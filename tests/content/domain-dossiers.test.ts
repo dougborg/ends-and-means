@@ -159,12 +159,16 @@ const expectedMissingConceptDossiers = [
   "institutional-formation",
   "institutional-reorganization",
   "legal-order",
+  "liberal-feminism",
   "market-coordination",
   "market-socialism",
+  "marxist-feminism",
   "matriarchy",
   "mixed-economy",
   "private-property",
+  "radical-feminism",
   "social-class",
+  "socialist-feminism",
   "statelessness",
   "wage-labor",
 ];
@@ -186,8 +190,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 18,
-      total: 37,
+      covered: 19,
+      total: 42,
       missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(
