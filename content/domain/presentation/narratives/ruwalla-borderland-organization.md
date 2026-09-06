@@ -3,15 +3,15 @@ Their organization combined mobile resource use, layered ʿAnaza affiliation, re
 
 ## whose-terms-describe-the-formation
 
-Ruwalla, also rendered Rwala, names the historical collective in the sources.
-Stocker and Çiçek use *Bedouin* and *tribe* as scholarly classifications, while mandate records classified people through tribal nationality and recognized shaykhs.
+Stocker names Ruwalla as the historical collective and classifies it in English as a camel-breeding Bedouin tribe.
+That scholarly classification does not establish every member’s self-description; Çiçek also shows mandate records classifying people through tribal nationality and recognized shaykhs.
 The wider ʿAnaza genealogy could support alliance, but it did not turn every affiliated group into one centralized polity.
 
 ## how-did-leadership-work
 
 The Al Shaʿlan family held the mashyakha, the position through which a paramount shaykh represented Ruwalla collectives to other leaders and governments.
-That office was not unlimited command: Çiçek argues that a shaykh had to persuade fellow tribespeople when state demands conflicted with their interests.
-Leadership therefore connected internal consent-making with external negotiation.
+Çiçek’s broader regional account cautions that a Bedouin shaykh might need persuasion when state demands conflicted with fellow tribespeople’s interests.
+The present evidence does not establish that general observation as a Ruwalla-specific rule in use; it establishes the mashyakha and external representation more directly.
 
 ## why-did-mobility-and-territory-matter
 
@@ -28,7 +28,7 @@ State incorporation and Ruwalla agency developed together rather than one replac
 ## what-can-the-sources-establish
 
 The historical account is reconstructed mainly through French and British archives, Arabic newspapers, private papers, travel accounts, and later scholarship.
-Cross-reading those records recovers political bargaining better than any one state archive, but it still preserves elite men’s actions more fully than the views of women and non-elite pastoralists.
+The reviewed archive identifies political bargaining, but it does not yet establish how women and non-elite pastoralists described the same decisions.
 Later ethnography cannot be projected backward as proof that institutions or identities remained unchanged.
 
 ## how-should-this-case-be-compared
