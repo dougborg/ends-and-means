@@ -503,6 +503,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "democracy-inclusion-measurement-boundary",
+    obligationType: "counterevidence",
+    target: "concept:democracy#measurement",
+    status: "open",
+  },
+  {
     id: "economic-democracy-causal-identification",
     obligationType: "research-gap",
     target:
@@ -553,6 +559,12 @@ const expectedOpenResearchObligations = [
     obligationType: "research-gap",
     target:
       "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
+    status: "open",
+  },
+  {
+    id: "republic-self-description-exclusion-boundary",
+    obligationType: "counterargument",
+    target: "concept:republic#disputes",
     status: "open",
   },
   {

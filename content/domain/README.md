@@ -96,3 +96,10 @@ but cannot support or challenge promoted empirical Statements. Eligible
 support must resolve through the Source to an actual non-fiction Work. The
 compiler emits entities, relationships, and indexes in stable ID order;
 authoring-file order is not semantic.
+
+Concept relationships are likewise non-inheriting. For example, Democracy and
+Republic are related Concepts, while representative government is an Approach,
+electoral representation and sortition are Means, and equal political standing
+and non-domination are attributed Ends. A constitutional label, institutional
+procedure, or related political tradition must not silently transfer those
+claims to another record.
