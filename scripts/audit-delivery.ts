@@ -2,7 +2,14 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
-import { auditDeliverySnapshot, deliverySnapshotSchema, reviewEvidenceForHead, type DeliveryItem, type DeliverySnapshot } from "./delivery-state.ts";
+import {
+  auditDeliverySnapshot,
+  deliverySnapshotSchema,
+  githubComparePath,
+  reviewEvidenceForHead,
+  type DeliveryItem,
+  type DeliverySnapshot,
+} from "./delivery-state.ts";
 
 const projectViewSchema = z.object({ number: z.number().int().positive(), title: z.string().min(1), public: z.boolean() }).passthrough();
 const projectItemSchema = z
@@ -83,7 +90,7 @@ function ownershipFrom(comments: Array<{ body: string }>) {
 }
 
 function branchEvidence(branch: string) {
-  const comparison = parseJson(gh(["api", `repos/dougborg/ends-and-means/compare/main...${branch}`]), compareSchema, `branch ${branch}`);
+  const comparison = parseJson(gh(["api", githubComparePath("main", branch)]), compareSchema, `branch ${branch}`);
   const main = parseJson(gh(["api", "repos/dougborg/ends-and-means/git/ref/heads/main"]), z.object({ object: z.object({ sha: z.string() }) }), "main ref");
   return {
     baseCurrent: comparison.merge_base_commit.sha === main.object.sha,
