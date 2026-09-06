@@ -12,6 +12,9 @@ const defaultRoutes = [
   "/cases/zapatista-autonomy-chiapas-1994-present/",
   "/cases/ruwalla-borderland-organization/",
   "/cases/jinst-postcollective-pastoral-governance/",
+  "/cases/bonjol-melayu-ulayat-governance/",
+  "/cases/iceland-parental-leave-2000-2018/",
+  "/cases/italian-fascist-dictatorship-1925-1943/",
   "/compare/",
   "/concepts/economic-democracy/",
   "/concepts/democracy/",
@@ -21,6 +24,11 @@ const defaultRoutes = [
   "/guides/economic-democracy/",
   "/guides/socialism/",
   "/guides/communism/",
+  "/guides/authoritarianism/",
+  "/guides/capitalism/",
+  "/guides/feminism/",
+  "/guides/liberalism/",
+  "/guides/matriliny-property-authority/",
   "/guides/kahnawake-community-lawmaking/",
   "/guides/ruwalla-borderland-organization/",
   "/guides/jinst-postcollective-pastoral-governance/",
@@ -182,6 +190,23 @@ test("disclosures expose state and work from the keyboard", async ({ page }) => 
   await page.keyboard.press("Enter");
   await expect(disclosure).toHaveAttribute("open", "");
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
+});
+
+test("forced colors preserve focus, evidence marks, and current-page state", async ({ page }) => {
+  await page.emulateMedia({ forcedColors: "active" });
+  await page.goto("/guides/feminism/", { waitUntil: "networkidle" });
+
+  const currentPage = page.locator('.primary-nav a[aria-current="page"]');
+  await expect(currentPage).toHaveCSS("text-decoration-line", "underline");
+
+  const evidenceSummary = page.locator("details.subject-guide__evidence > summary").first();
+  await evidenceSummary.focus();
+  await expect(evidenceSummary).toHaveCSS("outline-style", "solid");
+  await evidenceSummary.click();
+
+  const evidenceClaim = page.locator("details.subject-guide__evidence .canonical-claim").first();
+  await expect(evidenceClaim).toBeVisible();
+  await expect(evidenceClaim).toHaveCSS("border-top-style", "solid");
 });
 
 test("subject guide works without JavaScript and keeps evidence adjacent", async ({ browser }, testInfo) => {
