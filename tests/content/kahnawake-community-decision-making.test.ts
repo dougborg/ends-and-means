@@ -102,6 +102,19 @@ describe("diverse political-organization model boundaries", () => {
       kind: "case",
       id: "kahnawake-community-lawmaking",
     });
+    expect(guide).toMatchObject({
+      label: "Kahnawà:ke community law-making",
+      searchQueries: expect.arrayContaining([
+        { query: "Kahnawà:ke community law-making" },
+      ]),
+      sections: expect.arrayContaining([
+        expect.objectContaining({
+          role: "short-answer",
+          heading:
+            "What is the Kahnawà:ke Community Decision Making and Review Process?",
+        }),
+      ]),
+    });
     expect(
       guide?.searchQueries.find(({ query }) => query === "tribal organization"),
     ).toMatchObject({
