@@ -30,7 +30,8 @@ function guideDocument(documents: AuthoringDocument[]) {
       candidate.documentType === "subject-guide" &&
       candidate.guide.id === "guide-economic-democracy",
   );
-  if (!document) throw new Error("Missing economic-democracy SubjectGuide fixture");
+  if (!document)
+    throw new Error("Missing economic-democracy SubjectGuide fixture");
   return document;
 }
 
@@ -129,13 +130,14 @@ describe("compiled learner SubjectGuide composition", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 4,
-      total: 4,
+      live: 5,
+      total: 5,
       liveIds: [
         "guide-communism",
         "guide-economic-democracy",
         "guide-kahnawake-community-lawmaking",
         "guide-socialism",
+        "guide-tawantinsuyu-imperial-organization",
       ],
     });
   });
@@ -150,11 +152,12 @@ describe("compiled learner SubjectGuide composition", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(4);
+      expect(graph.subjectGuideRecords).toHaveLength(5);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
         "guide-communism",
         "guide-kahnawake-community-lawmaking",
         "guide-socialism",
+        "guide-tawantinsuyu-imperial-organization",
       ]);
       expect(subjectGuideById(guide.id, graph)).toBeUndefined();
       expect(subjectGuideBySlug(guide.slug, graph)).toBeUndefined();
