@@ -169,7 +169,10 @@ function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
   if (item.status === "In progress" && !item.ownership) {
     findings.push({ code: "WIP_OWNERSHIP", item: item.number, message: `#${item.number} lacks owner, branch, and worktree evidence.` });
   }
-  if (["In progress", "In review"].includes(item.status) && item.baseCurrent !== true) {
+  if (item.status === "In progress" && item.baseCurrent === undefined) {
+    findings.push({ code: "STARTING_BASE", item: item.number, message: `#${item.number} has no recorded base comparison for its active branch.` });
+  }
+  if (item.status === "In review" && item.baseCurrent !== true) {
     findings.push({ code: "CURRENT_BASE", item: item.number, message: `#${item.number} is not proven current with its base.` });
   }
   if (["In progress", "In review"].includes(item.status) && item.historyLinear !== true) {

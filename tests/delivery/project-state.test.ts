@@ -62,6 +62,17 @@ describe("delivery Project policy", () => {
     item(stale, 2).updatedAt = undefined;
     expect(codes(stale)).toContain("WIP_FRESHNESS_UNAVAILABLE");
   });
+
+  it("allows main to advance during valid implementation but blocks stale review handoff", async () => {
+    const snapshot = await fixture();
+    const active = item(snapshot, 1);
+    active.baseCurrent = false;
+    expect(codes(snapshot)).not.toContain("CURRENT_BASE");
+    expect(codes(snapshot)).not.toContain("STARTING_BASE");
+    const review = item(snapshot, 7);
+    review.baseCurrent = false;
+    expect(codes(snapshot)).toContain("CURRENT_BASE");
+  });
 });
 
 describe("delivery evidence and dependencies", () => {
@@ -117,13 +128,15 @@ describe("delivery evidence and dependencies", () => {
   it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
     const snapshot = await fixture();
     item(snapshot, 1).ownership = undefined;
-    item(snapshot, 1).baseCurrent = false;
+    item(snapshot, 1).baseCurrent = undefined;
+    item(snapshot, 2).baseCurrent = false;
     item(snapshot, 2).historyLinear = false;
     item(snapshot, 3).workstream = undefined;
     item(snapshot, 7).reviewEvidence = { copilot: true, adversarial: false };
     snapshot.repositoryLabels = snapshot.repositoryLabels.filter((label) => label !== "track:depictions");
     expect(codes(snapshot)).toEqual(expect.objectContaining(new Set([
       "WIP_OWNERSHIP",
+      "STARTING_BASE",
       "CURRENT_BASE",
       "LINEAR_HISTORY",
       "WIP_WORKSTREAM",
