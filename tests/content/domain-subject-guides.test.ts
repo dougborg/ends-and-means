@@ -27,9 +27,10 @@ function clonedDocuments() {
 function guideDocument(documents: AuthoringDocument[]) {
   const document = documents.find(
     (candidate): candidate is SubjectGuideDocument =>
-      candidate.documentType === "subject-guide",
+      candidate.documentType === "subject-guide" &&
+      candidate.guide.id === "guide-economic-democracy",
   );
-  if (!document) throw new Error("Missing SubjectGuide fixture");
+  if (!document) throw new Error("Missing economic-democracy SubjectGuide fixture");
   return document;
 }
 
@@ -167,6 +168,11 @@ describe("compiled learner SubjectGuide composition", () => {
     expect(reversed.indexes.subjectGuideIdsBySlug).toEqual(
       graph.indexes.subjectGuideIdsBySlug,
     );
+  });
+
+  it("selects the economic-democracy mutation fixture independent of document order", () => {
+    const documents = clonedDocuments().reverse();
+    expect(guideDocument(documents).guide.id).toBe("guide-economic-democracy");
   });
 });
 

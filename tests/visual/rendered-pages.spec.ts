@@ -14,6 +14,7 @@ const defaultRoutes = [
   "/concepts/socialism/",
   "/concepts/communism/",
   "/guides/economic-democracy/",
+  "/guides/kahnawake-community-lawmaking/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",
@@ -169,6 +170,16 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   } finally {
     await context.close();
   }
+});
+
+test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) => {
+  await page.goto("/guides/kahnawake-community-lawmaking/");
+  await expect(
+    page.getByRole("heading", { name: "Kahnawà:ke community law-making", level: 1 }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/not an example of one universal “tribal” system/),
+  ).toBeVisible();
 });
 
 test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {
