@@ -436,11 +436,11 @@ export const kahnawakeCommunityDecisionMakingEvidenceDocuments = [
     entity: {
       id: "kahnawake-cdmrp-type-two-design",
       kind: "statement",
-      label: "Type II laws give Council a larger initiating role",
+      label: "Type II law development consults stakeholders in two stages",
       description:
-        "A formal distinction for regulatory, financial, administrative, or sector-specific laws.",
+        "A formal sequence for regulatory, financial, administrative, or sector-specific laws.",
       statementKind: "observation",
-      text: "For a Type II law affecting a sector or specific group, Council determines the initial mandate, scope, purpose, and intent before stakeholder consultation, public review, and enactment.",
+      text: "For a Type II law affecting a sector or specific group, initial stakeholder consultation helps develop the proposal before the chiefs or Council are asked to establish its mandate, scope, purpose, and intent; further community and stakeholder consultation follows as the draft proceeds toward public review and enactment.",
       ...reviewed,
     },
   },

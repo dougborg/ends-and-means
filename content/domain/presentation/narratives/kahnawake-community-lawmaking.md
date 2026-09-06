@@ -14,7 +14,7 @@ Kahnawà:ke approved the process in 2005 to widen direct participation in law-ma
 Horn-Miller’s 2013 account defines consensus as responsive deliberation rather than unanimity, with public review before Council enactment.
 In January 2024, the Legislative Commission required pre-registration and ten participants and allowed advancement after two under-attended attempts; in April it instead required a drafting-committee recommendation and commission decision on next steps.
 Its process page says revisions remain underway, so these notices do not establish every rule now in force.
-For sector-specific or administrative laws, Council sets the mandate before consultation and public review.
+For sector-specific or administrative laws, stakeholders are consulted while a proposal is developed, the chiefs or Council are then asked to establish its mandate, and further consultation follows before public review and enactment.
 
 ## is-this-simply-traditional-government
 
