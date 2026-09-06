@@ -44,7 +44,7 @@ substantially revising reader-facing summaries.
 Draft from canonical Statements or closed-source notes, verify each factual
 clause against its evidence, and compare the draft with consulted sources for
 suspiciously close phrasing.
-The content audit reports objective attention signals; it does not replace
+The content-integrity harness and audit report objective attention signals; they do not replace
 human review for accuracy, fairness, plagiarism risk, focus, or publication.
 
 Narrative prose lives in one Markdown file per Dossier under
@@ -53,6 +53,8 @@ The adjacent typed manifest owns identity, publication state, section order,
 trace status, Statement IDs, and related entities.
 Use one semantic sentence per source line without visual hard breaks or a prose
 line-length cap, then run `pnpm lint:markdown`.
+Run `pnpm verify` before handoff for the fixture-backed publication gate and actionable missing-content report.
+See the [content integrity harness](docs/content-integrity-harness.md) for the failure and attention boundary.
 
 ## Review standards
 
@@ -113,6 +115,7 @@ available; an unavailable API or credential result is not a clean audit.
   pins required for Linux clean installs of optional WASM dependencies.
 - Astro's strict type check, canonical graph validation, unit tests, route
   tests, production build, and browser review remain required.
+- CI invokes `pnpm verify`, which owns the content-integrity audit and rendered-publication checks once.
 - V8 coverage is enforced for runtime TypeScript under `src/lib`: at least 88%
   statements, 87% branches, 100% functions, and 90% lines. Raise thresholds as
   coverage improves; do not lower them to accommodate a change.
@@ -139,10 +142,10 @@ pages have been evaluated in a browser. Build the site and run:
 
 ```sh
 pnpm exec playwright install chromium
-pnpm review:visual
+pnpm verify
 ```
 
-The review renders representative pages at desktop, tablet, and mobile widths;
+The command builds and audits the content, then renders representative pages at desktop, tablet, and mobile widths;
 saves full-page screenshots under `.artifacts/visual-review`; and fails on
 browser errors, horizontal overflow, undefined CSS design tokens, or WCAG text
 contrast failures. To focus the review on changed routes, provide a
