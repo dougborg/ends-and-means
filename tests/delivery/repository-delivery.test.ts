@@ -77,4 +77,10 @@ describe("repository delivery configuration", () => {
     await replace(root, ".github/actions/verify/action.yml", "actions/upload-pages-artifact@", "actions/upload-artifact@");
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_ARTIFACT");
   });
+
+  it("rejects additional Pages deploy write scopes", async () => {
+    const root = await repositoryFixture();
+    await replace(root, ".github/workflows/pages.yml", "      pages: write", "      pages: write\n      contents: write");
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_PERMISSIONS");
+  });
 });

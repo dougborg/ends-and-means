@@ -153,7 +153,13 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
     (step) => String(step.uses).startsWith("actions/upload-pages-artifact@") && step.if === "inputs.upload-pages-artifact == 'true'",
   );
   requireRule(pagesProducer && compositeProducer, "PAGES_ARTIFACT", "Pages must request and produce the verified Pages artifact.");
-  requireRule(record(record(pagesJobs.deploy).permissions).pages === "write" && record(record(pagesJobs.deploy).permissions)["id-token"] === "write", "PAGES_PERMISSIONS", "Only Pages deploy should receive Pages and OIDC write permissions.");
+  const deployPermissions = record(record(pagesJobs.deploy).permissions);
+  const deployWriteScopes = Object.entries(deployPermissions).filter(([, access]) => access === "write").map(([scope]) => scope).toSorted();
+  requireRule(
+    deployWriteScopes.length === 2 && deployWriteScopes[0] === "id-token" && deployWriteScopes[1] === "pages",
+    "PAGES_PERMISSIONS",
+    "Pages deploy must have exactly Pages and OIDC write permissions.",
+  );
   const artifactNames = allSteps.flatMap(({ step }) => (String(step.uses).startsWith("actions/upload-artifact@") ? [record(step.with).name] : []));
   requireRule(artifactNames.every((name) => typeof name === "string" && !name.includes("${{")), "ARTIFACT_NAME", "Artifact names must be deterministic.");
   return findings;

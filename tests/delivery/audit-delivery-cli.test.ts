@@ -1,4 +1,7 @@
 import { spawnSync } from "node:child_process";
+import { chmodSync, mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const script = new URL("../../scripts/audit-delivery.ts", import.meta.url).pathname;
@@ -22,6 +25,23 @@ describe("delivery audit result classes", () => {
     const result = run(["--live-project"], "");
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: UNAVAILABLE");
+  });
+
+  it("reports actionable gh failures as errors rather than unavailable API", () => {
+    const bin = mkdtempSync(join(tmpdir(), "ends-means-gh-"));
+    const executable = join(bin, "gh");
+    writeFileSync(executable, "#!/bin/sh\necho 'gh: Not Found (HTTP 404)' >&2\nexit 1\n");
+    chmodSync(executable, 0o755);
+    const result = run(["--live-project"], bin);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: ERROR");
+    expect(result.stderr).toContain("HTTP 404");
+  });
+
+  it("reports an omitted snapshot path as specific invalid input", () => {
+    const result = run(["--project-snapshot"]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: INVALID (--project-snapshot requires a path.)");
   });
 
   it("distinguishes unexpected input errors", () => {

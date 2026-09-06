@@ -107,6 +107,13 @@ describe("delivery evidence and dependencies", () => {
     expect(canPromote(snapshot, candidate)).toBe(false);
   });
 
+  it("accepts a named dependency as a concrete Blocked condition", async () => {
+    const snapshot = await fixture();
+    const blocked = item(snapshot, 8);
+    blocked.body = "Depends on #130 establishing the reviewed navigation contract.";
+    expect(codes(snapshot)).not.toContain("BLOCKER_UNNAMED");
+  });
+
   it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
     const snapshot = await fixture();
     item(snapshot, 1).ownership = undefined;
