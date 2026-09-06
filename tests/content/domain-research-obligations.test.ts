@@ -507,6 +507,26 @@ const expectedOpenResearchObligations = [
         status: "open",
       },
       {
+        id: "kahnawake-cdmrp-jurisdiction-enforcement",
+        obligationType: "research-gap",
+        target: "case:kahnawake-community-lawmaking",
+        status: "open",
+      },
+      {
+        id: "kahnawake-cdmrp-participation-representativeness",
+        obligationType: "counterevidence",
+        target:
+          "case:kahnawake-community-lawmaking#what-do-we-know-about-practice",
+        status: "open",
+      },
+      {
+        id: "kahnawake-governing-authority-legitimacy",
+        obligationType: "research-gap",
+        target:
+          "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
+        status: "open",
+      },
+      {
         id: "social-democracy-postwar-conditions",
         obligationType: "research-gap",
         target: "concept:social-democracy#where-the-tradition-came-from",

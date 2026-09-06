@@ -128,9 +128,12 @@ describe("compiled learner SubjectGuide composition", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 1,
-      total: 1,
-      liveIds: ["guide-economic-democracy"],
+      live: 2,
+      total: 2,
+      liveIds: [
+        "guide-economic-democracy",
+        "guide-kahnawake-community-lawmaking",
+      ],
     });
   });
 
@@ -144,8 +147,10 @@ describe("compiled learner SubjectGuide composition", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(1);
-      expect(graph.subjectGuides).toEqual([]);
+      expect(graph.subjectGuideRecords).toHaveLength(2);
+      expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
+        "guide-kahnawake-community-lawmaking",
+      ]);
       expect(subjectGuideById(guide.id, graph)).toBeUndefined();
       expect(subjectGuideBySlug(guide.slug, graph)).toBeUndefined();
     },

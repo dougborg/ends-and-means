@@ -28,6 +28,7 @@ describe("canonical vertical slice", () => {
       "swedish-wage-earner-fund-program",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
+      "kahnawake-community-lawmaking",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
     ]);

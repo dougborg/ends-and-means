@@ -11,6 +11,86 @@ export const openResearchObligationDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "kahnawake-cdmrp-participation-representativeness",
+      kind: "research-obligation",
+      label: "Participation and representation in Kahnawà:ke law-making",
+      description:
+        "A focused empirical test of who takes part in community law-making and whose views reach enacted laws.",
+      obligationType: "counterevidence",
+      question:
+        "From 2009 through 2026, did participants in Kahnawà:ke’s Type I law-making hearings represent the affected community across different laws?",
+      target: { kind: "case", id: "kahnawake-community-lawmaking" },
+      targetSectionId: "what-do-we-know-about-practice",
+      addressedStatementIds: [
+        "kahnawake-cdmrp-type-one-design",
+        "kahnawake-cdmrp-survey-attendance",
+        "kahnawake-cdmrp-survey-concerns",
+        "kahnawake-cdmrp-survey-sampling-limit",
+      ],
+      currentLimitation:
+        "The formal process gives participants a voice, but the available survey does not establish who attended particular law-making sessions or whether participants reflected the people affected by each law.",
+      evidenceNeeded:
+        "Session-level attendance records, participant characteristics collected with community approval, draft-to-final change records, and interviews or surveys that include nonparticipants and affected groups.",
+      scope:
+        "Type I Kahnawà:ke laws and hearings from the first public hearing in 2009 through 2026; it does not infer participation in Longhouse, Confederacy, electoral, or informal community decisions.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "kahnawake-governing-authority-legitimacy",
+      kind: "research-obligation",
+      label: "Competing sources of governing authority in Kahnawà:ke",
+      description:
+        "A focused question about how community members understand the authority of institutions that the current evidence keeps distinct.",
+      obligationType: "research-gap",
+      question:
+        "How do Kahnawa’kehró:non distinguish the authority of the Mohawk Council, Longhouse institutions, the Legislative Commission, and community hearing participants in law-making?",
+      target: { kind: "case", id: "kahnawake-community-lawmaking" },
+      targetSectionId: "is-this-simply-traditional-government",
+      addressedStatementIds: [
+        "kahnawake-cdmrp-hybrid-classification",
+        "kahnawake-cdmrp-trust-contestation",
+      ],
+      currentLimitation:
+        "Horn-Miller records rival positions and mistrust but does not provide a current, institution-by-institution account of legitimacy across the community.",
+      evidenceNeeded:
+        "Community-directed interviews, oral histories where participants authorize their use, institutional records, and research that preserves differences among political, legal, social, and spiritual authority.",
+      scope:
+        "Kahnawà:ke law-making authority from 2005 through 2026; it does not generalize to every Kanien’kehá:ka community or to the Haudenosaunee Confederacy as a whole.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "kahnawake-cdmrp-jurisdiction-enforcement",
+      kind: "research-obligation",
+      label: "Jurisdiction and enforcement of Kahnawà:ke laws",
+      description:
+        "A bounded institutional question about how law-making authority connects to enforcement when legal orders overlap.",
+      obligationType: "research-gap",
+      question:
+        "For Kahnawà:ke laws enacted through the community process from 2005 through 2026, how did Canadian and Quebec institutions affect recognition and enforcement?",
+      target: { kind: "case", id: "kahnawake-community-lawmaking" },
+      addressedStatementIds: [
+        "indian-act-band-administrative-definition",
+        "indian-act-band-council-definition",
+        "kahnawake-case-not-tribal-embodiment",
+      ],
+      currentLimitation:
+        "The current case identifies overlapping community and Canadian institutional categories but does not trace recognition, conflict-of-law rules, or enforcement for particular enacted laws.",
+      evidenceNeeded:
+        "Selected enacted laws, court and tribunal records, enforcement agreements, administrative records, and community accounts for a preselected sample of legal disputes.",
+      scope:
+        "A sample of Kahnawà:ke laws enacted from 2005 through 2026; each field such as justice, membership, land, or commerce requires its own legal and institutional bounds.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "socialism-rival-classification-boundary",
       kind: "research-obligation",
       label: "Rival classifications of socialism",

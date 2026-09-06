@@ -3,16 +3,20 @@ import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
 import { approachDocuments } from "./approaches/swedish-wage-earner-funds";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
+import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
 import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-communism";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
+import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
+import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
 import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
+import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
 import { socialOwnershipRelationshipDocuments } from "./relationships/social-ownership";
@@ -33,10 +37,13 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialOwnershipEvidenceDocuments,
   ...socialDemocracyEvidenceDocuments,
   ...socialismCommunismEvidenceDocuments,
+  ...kahnawakeCommunityDecisionMakingEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...socialismCommunismDossierDocuments,
   ...subjectGuideDocuments,
+  ...kahnawakeCommunityDecisionMakingGuideDocuments,
+  ...kahnawakeCommunityDecisionMakingDossierDocuments,
   ...openResearchObligationDocuments,
   ...analysisDocuments,
   ...relationshipDocuments,
@@ -45,4 +52,5 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...socialDemocracyRelationshipDocuments,
   ...socialOwnershipRelationshipDocuments,
   ...socialismCommunismRelationshipDocuments,
+  ...kahnawakeCommunityDecisionMakingRelationshipDocuments,
 ];

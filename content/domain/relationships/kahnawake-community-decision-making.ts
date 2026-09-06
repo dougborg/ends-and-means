@@ -1,0 +1,156 @@
+import type { AuthoringDocument } from "../../../src/lib/domain";
+
+const citations = [
+  [
+    "tribe-not-universal-political-form",
+    "sneath-tribe-source",
+    "abstract; ‘Tribe and social structure’; ‘Problems with tribe’, paragraphs 1–6",
+    "supports",
+    "tribe-category-boundary",
+  ],
+  [
+    "tribe-colonial-evolutionary-history",
+    "sneath-tribe-source",
+    "‘Origins’, paragraphs 1–8; ‘Problems with tribe’, paragraphs 2–6",
+    "supports",
+    "tribe-category-history",
+  ],
+  [
+    "indian-act-band-administrative-definition",
+    "canada-indian-act-1985-source",
+    "section 2(1), definition of ‘band’",
+    "supports",
+    "indian-act-band-definition",
+  ],
+  [
+    "indian-act-band-council-definition",
+    "canada-indian-act-1985-source",
+    "section 2(1), definition of ‘council of the band’; section 74",
+    "supports",
+    "indian-act-council-definition",
+  ],
+  [
+    "kahnawake-community-self-description",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 111–114, especially the community-authored preamble on p. 112",
+    "supports",
+    "kahnawake-self-description",
+  ],
+  [
+    "kahnawake-cdmrp-2005-adoption",
+    "kahnawake-cdmrp-public-description-source",
+    "‘Background information on the CDMRP’, approval record dated October 14, 2005",
+    "supports",
+    "cdmrp-adoption-community-record",
+  ],
+  [
+    "kahnawake-cdmrp-2005-adoption",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 120–122",
+    "supports",
+    "cdmrp-adoption-horn-miller",
+  ],
+  [
+    "kahnawake-cdmrp-consultative-development",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 120–122",
+    "supports",
+    "cdmrp-consultative-development",
+  ],
+  [
+    "kahnawake-consensus-process-definition",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 115–118",
+    "supports",
+    "cdmrp-consensus-definition",
+  ],
+  [
+    "kahnawake-cdmrp-type-one-design",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 122–126, especially pp. 125–126",
+    "supports",
+    "cdmrp-type-one-design",
+  ],
+  [
+    "kahnawake-cdmrp-2024-hearing-rule-change",
+    "kahnawake-cdmrp-2024-hearing-modification-source",
+    "notice dated January 16, 2024, paragraphs 1–4 and the three-item modified-process list",
+    "supports",
+    "cdmrp-2024-hearing-modification",
+  ],
+  [
+    "kahnawake-cdmrp-type-two-design",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 122–124 and 127–128",
+    "supports",
+    "cdmrp-type-two-design",
+  ],
+  [
+    "kahnawake-cdmrp-hybrid-classification",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 111–118 and 131–132",
+    "supports",
+    "cdmrp-hybrid-classification",
+  ],
+  [
+    "kahnawake-cdmrp-trust-contestation",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 129–131",
+    "supports",
+    "cdmrp-trust-contestation",
+  ],
+  [
+    "kahnawake-cdmrp-survey-attendance",
+    "kahnawake-cdmrp-2023-survey-analysis-source",
+    "pp. 1–3, especially p. 2",
+    "supports",
+    "cdmrp-survey-attendance",
+  ],
+  [
+    "kahnawake-cdmrp-survey-concerns",
+    "kahnawake-cdmrp-2023-survey-analysis-source",
+    "pp. 1–4 and 8–9",
+    "supports",
+    "cdmrp-survey-concerns",
+  ],
+  [
+    "kahnawake-cdmrp-survey-sampling-limit",
+    "kahnawake-cdmrp-2023-survey-analysis-source",
+    "pp. 1 and 30",
+    "supports",
+    "cdmrp-survey-method-limit",
+  ],
+  [
+    "kahnawake-case-not-tribal-embodiment",
+    "sneath-tribe-source",
+    "abstract; ‘Problems with tribe’, paragraphs 1–6",
+    "supports",
+    "case-non-embodiment-category",
+  ],
+  [
+    "kahnawake-case-not-tribal-embodiment",
+    "horn-miller-indigenous-participatory-democracy-source",
+    "pp. 111–132",
+    "context",
+    "case-non-embodiment-context",
+  ],
+] as const;
+
+export const kahnawakeCommunityDecisionMakingRelationshipDocuments = [
+  ...citations.map(
+    ([statementId, sourceId, locator, role, suffix]): AuthoringDocument => ({
+      documentType: "relationships",
+      subject: { kind: "statement", id: statementId },
+      relationships: [
+        {
+          id: `${statementId}-cites-${suffix}`,
+          predicate: "cites",
+          subject: { kind: "statement", id: statementId },
+          object: { kind: "source", id: sourceId },
+          role,
+          locator,
+        },
+      ],
+    }),
+  ),
+] satisfies AuthoringDocument[];
