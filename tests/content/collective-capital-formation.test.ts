@@ -45,7 +45,9 @@ describe("collective capital formation dossier", () => {
   });
 
   it("locates at least six atomic claims across four authoritative sources", () => {
-    expect(entityById("furendal-oneill-collective-capital-source")).toMatchObject({
+    expect(
+      entityById("furendal-oneill-collective-capital-source"),
+    ).toMatchObject({
       contributorDisplay: ["Markus Furendal", "Martin O'Neill"],
     });
     expect(statementIds.length).toBeGreaterThanOrEqual(6);
@@ -72,9 +74,7 @@ describe("collective capital formation dossier", () => {
       entityById("collective-capital-formation-swedish-case-classification"),
     ).toMatchObject({
       statementKind: "classification",
-      text: expect.stringContaining(
-        "not a definition or complete realization",
-      ),
+      text: expect.stringContaining("not a definition or complete realization"),
     });
   });
 
@@ -92,6 +92,31 @@ describe("collective capital formation dossier", () => {
           "collective-capital-formation-purpose-objection",
         ],
         obligationStatus: "open",
+      }),
+    ]);
+  });
+});
+
+describe("collective capital formation locator precision", () => {
+  it("keeps design and supporter objections tied to the exact supporting passages", () => {
+    expect(
+      citationsFor("collective-capital-formation-governing-constituency"),
+    ).toEqual([
+      expect.objectContaining({ locator: "section 5, pp. 319–320" }),
+    ]);
+    expect(
+      citationsFor("collective-capital-formation-rights-boundary"),
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ locator: "section 5, pp. 319–320" }),
+      ]),
+    );
+    expect(
+      citationsFor("collective-capital-formation-unclear-benefits-objection"),
+    ).toEqual([
+      expect.objectContaining({
+        locator:
+          "section ‘1978–1981: Muted support, vigorous opposition and the watering down of wage-earner funds’, pp. 513–514",
       }),
     ]);
   });
