@@ -166,9 +166,7 @@ async function verifySubjectGuideRoutes() {
   const text = stripMarkup(guide);
   expect(text).toContain("What does economic democracy mean?");
   expect(text).toContain("Does it mean one institutional model?");
-  expect(text).toContain(
-    "This case shows what happened in a specific place and period",
-  );
+  expect(text).toContain("making them a bounded test of one mechanism");
   expect(text).toContain("Check the evidence");
   expect(text).toContain("What remains open?");
   expect(text).not.toContain("Depictions");

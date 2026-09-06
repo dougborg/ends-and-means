@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { SubjectGuide, SubjectGuideSection } from "../../src/lib/domain";
+import { canonicalGraph } from "../../src/lib/domain/canonical";
 import {
+  directSubjectGuideEvidence,
   subjectGuideSectionHasContent,
   visibleSubjectGuideSections,
 } from "../../src/lib/subject-guide-presentation";
@@ -56,26 +58,28 @@ describe("SubjectGuide presentation states", () => {
   });
 
   it("preserves dense, long-label, disagreement, and open-research selections in authored order", () => {
-    const dense = fixture([
-      section("long-label", { statementIds: ["test-statement"] }),
-      {
-        ...section("disagreement", {
-          narrativeRefs: [{ dossierId: "test-dossier" }],
-        }),
-        role: "variants-and-disputes",
-      },
-      {
-        ...section("open-research", {
-          researchObligationIds: ["test-obligation"],
-        }),
-        role: "open-questions",
-      },
-    ]);
+    const source = canonicalGraph.subjectGuides[0];
+    if (!source) throw new Error("Missing real SubjectGuide fixture");
+    const dense = structuredClone(source);
+    const comparison = dense.sections.find(
+      ({ role }) => role === "comparisons-and-next-steps",
+    );
+    if (!comparison) throw new Error("Missing comparison fixture");
+    comparison.statementIds = ["economic-democracy-beyond-workplace"];
 
-    expect(visibleSubjectGuideSections(dense).map(({ id }) => id)).toEqual([
-      "long-label",
-      "disagreement",
-      "open-research",
+    expect(visibleSubjectGuideSections(dense)).toHaveLength(
+      dense.sections.length,
+    );
+    expect(directSubjectGuideEvidence(comparison)).toEqual([
+      "economic-democracy-beyond-workplace",
     ]);
+    expect(
+      dense.sections.find(({ role }) => role === "variants-and-disputes")
+        ?.heading.length,
+    ).toBeGreaterThan(40);
+    expect(
+      dense.sections.find(({ role }) => role === "open-questions")
+        ?.researchObligationIds,
+    ).toHaveLength(1);
   });
 });

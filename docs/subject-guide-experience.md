@@ -31,6 +31,8 @@ Each selected narrative passage keeps its supporting canonical Statements in a
 native `details` disclosure immediately after the passage.
 Selected relationships use their public directional label and keep supporting
 Statements in an adjacent disclosure.
+Statements selected directly by a guide section likewise remain in a native
+disclosure rather than entering the default narrative path.
 Research Obligations appear as concrete open questions with their scope,
 evidence need, and tested claims available on the same page.
 
