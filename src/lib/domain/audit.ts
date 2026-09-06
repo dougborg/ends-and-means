@@ -1,4 +1,4 @@
-import type { ResearchObligation } from "./entities";
+import type { ResearchObligation, Source } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import type { Dossier } from "./presentation";
 
@@ -29,6 +29,15 @@ export interface ContentAttentionReport {
     status: ResearchObligation["obligationStatus"];
   }>;
   researchEvidenceAwaitingResolution: string[];
+  sourcesWithoutCitations: string[];
+  entitiesWithoutRelationships: string[];
+  dimensionsWithoutPlacements: string[];
+  researchGapSectionsWithoutObligations: string[];
+  sourcePreflight: Array<{
+    id: string;
+    missingMetadata: string[];
+    urlsToVerify: string[];
+  }>;
 }
 
 const fillerPatterns = [
@@ -93,6 +102,109 @@ function narrativeFindings(dossiers: Dossier[]) {
   return findings;
 }
 
+function relationshipAttention(
+  graph: CompiledDomainGraph,
+  obligations: ResearchObligation[],
+  researchGapSections: string[],
+) {
+  const citedSourceIds = new Set(
+    graph.relationships
+      .filter(({ predicate }) => predicate === "cites")
+      .map(({ object }) => object.id),
+  );
+  const sourcesWithoutCitations = graph.entities
+    .filter(
+      ({ kind, id, publicationStatus }) =>
+        kind === "source" &&
+        publicationStatus !== "deprecated" &&
+        !citedSourceIds.has(id),
+    )
+    .map(({ id }) => id);
+  const relatedIds = new Set(
+    graph.relationships.flatMap(({ subject, object }) => [
+      subject.id,
+      object.id,
+    ]),
+  );
+  const relationshipExpectedKinds = new Set([
+    "approach",
+    "case",
+    "case-episode",
+    "challenge",
+    "comparison-dimension",
+    "concept",
+    "criterion",
+    "end",
+    "means",
+  ]);
+  const entitiesWithoutRelationships = graph.entities
+    .filter(
+      ({ kind, id, publicationStatus }) =>
+        relationshipExpectedKinds.has(kind) &&
+        publicationStatus !== "deprecated" &&
+        !relatedIds.has(id),
+    )
+    .map(({ kind, id }) => `${kind}:${id}`);
+  const placedDimensionIds = new Set(
+    graph.relationships
+      .filter(({ predicate }) => predicate === "placed-on")
+      .map(({ object }) => object.id),
+  );
+  const dimensionsWithoutPlacements = graph.entities
+    .filter(
+      ({ kind, id, publicationStatus }) =>
+        kind === "comparison-dimension" &&
+        publicationStatus !== "deprecated" &&
+        !placedDimensionIds.has(id),
+    )
+    .map(({ id }) => id);
+  const obligationTargets = new Set(
+    obligations
+      .filter(({ obligationStatus }) =>
+        ["open", "partially-addressed"].includes(obligationStatus),
+      )
+      .map(
+        ({ target, targetSectionId }) =>
+          `${target.kind}:${target.id}${targetSectionId ? `#${targetSectionId}` : ""}`,
+      ),
+  );
+  const researchGapSectionsWithoutObligations = researchGapSections.filter(
+    (section) => !obligationTargets.has(section),
+  );
+  return {
+    sourcesWithoutCitations,
+    entitiesWithoutRelationships,
+    dimensionsWithoutPlacements,
+    researchGapSectionsWithoutObligations,
+  };
+}
+
+function sourcePreflight(graph: CompiledDomainGraph) {
+  return graph.entities
+    .filter(
+      (entity): entity is Source =>
+        entity.kind === "source" && entity.publicationStatus !== "deprecated",
+    )
+    .map((source) => {
+      const missingMetadata: string[] = [];
+      if (!source.contributorDisplay?.length)
+        missingMetadata.push("contributors");
+      if (!source.publicationYear) missingMetadata.push("publication year");
+      if (!source.publisher) missingMetadata.push("publisher");
+      if (!source.identifiers && !source.resourceLinks?.length)
+        missingMetadata.push("identifier or access link");
+      return {
+        id: source.id,
+        missingMetadata,
+        urlsToVerify: (source.resourceLinks ?? []).map(({ url }) => url),
+      };
+    })
+    .filter(
+      ({ missingMetadata, urlsToVerify }) =>
+        missingMetadata.length > 0 || urlsToVerify.length > 0,
+    );
+}
+
 export function auditContent(
   graph: CompiledDomainGraph,
 ): ContentAttentionReport {
@@ -152,6 +264,11 @@ export function auditContent(
         statementIds.length > 0,
     )
     .map(({ id }) => id);
+  const relationshipFindings = relationshipAttention(
+    graph,
+    obligations,
+    researchGapSections,
+  );
   return {
     subjectGuides: {
       live: liveGuides.length,
@@ -164,10 +281,72 @@ export function auditContent(
     narrativeAttention: narrativeFindings(dossiers),
     openResearchObligations,
     researchEvidenceAwaitingResolution,
+    ...relationshipFindings,
+    sourcePreflight: sourcePreflight(graph),
   };
 }
 
-export function formatContentAttentionReport(report: ContentAttentionReport) {
+const addedAttentionKeys = [
+  "sourcesWithoutCitations",
+  "entitiesWithoutRelationships",
+  "dimensionsWithoutPlacements",
+  "researchGapSectionsWithoutObligations",
+  "sourcePreflight",
+] as const;
+
+type FormattableAttentionReport = Omit<
+  ContentAttentionReport,
+  (typeof addedAttentionKeys)[number]
+> &
+  Partial<Pick<ContentAttentionReport, (typeof addedAttentionKeys)[number]>>;
+
+function formatSourcePreflight(report: FormattableAttentionReport) {
+  return (report.sourcePreflight ?? []).map((source) => {
+    const missing = source.missingMetadata.length
+      ? `add or confirm ${source.missingMetadata.join(", ")}`
+      : "metadata recorded";
+    const urls = source.urlsToVerify.length
+      ? `; browse ${source.urlsToVerify.join(", ")}`
+      : "";
+    return `- ${source.id} — ${missing}${urls}; verify authority, claim support, and locators before review`;
+  });
+}
+
+function formatRelationshipAttention(report: FormattableAttentionReport) {
+  const sources = report.sourcesWithoutCitations ?? [];
+  const entities = report.entitiesWithoutRelationships ?? [];
+  const dimensions = report.dimensionsWithoutPlacements ?? [];
+  const gaps = report.researchGapSectionsWithoutObligations ?? [];
+  return [
+    "",
+    `Sources without citations: ${sources.length}`,
+    ...sources.map(
+      (id) => `- ${id} — cite it from a Statement or remove the unused Source`,
+    ),
+    "",
+    `Entities without relationships: ${entities.length}`,
+    ...entities.map(
+      (id) =>
+        `- ${id} — research an explicit typed relationship or confirm that absence is intentional`,
+    ),
+    "",
+    `Dimensions without Placements: ${dimensions.length}`,
+    ...dimensions.map(
+      (id) =>
+        `- ${id} — add a scoped evidence-backed Placement or retain as an explicit research gap`,
+    ),
+    "",
+    `Research-gap sections without an active obligation: ${gaps.length}`,
+    ...gaps.map(
+      (id) =>
+        `- ${id} — add an exact-section Research Obligation or revise the trace status`,
+    ),
+  ];
+}
+
+export function formatContentAttentionReport(
+  report: FormattableAttentionReport,
+) {
   const lines = [
     "Content attention report",
     "",
@@ -207,5 +386,8 @@ export function formatContentAttentionReport(report: ContentAttentionReport) {
   );
   for (const id of report.researchEvidenceAwaitingResolution)
     lines.push(`- ${id}`);
+  lines.push(...formatRelationshipAttention(report));
+  lines.push("", `Source preflight: ${report.sourcePreflight?.length ?? 0}`);
+  lines.push(...formatSourcePreflight(report));
   return lines.join("\n");
 }

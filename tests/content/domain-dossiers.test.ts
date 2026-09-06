@@ -190,6 +190,24 @@ describe("canonical narrative coverage", () => {
         narrativeAttention: [],
         openResearchObligations: [],
         researchEvidenceAwaitingResolution: [],
+        sourcesWithoutCitations: ["source:test"],
+        entitiesWithoutRelationships: ["concept:test"],
+        dimensionsWithoutPlacements: ["dimension:test"],
+        researchGapSectionsWithoutObligations: [
+          "concept:test#open-question",
+        ],
+        sourcePreflight: [
+          {
+            id: "source:test",
+            missingMetadata: ["publisher"],
+            urlsToVerify: ["https://example.com/source"],
+          },
+          {
+            id: "source:linked",
+            missingMetadata: [],
+            urlsToVerify: ["https://example.com/linked"],
+          },
+        ],
       }),
     ).toContain(
       "concept:test#open-question\n\nResearch-needed entities: 1\n- concept:test",

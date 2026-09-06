@@ -116,6 +116,10 @@ against consulted sources for suspiciously close phrasing, and remove repeated
 explanations and generic filler. Treat automated prose findings as attention
 signals; accuracy, fairness, source similarity, and publication require human
 review.
+The `pnpm audit:content-integrity` stage inside `pnpm verify` surfaces close
+phrasing with source-backed Statements and the cited Sources that require comparison. Treat that output
+only as a review location: inspect the actual source passages before judging
+quotation, attribution, or improper copying risk.
 
 For a high-level subject, assess learner completeness as well as graph coverage:
 a short answer and scope; important meanings and disputed uses; attributed
@@ -175,18 +179,18 @@ challenge an empirical observation, outcome, or assessment. Context and
 qualifying citations remain permitted only when a Source tied to a resolved
 non-fiction Work independently supports the empirical Statement.
 
+Install Playwright's Chromium runtime once.
 Run before handoff:
 
 ```bash
-pnpm validate
-pnpm lint
-pnpm static
-pnpm check
-pnpm test
-pnpm build
-pnpm test:routes
-pnpm audit:content
+pnpm verify
 ```
+
+The final command is the CI-parity publication gate. It rejects structural,
+narrative-line, workflow-language, route, browser, and archive-exclusion
+violations while reporting missing dossiers, entities, references,
+relationships, Placements, and Research Obligations as actionable attention
+where absence may be legitimate.
 
 Use the repository pull-request template. The PR must name the concrete changes,
 evidence conflicts, limitations, and human decisions required before merge.
