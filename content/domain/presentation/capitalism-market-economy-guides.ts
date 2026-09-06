@@ -13,6 +13,7 @@ const capitalismDossier = attachNarrative("capitalism.md", {
     "capitalism-definition-contested",
     "capitalism-market-boundary",
     "capitalism-institutional-definition",
+    "capitalism-private-property-relation",
   ],
   sections: [
     {
@@ -23,6 +24,7 @@ const capitalismDossier = attachNarrative("capitalism.md", {
       statementIds: [
         "capitalism-definition-contested",
         "capitalism-institutional-definition",
+        "capitalism-private-property-relation",
         "capitalism-marx-definition",
         "capitalism-polanyi-definition",
         "capitalism-market-boundary",
@@ -227,8 +229,8 @@ const guide = (
     label: id === "capitalism" ? "Capitalism" : "Market Economy",
     description:
       id === "capitalism"
-        ? "Capitalism has rival definitions that assign different weight to employment, firms, finance, production for exchange, and legal property. Markets existed before modern capitalism, so exchange alone does not establish that classification."
-        : "A market economy relies substantially on price-mediated exchange, but it also includes firms, households, law, public authority, and non-market allocation. Market exchange neither requires private ownership nor proves laissez-faire policy or capitalism.",
+        ? "Capitalism has no generally accepted definition. Hodgson distinguishes it from older markets by adding widespread employment and developed financial institutions."
+        : "Markets are institutions of regular exchange. They coexist with other allocation and ownership forms, require supporting legal rules, and do not imply laissez-faire.",
     publicationStatus: "reviewed",
     primarySubject: { kind: "concept", id },
     searchQueries:

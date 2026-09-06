@@ -200,7 +200,7 @@ export const capitalismMarketEvidenceDocuments = [
       kind: "concept",
       label: "Capitalism",
       description:
-        "A contested concept for economic orders in which property, firms, employment, markets, and finance operate in historically variable combinations.",
+        "A contested concept whose definitions distinguish modern capitalism from older markets by adding further institutions.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not use the term as a synonym for markets, commerce, private possessions, freedom, one policy program, or a timeless property of a country.",
@@ -214,7 +214,7 @@ export const capitalismMarketEvidenceDocuments = [
       kind: "concept",
       label: "Market economy",
       description:
-        "A contested description for an economy in which price-mediated exchange substantially coordinates production or allocation alongside organizations, law, households, public authority, and non-market practices.",
+        "A contested description for economies in which markets are important; it leaves ownership open and does not exclude non-market allocation.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer private ownership, laissez-faire policy, capitalism, or the absence of planning from market exchange alone.",
@@ -327,7 +327,7 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "capitalism-market-boundary",
-    "Markets do not define capitalism",
+    "Markets predate modern capitalism",
     "Markets existed before the economic order commonly called capitalism.",
     "definition",
   ),
@@ -339,13 +339,13 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "capitalism-marx-definition",
-    "Marx’s social-relation account",
+    "Marx on labor-power and surplus value",
     "Marx describes the capitalist’s purchase of labor-power as a condition for producing surplus value.",
     "definition",
   ),
   statement(
     "capitalism-polanyi-definition",
-    "Polanyi’s market-society account",
+    "Polanyi’s fictitious commodities",
     "Karl Polanyi calls labor, land, and money fictitious commodities because they are not produced for sale.",
     "definition",
   ),
@@ -357,25 +357,25 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "property-rights-plural",
-    "Property is not one indivisible power",
+    "Hohfeld distinguishes separate legal positions",
     "Hohfeld distinguishes claims, privileges, powers, and immunities as separate legal positions.",
     "definition",
   ),
   statement(
     "wage-labor-boundary",
-    "Wage labor is one labor relation",
+    "Employment permits direction of work",
     "An employment contract gives the employer a right to direct how work is performed.",
     "definition",
   ),
   statement(
     "wage-labor-history-limit",
-    "Wage labor predates modern capitalism",
+    "Paid day labor predates modern capitalism",
     "Paid day labor existed in medieval Europe before modern capitalism.",
     "observation",
   ),
   statement(
     "commodity-production-boundary",
-    "Commodity production is not a complete system",
+    "Production for exchange leaves ownership open",
     "Production for exchange does not by itself specify the ownership of productive assets.",
     "definition",
   ),
@@ -387,7 +387,7 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "capital-finance-boundary",
-    "Capital is not simply money or wealth",
+    "Hodgson’s definition of capital",
     "Hodgson defines capital as money value attached to alienable property.",
     "definition",
   ),
@@ -405,13 +405,13 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "market-state-boundary",
-    "Markets depend on political and legal institutions",
+    "Markets require supporting legal rules",
     "Functioning markets require legal rules that protect property rights and enforce contracts.",
     "definition",
   ),
   statement(
     "market-ownership-boundary",
-    "Market coordination does not settle ownership",
+    "Market exchange does not settle ownership",
     "Market exchange can coexist with forms of capital ownership other than private ownership.",
     "definition",
   ),
@@ -423,7 +423,7 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "smith-exchange-division-labor",
-    "Smith’s exchange account",
+    "Smith on market extent and the division of labor",
     "Adam Smith argues that the extent of the market limits the division of labor.",
     "observation",
   ),
@@ -441,7 +441,7 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "ghana-cocoa-smallholder-expansion",
-    "African producers drove cocoa expansion",
+    "African producers initiated cocoa expansion",
     "African producers initiated the Gold Coast cocoa take-off around 1890.",
     "observation",
   ),
@@ -453,25 +453,25 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "ghana-cocoa-classification-limit",
-    "Commodity expansion does not settle system classification",
+    "Gold Coast cocoa exports expanded",
     "Gold Coast cocoa exports expanded rapidly between about 1890 and 1936.",
     "observation",
   ),
   statement(
     "china-dual-track-coordination",
-    "Plan and market operated together in reform-era China",
+    "Enterprise autonomy expanded while planning continued",
     "China’s state-sector reforms after 1978 combined greater enterprise autonomy with continued planning.",
     "observation",
   ),
   statement(
     "china-tve-ownership-boundary",
-    "Market entry did not require conventional private ownership",
+    "Township and village enterprises entered markets",
     "Township and village enterprises entered markets and competed with state-owned enterprises during China’s reform period.",
     "observation",
   ),
   statement(
     "china-marketization-classification-limit",
-    "Marketization does not decide whether an economy is capitalist",
+    "Naughton describes reform as growing out of the plan",
     "Naughton describes China’s 1978–1993 reforms as growing out of the plan rather than abolishing it at once.",
     "observation",
   ),
@@ -509,6 +509,12 @@ export const capitalismMarketEvidenceDocuments = [
     "capitalism-legal-order-relation",
     "Capitalist institutions depend on law",
     "Hodgson’s definition of capitalism treats a legal system supporting property and contract as a necessary institution.",
+    "definition",
+  ),
+  statement(
+    "capitalism-private-property-relation",
+    "Hodgson includes private property in capitalism’s definition",
+    "Hodgson includes private property among the institutions in his definition of capitalism.",
     "definition",
   ),
 

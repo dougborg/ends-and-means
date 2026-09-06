@@ -229,10 +229,10 @@ describe("capitalism and market-economy guide boundaries", () => {
       id: "market-economy",
     });
     expect(capitalism.description).toContain(
-      "exchange alone does not establish that classification",
+      "no generally accepted definition",
     );
     expect(marketEconomy.description).toContain(
-      "neither requires private ownership",
+      "coexist with other allocation and ownership forms",
     );
 
     for (const guide of [capitalism, marketEconomy]) {
@@ -261,6 +261,7 @@ describe("capitalism and market-economy guide boundaries", () => {
       "finance",
       "legal-order",
       "market-economy",
+      "private-property",
       "wage-labor",
     ]);
     for (const caseId of [
