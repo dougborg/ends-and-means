@@ -2,33 +2,40 @@ export interface PublicRoute {
   readonly href: string;
   readonly label: string;
   readonly matchingPrefixes: readonly string[];
+  readonly level: "primary" | "trust";
 }
 
 export const publicRoutes = [
   {
     href: "/explore/",
-    label: "Approaches",
-    matchingPrefixes: ["/explore/", "/concepts/"],
+    label: "Explore",
+    matchingPrefixes: ["/explore/", "/guides/", "/concepts/"],
+    level: "primary",
   },
-  { href: "/cases/", label: "Cases", matchingPrefixes: ["/cases/"] },
+  { href: "/cases/", label: "Cases", matchingPrefixes: ["/cases/"], level: "primary" },
+  { href: "/compare/", label: "Compare", matchingPrefixes: ["/compare/"], level: "primary" },
   {
     href: "/challenges/",
     label: "Questions",
     matchingPrefixes: ["/challenges/"],
+    level: "primary",
   },
-  { href: "/compare/", label: "Compare", matchingPrefixes: ["/compare/"] },
   {
     href: "/reading/",
     label: "Sources",
     matchingPrefixes: ["/reading/", "/sources/"],
+    level: "trust",
   },
-  { href: "/framework/", label: "Method", matchingPrefixes: ["/framework/"] },
+  { href: "/framework/", label: "Method", matchingPrefixes: ["/framework/"], level: "trust" },
 ] as const satisfies readonly PublicRoute[];
+
+export const primaryRoutes = publicRoutes.filter(({ level }) => level === "primary");
 
 export const homeRoute = {
   href: "/",
   label: "Home",
   matchingPrefixes: ["/"],
+  level: "primary",
 } as const satisfies PublicRoute;
 
 export function isCurrentPublicRoute(

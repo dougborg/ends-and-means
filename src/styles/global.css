@@ -95,6 +95,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .site-footer__description strong { color: var(--night); }
 .site-map ul { display: flex; flex-wrap: wrap; gap: .15rem clamp(.4rem, 1vw, .75rem); justify-content: flex-end; margin: 0; padding: 0; list-style: none; }
 .site-map a { position: relative; display: inline-flex; min-height: 2.75rem; align-items: center; padding-inline: .35rem; color: var(--night); font-weight: 600; text-decoration: none; }
+.site-map__trust a { color: var(--muted); font-weight: 500; }
 .site-map a:hover { color: var(--cobalt); }
 .site-map a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--cobalt); text-decoration-thickness: .16rem; text-underline-offset: .35rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0,0,0,0); white-space: nowrap; }

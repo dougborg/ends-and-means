@@ -9,7 +9,7 @@ const siteMapRoutes = [homeRoute, ...publicRoutes];
     <p class="site-footer__description"><strong>Ends and Means</strong><br />Political and economic systems in theory and practice.</p>
     <nav class="site-map" aria-label="Site map">
       <ul>
-        {siteMapRoutes.map((route) => <li><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
+        {siteMapRoutes.map((route) => <li class:list={{ "site-map__trust": route.level === "trust" }}><a href={route.href} aria-current={isCurrentPublicRoute(currentPath, route) ? "page" : undefined}>{route.label}</a></li>)}
       </ul>
     </nav>
   </div>
