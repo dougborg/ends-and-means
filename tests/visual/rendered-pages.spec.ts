@@ -11,6 +11,7 @@ const defaultRoutes = [
   "/concepts/social-democracy/",
   "/concepts/socialism/",
   "/concepts/communism/",
+  "/guides/economic-democracy/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",
@@ -142,6 +143,35 @@ test("disclosures expose state and work from the keyboard", async ({ page }) => 
   await page.keyboard.press("Enter");
   await expect(disclosure).toHaveAttribute("open", "");
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
+});
+
+test("subject guide works without JavaScript and keeps evidence adjacent", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("/guides/economic-democracy/");
+  await expect(page.getByRole("heading", { name: "Economic democracy", level: 1 })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "On this page: Economic democracy" })).toBeVisible();
+  const evidence = page.locator("details.subject-guide__evidence").first();
+  await evidence.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(evidence).toHaveAttribute("open", "");
+  await expect(evidence.locator(".canonical-claim").first()).toBeVisible();
+  await context.close();
+});
+
+test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {
+  await page.setViewportSize({ width: 640, height: 1000 });
+  await page.goto("/guides/economic-democracy/");
+  await page.evaluate(() => { document.documentElement.style.fontSize = "200%"; });
+  const audit = await page.evaluate(() => {
+    const rail = document.querySelector(".subject-guide__rail");
+    return {
+      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      railPosition: rail ? getComputedStyle(rail).position : "missing",
+    };
+  });
+  expect(audit.overflow).toBeLessThanOrEqual(1);
+  expect(audit.railPosition).toBe("static");
 });
 
 test("research obligations expose their claim ledger from the keyboard", async ({ page }) => {
