@@ -70,5 +70,11 @@ describe("public entity routes", () => {
     expect(
       hrefForEntity({ kind: "case-episode", id: "missing-episode" }),
     ).toBeUndefined();
+    expect(
+      hrefForEntity({
+        kind: "concept",
+        id: "swedish-wage-earner-fund-program",
+      }),
+    ).toBeUndefined();
   });
 });
