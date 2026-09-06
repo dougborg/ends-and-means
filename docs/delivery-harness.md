@@ -78,12 +78,18 @@ assignment branch to match the PR head. Without an open pull request, it does
 not publish or query the private branch through GitHub. It instead checks the
 assigned local worktree, checked-out branch and ref, expected `origin`, and
 linear commits after the branch's unique merge base with a locally stored
-`origin/main`. A read-only `git ls-remote` proves that local tracking ref is not
-stale. If `main` advanced after implementation began, the audit reports the
+`origin/main`. A 15-second, noninteractive `git ls-remote` network request proves
+that local tracking ref is not stale; credential and terminal prompts are
+disabled. Here, read-only means the audit mutates
+neither the repository nor GitHub; live mode still requires network access.
+If `main` advanced after implementation began, the audit reports the
 branch as not current but does not fail In-progress work or require constant
 rebases; current-base evidence becomes mandatory at review handoff.
 
-Missing or mismatched worktrees, branches, refs, and remotes; unavailable or
+The assigned path must be an exact registered worktree of the coordinator's
+repository, proven through the shared Git directory and worktree inventory; a
+separate clone with the same remote is rejected. Missing or mismatched
+worktrees, branches, refs, and remotes; unavailable or
 stale `origin/main`; unrelated or ambiguous histories; merge commits; and Git
 command failures all fail closed with actionable classifications. Output names
 only the issue and classification, never the assignment owner or worktree path.
