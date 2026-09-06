@@ -184,9 +184,27 @@ async function verifyGlobalNavigation() {
 
 async function verifyExploreAndCaseRoutes() {
   const home = await readFile(routeFile("/"), "utf8");
-  expect(stripMarkup(home)).toContain("Research you can inspect");
-  expect(stripMarkup(home)).not.toContain("Earlier working material");
-  expect(home).toMatch(/href="\/cases\/">Browse the case directory/);
+  const homeText = stripMarkup(home);
+  expect(homeText).toContain("The label is only the beginning.");
+  expect(homeText).toContain("political, economic, social, legal, cultural, and organizational life");
+  expect(homeText).toContain("AI can assist discovery, synthesis, drafting, and consistency checks");
+  expect(homeText).toContain("It is not evidence");
+  expect(homeText).toContain("See what sits behind a sentence.");
+  expect(homeText).toContain("Karl Marx locates the capitalist’s increment");
+  expect(homeText).toContain("Marx describes the capitalist’s purchase of labor-power");
+  expect(homeText).toContain("chapter 6, paragraph beginning");
+  expect(homeText).toContain("supports");
+  expect(homeText).toContain("How should definitions centered on wage labor classify");
+  expect(homeText).toContain("A person reviews the proposal");
+  expect(homeText).not.toMatch(/01 \/|02 \/|03 \/|canonical graph|learner path|pull request|workflow/i);
+  expect(home).toMatch(/class="homepage-primary-action" href="\/explore\/"/);
+  expect(hrefs(home)).toEqual(expect.arrayContaining([
+    "/explore/", "/cases/", "/challenges/", "/compare/", "/framework/", "/reading/",
+    "/guides/democracy/", "/guides/capitalism/", "/guides/kahnawake-community-lawmaking/",
+    "/sources/marx-capital-volume-one-source/",
+    "/research/#capitalism-coerced-labor-boundary",
+    "/#capitalism-marx-definition",
+  ]));
 
   const explore = await readFile(
     routeFile("/explore/swedish-wage-earner-fund-program/"),
@@ -407,6 +425,10 @@ async function verifyMethodRoute() {
   );
   const methodText = stripMarkup(method);
   expect(methodText).toContain("How we research and classify.");
+  expect(methodText).toContain("The commitments behind each explanation");
+  expect(methodText).toContain("AI may assist discovery, synthesis, drafting, and consistency checks");
+  expect(methodText).toContain("it is not evidence or authority");
+  expect(methodText).toContain("Read the technical protocols");
   expect(methodText).toContain("How can I check an explanation?");
   expect(methodText).toContain("What kinds of judgment stay separate?");
   expect(methodText).toContain("Evidence about what happened");
@@ -446,6 +468,8 @@ async function verifyMethodRoute() {
     "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
     expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
     "https://github.com/dougborg/ends-and-means/blob/main/docs/domain-model.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/research-content-changes/SKILL.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/coordinate-project-delivery/SKILL.md",
   ]));
 }
 
@@ -528,7 +552,9 @@ async function verifyReferenceRoutes() {
   expect(reading).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
   expect(hasElementWithClasses(reading, "article", ["editorial-page", "reading-page"])).toBe(true);
   expect(hasElementWithClasses(reading, "header", ["editorial-header"])).toBe(true);
-  expect(stripMarkup(reading)).toContain("Which sources support the explanations?");
+  expect(stripMarkup(reading)).toContain("Which sources connect to the explanations?");
+  expect(stripMarkup(reading)).toContain("Cited by");
+  expect(stripMarkup(reading)).not.toMatch(/Supports \d+ claims?/);
   expect(stripMarkup(reading)).not.toMatch(/published source records|published evidence/i);
   expect(
     hrefs(reading).filter((href) => href.startsWith("/sources/")),

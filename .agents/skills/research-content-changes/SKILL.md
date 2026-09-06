@@ -142,6 +142,10 @@ Subject Guide, and never treat these links or imported taxonomy as evidence.
 
 For narrative prose, write plain-spoken analytical synthesis from the canonical
 Statement ledger or closed-source notes rather than by editing source wording.
+AI may assist discovery, synthesis, drafting, and consistency checks, but it is
+never a Source or editorial authority. A person must inspect the cited material
+and remains accountable for source fitness, framing, interpretation, wording,
+and publication.
 Verify every factual clause against its listed Statements, compare the draft
 against consulted sources for suspiciously close phrasing, and remove repeated
 explanations and generic filler. Treat automated prose findings as attention

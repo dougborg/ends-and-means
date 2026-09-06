@@ -14,6 +14,11 @@ privacy, sensitive-subject safeguards, and AI-assisted work.
 
 ## Research and content changes
 
+AI may assist discovery, synthesis, drafting, and consistency checks, but it is
+never evidence or editorial authority. Contributors must inspect the cited
+material themselves; reviewers remain responsible for source fitness, framing,
+interpretation, wording, and publication.
+
 1. Start from an up-to-date `main` branch in a clean, isolated worktree.
 2. Create a focused branch named `research/<type>-<stable-id>` and keep one
    owner responsible for its mutations.

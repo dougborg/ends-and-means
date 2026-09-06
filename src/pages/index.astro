@@ -1,29 +1,64 @@
 ---
+import HomepageEvidenceTrace from "../components/HomepageEvidenceTrace.astro";
+import PublicCommitments from "../components/PublicCommitments.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { entitiesOfKind } from "../lib/domain/canonical";
+import { homepageStarts } from "../lib/public-commitments";
 import "../styles/homepage.css";
-const approaches = entitiesOfKind("approach");
-const featuredApproach = approaches[0];
 ---
-<BaseLayout fullBleed mainClass="homepage" description="Explore evidence-backed political-economic approaches, institutions, cases, and comparisons.">
+
+<BaseLayout fullBleed mainClass="homepage" description="Understand contested political, economic, social, legal, cultural, and organizational ideas through evidence, cases, and comparison.">
   <header class="homepage-hero">
-    <p class="coordinate">ENDS AND MEANS / SYSTEMS IN THEORY AND PRACTICE</p>
-    <div class="homepage-hero__thesis"><h1>Follow the claim<br /><span>from purpose to practice.</span></h1><p class="dek measure-standfirst">Explore what an approach values, the institutions it proposes, what happened in bounded cases, and which judgments the evidence can—or cannot—support.</p></div>
-    {featuredApproach && <aside class="homepage-hero__guide" aria-label="Featured approach"><p class="coordinate">FEATURED APPROACH</p><p>{featuredApproach.description}</p><a href={`/explore/${featuredApproach.id}/`}>Explore {featuredApproach.label} <span aria-hidden="true">→</span></a></aside>}
+    <p class="coordinate">ENDS AND MEANS / IDEAS, INSTITUTIONS, AND PRACTICE</p>
+    <div class="homepage-hero__thesis">
+      <h1>The label is<br /><span>only the beginning.</span></h1>
+      <p class="dek measure-standfirst">Democracy, capitalism, socialism, monarchy, and other familiar labels can name contested ideas, traditions, movements, proposed institutions, people’s own descriptions, classifications imposed by others, and arrangements that existed in a particular place and time.</p>
+      <p class="homepage-hero__scope">Ends and Means brings those meanings into view across political, economic, social, legal, cultural, and organizational life—without treating them as one universal taxonomy or merely as systems of government.</p>
+      <div class="homepage-hero__actions">
+        <a class="homepage-primary-action" href="/explore/">Explore the subjects <span aria-hidden="true">→</span></a>
+        <nav aria-label="Other ways to begin"><a href="/challenges/">Questions</a><a href="/cases/">Cases</a><a href="/compare/">Compare</a></nav>
+      </div>
+    </div>
+    <aside class="homepage-hero__note" aria-label="Why synthesis matters">
+      <p class="coordinate">WHY THIS EXISTS</p>
+      <p>A shared name can hide disagreement about purposes, institutions, membership, and history. The project separates those claims, shows who made them, and keeps evidence and limits close enough to inspect.</p>
+    </aside>
   </header>
-  <section class="canonical-launch" aria-labelledby="canonical-launch-title">
-    <header><p class="coordinate">EXPLORE / CASES / COMPARE</p><h2 id="canonical-launch-title">Three ways into the evidence</h2></header>
+
+  <section class="homepage-entrances" aria-labelledby="homepage-entrances-title">
+    <header><p class="coordinate">WAYS TO ASK</p><h2 id="homepage-entrances-title">Begin with what you want to understand.</h2></header>
     <div>
-      <article><p class="coordinate">01 / EXPLORE</p><h3>Approaches and institutions</h3><p>Trace attributed Ends through proposed Means, Challenges, and sourced Statements.</p><a href="/explore/">Browse approaches →</a></article>
-      <article><p class="coordinate">02 / CASES</p><h3>Bounded practice</h3><p>Keep formal design, rules in use, observed outcomes, and interpretation visibly separate.</p><a href="/cases/">Browse the case directory →</a></article>
-      <article><p class="coordinate">03 / COMPARE</p><h3>Claims in the same frame</h3><p>Compare sourced Statements and placements without manufacturing a score or duplicating prose.</p><a href="/compare/">Open Compare →</a></article>
+      <article><h3>Meanings &amp; disagreements</h3><p>See how a familiar term has been defined, claimed, rejected, or applied—and where those uses diverge.</p><a href="/explore/">Browse subjects <span aria-hidden="true">→</span></a></article>
+      <article><h3>Institutions &amp; mechanisms</h3><p>Follow what people sought, which arrangements they proposed, and how authority, ownership, or coordination was meant to work.</p><a href="/explore/">Explore ideas and institutions <span aria-hidden="true">→</span></a></article>
+      <article><h3>Practice in context</h3><p>Examine evidence bounded to named places, periods, actors, and institutions without turning a country into a timeless system.</p><a href="/cases/">Browse cases <span aria-hidden="true">→</span></a></article>
+      <article><h3>Questions &amp; values</h3><p>Compare claims under an explicit question or evaluative standard, with assumptions and missing evidence left visible.</p><a href="/compare/">Open Compare <span aria-hidden="true">→</span></a></article>
     </div>
   </section>
-  <section class="secondary-discovery" aria-labelledby="catalogue-title">
-    <header><p class="coordinate">PUBLISHED RESEARCH</p><h2 id="catalogue-title">Research you can inspect.</h2><p>Every published dossier is built from the same evidence model of independently addressable claims, sources, institutions, and bounded cases.</p></header>
-    <div class="secondary-discovery__paths">
-      <article><p class="coordinate">METHOD</p><h3>How the evidence model works</h3><p>See why Concepts, Approaches, Means, Cases, Statements, and Sources remain distinct.</p><a href="/framework/">Read the method <span aria-hidden="true">→</span></a></article>
-      <article><p class="coordinate">READING</p><h3>Sources behind published claims</h3><p>Browse the works actually connected to published Statements.</p><a href="/reading/">Open the reading directory <span aria-hidden="true">→</span></a></article>
+
+  <HomepageEvidenceTrace />
+
+  <section class="homepage-method" aria-labelledby="homepage-method-title">
+    <header>
+      <p class="coordinate">HOW EXPLANATIONS ARE MADE</p>
+      <h2 id="homepage-method-title">Synthesis is useful only when its judgments stay visible.</h2>
+      <p>Research may draw from scholarship, primary and official records, statistics, and—where appropriate—community self-description and oral history. Sources do different jobs: they may support, challenge, qualify, or provide context for a claim.</p>
+      <p>AI can assist discovery, synthesis, drafting, and consistency checks. It is not evidence and does not decide what is fair or true. People remain accountable for the sources, framing, interpretation, wording, and decision to publish.</p>
+      <p><a href="/framework/">Read the full method <span aria-hidden="true">→</span></a> <a href="/reading/">Browse the sources <span aria-hidden="true">→</span></a></p>
+    </header>
+    <PublicCommitments />
+  </section>
+
+  <section class="homepage-participate" aria-labelledby="homepage-participate-title">
+    <p class="coordinate">INSPECT &amp; RESPOND</p>
+    <h2 id="homepage-participate-title">A claim should be open to a better source or interpretation.</h2>
+    <p>Open a claim to inspect its wording, source, exact location, and evidentiary role. You can also <a href="https://github.com/dougborg/ends-and-means/issues/new?title=Correction%3A+%5Bpage+or+claim%5D&amp;body=Page+or+claim%3A%0A%0AWhat+should+change%3A%0A%0AEvidence+and+exact+passage%3A">suggest a correction</a> by naming the page or claim, explaining what should change, and linking the evidence and exact passage when possible. A person reviews the proposal and its sources before anything is published.</p>
+  </section>
+
+  <section class="homepage-starts" aria-labelledby="homepage-starts-title">
+    <header><p class="coordinate">SELECTED STARTS</p><h2 id="homepage-starts-title">Choose a concrete place to begin.</h2></header>
+    <div>
+      <section><h3>Subjects</h3><ul>{homepageStarts.subjects.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></section>
+      <section><h3>Cases</h3><ul>{homepageStarts.cases.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></section>
+      <section><h3>Questions</h3><ul>{homepageStarts.questions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></section>
     </div>
   </section>
 </BaseLayout>
