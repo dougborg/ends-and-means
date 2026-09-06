@@ -256,8 +256,6 @@ describe("capitalism and market-economy guide boundaries", () => {
         .filter(({ predicate }) => predicate === "related-to")
         .map(({ object }) => object.id),
     ).toEqual([
-      "business-firm",
-      "commodity-production",
       "finance",
       "legal-order",
       "market-economy",

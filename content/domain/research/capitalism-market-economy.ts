@@ -60,6 +60,56 @@ export const capitalismMarketResearchDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "capitalism-commodity-production-relation",
+      kind: "research-obligation",
+      label: "Commodity production in definitions of capitalism",
+      description:
+        "A focused test of whether production for exchange is necessary or sufficient in rival definitions of capitalism.",
+      obligationType: "research-gap",
+      question:
+        "How do rival definitions relate capitalism to commodity production rather than to market exchange alone?",
+      target: { kind: "concept", id: "capitalism" },
+      targetSectionId: "what-defines-capitalism",
+      addressedStatementIds: [
+        "capitalism-market-boundary",
+      ],
+      currentLimitation:
+        "The present evidence distinguishes production for exchange from ownership and establishes that markets predate modern capitalism, but it does not directly establish a capitalism–commodity-production relationship.",
+      evidenceNeeded:
+        "Precisely located rival definitions that state whether commodity production is necessary, sufficient, characteristic, or historically variable within capitalism.",
+      scope:
+        "Attributed definitions and bounded historical applications; not an inference from the presence of trade alone.",
+      ...common,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "capitalism-business-firm-relation",
+      kind: "research-obligation",
+      label: "Business firms in definitions of capitalism",
+      description:
+        "A focused test of the place of firms in rival definitions of capitalism.",
+      obligationType: "research-gap",
+      question:
+        "Which forms of business firm are necessary, characteristic, or incidental in rival definitions of capitalism?",
+      target: { kind: "concept", id: "capitalism" },
+      targetSectionId: "which-institutions-work-together",
+      addressedStatementIds: [
+        "firm-market-boundary",
+      ],
+      currentLimitation:
+        "The present evidence distinguishes coordination inside firms from market exchange but does not directly establish a capitalism–business-firm relationship.",
+      evidenceNeeded:
+        "Precisely located definitions and comparative institutional research that distinguish firm type, ownership, governance, employment, and legal personality.",
+      scope:
+        "Named firm forms in attributed definitions and bounded cases; not every organization that produces goods or services.",
+      ...common,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "china-tve-effective-control",
       kind: "research-obligation",
       label:

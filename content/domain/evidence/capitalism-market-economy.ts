@@ -405,8 +405,8 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "market-state-boundary",
-    "Markets require supporting legal rules",
-    "Functioning markets require legal rules that protect property rights and enforce contracts.",
+    "A market economy requires supporting legal rules",
+    "A functioning market economy requires legal rules that protect property rights and enforce contracts.",
     "definition",
   ),
   statement(
@@ -507,7 +507,7 @@ export const capitalismMarketEvidenceDocuments = [
   ),
   statement(
     "capitalism-legal-order-relation",
-    "Capitalist institutions depend on law",
+    "Hodgson’s definition requires a legal system",
     "Hodgson’s definition of capitalism treats a legal system supporting property and contract as a necessary institution.",
     "definition",
   ),
@@ -515,6 +515,18 @@ export const capitalismMarketEvidenceDocuments = [
     "capitalism-private-property-relation",
     "Hodgson includes private property in capitalism’s definition",
     "Hodgson includes private property among the institutions in his definition of capitalism.",
+    "definition",
+  ),
+  statement(
+    "market-economy-firm-relation",
+    "Market economies combine inter-firm exchange with intra-firm hierarchy",
+    "A market economy can coordinate transactions between firms while firms coordinate their internal activity through hierarchy.",
+    "definition",
+  ),
+  statement(
+    "capitalism-market-economy-relation",
+    "Hodgson finds markets insufficient to define capitalism",
+    "Hodgson argues that markets are insufficient to define capitalism.",
     "definition",
   ),
 

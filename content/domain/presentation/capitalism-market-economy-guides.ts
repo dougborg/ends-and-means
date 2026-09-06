@@ -53,6 +53,7 @@ const capitalismDossier = attachNarrative("capitalism.md", {
       traceStatus: "qualified" as const,
       statementIds: [
         "capitalism-market-boundary",
+        "capitalism-market-economy-relation",
         "market-ownership-boundary",
         "wage-labor-history-limit",
         "commodity-production-boundary",
@@ -374,6 +375,8 @@ export const capitalismMarketGuideDocuments = [
     sections("capitalism", "capitalism-dossier", [
       "capitalism-coerced-labor-boundary",
       "capitalism-household-reproduction-boundary",
+      "capitalism-commodity-production-relation",
+      "capitalism-business-firm-relation",
     ]),
   ),
   guide(

@@ -37,6 +37,8 @@ const statementIds = [
   "market-finance-relation",
   "capitalism-legal-order-relation",
   "capitalism-private-property-relation",
+  "market-economy-firm-relation",
+  "capitalism-market-economy-relation",
 ] as const;
 
 const caseIds = [
