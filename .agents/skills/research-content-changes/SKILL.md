@@ -13,8 +13,9 @@ Begin with the reader's familiar subject or question.
 The primary product is a clear learning and comparison journey; the graph and
 evidence trace are its trust infrastructure.
 Do not require readers to choose an entity kind before learning.
-Treat “learner-first,” “learner path,” “learner journey,” and similar audience
-framing as internal product language, not published copy.
+Treat “learner-first,” “learner path,” “learner journey,” “reader-first,”
+“reader path,” “reader journey,” and similar audience framing as internal
+product language, not published copy.
 Public guide and Dossier identity text must describe the subject directly:
 state what it can mean, identify important institutions or mechanisms, and name
 a central boundary that the cited Statements support.

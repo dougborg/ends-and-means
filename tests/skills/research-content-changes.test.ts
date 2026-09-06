@@ -104,7 +104,9 @@ describe("research-content-changes skill", () => {
 describe("public subject copy guidance", () => {
   it("keeps internal journey framing out of published identity copy", async () => {
     const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
-    expect(skill).toMatch(/audience\s+framing as internal product language/);
+    expect(skill).toMatch(
+      /audience\s+framing as internal\s+product language/,
+    );
     expect(skill).toMatch(
       /Public guide and Dossier identity text must describe the subject directly/,
     );

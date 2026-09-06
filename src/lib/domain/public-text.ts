@@ -23,7 +23,7 @@ const workflowPatterns = [
   {
     name: "internal audience framing",
     pattern:
-      /\b(?:learner(?:-first|[- ](?:paths?|journeys?|workflow))|learning (?:paths?|journeys?)|reader journeys?)\b/iu,
+      /\b(?:learner(?:-first|[- ](?:paths?|journeys?|workflow))|learning (?:paths?|journeys?)|reader(?:-first|[- ](?:paths?|journeys?)))\b/iu,
   },
 ] as const;
 

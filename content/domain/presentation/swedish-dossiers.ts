@@ -14,7 +14,7 @@ const rawDossierDocuments = [
       kind: "dossier",
       label: "Swedish wage-earner fund program dossier",
       description:
-        "Sweden’s wage-earner fund program sought more even wealth distribution and greater wage-earner influence through five publicly appointed investment boards. Statutory caps and the funds’ small market share limited their control before liquidation.",
+        "Sweden’s wage-earner fund program sought more even wealth distribution and greater wage-earner influence through five publicly appointed investment boards. Statutory caps constrained each board, and by 1991 the funds held about 2.6 percent of exchange value without becoming controlling owners.",
       subject: { kind: "approach", id: "swedish-wage-earner-fund-program" },
       standfirst: "",
       standfirstStatementIds: [
