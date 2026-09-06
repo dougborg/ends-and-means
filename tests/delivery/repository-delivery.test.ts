@@ -118,13 +118,21 @@ describe("verify command ownership", () => {
       "VERIFY_DUPLICATE",
     );
   });
+});
 
+describe("conservative verify command surface", () => {
   it.each([
     "echo setup\npnpm lint",
     "echo setup; pnpm lint",
     "cd app && pnpm lint",
     "echo setup & pnpm lint",
     "(pnpm lint)",
+    "time pnpm lint",
+    "if pnpm lint; then echo ok; fi",
+    "env CI=1 pnpm lint",
+    "echo pnpm lint",
+    "echo setup \\; pnpm lint",
+    "echo setup \\&\\& pnpm lint",
   ])("rejects owned command after a shell boundary: %s", async (run) => {
     const root = await repositoryFixture();
     await replace(
@@ -139,15 +147,14 @@ describe("verify command ownership", () => {
   });
 
   it.each([
-    "echo pnpm lint",
     "# pnpm lint",
     "echo 'pnpm lint'",
     "echo 'setup; pnpm lint'",
     'echo "setup && pnpm lint"',
     "echo 'setup | pnpm lint'",
     "echo ok # ; pnpm lint",
-    "echo setup \\; pnpm lint",
-    "echo setup \\&\\& pnpm lint",
+    "echo pnpm linter",
+    "echo pnpm audit-helper",
   ])(
     "ignores non-command mention: %s",
     async (run) => {

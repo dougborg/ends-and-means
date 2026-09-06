@@ -158,7 +158,7 @@ const dependencyPhrasePattern =
   /(?:blocked on|blocked by|depends on|dependency\s*:|unblocks? (?:when|after)|blocking condition\s*:)[^\n]+/i;
 
 function hasConcreteBlocker(body = "") {
-  return dependencyPhrasePattern.test(body);
+  return hasUnmetDependency(body);
 }
 
 function hasUnmetDependency(body = "") {
