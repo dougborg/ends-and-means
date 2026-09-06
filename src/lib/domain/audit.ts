@@ -197,7 +197,7 @@ function sourcePreflight(graph: CompiledDomainGraph) {
       if (!hasIdentifier && !source.resourceLinks?.length)
         missingMetadata.push("identifier or access link");
       return {
-        id: source.id,
+        id: `source:${source.id}`,
         missingMetadata,
         urlsToVerify: (source.resourceLinks ?? []).map(({ url }) => url),
       };
