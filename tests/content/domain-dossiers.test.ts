@@ -424,7 +424,29 @@ describe("narrative Dossier model", () => {
       "test-concept-dossier: live Dossier identity contains an internal workflow reference",
     );
   });
+
 });
+
+it.each(["heading", "body"] as const)(
+  "rejects internal audience framing in live Dossier section %s",
+  (field) => {
+    const invalid = structuredClone(documents);
+    const dossier = invalid[2];
+    if (
+      dossier?.documentType !== "entity" ||
+      dossier.entity.kind !== "dossier"
+    )
+      throw new Error("Missing dossier fixture");
+    dossier.entity.publicationStatus = "reviewed";
+    const section = dossier.entity.sections[0];
+    if (!section) throw new Error("Missing Dossier section fixture");
+    section[field] = "Reader journeys through the evidence.";
+
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "test-concept-dossier:what-it-means: live Dossier narrative contains an internal workflow reference",
+    );
+  },
+);
 
 describe("Dossier standfirst and gap boundaries", () => {
   it("requires a unique, resolved standfirst trace", () => {

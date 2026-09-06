@@ -858,6 +858,14 @@ function validateNarrativeSection(
     errors.push(
       `${entity.id}: narrative section ${section.id} requires a heading and body`,
     );
+  reportInvalid(
+    errors,
+    ["reviewed", "published"].includes(entity.publicationStatus) &&
+      [section.heading, section.body].some(
+        (value) => workflowReferencesIn(value).length > 0,
+      ),
+    `${entity.id}:${section.id}: live Dossier narrative contains an internal workflow reference`,
+  );
   const isGap = section.traceStatus === "research-gap";
   if (!isGap && !section.statementIds.length)
     errors.push(

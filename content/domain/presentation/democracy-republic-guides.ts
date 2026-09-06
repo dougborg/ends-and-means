@@ -223,7 +223,7 @@ const neoRepublicanDossier = attachNarrative(
     kind: "dossier" as const,
     label: "Neo-republican non-domination dossier",
     description:
-      "Neo-republican theory treats freedom from arbitrary or uncontrolled power as a central political aim and connects that aim to older republican traditions.",
+      "Contemporary neo-republican theory treats freedom from arbitrary or uncontrolled power as a central political aim. It is one approach within traditions of republican argument, not another name for a republican governmental form.",
     subject: { kind: "approach" as const, id: "neo-republican-nondomination" },
     standfirst: "",
     standfirstStatementIds: ["republic-nondomination-end"],
