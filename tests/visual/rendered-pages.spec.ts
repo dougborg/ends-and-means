@@ -150,21 +150,24 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   const baseURL = testInfo.project.use.baseURL;
   if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
   const context = await browser.newContext({ baseURL, javaScriptEnabled: false });
-  const page = await context.newPage();
-  await page.goto("/guides/economic-democracy/");
-  await expect(page.getByRole("heading", { name: "Economic democracy", level: 1 })).toBeVisible();
-  await expect(page.getByRole("navigation", { name: "On this page: Economic democracy" })).toBeVisible();
-  const evidence = page.locator("details.subject-guide__evidence").first();
-  await evidence.locator("summary").focus();
-  await page.keyboard.press("Enter");
-  await expect(evidence).toHaveAttribute("open", "");
-  await expect(evidence.locator(".canonical-claim").first()).toBeVisible();
-  const connection = page.locator('[data-relationship-id="enacted-funds-partially-instantiated-program"]');
-  const qualification = connection.locator("details.subject-guide__qualification");
-  await qualification.locator("summary").click();
-  await expect(qualification.getByText("Evidence status")).toBeVisible();
-  await expect(qualification.getByText("qualified", { exact: true })).toBeVisible();
-  await context.close();
+  try {
+    const page = await context.newPage();
+    await page.goto("/guides/economic-democracy/");
+    await expect(page.getByRole("heading", { name: "Economic democracy", level: 1 })).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "On this page: Economic democracy" })).toBeVisible();
+    const evidence = page.locator("details.subject-guide__evidence").first();
+    await evidence.locator("summary").focus();
+    await page.keyboard.press("Enter");
+    await expect(evidence).toHaveAttribute("open", "");
+    await expect(evidence.locator(".canonical-claim").first()).toBeVisible();
+    const connection = page.locator('[data-relationship-id="enacted-funds-partially-instantiated-program"]');
+    const qualification = connection.locator("details.subject-guide__qualification");
+    await qualification.locator("summary").click();
+    await expect(qualification.getByText("Evidence status")).toBeVisible();
+    await expect(qualification.getByText("qualified", { exact: true })).toBeVisible();
+  } finally {
+    await context.close();
+  }
 });
 
 test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {

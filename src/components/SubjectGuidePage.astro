@@ -12,12 +12,12 @@ import { canonicalGraph, entityById } from "../lib/domain/canonical";
 import { hrefForEntity } from "../lib/public-routes";
 import {
   directSubjectGuideEvidence,
-  subjectGuideRelationshipDetails,
   visibleSubjectGuideSections,
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
 import MarkdownProse from "./MarkdownProse.astro";
 import ResearchObligationCard from "./ResearchObligationCard.astro";
+import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
 
 interface Props {
   guide: SubjectGuide;
@@ -41,7 +41,7 @@ function selectedNarrative(
   for (const reference of section.narrativeRefs ?? []) {
     const dossier = dossierFor(reference.dossierId);
     if (!dossier) continue;
-    if (!reference.sectionId) {
+    if (reference.sectionId === undefined) {
       selections.push({ narrative: dossier, standfirst: true });
       continue;
     }
@@ -216,12 +216,6 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
                   const { subject, object } = relationshipEnds(relationship);
                   const subjectHref = hrefForEntity(relationship.subject);
                   const objectHref = hrefForEntity(relationship.object);
-                  const details = subjectGuideRelationshipDetails(relationship, {
-                    entityLabel: (id) => entityById(id)?.label,
-                    ...(relationship.predicate === "placed-on"
-                      ? { placementValueLabel: () => placementValueLabel(relationship) }
-                      : {}),
-                  });
                   return subject && object && (
                     <article data-relationship-id={relationship.id}>
                       <p>
@@ -229,16 +223,13 @@ const shortAnswerSelections = shortAnswer ? selectedNarrative(shortAnswer) : [];
                         <span>{publicRelationshipLabel(relationship, "subject")}</span>
                         {objectHref ? <a href={objectHref}>{object.label}</a> : <strong>{object.label}</strong>}
                       </p>
-                      {details.length > 0 && (
-                        <details class="subject-guide__qualification">
-                          <summary>How to read this connection</summary>
-                          <dl>
-                            {details.map(({ label, value }) => (
-                              <div><dt>{label}</dt><dd>{value}</dd></div>
-                            ))}
-                          </dl>
-                        </details>
-                      )}
+                      <SubjectGuideRelationshipDetails
+                        relationship={relationship}
+                        entityLabel={(id) => entityById(id)?.label}
+                        {...(relationship.predicate === "placed-on"
+                          ? { placementValueLabel: () => placementValueLabel(relationship) }
+                          : {})}
+                      />
                       {"statementIds" in relationship && relationship.statementIds.length > 0 && (
                         <details class="reference-disclosure subject-guide__evidence">
                           <summary>Check this connection <span>{relationship.statementIds.length} {relationship.statementIds.length === 1 ? "claim" : "claims"}</span></summary>

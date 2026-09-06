@@ -1,6 +1,8 @@
-import { defineConfig } from "vitest/config";
+import { getViteConfig } from "astro/config";
 
-export default defineConfig({
+export default getViteConfig({
+  // Vitest extends Vite's config; Astro's helper types only the Vite surface.
+  // @ts-expect-error -- consumed by Vitest after Astro installs its plugin.
   test: {
     coverage: {
       include: ["src/lib/**/*.ts"],

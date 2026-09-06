@@ -1,0 +1,27 @@
+---
+import type { DomainRelationship, PlacementValue } from "../lib/domain";
+import { subjectGuideRelationshipDetails } from "../lib/subject-guide-presentation";
+
+interface Props {
+  relationship: DomainRelationship;
+  entityLabel?: (id: string) => string | undefined;
+  placementValueLabel?: (value: PlacementValue) => string | undefined;
+}
+
+const { relationship, entityLabel, placementValueLabel } = Astro.props;
+const details = subjectGuideRelationshipDetails(relationship, {
+  ...(entityLabel ? { entityLabel } : {}),
+  ...(placementValueLabel ? { placementValueLabel } : {}),
+});
+---
+
+{details.length > 0 && (
+  <details class="subject-guide__qualification">
+    <summary>How to read this connection</summary>
+    <dl>
+      {details.map(({ label, value }) => (
+        <div><dt>{label}</dt><dd>{value}</dd></div>
+      ))}
+    </dl>
+  </details>
+)}
