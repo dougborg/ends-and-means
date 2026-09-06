@@ -34,7 +34,6 @@ const statementIds = [
   "ghana-case-period-boundary",
   "china-case-period-boundary",
   "china-nonstate-sector-growth",
-  "market-finance-relation",
   "capitalism-legal-order-relation",
   "capitalism-private-property-relation",
   "market-economy-firm-relation",

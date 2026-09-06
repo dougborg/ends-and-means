@@ -337,12 +337,6 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "section 1, paragraph 3",
     ],
     [
-      "market-finance-relation",
-      "sep-markets-2026-source",
-      "supports",
-      "section 1, paragraph 2",
-    ],
-    [
       "market-laissez-faire-boundary",
       "sep-markets-2026-source",
       "supports",
@@ -895,12 +889,6 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "China’s non-state sector grew rapidly during the reform period.",
     ],
     [
-      "market-finance-relation",
-      "Financial markets are markets",
-      "definition",
-      "Financial markets organize exchange in financial assets.",
-    ],
-    [
       "capitalism-legal-order-relation",
       "Hodgson’s definition requires a legal system",
       "definition",
@@ -914,9 +902,9 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     ],
     [
       "market-economy-firm-relation",
-      "Market economies combine inter-firm exchange with intra-firm hierarchy",
+      "Economies can contain markets and hierarchical corporations",
       "definition",
-      "A market economy can coordinate transactions between firms while firms coordinate their internal activity through hierarchy.",
+      "An economy can include both markets and corporations while corporations coordinate their internal activity through hierarchy.",
     ],
     [
       "capitalism-market-economy-relation",

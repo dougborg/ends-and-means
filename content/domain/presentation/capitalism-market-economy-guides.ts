@@ -147,6 +147,7 @@ const marketEconomyDossier = attachNarrative("market-economy.md", {
         "property-possession-boundary",
         "property-rights-plural",
         "firm-market-boundary",
+        "market-economy-firm-relation",
         "smith-exchange-division-labor",
       ],
     },
