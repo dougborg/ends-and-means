@@ -1,0 +1,13 @@
+---
+interface Props {
+  tone?: "information" | "caution" | "evidence";
+  compact?: boolean;
+  className?: string;
+}
+
+const { tone = "information", compact = false, className } = Astro.props;
+---
+
+<div class:list={["notice", `notice--${tone}`, { "notice--compact": compact }, className]}>
+  <slot />
+</div>

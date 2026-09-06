@@ -1,0 +1,19 @@
+@layer layout {
+  .site-main {
+    width: min(var(--measure-prose), calc(100% - 2rem));
+    min-height: 65vh;
+    margin-inline: auto;
+    padding-block: var(--space-page);
+  }
+
+  .site-main--wide { width: min(var(--measure-page), calc(100% - 2rem)); }
+  .site-header__inner, .site-footer__inner { width: min(var(--measure-page), calc(100% - 2rem)); margin-inline: auto; }
+  .editorial-page, .section-stack { display: grid; gap: var(--space-section); }
+  .apparatus-stack { display: grid; gap: var(--space-section-tight); }
+  .editorial-header { max-width: min(100%, var(--measure-header)); }
+  .measure-prose { max-width: var(--measure-prose); }
+  .measure-standfirst { max-width: var(--measure-standfirst); }
+  .measure-compact { max-width: var(--measure-compact); }
+  .measure-apparatus { max-width: var(--measure-apparatus); }
+  .page-coordinate { margin-bottom: var(--space-3); }
+}

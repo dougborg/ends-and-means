@@ -1,5 +1,6 @@
 ---
 import CanonicalStatement from "./CanonicalStatement.astro";
+import Notice from "./Notice.astro";
 import { entityById } from "../lib/domain/canonical";
 import type { Event, Transition } from "../lib/domain";
 
@@ -12,5 +13,5 @@ const events = transition.eventIds.map((id) => entityById(id) as Event | undefin
   <h2>{transition.label}</h2>
   <p>{transition.description}</p>
   {events.map((event) => <article id={event.id} tabindex="-1"><p class="coordinate">EVENT / {event.startDate.year}</p><h3>{event.label}</h3>{event.descriptionStatementIds.map((id) => <CanonicalStatement statementId={id} anchored={anchorForStatement(id)} />)}</article>)}
-  <p class="scope-note"><strong>Interpretive caution:</strong> The event records what changed. Causal importance and longer-run meaning remain claims that require separate evidence and rival interpretations.</p>
+  <Notice tone="caution" compact className="scope-note"><strong>Interpretive caution:</strong> The event records what changed. Causal importance and longer-run meaning remain claims that require separate evidence and rival interpretations.</Notice>
 </section>

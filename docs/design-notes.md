@@ -191,6 +191,12 @@ Avoid political red/blue coding, flags, ornamental portraits, marble columns,
 voting-box imagery, gradients, glass effects, pill-heavy interfaces, rounded
 card grids, and generic “serious publication” sepia.
 
+The reusable Light-theme foundations, semantic token roles, normalized
+measures, spacing rhythm, component boundaries, and accessibility rules are
+documented in the [design system](design-system.md). Page compositions retain
+their distinct learner jobs; shared styling does not imply one universal page
+or card abstraction.
+
 ### Color tokens
 
 | Token | Value | Use |

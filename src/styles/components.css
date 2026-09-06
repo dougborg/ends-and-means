@@ -1,0 +1,26 @@
+@layer components {
+  .prose { max-width: var(--measure-prose); font-family: var(--font-reading); font-size: 1.06rem; line-height: 1.72; }
+  .prose p { margin-bottom: 1.2em; }
+  .dek { margin-bottom: var(--space-section); color: var(--text-muted); font-family: var(--font-reading); font-size: clamp(1.12rem, 2vw, 1.42rem); line-height: 1.52; }
+  .dek p { margin-bottom: 0; }
+  .coordinate, .report-source { font-family: var(--font-apparatus); }
+  .coordinate { margin: 0; color: var(--link); font-size: .68rem; font-weight: 600; letter-spacing: .115em; line-height: 1.4; text-transform: uppercase; }
+
+  .notice {
+    max-width: var(--measure-prose);
+    margin: var(--space-8) 0 0;
+    padding: var(--space-4) var(--space-6);
+    border-left: 3px solid var(--link-hover);
+    background: var(--surface);
+    font-family: var(--font-reading);
+    font-size: .88rem;
+    line-height: 1.6;
+  }
+
+  .notice--caution { border-color: var(--caution); background: var(--caution-surface); }
+  .notice--evidence { border-color: var(--evidence); background: var(--evidence-surface); }
+  .notice--compact { margin-top: 0; }
+  .notice > :last-child { margin-bottom: 0; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0,0,0,0); white-space: nowrap; }
+}

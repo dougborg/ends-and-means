@@ -6,6 +6,7 @@ import NarrativeDossier from "../../components/NarrativeDossier.astro";
 import OnPageNavigation from "../../components/OnPageNavigation.astro";
 import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Notice from "../../components/Notice.astro";
 import type { Approach, Case, CaseEpisode, Challenge, Criterion, End, Means } from "../../lib/domain";
 import { dossierForSubject, entitiesOfKind, entityById, relationshipsFrom, relationshipsTo, researchObligationsForTarget } from "../../lib/domain/canonical";
 import { hasUsefulOnPageNavigation } from "../../lib/on-page-navigation";
@@ -49,7 +50,7 @@ const claimStatementAnchor = (id: string) => {
       <header><p class="coordinate">REFERENCE</p><h2 id="approach-reference-title">{referenceSection.label}</h2><p>Open the formal relationships and evidence behind the summary.</p></header>
       <details class="apparatus-group"><summary>Purpose and proposed institutions</summary><div class="apparatus-group__body"><section><h3>Attributed purposes</h3>{ends.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</div>)}</section><section><h3>Proposed institutions</h3>{means.map(({ entity, statementIds }) => entity && <div><h4>{entity.label}</h4>{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={claimStatementAnchor(id)} />)}</div>)}</section></div></details>
       <details class="apparatus-group"><summary>Cases and evaluation</summary><div class="apparatus-group__body"><section><h3>Bounded practice</h3>{cases.map(({ subject, predicate, status }) => <div class="case-link"><p class="coordinate">{status} / {predicate.replaceAll("-", " ")}</p><h4><a href={`/cases/${subject.kind === "case" ? subject.id : subject.caseId}/`}>{subject.label}</a></h4><p>{subject.description}</p></div>)}</section><section><h3>Questions and criteria</h3>{challenges.map(({ challenge, criteria }) => challenge && <article><h4><a href={`/challenges/${challenge.id}/`}>{challenge.question}</a></h4><p>{challenge.rationale}</p>{criteria.map((criterion) => <p><strong>{criterion.label}:</strong> {criterion.definition}</p>)}</article>)}</section></div></details>
-      <details class="apparatus-group"><summary>Scope and external orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><p class="scope-note"><strong>Scope:</strong> {approach.scope}</p><ExternalReferences references={approach.externalRefs} /></div></details>
+      <details class="apparatus-group"><summary>Scope and external orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><Notice compact className="scope-note"><strong>Scope:</strong> {approach.scope}</Notice><ExternalReferences references={approach.externalRefs} /></div></details>
     </section>
       </div>
     </div>
