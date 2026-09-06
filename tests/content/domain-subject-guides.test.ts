@@ -234,6 +234,17 @@ describe("capitalism and market-economy guide boundaries", () => {
     expect(marketEconomy.description).toContain(
       "coexist with other allocation and ownership forms",
     );
+    expect(
+      canonicalGraph.indexes.entitiesById["capitalism-dossier"]?.description,
+    ).toBe(
+      "Capitalism has no generally accepted definition. Hodgson defines it through private property, widespread employment, and developed finance; firms also coordinate internally through hierarchy, and markets alone are insufficient to identify capitalism.",
+    );
+    expect(
+      canonicalGraph.indexes.entitiesById["market-economy-dossier"]
+        ?.description,
+    ).toBe(
+      "Markets are institutions of regular exchange supported by legal rules for property and contracts; economies containing them can also use hierarchical firms, nonprivate ownership, reciprocity, and redistribution. A market economy is not synonymous with capitalism or laissez-faire.",
+    );
 
     for (const guide of [capitalism, marketEconomy]) {
       expect(selectedStatementIds(guide).length).toBeGreaterThanOrEqual(16);

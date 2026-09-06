@@ -6,7 +6,7 @@ const capitalismDossier = attachNarrative("capitalism.md", {
   kind: "dossier" as const,
   label: "Capitalism dossier",
   description:
-    "Definitions, institutions, historical variation, and limits of capitalism as an analytical concept.",
+    "Capitalism has no generally accepted definition. Hodgson defines it through private property, widespread employment, and developed finance; firms also coordinate internally through hierarchy, and markets alone are insufficient to identify capitalism.",
   subject: { kind: "concept" as const, id: "capitalism" },
   standfirst: "",
   standfirstStatementIds: [
@@ -14,6 +14,8 @@ const capitalismDossier = attachNarrative("capitalism.md", {
     "capitalism-market-boundary",
     "capitalism-institutional-definition",
     "capitalism-private-property-relation",
+    "firm-market-boundary",
+    "capitalism-market-economy-relation",
   ],
   sections: [
     {
@@ -115,7 +117,7 @@ const marketEconomyDossier = attachNarrative("market-economy.md", {
   kind: "dossier" as const,
   label: "Market economy dossier",
   description:
-    "Market exchange, its institutional supports, alternative ownership forms, and its limits as a system label.",
+    "Markets are institutions of regular exchange supported by legal rules for property and contracts; economies containing them can also use hierarchical firms, nonprivate ownership, reciprocity, and redistribution. A market economy is not synonymous with capitalism or laissez-faire.",
   subject: { kind: "concept" as const, id: "market-economy" },
   standfirst: "",
   standfirstStatementIds: [
@@ -123,6 +125,9 @@ const marketEconomyDossier = attachNarrative("market-economy.md", {
     "market-economy-plural-allocation",
     "market-ownership-boundary",
     "market-state-boundary",
+    "market-economy-firm-relation",
+    "capitalism-market-economy-relation",
+    "market-laissez-faire-boundary",
   ],
   sections: [
     {
