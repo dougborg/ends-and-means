@@ -439,9 +439,9 @@ describe("public research text", () => {
   });
 
   it("labels every Statement publication state truthfully", () => {
-    expect(claimPublicationLabel("published")).toBe("Evidence available");
-    expect(claimPublicationLabel("reviewed")).toBe("Evidence checked");
-    expect(claimPublicationLabel("in-review")).toBe("Evidence check in progress");
+    expect(claimPublicationLabel("published")).toBe("Claim published");
+    expect(claimPublicationLabel("reviewed")).toBe("Claim reviewed");
+    expect(claimPublicationLabel("in-review")).toBe("Claim review in progress");
     expect(claimPublicationLabel("research-needed")).toBe("Research needed");
     expect(claimPublicationLabel("deprecated")).toBe("Claim retired");
   });

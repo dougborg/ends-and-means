@@ -31,9 +31,9 @@ export function workflowReferencesIn(value: string): string[] {
 export function claimPublicationLabel(status: PublicationStatus): string {
   return {
     deprecated: "Claim retired",
-    "in-review": "Evidence check in progress",
-    published: "Evidence available",
+    "in-review": "Claim review in progress",
+    published: "Claim published",
     "research-needed": "Research needed",
-    reviewed: "Evidence checked",
+    reviewed: "Claim reviewed",
   }[status];
 }

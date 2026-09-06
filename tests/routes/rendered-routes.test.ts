@@ -195,7 +195,7 @@ async function verifyExploreAndCaseRoutes() {
   expect(
     explore.match(/class="canonical-claim"/g)?.length,
   ).toBeGreaterThanOrEqual(2);
-  expect(stripMarkup(explore)).toContain("Evidence checked");
+  expect(stripMarkup(explore)).toContain("Claim reviewed");
   expect(stripMarkup(explore)).not.toContain("undefined");
   expect(hrefs(explore)).toContain(
     "https://en.wikipedia.org/wiki/Employee_funds",
