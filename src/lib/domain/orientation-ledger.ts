@@ -6,11 +6,26 @@ export type ReviewedOrientationDecision = {
   disposition: "mapped" | "intentionally-unmatched";
   reason?: string;
   references: ExternalReference[];
-  resolution?: "direct-canonical-target";
+  resolution?:
+    | "direct-canonical-target"
+    | {
+        canonicalArticleTitle: string;
+        canonicalArticleUrl: string;
+        pageKind: "article";
+        checkedAt: string;
+        wikidataId?: string;
+      };
   consideredCandidates?: Array<{
     title: string;
     url: string;
     boundary: string;
+    resolution: {
+      canonicalArticleTitle: string;
+      canonicalArticleUrl: string;
+      pageKind: "article";
+      checkedAt: string;
+      wikidataId?: string;
+    };
   }>;
 };
 const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
@@ -1832,7 +1847,7 @@ const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
 
 const mapped = (
   article: string,
-  id: string,
+  id: string | undefined,
   match: "exact" | "close" = "exact",
   reason?: string,
 ): Omit<ReviewedOrientationDecision, "targetType" | "id"> => ({
@@ -1846,36 +1861,63 @@ const mapped = (
       language: "en",
       checkedAt: "2026-09-06",
     },
-    {
-      system: "wikidata",
-      id,
-      url: `https://www.wikidata.org/wiki/${id}`,
-      purpose: "identity",
-      match,
-      checkedAt: "2026-09-06",
-    },
+    ...(id
+      ? [
+          {
+            system: "wikidata",
+            id,
+            url: `https://www.wikidata.org/wiki/${id}`,
+            purpose: "identity",
+            match,
+            checkedAt: "2026-09-06",
+          } as const,
+        ]
+      : []),
   ],
-  resolution: "direct-canonical-target",
+  resolution: {
+    canonicalArticleTitle: article,
+    canonicalArticleUrl: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+    pageKind: "article",
+    checkedAt: "2026-09-06",
+    ...(id ? { wikidataId: id } : {}),
+  },
 });
 
 const reviewedMappingOverrides: Record<
   string,
   Omit<ReviewedOrientationDecision, "targetType" | "id">
 > = {
+  "entity:accountability": mapped("Accountability", "Q2798912", "close"),
   "entity:authoritarianism": mapped("Authoritarianism", "Q6229"),
   "entity:anarcho-syndicalism": mapped("Anarcho-syndicalism", "Q188993"),
+  "entity:anarcho-syndicalist-organizing": mapped(
+    "Anarcho-syndicalism",
+    undefined,
+    "close",
+    "The external topic includes the broader ideology and movement; this project record isolates its organizing approach.",
+  ),
   "entity:autocracy": mapped("Autocracy", "Q173424"),
   "entity:capitalism": mapped("Capitalism", "Q6206"),
+  "entity:business-firm": mapped("Business", "Q4830453", "close"),
   "entity:conservatism": mapped("Conservatism", "Q7169"),
   "entity:dictatorship": mapped("Dictatorship", "Q317"),
   "entity:economic-planning": mapped("Economic planning", "Q3391448"),
   "entity:fascism": mapped("Fascism", "Q6223"),
   "entity:feminism": mapped("Feminism", "Q7252"),
+  "entity:finance": mapped("Finance", "Q43015"),
   "entity:liberalism": mapped("Liberalism", "Q6216"),
+  "entity:legal-order": mapped("Legal system", "Q858700", "close"),
   "entity:liberal-feminism": mapped("Liberal feminism", "Q1987244"),
+  "entity:socialist-feminism": mapped("Socialist feminism", "Q2225347"),
   "entity:market-economy": mapped("Market economy", "Q179522"),
   "entity:totalitarianism": mapped("Totalitarianism", "Q128135"),
   "entity:matriliny": mapped("Matrilineality", "Q1136773"),
+  "entity:matriarchy": mapped(
+    "Matriarchy",
+    "Q185681",
+    "exact",
+    "The canonical topic is the same disputed concept; the project scope preserves rival definitions and keeps it distinct from matriliny.",
+  ),
   "entity:marxist-feminism": mapped("Marxist feminism", "Q1321958"),
   "entity:mixed-economy": mapped("Mixed economy", "Q191675"),
   "entity:private-property": mapped("Private property", "Q555911"),
@@ -1900,6 +1942,15 @@ const reviewedMappingOverrides: Record<
   "entity:spain": mapped("Spain", "Q29"),
   "entity:united-states": mapped("United States", "Q30"),
   "entity:west-sumatra": mapped("West Sumatra", "Q2772"),
+  "entity:england-and-wales": mapped("England and Wales", "Q1156248"),
+  "entity:swedish-rehn-meidner-model": mapped("Rehn–Meidner model", undefined),
+  "entity:jinst-sum": mapped("Jinst", undefined),
+  "entity:active-labor-market-adjustment": mapped(
+    "Active labour market policies",
+    undefined,
+    "close",
+    "The external topic is a broader policy family; the project Means is the Swedish model's mobility-and-employment adjustment component.",
+  ),
 };
 
 const reviewedUnmatched = (
@@ -1915,7 +1966,17 @@ const reviewedUnmatched = (
   return {
     ...decision,
     reason: `Candidate reviewed: ${candidate.title}; rejected because ${candidate.boundary}`,
-    consideredCandidates: [candidate],
+    consideredCandidates: [
+      {
+        ...candidate,
+        resolution: {
+          canonicalArticleTitle: candidate.title,
+          canonicalArticleUrl: candidate.url,
+          pageKind: "article",
+          checkedAt: "2026-09-06",
+        },
+      },
+    ],
   };
 };
 
@@ -1942,9 +2003,33 @@ export const reviewedOrientationLedger: ReviewedOrientationDecision[] =
   baseReviewedOrientationLedger.map((decision) => {
     const override =
       reviewedMappingOverrides[`${decision.targetType}:${decision.id}`];
-    return reviewedUnmatched(
+    const reviewed = reviewedUnmatched(
       override
         ? { targetType: decision.targetType, id: decision.id, ...override }
         : decision,
     );
+    if (
+      reviewed.disposition !== "mapped" ||
+      typeof reviewed.resolution !== "string"
+    )
+      return reviewed;
+    const wikipedia = reviewed.references.find(
+      ({ system }) => system === "wikipedia",
+    );
+    const wikidata = reviewed.references.find(
+      ({ system }) => system === "wikidata",
+    );
+    if (!wikipedia) return reviewed;
+    return {
+      ...reviewed,
+      resolution: {
+        canonicalArticleTitle: decodeURIComponent(
+          wikipedia.url.split("/wiki/")[1] ?? "",
+        ).replaceAll("_", " "),
+        canonicalArticleUrl: wikipedia.url,
+        pageKind: "article",
+        checkedAt: "2026-09-06",
+        ...(wikidata?.id ? { wikidataId: wikidata.id } : {}),
+      },
+    };
   });

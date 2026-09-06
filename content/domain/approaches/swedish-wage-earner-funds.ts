@@ -3,11 +3,149 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 const base = { publicationStatus: "reviewed" as const };
 
 export const approachDocuments = [
-  { documentType: "entity", entity: { id: "swedish-wage-earner-fund-program", kind: "approach", label: "Swedish wage-earner fund program", description: "A contested social-democratic program for collective capital formation and wage-earner influence, represented here through its enacted 1984 form rather than as a synonym for social democracy.", scope: "The ideas and institutional design surrounding Sweden's enacted wage-earner funds; excludes claims that the program represents all social-democratic approaches.", externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Employee_funds", purpose: "orientation", language: "en", checkedAt: "2026-09-04" }, { system: "wikidata", id: "Q5374285", url: "https://www.wikidata.org/wiki/Q5374285", purpose: "identity", match: "exact", checkedAt: "2026-09-04" }], ...base } },
-  { documentType: "entity", entity: { id: "wage-earner-influence", kind: "end", label: "Wage-earner influence", description: "Greater worker influence over ownership and the use of accumulated capital.", scope: "An attributed End whose meaning varies between income distribution, ownership, voting power, and direct control.", ...base } },
-  { documentType: "entity", entity: { id: "regional-wage-earner-fund-boards", kind: "means", label: "Regional wage-earner fund boards", description: "Collectively financed investment funds governed by appointed regional boards and constrained by statutory ownership and voting limits.", institutionalForm: "Five AP-system boards investing payroll- and profit-tax receipts under funding, ownership, and voting caps.", ...base } },
-  { documentType: "entity", entity: { id: "distribution-of-gains-and-ownership", kind: "challenge", label: "Distribution of gains and ownership", description: "How productivity gains, income, wealth, ownership, and control are distributed.", question: "Who captures gains from productivity, wage restraint, and capital ownership—and how can that distribution change?", rationale: "Ownership, control, income, and wealth are distinct but interacting outcomes.", ...base } },
-  { documentType: "entity", entity: { id: "authority-and-accountability", kind: "challenge", label: "Authority and accountability", description: "How delegated investment authority can coordinate action while remaining answerable to affected people.", question: "How can delegated investment authority remain representative, contestable, and accountable?", rationale: "Authority may sit in public, private, or associational bodies, so accountability must follow actual powers.", ...base } },
-  { documentType: "entity", entity: { id: "distribution", kind: "criterion", label: "Distribution", description: "An evaluative lens for the allocation of income, wealth, control, benefits, and costs.", definition: "Who receives income, wealth, control, benefits, and adjustment costs?", evidenceRequirements: ["Separate measures of wages, wealth, ownership, control, employment, and adjustment costs."], normativeAssumptions: ["Concentrated wealth and involuntary burdens require justification."], limitations: ["Wage equality does not establish wealth equality."], ...base } },
-  { documentType: "entity", entity: { id: "accountability", kind: "criterion", label: "Accountability", description: "An evaluative lens for delegated authority and avenues of contestation.", definition: "Can affected people inspect, contest, and replace delegated decision-makers?", evidenceRequirements: ["Formal appointment rules and evidence of representation, transparency, contestation, and practice."], normativeAssumptions: ["Public and quasi-public power should be answerable to affected people."], limitations: ["Formal appointment rules do not establish accountability in practice."], ...base } },
+  {
+    documentType: "entity",
+    entity: {
+      id: "swedish-wage-earner-fund-program",
+      kind: "approach",
+      label: "Swedish wage-earner fund program",
+      description:
+        "A contested social-democratic program for collective capital formation and wage-earner influence, represented here through its enacted 1984 form rather than as a synonym for social democracy.",
+      scope:
+        "The ideas and institutional design surrounding Sweden's enacted wage-earner funds; excludes claims that the program represents all social-democratic approaches.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Employee_funds",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-04",
+        },
+        {
+          system: "wikidata",
+          id: "Q5374285",
+          url: "https://www.wikidata.org/wiki/Q5374285",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-04",
+        },
+      ],
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "wage-earner-influence",
+      kind: "end",
+      label: "Wage-earner influence",
+      description:
+        "Greater worker influence over ownership and the use of accumulated capital.",
+      scope:
+        "An attributed End whose meaning varies between income distribution, ownership, voting power, and direct control.",
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "regional-wage-earner-fund-boards",
+      kind: "means",
+      label: "Regional wage-earner fund boards",
+      description:
+        "Collectively financed investment funds governed by appointed regional boards and constrained by statutory ownership and voting limits.",
+      institutionalForm:
+        "Five AP-system boards investing payroll- and profit-tax receipts under funding, ownership, and voting caps.",
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "distribution-of-gains-and-ownership",
+      kind: "challenge",
+      label: "Distribution of gains and ownership",
+      description:
+        "How productivity gains, income, wealth, ownership, and control are distributed.",
+      question:
+        "Who captures gains from productivity, wage restraint, and capital ownership—and how can that distribution change?",
+      rationale:
+        "Ownership, control, income, and wealth are distinct but interacting outcomes.",
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "authority-and-accountability",
+      kind: "challenge",
+      label: "Authority and accountability",
+      description:
+        "How delegated investment authority can coordinate action while remaining answerable to affected people.",
+      question:
+        "How can delegated investment authority remain representative, contestable, and accountable?",
+      rationale:
+        "Authority may sit in public, private, or associational bodies, so accountability must follow actual powers.",
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "distribution",
+      kind: "criterion",
+      label: "Distribution",
+      description:
+        "An evaluative lens for the allocation of income, wealth, control, benefits, and costs.",
+      definition:
+        "Who receives income, wealth, control, benefits, and adjustment costs?",
+      evidenceRequirements: [
+        "Separate measures of wages, wealth, ownership, control, employment, and adjustment costs.",
+      ],
+      normativeAssumptions: [
+        "Concentrated wealth and involuntary burdens require justification.",
+      ],
+      limitations: ["Wage equality does not establish wealth equality."],
+      ...base,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "accountability",
+      kind: "criterion",
+      label: "Accountability",
+      description:
+        "An evaluative lens for delegated authority and avenues of contestation.",
+      definition:
+        "Can affected people inspect, contest, and replace delegated decision-makers?",
+      evidenceRequirements: [
+        "Formal appointment rules and evidence of representation, transparency, contestation, and practice.",
+      ],
+      normativeAssumptions: [
+        "Public and quasi-public power should be answerable to affected people.",
+      ],
+      limitations: [
+        "Formal appointment rules do not establish accountability in practice.",
+      ],
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Accountability",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q2798912",
+          url: "https://www.wikidata.org/wiki/Q2798912",
+          purpose: "identity",
+          match: "close",
+          checkedAt: "2026-09-06",
+        },
+      ],
+      ...base,
+    },
+  },
 ] satisfies AuthoringDocument[];

@@ -795,6 +795,7 @@ export const liberalismConservatismEvidenceDocuments = [
       description:
         "The geographic boundary used for the England and Wales housing case.",
       placeType: "region",
+      externalRefs: orientationRefs("England and Wales", "Q1156248"),
       ...reviewed,
     },
   },

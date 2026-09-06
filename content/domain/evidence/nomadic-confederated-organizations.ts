@@ -2,7 +2,17 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 
 const reviewed = { publicationStatus: "reviewed" as const };
 
-const statement = (id: string, label: string, text: string, statementKind: "observation" | "classification" | "definition" | "attributed-proposal" | "editorial-interpretation" = "observation"): AuthoringDocument => ({
+const statement = (
+  id: string,
+  label: string,
+  text: string,
+  statementKind:
+    | "observation"
+    | "classification"
+    | "definition"
+    | "attributed-proposal"
+    | "editorial-interpretation" = "observation",
+): AuthoringDocument => ({
   documentType: "entity",
   entity: {
     id,
@@ -22,7 +32,8 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "southwestern-syrian-desert-wadi-sirhan",
       kind: "place",
       label: "Southwestern Syrian Desert and Wadi Sirhan",
-      description: "The steppe and desert corridor connecting southern Syria and Transjordan with Wadi Sirhan and al-Jawf in northern Arabia.",
+      description:
+        "The steppe and desert corridor connecting southern Syria and Transjordan with Wadi Sirhan and al-Jawf in northern Arabia.",
       placeType: "region",
       ...reviewed,
     },
@@ -33,8 +44,18 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "jinst-sum",
       kind: "place",
       label: "Jinst sum",
-      description: "A desert-steppe district in Bayankhongor Province, Mongolia.",
+      description:
+        "A desert-steppe district in Bayankhongor Province, Mongolia.",
       placeType: "institutional-jurisdiction",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Jinst",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },
@@ -44,8 +65,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "cicek-tribal-agency-work",
       kind: "work",
       label: "Tribal agency and the translocalization of the Middle East",
-      description: "M. Talha Çiçek’s archival study of mobile Arab Bedouin agency in the post-Ottoman border order.",
-      title: "Tribal agency and the translocalization of the Middle East: the European mandates, the Arab Bedouins and the making of the post-Ottoman order",
+      description:
+        "M. Talha Çiçek’s archival study of mobile Arab Bedouin agency in the post-Ottoman border order.",
+      title:
+        "Tribal agency and the translocalization of the Middle East: the European mandates, the Arab Bedouins and the making of the post-Ottoman order",
       workType: "article",
       originalPublicationYear: 2025,
       ...reviewed,
@@ -57,8 +80,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "cicek-tribal-agency-source",
       kind: "source",
       label: "Tribal agency and the post-Ottoman order (2025)",
-      description: "The publisher-hosted Historical Research article based on French and British archives, Arabic newspapers, and other primary records.",
-      title: "Tribal agency and the translocalization of the Middle East: the European mandates, the Arab Bedouins and the making of the post-Ottoman order",
+      description:
+        "The publisher-hosted Historical Research article based on French and British archives, Arabic newspapers, and other primary records.",
+      title:
+        "Tribal agency and the translocalization of the Middle East: the European mandates, the Arab Bedouins and the making of the post-Ottoman order",
       sourceType: "article",
       workId: "cicek-tribal-agency-work",
       contributorDisplay: ["M. Talha Çiçek"],
@@ -81,8 +106,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "stocker-borders-in-motion-work",
       kind: "work",
       label: "Borders in Motion",
-      description: "Laura Stocker’s doctoral thesis on Ruwalla and Shammar Jarba territoriality after Ottoman rule, normalized to the model’s report Work type because it has no thesis type.",
-      title: "Borders in Motion: Bedouin Tribes and Territoriality in the Post-Ottoman Middle East, 1918–1936",
+      description:
+        "Laura Stocker’s doctoral thesis on Ruwalla and Shammar Jarba territoriality after Ottoman rule, normalized to the model’s report Work type because it has no thesis type.",
+      title:
+        "Borders in Motion: Bedouin Tribes and Territoriality in the Post-Ottoman Middle East, 1918–1936",
       workType: "report",
       originalPublicationYear: 2026,
       ...reviewed,
@@ -94,8 +121,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "stocker-borders-in-motion-source",
       kind: "source",
       label: "Borders in Motion (2026)",
-      description: "The University of Neuchâtel repository record for Stocker’s multilingual archival doctoral thesis, normalized to the model’s report Source type because it has no thesis type.",
-      title: "Borders in Motion: Bedouin Tribes and Territoriality in the Post-Ottoman Middle East, 1918–1936",
+      description:
+        "The University of Neuchâtel repository record for Stocker’s multilingual archival doctoral thesis, normalized to the model’s report Source type because it has no thesis type.",
+      title:
+        "Borders in Motion: Bedouin Tribes and Territoriality in the Post-Ottoman Middle East, 1918–1936",
       sourceType: "report",
       workId: "stocker-borders-in-motion-work",
       contributorDisplay: ["Laura Stocker"],
@@ -117,9 +146,12 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
     entity: {
       id: "fernandez-gimenez-pastoral-tenure-work",
       kind: "work",
-      label: "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure",
-      description: "María E. Fernández-Giménez’s field-based study of pastoral land use in Jinst and Bayan-Ovoo after Mongolia’s collectives ended.",
-      title: "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure: A Case Study From Postsocialist Mongolia",
+      label:
+        "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure",
+      description:
+        "María E. Fernández-Giménez’s field-based study of pastoral land use in Jinst and Bayan-Ovoo after Mongolia’s collectives ended.",
+      title:
+        "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure: A Case Study From Postsocialist Mongolia",
       workType: "article",
       originalPublicationYear: 2002,
       ...reviewed,
@@ -131,8 +163,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "fernandez-gimenez-pastoral-tenure-source",
       kind: "source",
       label: "Pastoral land tenure in postsocialist Mongolia (2002)",
-      description: "The Human Ecology article, consulted in an author-hosted full-text manifestation.",
-      title: "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure: A Case Study From Postsocialist Mongolia",
+      description:
+        "The Human Ecology article, consulted in an author-hosted full-text manifestation.",
+      title:
+        "Spatial and Social Boundaries and the Paradox of Pastoral Land Tenure: A Case Study From Postsocialist Mongolia",
       sourceType: "article",
       workId: "fernandez-gimenez-pastoral-tenure-work",
       contributorDisplay: ["María E. Fernández-Giménez"],
@@ -155,8 +189,10 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "allington-context-matters-work",
       kind: "work",
       label: "Context matters in Mongolian pastoral governance",
-      description: "A multi-ecozone household study of rules, social ties, tenure, mobility, and forage reservation in Mongolia.",
-      title: "Context matters: Rethinking resource governance theories for Mongolian pastoral systems",
+      description:
+        "A multi-ecozone household study of rules, social ties, tenure, mobility, and forage reservation in Mongolia.",
+      title:
+        "Context matters: Rethinking resource governance theories for Mongolian pastoral systems",
       workType: "article",
       originalPublicationYear: 2024,
       ...reviewed,
@@ -168,11 +204,22 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "allington-context-matters-source",
       kind: "source",
       label: "Context matters in Mongolian pastoral systems (2024)",
-      description: "The open-access Land Use Policy article based on a survey of 760 households across four Mongolian ecozones.",
-      title: "Context matters: Rethinking resource governance theories for Mongolian pastoral systems",
+      description:
+        "The open-access Land Use Policy article based on a survey of 760 households across four Mongolian ecozones.",
+      title:
+        "Context matters: Rethinking resource governance theories for Mongolian pastoral systems",
       sourceType: "article",
       workId: "allington-context-matters-work",
-      contributorDisplay: ["Ginger R. H. Allington", "María E. Fernández-Giménez", "Robin Reid", "Tungalag Ulambayar", "Jay Angerer", "Chantsallkham Jamsranjav", "Batkhishig Baival", "Batbuyan Batjav"],
+      contributorDisplay: [
+        "Ginger R. H. Allington",
+        "María E. Fernández-Giménez",
+        "Robin Reid",
+        "Tungalag Ulambayar",
+        "Jay Angerer",
+        "Chantsallkham Jamsranjav",
+        "Batkhishig Baival",
+        "Batbuyan Batjav",
+      ],
       publicationYear: 2024,
       publisher: "Land Use Policy",
       identifiers: { doi: "10.1016/j.landusepol.2024.107170" },
@@ -186,7 +233,12 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       ...reviewed,
     },
   },
-  statement("ruwalla-scholarly-classification", "Stocker classifies the Ruwalla formation", "Stocker names the historical collective Ruwalla and classifies it as a camel-breeding Bedouin tribe in the southwestern Syrian Desert.", "classification"),
+  statement(
+    "ruwalla-scholarly-classification",
+    "Stocker classifies the Ruwalla formation",
+    "Stocker names the historical collective Ruwalla and classifies it as a camel-breeding Bedouin tribe in the southwestern Syrian Desert.",
+    "classification",
+  ),
   statement(
     "ruwalla-classification-limit",
     "Ruwalla classification does not establish universal identity",
@@ -198,29 +250,60 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
     "Ruwalla belonged to wider ʿAnaza networks",
     "Çiçek places the Ruwalla among mobile groups linked through the ʿAnaza genealogy, which actors could mobilize for political alliance; the affiliation did not erase differences among Ruwalla sections or create a single centralized ʿAnaza state.",
   ),
-  statement("ruwalla-mobility-corridor", "Ruwalla mobility crossed emerging borders", "During the post-Ottoman settlement, Ruwalla seasonal movement connected the southwestern Syrian Desert with pasture and water around Wadi Sirhan and al-Jawf across territories claimed by Syria, Transjordan, Iraq, and Ibn Saud."),
-  statement("ruwalla-mashyakha", "The mashyakha institutionalized representation", "Stocker identifies the Al Shaʿlan family as political representatives of Ruwalla collectives and describes the mashyakha as the institutionalized position of paramount shaykh.", "definition"),
+  statement(
+    "ruwalla-mobility-corridor",
+    "Ruwalla mobility crossed emerging borders",
+    "During the post-Ottoman settlement, Ruwalla seasonal movement connected the southwestern Syrian Desert with pasture and water around Wadi Sirhan and al-Jawf across territories claimed by Syria, Transjordan, Iraq, and Ibn Saud.",
+  ),
+  statement(
+    "ruwalla-mashyakha",
+    "The mashyakha institutionalized representation",
+    "Stocker identifies the Al Shaʿlan family as political representatives of Ruwalla collectives and describes the mashyakha as the institutionalized position of paramount shaykh.",
+    "definition",
+  ),
   statement(
     "regional-bedouin-shaykh-persuasion",
     "Çiçek’s regional account limits command claims",
     "Çiçek argues at the regional Bedouin level that a shaykh risked internal crisis if he disregarded fellow tribespeople’s interests and therefore had to persuade them when government demands conflicted with those interests.",
   ),
-  statement("ruwalla-dira-not-sovereignty", "Dīra did not mean exclusive state territory", "Stocker interprets Ruwalla political action as seeking influence, mobility, and access across the collective’s historical resource area, or dīra, rather than exclusive territorial sovereignty.", "classification"),
-  statement("ruwalla-border-bargaining", "Ruwalla leaders bargained over border incorporation", "In the 1920s Nuri al-Shaʿlan used control of and access to al-Jawf to negotiate with British and French authorities, Amir Abdullah, King Faisal, and Ibn Saud over winter pasture, mobility, and regional influence."),
-  statement("ruwalla-border-concessions", "States conceded cross-border mobility", "Çiçek finds that mandate and regional governments could not reduce mobile tribal affiliation to ordinary individual nationality and instead developed exemptions and interstate mechanisms that preserved cross-border migration."),
+  statement(
+    "ruwalla-dira-not-sovereignty",
+    "Dīra did not mean exclusive state territory",
+    "Stocker interprets Ruwalla political action as seeking influence, mobility, and access across the collective’s historical resource area, or dīra, rather than exclusive territorial sovereignty.",
+    "classification",
+  ),
+  statement(
+    "ruwalla-border-bargaining",
+    "Ruwalla leaders bargained over border incorporation",
+    "In the 1920s Nuri al-Shaʿlan used control of and access to al-Jawf to negotiate with British and French authorities, Amir Abdullah, King Faisal, and Ibn Saud over winter pasture, mobility, and regional influence.",
+  ),
+  statement(
+    "ruwalla-border-concessions",
+    "States conceded cross-border mobility",
+    "Çiçek finds that mandate and regional governments could not reduce mobile tribal affiliation to ordinary individual nationality and instead developed exemptions and interstate mechanisms that preserved cross-border migration.",
+  ),
   statement(
     "ruwalla-archive-source-base",
     "Ruwalla history is reconstructed from a multilingual archive",
     "The principal historical studies reconstruct Ruwalla action by cross-reading French and British colonial archives with Arabic newspapers and multilingual private papers, travel accounts, and tribal reference works.",
   ),
-  statement("ruwalla-archive-voice-limit", "The archive leaves a non-elite voice gap", "Because the reviewed source base centers official archives and political intermediaries, it does not yet establish how Ruwalla women and non-elite pastoralists described the same decisions.", "editorial-interpretation"),
+  statement(
+    "ruwalla-archive-voice-limit",
+    "The archive leaves a non-elite voice gap",
+    "Because the reviewed source base centers official archives and political intermediaries, it does not yet establish how Ruwalla women and non-elite pastoralists described the same decisions.",
+    "editorial-interpretation",
+  ),
   statement(
     "ruwalla-case-transfer-limit",
     "The Ruwalla case is not a tribal template",
     "Ruwalla organization between 1918 and 1936 joined mobile pastoral production, layered kin affiliation, shaykhly representation, and bargaining with rival states under conditions specific to the post-Ottoman border settlement; it is not a stage or template for Arabian, Bedouin, tribal, or confederated government.",
     "editorial-interpretation",
   ),
-  statement("jinst-fieldwork-provenance", "Jinst evidence includes herder interviews", "Fernández-Giménez lived with herding camps in Jinst and Bayan-Ovoo during ten months in 1994–1995, conducted interviews with herders and officials, and surveyed 102 households across both districts in 1995."),
+  statement(
+    "jinst-fieldwork-provenance",
+    "Jinst evidence includes herder interviews",
+    "Fernández-Giménez lived with herding camps in Jinst and Bayan-Ovoo during ten months in 1994–1995, conducted interviews with herders and officials, and surveyed 102 households across both districts in 1995.",
+  ),
   statement(
     "mongolia-administrative-boundary",
     "Sum and bag were state administrative boundaries",
@@ -232,8 +315,17 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
     "Collective dissolution shifted risks to households",
     "In the article’s national and two-community account, collectives were dismantled and livestock privatized in 1992, leaving households responsible for movement, labor, transport, veterinary inputs, marketing, and production risk while pasture remained state-owned.",
   ),
-  statement("mongolia-seasonal-norms", "Herders described reserve and emergency-access norms", "Across the two study communities, herders described setting aside winter and spring pasture and discouraging out-of-season grazing, while allowing outsiders emergency access with an expectation of reciprocity."),
-  statement("study-sites-khot-ail", "Khot ail coordinated household herding labor", "Across the two study communities, khot ail were small, seasonally changeable camps in which households, often but not always kin, pooled animals into species herds and shared work such as hay cutting and moves.", "definition"),
+  statement(
+    "mongolia-seasonal-norms",
+    "Herders described reserve and emergency-access norms",
+    "Across the two study communities, herders described setting aside winter and spring pasture and discouraging out-of-season grazing, while allowing outsiders emergency access with an expectation of reciprocity.",
+  ),
+  statement(
+    "study-sites-khot-ail",
+    "Khot ail coordinated household herding labor",
+    "Across the two study communities, khot ail were small, seasonally changeable camps in which households, often but not always kin, pooled animals into species herds and shared work such as hay cutting and moves.",
+    "definition",
+  ),
   statement(
     "study-sites-campsite-rights",
     "Campsite rights combined custom, occupancy, and structures",
@@ -255,7 +347,11 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
     "Different resources carried different rights",
     "Across the two study communities, privately held shelters, inherited or occupied campsites, group-managed wells, leased pump wells, open summer pasture, and overlapping winter pasture did not form one uniform property regime.",
   ),
-  statement("study-sites-1998-campsite-certificates", "Campsite certificates began during the follow-up interval", "Fernández-Giménez reports that government-issued formal possession certificates for campsites began in 1998 in the study area and often named only the senior herder in a camp."),
+  statement(
+    "study-sites-1998-campsite-certificates",
+    "Campsite certificates began during the follow-up interval",
+    "Fernández-Giménez reports that government-issued formal possession certificates for campsites began in 1998 in the study area and often named only the senior herder in a camp.",
+  ),
   statement(
     "study-sites-inequality",
     "Secondary access was less secure",
@@ -266,16 +362,33 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
     "Loss of coordination weakened seasonal mobility",
     "Across the two study communities, material constraints and uncertainty about whether others would move contributed to reduced mobility, prolonged use near settlements, and out-of-season grazing after collective regulation and transport support ended.",
   ),
-  statement("fernandez-gimenez-seasonal-regulation-proposal", "Fernández-Giménez proposes participatory seasonal regulation", "Fernández-Giménez proposes testing participatory coordination of seasonal movement as an alternative to rigid pasture tenure.", "attributed-proposal"),
+  statement(
+    "fernandez-gimenez-seasonal-regulation-proposal",
+    "Fernández-Giménez proposes participatory seasonal regulation",
+    "Fernández-Giménez proposes testing participatory coordination of seasonal movement as an alternative to rigid pasture tenure.",
+    "attributed-proposal",
+  ),
   statement(
     "jinst-formalization-caution",
     "Formalization could harden unequal access",
     "The two-community evidence does not show an observed Jinst outcome from formal tenure, and it supports editorial caution that fixed claimant boundaries could restrict emergency access or consolidate unequal claims.",
     "editorial-interpretation",
   ),
-  statement("jinst-bag-leader-election", "Jinst herders secured a new bag-leader election", "In 1995 Jinst herders objected that an installed bag leader had not been chosen by popular vote and successfully called for an open election that selected a different leader."),
-  statement("jinst-1995-campsite-use", "Jinst households reported lower outside-campsite use", "In the 1995 survey, 17 percent of sampled Jinst households reported camping at a site belonging to another household, compared with 57 percent in Bayan-Ovoo."),
-  statement("jinst-1995-winter-pasture-incursion", "Jinst households reported winter-pasture incursions", "In the 1995 survey, 28 percent of sampled Jinst households reported that others had grazed their customary winter pasture without permission, compared with 73 percent in Bayan-Ovoo."),
+  statement(
+    "jinst-bag-leader-election",
+    "Jinst herders secured a new bag-leader election",
+    "In 1995 Jinst herders objected that an installed bag leader had not been chosen by popular vote and successfully called for an open election that selected a different leader.",
+  ),
+  statement(
+    "jinst-1995-campsite-use",
+    "Jinst households reported lower outside-campsite use",
+    "In the 1995 survey, 17 percent of sampled Jinst households reported camping at a site belonging to another household, compared with 57 percent in Bayan-Ovoo.",
+  ),
+  statement(
+    "jinst-1995-winter-pasture-incursion",
+    "Jinst households reported winter-pasture incursions",
+    "In the 1995 survey, 28 percent of sampled Jinst households reported that others had grazed their customary winter pasture without permission, compared with 73 percent in Bayan-Ovoo.",
+  ),
   statement(
     "mongolia-later-study-transfer",
     "Later national evidence does not extend the Jinst episode",
@@ -299,7 +412,8 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "ruwalla-borderland-organization",
       kind: "case",
       label: "Ruwalla organization across post-Ottoman borders",
-      description: "Ruwalla mobile pastoral organization and political bargaining across the southwestern Syrian Desert and northern Arabian corridor, 1918–1936.",
+      description:
+        "Ruwalla mobile pastoral organization and political bargaining across the southwestern Syrian Desert and northern Arabian corridor, 1918–1936.",
       locationIds: ["southwestern-syrian-desert-wadi-sirhan"],
       startDate: { year: 1918, certainty: "exact" },
       endDate: {
@@ -307,9 +421,19 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
         certainty: "approximate",
         note: "The endpoint follows Stocker’s boundary for consolidation of the post-Ottoman national order.",
       },
-      scope: "Ruwalla mobility, resource access, Al Shaʿlan representation, and relations with mandate and emerging national authorities from the Ottoman collapse through the mid-1930s; excludes a timeless account of Ruwalla life or a general model of Bedouin organization.",
-      selectionRationale: "The episode shows how mobile access, layered affiliation, representative leadership, and state border-making interacted without treating tribe or confederacy as a universal system.",
-      conditionStatementIds: ["ruwalla-scholarly-classification", "ruwalla-classification-limit", "ruwalla-anaza-affiliation", "ruwalla-mobility-corridor", "ruwalla-archive-source-base", "ruwalla-archive-voice-limit", "ruwalla-case-transfer-limit"],
+      scope:
+        "Ruwalla mobility, resource access, Al Shaʿlan representation, and relations with mandate and emerging national authorities from the Ottoman collapse through the mid-1930s; excludes a timeless account of Ruwalla life or a general model of Bedouin organization.",
+      selectionRationale:
+        "The episode shows how mobile access, layered affiliation, representative leadership, and state border-making interacted without treating tribe or confederacy as a universal system.",
+      conditionStatementIds: [
+        "ruwalla-scholarly-classification",
+        "ruwalla-classification-limit",
+        "ruwalla-anaza-affiliation",
+        "ruwalla-mobility-corridor",
+        "ruwalla-archive-source-base",
+        "ruwalla-archive-voice-limit",
+        "ruwalla-case-transfer-limit",
+      ],
       episodeIds: ["ruwalla-borderland-1918-1936"],
       ...reviewed,
     },
@@ -320,7 +444,8 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "ruwalla-borderland-1918-1936",
       kind: "case-episode",
       label: "Ruwalla borderland bargaining, 1918–1936",
-      description: "The bounded period in which Ruwalla leaders and mobile groups negotiated access and affiliation across new borders.",
+      description:
+        "The bounded period in which Ruwalla leaders and mobile groups negotiated access and affiliation across new borders.",
       caseId: "ruwalla-borderland-organization",
       locationIds: ["southwestern-syrian-desert-wadi-sirhan"],
       startDate: { year: 1918, certainty: "exact" },
@@ -329,11 +454,19 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
         certainty: "approximate",
         note: "Approximate consolidation boundary used by Stocker.",
       },
-      scope: "The post-Ottoman remaking of Ruwalla mobility, dīra access, shaykhly representation, and state relations; later ethnography is not evidence for unchanged continuity.",
-      conditionStatementIds: ["ruwalla-mobility-corridor", "ruwalla-archive-source-base", "regional-bedouin-shaykh-persuasion"],
+      scope:
+        "The post-Ottoman remaking of Ruwalla mobility, dīra access, shaykhly representation, and state relations; later ethnography is not evidence for unchanged continuity.",
+      conditionStatementIds: [
+        "ruwalla-mobility-corridor",
+        "ruwalla-archive-source-base",
+        "regional-bedouin-shaykh-persuasion",
+      ],
       formalRuleStatementIds: ["ruwalla-mashyakha"],
       ruleInUseStatementIds: ["ruwalla-dira-not-sovereignty"],
-      interactionStatementIds: ["ruwalla-border-bargaining", "ruwalla-border-concessions"],
+      interactionStatementIds: [
+        "ruwalla-border-bargaining",
+        "ruwalla-border-concessions",
+      ],
       outcomeStatementIds: [],
       ...reviewed,
     },
@@ -344,7 +477,8 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "jinst-postcollective-pastoral-governance",
       kind: "case",
       label: "Jinst post-collective pastoral governance",
-      description: "Herder households’ seasonal mobility and overlapping pasture institutions in Jinst sum after collective dissolution, 1990–1999.",
+      description:
+        "Herder households’ seasonal mobility and overlapping pasture institutions in Jinst sum after collective dissolution, 1990–1999.",
       locationIds: ["jinst-sum"],
       startDate: { year: 1990, certainty: "exact" },
       endDate: {
@@ -352,9 +486,19 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
         certainty: "exact",
         note: "The endpoint is the article’s follow-up survey, not the end of Jinst pastoral life.",
       },
-      scope: "Jinst-specific observations from 1995 and the 1999 follow-up boundary, with article-general and pooled Jinst–Bayan-Ovoo findings labeled separately; excludes later formal herder associations.",
-      selectionRationale: "The case exposes resource-specific and overlapping authority after a state collective ended, providing a materially different comparison with Ruwalla cross-border organization.",
-      conditionStatementIds: ["jinst-fieldwork-provenance", "mongolia-administrative-boundary", "mongolia-postcollective-change", "study-sites-mobility-coordination", "study-sites-1998-campsite-certificates", "fernandez-gimenez-seasonal-regulation-proposal", "jinst-case-transfer-limit"],
+      scope:
+        "Jinst-specific observations from 1995 and the 1999 follow-up boundary, with article-general and pooled Jinst–Bayan-Ovoo findings labeled separately; excludes later formal herder associations.",
+      selectionRationale:
+        "The case exposes resource-specific and overlapping authority after a state collective ended, providing a materially different comparison with Ruwalla cross-border organization.",
+      conditionStatementIds: [
+        "jinst-fieldwork-provenance",
+        "mongolia-administrative-boundary",
+        "mongolia-postcollective-change",
+        "study-sites-mobility-coordination",
+        "study-sites-1998-campsite-certificates",
+        "fernandez-gimenez-seasonal-regulation-proposal",
+        "jinst-case-transfer-limit",
+      ],
       episodeIds: ["jinst-transition-1990-1999"],
       ...reviewed,
     },
@@ -365,17 +509,30 @@ export const nomadicConfederatedOrganizationEvidenceDocuments = [
       id: "jinst-transition-1990-1999",
       kind: "case-episode",
       label: "Jinst transition after collective dissolution, 1990–1999",
-      description: "The evidence period spanning democratic transition, livestock privatization, 1994–1995 fieldwork, and the 1999 follow-up survey.",
+      description:
+        "The evidence period spanning democratic transition, livestock privatization, 1994–1995 fieldwork, and the 1999 follow-up survey.",
       caseId: "jinst-postcollective-pastoral-governance",
       locationIds: ["jinst-sum"],
       startDate: { year: 1990, certainty: "exact" },
       endDate: { year: 1999, certainty: "exact" },
-      scope: "Only Jinst-specific observations are assigned to practice or outcome fields; pooled and article-general findings remain conditions, with no projection into later formal herder associations.",
-      conditionStatementIds: ["jinst-fieldwork-provenance", "mongolia-postcollective-change", "study-sites-khot-ail", "study-sites-pasture-overlap", "study-sites-inequality", "study-sites-mobility-coordination", "study-sites-1998-campsite-certificates"],
+      scope:
+        "Only Jinst-specific observations are assigned to practice or outcome fields; pooled and article-general findings remain conditions, with no projection into later formal herder associations.",
+      conditionStatementIds: [
+        "jinst-fieldwork-provenance",
+        "mongolia-postcollective-change",
+        "study-sites-khot-ail",
+        "study-sites-pasture-overlap",
+        "study-sites-inequality",
+        "study-sites-mobility-coordination",
+        "study-sites-1998-campsite-certificates",
+      ],
       formalRuleStatementIds: ["mongolia-administrative-boundary"],
       ruleInUseStatementIds: ["jinst-bag-leader-election"],
       interactionStatementIds: [],
-      outcomeStatementIds: ["jinst-1995-campsite-use", "jinst-1995-winter-pasture-incursion"],
+      outcomeStatementIds: [
+        "jinst-1995-campsite-use",
+        "jinst-1995-winter-pasture-incursion",
+      ],
       ...reviewed,
     },
   },
