@@ -294,6 +294,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep property distinct from possession and identify which rights, assets, holders, and public enforcement institutions are involved.",
+      externalRefs: orientationRefs("Private property", "Q555911"),
       ...reviewed,
     },
   },
@@ -308,6 +309,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep employment distinct from slavery, serfdom, independent contracting, self-employment, household work, tenancy, and cooperative membership.",
+      externalRefs: orientationRefs("Wage labour", "Q949973"),
       ...reviewed,
     },
   },
@@ -336,6 +338,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Name the actual public, private, cooperative, household, customary, market, planned, and redistributive institutions instead of using this as a residual category.",
+      externalRefs: orientationRefs("Mixed economy", "Q191675"),
       ...reviewed,
     },
   },

@@ -24,12 +24,12 @@ describe("orientation audit", () => {
     expect(inventory).toHaveLength(1024);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(52);
+    ).toHaveLength(65);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(138);
+    ).toHaveLength(125);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
     ).toHaveLength(834);
@@ -160,6 +160,24 @@ describe("orientation rejected-candidate enforcement", () => {
         "entity:accountability: unmatched decision lacks a reviewed candidate",
         "entity:accountability: reviewed rejected-candidate decision changed",
       ]),
+    );
+  });
+
+  it("rejects a generic category placeholder as a candidate review", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const accountability = inventory.find(({ id }) => id === "accountability");
+    expect(accountability).toBeDefined();
+    if (!accountability) return;
+    accountability.consideredCandidates = [
+      {
+        title: "Concept",
+        url: "https://en.wikipedia.org/wiki/Concept",
+        boundary: `Concept is broader than ${accountability.label}.`,
+      },
+    ];
+    expect(validateOrientationAudit(graph, inventory)).toContain(
+      "entity:accountability: rejected candidate is a category placeholder",
     );
   });
 });

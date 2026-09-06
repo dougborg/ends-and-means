@@ -625,7 +625,9 @@ exact canonical label, disposition, complete mapping tuple, and direct
 canonical-target resolution check. An intentional absence must name a concrete
 canonical candidate that was opened and explain the target-specific identity
 boundary that rules it out; kind-level or label-substitution boilerplate is not
-a reviewed decision. A new eligible target or changed canonical label fails
+a reviewed decision. Generic category pages such as “Concept,” “Institution,”
+or “Case study” cannot stand in for the nearest plausible candidate. A new
+eligible target or changed canonical label fails
 closed until reviewed. Inapplicable entity kinds are classified before their metadata,
 so Sources, Works, Statements, and Dossiers cannot become orientation mappings.
 Guides reuse mappings owned by their primary canonical subjects rather than
