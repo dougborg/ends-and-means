@@ -89,8 +89,8 @@ function remoteMainOid(raw: string) {
 
 interface WorktreeRecord {
   path: string;
-  head?: string;
-  branch?: string;
+  head: string | undefined;
+  branch: string | undefined;
 }
 
 function worktreeRecords(raw: string): WorktreeRecord[] {
