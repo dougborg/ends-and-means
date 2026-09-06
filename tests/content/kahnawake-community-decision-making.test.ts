@@ -129,6 +129,19 @@ describe("diverse political-organization model boundaries", () => {
 });
 
 describe("Kahnawà:ke evidence and narrative", () => {
+  it("attributes the 2024 hearing rule to the announced procedure, not community assent", () => {
+    const ruleChange = entityById("kahnawake-cdmrp-2024-hearing-rule-change");
+    expect(ruleChange).toMatchObject({
+      kind: "statement",
+      text: expect.stringContaining(
+        "the procedure treats the draft or amendments as acceptable for advancing the law",
+      ),
+    });
+    expect(ruleChange).not.toMatchObject({
+      text: expect.stringContaining("acceptable to the community"),
+    });
+  });
+
   it("locates every atomic claim and includes community, legal, and external analytical sources", () => {
     expect(statementIds).toHaveLength(17);
     expect(statementIds.every((id) => entityById(id)?.kind === "statement")).toBe(
