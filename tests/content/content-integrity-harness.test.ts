@@ -453,6 +453,9 @@ describe("standfirst similarity signals", () => {
       expect.objectContaining({
         category: "source-similarity",
         location: "standfirst-similarity-dossier#standfirst",
+        message: expect.stringContaining(
+          "acknowledgement target standfirst-similarity-dossier#standfirst|standfirst-similarity-statement|standfirst-similarity-citation",
+        ),
       }),
     );
 

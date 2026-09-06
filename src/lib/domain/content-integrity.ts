@@ -8,6 +8,7 @@ import {
 } from "./publication-boundary";
 import {
   narrativeOverlapSignals,
+  overlapTarget,
   resolveReviewedOverlapAcknowledgements,
 } from "./reviewed-overlaps";
 import { scanRuntimeDependencies } from "./runtime-dependencies";
@@ -177,7 +178,7 @@ function sourceSimilarityFindings(
       category: "source-similarity" as const,
       severity: "attention" as const,
       location: `${signal.dossierId}#${signal.passageId}`,
-      message: `possible close phrasing with source-backed Statement ${signal.statementId} (${Math.round(signal.score * 100)}% five-word overlap); compare against Source ${signal.sourceId}; acknowledgement target ${signal.citationId}; fingerprint ${signal.fingerprint}`,
+      message: `possible close phrasing with source-backed Statement ${signal.statementId} (${Math.round(signal.score * 100)}% five-word overlap); compare against Source ${signal.sourceId}; acknowledgement target ${overlapTarget({ passage: signal, statementId: signal.statementId, citationId: signal.citationId })}; fingerprint ${signal.fingerprint}`,
       remediation:
         "review the narrative beside the cited source passage; quote and attribute necessary wording, rewrite independently, or record a narrowly scoped reviewed-overlap acknowledgement after inspection",
     })),
