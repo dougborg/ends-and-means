@@ -10,7 +10,10 @@
   live audit compares the head with that pull request's declared base; it uses
   privacy-safe local worktree and Git evidence against a verified
   `origin/main` only when an In-progress assignment has no open linked pull
-  request. Do not publish a branch merely to make the audit inspectable.
+  request. The path must be a registered worktree of the coordinator
+  repository; a same-origin standalone clone is not sufficient. Live
+  verification makes a bounded, noninteractive network request but mutates
+  neither Git nor GitHub. Do not publish a branch merely to make it inspectable.
 - Treat an advancing `main` during active implementation as information, not a
   reason for continuous rebase churn. Current-base evidence becomes mandatory
   when handing completed work into review.
