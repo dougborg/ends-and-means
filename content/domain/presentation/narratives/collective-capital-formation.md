@@ -14,20 +14,23 @@ Collective capital formation instead names an institutional arrangement for accu
 
 ## what-design-choices-matter
 
-Funds can receive newly issued shares or use contributed cash to purchase shares.
-The financing method does not determine governance, so analysis must separately identify the group a fund represents and how that group selects, directs, or removes decision-makers.
+Meidner's original proposal transferred newly issued shares into collective funds.
+The 1981 revision instead funded share purchases with a levy on excess profits.
+Neither financing method determines governance, so analysis must separately identify the group a fund represents and how that group selects, directs, or removes decision-makers.
 Other rules determine voting authority, beneficiaries, use of returns, transfer rights, and whether contributors have personal claims.
 These choices can connect the arrangement to social ownership or economic democracy, but accumulation alone does not establish either one.
 
 ## what-does-the-swedish-case-show
 
 Meidner proposed recurring transfers of company shares into funds administered by employees and their organizations so collective holdings and influence would grow over time.
-Sweden's enacted funds used a more constrained design with statutory voting caps and a limited operating period.
-The case therefore demonstrates one disputed mechanism and its limits, not a complete embodiment of the broader concept.
+The enacted arrangement used five government-appointed boards and capped their voting authority in listed companies.
+Those boards operated from 1984 through 1991 before abolition.
+This bounded case does not define or completely realize the broader concept.
 
 ## why-can-collective-funds-lose-support
 
 A collective fund can remain remote from the people it is meant to benefit when its gains are hard to see or its governors are difficult to influence.
-Warner attributes weak support across much of the labor and Social Democratic base to a poor fit with immediate priorities and difficulty identifying concrete gains.
-He separately finds that activist enthusiasm waned as fund proposals emphasized capital accumulation over worker influence and a transition to socialism.
+Warner explains low engagement by pointing to the gap between investment control and supporters' immediate priorities.
+Accounts he reviews also show that intended supporters struggled to identify a concrete payoff.
+At the 1981 labor and party congresses, some delegates argued that the emphasis on building capital had displaced worker influence.
 That history leaves an open institutional question: which governance and benefit rules make collective accumulation answerable and tangible without converting it into individual saving?

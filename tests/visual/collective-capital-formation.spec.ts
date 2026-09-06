@@ -3,7 +3,9 @@ import { expect, test } from "@playwright/test";
 test("collective capital formation publishes its traced reader narrative", async ({
   page,
 }) => {
-  const response = await page.goto("/concepts/collective-capital-formation/");
+  const response = await page.goto("/concepts/collective-capital-formation/", {
+    waitUntil: "networkidle",
+  });
 
   expect(response?.ok()).toBe(true);
   await expect(

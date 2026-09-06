@@ -10,13 +10,15 @@ const statementIds = [
   "collective-capital-formation-working-definition",
   "collective-capital-formation-national-accounts-boundary",
   "collective-capital-formation-individual-saving-boundary",
-  "collective-capital-formation-financing-methods",
+  "swedish-1981-funds-cash-financing",
+  "collective-capital-formation-financing-governance-boundary",
   "collective-capital-formation-governing-constituency",
   "meidner-collective-funds-proposal",
   "collective-capital-formation-rights-boundary",
-  "collective-capital-formation-swedish-case-boundary",
-  "collective-capital-formation-beneficiary-distance",
-  "collective-capital-formation-activist-purpose-objection",
+  "collective-capital-formation-swedish-case-classification",
+  "collective-capital-formation-supporter-distance",
+  "collective-capital-formation-unclear-benefits-objection",
+  "collective-capital-formation-purpose-objection",
 ];
 
 describe("collective capital formation dossier", () => {
@@ -67,11 +69,11 @@ describe("collective capital formation dossier", () => {
 
   it("keeps the bounded Swedish case from embodying the Concept", () => {
     expect(
-      entityById("collective-capital-formation-swedish-case-boundary"),
+      entityById("collective-capital-formation-swedish-case-classification"),
     ).toMatchObject({
       statementKind: "classification",
       text: expect.stringContaining(
-        "one constrained instance rather than a complete realization",
+        "not a definition or complete realization",
       ),
     });
   });
@@ -85,8 +87,9 @@ describe("collective capital formation dossier", () => {
         obligationType: "counterargument",
         targetSectionId: "why-can-collective-funds-lose-support",
         addressedStatementIds: [
-          "collective-capital-formation-beneficiary-distance",
-          "collective-capital-formation-activist-purpose-objection",
+          "collective-capital-formation-supporter-distance",
+          "collective-capital-formation-unclear-benefits-objection",
+          "collective-capital-formation-purpose-objection",
         ],
         obligationStatus: "open",
       }),
