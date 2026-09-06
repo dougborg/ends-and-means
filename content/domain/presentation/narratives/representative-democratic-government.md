@@ -1,8 +1,8 @@
-Representative democratic government uses recurring elections to authorize officeholders for bounded public roles.
+Representative democratic government uses elections to choose people who exercise public authority.
 
 ## what-the-approach-does
 
-Voters select representatives, while rules define their offices, terms, powers, and routes to replacement.
+Voters select representatives who make public decisions under an electoral arrangement.
 Representation is one approach to democratic government rather than a synonym for democracy.
 
 ## what-the-approach-cannot-prove
