@@ -11,6 +11,7 @@ import { branchTargetForActiveItem } from "./delivery-live-evidence.ts";
 import {
   assignmentForIssue,
   type PrivateDeliveryState,
+  PrivateDeliveryStateUnavailableError,
   readPrivateDeliveryState,
 } from "./delivery-private-state.ts";
 import {
@@ -258,11 +259,8 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
   try {
     privateState = readPrivateDeliveryState(privateStatePath);
   } catch (error) {
-    const code = (error as NodeJS.ErrnoException).code;
-    if (code === "ENOENT" || code === "EACCES")
-      throw new ApiUnavailableError(
-        "the explicitly supplied private delivery state is unreadable",
-      );
+    if (error instanceof PrivateDeliveryStateUnavailableError)
+      throw new ApiUnavailableError(error.message);
     throw new InputInvalidError(
       `private delivery state: ${error instanceof Error ? error.message : String(error)}`,
     );

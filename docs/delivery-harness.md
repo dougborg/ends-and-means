@@ -47,12 +47,16 @@ necessary, `.delivery-private-state.json` is ignored. Never commit the real
 file or copy its owner identities or filesystem paths into issues, pull
 requests, comments, fixtures, or logs.
 
-`generatedAt` must not be in the future, `expiresAt` must be later, and the
-audit time must be before `expiresAt`. Refresh the assignment whenever its
-owner, branch, or worktree changes and choose an expiry appropriate to the
-delivery window (normally no more than 24 hours). A missing assignment is a
+`generatedAt` must not be in the future, may be at most 24 hours old, and has
+no allowed clock-skew grace period. `expiresAt` must be later, must be no more
+than 24 hours after `generatedAt`, and must remain later than the audit time.
+Refresh the assignment whenever its owner, branch, or worktree changes. A missing assignment is a
 policy finding; an unreadable source is `UNAVAILABLE`; malformed, duplicate,
-future, or expired state is `INVALID`. All fail closed with a nonzero exit.
+long-lived, old, future, or expired state is `INVALID`. All fail closed with a
+nonzero exit. Unreadable includes missing paths, permission failures,
+non-directory path components, directory paths, symlink loops, and exhausted
+process or system file descriptors; readable malformed JSON or schema data is
+invalid rather than unavailable.
 Live and snapshot modes exit 0 for a clean readable snapshot, 1 for policy findings, and 2 for `INVALID`, `UNAVAILABLE`, or `ERROR` results, including invalid input, credentials or API access failures, and unexpected execution errors.
 Runtime schemas reject malformed API and snapshot data before policy analysis and distinguish invalid input, unavailable API access, and unexpected execution errors.
 Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.

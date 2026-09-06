@@ -11,8 +11,11 @@ const script = fileURLToPath(
 const malformed = fileURLToPath(
   new URL("../fixtures/delivery/project-malformed.json", import.meta.url),
 );
-const privateState = fileURLToPath(
-  new URL("../fixtures/delivery/private-state.example.json", import.meta.url),
+const malformedPrivateState = fileURLToPath(
+  new URL("../fixtures/delivery/private-state-malformed.json", import.meta.url),
+);
+const deliveryFixtures = fileURLToPath(
+  new URL("../fixtures/delivery/", import.meta.url),
 );
 
 function run(args: string[], path = process.env.PATH) {
@@ -20,6 +23,23 @@ function run(args: string[], path = process.env.PATH) {
     encoding: "utf8",
     env: { ...process.env, PATH: path },
   });
+}
+
+function freshPrivateState() {
+  const directory = mkdtempSync(join(tmpdir(), "ends-means-private-state-"));
+  const path = join(directory, "delivery-state.json");
+  const now = Date.now();
+  writeFileSync(
+    path,
+    JSON.stringify({
+      version: 1,
+      repository: "dougborg/ends-and-means",
+      generatedAt: new Date(now - 60_000).toISOString(),
+      expiresAt: new Date(now + 23 * 60 * 60 * 1000).toISOString(),
+      assignments: [],
+    }),
+  );
+  return path;
 }
 
 describe("delivery audit result classes", () => {
@@ -36,7 +56,10 @@ describe("delivery audit result classes", () => {
   });
 
   it("distinguishes unavailable API credentials or executable", () => {
-    const result = run(["--live-project", "--private-state", privateState], "");
+    const result = run(
+      ["--live-project", "--private-state", freshPrivateState()],
+      "",
+    );
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: UNAVAILABLE");
   });
@@ -50,14 +73,16 @@ describe("delivery audit result classes", () => {
     );
     chmodSync(executable, 0o755);
     const result = run(
-      ["--live-project", "--private-state", privateState],
+      ["--live-project", "--private-state", freshPrivateState()],
       bin,
     );
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: ERROR");
     expect(result.stderr).toContain("HTTP 404");
   });
+});
 
+describe("delivery audit input validation", () => {
   it("reports an omitted snapshot path as specific invalid input", () => {
     const result = run(["--project-snapshot"]);
     expect(result.status).toBe(2);
@@ -83,6 +108,22 @@ describe("delivery audit result classes", () => {
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: UNAVAILABLE");
     expect(result.stderr).toContain("private delivery state");
+  });
+
+  it("reports a directory private-state path as unavailable", () => {
+    const result = run(["--live-project", "--private-state", deliveryFixtures]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: UNAVAILABLE");
+  });
+
+  it("reports readable malformed private state as invalid", () => {
+    const result = run([
+      "--live-project",
+      "--private-state",
+      malformedPrivateState,
+    ]);
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: INVALID");
   });
 
   it("does not consume another flag as a snapshot path", () => {

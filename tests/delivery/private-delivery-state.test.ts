@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { branchTargetForActiveItem } from "../../scripts/delivery-live-evidence.ts";
 import {
   assignmentForIssue,
+  isPrivateStateUnavailableError,
   parsePrivateDeliveryState,
 } from "../../scripts/delivery-private-state.ts";
 
@@ -15,6 +16,18 @@ async function fixture() {
   return JSON.parse(await readFile(fixtureUrl, "utf8"));
 }
 
+async function namedFixture(name: string) {
+  return JSON.parse(
+    await readFile(
+      new URL(
+        `../fixtures/delivery/private-state-${name}.json`,
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+}
+
 describe("private delivery ownership", () => {
   it("loads a fresh explicit assignment without exposing it in Project data", async () => {
     const state = parsePrivateDeliveryState(
@@ -24,11 +37,11 @@ describe("private delivery ownership", () => {
     expect(assignmentForIssue(state, 194)?.branch).toBe("chore/example");
   });
 
-  it("fails closed for stale, missing, duplicate, or unavailable state", async () => {
+  it("fails closed for expired, missing, or duplicate state", async () => {
     const raw = await fixture();
     expect(() =>
-      parsePrivateDeliveryState(raw, new Date("2026-09-08T00:00:00Z")),
-    ).toThrow("expired");
+      parsePrivateDeliveryState(raw, new Date("2026-09-07T10:00:00Z")),
+    ).toThrow("expiresAt has passed");
     const state = parsePrivateDeliveryState(
       raw,
       new Date("2026-09-06T12:00:00Z"),
@@ -40,6 +53,46 @@ describe("private delivery ownership", () => {
         new Date("2026-09-06T12:00:00Z"),
       ),
     ).toThrow("more than one assignment");
+  });
+
+  it("rejects a validity interval longer than 24 hours", async () => {
+    const raw = await namedFixture("long-lived");
+    expect(() =>
+      parsePrivateDeliveryState(raw, new Date("2026-09-06T12:00:00Z")),
+    ).toThrow("no more than 24 hours");
+  });
+
+  it("rejects state generated more than 24 hours ago", async () => {
+    const raw = await namedFixture("old");
+    expect(() =>
+      parsePrivateDeliveryState(raw, new Date("2026-09-06T12:00:00Z")),
+    ).toThrow("generatedAt is older than 24 hours");
+  });
+
+  it("rejects any future generatedAt rather than tolerating clock skew", async () => {
+    const raw = await namedFixture("future");
+    expect(() =>
+      parsePrivateDeliveryState(raw, new Date("2026-09-06T12:00:00Z")),
+    ).toThrow("generatedAt must not be in the future");
+  });
+
+  it.each([
+    "EACCES",
+    "EISDIR",
+    "ELOOP",
+    "EMFILE",
+    "ENFILE",
+    "ENOENT",
+    "ENOTDIR",
+    "EPERM",
+  ])("classifies %s as unavailable filesystem state", (code) => {
+    expect(isPrivateStateUnavailableError({ code })).toBe(true);
+  });
+
+  it("does not classify readable malformed content as unavailable", () => {
+    expect(isPrivateStateUnavailableError(new SyntaxError("bad JSON"))).toBe(
+      false,
+    );
   });
 });
 
