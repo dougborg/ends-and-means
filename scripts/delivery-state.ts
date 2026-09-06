@@ -154,16 +154,15 @@ const priorityRank = new Map<Priority, number>(
   priorities.map((priority, index) => [priority, index]),
 );
 
+const dependencyPhrasePattern =
+  /(?:blocked on|blocked by|depends on|dependency\s*:|unblocks? (?:when|after)|blocking condition\s*:)[^\n]+/i;
+
 function hasConcreteBlocker(body = "") {
-  return /(?:blocked on|blocked by|depends on|dependency\s*:|unblocks? (?:when|after)|blocking condition\s*:)[^\n]+/i.test(
-    body,
-  );
+  return dependencyPhrasePattern.test(body);
 }
 
 function hasUnmetDependency(body = "") {
-  return /(?:blocked on|blocked by|depends on|dependency\s*:)[^\n]+/i.test(
-    body,
-  );
+  return dependencyPhrasePattern.test(body);
 }
 
 function hasExecutableAcceptance(body = "") {

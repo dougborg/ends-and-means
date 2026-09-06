@@ -130,6 +130,18 @@ describe("delivery evidence and dependencies", () => {
     expect(canPromote(snapshot, candidate)).toBe(false);
   });
 
+  it.each([
+    "Unblocks when #130 establishes the navigation contract.",
+    "Unblock after #130 establishes the navigation contract.",
+    "Blocking condition: #130 must establish the navigation contract.",
+  ])("rejects Ready candidate with blocker phrase: %s", async (phrase) => {
+    const snapshot = await fixture();
+    const candidate = item(snapshot, 5);
+    candidate.body = `${phrase}\n\n## Acceptance criteria\n\n- [ ] Work.`;
+    expect(canPromote(snapshot, candidate)).toBe(false);
+    expect(codes(snapshot)).toContain("READY_NOT_EXECUTABLE");
+  });
+
   it("accepts a named dependency as a concrete Blocked condition", async () => {
     const snapshot = await fixture();
     const blocked = item(snapshot, 8);

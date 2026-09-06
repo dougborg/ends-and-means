@@ -47,9 +47,16 @@ describe("repository skill contract", () => {
         code: "SKILL_CAPABILITY",
         message: `${capability.owner} does not cover ${capability.name}.`,
       });
-      expect(
-        findings.filter((finding) => finding.code === "SKILL_CAPABILITY"),
-      ).toHaveLength(1);
+      expect(auditSkillContracts(root)).toEqual(findings);
+      const legitimateMessages = new Set(
+        skillCapabilities.map(
+          ({ owner, name }) => `${owner} does not cover ${name}.`,
+        ),
+      );
+      for (const finding of findings) {
+        expect(finding.code).toBe("SKILL_CAPABILITY");
+        expect(legitimateMessages).toContain(finding.message);
+      }
     }
   });
 
