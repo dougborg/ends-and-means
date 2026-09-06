@@ -49,6 +49,11 @@ function sortedFindings(findings: IntegrityFinding[]) {
   return [...findings].sort(compareFindings);
 }
 
+export function validationFindingLocation(message: string) {
+  const delimiter = message.indexOf(": ");
+  return delimiter >= 0 ? message.slice(0, delimiter) : "canonical graph";
+}
+
 function words(value: string) {
   return value.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
 }
@@ -180,14 +185,16 @@ export function runContentIntegrity({
 }): ContentIntegrityResult {
   const findings: IntegrityFinding[] = validateAuthoringDocuments(
     documents,
-  ).map((message) => ({
-    category: "domain-validation",
-    severity: "violation",
-    location: message.split(":", 1)[0] ?? "canonical graph",
-    message,
-    remediation:
-      "repair the named entity, reference, relationship, locator, dossier, or research-obligation contract",
-  }));
+  ).map((message) => {
+    return {
+      category: "domain-validation",
+      severity: "violation",
+      location: validationFindingLocation(message),
+      message,
+      remediation:
+        "repair the named entity, reference, relationship, locator, dossier, or research-obligation contract",
+    };
+  });
   for (const narrative of narratives) {
     findings.push(
       ...narrative.lineErrors.map(({ line, message }) => ({

@@ -192,7 +192,7 @@ describe("canonical narrative coverage", () => {
         researchEvidenceAwaitingResolution: [],
         sourcesWithoutCitations: ["source:test"],
         entitiesWithoutRelationships: ["concept:test"],
-        dimensionsWithoutPlacements: ["dimension:test"],
+        dimensionsWithoutPlacements: ["comparison-dimension:test"],
         researchGapSectionsWithoutObligations: ["concept:test#open-question"],
         sourcePreflight: [
           {

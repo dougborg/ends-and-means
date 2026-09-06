@@ -13,6 +13,7 @@ import {
   formatIntegrityResult,
   publicationBoundaryFindings,
   runContentIntegrity,
+  validationFindingLocation,
 } from "../../src/lib/domain";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
@@ -57,12 +58,15 @@ describe("content-integrity harness", () => {
     expect(finding).toMatchObject({
       category: "domain-validation",
       severity: "violation",
-      location: expect.any(String),
+      location: "document 273",
       remediation: expect.stringContaining("reference"),
     });
     expect(finding?.message).toContain(
       "unresolved or mistyped document subject concept:missing-concept",
     );
+    expect(
+      validationFindingLocation("concept:missing-concept: unresolved owner"),
+    ).toBe("concept:missing-concept");
   });
 
   it("reports uncited Sources and unplaced Dimensions as attention", () => {
@@ -79,10 +83,10 @@ describe("content-integrity harness", () => {
     );
     const attention = verify({ graph }).attention;
     expect(attention.sourcesWithoutCitations).toContain(
-      "uncited-source-fixture",
+      "source:uncited-source-fixture",
     );
     expect(attention.dimensionsWithoutPlacements).toContain(
-      "unplaced-dimension-fixture",
+      "comparison-dimension:unplaced-dimension-fixture",
     );
   });
 
