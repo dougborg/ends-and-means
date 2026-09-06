@@ -29,6 +29,10 @@ const defaultRoutes = [
   "/guides/feminism/",
   "/guides/liberalism/",
   "/guides/matriliny-property-authority/",
+  "/guides/monarchy/",
+  "/cases/japan-symbolic-emperorship-1947-2004/",
+  "/cases/tonga-constitutional-settlement-2010-2013/",
+  "/cases/saudi-basic-law-monarchy-1992-2022/",
   "/guides/kahnawake-community-lawmaking/",
   "/guides/ruwalla-borderland-organization/",
   "/guides/jinst-postcollective-pastoral-governance/",
@@ -40,15 +44,18 @@ const defaultRoutes = [
   "/sources/erixon-rehn-meidner-model-source/",
 ];
 
-test("external mappings remain a quiet, accessible trust aid", async ({ page }) => {
+test("external mappings remain a quiet, accessible trust aid", async ({
+  page,
+}) => {
   await page.goto("/concepts/democracy/");
   await page.getByText("External orientation", { exact: true }).click();
-  const apparatus = page.getByRole("complementary", { name: "External references" });
+  const apparatus = page.getByRole("complementary", {
+    name: "External references",
+  });
   await expect(apparatus).toContainText("not evidence");
-  await expect(apparatus.getByRole("link", { name: "Wikipedia" })).toHaveAttribute(
-    "href",
-    "https://en.wikipedia.org/wiki/Democracy",
-  );
+  await expect(
+    apparatus.getByRole("link", { name: "Wikipedia" }),
+  ).toHaveAttribute("href", "https://en.wikipedia.org/wiki/Democracy");
   await expect(apparatus.getByRole("link", { name: /Q7174/ })).toContainText(
     "exact match",
   );
@@ -58,7 +65,8 @@ const routes =
   process.env.REVIEW_ROUTES?.split(",")
     .map((route) => route.trim())
     .filter(Boolean)
-    .map((route) => (route.startsWith("/") ? route : `/${route}`)) ?? defaultRoutes;
+    .map((route) => (route.startsWith("/") ? route : `/${route}`)) ??
+  defaultRoutes;
 const viewports = [
   { name: "desktop", width: 1440, height: 1000 },
   { name: "tablet", width: 820, height: 1180 },
@@ -68,7 +76,9 @@ const viewports = [
 for (const route of routes) {
   for (const viewport of viewports) {
     // biome-ignore lint/complexity/noExcessiveLinesPerFunction: the per-page browser audit is one cohesive accessibility contract.
-    test(`${route} renders cleanly at ${viewport.name}`, async ({ page }, testInfo) => {
+    test(`${route} renders cleanly at ${viewport.name}`, async ({
+      page,
+    }, testInfo) => {
       const browserErrors: string[] = [];
       page.on("console", (message) => {
         if (message.type() === "error") browserErrors.push(message.text());
@@ -83,6 +93,7 @@ for (const route of routes) {
         fullPage: true,
       });
 
+      // biome-ignore lint/complexity/noExcessiveLinesPerFunction: one cohesive in-page accessibility audit.
       const audit = await page.evaluate(() => {
         const parseColor = (value: string) => {
           const channels = value.match(/[\d.]+/g)?.map(Number) ?? [];
@@ -93,12 +104,26 @@ for (const route of routes) {
             a: channels[3] ?? 1,
           };
         };
-        const luminance = ({ r, g, b }: { r: number; g: number; b: number }) => {
+        const luminance = ({
+          r,
+          g,
+          b,
+        }: {
+          r: number;
+          g: number;
+          b: number;
+        }) => {
           const linear = [r, g, b].map((channel) => {
             const value = channel / 255;
-            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+            return value <= 0.04045
+              ? value / 12.92
+              : ((value + 0.055) / 1.055) ** 2.4;
           });
-          return 0.2126 * (linear[0] ?? 0) + 0.7152 * (linear[1] ?? 0) + 0.0722 * (linear[2] ?? 0);
+          return (
+            0.2126 * (linear[0] ?? 0) +
+            0.7152 * (linear[1] ?? 0) +
+            0.0722 * (linear[2] ?? 0)
+          );
         };
         const backgroundFor = (element: Element) => {
           let current: Element | null = element;
@@ -107,9 +132,17 @@ for (const route of routes) {
             if (color.a >= 0.95) return color;
             current = current.parentElement;
           }
-          return parseColor(getComputedStyle(document.documentElement).backgroundColor);
+          return parseColor(
+            getComputedStyle(document.documentElement).backgroundColor,
+          );
         };
-        const isHidden = (style: CSSStyleDeclaration, bounds: DOMRect) => [style.visibility === "hidden", style.display === "none", bounds.width === 0, bounds.height === 0].some(Boolean);
+        const isHidden = (style: CSSStyleDeclaration, bounds: DOMRect) =>
+          [
+            style.visibility === "hidden",
+            style.display === "none",
+            bounds.width === 0,
+            bounds.height === 0,
+          ].some(Boolean);
         const numericFontWeight = (fontWeight: string) => {
           if (fontWeight === "bold") return 700;
           if (fontWeight === "normal") return 400;
@@ -130,7 +163,10 @@ for (const route of routes) {
           const dark = Math.min(luminance(foreground), luminance(background));
           const ratio = (light + 0.05) / (dark + 0.05);
           const fontSize = Number.parseFloat(style.fontSize);
-          const minimum = minimumContrast(fontSize, numericFontWeight(style.fontWeight));
+          const minimum = minimumContrast(
+            fontSize,
+            numericFontWeight(style.fontWeight),
+          );
           if (ratio + 0.01 >= minimum) return undefined;
           return {
             element: element.tagName.toLowerCase(),
@@ -139,7 +175,13 @@ for (const route of routes) {
             minimum,
           };
         };
-        const lowContrast = [...document.querySelectorAll("main h1, main h2, main h3, main h4, main p, main a, main summary, main strong, main small")].map(contrastIssue).filter((issue) => issue !== undefined);
+        const lowContrast = [
+          ...document.querySelectorAll(
+            "main h1, main h2, main h3, main h4, main p, main a, main summary, main strong, main small",
+          ),
+        ]
+          .map(contrastIssue)
+          .filter((issue) => issue !== undefined);
 
         const sheetRules = (sheet: CSSStyleSheet) => {
           try {
@@ -148,26 +190,45 @@ for (const route of routes) {
             return [];
           }
         };
-        const matches = (css: string, pattern: RegExp) => [...css.matchAll(pattern)].map((match) => match[1]).filter((token) => token !== undefined);
+        const matches = (css: string, pattern: RegExp) =>
+          [...css.matchAll(pattern)]
+            .map((match) => match[1])
+            .filter((token) => token !== undefined);
         const undefinedTokens = () => {
           const declared = new Set<string>();
           const used = new Set<string>();
-          const cssTexts = [...document.styleSheets].flatMap(sheetRules).map((rule) => rule.cssText);
-          const inlineCssTexts = [...document.querySelectorAll<HTMLElement>("[style]")].map((element) => element.style.cssText);
-          for (const css of [...cssTexts, ...inlineCssTexts]) for (const token of matches(css, /(--[\w-]+)\s*:/g)) declared.add(token);
-          for (const css of cssTexts) for (const token of matches(css, /var\((--[\w-]+)\s*\)/g)) used.add(token);
+          const cssTexts = [...document.styleSheets]
+            .flatMap(sheetRules)
+            .map((rule) => rule.cssText);
+          const inlineCssTexts = [
+            ...document.querySelectorAll<HTMLElement>("[style]"),
+          ].map((element) => element.style.cssText);
+          for (const css of [...cssTexts, ...inlineCssTexts])
+            for (const token of matches(css, /(--[\w-]+)\s*:/g))
+              declared.add(token);
+          for (const css of cssTexts)
+            for (const token of matches(css, /var\((--[\w-]+)\s*\)/g))
+              used.add(token);
           return [...used].filter((token) => !declared.has(token)).sort();
         };
 
         const activeNavigationVisible = () =>
-          [...document.querySelectorAll('.primary-nav a[aria-current="page"]')].every((element) => {
+          [
+            ...document.querySelectorAll('.primary-nav a[aria-current="page"]'),
+          ].every((element) => {
             const item = element.getBoundingClientRect();
             const navigation = element.closest("nav")?.getBoundingClientRect();
-            return Boolean(navigation && item.left >= navigation.left - 1 && item.right <= navigation.right + 1);
+            return Boolean(
+              navigation &&
+                item.left >= navigation.left - 1 &&
+                item.right <= navigation.right + 1,
+            );
           });
 
         return {
-          horizontalOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          horizontalOverflow:
+            document.documentElement.scrollWidth -
+            document.documentElement.clientWidth,
           activeNavigationVisible: activeNavigationVisible(),
           lowContrast,
           undefinedTokens: undefinedTokens(),
@@ -183,7 +244,9 @@ for (const route of routes) {
   }
 }
 
-test("disclosures expose state and work from the keyboard", async ({ page }) => {
+test("disclosures expose state and work from the keyboard", async ({
+  page,
+}) => {
   await page.goto("/explore/swedish-wage-earner-fund-program/");
   const disclosure = page.locator("details.reference-disclosure").first();
   const summary = disclosure.locator("summary");
@@ -193,26 +256,35 @@ test("disclosures expose state and work from the keyboard", async ({ page }) => 
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
 });
 
-test("forced colors preserve focus, evidence marks, and current-page state", async ({ page }) => {
+test("forced colors preserve focus, evidence marks, and current-page state", async ({
+  page,
+}) => {
   await page.emulateMedia({ forcedColors: "active" });
   await page.goto("/guides/feminism/", { waitUntil: "networkidle" });
 
   const currentPage = page.locator('.primary-nav a[aria-current="page"]');
   await expect(currentPage).toHaveCSS("text-decoration-line", "underline");
 
-  const evidenceSummary = page.locator("details.subject-guide__evidence > summary").first();
+  const evidenceSummary = page
+    .locator("details.subject-guide__evidence > summary")
+    .first();
   await evidenceSummary.focus();
   await expect(evidenceSummary).toHaveCSS("outline-style", "solid");
   await evidenceSummary.click();
 
-  const evidenceClaim = page.locator("details.subject-guide__evidence .canonical-claim").first();
+  const evidenceClaim = page
+    .locator("details.subject-guide__evidence .canonical-claim")
+    .first();
   await expect(evidenceClaim).toBeVisible();
   await expect(evidenceClaim).toHaveCSS("border-top-style", "solid");
 });
 
-test("subject guide works without JavaScript and keeps evidence adjacent", async ({ browser }, testInfo) => {
+test("subject guide works without JavaScript and keeps evidence adjacent", async ({
+  browser,
+}, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
-  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  if (typeof baseURL !== "string")
+    throw new Error("Playwright project must configure baseURL");
   const context = await browser.newContext({
     baseURL,
     javaScriptEnabled: false,
@@ -220,7 +292,9 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   try {
     const page = await context.newPage();
     await page.goto("/guides/economic-democracy/");
-    await expect(page.getByRole("heading", { name: "Economic democracy", level: 1 })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Economic democracy", level: 1 }),
+    ).toBeVisible();
     await expect(
       page.getByRole("navigation", {
         name: "On this page: Economic democracy",
@@ -231,11 +305,17 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
     await page.keyboard.press("Enter");
     await expect(evidence).toHaveAttribute("open", "");
     await expect(evidence.locator(".canonical-claim").first()).toBeVisible();
-    const connection = page.locator('[data-relationship-id="enacted-funds-partially-instantiated-program"]');
-    const qualification = connection.locator("details.subject-guide__qualification");
+    const connection = page.locator(
+      '[data-relationship-id="enacted-funds-partially-instantiated-program"]',
+    );
+    const qualification = connection.locator(
+      "details.subject-guide__qualification",
+    );
     await qualification.locator("summary").click();
     await expect(qualification.getByText("Evidence status")).toBeVisible();
-    await expect(qualification.getByText("qualified", { exact: true })).toBeVisible();
+    await expect(
+      qualification.getByText("qualified", { exact: true }),
+    ).toBeVisible();
 
     await page.setViewportSize({ width: 390, height: 844 });
     const mobileOutline = page.locator("details.page-outline__mobile");
@@ -245,7 +325,10 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
     const noScriptLink = mobileOutline.getByRole("link", {
       name: "Does it mean one institutional model?",
     });
-    await expect(noScriptLink).toHaveAttribute("href", "#meanings-and-boundaries");
+    await expect(noScriptLink).toHaveAttribute(
+      "href",
+      "#meanings-and-boundaries",
+    );
     await noScriptLink.click({ force: true });
     await expect(page).toHaveURL(/#meanings-and-boundaries$/);
   } finally {
@@ -253,22 +336,30 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
   }
 });
 
-test("generated outlines navigate long pages and collapse natively on mobile", async ({ page }) => {
+test("generated outlines navigate long pages and collapse natively on mobile", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
   const desktopOutline = page.locator(".page-outline__desktop");
   await expect(desktopOutline).toBeVisible();
   await expect(page.locator(".page-outline")).toHaveCSS("position", "sticky");
   await page.evaluate(() => window.scrollTo(0, 1_400));
-  const stickyTop = await page.locator(".page-outline").evaluate((element) => element.getBoundingClientRect().top);
+  const stickyTop = await page
+    .locator(".page-outline")
+    .evaluate((element) => element.getBoundingClientRect().top);
   expect(stickyTop).toBeGreaterThanOrEqual(0);
   expect(stickyTop).toBeLessThan(32);
   await page.evaluate(() => window.scrollTo(0, 0));
-  await desktopOutline.getByRole("link", { name: "Does it mean one institutional model?" }).click();
+  await desktopOutline
+    .getByRole("link", { name: "Does it mean one institutional model?" })
+    .click();
   await expect(page).toHaveURL(/#meanings-and-boundaries$/);
   const target = page.locator("#meanings-and-boundaries");
   await expect(target).toBeInViewport();
-  expect(await target.evaluate((element) => element.getBoundingClientRect().top)).toBeGreaterThanOrEqual(0);
+  expect(
+    await target.evaluate((element) => element.getBoundingClientRect().top),
+  ).toBeGreaterThanOrEqual(0);
   await expect(target).toBeFocused();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto");
@@ -287,13 +378,22 @@ test("generated outlines navigate long pages and collapse natively on mobile", a
   ).toBeVisible();
 });
 
-test("qualifying routes derive exact ordered links from rendered targets", async ({ page }) => {
-  for (const route of ["/guides/economic-democracy/", "/explore/swedish-rehn-meidner-model/", "/cases/swedish-wage-earner-funds/", "/challenges/authority-and-accountability/"]) {
+test("qualifying routes derive exact ordered links from rendered targets", async ({
+  page,
+}) => {
+  for (const route of [
+    "/guides/economic-democracy/",
+    "/explore/swedish-rehn-meidner-model/",
+    "/cases/swedish-wage-earner-funds/",
+    "/challenges/authority-and-accountability/",
+  ]) {
     await page.goto(route, { waitUntil: "networkidle" });
     const links = page.locator(".page-outline__desktop li a");
     const count = await links.count();
     expect(count).toBeGreaterThanOrEqual(3);
-    expect(await page.locator(".page-outline").getAttribute("data-item-count")).toBe(String(count));
+    expect(
+      await page.locator(".page-outline").getAttribute("data-item-count"),
+    ).toBe(String(count));
     const targets: string[] = [];
     for (let index = 0; index < count; index += 1) {
       const link = links.nth(index);
@@ -304,33 +404,51 @@ test("qualifying routes derive exact ordered links from rendered targets", async
       const target = page.locator(`#${id}`);
       await expect(target).toHaveCount(1);
       const label = (await link.textContent())?.replace(/^\d+/, "").trim();
-      const targetLabel = id === "short-answer" ? await target.getAttribute("aria-label") : (await target.locator("h1, h2, h3").first().textContent())?.trim();
+      const targetLabel =
+        id === "short-answer"
+          ? await target.getAttribute("aria-label")
+          : (await target.locator("h1, h2, h3").first().textContent())?.trim();
       expect(label).toBe(targetLabel);
     }
     expect(new Set(targets).size).toBe(targets.length);
   }
 });
 
-test("short and out-of-scope real routes omit on-page navigation", async ({ page }) => {
+test("short and out-of-scope real routes omit on-page navigation", async ({
+  page,
+}) => {
   for (const route of ["/concepts/institutional-abolition/", "/reading/"]) {
     await page.goto(route, { waitUntil: "networkidle" });
     await expect(page.locator(".page-outline")).toHaveCount(0);
   }
 });
 
-test("generated learner pages contain no duplicate fragment identifiers", async ({ page }) => {
-  for (const route of ["/guides/economic-democracy/", "/guides/socialism/", "/guides/communism/", "/guides/kahnawake-community-lawmaking/", "/explore/swedish-rehn-meidner-model/", "/cases/swedish-solidaristic-bargaining/", "/challenges/authority-and-accountability/"]) {
+test("generated learner pages contain no duplicate fragment identifiers", async ({
+  page,
+}) => {
+  for (const route of [
+    "/guides/economic-democracy/",
+    "/guides/socialism/",
+    "/guides/communism/",
+    "/guides/kahnawake-community-lawmaking/",
+    "/explore/swedish-rehn-meidner-model/",
+    "/cases/swedish-solidaristic-bargaining/",
+    "/challenges/authority-and-accountability/",
+  ]) {
     await page.goto(route, { waitUntil: "networkidle" });
     const duplicates = await page.locator("[id]").evaluateAll((elements) => {
       const counts = new Map<string, number>();
-      for (const element of elements) counts.set(element.id, (counts.get(element.id) ?? 0) + 1);
+      for (const element of elements)
+        counts.set(element.id, (counts.get(element.id) ?? 0) + 1);
       return [...counts].filter(([, count]) => count > 1).map(([id]) => id);
     });
     expect(duplicates).toEqual([]);
   }
 });
 
-test("repeated guide research questions have one fragment owner", async ({ page }) => {
+test("repeated guide research questions have one fragment owner", async ({
+  page,
+}) => {
   await page.goto("/guides/socialism/", { waitUntil: "networkidle" });
   const obligationId = "socialism-democratic-control-threshold";
   const repeatedQuestion = page.locator(".research-obligation").filter({
@@ -341,11 +459,19 @@ test("repeated guide research questions have one fragment owner", async ({ page 
 
   await expect(repeatedQuestion).toHaveCount(2);
   await expect(page.locator(`#${obligationId}`)).toHaveCount(1);
-  expect(await repeatedQuestion.evaluateAll((cards) => cards.map(({ id }) => id))).toEqual([obligationId, ""]);
-  await expect(page.locator(`#${obligationId}`).getByRole("heading")).toHaveText("Which rights and accountability mechanisms are sufficient for productive assets to be under social and democratic control?");
+  expect(
+    await repeatedQuestion.evaluateAll((cards) => cards.map(({ id }) => id)),
+  ).toEqual([obligationId, ""]);
+  await expect(
+    page.locator(`#${obligationId}`).getByRole("heading"),
+  ).toHaveText(
+    "Which rights and accountability mechanisms are sufficient for productive assets to be under social and democratic control?",
+  );
 });
 
-test("representative pages have learner-first outlines and unique disclosure names", async ({ page }) => {
+test("representative pages have learner-first outlines and unique disclosure names", async ({
+  page,
+}) => {
   const expected = [
     {
       route: "/guides/economic-democracy/",
@@ -380,18 +506,28 @@ test("representative pages have learner-first outlines and unique disclosure nam
   ];
   for (const { route, h1, h2, hasDisclosures } of expected) {
     await page.goto(route);
-    await expect(page.getByRole("heading", { level: 1, name: h1 })).toHaveCount(1);
-    await expect(page.getByRole("heading", { level: 2, name: h2 })).toHaveCount(1);
-    const outline = await page.locator("main h1, main h2, main h3").allTextContents();
+    await expect(page.getByRole("heading", { level: 1, name: h1 })).toHaveCount(
+      1,
+    );
+    await expect(page.getByRole("heading", { level: 2, name: h2 })).toHaveCount(
+      1,
+    );
+    const outline = await page
+      .locator("main h1, main h2, main h3")
+      .allTextContents();
     expect(outline.every((heading) => heading.trim().length > 0)).toBe(true);
-    const summaries = (await page.locator("main details > summary").allTextContents()).map((value) => value.replace(/\s+/g, " ").trim());
+    const summaries = (
+      await page.locator("main details > summary").allTextContents()
+    ).map((value) => value.replace(/\s+/g, " ").trim());
     expect(summaries.length > 0).toBe(hasDisclosures);
     expect(summaries.every((summary) => summary.length > 0)).toBe(true);
     expect(new Set(summaries).size).toBe(summaries.length);
   }
 });
 
-test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) => {
+test("Kahnawà:ke guide renders its bounded learner framing", async ({
+  page,
+}) => {
   await page.goto("/guides/kahnawake-community-lawmaking/");
   await expect(
     page.getByRole("heading", {
@@ -399,10 +535,14 @@ test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) =
       level: 1,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/not an example of one universal “tribal” system/)).toBeVisible();
+  await expect(
+    page.getByText(/not an example of one universal “tribal” system/),
+  ).toBeVisible();
 });
 
-test("Ruwalla and Jinst guides render distinct bounded comparisons", async ({ page }) => {
+test("Ruwalla and Jinst guides render distinct bounded comparisons", async ({
+  page,
+}) => {
   await page.goto("/guides/ruwalla-borderland-organization/");
   await expect(
     page.getByRole("heading", {
@@ -410,7 +550,9 @@ test("Ruwalla and Jinst guides render distinct bounded comparisons", async ({ pa
       level: 1,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/rather than one timeless Arabian “tribal system”/)).toBeVisible();
+  await expect(
+    page.getByText(/rather than one timeless Arabian “tribal system”/),
+  ).toBeVisible();
   await page.goto("/guides/jinst-postcollective-pastoral-governance/");
   await expect(
     page.getByRole("heading", {
@@ -418,18 +560,35 @@ test("Ruwalla and Jinst guides render distinct bounded comparisons", async ({ pa
       level: 1,
     }),
   ).toBeVisible();
-  await expect(page.getByText(/single “nomadic government” type/)).toBeVisible();
-  await expect(page.getByText(/differed in scale, leadership, evidence, and state relationship/)).toBeVisible();
+  await expect(
+    page.getByText(/single “nomadic government” type/),
+  ).toBeVisible();
+  await expect(
+    page.getByText(
+      /differed in scale, leadership, evidence, and state relationship/,
+    ),
+  ).toBeVisible();
 });
 
-for (const route of ["/guides/ruwalla-borderland-organization/", "/guides/jinst-postcollective-pastoral-governance/"]) {
-  test(`${route} supports zoom, keyboard evidence, accessible structure, and print`, async ({ page }) => {
+for (const route of [
+  "/guides/ruwalla-borderland-organization/",
+  "/guides/jinst-postcollective-pastoral-governance/",
+]) {
+  test(`${route} supports zoom, keyboard evidence, accessible structure, and print`, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 640, height: 1000 });
     await page.goto(route);
     await page.evaluate(() => {
       document.documentElement.style.fontSize = "200%";
     });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(1);
     await expect(page.locator(".page-outline__desktop")).toBeHidden();
     await expect(page.locator(".page-outline__mobile")).toBeVisible();
 
@@ -443,9 +602,15 @@ for (const route of ["/guides/ruwalla-borderland-organization/", "/guides/jinst-
 
     const semantics = await page.evaluate(() => ({
       h1s: document.querySelectorAll("main h1").length,
-      duplicateIds: [...document.querySelectorAll("[id]")].map(({ id }) => id).filter((id, index, ids) => ids.indexOf(id) !== index),
-      emptySummaries: [...document.querySelectorAll("main details > summary")].filter((node) => !node.textContent?.trim()).length,
-      unlabeledLinks: [...document.querySelectorAll("main a")].filter((node) => !node.textContent?.trim() && !node.getAttribute("aria-label")).length,
+      duplicateIds: [...document.querySelectorAll("[id]")]
+        .map(({ id }) => id)
+        .filter((id, index, ids) => ids.indexOf(id) !== index),
+      emptySummaries: [
+        ...document.querySelectorAll("main details > summary"),
+      ].filter((node) => !node.textContent?.trim()).length,
+      unlabeledLinks: [...document.querySelectorAll("main a")].filter(
+        (node) => !node.textContent?.trim() && !node.getAttribute("aria-label"),
+      ).length,
     }));
     expect(semantics).toEqual({
       h1s: 1,
@@ -463,13 +628,19 @@ for (const route of ["/guides/ruwalla-borderland-organization/", "/guides/jinst-
     await page.reload();
     const initiallyClosedDetails = page.locator("main details").first();
     await expect(initiallyClosedDetails).not.toHaveAttribute("open", "");
-    await expect(initiallyClosedDetails.locator(".canonical-claim").first()).toBeHidden();
+    await expect(
+      initiallyClosedDetails.locator(".canonical-claim").first(),
+    ).toBeHidden();
     await page.emulateMedia({ media: "print" });
-    await expect(initiallyClosedDetails.locator(".canonical-claim").first()).toBeVisible();
+    await expect(
+      initiallyClosedDetails.locator(".canonical-claim").first(),
+    ).toBeVisible();
   });
 }
 
-test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {
+test("subject guide reflows at text zoom without sticky overlap", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 1000 });
   await page.goto("/guides/economic-democracy/");
   await expect(page.locator(".page-outline")).toHaveCSS("position", "sticky");
@@ -485,7 +656,9 @@ test("subject guide reflows at text zoom without sticky overlap", async ({ page 
     const desktop = document.querySelector(".page-outline__desktop");
     const mobile = document.querySelector(".page-outline__mobile");
     return {
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      overflow:
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
       outlinePosition: outline ? getComputedStyle(outline).position : "missing",
       desktopDisplay: desktop ? getComputedStyle(desktop).display : "missing",
       mobileDisplay: mobile ? getComputedStyle(mobile).display : "missing",
@@ -497,32 +670,50 @@ test("subject guide reflows at text zoom without sticky overlap", async ({ page 
   expect(audit.mobileDisplay).not.toBe("none");
 });
 
-test("research obligations expose their claim ledger from the keyboard", async ({ page }) => {
+test("research obligations expose their claim ledger from the keyboard", async ({
+  page,
+}) => {
   await page.goto("/research/");
   await expect(page.getByText("counterargument / open").first()).toBeVisible();
   const disclosure = page.locator(".research-obligation details").first();
   await disclosure.locator("summary").focus();
   await page.keyboard.press("Enter");
   await expect(disclosure).toHaveAttribute("open", "");
-  await expect(disclosure.getByText("Claims this question tests")).toBeVisible();
+  await expect(
+    disclosure.getByText("Claims this question tests"),
+  ).toBeVisible();
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
 });
 
-test("social ownership publishes a traceable dossier and focused research question", async ({ page }) => {
+test("social ownership publishes a traceable dossier and focused research question", async ({
+  page,
+}) => {
   await page.goto("/concepts/social-ownership/");
-  await expect(page.getByRole("heading", { name: "Which rights must be separated?" })).toBeVisible();
-  await expect(page.getByText("Legal title names the recognized holder of an asset.")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Economic democracy" }).first()).toHaveAttribute("href", "/concepts/economic-democracy/");
-  await expect(page.getByRole("link", { name: "Swedish wage-earner funds" }).first()).toHaveAttribute("href", "/cases/swedish-wage-earner-funds/");
+  await expect(
+    page.getByRole("heading", { name: "Which rights must be separated?" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Legal title names the recognized holder of an asset."),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Economic democracy" }).first(),
+  ).toHaveAttribute("href", "/concepts/economic-democracy/");
+  await expect(
+    page.getByRole("link", { name: "Swedish wage-earner funds" }).first(),
+  ).toHaveAttribute("href", "/cases/swedish-wage-earner-funds/");
   const obligation = page.locator(".research-obligation").filter({
-    hasText: "When does delegated control over collectively held assets cease to count as effective social ownership?",
+    hasText:
+      "When does delegated control over collectively held assets cease to count as effective social ownership?",
   });
   await expect(obligation.getByText("counterargument / open")).toBeVisible();
 });
 
 test("case-episode fragment links reveal their target", async ({ page }) => {
   await page.goto("/cases/swedish-wage-earner-funds/");
-  await page.locator('a[href$="#enacted-wage-earner-funds-1984-1991"]').first().click();
+  await page
+    .locator('a[href$="#enacted-wage-earner-funds-1984-1991"]')
+    .first()
+    .click();
   const target = page.locator("#enacted-wage-earner-funds-1984-1991");
   await expect(target).toHaveAttribute("open", "");
   await expect(target.getByText("Formal design")).toBeVisible();
@@ -541,32 +732,58 @@ test("print exposes closed reference material", async ({ page }) => {
   await expect(body).toBeVisible();
 });
 
-test("Zapatista case exposes freshness, interactions, evidence, and print disclosures", async ({ page }) => {
+test("Zapatista case exposes freshness, interactions, evidence, and print disclosures", async ({
+  page,
+}) => {
   await page.goto("/cases/zapatista-autonomy-chiapas-1994-present/");
-  await page.locator("details.apparatus-group").first().locator("summary").click();
+  await page
+    .locator("details.apparatus-group")
+    .first()
+    .locator("summary")
+    .click();
   await expect(page.getByText("Evidence current through:")).toBeVisible();
-  await expect(page.getByText("This pointer records why the case was re-reviewed")).toBeVisible();
-  await page.locator('a[href="#zapatista-autonomy-reorganization-2023"]').click();
-  const freshnessTarget = page.locator("#zapatista-autonomy-reorganization-2023");
+  await expect(
+    page.getByText("This pointer records why the case was re-reviewed"),
+  ).toBeVisible();
+  await page
+    .locator('a[href="#zapatista-autonomy-reorganization-2023"]')
+    .click();
+  const freshnessTarget = page.locator(
+    "#zapatista-autonomy-reorganization-2023",
+  );
   await expect(freshnessTarget).toBeVisible();
   await expect(freshnessTarget).toBeFocused();
   const episode = page.locator("#zapatista-caracol-jbg-episode-2003-2023");
   await episode.locator("summary").click();
-  await expect(episode.getByRole("heading", { name: "Interactions" })).toBeVisible();
-  expect(await episode.locator(".canonical-claim").count()).toBeGreaterThanOrEqual(8);
+  await expect(
+    episode.getByRole("heading", { name: "Interactions" }),
+  ).toBeVisible();
+  expect(
+    await episode.locator(".canonical-claim").count(),
+  ).toBeGreaterThanOrEqual(8);
   await page.emulateMedia({ media: "print" });
-  await expect(page.locator("details.apparatus-group").first()).toHaveAttribute("open", "");
+  await expect(page.locator("details.apparatus-group").first()).toHaveAttribute(
+    "open",
+    "",
+  );
 });
 
-test("sparse published records retain the narrative structure", async ({ page }) => {
-  for (const route of ["/concepts/institutional-abolition/", "/challenges/authority-and-accountability/"]) {
+test("sparse published records retain the narrative structure", async ({
+  page,
+}) => {
+  for (const route of [
+    "/concepts/institutional-abolition/",
+    "/challenges/authority-and-accountability/",
+  ]) {
     await page.goto(route);
     await expect(page.locator(".narrative-dossier")).toHaveCount(1);
     await expect(page.locator(".narrative-section").first()).toBeVisible();
   }
 });
 
-test("criteria grid reflects its content count and stacks only on narrow screens", async ({ page }) => {
+test("criteria grid reflects its content count and stacks only on narrow screens", async ({
+  page,
+}) => {
   await page.goto("/framework/");
   const grid = page.locator(".criteria-grid");
   await expect(grid).toHaveAttribute("data-comparison-columns", "3");
@@ -588,20 +805,32 @@ test("criteria grid reflects its content count and stacks only on narrow screens
   }
 });
 
-test("governance policy exposes correction, reconsideration, and keyboard section navigation", async ({ page }) => {
+test("governance policy exposes correction, reconsideration, and keyboard section navigation", async ({
+  page,
+}) => {
   await page.goto("/governance/");
   const correction = page.getByRole("link", { name: "Send a correction" });
-  const reconsideration = page.getByRole("link", { name: "Request reconsideration" });
+  const reconsideration = page.getByRole("link", {
+    name: "Request reconsideration",
+  });
   await expect(correction).toHaveAttribute("href", /title=Correction/);
-  await expect(reconsideration).toHaveAttribute("href", /title=Reconsideration/);
-  const sectionLink = page.getByRole("navigation", { name: "On this page" }).getByRole("link", { name: "AI-assisted work" });
+  await expect(reconsideration).toHaveAttribute(
+    "href",
+    /title=Reconsideration/,
+  );
+  const sectionLink = page
+    .getByRole("navigation", { name: "On this page" })
+    .getByRole("link", { name: "AI-assisted work" });
   await sectionLink.focus();
   await expect(sectionLink).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("#ai")).toBeVisible();
 });
 
-test("editorial shells share wide geometry while preserving semantic reading measures", async ({ page }) => {
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: one cohesive cross-shell geometry audit.
+test("editorial shells share wide geometry while preserving semantic reading measures", async ({
+  page,
+}) => {
   const headerUsesSemanticMeasure = async (selector: string) =>
     page.locator(selector).evaluate((header) => {
       const root = document.documentElement;
@@ -632,12 +861,19 @@ test("editorial shells share wide geometry while preserving semantic reading mea
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("main")).toHaveClass(/site-main--wide/);
-    await expect(page.locator("article.editorial-page > header.editorial-header")).toBeVisible();
+    await expect(
+      page.locator("article.editorial-page > header.editorial-header"),
+    ).toBeVisible();
     const widths = await page.evaluate(() => ({
       viewport: document.documentElement.clientWidth,
       main: document.querySelector("main")?.getBoundingClientRect().width ?? 0,
-      header: document.querySelector(".editorial-header")?.getBoundingClientRect().width ?? 0,
-      standfirst: document.querySelector(".editorial-header > .dek.measure-standfirst")?.getBoundingClientRect().width ?? 0,
+      header:
+        document.querySelector(".editorial-header")?.getBoundingClientRect()
+          .width ?? 0,
+      standfirst:
+        document
+          .querySelector(".editorial-header > .dek.measure-standfirst")
+          ?.getBoundingClientRect().width ?? 0,
     }));
     expect(widths.main / widths.viewport).toBeGreaterThan(0.85);
     expect(widths.header / widths.main).toBeGreaterThan(0.75);
@@ -648,27 +884,48 @@ test("editorial shells share wide geometry while preserving semantic reading mea
     expect(headerMeasure.after).not.toBe(headerMeasure.before);
   }
 
-  for (const route of ["/cases/swedish-solidaristic-bargaining/", "/concepts/economic-democracy/"]) {
+  for (const route of [
+    "/cases/swedish-solidaristic-bargaining/",
+    "/concepts/economic-democracy/",
+  ]) {
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
     const dossierWidths = await page.evaluate(() => ({
       viewport: document.documentElement.clientWidth,
-      article: document.querySelector(".canonical-dossier")?.getBoundingClientRect().width ?? 0,
-      header: document.querySelector(".canonical-dossier > header")?.getBoundingClientRect().width ?? 0,
-      standfirst: document.querySelector(".canonical-dossier > header .dossier-standfirst > .dek.measure-standfirst")?.getBoundingClientRect().width ?? 0,
+      article:
+        document.querySelector(".canonical-dossier")?.getBoundingClientRect()
+          .width ?? 0,
+      header:
+        document
+          .querySelector(".canonical-dossier > header")
+          ?.getBoundingClientRect().width ?? 0,
+      standfirst:
+        document
+          .querySelector(
+            ".canonical-dossier > header .dossier-standfirst > .dek.measure-standfirst",
+          )
+          ?.getBoundingClientRect().width ?? 0,
     }));
-    expect(dossierWidths.article / dossierWidths.viewport).toBeGreaterThan(0.85);
+    expect(dossierWidths.article / dossierWidths.viewport).toBeGreaterThan(
+      0.85,
+    );
     expect(dossierWidths.header / dossierWidths.article).toBeGreaterThan(0.75);
-    expect(dossierWidths.standfirst / dossierWidths.header).toBeGreaterThan(0.55);
+    expect(dossierWidths.standfirst / dossierWidths.header).toBeGreaterThan(
+      0.55,
+    );
     expect(dossierWidths.standfirst).toBeLessThanOrEqual(dossierWidths.header);
-    const headerMeasure = await headerUsesSemanticMeasure(".canonical-dossier > header");
+    const headerMeasure = await headerUsesSemanticMeasure(
+      ".canonical-dossier > header",
+    );
     expect(headerMeasure.after).toBe(headerMeasure.semantic);
     expect(headerMeasure.after).not.toBe(headerMeasure.before);
   }
 
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  const homepageStandfirst = page.locator(".homepage-hero .dek.measure-standfirst");
+  const homepageStandfirst = page.locator(
+    ".homepage-hero .dek.measure-standfirst",
+  );
   await expect(homepageStandfirst).toBeVisible();
   const homepageMeasures = await homepageStandfirst.evaluate((element) => {
     const actualStyle = getComputedStyle(element);
@@ -689,17 +946,31 @@ test("editorial shells share wide geometry while preserving semantic reading mea
   expect(homepageMeasures.actual).toBe(homepageMeasures.semantic);
 });
 
-test("global navigation remains ordered, reachable, and legible across constraints", async ({ page }) => {
+test("global navigation remains ordered, reachable, and legible across constraints", async ({
+  page,
+}) => {
   const primaryLabels = ["Explore", "Cases", "Compare", "Questions"];
-  const siteMapLabels = ["Home", ...primaryLabels, "Sources", "Method", "Governance"];
+  const siteMapLabels = [
+    "Home",
+    ...primaryLabels,
+    "Sources",
+    "Method",
+    "Governance",
+  ];
 
-  for (const route of ["/explore/", "/concepts/economic-democracy/", "/sources/erixon-rehn-meidner-model-source/"]) {
+  for (const route of [
+    "/explore/",
+    "/concepts/economic-democracy/",
+    "/sources/erixon-rehn-meidner-model-source/",
+  ]) {
     await page.goto(route);
     const primary = page.getByRole("navigation", { name: "Primary" });
     const siteMap = page.getByRole("navigation", { name: "Site map" });
     await expect(primary.getByRole("link")).toHaveText(primaryLabels);
     await expect(siteMap.getByRole("link")).toHaveText(siteMapLabels);
-    await expect(primary.locator('[aria-current="page"]')).toHaveCount(route.startsWith("/sources/") ? 0 : 1);
+    await expect(primary.locator('[aria-current="page"]')).toHaveCount(
+      route.startsWith("/sources/") ? 0 : 1,
+    );
     await expect(siteMap.locator('[aria-current="page"]')).toHaveCount(1);
   }
 
@@ -720,7 +991,9 @@ test("global navigation remains ordered, reachable, and legible across constrain
   };
   const primaryLinks = page.locator('.wordmark, nav[aria-label="Primary"] a');
   await page.keyboard.press("Tab");
-  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+  await expect(
+    page.getByRole("link", { name: "Skip to content" }),
+  ).toBeFocused();
   for (let index = 0; index < (await primaryLinks.count()); index += 1) {
     await page.keyboard.press("Tab");
     await expectFocusedTarget(primaryLinks.nth(index));
@@ -737,11 +1010,21 @@ test("global navigation remains ordered, reachable, and legible across constrain
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/concepts/economic-democracy/");
     const result = await page.evaluate(() => ({
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      targets: [...document.querySelectorAll(".primary-nav a, .mobile-navigation a, .site-map a")].map((link) => link.getBoundingClientRect().height),
+      overflow:
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+      targets: [
+        ...document.querySelectorAll(
+          ".primary-nav a, .mobile-navigation a, .site-map a",
+        ),
+      ].map((link) => link.getBoundingClientRect().height),
     }));
     expect(result.overflow).toBeLessThanOrEqual(1);
-    expect(result.targets.filter((height) => height > 0).every((height) => height >= 44)).toBe(true);
+    expect(
+      result.targets
+        .filter((height) => height > 0)
+        .every((height) => height >= 44),
+    ).toBe(true);
   }
 
   await page.setViewportSize({ width: 640, height: 900 });
@@ -749,27 +1032,44 @@ test("global navigation remains ordered, reachable, and legible across constrain
   await page.evaluate(() => {
     document.documentElement.style.zoom = "2";
   });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
 });
 
-test("mobile current route survives forced colors and reduced motion", async ({ page }) => {
+test("mobile current route survives forced colors and reduced motion", async ({
+  page,
+}) => {
   await page.emulateMedia({ forcedColors: "active", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/concepts/economic-democracy/");
   await page.locator("details.mobile-navigation summary").click();
-  const currentLink = page.getByRole("navigation", { name: "Mobile navigation" }).locator('[aria-current="page"]');
-  expect(await currentLink.evaluate((link) => getComputedStyle(link).textDecorationLine)).toContain("underline");
+  const currentLink = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .locator('[aria-current="page"]');
+  expect(
+    await currentLink.evaluate(
+      (link) => getComputedStyle(link).textDecorationLine,
+    ),
+  ).toContain("underline");
 });
 
-test("mobile menu is compact, complete, and predictably enhanced", async ({ page }) => {
+test("mobile menu is compact, complete, and predictably enhanced", async ({
+  page,
+}) => {
   for (const width of [320, 390, 430]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/concepts/economic-democracy/");
     const header = page.locator(".site-header");
     const disclosure = page.locator("details.mobile-navigation");
     const summary = disclosure.locator("summary");
-    const height = await header.evaluate((element) => element.getBoundingClientRect().height);
+    const height = await header.evaluate(
+      (element) => element.getBoundingClientRect().height,
+    );
     expect(height).toBeGreaterThanOrEqual(56);
     expect(height).toBeLessThanOrEqual(64);
     await expect(summary).toContainText("Menu");
@@ -788,7 +1088,11 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
     expect(focus.outlineWidth).toBeGreaterThanOrEqual(3);
     await page.keyboard.press("Enter");
     await expect(disclosure).toHaveAttribute("open", "");
-    await expect(page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link")).toHaveCount(8);
+    await expect(
+      page
+        .getByRole("navigation", { name: "Mobile navigation" })
+        .getByRole("link"),
+    ).toHaveCount(8);
     await page.keyboard.press("Escape");
     await expect(disclosure).not.toHaveAttribute("open", "");
     await expect(summary).toBeFocused();
@@ -800,9 +1104,13 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/research/");
   const researchDisclosure = page.locator("details.mobile-navigation");
-  await expect(researchDisclosure.locator("summary")).toContainText("Questions");
+  await expect(researchDisclosure.locator("summary")).toContainText(
+    "Questions",
+  );
   await researchDisclosure.locator("summary").click();
-  await expect(researchDisclosure.locator('[aria-current="page"]')).toHaveText("Questions");
+  await expect(researchDisclosure.locator('[aria-current="page"]')).toHaveText(
+    "Questions",
+  );
 
   // A 1280px layout viewport resolves to these CSS widths at 200% and 400% zoom.
   for (const width of [640, 320]) {
@@ -810,12 +1118,22 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
     await page.goto("/sources/erixon-rehn-meidner-model-source/");
     const disclosure = page.locator("details.mobile-navigation");
     await disclosure.locator("summary").click();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-    await expect(disclosure.locator('[aria-current="page"]')).toHaveText(/Sources/);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(1);
+    await expect(disclosure.locator('[aria-current="page"]')).toHaveText(
+      /Sources/,
+    );
   }
 });
 
-test("mobile menu yields focus and closes at its keyboard boundary", async ({ page }) => {
+test("mobile menu yields focus and closes at its keyboard boundary", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/concepts/economic-democracy/");
 
@@ -860,23 +1178,33 @@ test("mobile menu yields focus and closes at its keyboard boundary", async ({ pa
   await expect(summary).toBeFocused();
 });
 
-test("mobile links preserve native pointer, touch, keyboard, and new-context navigation", async ({ browser, page }) => {
+test("mobile links preserve native pointer, touch, keyboard, and new-context navigation", async ({
+  browser,
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
-  await page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Cases" }).click();
+  await page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Cases" })
+    .click();
   await expect(page).toHaveURL(/\/cases\/$/);
 
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
-  const compare = page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Compare" });
+  const compare = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Compare" });
   await compare.focus();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/compare\/$/);
 
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
-  const questions = page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Questions" });
+  const questions = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Questions" });
   const [newPage] = await Promise.all([
     page.context().waitForEvent("page"),
     questions.click({ modifiers: ["ControlOrMeta"] }),
@@ -887,7 +1215,10 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
 
   const [middlePage] = await Promise.all([
     page.context().waitForEvent("page"),
-    page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Sources" }).click({ button: "middle" }),
+    page
+      .getByRole("navigation", { name: "Mobile navigation" })
+      .getByRole("link", { name: "Sources" })
+      .click({ button: "middle" }),
   ]);
   await middlePage.waitForLoadState();
   await expect(middlePage).toHaveURL(/\/reading\/$/);
@@ -901,12 +1232,17 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
   const touchPage = await touchContext.newPage();
   await touchPage.goto("/research/");
   await touchPage.locator("details.mobile-navigation summary").tap();
-  await touchPage.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Cases" }).tap();
+  await touchPage
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Cases" })
+    .tap();
   await expect(touchPage).toHaveURL(/\/cases\/$/);
   await touchContext.close();
 });
 
-test("mobile navigation does not enter the narrow print layout", async ({ page }) => {
+test("mobile navigation does not enter the narrow print layout", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/guides/communism/");
   const disclosure = page.locator("details.mobile-navigation");
@@ -914,36 +1250,66 @@ test("mobile navigation does not enter the narrow print layout", async ({ page }
   await expect(disclosure).toHaveAttribute("open", "");
   await page.emulateMedia({ media: "print" });
   await expect(disclosure).toBeHidden();
-  expect(await disclosure.evaluate((element) => {
-    const { width, height } = element.getBoundingClientRect();
-    return { width, height };
-  })).toEqual({ width: 0, height: 0 });
-  await expect(page.getByRole("navigation", { name: "Site map" })).toBeVisible();
+  expect(
+    await disclosure.evaluate((element) => {
+      const { width, height } = element.getBoundingClientRect();
+      return { width, height };
+    }),
+  ).toEqual({ width: 0, height: 0 });
+  await expect(
+    page.getByRole("navigation", { name: "Site map" }),
+  ).toBeVisible();
 });
 
-test("mobile menu retains native navigation without JavaScript", async ({ browser }, testInfo) => {
+test("mobile menu retains native navigation without JavaScript", async ({
+  browser,
+}, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
-  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
-  const context = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport: { width: 320, height: 900 } });
+  if (typeof baseURL !== "string")
+    throw new Error("Playwright project must configure baseURL");
+  const context = await browser.newContext({
+    javaScriptEnabled: false,
+    baseURL,
+    viewport: { width: 320, height: 900 },
+  });
   const page = await context.newPage();
   await page.goto("/guides/economic-democracy/");
   const disclosure = page.locator("details.mobile-navigation");
   await disclosure.locator("summary").click();
   await expect(disclosure).toHaveAttribute("open", "");
   await expect(disclosure.getByRole("link")).toHaveCount(8);
-  await expect(disclosure.locator('[aria-current="page"]')).toHaveText(/Explore/);
+  await expect(disclosure.locator('[aria-current="page"]')).toHaveText(
+    /Explore/,
+  );
   await context.close();
 });
 
-test("homepage purpose and evidence trail survive no JavaScript, zoom, and keyboard use", async ({ browser, page }, testInfo) => {
+test("homepage purpose and evidence trail survive no JavaScript, zoom, and keyboard use", async ({
+  browser,
+  page,
+}, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
-  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
-  const noScriptContext = await browser.newContext({ baseURL, javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
+  if (typeof baseURL !== "string")
+    throw new Error("Playwright project must configure baseURL");
+  const noScriptContext = await browser.newContext({
+    baseURL,
+    javaScriptEnabled: false,
+    viewport: { width: 390, height: 900 },
+  });
   const noScriptPage = await noScriptContext.newPage();
   await noScriptPage.goto("/");
-  await expect(noScriptPage.getByRole("heading", { level: 1, name: "The label is only the beginning." })).toBeVisible();
-  await expect(noScriptPage.getByRole("link", { name: /Explore the subjects/ })).toBeVisible();
-  await expect(noScriptPage.getByText("Exact location", { exact: true })).toBeVisible();
+  await expect(
+    noScriptPage.getByRole("heading", {
+      level: 1,
+      name: "The label is only the beginning.",
+    }),
+  ).toBeVisible();
+  await expect(
+    noScriptPage.getByRole("link", { name: /Explore the subjects/ }),
+  ).toBeVisible();
+  await expect(
+    noScriptPage.getByText("Exact location", { exact: true }),
+  ).toBeVisible();
   await expect(noScriptPage.getByText("Role", { exact: true })).toBeVisible();
   await expect(noScriptPage.locator(".homepage-trace__map")).toHaveCSS(
     "grid-template-columns",
@@ -956,11 +1322,19 @@ test("homepage purpose and evidence trail survive no JavaScript, zoom, and keybo
   await page.evaluate(() => {
     document.documentElement.style.zoom = "2";
   });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
   const primary = page.getByRole("link", { name: /Explore the subjects/ });
   await primary.focus();
   await expect(primary).toBeFocused();
-  const outline = await primary.evaluate((element) => getComputedStyle(element).outlineStyle);
+  const outline = await primary.evaluate(
+    (element) => getComputedStyle(element).outlineStyle,
+  );
   expect(outline).not.toBe("none");
 
   await page.setViewportSize({ width: 768, height: 1024 });
@@ -970,23 +1344,40 @@ test("homepage purpose and evidence trail survive no JavaScript, zoom, and keybo
     "grid-template-columns",
     /^\d+(?:\.\d+)?px \d+(?:\.\d+)?px$/,
   );
-  await page.getByRole("link", { name: /Open the claim and its citations/ }).click();
-  await expect(page).toHaveURL(/\/guides\/capitalism\/#capitalism-marx-definition$/);
+  await page
+    .getByRole("link", { name: /Open the claim and its citations/ })
+    .click();
+  await expect(page).toHaveURL(
+    /\/guides\/capitalism\/#capitalism-marx-definition$/,
+  );
   const claim = page.locator("#capitalism-marx-definition");
   await expect(claim).toBeVisible();
-  await expect(claim.getByText("chapter 7, section 2", { exact: false })).toBeVisible();
+  await expect(
+    claim.getByText("chapter 7, section 2", { exact: false }),
+  ).toBeVisible();
 
   await page.goto("/");
   await page.emulateMedia({ forcedColors: "active" });
-  await expect(page.locator(".homepage-trace")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(page.locator(".homepage-trace")).toHaveCSS(
+    "background-color",
+    "rgb(255, 255, 255)",
+  );
   await page.emulateMedia({ media: "print", forcedColors: "none" });
-  const correctionLink = page.getByRole("link", { name: "suggest a correction" });
-  const printedSuffix = await correctionLink.evaluate((element) => getComputedStyle(element, "::after").content);
-  expect(printedSuffix).toContain("github.com/dougborg/ends-and-means/issues/new");
+  const correctionLink = page.getByRole("link", {
+    name: "suggest a correction",
+  });
+  const printedSuffix = await correctionLink.evaluate(
+    (element) => getComputedStyle(element, "::after").content,
+  );
+  expect(printedSuffix).toContain(
+    "github.com/dougborg/ends-and-means/issues/new",
+  );
   expect(printedSuffix).not.toContain("%3A");
 });
 
-test("Explore search preserves owned meanings and explicit research gaps", async ({ page }) => {
+test("Explore search preserves owned meanings and explicit research gaps", async ({
+  page,
+}) => {
   await page.goto("/explore/", { waitUntil: "networkidle" });
   const search = page.getByRole("searchbox", {
     name: "What do you want to understand?",
@@ -994,16 +1385,30 @@ test("Explore search preserves owned meanings and explicit research gaps", async
   const results = page.locator("[data-subject-result]:visible");
 
   await search.fill("communist countries");
-  await expect.poll(() => new URL(page.url()).searchParams.get("q")).toBe("communist countries");
+  await expect
+    .poll(() => new URL(page.url()).searchParams.get("q"))
+    .toBe("communist countries");
   await expect(results).toHaveCount(1);
-  await expect(results.getByRole("heading", { name: "Communism" })).toBeVisible();
-  await expect(results.getByText(/A country or party label does not establish one institutional model/)).toBeVisible();
+  await expect(
+    results.getByRole("heading", { name: "Communism" }),
+  ).toBeVisible();
+  await expect(
+    results.getByText(
+      /A country or party label does not establish one institutional model/,
+    ),
+  ).toBeVisible();
 
   await search.fill("direct democracy");
   await expect(results).toHaveCount(1);
-  await expect(results.getByRole("heading", { name: "Economic democracy" })).toBeVisible();
-  await expect(results.getByText("Research gap", { exact: true })).toBeVisible();
-  await expect(results.getByText(/not a general account of direct democracy/)).toBeVisible();
+  await expect(
+    results.getByRole("heading", { name: "Economic democracy" }),
+  ).toBeVisible();
+  await expect(
+    results.getByText("Research gap", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    results.getByText(/not a general account of direct democracy/),
+  ).toBeVisible();
 
   await search.fill("a subject that is not here");
   await expect(results).toHaveCount(0);
@@ -1012,14 +1417,20 @@ test("Explore search preserves owned meanings and explicit research gaps", async
       name: "No subject guide matches that phrase.",
     }),
   ).toBeVisible();
-  await expect(page.locator("#subject-search-status")).toContainText("No reviewed guides match");
+  await expect(page.locator("#subject-search-status")).toContainText(
+    "No reviewed guides match",
+  );
 
   await search.fill("");
-  await expect.poll(() => new URL(page.url()).searchParams.has("q")).toBe(false);
+  await expect
+    .poll(() => new URL(page.url()).searchParams.has("q"))
+    .toBe(false);
   await expect(results).toHaveCount(canonicalGraph.subjectGuides.length);
 });
 
-test("Explore restores query state from initial URLs and browser history", async ({ page }) => {
+test("Explore restores query state from initial URLs and browser history", async ({
+  page,
+}) => {
   await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
   const search = page.getByRole("searchbox", {
     name: "What do you want to understand?",
@@ -1028,17 +1439,24 @@ test("Explore restores query state from initial URLs and browser history", async
   await expect(search).toHaveValue("communism");
   await expect(results).toHaveCount(1);
 
-  await page.evaluate(() => history.pushState(null, "", "/explore/?q=socialism"));
+  await page.evaluate(() =>
+    history.pushState(null, "", "/explore/?q=socialism"),
+  );
   await page.evaluate(() => history.back());
   await expect(search).toHaveValue("communism");
   await page.evaluate(() => history.forward());
   await expect(search).toHaveValue("socialism");
-  await expect(results.getByRole("heading", { name: "Socialism" })).toBeVisible();
+  await expect(
+    results.getByRole("heading", { name: "Socialism" }),
+  ).toBeVisible();
 });
 
-test("Explore directory remains complete without JavaScript", async ({ browser }, testInfo) => {
+test("Explore directory remains complete without JavaScript", async ({
+  browser,
+}, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
-  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  if (typeof baseURL !== "string")
+    throw new Error("Playwright project must configure baseURL");
   const context = await browser.newContext({
     baseURL,
     javaScriptEnabled: false,
@@ -1046,10 +1464,18 @@ test("Explore directory remains complete without JavaScript", async ({ browser }
   try {
     const page = await context.newPage();
     await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
-    await expect(page.locator("[data-subject-result]")).toHaveCount(canonicalGraph.subjectGuides.length);
-    expect(await page.locator("noscript").textContent()).toContain("Use your browser's Find command");
-    await expect(page.getByText("communist countries", { exact: true })).toBeAttached();
-    await expect(page.getByRole("link", { name: "Learn about Communism →" })).toHaveAttribute("href", "/guides/communism/");
+    await expect(page.locator("[data-subject-result]")).toHaveCount(
+      canonicalGraph.subjectGuides.length,
+    );
+    expect(await page.locator("noscript").textContent()).toContain(
+      "Use your browser's Find command",
+    );
+    await expect(
+      page.getByText("communist countries", { exact: true }),
+    ).toBeAttached();
+    await expect(
+      page.getByRole("link", { name: "Learn about Communism →" }),
+    ).toHaveAttribute("href", "/guides/communism/");
   } finally {
     await context.close();
   }
@@ -1063,14 +1489,30 @@ test("Explore search reflows for mobile and text zoom", async ({ page }) => {
       await page.evaluate(() => {
         document.documentElement.style.zoom = "2";
       });
-    await page.getByRole("searchbox", { name: "What do you want to understand?" }).fill("worker ownership");
-    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-    await expect(page.getByRole("link", { name: "Learn about Socialism →" })).toBeVisible();
+    await page
+      .getByRole("searchbox", { name: "What do you want to understand?" })
+      .fill("worker ownership");
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(1);
+    await expect(
+      page.getByRole("link", { name: "Learn about Socialism →" }),
+    ).toBeVisible();
   }
 });
 
-test("central planning guide, case, and approach remain readable across viewports", async ({ page }) => {
-  const routes = ["/guides/central-planning/", "/cases/us-controlled-materials-plan/", "/explore/us-wartime-production-mobilization/"];
+test("central planning guide, case, and approach remain readable across viewports", async ({
+  page,
+}) => {
+  const routes = [
+    "/guides/central-planning/",
+    "/cases/us-controlled-materials-plan/",
+    "/explore/us-wartime-production-mobilization/",
+  ];
   const viewports = [
     { width: 1440, height: 1000 },
     { width: 768, height: 1024 },
@@ -1083,10 +1525,25 @@ test("central planning guide, case, and approach remain readable across viewport
       await page.goto(route, { waitUntil: "networkidle" });
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect(page.locator("main")).toBeVisible();
-      expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), `${route} at ${viewport.width}px`).toBeLessThanOrEqual(1);
+      expect(
+        await page.evaluate(
+          () =>
+            document.documentElement.scrollWidth -
+            document.documentElement.clientWidth,
+        ),
+        `${route} at ${viewport.width}px`,
+      ).toBeLessThanOrEqual(1);
       const summaries = page.locator("summary");
-      expect(await summaries.count(), `${route} should expose evidence disclosures`).toBeGreaterThan(0);
-      expect(await summaries.evaluateAll((items) => items.every((item) => (item.textContent ?? "").trim().length > 0)), `${route} disclosure names`).toBe(true);
+      expect(
+        await summaries.count(),
+        `${route} should expose evidence disclosures`,
+      ).toBeGreaterThan(0);
+      expect(
+        await summaries.evaluateAll((items) =>
+          items.every((item) => (item.textContent ?? "").trim().length > 0),
+        ),
+        `${route} disclosure names`,
+      ).toBe(true);
     }
   }
 });

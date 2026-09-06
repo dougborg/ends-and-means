@@ -1,7 +1,5 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
-import {
-  reviewedOrientationOnlyMappings,
-} from "../../src/lib/domain/orientation-only-mappings";
+import { reviewedOrientationOnlyMappings } from "../../src/lib/domain/orientation-only-mappings";
 import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
 import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { centralPlanningApproachDocuments } from "./approaches/central-planning";
@@ -18,6 +16,7 @@ import { feminismEvidenceDocuments } from "./evidence/feminism";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
 import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
+import { monarchyEvidenceDocuments } from "./evidence/monarchy";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
@@ -39,6 +38,7 @@ import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/k
 import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
 import { minangkabauDossierDocuments } from "./presentation/minangkabau-dossier";
 import { minangkabauGuideDocuments } from "./presentation/minangkabau-guide";
+import { monarchyGuideDocuments } from "./presentation/monarchy-guide";
 import { nomadicConfederatedOrganizationDossierDocuments } from "./presentation/nomadic-confederated-organizations-dossiers";
 import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/nomadic-confederated-organizations-guides";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
@@ -58,6 +58,7 @@ import { feminismRelationshipDocuments } from "./relationships/feminism";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
 import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
+import { monarchyRelationshipDocuments } from "./relationships/monarchy";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
@@ -75,6 +76,7 @@ import { authoritarianismFascismTotalitarianismResearchDocuments } from "./resea
 import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
 import { feminismResearchDocuments } from "./research/feminism";
 import { minangkabauResearchDocuments } from "./research/minangkabau";
+import { monarchyResearchDocuments } from "./research/monarchy";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
@@ -109,6 +111,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...nomadicConfederatedOrganizationEvidenceDocuments,
   ...liberalismConservatismEvidenceDocuments,
   ...minangkabauEvidenceDocuments,
+  ...monarchyEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...feminismGuideDocuments,
@@ -130,9 +133,11 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...liberalismConservatismGuideDocuments,
   ...minangkabauDossierDocuments,
   ...minangkabauGuideDocuments,
+  ...monarchyGuideDocuments,
   ...openResearchObligationDocuments,
   ...feminismResearchDocuments,
   ...minangkabauResearchDocuments,
+  ...monarchyResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...capitalismMarketResearchDocuments,
@@ -164,10 +169,11 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...nomadicConfederatedOrganizationRelationshipDocuments,
   ...liberalismConservatismRelationshipDocuments,
   ...minangkabauRelationshipDocuments,
+  ...monarchyRelationshipDocuments,
 ];
 
-export const canonicalDocuments: AuthoringDocument[] = rawCanonicalDocuments.map(
-  (document) => {
+export const canonicalDocuments: AuthoringDocument[] =
+  rawCanonicalDocuments.map((document) => {
     if (document.documentType !== "entity") return document;
     const article =
       reviewedOrientationOnlyMappings[
@@ -189,5 +195,4 @@ export const canonicalDocuments: AuthoringDocument[] = rawCanonicalDocuments.map
         ],
       },
     } as AuthoringDocument;
-  },
-);
+  });

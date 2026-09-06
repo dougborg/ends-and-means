@@ -153,23 +153,28 @@ const expectedMissingConceptDossiers = [
   "commodity-production",
   "dictatorship",
   "economic-planning",
+  "executive-authority",
   "finance",
   "indigenous-autonomy",
   "institutional-abolition",
   "institutional-formation",
   "institutional-reorganization",
   "legal-order",
+  "legislative-accountability",
   "liberal-feminism",
   "market-coordination",
   "market-socialism",
   "marxist-feminism",
   "matriarchy",
   "mixed-economy",
+  "monarchic-succession",
+  "monarchism",
   "private-property",
   "radical-feminism",
   "social-class",
   "socialist-feminism",
   "statelessness",
+  "theocracy",
   "wage-labor",
 ];
 
@@ -178,7 +183,7 @@ describe("canonical narrative coverage", () => {
     const report = auditContent(canonicalGraph);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "approach"),
-    ).toMatchObject({ covered: 8, total: 8, missingIds: [] });
+    ).toMatchObject({ covered: 10, total: 10, missingIds: [] });
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "challenge")
         ?.missingIds,
@@ -190,8 +195,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 19,
-      total: 42,
+      covered: 20,
+      total: 48,
       missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(

@@ -632,6 +632,24 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "monarchy-formal-power-rules-in-use",
+    obligationType: "counterevidence",
+    target: "concept:monarchy#institutions",
+    status: "open",
+  },
+  {
+    id: "monarchy-gendered-succession-membership",
+    obligationType: "counterargument",
+    target: "concept:monarchy",
+    status: "open",
+  },
+  {
+    id: "monarchy-personal-influence-reserve-power",
+    obligationType: "research-gap",
+    target: "concept:monarchy#institutions",
+    status: "open",
+  },
+  {
     id: "republic-self-description-exclusion-boundary",
     obligationType: "counterargument",
     target: "concept:republic#disputes",
@@ -725,6 +743,12 @@ const expectedOpenResearchObligations = [
     id: "tawantinsuyu-reciprocity-extraction-test",
     obligationType: "counterargument",
     target: "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
+    status: "open",
+  },
+  {
+    id: "tonga-colonial-missionary-mediation",
+    obligationType: "research-gap",
+    target: "concept:monarchy#tonga",
     status: "open",
   },
   {
