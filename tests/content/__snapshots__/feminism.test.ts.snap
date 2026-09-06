@@ -474,6 +474,1368 @@ exports[`feminism evidence ledgers > pins every Statement, kind, source, role, a
 ]
 `;
 
+exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > cases-and-episodes 1`] = `
+[
+  {
+    "conditionStatementIds": [],
+    "description": "A bounded study of one Black feminist socialist collective's self-description, political education, and coalition organizing.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 1980,
+    },
+    "episodeIds": [
+      "combahee-organizing-episode",
+    ],
+    "id": "combahee-river-collective-1974-1980",
+    "kind": "case",
+    "label": "Combahee River Collective, Boston, 1974–1980",
+    "locationIds": [
+      "boston",
+    ],
+    "publicationStatus": "reviewed",
+    "scope": "The collective's Boston-area organization and selected campaigns from 1974 to 1980; not all Black feminism, identity politics, or intersectionality.",
+    "selectionRationale": "The case tests coalition against a presumed universal womanhood through an organization's own account and independent oral history.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 1974,
+    },
+  },
+  {
+    "caseId": "combahee-river-collective-1974-1980",
+    "conditionStatementIds": [],
+    "description": "The collective's active Boston interval.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 1980,
+    },
+    "formalRuleStatementIds": [],
+    "id": "combahee-organizing-episode",
+    "interactionStatementIds": [],
+    "kind": "case-episode",
+    "label": "Combahee organizing, 1974–1980",
+    "locationIds": [
+      "boston",
+    ],
+    "outcomeStatementIds": [],
+    "publicationStatus": "reviewed",
+    "ruleInUseStatementIds": [
+      "combahee-organizing-practice",
+    ],
+    "scope": "Selected organizing documented in the collective statement and members' oral histories.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 1974,
+    },
+  },
+  {
+    "conditionStatementIds": [],
+    "description": "A bounded study of trade-union recognition and member-owned cooperative finance for self-employed women workers.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 1977,
+    },
+    "episodeIds": [
+      "sewa-ahmedabad-institutions-episode",
+    ],
+    "id": "sewa-ahmedabad-1972-1977",
+    "kind": "case",
+    "label": "SEWA institutions in Ahmedabad, 1972–1977",
+    "locationIds": [
+      "ahmedabad",
+    ],
+    "publicationStatus": "reviewed",
+    "scope": "Selected Ahmedabad union and cooperative institutions formed from 1972 through 1977; not later SEWA affiliates or informal workers generally.",
+    "selectionRationale": "The case connects labor, credit, and women's organizing while preserving organizational and geographic limits.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 1972,
+    },
+  },
+  {
+    "caseId": "sewa-ahmedabad-1972-1977",
+    "conditionStatementIds": [],
+    "description": "The 1972–1977 interval in which the union, cooperative bank, and selected producer cooperative formed.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 1977,
+    },
+    "formalRuleStatementIds": [],
+    "id": "sewa-ahmedabad-institutions-episode",
+    "interactionStatementIds": [
+      "sewa-worker-definition-contest",
+    ],
+    "kind": "case-episode",
+    "label": "SEWA union and cooperative formation",
+    "locationIds": [
+      "ahmedabad",
+    ],
+    "outcomeStatementIds": [
+      "sewa-union-registration",
+    ],
+    "publicationStatus": "reviewed",
+    "ruleInUseStatementIds": [
+      "sewa-cooperative-bank",
+      "sewa-quilt-cooperative",
+    ],
+    "scope": "Documented Ahmedabad institutions, without generalizing later national membership or outcomes backward.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 1972,
+    },
+  },
+  {
+    "conditionStatementIds": [],
+    "description": "A bounded study of the 2000 leave design, phased implementation, take-up, care practices, and crisis-era payment changes.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 2018,
+    },
+    "episodeIds": [
+      "iceland-parental-leave-outcomes-episode",
+    ],
+    "id": "iceland-parental-leave-2000-2018",
+    "kind": "case",
+    "label": "Iceland paid parental leave evidence, 2000–2018",
+    "locationIds": [
+      "iceland-modern-state",
+    ],
+    "publicationStatus": "reviewed",
+    "scope": "The law enacted in 2000 and observations collected through 2018, including a 2014 birth cohort; not current Icelandic law or proof that one policy caused every observed gender change.",
+    "selectionRationale": "The case distinguishes enacted entitlement, actual uptake, observed outcomes, and causal limits for a care-related institution.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 2000,
+    },
+  },
+  {
+    "caseId": "iceland-parental-leave-2000-2018",
+    "conditionStatementIds": [],
+    "description": "The enacted design and evidence window from 2000 through 2018.",
+    "endDate": {
+      "certainty": "exact",
+      "year": 2018,
+    },
+    "formalRuleStatementIds": [
+      "iceland-leave-enacted-design",
+    ],
+    "id": "iceland-parental-leave-outcomes-episode",
+    "interactionStatementIds": [],
+    "kind": "case-episode",
+    "label": "Iceland leave design and early outcomes",
+    "locationIds": [
+      "iceland-modern-state",
+    ],
+    "outcomeStatementIds": [
+      "iceland-care-work-outcomes",
+      "iceland-labor-force-participation-gap",
+      "iceland-working-hours-gap",
+    ],
+    "publicationStatus": "reviewed",
+    "ruleInUseStatementIds": [
+      "iceland-fathers-uptake",
+      "iceland-payment-cuts-uptake",
+    ],
+    "scope": "Formal rules, uptake, and observations collected through 2018, with causal limits kept explicit.",
+    "startDate": {
+      "certainty": "exact",
+      "year": 2000,
+    },
+  },
+]
+`;
+
+exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > presentation 1`] = `
+[
+  {
+    "description": "Feminism names contested movements, analyses, and political projects addressing gendered power and sexist oppression; traditions differ over subjects, causes, institutions, and change, while bounded cases cannot represent the whole family.",
+    "id": "feminism-dossier",
+    "kind": "dossier",
+    "label": "Feminism dossier",
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "sections": [
+      {
+        "body": "Feminist analysis asks how power operates through government, work, property, family, sexuality, reproduction, care, culture, and violence.
+Feminist movements and organizations may act on those analyses, but an analysis, self-description, external label, organization, and enacted program are different claims and need separate evidence.",
+        "heading": "What does feminism name?",
+        "id": "meaning",
+        "statementIds": [
+          "feminism-contested-family",
+          "feminism-analysis-action-distinction",
+          "feminism-public-private-boundary",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Liberal feminist arguments often work through autonomy and equal personhood, while radical feminist theories locate domination in deeper social structures.
+Socialist feminist accounts examine how work, class, households, and the reproduction of social life shape gender hierarchy; Marxist feminism is separately identified through its analysis of production and reproduction, and neither label supplies one program.
+
+Crenshaw showed how a single-axis legal framework could erase Black women's discrimination claims.
+Mohanty's postcolonial critique rejected a homogeneous “Third World woman,” Moreton-Robinson located white feminist authority within colonial relations, and Koyama's transfeminist manifesto joined trans women's bodily autonomy to wider coalition.
+These are situated interventions, not evidence that postcolonial, decolonial, Indigenous, Black, trans, and queer positions form subordinate branches of a complete taxonomy.",
+        "heading": "Why isn't feminism one tradition?",
+        "id": "traditions",
+        "relatedEntityRefs": [
+          {
+            "id": "feminist-traditions",
+            "kind": "collection",
+          },
+        ],
+        "statementIds": [
+          "feminism-traditions-nonexhaustive",
+          "liberal-feminism-tradition",
+          "radical-feminism-tradition",
+          "socialist-feminism-tradition",
+          "marxist-feminism-tradition",
+          "liberal-feminism-autonomy",
+          "radical-feminism-structural-boundary",
+          "socialist-feminism-material-boundary",
+          "crenshaw-single-axis-limit",
+          "mohanty-western-universal-limit",
+          "moreton-robinson-indigenous-boundary",
+          "koyama-transfeminist-self-description",
+          "koyama-body-autonomy",
+          "sex-gender-trans-boundary",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Formal equality in law can matter without establishing substantive equality in material and social conditions.
+Fraser's social-reproduction argument directs attention to the paid and unpaid work that sustains people and institutions, while remaining a contested account of capitalism rather than a fact inherited by every feminist tradition.",
+        "heading": "Are equal rights enough?",
+        "id": "equality-and-material-power",
+        "statementIds": [
+          "formal-substantive-equality-boundary",
+          "fraser-social-reproduction-definition",
+          "fraser-care-capitalism-claim",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Coalition begins from different positions rather than a presumed universal womanhood.
+Caste, class, race, sexuality, disability, citizenship, and colonial position matter only where bounded evidence shows how they shaped a claim or institution; listing them cannot substitute for that evidence.",
+        "heading": "Who can a feminist claim speak for?",
+        "id": "coalition-and-boundaries",
+        "statementIds": [
+          "crenshaw-single-axis-limit",
+          "mohanty-western-universal-limit",
+          "moreton-robinson-indigenous-boundary",
+          "sex-gender-trans-boundary",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "From 1974 to 1980, the Combahee River Collective developed a Black feminist socialist politics in Boston and organized around reproductive freedom, health care, violence against women, and the murders of Black women.
+Its members opposed racial, sexual, heterosexual, and class oppression together.
+This bounded organization clarifies coalition and self-description, but neither its statement nor the later language of intersectionality defines all Black feminism.",
+        "heading": "What can the Combahee collective show?",
+        "id": "combahee",
+        "relatedEntityRefs": [
+          {
+            "id": "combahee-river-collective-1974-1980",
+            "kind": "case",
+          },
+        ],
+        "statementIds": [
+          "combahee-self-description",
+          "combahee-organizing-practice",
+          "combahee-selected-campaigns",
+          "combahee-case-boundary",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "In Ahmedabad, self-employed women registered SEWA as a trade union in 1972 after contesting the claim that a union required a conventional employer.
+Members capitalized a cooperative bank in 1974, and quilt workers formed a producer cooperative in 1977.
+The case connects labor, credit, and women's organizing through particular institutions, but cannot stand for feminism or informal workers generally.",
+        "heading": "How did SEWA combine union and cooperative institutions?",
+        "id": "sewa",
+        "relatedEntityRefs": [
+          {
+            "id": "sewa-ahmedabad-1972-1977",
+            "kind": "case",
+          },
+          {
+            "id": "self-employed-worker-unionism",
+            "kind": "means",
+          },
+          {
+            "id": "member-owned-cooperative-finance",
+            "kind": "means",
+          },
+        ],
+        "statementIds": [
+          "sewa-union-registration",
+          "sewa-cooperative-bank",
+          "sewa-quilt-cooperative",
+          "sewa-case-boundary",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Iceland's 2000 law phased in three paid months reserved for each parent and three shareable months.
+Fathers' uptake rose sharply.
+Later surveys separately found more paternal care and a smaller difference between mothers' and fathers' employment rates three years after birth.
+Across the surveyed cohorts, mothers' average paid working hours rose while fathers' fell.
+Those changes do not prove that feminism was the policy's sole source or that the leave design caused every outcome: other changes occurred, and payment cuts during the financial crisis reduced fathers' use, with the largest drop among high-income fathers.",
+        "heading": "What changed under Iceland's 2000 leave design?",
+        "id": "iceland",
+        "relatedEntityRefs": [
+          {
+            "id": "iceland-parental-leave-2000-2018",
+            "kind": "case",
+          },
+          {
+            "id": "nontransferable-parental-leave",
+            "kind": "means",
+          },
+        ],
+        "statementIds": [
+          "iceland-leave-enacted-design",
+          "iceland-fathers-uptake",
+          "iceland-care-work-outcomes",
+          "iceland-labor-force-participation-gap",
+          "iceland-working-hours-gap",
+          "iceland-causal-transfer-limit",
+          "iceland-payment-cuts-uptake",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Compare formal equality with material power; representation with redistribution; and bodily autonomy with property, labor, care, and protection from violence.
+Then ask which actors made each claim, which institution they proposed or used, who could participate, and what the bounded evidence can establish.",
+        "heading": "Which distinctions sharpen comparison?",
+        "id": "comparisons",
+        "statementIds": [
+          "formal-substantive-equality-boundary",
+          "feminism-analysis-action-distinction",
+          "feminism-traditions-nonexhaustive",
+        ],
+        "traceStatus": "qualified",
+      },
+    ],
+    "standfirst": "Feminism is a contested family of movements, analyses, and political projects concerned with gendered power and sexist oppression.
+It is not one doctrine, a women-only identity, a global sequence of “waves,” or a synonym for legal equality; its traditions disagree about political subjects, causes, institutions, and the meaning of freedom.",
+    "standfirstStatementIds": [
+      "feminism-contested-family",
+      "feminism-traditions-nonexhaustive",
+      "formal-substantive-equality-boundary",
+    ],
+    "subject": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "description": "Feminism is a contested family of movements, analyses, and political projects confronting gendered power and sexist oppression; its traditions disagree over political subjects, material relations, institutions, and change, and no selected organization or policy represents the whole.",
+    "id": "guide-feminism",
+    "label": "Feminism",
+    "primarySubject": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "searchQueries": [
+      {
+        "query": "feminism",
+      },
+      {
+        "query": "what is feminism",
+      },
+      {
+        "query": "feminist traditions",
+      },
+      {
+        "disambiguation": "Intersectionality is an analytic framework with a wider history than this introductory guide can establish.",
+        "query": "intersectional feminism",
+        "resultStatus": "research-gap",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "What does feminism mean?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "feminism-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "feminism",
+            "kind": "concept",
+          },
+        ],
+        "heading": "What does the name include—and not include?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "meaning",
+          },
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "coalition-and-boundaries",
+          },
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "feminist-traditions",
+            "kind": "collection",
+          },
+        ],
+        "heading": "Where do feminist traditions disagree?",
+        "id": "traditions",
+        "narrativeRefs": [
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "traditions",
+          },
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "equality-and-material-power",
+          },
+        ],
+        "researchObligationIds": [
+          "feminism-universal-subject-exclusion",
+          "feminism-translation-nonwestern-naming",
+          "feminism-sex-gender-trans-boundaries",
+        ],
+        "role": "variants-and-disputes",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "self-employed-worker-unionism",
+            "kind": "means",
+          },
+          {
+            "id": "member-owned-cooperative-finance",
+            "kind": "means",
+          },
+          {
+            "id": "nontransferable-parental-leave",
+            "kind": "means",
+          },
+        ],
+        "heading": "Which institutions put claims into practice?",
+        "id": "institutions",
+        "role": "institutions-and-mechanisms",
+        "statementIds": [
+          "sewa-union-registration",
+          "sewa-cooperative-bank",
+          "iceland-leave-enacted-design",
+        ],
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "combahee-river-collective-1974-1980",
+            "kind": "case",
+          },
+          {
+            "id": "sewa-ahmedabad-1972-1977",
+            "kind": "case",
+          },
+          {
+            "id": "iceland-parental-leave-2000-2018",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do three bounded contexts establish?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "combahee",
+          },
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "sewa",
+          },
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "iceland",
+          },
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "socialism",
+            "kind": "concept",
+          },
+          {
+            "id": "economic-democracy",
+            "kind": "concept",
+          },
+          {
+            "id": "social-ownership",
+            "kind": "concept",
+          },
+        ],
+        "heading": "What should be compared next?",
+        "id": "comparisons-and-next-steps",
+        "narrativeRefs": [
+          {
+            "dossierId": "feminism-dossier",
+            "sectionId": "comparisons",
+          },
+        ],
+        "role": "comparisons-and-next-steps",
+      },
+      {
+        "heading": "What remains unsettled?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "feminism-universal-subject-exclusion",
+          "feminism-translation-nonwestern-naming",
+          "feminism-sex-gender-trans-boundaries",
+          "feminism-policy-attribution-causal-effects",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "feminism",
+  },
+]
+`;
+
+exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > relationships 1`] = `
+[
+  {
+    "id": "liberal-feminism-member-feminist-traditions",
+    "membership": "qualified",
+    "object": {
+      "id": "feminist-traditions",
+      "kind": "collection",
+    },
+    "predicate": "member-of",
+    "statementIds": [
+      "liberal-feminism-tradition",
+      "feminism-traditions-nonexhaustive",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "liberal-feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "id": "socialist-feminism-member-feminist-traditions",
+    "membership": "qualified",
+    "object": {
+      "id": "feminist-traditions",
+      "kind": "collection",
+    },
+    "predicate": "member-of",
+    "statementIds": [
+      "socialist-feminism-tradition",
+      "feminism-traditions-nonexhaustive",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "socialist-feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "id": "marxist-feminism-member-feminist-traditions",
+    "membership": "qualified",
+    "object": {
+      "id": "feminist-traditions",
+      "kind": "collection",
+    },
+    "predicate": "member-of",
+    "statementIds": [
+      "marxist-feminism-tradition",
+      "feminism-traditions-nonexhaustive",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "marxist-feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "id": "radical-feminism-member-feminist-traditions",
+    "membership": "qualified",
+    "object": {
+      "id": "feminist-traditions",
+      "kind": "collection",
+    },
+    "predicate": "member-of",
+    "statementIds": [
+      "radical-feminism-tradition",
+      "feminism-traditions-nonexhaustive",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "radical-feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "id": "feminism-citation-1",
+    "locator": "introduction, paragraphs 1–8; section 2, paragraphs 1–3",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "feminism-contested-family",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-2",
+    "locator": "introduction, paragraphs 3–8",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "feminism-analysis-action-distinction",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-3",
+    "locator": "introduction, paragraphs 1–7; section 1, paragraphs 1–9",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "feminism-public-private-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-4",
+    "locator": "sections 1–2.8, headings and introductory classifications",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "feminism-traditions-nonexhaustive",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-5",
+    "locator": "section 2.1, paragraphs 1–18",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "liberal-feminism-tradition",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-6",
+    "locator": "section 2.2, paragraphs 1–12",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "radical-feminism-tradition",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-7",
+    "locator": "section 2.3, paragraphs 1–18",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "socialist-feminism-tradition",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-8",
+    "locator": "section 2.3, paragraphs 1–18",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "marxist-feminism-tradition",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-9",
+    "locator": "section 2.1, paragraphs 1–18",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "liberal-feminism-autonomy",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-10",
+    "locator": "section 2.2, paragraphs 1–12",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "radical-feminism-structural-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-11",
+    "locator": "section 2.3, paragraphs 1–18",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "socialist-feminism-material-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-12",
+    "locator": "sections 2.1, 2.3, and 2.5",
+    "object": {
+      "id": "sep-feminist-political-philosophy-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "formal-substantive-equality-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-13",
+    "locator": "pp. 139–143",
+    "object": {
+      "id": "crenshaw-demarginalizing-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "crenshaw-single-axis-limit",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-14",
+    "locator": "pp. 501–509 and 522–525",
+    "object": {
+      "id": "mohanty-western-eyes-revisited-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "mohanty-western-universal-limit",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-15",
+    "locator": "publisher page, Description paragraphs 1–4",
+    "object": {
+      "id": "moreton-robinson-talkin-up-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "moreton-robinson-indigenous-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-16",
+    "locator": "pp. 1–2, opening and Primary Principles",
+    "object": {
+      "id": "koyama-transfeminist-manifesto-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "koyama-transfeminist-self-description",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-17",
+    "locator": "p. 2, Primary Principles",
+    "object": {
+      "id": "koyama-transfeminist-manifesto-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "koyama-body-autonomy",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-18",
+    "locator": "p. 1, operational definitions of sex and gender",
+    "object": {
+      "id": "koyama-transfeminist-manifesto-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sex-gender-trans-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-19",
+    "locator": "opening paragraphs 1–3",
+    "object": {
+      "id": "fraser-capital-care-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "fraser-social-reproduction-definition",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-20",
+    "locator": "opening paragraphs 4–12",
+    "object": {
+      "id": "fraser-capital-care-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "fraser-care-capitalism-claim",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-21",
+    "locator": "PDF pp. 1–3, opening and sections 1–2",
+    "object": {
+      "id": "combahee-statement-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-self-description",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-22",
+    "locator": "PDF p. 1, opening paragraph",
+    "object": {
+      "id": "combahee-statement-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-opposed-interlocking-oppressions",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-23",
+    "locator": "pp. 15–27 and 109–130",
+    "object": {
+      "id": "taylor-combahee-reader-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "context",
+    "subject": {
+      "id": "combahee-self-description",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-24",
+    "locator": "pp. 109–130, interview with Barbara Smith, Beverly Smith, and Demita Frazier",
+    "object": {
+      "id": "taylor-combahee-reader-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-organizing-practice",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-25",
+    "locator": "pp. 109–130, interview with Barbara Smith, Beverly Smith, and Demita Frazier",
+    "object": {
+      "id": "taylor-combahee-reader-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-selected-campaigns",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-26",
+    "locator": "pp. 280–305",
+    "object": {
+      "id": "harris-kennedy-combahee-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-organizing-practice",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-27",
+    "locator": "pp. 1–14 and 109–130",
+    "object": {
+      "id": "taylor-combahee-reader-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "combahee-case-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-28",
+    "locator": "Birth of SEWA, paragraphs 1–8",
+    "object": {
+      "id": "sewa-history-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sewa-union-registration",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-29",
+    "locator": "Birth of SEWA, paragraphs 3–8",
+    "object": {
+      "id": "sewa-history-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sewa-worker-definition-contest",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-30",
+    "locator": "pp. 13–17",
+    "object": {
+      "id": "ilo-sewa-cooperatives-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "context",
+    "subject": {
+      "id": "sewa-union-registration",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-31",
+    "locator": "p. 17, Beginnings of the cooperative journey",
+    "object": {
+      "id": "ilo-sewa-cooperatives-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sewa-cooperative-bank",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-32",
+    "locator": "p. 17, Beginnings of the cooperative journey",
+    "object": {
+      "id": "ilo-sewa-cooperatives-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sewa-quilt-cooperative",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-33",
+    "locator": "pp. 3, 7, and 13–17",
+    "object": {
+      "id": "ilo-sewa-cooperatives-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "sewa-case-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-34",
+    "locator": "History of SEWA, paragraphs 1–6",
+    "object": {
+      "id": "sewa-history-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "context",
+    "subject": {
+      "id": "sewa-case-boundary",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-35",
+    "locator": "archived consolidation dated 1 October 2000, Articles 2, 4, 8, 13, and 36",
+    "object": {
+      "id": "iceland-parental-leave-law-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-leave-enacted-design",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-36",
+    "locator": "chapter 18, pp. 370–387, Abstract and Introduction",
+    "object": {
+      "id": "gislason-iceland-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "context",
+    "subject": {
+      "id": "iceland-leave-enacted-design",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-37",
+    "locator": "chapter 18, pp. 370–387, A Policy Success? § Programmatic success, paragraphs 1–5 and Figure 18.1",
+    "object": {
+      "id": "gislason-iceland-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-fathers-uptake",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-38",
+    "locator": "printed pp. 247–249, section 5.1 and Figures 2–4",
+    "object": {
+      "id": "arnalds-eydal-gislason-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-care-work-outcomes",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-39",
+    "locator": "printed p. 250, section 5.2 and Figure 5",
+    "object": {
+      "id": "arnalds-eydal-gislason-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-labor-force-participation-gap",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-40",
+    "locator": "printed pp. 250–251, section 5.2 and Figure 6",
+    "object": {
+      "id": "arnalds-eydal-gislason-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-working-hours-gap",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-41",
+    "locator": "chapter 18, pp. 370–387, A Policy Success? §§ Programmatic success and Counterclaims to success",
+    "object": {
+      "id": "gislason-iceland-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-causal-transfer-limit",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "feminism-citation-42",
+    "locator": "chapter 18, pp. 378–379, ‘An Enduring System’, subsection ‘Coping with a financial crisis’, especially the paragraph reporting the largest decrease among high-income fathers",
+    "object": {
+      "id": "gislason-iceland-leave-source",
+      "kind": "source",
+    },
+    "predicate": "cites",
+    "role": "supports",
+    "subject": {
+      "id": "iceland-payment-cuts-uptake",
+      "kind": "statement",
+    },
+  },
+  {
+    "id": "sewa-episode-used-self-employed-worker-unionism",
+    "implementation": "mixed",
+    "object": {
+      "id": "self-employed-worker-unionism",
+      "kind": "means",
+    },
+    "predicate": "used-means",
+    "statementIds": [
+      "sewa-union-registration",
+      "sewa-worker-definition-contest",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "sewa-ahmedabad-institutions-episode",
+      "kind": "case-episode",
+    },
+  },
+  {
+    "id": "sewa-episode-used-member-owned-cooperative-finance",
+    "implementation": "mixed",
+    "object": {
+      "id": "member-owned-cooperative-finance",
+      "kind": "means",
+    },
+    "predicate": "used-means",
+    "statementIds": [
+      "sewa-cooperative-bank",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "sewa-ahmedabad-institutions-episode",
+      "kind": "case-episode",
+    },
+  },
+  {
+    "id": "iceland-episode-used-nontransferable-parental-leave",
+    "implementation": "mixed",
+    "object": {
+      "id": "nontransferable-parental-leave",
+      "kind": "means",
+    },
+    "predicate": "used-means",
+    "statementIds": [
+      "iceland-leave-enacted-design",
+      "iceland-fathers-uptake",
+      "iceland-payment-cuts-uptake",
+    ],
+    "status": "qualified",
+    "subject": {
+      "id": "iceland-parental-leave-outcomes-episode",
+      "kind": "case-episode",
+    },
+  },
+]
+`;
+
+exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > research-obligations 1`] = `
+[
+  {
+    "addressedStatementIds": [
+      "crenshaw-single-axis-limit",
+      "mohanty-western-universal-limit",
+      "moreton-robinson-indigenous-boundary",
+    ],
+    "currentLimitation": "The current evidence establishes three serious critiques but does not compare how exclusion operates across legal claims, transnational representation, Indigenous sovereignty, disability, citizenship, and caste.",
+    "description": "A focused comparison of who universal claims exclude and through which institutions.",
+    "evidenceNeeded": "Located self-descriptions and independent studies of specific organizations or policy disputes, including participants who contested their categories.",
+    "id": "feminism-universal-subject-exclusion",
+    "kind": "research-obligation",
+    "label": "Exclusion by universal feminist subjects",
+    "obligationStatus": "open",
+    "obligationType": "counterargument",
+    "publicationStatus": "reviewed",
+    "question": "When feminist programs claim a common subject, whose interests, authority, or experience do their categories exclude?",
+    "reviewedAt": "2026-09-06",
+    "scope": "Selected organizations and texts in their named places and periods; no universal hierarchy of exclusions.",
+    "statementIds": [],
+    "target": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+    "targetSectionId": "coalition-and-boundaries",
+  },
+  {
+    "addressedStatementIds": [
+      "mohanty-western-universal-limit",
+      "moreton-robinson-indigenous-boundary",
+      "sewa-case-boundary",
+    ],
+    "currentLimitation": "English-language sources cannot establish which translated labels or genealogies actors in other settings claim for themselves.",
+    "description": "A focused question about self-description across languages and political histories.",
+    "evidenceNeeded": "Primary records in original languages, named translators and editions, oral histories where appropriate, and scholarship on local political vocabulary.",
+    "id": "feminism-translation-nonwestern-naming",
+    "kind": "research-obligation",
+    "label": "Translation and non-Western naming",
+    "obligationStatus": "open",
+    "obligationType": "research-gap",
+    "publicationStatus": "reviewed",
+    "question": "How do movements outside English-language Western genealogies translate, reject, or rework names rendered as feminism?",
+    "reviewedAt": "2026-09-06",
+    "scope": "Bounded organizations and language communities; no presumption that an English family label travels unchanged.",
+    "statementIds": [],
+    "target": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+  },
+  {
+    "addressedStatementIds": [
+      "sex-gender-trans-boundary",
+      "koyama-transfeminist-self-description",
+      "koyama-body-autonomy",
+      "radical-feminism-structural-boundary",
+    ],
+    "currentLimitation": "One transfeminist manifesto and an overview of radical-feminist disputes do not represent the strongest rival positions or their institutional effects.",
+    "description": "A focused dispute over political subjects and institutional consequences.",
+    "evidenceNeeded": "Located primary arguments from trans-inclusive and critical positions, testimony from affected groups, and policy-specific evidence that distinguishes claims from outcomes.",
+    "id": "feminism-sex-gender-trans-boundaries",
+    "kind": "research-obligation",
+    "label": "Sex, gender, and trans boundaries",
+    "obligationStatus": "open",
+    "obligationType": "counterargument",
+    "publicationStatus": "reviewed",
+    "question": "How do rival feminist accounts of sex, gender, sexuality, and trans membership change proposed rules for bodily autonomy, safety, care, and association?",
+    "reviewedAt": "2026-09-06",
+    "scope": "Named debates and institutions rather than a binary verdict about all feminists or trans people.",
+    "statementIds": [],
+    "target": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+    "targetSectionId": "traditions",
+  },
+  {
+    "addressedStatementIds": [
+      "formal-substantive-equality-boundary",
+      "iceland-leave-enacted-design",
+      "iceland-fathers-uptake",
+      "iceland-care-work-outcomes",
+      "iceland-labor-force-participation-gap",
+      "iceland-working-hours-gap",
+      "iceland-causal-transfer-limit",
+    ],
+    "currentLimitation": "The Iceland evidence documents design, take-up, and longitudinal change but does not make feminism the sole author or isolate every causal pathway.",
+    "description": "A causal question separating feminist advocacy, enacted design, use, and outcomes.",
+    "evidenceNeeded": "Legislative histories that identify advocates, quasi-experimental or comparative designs, distributional results by income and family form, and rival explanations.",
+    "id": "feminism-policy-attribution-causal-effects",
+    "kind": "research-obligation",
+    "label": "Feminist policy attribution and causal effects",
+    "obligationStatus": "open",
+    "obligationType": "counterfactual",
+    "publicationStatus": "reviewed",
+    "question": "Which actors attributed a policy to feminist aims, and what would likely have happened to its distributional outcomes without the policy?",
+    "reviewedAt": "2026-09-06",
+    "scope": "The Iceland 2000 reform and separately selected policies with comparable institutional and outcome data.",
+    "statementIds": [],
+    "target": {
+      "id": "feminism",
+      "kind": "concept",
+    },
+  },
+]
+`;
+
 exports[`feminism evidence ledgers > pins the complete Work and Source manifestation metadata ledger 1`] = `
 [
   {
