@@ -128,7 +128,7 @@ describe("content-integrity harness", () => {
   });
 });
 
-describe("safe-publication boundary", () => {
+describe("private research publication boundary", () => {
   it("rejects Astro imports of the private corpus candidate matrix", () => {
     expect(
       publicationBoundaryFindings([
@@ -148,6 +148,29 @@ describe("safe-publication boundary", () => {
     );
   });
 
+  it("rejects runtime imports from every private research subtree", () => {
+    expect(
+      publicationBoundaryFindings([
+        {
+          path: "src/pages/example.ts",
+          content:
+            'import draft from "../../research/future-candidates/draft.json";',
+        },
+      ]),
+    ).toContainEqual(
+      expect.objectContaining({
+        category: "archive-exclusion",
+        severity: "violation",
+        location: "src/pages/example.ts",
+        message: expect.stringContaining(
+          "../../research/future-candidates/draft.json",
+        ),
+      }),
+    );
+  });
+});
+
+describe("safe-publication boundary", () => {
   it("rejects runtime imports and build references to excluded material", () => {
     expect(
       publicationBoundaryFindings([
