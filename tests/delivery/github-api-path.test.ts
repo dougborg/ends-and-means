@@ -13,4 +13,10 @@ describe("GitHub compare API paths", () => {
       "repos/dougborg/ends-and-means/compare/main%3F%23%25...feature%2Fa%20b%3F%23%25",
     );
   });
+
+  it("encodes dots inside each ref while preserving only the constructed delimiter", () => {
+    expect(githubComparePath("release..next", "feature/.../audit.v2")).toBe(
+      "repos/dougborg/ends-and-means/compare/release%2E%2Enext...feature%2F%2E%2E%2E%2Faudit%2Ev2",
+    );
+  });
 });

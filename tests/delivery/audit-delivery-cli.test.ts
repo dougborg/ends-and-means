@@ -20,6 +20,12 @@ function run(args: string[], path = process.env.PATH) {
 }
 
 describe("delivery audit result classes", () => {
+  it("reports repository-only Project state as unavailable while succeeding", () => {
+    const result = run(["--repository-only"]);
+    expect(result.status).toBe(0);
+    expect(result.stdout).toContain("Project state: UNAVAILABLE");
+  });
+
   it("distinguishes invalid snapshot schema", () => {
     const result = run(["--project-snapshot", malformed]);
     expect(result.status).toBe(2);

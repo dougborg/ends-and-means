@@ -36,8 +36,12 @@ const trustedCopilotReviewers = new Set([
 ]);
 
 /** Build GitHub's compare route without allowing ref separators/reserved characters to alter the path. */
+function encodeRefComponent(ref: string) {
+  return encodeURIComponent(ref).replaceAll(".", "%2E");
+}
+
 export function githubComparePath(base: string, head: string) {
-  return `repos/dougborg/ends-and-means/compare/${encodeURIComponent(base)}...${encodeURIComponent(head)}`;
+  return `repos/dougborg/ends-and-means/compare/${encodeRefComponent(base)}...${encodeRefComponent(head)}`;
 }
 
 const dateTime = z.string().datetime({ offset: true });
