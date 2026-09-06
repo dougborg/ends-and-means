@@ -229,7 +229,7 @@ describe("capitalism and market-economy guide boundaries", () => {
       id: "market-economy",
     });
     expect(capitalism.description).toContain(
-      "Markets or private possessions alone",
+      "exchange alone does not establish that classification",
     );
     expect(marketEconomy.description).toContain(
       "neither requires private ownership",
@@ -261,7 +261,6 @@ describe("capitalism and market-economy guide boundaries", () => {
       "finance",
       "legal-order",
       "market-economy",
-      "private-property",
       "wage-labor",
     ]);
     for (const caseId of [
@@ -274,16 +273,7 @@ describe("capitalism and market-economy guide boundaries", () => {
           relationship.predicate === "applies-to-case" ||
           relationship.predicate === "contested-in-case",
       );
-      expect(conceptLinks.map(({ object }) => object.id).sort()).toEqual([
-        "capitalism",
-        "market-economy",
-      ]);
-      expect(
-        conceptLinks.every(
-          (relationship) =>
-            "status" in relationship && relationship.status === "qualified",
-        ),
-      ).toBe(true);
+      expect(conceptLinks).toEqual([]);
     }
   });
 });

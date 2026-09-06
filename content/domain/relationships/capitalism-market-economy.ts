@@ -10,13 +10,13 @@ export const capitalismMarketCitations = [
   [
     "capitalism-market-boundary",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 10 abstract, paragraph 1",
+    "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     "supports",
   ],
   [
     "capitalism-institutional-definition",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 10 abstract, paragraph 1",
+    "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     "supports",
   ],
   [
@@ -34,7 +34,7 @@ export const capitalismMarketCitations = [
   [
     "property-possession-boundary",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 4 abstract, paragraph 1",
+    "chapter 4 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0004",
     "supports",
   ],
   [
@@ -46,13 +46,13 @@ export const capitalismMarketCitations = [
   [
     "wage-labor-boundary",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 9 abstract, paragraph 1",
+    "chapter 9 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0009",
     "supports",
   ],
   [
     "wage-labor-history-limit",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 9 abstract, paragraph 1",
+    "chapter 9 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0009",
     "supports",
   ],
   [
@@ -70,7 +70,7 @@ export const capitalismMarketCitations = [
   [
     "capital-finance-boundary",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 6 abstract, paragraph 1",
+    "chapter 6 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0006",
     "supports",
   ],
   [
@@ -190,7 +190,7 @@ export const capitalismMarketCitations = [
   [
     "capitalism-legal-order-relation",
     "hodgson-conceptualizing-capitalism-source",
-    "chapter 10 abstract, paragraph 1",
+    "chapter 10 abstract, paragraph 1; DOI 10.7208/chicago/9780226168142.003.0010",
     "supports",
   ],
 ] as const;
@@ -219,7 +219,6 @@ export const capitalismMarketRelationshipDocuments = [
         "capitalism-market-boundary",
         "market-ownership-boundary",
       ]),
-      related(capitalism, "private-property", ["property-possession-boundary"]),
       related(capitalism, "wage-labor", [
         "capitalism-institutional-definition",
         "wage-labor-history-limit",
@@ -258,29 +257,6 @@ export const capitalismMarketRelationshipDocuments = [
       related(marketEconomy, "social-ownership", ["market-ownership-boundary"]),
     ],
   },
-  ...[
-    ["english-agrarian-market-dependence", "england-brenner-class-thesis"],
-    ["gold-coast-cocoa-expansion", "ghana-cocoa-smallholder-expansion"],
-    ["china-dual-track-market-reforms", "china-dual-track-coordination"],
-  ].flatMap(([caseId, statementId]) =>
-    [capitalism, marketEconomy].map((concept) => ({
-      documentType: "relationships" as const,
-      subject: { kind: "case" as const, id: caseId ?? "" },
-      relationships: [
-        {
-          id: `${caseId}-${concept.id === "capitalism" ? "contests-capitalism" : "applies-market-economy"}`,
-          predicate:
-            concept.id === "capitalism"
-              ? ("contested-in-case" as const)
-              : ("applies-to-case" as const),
-          subject: { kind: "case" as const, id: caseId ?? "" },
-          object: concept,
-          status: "qualified" as const,
-          statementIds: [statementId ?? ""],
-        },
-      ],
-    })),
-  ),
   ...capitalismMarketCitations.map(
     ([statementId, sourceId, locator, role], index) => ({
       documentType: "relationships" as const,

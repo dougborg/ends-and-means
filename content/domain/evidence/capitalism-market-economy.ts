@@ -106,8 +106,8 @@ export const capitalismMarketEvidenceDocuments = [
     2015,
     "University of Chicago Press",
     "edition",
-    "https://press.uchicago.edu/ucp/books/book/chicago/C/bo18523749.html",
-    { isbn13: "9780226168142" },
+    "https://academic.oup.com/chicago-scholarship-online/book/17328",
+    { doi: "10.7208/chicago/9780226168142.001.0001", isbn13: "9780226168142" },
   ),
   ...source(
     "smith-wealth-nations-cannan",
@@ -190,7 +190,7 @@ export const capitalismMarketEvidenceDocuments = [
     "Cambridge University Press",
     "edition",
     "https://www.cambridge.org/core/books/growing-out-of-the-plan/4500F9826731A4765F9B6C2EFCE7AD53",
-    { isbn13: "9780521574624" },
+    { isbn13: "9780521470551" },
   ),
 
   {
@@ -200,7 +200,7 @@ export const capitalismMarketEvidenceDocuments = [
       kind: "concept",
       label: "Capitalism",
       description:
-        "A contested concept for economic orders in which private claims over productive assets, firms, employment, markets, finance, and investment operate in historically variable combinations.",
+        "A contested concept for economic orders in which property, firms, employment, markets, and finance operate in historically variable combinations.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not use the term as a synonym for markets, commerce, private possessions, freedom, one policy program, or a timeless property of a country.",
@@ -552,9 +552,9 @@ export const capitalismMarketEvidenceDocuments = [
     entity: {
       id: "english-agrarian-market-dependence",
       kind: "case",
-      label: "Agrarian market dependence in England, c. 1450–1750",
+      label: "Agrarian change in England, c. 1450–1750",
       description:
-        "A contested case about agrarian class relations, leasing, labor, and market dependence before industrialization.",
+        "A bounded case for comparing Brenner’s agrarian-class explanation with the historical dispute it prompted.",
       locationIds: ["agrarian-england"],
       startDate: {
         year: 1450,
@@ -569,7 +569,7 @@ export const capitalismMarketEvidenceDocuments = [
       scope:
         "Agrarian England from approximately 1450 to 1750; not Britain’s whole economy, a single-origin account, or a universal transition sequence.",
       selectionRationale:
-        "The dispute tests whether markets and private property alone explain capitalism or whether changing class and tenancy relations matter.",
+        "The case preserves a prominent explanation of agrarian development together with disagreement about that explanation.",
       conditionStatementIds: [
         "capitalism-market-boundary",
         "england-case-period-boundary",
@@ -583,9 +583,9 @@ export const capitalismMarketEvidenceDocuments = [
     entity: {
       id: "english-agrarian-transformation-1450-1750",
       kind: "case-episode",
-      label: "English agrarian transformation, c. 1450–1750",
+      label: "English agrarian change, c. 1450–1750",
       description:
-        "The bounded period in which rival explanations trace changes in agrarian property, tenancy, labor, and markets.",
+        "An analytically bounded period for Brenner’s account of English agrarian development.",
       caseId: "english-agrarian-market-dependence",
       locationIds: ["agrarian-england"],
       startDate: {
@@ -602,7 +602,7 @@ export const capitalismMarketEvidenceDocuments = [
         "Agrarian institutions in England, with regional and chronological variation retained.",
       conditionStatementIds: ["england-case-period-boundary"],
       formalRuleStatementIds: [],
-      ruleInUseStatementIds: ["england-brenner-class-thesis"],
+      ruleInUseStatementIds: [],
       interactionStatementIds: [],
       outcomeStatementIds: [],
       ...reviewed,
@@ -615,7 +615,7 @@ export const capitalismMarketEvidenceDocuments = [
       kind: "case",
       label: "Gold Coast cocoa expansion, c. 1890–1936",
       description:
-        "A bounded case of African smallholder commodity production within colonial rule and global markets.",
+        "A bounded case from Austin’s study of African producer-led cocoa expansion and resource reallocation.",
       locationIds: ["colonial-gold-coast-cocoa-region"],
       startDate: {
         year: 1890,
@@ -630,7 +630,7 @@ export const capitalismMarketEvidenceDocuments = [
       scope:
         "Cocoa-growing regions of Asante and the Gold Coast from about 1890 to 1936; not all households, crops, or colonial Africa.",
       selectionRationale:
-        "The case separates commodity and market expansion from plantation ownership and uniform wage labor.",
+        "The case records Austin’s finding that expansion reallocated resources from other market activities.",
       conditionStatementIds: ["ghana-case-period-boundary"],
       episodeIds: ["gold-coast-cocoa-takeoff-1890-1936"],
       ...reviewed,
@@ -643,7 +643,7 @@ export const capitalismMarketEvidenceDocuments = [
       kind: "case-episode",
       label: "Gold Coast cocoa take-off, c. 1890–1936",
       description:
-        "African producer-led adoption and expansion of cocoa for export under colonial rule.",
+        "The producer-led cocoa expansion dated approximately 1890–1936 by Austin.",
       caseId: "gold-coast-cocoa-expansion",
       locationIds: ["colonial-gold-coast-cocoa-region"],
       startDate: {
@@ -660,8 +660,11 @@ export const capitalismMarketEvidenceDocuments = [
         "The supply-side transformation studied by Austin, not a complete welfare or political history.",
       conditionStatementIds: ["ghana-case-period-boundary"],
       formalRuleStatementIds: [],
-      ruleInUseStatementIds: ["ghana-cocoa-smallholder-expansion"],
-      interactionStatementIds: ["ghana-cocoa-resource-reallocation"],
+      ruleInUseStatementIds: [],
+      interactionStatementIds: [
+        "ghana-cocoa-smallholder-expansion",
+        "ghana-cocoa-resource-reallocation",
+      ],
       outcomeStatementIds: ["ghana-cocoa-classification-limit"],
       ...reviewed,
     },
@@ -671,16 +674,16 @@ export const capitalismMarketEvidenceDocuments = [
     entity: {
       id: "china-dual-track-market-reforms",
       kind: "case",
-      label: "China’s dual-track market reforms, 1978–1993",
+      label: "China’s economic reforms, 1978–1993",
       description:
-        "A bounded case of market expansion alongside planning, state organizations, and mixed ownership claims.",
+        "A bounded case of greater enterprise autonomy, continued planning, and non-state-sector growth.",
       locationIds: ["reform-era-china"],
       startDate: { year: 1978, certainty: "exact" },
       endDate: { year: 1993, certainty: "exact" },
       scope:
         "Economic reforms in the People’s Republic of China from 1978 through 1993; not a classification of China before or after those dates.",
       selectionRationale:
-        "The case tests whether marketization, privatization, and capitalism can be treated as interchangeable transitions.",
+        "The case records institutional changes that Naughton describes as growing out of the plan rather than ending it at once.",
       conditionStatementIds: ["china-case-period-boundary"],
       episodeIds: ["china-plan-market-coexistence-1978-1993"],
       ...reviewed,
@@ -691,9 +694,9 @@ export const capitalismMarketEvidenceDocuments = [
     entity: {
       id: "china-plan-market-coexistence-1978-1993",
       kind: "case-episode",
-      label: "Plan–market coexistence, 1978–1993",
+      label: "Enterprise reform and non-state growth, 1978–1993",
       description:
-        "Incremental reform through enterprise autonomy, dual-track allocation, and non-state entry.",
+        "A period of enterprise reform, continued planning, and non-state market entry.",
       caseId: "china-dual-track-market-reforms",
       locationIds: ["reform-era-china"],
       startDate: { year: 1978, certainty: "exact" },
@@ -701,9 +704,9 @@ export const capitalismMarketEvidenceDocuments = [
       scope:
         "The reform sequence analyzed by Naughton, ending before later ownership and corporate reforms.",
       conditionStatementIds: ["china-case-period-boundary"],
-      formalRuleStatementIds: ["china-dual-track-coordination"],
-      ruleInUseStatementIds: ["china-marketization-classification-limit"],
-      interactionStatementIds: ["china-tve-ownership-boundary"],
+      formalRuleStatementIds: [],
+      ruleInUseStatementIds: [],
+      interactionStatementIds: [],
       outcomeStatementIds: ["china-nonstate-sector-growth"],
       ...reviewed,
     },

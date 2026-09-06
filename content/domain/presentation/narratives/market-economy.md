@@ -13,14 +13,14 @@ The label does not by itself mean capitalism or laissez-faire.
 Markets require legal rules protecting property and enforcing contracts.
 Hohfeld distinguishes several legal positions rather than one indivisible form of ownership.
 Firms participate in markets but often coordinate work internally through managerial authority.
-Adam Smith connected exchange to specialization, yet even his account makes the extent of the market a condition that varies rather than a complete description of an economy.
+For Adam Smith, specialization cannot outrun the available field of exchange.
 
 ## how-markets-differ-from-capitalism
 
 Markets predate modern capitalism and can coexist with ownership forms other than private ownership.
 Hodgson’s definition of capitalism adds widespread employment and developed financial institutions.
 Paid day labor also appeared before modern capitalism.
-The two concepts overlap, but treating them as synonyms hides differences in ownership, authority, and investment.
+The two concepts overlap, but treating them as synonyms hides differences in ownership and authority.
 
 ## what-do-bounded-cases-show
 
@@ -37,5 +37,5 @@ Regulation does not by itself make an economy non-market.
 
 ## how-to-compare-market-economies
 
-Begin with the actual markets involved and identify their rules and participants.
-Then examine ownership, employment authority, firm coordination, finance, planning, and non-market allocation separately.
+Begin with the actual exchange institutions and their legal rules.
+Then examine ownership, employment authority, and coordination inside firms separately.
