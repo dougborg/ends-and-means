@@ -399,6 +399,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "bonjol-inheritance-effective-control",
+    obligationType: "counterevidence",
+    target: "concept:matriliny#what-can-bonjol-show",
+    status: "open",
+  },
+  {
     id: "capitalism-business-firm-relation",
     obligationType: "research-gap",
     target: "concept:capitalism#which-institutions-work-together",
@@ -560,6 +566,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "koto-tinggi-community-voices",
+    obligationType: "research-gap",
+    target: "concept:matriliny#what-can-koto-tinggi-show",
+    status: "open",
+  },
+  {
     id: "liberalism-gender-contract-boundary",
     obligationType: "counterargument",
     target: "concept:liberalism#exclusions",
@@ -575,6 +587,24 @@ const expectedOpenResearchObligations = [
     id: "liberalism-imperial-domination",
     obligationType: "counterargument",
     target: "concept:liberalism#exclusions",
+    status: "open",
+  },
+  {
+    id: "minangkabau-migration-class-generation",
+    obligationType: "research-gap",
+    target: "concept:matriliny",
+    status: "open",
+  },
+  {
+    id: "minangkabau-religious-authority",
+    obligationType: "research-gap",
+    target: "concept:matriliny",
+    status: "open",
+  },
+  {
+    id: "minangkabau-state-administration-effects",
+    obligationType: "counterfactual",
+    target: "concept:matriliny",
     status: "open",
   },
   {

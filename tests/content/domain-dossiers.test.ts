@@ -161,6 +161,7 @@ const expectedMissingConceptDossiers = [
   "legal-order",
   "market-coordination",
   "market-socialism",
+  "matriarchy",
   "mixed-economy",
   "private-property",
   "social-class",
@@ -185,8 +186,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 17,
-      total: 35,
+      covered: 18,
+      total: 37,
       missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(
