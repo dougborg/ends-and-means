@@ -6,6 +6,10 @@ The machine-checkable inventory is
 [`provenance/inventory.json`](../provenance/inventory.json), and
 `pnpm audit:provenance` checks it during `pnpm verify`.
 The snapshot was reviewed on 2026-09-06.
+Each tracked file inherits the material, kind, and distribution classification
+of exactly one normalized directory prefix, or uses one exact root-file record.
+The audit rejects missing, overlapping, traversal-shaped, and root-versus-prefix
+classifications rather than choosing an implicit winner.
 
 ## Findings
 
@@ -34,7 +38,8 @@ the applicable terms of its source inputs and any included third-party code.
 The production dependencies are Astro and micromark, both declaring MIT terms;
 the rest of the direct dependency inventory is development-only.
 The lockfile controls the full transitive dependency graph.
-The committed exact-lockfile inventory records all 525 package/version keys,
+The committed exact-lockfile inventory records all 525 package/version keys in
+the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
 declared licenses for 386 packages installed on the audit platform.
 The other 139 entries are platform-specific optional packages not installed on
@@ -42,7 +47,12 @@ that platform; their exact registry/terms locators are recorded and their
 license metadata is explicitly unresolved rather than guessed.
 `pnpm inventory:dependencies` deterministically regenerates this evidence from
 the lockfile and installed package manifests, while `pnpm audit:provenance`
-fails on any lock/inventory drift.
+fails on lock/inventory drift, locator mutation, or a license/source value that
+differs from an installed manifest.
+Each resolved record also carries a deterministic digest of its observed
+identity, license, source, and status so accidental metadata mutation fails.
+The registry locators identify unavailable cross-platform packages but do not
+substitute for their unobserved manifest metadata, which remains unresolved.
 Before a release artifact is redistributed, resolve and review the entries for
 the target platform and preserve every required license or notice text.
 
@@ -86,7 +96,7 @@ outputs, and archive material into one default.
 ## Existing third-party obligations and evidence
 
 Direct package declarations are recorded individually in the main inventory;
-every transitive and optional lockfile package/version is recorded in
+every package/version in the lockfile `packages` table is recorded in
 `provenance/pnpm-lock-packages.json`.
 The relevant standard terms and upstream evidence are:
 

@@ -18,8 +18,8 @@ asset/provenance inventory, then runs linting, static analysis, dependency
 audit, type checks, coverage, the `pnpm build` script, content-integrity audit,
 rendered-route tests, and browser review.
 The provenance gate classifies every tracked path, reconciles every direct and
-optional manifest dependency plus every exact package/version key in
-`pnpm-lock.yaml`, rejects unregistered governed asset types and stale asset
+optional manifest dependency plus every exact package/version key in the
+`pnpm-lock.yaml` packages table, rejects unregistered governed asset types and stale asset
 class states, and prevents unresolved third-party material from being marked
 for site distribution.
 See [the licensing audit](licensing-audit.md) for the inventory boundary and
