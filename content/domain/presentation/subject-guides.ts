@@ -179,12 +179,18 @@ export const subjectGuideDocuments = [
             { kind: "concept", id: "economic-democracy" },
             { kind: "concept", id: "market-socialism" },
             { kind: "concept", id: "social-democracy" },
+            { kind: "concept", id: "economic-planning" },
+            { kind: "concept", id: "market-coordination" },
+            { kind: "concept", id: "social-class" },
           ],
           relationshipIds: [
             "socialism-related-to-social-ownership",
             "socialism-related-to-economic-democracy",
             "socialism-related-to-market-socialism",
             "socialism-related-to-social-democracy",
+            "socialism-related-to-economic-planning",
+            "socialism-related-to-market-coordination",
+            "socialism-related-to-social-class",
           ],
         },
         {
@@ -192,6 +198,10 @@ export const subjectGuideDocuments = [
           role: "bounded-practice",
           heading: "What can one Swedish experiment show?",
           narrativeRefs: [
+            {
+              dossierId: "socialism-dossier",
+              sectionId: "what-can-the-swedish-funds-show",
+            },
             { dossierId: "swedish-wage-earner-funds-case-dossier" },
           ],
           entityRefs: [
@@ -219,9 +229,17 @@ export const subjectGuideDocuments = [
             { kind: "concept", id: "economic-democracy" },
             { kind: "concept", id: "social-democracy" },
             { kind: "concept", id: "market-socialism" },
+            { kind: "concept", id: "economic-planning" },
+            { kind: "concept", id: "market-coordination" },
+            { kind: "concept", id: "social-class" },
             { kind: "approach", id: "swedish-wage-earner-fund-program" },
           ],
-          relationshipIds: ["socialism-related-to-communism"],
+          relationshipIds: [
+            "socialism-related-to-communism",
+            "socialism-related-to-economic-planning",
+            "socialism-related-to-market-coordination",
+            "socialism-related-to-social-class",
+          ],
         },
         {
           id: "open-questions",
@@ -291,8 +309,16 @@ export const subjectGuideDocuments = [
               sectionId: "did-communists-agree-on-the-path-or-destination",
             },
           ],
-          entityRefs: [{ kind: "concept", id: "social-ownership" }],
-          relationshipIds: ["communism-related-to-social-ownership"],
+          entityRefs: [
+            { kind: "concept", id: "social-ownership" },
+            { kind: "concept", id: "social-class" },
+            { kind: "concept", id: "statelessness" },
+          ],
+          relationshipIds: [
+            "communism-related-to-social-ownership",
+            "communism-related-to-social-class",
+            "communism-related-to-statelessness",
+          ],
         },
         {
           id: "variants-disputes-and-limits",
@@ -316,8 +342,14 @@ export const subjectGuideDocuments = [
           entityRefs: [
             { kind: "concept", id: "socialism" },
             { kind: "concept", id: "social-ownership" },
+            { kind: "concept", id: "social-class" },
+            { kind: "concept", id: "statelessness" },
           ],
-          relationshipIds: ["communism-related-to-socialism"],
+          relationshipIds: [
+            "communism-related-to-socialism",
+            "communism-related-to-social-class",
+            "communism-related-to-statelessness",
+          ],
         },
         {
           id: "open-questions",

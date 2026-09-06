@@ -303,6 +303,19 @@ export const socialismCommunismEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
+      id: "socialism-planning-designs",
+      kind: "statement",
+      label: "Socialist planning includes central and participatory designs",
+      description:
+        "An attributed classification of two distinct planning proposals within socialist institutional debate.",
+      statementKind: "classification",
+      text: "Gilabert and O'Neill present central planning and participatory planning as distinct proposed socialist institutional designs.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
       id: "socialism-three-distinct-questions",
       kind: "statement",
       label: "Socialist values, institutions, and transitions are distinct",

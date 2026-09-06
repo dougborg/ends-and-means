@@ -40,6 +40,13 @@ const citations = [
     "socialism-markets",
   ],
   [
+    "socialism-planning-designs",
+    "gilabert-oneill-socialism-source",
+    "section 4.1, paragraphs 1–2 and 9–12",
+    "supports",
+    "socialism-planning-designs-sep",
+  ],
+  [
     "socialism-three-distinct-questions",
     "gilabert-oneill-socialism-source",
     "section 2, paragraphs 1–5",
@@ -270,6 +277,33 @@ export const socialismCommunismRelationshipDocuments = [
         status: "qualified",
         statementIds: ["socialism-market-boundary"],
       },
+      {
+        id: "socialism-related-to-economic-planning",
+        predicate: "related-to",
+        subject: socialism,
+        object: { kind: "concept", id: "economic-planning" },
+        status: "qualified",
+        statementIds: ["socialism-planning-designs"],
+      },
+      {
+        id: "socialism-related-to-market-coordination",
+        predicate: "related-to",
+        subject: socialism,
+        object: { kind: "concept", id: "market-coordination" },
+        status: "qualified",
+        statementIds: ["socialism-market-boundary"],
+      },
+      {
+        id: "socialism-related-to-social-class",
+        predicate: "related-to",
+        subject: socialism,
+        object: { kind: "concept", id: "social-class" },
+        status: "qualified",
+        statementIds: [
+          "socialism-democratic-control-minimum",
+          "modern-communist-traditions-within-socialist-debates",
+        ],
+      },
     ],
   },
   {
@@ -296,6 +330,29 @@ export const socialismCommunismRelationshipDocuments = [
         statementIds: [
           "manifesto-bourgeois-property-boundary",
           "manifesto-common-property-class-character",
+        ],
+      },
+      {
+        id: "communism-related-to-social-class",
+        predicate: "related-to",
+        subject: communism,
+        object: { kind: "concept", id: "social-class" },
+        status: "qualified",
+        statementIds: [
+          "manifesto-communist-immediate-aim",
+          "manifesto-common-property-class-character",
+        ],
+      },
+      {
+        id: "communism-related-to-statelessness",
+        predicate: "related-to",
+        subject: communism,
+        object: { kind: "concept", id: "statelessness" },
+        status: "contested",
+        statementIds: [
+          "communist-organizational-rivalry",
+          "lenin-state-withering-claim",
+          "kropotkin-anarchist-communist-route",
         ],
       },
     ],
