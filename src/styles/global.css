@@ -171,6 +171,16 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .research-notes > section + section { margin-top: 1.25rem; }
 .research-notes h3 { font-size: 1rem; }
 .research-notes section p { max-width: 68ch; font-family: var(--reading); line-height: 1.65; }
+.method-records { border-top: 4px solid var(--night); }
+.method-records > header { display: grid; grid-template-columns: minmax(12rem, .35fr) minmax(0, 1fr); gap: .4rem 2rem; align-items: start; padding: 1.5rem 0; }
+.method-records > header .coordinate { grid-column: 1 / -1; }
+.method-records > header h2 { margin: 0; }
+.method-records > header p:last-child { max-width: 68ch; margin: 0; font-family: var(--reading); line-height: 1.65; }
+.method-records > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--rule); }
+.method-records > div > section { padding: clamp(1.1rem, 2vw, 1.5rem); border-bottom: 1px solid var(--rule); }
+.method-records > div > section:nth-child(even) { border-left: 1px solid var(--rule); }
+.method-records h3 { margin: 0 0 .65rem; font-size: 1rem; }
+.method-records section p { max-width: 68ch; margin: 0; font-family: var(--reading); line-height: 1.65; }
 .method-sequence { padding: clamp(1.5rem, 4vw, 3rem); border-top: 4px solid var(--night); background: var(--sheet); }
 .method-sequence ol { display: grid; grid-template-columns: repeat(6, 1fr); margin: 2rem 0 0; padding: 0; list-style: none; }
 .method-sequence li { position: relative; padding: 2.8rem .8rem 0 0; border-top: 1px solid var(--cobalt); }
@@ -188,6 +198,10 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .criteria-section dd { margin-top: .35rem; font-family: var(--reading); font-size: .8rem; line-height: 1.55; }
 .model-boundary { max-width: var(--measure-apparatus); padding-top: 1.5rem; border-top: 4px solid var(--cobalt); }
 .model-boundary p:not(.coordinate) { max-width: 68ch; font-family: var(--reading); line-height: 1.7; }
+.method-page .model-boundary { display: grid; grid-template-columns: minmax(12rem, .35fr) minmax(0, 1fr); gap: .45rem 2rem; max-width: none; }
+.method-page .model-boundary .coordinate { grid-column: 1 / -1; }
+.method-page .model-boundary h2 { grid-column: 1; grid-row: 2 / span 8; }
+.method-page .model-boundary p:not(.coordinate) { grid-column: 2; margin-bottom: .65rem; }
 .source-page { display: grid; gap: var(--space-section); }
 .source-page > header { max-width: min(100%, var(--measure-header)); }
 .section-jump { padding: 1.25rem; border-top: 3px solid var(--night); background: var(--sheet); }
@@ -498,6 +512,11 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .review-flag { grid-column: 2; width: fit-content; }
   .response-columns > section + section { border-top: 1px solid var(--rule); border-left: 0; }
   .research-notes > section { grid-template-columns: 1fr; gap: .5rem; }
+  .method-records > header, .method-records > div { grid-template-columns: 1fr; }
+  .method-records > header .coordinate { grid-column: auto; }
+  .method-records > div > section:nth-child(even) { border-left: 0; }
+  .method-page .model-boundary { grid-template-columns: 1fr; }
+  .method-page .model-boundary .coordinate, .method-page .model-boundary h2, .method-page .model-boundary p:not(.coordinate) { grid-column: 1; grid-row: auto; }
   .method-sequence ol { grid-template-columns: 1fr; }
   .method-sequence li { padding: .5rem 0 1.4rem 2rem; border-top: 0; border-left: 1px solid var(--cobalt); }
   .method-sequence li::before { top: .35rem; left: -.38rem; }
