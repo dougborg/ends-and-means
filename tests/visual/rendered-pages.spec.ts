@@ -414,8 +414,17 @@ for (const route of ["/guides/ruwalla-borderland-organization/", "/guides/jinst-
     });
     await expect(details).toContainText(/supports|context/i);
 
+    await page.emulateMedia({ forcedColors: "active" });
+    await expect(summary).toBeVisible();
+    await expect(details).toContainText(/supports|context/i);
+
+    await page.emulateMedia({ media: "screen", forcedColors: "none" });
+    await page.reload();
+    const initiallyClosedDetails = page.locator("main details").first();
+    await expect(initiallyClosedDetails).not.toHaveAttribute("open", "");
+    await expect(initiallyClosedDetails.locator(".canonical-claim").first()).toBeHidden();
     await page.emulateMedia({ media: "print" });
-    await expect(details.locator(".canonical-claim").first()).toBeVisible();
+    await expect(initiallyClosedDetails.locator(".canonical-claim").first()).toBeVisible();
   });
 }
 

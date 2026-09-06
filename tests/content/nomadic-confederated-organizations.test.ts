@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { nomadicConfederatedOrganizationEvidenceDocuments } from "../../content/domain/evidence/nomadic-confederated-organizations";
+import { nomadicConfederatedOrganizationDossierDocuments } from "../../content/domain/presentation/nomadic-confederated-organizations-dossiers";
+import { nomadicConfederatedOrganizationGuideDocuments } from "../../content/domain/presentation/nomadic-confederated-organizations-guides";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "../../content/domain/relationships/nomadic-confederated-organizations";
-import { citationsFor, dossierForSubject, entitiesOfKind, entityById, researchObligationsForTarget, subjectGuideById } from "../../src/lib/domain/canonical";
+import { nomadicConfederatedOrganizationResearchDocuments } from "../../content/domain/research/nomadic-confederated-organizations";
+import { dossierForSubject, entitiesOfKind, entityById, researchObligationsForTarget, subjectGuideById } from "../../src/lib/domain/canonical";
 
 const evidenceTuples = [
   ["ruwalla-scholarly-classification", "stocker-borders-in-motion-source", "supports", "repository abstract, paragraphs 3–4"],
@@ -55,30 +59,24 @@ describe("bounded Ruwalla and Jinst cases", () => {
       endDate: { year: 1999 },
       episodeIds: ["jinst-transition-1990-1999"],
     });
-    const canonicalSlice = JSON.stringify([entityById("jinst-postcollective-pastoral-governance"), entityById("jinst-transition-1990-1999")])
+    const permittedQuestion = "Which Jinst pasture practices persisted, changed, or ended after the 1999 resurvey as pasture-user groups, markets, and climate pressures developed?";
+    const publicProjection = JSON.stringify([...nomadicConfederatedOrganizationEvidenceDocuments, ...nomadicConfederatedOrganizationDossierDocuments, ...nomadicConfederatedOrganizationGuideDocuments, ...nomadicConfederatedOrganizationRelationshipDocuments, ...nomadicConfederatedOrganizationResearchDocuments])
+      .replace(permittedQuestion, "[permitted post-1999 research question]")
       .toLowerCase()
       .replace(/[-_]+/g, " ");
-    expect(canonicalSlice).not.toMatch(/pasture\s+user\s+group|\bpug\b|\bapug\b/);
-    const relationshipIdentity = JSON.stringify(
-      nomadicConfederatedOrganizationRelationshipDocuments.map((document) =>
-        document.documentType === "relationships"
-          ? document.relationships.map(({ id, predicate, subject, object }) => ({
-              id,
-              predicate,
-              subject,
-              object,
-            }))
-          : [],
-      ),
-    )
-      .toLowerCase()
-      .replace(/[-_]+/g, " ");
-    expect(relationshipIdentity).not.toMatch(/pasture\s+user\s+group|\bpug\b|\bapug\b/);
+    expect(publicProjection).not.toMatch(/pasture\s+user\s+group|\bpug\b|\bapug\b/);
+    expect(entityById("jinst-post-1999-continuity")).toMatchObject({ question: permittedQuestion });
   });
 
   it("preserves every complete evidence tuple exactly", () => {
-    const actual = [...new Set(evidenceTuples.map(([statementId]) => statementId))].flatMap((statementId) => citationsFor(statementId).map(({ object, role, locator }) => [statementId, object.id, role, locator]));
-    expect(actual).toEqual(evidenceTuples);
+    const trancheStatementIds = nomadicConfederatedOrganizationEvidenceDocuments.flatMap((document) => (document.documentType === "entity" && document.entity.kind === "statement" ? [document.entity.id] : []));
+    const actual = nomadicConfederatedOrganizationRelationshipDocuments.flatMap((document) =>
+      document.documentType === "relationships" ? document.relationships.flatMap((relationship) => (relationship.predicate === "cites" ? [[relationship.subject.id, relationship.object.id, relationship.role, relationship.locator] as const] : [])) : [],
+    );
+    const sortTuple = (tuple: readonly string[]) => JSON.stringify(tuple);
+    expect(actual).toHaveLength(evidenceTuples.length);
+    expect([...new Set(actual.map(([statementId]) => statementId))].sort()).toEqual(trancheStatementIds.sort());
+    expect(actual.toSorted((left, right) => sortTuple(left).localeCompare(sortTuple(right)))).toEqual([...evidenceTuples].sort((left, right) => sortTuple(left).localeCompare(sortTuple(right))));
   });
 });
 
