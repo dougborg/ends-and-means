@@ -1,7 +1,4 @@
-import type {
-  AuthoringDocument,
-  DomainEntity,
-} from "../../../src/lib/domain";
+import type { AuthoringDocument, DomainEntity } from "../../../src/lib/domain";
 
 const reviewed = { publicationStatus: "reviewed" as const };
 
@@ -126,8 +123,8 @@ const entities = [
       },
       {
         purpose: "authorized-reading",
-        url: "https://api.pageplace.de/preview/DT0400.9798216248378_A63333872/preview-9798216248378_A63333872.pdf",
-        label: "Read the authorized preview",
+        url: "https://books.google.com/books?id=Bs1t0QUOeKsC",
+        label: "Inspect the 2000 edition preview",
       },
     ],
   },
@@ -253,7 +250,7 @@ const entities = [
     resourceLinks: [
       {
         purpose: "publisher",
-        url: "https://peraturan.bpk.go.id/Details/99639/perda-prov-sumatera-barat-no-7-",
+        url: "https://peraturan.bpk.go.id/Details/99639/perda-",
         label: "Read the official legal record",
       },
     ],
@@ -274,7 +271,7 @@ const entities = [
     kind: "source",
     label: "Minangkabau urban landownership study (1992)",
     description:
-      "The Bijdragen tot de Taal-, Land- en Volkenkunde article on property categories and changing landownership in Padang.",
+      "The Bijdragen tot de Taal-, Land- en Volkenkunde article, checked against an author-uploaded full-text copy, on property categories and changing landownership in Padang.",
     title:
       "Dynamics and Dynamite: Minangkabau Urban Landownership in the 1990s",
     sourceType: "article",
@@ -286,8 +283,13 @@ const entities = [
     resourceLinks: [
       {
         purpose: "publisher",
-        url: "https://brill.com/view/journals/bki/148/3/article-p428_4.xml",
+        url: "https://doi.org/10.1163/22134379-90003145",
         label: "View the journal article",
+      },
+      {
+        purpose: "authorized-reading",
+        url: "https://www.researchgate.net/publication/41017572_Dynamics_and_dynamite_Minangkabau_urban_landownership_in_the_1990s",
+        label: "Read the author-uploaded article",
       },
     ],
   },
@@ -409,7 +411,15 @@ const entities = [
     label: "Formal planning rules included women’s-group delegates",
     description: "The stated participation and decision rules.",
     statementKind: "observation",
-    text: "The rules described by Nurdin assigned the Nagari Council to convene development meetings with invited delegates including women’s groups, required a two-thirds quorum, preferred consensus after participants could speak, and permitted majority voting.",
+    text: "Nurdin reports that the Nagari Council convened development meetings whose invited delegates included representatives of women’s groups.",
+  },
+  {
+    id: "koto-tinggi-formal-decision-rule",
+    kind: "statement",
+    label: "Formal meetings required quorum and preferred consensus",
+    description: "The stated quorum and decision rule.",
+    statementKind: "observation",
+    text: "The formal meeting procedure required a two-thirds quorum and preferred consensus after participants could speak, with majority voting available if consensus failed.",
   },
   {
     id: "koto-tinggi-customary-council-contestation",
@@ -425,7 +435,15 @@ const entities = [
     label: "The 2016 budget meeting exposed rules-in-use",
     description: "An observed interaction among executive and council actors.",
     statementKind: "observation",
-    text: "In 2016 the wali nagari delivered a draft budget too late for review, council members secured a one-week postponement, and the reconvened meeting reached consensus on infrastructure, housing repairs, and scholarships.",
+    text: "In 2016 the wali nagari delivered a draft budget too late for review, and council members secured a one-week postponement.",
+  },
+  {
+    id: "koto-tinggi-budget-consensus",
+    kind: "statement",
+    label: "The reconvened budget meeting reached consensus",
+    description: "The reported decision after the postponement.",
+    statementKind: "observation",
+    text: "The reconvened 2016 meeting reached consensus on allocations for infrastructure, housing repairs, and scholarships.",
   },
   {
     id: "koto-tinggi-administrative-capacity-limit",
@@ -433,7 +451,15 @@ const entities = [
     label: "Administrative capacity constrained implementation",
     description: "The study’s observed limit on local program management.",
     statementKind: "observation",
-    text: "Nurdin reports incomplete planning documents, unspent funds, and difficulty meeting accounting requirements, while council members described inadequate preparation for changing regulations.",
+    text: "Nurdin reports incomplete planning documents, unspent funds, and difficulty meeting accounting requirements in Koto Tinggi.",
+  },
+  {
+    id: "koto-tinggi-regulatory-preparation-limit",
+    kind: "statement",
+    label: "Council members reported inadequate regulatory preparation",
+    description: "Attributed testimony about administrative preparation.",
+    statementKind: "observation",
+    text: "Council members told Nurdin that nagari personnel had not been adequately prepared for changing regulations.",
   },
   {
     id: "bonjol-study-method-and-voice",
@@ -449,7 +475,15 @@ const entities = [
     label: "Administrative and forest transitions changed control",
     description: "The episode’s institutional starting conditions.",
     statementKind: "observation",
-    text: "After decentralization ended desa administration around 2000, Bonjol became a separate nagari; when a forest concession ended in 2002, Melayu-clan leaders and state and company actors negotiated new access to land claimed both as state forest and ulayat.",
+    text: "The Bonjol study reports that decentralization ended desa administration around 2000 and Bonjol became a separate nagari.",
+  },
+  {
+    id: "bonjol-concession-end-transition",
+    kind: "statement",
+    label: "A concession ending changed forest access",
+    description: "The reported 2002 forest transition.",
+    statementKind: "observation",
+    text: "When a forest concession ended in 2002, Melayu-clan leaders and state and company actors negotiated access to land claimed both as state forest and ulayat.",
   },
   {
     id: "bonjol-ulayat-formal-distinction",
@@ -458,7 +492,16 @@ const entities = [
     description:
       "A distinction among collective title, access, and management.",
     statementKind: "observation",
-    text: "The study describes Melayu-clan ulayat as collectively held land whose members could seek access, while a Datuak, or titled customary leader, and mamak kepala waris, maternal-kin property managers, managed it for the clan rather than owning it personally.",
+    text: "The study describes Melayu-clan ulayat as collectively held land to which clan members could seek access.",
+  },
+  {
+    id: "bonjol-ulayat-delegated-management",
+    kind: "statement",
+    label: "Named officeholders managed ulayat for the clan",
+    description:
+      "A distinction between delegated management and personal ownership.",
+    statementKind: "observation",
+    text: "A Datuak, or titled customary leader, and mamak kepala waris, maternal-kin property managers, managed the Melayu clan’s ulayat rather than owning it personally.",
   },
   {
     id: "bonjol-harta-pusaka-transition",
@@ -499,7 +542,15 @@ const entities = [
     label: "Observed plot distribution departed from the promise",
     description: "The reported distribution outcome.",
     statementKind: "observation",
-    text: "The study reports that male signatories controlled the recipient list, favored relatives and associates, and excluded many Melayu-clan members from the promised smallholdings.",
+    text: "The study reports that male signatories controlled the recipient list for the promised smallholdings.",
+  },
+  {
+    id: "bonjol-neshp-exclusion-outcome",
+    kind: "statement",
+    label: "The reported distribution favored associates and excluded members",
+    description: "The reported distributional result.",
+    statementKind: "observation",
+    text: "The authors report that the recipient list favored signatories’ relatives and associates and excluded many Melayu-clan members.",
   },
   {
     id: "bonjol-women-testimony-limit",
@@ -508,7 +559,16 @@ const entities = [
     description:
       "An observation about both testimony and the conditions of speaking.",
     statementKind: "observation",
-    text: "Researchers report that many women declined to discuss the contested land practices, while a group of five Melayu women described anger, lost income, and an inability to influence male kin who represented the clan publicly.",
+    text: "Researchers report that many women declined to discuss the contested land practices.",
+  },
+  {
+    id: "bonjol-five-women-testimony",
+    kind: "statement",
+    label: "Five women described losses and weak influence",
+    description:
+      "Attributed testimony from a small group, not a population estimate.",
+    statementKind: "observation",
+    text: "A group of five Melayu women described anger, lost income, and an inability to influence male kin who represented the clan publicly.",
   },
   {
     id: "bonjol-authors-causal-interpretation",
@@ -544,35 +604,35 @@ const cases = [
   {
     id: "koto-tinggi-post-decentralization-governance",
     kind: "case",
-    label: "Koto Tinggi nagari governance after decentralization",
+    label: "Koto Tinggi nagari governance observed in October 2016",
     description:
-      "A bounded study of formal institutions and development-planning practice in Koto Tinggi through October 2016.",
+      "A bounded October 2016 study of formal institutions and development-planning practice in Koto Tinggi.",
     locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
     startDate: {
-      year: 2001,
-      certainty: "approximate",
-      note: "The study identifies decentralization from 2001 as the reform context but observes the site only in October 2016.",
+      year: 2016,
+      month: 10,
+      certainty: "exact",
     },
     endDate: { year: 2016, month: 10, certainty: "exact" },
     scope:
-      "Nagari government, representative and customary councils, and development planning in Koto Tinggi after decentralization through the October 2016 field study.",
+      "Nagari government, representative and customary councils, and development planning observed in Koto Tinggi during October 2016; decentralization from 2001 is background, and the cited formal design dates to Agam Regulation 12 of 2007.",
     conditionStatementIds: ["koto-tinggi-fieldwork-scope"],
     selectionRationale:
       "Selected to separate maternal-line social organization from the public offices, representative bodies, customary council, and rules-in-use of one named nagari.",
-    episodeIds: ["koto-tinggi-governance-2001-2016"],
+    episodeIds: ["koto-tinggi-governance-october-2016"],
   },
   {
-    id: "koto-tinggi-governance-2001-2016",
+    id: "koto-tinggi-governance-october-2016",
     kind: "case-episode",
     caseId: "koto-tinggi-post-decentralization-governance",
-    label: "Koto Tinggi governance, 2001–2016",
+    label: "Koto Tinggi governance observed in October 2016",
     description:
       "The post-decentralization institutional arrangement observed in October 2016.",
     locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
     startDate: {
-      year: 2001,
-      certainty: "approximate",
-      note: "The study identifies decentralization from 2001 as the reform context but observes the site only in October 2016.",
+      year: 2016,
+      month: 10,
+      certainty: "exact",
     },
     endDate: { year: 2016, month: 10, certainty: "exact" },
     scope:
@@ -581,10 +641,17 @@ const cases = [
     formalRuleStatementIds: [
       "koto-tinggi-three-institutions",
       "koto-tinggi-formal-participation-rules",
+      "koto-tinggi-formal-decision-rule",
     ],
-    ruleInUseStatementIds: ["koto-tinggi-customary-council-contestation"],
-    interactionStatementIds: ["koto-tinggi-budget-rules-in-use"],
-    outcomeStatementIds: ["koto-tinggi-administrative-capacity-limit"],
+    ruleInUseStatementIds: [],
+    interactionStatementIds: [
+      "koto-tinggi-budget-rules-in-use",
+      "koto-tinggi-budget-consensus",
+    ],
+    outcomeStatementIds: [
+      "koto-tinggi-administrative-capacity-limit",
+      "koto-tinggi-regulatory-preparation-limit",
+    ],
   },
   {
     id: "bonjol-melayu-ulayat-governance",
@@ -629,19 +696,16 @@ const cases = [
     conditionStatementIds: [
       "bonjol-study-method-and-voice",
       "bonjol-new-nagari-forest-transition",
+      "bonjol-concession-end-transition",
+      "bonjol-ulayat-formal-distinction",
+      "bonjol-ulayat-delegated-management",
+      "bonjol-harta-pusaka-transition",
       "bonjol-no-minangkabau-generalization",
     ],
-    formalRuleStatementIds: [
-      "bonjol-ulayat-formal-distinction",
-      "bonjol-harta-pusaka-transition",
-      "bonjol-neshp-formal-promise",
-    ],
-    ruleInUseStatementIds: [
-      "bonjol-ulayat-sales-rules-in-use",
-      "bonjol-neshp-distribution-practice",
-    ],
-    interactionStatementIds: ["bonjol-women-testimony-limit"],
-    outcomeStatementIds: ["bonjol-authors-causal-interpretation"],
+    formalRuleStatementIds: ["bonjol-neshp-formal-promise"],
+    ruleInUseStatementIds: ["bonjol-ulayat-sales-rules-in-use"],
+    interactionStatementIds: ["bonjol-neshp-distribution-practice"],
+    outcomeStatementIds: ["bonjol-neshp-exclusion-outcome"],
   },
 ].map((entity) => ({
   documentType: "entity" as const,
