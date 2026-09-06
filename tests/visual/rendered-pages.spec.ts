@@ -34,6 +34,7 @@ const defaultRoutes = [
   "/guides/jinst-postcollective-pastoral-governance/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
+  "/governance/",
   "/reading/",
   "/research/",
   "/sources/erixon-rehn-meidner-model-source/",
@@ -587,6 +588,19 @@ test("criteria grid reflects its content count and stacks only on narrow screens
   }
 });
 
+test("governance policy exposes correction, reconsideration, and keyboard section navigation", async ({ page }) => {
+  await page.goto("/governance/");
+  const correction = page.getByRole("link", { name: "Send a correction" });
+  const reconsideration = page.getByRole("link", { name: "Request reconsideration" });
+  await expect(correction).toHaveAttribute("href", /title=Correction/);
+  await expect(reconsideration).toHaveAttribute("href", /title=Reconsideration/);
+  const sectionLink = page.getByRole("navigation", { name: "On this page" }).getByRole("link", { name: "AI-assisted work" });
+  await sectionLink.focus();
+  await expect(sectionLink).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#ai")).toBeVisible();
+});
+
 test("editorial shells share wide geometry while preserving semantic reading measures", async ({ page }) => {
   const headerUsesSemanticMeasure = async (selector: string) =>
     page.locator(selector).evaluate((header) => {
@@ -614,7 +628,7 @@ test("editorial shells share wide geometry while preserving semantic reading mea
     });
 
   await page.setViewportSize({ width: 1440, height: 1000 });
-  for (const route of ["/framework/", "/reading/"]) {
+  for (const route of ["/framework/", "/governance/", "/reading/"]) {
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("main")).toHaveClass(/site-main--wide/);
@@ -677,7 +691,7 @@ test("editorial shells share wide geometry while preserving semantic reading mea
 
 test("global navigation remains ordered, reachable, and legible across constraints", async ({ page }) => {
   const primaryLabels = ["Explore", "Cases", "Compare", "Questions"];
-  const siteMapLabels = ["Home", ...primaryLabels, "Sources", "Method"];
+  const siteMapLabels = ["Home", ...primaryLabels, "Sources", "Method", "Governance"];
 
   for (const route of ["/explore/", "/concepts/economic-democracy/", "/sources/erixon-rehn-meidner-model-source/"]) {
     await page.goto(route);

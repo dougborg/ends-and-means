@@ -8,6 +8,9 @@ work tracks, and delivery policy.
 The public [research and classification method](https://endsandmeans.info/framework/)
 explains what readers should expect from claims, cases, classifications,
 uncertainty, and judgment.
+The public [editorial governance policy](https://endsandmeans.info/governance/)
+explains accountability, corrections, reconsideration, conflicts, moderation,
+privacy, sensitive-subject safeguards, and AI-assisted work.
 
 ## Research and content changes
 

@@ -28,6 +28,7 @@ Sources and Method remain close at hand as a quieter trust layer.
 | [`docs/design-notes.md`](docs/design-notes.md) | Visual thesis, layout, typography, interaction, and accessibility direction. |
 | [`docs/subject-guide-experience.md`](docs/subject-guide-experience.md) | Learner-journey routes, evidence disclosure, omission, and responsive behavior. |
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Working principles for fairness, viewpoint, evidence, judgment, and correction. |
+| [`docs/editorial-governance.md`](docs/editorial-governance.md) | Implementation notes and reusable responsibility language for the public governance policy. |
 | [`docs/narrative-style.md`](docs/narrative-style.md) | Plain-spoken prose, attribution, source-similarity safeguards, and editorial review. |
 | [`docs/delivery-harness.md`](docs/delivery-harness.md) | Local/CI verification, Project-state diagnostics, stable checks, and review/integration gates. |
 | [`docs/content-integrity-harness.md`](docs/content-integrity-harness.md) | Deterministic publication checks, actionable research attention, and safe-publication boundaries. |

@@ -27,6 +27,12 @@ export const publicRoutes = [
     level: "trust",
   },
   { href: "/framework/", label: "Method", matchingPrefixes: ["/framework/"], level: "trust" },
+  {
+    href: "/governance/",
+    label: "Governance",
+    matchingPrefixes: ["/governance/"],
+    level: "trust",
+  },
 ] as const satisfies readonly PublicRoute[];
 
 export const primaryRoutes = publicRoutes.filter(({ level }) => level === "primary");

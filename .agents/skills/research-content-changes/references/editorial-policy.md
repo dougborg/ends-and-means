@@ -41,3 +41,14 @@ A pull request is the proposed concrete change, not published truth. Human
 review owns acceptance, IDs, reconciliation, relationship decisions, and
 publication. Keep claims and their supporting implementation together in the
 branch so reviewers evaluate what merging will actually publish.
+
+The public governance policy at `src/pages/governance/index.astro` governs
+corrections, reconsideration, conflicts and recusal, sensitive subjects,
+moderation, privacy, AI assistance, exceptions, and policy amendments. Read it
+before changing those commitments or content involving a living person,
+restricted community knowledge, contested identity, or harmful terminology.
+Do not send private submissions, restricted community knowledge, or unnecessary
+personal data to an external AI service. Treat automated structural and source-
+similarity output as an attention signal; a person remains accountable for
+source fitness, framing, interpretation, wording, fairness, consent, harm, and
+publication.

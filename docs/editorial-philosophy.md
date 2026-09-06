@@ -17,6 +17,10 @@ Its learner-first purpose and organizing principles are defined in the
 The public [research and classification method](https://endsandmeans.info/framework/)
 explains these commitments, evidence limits, and correction paths in ordinary
 language.
+The public [editorial governance policy](https://endsandmeans.info/governance/)
+names the accountable authority and defines corrections, reconsideration,
+conflicts, sensitive-subject safeguards, moderation, privacy, and AI-assisted
+work.
 
 Our analytical vocabulary separates **Ends** (values and promised outcomes),
 **Means** (formal institutions and rules-in-use), **Challenges** (recurring
@@ -86,6 +90,11 @@ never determine source selection or evaluation.
 
 We expect the work to change. A correction is evidence that the process can
 learn, not an embarrassment to hide.
+
+The project editor makes the final publication decision and remains responsible
+for framing, source fitness, interpretation, wording, fairness, and publication.
+Tools can assist discovery, synthesis, drafting, and checking, but their output
+is never evidence and their signals never replace human judgment.
 
 ## Continuous improvement
 
