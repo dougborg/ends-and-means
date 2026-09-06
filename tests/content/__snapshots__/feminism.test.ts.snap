@@ -474,7 +474,400 @@ exports[`feminism evidence ledgers > pins every Statement, kind, source, role, a
 ]
 `;
 
-exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > cases-and-episodes 1`] = `
+exports[`feminism evidence ledgers > pins the complete Work and Source manifestation metadata ledger 1`] = `
+[
+  {
+    "base": "sep-feminist-political-philosophy",
+    "source": {
+      "contributorDisplay": [
+        "Noëlle McAfee",
+        "Katie B. Howard",
+      ],
+      "identifiers": undefined,
+      "publicationYear": 2023,
+      "publisher": "Stanford Encyclopedia of Philosophy",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://plato.stanford.edu/entries/feminism-political/",
+        },
+      ],
+      "sourceType": "web-page",
+      "title": "Feminist Political Philosophy",
+      "workId": "sep-feminist-political-philosophy-work",
+    },
+    "work": {
+      "originalPublicationYear": 2009,
+      "title": "Feminist Political Philosophy",
+      "workType": "article",
+    },
+  },
+  {
+    "base": "combahee-statement",
+    "source": {
+      "contributorDisplay": [
+        "Combahee River Collective",
+      ],
+      "identifiers": undefined,
+      "publicationYear": undefined,
+      "publisher": "LGBTQ History Digital Collaboratory",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "archive",
+          "url": "https://www.lgbtqhistory.org/wp-content/uploads/2019/04/Combahee_River_Collective_Statement.pdf",
+        },
+      ],
+      "sourceType": "edition",
+      "title": "The Combahee River Collective Statement",
+      "workId": "combahee-statement-work",
+    },
+    "work": {
+      "originalPublicationYear": 1977,
+      "title": "The Combahee River Collective Statement",
+      "workType": "other",
+    },
+  },
+  {
+    "base": "taylor-combahee-reader",
+    "source": {
+      "contributorDisplay": [
+        "Keeanga-Yamahtta Taylor",
+        "Barbara Smith",
+        "Beverly Smith",
+        "Demita Frazier",
+      ],
+      "identifiers": {
+        "isbn13": "9781608468553",
+      },
+      "publicationYear": 2017,
+      "publisher": "Haymarket Books",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.haymarketbooks.org/books/1108-how-we-get-free",
+        },
+      ],
+      "sourceType": "edition",
+      "title": "How We Get Free: Black Feminism and the Combahee River Collective",
+      "workId": "taylor-combahee-reader-work",
+    },
+    "work": {
+      "originalPublicationYear": 2017,
+      "title": "How We Get Free: Black Feminism and the Combahee River Collective",
+      "workType": "book",
+    },
+  },
+  {
+    "base": "crenshaw-demarginalizing",
+    "source": {
+      "contributorDisplay": [
+        "Kimberlé W. Crenshaw",
+      ],
+      "identifiers": undefined,
+      "publicationYear": 1989,
+      "publisher": "University of Chicago Legal Forum",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "authorized-reading",
+          "url": "https://scholarship.law.columbia.edu/faculty_scholarship/3007/",
+        },
+      ],
+      "sourceType": "article",
+      "title": "Demarginalizing the Intersection of Race and Sex",
+      "workId": "crenshaw-demarginalizing-work",
+    },
+    "work": {
+      "originalPublicationYear": 1989,
+      "title": "Demarginalizing the Intersection of Race and Sex",
+      "workType": "article",
+    },
+  },
+  {
+    "base": "harris-kennedy-combahee",
+    "source": {
+      "contributorDisplay": [
+        "Duchess Harris",
+      ],
+      "identifiers": {
+        "doi": "10.18574/nyu/9780814790380.003.0019",
+      },
+      "publicationYear": 2001,
+      "publisher": "New York University Press",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.degruyterbrill.com/document/doi/10.18574/nyu/9780814790380.003.0019/html?lang=en",
+        },
+      ],
+      "sourceType": "article",
+      "title": "From the Kennedy Commission to the Combahee Collective: Black Feminist Organizing, 1960–80",
+      "workId": "harris-kennedy-combahee-work",
+    },
+    "work": {
+      "originalPublicationYear": 2001,
+      "title": "From the Kennedy Commission to the Combahee Collective: Black Feminist Organizing, 1960–80",
+      "workType": "article",
+    },
+  },
+  {
+    "base": "mohanty-western-eyes-revisited",
+    "source": {
+      "contributorDisplay": [
+        "Chandra Talpade Mohanty",
+      ],
+      "identifiers": {
+        "doi": "10.1086/342914",
+      },
+      "publicationYear": 2003,
+      "publisher": "Signs",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.jstor.org/stable/10.1086/342914",
+        },
+      ],
+      "sourceType": "article",
+      "title": "Under Western Eyes Revisited: Feminist Solidarity through Anticapitalist Struggles",
+      "workId": "mohanty-western-eyes-revisited-work",
+    },
+    "work": {
+      "originalPublicationYear": 2003,
+      "title": "Under Western Eyes Revisited: Feminist Solidarity through Anticapitalist Struggles",
+      "workType": "article",
+    },
+  },
+  {
+    "base": "moreton-robinson-talkin-up",
+    "source": {
+      "contributorDisplay": [
+        "Aileen Moreton-Robinson",
+      ],
+      "identifiers": {
+        "isbn13": "9781452966892",
+      },
+      "publicationYear": 2021,
+      "publisher": "University of Minnesota Press",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.upress.umn.edu/9781452966892/talkin-up-to-the-white-woman/",
+        },
+      ],
+      "sourceType": "edition",
+      "title": "Talkin’ Up to the White Woman: Indigenous Women and Feminism",
+      "workId": "moreton-robinson-talkin-up-work",
+    },
+    "work": {
+      "originalPublicationYear": 2000,
+      "title": "Talkin’ Up to the White Woman: Indigenous Women and Feminism",
+      "workType": "book",
+    },
+  },
+  {
+    "base": "koyama-transfeminist-manifesto",
+    "source": {
+      "contributorDisplay": [
+        "Emi Koyama",
+      ],
+      "identifiers": undefined,
+      "publicationYear": 2001,
+      "publisher": "eminism.org",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "authorized-reading",
+          "url": "https://eminism.org/readings/pdf-rdg/tfmanifesto.pdf",
+        },
+      ],
+      "sourceType": "edition",
+      "title": "The Transfeminist Manifesto",
+      "workId": "koyama-transfeminist-manifesto-work",
+    },
+    "work": {
+      "originalPublicationYear": 2001,
+      "title": "The Transfeminist Manifesto",
+      "workType": "other",
+    },
+  },
+  {
+    "base": "fraser-capital-care",
+    "source": {
+      "contributorDisplay": [
+        "Nancy Fraser",
+      ],
+      "identifiers": {
+        "doi": "10.64590/nt2",
+      },
+      "publicationYear": 2016,
+      "publisher": "New Left Review",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://newleftreview.org/issues/ii100/articles/nancy-fraser-contradictions-of-capital-and-care",
+        },
+      ],
+      "sourceType": "article",
+      "title": "Contradictions of Capital and Care",
+      "workId": "fraser-capital-care-work",
+    },
+    "work": {
+      "originalPublicationYear": 2016,
+      "title": "Contradictions of Capital and Care",
+      "workType": "article",
+    },
+  },
+  {
+    "base": "sewa-history",
+    "source": {
+      "contributorDisplay": [
+        "Self Employed Women's Association",
+      ],
+      "identifiers": undefined,
+      "publicationYear": undefined,
+      "publisher": "Self Employed Women's Association",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.sewa.org/about-us/history/",
+        },
+      ],
+      "sourceType": "web-page",
+      "title": "History of SEWA",
+      "workId": "sewa-history-work",
+    },
+    "work": {
+      "originalPublicationYear": undefined,
+      "title": "History of SEWA",
+      "workType": "other",
+    },
+  },
+  {
+    "base": "ilo-sewa-cooperatives",
+    "source": {
+      "contributorDisplay": [
+        "Tara Sinha",
+      ],
+      "identifiers": {
+        "isbn13": "9789220309766",
+      },
+      "publicationYear": 2018,
+      "publisher": "International Labour Organization",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40ed_emp/%40emp_ent/%40coop/documents/publication/wcms_633752.pdf",
+        },
+      ],
+      "sourceType": "report",
+      "title": "Advancing cooperation among women workers in the informal economy: The SEWA way",
+      "workId": "ilo-sewa-cooperatives-work",
+    },
+    "work": {
+      "originalPublicationYear": 2018,
+      "title": "Advancing cooperation among women workers in the informal economy: The SEWA way",
+      "workType": "report",
+    },
+  },
+  {
+    "base": "iceland-parental-leave-law",
+    "source": {
+      "contributorDisplay": [
+        "Alþingi",
+      ],
+      "identifiers": undefined,
+      "publicationYear": 2000,
+      "publisher": "Alþingi",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "authorized-reading",
+          "url": "https://www.althingi.is/lagas/125b/2000095.html",
+        },
+      ],
+      "sourceType": "legal-text",
+      "title": "Lög um fæðingar- og foreldraorlof, nr. 95/2000",
+      "workId": "iceland-parental-leave-law-work",
+    },
+    "work": {
+      "originalPublicationYear": 2000,
+      "title": "Lög um fæðingar- og foreldraorlof, nr. 95/2000",
+      "workType": "law",
+    },
+  },
+  {
+    "base": "gislason-iceland-leave",
+    "source": {
+      "contributorDisplay": [
+        "Ásdís Aðalbjörg Arnalds",
+        "Guðný Björk Eydal",
+        "Ingólfur V. Gíslason",
+      ],
+      "identifiers": {
+        "doi": "10.1093/oso/9780192856296.003.0018",
+      },
+      "publicationYear": 2022,
+      "publisher": "Oxford University Press",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://academic.oup.com/book/44441/chapter/376663976",
+        },
+      ],
+      "sourceType": "edition",
+      "title": "Paid Parental Leave in Iceland: Increasing Gender Equality at Home and on the Labour Market",
+      "workId": "gislason-iceland-leave-work",
+    },
+    "work": {
+      "originalPublicationYear": 2022,
+      "title": "Paid Parental Leave in Iceland: Increasing Gender Equality at Home and on the Labour Market",
+      "workType": "other",
+    },
+  },
+  {
+    "base": "arnalds-eydal-gislason-leave",
+    "source": {
+      "contributorDisplay": [
+        "Ásdís A. Arnalds",
+        "Guðný Björk Eydal",
+        "Ingólfur V. Gíslason",
+      ],
+      "identifiers": {
+        "doi": "10.13177/irpa.a.2021.17.2.5",
+      },
+      "publicationYear": 2021,
+      "publisher": "Icelandic Review of Politics & Administration",
+      "resourceLinks": [
+        {
+          "label": "Open the consulted source",
+          "purpose": "publisher",
+          "url": "https://irpa.is/index.php/irpa/article/view/a.2021.17.2.5",
+        },
+      ],
+      "sourceType": "article",
+      "title": "Maternity, paternity, and parental leave: Origin, changes, and impact of a law that aims at encouraging leave use of both parents",
+      "workId": "arnalds-eydal-gislason-leave-work",
+    },
+    "work": {
+      "originalPublicationYear": 2021,
+      "title": "Maternity, paternity, and parental leave: Origin, changes, and impact of a law that aims at encouraging leave use of both parents",
+      "workType": "article",
+    },
+  },
+]
+`;
+
+exports[`feminism exact model ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > cases-and-episodes 1`] = `
 [
   {
     "conditionStatementIds": [],
@@ -644,7 +1037,7 @@ exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dos
 ]
 `;
 
-exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > presentation 1`] = `
+exports[`feminism exact model ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > presentation 1`] = `
 [
   {
     "description": "Feminism names contested movements, analyses, and political projects addressing gendered power and sexist oppression; traditions differ over subjects, causes, institutions, and change, while bounded cases cannot represent the whole family.",
@@ -1009,7 +1402,7 @@ It is not one doctrine, a women-only identity, a global sequence of “waves,”
 ]
 `;
 
-exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > relationships 1`] = `
+exports[`feminism exact model ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > relationships 1`] = `
 [
   {
     "id": "liberal-feminism-member-feminist-traditions",
@@ -1728,7 +2121,7 @@ exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dos
 ]
 `;
 
-exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > research-obligations 1`] = `
+exports[`feminism exact model ledgers > pins every relationship, Case, Episode, Dossier, Guide, and Research Obligation > research-obligations 1`] = `
 [
   {
     "addressedStatementIds": [
@@ -1831,399 +2224,6 @@ exports[`feminism evidence ledgers > pins every relationship, Case, Episode, Dos
     "target": {
       "id": "feminism",
       "kind": "concept",
-    },
-  },
-]
-`;
-
-exports[`feminism evidence ledgers > pins the complete Work and Source manifestation metadata ledger 1`] = `
-[
-  {
-    "base": "sep-feminist-political-philosophy",
-    "source": {
-      "contributorDisplay": [
-        "Noëlle McAfee",
-        "Katie B. Howard",
-      ],
-      "identifiers": undefined,
-      "publicationYear": 2023,
-      "publisher": "Stanford Encyclopedia of Philosophy",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://plato.stanford.edu/entries/feminism-political/",
-        },
-      ],
-      "sourceType": "web-page",
-      "title": "Feminist Political Philosophy",
-      "workId": "sep-feminist-political-philosophy-work",
-    },
-    "work": {
-      "originalPublicationYear": 2009,
-      "title": "Feminist Political Philosophy",
-      "workType": "article",
-    },
-  },
-  {
-    "base": "combahee-statement",
-    "source": {
-      "contributorDisplay": [
-        "Combahee River Collective",
-      ],
-      "identifiers": undefined,
-      "publicationYear": undefined,
-      "publisher": "LGBTQ History Digital Collaboratory",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "archive",
-          "url": "https://www.lgbtqhistory.org/wp-content/uploads/2019/04/Combahee_River_Collective_Statement.pdf",
-        },
-      ],
-      "sourceType": "edition",
-      "title": "The Combahee River Collective Statement",
-      "workId": "combahee-statement-work",
-    },
-    "work": {
-      "originalPublicationYear": 1977,
-      "title": "The Combahee River Collective Statement",
-      "workType": "other",
-    },
-  },
-  {
-    "base": "taylor-combahee-reader",
-    "source": {
-      "contributorDisplay": [
-        "Keeanga-Yamahtta Taylor",
-        "Barbara Smith",
-        "Beverly Smith",
-        "Demita Frazier",
-      ],
-      "identifiers": {
-        "isbn13": "9781608468553",
-      },
-      "publicationYear": 2017,
-      "publisher": "Haymarket Books",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.haymarketbooks.org/books/1108-how-we-get-free",
-        },
-      ],
-      "sourceType": "edition",
-      "title": "How We Get Free: Black Feminism and the Combahee River Collective",
-      "workId": "taylor-combahee-reader-work",
-    },
-    "work": {
-      "originalPublicationYear": 2017,
-      "title": "How We Get Free: Black Feminism and the Combahee River Collective",
-      "workType": "book",
-    },
-  },
-  {
-    "base": "crenshaw-demarginalizing",
-    "source": {
-      "contributorDisplay": [
-        "Kimberlé W. Crenshaw",
-      ],
-      "identifiers": undefined,
-      "publicationYear": 1989,
-      "publisher": "University of Chicago Legal Forum",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "authorized-reading",
-          "url": "https://scholarship.law.columbia.edu/faculty_scholarship/3007/",
-        },
-      ],
-      "sourceType": "article",
-      "title": "Demarginalizing the Intersection of Race and Sex",
-      "workId": "crenshaw-demarginalizing-work",
-    },
-    "work": {
-      "originalPublicationYear": 1989,
-      "title": "Demarginalizing the Intersection of Race and Sex",
-      "workType": "article",
-    },
-  },
-  {
-    "base": "harris-kennedy-combahee",
-    "source": {
-      "contributorDisplay": [
-        "Duchess Harris",
-      ],
-      "identifiers": {
-        "doi": "10.18574/nyu/9780814790380.003.0019",
-      },
-      "publicationYear": 2001,
-      "publisher": "New York University Press",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.degruyterbrill.com/document/doi/10.18574/nyu/9780814790380.003.0019/html?lang=en",
-        },
-      ],
-      "sourceType": "article",
-      "title": "From the Kennedy Commission to the Combahee Collective: Black Feminist Organizing, 1960–80",
-      "workId": "harris-kennedy-combahee-work",
-    },
-    "work": {
-      "originalPublicationYear": 2001,
-      "title": "From the Kennedy Commission to the Combahee Collective: Black Feminist Organizing, 1960–80",
-      "workType": "article",
-    },
-  },
-  {
-    "base": "mohanty-western-eyes-revisited",
-    "source": {
-      "contributorDisplay": [
-        "Chandra Talpade Mohanty",
-      ],
-      "identifiers": {
-        "doi": "10.1086/342914",
-      },
-      "publicationYear": 2003,
-      "publisher": "Signs",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.jstor.org/stable/10.1086/342914",
-        },
-      ],
-      "sourceType": "article",
-      "title": "Under Western Eyes Revisited: Feminist Solidarity through Anticapitalist Struggles",
-      "workId": "mohanty-western-eyes-revisited-work",
-    },
-    "work": {
-      "originalPublicationYear": 2003,
-      "title": "Under Western Eyes Revisited: Feminist Solidarity through Anticapitalist Struggles",
-      "workType": "article",
-    },
-  },
-  {
-    "base": "moreton-robinson-talkin-up",
-    "source": {
-      "contributorDisplay": [
-        "Aileen Moreton-Robinson",
-      ],
-      "identifiers": {
-        "isbn13": "9781452966892",
-      },
-      "publicationYear": 2021,
-      "publisher": "University of Minnesota Press",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.upress.umn.edu/9781452966892/talkin-up-to-the-white-woman/",
-        },
-      ],
-      "sourceType": "edition",
-      "title": "Talkin’ Up to the White Woman: Indigenous Women and Feminism",
-      "workId": "moreton-robinson-talkin-up-work",
-    },
-    "work": {
-      "originalPublicationYear": 2000,
-      "title": "Talkin’ Up to the White Woman: Indigenous Women and Feminism",
-      "workType": "book",
-    },
-  },
-  {
-    "base": "koyama-transfeminist-manifesto",
-    "source": {
-      "contributorDisplay": [
-        "Emi Koyama",
-      ],
-      "identifiers": undefined,
-      "publicationYear": 2001,
-      "publisher": "eminism.org",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "authorized-reading",
-          "url": "https://eminism.org/readings/pdf-rdg/tfmanifesto.pdf",
-        },
-      ],
-      "sourceType": "edition",
-      "title": "The Transfeminist Manifesto",
-      "workId": "koyama-transfeminist-manifesto-work",
-    },
-    "work": {
-      "originalPublicationYear": 2001,
-      "title": "The Transfeminist Manifesto",
-      "workType": "other",
-    },
-  },
-  {
-    "base": "fraser-capital-care",
-    "source": {
-      "contributorDisplay": [
-        "Nancy Fraser",
-      ],
-      "identifiers": {
-        "doi": "10.64590/nt2",
-      },
-      "publicationYear": 2016,
-      "publisher": "New Left Review",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://newleftreview.org/issues/ii100/articles/nancy-fraser-contradictions-of-capital-and-care",
-        },
-      ],
-      "sourceType": "article",
-      "title": "Contradictions of Capital and Care",
-      "workId": "fraser-capital-care-work",
-    },
-    "work": {
-      "originalPublicationYear": 2016,
-      "title": "Contradictions of Capital and Care",
-      "workType": "article",
-    },
-  },
-  {
-    "base": "sewa-history",
-    "source": {
-      "contributorDisplay": [
-        "Self Employed Women's Association",
-      ],
-      "identifiers": undefined,
-      "publicationYear": undefined,
-      "publisher": "Self Employed Women's Association",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.sewa.org/about-us/history/",
-        },
-      ],
-      "sourceType": "web-page",
-      "title": "History of SEWA",
-      "workId": "sewa-history-work",
-    },
-    "work": {
-      "originalPublicationYear": undefined,
-      "title": "History of SEWA",
-      "workType": "other",
-    },
-  },
-  {
-    "base": "ilo-sewa-cooperatives",
-    "source": {
-      "contributorDisplay": [
-        "Tara Sinha",
-      ],
-      "identifiers": {
-        "isbn13": "9789220309766",
-      },
-      "publicationYear": 2018,
-      "publisher": "International Labour Organization",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40ed_emp/%40emp_ent/%40coop/documents/publication/wcms_633752.pdf",
-        },
-      ],
-      "sourceType": "report",
-      "title": "Advancing cooperation among women workers in the informal economy: The SEWA way",
-      "workId": "ilo-sewa-cooperatives-work",
-    },
-    "work": {
-      "originalPublicationYear": 2018,
-      "title": "Advancing cooperation among women workers in the informal economy: The SEWA way",
-      "workType": "report",
-    },
-  },
-  {
-    "base": "iceland-parental-leave-law",
-    "source": {
-      "contributorDisplay": [
-        "Alþingi",
-      ],
-      "identifiers": undefined,
-      "publicationYear": 2000,
-      "publisher": "Alþingi",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "authorized-reading",
-          "url": "https://www.althingi.is/lagas/125b/2000095.html",
-        },
-      ],
-      "sourceType": "legal-text",
-      "title": "Lög um fæðingar- og foreldraorlof, nr. 95/2000",
-      "workId": "iceland-parental-leave-law-work",
-    },
-    "work": {
-      "originalPublicationYear": 2000,
-      "title": "Lög um fæðingar- og foreldraorlof, nr. 95/2000",
-      "workType": "law",
-    },
-  },
-  {
-    "base": "gislason-iceland-leave",
-    "source": {
-      "contributorDisplay": [
-        "Ásdís Aðalbjörg Arnalds",
-        "Guðný Björk Eydal",
-        "Ingólfur V. Gíslason",
-      ],
-      "identifiers": {
-        "doi": "10.1093/oso/9780192856296.003.0018",
-      },
-      "publicationYear": 2022,
-      "publisher": "Oxford University Press",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://academic.oup.com/book/44441/chapter/376663976",
-        },
-      ],
-      "sourceType": "edition",
-      "title": "Paid Parental Leave in Iceland: Increasing Gender Equality at Home and on the Labour Market",
-      "workId": "gislason-iceland-leave-work",
-    },
-    "work": {
-      "originalPublicationYear": 2022,
-      "title": "Paid Parental Leave in Iceland: Increasing Gender Equality at Home and on the Labour Market",
-      "workType": "other",
-    },
-  },
-  {
-    "base": "arnalds-eydal-gislason-leave",
-    "source": {
-      "contributorDisplay": [
-        "Ásdís A. Arnalds",
-        "Guðný Björk Eydal",
-        "Ingólfur V. Gíslason",
-      ],
-      "identifiers": {
-        "doi": "10.13177/irpa.a.2021.17.2.5",
-      },
-      "publicationYear": 2021,
-      "publisher": "Icelandic Review of Politics & Administration",
-      "resourceLinks": [
-        {
-          "label": "Open the consulted source",
-          "purpose": "publisher",
-          "url": "https://irpa.is/index.php/irpa/article/view/a.2021.17.2.5",
-        },
-      ],
-      "sourceType": "article",
-      "title": "Maternity, paternity, and parental leave: Origin, changes, and impact of a law that aims at encouraging leave use of both parents",
-      "workId": "arnalds-eydal-gislason-leave-work",
-    },
-    "work": {
-      "originalPublicationYear": 2021,
-      "title": "Maternity, paternity, and parental leave: Origin, changes, and impact of a law that aims at encouraging leave use of both parents",
-      "workType": "article",
     },
   },
 ]
