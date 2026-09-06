@@ -1,4 +1,5 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
+
 const common = {
   publicationStatus: "reviewed" as const,
   obligationStatus: "open" as const,
@@ -59,31 +60,6 @@ export const zapatistaCaracolesResearchDocuments = [
         "Zone- and period-specific service records, community-authorized interviews including women and nonparticipants, decision appeals, recall cases, and evidence capable of distinguishing civilian from military authority in practice.",
       scope:
         "Good Government Councils and constituent municipalities in Zapatista regions of Chiapas, August 2003–November 2023; no inference about every community or member.",
-      ...common,
-    },
-  },
-  {
-    documentType: "entity",
-    entity: {
-      id: "zapatista-external-coercion-effects",
-      kind: "research-obligation",
-      label: "Effects of external coercion on autonomous governance",
-      description:
-        "A bounded causal counterfactual about security pressure and institutional practice.",
-      obligationType: "counterfactual",
-      question:
-        "Under a counterfactual of materially lower external security pressure, how might participation, mobility, service provision, and institutional redesign have differed during the bounded episode?",
-      target: { kind: "case", id: "zapatista-autonomy-chiapas-1994-present" },
-      addressedStatementIds: [
-        "zapatista-reach-limit",
-        "zapatista-2023-practice-open",
-      ],
-      currentLimitation:
-        "Current sources establish overlapping authority and leave successor practice open, but they do not identify how lower external security pressure would have changed particular governance outcomes or the 2023 redesign.",
-      evidenceNeeded:
-        "Preselected within-region comparisons over time, event-level security records, service and participation measures, and rival explanations for institutional change.",
-      scope:
-        "Selected Zapatista regions in Chiapas during 2003–2023; it does not presume external coercion was the sole or primary cause of redesign.",
       ...common,
     },
   },

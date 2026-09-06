@@ -159,7 +159,7 @@ describe("canonical narrative coverage", () => {
     ).toEqual([
       "authority-and-accountability",
       "planning-information-and-coordination",
-      "zapatista-external-coercion",
+      "zapatista-participation-and-inclusion",
     ]);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
@@ -417,10 +417,7 @@ describe("narrative Dossier model", () => {
   it("allows internal audience framing in non-live Dossier records", () => {
     const invalid = structuredClone(documents);
     const dossier = invalid[2];
-    if (
-      dossier?.documentType !== "entity" ||
-      dossier.entity.kind !== "dossier"
-    )
+    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
       throw new Error("Missing dossier fixture");
     dossier.entity.description = "An internal reader-first fixture.";
 
@@ -428,7 +425,6 @@ describe("narrative Dossier model", () => {
       "test-concept-dossier: live Dossier identity contains an internal workflow reference",
     );
   });
-
 });
 
 it.each(["heading", "body"] as const)(
@@ -436,10 +432,7 @@ it.each(["heading", "body"] as const)(
   (field) => {
     const invalid = structuredClone(documents);
     const dossier = invalid[2];
-    if (
-      dossier?.documentType !== "entity" ||
-      dossier.entity.kind !== "dossier"
-    )
+    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
       throw new Error("Missing dossier fixture");
     dossier.entity.publicationStatus = "reviewed";
     const section = dossier.entity.sections[0];

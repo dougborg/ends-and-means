@@ -9,7 +9,9 @@ the periods actually compared. Represent uncertain boundaries explicitly and
 give ongoing Cases `asOf`, review, and freshness metadata. When a documented
 institutional change triggered the latest review, point to its cited Event with
 `materialChangeEventIds`; treat this only as editorial freshness metadata and
-never as a claim of historical importance or causation. Keep conditions,
+never as a claim of historical importance or causation. The Event must share a
+Place with its ongoing Case and fall within its review period; temporal
+coincidence alone does not establish relevance. Keep conditions,
 formal rules, rules-in-use, interactions, and outcomes in distinct Statements
 referenced by the episode. Link Approaches cautiously and link institutional
 Means only through typed, sourced relationships. Use Events for chronology and
