@@ -33,6 +33,7 @@ describe("collective capital formation dossier", () => {
     );
     expect(dossier?.standfirstStatementIds).toEqual([
       "collective-capital-formation-working-definition",
+      "collective-capital-formation-national-accounts-boundary",
       "collective-capital-formation-rights-boundary",
     ]);
     expect(dossier?.sections.map(({ id }) => id)).toEqual([
@@ -41,6 +42,12 @@ describe("collective capital formation dossier", () => {
       "what-design-choices-matter",
       "what-does-the-swedish-case-show",
       "why-can-collective-funds-lose-support",
+    ]);
+    expect(dossier?.sections[0]?.statementIds).toEqual([
+      "collective-capital-formation-working-definition",
+      "collective-capital-formation-individual-saving-boundary",
+      "collective-capital-formation-governing-constituency",
+      "collective-capital-formation-rights-boundary",
     ]);
   });
 

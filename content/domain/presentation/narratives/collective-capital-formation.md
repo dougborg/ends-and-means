@@ -1,5 +1,5 @@
 Collective capital formation channels recurring contributions or asset transfers into an enduring fund governed on behalf of a defined group.
-It describes how capital is accumulated institutionally, not who necessarily owns each underlying asset, controls investment, receives returns, or how much an economy invests.
+It describes how capital is accumulated institutionally, not how much an economy invests, and accumulation alone does not establish democratic control over investment.
 
 ## what-does-collective-mean-here
 
@@ -29,8 +29,8 @@ This bounded case does not define or completely realize the broader concept.
 
 ## why-can-collective-funds-lose-support
 
-A collective fund can remain remote from the people it is meant to benefit when its gains are hard to see or its governors are difficult to influence.
-Warner explains low engagement by pointing to the gap between investment control and supporters' immediate priorities.
+A collective fund can remain remote from the people it is meant to benefit when its gains are hard to see.
+Warner explains low engagement by showing that most intended supporters treated the funds as distant from their everyday concerns.
 Accounts he reviews also show that intended supporters struggled to identify a concrete payoff.
 At the 1981 labor and party congresses, some delegates argued that the emphasis on building capital had displaced worker influence.
 That history leaves an open institutional question: which governance and benefit rules make collective accumulation answerable and tangible without converting it into individual saving?

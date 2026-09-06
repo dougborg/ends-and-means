@@ -11,6 +11,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
   standfirst: "",
   standfirstStatementIds: [
     "collective-capital-formation-working-definition",
+    "collective-capital-formation-national-accounts-boundary",
     "collective-capital-formation-rights-boundary",
   ],
   sections: [
@@ -22,6 +23,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       statementIds: [
         "collective-capital-formation-working-definition",
         "collective-capital-formation-individual-saving-boundary",
+        "collective-capital-formation-governing-constituency",
         "collective-capital-formation-rights-boundary",
       ],
     },
