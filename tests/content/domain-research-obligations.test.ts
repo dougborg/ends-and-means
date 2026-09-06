@@ -542,6 +542,30 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "feminism-policy-attribution-causal-effects",
+    obligationType: "counterfactual",
+    target: "concept:feminism",
+    status: "open",
+  },
+  {
+    id: "feminism-sex-gender-trans-boundaries",
+    obligationType: "counterargument",
+    target: "concept:feminism#traditions",
+    status: "open",
+  },
+  {
+    id: "feminism-translation-nonwestern-naming",
+    obligationType: "research-gap",
+    target: "concept:feminism",
+    status: "open",
+  },
+  {
+    id: "feminism-universal-subject-exclusion",
+    obligationType: "counterargument",
+    target: "concept:feminism#coalition-and-boundaries",
+    status: "open",
+  },
+  {
     id: "kahnawake-cdmrp-current-hearing-rules",
     obligationType: "research-gap",
     target: "case:kahnawake-community-lawmaking#how-does-the-process-work",

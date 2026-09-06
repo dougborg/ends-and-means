@@ -11,6 +11,7 @@ import { collectiveCapitalFormationEvidenceDocuments } from "./evidence/collecti
 import { democracyRepublicEvidenceDocuments } from "./evidence/democracy-republic";
 import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evidence/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
+import { feminismEvidenceDocuments } from "./evidence/feminism";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
 import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
@@ -29,6 +30,7 @@ import { collectiveCapitalFormationDossierDocuments } from "./presentation/colle
 import { democracyRepublicGuideDocuments } from "./presentation/democracy-republic-guides";
 import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
 import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
+import { feminismGuideDocuments } from "./presentation/feminism-guide";
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
 import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
@@ -49,6 +51,7 @@ import { collectiveCapitalFormationRelationshipDocuments } from "./relationships
 import { democracyRepublicRelationshipDocuments } from "./relationships/democracy-republic";
 import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
+import { feminismRelationshipDocuments } from "./relationships/feminism";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
 import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
@@ -67,6 +70,7 @@ import { collectiveCapitalFormationResearchDocuments } from "./research/collecti
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
 import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
+import { feminismResearchDocuments } from "./research/feminism";
 import { minangkabauResearchDocuments } from "./research/minangkabau";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
@@ -86,6 +90,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...evidenceDocuments,
   ...rehnMeidnerEvidenceDocuments,
   ...economicDemocracyEvidenceDocuments,
+  ...feminismEvidenceDocuments,
   ...collectiveCapitalFormationEvidenceDocuments,
   ...centralPlanningEvidenceDocuments,
   ...capitalismMarketEvidenceDocuments,
@@ -103,6 +108,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...minangkabauEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
+  ...feminismGuideDocuments,
   ...collectiveCapitalFormationDossierDocuments,
   ...centralPlanningGuideDocuments,
   ...capitalismMarketGuideDocuments,
@@ -122,6 +128,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...minangkabauDossierDocuments,
   ...minangkabauGuideDocuments,
   ...openResearchObligationDocuments,
+  ...feminismResearchDocuments,
   ...minangkabauResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
@@ -138,6 +145,7 @@ export const canonicalDocuments: AuthoringDocument[] = [
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,
   ...economicDemocracyRelationshipDocuments,
+  ...feminismRelationshipDocuments,
   ...collectiveCapitalFormationRelationshipDocuments,
   ...centralPlanningRelationshipDocuments,
   ...capitalismMarketRelationshipDocuments,
