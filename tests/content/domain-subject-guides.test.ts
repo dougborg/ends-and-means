@@ -92,7 +92,6 @@ function relationshipIn(documents: AuthoringDocument[], id: string) {
   throw new Error(`Missing Relationship ${id}`);
 }
 
-// biome-ignore lint/complexity/noExcessiveLinesPerFunction: the exact canonical guide inventory belongs in one integration contract
 describe("compiled learner SubjectGuide composition", () => {
   it("compiles reviewed guides beside, rather than into, the plural graph", () => {
     const guide = subjectGuideBySlug("economic-democracy");
@@ -128,7 +127,6 @@ describe("compiled learner SubjectGuide composition", () => {
     expect(guide?.sections.map(({ role }) => role)).not.toContain("depictions");
     expect(validateAuthoringDocuments(canonicalDocuments)).toEqual([]);
   });
-
 });
 
 describe("SubjectGuide content attention", () => {
@@ -158,7 +156,6 @@ describe("SubjectGuide content attention", () => {
 });
 
 describe("compiled SubjectGuide publication boundaries", () => {
-
   it.each(["research-needed", "in-review", "deprecated"] as const)(
     "keeps %s guides in editorial records but out of public resolution",
     (publicationStatus) => {
