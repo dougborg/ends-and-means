@@ -279,6 +279,94 @@ test("criteria grid reflects its content count and stacks only on narrow screens
   }
 });
 
+test("editorial shells share wide geometry while preserving semantic reading measures", async ({ page }) => {
+  const headerUsesSemanticMeasure = async (selector: string) =>
+    page.locator(selector).evaluate((header) => {
+      const root = document.documentElement;
+      const originalToken = root.style.getPropertyValue("--measure-header");
+      const before = getComputedStyle(header).maxWidth;
+      const control = document.createElement("span");
+      control.style.maxWidth = "min(100%, var(--measure-header))";
+      try {
+        root.style.setProperty("--measure-header", "61rem");
+        document.body.append(control);
+        return {
+          before,
+          after: getComputedStyle(header).maxWidth,
+          semantic: getComputedStyle(control).maxWidth,
+        };
+      } finally {
+        control.remove();
+        if (originalToken) {
+          root.style.setProperty("--measure-header", originalToken);
+        } else {
+          root.style.removeProperty("--measure-header");
+        }
+      }
+    });
+
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  for (const route of ["/framework/", "/reading/"]) {
+    await page.goto(route);
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator("main")).toHaveClass(/site-main--wide/);
+    await expect(page.locator("article.editorial-page > header.editorial-header")).toBeVisible();
+    const widths = await page.evaluate(() => ({
+      viewport: document.documentElement.clientWidth,
+      main: document.querySelector("main")?.getBoundingClientRect().width ?? 0,
+      header: document.querySelector(".editorial-header")?.getBoundingClientRect().width ?? 0,
+      standfirst: document.querySelector(".editorial-header > .dek.measure-standfirst")?.getBoundingClientRect().width ?? 0,
+    }));
+    expect(widths.main / widths.viewport).toBeGreaterThan(0.85);
+    expect(widths.header / widths.main).toBeGreaterThan(0.75);
+    expect(widths.standfirst / widths.header).toBeGreaterThan(0.55);
+    expect(widths.standfirst).toBeLessThanOrEqual(widths.header);
+    const headerMeasure = await headerUsesSemanticMeasure(".editorial-header");
+    expect(headerMeasure.after).toBe(headerMeasure.semantic);
+    expect(headerMeasure.after).not.toBe(headerMeasure.before);
+  }
+
+  for (const route of ["/cases/swedish-solidaristic-bargaining/", "/concepts/economic-democracy/"]) {
+    await page.goto(route);
+    await page.evaluate(() => document.fonts.ready);
+    const dossierWidths = await page.evaluate(() => ({
+      viewport: document.documentElement.clientWidth,
+      article: document.querySelector(".canonical-dossier")?.getBoundingClientRect().width ?? 0,
+      header: document.querySelector(".canonical-dossier > header")?.getBoundingClientRect().width ?? 0,
+      standfirst: document.querySelector(".canonical-dossier > header .dossier-standfirst > .dek.measure-standfirst")?.getBoundingClientRect().width ?? 0,
+    }));
+    expect(dossierWidths.article / dossierWidths.viewport).toBeGreaterThan(0.85);
+    expect(dossierWidths.header / dossierWidths.article).toBeGreaterThan(0.75);
+    expect(dossierWidths.standfirst / dossierWidths.header).toBeGreaterThan(0.55);
+    expect(dossierWidths.standfirst).toBeLessThanOrEqual(dossierWidths.header);
+    const headerMeasure = await headerUsesSemanticMeasure(".canonical-dossier > header");
+    expect(headerMeasure.after).toBe(headerMeasure.semantic);
+    expect(headerMeasure.after).not.toBe(headerMeasure.before);
+  }
+
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  const homepageStandfirst = page.locator(".homepage-hero .dek.measure-standfirst");
+  await expect(homepageStandfirst).toBeVisible();
+  const homepageMeasures = await homepageStandfirst.evaluate((element) => {
+    const actualStyle = getComputedStyle(element);
+    const control = document.createElement("span");
+    control.className = "measure-standfirst";
+    control.style.fontFamily = actualStyle.fontFamily;
+    control.style.fontSize = actualStyle.fontSize;
+    control.style.position = "absolute";
+    control.style.visibility = "hidden";
+    document.body.append(control);
+    const result = {
+      actual: getComputedStyle(element).maxWidth,
+      semantic: getComputedStyle(control).maxWidth,
+    };
+    control.remove();
+    return result;
+  });
+  expect(homepageMeasures.actual).toBe(homepageMeasures.semantic);
+});
+
 test("global navigation remains ordered, reachable, and legible across constraints", async ({
   page,
 }) => {

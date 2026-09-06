@@ -29,6 +29,35 @@ function hrefs(html: string): string[] {
   ].map((match) => match[1] ?? match[2] ?? "");
 }
 
+function hasElementWithClasses(
+  html: string,
+  tag: "article" | "header",
+  expectedClasses: string[],
+): boolean {
+  return [...html.matchAll(new RegExp(`<${tag}(?=[\\s/>])[^>]*>`, "gi"))].some(
+    ([element]) => {
+      const classNames =
+        element?.match(/\bclass=(?:"([^"]*)"|'([^']*)')/i)?.slice(1).find(Boolean)
+          ?.split(/\s+/)
+          .filter(Boolean) ?? [];
+      return expectedClasses.every((className) => classNames.includes(className));
+    },
+  );
+}
+
+it("requires the exact supported tag when matching element classes", () => {
+  expect(
+    hasElementWithClasses('<header-nav class="editorial-header"></header-nav>', "header", [
+      "editorial-header",
+    ]),
+  ).toBe(false);
+  expect(
+    hasElementWithClasses('<header class="extra editorial-header"></header>', "header", [
+      "editorial-header",
+    ]),
+  ).toBe(true);
+});
+
 function stripElement(html: string, tag: "script" | "style"): string {
   let output = html;
   while (true) {
@@ -91,6 +120,11 @@ async function verifyEveryPublicRecordRenders() {
     expect(text.length, route).toBeGreaterThan(200);
     expect(html, route).not.toMatch(/<astro-island\b/i);
     expect(workflowReferencesIn(text), route).toEqual([]);
+    for (const [, classNames] of html.matchAll(
+      /class="([^"]*\bdek\b[^"]*)"/g,
+    )) {
+      expect(classNames?.split(/\s+/), route).toContain("measure-standfirst");
+    }
   }
 
   await verifyExploreAndCaseRoutes();
@@ -307,6 +341,9 @@ async function verifyConceptRoutes() {
 
 async function verifyReferenceRoutes() {
   const method = await readFile(routeFile("/framework/"), "utf8");
+  expect(method).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
+  expect(hasElementWithClasses(method, "article", ["editorial-page", "method-page"])).toBe(true);
+  expect(hasElementWithClasses(method, "header", ["editorial-header"])).toBe(true);
   expect(method).toMatch(
     /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="2"/,
   );
@@ -365,6 +402,9 @@ async function verifyReferenceRoutes() {
   expect(stripMarkup(challenge)).not.toContain("research-needed");
 
   const reading = await readFile(routeFile("/reading/"), "utf8");
+  expect(reading).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
+  expect(hasElementWithClasses(reading, "article", ["editorial-page", "reading-page"])).toBe(true);
+  expect(hasElementWithClasses(reading, "header", ["editorial-header"])).toBe(true);
   expect(
     hrefs(reading).filter((href) => href.startsWith("/sources/")),
   ).toHaveLength(entitiesOfKind("source").length);

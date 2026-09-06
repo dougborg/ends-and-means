@@ -239,6 +239,42 @@ Major analytical stages need more separation than statements within a stage.
 - compact breakpoint: approximately `48rem`, determined by content stress;
 - wide three-region dossier: approximately `72rem` and above.
 
+### Page shells and semantic measures
+
+Public pages use the wide site shell for shared alignment; width inside that
+shell follows the content's role rather than its route.
+
+- `editorial-page` supplies the common section rhythm for narrative and
+  reference-led pages.
+- `editorial-header` lets a title and standfirst use the composition without
+  creating an arbitrary empty column.
+- The `--measure-header` token caps title-and-standfirst compositions at 78rem
+  through semantic header selectors such as `editorial-header`. This keeps
+  their hierarchy readable inside the 90rem shell. Structural surfaces such as
+  navigation, comparison grids, and evidence apparatus may still use the full
+  shell; the cap is not a general page-width constraint.
+- `measure-standfirst` is for introductory summaries, which may be wider than
+  sustained prose because they use larger type and contain only a few lines.
+- `measure-prose` keeps sustained reading between 60 and 72 characters.
+- `measure-compact` is for supporting notes, labels, and short explanations.
+- `measure-apparatus` is for evidence disclosures and reference controls whose
+  structure benefits from more horizontal room.
+- Tables, comparison grids, directories, timelines, and other structural
+  surfaces use the available shell width and provide their own responsive
+  behavior.
+
+Short `ch` constraints on headings and control labels are local line-balance
+roles, not page measures.
+`rem` constraints inside named grids describe structural regions such as rails,
+comparison cells, and evidence panels; breakpoint widths describe reflow
+stress points rather than reading measures.
+The open-research agenda is reference apparatus and therefore uses
+`measure-apparatus`.
+
+A width constraint must express one of these reading or structural purposes.
+Do not add route-specific maximum widths, fixed heights, or empty layout tracks
+to make an individual screenshot look balanced.
+
 Use square or 2–4px corners on functional surfaces. Reserve shadows for
 temporary overlays; use rules and background contrast for permanent structure.
 
