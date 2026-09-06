@@ -1,18 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { AuthoringDocument, EntityRef } from "../../src/lib/domain";
-import {
-  auditContent,
-  claimPublicationLabel,
-  compileDomainGraph,
-  formatContentAttentionReport,
-  validateAuthoringDocuments,
-  workflowReferencesIn,
-} from "../../src/lib/domain";
-import {
-  canonicalGraph,
-  researchObligationsForTarget,
-  researchTargetHref,
-} from "../../src/lib/domain/canonical";
+import { auditContent, claimPublicationLabel, compileDomainGraph, formatContentAttentionReport, validateAuthoringDocuments, workflowReferencesIn } from "../../src/lib/domain";
+import { canonicalGraph, researchObligationsForTarget, researchTargetHref } from "../../src/lib/domain/canonical";
 
 const reviewed = { publicationStatus: "reviewed" as const };
 const documents: AuthoringDocument[] = [
@@ -196,16 +185,8 @@ const documents: AuthoringDocument[] = [
 ];
 
 function obligationIn(candidate: AuthoringDocument[]) {
-  const document = candidate.find(
-    (item) =>
-      item.documentType === "entity" &&
-      item.entity.kind === "research-obligation",
-  );
-  if (
-    document?.documentType !== "entity" ||
-    document.entity.kind !== "research-obligation"
-  )
-    throw new Error("Missing research obligation fixture");
+  const document = candidate.find((item) => item.documentType === "entity" && item.entity.kind === "research-obligation");
+  if (document?.documentType !== "entity" || document.entity.kind !== "research-obligation") throw new Error("Missing research obligation fixture");
   return document.entity;
 }
 
@@ -221,9 +202,7 @@ describe("research obligations", () => {
         status: "open",
       },
     ]);
-    expect(formatContentAttentionReport(report)).toContain(
-      "test-research-obligation: counterfactual; concept:test-concept; open",
-    );
+    expect(formatContentAttentionReport(report)).toContain("test-research-obligation: counterfactual; concept:test-concept; open");
   });
 
   it("rejects unresolved targets, unscoped questions, and incomplete lifecycles", () => {
@@ -235,43 +214,27 @@ describe("research obligations", () => {
     obligation.scope = "";
     obligation.obligationStatus = "resolved";
     const errors = validateAuthoringDocuments(invalid);
-    expect(errors).toContain(
-      "test-research-obligation: unresolved or mistyped research target concept:missing-concept",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: unresolved or unpublished Dossier section concept:missing-concept#missing-section",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: research question must end with a question mark",
-    );
+    expect(errors).toContain("test-research-obligation: unresolved or mistyped research target concept:missing-concept");
+    expect(errors).toContain("test-research-obligation: unresolved or unpublished Dossier section concept:missing-concept#missing-section");
+    expect(errors).toContain("test-research-obligation: research question must end with a question mark");
     expect(errors).toContain("test-research-obligation: scope is empty");
-    expect(errors).toContain(
-      "test-research-obligation: resolved research obligation requires a resolution rationale",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: resolved research obligation requires a reconciled Statement",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: closed research obligation requires a closure date",
-    );
+    expect(errors).toContain("test-research-obligation: resolved research obligation requires a resolution rationale");
+    expect(errors).toContain("test-research-obligation: resolved research obligation requires a reconciled Statement");
+    expect(errors).toContain("test-research-obligation: closed research obligation requires a closure date");
   });
 
   it("requires reconciled evidence to advance an open obligation", () => {
     const pending = structuredClone(documents);
     const obligation = obligationIn(pending);
     obligation.statementIds = ["test-result-statement"];
-    expect(validateAuthoringDocuments(pending)).toContain(
-      "test-research-obligation: open research obligation cannot have reconciled Statements; use partially-addressed",
-    );
+    expect(validateAuthoringDocuments(pending)).toContain("test-research-obligation: open research obligation cannot have reconciled Statements; use partially-addressed");
   });
 
   it("resolves a section target through its subject Dossier", () => {
     const scoped = structuredClone(documents);
     const obligation = obligationIn(scoped);
     obligation.targetSectionId = "test-section";
-    expect(
-      compileDomainGraph(scoped).indexes.entitiesById[obligation.id],
-    ).toMatchObject({
+    expect(compileDomainGraph(scoped).indexes.entitiesById[obligation.id]).toMatchObject({
       targetSectionId: "test-section",
     });
   });
@@ -280,25 +243,17 @@ describe("research obligations", () => {
     const invalid = structuredClone(documents);
     const obligation = obligationIn(invalid);
     obligation.targetSectionId = "test-section";
-    const dossier = invalid.find(
-      (item) =>
-        item.documentType === "entity" && item.entity.kind === "dossier",
-    );
-    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
-      throw new Error("Missing Dossier fixture");
+    const dossier = invalid.find((item) => item.documentType === "entity" && item.entity.kind === "dossier");
+    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier") throw new Error("Missing Dossier fixture");
     dossier.entity.publicationStatus = "in-review";
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      "test-research-obligation: unresolved or unpublished Dossier section concept:test-concept#test-section",
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain("test-research-obligation: unresolved or unpublished Dossier section concept:test-concept#test-section");
   });
 
   it("requires reconciled evidence for partially addressed obligations", () => {
     const partial = structuredClone(documents);
     const obligation = obligationIn(partial);
     obligation.obligationStatus = "partially-addressed";
-    expect(validateAuthoringDocuments(partial)).toContain(
-      "test-research-obligation: partially addressed research obligation requires a reconciled Statement",
-    );
+    expect(validateAuthoringDocuments(partial)).toContain("test-research-obligation: partially addressed research obligation requires a reconciled Statement");
   });
 });
 
@@ -309,9 +264,7 @@ describe("research obligation lifecycles", () => {
     obligation.obligationStatus = "partially-addressed";
     obligation.statementIds = ["test-result-statement"];
     const report = auditContent(compileDomainGraph(partial));
-    expect(report.researchEvidenceAwaitingResolution).toEqual([
-      "test-research-obligation",
-    ]);
+    expect(report.researchEvidenceAwaitingResolution).toEqual(["test-research-obligation"]);
   });
 
   it("accepts complete resolved and withdrawn lifecycles", () => {
@@ -319,16 +272,14 @@ describe("research obligation lifecycles", () => {
     const resolvedObligation = obligationIn(resolved);
     resolvedObligation.obligationStatus = "resolved";
     resolvedObligation.statementIds = ["test-result-statement"];
-    resolvedObligation.resolutionRationale =
-      "The new evidence answers the scoped question.";
+    resolvedObligation.resolutionRationale = "The new evidence answers the scoped question.";
     resolvedObligation.closedAt = "2026-09-05";
     expect(() => compileDomainGraph(resolved)).not.toThrow();
 
     const withdrawn = structuredClone(documents);
     const withdrawnObligation = obligationIn(withdrawn);
     withdrawnObligation.obligationStatus = "withdrawn";
-    withdrawnObligation.resolutionRationale =
-      "The question duplicates a better-scoped obligation.";
+    withdrawnObligation.resolutionRationale = "The question duplicates a better-scoped obligation.";
     withdrawnObligation.closedAt = "2026-09-05";
     expect(() => compileDomainGraph(withdrawn)).not.toThrow();
   });
@@ -340,15 +291,9 @@ describe("research obligation lifecycles", () => {
     obligation.statementIds = ["test-statement"];
     obligation.addressedStatementIds = ["test-statement", "test-statement"];
     const errors = validateAuthoringDocuments(invalid);
-    expect(errors).toContain(
-      "test-research-obligation: active research obligation cannot have a closure date",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: research obligation repeats an addressed Statement",
-    );
-    expect(errors).toContain(
-      "test-research-obligation: addressed and reconciled Statements must be distinct",
-    );
+    expect(errors).toContain("test-research-obligation: active research obligation cannot have a closure date");
+    expect(errors).toContain("test-research-obligation: research obligation repeats an addressed Statement");
+    expect(errors).toContain("test-research-obligation: addressed and reconciled Statements must be distinct");
   });
 });
 
@@ -358,30 +303,21 @@ describe("research obligation targets and public text", () => {
     const obligation = obligationIn(invalid);
     (obligation.target as EntityRef).kind = "source";
     obligation.target.id = "test-source";
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      "test-research-obligation: research obligations must target a reader-facing approach, case, challenge, or concept",
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain("test-research-obligation: research obligations must target a reader-facing approach, case, challenge, or concept");
   });
 
   it("requires an exact claim or section target", () => {
     const invalid = structuredClone(documents);
     obligationIn(invalid).addressedStatementIds = [];
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      "test-research-obligation: research obligation requires an addressed Statement or exact Dossier section",
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain("test-research-obligation: research obligation requires an addressed Statement or exact Dossier section");
   });
 
   it("rejects a Statement owned by an unrelated Dossier", () => {
     const invalid = structuredClone(documents);
     const obligation = obligationIn(invalid);
     obligation.addressedStatementIds = ["test-result-statement"];
-    const dossier = invalid.find(
-      (item) =>
-        item.documentType === "entity" &&
-        item.entity.id === "test-concept-dossier",
-    );
-    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier")
-      throw new Error("Missing Dossier fixture");
+    const dossier = invalid.find((item) => item.documentType === "entity" && item.entity.id === "test-concept-dossier");
+    if (dossier?.documentType !== "entity" || dossier.entity.kind !== "dossier") throw new Error("Missing Dossier fixture");
     dossier.entity.sections[1] = {
       id: "other-section",
       heading: "What did later evidence establish?",
@@ -389,9 +325,7 @@ describe("research obligation targets and public text", () => {
       traceStatus: "supported",
       statementIds: [],
     };
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      "test-research-obligation: addressed Statement test-result-statement is not owned by concept:test-concept",
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain("test-research-obligation: addressed Statement test-result-statement is not owned by concept:test-concept");
   });
 
   it("rejects a Statement owned by the target Dossier but not its exact section", () => {
@@ -400,42 +334,22 @@ describe("research obligation targets and public text", () => {
     obligation.targetSectionId = "test-section";
     obligation.obligationStatus = "partially-addressed";
     obligation.statementIds = ["test-result-statement"];
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      "test-research-obligation: reconciled Statement test-result-statement is not owned by concept:test-concept#test-section",
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain("test-research-obligation: reconciled Statement test-result-statement is not owned by concept:test-concept#test-section");
   });
 });
 
 describe("public research text", () => {
-  it.each([
-    "label",
-    "description",
-    "question",
-    "currentLimitation",
-    "evidenceNeeded",
-    "scope",
-    "resolutionRationale",
-  ] as const)("rejects internal workflow references in %s", (field) => {
+  it.each(["label", "description", "question", "currentLimitation", "evidenceNeeded", "scope", "resolutionRationale"] as const)("rejects internal workflow references in %s", (field) => {
     const invalid = structuredClone(documents);
     const obligation = obligationIn(invalid);
     obligation[field] = "Track this in pull request #97.";
-    expect(validateAuthoringDocuments(invalid)).toContain(
-      `test-research-obligation: reader-facing research text contains an internal workflow reference in ${field}`,
-    );
+    expect(validateAuthoringDocuments(invalid)).toContain(`test-research-obligation: reader-facing research text contains an internal workflow reference in ${field}`);
   });
 
   it("detects repository workflow language without rejecting ordinary numbers", () => {
-    expect(
-      workflowReferencesIn("Tracked in issue 97 on feature/research-work."),
-    ).toEqual(["repository issue or pull request", "repository branch"]);
-    expect(
-      workflowReferencesIn(
-        "See https://github.com/example/project/pull/12 during content migration.",
-      ),
-    ).toEqual(["repository issue or pull request", "migration or draft state"]);
-    expect(
-      workflowReferencesIn("Article #12 examines migration policy."),
-    ).toEqual([]);
+    expect(workflowReferencesIn("Tracked in issue 97 on feature/research-work.")).toEqual(["repository issue or pull request", "repository branch"]);
+    expect(workflowReferencesIn("See https://github.com/example/project/pull/12 during content migration.")).toEqual(["repository issue or pull request", "migration or draft state"]);
+    expect(workflowReferencesIn("Article #12 examines migration policy.")).toEqual([]);
   });
 
   it("labels every Statement publication state truthfully", () => {
@@ -504,8 +418,7 @@ const expectedOpenResearchObligations = [
   ].map(([id, obligationType]) => ({
     id,
     obligationType,
-    target:
-      "concept:collective-capital-formation#why-can-collective-funds-lose-support",
+    target: "concept:collective-capital-formation#why-can-collective-funds-lose-support",
     status: "open",
   })),
   {
@@ -529,29 +442,25 @@ const expectedOpenResearchObligations = [
   {
     id: "economic-democracy-causal-identification",
     obligationType: "research-gap",
-    target:
-      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
     status: "open",
   },
   {
     id: "economic-democracy-decision-cost-objection",
     obligationType: "counterargument",
-    target:
-      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
     status: "open",
   },
   {
     id: "economic-democracy-futility-objection",
     obligationType: "counterargument",
-    target:
-      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
     status: "open",
   },
   {
     id: "economic-democracy-property-rights-objection",
     obligationType: "counterargument",
-    target:
-      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    target: "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
     status: "open",
   },
   {
@@ -567,7 +476,7 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
-    id: "jinst-post-1997-continuity",
+    id: "jinst-post-1999-continuity",
     obligationType: "research-gap",
     target: "case:jinst-postcollective-pastoral-governance",
     status: "open",
@@ -599,8 +508,7 @@ const expectedOpenResearchObligations = [
   {
     id: "kahnawake-governing-authority-legitimacy",
     obligationType: "research-gap",
-    target:
-      "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
+    target: "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
     status: "open",
   },
   {
@@ -684,8 +592,7 @@ const expectedOpenResearchObligations = [
   {
     id: "tawantinsuyu-colonial-translation",
     obligationType: "research-gap",
-    target:
-      "case:tawantinsuyu-imperial-organization#how-should-colonial-accounts-be-read",
+    target: "case:tawantinsuyu-imperial-organization#how-should-colonial-accounts-be-read",
     status: "open",
   },
   {
@@ -697,8 +604,7 @@ const expectedOpenResearchObligations = [
   {
     id: "tawantinsuyu-reciprocity-extraction-test",
     obligationType: "counterargument",
-    target:
-      "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
+    target: "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
     status: "open",
   },
   {
@@ -724,24 +630,9 @@ const expectedOpenResearchObligations = [
 describe("canonical research agenda", () => {
   it("publishes the exact initial obligations", () => {
     const report = auditContent(canonicalGraph);
-    expect(report.openResearchObligations).toEqual(
-      expectedOpenResearchObligations,
-    );
-    expect(
-      researchObligationsForTarget("concept", "economic-democracy").map(
-        ({ id }) => id,
-      ),
-    ).toEqual([
-      "economic-democracy-causal-identification",
-      "economic-democracy-decision-cost-objection",
-      "economic-democracy-futility-objection",
-      "economic-democracy-property-rights-objection",
-    ]);
+    expect(report.openResearchObligations).toEqual(expectedOpenResearchObligations);
+    expect(researchObligationsForTarget("concept", "economic-democracy").map(({ id }) => id)).toEqual(["economic-democracy-causal-identification", "economic-democracy-decision-cost-objection", "economic-democracy-futility-objection", "economic-democracy-property-rights-objection"]);
     expect(researchObligationsForTarget("concept", "missing")).toEqual([]);
-    expect(
-      researchObligationsForTarget("concept", "social-ownership").map(
-        ({ id }) => id,
-      ),
-    ).toEqual(["social-ownership-delegation-accountability-gap"]);
+    expect(researchObligationsForTarget("concept", "social-ownership").map(({ id }) => id)).toEqual(["social-ownership-delegation-accountability-gap"]);
   });
 });
