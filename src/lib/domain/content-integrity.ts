@@ -30,8 +30,6 @@ export interface ContentIntegrityResult {
 }
 
 const forbiddenRuntimePath = /(?:^|\/)(?:archive|legacy|drafts?)(?:\/|$)/iu;
-const codeToken =
-  /\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|[A-Za-z_$][\w$]*|[().]/gu;
 const executableRuntimePath = /\.(?:astro|cjs|cts|js|jsx|mjs|mts|ts|tsx)$/iu;
 const forbiddenBuildText =
   /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
@@ -86,25 +84,123 @@ interface CodeToken {
   value: string;
 }
 
+function quotedEnd(content: string, start: number, quote: string) {
+  let index = start + 1;
+  while (index < content.length) {
+    if (content[index] === "\\") index += 2;
+    else if (content[index++] === quote) break;
+  }
+  return index;
+}
+
+function commentEnd(content: string, start: number) {
+  const line = content[start + 1] === "/";
+  const marker = line ? "\n" : "*/";
+  const end = content.indexOf(marker, start + 2);
+  return end < 0 ? content.length : end + marker.length;
+}
+
+function templateEnd(
+  content: string,
+  start: number,
+  expressions: string[],
+): number {
+  let index = start + 1;
+  while (index < content.length) {
+    if (content[index] === "\\") index += 2;
+    else if (content[index] === "`") return index + 1;
+    else if (content.slice(index, index + 2) === "${") {
+      const expression = interpolationEnd(content, index + 2);
+      expressions.push(content.slice(index + 2, expression - 1));
+      index = expression;
+    } else index += 1;
+  }
+  return index;
+}
+
+function interpolationEnd(content: string, start: number): number {
+  let depth = 1;
+  let index = start;
+  while (index < content.length && depth > 0) {
+    const character = content[index] ?? "";
+    const skipped = skippedSyntaxEnd(content, index);
+    if (skipped !== undefined) index = skipped;
+    else {
+      depth += Number(character === "{") - Number(character === "}");
+      index += 1;
+    }
+  }
+  return index;
+}
+
+function skippedSyntaxEnd(content: string, index: number) {
+  const character = content[index] ?? "";
+  if (character === '"' || character === "'") {
+    return quotedEnd(content, index, character);
+  }
+  if (character === "`") return templateEnd(content, index, []);
+  const pair = content.slice(index, index + 2);
+  if (pair === "//" || pair === "/*") return commentEnd(content, index);
+  return undefined;
+}
+
+function wordEnd(content: string, start: number) {
+  let index = start + 1;
+  while (/[\w$]/u.test(content[index] ?? "")) index += 1;
+  return index;
+}
+
+function scanCodeToken(content: string, index: number) {
+  const character = content[index] ?? "";
+  const pair = content.slice(index, index + 2);
+  if (pair === "//" || pair === "/*") {
+    return { end: commentEnd(content, index), tokens: [] };
+  }
+  if (character === '"' || character === "'") {
+    const end = quotedEnd(content, index, character);
+    return {
+      end,
+      tokens: [
+        { kind: "string" as const, value: content.slice(index + 1, end - 1) },
+      ],
+    };
+  }
+  if (character === "`") {
+    const expressions: string[] = [];
+    const end = templateEnd(content, index, expressions);
+    const tokens =
+      expressions.length > 0
+        ? expressions.flatMap(codeTokens)
+        : [
+            {
+              kind: "string" as const,
+              value: content.slice(index + 1, end - 1),
+            },
+          ];
+    return { end, tokens };
+  }
+  if (/[A-Za-z_$]/u.test(character)) {
+    const end = wordEnd(content, index);
+    return {
+      end,
+      tokens: [{ kind: "word" as const, value: content.slice(index, end) }],
+    };
+  }
+  const tokens = ["(", ")", "."].includes(character)
+    ? [{ kind: "punctuation" as const, value: character }]
+    : [];
+  return { end: index + 1, tokens };
+}
+
 function codeTokens(content: string): CodeToken[] {
-  return [...content.matchAll(codeToken)].flatMap(([value]) => {
-    if (value.startsWith("//") || value.startsWith("/*")) return [];
-    if (value.startsWith("`")) {
-      const expressions = [
-        ...value.slice(1, -1).matchAll(/\$\{([\s\S]*?)\}/gu),
-      ].flatMap((match) => codeTokens(match[1] ?? ""));
-      return expressions.length > 0
-        ? expressions
-        : [{ kind: "string" as const, value: value.slice(1, -1) }];
-    }
-    if (['"', "'"].includes(value[0] ?? "")) {
-      return [{ kind: "string" as const, value: value.slice(1, -1) }];
-    }
-    if (["(", ")", "."].includes(value)) {
-      return [{ kind: "punctuation" as const, value }];
-    }
-    return [{ kind: "word" as const, value }];
-  });
+  const tokens: CodeToken[] = [];
+  let index = 0;
+  while (index < content.length) {
+    const scanned = scanCodeToken(content, index);
+    tokens.push(...scanned.tokens);
+    index = scanned.end;
+  }
+  return tokens;
 }
 
 const dependencyPatterns = [
