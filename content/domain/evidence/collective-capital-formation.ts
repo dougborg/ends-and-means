@@ -2,7 +2,6 @@ import type { AuthoringDocument } from "../../../src/lib/domain";
 
 const reviewed = {
   publicationStatus: "reviewed" as const,
-  reviewedAt: "2026-09-05",
 };
 
 export const collectiveCapitalFormationEvidenceDocuments = [
