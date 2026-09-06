@@ -15,7 +15,8 @@ export const collectiveCapitalFormationResearchDocuments = [
       target: { kind: "concept", id: "collective-capital-formation" },
       targetSectionId: "why-can-collective-funds-lose-support",
       addressedStatementIds: [
-        "collective-capital-formation-beneficiary-distance-objection",
+        "collective-capital-formation-beneficiary-distance",
+        "collective-capital-formation-activist-purpose-objection",
       ],
       statementIds: [],
       obligationStatus: "open",

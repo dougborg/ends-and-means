@@ -14,8 +14,9 @@ Collective capital formation instead names an institutional arrangement for accu
 
 ## what-design-choices-matter
 
-Funds can receive newly issued shares, collect cash levies and purchase assets, or use another recurring contribution rule.
-Separate rules determine the governing constituency, voting authority, beneficiaries, use of returns, transfer rights, and whether contributors have personal claims.
+Funds can receive newly issued shares or use contributed cash to purchase shares.
+The financing method does not determine governance, so analysis must separately identify the group a fund represents and how that group selects, directs, or removes decision-makers.
+Other rules determine voting authority, beneficiaries, use of returns, transfer rights, and whether contributors have personal claims.
 These choices can connect the arrangement to social ownership or economic democracy, but accumulation alone does not establish either one.
 
 ## what-does-the-swedish-case-show
@@ -27,5 +28,6 @@ The case therefore demonstrates one disputed mechanism and its limits, not a com
 ## why-can-collective-funds-lose-support
 
 A collective fund can remain remote from the people it is meant to benefit when its gains are hard to see or its governors are difficult to influence.
-Warner finds that many intended Swedish supporters regarded wage-earner funds as abstract, while some labor activists resisted the growing emphasis on capital accumulation at the expense of worker power.
+Warner attributes weak support across much of the labor and Social Democratic base to a poor fit with immediate priorities and difficulty identifying concrete gains.
+He separately finds that activist enthusiasm waned as fund proposals emphasized capital accumulation over worker influence and a transition to socialism.
 That history leaves an open institutional question: which governance and benefit rules make collective accumulation answerable and tangible without converting it into individual saving?

@@ -10,11 +10,13 @@ const statementIds = [
   "collective-capital-formation-working-definition",
   "collective-capital-formation-national-accounts-boundary",
   "collective-capital-formation-individual-saving-boundary",
-  "collective-capital-formation-design-choices",
+  "collective-capital-formation-financing-methods",
+  "collective-capital-formation-governing-constituency",
   "meidner-collective-funds-proposal",
   "collective-capital-formation-rights-boundary",
   "collective-capital-formation-swedish-case-boundary",
-  "collective-capital-formation-beneficiary-distance-objection",
+  "collective-capital-formation-beneficiary-distance",
+  "collective-capital-formation-activist-purpose-objection",
 ];
 
 describe("collective capital formation dossier", () => {
@@ -80,7 +82,8 @@ describe("collective capital formation dossier", () => {
         obligationType: "counterargument",
         targetSectionId: "why-can-collective-funds-lose-support",
         addressedStatementIds: [
-          "collective-capital-formation-beneficiary-distance-objection",
+          "collective-capital-formation-beneficiary-distance",
+          "collective-capital-formation-activist-purpose-objection",
         ],
         obligationStatus: "open",
       }),

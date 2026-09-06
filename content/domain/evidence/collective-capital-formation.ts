@@ -208,13 +208,26 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-design-choices",
+      id: "collective-capital-formation-financing-methods",
       kind: "statement",
-      label: "Financing and governance are separate design choices",
+      label: "Collective funds can acquire assets through different financing methods",
       description:
-        "An institutional boundary preventing one funding mechanism from defining the whole concept.",
+        "A narrow distinction between share transfers and cash-financed asset purchases.",
       statementKind: "editorial-interpretation",
-      text: "Collective-capital institutions can receive newly issued shares or use cash levies to buy assets, while their governing constituency may be workers, unions, citizens, public appointees, or some combination; neither the financing method nor the fund label settles who controls the capital.",
+      text: "A collective-capital institution can receive newly issued shares or use contributed cash to purchase shares; either method can accumulate collective holdings, but the method does not by itself determine who governs the fund.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "collective-capital-formation-governing-constituency",
+      kind: "statement",
+      label: "A collective fund must identify its governing constituency",
+      description:
+        "A governance boundary requiring the represented group and its authority to be stated separately.",
+      statementKind: "editorial-interpretation",
+      text: "Calling an institution collective does not identify its governing constituency: analysis must state which group the fund represents and how that group selects, directs, or removes decision-makers.",
       ...reviewed,
     },
   },
@@ -260,13 +273,26 @@ export const collectiveCapitalFormationEvidenceDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "collective-capital-formation-beneficiary-distance-objection",
+      id: "collective-capital-formation-beneficiary-distance",
       kind: "statement",
       label: "Collective funds can feel remote from intended beneficiaries",
       description:
-        "A political and accountability objection drawn from the Swedish fund debate.",
+        "A mass-support and accountability objection drawn from the Swedish fund debate.",
       statementKind: "observation",
-      text: "Warner finds that many Swedish workers and Social Democratic voters saw wage-earner funds as abstract and detached from everyday concerns, while some labor activists objected when capital accumulation displaced worker influence as the proposal's visible purpose.",
+      text: "Warner finds that most Social Democratic voters and union members treated wage-earner funds as abstract and distant from everyday concerns, while the funds' tangible benefits remained unclear to many intended supporters.",
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "collective-capital-formation-activist-purpose-objection",
+      kind: "statement",
+      label: "Some labor activists opposed making capital accumulation the dominant purpose",
+      description:
+        "A distinct objection about displacement of worker influence as the proposal's purpose.",
+      statementKind: "observation",
+      text: "Warner finds that activist enthusiasm waned as Swedish fund proposals emphasized capital accumulation over worker influence and a transition to socialism, and that disappointment with this shift recurred at the 1981 LO and Social Democratic congresses.",
       ...reviewed,
     },
   },

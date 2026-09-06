@@ -38,7 +38,8 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "collective-capital-formation-design-choices",
+        "collective-capital-formation-financing-methods",
+        "collective-capital-formation-governing-constituency",
         "collective-capital-formation-rights-boundary",
       ],
       relatedEntityRefs: [
@@ -66,7 +67,8 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "collective-capital-formation-beneficiary-distance-objection",
+        "collective-capital-formation-beneficiary-distance",
+        "collective-capital-formation-activist-purpose-objection",
       ],
     },
   ],
