@@ -173,6 +173,7 @@ describe("safe-publication boundary", () => {
     'const data = require("../archive/data");',
     'const resolved = require.resolve("../archive/data");',
     'import data = require("../archive/data");',
+    `const deferred = \`${"${"}require("../archive/data")}\`;`,
   ])("rejects executable dependency syntax: %s", (content) => {
     expect(
       publicationBoundaryFindings([{ path: "src/example.ts", content }]),
@@ -182,6 +183,17 @@ describe("safe-publication boundary", () => {
         message: expect.stringContaining("../archive/data"),
       }),
     );
+  });
+
+  it.each([
+    '// import "../archive/data";',
+    '/* const data = require("../archive/data"); */',
+    "const example = 'import \"../archive/data\"';",
+    'const example = `require("../archive/data")`;',
+  ])("ignores non-executable dependency examples: %s", (content) => {
+    expect(
+      publicationBoundaryFindings([{ path: "src/example.ts", content }]),
+    ).toEqual([]);
   });
 
   it("rejects publishable files stored inside excluded trees", () => {

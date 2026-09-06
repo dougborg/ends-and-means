@@ -30,11 +30,8 @@ export interface ContentIntegrityResult {
 }
 
 const forbiddenRuntimePath = /(?:^|\/)(?:archive|legacy|drafts?)(?:\/|$)/iu;
-const moduleSpecifiers = [
-  /\bfrom\s*["']([^"']+)["']/gu,
-  /\bimport\s*(?:\(\s*)?["']([^"']+)["']/gu,
-  /\brequire(?:\.resolve)?\s*\(\s*["']([^"']+)["']/gu,
-];
+const codeToken =
+  /\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$)|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|[A-Za-z_$][\w$]*|[().]/gu;
 const executableRuntimePath = /\.(?:astro|cjs|cts|js|jsx|mjs|mts|ts|tsx)$/iu;
 const forbiddenBuildText =
   /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
@@ -84,12 +81,63 @@ function shingleOverlap(left: string, right: string, width = 5) {
   );
 }
 
+interface CodeToken {
+  kind: "punctuation" | "string" | "word";
+  value: string;
+}
+
+function codeTokens(content: string): CodeToken[] {
+  return [...content.matchAll(codeToken)].flatMap(([value]) => {
+    if (value.startsWith("//") || value.startsWith("/*")) return [];
+    if (value.startsWith("`")) {
+      const expressions = [
+        ...value.slice(1, -1).matchAll(/\$\{([\s\S]*?)\}/gu),
+      ].flatMap((match) => codeTokens(match[1] ?? ""));
+      return expressions.length > 0
+        ? expressions
+        : [{ kind: "string" as const, value: value.slice(1, -1) }];
+    }
+    if (['"', "'"].includes(value[0] ?? "")) {
+      return [{ kind: "string" as const, value: value.slice(1, -1) }];
+    }
+    if (["(", ")", "."].includes(value)) {
+      return [{ kind: "punctuation" as const, value }];
+    }
+    return [{ kind: "word" as const, value }];
+  });
+}
+
+const dependencyPatterns = [
+  { sequence: ["from", "<string>"], specifierOffset: 1 },
+  { sequence: ["import", "<string>"], specifierOffset: 1 },
+  { sequence: ["import", "(", "<string>"], specifierOffset: 2 },
+  { sequence: ["require", "(", "<string>"], specifierOffset: 2 },
+  {
+    sequence: ["require", ".", "resolve", "(", "<string>"],
+    specifierOffset: 4,
+  },
+] as const;
+
+function tokenSignature(token: CodeToken | undefined) {
+  return token?.kind === "string" ? "<string>" : token?.value;
+}
+
+function moduleSpecifiers(content: string) {
+  const tokens = codeTokens(content);
+  return tokens.flatMap((_, index) =>
+    dependencyPatterns.flatMap(({ sequence, specifierOffset }) => {
+      const matches = sequence.every(
+        (expected, offset) =>
+          tokenSignature(tokens[index + offset]) === expected,
+      );
+      return matches ? [tokens[index + specifierOffset]?.value ?? ""] : [];
+    }),
+  );
+}
+
 function runtimeDependencyFindings(file: PublicationFile): IntegrityFinding[] {
   if (!executableRuntimePath.test(file.path)) return [];
-  return moduleSpecifiers
-    .flatMap((pattern) =>
-      [...file.content.matchAll(pattern)].map((match) => match[1] ?? ""),
-    )
+  return moduleSpecifiers(file.content)
     .filter((specifier) => forbiddenRuntimePath.test(specifier))
     .map((specifier) => ({
       category: "archive-exclusion",
