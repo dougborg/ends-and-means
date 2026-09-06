@@ -270,6 +270,18 @@ describe("reviewed overlap resolution", () => {
     expect(result.errors.join("\n")).toMatch(/duplicate|invalidated|reviewer/u);
   });
 
+  it("rejects whitespace around acknowledgement identifiers", () => {
+    const result = resolveReviewedOverlapAcknowledgements(
+      [acknowledgement({ statementId: ` ${statement.id}` })],
+      [signal()],
+    );
+    expect(result.openSignals).toEqual([signal()]);
+    expect(result.acknowledgedSignals).toEqual([]);
+    expect(result.errors).toEqual([
+      "reviewed overlap acknowledgement: statementId has leading or trailing whitespace",
+    ]);
+  });
+
   it("sorts targets with stable code-unit keys", () => {
     expect(overlapTarget(acknowledgement())).toBe(
       "fixture-dossier#answer|fixture-statement|fixture-citation",
