@@ -71,14 +71,22 @@ const documents: AuthoringDocument[] = [
     ...base,
   }),
   entity({ id: "example-change-kind", kind: "concept", label: "Synthetic institutional change", schemeIds: [], scopeNote: "Synthetic Event-kind fixture only.", ...base }),
-  entity({ id: "example-material-source", kind: "source", label: "Synthetic material-change source", title: "Synthetic source", sourceType: "other", publicationStatus: "reviewed", description: "A synthetic source used only for a model-boundary test." }),
+  entity({ id: "example-material-source", kind: "source", label: "Synthetic material-change source", title: "Synthetic source", sourceType: "other", workId: "example-material-work", publicationStatus: "reviewed", description: "A synthetic source used only for a model-boundary test." }),
   entity({ id: "example-material-change", kind: "event", label: "Synthetic material change", description: "A synthetic reviewed Event used only for model-boundary tests.", eventKindIds: ["example-change-kind"], placeIds: ["example-region"], startDate: { year: 2026, certainty: "exact" }, descriptionStatementIds: ["example-outcome"], publicationStatus: "reviewed" }),
   { documentType: "relationships", subject: { kind: "statement", id: "example-outcome" }, relationships: [{ id: "example-outcome-cites-material-source", predicate: "cites", subject: { kind: "statement", id: "example-outcome" }, object: { kind: "source", id: "example-material-source" }, role: "supports", locator: "synthetic locator" }] },
+  entity({ id: "example-material-work", kind: "work", label: "Synthetic material-change work", title: "Synthetic source", workType: "other", publicationStatus: "reviewed", description: "A synthetic work used only for a model-boundary test." }),
 ];
+
+const reviewedDocuments = () => {
+  const copy = structuredClone(documents);
+  const statement = copy[4];
+  if (statement?.documentType === "entity") statement.entity.publicationStatus = "reviewed";
+  return copy;
+};
 
 describe("bounded Case model", () => {
   it("compiles an ongoing Case with a bounded episode and separated observations", () => {
-    const graph = compileDomainGraph(documents);
+    const graph = compileDomainGraph(reviewedDocuments());
 
     expect(graph.indexes.entitiesById["example-ongoing-case"]?.kind).toBe("case");
     expect(graph.indexes.entitiesById["example-case-episode"]?.kind).toBe("case-episode");
@@ -163,16 +171,44 @@ describe("bounded Case model", () => {
       "example-case-episode: parent Case example-ongoing-case does not reference this episode",
     );
   });
+});
 
+describe("material-change Event freshness metadata", () => {
   it("validates material-change pointers as cited, deterministic freshness metadata", () => {
-    expect(validateAuthoringDocuments(documents)).toEqual([]);
-    const invalid = structuredClone(documents);
+    expect(validateAuthoringDocuments(reviewedDocuments())).toEqual([]);
+    const invalid = reviewedDocuments();
     const ongoingCase = invalid[5];
     if (ongoingCase?.documentType === "entity" && ongoingCase.entity.kind === "case") ongoingCase.entity.materialChangeEventIds = ["missing-event", "missing-event"];
     expect(validateAuthoringDocuments(invalid)).toEqual(expect.arrayContaining([
       "example-ongoing-case: material-change Event IDs must be unique",
       "example-ongoing-case: unresolved material-change Event missing-event",
     ]));
+  });
+
+  it("rejects every material-change boundary violation", () => {
+    const variants: Array<[string, (docs: AuthoringDocument[]) => void]> = [
+      ["material-change Event IDs must be sorted", (docs) => { const value = docs[5]; if (value?.documentType === "entity" && value.entity.kind === "case") value.entity.materialChangeEventIds = ["z-event", "example-material-change"]; docs.push(entity({ id: "z-event", kind: "event", label: "Later synthetic change", description: "Fixture.", eventKindIds: ["example-change-kind"], placeIds: ["example-region"], startDate: { year: 2026, certainty: "exact" }, descriptionStatementIds: ["example-outcome"], publicationStatus: "reviewed" })); }],
+      ["must be reviewed or published", (docs) => { const value = docs[9]; if (value?.documentType === "entity") value.entity.publicationStatus = "in-review"; }],
+      ["falls outside the Case review period", (docs) => { const value = docs[9]; if (value?.documentType === "entity" && value.entity.kind === "event") value.entity.startDate = { year: 1993, certainty: "exact" }; }],
+      ["falls outside the Case review period", (docs) => { const value = docs[9]; if (value?.documentType === "entity" && value.entity.kind === "event") value.entity.startDate = { year: 2027, certainty: "exact" }; }],
+      ["unresolved material-change Event", (docs) => { const value = docs[5]; if (value?.documentType === "entity" && value.entity.kind === "case") value.entity.materialChangeEventIds = ["example-material-source"]; }],
+      ["requires an Event-owned reviewed description Statement", (docs) => { docs.splice(10, 1); }],
+      ["requires an Event-owned reviewed description Statement", (docs) => { const value = docs[8]; if (value?.documentType === "entity") value.entity.publicationStatus = "research-needed"; }],
+    ];
+    for (const [message, mutate] of variants) {
+      const invalid = reviewedDocuments(); mutate(invalid);
+      expect(validateAuthoringDocuments(invalid).some((error) => error.includes(message))).toBe(true);
+    }
+  });
+
+  it("rejects freshness pointers on ended Cases and compiles deterministically across input permutations", () => {
+    const ended = reviewedDocuments();
+    const value = ended[5];
+    if (value?.documentType === "entity" && value.entity.kind === "case") value.entity.endDate = { year: 2026, certainty: "exact" };
+    expect(validateAuthoringDocuments(ended)).toContain("example-ongoing-case: ended Case must not declare material-change Event IDs");
+    const forward = compileDomainGraph(reviewedDocuments());
+    const reverse = compileDomainGraph(reviewedDocuments().reverse());
+    expect(reverse.indexes.entitiesById["example-ongoing-case"]).toEqual(forward.indexes.entitiesById["example-ongoing-case"]);
   });
 });
 

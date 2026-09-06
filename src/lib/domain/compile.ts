@@ -711,6 +711,8 @@ function validateMaterialChangeEvents(
   errors: string[],
 ) {
   const changeIds = entity.materialChangeEventIds ?? [];
+  if (entity.endDate && changeIds.length > 0)
+    errors.push(`${entity.id}: ended Case must not declare material-change Event IDs`);
   if (new Set(changeIds).size !== changeIds.length)
     errors.push(`${entity.id}: material-change Event IDs must be unique`);
   if (changeIds.some((id, index) => index > 0 && (changeIds[index - 1] ?? "") > id))
@@ -721,14 +723,18 @@ function validateMaterialChangeEvents(
       errors.push(`${entity.id}: unresolved material-change Event ${eventId}`);
       continue;
     }
-    if (["research-needed", "in-review", "deprecated"].includes(event.publicationStatus))
-      errors.push(`${entity.id}: material-change Event ${eventId} must be reviewed or published`);
-    const eventStart = comparableDate(event.startDate, "start");
-    const caseStart = comparableDate(entity.startDate, "start");
-    const asOf = entity.asOf ? Number(entity.asOf.replaceAll("-", "")) : undefined;
-    if ((eventStart !== undefined && caseStart !== undefined && eventStart < caseStart) || (eventStart !== undefined && asOf !== undefined && eventStart > asOf))
-      errors.push(`${entity.id}: material-change Event ${eventId} falls outside the Case review period`);
+    validateMaterialChangeEvent(entity, event, errors);
   }
+}
+
+function validateMaterialChangeEvent(entity: EntityOf<"case">, event: EntityOf<"event">, errors: string[]) {
+  if (!["reviewed", "published"].includes(event.publicationStatus))
+    errors.push(`${entity.id}: material-change Event ${event.id} must be reviewed or published`);
+  const eventStart = comparableDate(event.startDate, "start");
+  const caseStart = comparableDate(entity.startDate, "start");
+  const asOf = entity.asOf ? Number(entity.asOf.replaceAll("-", "")) : undefined;
+  if ((eventStart !== undefined && caseStart !== undefined && eventStart < caseStart) || (eventStart !== undefined && asOf !== undefined && eventStart > asOf))
+    errors.push(`${entity.id}: material-change Event ${event.id} falls outside the Case review period`);
 }
 
 function validateMaterialChangeEvidence(
@@ -736,15 +742,23 @@ function validateMaterialChangeEvidence(
   relationships: DomainRelationship[],
   errors: string[],
 ) {
-  const citedStatementIds = new Set(relationships.filter(({ predicate }) => predicate === "cites").map(({ subject }) => subject.id));
   const entityById = new Map(entities.map((entity) => [entity.id, entity]));
   for (const entity of entities) {
     if (entity.kind !== "case") continue;
     for (const eventId of entity.materialChangeEventIds ?? []) {
       const event = entityById.get(eventId);
       if (event?.kind !== "event") continue;
-      if (!event.descriptionStatementIds.some((id) => citedStatementIds.has(id)))
-        errors.push(`${entity.id}: material-change Event ${eventId} requires a cited description Statement`);
+      const hasValidDescriptionEvidence = event.descriptionStatementIds.some((statementId) => {
+        const statement = entityById.get(statementId);
+        if (statement?.kind !== "statement" || !["reviewed", "published"].includes(statement.publicationStatus)) return false;
+        return relationships.some((relationship) => {
+          if (relationship.predicate !== "cites" || relationship.subject.id !== statementId) return false;
+          const source = entityById.get(relationship.object.id);
+          return source?.kind === "source" && ["reviewed", "published"].includes(source.publicationStatus);
+        });
+      });
+      if (!hasValidDescriptionEvidence)
+        errors.push(`${entity.id}: material-change Event ${eventId} requires an Event-owned reviewed description Statement citing a reviewed or published Source`);
     }
   }
 }

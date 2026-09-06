@@ -12,7 +12,7 @@ Free-text summaries would duplicate claims and could silently turn chronology in
 ## Decision
 
 An ongoing Case may list sorted, unique `materialChangeEventIds`.
-Each ID must resolve to a reviewed or published Event within the Case review period, and that Event must own at least one atomic description Statement with a citation.
+The field is valid only on an ongoing Case. Each ID must resolve to a reviewed or published Event within the Case review period, and that Event must own at least one reviewed atomic description Statement citing a resolved reviewed or published Source.
 The pointer records why editors revisited the Case; it does not assert turning-point status, causal importance, or observed implementation.
 Case pages show the freshness dates, the linked Event description evidence, and this non-causal boundary in plain language.
 
@@ -20,4 +20,4 @@ Case pages show the freshness dates, the linked Event description evidence, and 
 
 Material change remains independently sourced through Event Statements rather than duplicated on the Case.
 Explanations, rival causal accounts, rules in use, and outcomes remain separate Statements and Transition fields.
-Cases without a documented review trigger may omit the field.
+Ongoing Cases without a documented review trigger may omit the field; ended Cases cannot use it.
