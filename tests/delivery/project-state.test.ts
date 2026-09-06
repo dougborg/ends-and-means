@@ -285,6 +285,23 @@ describe("delivery evidence completeness", () => {
   });
 });
 
+describe("local Git failure reporting", () => {
+  it("omits private assignment details and duplicate generic findings", async () => {
+    const snapshot = await fixture();
+    const active = item(snapshot, 1);
+    active.baseCurrent = undefined;
+    active.historyLinear = undefined;
+    active.localGitFailure = "WORKTREE_UNAVAILABLE";
+    const findings = auditDeliverySnapshot(snapshot);
+    const messages = findings.map(({ message }) => message).join("\n");
+    expect(codes(snapshot)).toContain("WORKTREE_UNAVAILABLE");
+    expect(codes(snapshot)).not.toContain("STARTING_BASE");
+    expect(codes(snapshot)).not.toContain("LINEAR_HISTORY");
+    expect(messages).not.toContain("private-owner");
+    expect(messages).not.toContain("/private/");
+  });
+});
+
 describe("linked pull request selection", () => {
   it("selects the sole open linked PR independently of list order and rejects ambiguity", () => {
     const closed = { state: "CLOSED" as const, id: 1 };

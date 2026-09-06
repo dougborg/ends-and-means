@@ -7,7 +7,11 @@ import {
   compareSchema,
   mainRefSchema,
 } from "./delivery-api-schema.ts";
-import { branchTargetForActiveItem } from "./delivery-live-evidence.ts";
+import {
+  branchTargetForActiveItem,
+  loadActiveBranchEvidence,
+} from "./delivery-live-evidence.ts";
+import { localGitEvidence } from "./delivery-local-git.ts";
 import {
   assignmentForIssue,
   type PrivateDeliveryState,
@@ -227,10 +231,14 @@ function loadLiveItem(
         prs,
       )
     : undefined;
-  const branch =
-    target?.base && target.head
-      ? branchEvidence(target.base, target.head)
-      : undefined;
+  const branch = target
+    ? loadActiveBranchEvidence(
+        target,
+        assignment,
+        branchEvidence,
+        localGitEvidence,
+      )
+    : undefined;
   return {
     number: item.content.number,
     title: item.content.title,
@@ -250,6 +258,7 @@ function loadLiveItem(
     baseCurrent:
       target?.assignmentMatches === false ? false : branch?.baseCurrent,
     historyLinear: branch?.historyLinear,
+    localGitFailure: branch && "failure" in branch ? branch.failure : undefined,
     reviewEvidence: relevantPr.selected?.reviewEvidence,
   };
 }

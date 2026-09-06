@@ -19,6 +19,9 @@ the expiring private delivery-state file described by the delivery policy.
 Never put owner identities or filesystem paths in public issue or pull-request
 text. Pass the private file explicitly; do not infer it from public comments.
 Do not mutate another owner's worktree or preserved paused work.
+For In-progress work without an open pull request, use the harness's local Git
+evidence; do not publish the branch merely to make it auditable. Once an open
+pull request exists, its GitHub-declared base and head are authoritative.
 
 Run the repository audit without credentials in normal verification:
 
