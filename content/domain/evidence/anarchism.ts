@@ -132,6 +132,10 @@ export const anarchismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep the concept, historical movements, approaches, ends, means, self-identification, and bounded cases distinct.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Anarchism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q6199", url: "https://www.wikidata.org/wiki/Q6199", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },

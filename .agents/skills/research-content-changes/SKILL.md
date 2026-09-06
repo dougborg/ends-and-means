@@ -119,6 +119,15 @@ imported, rendered, or cited as evidence. Record plausible candidates; do not
 silently merge concepts.
 Keep substantive claims as atomic Statements with precise locators.
 
+For external orientation and identity mappings, browse the final target after
+resolving redirects and disambiguation. Record Wikipedia only as an orientation
+link with its language, canonical article URL, and check date; record Wikidata
+only as an identity link with canonical QID/URL, check date, and exact or close
+confidence. Exact means the same authored identity; broader, narrower, or
+differently bounded items are close or remain intentionally unmatched. Keep a
+reason for every intentional absence, reuse an entity-owned mapping for its
+Subject Guide, and never treat these links or imported taxonomy as evidence.
+
 For narrative prose, write plain-spoken analytical synthesis from the canonical
 Statement ledger or closed-source notes rather than by editing source wording.
 Verify every factual clause against its listed Statements, compare the draft

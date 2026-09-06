@@ -96,6 +96,14 @@ See the [content integrity harness](docs/content-integrity-harness.md) for the f
 - Keep absent and ambiguous matches absent. Redirects should be reviewed and
   updated to their stable target; a close match must never be presented as an
   exact identity.
+- Recheck the final canonical article URL and QID on the recorded `checkedAt`
+  date. The compiled orientation audit inventories every live guide and entity
+  as mapped, intentionally unmatched with a reason, or not applicable; do not
+  add a weak link merely to clear an absence. Scheduled availability and
+  renewal checks remain separate operational work tracked in issue #19.
+- External orientation and identity metadata is a quiet trust aid. It cannot
+  satisfy a Statement citation, strengthen a relationship, or import Wikipedia
+  categories or Wikidata taxonomy into the canonical graph.
 
 ## Small corrections and software changes
 

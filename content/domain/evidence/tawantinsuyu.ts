@@ -343,6 +343,10 @@ export const tawantinsuyuEvidenceDocuments = [
         "Imperial institutions and their regional operation from the expansion associated with Pachakuti through the Spanish seizure of Cusco; excludes treating later colonial Andean communities, all Inka-descended peoples, or the Vilcabamba polity as the same institutional episode.",
       selectionRationale:
         "The case permits comparison of coercion, negotiation, reciprocity, labor, storage, and indirect rule without making Tawantinsuyu an avatar of a modern ideology.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Inca_Empire", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q28573", url: "https://www.wikidata.org/wiki/Q28573", purpose: "identity", match: "close", checkedAt: "2026-09-06" },
+      ],
       conditionStatementIds: [
         "tawantinsuyu-name-boundary",
         "tawantinsuyu-chronology-boundary",

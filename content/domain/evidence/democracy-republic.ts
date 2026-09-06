@@ -237,6 +237,10 @@ export const democracyRepublicEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer democratic practice from a constitutional label, an election, or one participatory institution.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Democracy", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q7174", url: "https://www.wikidata.org/wiki/Q7174", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },
@@ -251,6 +255,10 @@ export const democracyRepublicEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep a republic, republican traditions, democratic procedures, attributed popular sovereignty, and measured practice distinct.",
+      externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Republic", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q7270", url: "https://www.wikidata.org/wiki/Q7270", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+      ],
       ...reviewed,
     },
   },

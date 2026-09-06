@@ -25,7 +25,7 @@ describe("external references", () => {
     ];
     const errors = validateAuthoringDocuments(documents);
     expect(errors).toContain("first: Wikipedia references must be orientation links");
-    expect(errors).toContain("first: Wikipedia reference 0 does not match its language and article form");
+    expect(errors).toContain("first: Wikipedia reference 0 does not match its language and canonical article form");
     expect(errors).toContain("first: external reference 0 checkedAt requires an ISO calendar date");
     expect(errors).toContain("first: Wikidata references require a QID");
     expect(errors).toContain("first: Wikidata references must be identity links");
@@ -33,6 +33,19 @@ describe("external references", () => {
     expect(errors).toContain("first: Wikidata reference 1 requires the canonical host");
     expect(errors.some((error) => error.includes("external identity wikidata:undefined"))).toBe(false);
     expect(errors.some((error) => error.includes("external identity wikidata:123"))).toBe(false);
+  });
+
+  it("rejects redirects, disambiguation forms, and noncanonical identity URLs", () => {
+    const documents: AuthoringDocument[] = [{ documentType: "entity", entity: {
+      id: "example", kind: "concept-scheme", scope: "Fixture.", externalRefs: [
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Example_(disambiguation)", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Example?redirect=no", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
+        { system: "wikidata", id: "Q123", url: "https://www.wikidata.org/wiki/Q123#claims", purpose: "identity", match: "close", checkedAt: "2026-09-06" },
+      ], ...base,
+    } }];
+    const errors = validateAuthoringDocuments(documents);
+    expect(errors.filter((error) => error.includes("canonical article form"))).toHaveLength(2);
+    expect(errors).toContain("example: Wikidata reference 2 requires the canonical host");
   });
 
   it("rejects duplicate well-formed external identities", () => {

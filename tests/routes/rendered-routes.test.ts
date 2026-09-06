@@ -237,6 +237,7 @@ async function verifyExploreAndCaseRoutes() {
   expect(canonicalCase).toContain("<details");
 
   await verifyConceptRoutes();
+  await verifyOrientationRoutes();
   await verifySubjectGuideRoutes();
 }
 
@@ -373,6 +374,19 @@ async function verifyConceptRoutes() {
   );
   expect(hrefs(socialDemocracy)).toContain(
     "/explore/swedish-wage-earner-fund-program/",
+  );
+}
+
+async function verifyOrientationRoutes() {
+  const democracy = await readFile(routeFile("/concepts/democracy/"), "utf8");
+  expect(hrefs(democracy)).toEqual(
+    expect.arrayContaining([
+      "https://en.wikipedia.org/wiki/Democracy",
+      "https://www.wikidata.org/wiki/Q7174",
+    ]),
+  );
+  expect(stripMarkup(democracy)).toContain(
+    "Orientation and identity links are not evidence",
   );
 }
 
