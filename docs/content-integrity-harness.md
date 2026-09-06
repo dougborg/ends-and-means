@@ -18,9 +18,11 @@ The content audit remains informational where absence can be legitimate.
 It lists missing dossiers, research-needed entities, unused Sources, entities without typed relationships, Dimensions without Placements, open Research Obligations, and research-gap sections without exact obligation ownership.
 Researchers should resolve a listed gap or document why the absence is analytically correct; the harness must not manufacture a relationship or turn missing data into a midpoint.
 
-Close phrasing between narrative and source-backed Statements is also an attention signal.
+Close phrasing between a Dossier standfirst or section and its source-backed Statements is also an attention signal.
 It tells a reviewer which cited Sources to compare, but it is not a plagiarism verdict.
 Human review remains responsible for checking the actual source passages, attribution, quotation, fairness, and independent synthesis.
+Signals remain open until that comparison is possible; matching internal trace prose alone is not evidence that source mimicry has been cleared.
+The harness sorts scanned paths and findings so identical inputs produce stable output regardless of filesystem or caller ordering.
 
 ## Source preflight
 

@@ -34,6 +34,21 @@ const moduleSpecifier = /(?:\bfrom\s*|\bimport\s*\(\s*)["']([^"']+)["']/gu;
 const forbiddenBuildText =
   /archive\/legacy-research|content\/framework|(?:lib|routes?)\/(?:framework|prototype|legacy-content)/iu;
 
+function compareFindings(left: IntegrityFinding, right: IntegrityFinding) {
+  return (
+    Number(right.severity === "violation") -
+      Number(left.severity === "violation") ||
+    left.category.localeCompare(right.category) ||
+    left.location.localeCompare(right.location) ||
+    left.message.localeCompare(right.message) ||
+    left.remediation.localeCompare(right.remediation)
+  );
+}
+
+function sortedFindings(findings: IntegrityFinding[]) {
+  return [...findings].sort(compareFindings);
+}
+
 function words(value: string) {
   return value.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
 }
@@ -97,7 +112,7 @@ export function publicationBoundaryFindings(
         "trace the reference to its production import and remove the legacy or archived dependency",
     });
   }
-  return findings;
+  return sortedFindings(findings);
 }
 
 function sourceSimilarityFindings(graph: CompiledDomainGraph) {
@@ -113,32 +128,41 @@ function sourceSimilarityFindings(graph: CompiledDomainGraph) {
     sources.push(relationship.object.id);
     citationsByStatement.set(relationship.subject.id, sources);
   }
+  for (const sources of citationsByStatement.values()) sources.sort();
   const dossiers = graph.entities.filter(
     (entity): entity is Dossier =>
       entity.kind === "dossier" &&
       ["reviewed", "published"].includes(entity.publicationStatus),
   );
-  return dossiers.flatMap((dossier) =>
-    dossier.sections.flatMap((section) =>
-      section.statementIds.flatMap((statementId) => {
+  return dossiers.flatMap((dossier) => {
+    const passages = [
+      {
+        id: "standfirst",
+        body: dossier.standfirst,
+        statementIds: dossier.standfirstStatementIds,
+      },
+      ...dossier.sections,
+    ];
+    return passages.flatMap((passage) =>
+      passage.statementIds.flatMap((statementId) => {
         const statement = statements.get(statementId);
         const sourceIds = citationsByStatement.get(statementId) ?? [];
         if (!statement || sourceIds.length === 0) return [];
-        const score = shingleOverlap(section.body, statement.text);
+        const score = shingleOverlap(passage.body, statement.text);
         if (score < 0.45) return [];
         return [
           {
             category: "source-similarity" as const,
             severity: "attention" as const,
-            location: `${dossier.id}#${section.id}`,
+            location: `${dossier.id}#${passage.id}`,
             message: `possible close phrasing with source-backed Statement ${statementId} (${Math.round(score * 100)}% five-word overlap); compare against Sources ${sourceIds.join(", ")}`,
             remediation:
               "review the narrative beside the cited source passages; quote and attribute necessary wording or rewrite independently",
           },
         ];
       }),
-    ),
-  );
+    );
+  });
 }
 
 export function runContentIntegrity({
@@ -178,16 +202,15 @@ export function runContentIntegrity({
   }
   findings.push(...publicationBoundaryFindings(runtimeFiles, builtFiles));
   findings.push(...sourceSimilarityFindings(graph));
-  return { findings, attention: auditContent(graph) };
+  return { findings: sortedFindings(findings), attention: auditContent(graph) };
 }
 
 export function formatIntegrityResult(result: ContentIntegrityResult) {
-  const violations = result.findings.filter(
+  const findings = sortedFindings(result.findings);
+  const violations = findings.filter(
     ({ severity }) => severity === "violation",
   );
-  const signals = result.findings.filter(
-    ({ severity }) => severity === "attention",
-  );
+  const signals = findings.filter(({ severity }) => severity === "attention");
   const lines = [
     "Content integrity verification",
     "",

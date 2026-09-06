@@ -196,10 +196,7 @@ export const socialismCommunismEvidenceDocuments = [
       title: "The Conquest of Bread",
       sourceType: "edition",
       workId: "kropotkin-conquest-bread-work",
-      contributorDisplay: [
-        "Pëtr Kropotkin",
-        "Chapman and Hall (translator)",
-      ],
+      contributorDisplay: ["Pëtr Kropotkin", "Chapman and Hall (translator)"],
       publicationYear: 2026,
       publisher: "Standard Ebooks",
       resourceLinks: [
@@ -360,7 +357,8 @@ export const socialismCommunismEvidenceDocuments = [
     entity: {
       id: "modern-communist-traditions-within-socialist-debates",
       kind: "statement",
-      label: "The represented modern communist traditions emerged within socialist debates",
+      label:
+        "The represented modern communist traditions emerged within socialist debates",
       description:
         "A bounded genealogy restricted to the modern traditions represented by this source set.",
       statementKind: "classification",
@@ -403,7 +401,7 @@ export const socialismCommunismEvidenceDocuments = [
       description:
         "An attributed programmatic aim for communists in the 1848 Manifesto.",
       statementKind: "attributed-proposal",
-      text: "In the 1848 Manifesto, Marx and Engels call for workers to organize as a class, overthrow bourgeois political supremacy, and win political power.",
+      text: "Marx and Engels say communists share other proletarian parties' near-term objective: political rule by the proletariat after it has organized as a class and displaced bourgeois supremacy.",
       ...reviewed,
     },
   },

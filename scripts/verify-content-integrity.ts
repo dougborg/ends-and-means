@@ -17,12 +17,14 @@ async function walk(directory: string): Promise<string[]> {
     () => [],
   );
   const paths = await Promise.all(
-    entries.map((entry) => {
-      const pathname = resolve(directory, entry.name);
-      return entry.isDirectory() ? walk(pathname) : [pathname];
-    }),
+    entries
+      .toSorted((left, right) => left.name.localeCompare(right.name))
+      .map((entry) => {
+        const pathname = resolve(directory, entry.name);
+        return entry.isDirectory() ? walk(pathname) : [pathname];
+      }),
   );
-  return paths.flat();
+  return paths.flat().sort((left, right) => left.localeCompare(right));
 }
 
 async function loadFiles(
@@ -35,7 +37,8 @@ async function loadFiles(
     )
   )
     .flat()
-    .filter((pathname) => include.test(pathname));
+    .filter((pathname) => include.test(pathname))
+    .sort((left, right) => left.localeCompare(right));
   return Promise.all(
     paths.map(async (pathname) => ({
       path: relative(root, pathname),

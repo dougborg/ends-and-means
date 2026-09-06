@@ -228,7 +228,85 @@ describe("editorial similarity signals", () => {
       }),
     );
   });
+});
 
+describe("standfirst similarity signals", () => {
+  it("checks a Dossier standfirst against its traced Statements", () => {
+    const graph = structuredClone(canonicalGraph);
+    const statement = graph.entities.find(
+      (entity) => entity.kind === "statement",
+    );
+    const source = graph.entities.find((entity) => entity.kind === "source");
+    if (statement?.kind !== "statement" || source?.kind !== "source")
+      throw new Error("Missing canonical similarity fixtures");
+    const fixtureStatement = {
+      ...statement,
+      id: "standfirst-similarity-statement",
+      text: "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
+    };
+    graph.entities.push(fixtureStatement, {
+      id: "standfirst-similarity-dossier",
+      kind: "dossier",
+      label: "Standfirst similarity dossier",
+      description: "Synthetic fixture.",
+      publicationStatus: "reviewed",
+      subject: { kind: "concept", id: "fixture-subject" },
+      standfirst:
+        "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
+      standfirstStatementIds: [fixtureStatement.id],
+      reviewedAt: "2026-09-05",
+      sections: [],
+    });
+    graph.relationships.push({
+      id: "standfirst-similarity-citation",
+      predicate: "cites",
+      subject: { kind: "statement", id: fixtureStatement.id },
+      object: { kind: "source", id: source.id },
+      role: "supports",
+      locator: "p. 1",
+    });
+
+    expect(verify({ graph }).findings).toContainEqual(
+      expect.objectContaining({
+        category: "source-similarity",
+        location: "standfirst-similarity-dossier#standfirst",
+      }),
+    );
+
+    const dossier = graph.entities.find(
+      ({ id }) => id === "standfirst-similarity-dossier",
+    );
+    if (dossier?.kind !== "dossier")
+      throw new Error("Missing standfirst Dossier fixture");
+    dossier.standfirstStatementIds = [];
+    expect(verify({ graph }).findings).not.toContainEqual(
+      expect.objectContaining({
+        location: "standfirst-similarity-dossier#standfirst",
+      }),
+    );
+  });
+});
+
+describe("deterministic integrity output", () => {
+  it("returns and formats findings deterministically for permuted inputs", () => {
+    const runtimeFiles = [
+      { path: "src/archive/z.ts", content: "export const z = 1" },
+      { path: "src/archive/a.ts", content: "export const a = 1" },
+    ];
+    const forward = verify({ runtimeFiles });
+    const reverse = verify({ runtimeFiles: runtimeFiles.toReversed() });
+
+    expect(reverse.findings).toEqual(forward.findings);
+    expect(
+      formatIntegrityResult({
+        ...forward,
+        findings: forward.findings.toReversed(),
+      }),
+    ).toBe(formatIntegrityResult(forward));
+  });
+});
+
+describe("integrity result formatting", () => {
   it("formats violations and human-review signals distinctly", () => {
     const output = formatIntegrityResult({
       attention: verify().attention,
