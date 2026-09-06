@@ -135,7 +135,10 @@ describe("delivery evidence and dependencies", () => {
     candidate.body = "## Acceptance criteria\n\n- [ ] Work.";
     item(snapshot, 2).status = "In review";
     item(snapshot, 2).linkedPullRequestStates = ["OPEN"];
-    item(snapshot, 2).reviewEvidence = { copilot: true, adversarial: true };
+    item(snapshot, 2).reviewEvidence = {
+      copilot: "reviewed",
+      adversarial: true,
+    };
     item(snapshot, 1).workstream = undefined;
     expect(canPromote(snapshot, candidate)).toBe(false);
   });
@@ -161,6 +164,26 @@ describe("delivery evidence and dependencies", () => {
   });
 });
 
+describe("Copilot delivery evidence states", () => {
+  it.each(["reviewed", "unavailable"] as const)(
+    "accepts complete adversarial evidence when Copilot is %s",
+    async (copilot) => {
+      const snapshot = await fixture();
+      item(snapshot, 7).reviewEvidence = { copilot, adversarial: true };
+      expect(codes(snapshot)).not.toContain("REVIEW_EVIDENCE");
+    },
+  );
+
+  it("fails closed when Copilot status is missing", async () => {
+    const snapshot = await fixture();
+    item(snapshot, 7).reviewEvidence = {
+      copilot: "missing",
+      adversarial: true,
+    };
+    expect(codes(snapshot)).toContain("REVIEW_EVIDENCE");
+  });
+});
+
 describe("delivery evidence completeness", () => {
   it("requires ownership, current-base, linear-history, review, workstream, and track-label evidence", async () => {
     const snapshot = await fixture();
@@ -169,7 +192,10 @@ describe("delivery evidence completeness", () => {
     item(snapshot, 7).baseCurrent = false;
     item(snapshot, 2).historyLinear = false;
     item(snapshot, 3).workstream = undefined;
-    item(snapshot, 7).reviewEvidence = { copilot: true, adversarial: false };
+    item(snapshot, 7).reviewEvidence = {
+      copilot: "reviewed",
+      adversarial: false,
+    };
     snapshot.repositoryLabels = snapshot.repositoryLabels.filter(
       (label) => label !== "track:depictions",
     );
@@ -224,7 +250,7 @@ describe("delivery evidence completeness", () => {
         linkedPullRequestStates: ["OPEN"],
         baseCurrent: true,
         historyLinear: true,
-        reviewEvidence: { copilot: true, adversarial: true },
+        reviewEvidence: { copilot: "unavailable", adversarial: true },
       },
       {
         number: 121,
@@ -280,6 +306,16 @@ describe("linked pull request selection", () => {
 });
 
 describe("delivery evidence schema", () => {
+  it("rejects legacy boolean Copilot evidence", async () => {
+    const snapshot = (await rawFixture()) as unknown as {
+      items: Array<{ number: number; reviewEvidence?: { copilot: unknown } }>;
+    };
+    const review = snapshot.items.find(({ number }) => number === 7);
+    if (!review?.reviewEvidence) throw new Error("Missing review fixture");
+    review.reviewEvidence.copilot = true;
+    expect(deliverySnapshotSchema.safeParse(snapshot).success).toBe(false);
+  });
+
   it("rejects implementation owners outside the documented agent namespace", async () => {
     const snapshot = await fixture();
     const ownership = item(snapshot, 1).ownership;

@@ -57,6 +57,7 @@ pnpm verify
 
 Open the pull request from a branch rebased on current `main`.
 Use the repository template, identify human decisions, request applicable Copilot review, and obtain an independent adversarial review.
+Record only the privacy-safe exact-head markers defined in the review reference; keep internal agent handles, worktree paths, quota state, and operational explanations in private coordination state.
 These reviews are project-process gates even though GitHub does not require an approving review.
 Resolve conversations and all strict checks, rebase again if the base moved, integrate with rebase rather than squash or merge commits, and verify main plus deployment after merge.
 

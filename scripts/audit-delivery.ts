@@ -78,7 +78,13 @@ const prViewSchema = z
         .passthrough(),
     ),
     comments: z.array(
-      z.object({ author: actorSchema, body: z.string() }).passthrough(),
+      z
+        .object({
+          author: actorSchema,
+          authorAssociation: z.string().min(1),
+          body: z.string(),
+        })
+        .passthrough(),
     ),
   })
   .passthrough();
@@ -172,7 +178,7 @@ function branchEvidence(branch: string) {
   };
 }
 
-function prEvidence(url: string, implementationOwner: string | undefined) {
+function prEvidence(url: string) {
   const pr = parseJson(
     gh([
       "pr",
@@ -191,7 +197,6 @@ function prEvidence(url: string, implementationOwner: string | undefined) {
     headRefName: pr.headRefName,
     reviewEvidence: reviewEvidenceForHead(
       pr.headRefOid,
-      implementationOwner,
       pr.reviews,
       pr.comments,
     ),
@@ -214,7 +219,7 @@ function loadLiveItem(item: z.infer<typeof projectItemSchema>): DeliveryItem {
   );
   const ownership = ownershipFrom(issue.comments);
   const links = item["linked pull requests"] ?? [];
-  const prs = links.map((url) => prEvidence(url, ownership?.owner));
+  const prs = links.map((url) => prEvidence(url));
   const relevantPr = selectRelevantPullRequest(prs);
   const reviewBranch =
     item.status === "In review" && relevantPr.selected
@@ -297,7 +302,11 @@ function loadLiveSnapshot(): DeliverySnapshot {
 
 function loadSnapshot(args: string[]) {
   const normalizedArgs = args.filter((arg) => arg !== "--");
-  const modes = new Set(["--project-snapshot", "--live-project", "--repository-only"]);
+  const modes = new Set([
+    "--project-snapshot",
+    "--live-project",
+    "--repository-only",
+  ]);
   const unknown = normalizedArgs.filter(
     (arg) => arg.startsWith("-") && !modes.has(arg),
   );
@@ -315,7 +324,9 @@ function loadSnapshot(args: string[]) {
       snapshotPath.startsWith("-") ||
       normalizedArgs.length !== 2
     )
-      throw new InputInvalidError("--project-snapshot requires exactly one path.");
+      throw new InputInvalidError(
+        "--project-snapshot requires exactly one path.",
+      );
     return parseJson(
       readFileSync(resolve(snapshotPath), "utf8"),
       deliverySnapshotSchema,

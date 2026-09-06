@@ -51,6 +51,7 @@ export const skillCapabilities: SkillCapability[] = [
     patterns: [
       /Copilot/i,
       /independent adversarial review/i,
+      /privacy-safe exact-head/i,
       /process.+gate/is,
     ],
     deletion: {

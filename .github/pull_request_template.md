@@ -27,8 +27,8 @@
 
 ## Review and integration
 
-- [ ] Applicable Copilot findings are resolved.
-- [ ] An independent adversarial review covered the material risks, with a head-bound reviewer comment recorded as described in `docs/delivery-harness.md`.
+- [ ] Applicable Copilot findings are resolved, or an exact-head unavailable marker records that a normal request produced no review.
+- [ ] An independent adversarial review covered the material risks, with a privacy-safe exact-head attestation recorded as described in `docs/delivery-harness.md`.
 - [ ] The branch is rebased on current `main` and will use rebase integration.
 
 ## Human decisions requested
