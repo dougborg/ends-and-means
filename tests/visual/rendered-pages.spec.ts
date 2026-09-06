@@ -146,8 +146,10 @@ test("disclosures expose state and work from the keyboard", async ({ page }) => 
   await expect(disclosure.locator(".canonical-claim").first()).toBeVisible();
 });
 
-test("subject guide works without JavaScript and keeps evidence adjacent", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+test("subject guide works without JavaScript and keeps evidence adjacent", async ({ browser }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false });
   const page = await context.newPage();
   await page.goto("/guides/economic-democracy/");
   await expect(page.getByRole("heading", { name: "Economic democracy", level: 1 })).toBeVisible();
