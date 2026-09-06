@@ -252,6 +252,9 @@ describe("SubjectGuide publication boundaries", () => {
     "Learning paths through the subject.",
     "A learning journey through the subject.",
     "Learning journeys through the subject.",
+    "A reader-first account of the subject.",
+    "A reader path through the subject.",
+    "Reader paths through the subject.",
     "A reader journey through the subject.",
     "Reader journeys through the subject.",
   ])("rejects internal audience framing in public guide identity: %s", (description) => {

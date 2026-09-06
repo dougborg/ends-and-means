@@ -418,7 +418,7 @@ describe("narrative Dossier model", () => {
       dossier.entity.kind !== "dossier"
     )
       throw new Error("Missing dossier fixture");
-    dossier.entity.description = "An internal learner journey fixture.";
+    dossier.entity.description = "An internal reader-first fixture.";
 
     expect(validateAuthoringDocuments(invalid)).not.toContain(
       "test-concept-dossier: live Dossier identity contains an internal workflow reference",

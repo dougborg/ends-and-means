@@ -15,7 +15,8 @@ Evidence and formal model detail support that journey through progressive
 disclosure rather than competing with the answer for attention.
 This product framing remains internal.
 Public labels, descriptions, headings, and summaries should never call
-themselves a “learner path,” “learner journey,” or “learner-first” experience.
+themselves a “learner path,” “learner journey,” “learner-first,” “reader path,”
+“reader journey,” or “reader-first” experience.
 Describe the subject instead of describing the page: name its important
 meanings or mechanisms and a supported boundary that prevents overclaiming.
 
