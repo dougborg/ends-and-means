@@ -89,7 +89,7 @@ export function reviewEvidenceForHead(headOid: string, implementationOwner: stri
 const priorityRank = new Map<Priority, number>(priorities.map((priority, index) => [priority, index]));
 
 function hasConcreteBlocker(body = "") {
-  return /(?:blocked on|blocked by|unblocks? (?:when|after)|blocking condition\s*:)[^\n]+/i.test(body);
+  return /(?:blocked on|blocked by|depends on|dependency\s*:|unblocks? (?:when|after)|blocking condition\s*:)[^\n]+/i.test(body);
 }
 
 function hasUnmetDependency(body = "") {

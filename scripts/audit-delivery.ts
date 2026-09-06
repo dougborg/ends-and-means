@@ -32,7 +32,7 @@ const prViewSchema = z
     headRefName: z.string().min(1),
     headRefOid: commitOidSchema,
     author: actorSchema,
-    reviews: z.array(z.object({ author: actorSchema, commit: z.object({ oid: commitOidSchema }), body: z.string() }).passthrough()),
+    reviews: z.array(z.object({ author: actorSchema, commit: z.object({ oid: commitOidSchema }), body: z.string().nullable().optional() }).passthrough()),
     comments: z.array(z.object({ author: actorSchema, body: z.string() }).passthrough()),
   })
   .passthrough();
@@ -47,7 +47,13 @@ function gh(args: string[]) {
   try {
     return execFileSync("gh", args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
   } catch (error) {
-    throw new ApiUnavailableError(error instanceof Error ? error.message : String(error));
+    const commandError = error as Error & { code?: string; stderr?: string | Buffer };
+    const stderr = String(commandError.stderr ?? "").trim();
+    const detail = stderr || commandError.message || String(error);
+    if (commandError.code === "ENOENT" || /auth login|not logged into|authentication required|error connecting|could not resolve|failed to connect/i.test(detail)) {
+      throw new ApiUnavailableError(detail);
+    }
+    throw new Error(`gh ${args[0] ?? "command"} failed: ${detail}`);
   }
 }
 
@@ -135,6 +141,7 @@ function loadLiveSnapshot(): DeliverySnapshot {
 function loadSnapshot(args: string[]) {
   const pathIndex = args.indexOf("--project-snapshot");
   const snapshotPath = args[pathIndex + 1];
+  if (pathIndex >= 0 && !snapshotPath) throw new InputInvalidError("--project-snapshot requires a path.");
   if (pathIndex >= 0 && snapshotPath) {
     return parseJson(readFileSync(resolve(snapshotPath), "utf8"), deliverySnapshotSchema, snapshotPath);
   }
