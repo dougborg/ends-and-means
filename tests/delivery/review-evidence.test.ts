@@ -3,26 +3,53 @@ import { reviewEvidenceForHead } from "../../scripts/delivery-state.ts";
 
 const head = "a".repeat(40);
 const stale = "b".repeat(40);
+const trusted = (body: string, authorAssociation = "OWNER") => ({
+  body,
+  authorAssociation,
+});
 
-describe("review evidence", () => {
-  it("requires Copilot and an independently attributable adversarial approval on the exact head", () => {
+describe("privacy-safe exact-head review evidence", () => {
+  it.each(["OWNER", "MEMBER", "COLLABORATOR"])(
+    "accepts an adversarial attestation from a GitHub %s",
+    (authorAssociation) => {
+      expect(
+        reviewEvidenceForHead(
+          head,
+          [],
+          [
+            trusted(
+              `Independent adversarial review: APPROVED\nHead: ${head}`,
+              authorAssociation,
+            ),
+          ],
+        ),
+      ).toEqual({ copilot: "missing", adversarial: true });
+    },
+  );
+
+  it("accepts an explicit exact-head Copilot-unavailable attestation", () => {
     expect(
       reviewEvidenceForHead(
         head,
-        "/root/implementation_133",
+        [],
+        [trusted(`Copilot review: UNAVAILABLE\nHead: ${head}`)],
+      ),
+    ).toEqual({ copilot: "unavailable", adversarial: false });
+  });
+
+  it("gives an actual exact-head Copilot review precedence over an unavailable marker", () => {
+    expect(
+      reviewEvidenceForHead(
+        head,
         [
           {
             author: { login: "copilot-pull-request-reviewer" },
             commit: { oid: head },
           },
         ],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
-          },
-        ],
-      ),
-    ).toEqual({ copilot: true, adversarial: true });
+        [trusted(`Copilot review: UNAVAILABLE\nHead: ${head}`)],
+      ).copilot,
+    ).toBe("reviewed");
   });
 });
 
@@ -37,18 +64,16 @@ describe("trusted Copilot review identity", () => {
     expect(
       reviewEvidenceForHead(
         head,
-        "/root/implementation_133",
         [{ author: { login }, commit: { oid: head } }],
         [],
       ).copilot,
-    ).toBe(false);
+    ).toBe("missing");
   });
 
   it("accepts GitHub's bot-suffixed normalization of the trusted reviewer", () => {
     expect(
       reviewEvidenceForHead(
         head,
-        "/root/implementation_133",
         [
           {
             author: { login: "copilot-pull-request-reviewer[bot]" },
@@ -57,138 +82,67 @@ describe("trusted Copilot review identity", () => {
         ],
         [],
       ).copilot,
-    ).toBe(true);
+    ).toBe("reviewed");
   });
 });
 
 describe("rejected review evidence", () => {
-  it("rejects stale reviews, a template checkbox, and self-attributed evidence", () => {
+  it.each(["NONE", "CONTRIBUTOR", "FIRST_TIMER", "FIRST_TIME_CONTRIBUTOR"])(
+    "rejects markers from GitHub association %s",
+    (authorAssociation) => {
+      expect(
+        reviewEvidenceForHead(
+          head,
+          [],
+          [
+            trusted(
+              `Independent adversarial review: APPROVED\nHead: ${head}`,
+              authorAssociation,
+            ),
+            trusted(
+              `Copilot review: UNAVAILABLE\nHead: ${head}`,
+              authorAssociation,
+            ),
+          ],
+        ),
+      ).toEqual({ copilot: "missing", adversarial: false });
+    },
+  );
+
+  it.each([
+    `Independent adversarial review: APPROVED\nHead: ${stale}`,
+    "Independent adversarial review: APPROVED\nHead: short",
+    `Independent adversarial review: APPROVED\nHead: ${head}\nExtra`,
+    `Independent adversarial review: APPROVED\nReviewer: /root/reviewer\nHead: ${head}`,
+  ])("rejects malformed or stale adversarial marker %s", (body) => {
+    expect(reviewEvidenceForHead(head, [], [trusted(body)]).adversarial).toBe(
+      false,
+    );
+  });
+
+  it.each([
+    `Copilot review: UNAVAILABLE\nHead: ${stale}`,
+    "Copilot review: UNAVAILABLE\nHead: short",
+    `Copilot review: UNAVAILABLE\nHead: ${head}\nOperational detail`,
+    `Copilot review: unavailable\nHead: ${head}`,
+  ])("rejects malformed or stale unavailable marker %s", (body) => {
+    expect(reviewEvidenceForHead(head, [], [trusted(body)]).copilot).toBe(
+      "missing",
+    );
+  });
+
+  it("invalidates a Copilot review after the head changes", () => {
     expect(
       reviewEvidenceForHead(
         head,
-        "/root/adversarial_133",
         [
           {
             author: { login: "copilot-pull-request-reviewer" },
             commit: { oid: stale },
           },
         ],
-        [
-          {
-            body: "- [x] An independent adversarial review covered the material risks.",
-          },
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
-          },
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${stale}`,
-          },
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/other_reviewer\nHead: ${head}\nAdditional unstructured text.`,
-          },
-        ],
-      ),
-    ).toEqual({ copilot: false, adversarial: false });
-  });
-
-  it("rejects review evidence when implementation ownership is missing", () => {
-    expect(
-      reviewEvidenceForHead(
-        head,
-        undefined,
-        [
-          {
-            author: { login: "copilot-pull-request-reviewer" },
-            commit: { oid: head },
-          },
-        ],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
-          },
-        ],
-      ).adversarial,
-    ).toBe(false);
-  });
-
-  it("rejects review evidence when implementation ownership is not a documented agent path", () => {
-    expect(
-      reviewEvidenceForHead(
-        head,
-        "implementation_133",
-        [
-          {
-            author: { login: "copilot-pull-request-reviewer" },
-            commit: { oid: head },
-          },
-        ],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
-          },
-        ],
-      ).adversarial,
-    ).toBe(false);
-  });
-});
-
-describe("canonical review agent paths", () => {
-  it.each([
-    "/root//",
-    "/root/agent/",
-    "/root/agent//reviewer",
-    "/root/agent-name",
-    "/root/-",
-    "/root/Agent",
-  ])("rejects noncanonical implementation owner %s", (owner) => {
-    expect(
-      reviewEvidenceForHead(
-        head,
-        owner,
         [],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/adversarial_133\nHead: ${head}`,
-          },
-        ],
-      ).adversarial,
-    ).toBe(false);
-  });
-
-  it.each([
-    "/root//",
-    "/root/agent/",
-    "/root/agent//reviewer",
-    "/root/agent-name",
-    "/root/-",
-    "/root/Agent",
-  ])("rejects noncanonical reviewer %s", (reviewer) => {
-    expect(
-      reviewEvidenceForHead(
-        head,
-        "/root/agent",
-        [],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: ${reviewer}\nHead: ${head}`,
-          },
-        ],
-      ).adversarial,
-    ).toBe(false);
-  });
-
-  it("does not permit case variation to evade same-owner rejection", () => {
-    expect(
-      reviewEvidenceForHead(
-        head,
-        "/root/agent",
-        [],
-        [
-          {
-            body: `Independent adversarial review: APPROVED\nReviewer: /root/Agent\nHead: ${head}`,
-          },
-        ],
-      ).adversarial,
-    ).toBe(false);
+      ).copilot,
+    ).toBe("missing");
   });
 });

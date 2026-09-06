@@ -20,7 +20,9 @@ work tracks, and delivery policy.
 5. Rebase onto the current base, open a pull request, and identify all claims,
    classifications, and judgments the reviewer must decide.
 6. Resolve automated review and obtain an independent adversarial review of the
-   material risks.
+   material risks. Record only the privacy-safe exact-head attestations defined
+   in the [delivery harness](docs/delivery-harness.md); keep internal agent,
+   worktree, quota, and operational details out of public review evidence.
 7. Rebase again when required, integrate without a merge or squash commit, and
    verify the resulting deployment when public output changes.
 
@@ -145,6 +147,9 @@ available; an unavailable API or credential result is not a clean audit.
   intentional dependency change. Unresolved third-party material cannot enter
   the live site.
 - Copilot and independent adversarial review are project-process requirements.
+  Request Copilot normally; when it produces no review, record the explicit
+  exact-head unavailable marker instead of silently inferring availability or
+  publishing an operational explanation.
   Branch protection does not require an approving review, but strict checks,
   conversation resolution, and linear history remain enforced.
 

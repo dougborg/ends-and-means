@@ -47,19 +47,35 @@ An active In-progress branch must have a successful base comparison, but `main` 
 Current-base evidence becomes blocking at In-review handoff and remains required for integration.
 
 Review evidence is valid only for the pull request's exact current head.
-Copilot must have submitted a review on that commit, and the independent reviewer must leave this machine-readable PR comment after completing review:
+An actual Copilot review is accepted only when GitHub reports the trusted bot identity and that exact reviewed commit.
+After a separately assigned review, a repository owner, member, or collaborator records this machine-readable, privacy-safe PR comment:
 
 ```text
 Independent adversarial review: APPROVED
-Reviewer: /root/<independent-agent-name>
 Head: <full-40-character-commit-oid>
 ```
 
-The pull-request template checkbox records human workflow completion but is deliberately not accepted as audit evidence by itself.
-A rebase or remediation commit invalidates both head-bound signals and requires fresh reviews.
-The implementation owner and reviewer must both use canonical, case-sensitive `/root/<segment>[/<segment>...]` identities, where every segment contains only lowercase ASCII letters, digits, or underscores.
-The paths must differ; missing or malformed ownership fails closed.
-Because local agents share the repository owner's GitHub authentication, this marker is auditable process evidence, not cryptographic proof of identity or independence.
+If a normal Copilot request produces no review, absence alone never passes.
+A trusted repository association must explicitly record the fallback:
+
+```text
+Copilot review: UNAVAILABLE
+Head: <full-40-character-commit-oid>
+```
+
+The harness reports Copilot as `reviewed`, `unavailable`, or `missing`.
+An actual exact-head review takes precedence over the fallback.
+The pull-request template checkbox records workflow completion but is deliberately not accepted as audit evidence by itself.
+A rebase or remediation commit invalidates every head-bound signal and requires fresh review and attestation.
+
+GitHub can verify the current head, Copilot review identity and commit, comment text, and whether an attester is an owner, member, or collaborator.
+It cannot prove which internal agent performed the independent review or why Copilot returned nothing.
+The public marker is therefore the repository coordinator's accountable assertion that a separately assigned review occurred, not cryptographic proof of internal-agent independence.
+Keep internal agent handles, assignments, worktree paths, quota state, and operational explanations in private coordination state rather than public review evidence.
+
+For open pull requests created under the earlier contract, request Copilot normally, then add the two-line adversarial marker for the exact current head.
+Add the two-line unavailable marker only if no Copilot review appears.
+Do not rewrite unrelated review history; after any rebase, repeat review and replace the stale evidence with new exact-head markers.
 
 For diagnosis or fixture development, pass a stored normalized snapshot:
 
@@ -83,5 +99,5 @@ Express dynamic operations as explicit steps so command ownership remains audita
 The audit likewise rejects any unquoted, unescaped verify-owned command token sequence anywhere in a run segment, including wrapper, environment-prefix, and control-flow forms; use the shared verification action instead.
 The Pages deploy job receives write permissions only after the read-only verified build succeeds.
 
-Copilot and an independent adversarial review remain process requirements even though branch protection does not require an approving review.
+Copilot, or its explicit unavailable status after a normal request, and an independent adversarial review remain process requirements even though branch protection does not require an approving review.
 Conversation resolution, strict checks, and linear history remain repository gates.

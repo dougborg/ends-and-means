@@ -51,8 +51,17 @@ export function parseAgentPath(value: string | undefined) {
   return value && agentPathPattern.test(value) ? value : undefined;
 }
 
+export const copilotReviewStatuses = [
+  "reviewed",
+  "unavailable",
+  "missing",
+] as const;
+
 const reviewEvidenceSchema = z
-  .object({ copilot: z.boolean(), adversarial: z.boolean() })
+  .object({
+    copilot: z.enum(copilotReviewStatuses),
+    adversarial: z.boolean(),
+  })
   .strict();
 const ownershipSchema = z
   .object({
@@ -118,29 +127,44 @@ interface ReviewRecord {
 
 interface ReviewComment {
   body: string;
+  authorAssociation: string;
 }
+
+const trustedAttesterAssociations = new Set([
+  "OWNER",
+  "MEMBER",
+  "COLLABORATOR",
+]);
 
 export function reviewEvidenceForHead(
   headOid: string,
-  implementationOwner: string | undefined,
   reviews: ReviewRecord[],
   comments: ReviewComment[],
 ) {
-  const marker = new RegExp(
-    String.raw`^Independent adversarial review: APPROVED\r?\nReviewer: ([^\r\n]+)\r?\nHead: ${headOid}$`,
+  const adversarialMarker = new RegExp(
+    String.raw`^Independent adversarial review: APPROVED\r?\nHead: ${headOid}$`,
   );
-  const validOwner = parseAgentPath(implementationOwner);
+  const unavailableMarker = new RegExp(
+    String.raw`^Copilot review: UNAVAILABLE\r?\nHead: ${headOid}$`,
+  );
+  const reviewed = reviews.some(
+    (review) =>
+      trustedCopilotReviewers.has(review.author.login) &&
+      review.commit.oid === headOid,
+  );
+  const trustedCommentMatches = (pattern: RegExp) =>
+    comments.some(
+      (comment) =>
+        trustedAttesterAssociations.has(comment.authorAssociation) &&
+        pattern.test(comment.body),
+    );
   return {
-    copilot: reviews.some(
-      (review) =>
-        trustedCopilotReviewers.has(review.author.login) &&
-        review.commit.oid === headOid,
-    ),
-    adversarial: comments.some((comment) => {
-      const match = comment.body.match(marker);
-      const reviewer = parseAgentPath(match?.[1]);
-      return Boolean(validOwner && reviewer && reviewer !== validOwner);
-    }),
+    copilot: reviewed
+      ? ("reviewed" as const)
+      : trustedCommentMatches(unavailableMarker)
+        ? ("unavailable" as const)
+        : ("missing" as const),
+    adversarial: trustedCommentMatches(adversarialMarker),
   };
 }
 
@@ -323,12 +347,13 @@ function activeEvidenceFindings(item: DeliveryItem): DeliveryFinding[] {
   }
   if (
     item.status === "In review" &&
-    (!item.reviewEvidence?.copilot || !item.reviewEvidence.adversarial)
+    (item.reviewEvidence?.copilot === "missing" ||
+      !item.reviewEvidence?.adversarial)
   ) {
     findings.push({
       code: "REVIEW_EVIDENCE",
       item: item.number,
-      message: `#${item.number} lacks completed Copilot and adversarial review evidence.`,
+      message: `#${item.number} lacks exact-head Copilot status or adversarial review evidence.`,
     });
   }
   return findings;
