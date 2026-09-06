@@ -213,6 +213,16 @@ function exactRelationshipAbsenceLedger(
   }));
 }
 
+function exactPresentationLedger() {
+  const dossier =
+    canonicalGraph.indexes.entitiesById["matriliny-property-authority-dossier"];
+  const guide = subjectGuideBySlug("matriliny-property-authority");
+  if (dossier?.kind !== "dossier")
+    throw new Error("Missing Dossier matriliny-property-authority-dossier");
+  if (!guide) throw new Error("Missing Subject Guide guide-matriliny-property-authority");
+  return [structuredClone(dossier), structuredClone(guide)];
+}
+
 function expectEveryFieldDriftDetected<T extends object>(
   rows: T[],
   fields: (keyof T)[],
@@ -296,6 +306,7 @@ describe("Minangkabau bounded case categories", () => {
   it("locks every Case, Case Episode, semantic relationship, and required absence", () => {
     expect(exactCaseLedger()).toMatchSnapshot("cases-and-episodes");
     expect(exactRelationshipLedger()).toMatchSnapshot("semantic-relationships");
+    expect(exactPresentationLedger()).toMatchSnapshot("public-presentation");
     expect(exactRelationshipAbsenceLedger()).toEqual([
       { id: "koto-tinggi-applies-matriliny", absent: true },
     ]);
