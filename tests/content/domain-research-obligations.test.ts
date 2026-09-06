@@ -518,30 +518,6 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
-    id: "gold-coast-cocoa-labor-distribution",
-    obligationType: "counterevidence",
-    target: "concept:market-economy#what-do-bounded-cases-show",
-    status: "open",
-  },
-  {
-    id: "jinst-access-inequality",
-    obligationType: "counterevidence",
-    target: "case:jinst-postcollective-pastoral-governance",
-    status: "open",
-  },
-  {
-    id: "jinst-post-1999-continuity",
-    obligationType: "research-gap",
-    target: "case:jinst-postcollective-pastoral-governance",
-    status: "open",
-  },
-  {
-    id: "jinst-translation-oral-provenance",
-    obligationType: "research-gap",
-    target: "case:jinst-postcollective-pastoral-governance",
-    status: "open",
-  },
-  {
     id: "feminism-policy-attribution-causal-effects",
     obligationType: "counterfactual",
     target: "concept:feminism",
@@ -563,6 +539,30 @@ const expectedOpenResearchObligations = [
     id: "feminism-universal-subject-exclusion",
     obligationType: "counterargument",
     target: "concept:feminism#coalition-and-boundaries",
+    status: "open",
+  },
+  {
+    id: "gold-coast-cocoa-labor-distribution",
+    obligationType: "counterevidence",
+    target: "concept:market-economy#what-do-bounded-cases-show",
+    status: "open",
+  },
+  {
+    id: "jinst-access-inequality",
+    obligationType: "counterevidence",
+    target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
+    id: "jinst-post-1999-continuity",
+    obligationType: "research-gap",
+    target: "case:jinst-postcollective-pastoral-governance",
+    status: "open",
+  },
+  {
+    id: "jinst-translation-oral-provenance",
+    obligationType: "research-gap",
+    target: "case:jinst-postcollective-pastoral-governance",
     status: "open",
   },
   {
