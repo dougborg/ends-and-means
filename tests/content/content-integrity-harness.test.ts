@@ -1,6 +1,7 @@
 import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { canonicalDocuments } from "../../content/domain";
 import {
@@ -35,7 +36,10 @@ function verify(
 
 describe("content-integrity harness", () => {
   it("keeps parser-backed audit modules out of the runtime domain barrel", async () => {
-    const barrel = await readFile("src/lib/domain/index.ts", "utf8");
+    const barrel = await readFile(
+      fileURLToPath(new URL("../../src/lib/domain/index.ts", import.meta.url)),
+      "utf8",
+    );
     expect(barrel).not.toMatch(/content-integrity|runtime-dependencies/u);
   });
 
