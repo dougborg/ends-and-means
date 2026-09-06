@@ -44,12 +44,13 @@ function compareCodeUnits(left: string, right: string) {
 function stableJson(value: unknown): string {
   if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
   if (value && typeof value === "object") {
-    const entries = Object.entries(value as Record<string, unknown>)
-      .filter(([, child]) => child !== undefined)
-      .sort(([left], [right]) => compareCodeUnits(left, right));
+    const entries = Object.entries(value as Record<string, unknown>).sort(
+      ([left], [right]) => compareCodeUnits(left, right),
+    );
     return `{${entries.map(([key, child]) => `${JSON.stringify(key)}:${stableJson(child)}`).join(",")}}`;
   }
-  return JSON.stringify(value);
+  const json = JSON.stringify(value);
+  return json ?? JSON.stringify({ unsupportedType: typeof value });
 }
 
 export function reviewedOverlapFingerprint(input: {
@@ -58,7 +59,13 @@ export function reviewedOverlapFingerprint(input: {
   citation: StatementCitation;
   source: Source;
 }): `sha256:${string}` {
-  const digest = createHash("sha256").update(stableJson(input)).digest("hex");
+  const governedInput = {
+    ...input,
+    statement: { id: input.statement.id, text: input.statement.text },
+  };
+  const digest = createHash("sha256")
+    .update(stableJson(governedInput))
+    .digest("hex");
   return `sha256:${digest}`;
 }
 
@@ -81,10 +88,9 @@ function isIsoDate(value: unknown): value is string {
 
 function validateAcknowledgement(
   candidate: unknown,
-  index: number,
   errors: string[],
 ): candidate is ReviewedOverlapAcknowledgement {
-  const label = `reviewed overlap acknowledgement ${index}`;
+  const label = "reviewed overlap acknowledgement";
   if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) {
     errors.push(`${label}: record must be an object`);
     return false;
@@ -122,11 +128,8 @@ export function validateReviewedOverlapAcknowledgements(
 ) {
   const candidates: ReviewedOverlapAcknowledgement[] = [];
   const errors: string[] = [];
-  const sortedValues = [...values].sort((left, right) =>
-    compareCodeUnits(stableJson(left), stableJson(right)),
-  );
-  for (const [index, candidate] of sortedValues.entries()) {
-    if (!validateAcknowledgement(candidate, index, errors)) continue;
+  for (const candidate of values) {
+    if (!validateAcknowledgement(candidate, errors)) continue;
     candidates.push(candidate);
   }
   const targetCounts = new Map<string, number>();
