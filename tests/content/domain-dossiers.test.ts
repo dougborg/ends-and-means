@@ -147,10 +147,9 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 5,
+      covered: 6,
       total: 8,
       missingIds: [
-        "collective-capital-formation",
         "institutional-abolition",
         "market-socialism",
       ],
