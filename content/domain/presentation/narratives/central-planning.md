@@ -1,5 +1,5 @@
 Central planning is a family of institutional means, not an ideology, an ownership form, or a complete description of an economy.
-The United States Controlled Materials Plan offers one bounded example: federal bodies allocated three critical metals through public agencies and privately owned production chains from April 1943 through its 1945 dismantling.
+The United States Controlled Materials Plan offers one bounded example: federal bodies allocated three critical metals through public agencies and distinct production organizations from April 1943 until the plan expired on September 30, 1945.
 
 ## what-does-central-planning-name
 
@@ -16,7 +16,7 @@ Orders reaching mills therefore reflected the approved allotment chain rather th
 
 The WPB set the material envelope, its Requirements Committee divided initial allotments, and claimant agencies translated programs into authorizations for producers.
 This was centralized allocation with distributed administration, not one office making every production decision.
-It also did not transfer ownership of the firms that used the allotted materials.
+Its rules assigned different roles to public agencies and production organizations without prescribing a transfer of ownership among them.
 
 ## how-could-the-plan-change
 
@@ -31,5 +31,5 @@ The episode therefore shows a concrete allocation design and a historical disput
 
 ## where-does-the-boundary-end
 
-CMP governed specified critical materials within a temporary wartime mobilization that also used procurement, markets, private firms, and other controls.
+CMP governed specified critical materials within a temporary wartime setting.
 It cannot stand for the whole United States economy, every wartime institution, or a timeless national model.

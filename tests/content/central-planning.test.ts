@@ -18,18 +18,19 @@ const expectedCitations = {
   "cmp-targets": ["wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 74–75"],
   "cmp-revision": ["wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 78–85"],
   "cmp-enforcement": ["wpb-controlled-materials-plan-source", "sections 23–24, pp. 17–18"],
-  "cmp-ownership": ["koistinen-arsenal-source", "chapters 12–13, pp. 302–369"],
-  "cmp-operating-period": ["bureau-budget-united-states-war-source", "chapter X, pp. 305–306; chapter XV, p. 491"],
+  "cmp-ownership": ["wpb-controlled-materials-plan-source", "overview, pp. 1–8, especially allotment-chain roles on p. 7"],
+  "cmp-operating-period": ["bureau-budget-united-states-war-source", "chapter X, pp. 305–306"],
+  "cmp-expiration": ["wpb-products-priorities-september-1945-source", "p. II, ‘The Revised and Simplified Priorities System,’ second paragraph"],
   "cmp-distributed-administration": ["wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73–75"],
   "cmp-official-performance-account": ["wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 73, 79–85"],
   "cmp-performance-rival": ["landon-lane-rockoff-cmp-source", "abstract; pp. 24–27"],
-  "cmp-power-rival": ["koistinen-arsenal-source", "publisher description, paragraphs 2–3; chapters 8 and 12–13"],
+  "cmp-power-rival": ["kansas-press-koistinen-arsenal-source", "Description, paragraph 4"],
   "cmp-correctability-assessment": ["wpb-war-production-1944-source", "The Controlled Materials Plan in 1944, pp. 79–85"],
 } as const;
 
 describe("central planning bounded slice", () => {
   it("pins every substantive statement to the intended source and locator", () => {
-    expect(Object.keys(expectedCitations)).toHaveLength(14);
+    expect(Object.keys(expectedCitations)).toHaveLength(15);
     for (const [statementId, [sourceId, locator]] of Object.entries(expectedCitations)) {
       expect(entityById(statementId), statementId).toMatchObject({ kind: "statement" });
       expect(citationsFor(statementId), statementId).toEqual([
@@ -49,7 +50,7 @@ describe("central planning bounded slice", () => {
     expect(entityById("cmp-operation-1943-1945")).toMatchObject({
       kind: "case-episode",
       startDate: { year: 1943, month: 4, day: 1 },
-      endDate: { year: 1945, month: 9, day: 30 },
+      endDate: { year: 1945, month: 9, day: 30, certainty: "exact" },
     });
     expect(relationshipsFrom("controlled-materials-allocation").filter(({ predicate }) => predicate === "specified-by")).toHaveLength(7);
     expect(relationshipsFrom("cmp-operation-1943-1945")).toEqual(expect.arrayContaining([
