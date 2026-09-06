@@ -580,6 +580,17 @@ function registerGuideQueries(
       ),
       `${guide.id}: search-query disambiguation contains an internal workflow reference`,
     );
+    reportInvalid(
+      errors,
+      entry.resultStatus !== undefined &&
+        !["guide", "research-gap"].includes(entry.resultStatus),
+      `${guide.id}: search query ${JSON.stringify(query)} has an invalid result status`,
+    );
+    reportInvalid(
+      errors,
+      entry.resultStatus === "research-gap" && !entry.disambiguation?.trim(),
+      `${guide.id}: research-gap search query ${JSON.stringify(query)} requires a reader-facing explanation`,
+    );
     localQueries.add(query);
     addMapValue(queryOwners, query, {
       guide,

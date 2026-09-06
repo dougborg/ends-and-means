@@ -225,6 +225,23 @@ describe("SubjectGuide publication boundaries", () => {
       ]),
     );
   });
+
+  it("requires a reader-facing explanation for research-gap entry phrases", () => {
+    const errors = errorsAfter((guide) => {
+      firstQuery(guide).resultStatus = "research-gap";
+      firstQuery(guide).disambiguation = "";
+      const second = guide.searchQueries[1];
+      if (!second) throw new Error("Missing second query fixture");
+      second.resultStatus = "unsupported" as "guide";
+    });
+
+    expect(errors).toEqual(
+      expect.arrayContaining([
+        'guide-economic-democracy: research-gap search query "economic democracy" requires a reader-facing explanation',
+        'guide-economic-democracy: search query "democracy at work" has an invalid result status',
+      ]),
+    );
+  });
 });
 
 describe("SubjectGuide journey requirements", () => {

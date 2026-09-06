@@ -87,6 +87,7 @@ interface SubjectGuide {
   searchQueries: Array<{
     query: string;
     disambiguation?: string;
+    resultStatus?: "guide" | "research-gap";
   }>;
   redirects?: Array<{ from: string; reviewedAt: string }>;
   sections: SubjectGuideSection[];
@@ -709,6 +710,11 @@ identity.
 They must not absorb a broader learner question merely to improve search.
 A SubjectGuide's `searchQueries` are non-identifying entry phrases that route a
 question to a guide; they do not become entity labels or assert equivalence.
+Explore derives its index only from the reviewed/published Subject Guide
+projection and each guide's owned queries.
+An entry marked `research-gap` names the nearest reviewed guide while stating
+that the broader query is not yet fully answered; it requires a reader-facing
+explanation and must not be presented as equivalence.
 Colliding entry phrases require explicit editorial disambiguation rather than
 first-match routing.
 Queries and active guide slugs share one resolution namespace: another guide's

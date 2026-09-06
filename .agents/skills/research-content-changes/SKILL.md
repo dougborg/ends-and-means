@@ -80,6 +80,10 @@ identity.
 Treat SubjectGuide `searchQueries` as non-identifying entry phrases;
 disambiguate collisions explicitly and never use a redirect to merge distinct
 canonical identities.
+Mark an entry phrase as `research-gap` only when its nearest reviewed guide does
+not fully answer the broader query, and supply a plain reader-facing boundary.
+Explore discovery must derive aliases from the reviewed/published guide
+projection rather than maintaining a parallel index.
 Require the short answer, meanings and boundaries, and comparisons and next
 steps exactly once.
 The short answer must select the primary subject's Dossier standfirst, and the

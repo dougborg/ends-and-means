@@ -16,6 +16,12 @@ export const subjectGuideDocuments = [
         { query: "democracy at work" },
         { query: "democratic economy" },
         { query: "who controls the economy" },
+        {
+          query: "direct democracy",
+          resultStatus: "research-gap",
+          disambiguation:
+            "This guide concerns democratic authority in economic institutions, not a general account of direct democracy.",
+        },
       ],
       sections: [
         {
@@ -130,6 +136,17 @@ export const subjectGuideDocuments = [
         { query: "what is socialism" },
         { query: "socialist ideas" },
         { query: "socialist economy" },
+        {
+          query: "worker ownership",
+          disambiguation:
+            "Worker ownership is one institutional path discussed within broader disputes about social ownership and control.",
+        },
+        {
+          query: "planned economy",
+          resultStatus: "research-gap",
+          disambiguation:
+            "This guide distinguishes disputed socialist planning proposals but is not a general guide to planned economies.",
+        },
       ],
       sections: [
         {
@@ -269,6 +286,11 @@ export const subjectGuideDocuments = [
         { query: "what is communism" },
         { query: "communist society" },
         { query: "communist state" },
+        {
+          query: "communist countries",
+          disambiguation:
+            "A country or party label does not establish one institutional model; this guide separates claimed identity from bounded practice.",
+        },
       ],
       sections: [
         {

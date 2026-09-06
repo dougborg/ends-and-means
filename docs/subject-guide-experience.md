@@ -12,6 +12,13 @@ the reviewed/published projection.
 It must never use `subjectGuideRecords` or its editorial indexes.
 Explore likewise lists only the live projection and presents existing Approach
 dossiers as distinct institutional paths, not incomplete Subject Guides.
+Its subject search is a deterministic projection of guide labels,
+descriptions, and guide-owned `searchQueries`; it has no separate alias index.
+Exact ambiguous phrases return every explicitly disambiguated owner.
+Queries whose nearest guide leaves the general subject unsettled are visibly
+marked as research gaps rather than silently conflated with that guide.
+With scripting unavailable, the full reviewed directory and its entry phrases
+remain readable and searchable with browser Find.
 
 ## Reading order
 

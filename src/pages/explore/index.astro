@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { canonicalGraph, dossierForSubject, entitiesOfKind } from "../../lib/domain/canonical";
+import { buildExploreDirectory, normalizeExploreQuery } from "../../lib/explore-discovery";
 import { hasSubjectGuideDirectory } from "../../lib/subject-guide-presentation";
 
 const approaches = entitiesOfKind("approach");
 const guides = canonicalGraph.subjectGuides;
+const directory = buildExploreDirectory(guides);
 ---
 <BaseLayout title="Explore" description="Start with a subject, then follow its meanings, institutions, cases, disagreements, and evidence." fullBleed>
   <article class="canonical-index explore-directory">
@@ -16,14 +18,47 @@ const guides = canonicalGraph.subjectGuides;
     {hasSubjectGuideDirectory(guides) && <section aria-labelledby="subject-guides-title">
       <header class="explore-directory__heading">
         <p class="coordinate">SUBJECT GUIDES</p>
-        <h2 id="subject-guides-title">Learn a subject from the question outward</h2>
+        <div>
+          <h2 id="subject-guides-title">Learn a subject from the question outward</h2>
+          <p>Search familiar names and questions. A search phrase can lead to more than one bounded meaning; the guide title remains the subject's canonical label.</p>
+        </div>
       </header>
-      <ol class="subject-guide-directory">
-        {guides.map((guide) => (
-          <li>
+      <search>
+      <form class="subject-search" action="/explore/" method="get" data-subject-search>
+        <label for="subject-search-query">What do you want to understand?</label>
+        <div class="subject-search__control">
+          <input id="subject-search-query" name="q" type="search" autocomplete="off" aria-controls="subject-guide-results" placeholder="Try communism, worker ownership, or economic democracy…" />
+          <button type="submit">Search subjects</button>
+        </div>
+        <p id="subject-search-status" class="subject-search__status" aria-live="polite">Showing all {directory.length} reviewed guides.</p>
+        <noscript><p>All reviewed guides and their entry phrases remain listed below. Use your browser's Find command to search this page.</p></noscript>
+      </form>
+      </search>
+      <div class="subject-search__empty" data-search-empty hidden>
+        <p class="coordinate">NO REVIEWED GUIDE YET</p>
+        <h3>No subject guide matches that phrase.</h3>
+        <p>Try a broader term, check the listed entry phrases, or browse the open <a href="/research/">research questions</a>.</p>
+      </div>
+      <ol class="subject-guide-directory" id="subject-guide-results">
+        {directory.map(({ guide, aliases, searchText }) => (
+          <li data-subject-result data-search-text={searchText} data-guide-id={guide.id}>
             <p class="coordinate">START HERE</p>
-            <h3><a href={`/guides/${guide.slug}/`}>{guide.label}</a></h3>
-            <p>{guide.description}</p>
+            <div class="subject-guide-directory__summary">
+              <h3><a href={`/guides/${guide.slug}/`}>{guide.label}</a></h3>
+              <p>{guide.description}</p>
+              <details class="subject-guide-directory__terms">
+                <summary>Search terms and boundaries</summary>
+                <ul>
+                  {aliases.map((alias) => (
+                    <li data-alias={alias.query} data-alias-normalized={normalizeExploreQuery(alias.query)} data-result-status={alias.resultStatus ?? "guide"}>
+                      <strong>{alias.query}</strong>
+                      {alias.resultStatus === "research-gap" && <span class="subject-guide-directory__gap">Research gap</span>}
+                      {alias.disambiguation && <p>{alias.disambiguation}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </div>
             <a class="detail-link" href={`/guides/${guide.slug}/`}>Learn about {guide.label} →</a>
           </li>
         ))}
@@ -48,4 +83,61 @@ const guides = canonicalGraph.subjectGuides;
       </section>
     )}
   </article>
+  <script>
+    import { matchExploreDirectory, normalizeExploreQuery } from "../../lib/explore-discovery";
+
+    const form = document.querySelector("[data-subject-search]");
+    const input = document.querySelector("#subject-search-query");
+    const status = document.querySelector("#subject-search-status");
+    const empty = document.querySelector("[data-search-empty]");
+    const results = [...document.querySelectorAll("[data-subject-result]")];
+    const directory = results.map((result) => ({
+      guide: { id: result.getAttribute("data-guide-id") ?? "" },
+      aliases: [...result.querySelectorAll("[data-alias-normalized]")].map((alias) => ({
+        guideId: result.getAttribute("data-guide-id") ?? "",
+        query: alias.getAttribute("data-alias") ?? "",
+      })),
+      searchText: result.getAttribute("data-search-text") ?? "",
+    }));
+
+    const update = () => {
+      if (!(input instanceof HTMLInputElement)) return;
+      const query = normalizeExploreQuery(input.value);
+      const matchedIds = new Set(matchExploreDirectory(directory, query).map(({ guide }) => guide.id));
+      const matches = results.filter((result) => matchedIds.has(result.getAttribute("data-guide-id") ?? ""));
+      for (const result of results) updateResult(result, matches, query);
+      empty?.toggleAttribute("hidden", matches.length > 0);
+      if (status) status.textContent = statusMessage(input.value, query, matches.length, results.length);
+    };
+
+    const updateResult = (result: Element, matches: Element[], query: string) => {
+        result.toggleAttribute("hidden", !matches.includes(result));
+        const aliases = [...result.querySelectorAll("[data-alias-normalized]")];
+        const exactAliases = aliases.filter((alias) => alias.getAttribute("data-alias-normalized") === query);
+        for (const alias of aliases) alias.toggleAttribute("hidden", exactAliases.length > 0 && !exactAliases.includes(alias));
+        const details = result.querySelector("details.subject-guide-directory__terms");
+        if (details instanceof HTMLDetailsElement) details.open = query.length > 0 && exactAliases.length > 0;
+    };
+
+    const statusMessage = (value: string, query: string, matchCount: number, total: number) => query.length === 0
+        ? `Showing all ${total} reviewed guides.`
+        : matchCount === 0
+          ? `No reviewed guides match “${value.trim()}”.`
+          : `${matchCount} reviewed ${matchCount === 1 ? "guide matches" : "guides match"} “${value.trim()}”.`;
+
+    if (input instanceof HTMLInputElement) {
+      const initial = new URLSearchParams(window.location.search).get("q");
+      if (initial) input.value = initial;
+      input.addEventListener("input", update);
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const url = new URL(window.location.href);
+        if (input.value.trim()) url.searchParams.set("q", input.value.trim());
+        else url.searchParams.delete("q");
+        history.replaceState(null, "", url);
+        update();
+      });
+      update();
+    }
+  </script>
 </BaseLayout>
