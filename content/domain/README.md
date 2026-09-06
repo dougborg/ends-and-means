@@ -21,6 +21,11 @@ consulted. Statement-to-Source citation relationships own evidentiary roles and
 locators. Publisher, library, authorized-reading, archive, and purchase links
 are secondary resource metadata; purchase links must disclose affiliate status
 and never serve as canonical identifiers.
+Record a Work's original publication year separately from the consulted
+Source's publication or digitization year. Omit a Source year when the linked
+manifestation does not establish one, retain translators and editors needed to
+identify that manifestation, and label repository or archive links by their
+actual purpose rather than as publisher links.
 
 Cases represent bounded empirical settings; Case Episodes separate materially
 different institutional configurations within them. Places are referenced as

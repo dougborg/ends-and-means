@@ -4,10 +4,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
 {
   "cases": [
     {
-      "conditionStatementIds": [
-        "capitalism-market-boundary",
-        "england-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "A bounded case for comparing Brenner’s agrarian-class explanation with the historical dispute it prompted.",
       "endDate": {
         "certainty": "approximate",
@@ -34,9 +31,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     },
     {
       "caseId": "english-agrarian-market-dependence",
-      "conditionStatementIds": [
-        "england-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "An analytically bounded period for Brenner’s account of English agrarian development.",
       "endDate": {
         "certainty": "approximate",
@@ -62,9 +57,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       },
     },
     {
-      "conditionStatementIds": [
-        "ghana-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "A bounded case from Austin’s study of African producer-led cocoa expansion and resource reallocation.",
       "endDate": {
         "certainty": "approximate",
@@ -91,9 +84,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     },
     {
       "caseId": "gold-coast-cocoa-expansion",
-      "conditionStatementIds": [
-        "ghana-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "The producer-led cocoa expansion dated approximately 1890–1936 by Austin.",
       "endDate": {
         "certainty": "approximate",
@@ -124,9 +115,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       },
     },
     {
-      "conditionStatementIds": [
-        "china-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "A bounded case of greater enterprise autonomy, continued planning, and non-state-sector growth.",
       "endDate": {
         "certainty": "exact",
@@ -151,9 +140,7 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     },
     {
       "caseId": "china-dual-track-market-reforms",
-      "conditionStatementIds": [
-        "china-case-period-boundary",
-      ],
+      "conditionStatementIds": [],
       "description": "A period of enterprise reform, continued planning, and non-state market entry.",
       "endDate": {
         "certainty": "exact",
@@ -161,7 +148,10 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       },
       "formalRuleStatementIds": [],
       "id": "china-plan-market-coexistence-1978-1993",
-      "interactionStatementIds": [],
+      "interactionStatementIds": [
+        "china-dual-track-coordination",
+        "china-tve-ownership-boundary",
+      ],
       "kind": "case-episode",
       "label": "Enterprise reform and non-state growth, 1978–1993",
       "locationIds": [
@@ -505,11 +495,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "aston-philpin-brenner-debate-source",
       "The Brenner Debate: Agrarian Class Structure and Economic Development in Pre-Industrial Europe",
+      "edition",
+      "aston-philpin-brenner-debate-work",
       [
         "T. H. Aston",
         "C. H. E. Philpin",
       ],
-      1985,
+      2009,
       "Cambridge University Press",
       {
         "isbn13": "9780521349338",
@@ -525,6 +517,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "austin-ghana-cocoa-source",
       "Vent for Surplus or Productivity Breakthrough? The Ghanaian Cocoa Take-off, c. 1890–1936",
+      "article",
+      "austin-ghana-cocoa-work",
       [
         "Gareth Austin",
       ],
@@ -544,6 +538,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "brenner-agrarian-class-structure-source",
       "Agrarian Class Structure and Economic Development in Pre-Industrial Europe",
+      "article",
+      "brenner-agrarian-class-structure-work",
       [
         "Robert Brenner",
       ],
@@ -563,6 +559,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "hodgson-conceptualizing-capitalism-source",
       "Conceptualizing Capitalism: Institutions, Evolution, Future",
+      "edition",
+      "hodgson-conceptualizing-capitalism-work",
       [
         "Geoffrey M. Hodgson",
       ],
@@ -583,6 +581,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "hohfeld-fundamental-legal-conceptions-source",
       "Some Fundamental Legal Conceptions as Applied in Judicial Reasoning",
+      "article",
+      "hohfeld-fundamental-legal-conceptions-work",
       [
         "Wesley Newcomb Hohfeld",
       ],
@@ -602,16 +602,21 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "marx-capital-volume-one-source",
       "Capital: A Critique of Political Economy, volume 1",
+      "edition",
+      "marx-capital-volume-one-work",
       [
         "Karl Marx",
+        "Samuel Moore",
+        "Edward Aveling",
+        "Friedrich Engels",
       ],
-      1887,
+      undefined,
       "Marxists Internet Archive",
       null,
       [
         {
           "label": "Open the source record",
-          "purpose": "publisher",
+          "purpose": "archive",
           "url": "https://www.marxists.org/archive/marx/works/1867-c1/",
         },
       ],
@@ -619,10 +624,12 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "naughton-growing-out-plan-source",
       "Growing Out of the Plan: Chinese Economic Reform, 1978–1993",
+      "edition",
+      "naughton-growing-out-plan-work",
       [
         "Barry Naughton",
       ],
-      1995,
+      2010,
       "Cambridge University Press",
       {
         "isbn13": "9780521470551",
@@ -638,6 +645,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "polanyi-great-transformation-source",
       "The Great Transformation: The Political and Economic Origins of Our Time",
+      "edition",
+      "polanyi-great-transformation-work",
       [
         "Karl Polanyi",
       ],
@@ -657,6 +666,8 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "sep-capitalism-source",
       "Capitalism",
+      "web-page",
+      "sep-capitalism-work",
       [
         "Chiara Cordelli",
       ],
@@ -674,10 +685,12 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "sep-markets-2026-source",
       "Markets",
+      "web-page",
+      "sep-markets-2026-work",
       [
         "Lisa Herzog",
       ],
-      2025,
+      2026,
       "Stanford Encyclopedia of Philosophy",
       null,
       [
@@ -691,17 +704,19 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "smith-wealth-nations-cannan-source",
       "An Inquiry into the Nature and Causes of the Wealth of Nations, Cannan edition, volume 1",
+      "edition",
+      "smith-wealth-nations-cannan-work",
       [
         "Adam Smith",
         "Edwin Cannan",
       ],
-      1904,
+      undefined,
       "Online Library of Liberty",
       null,
       [
         {
           "label": "Open the source record",
-          "purpose": "publisher",
+          "purpose": "authorized-reading",
           "url": "https://oll.libertyfund.org/titles/smith-an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-cannan-ed-vol-1",
         },
       ],
@@ -813,13 +828,13 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
     [
       "smith-exchange-division-labor",
       "Smith on market extent and the division of labor",
-      "observation",
+      "causal-hypothesis",
       "Adam Smith argues that the extent of the market limits the division of labor.",
     ],
     [
       "england-brenner-class-thesis",
       "Brenner’s agrarian class thesis",
-      "observation",
+      "causal-hypothesis",
       "Robert Brenner attributes England’s agrarian development to its structure of agrarian class relations.",
     ],
     [
@@ -911,6 +926,74 @@ exports[`capitalism and market-economy evidence ledger > freezes every statement
       "Hodgson finds markets insufficient to define capitalism",
       "definition",
       "Hodgson argues that markets are insufficient to define capitalism.",
+    ],
+  ],
+  "works": [
+    [
+      "aston-philpin-brenner-debate-work",
+      "The Brenner Debate: Agrarian Class Structure and Economic Development in Pre-Industrial Europe",
+      "book",
+      1985,
+    ],
+    [
+      "austin-ghana-cocoa-work",
+      "Vent for Surplus or Productivity Breakthrough? The Ghanaian Cocoa Take-off, c. 1890–1936",
+      "article",
+      2014,
+    ],
+    [
+      "brenner-agrarian-class-structure-work",
+      "Agrarian Class Structure and Economic Development in Pre-Industrial Europe",
+      "article",
+      1976,
+    ],
+    [
+      "hodgson-conceptualizing-capitalism-work",
+      "Conceptualizing Capitalism: Institutions, Evolution, Future",
+      "book",
+      2015,
+    ],
+    [
+      "hohfeld-fundamental-legal-conceptions-work",
+      "Some Fundamental Legal Conceptions as Applied in Judicial Reasoning",
+      "article",
+      1913,
+    ],
+    [
+      "marx-capital-volume-one-work",
+      "Capital: A Critique of Political Economy, volume 1",
+      "book",
+      1867,
+    ],
+    [
+      "naughton-growing-out-plan-work",
+      "Growing Out of the Plan: Chinese Economic Reform, 1978–1993",
+      "book",
+      1995,
+    ],
+    [
+      "polanyi-great-transformation-work",
+      "The Great Transformation: The Political and Economic Origins of Our Time",
+      "book",
+      1944,
+    ],
+    [
+      "sep-capitalism-work",
+      "Capitalism",
+      "other",
+      2026,
+    ],
+    [
+      "sep-markets-2026-work",
+      "Markets",
+      "other",
+      2013,
+    ],
+    [
+      "smith-wealth-nations-cannan-work",
+      "An Inquiry into the Nature and Causes of the Wealth of Nations, Cannan edition, volume 1",
+      "book",
+      1776,
     ],
   ],
 }
