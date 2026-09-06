@@ -466,133 +466,137 @@ describe("research obligation routes", () => {
 });
 
 const expectedOpenResearchObligations = [
-      {
-        id: "collective-capital-formation-accountability-design",
-        obligationType: "counterargument",
-        target:
-          "concept:collective-capital-formation#why-can-collective-funds-lose-support",
-        status: "open",
-      },
-      {
-        id: "communism-claimed-identity-practice-gap",
-        obligationType: "research-gap",
-        target: "concept:communism#does-a-communist-label-settle-the-case",
-        status: "open",
-      },
-      {
-        id: "communism-roy-comintern-strategy",
-        obligationType: "research-gap",
-        target: "concept:communism#was-communism-one-global-movement",
-        status: "open",
-      },
-      {
-        id: "economic-democracy-causal-identification",
-        obligationType: "research-gap",
-        target:
-          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
-        status: "open",
-      },
-      {
-        id: "economic-democracy-decision-cost-objection",
-        obligationType: "counterargument",
-        target:
-          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
-        status: "open",
-      },
-      {
-        id: "economic-democracy-futility-objection",
-        obligationType: "counterargument",
-        target:
-          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
-        status: "open",
-      },
-      {
-        id: "economic-democracy-property-rights-objection",
-        obligationType: "counterargument",
-        target:
-          "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
-        status: "open",
-      },
-      {
-        id: "kahnawake-cdmrp-current-hearing-rules",
-        obligationType: "research-gap",
-        target: "case:kahnawake-community-lawmaking#how-does-the-process-work",
-        status: "open",
-      },
-      {
-        id: "kahnawake-cdmrp-jurisdiction-enforcement",
-        obligationType: "research-gap",
-        target: "case:kahnawake-community-lawmaking",
-        status: "open",
-      },
-      {
-        id: "kahnawake-cdmrp-participation-representativeness",
-        obligationType: "counterevidence",
-        target:
-          "case:kahnawake-community-lawmaking#what-do-we-know-about-practice",
-        status: "open",
-      },
-      {
-        id: "kahnawake-governing-authority-legitimacy",
-        obligationType: "research-gap",
-        target:
-          "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
-        status: "open",
-      },
-      {
-        id: "social-democracy-postwar-conditions",
-        obligationType: "research-gap",
-        target: "concept:social-democracy#where-the-tradition-came-from",
-        status: "open",
-      },
-      {
-        id: "social-ownership-delegation-accountability-gap",
-        obligationType: "counterargument",
-        target: "concept:social-ownership#which-rights-must-be-separated",
-        status: "open",
-      },
-      {
-        id: "socialism-communism-lexical-history",
-        obligationType: "research-gap",
-        target: "concept:socialism#how-do-socialism-and-communism-relate",
-        status: "open",
-      },
-      {
-        id: "socialism-democratic-control-threshold",
-        obligationType: "research-gap",
-        target: "concept:socialism#what-defines-socialism",
-        status: "open",
-      },
-      {
-        id: "socialism-rival-classification-boundary",
-        obligationType: "counterargument",
-        target: "concept:socialism#what-defines-socialism",
-        status: "open",
-      },
-      {
-        id: "swedish-funds-investment-counterfactual",
-        obligationType: "counterfactual",
-        target: "case:swedish-wage-earner-funds",
-        status: "open",
-      },
-      {
-        id: "swedish-funds-ownership-counterfactual",
-        obligationType: "counterfactual",
-        target: "case:swedish-wage-earner-funds#what-they-did-in-practice",
-        status: "open",
-      },
-      {
-        id: "swedish-funds-political-durability-counterfactual",
-        obligationType: "counterfactual",
-        target: "case:swedish-wage-earner-funds#why-the-case-matters",
-        status: "open",
-      },
-      {
-        id: "swedish-funds-wage-formation-counterfactual",
-        obligationType: "counterfactual",
-        target: "case:swedish-wage-earner-funds#what-they-were-meant-to-do",
-        status: "open",
-      },
+  ...[
+    ["collective-capital-formation-benefit-allocation", "counterargument"],
+    ["collective-capital-formation-durable-support", "counterargument"],
+    ["collective-capital-formation-governance-exit-design", "counterargument"],
+    ["collective-capital-formation-participant-understanding", "research-gap"],
+  ].map(([id, obligationType]) => ({
+    id,
+    obligationType,
+    target:
+      "concept:collective-capital-formation#why-can-collective-funds-lose-support",
+    status: "open",
+  })),
+  {
+    id: "communism-claimed-identity-practice-gap",
+    obligationType: "research-gap",
+    target: "concept:communism#does-a-communist-label-settle-the-case",
+    status: "open",
+  },
+  {
+    id: "communism-roy-comintern-strategy",
+    obligationType: "research-gap",
+    target: "concept:communism#was-communism-one-global-movement",
+    status: "open",
+  },
+  {
+    id: "economic-democracy-causal-identification",
+    obligationType: "research-gap",
+    target:
+      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    status: "open",
+  },
+  {
+    id: "economic-democracy-decision-cost-objection",
+    obligationType: "counterargument",
+    target:
+      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    status: "open",
+  },
+  {
+    id: "economic-democracy-futility-objection",
+    obligationType: "counterargument",
+    target:
+      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    status: "open",
+  },
+  {
+    id: "economic-democracy-property-rights-objection",
+    obligationType: "counterargument",
+    target:
+      "concept:economic-democracy#what-can-democratic-designs-fail-to-achieve",
+    status: "open",
+  },
+  {
+    id: "kahnawake-cdmrp-current-hearing-rules",
+    obligationType: "research-gap",
+    target: "case:kahnawake-community-lawmaking#how-does-the-process-work",
+    status: "open",
+  },
+  {
+    id: "kahnawake-cdmrp-jurisdiction-enforcement",
+    obligationType: "research-gap",
+    target: "case:kahnawake-community-lawmaking",
+    status: "open",
+  },
+  {
+    id: "kahnawake-cdmrp-participation-representativeness",
+    obligationType: "counterevidence",
+    target: "case:kahnawake-community-lawmaking#what-do-we-know-about-practice",
+    status: "open",
+  },
+  {
+    id: "kahnawake-governing-authority-legitimacy",
+    obligationType: "research-gap",
+    target:
+      "case:kahnawake-community-lawmaking#is-this-simply-traditional-government",
+    status: "open",
+  },
+  {
+    id: "social-democracy-postwar-conditions",
+    obligationType: "research-gap",
+    target: "concept:social-democracy#where-the-tradition-came-from",
+    status: "open",
+  },
+  {
+    id: "social-ownership-delegation-accountability-gap",
+    obligationType: "counterargument",
+    target: "concept:social-ownership#which-rights-must-be-separated",
+    status: "open",
+  },
+  {
+    id: "socialism-communism-lexical-history",
+    obligationType: "research-gap",
+    target: "concept:socialism#how-do-socialism-and-communism-relate",
+    status: "open",
+  },
+  {
+    id: "socialism-democratic-control-threshold",
+    obligationType: "research-gap",
+    target: "concept:socialism#what-defines-socialism",
+    status: "open",
+  },
+  {
+    id: "socialism-rival-classification-boundary",
+    obligationType: "counterargument",
+    target: "concept:socialism#what-defines-socialism",
+    status: "open",
+  },
+  {
+    id: "swedish-funds-investment-counterfactual",
+    obligationType: "counterfactual",
+    target: "case:swedish-wage-earner-funds",
+    status: "open",
+  },
+  {
+    id: "swedish-funds-ownership-counterfactual",
+    obligationType: "counterfactual",
+    target: "case:swedish-wage-earner-funds#what-they-did-in-practice",
+    status: "open",
+  },
+  {
+    id: "swedish-funds-political-durability-counterfactual",
+    obligationType: "counterfactual",
+    target: "case:swedish-wage-earner-funds#why-the-case-matters",
+    status: "open",
+  },
+  {
+    id: "swedish-funds-wage-formation-counterfactual",
+    obligationType: "counterfactual",
+    target: "case:swedish-wage-earner-funds#what-they-were-meant-to-do",
+    status: "open",
+  },
 ];
 
 describe("canonical research agenda", () => {

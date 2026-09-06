@@ -12,6 +12,7 @@ const dossier = attachNarrative("collective-capital-formation.md", {
   standfirstStatementIds: [
     "collective-capital-formation-working-definition",
     "collective-capital-formation-national-accounts-boundary",
+    "collective-capital-formation-statistical-governance-boundary",
     "collective-capital-formation-rights-boundary",
   ],
   sections: [
@@ -32,7 +33,10 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       heading: "How is this different from investment statistics?",
       body: "",
       traceStatus: "supported" as const,
-      statementIds: ["collective-capital-formation-national-accounts-boundary"],
+      statementIds: [
+        "collective-capital-formation-national-accounts-boundary",
+        "collective-capital-formation-statistical-governance-boundary",
+      ],
     },
     {
       id: "what-design-choices-matter",
@@ -40,7 +44,8 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "meidner-collective-funds-proposal",
+        "meidner-profit-share-financing-proposal",
+        "meidner-union-fund-governance-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -58,7 +63,8 @@ const dossier = attachNarrative("collective-capital-formation.md", {
       body: "",
       traceStatus: "qualified" as const,
       statementIds: [
-        "meidner-collective-funds-proposal",
+        "meidner-profit-share-financing-proposal",
+        "meidner-union-fund-governance-proposal",
         "funds-statutory-design",
         "funds-abolished",
         "collective-capital-formation-swedish-case-classification",

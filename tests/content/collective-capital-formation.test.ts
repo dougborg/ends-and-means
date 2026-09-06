@@ -10,11 +10,13 @@ import {
 const statementIds = [
   "collective-capital-formation-working-definition",
   "collective-capital-formation-national-accounts-boundary",
+  "collective-capital-formation-statistical-governance-boundary",
   "collective-capital-formation-individual-saving-boundary",
   "swedish-1981-funds-cash-financing",
   "collective-capital-formation-financing-governance-boundary",
   "collective-capital-formation-governing-constituency",
-  "meidner-collective-funds-proposal",
+  "meidner-profit-share-financing-proposal",
+  "meidner-union-fund-governance-proposal",
   "collective-capital-formation-rights-boundary",
   "collective-capital-formation-swedish-case-classification",
   "collective-capital-formation-supporter-distance",
@@ -35,6 +37,7 @@ describe("collective capital formation dossier", () => {
     expect(dossier?.standfirstStatementIds).toEqual([
       "collective-capital-formation-working-definition",
       "collective-capital-formation-national-accounts-boundary",
+      "collective-capital-formation-statistical-governance-boundary",
       "collective-capital-formation-rights-boundary",
     ]);
     expect(dossier?.sections.map(({ id }) => id)).toEqual([
@@ -57,9 +60,13 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-governing-constituency",
         "collective-capital-formation-rights-boundary",
       ],
-      ["collective-capital-formation-national-accounts-boundary"],
       [
-        "meidner-collective-funds-proposal",
+        "collective-capital-formation-national-accounts-boundary",
+        "collective-capital-formation-statistical-governance-boundary",
+      ],
+      [
+        "meidner-profit-share-financing-proposal",
+        "meidner-union-fund-governance-proposal",
         "swedish-1981-funds-cash-financing",
         "collective-capital-formation-financing-governance-boundary",
         "collective-capital-formation-governing-constituency",
@@ -67,7 +74,8 @@ describe("collective capital formation dossier", () => {
         "collective-capital-formation-rights-boundary",
       ],
       [
-        "meidner-collective-funds-proposal",
+        "meidner-profit-share-financing-proposal",
+        "meidner-union-fund-governance-proposal",
         "funds-statutory-design",
         "funds-abolished",
         "collective-capital-formation-swedish-case-classification",
@@ -81,7 +89,7 @@ describe("collective capital formation dossier", () => {
     ]);
     expect(dossier?.sections[1]?.body).not.toContain("machinery");
     expect(dossier?.sections[1]?.body).toContain(
-      "produced fixed assets used in production for more than one year",
+      "additions to long-lived productive assets after disposals",
     );
     expect(dossier?.sections[3]?.body).not.toContain(
       "operated from 1984 through 1991",
@@ -130,22 +138,34 @@ describe("collective capital formation evidence", () => {
     });
   });
 
-  it("records a focused accountability counterargument", () => {
+  it("records independently closable research obligations", () => {
     expect(
       researchObligationsForTarget("concept", "collective-capital-formation"),
-    ).toEqual([
-      expect.objectContaining({
-        id: "collective-capital-formation-accountability-design",
-        obligationType: "counterargument",
-        targetSectionId: "why-can-collective-funds-lose-support",
-        addressedStatementIds: [
-          "collective-capital-formation-supporter-distance",
-          "collective-capital-formation-unclear-benefits-objection",
-          "collective-capital-formation-purpose-objection",
-        ],
-        obligationStatus: "open",
-      }),
-    ]);
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "collective-capital-formation-governance-exit-design",
+          addressedStatementIds: expect.arrayContaining([
+            "collective-capital-formation-individual-saving-boundary",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "collective-capital-formation-benefit-allocation",
+          addressedStatementIds: expect.arrayContaining([
+            "collective-capital-formation-individual-saving-boundary",
+          ]),
+        }),
+        expect.objectContaining({
+          id: "collective-capital-formation-participant-understanding",
+        }),
+        expect.objectContaining({
+          id: "collective-capital-formation-durable-support",
+        }),
+      ]),
+    );
+    expect(
+      researchObligationsForTarget("concept", "collective-capital-formation"),
+    ).toHaveLength(4);
   });
 });
 
@@ -156,6 +176,31 @@ describe("collective capital formation locator precision", () => {
     ).toEqual([
       expect.objectContaining({
         locator: "chapter 5, p. 143, ‘Gross fixed capital formation’",
+      }),
+    ]);
+    expect(
+      citationsFor(
+        "collective-capital-formation-statistical-governance-boundary",
+      ),
+    ).toEqual([
+      expect.objectContaining({
+        locator: "chapter 5, p. 143, ‘Gross fixed capital formation’",
+        role: "qualifies",
+      }),
+    ]);
+  });
+
+  it("keeps Meidner's financing and governance proposals atomic", () => {
+    expect(citationsFor("meidner-profit-share-financing-proposal")).toEqual([
+      expect.objectContaining({
+        locator:
+          "section ‘The essential features of the LO proposal for wage-earner funds’, p. 309",
+      }),
+    ]);
+    expect(citationsFor("meidner-union-fund-governance-proposal")).toEqual([
+      expect.objectContaining({
+        locator:
+          "section ‘The essential features of the LO proposal for wage-earner funds’, p. 310",
       }),
     ]);
   });
