@@ -14,6 +14,23 @@ export const minangkabauVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer residence, ownership, practical control, political office, gender equality, or rule by women from maternal-line descent alone.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Matrilineality",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q1136773",
+          url: "https://www.wikidata.org/wiki/Q1136773",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

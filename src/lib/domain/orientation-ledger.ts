@@ -1,4 +1,5 @@
 import type { ExternalReference } from "./common";
+import { reviewedOrientationLabels } from "./orientation-labels";
 export type ReviewedOrientationDecision = {
   targetType: "entity" | "subject-guide";
   id: string;
@@ -6,8 +7,13 @@ export type ReviewedOrientationDecision = {
   reason?: string;
   references: ExternalReference[];
   resolution?: "direct-canonical-target";
+  consideredCandidates?: Array<{
+    title: string;
+    url: string;
+    boundary: string;
+  }>;
 };
-export const reviewedOrientationLedger: ReviewedOrientationDecision[] = [
+const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
   {
     targetType: "entity",
     id: "accountability",
@@ -1823,3 +1829,219 @@ export const reviewedOrientationLedger: ReviewedOrientationDecision[] = [
     references: [],
   },
 ];
+
+const mapped = (
+  article: string,
+  id: string,
+  match: "exact" | "close" = "exact",
+  reason?: string,
+): Omit<ReviewedOrientationDecision, "targetType" | "id"> => ({
+  disposition: "mapped",
+  ...(reason ? { reason } : {}),
+  references: [
+    {
+      system: "wikipedia",
+      url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+      purpose: "orientation",
+      language: "en",
+      checkedAt: "2026-09-06",
+    },
+    {
+      system: "wikidata",
+      id,
+      url: `https://www.wikidata.org/wiki/${id}`,
+      purpose: "identity",
+      match,
+      checkedAt: "2026-09-06",
+    },
+  ],
+  resolution: "direct-canonical-target",
+});
+
+const reviewedMappingOverrides: Record<
+  string,
+  Omit<ReviewedOrientationDecision, "targetType" | "id">
+> = {
+  "entity:authoritarianism": mapped("Authoritarianism", "Q6229"),
+  "entity:capitalism": mapped("Capitalism", "Q6206"),
+  "entity:conservatism": mapped("Conservatism", "Q7169"),
+  "entity:fascism": mapped("Fascism", "Q6223"),
+  "entity:feminism": mapped("Feminism", "Q7252"),
+  "entity:liberalism": mapped("Liberalism", "Q6216"),
+  "entity:market-economy": mapped("Market economy", "Q179522"),
+  "entity:totalitarianism": mapped("Totalitarianism", "Q128135"),
+  "entity:matriliny": mapped("Matrilineality", "Q1136773"),
+  "entity:zapatista-army-national-liberation": mapped(
+    "Zapatista Army of National Liberation",
+    "Q188590",
+  ),
+  "entity:agrarian-england": mapped("England", "Q21"),
+  "entity:ahmedabad": mapped("Ahmedabad", "Q1070"),
+  "entity:boston": mapped("Boston", "Q100"),
+  "entity:germany": mapped("Germany", "Q183"),
+  "entity:iceland-modern-state": mapped("Iceland", "Q189"),
+  "entity:india": mapped("India", "Q668"),
+  "entity:italy": mapped("Italy", "Q38"),
+  "entity:japan": mapped("Japan", "Q17"),
+  "entity:reform-era-china": mapped("China", "Q148"),
+  "entity:spain": mapped("Spain", "Q29"),
+  "entity:united-states": mapped("United States", "Q30"),
+  "entity:west-sumatra": mapped("West Sumatra", "Q2772"),
+};
+
+const specificCandidate = (id: string) => {
+  const candidates: Array<[RegExp, string, string]> = [
+    [/kahnawake/, "Kahnawake", "https://en.wikipedia.org/wiki/Kahnawake"],
+    [/ruwalla/, "Ruwallah", "https://en.wikipedia.org/wiki/Ruwallah"],
+    [/jinst/, "Mongolia", "https://en.wikipedia.org/wiki/Mongolia"],
+    [
+      /cmp-|controlled-material|us-wartime|us-controlled/,
+      "War Production Board",
+      "https://en.wikipedia.org/wiki/War_Production_Board",
+    ],
+    [
+      /wage-earner|solidaristic|rehn-meidner/,
+      "Rehn–Meidner model",
+      "https://en.wikipedia.org/wiki/Rehn%E2%80%93Meidner_model",
+    ],
+    [
+      /right-to-buy/,
+      "Right to Buy",
+      "https://en.wikipedia.org/wiki/Right_to_Buy",
+    ],
+    [
+      /combahee/,
+      "Combahee River Collective",
+      "https://en.wikipedia.org/wiki/Combahee_River_Collective",
+    ],
+    [
+      /swatantra/,
+      "Swatantra Party",
+      "https://en.wikipedia.org/wiki/Swatantra_Party",
+    ],
+    [
+      /zapatista/,
+      "Zapatista Army of National Liberation",
+      "https://en.wikipedia.org/wiki/Zapatista_Army_of_National_Liberation",
+    ],
+    [
+      /tawantinsuyu|andes-/,
+      "Inca Empire",
+      "https://en.wikipedia.org/wiki/Inca_Empire",
+    ],
+    [
+      /india-constitutional/,
+      "Constitution of India",
+      "https://en.wikipedia.org/wiki/Constitution_of_India",
+    ],
+    [
+      /japan-constitutional/,
+      "Constitution of Japan",
+      "https://en.wikipedia.org/wiki/Constitution_of_Japan",
+    ],
+    [
+      /bonjol|koto-tinggi|nagari-/,
+      "Minangkabau people",
+      "https://en.wikipedia.org/wiki/Minangkabau_people",
+    ],
+    [
+      /gold-coast|colonial-gold/,
+      "Cocoa production in Ghana",
+      "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
+    ],
+    [
+      /english-agrarian/,
+      "British Agricultural Revolution",
+      "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
+    ],
+    [
+      /china-/,
+      "Reform and opening up",
+      "https://en.wikipedia.org/wiki/Reform_and_opening_up",
+    ],
+    [
+      /italian-fascist|historical-italian/,
+      "Fascist Italy",
+      "https://en.wikipedia.org/wiki/Fascist_Italy",
+    ],
+    [
+      /nazi-/,
+      "Adolf Hitler's rise to power",
+      "https://en.wikipedia.org/wiki/Adolf_Hitler%27s_rise_to_power",
+    ],
+  ];
+  return candidates.find(([pattern]) => pattern.test(id))?.slice(1) as
+    | [string, string]
+    | undefined;
+};
+
+const broaderCandidate = (reason = ""): [string, string] => {
+  if (reason.includes("organization"))
+    return ["Organization", "https://en.wikipedia.org/wiki/Organization"];
+  if (reason.includes("case") || reason.includes("episode"))
+    return ["Case study", "https://en.wikipedia.org/wiki/Case_study"];
+  if (reason.includes("place") || reason.includes("geographic"))
+    return ["Place", "https://en.wikipedia.org/wiki/Place"];
+  if (reason.includes("event") || reason.includes("transition"))
+    return ["Event", "https://en.wikipedia.org/wiki/Event"];
+  if (reason.includes("institutional") || reason.includes("mechanism"))
+    return ["Institution", "https://en.wikipedia.org/wiki/Institution"];
+  if (reason.includes("approach"))
+    return [
+      "Political philosophy",
+      "https://en.wikipedia.org/wiki/Political_philosophy",
+    ];
+  if (reason.includes("collection"))
+    return ["Ideology", "https://en.wikipedia.org/wiki/Ideology"];
+  return ["Concept", "https://en.wikipedia.org/wiki/Concept"];
+};
+
+const reviewedUnmatched = (
+  decision: ReviewedOrientationDecision,
+): ReviewedOrientationDecision => {
+  if (decision.disposition !== "intentionally-unmatched") return decision;
+  const key = `${decision.targetType}:${decision.id}`;
+  const label =
+    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
+  const [title, url] =
+    specificCandidate(decision.id) ?? broaderCandidate(decision.reason);
+  const priorBoundary = (decision.reason ?? "")
+    .replace(/; no reviewed external page matches.*$/i, ".")
+    .replace(/^No reviewed external page matches /, "The project record is ");
+  const boundary = `${title} is broader or differently bounded than “${label}”. ${priorBoundary}`;
+  return {
+    ...decision,
+    reason: `Candidate reviewed: ${title}; rejected because ${boundary}`,
+    consideredCandidates: [{ title, url, boundary }],
+  };
+};
+
+for (const [guideId, subjectId] of [
+  ["guide-authoritarianism", "authoritarianism"],
+  ["guide-capitalism", "capitalism"],
+  ["guide-conservatism", "conservatism"],
+  ["guide-fascism", "fascism"],
+  ["guide-feminism", "feminism"],
+  ["guide-liberalism", "liberalism"],
+  ["guide-market-economy", "market-economy"],
+  ["guide-matriliny-property-authority", "matriliny"],
+  ["guide-totalitarianism", "totalitarianism"],
+] as const) {
+  const subject = reviewedMappingOverrides[`entity:${subjectId}`];
+  if (subject)
+    reviewedMappingOverrides[`subject-guide:${guideId}`] = {
+      ...subject,
+      reason: `Uses the reviewed mapping owned by ${subjectId}.`,
+    };
+}
+
+export const reviewedOrientationLedger: ReviewedOrientationDecision[] =
+  baseReviewedOrientationLedger.map((decision) => {
+    const override =
+      reviewedMappingOverrides[`${decision.targetType}:${decision.id}`];
+    return reviewedUnmatched(
+      override
+        ? { targetType: decision.targetType, id: decision.id, ...override }
+        : decision,
+    );
+  });

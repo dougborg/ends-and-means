@@ -4,6 +4,23 @@ const reviewed = {
   publicationStatus: "reviewed" as const,
   reviewedAt: "2026-09-06",
 };
+const orientationRefs = (article: string, id: string) => [
+  {
+    system: "wikipedia" as const,
+    url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+    purpose: "orientation" as const,
+    language: "en",
+    checkedAt: "2026-09-06",
+  },
+  {
+    system: "wikidata" as const,
+    id,
+    url: `https://www.wikidata.org/wiki/${id}`,
+    purpose: "identity" as const,
+    match: "exact" as const,
+    checkedAt: "2026-09-06",
+  },
+];
 
 const sourceCopy: Record<
   string,
@@ -418,6 +435,7 @@ export const liberalismConservatismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer a fixed economic program, democratic performance, individualism, or a present-day party position from the label alone.",
+      externalRefs: orientationRefs("Liberalism", "Q6216"),
       ...reviewed,
     },
   },
@@ -432,6 +450,7 @@ export const liberalismConservatismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer authoritarianism, nationalism, religion, capitalism, opposition to all reform, or a present-day party position from the label alone.",
+      externalRefs: orientationRefs("Conservatism", "Q7169"),
       ...reviewed,
     },
   },
@@ -750,6 +769,7 @@ export const liberalismConservatismEvidenceDocuments = [
       description:
         "The geographic boundary for the Indian constitutional settlement case.",
       placeType: "country",
+      externalRefs: orientationRefs("India", "Q668"),
       ...reviewed,
     },
   },
@@ -762,6 +782,7 @@ export const liberalismConservatismEvidenceDocuments = [
       description:
         "The geographic boundary for the Japanese constitutional settlement case.",
       placeType: "country",
+      externalRefs: orientationRefs("Japan", "Q17"),
       ...reviewed,
     },
   },

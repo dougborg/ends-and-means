@@ -24,12 +24,12 @@ describe("orientation audit", () => {
     expect(inventory).toHaveLength(1024);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(21);
+    ).toHaveLength(52);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(169);
+    ).toHaveLength(138);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
     ).toHaveLength(834);
@@ -106,12 +106,28 @@ describe("orientation audit mutation enforcement", () => {
       references: [],
       orientationUrls: [],
       identityIds: [],
+      consideredCandidates: [],
     });
     expect(validateOrientationAudit(graph, inventory)).toEqual(
       expect.arrayContaining([
         "entity:democracy: reviewed disposition changed",
         "entity:democracy: reviewed reason changed",
         "entity:democracy: reviewed reference tuple changed",
+      ]),
+    );
+  });
+
+  it("rejects an unmatched decision with its candidate review erased", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const accountability = inventory.find(({ id }) => id === "accountability");
+    expect(accountability).toBeDefined();
+    if (!accountability) return;
+    accountability.consideredCandidates = [];
+    expect(validateOrientationAudit(graph, inventory)).toEqual(
+      expect.arrayContaining([
+        "entity:accountability: unmatched decision lacks a reviewed candidate",
+        "entity:accountability: reviewed rejected-candidate decision changed",
       ]),
     );
   });
@@ -164,6 +180,17 @@ describe("orientation audit projections and publication scope", () => {
         "entity:democracy: projected orientation URLs changed",
         "entity:democracy: projected identity IDs changed",
       ]),
+    );
+  });
+
+  it("rejects canonical source-graph label drift", () => {
+    const graph = canonicalGraph();
+    const democracy = graph.indexes.entitiesById.democracy;
+    expect(democracy).toBeDefined();
+    if (!democracy) return;
+    democracy.label = "Democracy (renamed without orientation review)";
+    expect(validateOrientationAudit(graph)).toContain(
+      "entity:democracy: canonical label changed from reviewed ledger",
     );
   });
 

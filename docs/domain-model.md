@@ -621,9 +621,12 @@ Record the canonical article URL, language, check date, and canonical QID; use
 is useful but broader, narrower, or differently bounded.
 The deterministic orientation audit compares every live eligible Subject Guide
 and entity against a target-specific reviewed ledger. The ledger preserves the
-exact disposition, intentional-absence reason, complete mapping tuple, and
-direct canonical-target resolution check; a new eligible target fails closed
-until reviewed. Inapplicable entity kinds are classified before their metadata,
+exact canonical label, disposition, complete mapping tuple, and direct
+canonical-target resolution check. An intentional absence must name a concrete
+canonical candidate that was opened and explain the target-specific identity
+boundary that rules it out; kind-level or label-substitution boilerplate is not
+a reviewed decision. A new eligible target or changed canonical label fails
+closed until reviewed. Inapplicable entity kinds are classified before their metadata,
 so Sources, Works, Statements, and Dossiers cannot become orientation mappings.
 Guides reuse mappings owned by their primary canonical subjects rather than
 duplicating identity metadata.

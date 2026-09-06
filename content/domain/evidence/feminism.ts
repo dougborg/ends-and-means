@@ -99,6 +99,12 @@ const concept = (
   label: string,
   description: string,
   scopeNote: string,
+  externalRefs?: NonNullable<
+    Extract<
+      AuthoringDocument,
+      { documentType: "entity" }
+    >["entity"]["externalRefs"]
+  >,
 ): AuthoringDocument => ({
   documentType: "entity",
   entity: {
@@ -108,6 +114,7 @@ const concept = (
     description,
     schemeIds: ["political-economic-ideas"],
     scopeNote,
+    ...(externalRefs ? { externalRefs } : {}),
     ...reviewed,
   },
 });
@@ -298,6 +305,23 @@ export const feminismEvidenceDocuments = [
     "Feminism",
     "A contested family of analyses, movements, and political projects concerned with gendered power and sexist oppression.",
     "Keep beliefs, analyses, movements, organizations, programs, self-descriptions, and external labels distinct; the name does not supply one subject, doctrine, chronology, or policy package.",
+    [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/Feminism",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q7252",
+        url: "https://www.wikidata.org/wiki/Q7252",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   ),
   {
     documentType: "entity",
@@ -586,6 +610,23 @@ export const feminismEvidenceDocuments = [
       description:
         "Boston, Massachusetts, the geographic boundary for the Combahee case.",
       placeType: "city",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Boston",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q100",
+          url: "https://www.wikidata.org/wiki/Q100",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },
@@ -598,6 +639,23 @@ export const feminismEvidenceDocuments = [
       description:
         "Ahmedabad, Gujarat, the geographic boundary for the SEWA case.",
       placeType: "city",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Ahmedabad",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q1070",
+          url: "https://www.wikidata.org/wiki/Q1070",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },
@@ -609,6 +667,23 @@ export const feminismEvidenceDocuments = [
       label: "Iceland",
       description: "The state jurisdiction for the parental-leave case.",
       placeType: "country",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Iceland",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q189",
+          url: "https://www.wikidata.org/wiki/Q189",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

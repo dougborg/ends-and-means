@@ -1,6 +1,27 @@
 import type { AuthoringDocument } from "../../../src/lib/domain";
 
 const reviewed = { publicationStatus: "reviewed" as const };
+const orientationRefs = (
+  article: string,
+  id: string,
+  match: "exact" | "close" = "exact",
+) => [
+  {
+    system: "wikipedia" as const,
+    url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
+    purpose: "orientation" as const,
+    language: "en",
+    checkedAt: "2026-09-06",
+  },
+  {
+    system: "wikidata" as const,
+    id,
+    url: `https://www.wikidata.org/wiki/${id}`,
+    purpose: "identity" as const,
+    match,
+    checkedAt: "2026-09-06",
+  },
+];
 
 type SourceType = "article" | "edition" | "web-page";
 type WorkType = "article" | "book" | "other";
@@ -57,7 +78,9 @@ const source = (
       contributorDisplay: options.sourceContributors ?? contributors,
       ...(options.sourcePublicationYear === null
         ? {}
-        : { publicationYear: options.sourcePublicationYear ?? publicationYear }),
+        : {
+            publicationYear: options.sourcePublicationYear ?? publicationYear,
+          }),
       publisher: options.sourcePublisher ?? publisher,
       ...(Object.keys(identifiers).length ? { identifiers } : {}),
       resourceLinks: [
@@ -241,6 +264,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not use the term as a synonym for markets, commerce, private possessions, freedom, one policy program, or a timeless property of a country.",
+      externalRefs: orientationRefs("Capitalism", "Q6206"),
       ...reviewed,
     },
   },
@@ -255,6 +279,7 @@ export const capitalismMarketEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not infer private ownership, laissez-faire policy, capitalism, or the absence of planning from market exchange alone.",
+      externalRefs: orientationRefs("Market economy", "Q179522"),
       ...reviewed,
     },
   },
@@ -569,6 +594,7 @@ export const capitalismMarketEvidenceDocuments = [
       label: "England",
       description: "England as bounded for the agrarian transformation case.",
       placeType: "country",
+      externalRefs: orientationRefs("England", "Q21"),
       ...reviewed,
     },
   },
@@ -593,6 +619,7 @@ export const capitalismMarketEvidenceDocuments = [
       description:
         "The People’s Republic of China as bounded for the 1978–1993 reform case.",
       placeType: "country",
+      externalRefs: orientationRefs("China", "Q148"),
       ...reviewed,
     },
   },
