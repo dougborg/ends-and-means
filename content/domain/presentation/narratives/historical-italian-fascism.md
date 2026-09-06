@@ -2,7 +2,7 @@ Historical Italian Fascism was a movement, party, doctrine, and governing projec
 
 ## doctrine-and-organization
 
-Mussolini and Gentile presented an anti-liberal and anti-Marxist doctrine centered on state and nation.
+The 1932 Fascist doctrine presented anti-liberal and anti-Marxist positions centered on state and nation.
 That self-description records a claim, while the movement founded in 1919, the later party, and the coalition government formed in 1922 remained distinct organizations and moments.
 
 ## bounded-rule

@@ -136,8 +136,26 @@ const citations = [
   [
     "fascism-evidence-region-limit",
     "paxton-anatomy-source",
-    "chapter 1, p. 23, final two paragraphs on stages and comparison",
+    "chapter 1, p. 14, paragraph beginning ‘I propose to set aside’",
     "context",
+  ],
+  [
+    "fascism-authoritarianism-distinction",
+    "paxton-anatomy-source",
+    "chapter 8, p. 207, paragraph beginning ‘Considering fascism simply’",
+    "supports",
+  ],
+  [
+    "fascism-totalitarianism-classification-dispute",
+    "paxton-anatomy-source",
+    "chapter 8, p. 210, paragraphs beginning ‘A multitude of observers’",
+    "supports",
+  ],
+  [
+    "italian-fascism-external-classification",
+    "paxton-anatomy-source",
+    "chapter 1, p. 14, paragraph beginning ‘I propose to set aside’",
+    "supports",
   ],
   [
     "totalitarian-linz-definition",
@@ -170,9 +188,15 @@ const citations = [
     "supports",
   ],
   [
-    "nazi-one-party-consolidation",
+    "nazi-democratic-destruction",
     "ushmm-nazi-state-source",
-    "sections ‘Foundations of the Nazi State’ and ‘Creating the Führer State’",
+    "opening summary and critical-thinking question 1",
+    "supports",
+  ],
+  [
+    "nazi-one-party-state-july-1933",
+    "ushmm-nazi-state-source",
+    "section ‘Creating the Führer State,’ paragraph beginning ‘With the passage’",
     "supports",
   ],
   [
@@ -182,9 +206,15 @@ const citations = [
     "supports",
   ],
   [
-    "nazi-control-limit",
+    "nazi-coordination-scope",
     "ushmm-nazi-state-source",
     "section ‘The Gleichschaltung of German Society’",
+    "supports",
+  ],
+  [
+    "nazi-christian-coordination-limit",
+    "ushmm-nazi-state-source",
+    "section ‘The Gleichschaltung of German Society,’ final sentence",
     "supports",
   ],
   [
@@ -261,7 +291,7 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           subject: ref("concept", "fascism"),
           object: ref("concept", "authoritarianism"),
           status: "qualified",
-          statementIds: ["fascism-label-boundary"],
+          statementIds: ["fascism-authoritarianism-distinction"],
         },
         {
           id: "fascism-related-totalitarianism",
@@ -269,7 +299,7 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           subject: ref("concept", "fascism"),
           object: ref("concept", "totalitarianism"),
           status: "qualified",
-          statementIds: ["totalitarian-contested-category"],
+          statementIds: ["fascism-totalitarianism-classification-dispute"],
         },
       ],
     },
@@ -301,7 +331,7 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           object: ref("collection", "fascist-movements"),
           membership: "widely-accepted",
           status: "qualified",
-          statementIds: ["italy-party-regime-boundary"],
+          statementIds: ["italian-fascism-external-classification"],
         },
       ],
     },
@@ -342,23 +372,6 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
           membership: "widely-accepted",
           status: "qualified",
           statementIds: ["totalitarian-linz-definition"],
-        },
-      ],
-    },
-    {
-      documentType: "relationships",
-      subject: ref("case", "italian-fascist-dictatorship-1925-1943"),
-      relationships: [
-        {
-          id: "italian-fascist-case-partial",
-          predicate: "partially-instantiated",
-          subject: ref("case", "italian-fascist-dictatorship-1925-1943"),
-          object: ref("approach", "historical-italian-fascism"),
-          status: "qualified",
-          statementIds: [
-            "italy-dictatorship-transition",
-            "italy-party-regime-boundary",
-          ],
         },
       ],
     },
