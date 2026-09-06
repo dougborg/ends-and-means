@@ -46,6 +46,10 @@ clause against its evidence, and compare the draft with consulted sources for
 suspiciously close phrasing.
 The content-integrity harness and audit report objective attention signals; they do not replace
 human review for accuracy, fairness, plagiarism risk, focus, or publication.
+When an actual cited page has been inspected, a narrowly scoped reviewed
+overlap acknowledgement may record that decision. Follow the
+[acknowledgement schema and invalidation contract](docs/reviewed-overlap-acknowledgements.md);
+an acknowledgement is process evidence, not an authorship or plagiarism verdict.
 
 Narrative prose lives in one Markdown file per Dossier under
 `content/domain/presentation/narratives/`.
