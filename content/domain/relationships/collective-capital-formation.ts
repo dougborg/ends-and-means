@@ -23,7 +23,7 @@ const citations = [
   [
     "collective-capital-formation-national-accounts-boundary",
     "oecd-understanding-national-accounts-source",
-    "chapter 5, p. 144, ‘Gross fixed capital formation’",
+    "chapter 5, p. 143, ‘Gross fixed capital formation’",
     "supports",
     "national-accounts-boundary",
   ],

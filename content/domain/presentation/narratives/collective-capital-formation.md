@@ -14,11 +14,11 @@ Collective capital formation instead names an institutional arrangement for accu
 
 ## what-design-choices-matter
 
-Meidner's original proposal transferred newly issued shares into collective funds.
+Meidner's original proposal transferred shares tied to profits into collective funds.
 The 1981 revision instead funded share purchases with a levy on excess profits.
 Neither financing method determines governance, so analysis must separately identify the group a fund represents and the authority that group holds.
-Other rules determine voting authority, beneficiaries, use of returns, transfer rights, and whether contributors have personal claims.
-These choices can connect the arrangement to social ownership or economic democracy, but accumulation alone does not establish either one.
+Separate rules determine whether contributors receive personal claims and whether the represented constituency gains democratic control over investment.
+Those distinctions help analyze connections to social ownership and economic democracy, but neither follows from accumulation alone.
 
 ## what-does-the-swedish-case-show
 
