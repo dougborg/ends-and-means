@@ -1,3 +1,4 @@
+@layer pages {
 .homepage { padding-top:clamp(1.5rem,3vw,2.75rem); padding-bottom:clamp(2rem,4vw,3.5rem); }
 .homepage + .site-footer { margin-top:0; }
 .homepage-hero { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(17rem,.55fr); gap:clamp(1rem,2vw,1.5rem) clamp(2rem,6vw,6rem); align-items:end; margin-bottom:clamp(2rem,4vw,3.5rem); }
@@ -26,4 +27,5 @@
   .secondary-discovery__paths { grid-template-columns:1fr; }
   .secondary-discovery__paths article + article { border-right:0; border-left:0; }
   .secondary-discovery__paths p:not(.coordinate) { min-height:0; }
+}
 }

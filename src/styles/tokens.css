@@ -36,6 +36,9 @@
     --caution: var(--color-amber);
     --caution-text: var(--color-amber-deep);
     --caution-surface: var(--color-amber-soft);
+    --caution-rule: color-mix(in srgb, var(--caution) 55%, var(--surface));
+    --shadow-panel: 0 1.25rem 3.5rem rgb(23 35 43 / 8%);
+    --shadow-ledger: 0 1.5rem 5rem rgb(23 35 43 / 8%);
 
     --font-display: "IBM Plex Sans", sans-serif;
     --font-reading: "Literata", Georgia, serif;
