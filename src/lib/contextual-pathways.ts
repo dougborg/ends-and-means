@@ -157,23 +157,20 @@ export function relationshipEndpointKeys(
 }
 
 export function relationshipSentence({
-  relationship,
-  destinationLabel,
   subjectLabel,
   objectLabel,
   relationshipLabel,
-  relevanceLabel,
 }: Pick<
   ContextualPathway,
-  | "relationship"
-  | "destinationLabel"
-  | "subjectLabel"
-  | "objectLabel"
-  | "relationshipLabel"
-  | "relevanceLabel"
+  "subjectLabel" | "objectLabel" | "relationshipLabel"
 >) {
-  if (relationship.predicate === "related-to" && relevanceLabel) {
-    return `Explore ${destinationLabel} through the reviewed claim: ${relevanceLabel}.`;
-  }
-  return `${subjectLabel} ${relationshipLabel.toLocaleLowerCase("en")} ${objectLabel}.`;
+  return `${subjectLabel} — ${relationshipLabel} — ${objectLabel}.`;
+}
+
+export function relationshipRelevanceSentence({
+  destinationLabel,
+  relevanceLabel,
+}: Pick<ContextualPathway, "destinationLabel" | "relevanceLabel">) {
+  if (!relevanceLabel) return undefined;
+  return `Why continue to ${destinationLabel}: ${relevanceLabel}.`;
 }

@@ -756,7 +756,13 @@ test("Subject guides present typed contextual paths without duplicate generic li
   ).toBeVisible();
   await expect(
     page.getByText(
-      "Explore Communism through the reviewed claim: The represented modern communist traditions emerged within socialist debates.",
+      "Socialism — Related to — Communism.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByText(
+      "Why continue to Communism: The represented modern communist traditions emerged within socialist debates.",
       { exact: true },
     ),
   ).toBeVisible();

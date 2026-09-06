@@ -1,6 +1,9 @@
 ---
 import type { ContextualPathway } from "../lib/contextual-pathways";
-import { relationshipSentence } from "../lib/contextual-pathways";
+import {
+  relationshipRelevanceSentence,
+  relationshipSentence,
+} from "../lib/contextual-pathways";
 import { entityById } from "../lib/domain/canonical";
 import CanonicalStatement from "./CanonicalStatement.astro";
 import SubjectGuideRelationshipDetails from "./SubjectGuideRelationshipDetails.astro";
@@ -27,6 +30,9 @@ const { pathways, headingId, sectionLabel, placementValueLabel } = Astro.props;
             <p class="coordinate">{pathway.kind}</p>
             <h4><a href={pathway.href}>{pathway.destinationLabel}</a></h4>
             <p>{relationshipSentence(pathway)}</p>
+            {relationshipRelevanceSentence(pathway) && (
+              <p>{relationshipRelevanceSentence(pathway)}</p>
+            )}
             <SubjectGuideRelationshipDetails
               relationship={pathway.relationship}
               summary={`Why ${pathway.destinationLabel} is connected`}

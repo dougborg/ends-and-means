@@ -3,6 +3,7 @@ import {
   contextualPathwayForRelationship,
   contextualPathwayKind,
   contextualPathwayKinds,
+  relationshipRelevanceSentence,
   relationshipEndpointKeys,
   relationshipSentence,
 } from "../../src/lib/contextual-pathways";
@@ -94,12 +95,10 @@ describe("controlled contextual-pathway vocabulary", () => {
       expect(pathway.relationship).toBe(source);
       if (source.predicate === "related-to") {
         expect(pathway.relevanceLabel).toBeTruthy();
-        expect(relationshipSentence(pathway)).not.toContain(" is related to ");
-      } else {
-        expect(relationshipSentence(pathway)).toContain(
-          pathway.relationshipLabel.toLocaleLowerCase("en"),
-        );
       }
+      expect(relationshipSentence(pathway)).toContain(
+        `— ${pathway.relationshipLabel} —`,
+      );
     },
   );
 
@@ -126,7 +125,10 @@ describe("controlled contextual-pathway vocabulary", () => {
       "The represented modern communist traditions emerged within socialist debates",
     );
     expect(relationshipSentence(pathway)).toBe(
-      "Explore Communism through the reviewed claim: The represented modern communist traditions emerged within socialist debates.",
+      "Socialism — Related to — Communism.",
+    );
+    expect(relationshipRelevanceSentence(pathway)).toBe(
+      "Why continue to Communism: The represented modern communist traditions emerged within socialist debates.",
     );
   });
 });
