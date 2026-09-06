@@ -164,6 +164,7 @@ async function verifyGlobalNavigation() {
     const siteMap = navigationIn(html, "Site map");
     expect(primary, route).not.toBe("");
     expect(siteMap, route).not.toBe("");
+    expect(html, route).toContain('href="/third-party-notices.txt"');
     expect(linksIn(primary), route).toEqual(expectedPrimary);
     expect(linksIn(siteMap), route).toEqual(expectedSiteMap);
     expect(primary.match(/aria-current="page"/g) ?? [], route).toHaveLength(

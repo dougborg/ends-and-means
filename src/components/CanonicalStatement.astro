@@ -1,6 +1,7 @@
 ---
 import { citationsFor, entityById } from "../lib/domain/canonical";
 import { claimPublicationLabel, type Source, type Statement } from "../lib/domain";
+import Glyph from "./Glyph.astro";
 
 interface Props { statementId: string; label?: string; anchored?: boolean; }
 const { statementId, label, anchored = true } = Astro.props;
@@ -14,7 +15,7 @@ const citations = citationsFor(statementId).map((citation) => {
 });
 ---
 <article class="canonical-claim" id={anchored ? statement.id : undefined}>
-  <p class="coordinate">{label ?? statement.statementKind.replaceAll("-", " ")}</p>
+  <p class="coordinate glyph-label"><Glyph glyph="evidence-source" tone="evidence" />{label ?? statement.statementKind.replaceAll("-", " ")}</p>
   <p class="canonical-claim__text">{statement.text}</p>
   <footer>
     <span class="claim-status">{claimPublicationLabel(statement.publicationStatus)}</span>

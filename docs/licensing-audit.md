@@ -16,7 +16,7 @@ classifications rather than choosing an implicit winner.
 The repository currently contains project-authored application code, canonical
 records, narrative, documentation, tests, workflow files, and one segregated
 legacy research archive.
-It contains no bundled fonts, icons, flag files, logos, images, audio, video,
+It contains no bundled fonts, flag files, logos, images, audio, video,
 or copied datasets.
 The wordmark is text styled with system font stacks.
 Source records cite external works and datasets by metadata and URL; the cited
@@ -35,13 +35,14 @@ Build output (`dist/`), coverage, screenshots, caches, and installed packages
 are generated and ignored.
 They are not a separate authorship category: a distributed artifact carries
 the applicable terms of its source inputs and any included third-party code.
-The production dependencies are Astro and micromark, both declaring MIT terms;
+The production dependencies are Astro and micromark under MIT terms and
+`@lucide/astro` under ISC terms;
 the rest of the direct dependency inventory is development-only.
 The lockfile controls the full transitive dependency graph.
-The committed exact-lockfile inventory records all 525 package/version keys in
+The committed exact-lockfile inventory records all 526 package/version keys in
 the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
-declared licenses for 396 packages observed in installed manifests on macOS or
+declared licenses for 397 packages observed in installed manifests on macOS or
 captured from the exact-version npm registry manifests for Linux packages.
 The remaining 129 unresolved entries were unavailable in the audit platform's installed
 package store; their exact registry/terms locators are recorded and their
@@ -69,7 +70,8 @@ the target platform and preserve every required license or notice text.
 | Documentation and research planning | `docs/`, `research/`, `README.md`, `CONTRIBUTING.md`, and repository skills | Decide whether documentation and non-public research-planning metadata follow code or narrative terms; say so rather than relying on inference. |
 | Generated artifacts | deployed HTML, CSS, and JavaScript in `dist/` | State that outputs inherit the applicable input boundaries and preserve third-party notices. |
 | Legacy archive | `archive/legacy-research/` | Exclude unless and until provenance is resolved item by item. |
-| Future third-party assets | fonts, icons, flags, logos, images, media, datasets, quotations, imported metadata | Require an inventory record before commit or publication, including source, provider, terms, modifications, distribution, and attribution. |
+| `@lucide/astro` | selected static interface glyphs | Lucide contributors; ISC; unmodified component output; installed through pnpm; see `docs/glyph-system.md`. |
+| Future third-party assets | fonts, flags, logos, images, media, datasets, quotations, imported metadata | Require an inventory record before commit or publication, including source, provider, terms, modifications, distribution, and attribution. |
 
 This split keeps the live site canonical-only and prevents a repository-wide
 license statement from accidentally claiming rights in unresolved archive or
@@ -109,7 +111,7 @@ The relevant standard terms and upstream evidence are:
   the license and applicable attribution notices; inspect upstream `NOTICE`
   files for distributed dependencies.
 - [ISC license text](https://opensource.org/license/isc-license-txt): used by
-  development-only direct dependencies in this snapshot.
+  direct dependencies including the Lucide interface-glyph package.
 - [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/),
   [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/): authoritative
@@ -138,5 +140,7 @@ the future, they become governed assets and need their own record.
 7. Obtain qualified legal review if certainty is required for jurisdiction,
    database rights, quotations, contributor ownership, or compatibility.
 
-No `LICENSE`, content-license notice, site footer notice, or package license
-field is added by this audit.
+No repository-wide `LICENSE`, content-license notice, or package license field
+is added by this audit.
+The site footer links only to the targeted third-party notices required for
+the selected Lucide and Feather-derived interface glyphs.
