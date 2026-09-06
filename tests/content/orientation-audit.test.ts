@@ -117,21 +117,6 @@ describe("orientation audit mutation enforcement", () => {
     );
   });
 
-  it("rejects an unmatched decision with its candidate review erased", () => {
-    const graph = canonicalGraph();
-    const inventory = buildOrientationAudit(graph);
-    const accountability = inventory.find(({ id }) => id === "accountability");
-    expect(accountability).toBeDefined();
-    if (!accountability) return;
-    accountability.consideredCandidates = [];
-    expect(validateOrientationAudit(graph, inventory)).toEqual(
-      expect.arrayContaining([
-        "entity:accountability: unmatched decision lacks a reviewed candidate",
-        "entity:accountability: reviewed rejected-candidate decision changed",
-      ]),
-    );
-  });
-
   it("rejects stale/conflicting tuples and mappings on inapplicable kinds", () => {
     const graph = canonicalGraph();
     const democracy = graph.indexes.entitiesById.democracy;
@@ -158,6 +143,23 @@ describe("orientation audit mutation enforcement", () => {
     );
     expect(errors.join("\n")).toContain(
       "sep-democracy-source: absent entry contains a mapping",
+    );
+  });
+});
+
+describe("orientation rejected-candidate enforcement", () => {
+  it("rejects an unmatched decision with its candidate review erased", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const accountability = inventory.find(({ id }) => id === "accountability");
+    expect(accountability).toBeDefined();
+    if (!accountability) return;
+    accountability.consideredCandidates = [];
+    expect(validateOrientationAudit(graph, inventory)).toEqual(
+      expect.arrayContaining([
+        "entity:accountability: unmatched decision lacks a reviewed candidate",
+        "entity:accountability: reviewed rejected-candidate decision changed",
+      ]),
     );
   });
 });
