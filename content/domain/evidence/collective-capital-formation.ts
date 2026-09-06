@@ -262,7 +262,7 @@ export const collectiveCapitalFormationEvidenceDocuments = [
     entity: {
       id: "collective-capital-formation-rights-boundary",
       kind: "statement",
-      label: "Accumulation does not settle ownership rights",
+      label: "Accumulation does not establish democratic investment control",
       description:
         "A boundary separating the existence of a collective fund from democratic control over investment.",
       statementKind: "editorial-interpretation",
