@@ -172,10 +172,23 @@ function auditLockfileRecord(key: string, record: LockfilePackageInventory["pack
   const locators = packageLocators(identity.name, identity.version);
   if (record.origin !== locators.origin || record.terms !== locators.terms) return [`${key}: registry origin or terms locator is not deterministic`];
   if (record.evidenceDigest !== packageEvidenceDigest(record)) return [`${key}: package evidence digest does not match license/source metadata`];
+  const resolutionFinding = auditInstalledResolution(key, record, evidence);
+  if (resolutionFinding) return [resolutionFinding];
   if (record.metadataStatus === "unresolved" && (record.license !== "unresolved" || record.source !== null)) return [`${key}: unavailable package metadata must remain explicitly unresolved`];
   if (record.metadataStatus === "resolved" && !record.source) return [`${key}: resolved package lacks an upstream source locator`];
-  if (evidence && record.metadataStatus === "resolved" && (record.license !== evidence.license || record.source !== evidence.source)) return [`${key}: license or source differs from the installed package manifest`];
+  const evidenceFinding = auditInstalledEvidence(key, record, evidence);
+  if (evidenceFinding) return [evidenceFinding];
   return [];
+}
+
+function auditInstalledResolution(key: string, record: LockfilePackageInventory["packages"][number], evidence: PackageManifestEvidence | undefined) {
+  return evidence && record.metadataStatus !== "resolved" ? `${key}: installed package evidence must be recorded as resolved` : undefined;
+}
+
+function auditInstalledEvidence(key: string, record: LockfilePackageInventory["packages"][number], evidence: PackageManifestEvidence | undefined) {
+  if (!evidence) return undefined;
+  if (record.license !== evidence.license || record.source !== evidence.source) return `${key}: license or source differs from the installed package manifest`;
+  return undefined;
 }
 
 export function auditProvenance(

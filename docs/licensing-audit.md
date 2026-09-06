@@ -42,9 +42,11 @@ The committed exact-lockfile inventory records all 525 package/version keys in
 the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
 declared licenses for 386 packages installed on the audit platform.
-The other 139 entries are platform-specific optional packages not installed on
-that platform; their exact registry/terms locators are recorded and their
-license metadata is explicitly unresolved rather than guessed.
+The other 139 entries were unavailable in the audit platform's installed
+package store; their exact registry/terms locators are recorded and their
+license metadata is explicitly unresolved rather than guessed. This count is
+an observation about locally available manifests, not a claim that every entry
+has the same optional-dependency role in the lockfile graph.
 `pnpm inventory:dependencies` deterministically regenerates this evidence from
 the lockfile and installed package manifests, while `pnpm audit:provenance`
 fails on lock/inventory drift, locator mutation, or a license/source value that
