@@ -14,6 +14,8 @@ const defaultRoutes = [
   "/concepts/socialism/",
   "/concepts/communism/",
   "/guides/economic-democracy/",
+  "/guides/socialism/",
+  "/guides/communism/",
   "/guides/kahnawake-community-lawmaking/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
