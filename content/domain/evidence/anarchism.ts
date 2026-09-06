@@ -118,6 +118,23 @@ export const anarchismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep this historically named tradition distinct from the broader anarchism concept and from any concrete organizing approach or union.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Anarcho-syndicalism",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q188993",
+          url: "https://www.wikidata.org/wiki/Q188993",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },

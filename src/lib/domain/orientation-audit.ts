@@ -3,6 +3,7 @@ import type { DomainEntity } from "./entities";
 import type { CompiledDomainGraph } from "./graph";
 import { reviewedOrientationLedger } from "./orientation-ledger";
 import { reviewedOrientationLabels } from "./orientation-labels";
+import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
 import type { SubjectGuide } from "./presentation";
 
 export type OrientationAuditEntry = {
@@ -203,12 +204,24 @@ function validateEntry(
 
 function validateCandidateReview(key: string, entry: OrientationAuditEntry) {
   const errors: string[] = [];
+  const placeholderTitles = new Set([
+    "Case study",
+    "Concept",
+    "Event",
+    "Ideology",
+    "Institution",
+    "Organization",
+    "Place",
+    "Political philosophy",
+  ]);
   if (
     entry.disposition === "intentionally-unmatched" &&
     entry.consideredCandidates.length === 0
   )
     errors.push(`${key}: unmatched decision lacks a reviewed candidate`);
   for (const candidate of entry.consideredCandidates) {
+    if (placeholderTitles.has(candidate.title))
+      errors.push(`${key}: rejected candidate is a category placeholder`);
     if (!candidate.title.trim() || !candidate.boundary.includes(entry.label))
       errors.push(
         `${key}: rejected candidate lacks a target-specific boundary`,
@@ -287,6 +300,11 @@ export function validateOrientationAudit(
       })
       .map(({ targetType, id }) => `${targetType}:${id}`),
   );
+  const expectedUnmatchedKeys = new Set(
+    expected
+      .filter(({ disposition }) => disposition === "intentionally-unmatched")
+      .map(({ targetType, id }) => `${targetType}:${id}`),
+  );
   if (reviewedDecisions.size !== reviewedOrientationLedger.length)
     errors.push("reviewed orientation ledger contains duplicate targets");
   for (const key of reviewedDecisions.keys())
@@ -295,6 +313,9 @@ export function validateOrientationAudit(
   for (const key of Object.keys(reviewedOrientationLabels))
     if (!expectedReviewedKeys.has(key))
       errors.push(`${key}: stale immutable reviewed label`);
+  for (const key of Object.keys(reviewedRejectedOrientationCandidates))
+    if (!expectedUnmatchedKeys.has(key))
+      errors.push(`${key}: stale rejected-candidate review`);
   const seen = new Set<string>();
   for (const entry of inventory)
     errors.push(

@@ -338,6 +338,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Operational definitions differ; a country label is time-indexed and measurement-dependent.",
+      externalRefs: orientationRefs("Autocracy", "Q173424", "exact"),
       ...reviewed,
     },
   },
@@ -352,6 +353,7 @@ export const authoritarianismFascismTotalitarianismEvidenceDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Do not assume personal rule or one institutional form from the generic label.",
+      externalRefs: orientationRefs("Dictatorship", "Q317", "exact"),
       ...reviewed,
     },
   },

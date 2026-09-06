@@ -1,5 +1,5 @@
 import type { ExternalReference } from "./common";
-import { reviewedOrientationLabels } from "./orientation-labels";
+import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
 export type ReviewedOrientationDecision = {
   targetType: "entity" | "subject-guide";
   id: string;
@@ -1863,14 +1863,27 @@ const reviewedMappingOverrides: Record<
   Omit<ReviewedOrientationDecision, "targetType" | "id">
 > = {
   "entity:authoritarianism": mapped("Authoritarianism", "Q6229"),
+  "entity:anarcho-syndicalism": mapped("Anarcho-syndicalism", "Q188993"),
+  "entity:autocracy": mapped("Autocracy", "Q173424"),
   "entity:capitalism": mapped("Capitalism", "Q6206"),
   "entity:conservatism": mapped("Conservatism", "Q7169"),
+  "entity:dictatorship": mapped("Dictatorship", "Q317"),
+  "entity:economic-planning": mapped("Economic planning", "Q3391448"),
   "entity:fascism": mapped("Fascism", "Q6223"),
   "entity:feminism": mapped("Feminism", "Q7252"),
   "entity:liberalism": mapped("Liberalism", "Q6216"),
+  "entity:liberal-feminism": mapped("Liberal feminism", "Q1987244"),
   "entity:market-economy": mapped("Market economy", "Q179522"),
   "entity:totalitarianism": mapped("Totalitarianism", "Q128135"),
   "entity:matriliny": mapped("Matrilineality", "Q1136773"),
+  "entity:marxist-feminism": mapped("Marxist feminism", "Q1321958"),
+  "entity:mixed-economy": mapped("Mixed economy", "Q191675"),
+  "entity:private-property": mapped("Private property", "Q555911"),
+  "entity:radical-feminism": mapped("Radical feminism", "Q2914207"),
+  "entity:social-class": mapped("Social class", "Q187588"),
+  "entity:sortition-deliberative-minipublic": mapped("Sortition", "Q70196"),
+  "entity:wage-labor": mapped("Wage labour", "Q949973"),
+  "entity:war-production-board": mapped("War Production Board", "Q1536750"),
   "entity:zapatista-army-national-liberation": mapped(
     "Zapatista Army of National Liberation",
     "Q188590",
@@ -1889,130 +1902,20 @@ const reviewedMappingOverrides: Record<
   "entity:west-sumatra": mapped("West Sumatra", "Q2772"),
 };
 
-const specificCandidates: Array<[RegExp, string, string]> = [
-  [/kahnawake/, "Kahnawake", "https://en.wikipedia.org/wiki/Kahnawake"],
-  [/ruwalla/, "Ruwallah", "https://en.wikipedia.org/wiki/Ruwallah"],
-  [/jinst/, "Mongolia", "https://en.wikipedia.org/wiki/Mongolia"],
-  [
-    /cmp-|controlled-material|us-wartime|us-controlled/,
-    "War Production Board",
-    "https://en.wikipedia.org/wiki/War_Production_Board",
-  ],
-  [
-    /wage-earner|solidaristic|rehn-meidner/,
-    "Rehn–Meidner model",
-    "https://en.wikipedia.org/wiki/Rehn%E2%80%93Meidner_model",
-  ],
-  [
-    /right-to-buy/,
-    "Right to Buy",
-    "https://en.wikipedia.org/wiki/Right_to_Buy",
-  ],
-  [
-    /combahee/,
-    "Combahee River Collective",
-    "https://en.wikipedia.org/wiki/Combahee_River_Collective",
-  ],
-  [
-    /swatantra/,
-    "Swatantra Party",
-    "https://en.wikipedia.org/wiki/Swatantra_Party",
-  ],
-  [
-    /zapatista/,
-    "Zapatista Army of National Liberation",
-    "https://en.wikipedia.org/wiki/Zapatista_Army_of_National_Liberation",
-  ],
-  [
-    /tawantinsuyu|andes-/,
-    "Inca Empire",
-    "https://en.wikipedia.org/wiki/Inca_Empire",
-  ],
-  [
-    /india-constitutional/,
-    "Constitution of India",
-    "https://en.wikipedia.org/wiki/Constitution_of_India",
-  ],
-  [
-    /japan-constitutional/,
-    "Constitution of Japan",
-    "https://en.wikipedia.org/wiki/Constitution_of_Japan",
-  ],
-  [
-    /bonjol|koto-tinggi|nagari-/,
-    "Minangkabau people",
-    "https://en.wikipedia.org/wiki/Minangkabau_people",
-  ],
-  [
-    /gold-coast|colonial-gold/,
-    "Cocoa production in Ghana",
-    "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
-  ],
-  [
-    /english-agrarian/,
-    "British Agricultural Revolution",
-    "https://en.wikipedia.org/wiki/British_Agricultural_Revolution",
-  ],
-  [
-    /china-/,
-    "Reform and opening up",
-    "https://en.wikipedia.org/wiki/Reform_and_opening_up",
-  ],
-  [
-    /italian-fascist|historical-italian/,
-    "Fascist Italy",
-    "https://en.wikipedia.org/wiki/Fascist_Italy",
-  ],
-  [
-    /nazi-/,
-    "Adolf Hitler's rise to power",
-    "https://en.wikipedia.org/wiki/Adolf_Hitler%27s_rise_to_power",
-  ],
-];
-
-const specificCandidate = (id: string) =>
-  specificCandidates.find(([pattern]) => pattern.test(id))?.slice(1) as
-    | [string, string]
-    | undefined;
-
-const broaderCandidate = (reason = ""): [string, string] => {
-  if (reason.includes("organization"))
-    return ["Organization", "https://en.wikipedia.org/wiki/Organization"];
-  if (reason.includes("case") || reason.includes("episode"))
-    return ["Case study", "https://en.wikipedia.org/wiki/Case_study"];
-  if (reason.includes("place") || reason.includes("geographic"))
-    return ["Place", "https://en.wikipedia.org/wiki/Place"];
-  if (reason.includes("event") || reason.includes("transition"))
-    return ["Event", "https://en.wikipedia.org/wiki/Event"];
-  if (reason.includes("institutional") || reason.includes("mechanism"))
-    return ["Institution", "https://en.wikipedia.org/wiki/Institution"];
-  if (reason.includes("approach"))
-    return [
-      "Political philosophy",
-      "https://en.wikipedia.org/wiki/Political_philosophy",
-    ];
-  if (reason.includes("collection"))
-    return ["Ideology", "https://en.wikipedia.org/wiki/Ideology"];
-  return ["Concept", "https://en.wikipedia.org/wiki/Concept"];
-};
-
 const reviewedUnmatched = (
   decision: ReviewedOrientationDecision,
 ): ReviewedOrientationDecision => {
   if (decision.disposition !== "intentionally-unmatched") return decision;
   const key = `${decision.targetType}:${decision.id}`;
-  const label =
-    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
-  const [title, url] =
-    specificCandidate(decision.id) ?? broaderCandidate(decision.reason);
-  const priorBoundary = (decision.reason ?? "")
-    .replace(/; no reviewed external page matches.*$/i, ".")
-    .replace(/^No reviewed external page matches /, "The project record is ");
-  const boundary = `${title} is broader or differently bounded than “${label}”. ${priorBoundary}`;
+  const candidate =
+    reviewedRejectedOrientationCandidates[
+      key as keyof typeof reviewedRejectedOrientationCandidates
+    ];
+  if (!candidate) return decision;
   return {
     ...decision,
-    reason: `Candidate reviewed: ${title}; rejected because ${boundary}`,
-    consideredCandidates: [{ title, url, boundary }],
+    reason: `Candidate reviewed: ${candidate.title}; rejected because ${candidate.boundary}`,
+    consideredCandidates: [candidate],
   };
 };
 

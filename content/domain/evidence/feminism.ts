@@ -343,6 +343,23 @@ export const feminismEvidenceDocuments = [
     "Liberal feminism",
     "Feminist arguments that work with and revise liberal commitments such as equal personhood, liberty, and autonomy.",
     "Not every rights claim is liberal feminist, and liberal feminists disagree about formal equality, family, dependency, and material conditions.",
+    [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/Liberal_feminism",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q1987244",
+        url: "https://www.wikidata.org/wiki/Q1987244",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   ),
   concept(
     "socialist-feminism",
@@ -355,12 +372,46 @@ export const feminismEvidenceDocuments = [
     "Marxist feminism",
     "Feminist analysis drawing on and revising Marxist accounts of production, labor, class, and social reproduction.",
     "Related to but not interchangeable with socialist feminism or every feminism critical of capitalism.",
+    [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/Marxist_feminism",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q1321958",
+        url: "https://www.wikidata.org/wiki/Q1321958",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   ),
   concept(
     "radical-feminism",
     "Radical feminism",
     "A disputed feminist tradition locating gender domination in basic social structures rather than only unequal legal treatment.",
     "Historical radical-feminist theories differ, including over sexuality, biology, race, class, and trans inclusion; the label supplies no inherited position.",
+    [
+      {
+        system: "wikipedia",
+        url: "https://en.wikipedia.org/wiki/Radical_feminism",
+        purpose: "orientation",
+        language: "en",
+        checkedAt: "2026-09-06",
+      },
+      {
+        system: "wikidata",
+        id: "Q2914207",
+        url: "https://www.wikidata.org/wiki/Q2914207",
+        purpose: "identity",
+        match: "exact",
+        checkedAt: "2026-09-06",
+      },
+    ],
   ),
   {
     documentType: "entity",

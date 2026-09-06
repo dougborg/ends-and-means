@@ -130,7 +130,8 @@ immutable canonical label, exact reference tuple, canonical-target resolution,
 and reason for every intentional absence. An unmatched decision must name each
 concrete canonical candidate opened during reconciliation and explain the
 target-specific identity boundary for rejecting it; category boilerplate is not
-a review. New eligible targets and label changes must fail closed rather than
+a review, and generic pages such as Concept, Institution, Organization, or Case
+study are not candidate substitutes. New eligible targets and label changes must fail closed rather than
 inherit a kind-level reason. Reuse an entity-owned mapping for its
 Subject Guide, and never treat these links or imported taxonomy as evidence.
 

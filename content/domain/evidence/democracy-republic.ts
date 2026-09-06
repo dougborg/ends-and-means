@@ -238,8 +238,21 @@ export const democracyRepublicEvidenceDocuments = [
       scopeNote:
         "Do not infer democratic practice from a constitutional label, an election, or one participatory institution.",
       externalRefs: [
-        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Democracy", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
-        { system: "wikidata", id: "Q7174", url: "https://www.wikidata.org/wiki/Q7174", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Democracy",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q7174",
+          url: "https://www.wikidata.org/wiki/Q7174",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
       ],
       ...reviewed,
     },
@@ -256,8 +269,21 @@ export const democracyRepublicEvidenceDocuments = [
       scopeNote:
         "Keep a republic, republican traditions, democratic procedures, attributed popular sovereignty, and measured practice distinct.",
       externalRefs: [
-        { system: "wikipedia", url: "https://en.wikipedia.org/wiki/Republic", purpose: "orientation", language: "en", checkedAt: "2026-09-06" },
-        { system: "wikidata", id: "Q7270", url: "https://www.wikidata.org/wiki/Q7270", purpose: "identity", match: "exact", checkedAt: "2026-09-06" },
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Republic",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q7270",
+          url: "https://www.wikidata.org/wiki/Q7270",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
       ],
       ...reviewed,
     },
@@ -324,6 +350,23 @@ export const democracyRepublicEvidenceDocuments = [
         "A procedure that selects people by lot for a defined public role.",
       institutionalForm:
         "Eligible participants have an equal chance of random selection for a specified role.",
+      externalRefs: [
+        {
+          system: "wikipedia",
+          url: "https://en.wikipedia.org/wiki/Sortition",
+          purpose: "orientation",
+          language: "en",
+          checkedAt: "2026-09-06",
+        },
+        {
+          system: "wikidata",
+          id: "Q70196",
+          url: "https://www.wikidata.org/wiki/Q70196",
+          purpose: "identity",
+          match: "exact",
+          checkedAt: "2026-09-06",
+        },
+      ],
       ...reviewed,
     },
   },
