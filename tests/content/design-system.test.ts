@@ -53,9 +53,11 @@ describe("design-system foundations", () => {
   it("uses named width roles instead of recreating the shared content measures", async () => {
     const contents = await stylesheetContents();
     const duplicatedMeasure = /max-width:\s*(?:68ch|70ch|72ch|46rem|48rem|58rem|64rem|78rem|90rem)\s*;/;
+    const duplicatedRail = /minmax\(\s*13rem\s*,\s*18rem\s*\)/;
 
-    for (const { file, css } of contents) {
+    for (const { file, css } of contents.filter(({ file }) => file !== "styles/tokens.css")) {
       expect(css, file).not.toMatch(duplicatedMeasure);
+      expect(css, file).not.toMatch(duplicatedRail);
     }
   });
 
