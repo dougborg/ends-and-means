@@ -15,6 +15,7 @@ export const centralPlanningApproachDocuments = [
         "Include only concrete Means whose binding or directive plans specify authority, scope, information, targets, revision, enforcement, and ownership context.",
       editorialPurpose:
         "Keep central planning searchable without treating it as an ideology, ownership form, or one uniform institution.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Economic_planning", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },

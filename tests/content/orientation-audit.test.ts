@@ -24,12 +24,12 @@ describe("orientation audit", () => {
     expect(inventory).toHaveLength(1024);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(76);
+    ).toHaveLength(172);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(114);
+    ).toHaveLength(18);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
     ).toHaveLength(834);
@@ -40,8 +40,8 @@ describe("orientation audit", () => {
     expect(
       inventory.find(({ id }) => id === "guide-kahnawake-community-lawmaking"),
     ).toMatchObject({
-      disposition: "intentionally-unmatched",
-      orientationUrls: [],
+      disposition: "mapped",
+      orientationUrls: ["https://en.wikipedia.org/wiki/Kahnawake"],
       identityIds: [],
     });
     expect(
@@ -117,6 +117,26 @@ describe("orientation audit mutation enforcement", () => {
     );
   });
 
+});
+
+describe("orientation-only boundary enforcement", () => {
+  it("rejects an orientation-only mapping without its explanatory boundary", () => {
+    const graph = canonicalGraph();
+    const inventory = buildOrientationAudit(graph);
+    const statelessness = inventory.find(({ id }) => id === "statelessness");
+    expect(statelessness).toBeDefined();
+    if (!statelessness) return;
+    statelessness.reason = "Useful background.";
+    expect(validateOrientationAudit(graph, inventory)).toEqual(
+      expect.arrayContaining([
+        "entity:statelessness: orientation-only mapping lacks the reviewed explanatory-target boundary",
+        "entity:statelessness: reviewed reason changed",
+      ]),
+    );
+  });
+});
+
+describe("orientation audit tuple enforcement", () => {
   it("rejects stale/conflicting tuples and mappings on inapplicable kinds", () => {
     const graph = canonicalGraph();
     const democracy = graph.indexes.entitiesById.democracy;
@@ -152,15 +172,15 @@ describe("orientation rejected-candidate enforcement", () => {
     const graph = canonicalGraph();
     const inventory = buildOrientationAudit(graph);
     const accountability = inventory.find(
-      ({ id }) => id === "affected-community-accountability",
+      ({ id }) => id === "authority-and-accountability",
     );
     expect(accountability).toBeDefined();
     if (!accountability) return;
     accountability.consideredCandidates = [];
     expect(validateOrientationAudit(graph, inventory)).toEqual(
       expect.arrayContaining([
-        "entity:affected-community-accountability: unmatched decision lacks a reviewed candidate",
-        "entity:affected-community-accountability: reviewed rejected-candidate decision changed",
+        "entity:authority-and-accountability: unmatched decision lacks a reviewed candidate",
+        "entity:authority-and-accountability: reviewed rejected-candidate decision changed",
       ]),
     );
   });

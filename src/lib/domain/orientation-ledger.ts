@@ -1,5 +1,11 @@
 import type { ExternalReference } from "./common";
 import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
+import {
+  orientationOnlyReason,
+  reviewedOrientationOnlyGuideSubjects,
+  reviewedOrientationOnlyMappings,
+} from "./orientation-only-mappings";
+import { reviewedOrientationLabels } from "./orientation-labels";
 export type ReviewedOrientationDecision = {
   targetType: "entity" | "subject-guide";
   id: string;
@@ -1894,7 +1900,7 @@ const reviewedMappingOverrides: Record<
     "Anarcho-syndicalism",
     undefined,
     "close",
-    "The external topic includes the broader ideology and movement; this project record isolates its organizing approach.",
+    "The article directly situates this organizing approach within the broader ideology and movement; the project record keeps the approach boundary.",
   ),
   "entity:autocracy": mapped("Autocracy", "Q173424"),
   "entity:capitalism": mapped("Capitalism", "Q6206"),
@@ -1943,15 +1949,110 @@ const reviewedMappingOverrides: Record<
   "entity:united-states": mapped("United States", "Q30"),
   "entity:west-sumatra": mapped("West Sumatra", "Q2772"),
   "entity:england-and-wales": mapped("England and Wales", "Q1156248"),
-  "entity:swedish-rehn-meidner-model": mapped("Rehn–Meidner model", undefined),
-  "entity:jinst-sum": mapped("Jinst", undefined),
+  "entity:swedish-rehn-meidner-model": mapped(
+    "Rehn–Meidner model",
+    undefined,
+    "close",
+    "The article directly situates the Swedish policy package; the project Approach preserves its specified institutional scope.",
+  ),
+  "entity:jinst-sum": mapped(
+    "Jinst",
+    undefined,
+    "close",
+    "The article directly defines the same customary district institution; the project record preserves its situated historical scope.",
+  ),
   "entity:active-labor-market-adjustment": mapped(
     "Active labour market policies",
     undefined,
     "close",
-    "The external topic is a broader policy family; the project Means is the Swedish model's mobility-and-employment adjustment component.",
+    "The article directly situates this adjustment instrument within a broader policy family; the project Means is the Swedish model's mobility-and-employment component.",
+  ),
+  "entity:market-coordination": mapped(
+    "Market economy",
+    undefined,
+    "close",
+    "The article directly explains market coordination, while the project keeps that coordination idea distinct from an entire economic system.",
+  ),
+  "entity:statelessness": mapped(
+    "Stateless society",
+    undefined,
+    "close",
+    "The article directly explains social organization without a state; the project record also preserves the distinction between an ideal and an observed condition.",
+  ),
+  "entity:central-planning-arrangements": mapped(
+    "Economic planning",
+    undefined,
+    "close",
+    "The article directly situates central planning, while the project record is a non-inheriting family of specified institutional Means.",
+  ),
+  "entity:andes-tawantinsuyu": mapped(
+    "Inca Empire",
+    undefined,
+    "close",
+    "The article directly situates Tawantinsuyu under its conventional English name; the project Place retains its bounded period and Indigenous name.",
+  ),
+  "entity:fascist-movements": mapped(
+    "Fascism",
+    undefined,
+    "close",
+    "The article directly situates the movements grouped here, while the project Collection remains non-inheriting and evidence-qualified.",
+  ),
+  "entity:totalitarianism-analyses": mapped(
+    "Totalitarianism",
+    undefined,
+    "close",
+    "The article directly situates the disputed analytic subject; the project Collection preserves distinct scholarly approaches.",
+  ),
+  "entity:historical-italian-fascism": mapped(
+    "Fascism",
+    undefined,
+    "close",
+    "The article directly situates Italian Fascism, while the project Approach is limited to its documented interwar doctrine and program.",
+  ),
+  "entity:republican-traditions": mapped(
+    "Republicanism",
+    undefined,
+    "close",
+    "The article directly situates the traditions grouped here, while the project Collection transmits no inherited commitments.",
+  ),
+  "entity:feminist-traditions": mapped(
+    "Feminism",
+    undefined,
+    "close",
+    "The article directly situates the traditions grouped here, while the project Collection preserves their conflicts and non-inheritance.",
+  ),
+  "entity:nontransferable-parental-leave": mapped(
+    "Parental leave",
+    undefined,
+    "close",
+    "The article directly explains the policy family, while the project Means isolates paid, individually reserved entitlement design.",
   ),
 };
+
+for (const [id, article] of Object.entries(reviewedOrientationOnlyMappings)) {
+  const key = `entity:${id}`;
+  if (reviewedMappingOverrides[key]) continue;
+  const label =
+    reviewedOrientationLabels[key as keyof typeof reviewedOrientationLabels];
+  if (!label) continue;
+  reviewedMappingOverrides[key] = mapped(
+    article,
+    undefined,
+    "close",
+    orientationOnlyReason(label, article),
+  );
+}
+
+for (const [guideId, subjectId] of Object.entries(
+  reviewedOrientationOnlyGuideSubjects,
+)) {
+  const subject = reviewedMappingOverrides[`entity:${subjectId}`];
+  if (subject)
+    reviewedMappingOverrides[`subject-guide:${guideId}`] = {
+      ...subject,
+      reason: `Uses the reviewed orientation-only mapping owned by ${subjectId}.`,
+    };
+}
 
 const reviewedUnmatched = (
   decision: ReviewedOrientationDecision,

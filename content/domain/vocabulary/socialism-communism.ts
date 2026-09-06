@@ -107,6 +107,7 @@ export const socialismCommunismVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Use for a coordination idea, not as a synonym for capitalism, private ownership, or an unregulated economy; market rules and ownership arrangements must be identified separately.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Market_economy", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },
@@ -152,6 +153,7 @@ export const socialismCommunismVocabularyDocuments = [
       schemeIds: ["political-economic-ideas"],
       scopeNote:
         "Keep a proposed stateless ideal distinct from the absence of effective government, from a transition claim, and from evidence about authority in any bounded Case.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Stateless_society", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },

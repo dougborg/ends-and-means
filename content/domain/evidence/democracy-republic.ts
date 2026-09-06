@@ -210,6 +210,7 @@ export const democracyRepublicEvidenceDocuments = [
         "Include an Approach only through an explicit, sourced, qualified membership relationship.",
       editorialPurpose:
         "Keep republican traditions distinct from states bearing a republic label.",
+      externalRefs: [{ system: "wikipedia", url: "https://en.wikipedia.org/wiki/Republicanism", purpose: "orientation", language: "en", checkedAt: "2026-09-06" }],
       ...reviewed,
     },
   },
