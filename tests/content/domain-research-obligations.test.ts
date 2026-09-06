@@ -653,9 +653,18 @@ const expectedOpenResearchObligations = [
       "case:tawantinsuyu-imperial-organization#was-it-reciprocity-or-extraction",
     status: "open",
   },
-  { id: "zapatista-external-coercion-effects", obligationType: "counterfactual", target: "case:zapatista-autonomy-chiapas-1994-present", status: "open" },
-  { id: "zapatista-participation-gender-authority", obligationType: "counterevidence", target: "case:zapatista-autonomy-chiapas-1994-present#how-did-it-work", status: "open" },
-  { id: "zapatista-post-2023-rules-in-use", obligationType: "counterevidence", target: "case:zapatista-autonomy-chiapas-1994-present#what-changed-in-2023", status: "open" },
+  {
+    id: "zapatista-participation-gender-authority",
+    obligationType: "counterevidence",
+    target: "case:zapatista-autonomy-chiapas-1994-present#how-did-it-work",
+    status: "open",
+  },
+  {
+    id: "zapatista-post-2023-rules-in-use",
+    obligationType: "counterevidence",
+    target: "case:zapatista-autonomy-chiapas-1994-present#what-changed-in-2023",
+    status: "open",
+  },
 ];
 
 describe("canonical research agenda", () => {

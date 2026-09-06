@@ -4,7 +4,7 @@ The arrangement belongs first in the history of Indigenous autonomy, and the 202
 ## what-is-bounded
 
 This case concerns civilian institutions among Zapatista support-base communities, not all Indigenous people in Chiapas or one continuous territory controlled exclusively by the EZLN.
-Forbis situates the councils in an Indigenous struggle to exercise collective autonomy after state recognition failed.
+Speed situates the councils in an Indigenous struggle to exercise collective autonomy after state recognition failed.
 Assemblies and rotating delegates permit comparison with anarchist proposals, but resemblance does not override the communities’ own Zapatista and Indigenous political context.
 
 ## what-changed-in-2003
@@ -17,7 +17,7 @@ The same declaration gave the EZLN’s Indigenous Revolutionary Clandestine Comm
 ## how-did-it-work
 
 Accounts by Zapatista participants describe rotating service, collective reporting, and learning government by doing it.
-Andrews found that the councils also required outside organizations to seek permission and accept community control over projects and resource allocation.
+Andrews describes a reversal in aid relationships: councils set the terms on which outside groups could operate and distribute resources.
 Those practices created avenues for accountability, but they did not distribute participation evenly: participants reported persistent gaps for women in some councils even where parity was a stated rule.
 Gunderson’s critical account further shows why rotating civilian delegates cannot be treated as proof that central political-military authority disappeared.
 
@@ -26,4 +26,4 @@ Gunderson’s critical account further shows why rotating civilian delegates can
 In November 2023 the EZLN declared that community-level Local Autonomous Governments would replace Good Government Councils and autonomous municipalities as the base of command and coordination.
 Regional collectives and mobile zone assemblies were placed above them, while caracoles continued as bases rather than disappearing.
 The communiqué records a formal redesign, not verified rules in use, participation, reach, or outcomes across communities.
-Current comparison therefore has to keep the 2003–2023 episode separate from the successor structure and leave coercion, gender, authority, and continuity questions open.
+Current comparison therefore has to keep the 2003–2023 episode separate from the successor structure and leave participation, gender, authority, and continuity questions open.
