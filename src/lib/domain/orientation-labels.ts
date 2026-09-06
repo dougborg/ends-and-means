@@ -1,4 +1,8 @@
 export const reviewedOrientationLabels = {
+  "entity:constitutional-parliamentary-monarchy":
+    "Constitutional parliamentary monarchy",
+  "entity:executive-authority": "Executive authority",
+  "entity:executive-dynastic-monarchy": "Executive dynastic monarchy",
   "entity:accountability": "Accountability",
   "entity:active-labor-market-adjustment": "Active labor-market adjustment",
   "entity:affected-community-accountability":
@@ -96,6 +100,10 @@ export const reviewedOrientationLabels = {
     "Italian Fascist dictatorship, 1925–1943",
   "entity:italy": "Italy",
   "entity:japan": "Japan",
+  "entity:japan-symbolic-emperorship-1947-2004":
+    "Japan under the 1947 Constitution",
+  "entity:japan-symbolic-emperorship-episode":
+    "Postwar symbolic emperorship evidence, 1947–2004",
   "entity:japan-constitutional-rights-episode":
     "Japanese constitutional-rights adoption and commencement",
   "entity:japan-constitutional-rights-settlement-1946-1947":
@@ -119,6 +127,10 @@ export const reviewedOrientationLabels = {
   "entity:linz-regime-analysis": "Linz's regime analysis",
   "entity:liquidation-board-period-1992": "Liquidation-board period, 1992",
   "entity:market-coordination": "Market coordination",
+  "entity:legislative-accountability": "Legislative accountability",
+  "entity:monarchic-succession": "Monarchic succession",
+  "entity:monarchism": "Monarchism",
+  "entity:monarchy": "Monarchy",
   "entity:market-economy": "Market economy",
   "entity:market-socialism": "Market socialism",
   "entity:marxist-feminism": "Marxist feminism",
@@ -165,6 +177,10 @@ export const reviewedOrientationLabels = {
   "entity:social-ownership": "Social ownership",
   "entity:socialism": "Socialism",
   "entity:socialist-feminism": "Socialist feminism",
+  "entity:saudi-arabia": "Saudi Arabia",
+  "entity:saudi-basic-law-monarchy-1992-2022":
+    "Saudi Arabia under the 1992 Basic Law",
+  "entity:saudi-basic-law-monarchy-episode": "Basic Law evidence, 1992–2022",
   "entity:solidaristic-wage-bargaining": "Solidaristic wage bargaining",
   "entity:sortition-deliberative-minipublic": "Selection by lot",
   "entity:southwestern-syrian-desert-wadi-sirhan":
@@ -192,6 +208,12 @@ export const reviewedOrientationLabels = {
   "entity:tawantinsuyu-succession-invasion":
     "Succession war and invasion, c. 1527–1533",
   "entity:totalitarianism": "Totalitarianism",
+  "entity:theocracy": "Theocracy",
+  "entity:tonga": "Tonga",
+  "entity:tonga-constitutional-settlement-2010-2013":
+    "Tonga's 2010 constitutional settlement",
+  "entity:tonga-post-reform-monarchy-episode":
+    "Tongan reform evidence, 2010–2013",
   "entity:totalitarianism-analyses": "Totalitarianism analyses",
   "entity:united-states": "United States",
   "entity:us-controlled-materials-plan":
@@ -247,6 +269,7 @@ export const reviewedOrientationLabels = {
     "Kahnawà:ke community law-making",
   "subject-guide:guide-liberalism": "Liberalism",
   "subject-guide:guide-market-economy": "Market Economy",
+  "subject-guide:guide-monarchy": "Monarchy",
   "subject-guide:guide-matriliny-property-authority":
     "Does matriliny mean women rule?",
   "subject-guide:guide-republic": "Republic",

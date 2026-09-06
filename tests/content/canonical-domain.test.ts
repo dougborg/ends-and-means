@@ -11,6 +11,7 @@ import {
   requireEntityOfKind,
 } from "../../src/lib/domain/canonical";
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: the exact canonical inventory is one cohesive contract.
 describe("canonical vertical slice", () => {
   it("compiles only the reviewed modular authoring records", () => {
     expect(
@@ -26,6 +27,8 @@ describe("canonical vertical slice", () => {
     );
     expect(entitiesOfKind("approach").map(({ id }) => id)).toEqual([
       "anarcho-syndicalist-organizing",
+      "constitutional-parliamentary-monarchy",
+      "executive-dynastic-monarchy",
       "historical-italian-fascism",
       "linz-regime-analysis",
       "neo-republican-nondomination",
@@ -44,31 +47,34 @@ describe("canonical vertical slice", () => {
       "india-constitutional-rights-settlement-1946-1950",
       "italian-fascist-dictatorship-1925-1943",
       "japan-constitutional-rights-settlement-1946-1947",
+      "japan-symbolic-emperorship-1947-2004",
       "jinst-postcollective-pastoral-governance",
       "kahnawake-community-lawmaking",
       "koto-tinggi-post-decentralization-governance",
       "nazi-consolidation-1933",
       "right-to-buy-england-wales-1980-1998",
       "ruwalla-borderland-organization",
+      "saudi-basic-law-monarchy-1992-2022",
       "sewa-ahmedabad-1972-1977",
       "spanish-anarchist-initiatives-1936-1939",
       "swatantra-opposition-organization-1959-1967",
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",
+      "tonga-constitutional-settlement-2010-2013",
       "us-controlled-materials-plan",
       "zapatista-autonomy-chiapas-1994-present",
     ]);
   });
 
   it("publishes a sourced before/change/after sequence", () => {
-    const transition = entitiesOfKind("transition").find(({ id }) => id === "wage-earner-funds-to-liquidation");
+    const transition = entitiesOfKind("transition").find(
+      ({ id }) => id === "wage-earner-funds-to-liquidation",
+    );
     expect(transition?.fromEpisodeIds).toEqual([
       "enacted-wage-earner-funds-1984-1991",
     ]);
-    expect(transition?.toEpisodeIds).toEqual([
-      "liquidation-board-period-1992",
-    ]);
+    expect(transition?.toEpisodeIds).toEqual(["liquidation-board-period-1992"]);
     expect(entitiesOfKind("event").map(({ id }) => id)).toEqual([
       "wage-earner-fund-board-abolition",
       "zapatista-autonomy-reorganization-2023",
@@ -110,9 +116,9 @@ describe("canonical comparison and lookup helpers", () => {
       entities: [...canonicalGraph.entities, researchNeeded],
     };
 
-    expect(publicEntitiesOfKind("criterion", graph).map(({ id }) => id)).not.toContain(
-      researchNeeded.id,
-    );
+    expect(
+      publicEntitiesOfKind("criterion", graph).map(({ id }) => id),
+    ).not.toContain(researchNeeded.id);
   });
 
   it("publishes a descriptive Dimension with scoped episode Placements", () => {

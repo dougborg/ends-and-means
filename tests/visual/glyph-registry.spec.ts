@@ -81,7 +81,7 @@ test("representative directories render bounded-case and definition glyphs", asy
 test("every current guide uses the restrained section glyph grammar", async ({
   page,
 }) => {
-  expect(guideRoutes).toHaveLength(20);
+  expect(guideRoutes).toHaveLength(21);
 
   for (const route of guideRoutes) {
     await page.goto(route, { waitUntil: "networkidle" });

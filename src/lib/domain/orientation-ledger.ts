@@ -1,11 +1,11 @@
 import type { ExternalReference } from "./common";
-import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
+import { reviewedOrientationLabels } from "./orientation-labels";
 import {
   orientationOnlyReason,
   reviewedOrientationOnlyGuideSubjects,
   reviewedOrientationOnlyMappings,
 } from "./orientation-only-mappings";
-import { reviewedOrientationLabels } from "./orientation-labels";
+import { reviewedRejectedOrientationCandidates } from "./orientation-rejected-candidates";
 export type ReviewedOrientationDecision = {
   targetType: "entity" | "subject-guide";
   id: string;
@@ -1849,6 +1849,44 @@ const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
       "The Totalitarianism guide remains unmatched because its primary subject has no independently reviewed direct canonical external target.",
     references: [],
   },
+  ...[
+    "constitutional-parliamentary-monarchy",
+    "executive-authority",
+    "japan-symbolic-emperorship-1947-2004",
+    "japan-symbolic-emperorship-episode",
+    "legislative-accountability",
+    "monarchic-succession",
+    "monarchism",
+    "monarchy",
+    "saudi-arabia",
+    "saudi-basic-law-monarchy-1992-2022",
+    "saudi-basic-law-monarchy-episode",
+    "theocracy",
+    "tonga",
+    "tonga-constitutional-settlement-2010-2013",
+    "tonga-post-reform-monarchy-episode",
+  ].map((id) => ({
+    targetType: "entity" as const,
+    id,
+    disposition: "intentionally-unmatched" as const,
+    reason: `Reviewed orientation reconciliation for ${id}.`,
+    references: [],
+  })),
+  {
+    targetType: "entity",
+    id: "executive-dynastic-monarchy",
+    disposition: "intentionally-unmatched",
+    reason:
+      "The reviewed Absolute monarchy candidate does not directly match Herb's bounded analytical configuration because it would conflate ruling-family participation with legally unlimited power.",
+    references: [],
+  },
+  {
+    targetType: "subject-guide",
+    id: "guide-monarchy",
+    disposition: "intentionally-unmatched",
+    reason: "The guide reuses the reviewed identity of its Monarchy subject.",
+    references: [],
+  },
 ];
 
 const mapped = (
@@ -1893,6 +1931,17 @@ const reviewedMappingOverrides: Record<
   string,
   Omit<ReviewedOrientationDecision, "targetType" | "id">
 > = {
+  "entity:monarchy": mapped("Monarchy", "Q7269"),
+  "entity:monarchism": mapped("Monarchism", "Q216669"),
+  "entity:saudi-arabia": mapped("Saudi Arabia", "Q851"),
+  "entity:theocracy": mapped("Theocracy", "Q44405"),
+  "entity:tonga": mapped("Tonga", "Q678"),
+  "subject-guide:guide-monarchy": mapped(
+    "Monarchy",
+    "Q7269",
+    "exact",
+    "Uses the reviewed mapping owned by monarchy.",
+  ),
   "entity:accountability": mapped("Accountability", "Q2798912", "close"),
   "entity:authoritarianism": mapped("Authoritarianism", "Q6229"),
   "entity:anarcho-syndicalism": mapped("Anarcho-syndicalism", "Q188993"),

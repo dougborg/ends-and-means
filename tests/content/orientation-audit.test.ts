@@ -21,18 +21,18 @@ describe("orientation audit", () => {
         ["reviewed", "published"].includes(publicationStatus),
       ).length;
     expect(inventory).toHaveLength(expectedCount);
-    expect(inventory).toHaveLength(1024);
+    expect(inventory).toHaveLength(1107);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(172);
+    ).toHaveLength(188);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(18);
+    ).toHaveLength(19);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
-    ).toHaveLength(834);
+    ).toHaveLength(900);
     expect(
       inventory.filter(({ disposition }) => disposition !== "not-applicable"),
     ).toMatchSnapshot("eligible-target-decisions");
@@ -116,7 +116,6 @@ describe("orientation audit mutation enforcement", () => {
       ]),
     );
   });
-
 });
 
 describe("orientation-only boundary enforcement", () => {

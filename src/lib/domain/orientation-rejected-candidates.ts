@@ -4,6 +4,12 @@ import {
 } from "./orientation-only-mappings";
 
 const allReviewedRejectedOrientationCandidates = {
+  "entity:executive-dynastic-monarchy": {
+    title: "Absolute monarchy",
+    url: "https://en.wikipedia.org/wiki/Absolute_monarchy",
+    boundary:
+      "Absolute monarchy was the real canonical candidate inspected, but it does not identify Executive dynastic monarchy: Herb's bounded analytical configuration of ruling-family participation, which does not itself assert legally unlimited power.",
+  },
   "entity:affected-community-accountability": {
     title: "Accountability",
     url: "https://en.wikipedia.org/wiki/Accountability",
