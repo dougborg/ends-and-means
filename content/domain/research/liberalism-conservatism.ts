@@ -41,10 +41,10 @@ export const liberalismConservatismResearchDocuments = [
       kind: "research-obligation",
       label: "Liberal claims and imperial domination",
       description:
-        "A focused counterargument about British liberal liberty claims and imperial rule in India.",
+        "A focused counterargument centering colonized Indian responses to British liberal claims and rival positions within British liberalism.",
       obligationType: "counterargument",
       question:
-        "How did nineteenth-century British liberal arguments justify imperial authority in India despite commitments to liberty and self-determination?",
+        "How did colonized Indian critics and reformers contest British liberal justifications of imperial authority, and which rival British liberal positions did they confront?",
       target: { kind: "concept", id: "liberalism" },
       targetSectionId: "exclusions",
       addressedStatementIds: [

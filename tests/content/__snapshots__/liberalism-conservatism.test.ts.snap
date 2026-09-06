@@ -92,7 +92,7 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     {
       "caseId": "japan-constitutional-rights-settlement-1946-1947",
       "conditionStatementIds": [],
-      "description": "The bounded promulgation-to-commencement interval for the postwar Constitution.",
+      "description": "The bounded drafting-to-commencement interval for selected equality and marriage provisions in the postwar Constitution.",
       "endDate": {
         "certainty": "exact",
         "day": 3,
@@ -120,8 +120,6 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
       "scope": "Articles 14 and 24 and their drafting context; not their full implementation history.",
       "startDate": {
         "certainty": "exact",
-        "day": 3,
-        "month": 11,
         "year": 1946,
       },
     },
@@ -381,6 +379,34 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     },
     {
       "id": "conservatism-genealogy-limit-cites-53",
+      "locator": "sections 1.2 and 2.5",
+      "object": {
+        "id": "sep-conservatism-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "context",
+      "subject": {
+        "id": "conservatism-genealogy-limit",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "conservatism-genealogy-limit-cites-54",
+      "locator": "pp. 454–457",
+      "object": {
+        "id": "huntington-conservatism-ideology-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "context",
+      "subject": {
+        "id": "conservatism-genealogy-limit",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "conservatism-genealogy-limit-cites-55",
       "locator": "introduction, printed pp. 3–6",
       "object": {
         "id": "balasubramanian-free-economy-source",
@@ -507,7 +533,7 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     },
     {
       "id": "india-special-provisions-cites-12",
-      "locator": "article 15(3)–(5)",
+      "locator": "article 15(3)",
       "object": {
         "id": "india-constitution-source",
         "kind": "source",
@@ -885,7 +911,7 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     },
     {
       "id": "swatantra-coalition-practice-cites-42",
-      "locator": "introduction, printed pp. 17–18",
+      "locator": "introduction, printed pp. 7–8",
       "object": {
         "id": "balasubramanian-free-economy-source",
         "kind": "source",
@@ -913,7 +939,7 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     },
     {
       "id": "swatantra-court-practice-cites-44",
-      "locator": "introduction, printed pp. 17–18",
+      "locator": "introduction, printed pp. 7–8",
       "object": {
         "id": "balasubramanian-free-economy-source",
         "kind": "source",
@@ -983,7 +1009,7 @@ exports[`Liberalism and Conservatism exact ledgers > pins the complete public ev
     },
     {
       "id": "swatantra-parliamentary-practice-cites-43",
-      "locator": "introduction, printed pp. 17–18",
+      "locator": "introduction, printed pp. 7–8",
       "object": {
         "id": "balasubramanian-free-economy-source",
         "kind": "source",
@@ -1490,7 +1516,7 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
         "mehta-liberal-empire-tension",
       ],
       "currentLimitation": "Mill and Mehta establish a British-imperial tension but do not yet center political arguments made by colonized Indian actors or compare rival liberal positions across administrations.",
-      "description": "A focused counterargument about British liberal liberty claims and imperial rule in India.",
+      "description": "A focused counterargument centering colonized Indian responses to British liberal claims and rival positions within British liberalism.",
       "evidenceNeeded": "British Indian administrative records, writings by Indian critics and reformers, and intellectual histories comparing explicit liberty claims with specified exercises of imperial authority.",
       "id": "liberalism-imperial-domination",
       "kind": "research-obligation",
@@ -1498,7 +1524,7 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
       "obligationStatus": "open",
       "obligationType": "counterargument",
       "publicationStatus": "reviewed",
-      "question": "How did nineteenth-century British liberal arguments justify imperial authority in India despite commitments to liberty and self-determination?",
+      "question": "How did colonized Indian critics and reformers contest British liberal justifications of imperial authority, and which rival British liberal positions did they confront?",
       "reviewedAt": "2026-09-06",
       "scope": "British rule in India and selected nineteenth-century arguments; not a claim that all liberal traditions justified empire in the same way.",
       "statementIds": [],
@@ -1706,9 +1732,9 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
     },
     {
       "contributorDisplay": [
-        "Yuki Nakanishi",
-        "Akiko Onose",
-        "Yukiko Kusano",
+        "Haruka Nakanishi",
+        "Hiroko Onose",
+        "Atsuko Kusano",
       ],
       "description": "The Journal of Home Economics of Japan article page and full text.",
       "id": "nakanishi-japan-rights-source",
@@ -1716,7 +1742,7 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
         "doi": "10.11428/jhej1987.49.1185",
       },
       "kind": "source",
-      "label": "The Process of Making the Human Rights Articles in the Constitution of Japan",
+      "label": "Formation Process of the Human Rights Articles, the Third Chapter of the Constitution of Japan (Part 1): Circumstances under Which the Articles Drafted by Beate Shirota Gordon Became the Constitution of Japan",
       "publicationStatus": "reviewed",
       "publicationYear": 1998,
       "publisher": "Journal of Home Economics of Japan",
@@ -1729,7 +1755,7 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
       ],
       "reviewedAt": "2026-09-06",
       "sourceType": "article",
-      "title": "The Process of Making the Human Rights Articles in the Constitution of Japan",
+      "title": "Formation Process of the Human Rights Articles, the Third Chapter of the Constitution of Japan (Part 1): Circumstances under Which the Articles Drafted by Beate Shirota Gordon Became the Constitution of Japan",
       "workId": "nakanishi-japan-rights-work",
     },
     {
@@ -2108,14 +2134,14 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
       "text": "Article 15(1) prohibits the state from discriminating against a citizen only on grounds of religion, race, caste, sex, or place of birth.",
     },
     {
-      "description": "India's Constitution permits specified special provisions",
+      "description": "India's original Constitution permitted special provisions for women and children",
       "id": "india-special-provisions",
       "kind": "statement",
-      "label": "India's Constitution permits specified special provisions",
+      "label": "India's original Constitution permitted special provisions for women and children",
       "publicationStatus": "reviewed",
       "reviewedAt": "2026-09-06",
       "statementKind": "observation",
-      "text": "Article 15 permits specified special provisions for women, children, and socially and educationally backward classes and for Scheduled Castes and Scheduled Tribes.",
+      "text": "Article 15(3) of India's Constitution permits the state to make special provisions for women and children.",
     },
     {
       "description": "Japan's Constitution specifies legal equality",
@@ -2155,7 +2181,7 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
       "publicationStatus": "reviewed",
       "reviewedAt": "2026-09-06",
       "statementKind": "observation",
-      "text": "Nakanishi, Onose, and Kusano trace the human-rights provisions of Japan's Constitution through Japanese drafts and the Allied occupation drafting process rather than attributing them to one national tradition.",
+      "text": "Nakanishi, Onose, and Kusano trace how Beate Shirota Gordon's occupation-era drafts shaped Articles 24 and 26 alongside Japanese deliberation and revision.",
     },
     {
       "description": "Conservatism has broad and narrow senses",
@@ -2565,14 +2591,14 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
       "workType": "constitution",
     },
     {
-      "description": "A Japanese scholarly account of the drafting of the Constitution's human-rights provisions.",
+      "description": "A Japanese scholarly account of how Beate Shirota Gordon's drafts shaped Articles 24 and 26 of Japan's Constitution.",
       "id": "nakanishi-japan-rights-work",
       "kind": "work",
-      "label": "The Process of Making the Human Rights Articles in the Constitution of Japan",
+      "label": "Formation Process of the Human Rights Articles, the Third Chapter of the Constitution of Japan (Part 1): Circumstances under Which the Articles Drafted by Beate Shirota Gordon Became the Constitution of Japan",
       "originalPublicationYear": 1998,
       "publicationStatus": "reviewed",
       "reviewedAt": "2026-09-06",
-      "title": "The Process of Making the Human Rights Articles in the Constitution of Japan",
+      "title": "Formation Process of the Human Rights Articles, the Third Chapter of the Constitution of Japan (Part 1): Circumstances under Which the Articles Drafted by Beate Shirota Gordon Became the Constitution of Japan",
       "workType": "article",
     },
     {
