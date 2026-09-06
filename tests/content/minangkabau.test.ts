@@ -103,6 +103,21 @@ const workIds = [
   "colombijn-padang-landownership-work",
 ] as const;
 
+const caseIds = [
+  "koto-tinggi-post-decentralization-governance",
+  "koto-tinggi-governance-october-2016",
+  "bonjol-melayu-ulayat-governance",
+  "bonjol-ulayat-governance-2000-2016",
+] as const;
+
+const semanticRelationshipIds = [
+  "bonjol-applies-matriliny",
+  "matriliny-related-to-matrilocality",
+  "matriliny-commonly-confused-with-matriarchy",
+] as const;
+
+const requiredRelationshipAbsences = ["koto-tinggi-applies-matriliny"] as const;
+
 function clonedDocuments() {
   return structuredClone(canonicalDocuments);
 }
@@ -157,6 +172,37 @@ function exactCitationLedger() {
       locator,
     })),
   );
+}
+
+function exactCaseLedger(documents: AuthoringDocument[] = canonicalDocuments) {
+  const graph = compileDomainGraph(documents);
+  return caseIds.map((id) => {
+    const entity = graph.indexes.entitiesById[id];
+    if (entity?.kind !== "case" && entity?.kind !== "case-episode")
+      throw new Error(`Missing Case or Case Episode ${id}`);
+    return structuredClone(entity);
+  });
+}
+
+function exactRelationshipLedger(
+  documents: AuthoringDocument[] = canonicalDocuments,
+) {
+  const graph = compileDomainGraph(documents);
+  return semanticRelationshipIds.map((id) => {
+    const relationship = graph.relationships.find((candidate) => candidate.id === id);
+    if (!relationship) throw new Error(`Missing relationship ${id}`);
+    return structuredClone(relationship);
+  });
+}
+
+function exactRelationshipAbsenceLedger(
+  documents: AuthoringDocument[] = canonicalDocuments,
+) {
+  const graph = compileDomainGraph(documents);
+  return requiredRelationshipAbsences.map((id) => ({
+    id,
+    absent: !graph.relationships.some((relationship) => relationship.id === id),
+  }));
 }
 
 function expectEveryFieldDriftDetected<T extends object>(
@@ -239,6 +285,41 @@ describe("Minangkabau matriliny, property, and authority", () => {
 });
 
 describe("Minangkabau bounded case categories", () => {
+  it("locks every Case, Case Episode, semantic relationship, and required absence", () => {
+    expect(exactCaseLedger()).toMatchSnapshot("cases-and-episodes");
+    expect(exactRelationshipLedger()).toMatchSnapshot("semantic-relationships");
+    expect(exactRelationshipAbsenceLedger()).toEqual([
+      { id: "koto-tinggi-applies-matriliny", absent: true },
+    ]);
+  });
+
+  it("detects authored Case-slot and relationship drift after compilation", () => {
+    const caseDocuments = clonedDocuments();
+    const episode = caseDocuments.find(
+      (document) =>
+        document.documentType === "entity" &&
+        document.entity.id === "koto-tinggi-governance-october-2016",
+    );
+    if (episode?.documentType !== "entity" || episode.entity.kind !== "case-episode")
+      throw new Error("Missing Koto Tinggi Case Episode fixture");
+    episode.entity.conditionStatementIds = ["koto-tinggi-fieldwork-scope"];
+    expect(exactCaseLedger(caseDocuments)).not.toEqual(exactCaseLedger());
+
+    const relationshipDocuments = clonedDocuments();
+    const relationship = relationshipIn(
+      relationshipDocuments,
+      "matriliny-related-to-matrilocality",
+    );
+    if (relationship.predicate !== "related-to")
+      throw new Error("Missing matriliny/matrilocality relationship fixture");
+    relationship.statementIds = ["matrilocality-residence-distinction"];
+    expect(exactRelationshipLedger(relationshipDocuments)).not.toEqual(
+      exactRelationshipLedger(),
+    );
+  });
+});
+
+describe("Minangkabau bounded case assignments", () => {
   it("keeps the two cases and their evidence categories separately bounded", () => {
     expect(
       canonicalGraph.indexes.entitiesById[
@@ -247,6 +328,7 @@ describe("Minangkabau bounded case categories", () => {
     ).toMatchObject({
       kind: "case",
       locationIds: ["nagari-koto-tinggi-agam", "west-sumatra"],
+      conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
       episodeIds: ["koto-tinggi-governance-october-2016"],
     });
     expect(
@@ -255,6 +337,7 @@ describe("Minangkabau bounded case categories", () => {
       ],
     ).toMatchObject({
       kind: "case-episode",
+      conditionStatementIds: ["koto-tinggi-minangkabau-adat-context"],
       formalRuleStatementIds: [
         "koto-tinggi-three-institutions",
         "koto-tinggi-representative-council",
@@ -285,14 +368,29 @@ describe("Minangkabau bounded case categories", () => {
     ).toMatchObject({
       kind: "case",
       locationIds: ["nagari-bonjol-dharmasraya", "west-sumatra"],
+      conditionStatementIds: [
+        "bonjol-new-nagari-forest-transition",
+        "bonjol-concession-end-transition",
+      ],
       episodeIds: ["bonjol-ulayat-governance-2000-2016"],
     });
     expect(
       canonicalGraph.indexes.entitiesById["bonjol-ulayat-governance-2000-2016"],
     ).toMatchObject({
       kind: "case-episode",
-      formalRuleStatementIds: ["bonjol-neshp-formal-promise"],
+      conditionStatementIds: [
+        "bonjol-new-nagari-forest-transition",
+        "bonjol-concession-end-transition",
+      ],
+      formalRuleStatementIds: [
+        "bonjol-ulayat-formal-distinction",
+        "bonjol-harta-pusaka-female-line",
+        "bonjol-neshp-formal-promise",
+      ],
       ruleInUseStatementIds: [
+        "bonjol-ulayat-delegated-management",
+        "bonjol-harta-pusaka-transition",
+        "bonjol-inheritance-did-not-confer-office-authority",
         "bonjol-ulayat-sales-rules-in-use",
         "bonjol-ulayat-sales-contrary-to-custom",
       ],

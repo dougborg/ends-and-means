@@ -1,18 +1,17 @@
 Matriliny traces descent or group membership through a maternal line.
-It does not, by itself, tell us where spouses live, who controls property, who holds office, or whether people experience equality.
+The studies collected here separately document residence, property control, officeholding, and participation; their findings do not establish a rule for every Minangkabau community.
 
 ## how-do-the-terms-differ
 
 Matriliny is a descent principle.
-Matrilocality concerns postmarital household location; in Sanday’s account, a married man joined his wife’s domestic group.
+In Sanday’s account, maternal-line kin organization and a married man joining his wife’s domestic group were separate features.
 Matriarchy is a disputed interpretive category: some use it for women’s rule, while Sanday uses it to describe maternal meanings and women’s social centrality.
-None of these terms can substitute for evidence about who decides, manages, works, benefits, or speaks in a particular setting.
+These terms do not replace evidence about who decides, manages, works, benefits, or speaks in a particular setting.
 
 ## what-counts-as-power
 
-Not on its own.
-Blackwood found senior women acting as heirs, household heads, and land controllers in one village even where men claimed formal kin authority.
-The Bonjol evidence points the other way in a different relationship: women’s inherited claims did not give them practical authority over communal-forest transactions.
+Blackwood reports senior women controlling land in one village even as men claimed formal kin authority.
+In the Bonjol study, women’s inherited claims did not give them the forest-negotiation authority exercised by male customary officeholders.
 Power must therefore be traced across specific relationships rather than assigned to all women or all men.
 
 ## how-are-local-terms-used
