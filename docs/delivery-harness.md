@@ -68,6 +68,7 @@ pnpm audit:delivery -- --project-snapshot tests/fixtures/delivery/project-valid.
 
 The strict names are branch-protection interfaces and should not be renamed casually.
 Workflows use least-privilege permissions, immutable action SHAs, frozen pnpm installs and cache keys, non-persistent checkout credentials, and no `pull_request_target` execution.
+Workflow `run` blocks must not use executable `$()` or backtick command substitution; express those operations as explicit steps so command ownership remains auditable.
 The Pages deploy job receives write permissions only after the read-only verified build succeeds.
 
 Copilot and an independent adversarial review remain process requirements even though branch protection does not require an approving review.

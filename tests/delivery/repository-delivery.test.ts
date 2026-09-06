@@ -170,3 +170,45 @@ describe("verify command ownership", () => {
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_PERMISSIONS");
   });
 });
+
+describe("workflow command substitution", () => {
+  it.each([
+    "echo $(pnpm lint)",
+    "echo `pnpm lint`",
+    'echo "$(pnpm lint)"',
+    'echo "`pnpm lint`"',
+  ])("rejects executable substitution: %s", async (run) => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      `      - run: ${JSON.stringify(run)}\n      - name: Verify and build\n        uses: $/.github/actions/verify`,
+    );
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
+      "COMMAND_SUBSTITUTION",
+    );
+  });
+
+  it.each([
+    "echo '$(pnpm lint)'",
+    "echo '`pnpm lint`'",
+    "echo \\$(pnpm lint)",
+    "echo \\`pnpm lint\\`",
+    "# $(pnpm lint)",
+    "# `pnpm lint`",
+    "echo ok # $(pnpm lint)",
+    "echo ok # `pnpm lint`",
+  ])("allows literal substitution text: %s", async (run) => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      `      - run: ${JSON.stringify(run)}\n      - name: Verify and build\n        uses: $/.github/actions/verify`,
+    );
+    expect(
+      auditRepositoryDelivery(root).map((finding) => finding.code),
+    ).not.toContain("COMMAND_SUBSTITUTION");
+  });
+});

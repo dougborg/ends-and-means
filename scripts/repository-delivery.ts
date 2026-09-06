@@ -41,6 +41,7 @@ function quotedToken(run: string, start: number) {
 function boundaryWidth(run: string, index: number) {
   const character = run[index] ?? "";
   if (character === "&") return run[index + 1] === "&" ? 2 : 1;
+  if (character === "(" && run[index - 1] === "$") return 0;
   return character === "\n" || ";|()".includes(character) ? 1 : 0;
 }
 
@@ -98,6 +99,45 @@ function invokesOwnedCommand(run: string) {
       (command) => segment === command || segment.startsWith(`${command} `),
     ),
   );
+}
+
+function hasUnescapedSubstitution(text: string) {
+  for (let index = 0; index < text.length; index += 1) {
+    if (text[index] === "\\") index += 1;
+    else if (text[index] === "`" || text.slice(index, index + 2) === "$(")
+      return true;
+  }
+  return false;
+}
+
+function segmentHasExecutableSubstitution(segment: string) {
+  for (let index = 0; index < segment.length; index += 1) {
+    if (segment[index] === "\\") {
+      index += 1;
+      continue;
+    }
+    if (segment[index] === "'") {
+      const quoted = quotedToken(segment, index);
+      index = quoted.end;
+      continue;
+    }
+    if (segment[index] === '"') {
+      const quoted = quotedToken(segment, index);
+      if (hasUnescapedSubstitution(quoted.token.slice(1, -1))) return true;
+      index = quoted.end;
+      continue;
+    }
+    if (
+      segment[index] === "`" ||
+      segment.slice(index, index + 2) === "$("
+    )
+      return true;
+  }
+  return false;
+}
+
+function hasExecutableCommandSubstitution(run: string) {
+  return shellCommandSegments(run).some(segmentHasExecutableSubstitution);
 }
 
 function record(value: unknown): Node {
@@ -225,6 +265,16 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
       typeof step.run === "string" && invokesOwnedCommand(step.run),
   );
   requireRule(duplicateCommands.length === 0, "VERIFY_DUPLICATE", "Workflow steps must not duplicate commands owned by pnpm verify.");
+  const substitutions = allSteps.filter(
+    ({ step }) =>
+      typeof step.run === "string" &&
+      hasExecutableCommandSubstitution(step.run),
+  );
+  requireRule(
+    substitutions.length === 0,
+    "COMMAND_SUBSTITUTION",
+    "Workflow run blocks must not use executable command substitution; use explicit steps instead.",
+  );
 
   findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps, allJobs));
 
