@@ -5,12 +5,13 @@ It does not by itself specify authoritarian rule, nationalism, religion, capital
 
 Hamilton distinguishes broad and narrow senses, gradual reform from reaction, and procedural from substantive accounts.
 Huntington instead organizes rival definitions as aristocratic, autonomous, and situational theories.
-Those general taxonomies arise from European and North American debates; Balasubramanian's Indian account below supplies one locally grounded classification rather than a universal alternative.
+Hamilton's and Huntington's taxonomies derive from European and North American debates.
+Balasubramanian analyzes one Indian formation on its own historical terms, but that account cannot define every use outside those debates.
 
 ## arguments
 
 Burke wrote that a state “without the means of some change” lacks the means to conserve itself.
-He also defended inherited institutions and prescription against rebuilding government solely from abstract rights or present choice.
+For Burke, political legitimacy could rest on arrangements handed down over time rather than on a fresh design derived only from abstract rights.
 Those arguments are historically influential without defining every later conservative movement.
 
 ## party-programmes
