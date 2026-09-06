@@ -26,7 +26,7 @@ const citations = [
   ["nazi-one-party-consolidation", "ushmm-nazi-state-source", "sections ‘Foundations of the Nazi State’ and ‘Creating the Führer State’", "supports"],
   ["nazi-party-state-law", "party-state-law-source", "articles 1–3", "supports"],
   ["nazi-control-limit", "ushmm-nazi-state-source", "section ‘The Gleichschaltung of German Society’", "supports"],
-  ["totalitarian-case-nonembodiment", "totalitarian-contested-category-source", "p. 535, paragraphs 1–2", "context"],
+  ["totalitarian-case-nonembodiment", "bunce-totalitarianism-source", "p. 535, paragraphs 1–2", "context"],
 ] as const;
 
 const ref = (kind: "concept" | "approach" | "collection" | "case", id: string) => ({ kind, id });
@@ -74,6 +74,6 @@ export const authoritarianismFascismTotalitarianismRelationshipDocuments: Author
   {
     documentType: "relationships",
     subject: ref("case", "italian-fascist-dictatorship-1925-1943"),
-    relationships: [{ id: "italian-fascist-case-partial", predicate: "partially-instantiates", subject: ref("case", "italian-fascist-dictatorship-1925-1943"), object: ref("approach", "historical-italian-fascism"), status: "qualified", statementIds: ["italy-dictatorship-transition", "italy-party-regime-boundary"] }],
+    relationships: [{ id: "italian-fascist-case-partial", predicate: "partially-instantiated", subject: ref("case", "italian-fascist-dictatorship-1925-1943"), object: ref("approach", "historical-italian-fascism"), status: "qualified", statementIds: ["italy-dictatorship-transition", "italy-party-regime-boundary"] }],
   },
 ];

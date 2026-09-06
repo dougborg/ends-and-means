@@ -131,18 +131,21 @@ describe("compiled learner SubjectGuide composition", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 9,
-      total: 9,
+      live: 12,
+      total: 12,
       liveIds: [
         "guide-anarchism",
+        "guide-authoritarianism",
         "guide-central-planning",
         "guide-communism",
         "guide-democracy",
         "guide-economic-democracy",
+        "guide-fascism",
         "guide-kahnawake-community-lawmaking",
         "guide-republic",
         "guide-socialism",
         "guide-tawantinsuyu-imperial-organization",
+        "guide-totalitarianism",
       ],
     });
   });
@@ -157,16 +160,19 @@ describe("compiled learner SubjectGuide composition", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(9);
+      expect(graph.subjectGuideRecords).toHaveLength(12);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
         "guide-anarchism",
+        "guide-authoritarianism",
         "guide-central-planning",
         "guide-communism",
         "guide-democracy",
+        "guide-fascism",
         "guide-kahnawake-community-lawmaking",
         "guide-republic",
         "guide-socialism",
         "guide-tawantinsuyu-imperial-organization",
+        "guide-totalitarianism",
       ]);
       expect(subjectGuideById(guide.id, graph)).toBeUndefined();
       expect(subjectGuideBySlug(guide.slug, graph)).toBeUndefined();

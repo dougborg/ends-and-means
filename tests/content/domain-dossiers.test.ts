@@ -152,7 +152,7 @@ describe("canonical narrative coverage", () => {
     const report = auditContent(canonicalGraph);
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "approach"),
-    ).toMatchObject({ covered: 6, total: 6, missingIds: [] });
+    ).toMatchObject({ covered: 8, total: 8, missingIds: [] });
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "challenge")
         ?.missingIds,

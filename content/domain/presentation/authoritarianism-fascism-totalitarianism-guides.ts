@@ -30,6 +30,22 @@ const totalitarianism = dossier("totalitarianism", ["totalitarian-linz-definitio
   { id: "label-history", heading: "How did the label travel?", body: "", traceStatus: "qualified", statementIds: ["totalitarian-label-history", "totalitarian-polemical-boundary"] },
   { id: "bounded-practice", heading: "What can the 1933 German case establish?", body: "", traceStatus: "qualified", statementIds: ["nazi-one-party-consolidation", "nazi-party-state-law", "nazi-control-limit", "totalitarian-case-nonembodiment"], relatedEntityRefs: [{ kind: "case", id: "nazi-consolidation-1933" }] },
 ]);
+const historicalItalianFascism = attachNarrative("historical-italian-fascism.md", {
+  id: "historical-italian-fascism-dossier", kind: "dossier" as const, label: "Historical Italian Fascism dossier",
+  description: "A bounded account of doctrine, organization, and consolidated rule.", subject: { kind: "approach" as const, id: "historical-italian-fascism" }, standfirst: "",
+  standfirstStatementIds: ["fascism-self-description", "italy-party-regime-boundary"], sections: [
+    { id: "doctrine-and-organization", heading: "How did doctrine and organization differ?", body: "", traceStatus: "qualified" as const, statementIds: ["fascism-self-description", "fascism-self-description-limit", "italy-party-regime-boundary"] },
+    { id: "bounded-rule", heading: "What does the bounded regime case show?", body: "", traceStatus: "qualified" as const, statementIds: ["italy-dictatorship-transition", "italy-party-regime-boundary"], relatedEntityRefs: [{ kind: "case" as const, id: "italian-fascist-dictatorship-1925-1943" }] },
+  ], ...reviewed,
+});
+const linzRegimeAnalysis = attachNarrative("linz-regime-analysis.md", {
+  id: "linz-regime-analysis-dossier", kind: "dossier" as const, label: "Linz regime analysis dossier",
+  description: "A bounded account of Linz's contrasting regime ideal types.", subject: { kind: "approach" as const, id: "linz-regime-analysis" }, standfirst: "",
+  standfirstStatementIds: ["authoritarian-linz-boundary", "totalitarian-linz-definition"], sections: [
+    { id: "authoritarian-type", heading: "What defines the authoritarian ideal type?", body: "", traceStatus: "qualified" as const, statementIds: ["authoritarian-linz-boundary"] },
+    { id: "totalitarian-type", heading: "How does the totalitarian ideal type differ?", body: "", traceStatus: "qualified" as const, statementIds: ["totalitarian-linz-definition", "authoritarian-not-totalitarian"] },
+  ], ...reviewed,
+});
 
 type Guide = Extract<AuthoringDocument, { documentType: "subject-guide" }>;
 const guide = (id: "authoritarianism" | "fascism" | "totalitarianism", sections: Guide["guide"]["sections"]): Guide => ({
@@ -38,19 +54,24 @@ const guide = (id: "authoritarianism" | "fascism" | "totalitarianism", sections:
     id: `guide-${id}`, slug: id, label: id[0]!.toUpperCase() + id.slice(1),
     description: `Distinguish the scholarly, historical, organizational, and polemical uses of ${id}.`,
     publicationStatus: "reviewed", primarySubject: { kind: "concept", id },
-    searchQueries: [id, `${id} definition`, `${id} meaning`], disambiguation: [], sections, reviewedAt: "2026-09-06",
+    searchQueries: [{ query: id }, { query: `${id} definition` }, { query: `${id} meaning` }], sections, reviewedAt: "2026-09-06",
   },
 });
 const guideSections = (id: string): Guide["guide"]["sections"] => [
-  { role: "short-answer", label: "Start with the short answer", dossierId: `${id}-dossier`, passageId: "standfirst" },
-  { role: "meanings-and-boundaries", label: "Separate the meanings and boundaries", dossierId: `${id}-dossier`, passageId: "definitions" },
-  { role: "bounded-practice", label: "Test the label against bounded practice", dossierId: `${id}-dossier`, passageId: id === "authoritarianism" ? "neighbors" : "bounded-practice" },
-  { role: "open-question", label: "Keep the unresolved question visible", researchObligationIds: [id === "authoritarianism" ? "authoritarian-practice-regime-transfer" : id === "fascism" ? "fascism-crossregional-boundary" : "totalitarian-control-evidence"] },
-  { role: "comparisons-and-next-steps", label: "Compare neighboring terms", dossierId: `${id}-dossier`, passageId: id === "fascism" ? "variation" : "disputes" },
+  { id: "short-answer", role: "short-answer", heading: "What is the short answer?", narrativeRefs: [{ dossierId: `${id}-dossier` }] },
+  { id: "meanings-and-boundaries", role: "meanings-and-boundaries", heading: "Which meanings must stay separate?", narrativeRefs: [{ dossierId: `${id}-dossier`, sectionId: "definitions" }] },
+  { id: "bounded-practice", role: "bounded-practice", heading: "What can bounded evidence establish?", narrativeRefs: [{ dossierId: `${id}-dossier`, sectionId: id === "authoritarianism" ? "neighbors" : "bounded-practice" }], entityRefs: id === "totalitarianism" ? [{ kind: "case", id: "nazi-consolidation-1933" }] : [{ kind: "case", id: "italian-fascist-dictatorship-1925-1943" }] },
+  { id: "variants-disputes-and-limits", role: "variants-and-disputes", heading: "What remains disputed?", narrativeRefs: [{ dossierId: `${id}-dossier`, sectionId: id === "fascism" ? "variation" : "disputes" }] },
+  { id: "comparisons-and-next-steps", role: "comparisons-and-next-steps", heading: "Which neighboring terms should you compare?", entityRefs: id === "authoritarianism" ? [{ kind: "concept", id: "autocracy" }, { kind: "concept", id: "dictatorship" }, { kind: "concept", id: "totalitarianism" }] : id === "fascism" ? [{ kind: "concept", id: "authoritarianism" }, { kind: "concept", id: "totalitarianism" }] : [{ kind: "concept", id: "authoritarianism" }, { kind: "concept", id: "fascism" }] },
+  { id: "open-questions", role: "open-questions", heading: "What remains open?", researchObligationIds: [id === "authoritarianism" ? "authoritarian-practice-regime-transfer" : id === "fascism" ? "fascism-crossregional-boundary" : "totalitarian-control-evidence"] },
 ];
 
 export const authoritarianismFascismTotalitarianismGuideDocuments: AuthoringDocument[] = [
-  authoritarianism, fascism, totalitarianism,
+  { documentType: "entity", entity: authoritarianism },
+  { documentType: "entity", entity: fascism },
+  { documentType: "entity", entity: totalitarianism },
+  { documentType: "entity", entity: historicalItalianFascism },
+  { documentType: "entity", entity: linzRegimeAnalysis },
   guide("authoritarianism", guideSections("authoritarianism")),
   guide("fascism", guideSections("fascism")),
   guide("totalitarianism", guideSections("totalitarianism")),
