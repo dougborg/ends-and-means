@@ -161,7 +161,8 @@ function validateGuideSection(
   reportInvalid(errors, !section.heading.trim(), `${owner}: heading is empty`);
   reportInvalid(
     errors,
-    workflowReferencesIn(section.heading).length > 0,
+    live(guide.publicationStatus) &&
+      workflowReferencesIn(section.heading).length > 0,
     `${owner}: heading contains an internal workflow reference`,
   );
   validateGuideSelectionPresence(owner, section, errors);
@@ -492,7 +493,8 @@ function validateGuideShape(guide: SubjectGuide, errors: string[]) {
   );
   reportInvalid(
     errors,
-    workflowReferencesIn(`${guide.label} ${guide.description}`).length > 0,
+    live(guide.publicationStatus) &&
+      workflowReferencesIn(`${guide.label} ${guide.description}`).length > 0,
     `${guide.id}: reader-facing guide identity contains an internal workflow reference`,
   );
   validateIsoDate(guide.id, "reviewedAt", guide.reviewedAt, errors);
@@ -575,7 +577,8 @@ function registerGuideQueries(
     reportInvalid(
       errors,
       Boolean(
-        entry.disambiguation &&
+        live(guide.publicationStatus) &&
+          entry.disambiguation &&
           workflowReferencesIn(entry.disambiguation).length > 0,
       ),
       `${guide.id}: search-query disambiguation contains an internal workflow reference`,
