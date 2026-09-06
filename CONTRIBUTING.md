@@ -128,9 +128,15 @@ available; an unavailable API or credential result is not a clean audit.
 - Production Pages build and deployment jobs depend on successful main-branch
   verification; pull requests cannot enter the deployment path.
 - `pnpm verify` is the single full local and CI verification path. It includes
-  repository/skill drift checks, lint, static analysis, dependency audit, type
+  repository/skill and asset-provenance drift checks, lint, static analysis, dependency audit, type
   checks, coverage, build, route tests, and browser review. See the
   [delivery harness](docs/delivery-harness.md).
+- New bundled or published assets—including fonts, icons, flags, logos, images,
+  media, datasets, quotations, and imported metadata—must be registered in
+  `provenance/inventory.json` with their source, provider, license or terms
+  locator, modification state, distribution path, and attribution requirement.
+  `pnpm audit:provenance` fails on unregistered governed file types and direct
+  dependency drift. Unresolved third-party material cannot enter the live site.
 - Copilot and independent adversarial review are project-process requirements.
   Branch protection does not require an approving review, but strict checks,
   conversation resolution, and linear history remain enforced.
