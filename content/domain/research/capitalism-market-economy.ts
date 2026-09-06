@@ -76,7 +76,7 @@ export const capitalismMarketResearchDocuments = [
         "china-marketization-classification-limit",
       ],
       currentLimitation:
-        "Naughton establishes varied non-state entry and local or collective labels, but the present evidence does not compare effective control rights across enterprise forms and localities.",
+        "Naughton establishes non-state entry, but the present evidence does not compare ownership or effective control rights across enterprise forms and localities.",
       evidenceNeeded:
         "Enterprise charters, accounts, appointment and disposition records, local-government archives, worker testimony where available, and comparative scholarship covering a preselected set of provinces and sectors.",
       scope:
@@ -102,7 +102,7 @@ export const capitalismMarketResearchDocuments = [
         "ghana-cocoa-classification-limit",
       ],
       currentLimitation:
-        "The present source establishes smallholder-led expansion and mixed labor arrangements but does not disaggregate control and returns among differently situated participants.",
+        "The present source establishes producer-led expansion but does not disaggregate ownership, labor relations, control, or returns among differently situated participants.",
       evidenceNeeded:
         "Farm and household records, land and tenancy agreements, wage and migration evidence, colonial records read critically, oral histories where provenance permits, and locally grounded scholarship.",
       scope:
