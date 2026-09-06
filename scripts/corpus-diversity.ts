@@ -2,11 +2,11 @@ import { z } from "zod";
 
 const nonEmpty = z.string().trim().min(1);
 const feasibility = z
-  .object({
+  .strictObject({
     availability: z.enum(["viable", "partial", "not-found", "not-assessed"]),
     notes: nonEmpty,
     sourceLeads: z.array(
-      z.object({
+      z.strictObject({
         title: nonEmpty,
         url: z.url(),
         authority: nonEmpty,
