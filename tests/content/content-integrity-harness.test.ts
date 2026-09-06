@@ -178,6 +178,8 @@ describe("safe-publication boundary", () => {
     `const nested = \`${"${"}flag ? { ok: true } : require("../archive/data")}\`;`,
     `const nestedTemplate = \`${"${"}\`value ${"${"}require("../archive/data")}\`}` +
       "`;",
+    `const regexBrace = \`${"${"}/}/.test(value) ? require("../archive/data") : "ok"}\`;`,
+    'const slashPattern = /[//]/; const data = require("../archive/data");',
   ])("rejects executable dependency syntax: %s", (content) => {
     expect(
       publicationBoundaryFindings([{ path: "src/example.ts", content }]),
@@ -194,6 +196,8 @@ describe("safe-publication boundary", () => {
     '/* const data = require("../archive/data"); */',
     "const example = 'import \"../archive/data\"';",
     'const example = `require("../archive/data")`;',
+    'from = "../archive/data";',
+    'const example = { from: "../archive/data" };',
     // biome-ignore lint/suspicious/noTemplateCurlyInString: literal scanner fixture
     'const example = `escaped \\${require("../archive/data")}`;',
     // biome-ignore lint/suspicious/noTemplateCurlyInString: literal scanner fixture
@@ -215,6 +219,53 @@ describe("safe-publication boundary", () => {
         location: "src/archive/example.ts",
       }),
     );
+  });
+});
+
+describe("parser-backed publication boundary", () => {
+  it("fails closed when executable syntax cannot be parsed", () => {
+    expect(
+      publicationBoundaryFindings([
+        { path: "src/example.ts", content: 'import value from "unterminated' },
+      ]),
+    ).toContainEqual(
+      expect.objectContaining({
+        category: "archive-exclusion",
+        message: expect.stringContaining("could not prove a static boundary"),
+      }),
+    );
+    expect(
+      publicationBoundaryFindings([
+        { path: "src/example.ts", content: "const data = require(variable);" },
+      ]),
+    ).toContainEqual(
+      expect.objectContaining({
+        message: expect.stringContaining("non-static module specifier"),
+      }),
+    );
+  });
+
+  it("scans Astro frontmatter and scripts but ignores HTML comments", () => {
+    expect(
+      publicationBoundaryFindings([
+        {
+          path: "src/pages/example.astro",
+          content: [
+            "---",
+            'import data from "../archive/data";',
+            'const example = `<script>require("../archive/frontmatter-string")</script>`;',
+            "---",
+            '<!-- <script>require("../archive/comment")</script> -->',
+            '<script src="../archive/external"></script>',
+            '<script>require("../archive/client")</script>',
+          ].join("\n"),
+        },
+      ]).map(({ message }) => message),
+    ).toEqual([
+      expect.stringContaining("../archive/client"),
+      expect.stringContaining("../archive/data"),
+      expect.stringContaining("../archive/external"),
+    ]);
   });
 });
 
