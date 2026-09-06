@@ -10,6 +10,8 @@ const defaultRoutes = [
   "/cases/swedish-solidaristic-bargaining/",
   "/cases/kahnawake-community-lawmaking/",
   "/cases/zapatista-autonomy-chiapas-1994-present/",
+  "/cases/ruwalla-borderland-organization/",
+  "/cases/jinst-postcollective-pastoral-governance/",
   "/compare/",
   "/concepts/economic-democracy/",
   "/concepts/social-democracy/",
@@ -19,6 +21,8 @@ const defaultRoutes = [
   "/guides/socialism/",
   "/guides/communism/",
   "/guides/kahnawake-community-lawmaking/",
+  "/guides/ruwalla-borderland-organization/",
+  "/guides/jinst-postcollective-pastoral-governance/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
   "/reading/",
@@ -323,6 +327,16 @@ test("Kahnawà:ke guide renders its bounded learner framing", async ({ page }) =
   await expect(
     page.getByText(/not an example of one universal “tribal” system/),
   ).toBeVisible();
+});
+
+test("Ruwalla and Jinst guides render distinct bounded comparisons", async ({ page }) => {
+  await page.goto("/guides/ruwalla-borderland-organization/");
+  await expect(page.getByRole("heading", { name: "Ruwalla organization across post-Ottoman borders", level: 1 })).toBeVisible();
+  await expect(page.getByText(/rather than one timeless Arabian “tribal system”/)).toBeVisible();
+  await page.goto("/guides/jinst-postcollective-pastoral-governance/");
+  await expect(page.getByRole("heading", { name: "Jinst post-collective pastoral governance", level: 1 })).toBeVisible();
+  await expect(page.getByText(/rather than forming a single “nomadic government”/)).toBeVisible();
+  await expect(page.getByText(/differed in scale, leadership, evidence, and state relationship/)).toBeVisible();
 });
 
 test("subject guide reflows at text zoom without sticky overlap", async ({ page }) => {

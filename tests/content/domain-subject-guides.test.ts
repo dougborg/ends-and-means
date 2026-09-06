@@ -129,11 +129,14 @@ describe("compiled learner SubjectGuide composition", () => {
     expect(validateAuthoringDocuments(canonicalDocuments)).toEqual([]);
   });
 
+});
+
+describe("SubjectGuide content attention", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 12,
-      total: 12,
+      live: 14,
+      total: 14,
       liveIds: [
         "guide-anarchism",
         "guide-authoritarianism",
@@ -142,14 +145,19 @@ describe("compiled learner SubjectGuide composition", () => {
         "guide-democracy",
         "guide-economic-democracy",
         "guide-fascism",
+        "guide-jinst-postcollective-pastoral-governance",
         "guide-kahnawake-community-lawmaking",
         "guide-republic",
+        "guide-ruwalla-borderland-organization",
         "guide-socialism",
         "guide-tawantinsuyu-imperial-organization",
         "guide-totalitarianism",
       ],
     });
   });
+});
+
+describe("compiled SubjectGuide publication boundaries", () => {
 
   it.each(["research-needed", "in-review", "deprecated"] as const)(
     "keeps %s guides in editorial records but out of public resolution",
@@ -161,7 +169,7 @@ describe("compiled learner SubjectGuide composition", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(12);
+      expect(graph.subjectGuideRecords).toHaveLength(14);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual([
         "guide-anarchism",
         "guide-authoritarianism",
@@ -169,8 +177,10 @@ describe("compiled learner SubjectGuide composition", () => {
         "guide-communism",
         "guide-democracy",
         "guide-fascism",
+        "guide-jinst-postcollective-pastoral-governance",
         "guide-kahnawake-community-lawmaking",
         "guide-republic",
+        "guide-ruwalla-borderland-organization",
         "guide-socialism",
         "guide-tawantinsuyu-imperial-organization",
         "guide-totalitarianism",
