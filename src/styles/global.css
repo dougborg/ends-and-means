@@ -404,13 +404,14 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .subject-guide__links p { margin: .45rem 0 0; color: var(--muted); font-family: var(--reading); font-size: .78rem; line-height: 1.5; }
 .subject-guide__relationships { margin-top: 1rem; padding: .8rem 1rem; border-left: 3px solid var(--cobalt); background: var(--sheet); }
 .subject-guide__relationships p { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; font-size: .8rem; line-height: 1.5; }
-.subject-guide__relationships p + p { margin-top: .5rem; }
+.subject-guide__relationships article + article { margin-top: .7rem; }
 .subject-guide__relationships span { color: var(--muted); font-family: var(--reading); }
 .subject-guide__questions { margin: 1rem 0 0; padding: 0; list-style: none; }
 .subject-guide__questions > li { padding: 1rem; border: 1px solid var(--rule); background: var(--sheet); }
 .subject-guide__questions > li + li { margin-top: .75rem; }
 .subject-guide__questions h3 { margin: .35rem 0 .65rem; font-family: var(--reading); }
-.explore-directory { gap: clamp(2rem, 5vw, 4rem); }
+.explore-directory { gap: clamp(1.75rem, 3vw, 2.5rem); }
+.explore-directory > header .dek { margin-bottom: 0; }
 .explore-directory__heading { display: grid; grid-template-columns: minmax(10rem, .3fr) 1fr; gap: 1rem 2rem; align-items: baseline; padding-bottom: 1rem; border-bottom: 3px solid var(--night); }
 .subject-guide-directory { margin: 0; padding: 0; list-style: none; }
 .subject-guide-directory > li { display: grid; grid-template-columns: minmax(10rem, .3fr) minmax(0, 1fr) auto; gap: .5rem 2rem; align-items: start; padding: clamp(1.25rem, 3vw, 2rem) 0; border-bottom: 1px solid var(--rule); }

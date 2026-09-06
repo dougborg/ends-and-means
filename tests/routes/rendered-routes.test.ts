@@ -1,8 +1,8 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { entitiesOfKind } from "../../src/lib/domain/canonical";
 import { workflowReferencesIn } from "../../src/lib/domain";
+import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -80,6 +80,7 @@ async function verifyEveryPublicRecordRenders() {
     ...entitiesOfKind("concept").map(({ id }) => `/concepts/${id}/`),
     ...entitiesOfKind("challenge").map(({ id }) => `/challenges/${id}/`),
     ...entitiesOfKind("source").map(({ id }) => `/sources/${id}/`),
+    ...canonicalGraph.subjectGuides.map(({ slug }) => `/guides/${slug}/`),
   ];
   for (const route of routes) {
     const html = await readFile(routeFile(route), "utf8");
@@ -148,6 +149,34 @@ async function verifyExploreAndCaseRoutes() {
   expect(canonicalCase).toContain("<details");
 
   await verifyConceptRoutes();
+  await verifySubjectGuideRoutes();
+}
+
+async function verifySubjectGuideRoutes() {
+  const explore = await readFile(routeFile("/explore/"), "utf8");
+  expect(stripMarkup(explore)).toContain(
+    "Start with what you want to understand",
+  );
+  expect(hrefs(explore)).toContain("/guides/economic-democracy/");
+
+  const guide = await readFile(
+    routeFile("/guides/economic-democracy/"),
+    "utf8",
+  );
+  const text = stripMarkup(guide);
+  expect(text).toContain("What does economic democracy mean?");
+  expect(text).toContain("Does it mean one institutional model?");
+  expect(text).toContain(
+    "This case shows what happened in a specific place and period",
+  );
+  expect(text).toContain("Check the evidence");
+  expect(text).toContain("What remains open?");
+  expect(text).not.toContain("Depictions");
+  expect(text).not.toMatch(/research-needed|in-review|deprecated/i);
+  expect(guide).not.toContain("<astro-island");
+  expect(hrefs(guide)).toContain("/concepts/economic-democracy/");
+  expect(hrefs(guide)).toContain("/cases/swedish-wage-earner-funds/");
+  expect(hrefs(guide)).toContain("#meanings-and-boundaries");
 }
 
 async function verifyConceptRoutes() {
@@ -235,16 +264,19 @@ async function verifyReferenceRoutes() {
   expect(method).toMatch(
     /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="2"/,
   );
-  expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(1);
+  expect(method.match(/class="comparison-grid criteria-grid"/g)).toHaveLength(
+    1,
+  );
 
   const research = await readFile(routeFile("/research/"), "utf8");
   const researchText = stripMarkup(research);
   const researchIds = [
     ...research.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/gi),
   ].map((match) => match[1] ?? match[2]);
-  expect(new Set(researchIds).size, "research page has duplicate element IDs").toBe(
-    researchIds.length,
-  );
+  expect(
+    new Set(researchIds).size,
+    "research page has duplicate element IDs",
+  ).toBe(researchIds.length);
   expect(researchText).toContain("What the evidence does not yet settle.");
   expect(researchText).toContain("Counterarguments");
   expect(researchText).toContain("Counterfactual questions");
