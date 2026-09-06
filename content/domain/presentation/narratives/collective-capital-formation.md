@@ -25,12 +25,6 @@ Those distinctions help analyze connections to social ownership and economic dem
 
 ## what-does-the-swedish-case-show
 
-Meidner described a contribution drawn from company profits.
-The report suggested a 20 percent rate.
-The contributions would go to a central fund.
-Firms would pay through wage-earner shares rather than cash.
-Unions would elect the central fund's board.
-Voting power attached to the fund's shares would be exercised at two levels: workplace union branches and industry-wide funds.
 The enacted arrangement used five government-appointed boards and capped their voting authority in listed companies.
 A center-right administration ended the boards across the 1991–1992 year boundary.
 This bounded case does not define or completely realize the broader concept.
