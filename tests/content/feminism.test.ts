@@ -189,7 +189,10 @@ describe("foundational feminism boundaries", () => {
       endDate: { year: 2018, certainty: "exact" },
       conditionStatementIds: [],
       formalRuleStatementIds: ["iceland-leave-enacted-design"],
-      ruleInUseStatementIds: ["iceland-fathers-uptake"],
+      ruleInUseStatementIds: [
+        "iceland-fathers-uptake",
+        "iceland-payment-cuts-uptake",
+      ],
       outcomeStatementIds: [
         "iceland-care-work-outcomes",
         "iceland-labor-force-participation-gap",
@@ -202,9 +205,12 @@ describe("foundational feminism boundaries", () => {
       endDate: { year: 1977, certainty: "exact" },
       conditionStatementIds: [],
       formalRuleStatementIds: [],
-      ruleInUseStatementIds: [],
-      interactionStatementIds: [],
-      outcomeStatementIds: [],
+      ruleInUseStatementIds: [
+        "sewa-cooperative-bank",
+        "sewa-quilt-cooperative",
+      ],
+      interactionStatementIds: ["sewa-worker-definition-contest"],
+      outcomeStatementIds: ["sewa-union-registration"],
     });
     expect(entityById("combahee-organizing-episode")).toMatchObject({
       kind: "case-episode",

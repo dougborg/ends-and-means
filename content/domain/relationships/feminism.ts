@@ -242,7 +242,7 @@ const citationRows = [
   [
     "iceland-payment-cuts-uptake",
     "gislason-iceland-leave-source",
-    "chapter 18, pp. 370–387, Programmatic success, Figure 18.1, and An Enduring System § Coping with a financial crisis",
+    "chapter 18, pp. 378–379, ‘An Enduring System’, subsection ‘Coping with a financial crisis’, especially the paragraph reporting the largest decrease among high-income fathers",
     "supports",
   ],
 ] as const;
@@ -277,4 +277,47 @@ export const feminismRelationshipDocuments = [
       },
     ],
   })),
+  {
+    documentType: "relationships",
+    subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+    relationships: [
+      {
+        id: "sewa-episode-used-self-employed-worker-unionism",
+        predicate: "used-means",
+        subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+        object: { kind: "means", id: "self-employed-worker-unionism" },
+        implementation: "mixed",
+        status: "qualified",
+        statementIds: ["sewa-union-registration", "sewa-worker-definition-contest"],
+      },
+      {
+        id: "sewa-episode-used-member-owned-cooperative-finance",
+        predicate: "used-means",
+        subject: { kind: "case-episode", id: "sewa-ahmedabad-institutions-episode" },
+        object: { kind: "means", id: "member-owned-cooperative-finance" },
+        implementation: "mixed",
+        status: "qualified",
+        statementIds: ["sewa-cooperative-bank"],
+      },
+    ],
+  },
+  {
+    documentType: "relationships",
+    subject: { kind: "case-episode", id: "iceland-parental-leave-outcomes-episode" },
+    relationships: [
+      {
+        id: "iceland-episode-used-nontransferable-parental-leave",
+        predicate: "used-means",
+        subject: { kind: "case-episode", id: "iceland-parental-leave-outcomes-episode" },
+        object: { kind: "means", id: "nontransferable-parental-leave" },
+        implementation: "mixed",
+        status: "qualified",
+        statementIds: [
+          "iceland-leave-enacted-design",
+          "iceland-fathers-uptake",
+          "iceland-payment-cuts-uptake",
+        ],
+      },
+    ],
+  },
 ] satisfies AuthoringDocument[];

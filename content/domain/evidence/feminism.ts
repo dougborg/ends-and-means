@@ -254,6 +254,8 @@ export const feminismEvidenceDocuments = [
     "https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40ed_emp/%40emp_ent/%40coop/documents/publication/wcms_633752.pdf",
     "report",
     "report",
+    undefined,
+    "9789220309766",
   ),
   ...source(
     "iceland-parental-leave-law",
@@ -556,7 +558,7 @@ export const feminismEvidenceDocuments = [
   claim(
     "iceland-payment-cuts-uptake",
     "Payment cuts changed fathers' leave use",
-    "Payment cuts during Iceland's financial crisis were associated with reduced leave use by fathers, especially fathers with lower incomes.",
+    "Payment cuts during Iceland's financial crisis were associated with reduced leave use by fathers, with the largest drop among fathers with high incomes.",
   ),
 
   {
@@ -671,9 +673,12 @@ export const feminismEvidenceDocuments = [
         "Documented Ahmedabad institutions, without generalizing later national membership or outcomes backward.",
       conditionStatementIds: [],
       formalRuleStatementIds: [],
-      ruleInUseStatementIds: [],
-      interactionStatementIds: [],
-      outcomeStatementIds: [],
+      ruleInUseStatementIds: [
+        "sewa-cooperative-bank",
+        "sewa-quilt-cooperative",
+      ],
+      interactionStatementIds: ["sewa-worker-definition-contest"],
+      outcomeStatementIds: ["sewa-union-registration"],
       ...reviewed,
     },
   },
@@ -713,7 +718,10 @@ export const feminismEvidenceDocuments = [
         "Formal rules, uptake, and observations collected through 2018, with causal limits kept explicit.",
       conditionStatementIds: [],
       formalRuleStatementIds: ["iceland-leave-enacted-design"],
-      ruleInUseStatementIds: ["iceland-fathers-uptake"],
+      ruleInUseStatementIds: [
+        "iceland-fathers-uptake",
+        "iceland-payment-cuts-uptake",
+      ],
       interactionStatementIds: [],
       outcomeStatementIds: [
         "iceland-care-work-outcomes",
