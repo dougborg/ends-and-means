@@ -392,15 +392,27 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .subject-guide__answer { max-width: 70ch; font-family: var(--reading); font-size: clamp(1.08rem, 1.7vw, 1.25rem); line-height: 1.55; }
 .subject-guide__answer > div > p:last-child { margin-bottom: 0; }
 .subject-guide__layout { display: grid; grid-template-columns: var(--guide-rail) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
-.subject-guide__rail { position: sticky; top: 1rem; padding-top: 1rem; border-top: 3px solid var(--cobalt); }
-.subject-guide__rail ol { margin: .8rem 0 1.2rem; padding: 0; list-style: none; counter-reset: guide-section; }
-.subject-guide__rail li { counter-increment: guide-section; border-bottom: 1px solid var(--rule); }
-.subject-guide__rail a { display: grid; grid-template-columns: 1.6rem 1fr; gap: .5rem; padding: .68rem 0; color: var(--night); font-size: .76rem; font-weight: 550; line-height: 1.35; text-decoration: none; }
-.subject-guide__rail li a::before { color: var(--cobalt); content: counter(guide-section, decimal-leading-zero); font: .6rem/1.8 var(--apparatus); }
-.subject-guide__rail a:hover { color: var(--cobalt-dark); }
-.subject-guide__rail .subject-guide__reference-link { display: block; color: var(--cobalt-dark); font-size: .7rem; text-decoration: underline; }
+.page-outline-layout--active { display: grid; grid-template-columns: var(--guide-rail, minmax(13rem, 18rem)) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.page-outline-layout__content { display: grid; min-width: 0; gap: var(--space-section); }
+.page-outline-layout--active .narrative-dossier { grid-template-columns: minmax(0, 1fr); }
+.page-outline-layout--active .narrative-dossier__heading { position: static; }
+.page-outline-layout--active .narrative-dossier__heading h2 { max-width: none; }
+.page-outline { position: sticky; top: 1rem; min-width: 0; padding-top: 1rem; border-top: 3px solid var(--cobalt); }
+.page-outline__desktop { min-width: 0; }
+.page-outline ol { margin: .8rem 0 1.2rem; padding: 0; list-style: none; counter-reset: page-section; }
+.page-outline li { counter-increment: page-section; border-bottom: 1px solid var(--rule); }
+.page-outline li a { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .5rem; padding: .68rem 0; color: var(--night); font-size: .76rem; font-weight: 550; line-height: 1.35; text-decoration: none; }
+.page-outline li a::before { color: var(--cobalt); content: counter(page-section, decimal-leading-zero); font: .6rem/1.8 var(--apparatus); }
+.page-outline li a:hover { color: var(--cobalt-dark); }
+.page-outline__reference-link { display: block; color: var(--cobalt-dark); font-size: .7rem; text-decoration: underline; }
+.page-outline__mobile { display: none; }
+.page-outline__mobile > summary { display: flex; gap: 1rem; justify-content: space-between; padding: .8rem 0; color: var(--cobalt-dark); cursor: pointer; font: 650 .76rem/1.4 var(--apparatus); }
+.page-outline__mobile > summary > span { color: var(--muted); font-weight: 400; }
+.page-outline__mobile[open] > summary { border-bottom: 1px solid var(--rule); }
+.page-outline__mobile > nav { padding-bottom: .8rem; }
 .subject-guide__journey { min-width: 0; max-width: 58rem; }
-.subject-guide__section { scroll-margin-top: 1rem; padding-block: clamp(1.5rem, 4vw, 3rem); border-bottom: 1px solid var(--rule); }
+.subject-guide__section, .narrative-section, .open-research, .reference-apparatus, .question-overview { scroll-margin-top: 1rem; }
+.subject-guide__section { padding-block: clamp(1.5rem, 4vw, 3rem); border-bottom: 1px solid var(--rule); }
 .subject-guide__section:first-child { padding-top: 1rem; }
 .subject-guide__section > header { display: grid; grid-template-columns: minmax(8rem, .28fr) minmax(0, 1fr); gap: 1rem 2rem; align-items: baseline; margin-bottom: clamp(1rem, 2vw, 1.5rem); }
 .subject-guide__section > header h2 { max-width: 24ch; }
@@ -483,13 +495,13 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
   .claim-thread > section { padding-left: 3.2rem; }
   .claim-thread > section > header { margin-left: -3.2rem; }
   .canonical-claim footer { grid-template-columns: 1fr; }
-  .subject-guide__hero, .subject-guide__layout, .subject-guide__section > header, .explore-directory__heading, .subject-guide-directory > li { grid-template-columns: 1fr; }
+  .subject-guide__hero, .subject-guide__layout, .page-outline-layout--active, .subject-guide__section > header, .explore-directory__heading, .subject-guide-directory > li { grid-template-columns: 1fr; }
   .subject-guide__hero h1 { overflow-wrap: anywhere; }
   .subject-guide__hero h2 { max-width: none; padding-top: 0; }
-  .subject-guide__rail { position: static; overflow: visible; }
-  .subject-guide__rail ol { display: flex; flex-wrap: wrap; gap: .35rem .8rem; }
-  .subject-guide__rail li { border: 0; }
-  .subject-guide__rail a { grid-template-columns: auto 1fr; padding: .25rem 0; text-decoration: underline; }
+  .page-outline__desktop { display: none; }
+  .page-outline { position: static; padding-top: 0; }
+  .page-outline__mobile { display: block; }
+  .page-outline__mobile li a { grid-template-columns: 1.6rem minmax(0, 1fr); }
   .subject-guide__section:first-child { padding-top: 0; }
   .subject-guide__links li + li { padding-left: 0; border-left: 0; }
   .subject-guide-directory .detail-link { grid-column: auto; }
@@ -498,6 +510,8 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media (forced-colors: active) { .evidence-badge__mark { forced-color-adjust: none; } .primary-nav a[aria-current="page"], .site-map a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: .16rem; } }
 @media print {
+  .page-outline { display: none; }
+  .page-outline-layout--active { display: block; }
   .reference-disclosure:not([open]) > .reference-disclosure__body,
   .apparatus-group:not([open]) > .apparatus-group__body,
   .apparatus-group:not([open]) > .reference-disclosure__body { display: block; }

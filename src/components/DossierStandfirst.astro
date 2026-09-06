@@ -11,7 +11,7 @@ const { content, statementIds = [] } = Astro.props;
   {statementIds.length > 0 && (
     <details class="standfirst-evidence reference-disclosure">
       <summary>Sources for this overview <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
-      <div class="reference-disclosure__body">{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</div>
+      <div class="reference-disclosure__body">{statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}</div>
     </details>
   )}
 </div>

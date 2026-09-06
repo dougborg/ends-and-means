@@ -1,0 +1,54 @@
+---
+import type { OnPageNavigationItem } from "../lib/on-page-navigation";
+import { hasUsefulOnPageNavigation } from "../lib/on-page-navigation";
+
+interface Props {
+  pageLabel: string;
+  items: OnPageNavigationItem[];
+  referenceLink?: { href: string; label: string };
+}
+
+const { pageLabel, items, referenceLink } = Astro.props;
+const visible = hasUsefulOnPageNavigation(items);
+const navigationLabel = `On this page: ${pageLabel}`;
+---
+
+{visible && (
+  <aside class="page-outline" data-item-count={items.length}>
+    <nav class="page-outline__desktop" aria-label={navigationLabel}>
+      <p class="coordinate">ON THIS PAGE</p>
+      <ol>
+        {items.map((item) => <li><a href={`#${item.id}`}>{item.label}</a></li>)}
+      </ol>
+      {referenceLink && <a class="page-outline__reference-link" href={referenceLink.href}>{referenceLink.label}</a>}
+    </nav>
+
+    <details class="page-outline__mobile">
+      <summary>On this page <span>{items.length} sections</span></summary>
+      <nav aria-label={navigationLabel}>
+        <ol>
+          {items.map((item) => <li><a href={`#${item.id}`}>{item.label}</a></li>)}
+        </ol>
+        {referenceLink && <a class="page-outline__reference-link" href={referenceLink.href}>{referenceLink.label}</a>}
+      </nav>
+    </details>
+  </aside>
+)}
+
+<script>
+  const focusFragmentTarget = (hash: string) => {
+    if (!hash.startsWith("#")) return;
+    const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (!target) return;
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+  };
+
+  for (const link of document.querySelectorAll<HTMLAnchorElement>(
+    '.page-outline a[href^="#"]',
+  )) {
+    link.addEventListener("click", () => {
+      requestAnimationFrame(() => focusFragmentTarget(link.hash));
+    });
+  }
+</script>

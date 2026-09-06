@@ -20,7 +20,10 @@ standfirst.
 The subject itself is the H1, and the standfirst follows it immediately without
 an intervening heading.
 The remaining authored section headings form both the visible narrative and a
-compact on-page outline.
+compact on-page outline generated from the same ordered section contract.
+Long Approach, Case, and Challenge pages use that component when their rendered
+contract supplies at least three useful destinations.
+Short pages omit it rather than adding navigation overhead.
 Unsupported optional sections are omitted instead of leaving headings,
 placeholders, status messages, or empty space.
 
@@ -47,8 +50,16 @@ evidence” are not sufficient.
 ## Responsive behavior
 
 The wide shell pairs a readable narrative measure with a sticky question rail.
-At narrow widths the rail becomes a wrapping, in-flow outline before the
-narrative, preventing sticky overlap under mobile layouts and text zoom.
+At narrow widths the rail becomes a compact native `details` disclosure before
+the narrative, preventing sticky overlap under mobile layouts and text zoom
+while remaining usable without JavaScript.
+Fragment targets follow source order and use scroll offsets without smooth
+motion being required.
+Native fragment navigation remains the no-JavaScript fallback, while a small
+enhancement moves keyboard focus to the selected section when scripting is
+available.
+Repeated evidence disclosures do not repeat a Statement's fragment identifier;
+the detailed reference presentation owns at most one anchor per Statement.
 The page does not use fixed viewport heights or empty side columns.
 
 Browser review covers desktop, tablet, mobile, text zoom, keyboard operation,
