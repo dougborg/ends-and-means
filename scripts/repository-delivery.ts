@@ -12,13 +12,19 @@ const ownedCommands = [
   "pnpm audit:delivery",
   "pnpm lint",
   "pnpm static",
-  "pnpm audit ",
+  "pnpm audit",
   "pnpm check",
   "pnpm test:coverage",
   "pnpm build",
   "pnpm test:routes",
   "pnpm test:visual",
 ];
+
+function invokesOwnedCommand(run: string) {
+  return ownedCommands.some(
+    (command) => run === command || run.startsWith(`${command} `),
+  );
+}
 
 function record(value: unknown): Node {
   return value && typeof value === "object" && !Array.isArray(value) ? (value as Node) : {};
@@ -140,7 +146,10 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
 
   const verifyRuns = allSteps.filter(({ step }) => step.run === "pnpm verify");
   requireRule(verifyRuns.length === 1 && verifyRuns[0]?.file === ".github/actions/verify/action.yml", "VERIFY_OWNER", "The shared verify action must own exactly one pnpm verify invocation.");
-  const duplicateCommands = allSteps.filter(({ step }) => typeof step.run === "string" && ownedCommands.some((command) => (step.run as string).startsWith(command)));
+  const duplicateCommands = allSteps.filter(
+    ({ step }) =>
+      typeof step.run === "string" && invokesOwnedCommand(step.run),
+  );
   requireRule(duplicateCommands.length === 0, "VERIFY_DUPLICATE", "Workflow steps must not duplicate commands owned by pnpm verify.");
 
   findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps, allJobs));

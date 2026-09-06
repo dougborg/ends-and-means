@@ -77,7 +77,9 @@ describe("repository delivery configuration", () => {
     await replace(root, ".github/actions/verify/action.yml", "actions/upload-pages-artifact@", "actions/upload-artifact@");
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_ARTIFACT");
   });
+});
 
+describe("verify command ownership", () => {
   it("rejects a workflow that duplicates the delivery audit owned by pnpm verify", async () => {
     const root = await repositoryFixture();
     await replace(
@@ -87,6 +89,32 @@ describe("repository delivery configuration", () => {
       "      - run: pnpm audit:delivery -- --repository-only\n      - name: Verify and build\n        uses: $/.github/actions/verify",
     );
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
+      "VERIFY_DUPLICATE",
+    );
+  });
+
+  it("rejects an exact duplicate audit command", async () => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      "      - run: pnpm audit\n      - name: Verify and build\n        uses: $/.github/actions/verify",
+    );
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
+      "VERIFY_DUPLICATE",
+    );
+  });
+
+  it("does not confuse a near-name command with an owned command", async () => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      "      - run: pnpm auditor\n      - name: Verify and build\n        uses: $/.github/actions/verify",
+    );
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).not.toContain(
       "VERIFY_DUPLICATE",
     );
   });
