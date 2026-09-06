@@ -24,7 +24,44 @@ describe("review evidence", () => {
       ),
     ).toEqual({ copilot: true, adversarial: true });
   });
+});
 
+describe("trusted Copilot review identity", () => {
+  it.each([
+    "copilot",
+    "copilot-reviewer",
+    "trusted-copilot-pull-request-reviewer",
+    "copilot-pull-request-reviewer-spoof",
+    "Copilot-Pull-Request-Reviewer",
+  ])("rejects untrusted Copilot-like login %s", (login) => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        "/root/implementation_133",
+        [{ author: { login }, commit: { oid: head } }],
+        [],
+      ).copilot,
+    ).toBe(false);
+  });
+
+  it("accepts GitHub's bot-suffixed normalization of the trusted reviewer", () => {
+    expect(
+      reviewEvidenceForHead(
+        head,
+        "/root/implementation_133",
+        [
+          {
+            author: { login: "copilot-pull-request-reviewer[bot]" },
+            commit: { oid: head },
+          },
+        ],
+        [],
+      ).copilot,
+    ).toBe(true);
+  });
+});
+
+describe("rejected review evidence", () => {
   it("rejects stale reviews, a template checkbox, and self-attributed evidence", () => {
     expect(
       reviewEvidenceForHead(

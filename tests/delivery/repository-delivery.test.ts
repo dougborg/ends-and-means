@@ -78,6 +78,19 @@ describe("repository delivery configuration", () => {
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_ARTIFACT");
   });
 
+  it("rejects a workflow that duplicates the delivery audit owned by pnpm verify", async () => {
+    const root = await repositoryFixture();
+    await replace(
+      root,
+      ".github/workflows/ci.yml",
+      "      - name: Verify and build\n        uses: $/.github/actions/verify",
+      "      - run: pnpm audit:delivery -- --repository-only\n      - name: Verify and build\n        uses: $/.github/actions/verify",
+    );
+    expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain(
+      "VERIFY_DUPLICATE",
+    );
+  });
+
   it("rejects additional Pages deploy write scopes", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/workflows/pages.yml", "      pages: write", "      pages: write\n      contents: write");

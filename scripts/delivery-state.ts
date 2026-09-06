@@ -30,6 +30,11 @@ export type ProjectStatus = (typeof projectStatuses)[number];
 export type Workstream = (typeof workstreams)[number];
 export type Priority = (typeof priorities)[number];
 
+const trustedCopilotReviewers = new Set([
+  "copilot-pull-request-reviewer",
+  "copilot-pull-request-reviewer[bot]",
+]);
+
 /** Build GitHub's compare route without allowing ref separators/reserved characters to alter the path. */
 export function githubComparePath(base: string, head: string) {
   return `repos/dougborg/ends-and-means/compare/${encodeURIComponent(base)}...${encodeURIComponent(head)}`;
@@ -124,7 +129,8 @@ export function reviewEvidenceForHead(
   return {
     copilot: reviews.some(
       (review) =>
-        /copilot/i.test(review.author.login) && review.commit.oid === headOid,
+        trustedCopilotReviewers.has(review.author.login) &&
+        review.commit.oid === headOid,
     ),
     adversarial: comments.some((comment) => {
       const match = comment.body.match(marker);
