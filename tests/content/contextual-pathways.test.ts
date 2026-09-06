@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   contextualPathwayForRelationship,
   contextualPathwayKind,
+  contextualPathwayKinds,
   relationshipEndpointKeys,
   relationshipSentence,
 } from "../../src/lib/contextual-pathways";
@@ -20,6 +21,38 @@ const economicDemocracy = {
   kind: "concept",
   id: "economic-democracy",
 } satisfies EntityRef;
+
+const expectedPathwayKinds = {
+  "broader-than": "Related subject",
+  "narrower-than": "Related subject",
+  "related-to": "Related subject",
+  "commonly-confused-with": "Related subject",
+  "member-of": "Related subject",
+  depicts: "Depiction",
+  "addresses-domain": "Related subject",
+  "interprets-concept": "Institutional pathway",
+  "advances-end": "Purpose",
+  "rejects-end": "Purpose",
+  "internally-contests-end": "Purpose",
+  "advocates-means": "Institutional pathway",
+  "permits-means": "Institutional pathway",
+  "rejects-means": "Institutional pathway",
+  "internally-contests-means": "Institutional pathway",
+  "specified-by": "Institutional pathway",
+  "applies-to-case": "Bounded case",
+  "contested-in-case": "Bounded case",
+  "self-identified-with": "Bounded case",
+  "influenced-by": "Bounded case",
+  "partially-instantiated": "Bounded case",
+  "hybridized-with": "Bounded case",
+  "departed-from": "Bounded case",
+  "used-means": "Bounded case",
+  "responds-to": "Question to test",
+  "evaluates-response-to": "Question to test",
+  "assessed-by": "Question to test",
+  "placed-on": "Comparison",
+  cites: "Evidence",
+};
 
 describe("controlled contextual-pathway vocabulary", () => {
   it.each([
@@ -59,16 +92,42 @@ describe("controlled contextual-pathway vocabulary", () => {
       });
       expect(pathway.relationship.predicate).toBe(source.predicate);
       expect(pathway.relationship).toBe(source);
-      expect(relationshipSentence(pathway)).toContain(
-        pathway.relationshipLabel.toLocaleLowerCase("en"),
-      );
+      if (source.predicate === "related-to") {
+        expect(pathway.relevanceLabel).toBeTruthy();
+        expect(relationshipSentence(pathway)).not.toContain(" is related to ");
+      } else {
+        expect(relationshipSentence(pathway)).toContain(
+          pathway.relationshipLabel.toLocaleLowerCase("en"),
+        );
+      }
     },
   );
 
-  it("defines a reader-facing kind for every canonical relationship predicate", () => {
+  it("keeps every predicate in the reviewed eight-kind vocabulary", () => {
+    expect(contextualPathwayKinds).toEqual(expectedPathwayKinds);
+
     for (const candidate of canonicalGraph.relationships) {
-      expect(contextualPathwayKind(candidate)).toBeTruthy();
+      expect(contextualPathwayKind(candidate)).toBe(
+        contextualPathwayKinds[candidate.predicate],
+      );
     }
+  });
+
+  it("uses reviewed support to explain a related-subject pathway", () => {
+    const source = relationship("socialism-related-to-communism");
+    const pathway = contextualPathwayForRelationship(
+      source,
+      { kind: "concept", id: "socialism" },
+      canonicalGraph,
+    );
+    if (!pathway) throw new Error("Missing related-subject pathway fixture");
+
+    expect(pathway.relevanceLabel).toBe(
+      "The represented modern communist traditions emerged within socialist debates",
+    );
+    expect(relationshipSentence(pathway)).toBe(
+      "Explore Communism through the reviewed claim: The represented modern communist traditions emerged within socialist debates.",
+    );
   });
 });
 

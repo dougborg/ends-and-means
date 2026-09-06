@@ -21,10 +21,11 @@ export interface ContextualPathway {
   subjectLabel: string;
   objectLabel: string;
   relationshipLabel: string;
+  relevanceLabel?: string;
   statementIds: string[];
 }
 
-const pathwayKinds = {
+export const contextualPathwayKinds = {
   "broader-than": "Related subject",
   "narrower-than": "Related subject",
   "related-to": "Related subject",
@@ -59,7 +60,7 @@ const pathwayKinds = {
 export function contextualPathwayKind(
   relationship: DomainRelationship,
 ): ContextualPathwayKind {
-  return pathwayKinds[relationship.predicate];
+  return contextualPathwayKinds[relationship.predicate];
 }
 
 function sameRef(left: EntityRef, right: EntityRef) {
@@ -119,6 +120,10 @@ export function contextualPathwayForRelationship(
   const destinationEntity = sameRef(destination, relationship.subject)
     ? subject
     : object;
+  const relevanceStatement =
+    statementIds.length > 0
+      ? graph.indexes.entitiesById[statementIds[0] as string]
+      : undefined;
 
   return {
     relationship,
@@ -128,6 +133,10 @@ export function contextualPathwayForRelationship(
     subjectLabel: subject.label,
     objectLabel: object.label,
     relationshipLabel: publicRelationshipLabel(relationship, "subject"),
+    ...(relationship.predicate === "related-to" &&
+    relevanceStatement?.kind === "statement"
+      ? { relevanceLabel: relevanceStatement.label }
+      : {}),
     statementIds,
   };
 }
@@ -148,12 +157,23 @@ export function relationshipEndpointKeys(
 }
 
 export function relationshipSentence({
+  relationship,
+  destinationLabel,
   subjectLabel,
   objectLabel,
   relationshipLabel,
+  relevanceLabel,
 }: Pick<
   ContextualPathway,
-  "subjectLabel" | "objectLabel" | "relationshipLabel"
+  | "relationship"
+  | "destinationLabel"
+  | "subjectLabel"
+  | "objectLabel"
+  | "relationshipLabel"
+  | "relevanceLabel"
 >) {
+  if (relationship.predicate === "related-to" && relevanceLabel) {
+    return `Explore ${destinationLabel} through the reviewed claim: ${relevanceLabel}.`;
+  }
   return `${subjectLabel} ${relationshipLabel.toLocaleLowerCase("en")} ${objectLabel}.`;
 }

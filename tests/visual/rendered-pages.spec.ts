@@ -754,6 +754,12 @@ test("Subject guides present typed contextual paths without duplicate generic li
       { exact: true },
     ).first(),
   ).toBeVisible();
+  await expect(
+    page.getByText(
+      "Explore Communism through the reviewed claim: The represented modern communist traditions emerged within socialist debates.",
+      { exact: true },
+    ),
+  ).toBeVisible();
 });
 
 test("Contextual paths remain native and reflow without scripting", async ({ browser }, testInfo) => {

@@ -289,6 +289,9 @@ async function verifySubjectGuideRoutes() {
     "do not show how socialist institutions would work elsewhere",
   );
   expect(stripMarkup(socialism)).toContain("Related subject");
+  expect(stripMarkup(socialism)).toContain(
+    "Explore Communism through the reviewed claim: The represented modern communist traditions emerged within socialist debates.",
+  );
   expect(hrefs(socialism)).toContain(
     "/cases/swedish-wage-earner-funds/#enacted-wage-earner-funds-1984-1991",
   );

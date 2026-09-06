@@ -38,7 +38,7 @@ const { pathways, headingId, sectionLabel, placementValueLabel } = Astro.props;
             {pathway.statementIds.length > 0 && (
               <details class="reference-disclosure subject-guide__evidence">
                 <summary>
-                  Sources for “{relationshipSentence(pathway)}”
+                  Sources for the pathway to {pathway.destinationLabel}
                   <span>{pathway.statementIds.length} {pathway.statementIds.length === 1 ? "claim" : "claims"}</span>
                 </summary>
                 <div class="reference-disclosure__body">
