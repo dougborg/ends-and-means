@@ -1,0 +1,9 @@
+[
+  {
+    "number": 290,
+    "title": "Remove the external font runtime dependency",
+    "state": "OPEN",
+    "labels": ["testing", "track:platform-process"],
+    "body": "## Outcome\\n\\nRemove third-party font delivery.\\n\\n## Acceptance criteria\\n\\n- [ ] No remote fonts.\\n- [ ] Full [WARN] Unsupported engine\\n[WARN] Unsupported engine\nRUN v5.0.0\nTest Files 59 passed\nTests 635 passed\nCoverage summary\n^[[96mscripts/audit-delivery.ts^[[0m"
+  }
+]

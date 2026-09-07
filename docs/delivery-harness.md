@@ -29,6 +29,9 @@ The shared CI composite action invokes this command once; Pages consumes the res
 
 Repository-only verification deliberately prints `Project state: UNAVAILABLE` because pull-request jobs do not receive credentials for the private user Project.
 This is an explicit unavailable message, not evidence that Project state is clean; repository-only mode exits 0 when its repository and skill audits pass so credential-free CI can succeed.
+It likewise prints `Backlog integrity: UNAVAILABLE`: a repository checkout does
+not contain authoritative issue bodies, so offline verification neither calls
+GitHub nor claims the open backlog is clean.
 
 ## Project-state audit
 
@@ -39,6 +42,15 @@ pnpm audit:delivery -- --live-project --private-state /secure/path/delivery-stat
 ```
 
 The command is read-only and never changes Project visibility.
+Authenticated mode also retrieves every open repository issue, including
+issues outside the delivery Project. It reports literal escaped control
+sequences, terminal formatting, likely pasted command/test transcripts,
+implausibly large acceptance sections, and conservative likely-duplicate
+active scope. Findings include issue numbers and remediation, but the audit
+never edits or closes an issue. Long research context and fenced code examples
+are ignored by the paste heuristics; duplicate detection excludes closed
+issues and explicit umbrella, parent, child, subtask, and follow-up
+relationships.
 The explicitly supplied JSON file is the private source of truth for active
 assignments. It has `version: 1`, the repository name, `generatedAt`,
 `expiresAt`, and one assignment per issue containing `owner`, `branch`, and
@@ -135,6 +147,25 @@ For diagnosis or fixture development, pass a stored normalized snapshot:
 ```sh
 pnpm audit:delivery -- --project-snapshot tests/fixtures/delivery/project-valid.json
 ```
+
+## Safe issue-body creation
+
+Create issue bodies as Markdown files and pass the file directly instead of
+embedding escaped newlines or command substitutions in a shell argument:
+
+```sh
+gh issue create --title "Focused outcome" --body-file /path/to/issue-body.md
+```
+
+Keep terminal output out of the body unless a short excerpt is essential; put
+intentional examples in a fenced code block and summarize verification results
+in prose. Before coordinating the issue, inspect the rendered body with
+`gh issue view <number> --web` or the GitHub interface. Check that headings and
+checkboxes render, inline-code operands remain present, no literal `\n` text or
+terminal color sequences appear, and the scope is not already owned by another
+open issue. API callers should send a JSON body value containing real newline
+characters rather than pre-escaping Markdown and then escaping it a second
+time.
 
 ## Owned signals
 
