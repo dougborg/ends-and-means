@@ -8,10 +8,22 @@ const citations = [
     "supports",
   ],
   [
+    "welfare-state-institutional-category",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Social protection, Social security, and Social transfer definitions",
+    "qualifies",
+  ],
+  [
     "welfare-regime-analytical-category",
     "esping-andersen-three-worlds-source",
     "part I, chapters 1–5",
     "supports",
+  ],
+  [
+    "welfare-regime-analytical-category",
+    "daly-lewis-social-care-source",
+    "pp. 281–298, abstract and conceptual framework across state, market, family, and voluntary sectors",
+    "qualifies",
   ],
   [
     "social-protection-category-boundary",
@@ -137,6 +149,18 @@ const citations = [
     "welfare-attributed-purposes",
     "kwon-developmental-welfare-source",
     "pp. 477–497, selective and inclusive welfare developmentalism",
+    "qualifies",
+  ],
+  [
+    "welfare-attributed-purposes",
+    "ku-korea-welfare-reform-source",
+    "Social context of the financial crisis, paragraphs 3–8",
+    "qualifies",
+  ],
+  [
+    "welfare-attributed-purposes",
+    "shim-legislature-welfare-source",
+    "pp. 1245–1248, authoritarian-period legitimation and targeted provision",
     "qualifies",
   ],
   [
@@ -274,7 +298,7 @@ const citations = [
   [
     "korea-selective-political-provision",
     "shim-legislature-welfare-source",
-    "pp. 1246–1250, regime-period findings on cabinet bills and occupational groups",
+    "pp. 1245–1248, regime-period findings on cabinet bills and occupational groups",
     "supports",
   ],
   [
