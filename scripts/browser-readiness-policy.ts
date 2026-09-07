@@ -78,9 +78,17 @@ function resolveImport(from: string, specifier: string) {
 }
 
 export function visualReadinessSources(visualDirectory: string) {
-  const pending = readdirSync(visualDirectory, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".spec.ts"))
-    .map((entry) => join(visualDirectory, entry.name));
+  const entrypoints: string[] = [];
+  function collectEntrypoints(directory: string) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = join(directory, entry.name);
+      if (entry.isDirectory()) collectEntrypoints(path);
+      else if (entry.isFile() && entry.name.endsWith(".spec.ts"))
+        entrypoints.push(path);
+    }
+  }
+  collectEntrypoints(visualDirectory);
+  const pending = [...entrypoints];
   const visited = new Set<string>();
   while (pending.length > 0) {
     const file = pending.pop();
