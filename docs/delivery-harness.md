@@ -241,3 +241,11 @@ CI=1 pnpm exec playwright test tests/visual/rendered-pages.spec.ts \
   --grep "mobile links preserve|subject guide works without JavaScript" \
   --repeat-each 50 --retries 0
 ```
+
+## External availability
+
+`pnpm audit:external-links` is a separate scheduled or manual, report-only
+operation documented in `docs/external-link-monitoring.md`.
+It must not be folded into `pnpm verify`: third-party availability cannot block
+ordinary pull requests or deployments, and a successful request is not source
+validation.

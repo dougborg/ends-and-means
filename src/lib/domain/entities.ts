@@ -80,6 +80,8 @@ export interface ResourceLink {
   label: string;
   vendor?: string;
   affiliate?: boolean;
+  /** Date a person last opened and evaluated this exact manifestation URL. */
+  checkedAt?: string;
 }
 
 export interface Source extends EntityBase {

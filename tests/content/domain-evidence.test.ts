@@ -129,6 +129,33 @@ describe("domain evidence model", () => {
     expect(validateAuthoringDocuments(paperDocuments)).toEqual([]);
   });
 
+});
+
+describe("resource-link access metadata", () => {
+  it("validates a recorded access date without inventing one", () => {
+    const valid = structuredClone(evidenceDocuments);
+    const validSource = valid[1];
+    if (validSource?.documentType === "entity" && validSource.entity.kind === "source")
+      validSource.entity.resourceLinks = [{
+        purpose: "publisher",
+        url: "https://example.com/book",
+        label: "Publisher",
+        checkedAt: "2026-09-07",
+      }];
+    expect(validateAuthoringDocuments(valid)).toEqual([]);
+
+    const invalid = structuredClone(valid);
+    const invalidSource = invalid[1];
+    if (invalidSource?.documentType === "entity" && invalidSource.entity.kind === "source" && invalidSource.entity.resourceLinks?.[0])
+      invalidSource.entity.resourceLinks[0].checkedAt = "last week";
+    expect(validateAuthoringDocuments(invalid)).toContain(
+      "governing-the-commons-1990-cup: resource link 0 checkedAt requires an ISO calendar date",
+    );
+  });
+
+});
+
+describe("source relationship and URL safety", () => {
   it("rejects unresolved Work references and unsafe resource URLs", () => {
     const invalid = structuredClone(evidenceDocuments);
     const source = invalid[1];

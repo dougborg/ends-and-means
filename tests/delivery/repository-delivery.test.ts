@@ -77,6 +77,15 @@ describe("repository delivery configuration", () => {
     await replace(root, ".github/actions/verify/action.yml", "actions/upload-pages-artifact@", "actions/upload-artifact@");
     expect(auditRepositoryDelivery(root).map((finding) => finding.code)).toContain("PAGES_ARTIFACT");
   });
+
+  it("protects the report-only external-link workflow boundary", async () => {
+    const root = await repositoryFixture();
+    await replace(root, ".github/workflows/external-links.yml", "  workflow_dispatch:", "  pull_request:");
+    await replace(root, ".github/workflows/external-links.yml", "  contents: read", "  contents: write");
+    await replace(root, ".github/workflows/external-links.yml", "run: pnpm audit:external-links", "run: echo skipped");
+    const codes = auditRepositoryDelivery(root).map((finding) => finding.code);
+    expect(codes).toEqual(expect.arrayContaining(["EXTERNAL_LINK_WORKFLOW", "WORKFLOW_PERMISSIONS"]));
+  });
 });
 
 describe("verify command ownership", () => {

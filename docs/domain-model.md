@@ -406,6 +406,14 @@ relationship. A Work is the intellectual object; a Source is the edition,
 article, dataset, archival record, or other citable manifestation used as
 evidence.
 
+Source manifestations carry typed resource links for publisher records,
+authorized reading, library discovery, purchase, archive, or other access.
+Their optional `checkedAt` ISO date records a real human inspection of that
+exact URL. Absence means the access check has never been recorded; an automated
+reachability result must not invent the date. See
+[external link monitoring](external-link-monitoring.md) for the separate,
+report-only availability policy.
+
 A Statement is one challengeable proposition. Statements distinguish empirical
 observation, attributed value, attributed institutional proposal, definition,
 causal hypothesis, classification, and editorial interpretation. An attributed

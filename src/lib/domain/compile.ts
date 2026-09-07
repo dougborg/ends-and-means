@@ -519,6 +519,32 @@ function validateSchemes(
   }
 }
 
+function validateResourceLink(
+  entity: EntityOf<"source">,
+  link: NonNullable<EntityOf<"source">["resourceLinks"]>[number],
+  index: number,
+  errors: string[],
+) {
+  if (!isHttpUrl(link.url))
+    errors.push(`${entity.id}: resource link ${index} requires an HTTP(S) URL`);
+  reportInvalid(
+    errors,
+    !link.label.trim(),
+    `${entity.id}: resource link ${index} requires a label`,
+  );
+  if (link.checkedAt !== undefined)
+    validateIsoDate(
+      entity.id,
+      `resource link ${index} checkedAt`,
+      link.checkedAt,
+      errors,
+    );
+  if (link.purpose === "purchase" && typeof link.affiliate !== "boolean")
+    errors.push(
+      `${entity.id}: purchase link ${index} must declare affiliate true or false`,
+    );
+}
+
 function validateSource(
   entity: EntityOf<"source">,
   entityById: Map<string, DomainEntity>,
@@ -544,21 +570,8 @@ function validateSource(
     !/^\d{13}$/.test(entity.identifiers.isbn13.replaceAll("-", ""))
   )
     errors.push(`${entity.id}: invalid ISBN-13`);
-  for (const [index, link] of (entity.resourceLinks ?? []).entries()) {
-    if (!isHttpUrl(link.url))
-      errors.push(
-        `${entity.id}: resource link ${index} requires an HTTP(S) URL`,
-      );
-    reportInvalid(
-      errors,
-      !link.label.trim(),
-      `${entity.id}: resource link ${index} requires a label`,
-    );
-    if (link.purpose === "purchase" && typeof link.affiliate !== "boolean")
-      errors.push(
-        `${entity.id}: purchase link ${index} must declare affiliate true or false`,
-      );
-  }
+  for (const [index, link] of (entity.resourceLinks ?? []).entries())
+    validateResourceLink(entity, link, index, errors);
 }
 
 function validateDepiction(

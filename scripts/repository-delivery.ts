@@ -254,6 +254,31 @@ function auditActionSetup(actionSteps: Node[]) {
   return findings;
 }
 
+function auditExternalLinkWorkflow(workflow: Node | undefined) {
+  if (!workflow)
+    return [{ code: "EXTERNAL_LINK_WORKFLOW", message: "The scheduled external-link report workflow is missing." }];
+  const findings: RepositoryDeliveryFinding[] = [];
+  const triggers = record(workflow.on);
+  if (!Object.hasOwn(triggers, "schedule") || !Object.hasOwn(triggers, "workflow_dispatch"))
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must support scheduled and manual runs." });
+  if (Object.keys(triggers).some((trigger) => ["push", "pull_request", "pull_request_target"].includes(trigger)))
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must not run on pushes or pull requests." });
+  const permissions = record(workflow.permissions);
+  if (Object.keys(permissions).length !== 1 || permissions.contents !== "read")
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must have only read access to repository contents." });
+  const report = record(record(workflow.jobs).report);
+  if (typeof report["timeout-minutes"] !== "number" || Number(report["timeout-minutes"]) > 15)
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting requires a bounded job timeout of at most 15 minutes." });
+  const reportSteps = steps(report);
+  if (!reportSteps.some((step) => step.run === "pnpm audit:external-links"))
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must invoke the canonical pnpm command exactly once." });
+  if (!reportSteps.some((step) => String(step.uses).startsWith("actions/upload-artifact@") && record(step.with).name === "external-link-report"))
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must retain a deterministic artifact." });
+  if (JSON.stringify(workflow).includes("secrets."))
+    findings.push({ code: "EXTERNAL_LINK_WORKFLOW", message: "External-link reporting must not require repository secrets." });
+  return findings;
+}
+
 export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding[] {
   const findings: RepositoryDeliveryFinding[] = [];
   const requireRule = (condition: boolean, code: string, message: string) => {
@@ -297,6 +322,7 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   );
 
   findings.push(...auditWorkflowPermissions(workflows, allJobs), ...auditActionPins(allSteps, allJobs));
+  findings.push(...auditExternalLinkWorkflow(workflows.get("external-links.yml")));
 
   const jobNames = allJobs.map(({ name }) => name);
   for (const name of ["verify", "dependency-review", "codeql", "workflow-analysis"]) {

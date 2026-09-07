@@ -159,6 +159,24 @@ export const skillCapabilities: SkillCapability[] = [
     },
   },
   {
+    name: "source access metadata",
+    owner: "research-content-changes",
+    paths: [
+      `${researchRoot}/SKILL.md`,
+      `${researchRoot}/references/routes/source.md`,
+    ],
+    patterns: [
+      /browse every cited URL/i,
+      /Record `checkedAt` only after a person opens and evaluates/i,
+      /Never bulk-fill access dates/i,
+      /operational result is not evidence.+reliable/is,
+    ],
+    deletion: {
+      path: `${researchRoot}/references/routes/source.md`,
+      pattern: /Record `checkedAt` only after a person opens and evaluates/i,
+    },
+  },
+  {
     name: "narrative integrity",
     owner: "research-content-changes",
     paths: [
