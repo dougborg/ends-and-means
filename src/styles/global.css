@@ -538,6 +538,7 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 @media (max-width: 25rem) { .site-header__inner { width: calc(100% - 1.25rem); } .wordmark { font-size: 1rem; } .mobile-navigation summary { min-width: 7rem; padding-inline: .55rem; } .mobile-navigation ul { grid-template-columns: 1fr; width: calc(100% - 1.25rem); } .mobile-navigation li:nth-child(odd) { border-right: 0; } }
 @media (forced-colors: active) { .primary-nav a[aria-current="page"], .mobile-navigation a[aria-current="page"], .site-map a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: .16rem; } .mobile-navigation nav { border-color: CanvasText; } }
 @media print {
+  .mobile-navigation { display: none; }
   .page-outline { display: none; }
   .page-outline-layout--active { display: block; }
   .reference-disclosure:not([open]) > .reference-disclosure__body,
