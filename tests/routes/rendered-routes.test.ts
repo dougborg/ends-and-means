@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -139,6 +140,7 @@ async function verifyEveryPublicRecordRenders() {
   await verifyReferenceRoutes();
   await verifyGlobalNavigation();
   await verifyNonBrowseGuideDiscovery();
+  await verifyThemeBootstrap();
 }
 
 async function verifyNonBrowseGuideDiscovery() {
@@ -214,6 +216,42 @@ async function verifyGlobalNavigation() {
       new RegExp(`aria-current="page"[^>]*>${currentLabel}<`),
     );
   }
+}
+
+async function verifyThemeBootstrap() {
+  const home = await readFile(routeFile("/"), "utf8");
+  const head = home.match(/<head>([\s\S]*?)<\/head>/i)?.[1] ?? "";
+  const csp =
+    head.match(
+      /<meta[^>]*http-equiv="content-security-policy"[^>]*content="([^"]+)"[^>]*>/i,
+    )?.[1] ?? "";
+  const bootstrapSource =
+    head.match(
+      /<script[^>]*data-theme-bootstrap[^>]*>([\s\S]*?)<\/script>/i,
+    )?.[1] ?? "";
+  const bootstrapHash = createHash("sha256")
+    .update(bootstrapSource)
+    .digest("base64");
+  expect(csp).toContain(`script-src 'self' 'sha256-${bootstrapHash}'`);
+  expect(csp).toContain("font-src 'self'");
+  expect(csp).toContain("style-src 'self'");
+  expect(csp).not.toMatch(/unsafe-inline|fonts\.googleapis|fonts\.gstatic/);
+  expect(bootstrapSource).toContain(
+    'localStorage.getItem("ends-and-means-theme")',
+  );
+  expect(bootstrapSource).not.toMatch(
+    /(?:fetch|XMLHttpRequest|sendBeacon|document\.cookie)/,
+  );
+  expect(head.indexOf("content-security-policy")).toBeLessThan(
+    head.indexOf("data-theme-bootstrap"),
+  );
+  expect(head).toContain('data-theme-color="light"');
+  expect(head).toContain('data-theme-color="dark"');
+  expect(home).toMatch(/<html[^>]*class="no-js"/i);
+  expect(home).toMatch(
+    /<script type="module" src="\/_astro\/BaseLayout[^>]+\.js"><\/script>/,
+  );
+  await expect(stat(path.join(dist, "theme.js"))).rejects.toThrow();
 }
 
 async function verifyHomepage() {
