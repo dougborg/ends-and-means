@@ -860,6 +860,67 @@ test("mobile menu yields focus and closes at its keyboard boundary", async ({ pa
   await expect(summary).toBeFocused();
 });
 
+test("mobile links preserve native pointer, touch, keyboard, and new-context navigation", async ({ browser, page }) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/research/");
+  await page.locator("details.mobile-navigation summary").click();
+  await page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Cases" }).click();
+  await expect(page).toHaveURL(/\/cases\/$/);
+
+  await page.goto("/research/");
+  await page.locator("details.mobile-navigation summary").click();
+  const compare = page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Compare" });
+  await compare.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/compare\/$/);
+
+  await page.goto("/research/");
+  await page.locator("details.mobile-navigation summary").click();
+  const questions = page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Questions" });
+  const [newPage] = await Promise.all([
+    page.context().waitForEvent("page"),
+    questions.click({ modifiers: ["ControlOrMeta"] }),
+  ]);
+  await newPage.waitForLoadState();
+  await expect(newPage).toHaveURL(/\/challenges\/$/);
+  await newPage.close();
+
+  const [middlePage] = await Promise.all([
+    page.context().waitForEvent("page"),
+    page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Sources" }).click({ button: "middle" }),
+  ]);
+  await middlePage.waitForLoadState();
+  await expect(middlePage).toHaveURL(/\/reading\/$/);
+  await middlePage.close();
+
+  const touchContext = await browser.newContext({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 390, height: 844 },
+  });
+  const touchPage = await touchContext.newPage();
+  await touchPage.goto("/research/");
+  await touchPage.locator("details.mobile-navigation summary").tap();
+  await touchPage.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Cases" }).tap();
+  await expect(touchPage).toHaveURL(/\/cases\/$/);
+  await touchContext.close();
+});
+
+test("mobile navigation does not enter the narrow print layout", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/guides/communism/");
+  const disclosure = page.locator("details.mobile-navigation");
+  await disclosure.locator("summary").click();
+  await expect(disclosure).toHaveAttribute("open", "");
+  await page.emulateMedia({ media: "print" });
+  await expect(disclosure).toBeHidden();
+  expect(await disclosure.evaluate((element) => {
+    const { width, height } = element.getBoundingClientRect();
+    return { width, height };
+  })).toEqual({ width: 0, height: 0 });
+  await expect(page.getByRole("navigation", { name: "Site map" })).toBeVisible();
+});
+
 test("mobile menu retains native navigation without JavaScript", async ({ browser }, testInfo) => {
   const baseURL = testInfo.project.use.baseURL;
   if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");

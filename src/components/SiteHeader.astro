@@ -37,15 +37,8 @@ const currentRoute = mobileRoutes.find((route) =>
       if (restoreFocus) summary.focus();
     };
 
-    disclosure.addEventListener("click", (event) => {
-      if (event.target instanceof Element && event.target.closest("a")) close();
-    });
-    disclosure.addEventListener("focusout", () => {
-      queueMicrotask(() => {
-        if (disclosure.open && !disclosure.contains(document.activeElement)) {
-          close();
-        }
-      });
+    document.addEventListener("focusin", (event) => {
+      if (disclosure.open && !disclosure.contains(event.target as Node)) close();
     });
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && disclosure.open) close(true);
