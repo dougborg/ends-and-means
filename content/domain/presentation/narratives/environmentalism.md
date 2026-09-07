@@ -10,7 +10,7 @@ Movements turn some of those judgments into collective action, but Guha's global
 
 Ecology and environmental science investigate conditions and relationships; they do not by themselves decide what ought to be protected or who should bear costs.
 Conservation and preservation concern uses and protection of land and life, while sustainability joins present and future needs without settling whose needs count.
-Climate policy overlaps with environmentalism but does not exhaust it, and neither a green party nor a policy label proves environmental purposes or effects.
+Climate change is one subject in environmental ethics, not its full scope, and neither a green party nor a policy label proves environmental purposes or effects.
 
 ## justice
 
