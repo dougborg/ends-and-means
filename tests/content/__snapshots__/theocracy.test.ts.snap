@@ -233,14 +233,14 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "sections ‘The Islamic character of the Constitution’ and ‘Constitutional conflicts and amendments,’ especially discussion of articles 56–61 and institutional conflict",
+        "locator": "section ‘The Islamic character of the Constitution,’ paragraphs discussing articles 3, 7, and 56–61",
         "role": "supports",
         "sourceId": "iranica-iran-constitution-source",
       },
     ],
     "id": "iran-hybrid-rival-reading",
     "statementKind": "classification",
-    "text": "Schirazi's institutional account identifies unresolved constitutional tensions among popular participation, separate state institutions, and clerical supervisory authority rather than a single undifferentiated chain of command.",
+    "text": "Arjomand observes that the Constitution retains popular participation and separate legislative, executive, and judicial institutions while subordinating those institutions to religious leadership and review.",
   },
   {
     "citations": [
