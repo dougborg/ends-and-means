@@ -8,6 +8,23 @@
     "append": "\nOpen research pull requests as drafts by default.\n"
   },
   {
+    "name": "declarative draft-by-default paraphrase",
+    "append": "\nResearch pull requests are drafts by default.\n"
+  },
+  {
+    "name": "default-to-draft paraphrase",
+    "append": "\nDefault research pull requests to draft.\n"
+  },
+  {
+    "name": "start-as-draft paraphrase",
+    "append": "\nStart research pull requests as drafts normally.\n"
+  },
+  {
+    "name": "compliant draft-default prohibition",
+    "append": "\nNever open research pull requests as drafts by default.\n",
+    "valid": true
+  },
+  {
     "name": "missing ready-for-review default",
     "remove": "by default"
   },

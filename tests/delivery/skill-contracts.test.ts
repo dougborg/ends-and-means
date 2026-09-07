@@ -15,6 +15,7 @@ interface ResearchDeliveryFixture {
   name: string;
   append?: string;
   remove?: string;
+  valid?: boolean;
 }
 
 const researchSkillPath = ".agents/skills/research-content-changes/SKILL.md";
@@ -92,11 +93,20 @@ describe("repository skill contract", () => {
       if (fixture.append) skill += fixture.append;
       await writeFile(target, skill);
 
-      expect(auditSkillContracts(root), fixture.name).toContainEqual({
+      const expectedFinding = {
         code: "SKILL_CAPABILITY",
         message:
           "research-content-changes does not cover research review delivery.",
-      });
+      };
+      if (fixture.valid) {
+        expect(auditSkillContracts(root), fixture.name).not.toContainEqual(
+          expectedFinding,
+        );
+      } else {
+        expect(auditSkillContracts(root), fixture.name).toContainEqual(
+          expectedFinding,
+        );
+      }
     }
   });
 
