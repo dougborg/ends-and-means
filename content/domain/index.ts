@@ -30,6 +30,7 @@ import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-commun
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { theocracyEvidenceDocuments } from "./evidence/theocracy";
+import { welfareStateEvidenceDocuments } from "./evidence/welfare-state";
 import { zapatistaCaracolesEvidenceDocuments } from "./evidence/zapatista-caracoles";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
 import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
@@ -57,6 +58,7 @@ import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossier";
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
 import { theocracyGuideDocuments } from "./presentation/theocracy-guide";
+import { welfareStateGuideDocuments } from "./presentation/welfare-state-guide";
 import { zapatistaCaracolesDossierDocuments } from "./presentation/zapatista-caracoles-dossier";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
 import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
@@ -82,6 +84,7 @@ import { socialismCommunismRelationshipDocuments } from "./relationships/sociali
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { theocracyRelationshipDocuments } from "./relationships/theocracy";
+import { welfareStateRelationshipDocuments } from "./relationships/welfare-state";
 import { zapatistaCaracolesRelationshipDocuments } from "./relationships/zapatista-caracoles";
 import { anarchismResearchDocuments } from "./research/anarchism";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
@@ -101,6 +104,7 @@ import { populismResearchDocuments } from "./research/populism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { theocracyResearchDocuments } from "./research/theocracy";
+import { welfareStateResearchDocuments } from "./research/welfare-state";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
 import { minangkabauVocabularyDocuments } from "./vocabulary/minangkabau";
 import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
@@ -137,6 +141,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyEvidenceDocuments,
   ...oligarchyEvidenceDocuments,
   ...theocracyEvidenceDocuments,
+  ...welfareStateEvidenceDocuments,
   ...populismEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
@@ -163,6 +168,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...minangkabauGuideDocuments,
   ...monarchyGuideDocuments,
   ...theocracyGuideDocuments,
+  ...welfareStateGuideDocuments,
   ...openResearchObligationDocuments,
   ...feminismResearchDocuments,
   ...environmentalismResearchDocuments,
@@ -172,6 +178,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...populismGuideDocuments,
   ...oligarchyResearchDocuments,
   ...theocracyResearchDocuments,
+  ...welfareStateResearchDocuments,
   ...populismResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
@@ -211,6 +218,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyRelationshipDocuments,
   ...oligarchyRelationshipDocuments,
   ...theocracyRelationshipDocuments,
+  ...welfareStateRelationshipDocuments,
   ...populismRelationshipDocuments,
 ];
 

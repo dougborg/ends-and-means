@@ -926,6 +926,36 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "welfare-state-authoritarian-provision",
+    obligationType: "counterargument",
+    target: "concept:welfare-state",
+    status: "open",
+  },
+  {
+    id: "welfare-state-formal-access-exclusion",
+    obligationType: "counterevidence",
+    target: "concept:welfare-state#design",
+    status: "open",
+  },
+  {
+    id: "welfare-state-institution-outcome-counterfactual",
+    obligationType: "counterfactual",
+    target: "concept:welfare-state",
+    status: "open",
+  },
+  {
+    id: "welfare-state-nonstate-provision-boundary",
+    obligationType: "research-gap",
+    target: "concept:welfare-state#definitions",
+    status: "open",
+  },
+  {
+    id: "welfare-state-unpaid-care-distribution",
+    obligationType: "counterevidence",
+    target: "concept:welfare-state#care",
+    status: "open",
+  },
+  {
     id: "zapatista-participation-gender-authority",
     obligationType: "counterevidence",
     target: "case:zapatista-autonomy-chiapas-1994-present#how-did-it-work",
