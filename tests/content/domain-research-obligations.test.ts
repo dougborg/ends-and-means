@@ -494,6 +494,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "costa-rica-health-counterfactual",
+    obligationType: "counterfactual",
+    target: "concept:welfare-state#costa-rica",
+    status: "open",
+  },
+  {
     id: "democracy-inclusion-measurement-boundary",
     obligationType: "counterevidence",
     target: "concept:democracy#measurement",
@@ -854,6 +860,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "south-korea-distribution-counterfactual",
+    obligationType: "counterfactual",
+    target: "concept:welfare-state#south-korea",
+    status: "open",
+  },
+  {
     id: "swedish-funds-investment-counterfactual",
     obligationType: "counterfactual",
     target: "case:swedish-wage-earner-funds",
@@ -935,12 +947,6 @@ const expectedOpenResearchObligations = [
     id: "welfare-state-formal-access-exclusion",
     obligationType: "counterevidence",
     target: "concept:welfare-state#design",
-    status: "open",
-  },
-  {
-    id: "welfare-state-institution-outcome-counterfactual",
-    obligationType: "counterfactual",
-    target: "concept:welfare-state",
     status: "open",
   },
   {

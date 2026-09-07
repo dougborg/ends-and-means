@@ -116,27 +116,52 @@ export const welfareStateResearchDocuments = [
   {
     documentType: "entity",
     entity: {
-      id: "welfare-state-institution-outcome-counterfactual",
+      id: "costa-rica-health-counterfactual",
       kind: "research-obligation",
-      label: "Institution and outcome counterfactuals",
+      label: "Costa Rican health-access counterfactual",
       description:
-        "Test whether observed distributional or health changes were caused by selected welfare institutions.",
+        "Test whether the selected CCSS reforms changed health access and financial protection.",
       obligationType: "counterfactual",
       question:
-        "What would likely have happened to access, income security, health, employment, or inequality without the selected reform or under a plausible alternative design?",
+        "How did the 1961 universalization mandate and 1973 hospital transfer change health-service access and financial protection relative to a plausible alternative without those reforms?",
       target: { kind: "concept", id: "welfare-state" },
+      targetSectionId: "costa-rica",
       addressedStatementIds: [
-        "welfare-outcome-boundary",
         "costa-rica-financing-access",
+        "costa-rica-welfare-case-limit",
+      ],
+      currentLimitation:
+        "The selected institutional histories establish timing, design, and coverage limits but do not isolate the reforms' effects from economic change, demography, public-health measures, or prior trends.",
+      evidenceNeeded:
+        "Credible comparative or quasi-experimental research, pre-reform trends, regional implementation variation, and health-access and financial-protection outcomes disaggregated by affected population.",
+      scope:
+        "The 1961 universalization mandate and 1973 hospital transfer within the bounded Costa Rican case.",
+      ...common,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "south-korea-distribution-counterfactual",
+      kind: "research-obligation",
+      label: "South Korean distribution counterfactual",
+      description:
+        "Test the distributional effect of post-crisis welfare expansion in South Korea.",
+      obligationType: "counterfactual",
+      question:
+        "How did South Korea's post-1997 welfare expansion affect income inequality and relative poverty compared with a plausible path without that expansion?",
+      target: { kind: "concept", id: "welfare-state" },
+      targetSectionId: "south-korea",
+      addressedStatementIds: [
         "korea-reform-outcome-limit",
         "south-korea-welfare-case-limit",
       ],
       currentLimitation:
-        "The selected institutional histories establish timing, design, and observed limits but do not isolate causal effects from economic change, demography, labor markets, public health, or political mobilization.",
+        "The observed post-crisis rise in inequality and relative poverty does not identify what welfare expansion changed relative to labor-market restructuring, the financial crisis, demography, or other policies.",
       evidenceNeeded:
-        "Credible comparative or quasi-experimental research, pre-reform trends, implementation variation, and outcomes disaggregated by affected population.",
+        "Distributional simulations or credible comparative designs, pre-crisis trends, program-specific exposure, and income outcomes disaggregated by employment status and household type.",
       scope:
-        "Exact programs and outcomes within the three bounded cases; separate designs require separate counterfactuals.",
+        "Post-crisis welfare expansion and income distribution within the bounded 1988–2008 South Korean case.",
       ...common,
     },
   },

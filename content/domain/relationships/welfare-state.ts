@@ -4,7 +4,7 @@ const citations = [
   [
     "welfare-state-institutional-category",
     "briggs-historical-perspective-source",
-    "pp. 221–258, especially pp. 228–230",
+    "pp. 228–231",
     "supports",
   ],
   [
@@ -32,6 +32,18 @@ const citations = [
     "supports",
   ],
   [
+    "welfare-economic-order-boundary",
+    "esping-andersen-three-worlds-source",
+    "title, description, and part I, chapters 1–3",
+    "qualifies",
+  ],
+  [
+    "welfare-economic-order-boundary",
+    "gilabert-oneill-socialism-source",
+    "section 4.3, paragraph 1",
+    "supports",
+  ],
+  [
     "welfare-outcome-boundary",
     "ilo-world-social-protection-2024-source",
     "Annex 2, legal and effective coverage measures",
@@ -50,9 +62,27 @@ const citations = [
     "supports",
   ],
   [
+    "social-insurance-assistance-boundary",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Contributory scheme, Means test, Non-contributory scheme, Social assistance, and Social insurance definitions",
+    "supports",
+  ],
+  [
+    "universal-categorical-boundary",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Universal/categorical non-contributory benefits and universal benefits definitions",
+    "supports",
+  ],
+  [
     "welfare-mixed-provision",
     "ilo-world-social-protection-2024-source",
     "Annex 1, Social security, paragraphs on public responsibility and delivery",
+    "supports",
+  ],
+  [
+    "welfare-provider-boundaries",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Social security and Social transfer definitions; paragraphs on public responsibility, occupational schemes, mutual benefit societies, and family or community provision",
     "supports",
   ],
   [
@@ -71,6 +101,18 @@ const citations = [
     "care-social-reproduction-boundary",
     "orloff-gender-social-rights-source",
     "pp. 303–328, especially pp. 312–320",
+    "supports",
+  ],
+  [
+    "esping-decommodification-purpose",
+    "orloff-gender-social-rights-source",
+    "p. 312, discussion of social citizenship and decommodification",
+    "supports",
+  ],
+  [
+    "orloff-decommodification-limit",
+    "orloff-gender-social-rights-source",
+    "pp. 318–320, access to paid work and autonomous household dimensions",
     "supports",
   ],
   [
@@ -100,7 +142,13 @@ const citations = [
   [
     "beveridge-proposal-boundary",
     "beveridge-social-insurance-source",
-    "Social Insurance and Allied Services, 1942; UK Parliament catalogue BBK/D/495",
+    "summary paragraphs 2–3 and 9–14",
+    "supports",
+  ],
+  [
+    "beveridge-population-policy",
+    "beveridge-social-insurance-source",
+    "summary paragraphs 15–16",
     "supports",
   ],
   [
@@ -109,7 +157,18 @@ const citations = [
     "sections 1–4 and First Schedule",
     "supports",
   ],
-  ["uk-nhs-formal-rule", "uk-nhs-act-1946-source", "sections 1–3", "supports"],
+  [
+    "uk-nhs-formal-rule",
+    "uk-nhs-act-1946-source",
+    "sections 1–3 and 80(2)",
+    "supports",
+  ],
+  [
+    "uk-nhs-scotland-formal-rule",
+    "uk-nhs-scotland-act-1947-source",
+    "section 1",
+    "supports",
+  ],
   [
     "uk-assistance-formal-rule",
     "uk-national-assistance-act-1948-source",
@@ -124,20 +183,26 @@ const citations = [
   ],
   [
     "costa-rica-ccss-formation",
-    "saenz-costa-rica-universal-coverage-source",
-    "pp. 3–5, historical and legal framework",
+    "vargas-muiser-costa-rica-universal-coverage-source",
+    "Background, First period of reform, paragraphs 1–5",
     "supports",
   ],
   [
     "costa-rica-universalization-mandate",
-    "saenz-costa-rica-universal-coverage-source",
-    "pp. 3–5, 1961 universalization law",
+    "vargas-muiser-costa-rica-universal-coverage-source",
+    "Background, Second period of major reform, paragraphs 1–4",
     "supports",
   ],
   [
-    "costa-rica-1973-health-integration",
+    "costa-rica-1973-hospital-transfer",
+    "vargas-muiser-costa-rica-universal-coverage-source",
+    "Background, Second period of major reform, paragraphs 4–9",
+    "supports",
+  ],
+  [
+    "costa-rica-1973-health-right",
     "saenz-costa-rica-universal-coverage-source",
-    "pp. 3–5, 1973 institutional transfer and General Health Law",
+    "p. 5, General Health Law summary",
     "supports",
   ],
   [
@@ -159,6 +224,12 @@ const citations = [
     "supports",
   ],
   [
+    "korea-labor-discipline-purpose",
+    "ku-korea-welfare-reform-source",
+    "Social context of the financial crisis, paragraphs 3–8",
+    "supports",
+  ],
+  [
     "korea-crisis-coverage-gap",
     "ku-korea-welfare-reform-source",
     "Social context of the financial crisis, paragraphs 9–10",
@@ -168,6 +239,24 @@ const citations = [
     "korea-employment-insurance-expansion",
     "ku-korea-welfare-reform-source",
     "Responses of social welfare policy, paragraphs 1–4",
+    "supports",
+  ],
+  [
+    "korea-public-works-response",
+    "ku-korea-welfare-reform-source",
+    "Responses of social welfare policy, paragraphs 3–4",
+    "supports",
+  ],
+  [
+    "korea-assistance-response",
+    "ku-korea-welfare-reform-source",
+    "Responses of social welfare policy, paragraph 4",
+    "supports",
+  ],
+  [
+    "korea-2008-coverage-gap",
+    "oecd-korea-economic-survey-2008-source",
+    "chapter 3, pp. 82–84, especially table 3.8 and the note distinguishing survey from administrative coverage",
     "supports",
   ],
   [
@@ -183,9 +272,15 @@ const citations = [
     "supports",
   ],
   [
+    "korea-selective-political-provision",
+    "shim-legislature-welfare-source",
+    "pp. 1246–1250, regime-period findings on cabinet bills and occupational groups",
+    "supports",
+  ],
+  [
     "south-korea-welfare-case-limit",
-    "kwon-developmental-welfare-source",
-    "pp. 477–497, continuity and reform around the 1997 crisis",
+    "oecd-korea-economic-survey-2008-source",
+    "chapter 3, pp. 82–84",
     "supports",
   ],
 ] as const;
@@ -202,7 +297,7 @@ export const welfareStateRelationshipDocuments = [
         object: { kind: "concept", id: "capitalism" },
         status: "qualified",
         statementIds: [
-          "welfare-political-regime-boundary",
+          "welfare-economic-order-boundary",
           "esping-welfare-regime-typology",
         ],
       },
@@ -212,7 +307,10 @@ export const welfareStateRelationshipDocuments = [
         subject: { kind: "concept", id: "welfare-state" },
         object: { kind: "concept", id: "social-democracy" },
         status: "qualified",
-        statementIds: ["welfare-political-regime-boundary"],
+        statementIds: [
+          "welfare-economic-order-boundary",
+          "social-democracy-welfare-state-form",
+        ],
       },
       {
         id: "welfare-state-related-to-socialism",
@@ -220,7 +318,10 @@ export const welfareStateRelationshipDocuments = [
         subject: { kind: "concept", id: "welfare-state" },
         object: { kind: "concept", id: "socialism" },
         status: "qualified",
-        statementIds: ["welfare-political-regime-boundary"],
+        statementIds: [
+          "welfare-economic-order-boundary",
+          "social-democracy-welfare-state-form",
+        ],
       },
     ],
   },
