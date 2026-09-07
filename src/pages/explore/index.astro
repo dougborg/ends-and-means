@@ -42,9 +42,9 @@ const directory = buildExploreDirectory(guides);
         <p>Try a broader term, check the listed entry phrases, or browse the open <a href="/research/">research questions</a>.</p>
       </div>
       <ol class="subject-guide-directory" id="subject-guide-results">
-        {directory.map(({ guide, aliases, searchText }) => (
-          <li data-subject-result data-search-text={searchText} data-guide-id={guide.id}>
-            <p class="coordinate glyph-label"><Glyph glyph="idea-definition" tone="accent" />START HERE</p>
+        {directory.map(({ guide, aliases, marker, searchText }) => (
+          <li data-subject-result data-search-text={searchText} data-guide-id={guide.id} data-subject-kind={guide.primarySubject.kind}>
+            <p class="coordinate glyph-label">{marker.glyph && <Glyph glyph={marker.glyph} tone="accent" />}{marker.label}</p>
             <div class="subject-guide-directory__summary">
               <h3><a href={`/guides/${guide.slug}/`}>{guide.label}</a></h3>
               <p>{guide.description}</p>
