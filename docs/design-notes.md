@@ -53,6 +53,7 @@ Both landmarks consume the same typed public-route registry.
 The registry also owns current-section mapping: Subject Guides and Concept
 reference pages belong to Explore, and
 individual Source records belong to Sources.
+The open-research ledger belongs to Questions.
 When adding a public area, update that registry rather than either component,
 provide a reader-facing label and all descendant route prefixes, and test its
 order and current-page behavior in both landmarks.
