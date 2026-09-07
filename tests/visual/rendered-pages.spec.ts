@@ -1,4 +1,10 @@
-import { expect, type Locator, test } from "@playwright/test";
+import {
+  type BrowserContext,
+  expect,
+  type Locator,
+  type Page,
+  test,
+} from "@playwright/test";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -44,6 +50,30 @@ const defaultRoutes = [
   "/research/",
   "/sources/erixon-rehn-meidner-model-source/",
 ];
+
+async function expectNativeNewPage(
+  context: BrowserContext,
+  activate: () => Promise<void>,
+  expectedURL: RegExp,
+) {
+  let openedPage: Page | undefined;
+  const openedPagePromise = context
+    .waitForEvent("page", { timeout: 5_000 })
+    .then((page) => {
+      openedPage = page;
+      return page;
+    });
+
+  try {
+    await activate();
+    const page = await openedPagePromise;
+    await page.waitForLoadState("domcontentloaded", { timeout: 5_000 });
+    await expect(page).toHaveURL(expectedURL);
+  } finally {
+    const pendingPage = await openedPagePromise.catch(() => undefined);
+    await (openedPage ?? pendingPage)?.close();
+  }
+}
 
 test("external mappings remain a quiet, accessible trust aid", async ({
   page,
@@ -312,7 +342,8 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
     const qualification = connection.locator(
       "details.subject-guide__qualification",
     );
-    await qualification.locator("summary").click();
+    await qualification.locator("summary").focus();
+    await page.keyboard.press("Enter");
     await expect(qualification.getByText("Evidence status")).toBeVisible();
     await expect(
       qualification.getByText("qualified", { exact: true }),
@@ -330,8 +361,17 @@ test("subject guide works without JavaScript and keeps evidence adjacent", async
       "href",
       "#meanings-and-boundaries",
     );
-    await noScriptLink.click({ force: true });
-    await expect(page).toHaveURL(/#meanings-and-boundaries$/);
+    await expect(noScriptLink).toBeVisible();
+    await noScriptLink.focus();
+    await expect(noScriptLink).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect
+      .poll(() => new URL(page.url()).hash, {
+        message: "native no-JavaScript anchor navigation updates the URL hash",
+        timeout: 5_000,
+      })
+      .toBe("#meanings-and-boundaries");
+    await expect(page.locator("#meanings-and-boundaries")).toBeInViewport();
   } finally {
     await context.close();
   }
@@ -1252,39 +1292,40 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
   const questions = page
     .getByRole("navigation", { name: "Mobile navigation" })
     .getByRole("link", { name: "Questions" });
-  const [newPage] = await Promise.all([
-    page.context().waitForEvent("page"),
-    questions.click({ modifiers: ["ControlOrMeta"] }),
-  ]);
-  await newPage.waitForLoadState();
-  await expect(newPage).toHaveURL(/\/challenges\/$/);
-  await newPage.close();
+  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
+  await expectNativeNewPage(
+    page.context(),
+    () => questions.click({ modifiers: [platformModifier] }),
+    /\/challenges\/$/,
+  );
 
-  const [middlePage] = await Promise.all([
-    page.context().waitForEvent("page"),
-    page
-      .getByRole("navigation", { name: "Mobile navigation" })
-      .getByRole("link", { name: "Sources" })
-      .click({ button: "middle" }),
-  ]);
-  await middlePage.waitForLoadState();
-  await expect(middlePage).toHaveURL(/\/reading\/$/);
-  await middlePage.close();
+  await expectNativeNewPage(
+    page.context(),
+    () =>
+      page
+        .getByRole("navigation", { name: "Mobile navigation" })
+        .getByRole("link", { name: "Sources" })
+        .click({ button: "middle" }),
+    /\/reading\/$/,
+  );
 
   const touchContext = await browser.newContext({
     hasTouch: true,
     isMobile: true,
     viewport: { width: 390, height: 844 },
   });
-  const touchPage = await touchContext.newPage();
-  await touchPage.goto("/research/");
-  await touchPage.locator("details.mobile-navigation summary").tap();
-  await touchPage
-    .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "Cases" })
-    .tap();
-  await expect(touchPage).toHaveURL(/\/cases\/$/);
-  await touchContext.close();
+  try {
+    const touchPage = await touchContext.newPage();
+    await touchPage.goto("/research/");
+    await touchPage.locator("details.mobile-navigation summary").tap();
+    await touchPage
+      .getByRole("navigation", { name: "Mobile navigation" })
+      .getByRole("link", { name: "Cases" })
+      .tap();
+    await expect(touchPage).toHaveURL(/\/cases\/$/);
+  } finally {
+    await touchContext.close();
+  }
 });
 
 test("mobile navigation does not enter the narrow print layout", async ({

@@ -154,3 +154,26 @@ The Pages deploy job receives write permissions only after the read-only verifie
 
 Copilot, or its explicit unavailable status after a normal request, and an independent adversarial review remain process requirements even though branch protection does not require an approving review.
 Conversation resolution, strict checks, and linear history remain repository gates.
+
+## Browser-test isolation
+
+Each Playwright invocation starts and owns its preview server. Its default port
+is derived from the absolute worktree path, so concurrent branches do not share
+the repository-wide Astro default; an occupied selected port fails closed
+instead of reusing an unknown listener. Set `PLAYWRIGHT_TEST_PORT` to a valid
+unoccupied port when a runner needs an explicit assignment. The server remains
+non-reusable in every environment, which proves the suite is exercising the
+preview process started from the current worktree and its local `dist` build.
+
+Native-navigation event listeners use bounded waits and close every page or
+context in `finally` blocks. The modifier assertion selects `Meta` on macOS and
+`Control` elsewhere rather than relying on an environment-dependent alias.
+No-JavaScript anchors use focused Enter activation and wait for their exact URL
+condition; forced activation is not an acceptable substitute for native
+navigation. To repeat the two regression cohorts without diagnostic retries:
+
+```sh
+CI=1 pnpm exec playwright test tests/visual/rendered-pages.spec.ts \
+  --grep "mobile links preserve|subject guide works without JavaScript" \
+  --repeat-each 25 --retries 0
+```
