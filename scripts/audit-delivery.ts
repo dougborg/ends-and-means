@@ -107,9 +107,10 @@ const repositoryIssueSchema = z
   .object({
     number: z.number().int().positive(),
     title: z.string().min(1),
-    body: z.string(),
-    state: z.enum(["OPEN", "CLOSED"]),
+    body: z.string().nullable(),
+    state: z.enum(["open", "closed"]),
     labels: labelsSchema,
+    pull_request: z.unknown().optional(),
   })
   .passthrough();
 
@@ -320,18 +321,12 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
   );
   const repositoryIssues = parseJson(
     gh([
-      "issue",
-      "list",
-      "--repo",
-      repository,
-      "--state",
-      "open",
-      "--limit",
-      "1000",
-      "--json",
-      "number,title,body,state,labels",
+      "api",
+      "--paginate",
+      "--slurp",
+      `repos/${repository}/issues?state=open&per_page=100`,
     ]),
-    z.array(repositoryIssueSchema),
+    z.array(z.array(repositoryIssueSchema)),
     "open repository issues",
   );
   return parseInput(
@@ -343,15 +338,18 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
       },
       capturedAt: new Date().toISOString(),
       repositoryLabels: labels.map((label) => label.name),
-      backlogIssues: repositoryIssues.map((issue) =>
-        backlogIssueSchema.parse({
-          number: issue.number,
-          title: issue.title,
-          body: issue.body,
-          state: issue.state,
-          labels: issue.labels.map((label) => label.name),
-        }),
-      ),
+      backlogIssues: repositoryIssues
+        .flat()
+        .filter((issue) => issue.pull_request === undefined)
+        .map((issue) =>
+          backlogIssueSchema.parse({
+            number: issue.number,
+            title: issue.title,
+            body: issue.body ?? "",
+            state: issue.state.toUpperCase(),
+            labels: issue.labels.map((label) => label.name),
+          }),
+        ),
       items: list.items.map((item) => loadLiveItem(item, privateState)),
     },
     deliverySnapshotSchema,

@@ -68,7 +68,11 @@ describe("repository backlog integrity", () => {
       body: "## Outcome\n\nRemove remote font requests from public pages.\n\n## Scope\n\nRemove Google Fonts and preserve local font roles.",
     });
     const duplicate = issue({ ...first, number: 11 });
-    expect(codes([first, duplicate])).toContain("BACKLOG_LIKELY_DUPLICATE");
+    const orderedFindings = auditBacklogIssues([first, duplicate]);
+    expect(orderedFindings.map(({ code }) => code)).toContain(
+      "BACKLOG_LIKELY_DUPLICATE",
+    );
+    expect(auditBacklogIssues([duplicate, first])).toEqual(orderedFindings);
 
     const closed = issue({ ...duplicate, state: "CLOSED" });
     expect(codes([first, closed])).not.toContain("BACKLOG_LIKELY_DUPLICATE");
@@ -78,6 +82,28 @@ describe("repository backlog integrity", () => {
       body: `${duplicate.body}\n\n## Relationship\n\nChild of #10.`,
     });
     expect(codes([first, child])).not.toContain("BACKLOG_LIKELY_DUPLICATE");
+
+    const umbrella = issue({
+      ...duplicate,
+      body: `${duplicate.body}\n\n## Relationship\n\n#10 is the umbrella issue for this bounded subtask.`,
+    });
+    expect(codes([first, umbrella])).not.toContain("BACKLOG_LIKELY_DUPLICATE");
+
+    const dependency = issue({
+      ...duplicate,
+      body: `${duplicate.body}\n\n## Relationship\n\nDepends on #10 for the shared prerequisite.`,
+    });
+    expect(codes([first, dependency])).not.toContain(
+      "BACKLOG_LIKELY_DUPLICATE",
+    );
+
+    const unrelatedReference = issue({
+      ...duplicate,
+      body: `${duplicate.body}\n\nSee #10 for a screenshot. A later follow-up may cover docs.`,
+    });
+    expect(codes([first, unrelatedReference])).toContain(
+      "BACKLOG_LIKELY_DUPLICATE",
+    );
 
     const coincidental = issue({
       ...duplicate,

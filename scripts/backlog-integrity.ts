@@ -50,14 +50,21 @@ function transcriptEvidence(body: string) {
 }
 
 const relationshipPattern =
-  /\b(?:umbrella|parent|child|subtask|follow-up|followup|tracks|tracked by|part of)\b/i;
+  /\b(?:umbrella|parent|child|subtask|follow-up|followup|depends on|dependency|supersedes|superseded by|duplicate of|tracks|tracked by|part of)\b/i;
 
 function explicitlyRelated(left: BacklogIssue, right: BacklogIssue) {
-  const leftReference = new RegExp(`#${right.number}\\b`);
-  const rightReference = new RegExp(`#${left.number}\\b`);
+  const hasLocalRelationship = (body: string, number: number) => {
+    const reference = new RegExp(`#${number}\\b`);
+    return body
+      .split(/\r?\n|(?<=[.!?])\s+/)
+      .some(
+        (segment) =>
+          reference.test(segment) && relationshipPattern.test(segment),
+      );
+  };
   return (
-    (leftReference.test(left.body) && relationshipPattern.test(left.body)) ||
-    (rightReference.test(right.body) && relationshipPattern.test(right.body))
+    hasLocalRelationship(left.body, right.number) ||
+    hasLocalRelationship(right.body, left.number)
   );
 }
 
@@ -145,7 +152,9 @@ function bodyFindings(issue: BacklogIssue): BacklogFinding[] {
 }
 
 export function auditBacklogIssues(issues: BacklogIssue[]) {
-  const open = issues.filter((issue) => issue.state === "OPEN");
+  const open = issues
+    .filter((issue) => issue.state === "OPEN")
+    .toSorted((left, right) => left.number - right.number);
   const findings = open.flatMap(bodyFindings);
   for (let leftIndex = 0; leftIndex < open.length; leftIndex += 1) {
     for (let rightIndex = leftIndex + 1; rightIndex < open.length; rightIndex += 1) {
