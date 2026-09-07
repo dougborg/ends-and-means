@@ -169,7 +169,10 @@ Native-navigation event listeners use bounded waits and close every page or
 context in `finally` blocks. Modifier and middle-button checks assert the
 browser's top-level document request from a distinct page frame; this remains
 observable while a background target is still `about:blank` or has not emitted
-a Playwright `page` event. The modifier assertion selects `Meta` on macOS and
+a Playwright `page` event. Cleanup polls for that eventual target for one
+bounded second and closes it; harness tests reproduce request-before-page
+ordering and reject a target that never becomes available. The modifier
+assertion selects `Meta` on macOS and
 `Control` elsewhere rather than relying on an environment-dependent alias.
 No-JavaScript anchors use focused Enter activation and wait for their exact URL
 condition; forced activation is not an acceptable substitute for native
