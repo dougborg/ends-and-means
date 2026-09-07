@@ -110,7 +110,9 @@ export const skillCapabilities: SkillCapability[] = [
     ],
     forbiddenPatterns: [
       /Push and open a draft pull request when authorized/i,
-      /\b(?:open|create|submit|push)\b[^.\n]{0,100}\b(?:draft pull requests?|pull requests? as drafts?)\b[^.\n]{0,40}\b(?:by default|as the default|normally)\b/i,
+      /\b(?:open|create|submit|push|start)\b[^.\n]{0,100}\b(?:draft pull requests?|pull requests? as drafts?)\b[^.\n]{0,40}\b(?:by default|as the default|normally)\b/i,
+      /\bpull requests?\b[^.\n]{0,40}\b(?:are|should be|must be)\b[^.\n]{0,20}\bdrafts?\b[^.\n]{0,40}\b(?:by default|as the default|normally)\b/i,
+      /\bdefault\b[^.\n]{0,100}\bpull requests?\b[^.\n]{0,30}\b(?:to|as)\b[^.\n]{0,10}\bdrafts?\b/i,
     ],
     deletion: {
       path: `${researchRoot}/SKILL.md`,
@@ -197,6 +199,17 @@ export const skillCapabilities: SkillCapability[] = [
   },
 ];
 
+function containsUnnegatedMatch(text: string, pattern: RegExp): boolean {
+  return text.split(/[.\n]+/).some((sentence) => {
+    const match = pattern.exec(sentence);
+    if (!match) return false;
+    const prefix = sentence.slice(0, match.index);
+    return !/\b(?:never|do not|don't|must not|should not|cannot|can't)\b/i.test(
+      prefix,
+    );
+  });
+}
+
 export function auditSkillContracts(root: string): SkillContractFinding[] {
   const missingPaths = new Map<string, SkillCapability["owner"]>();
   for (const capability of skillCapabilities) {
@@ -217,7 +230,7 @@ export function auditSkillContracts(root: string): SkillContractFinding[] {
       pattern.test(corpus),
     );
     const containsForbidden = capability.forbiddenPatterns?.some((pattern) =>
-      pattern.test(corpus),
+      containsUnnegatedMatch(corpus, pattern),
     );
     return coversRequired && !containsForbidden
       ? []
