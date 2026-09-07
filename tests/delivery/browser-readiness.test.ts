@@ -55,6 +55,25 @@ describe("browser readiness policy", () => {
     }
   });
 
+  it("discovers unimported specs nested beneath the visual directory", () => {
+    const fixtureRoot = mkdtempSync(join(tmpdir(), "browser-readiness-"));
+    const nested = join(fixtureRoot, "visual", "nested");
+    mkdirSync(nested, { recursive: true });
+    writeFileSync(
+      join(nested, "unimported.spec.ts"),
+      'await page.goto("/", { waitUntil: "networkidle" });',
+    );
+    try {
+      const findings = visualReadinessSources(join(fixtureRoot, "visual")).flatMap(
+        (file) => findNetworkIdleWaits(readFileSync(file, "utf8"), file),
+      );
+      expect(findings).toHaveLength(1);
+      expect(findings[0]?.method).toBe("goto");
+    } finally {
+      rmSync(fixtureRoot, { recursive: true, force: true });
+    }
+  });
+
   it("does not hide an unstable browser contract behind retries", () => {
     const config = readFileSync(
       join(repositoryRoot, "playwright.config.ts"),

@@ -3,7 +3,7 @@ export interface ExternalFontResource {
   url: string;
 }
 
-const remoteUrl = /https?:\/\/[^\s)'"<>]+/gi;
+const remoteUrl = /(?:https?:)?\/\/[^\s)'"<>]+/gi;
 const withoutComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, "");
 
 function remoteUrls(value: string) {
@@ -35,7 +35,7 @@ export function findExternalFontHtml(html: string): ExternalFontResource[] {
     const as = attribute(tag, "as")?.toLowerCase();
     if (
       href &&
-      /^https?:\/\//i.test(href) &&
+      /^(?:https?:)?\/\//i.test(href) &&
       (rel.includes("stylesheet") || (rel.includes("preload") && as === "font"))
     )
       return [{ context: "link" as const, url: href }];
