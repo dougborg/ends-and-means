@@ -1,10 +1,10 @@
 ---
+import Glyph from "../../components/Glyph.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { canonicalGraph } from "../../lib/domain/canonical";
 import { buildExploreApproaches } from "../../lib/explore-approaches";
 import { buildExploreDirectory, normalizeExploreQuery } from "../../lib/explore-discovery";
 import { hasSubjectGuideDirectory } from "../../lib/subject-guide-presentation";
-import Glyph from "../../components/Glyph.astro";
 
 const approaches = buildExploreApproaches(canonicalGraph);
 const guides = canonicalGraph.subjectGuides;
@@ -22,7 +22,7 @@ const directory = buildExploreDirectory(guides);
         <p class="coordinate">SUBJECT GUIDES</p>
         <div>
           <h2 id="subject-guides-title">Learn a subject from the question outward</h2>
-          <p>Search familiar names and questions. A search phrase can lead to more than one bounded meaning; the guide title remains the subject's canonical label.</p>
+          <p>Browse broad ideas, systems, and traditions. A search phrase can lead to more than one bounded meaning; the guide title remains the subject's canonical label.</p>
         </div>
       </header>
       <search>
@@ -32,8 +32,8 @@ const directory = buildExploreDirectory(guides);
           <input id="subject-search-query" name="q" type="search" autocomplete="off" aria-controls="subject-guide-results" placeholder="Try communism, worker ownership, or economic democracy…" />
           <button type="submit">Search subjects</button>
         </div>
-        <p id="subject-search-status" class="subject-search__status" aria-live="polite">Showing all {directory.length} reviewed guides.</p>
-        <noscript><p>All reviewed guides and their entry phrases remain listed below. Use your browser's Find command to search this page.</p></noscript>
+        <p id="subject-search-status" class="subject-search__status" aria-live="polite">Showing all {directory.length} broad subject guides.</p>
+        <noscript><p>All broad subject guides and their entry phrases remain listed below. Use your browser's Find command to search this page.</p></noscript>
       </form>
       </search>
       <div class="subject-search__empty" data-search-empty hidden>
@@ -130,10 +130,10 @@ const directory = buildExploreDirectory(guides);
     };
 
     const statusMessage = (value: string, query: string, matchCount: number, total: number) => query.length === 0
-        ? `Showing all ${total} reviewed guides.`
+        ? `Showing all ${total} broad subject guides.`
         : matchCount === 0
-          ? `No reviewed guides match “${value.trim()}”.`
-          : `${matchCount} reviewed ${matchCount === 1 ? "guide matches" : "guides match"} “${value.trim()}”.`;
+          ? `No broad subject guides match “${value.trim()}”.`
+          : `${matchCount} broad subject ${matchCount === 1 ? "guide matches" : "guides match"} “${value.trim()}”.`;
 
     if (input instanceof HTMLInputElement) {
       let pendingUrlUpdate: number | undefined;

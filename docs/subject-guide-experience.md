@@ -10,11 +10,24 @@ precise secondary reference infrastructure.
 The `/guides/[slug]/` route is generated only from `canonicalGraph.subjectGuides`,
 the reviewed/published projection.
 It must never use `subjectGuideRecords` or its editorial indexes.
-Explore likewise lists only the live projection and presents existing Approach
-dossiers as distinct institutional paths, not incomplete Subject Guides.
-Each directory entry labels the kind of its canonical `primarySubject`, so an
-idea or tradition is visibly distinct from a bounded case without giving the
-Subject Guide itself a canonical kind.
+Explore likewise presents only an explicitly curated set of broad, live
+subjects and presents existing Approach dossiers as distinct institutional
+paths, not incomplete Subject Guides.
+Bounded-case and narrow-question guides remain published and reachable through
+Cases or a relevant contextual page; they are not peer entries in the broad
+browse.
+Every non-browse placement declares that incoming public route, the route
+renders a link to the guide, and the generic rendered-route audit verifies the
+connection.
+The guide's own direct route does not count as incoming discovery.
+Every live guide has a presentation-only placement decision, and a missing or
+stale decision fails the build rather than silently changing the directory.
+Each displayed entry labels the kind of its canonical `primarySubject` without
+giving the Subject Guide itself a canonical kind.
+The label is the authoritative cue; an existing semantic glyph reinforces it
+only where the shape already has a truthful reader-facing meaning.
+Directory typography uses the site's local system stacks, so discovery does
+not depend on a remote font request.
 Its subject search is a deterministic projection of guide labels,
 descriptions, and guide-owned `searchQueries`; it has no separate alias index.
 Fallback search requires complete normalized tokens rather than substring
