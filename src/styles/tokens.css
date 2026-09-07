@@ -16,8 +16,28 @@
     --color-teal-soft: #e6f5f2;
     --color-rule: #bfd0d5;
     --color-muted: #52666f;
+    --color-violet-deep: #563b87;
 
-    /* Semantic color roles. Light is the only theme in this slice. */
+    /* Dark primitives: a blue-black reading room, not a simple inversion. */
+    --color-evening: #10191f;
+    --color-evening-sheet: #18252d;
+    --color-evening-subtle: #1d2c35;
+    --color-evening-hover: #22343e;
+    --color-evening-text: #e8f0f1;
+    --color-evening-muted: #a9bbc1;
+    --color-evening-rule: #40535d;
+    --color-evening-link: #a9c0ff;
+    --color-evening-link-hover: #ced9ff;
+    --color-evening-visited: #d3b9f2;
+    --color-evening-focus: #f3c96b;
+    --color-evening-evidence: #6dd1c0;
+    --color-evening-evidence-text: #a3e4d9;
+    --color-evening-evidence-surface: #14332f;
+    --color-evening-caution: #e5ad5d;
+    --color-evening-caution-text: #f4c984;
+    --color-evening-caution-surface: #362817;
+
+    /* Semantic roles default to Light and are remapped below for Dark. */
     --canvas: var(--color-atmosphere);
     --surface: var(--color-sheet);
     --surface-subtle: #f8fbfb;
@@ -29,6 +49,7 @@
     --rule-strong: var(--color-night);
     --link: var(--color-cobalt-deep);
     --link-hover: var(--color-cobalt);
+    --link-visited: var(--color-violet-deep);
     --focus: var(--color-cobalt);
     --evidence: var(--color-teal);
     --evidence-text: var(--color-teal-deep);
@@ -65,5 +86,92 @@
     --space-section-tight: clamp(var(--space-4), 2vw, var(--space-6));
 
     --type-page-title: clamp(2.15rem, 4.25vw, 4rem);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      color-scheme: dark;
+      --canvas: var(--color-evening);
+      --surface: var(--color-evening-sheet);
+      --surface-subtle: var(--color-evening-subtle);
+      --surface-hover: var(--color-evening-hover);
+      --text: var(--color-evening-text);
+      --text-muted: var(--color-evening-muted);
+      --text-inverse: var(--color-evening);
+      --rule: var(--color-evening-rule);
+      --rule-strong: var(--color-evening-text);
+      --link: var(--color-evening-link);
+      --link-hover: var(--color-evening-link-hover);
+      --link-visited: var(--color-evening-visited);
+      --focus: var(--color-evening-focus);
+      --evidence: var(--color-evening-evidence);
+      --evidence-text: var(--color-evening-evidence-text);
+      --evidence-surface: var(--color-evening-evidence-surface);
+      --caution: var(--color-evening-caution);
+      --caution-text: var(--color-evening-caution-text);
+      --caution-surface: var(--color-evening-caution-surface);
+      --caution-rule: color-mix(in srgb, var(--caution) 68%, var(--surface));
+      --shadow-panel: 0 1.25rem 3.5rem rgb(0 0 0 / 28%);
+      --shadow-ledger: 0 1.5rem 5rem rgb(0 0 0 / 32%);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --canvas: var(--color-evening);
+    --surface: var(--color-evening-sheet);
+    --surface-subtle: var(--color-evening-subtle);
+    --surface-hover: var(--color-evening-hover);
+    --text: var(--color-evening-text);
+    --text-muted: var(--color-evening-muted);
+    --text-inverse: var(--color-evening);
+    --rule: var(--color-evening-rule);
+    --rule-strong: var(--color-evening-text);
+    --link: var(--color-evening-link);
+    --link-hover: var(--color-evening-link-hover);
+    --link-visited: var(--color-evening-visited);
+    --focus: var(--color-evening-focus);
+    --evidence: var(--color-evening-evidence);
+    --evidence-text: var(--color-evening-evidence-text);
+    --evidence-surface: var(--color-evening-evidence-surface);
+    --caution: var(--color-evening-caution);
+    --caution-text: var(--color-evening-caution-text);
+    --caution-surface: var(--color-evening-caution-surface);
+    --caution-rule: color-mix(in srgb, var(--caution) 68%, var(--surface));
+    --shadow-panel: 0 1.25rem 3.5rem rgb(0 0 0 / 28%);
+    --shadow-ledger: 0 1.5rem 5rem rgb(0 0 0 / 32%);
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  @media print {
+    :root,
+    :root[data-theme] {
+      color-scheme: light;
+      --canvas: var(--color-sheet);
+      --surface: var(--color-sheet);
+      --surface-subtle: var(--color-sheet);
+      --surface-hover: var(--color-sheet);
+      --text: var(--color-night);
+      --text-muted: var(--color-night);
+      --text-inverse: var(--color-sheet);
+      --rule: var(--color-night);
+      --rule-strong: var(--color-night);
+      --link: var(--color-night);
+      --link-hover: var(--color-night);
+      --link-visited: var(--color-night);
+      --focus: var(--color-night);
+      --evidence: var(--color-night);
+      --evidence-text: var(--color-night);
+      --evidence-surface: var(--color-sheet);
+      --caution: var(--color-night);
+      --caution-text: var(--color-night);
+      --caution-surface: var(--color-sheet);
+      --caution-rule: var(--color-night);
+      --shadow-panel: none;
+      --shadow-ledger: none;
+    }
   }
 }

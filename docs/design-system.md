@@ -22,8 +22,8 @@ this architecture.
 
 Components and page compositions consume semantic tokens such as `--canvas`,
 `--surface`, `--text`, `--link`, `--evidence`, and `--caution`. Literal palette
-values belong only in the token layer. Theme mappings will be added separately;
-the current semantic map intentionally preserves the established Light design.
+values belong only in the token layer. Light and Dark map those same roles to
+different values, so components never select a theme-specific primitive.
 Permanent-surface shadows likewise use semantic shadow tokens; their color
 functions remain centralized with the palette rather than bypassing it in page
 CSS. The system keywords `currentColor` and `transparent` remain valid outside
@@ -87,6 +87,26 @@ summary names remain authoritative. Color never carries evidence, caution,
 selection, or open state alone. Reduced motion disables smooth fragment
 scrolling; forced-color and print rules preserve structure without depending on
 background fills.
+
+## Appearance
+
+System is the default and follows `prefers-color-scheme`, including changes made
+while a page remains open. The footer Appearance fieldset offers System, Light,
+and Dark as native radio choices. Light and Dark are the only values stored in
+local storage; selecting System removes the stored preference. No preference is
+sent to a server or included in analytics.
+
+A minimal inline bootstrap runs in the document head before render-blocking
+styles. Its exact bytes are authorized by a generated SHA-256 Content Security
+Policy hash; the policy does not permit unsafe inline scripts. The bootstrap
+accepts only the two explicit values and applies the root theme attribute before
+paint. A normal deferred module owns controls, operating-system changes, and
+browser theme color after parsing. Storage errors and invalid values fall back
+to System on a new document, while a current-page choice remains in memory if
+storage is denied, including across back-forward cache restoration.
+With JavaScript disabled, the control is absent and the CSS media query follows
+the operating system without hiding content. Print always uses a white canvas,
+dark text, visible rules, and no Appearance control, regardless of screen mode.
 
 ## Signature
 

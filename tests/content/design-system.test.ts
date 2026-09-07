@@ -1,18 +1,14 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { parse as parseAstro } from "@astrojs/compiler";
-import type { ElementNode, Node as AstroNode } from "@astrojs/compiler/types";
+import type { Node as AstroNode, ElementNode } from "@astrojs/compiler/types";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import {
-  ident,
-  parse as parseCss,
-  type Atrule,
-  type CssNode,
-} from "css-tree";
+import { type Atrule, type CssNode, ident, parse as parseCss } from "css-tree";
 import { parse as parsePostCss } from "postcss";
 import { describe, expect, it } from "vitest";
 import EditorialHeader from "../../src/components/EditorialHeader.astro";
 import Notice from "../../src/components/Notice.astro";
+import ThemeControl from "../../src/components/ThemeControl.astro";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const sourceDirectory = path.join(root, "src");
@@ -62,7 +58,13 @@ async function productionAstroFiles(
     .toSorted();
 }
 
-const namedLayers = new Set(["tokens", "base", "layout", "components", "pages"]);
+const namedLayers = new Set([
+  "tokens",
+  "base",
+  "layout",
+  "components",
+  "pages",
+]);
 
 function findStyleElements(node: AstroNode): ElementNode[] {
   const own = node.type === "element" && node.name === "style" ? [node] : [];
@@ -76,33 +78,44 @@ async function astroStyleBlocks(source: string): Promise<string[] | undefined> {
 
   const styles = findStyleElements(result.ast);
   if (styles.some((style) => !style.position?.end)) return undefined;
-  if (styles.some((style) => style.children.some((child) => child.type !== "text"))) {
+  if (
+    styles.some((style) =>
+      style.children.some((child) => child.type !== "text"),
+    )
+  ) {
     return undefined;
   }
-  return styles.map((style) => style.children
-    .map((child) => child.type === "text" ? child.value : "")
-    .join(""));
+  return styles.map((style) =>
+    style.children
+      .map((child) => (child.type === "text" ? child.value : ""))
+      .join(""),
+  );
 }
 
 function isAllowedLayer(node: CssNode): node is Atrule {
-  if (node.type !== "Atrule" || node.name.toLowerCase() !== "layer") return false;
+  if (node.type !== "Atrule" || node.name.toLowerCase() !== "layer")
+    return false;
   if (!node.block || node.prelude?.type !== "AtrulePrelude") return false;
   const prelude = node.prelude.children.toArray();
   const layerList = prelude.length === 1 ? prelude[0] : undefined;
   if (layerList?.type !== "LayerList") return false;
   const layers = layerList.children.toArray();
-  return layers.length === 1
-    && layers[0]?.type === "Layer"
-    && namedLayers.has(ident.decode(layers[0].name));
+  return (
+    layers.length === 1 &&
+    layers[0]?.type === "Layer" &&
+    namedLayers.has(ident.decode(layers[0].name))
+  );
 }
 
 function isWhollyWrappedInNamedLayer(css: string): boolean {
   try {
     parsePostCss(css, { from: undefined });
     const stylesheet = parseCss(css, { context: "stylesheet" });
-    return stylesheet.type === "StyleSheet"
-      && stylesheet.children.size === 1
-      && isAllowedLayer(stylesheet.children.first as CssNode);
+    return (
+      stylesheet.type === "StyleSheet" &&
+      stylesheet.children.size === 1 &&
+      isAllowedLayer(stylesheet.children.first as CssNode)
+    );
   } catch {
     return false;
   }
@@ -151,21 +164,30 @@ describe("design-system foundations", () => {
       "@layer compon\\65 nts { .escaped { color: var(--text); } }",
     ];
 
-    for (const css of invalid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(false);
-    for (const css of valid) expect(isWhollyWrappedInNamedLayer(css), css).toBe(true);
-    expect(await astroStyleBlocks("<style>@layer components{.ok{}}</style><style>broken"))
-      .toBeUndefined();
-    expect(await astroStyleBlocks(`---
+    for (const css of invalid)
+      expect(isWhollyWrappedInNamedLayer(css), css).toBe(false);
+    for (const css of valid)
+      expect(isWhollyWrappedInNamedLayer(css), css).toBe(true);
+    expect(
+      await astroStyleBlocks(
+        "<style>@layer components{.ok{}}</style><style>broken",
+      ),
+    ).toBeUndefined();
+    expect(
+      await astroStyleBlocks(`---
 const example = "<style>.frontmatter-bypass{}</style>";
 ---
 <style is:global data-example=">">@layer components{.ok{}}</style>
-<style>@layer pages{.also-ok{content:"}"}}</style>`))
-      .toEqual([
-        "@layer components{.ok{}}",
-        '@layer pages{.also-ok{content:"}"}}',
-      ]);
-    expect(await astroStyleBlocks("<style is:global>@layer components{.ok{}}</style>"))
-      .toEqual(["@layer components{.ok{}}"]);
+<style>@layer pages{.also-ok{content:"}"}}</style>`),
+    ).toEqual([
+      "@layer components{.ok{}}",
+      '@layer pages{.also-ok{content:"}"}}',
+    ]);
+    expect(
+      await astroStyleBlocks(
+        "<style is:global>@layer components{.ok{}}</style>",
+      ),
+    ).toEqual(["@layer components{.ok{}}"]);
     const mixedNodes = await astroStyleBlocks(
       "<style>@layer components{.ok{}}</style><style>.bypass{}</style>",
     );
@@ -196,7 +218,94 @@ describe("design tokens and shared components", () => {
       );
     }
   });
+});
 
+describe("theme contracts", () => {
+  it("maps every theme through the complete semantic color contract", async () => {
+    const tokens = await readFile(
+      path.join(root, "src/styles/tokens.css"),
+      "utf8",
+    );
+    const roles = [
+      "canvas",
+      "surface",
+      "surface-subtle",
+      "surface-hover",
+      "text",
+      "text-muted",
+      "text-inverse",
+      "rule",
+      "rule-strong",
+      "link",
+      "link-hover",
+      "link-visited",
+      "focus",
+      "evidence",
+      "evidence-text",
+      "evidence-surface",
+      "caution",
+      "caution-text",
+      "caution-surface",
+      "caution-rule",
+      "shadow-panel",
+      "shadow-ledger",
+    ];
+    const sheet = parsePostCss(tokens, { from: undefined });
+    const declarations = (selector: string, media?: string) => {
+      const values = new Map<string, string>();
+      sheet.walkRules((rule) => {
+        const parentMedia =
+          rule.parent?.type === "atrule" && rule.parent.name === "media"
+            ? rule.parent.params
+            : undefined;
+        if (
+          rule.selectors.map((value) => value.trim()).includes(selector) &&
+          parentMedia === media
+        ) {
+          rule.walkDecls(/^--/, (declaration) => {
+            values.set(declaration.prop.slice(2), declaration.value);
+          });
+        }
+      });
+      return values;
+    };
+    const light = declarations(":root");
+    const systemDark = declarations(
+      ":root:not([data-theme])",
+      "(prefers-color-scheme: dark)",
+    );
+    const explicitDark = declarations(':root[data-theme="dark"]');
+    const print = declarations(":root[data-theme]", "print");
+
+    for (const [theme, contract] of Object.entries({
+      light,
+      systemDark,
+      explicitDark,
+      print,
+    })) {
+      for (const role of roles)
+        expect(contract.has(role), `${theme} ${role}`).toBe(true);
+    }
+    expect(
+      Object.fromEntries(systemDark),
+      "System and explicit Dark must map every role identically",
+    ).toEqual(Object.fromEntries(explicitDark));
+  });
+
+  it("renders a native Appearance choice without requiring JavaScript", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(ThemeControl);
+
+    expect(html).toContain("<fieldset");
+    expect(html).toContain("<legend>Appearance</legend>");
+    expect(html.match(/type="radio"/g)).toHaveLength(3);
+    expect(html).toContain('value="system" checked');
+    expect(html).toContain('value="light"');
+    expect(html).toContain('value="dark"');
+  });
+});
+
+describe("shared measures and components", () => {
   it("uses named width roles instead of recreating the shared content measures", async () => {
     const contents = await stylesheetContents();
     const duplicatedMeasure =
@@ -217,6 +326,13 @@ describe("design tokens and shared components", () => {
       ":where(a, button, summary, [tabindex]):focus-visible",
     );
     expect(base).toContain("outline: 3px solid var(--focus)");
+  });
+
+  it("keeps visited and disabled states on semantic tokens", async () => {
+    const base = await readFile(path.join(root, "src/styles/base.css"), "utf8");
+    expect(base).toMatch(/a:visited\s*{\s*color:\s*var\(--link-visited\)/);
+    expect(base).toMatch(/:where\(button, input, select, textarea\):disabled/);
+    expect(base).toContain("background-color: var(--surface-subtle)");
   });
 
   it("renders a conventional editorial header without changing heading semantics", async () => {
