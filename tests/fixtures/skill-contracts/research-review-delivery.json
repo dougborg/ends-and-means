@@ -1,10 +1,34 @@
 [
   {
-    "name": "former draft-by-default instruction",
+    "name": "legacy draft-by-default instruction",
     "append": "\nPush and open a draft pull request when authorized; do not merge.\n"
   },
   {
-    "name": "missing selective stack boundary",
+    "name": "semantic draft-by-default paraphrase",
+    "append": "\nOpen research pull requests as drafts by default.\n"
+  },
+  {
+    "name": "missing ready-for-review default",
+    "remove": "by default"
+  },
+  {
+    "name": "missing substantial-work requirement",
+    "remove": "substantial work remains"
+  },
+  {
+    "name": "missing issue In-progress requirement",
+    "remove": "issue `In progress`"
+  },
+  {
+    "name": "missing genuine-dependency-only stack boundary",
     "remove": "Use stacked pull requests only for genuine dependency chains."
+  },
+  {
+    "name": "missing bottom-up rebase-only integration",
+    "remove": "bottom-up with rebase-only linear history"
+  },
+  {
+    "name": "missing refreshed exact-head evidence after automatic rebase or retarget",
+    "remove": "renew exact-head evidence after\nan automatic rebase or retargeting"
   }
 ]

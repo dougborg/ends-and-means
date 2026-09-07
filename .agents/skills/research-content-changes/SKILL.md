@@ -36,10 +36,10 @@ integrating agent reviews reported commits and reruns the complete suite.
 Implement directly in the canonical content model or its deterministic source
 generator. Research, rendering, and tests may change together when they form one
 reviewable outcome. When authorized, open completed, verified work as a ready
-pull request by default. Use a draft only for an explicitly experimental
-approach or an early-feedback checkpoint with substantial work remaining, and
-keep its issue `In progress` until the pull request is marked ready. Do not merge
-or publish without human approval.
+pull request by default. Use a draft only when substantial work remains and
+either the approach is explicitly experimental or a deliberate early-feedback
+checkpoint is needed. Keep its issue `In progress` until the pull request is
+marked ready. Do not merge or publish without human approval.
 
 Rebase onto the current base before final review and integration.
 Resolve automated review findings and obtain an independent adversarial review
