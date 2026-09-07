@@ -764,6 +764,42 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "populism-definition-sensitivity",
+    obligationType: "research-gap",
+    target: "concept:populism#definitions",
+    status: "open",
+  },
+  {
+    id: "populism-inclusion-antipluralism",
+    obligationType: "counterevidence",
+    target: "concept:populism#democracy",
+    status: "open",
+  },
+  {
+    id: "populism-leader-organization-counterfactual",
+    obligationType: "counterfactual",
+    target: "concept:populism",
+    status: "open",
+  },
+  {
+    id: "populism-people-exclusions",
+    obligationType: "counterargument",
+    target: "concept:populism",
+    status: "open",
+  },
+  {
+    id: "populism-policy-attribution",
+    obligationType: "counterfactual",
+    target: "concept:populism",
+    status: "open",
+  },
+  {
+    id: "populism-translation-category-travel",
+    obligationType: "research-gap",
+    target: "concept:populism",
+    status: "open",
+  },
+  {
     id: "republic-self-description-exclusion-boundary",
     obligationType: "counterargument",
     target: "concept:republic#disputes",

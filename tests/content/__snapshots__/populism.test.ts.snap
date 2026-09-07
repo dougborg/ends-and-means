@@ -1,0 +1,1306 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`foundational populism guide > pins the complete source, citation, and presentation ledgers 1`] = `
+{
+  "citations": [
+    {
+      "id": "populism-citation-1",
+      "locator": "pp. 543–544, Defining the Undefinable",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "context",
+      "subject": {
+        "id": "populism-contested-category",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-2",
+      "locator": "pp. 1–4, competing domain and extension definitions",
+      "object": {
+        "id": "weyland-contested-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "populism-contested-category",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-3",
+      "locator": "pp. 88–92, ideology critique and framing alternative",
+      "object": {
+        "id": "aslanidis-ideology-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "challenges",
+      "subject": {
+        "id": "populism-contested-category",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-4",
+      "locator": "pp. 543–544",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "populism-people-elite-core",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-5",
+      "locator": "pp. 543–544, definition and thin-centered qualification",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "mudde-thin-ideology",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-6",
+      "locator": "pp. 12–14, political-strategy definition",
+      "object": {
+        "id": "weyland-contested-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "weyland-strategy-definition",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-7",
+      "locator": "pp. 96–99, discursive-frame proposal",
+      "object": {
+        "id": "aslanidis-ideology-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "aslanidis-discourse-definition",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-8",
+      "locator": "chapter 3, pp. 28–50, especially p. 45",
+      "object": {
+        "id": "moffitt-global-rise-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "moffitt-style-definition",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-9",
+      "locator": "chapter 1, pp. 19–41",
+      "object": {
+        "id": "muller-populism-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "muller-antipluralism",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-10",
+      "locator": "pp. 1–14",
+      "object": {
+        "id": "weyland-contested-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "populism-label-provenance",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-11",
+      "locator": "pp. 542–544",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "popularity-insufficient",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-12",
+      "locator": "pp. 542–544, demagogy and opportunism boundary",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "redistribution-insufficient",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-13",
+      "locator": "chapter 1, pp. 19–41",
+      "object": {
+        "id": "muller-populism-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "anti-elitism-antipluralism-distinct",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-14",
+      "locator": "pp. 544–546",
+      "object": {
+        "id": "mudde-zeitgeist-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "host-ideology-boundary",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-15",
+      "locator": "pp. 184–208, threat and corrective argument",
+      "object": {
+        "id": "rovira-ambivalence-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "democratic-ambivalence",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-16",
+      "locator": "chapter 6, pp. 91–111",
+      "object": {
+        "id": "moffitt-global-rise-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "people-is-constructed",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-17",
+      "locator": "Congressional Record vol. 28, pp. 5826–5828, Omaha Platform preamble",
+      "object": {
+        "id": "omaha-congressional-record-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "omaha-corruption-claim",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-18",
+      "locator": "Congressional Record vol. 28, pp. 5826–5828, platform demands",
+      "object": {
+        "id": "omaha-congressional-record-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "omaha-institutional-demands",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-19",
+      "locator": "People's Party platform, pp. 24–29",
+      "object": {
+        "id": "peoples-platforms-1896-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peoples-party-fusion-boundary",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-20",
+      "locator": "People's Party platform, pp. 24–29",
+      "object": {
+        "id": "peoples-platforms-1896-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peoples-party-case-limit",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-21",
+      "locator": "Preamble; Part I, chapter III, articles 37–40",
+      "object": {
+        "id": "argentina-constitution-1949-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peron-social-justice-constitution",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-22",
+      "locator": "9 April 1949 closing address, pp. 246–266, especially pp. 251, 254, and 263",
+      "object": {
+        "id": "peron-philosophy-address-bcn-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peron-organized-community",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-23",
+      "locator": "9 April 1949 closing address, p. 247",
+      "object": {
+        "id": "peron-philosophy-address-bcn-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peronism-self-description-boundary",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-24",
+      "locator": "constitutional text and date boundary",
+      "object": {
+        "id": "argentina-constitution-1949-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "peron-case-limit",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-25",
+      "locator": "pp. 15–22, Zambia case",
+      "object": {
+        "id": "resnick-populist-strategies-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "sata-urban-poor-strategy",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-26",
+      "locator": "pp. 17–20",
+      "object": {
+        "id": "resnick-populist-strategies-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "sata-china-rhetoric",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-27",
+      "locator": "debate of 31 January 2007, passages on PF–ULP memorandum",
+      "object": {
+        "id": "zambia-assembly-2007-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "zambia-opposition-institution",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-28",
+      "locator": "pp. 4–6 and 15–22",
+      "object": {
+        "id": "resnick-populist-strategies-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "zambia-case-limit",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-29",
+      "locator": "policy statement of 26 February 2001, Urgent Policies and economic/social policy sections",
+      "object": {
+        "id": "thailand-policy-2001-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "thai-policy-program",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-30",
+      "locator": "pp. 62–83, abstract and stages of populist development",
+      "object": {
+        "id": "phongpaichit-baker-thaksin-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "thaksin-classification-developed",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-31",
+      "locator": "pp. 62–66, Thai political vocabulary and classification context",
+      "object": {
+        "id": "phongpaichit-baker-thaksin-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "prachaniyom-translation-boundary",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "populism-citation-32",
+      "locator": "pp. 62–83",
+      "object": {
+        "id": "phongpaichit-baker-thaksin-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "supports",
+      "subject": {
+        "id": "thailand-case-limit",
+        "kind": "statement",
+      },
+    },
+  ],
+  "dossier": {
+    "description": "Populism is a disputed category for politics that constructs a morally privileged people against an elite; rival definitions select ideology, discourse, style, strategy, or anti-pluralism, and none follows from popularity or policy alone.",
+    "id": "populism-dossier",
+    "kind": "dossier",
+    "label": "Populism dossier",
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-07",
+    "sections": [
+      {
+        "body": "Mudde calls populism a thin-centered ideology built around a pure people, a corrupt elite, and the people's general will.
+Weyland instead centers a personalistic leader who wins or exercises power through direct support from largely unorganized followers.
+Aslanidis treats populism as a discursive frame, while Moffitt analyzes a performed style that joins people-versus-elite appeals to staged crisis and norm-breaking manners.
+Müller adds a narrower democratic warning: anti-elitism becomes anti-pluralist when a claimant says only they represent the real people.
+
+These definitions select different units of analysis and can classify the same speech, movement, party, leader, or government differently.
+Every use of the label therefore needs a named classifier, definition, evidence, period, and scope.",
+        "heading": "Why do researchers define populism differently?",
+        "id": "definitions",
+        "statementIds": [
+          "populism-contested-category",
+          "mudde-thin-ideology",
+          "weyland-strategy-definition",
+          "aslanidis-discourse-definition",
+          "moffitt-style-definition",
+          "muller-antipluralism",
+          "populism-label-provenance",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "“The people” may mean citizens, workers, producers, a nation, an ethnic group, a majority, ordinary people, or another constructed constituency.
+“The elite” may be political, economic, cultural, technocratic, or foreign.
+Those boundaries determine who can belong, speak, contest a decision, or be excluded, so a people-claim is not innocent merely because it invokes popular sovereignty.",
+        "heading": "Who counts as the people—and the elite?",
+        "id": "people-and-elite",
+        "statementIds": [
+          "populism-people-elite-core",
+          "people-is-constructed",
+          "anti-elitism-antipluralism-distinct",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Rovira Kaltwasser argues that populism can press neglected demands into public debate and can also threaten pluralism and liberal-democratic restraints.
+The two possibilities must be investigated rather than read off the label.
+Criticism of elites does not prove an exclusive claim to representation, and charisma does not prove authoritarian rule.",
+        "heading": "Does populism widen or weaken democracy?",
+        "id": "democracy",
+        "statementIds": [
+          "democratic-ambivalence",
+          "anti-elitism-antipluralism-distinct",
+          "popularity-insufficient",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "The United States People's Party organized an agrarian challenge in the 1890s.
+Its Omaha Platform opposed producing people to concentrated financial and corporate power and proposed public control of railroads and communications, monetary reform, graduated taxation, and ballot protections.
+The 1896 platform reaffirmed the earlier program while participating in a changed electoral strategy around William Jennings Bryan.
+
+These national platforms show attributed claims and proposals, not the experience of every farmer, worker, Black organizer, or woman associated with the movement.
+They also do not turn one party bearing the Populist name into a definition for other places and periods.",
+        "heading": "What did the United States People's Party claim?",
+        "id": "peoples-party",
+        "relatedEntityRefs": [
+          {
+            "id": "us-peoples-party-1890-1896",
+            "kind": "case",
+          },
+        ],
+        "statementIds": [
+          "omaha-corruption-claim",
+          "omaha-institutional-demands",
+          "peoples-party-fusion-boundary",
+          "peoples-party-case-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Argentina's 1949 constitutional settlement joined Peronist self-description to newly enumerated protections for labor and social welfare.
+In a separate April address and associated text, Perón framed an organized community as an alternative to both unconstrained individualism and materialist collectivism.
+Those records establish Justicialist self-description and formal design; they do not by themselves decide whether ideology, discourse, style, strategy, or anti-pluralism best explains the formation.
+
+The 1943–1955 case cannot stand for every later Peronist organization or government.",
+        "heading": "What can the first Perón governments establish?",
+        "id": "peronism",
+        "relatedEntityRefs": [
+          {
+            "id": "peronist-formation-1943-1955",
+            "kind": "case",
+          },
+        ],
+        "statementIds": [
+          "peron-social-justice-constitution",
+          "peron-organized-community",
+          "peronism-self-description-boundary",
+          "peron-case-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Resnick classifies Michael Sata's 2006 Zambian campaign as a populist strategy that joined anti-elite appeals to urban poor voters with a broader coalition effort.
+Her account reports attacks on incumbent elites and Chinese investors over labor conditions and exclusion.
+National Assembly debate from early 2007 also locates the Patriotic Front within opposition-party bargaining rather than government rule during this period.
+
+This case tests one strategy definition; poverty, foreign-investment criticism, and personal leadership remain insufficient classifications on their own.",
+        "heading": "How did Sata mobilize in opposition?",
+        "id": "zambia",
+        "relatedEntityRefs": [
+          {
+            "id": "zambia-pf-opposition-2001-2008",
+            "kind": "case",
+          },
+        ],
+        "statementIds": [
+          "sata-urban-poor-strategy",
+          "sata-china-rhetoric",
+          "zambia-opposition-institution",
+          "zambia-case-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Thaksin's 2001 government policy statement proposed village and urban funds, farmers' debt relief, and expanded health care within a wider program.
+Phongpaichit and Baker argue that his populism developed after taking office through changing rhetoric and increasingly personalized authority.
+The later classification therefore depends on more than the policies themselves.
+
+Thai uses of ประชานิยม (prachaniyom) require their own linguistic and political context rather than automatic equivalence with every English definition.",
+        "heading": "Why isn't a redistributive program enough?",
+        "id": "thailand",
+        "relatedEntityRefs": [
+          {
+            "id": "thai-rak-thai-government-2001-2006",
+            "kind": "case",
+          },
+        ],
+        "statementIds": [
+          "thai-policy-program",
+          "thaksin-classification-developed",
+          "prachaniyom-translation-boundary",
+          "thailand-case-limit",
+        ],
+        "traceStatus": "qualified",
+      },
+      {
+        "body": "Begin by separating the speaker, organization, audience, claim, institution, and observed result.
+Then ask who counts as the people and the elite, whether the label is self-applied or external, which definition supplies the criteria, and whether participation or exclusion changed in practice.
+Compare formal rules, rules-in-use, rights, opposition, distribution, and accountability without turning these dimensions into a single populism score.",
+        "heading": "What should a comparison keep separate?",
+        "id": "comparisons",
+        "statementIds": [
+          "populism-label-provenance",
+          "host-ideology-boundary",
+          "redistribution-insufficient",
+          "people-is-constructed",
+        ],
+        "traceStatus": "qualified",
+      },
+    ],
+    "standfirst": "Populism is a disputed way of naming politics that constructs a morally privileged people against an elite.
+Researchers analyze that pattern as an ideology, discourse, style, or strategy, and some reserve the term for claims that one actor alone represents the real people.
+The label cannot be inferred from popularity, redistribution, charisma, nationalism, or criticism of elites by itself.",
+    "standfirstStatementIds": [
+      "populism-contested-category",
+      "populism-people-elite-core",
+      "popularity-insufficient",
+      "redistribution-insufficient",
+    ],
+    "subject": {
+      "id": "populism",
+      "kind": "concept",
+    },
+  },
+  "guide": {
+    "description": "Populism is a disputed category for politics that opposes a morally privileged people to an elite; ideology, discourse, style, strategy, and anti-pluralist definitions select different evidence, and popularity or redistribution alone does not settle the label.",
+    "id": "guide-populism",
+    "label": "Populism",
+    "primarySubject": {
+      "id": "populism",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-07",
+    "searchQueries": [
+      {
+        "query": "populism",
+      },
+      {
+        "query": "what is populism",
+      },
+      {
+        "query": "populist meaning",
+      },
+      {
+        "disambiguation": "Left and right labels name host projects whose specific institutions and constituencies require separate evidence.",
+        "query": "left wing populism vs right wing populism",
+        "resultStatus": "research-gap",
+      },
+      {
+        "query": "populism and democracy",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "What does populism mean?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "populism-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "populism",
+            "kind": "concept",
+          },
+        ],
+        "heading": "Why does the definition matter?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "definitions",
+          },
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "people-and-elite",
+          },
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "heading": "What changes across rival definitions?",
+        "id": "variants",
+        "researchObligationIds": [
+          "populism-definition-sensitivity",
+          "populism-translation-category-travel",
+        ],
+        "role": "variants-and-disputes",
+        "statementIds": [
+          "mudde-thin-ideology",
+          "weyland-strategy-definition",
+          "aslanidis-discourse-definition",
+          "moffitt-style-definition",
+          "muller-antipluralism",
+        ],
+      },
+      {
+        "heading": "What should democratic analysis test?",
+        "id": "democracy",
+        "narrativeRefs": [
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "democracy",
+          },
+        ],
+        "role": "institutions-and-mechanisms",
+        "statementIds": [
+          "democratic-ambivalence",
+          "anti-elitism-antipluralism-distinct",
+        ],
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "us-peoples-party-1890-1896",
+            "kind": "case",
+          },
+          {
+            "id": "peronist-formation-1943-1955",
+            "kind": "case",
+          },
+          {
+            "id": "zambia-pf-opposition-2001-2008",
+            "kind": "case",
+          },
+          {
+            "id": "thai-rak-thai-government-2001-2006",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do four bounded formations show?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "peoples-party",
+          },
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "peronism",
+          },
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "zambia",
+          },
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "thailand",
+          },
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "heading": "What should be compared next?",
+        "id": "comparisons-and-next-steps",
+        "narrativeRefs": [
+          {
+            "dossierId": "populism-dossier",
+            "sectionId": "comparisons",
+          },
+        ],
+        "researchObligationIds": [
+          "populism-people-exclusions",
+          "populism-inclusion-antipluralism",
+          "populism-leader-organization-counterfactual",
+          "populism-policy-attribution",
+        ],
+        "role": "comparisons-and-next-steps",
+      },
+      {
+        "heading": "What remains unsettled?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "populism-definition-sensitivity",
+          "populism-people-exclusions",
+          "populism-inclusion-antipluralism",
+          "populism-leader-organization-counterfactual",
+          "populism-translation-category-travel",
+          "populism-policy-attribution",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "populism",
+  },
+  "sources": [
+    {
+      "source": {
+        "contributorDisplay": [
+          "Cas Mudde",
+        ],
+        "description": "The consulted Government and Opposition manifestation of The Populist Zeitgeist.",
+        "id": "mudde-zeitgeist-source",
+        "identifiers": {
+          "doi": "10.1111/j.1477-7053.2004.00135.x",
+        },
+        "kind": "source",
+        "label": "The Populist Zeitgeist",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2004,
+        "publisher": "Government and Opposition",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://www.cambridge.org/core/journals/government-and-opposition/article/populist-zeitgeist/2CD34F8B25C4FFF4F322316833DB94B7",
+          },
+        ],
+        "sourceType": "article",
+        "title": "The Populist Zeitgeist",
+        "workId": "mudde-zeitgeist-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: The Populist Zeitgeist.",
+        "id": "mudde-zeitgeist-work",
+        "kind": "work",
+        "label": "The Populist Zeitgeist",
+        "originalPublicationYear": 2004,
+        "publicationStatus": "reviewed",
+        "title": "The Populist Zeitgeist",
+        "workType": "article",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Kurt Weyland",
+        ],
+        "description": "The consulted Comparative Politics manifestation of Clarifying a Contested Concept: Populism in the Study of Latin American Politics.",
+        "id": "weyland-contested-source",
+        "identifiers": {
+          "doi": "10.2307/422412",
+        },
+        "kind": "source",
+        "label": "Clarifying a Contested Concept: Populism in the Study of Latin American Politics",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2001,
+        "publisher": "Comparative Politics",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://doi.org/10.2307/422412",
+          },
+        ],
+        "sourceType": "article",
+        "title": "Clarifying a Contested Concept: Populism in the Study of Latin American Politics",
+        "workId": "weyland-contested-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Clarifying a Contested Concept: Populism in the Study of Latin American Politics.",
+        "id": "weyland-contested-work",
+        "kind": "work",
+        "label": "Clarifying a Contested Concept: Populism in the Study of Latin American Politics",
+        "originalPublicationYear": 2001,
+        "publicationStatus": "reviewed",
+        "title": "Clarifying a Contested Concept: Populism in the Study of Latin American Politics",
+        "workType": "article",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Paris Aslanidis",
+        ],
+        "description": "The consulted Political Studies manifestation of Is Populism an Ideology? A Refutation and a New Perspective.",
+        "id": "aslanidis-ideology-source",
+        "identifiers": {
+          "doi": "10.1111/1467-9248.12224",
+        },
+        "kind": "source",
+        "label": "Is Populism an Ideology? A Refutation and a New Perspective",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2016,
+        "publisher": "Political Studies",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://journals.sagepub.com/doi/10.1111/1467-9248.12224",
+          },
+        ],
+        "sourceType": "article",
+        "title": "Is Populism an Ideology? A Refutation and a New Perspective",
+        "workId": "aslanidis-ideology-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Is Populism an Ideology? A Refutation and a New Perspective.",
+        "id": "aslanidis-ideology-work",
+        "kind": "work",
+        "label": "Is Populism an Ideology? A Refutation and a New Perspective",
+        "originalPublicationYear": 2016,
+        "publicationStatus": "reviewed",
+        "title": "Is Populism an Ideology? A Refutation and a New Perspective",
+        "workType": "article",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Benjamin Moffitt",
+        ],
+        "description": "The consulted Stanford University Press manifestation of The Global Rise of Populism.",
+        "id": "moffitt-global-rise-source",
+        "identifiers": {
+          "doi": "10.11126/stanford/9780804796132.001.0001",
+          "isbn13": "9780804796132",
+        },
+        "kind": "source",
+        "label": "The Global Rise of Populism",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2016,
+        "publisher": "Stanford University Press",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://academic.oup.com/stanford-scholarship-online/book/30346",
+          },
+        ],
+        "sourceType": "edition",
+        "title": "The Global Rise of Populism",
+        "workId": "moffitt-global-rise-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: The Global Rise of Populism.",
+        "id": "moffitt-global-rise-work",
+        "kind": "work",
+        "label": "The Global Rise of Populism",
+        "originalPublicationYear": 2016,
+        "publicationStatus": "reviewed",
+        "title": "The Global Rise of Populism",
+        "workType": "book",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Jan-Werner Müller",
+        ],
+        "description": "The consulted University of Pennsylvania Press manifestation of What Is Populism?.",
+        "id": "muller-populism-source",
+        "identifiers": {
+          "isbn13": "9780812248982",
+        },
+        "kind": "source",
+        "label": "What Is Populism?",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2016,
+        "publisher": "University of Pennsylvania Press",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://www.pennpress.org/9780812248982/what-is-populism/",
+          },
+        ],
+        "sourceType": "edition",
+        "title": "What Is Populism?",
+        "workId": "muller-populism-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: What Is Populism?.",
+        "id": "muller-populism-work",
+        "kind": "work",
+        "label": "What Is Populism?",
+        "originalPublicationYear": 2016,
+        "publicationStatus": "reviewed",
+        "title": "What Is Populism?",
+        "workType": "book",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Cristóbal Rovira Kaltwasser",
+        ],
+        "description": "The consulted Democratization manifestation of The Ambivalence of Populism: Threat and Corrective for Democracy.",
+        "id": "rovira-ambivalence-source",
+        "identifiers": {
+          "doi": "10.1080/13510347.2011.572619",
+        },
+        "kind": "source",
+        "label": "The Ambivalence of Populism: Threat and Corrective for Democracy",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2012,
+        "publisher": "Democratization",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://www.tandfonline.com/doi/abs/10.1080/13510347.2011.572619",
+          },
+        ],
+        "sourceType": "article",
+        "title": "The Ambivalence of Populism: Threat and Corrective for Democracy",
+        "workId": "rovira-ambivalence-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: The Ambivalence of Populism: Threat and Corrective for Democracy.",
+        "id": "rovira-ambivalence-work",
+        "kind": "work",
+        "label": "The Ambivalence of Populism: Threat and Corrective for Democracy",
+        "originalPublicationYear": 2012,
+        "publicationStatus": "reviewed",
+        "title": "The Ambivalence of Populism: Threat and Corrective for Democracy",
+        "workType": "article",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Union Pacific Railway Company",
+        ],
+        "description": "The consulted Library of Congress manifestation of National Platforms of the People's and Other Parties.",
+        "id": "peoples-platforms-1896-source",
+        "kind": "source",
+        "label": "National Platforms of the People's and Other Parties",
+        "publicationStatus": "reviewed",
+        "publicationYear": 1896,
+        "publisher": "Library of Congress",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "archive",
+            "url": "https://www.loc.gov/item/30000314/",
+          },
+        ],
+        "sourceType": "archival-record",
+        "title": "National Platforms of the People's and Other Parties",
+        "workId": "peoples-platforms-1896-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: National Platforms of the People's and Other Parties.",
+        "id": "peoples-platforms-1896-work",
+        "kind": "work",
+        "label": "National Platforms of the People's and Other Parties",
+        "originalPublicationYear": 1896,
+        "publicationStatus": "reviewed",
+        "title": "National Platforms of the People's and Other Parties",
+        "workType": "other",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "United States Congress",
+        ],
+        "description": "The consulted Congress.gov manifestation of The Omaha Platform in the Congressional Record.",
+        "id": "omaha-congressional-record-source",
+        "kind": "source",
+        "label": "The Omaha Platform in the Congressional Record",
+        "publicationStatus": "reviewed",
+        "publicationYear": 1896,
+        "publisher": "Congress.gov",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "archive",
+            "url": "https://www.congress.gov/54/crecb/1896/05/28/GPO-CRECB-1896-pt6-v28-18-1.pdf",
+          },
+        ],
+        "sourceType": "archival-record",
+        "title": "The Omaha Platform in the Congressional Record",
+        "workId": "omaha-congressional-record-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: The Omaha Platform in the Congressional Record.",
+        "id": "omaha-congressional-record-work",
+        "kind": "work",
+        "label": "The Omaha Platform in the Congressional Record",
+        "originalPublicationYear": 1896,
+        "publicationStatus": "reviewed",
+        "title": "The Omaha Platform in the Congressional Record",
+        "workType": "other",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Argentine Republic",
+        ],
+        "description": "The consulted Biblioteca del Congreso de la Nación manifestation of Constitution of the Argentine Nation (1949).",
+        "id": "argentina-constitution-1949-source",
+        "kind": "source",
+        "label": "Constitution of the Argentine Nation (1949)",
+        "publicationStatus": "reviewed",
+        "publicationYear": 1949,
+        "publisher": "Biblioteca del Congreso de la Nación",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "authorized-reading",
+            "url": "https://digitales.bcn.gob.ar/textos-1/archivo-legislativo-1/constituciones-/constitucion-de-la-nacion-argentina--constitucion-1950/",
+          },
+        ],
+        "sourceType": "edition",
+        "title": "Constitution of the Argentine Nation (1949)",
+        "workId": "argentina-constitution-1949-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Constitution of the Argentine Nation (1949).",
+        "id": "argentina-constitution-1949-work",
+        "kind": "work",
+        "label": "Constitution of the Argentine Nation (1949)",
+        "originalPublicationYear": 1949,
+        "publicationStatus": "reviewed",
+        "title": "Constitution of the Argentine Nation (1949)",
+        "workType": "other",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Danielle Resnick",
+        ],
+        "description": "The consulted UNU-WIDER manifestation of Populist Strategies in African Democracies.",
+        "id": "resnick-populist-strategies-source",
+        "identifiers": {
+          "isbn13": "9789292303525",
+        },
+        "kind": "source",
+        "label": "Populist Strategies in African Democracies",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2010,
+        "publisher": "UNU-WIDER",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "authorized-reading",
+            "url": "https://www.econstor.eu/bitstream/10419/54155/1/63946453X.pdf",
+          },
+        ],
+        "sourceType": "report",
+        "title": "Populist Strategies in African Democracies",
+        "workId": "resnick-populist-strategies-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Populist Strategies in African Democracies.",
+        "id": "resnick-populist-strategies-work",
+        "kind": "work",
+        "label": "Populist Strategies in African Democracies",
+        "originalPublicationYear": 2010,
+        "publicationStatus": "reviewed",
+        "title": "Populist Strategies in African Democracies",
+        "workType": "report",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "National Assembly of Zambia",
+        ],
+        "description": "The consulted National Assembly of Zambia manifestation of National Assembly Debates, 31 January 2007.",
+        "id": "zambia-assembly-2007-source",
+        "kind": "source",
+        "label": "National Assembly Debates, 31 January 2007",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2007,
+        "publisher": "National Assembly of Zambia",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "archive",
+            "url": "https://www.parliament.gov.zm/node/1924",
+          },
+        ],
+        "sourceType": "archival-record",
+        "title": "National Assembly Debates, 31 January 2007",
+        "workId": "zambia-assembly-2007-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: National Assembly Debates, 31 January 2007.",
+        "id": "zambia-assembly-2007-work",
+        "kind": "work",
+        "label": "National Assembly Debates, 31 January 2007",
+        "originalPublicationYear": 2007,
+        "publicationStatus": "reviewed",
+        "title": "National Assembly Debates, 31 January 2007",
+        "workType": "other",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Thaksin Shinawatra",
+          "Government of Thailand",
+        ],
+        "description": "The consulted Yale Program on Financial Stability manifestation of Policy of the Government of Prime Minister Thaksin Shinawatra.",
+        "id": "thailand-policy-2001-source",
+        "kind": "source",
+        "label": "Policy of the Government of Prime Minister Thaksin Shinawatra",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2001,
+        "publisher": "Yale Program on Financial Stability",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "authorized-reading",
+            "url": "https://elischolar.library.yale.edu/ypfs-documents/10190/",
+          },
+        ],
+        "sourceType": "edition",
+        "title": "Policy of the Government of Prime Minister Thaksin Shinawatra",
+        "workId": "thailand-policy-2001-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Policy of the Government of Prime Minister Thaksin Shinawatra.",
+        "id": "thailand-policy-2001-work",
+        "kind": "work",
+        "label": "Policy of the Government of Prime Minister Thaksin Shinawatra",
+        "originalPublicationYear": 2001,
+        "publicationStatus": "reviewed",
+        "title": "Policy of the Government of Prime Minister Thaksin Shinawatra",
+        "workType": "other",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Pasuk Phongpaichit",
+          "Chris Baker",
+        ],
+        "description": "The consulted Journal of Contemporary Asia manifestation of Thaksin's Populism.",
+        "id": "phongpaichit-baker-thaksin-source",
+        "identifiers": {
+          "doi": "10.1080/00472330701651960",
+        },
+        "kind": "source",
+        "label": "Thaksin's Populism",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2008,
+        "publisher": "Journal of Contemporary Asia",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "publisher",
+            "url": "https://www.tandfonline.com/doi/abs/10.1080/00472330701651960",
+          },
+        ],
+        "sourceType": "article",
+        "title": "Thaksin's Populism",
+        "workId": "phongpaichit-baker-thaksin-work",
+      },
+      "work": {
+        "description": "The non-fiction work used to distinguish definitions and bounded uses of populism: Thaksin's Populism.",
+        "id": "phongpaichit-baker-thaksin-work",
+        "kind": "work",
+        "label": "Thaksin's Populism",
+        "originalPublicationYear": 2008,
+        "publicationStatus": "reviewed",
+        "title": "Thaksin's Populism",
+        "workType": "article",
+      },
+    },
+    {
+      "source": {
+        "contributorDisplay": [
+          "Juan Domingo Perón (speaker)",
+          "Biblioteca del Congreso de la Nación, Subdirección de Estudios y Archivos Especiales (compilation, redaction, and general editorial supervision)",
+          "Oscar Castellucci (collection director and preface co-author)",
+          "Isela María Mo Amavet (preface co-author)",
+        ],
+        "description": "The consulted 2016 Biblioteca del Congreso de la Nación collected edition containing the 9 April 1949 address, transcribed from Archivo General de la Nación audio and supplemented where noted from the 1950 congress proceedings.",
+        "id": "peron-philosophy-address-bcn-source",
+        "identifiers": {
+          "isbn13": "9789506910990",
+        },
+        "kind": "source",
+        "label": "Perón, 1949: Discursos, mensajes, correspondencia y escritos I",
+        "publicationStatus": "reviewed",
+        "publicationYear": 2016,
+        "publisher": "Biblioteca del Congreso de la Nación",
+        "resourceLinks": [
+          {
+            "label": "Open the consulted source",
+            "purpose": "authorized-reading",
+            "url": "https://cedinpe.unsam.edu.ar/sites/default/files/pdfs/peron-discursos_mensajes_1949_tomo1.pdf",
+          },
+        ],
+        "sourceType": "edition",
+        "title": "Perón, 1949: Discursos, mensajes, correspondencia y escritos I",
+        "workId": "peron-philosophy-address-work",
+      },
+      "work": {
+        "description": "Juan Domingo Perón's closing address to the National Congress of Philosophy in Mendoza on 9 April 1949.",
+        "id": "peron-philosophy-address-work",
+        "kind": "work",
+        "label": "Exposición en el Acto de Clausura del primer Congreso Nacional de Filosofía",
+        "originalPublicationYear": 1949,
+        "publicationStatus": "reviewed",
+        "title": "Exposición en el Acto de Clausura del primer Congreso Nacional de Filosofía",
+        "workType": "other",
+      },
+    },
+  ],
+}
+`;

@@ -105,6 +105,10 @@ export const exploreDirectoryCuration: ExploreDirectoryCuration = {
     placement: "browse",
     reason: "High-level form of power",
   },
+  "guide-populism": {
+    placement: "browse",
+    reason: "High-level contested political category",
+  },
   "guide-republic": {
     placement: "browse",
     reason: "High-level constitutional form and tradition",

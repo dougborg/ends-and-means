@@ -59,6 +59,7 @@ describe("canonical vertical slice", () => {
       "kahnawake-community-lawmaking",
       "koto-tinggi-post-decentralization-governance",
       "nazi-consolidation-1933",
+      "peronist-formation-1943-1955",
       "right-to-buy-england-wales-1980-1998",
       "ruwalla-borderland-organization",
       "saudi-basic-law-monarchy-1992-2022",
@@ -69,11 +70,14 @@ describe("canonical vertical slice", () => {
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",
       "te-awa-tupua-framework-2017-present",
+      "thai-rak-thai-government-2001-2006",
       "tonga-constitutional-settlement-2010-2013",
       "us-controlled-materials-plan",
       "us-federal-policy-preferences-1981-2002",
+      "us-peoples-party-1890-1896",
       "vatican-city-authority-2023-present",
       "warren-county-environmental-justice-1982-1991",
+      "zambia-pf-opposition-2001-2008",
       "zapatista-autonomy-chiapas-1994-present",
     ]);
   });
