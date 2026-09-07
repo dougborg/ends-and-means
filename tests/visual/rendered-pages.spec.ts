@@ -6,7 +6,10 @@ import {
   type Request,
   test,
 } from "@playwright/test";
-import { closeEventuallyOpenedPages } from "../../scripts/browser-page-cleanup";
+import {
+  closeRegisteredPages,
+  observeOpenedPage,
+} from "../../scripts/browser-page-cleanup";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -63,6 +66,7 @@ async function expectNativeNewPageRequest(
   let navigationRequest: Request | undefined;
   let primaryError: unknown;
   const existingPages = new Set(context.pages());
+  const registeredPage = observeOpenedPage(context, existingPages, timeout);
   const requestPromise = context.waitForEvent("request", {
     predicate: (request) =>
       request.isNavigationRequest() && request.url() === expectedURL,
@@ -93,11 +97,7 @@ async function expectNativeNewPageRequest(
 
   let cleanupError: unknown;
   try {
-    await closeEventuallyOpenedPages(
-      context,
-      existingPages,
-      Math.min(timeout, 1_000),
-    );
+    await closeRegisteredPages(context, existingPages, registeredPage);
   } catch (error) {
     cleanupError = error;
   }
