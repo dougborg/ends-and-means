@@ -5,27 +5,42 @@ interface ClosablePage {
 
 interface PageContext<Page extends ClosablePage> {
   pages(): Page[];
+  waitForEvent(
+    event: "page",
+    options: { predicate: (page: Page) => boolean; timeout: number },
+  ): Promise<Page>;
 }
 
-export async function closeEventuallyOpenedPages<Page extends ClosablePage>(
+export function observeOpenedPage<Page extends ClosablePage>(
   context: PageContext<Page>,
   existingPages: ReadonlySet<Page>,
-  timeout = 1_000,
+  timeout: number,
 ) {
-  const deadline = Date.now() + timeout;
+  return context.waitForEvent("page", {
+    predicate: (page) => !existingPages.has(page),
+    timeout,
+  });
+}
 
-  while (Date.now() <= deadline) {
-    const openedPages = context
-      .pages()
-      .filter((page) => !existingPages.has(page));
-    if (openedPages.length > 0) {
-      await Promise.all(
-        openedPages.map((page) => (page.isClosed() ? undefined : page.close())),
-      );
-      return;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 10));
+export async function closeRegisteredPages<Page extends ClosablePage>(
+  context: Pick<PageContext<Page>, "pages">,
+  existingPages: ReadonlySet<Page>,
+  registeredPage: Promise<Page>,
+) {
+  let firstRegisteredPage: Page;
+  try {
+    firstRegisteredPage = await registeredPage;
+  } catch {
+    throw new Error("Native navigation target was not registered for cleanup");
   }
 
-  throw new Error("Native navigation target was not registered for cleanup");
+  const openedPages = new Set([
+    firstRegisteredPage,
+    ...context.pages().filter((page) => !existingPages.has(page)),
+  ]);
+  await Promise.all(
+    [...openedPages].map((page) =>
+      page.isClosed() ? undefined : page.close(),
+    ),
+  );
 }
