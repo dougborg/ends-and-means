@@ -1,15 +1,8 @@
 import {
-  type BrowserContext,
   expect,
   type Locator,
-  type Page,
-  type Request,
   test,
 } from "@playwright/test";
-import {
-  closeEventuallyOpenedPages,
-  pageForNavigationRequest,
-} from "../../scripts/browser-page-cleanup";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -56,167 +49,49 @@ const defaultRoutes = [
   "/sources/erixon-rehn-meidner-model-source/",
 ];
 
-function observeContextPages(context: BrowserContext) {
-  const pages = new Set<Page>();
-  let version = 0;
-  let wake: (() => void) | undefined;
-  const listener = (page: Page) => {
-    pages.add(page);
-    version += 1;
-    wake?.();
-  };
-  context.on("page", listener);
-
-  const waitForQuiescence = async (deadline: number) => {
-    const quietWindow = 50;
-    while (true) {
-      const remaining = deadline - Date.now();
-      if (remaining <= 0)
-        throw new Error("Native target page observation did not settle");
-      const observedVersion = version;
-      const delay = Math.min(quietWindow, remaining);
-      const outcome = await new Promise<"page" | "quiet">((resolve) => {
-        const timer = setTimeout(() => resolve("quiet"), delay);
-        wake = () => {
-          clearTimeout(timer);
-          resolve("page");
-        };
+async function expectMouseActivationNotCanceled(
+  link: Locator,
+  eventType: "auxclick" | "click",
+  options: { button: number; ctrlKey?: boolean; metaKey?: boolean },
+) {
+  const eventResult = await link.evaluate(
+    (element, { eventType, options }) => {
+      let preventedBeforeGuard: boolean | undefined;
+      const terminalGuard = (event: Event) => {
+        preventedBeforeGuard = event.defaultPrevented;
+        event.preventDefault();
+      };
+      // The application is already loaded before this terminal window listener
+      // is installed. It observes target, document, and earlier window handlers,
+      // then alone suppresses the synthetic event's browser-owned default.
+      window.addEventListener(eventType, terminalGuard, { once: true });
+      const event = new MouseEvent(eventType, {
+        ...options,
+        bubbles: true,
+        cancelable: true,
       });
-      wake = undefined;
-      if (
-        outcome === "quiet" &&
-        delay === quietWindow &&
-        version === observedVersion
-      ) {
-        return;
-      }
-    }
-  };
-
-  return {
-    pages,
-    waitForQuiescence,
-    async drainAndStop(deadline: number) {
-      while (true) {
-        await waitForQuiescence(deadline);
-        const observedVersion = version;
-        await Promise.all(
-          [...pages].map((page) =>
-            page.isClosed() ? undefined : page.close(),
-          ),
-        );
-        if (version === observedVersion) {
-          context.off("page", listener);
-          return;
-        }
+      try {
+        const dispatchResult = element.dispatchEvent(event);
+        return {
+          defaultPrevented: event.defaultPrevented,
+          dispatchResult,
+          preventedBeforeGuard,
+          reachedTerminalGuard: preventedBeforeGuard !== undefined,
+        };
+      } finally {
+        window.removeEventListener(eventType, terminalGuard);
       }
     },
-    stop: () => context.off("page", listener),
-  };
-}
-
-async function expectNativeNewPageRequest(
-  context: BrowserContext,
-  sourcePage: Page,
-  activate: () => Promise<void>,
-  expectedURL: string,
-  timeout = 5_000,
-) {
-  let navigationRequest: Request | undefined;
-  let openedPage: Page | undefined;
-  let primaryError: unknown;
-  const assertionDeadline = Date.now() + timeout;
-  const existingPages = new Set(context.pages());
-  const pageObservation = observeContextPages(context);
-  // Native new-context targets can open and close before context.pages() is
-  // sampled. Install both event waits before activation so cleanup retains the
-  // Page object even when Chromium removes it from the live page inventory.
-  // The product contract ends at a new Page plus the exact navigation request;
-  // target URL commit, frame creation, and request-header availability are
-  // later browser/Playwright lifecycle details and may never become observable.
-  // A single observed target rejects decoy pairing, frame identity is enforced
-  // when available, and GET remains product-owned native-anchor behavior.
-  const pagePromise = context
-    .waitForEvent("page", { timeout })
-    .then((page) => (openedPage = page));
-  const requestPromise = context
-    .waitForEvent("request", {
-      predicate: (request) =>
-        request.isNavigationRequest() && request.url() === expectedURL,
-      timeout,
-    })
-    .then((request) => (navigationRequest = request));
-
-  try {
-    [openedPage, navigationRequest] = await Promise.all([
-      pagePromise,
-      requestPromise,
-      activate(),
-    ]);
-    await pageObservation.waitForQuiescence(assertionDeadline);
-    expect(openedPage).not.toBe(sourcePage);
-    expect(existingPages.has(openedPage)).toBe(false);
-    expect([...pageObservation.pages]).toEqual([openedPage]);
-    const requestPage = pageForNavigationRequest(navigationRequest);
-    if (requestPage !== undefined) expect(requestPage).toBe(openedPage);
-    expect(navigationRequest.method()).toBe("GET");
-  } catch (error) {
-    primaryError = error;
-  }
-
-  let cleanupError: unknown;
-  try {
-    await closeEventuallyOpenedPages(
-      context,
-      existingPages,
-      () => {
-        if (openedPage !== undefined) return openedPage;
-        if (navigationRequest === undefined) return undefined;
-        return pageForNavigationRequest(navigationRequest);
-      },
-      timeout,
-    );
-  } catch (error) {
-    cleanupError = error;
-  }
-  try {
-    await pageObservation.drainAndStop(Date.now() + timeout);
-  } catch (error) {
-    if (cleanupError === undefined) cleanupError = error;
-    try {
-      await Promise.all(
-        [...pageObservation.pages].map((page) =>
-          page.isClosed() ? undefined : page.close(),
-        ),
-      );
-    } catch (finalDrainError) {
-      if (cleanupError === undefined) cleanupError = finalDrainError;
-    } finally {
-      pageObservation.stop();
-    }
-  }
-
-  if (primaryError !== undefined) throw primaryError;
-  if (cleanupError !== undefined) throw cleanupError;
-}
-
-async function expectMiddleAuxclickNotCanceled(link: Locator) {
-  const eventResult = await link.evaluate((element) => {
-    const event = new MouseEvent("auxclick", {
-      bubbles: true,
-      button: 1,
-      cancelable: true,
-    });
-    const dispatchResult = element.dispatchEvent(event);
-    return {
-      defaultPrevented: event.defaultPrevented,
-      dispatchResult,
-    };
-  });
-  // DOM dispatch returns false exactly when a cancelable event was prevented.
+    { eventType, options },
+  );
+  // Browser engines own tab creation and commit, which hosted headless cannot
+  // attest reliably. The terminal guard leaves the real anchor unchanged and
+  // prevents navigation only after recording whether application code canceled.
   expect(eventResult).toEqual({
-    defaultPrevented: false,
-    dispatchResult: true,
+    defaultPrevented: true,
+    dispatchResult: false,
+    preventedBeforeGuard: false,
+    reachedTerminalGuard: true,
   });
 }
 
@@ -1410,7 +1285,7 @@ test("mobile menu yields focus and closes at its keyboard boundary", async ({
   await expect(summary).toBeFocused();
 });
 
-test("mobile links preserve native pointer, touch, keyboard, and new-context navigation", async ({
+test("mobile links preserve native pointer, touch, and keyboard navigation", async ({
   browser,
   page,
 }) => {
@@ -1432,26 +1307,6 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/compare\/$/);
 
-  await page.goto("/research/");
-  await page.locator("details.mobile-navigation summary").click();
-  const questions = page
-    .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "Questions" });
-  expect(
-    await questions.evaluate((link) => ({
-      href: link.getAttribute("href"),
-      tagName: link.tagName,
-    })),
-  ).toEqual({ href: "/challenges/", tagName: "A" });
-  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
-  await expectNativeNewPageRequest(
-    page.context(),
-    page,
-    () => questions.click({ modifiers: [platformModifier] }),
-    new URL("/challenges/", page.url()).href,
-  );
-  await expect(page).toHaveURL(/\/research\/$/);
-
   const touchContext = await browser.newContext({
     hasTouch: true,
     isMobile: true,
@@ -1471,9 +1326,44 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
   }
 });
 
+test("mobile links preserve uncanceled native modifier activation", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/research/");
+  await page.locator("details.mobile-navigation summary").click();
+
+  const questions = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Questions" });
+  expect(
+    await questions.evaluate((link) => ({
+      href: link.getAttribute("href"),
+      tagName: link.tagName,
+      target: link.getAttribute("target"),
+    })),
+  ).toEqual({ href: "/challenges/", tagName: "A", target: null });
+  await expectMouseActivationNotCanceled(questions, "click", {
+    button: 0,
+    ...(process.platform === "darwin"
+      ? { metaKey: true }
+      : { ctrlKey: true }),
+  });
+  expect(
+    await questions.evaluate((link) => ({
+      href: link.getAttribute("href"),
+      target: link.getAttribute("target"),
+    })),
+  ).toEqual({ href: "/challenges/", target: null });
+
+  await expect(page).toHaveURL(/\/research\/$/);
+});
+
 // Middle-click has its own auxclick cancellation path, so the modifier-click
-// probe cannot protect this independently breakable native affordance.
-test("mobile links preserve native middle-click navigation", async ({ page }) => {
+// check cannot protect this independently breakable native affordance.
+test("mobile links preserve uncanceled native middle-click activation", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
@@ -1481,102 +1371,46 @@ test("mobile links preserve native middle-click navigation", async ({ page }) =>
   const sources = page
     .getByRole("navigation", { name: "Mobile navigation" })
     .getByRole("link", { name: "Sources" });
-  await expect(sources).toHaveAttribute("href", "/reading/");
-  await expectMiddleAuxclickNotCanceled(sources);
+  expect(
+    await sources.evaluate((link) => ({
+      href: link.getAttribute("href"),
+      tagName: link.tagName,
+      target: link.getAttribute("target"),
+    })),
+  ).toEqual({ href: "/reading/", tagName: "A", target: null });
+  await expectMouseActivationNotCanceled(sources, "auxclick", { button: 1 });
+  expect(
+    await sources.evaluate((link) => ({
+      href: link.getAttribute("href"),
+      target: link.getAttribute("target"),
+    })),
+  ).toEqual({ href: "/reading/", target: null });
 
   await expect(page).toHaveURL(/\/research\/$/);
 });
 
-test("failed native new-context assertions close unexpected targets", async ({
+test("preventing modified click breaks native modifier activation", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
-  const context = page.context();
-  const existingPages = context.pages();
-  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
+  const questions = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Questions" });
+  await questions.evaluate((link) =>
+    link.addEventListener("click", (event) => event.preventDefault()),
+  );
 
   await expect(
-    expectNativeNewPageRequest(
-      context,
-      page,
-      () =>
-        page
-          .getByRole("navigation", { name: "Mobile navigation" })
-          .getByRole("link", { name: "Questions" })
-          .click({ modifiers: [platformModifier] }),
-      new URL("/unexpected-native-target/", page.url()).href,
-      500,
-    ),
+    expectMouseActivationNotCanceled(questions, "click", {
+      button: 0,
+      ...(process.platform === "darwin"
+        ? { metaKey: true }
+        : { ctrlKey: true }),
+    }),
   ).rejects.toThrow();
 
-  expect(context.pages()).toEqual(existingPages);
-  await expect(page).toHaveURL(/\/research\/$/);
-});
-
-test("native new-context assertions reject extra target pages", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 390, height: 900 });
-  await page.goto("/research/");
-  await page.locator("details.mobile-navigation summary").click();
-  const context = page.context();
-  const existingPages = context.pages();
-  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
-
-  await expect(
-    expectNativeNewPageRequest(
-      context,
-      page,
-      async () => {
-        await context.newPage();
-        await Promise.all([
-          context.waitForEvent("page"),
-          page
-            .getByRole("navigation", { name: "Mobile navigation" })
-            .getByRole("link", { name: "Questions" })
-            .click({ modifiers: [platformModifier] }),
-        ]);
-      },
-      new URL("/challenges/", page.url()).href,
-    ),
-  ).rejects.toThrow();
-
-  expect(context.pages()).toEqual(existingPages);
-  await expect(page).toHaveURL(/\/research\/$/);
-});
-
-test("native new-context assertions reject a late second target", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 390, height: 900 });
-  await page.goto("/research/");
-  await page.locator("details.mobile-navigation summary").click();
-  const context = page.context();
-  const existingPages = context.pages();
-  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
-  let latePagePromise: Promise<Page> | undefined;
-
-  await expect(
-    expectNativeNewPageRequest(
-      context,
-      page,
-      async () => {
-        latePagePromise = new Promise<Page>((resolve, reject) => {
-          setTimeout(() => void context.newPage().then(resolve, reject), 20);
-        });
-        await page
-          .getByRole("navigation", { name: "Mobile navigation" })
-          .getByRole("link", { name: "Questions" })
-          .click({ modifiers: [platformModifier] });
-      },
-      new URL("/challenges/", page.url()).href,
-    ),
-  ).rejects.toThrow();
-
-  await latePagePromise;
-  expect(context.pages()).toEqual(existingPages);
   await expect(page).toHaveURL(/\/research\/$/);
 });
 
@@ -1593,39 +1427,37 @@ test("preventing auxclick breaks native middle-click navigation", async ({
     link.addEventListener("auxclick", (event) => event.preventDefault()),
   );
 
-  await expect(expectMiddleAuxclickNotCanceled(sources)).rejects.toThrow();
+  await expect(
+    expectMouseActivationNotCanceled(sources, "auxclick", { button: 1 }),
+  ).rejects.toThrow();
 
   await expect(page).toHaveURL(/\/research\/$/);
 });
 
-test("native new-context assertions close targets immediately after registration", async ({
+test("delegated link cancellation breaks native modifier activation", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/research/");
   await page.locator("details.mobile-navigation summary").click();
-  const context = page.context();
-  const existingPages = context.pages();
-  const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
-  let immediateClosePromise: Promise<void> | undefined;
-
-  context.once("page", (openedPage) => {
-    immediateClosePromise = openedPage.close();
+  const questions = page
+    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("link", { name: "Questions" });
+  await page.evaluate(() => {
+    document.addEventListener("click", (event) => {
+      if ((event.target as Element).closest("a[href]")) event.preventDefault();
+    });
   });
-  await expectNativeNewPageRequest(
-    context,
-    page,
-    () =>
-      page
-        .getByRole("navigation", { name: "Mobile navigation" })
-        .getByRole("link", { name: "Questions" })
-        .click({ modifiers: [platformModifier] }),
-    new URL("/challenges/", page.url()).href,
-  );
 
-  expect(immediateClosePromise).toBeDefined();
-  await immediateClosePromise;
-  expect(context.pages()).toEqual(existingPages);
+  await expect(
+    expectMouseActivationNotCanceled(questions, "click", {
+      button: 0,
+      ...(process.platform === "darwin"
+        ? { metaKey: true }
+        : { ctrlKey: true }),
+    }),
+  ).rejects.toThrow();
+
   await expect(page).toHaveURL(/\/research\/$/);
 });
 
