@@ -53,6 +53,38 @@ describe("browser page cleanup", () => {
     expect(sourcePage.close).not.toHaveBeenCalled();
   });
 
+  it("closes a new context page when the request page remains unavailable", async () => {
+    const sourcePage = page();
+    const contextPage = page();
+
+    await closeEventuallyOpenedPages(
+      { pages: () => [sourcePage, contextPage] },
+      new Set([sourcePage]),
+      () => undefined,
+      20,
+    );
+
+    expect(contextPage.close).toHaveBeenCalledOnce();
+    expect(sourcePage.close).not.toHaveBeenCalled();
+  });
+
+  it("closes distinct request and context targets while preserving the source", async () => {
+    const sourcePage = page();
+    const requestPage = page();
+    const contextPage = page();
+
+    await closeEventuallyOpenedPages(
+      { pages: () => [sourcePage, contextPage] },
+      new Set([sourcePage]),
+      () => requestPage,
+      20,
+    );
+
+    expect(requestPage.close).toHaveBeenCalledOnce();
+    expect(contextPage.close).toHaveBeenCalledOnce();
+    expect(sourcePage.close).not.toHaveBeenCalled();
+  });
+
   it("fails when neither the request nor context exposes a target", async () => {
     const sourcePage = page();
     await expect(
