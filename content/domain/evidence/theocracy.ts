@@ -194,7 +194,7 @@ export const theocracyEvidenceDocuments = [
   statement(
     "theocracy-contested-family",
     "Theocracy names a contested family of classifications",
-    "Huzakai traces theocracy from a claim of divine rule to several arrangements in which religious authority is connected to government; the term does not identify one timeless institutional form.",
+    "Zakai traces theocracy from a claim of divine rule to several arrangements in which religious authority is connected to government; the term does not identify one timeless institutional form.",
     "definition",
   ),
   statement(
