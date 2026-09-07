@@ -245,6 +245,8 @@ export const reviewedOrientationLabels = {
   "entity:vatican-city": "Vatican City",
   "entity:vatican-city-authority-2023-present":
     "Vatican City under the 2023 Fundamental Law",
+  "entity:vatican-commission-membership-amended-2025":
+    "Vatican commission membership rule amended",
   "entity:vatican-post-2023-fundamental-law-episode":
     "Vatican authority under the 2023 Fundamental Law",
   "entity:tonga": "Tonga",

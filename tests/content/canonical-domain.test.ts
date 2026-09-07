@@ -87,6 +87,7 @@ describe("canonical vertical slice", () => {
     ]);
     expect(transition?.toEpisodeIds).toEqual(["liquidation-board-period-1992"]);
     expect(entitiesOfKind("event").map(({ id }) => id)).toEqual([
+      "vatican-commission-membership-amended-2025",
       "wage-earner-fund-board-abolition",
       "zapatista-autonomy-reorganization-2023",
       "zapatista-caracoles-jbg-formation-announced-2003",

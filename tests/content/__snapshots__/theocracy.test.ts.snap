@@ -5,7 +5,7 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "pp. 1–2, historical meanings and modern forms",
+        "locator": "pp. 342–343, historical meanings and modern forms",
         "role": "supports",
         "sourceId": "huzakai-theocracy-source",
       },
@@ -17,7 +17,7 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "pp. 1–2, divine rule and priestly rule",
+        "locator": "pp. 342–343, divine rule and priestly rule",
         "role": "supports",
         "sourceId": "huzakai-theocracy-source",
       },
@@ -53,7 +53,7 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "p. 2, institutional forms",
+        "locator": "p. 343, institutional forms",
         "role": "qualifies",
         "sourceId": "huzakai-theocracy-source",
       },
@@ -65,7 +65,7 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "pp. 1–2, divine rule and human institutions",
+        "locator": "pp. 342–343, divine rule and human institutions",
         "role": "qualifies",
         "sourceId": "huzakai-theocracy-source",
       },
@@ -89,7 +89,7 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "p. 1, conceptual history",
+        "locator": "p. 342, conceptual history",
         "role": "context",
         "sourceId": "huzakai-theocracy-source",
       },
@@ -233,19 +233,14 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "pp. 1–12 and 293–310",
-        "role": "supports",
-        "sourceId": "schirazi-constitution-iran-source",
-      },
-      {
-        "locator": "sections on sovereignty, institutions, and contradictions",
+        "locator": "sections ‘The Islamic character of the Constitution’ and ‘Constitutional conflicts and amendments,’ especially discussion of articles 56–61 and institutional conflict",
         "role": "supports",
         "sourceId": "iranica-iran-constitution-source",
       },
     ],
     "id": "iran-hybrid-rival-reading",
     "statementKind": "classification",
-    "text": "Schirazi argues that Iran's constitutional order joins popular-sovereignty institutions to clerical supervisory authority and documents persistent conflict rather than a single undifferentiated clerical chain of command.",
+    "text": "Schirazi's institutional account identifies unresolved constitutional tensions among popular participation, separate state institutions, and clerical supervisory authority rather than a single undifferentiated chain of command.",
   },
   {
     "citations": [
@@ -279,14 +274,26 @@ exports[`foundational Theocracy guide > pins every Statement and precise citatio
   {
     "citations": [
       {
-        "locator": "articles 7–8",
+        "locator": "articles 7–8 as promulgated 13 May 2023",
         "role": "supports",
         "sourceId": "vatican-fundamental-law-2023-source",
       },
     ],
     "id": "vatican-legislative-commission",
     "statementKind": "observation",
-    "text": "Articles 7 and 8 provide that the Pontifical Commission exercises legislative power except in matters reserved to the Pope and is composed of cardinals and other members appointed for five-year terms.",
+    "text": "As enacted in 2023, Articles 7 and 8 assigned legislative power to the Pontifical Commission except in matters reserved to the Pope and specified a Cardinal President and other Cardinals appointed for five-year terms; the membership rule was replaced in November 2025.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "paragraph 1 and entry-into-force clause",
+        "role": "supports",
+        "sourceId": "vatican-commission-amendment-2025-source",
+      },
+    ],
+    "id": "vatican-commission-amendment",
+    "statementKind": "observation",
+    "text": "Leo XIV's 19 November 2025 apostolic letter abrogated and replaced Article 8(1), specifying that the Pontifical Commission comprises the Cardinal and other members, including the President, appointed by the Pope for five-year terms; it entered into force on publication.",
   },
   {
     "citations": [
@@ -405,7 +412,7 @@ exports[`foundational Theocracy guide > pins the concept, cases, placements, obl
         "iran",
       ],
       "publicationStatus": "reviewed",
-      "scope": "The formal amended constitutional design and Schirazi's account of its institutional conflict; not every rule in use, later election, Iranian society, Islam, or Shi'a traditions.",
+      "scope": "The formal amended constitutional design and a bounded scholarly account of its institutional tensions; not every rule in use, later election, Iranian society, Islam, or Shi'a traditions.",
       "selectionRationale": "Tests a constitutional-theocracy classification where elections and secularly staffed institutions coexist with religious qualification, review, and leadership powers.",
       "startDate": {
         "certainty": "exact",
@@ -432,8 +439,11 @@ exports[`foundational Theocracy guide > pins the concept, cases, placements, obl
       "locationIds": [
         "vatican-city",
       ],
+      "materialChangeEventIds": [
+        "vatican-commission-membership-amended-2025",
+      ],
       "publicationStatus": "reviewed",
-      "scope": "Vatican City's formal constitutional offices and official account of first-year implementation; not the Holy See's entire ecclesial government, Catholicism, Christianity, or informal practice beyond the reviewed record.",
+      "scope": "Vatican City's formal constitutional offices under the 2023 Fundamental Law as amended through 19 November 2025; not the Holy See's entire ecclesial government, Catholicism, Christianity, or informal practice beyond the reviewed record.",
       "selectionRationale": "Tests a theocracy classification where a religious officeholder holds plenary state power but distinct organs ordinarily exercise legislative, executive, and judicial functions.",
       "startDate": {
         "certainty": "exact",
@@ -678,6 +688,7 @@ exports[`foundational Theocracy guide > pins the concept, cases, placements, obl
       "addressedStatementIds": [
         "vatican-pope-sovereign",
         "vatican-legislative-commission",
+        "vatican-commission-amendment",
         "vatican-executive-governorate",
         "vatican-judicial-name",
         "vatican-delegation-boundary",
@@ -779,6 +790,7 @@ exports[`foundational Theocracy guide > pins the concept, cases, placements, obl
       },
       "statementIds": [
         "vatican-pope-sovereign",
+        "vatican-commission-amendment",
         "pope-religious-state-office",
         "vatican-delegation-boundary",
         "vatican-classification-qualified",
@@ -788,7 +800,7 @@ exports[`foundational Theocracy guide > pins the concept, cases, placements, obl
         "id": "vatican-post-2023-fundamental-law-episode",
         "kind": "case-episode",
       },
-      "uncertainty": "High confidence in ultimate authority under the 2023 law; ordinary delegated practice and the distinct international personality of the Holy See remain outside this placement.",
+      "uncertainty": "High confidence in ultimate authority under the 2023 law as amended through 19 November 2025; ordinary delegated practice and the distinct international personality of the Holy See remain outside this placement.",
       "value": {
         "categoryId": "plenary-religious-office",
         "kind": "category",

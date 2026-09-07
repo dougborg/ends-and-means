@@ -42,6 +42,7 @@ const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
     "religiously-grounded-governing-authority",
     "vatican-city",
     "vatican-city-authority-2023-present",
+    "vatican-commission-membership-amended-2025",
     "vatican-post-2023-fundamental-law-episode",
   ].map((id) => ({
     targetType: "entity" as const,

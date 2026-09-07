@@ -11,6 +11,7 @@ const source = (
   workType: "article" | "book" | "constitution" | "law" | "other",
   sourceType: "article" | "edition" | "web-page",
   year?: number,
+  manifestationTitle?: string,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -30,9 +31,9 @@ const source = (
     entity: {
       id: `${id}-source`,
       kind: "source",
-      label: title,
+      label: manifestationTitle ?? title,
       description: `The consulted ${publisher} manifestation of ${title}.`,
-      title,
+      title: manifestationTitle ?? title,
       sourceType,
       workId: `${id}-work`,
       contributorDisplay: contributors,
@@ -78,11 +79,12 @@ export const theocracyEvidenceDocuments = [
     "huzakai-theocracy",
     "Theocracy",
     ["Avihu Zakai"],
-    "The Encyclopedia of Political Thought / Hebrew University of Jerusalem",
+    "Macmillan Reference USA",
     "https://avihuzakai.huji.ac.il/sites/default/files/avihuzakai/files/theocracy.pdf",
     "article",
-    "article",
-    2015,
+    "edition",
+    2008,
+    "International Encyclopedia of the Social Sciences, 2nd edition, volume 8",
   ),
   ...source(
     "hirschl-constitutional-theocracy",
@@ -115,16 +117,6 @@ export const theocracyEvidenceDocuments = [
     2011,
   ),
   ...source(
-    "schirazi-constitution-iran",
-    "The Constitution of Iran: Politics and the State in the Islamic Republic",
-    ["Asghar Schirazi"],
-    "I.B. Tauris / University of Manchester repository",
-    "https://pure.manchester.ac.uk/ws/portalfiles/portal/122883014/FULL_TEXT.PDF",
-    "book",
-    "edition",
-    1997,
-  ),
-  ...source(
     "vatican-fundamental-law-2023",
     "Legge fondamentale dello Stato della Città del Vaticano",
     ["Francis"],
@@ -133,6 +125,16 @@ export const theocracyEvidenceDocuments = [
     "law",
     "web-page",
     2023,
+  ),
+  ...source(
+    "vatican-commission-amendment-2025",
+    "On the Composition and Presidency of the Pontifical Commission for Vatican City State",
+    ["Leo XIV"],
+    "The Holy See",
+    "https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251119-il-governatorato.html",
+    "law",
+    "web-page",
+    2025,
   ),
   ...source(
     "vatican-law-one-year",
@@ -300,8 +302,8 @@ export const theocracyEvidenceDocuments = [
   ),
   statement(
     "iran-hybrid-rival-reading",
-    "Schirazi describes conflict between Islamic and republican elements",
-    "Schirazi argues that Iran's constitutional order joins popular-sovereignty institutions to clerical supervisory authority and documents persistent conflict rather than a single undifferentiated clerical chain of command.",
+    "Schirazi identifies constitutional contradictions between authorities",
+    "Schirazi's institutional account identifies unresolved constitutional tensions among popular participation, separate state institutions, and clerical supervisory authority rather than a single undifferentiated chain of command.",
     "classification",
   ),
   statement(
@@ -318,8 +320,14 @@ export const theocracyEvidenceDocuments = [
   ),
   statement(
     "vatican-legislative-commission",
-    "A commission ordinarily exercises Vatican legislative power",
-    "Articles 7 and 8 provide that the Pontifical Commission exercises legislative power except in matters reserved to the Pope and is composed of cardinals and other members appointed for five-year terms.",
+    "The 2023 law assigned legislative power to a cardinal commission",
+    "As enacted in 2023, Articles 7 and 8 assigned legislative power to the Pontifical Commission except in matters reserved to the Pope and specified a Cardinal President and other Cardinals appointed for five-year terms; the membership rule was replaced in November 2025.",
+    "observation",
+  ),
+  statement(
+    "vatican-commission-amendment",
+    "A 2025 amendment replaced the commission membership rule",
+    "Leo XIV's 19 November 2025 apostolic letter abrogated and replaced Article 8(1), specifying that the Pontifical Commission comprises the Cardinal and other members, including the President, appointed by the Pope for five-year terms; it entered into force on publication.",
     "observation",
   ),
   statement(
@@ -428,7 +436,7 @@ export const theocracyEvidenceDocuments = [
       locationIds: ["iran"],
       startDate: { year: 1989, month: 7, day: 28, certainty: "exact" },
       scope:
-        "The formal amended constitutional design and Schirazi's account of its institutional conflict; not every rule in use, later election, Iranian society, Islam, or Shi'a traditions.",
+        "The formal amended constitutional design and a bounded scholarly account of its institutional tensions; not every rule in use, later election, Iranian society, Islam, or Shi'a traditions.",
       selectionRationale:
         "Tests a constitutional-theocracy classification where elections and secularly staffed institutions coexist with religious qualification, review, and leadership powers.",
       conditionStatementIds: [
@@ -469,8 +477,11 @@ export const theocracyEvidenceDocuments = [
         "iran-leader-powers",
         "iran-expediency-council",
       ],
-      ruleInUseStatementIds: ["iran-hybrid-rival-reading"],
-      interactionStatementIds: ["iran-classification-qualified"],
+      ruleInUseStatementIds: [],
+      interactionStatementIds: [
+        "iran-hybrid-rival-reading",
+        "iran-classification-qualified",
+      ],
       outcomeStatementIds: [],
       ...reviewed,
     },
@@ -486,7 +497,7 @@ export const theocracyEvidenceDocuments = [
       locationIds: ["vatican-city"],
       startDate: { year: 2023, month: 6, day: 7, certainty: "exact" },
       scope:
-        "Vatican City's formal constitutional offices and official account of first-year implementation; not the Holy See's entire ecclesial government, Catholicism, Christianity, or informal practice beyond the reviewed record.",
+        "Vatican City's formal constitutional offices under the 2023 Fundamental Law as amended through 19 November 2025; not the Holy See's entire ecclesial government, Catholicism, Christianity, or informal practice beyond the reviewed record.",
       selectionRationale:
         "Tests a theocracy classification where a religious officeholder holds plenary state power but distinct organs ordinarily exercise legislative, executive, and judicial functions.",
       conditionStatementIds: [
@@ -494,6 +505,7 @@ export const theocracyEvidenceDocuments = [
         "pope-religious-state-office",
       ],
       episodeIds: ["vatican-post-2023-fundamental-law-episode"],
+      materialChangeEventIds: ["vatican-commission-membership-amended-2025"],
       asOf: "2026-09-07",
       lastReviewedAt: "2026-09-07",
       freshness: "current",
@@ -512,7 +524,7 @@ export const theocracyEvidenceDocuments = [
       locationIds: ["vatican-city"],
       startDate: { year: 2023, month: 6, day: 7, certainty: "exact" },
       scope:
-        "Formal authority and delegated organs under the 2023 law, reviewed through 7 September 2026.",
+        "Formal authority and delegated organs under the 2023 law, including the Article 8(1) text substituted in November 2025, reviewed through 7 September 2026.",
       conditionStatementIds: [
         "holy-see-vatican-distinct",
         "pope-religious-state-office",
@@ -520,12 +532,31 @@ export const theocracyEvidenceDocuments = [
       formalRuleStatementIds: [
         "vatican-pope-sovereign",
         "vatican-legislative-commission",
+        "vatican-commission-amendment",
         "vatican-executive-governorate",
         "vatican-judicial-name",
       ],
-      ruleInUseStatementIds: ["vatican-delegation-boundary"],
-      interactionStatementIds: ["vatican-classification-qualified"],
+      ruleInUseStatementIds: [],
+      interactionStatementIds: [
+        "vatican-delegation-boundary",
+        "vatican-classification-qualified",
+      ],
       outcomeStatementIds: [],
+      ...reviewed,
+    },
+  },
+  {
+    documentType: "entity",
+    entity: {
+      id: "vatican-commission-membership-amended-2025",
+      kind: "event",
+      label: "Vatican commission membership rule amended",
+      description:
+        "Leo XIV replaced Article 8(1) of the 2023 Fundamental Law, a material textual change recorded for case freshness without assigning causal or turning-point significance.",
+      eventKindIds: ["institutional-reorganization"],
+      placeIds: ["vatican-city"],
+      startDate: { year: 2025, month: 11, day: 19, certainty: "exact" },
+      descriptionStatementIds: ["vatican-commission-amendment"],
       ...reviewed,
     },
   },
