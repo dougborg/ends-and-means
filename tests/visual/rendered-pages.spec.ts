@@ -6,6 +6,7 @@ import {
   type Request,
   test,
 } from "@playwright/test";
+import { closeEventuallyOpenedPages } from "../../scripts/browser-page-cleanup";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -85,11 +86,10 @@ async function expectNativeNewPageRequest(
       }
     }
   } finally {
-    await requestPromise.catch(() => undefined);
-    for (const openedPage of context.pages()) {
-      if (!existingPages.has(openedPage) && !openedPage.isClosed()) {
-        await openedPage.close();
-      }
+    const observedRequest =
+      navigationRequest ?? (await requestPromise.catch(() => undefined));
+    if (observedRequest) {
+      await closeEventuallyOpenedPages(context, existingPages);
     }
   }
 }
