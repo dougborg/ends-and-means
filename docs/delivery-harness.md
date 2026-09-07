@@ -165,15 +165,20 @@ unoccupied port when a runner needs an explicit assignment. The server remains
 non-reusable in every environment, which proves the suite is exercising the
 preview process started from the current worktree and its local `dist` build.
 
-Native-navigation event listeners use bounded waits and close every page or
-context in `finally` blocks. Modifier and middle-button checks assert the
-browser's top-level document request from a distinct page frame; this remains
-observable while a background target is still `about:blank` or has not emitted
-a Playwright `page` event. Cleanup polls for that eventual target for one
-bounded second and closes it; harness tests reproduce request-before-page
-ordering and reject a target that never becomes available. The modifier
-assertion selects `Meta` on macOS and
-`Control` elsewhere rather than relying on an environment-dependent alias.
+Browser engines own modifier- and middle-button tab creation and document
+commit. Hosted headless Chromium does not expose those lifecycle events
+reliably, so the suite stops at the product-owned boundary: the rendered value
+must be a real anchor with its exact `href` and no forced `target`, and neither
+its cancelable modifier `click` nor button-1 `auxclick` event may be prevented.
+After application load, the test installs a terminal window listener that
+records cancellation after target and document handlers, then prevents the
+synthetic default navigation itself. The anchor remains unchanged throughout,
+so delegated `a[href]` handlers and synchronous attribute mutations remain
+observable. Negative tests install `preventDefault()` independently for each
+event path and through a delegated document handler, proving the contract check
+fails. The modifier assertion
+selects `Meta` on macOS and `Control` elsewhere rather than relying on an
+environment-dependent alias.
 No-JavaScript anchors use focused Enter activation and wait for their exact URL
 condition; forced activation is not an acceptable substitute for native
 navigation. To repeat the two regression cohorts without diagnostic retries:
@@ -181,5 +186,5 @@ navigation. To repeat the two regression cohorts without diagnostic retries:
 ```sh
 CI=1 pnpm exec playwright test tests/visual/rendered-pages.spec.ts \
   --grep "mobile links preserve|subject guide works without JavaScript" \
-  --repeat-each 25 --retries 0
+  --repeat-each 50 --retries 0
 ```

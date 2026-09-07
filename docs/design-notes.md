@@ -48,7 +48,7 @@ outside-click, and focus-arrival behavior.
 When keyboard focus advances beyond the last menu link, the panel closes without
 moving focus away from the next page control.
 Link activation is left entirely to the browser so pointer, touch, keyboard,
-modifier-key, and new-context navigation retain their native behavior.
+modifier-key, and middle-button navigation retain their native behavior.
 Desktop navigation and the footer site map retain their existing structures.
 
 Both landmarks consume the same typed public-route registry.
