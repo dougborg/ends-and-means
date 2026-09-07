@@ -512,6 +512,42 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "environmentalism-colonial-conservation-outcomes",
+    obligationType: "counterevidence",
+    target: "concept:environmentalism#justice",
+    status: "open",
+  },
+  {
+    id: "environmentalism-gendered-claims",
+    obligationType: "counterargument",
+    target: "concept:environmentalism#chipko",
+    status: "open",
+  },
+  {
+    id: "environmentalism-knowledge-authority",
+    obligationType: "counterargument",
+    target: "concept:environmentalism",
+    status: "open",
+  },
+  {
+    id: "environmentalism-movement-effects",
+    obligationType: "counterfactual",
+    target: "concept:environmentalism#warren-county",
+    status: "open",
+  },
+  {
+    id: "environmentalism-north-south-translation",
+    obligationType: "research-gap",
+    target: "concept:environmentalism#meanings",
+    status: "open",
+  },
+  {
+    id: "environmentalism-nuclear-divergence",
+    obligationType: "research-gap",
+    target: "concept:environmentalism#boundaries",
+    status: "open",
+  },
+  {
     id: "fascism-crossregional-boundary",
     obligationType: "counterargument",
     target: "concept:fascism#variation",

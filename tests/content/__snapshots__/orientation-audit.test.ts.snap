@@ -650,6 +650,48 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "targetType": "entity",
   },
   {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "chipko-garhwal-1973-1981",
+    "identityIds": [],
+    "label": "Chipko actions in Garhwal, 1973–1981",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Chipko_movement",
+    ],
+    "reason": "Chipko movement directly defines or situates Chipko actions in Garhwal, 1973–1981; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Chipko_movement",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "chipko-garhwal-actions-episode",
+    "identityIds": [],
+    "label": "Selected Garhwal Chipko actions, 1973–1981",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Chipko_movement",
+    ],
+    "reason": "Chipko movement directly defines or situates Selected Garhwal Chipko actions, 1973–1981; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Chipko_movement",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
     "consideredCandidates": [
       {
         "boundary": "Economic planning was the nearest canonical candidate opened, but it is not the same identity as Controlled Materials Plan claimant agencies: The officially designated CMP claimant agencies, treated collectively only for their shared allotment role.",
@@ -1288,6 +1330,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "environmentalism",
+    "identityIds": [
+      "Q2855609",
+    ],
+    "label": "Environmentalism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Environmentalism",
+    ],
+    "reason": "The candidate identifies the same contested family, while the project record preserves science, policy, movement, and Indigenous-governance boundaries.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Environmentalism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q2855609",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q2855609",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "equal-political-standing",
     "identityIds": [],
     "label": "Equal political standing",
@@ -1543,6 +1616,36 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Republicanism",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "garhwal-uttarakhand",
+    "identityIds": [
+      "Q1460406",
+    ],
+    "label": "Garhwal, Uttarakhand",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Garhwal_division",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Garhwal_division",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q1460406",
+        "match": "close",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q1460406",
       },
     ],
     "targetType": "entity",
@@ -3973,6 +4076,48 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "te-awa-tupua-enacted-framework-episode",
+    "identityIds": [],
+    "label": "Te Awa Tupua enacted framework, 2017–present",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Te_Awa_Tupua",
+    ],
+    "reason": "Te Awa Tupua directly defines or situates Te Awa Tupua enacted framework, 2017–present; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Te_Awa_Tupua",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "te-awa-tupua-framework-2017-present",
+    "identityIds": [],
+    "label": "Te Awa Tupua framework, 2017–present",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Te_Awa_Tupua",
+    ],
+    "reason": "Te Awa Tupua directly defines or situates Te Awa Tupua framework, 2017–present; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Te_Awa_Tupua",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "theocracy",
     "identityIds": [
       "Q44405",
@@ -4367,6 +4512,78 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "warren-county-environmental-justice-1982-1991",
+    "identityIds": [],
+    "label": "Warren County and environmental-justice organizing, 1982–1991",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/North_Carolina_PCB_protest,_1982",
+    ],
+    "reason": "North Carolina PCB protest, 1982 directly defines or situates Warren County and environmental-justice organizing, 1982–1991; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/North_Carolina_PCB_protest,_1982",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "warren-county-north-carolina",
+    "identityIds": [
+      "Q507853",
+    ],
+    "label": "Warren County, North Carolina",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Warren_County,_North_Carolina",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Warren_County,_North_Carolina",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q507853",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q507853",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "warren-county-to-ej-summit-episode",
+    "identityIds": [],
+    "label": "From Warren County protest to summit principles, 1982–1991",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/North_Carolina_PCB_protest,_1982",
+    ],
+    "reason": "North Carolina PCB protest, 1982 directly defines or situates From Warren County protest to summit principles, 1982–1991; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/North_Carolina_PCB_protest,_1982",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "west-sumatra",
     "identityIds": [
       "Q2772",
@@ -4390,6 +4607,36 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "identity",
         "system": "wikidata",
         "url": "https://www.wikidata.org/wiki/Q2772",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "whanganui-river-catchment",
+    "identityIds": [
+      "Q1940419",
+    ],
+    "label": "Whanganui River catchment",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Whanganui_River",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Whanganui_River",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q1940419",
+        "match": "close",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q1940419",
       },
     ],
     "targetType": "entity",
@@ -4923,6 +5170,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Economic_democracy",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "guide-environmentalism",
+    "identityIds": [
+      "Q2855609",
+    ],
+    "label": "Environmentalism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Environmentalism",
+    ],
+    "reason": "Uses the reviewed orientation-only mapping owned by environmentalism.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Environmentalism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q2855609",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q2855609",
       },
     ],
     "targetType": "subject-guide",

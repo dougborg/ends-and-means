@@ -195,8 +195,8 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 21,
-      total: 49,
+      covered: 22,
+      total: 50,
       missingIds: expectedMissingConceptDossiers,
     });
     expect(formatContentAttentionReport(report)).not.toContain(

@@ -21,10 +21,10 @@ describe("orientation audit", () => {
         ["reviewed", "published"].includes(publicationStatus),
       ).length;
     expect(inventory).toHaveLength(expectedCount);
-    expect(inventory).toHaveLength(1182);
+    expect(inventory).toHaveLength(1262);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(194);
+    ).toHaveLength(205);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
@@ -32,7 +32,7 @@ describe("orientation audit", () => {
     ).toHaveLength(23);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
-    ).toHaveLength(965);
+    ).toHaveLength(1034);
     expect(
       inventory.filter(({ disposition }) => disposition !== "not-applicable"),
     ).toMatchSnapshot("eligible-target-decisions");

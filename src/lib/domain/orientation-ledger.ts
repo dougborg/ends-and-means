@@ -35,6 +35,29 @@ export type ReviewedOrientationDecision = {
   }>;
 };
 const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
+  ...[
+    "chipko-garhwal-1973-1981",
+    "chipko-garhwal-actions-episode",
+    "environmentalism",
+    "garhwal-uttarakhand",
+    "te-awa-tupua-enacted-framework-episode",
+    "te-awa-tupua-framework-2017-present",
+    "warren-county-environmental-justice-1982-1991",
+    "warren-county-north-carolina",
+    "warren-county-to-ej-summit-episode",
+    "whanganui-river-catchment",
+  ].map((id) => ({
+    targetType: "entity" as const,
+    id,
+    disposition: "intentionally-unmatched" as const,
+    references: [],
+  })),
+  {
+    targetType: "subject-guide",
+    id: "guide-environmentalism",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
   {
     targetType: "entity",
     id: "athens",
@@ -1999,6 +2022,22 @@ const reviewedMappingOverrides: Record<
   string,
   Omit<ReviewedOrientationDecision, "targetType" | "id">
 > = {
+  "entity:environmentalism": mapped(
+    "Environmentalism",
+    "Q2855609",
+    "exact",
+    "The candidate identifies the same contested family, while the project record preserves science, policy, movement, and Indigenous-governance boundaries.",
+  ),
+  "entity:garhwal-uttarakhand": mapped("Garhwal division", "Q1460406", "close"),
+  "entity:warren-county-north-carolina": mapped(
+    "Warren County, North Carolina",
+    "Q507853",
+  ),
+  "entity:whanganui-river-catchment": mapped(
+    "Whanganui River",
+    "Q1940419",
+    "close",
+  ),
   "entity:athens": mapped("Athens", "Q1524"),
   "entity:indonesia": mapped("Indonesia", "Q252"),
   "entity:oligarchy": mapped(
