@@ -5,6 +5,10 @@ import { workflowReferencesIn } from "../../src/lib/domain";
 import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
 import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
 import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
+import {
+  findExternalFontCss,
+  findExternalFontHtml,
+} from "../../scripts/external-font-policy";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -646,16 +650,19 @@ async function verifyReferenceRoutes() {
 describe("canonical public routes", () => {
   it("keeps published rendering independent of externally hosted fonts", async () => {
     const externalResources: string[] = [];
-    for (const file of (await walk(dist)).filter((candidate) =>
-      candidate.endsWith(".html"),
-    )) {
-      const html = await readFile(file, "utf8");
-      for (const [link] of html.matchAll(/<link\b[^>]*>/gi)) {
-        const href = link.match(/\bhref=(?:"([^"]*)"|'([^']*)')/i);
-        const value = href?.[1] ?? href?.[2];
-        if (value && /^https?:\/\//i.test(value))
-          externalResources.push(`${path.relative(dist, file)} -> ${value}`);
-      }
+    for (const file of await walk(dist)) {
+      const source = await readFile(file, "utf8");
+      const findings = file.endsWith(".html")
+        ? findExternalFontHtml(source)
+        : file.endsWith(".css")
+          ? findExternalFontCss(source)
+          : [];
+      externalResources.push(
+        ...findings.map(
+          ({ context, url }) =>
+            `${path.relative(dist, file)} [${context}] -> ${url}`,
+        ),
+      );
     }
     expect(externalResources).toEqual([]);
   });
