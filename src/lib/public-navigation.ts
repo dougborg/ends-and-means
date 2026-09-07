@@ -28,6 +28,12 @@ export const publicRoutes = [
   },
   { href: "/framework/", label: "Method", matchingPrefixes: ["/framework/"], level: "trust" },
   {
+    href: "/principles/",
+    label: "Principles",
+    matchingPrefixes: ["/principles/"],
+    level: "trust",
+  },
+  {
     href: "/governance/",
     label: "Governance",
     matchingPrefixes: ["/governance/"],

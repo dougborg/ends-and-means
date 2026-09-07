@@ -16,6 +16,9 @@ learning and comparison are the primary usable features.
 The public [research and classification method](https://endsandmeans.info/framework/)
 explains how those commitments appear on the site without requiring readers to
 learn the technical model.
+The public [editorial principles](https://endsandmeans.info/principles/)
+explain how framing, evidence, disagreement, synthesis, evaluation, AI
+assistance, and revision are handled.
 
 ## Organizing principles
 

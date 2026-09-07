@@ -1,0 +1,132 @@
+---
+import EditorialHeader from "../../components/EditorialHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { ResearchObligation, Source, Statement } from "../../lib/domain";
+import { citationsFor, entityById } from "../../lib/domain/canonical";
+import { editorialPrinciples } from "../../lib/editorial-principles";
+import { homepageTrace } from "../../lib/public-commitments";
+
+const repository = "https://github.com/dougborg/ends-and-means";
+const correctionUrl = `${repository}/issues/new?title=Correction%3A+%5Bpage+or+claim%5D&body=Page+or+claim%3A%0A%0AWhat+should+change%3A%0A%0AEvidence+and+exact+passage%3A`;
+const exampleStatement = entityById<Statement>(homepageTrace.statementId);
+const exampleObligation = entityById<ResearchObligation>(homepageTrace.obligationId);
+const exampleCitation = citationsFor(homepageTrace.statementId).find(
+  ({ id }) => id === "capitalism-marx-definition-citation-4",
+);
+const exampleSource = exampleCitation
+  ? entityById<Source>(exampleCitation.object.id)
+  : undefined;
+if (
+  exampleStatement?.kind !== "statement" ||
+  exampleObligation?.kind !== "research-obligation" ||
+  !exampleCitation ||
+  exampleSource?.kind !== "source"
+)
+  throw new Error("Editorial principles require a complete reviewed example trace");
+---
+
+<BaseLayout title="Editorial principles" description="How Ends and Means handles evidence, judgment, disagreement, AI assistance, originality, uncertainty, and revision." fullBleed>
+  <article class="editorial-page principles-page">
+    <EditorialHeader coordinate="EDITORIAL PRINCIPLES" title="Fairness requires visible judgment.">
+      <p class="dek measure-standfirst">Ends and Means makes choices about scope, language, classification, evidence, and evaluation. The standard is not a view from nowhere; it is a fair, transparent, and revisable account whose claims and judgments can be inspected and challenged.</p>
+    </EditorialHeader>
+
+    <nav class="section-jump" aria-label="On this page">
+      <p class="coordinate">ON THIS PAGE</p>
+      <ul>
+        <li><a href="#commitments">Commitments</a></li>
+        <li><a href="#claim-types">Kinds of claim</a></li>
+        <li><a href="#example">Example</a></li>
+        <li><a href="#disagreement">Disagreement</a></li>
+        <li><a href="#sources">Sources and synthesis</a></li>
+        <li><a href="#limits">Uncertainty</a></li>
+        <li><a href="#purpose">Explanation and advocacy</a></li>
+        <li><a href="#ai">AI-assisted work</a></li>
+        <li><a href="#respond">Correction</a></li>
+      </ul>
+    </nav>
+
+    <section class="method-records" id="commitments" aria-labelledby="commitments-title">
+      <header>
+        <p class="coordinate">OUR COMMITMENTS</p>
+        <h2 id="commitments-title">What should shape every explanation?</h2>
+        <p>These commitments apply to short summaries as well as detailed cases and comparisons. Automated checks enforce structural boundaries; authors, reviewers, and the project editor remain responsible for the judgments machines cannot make.</p>
+      </header>
+      <div>
+        {editorialPrinciples.map((principle) => (
+          <section id={principle.id}>
+            <h3>{principle.heading}</h3>
+            <p>{principle.summary}</p>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section class="model-boundary" id="example" aria-labelledby="example-title">
+      <p class="coordinate">ONE PRACTICAL EXAMPLE</p>
+      <h2 id="example-title">An attributed definition remains open to evidence and qualification.</h2>
+      <p>The <a href={`/guides/${homepageTrace.subject.id}/#${exampleStatement.id}`}>Capitalism explanation</a> identifies Karl Marx’s account as an attributed definition rather than silently adopting it as the project’s universal definition. The connected claim reads: “{exampleStatement.text}”</p>
+      <p>Its citation points to <a href={`/sources/${exampleSource.id}/`}>{exampleSource.title}</a> at {exampleCitation.locator} and records the evidence role as “{exampleCitation.role}.” A linked <a href={`/research/#${exampleObligation.id}`}>open qualification</a> names evidence that could narrow the account instead of hiding the limitation in a general disclaimer.</p>
+    </section>
+
+    <section class="research-notes" id="claim-types" aria-labelledby="claim-types-title">
+      <h2 id="claim-types-title">What kind of statement am I reading?</h2>
+      <section><h3>Sourced fact</h3><p>A checkable description of a law, institution, event, action, or result points to the particular evidence consulted. The citation’s location and role show what the evidence is being asked to establish.</p></section>
+      <section><h3>Attributed interpretation</h3><p>A scholar’s explanation, a participant’s purpose, or a community’s self-description is identified with its speaker. Recording a view accurately does not make it the project’s conclusion.</p></section>
+      <section><h3>Editorial inference</h3><p>When the project draws a conclusion from several facts, the reasoning and its limits should be visible. Sequence, resemblance, and association do not establish cause by themselves.</p></section>
+      <section><h3>Value judgment</h3><p>An evaluation states the standard being applied and the assumptions behind it. Evidence can show whether an outcome occurred; it cannot by itself decide how liberty, equality, security, participation, prosperity, dignity, or another value should be weighed.</p></section>
+    </section>
+
+    <section class="model-boundary" id="disagreement" aria-labelledby="disagreement-title">
+      <p class="coordinate">FAIRNESS AND DISAGREEMENT</p>
+      <h2 id="disagreement-title">A serious rival view should be recognizable to someone who holds it.</h2>
+      <p>The project tries to state an argument’s aims, reasoning, and strongest relevant evidence before criticizing it. It seeks consequential counterevidence and alternative explanations, including evidence that cuts against an expected conclusion.</p>
+      <p>This does not require splitting every conclusion down the middle. A weakly supported claim does not receive equal weight merely because it creates two sides, and a dispute is not invented when the evidence is materially one-sided. The account should explain why evidence was weighted differently.</p>
+      <p>Community self-description matters when a community’s institutions, identity, or history are at issue. It is considered alongside appropriate community-authored, oral-history, archival, legal, and scholarly evidence without treating one speaker as the voice of an internally varied community.</p>
+    </section>
+
+    <section class="model-boundary" id="sources" aria-labelledby="sources-title">
+      <p class="coordinate">SOURCES AND ORIGINALITY</p>
+      <h2 id="sources-title">Authority depends on the question being asked.</h2>
+      <p>Primary records, official statistics, peer-reviewed research, academic books, institutional publications, community-authored work, and oral history can each be appropriate for different claims. Prestige alone does not make a source relevant, and access to a record does not grant authority to speak for a community.</p>
+      <p>Every substantial factual claim should point to the edition, scan, dataset, recording, or webpage actually consulted and to a precise page, section, table, timestamp, or other location. A citation may support, challenge, qualify, or contextualize a claim; background context is not presented as direct proof.</p>
+      <p>Writers synthesize from checked claims and notes rather than modifying a source’s sentences. Distinctive wording is quoted only when the wording matters, with attribution and a precise location. Automated similarity checks identify passages for a person to compare; they cannot decide whether prose is original, fair, or properly attributed.</p>
+    </section>
+
+    <section class="method-records" id="limits" aria-labelledby="limits-title">
+      <header>
+        <p class="coordinate">UNCERTAINTY AND OPEN QUESTIONS</p>
+        <h2 id="limits-title">A limit should say what remains unresolved.</h2>
+        <p>“More research is needed” is not enough. A useful limit identifies the claim at stake, the missing or conflicting evidence, and what kind of finding could alter the conclusion.</p>
+      </header>
+      <div>
+        <section><h3>Counterevidence</h3><p>Evidence that may contradict an observation stays connected to the exact claim it tests. The conclusion narrows while the conflict remains unresolved.</p></section>
+        <section><h3>Counterarguments</h3><p>An argument may challenge a definition, interpretation, mechanism, or evaluative standard without disputing the underlying event. Its reasoning is kept distinct from contrary empirical evidence.</p></section>
+        <section><h3>Counterfactuals</h3><p>A causal claim should face plausible alternatives: what would likely have happened without the named institution, policy, condition, or event? The comparison and missing evidence are stated rather than hidden inside causal language.</p></section>
+        <section><h3>Transfer limits</h3><p>A result from one place, period, population, or institutional setting does not automatically travel to another. A bounded case establishes only what its evidence and selection can sustain.</p></section>
+      </div>
+    </section>
+
+    <section class="model-boundary" id="purpose" aria-labelledby="purpose-title">
+      <p class="coordinate">PURPOSE</p>
+      <h2 id="purpose-title">Explanation, evaluation, and advocacy are different acts.</h2>
+      <p>An explanation identifies meanings, aims, institutions, mechanisms, and evidence. An evaluation applies a disclosed standard and shows how its assumptions affect the judgment. Advocacy asks readers to support or oppose a position.</p>
+      <p>The project’s primary purpose is explanation and comparison. It can reach an evaluative conclusion when the evidence and criterion support one, but it should label that move. If material advocates a position, that change of purpose must be explicit rather than smuggled into neutral-sounding description.</p>
+    </section>
+
+    <section class="model-boundary" id="ai" aria-labelledby="ai-title">
+      <p class="coordinate">AI-ASSISTED WORK</p>
+      <h2 id="ai-title">AI can assist the work; it cannot carry editorial responsibility.</h2>
+      <p>AI may help find possible sources, compare records, synthesize notes, draft language, and flag inconsistencies. Its output is never evidence or authority. A person must open the cited material, inspect the relevant passage, and decide whether the source and wording fit the claim.</p>
+      <p>People remain accountable for source fitness, framing, inclusion, classification, interpretation, wording, fairness, originality, and publication. Automated results are prompts for attention, not verdicts about truth, plagiarism, identity, balance, or harm.</p>
+    </section>
+
+    <section class="model-boundary" id="respond" aria-labelledby="respond-title">
+      <p class="coordinate">CORRECTION AND CONTINUOUS IMPROVEMENT</p>
+      <h2 id="respond-title">The published account can change when its evidence or reasoning should change.</h2>
+      <p>A focused open question preserves an unresolved counterargument, evidence conflict, missing comparison, or causal alternative beside the conclusion it limits. New evidence can resolve part of the question, revise a claim, change a classification, or expose a problem in the method itself.</p>
+      <p><a class="print-short-url" href={correctionUrl}>Suggest a correction in a public GitHub issue</a> by naming the affected page or claim, explaining what should change, and linking the evidence and exact passage when possible. No private editorial channel exists; do not submit private, restricted, or sensitive personal information. The <a href="/governance/#corrections">editorial governance policy</a> explains how corrections and reconsideration are assessed, who decides, and how conflicts are handled.</p>
+      <p>For further detail, read the <a href="/framework/">research and classification method</a>, the <a href={`${repository}/blob/main/docs/project-vision.md`}>project vision</a>, or the <a href={`${repository}/blob/main/CONTRIBUTING.md`}>contribution guide</a>. Researchers and reviewers can also inspect the optional <a href={`${repository}/blob/main/.agents/skills/research-content-changes/SKILL.md`}>research protocol</a> and <a href={`${repository}/blob/main/.agents/skills/coordinate-project-delivery/SKILL.md`}>review protocol</a>.</p>
+    </section>
+  </article>
+</BaseLayout>

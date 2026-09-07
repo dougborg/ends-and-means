@@ -168,8 +168,8 @@ pre { overflow-x: auto; margin: 0; padding: clamp(1.25rem,4vw,3rem); border-top:
 .source-page { display: grid; gap: var(--space-section); }
 .source-page > header { max-width: min(100%, var(--measure-header)); }
 .section-jump { padding: 1.25rem; border-top: 3px solid var(--text); background: var(--surface); }
-.section-jump ul { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1rem 0 0; padding: 0; list-style: none; }
-.section-jump a { font-size: .78rem; }
+.section-jump ul { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin: .75rem 0 0; padding: 0; list-style: none; }
+.section-jump a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; padding: .15rem 0; font-size: .78rem; }
 .section-jump a span { color: var(--text-muted); font-family: var(--font-apparatus); font-size: .7rem; }
 .reading-section { scroll-margin-top: 1rem; }
 .reading-section > header { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding-bottom: 1rem; border-bottom: 3px solid var(--text); }

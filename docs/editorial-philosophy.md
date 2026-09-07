@@ -1,7 +1,9 @@
 # Editorial Philosophy
 
-**Status:** working principles; substantive value commitments still require
-editorial discussion
+The public [editorial principles](https://endsandmeans.info/principles/) are the
+authoritative plain-language statement of these commitments.
+This document records how those commitments connect to the repository's
+research, review, and publication rules.
 
 Ends and Means is not written from nowhere. Choosing which systems to compare,
 which problems count as Challenges, what evidence deserves weight, and what belongs
@@ -10,9 +12,9 @@ when they are not.
 
 Our standard is fairness, transparency, corrigibility, and continuous
 improvement.
-The project's reader-facing voice and prose review rules are defined in the
+The project's public voice and prose review rules are defined in the
 [narrative style guide](narrative-style.md).
-Its learner-first purpose and organizing principles are defined in the
+Its purpose and organizing principles are defined in the
 [project vision](project-vision.md).
 The public [research and classification method](https://endsandmeans.info/framework/)
 explains these commitments, evidence limits, and correction paths in ordinary
@@ -35,11 +37,13 @@ before evaluating its mechanisms and record. It does not require giving every
 claim equal weight, splitting every conclusion down the middle, or withholding
 a judgment that the evidence supports.
 
-We will distinguish:
+We distinguish:
 
-- **Fact:** a claim that can be checked against cited evidence.
-- **Inference:** a conclusion drawn from facts, with its reasoning and
-  uncertainty exposed.
+- **Sourced fact:** a claim that can be checked against cited evidence.
+- **Attributed interpretation:** a scholar's explanation, a participant's
+  purpose, or a community's self-description, identified with its speaker.
+- **Editorial inference:** a conclusion drawn from facts, with its reasoning
+  and uncertainty exposed.
 - **Value judgment:** an assessment that depends partly on priorities such as
   liberty, equality, security, participation, prosperity, or human dignity.
 
@@ -65,6 +69,21 @@ behavior under rules-in-use, observed outcomes, and our causal interpretation.
 Similarity between an outcome and a stated end does not by itself establish
 intent or causation.
 
+Sources are selected for the particular work they can do.
+Primary records, official statistics, peer-reviewed research, academic books,
+institutional publications, community-authored work, and oral history may each
+be appropriate for different claims.
+Every substantial factual claim should identify the copy consulted, a precise
+location, and whether the citation supports, challenges, qualifies, or
+contextualizes the claim.
+
+Writers draft synthesis from checked claims and notes rather than modifying a
+source's sentences.
+Distinctive wording is quoted and precisely attributed when the wording
+matters.
+Automated similarity checks identify passages for human comparison; they do
+not decide originality, plagiarism, fairness, or adequate attribution.
+
 ## Visible judgment
 
 Verdicts are allowed, but they must be labeled, sourced, and explain their
@@ -77,9 +96,8 @@ an assessment should state which criterion it applies, why that criterion is
 relevant, and how uncertainty or a different normative priority could change
 the conclusion.
 
-The project may eventually state substantive editorial commitments. Those
-commitments should be adopted deliberately and published plainly, not inferred
-after the fact from individual verdicts.
+Substantive editorial commitments are adopted deliberately and published
+plainly rather than inferred after the fact from individual verdicts.
 
 ## Correction and accountability
 

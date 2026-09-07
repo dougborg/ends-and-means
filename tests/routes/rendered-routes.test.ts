@@ -106,6 +106,7 @@ async function verifyEveryPublicRecordRenders() {
     "/reading/",
     "/research/",
     "/framework/",
+    "/principles/",
     "/governance/",
     ...entitiesOfKind("approach").map(({ id }) => `/explore/${id}/`),
     ...entitiesOfKind("case").map(({ id }) => `/cases/${id}/`),
@@ -144,6 +145,7 @@ async function verifyGlobalNavigation() {
   const expectedSiteMap = [["Home", "/"], ...expectedPrimary,
     ["Sources", "/reading/"],
     ["Method", "/framework/"],
+    ["Principles", "/principles/"],
     ["Governance", "/governance/"],
   ];
   const linksIn = (navigation: string) =>
@@ -490,7 +492,7 @@ async function verifyMethodRoute() {
     "/research/",
     "/governance/",
     "https://github.com/dougborg/ends-and-means/blob/main/docs/project-vision.md",
-    "https://github.com/dougborg/ends-and-means/blob/main/docs/editorial-philosophy.md",
+    "/principles/",
     "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
     expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
     "https://github.com/dougborg/ends-and-means/blob/main/docs/domain-model.md",
@@ -508,6 +510,7 @@ async function verifyGovernanceRoute() {
   expect(governance).toContain(`data-recusal-authority="${editorialGovernanceContract.conflictedDecision}"`);
   expect(governance).toContain(`data-record-boundary="${editorialGovernanceContract.recordBoundary}"`);
   const links = hrefs(governance);
+  expect(links).toContain("/principles/");
   expect(links.filter((href) => /title=Correction/.test(href))).toHaveLength(1);
   expect(links.filter((href) => /title=Reconsideration/.test(href))).toHaveLength(1);
   expect(links.some((href) => /security\/advisories|private.*report/i.test(href))).toBe(false);
@@ -519,8 +522,51 @@ async function verifyGovernanceRoute() {
   expect(text).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
 }
 
+async function verifyPrinciplesRoute() {
+  const principles = await readFile(routeFile("/principles/"), "utf8");
+  expect(principles).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
+  expect(hasElementWithClasses(principles, "article", ["editorial-page", "principles-page"])).toBe(true);
+  expect(hasElementWithClasses(principles, "header", ["editorial-header"])).toBe(true);
+  const text = stripMarkup(principles);
+  for (const phrase of [
+    "Fairness requires visible judgment.",
+    "Sourced fact",
+    "Attributed interpretation",
+    "Editorial inference",
+    "Value judgment",
+    "An attributed definition remains open to evidence and qualification.",
+    "A serious rival view should be recognizable",
+    "Fairness does not manufacture a dispute",
+    "Authority depends on the question being asked.",
+    "Counterevidence",
+    "Counterarguments",
+    "Counterfactuals",
+    "Transfer limits",
+    "Explanation, evaluation, and advocacy are different acts.",
+    "AI can assist the work; it cannot carry editorial responsibility.",
+    "Its output is never evidence or authority.",
+    "Suggest a correction in a public GitHub issue",
+    "No private editorial channel exists",
+    "do not submit private, restricted, or sensitive personal information",
+  ]) expect(text).toContain(phrase);
+  expect(text).not.toMatch(/learner(?:-first| path| journey)|reader(?:-first| path| journey)|pull request|worktree|\bWIP\b|migration|agent/i);
+  expect(hrefs(principles)).toEqual(expect.arrayContaining([
+    "/framework/",
+    "/guides/capitalism/#capitalism-marx-definition",
+    "/sources/marx-capital-volume-one-source/",
+    "/research/#capitalism-coerced-labor-boundary",
+    "/governance/#corrections",
+    "https://github.com/dougborg/ends-and-means/blob/main/docs/project-vision.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/CONTRIBUTING.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/research-content-changes/SKILL.md",
+    "https://github.com/dougborg/ends-and-means/blob/main/.agents/skills/coordinate-project-delivery/SKILL.md",
+    expect.stringMatching(/^https:\/\/github\.com\/dougborg\/ends-and-means\/issues\/new\?title=Correction/),
+  ]));
+}
+
 async function verifyReferenceRoutes() {
   await verifyMethodRoute();
+  await verifyPrinciplesRoute();
   await verifyGovernanceRoute();
   const research = await readFile(routeFile("/research/"), "utf8");
   const researchText = stripMarkup(research);

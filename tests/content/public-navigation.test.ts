@@ -16,6 +16,7 @@ describe("public navigation", () => {
       { label: "Questions", href: "/challenges/" },
       { label: "Sources", href: "/reading/" },
       { label: "Method", href: "/framework/" },
+      { label: "Principles", href: "/principles/" },
       { label: "Governance", href: "/governance/" },
     ]);
     expect(new Set(publicRoutes.map(({ href }) => href)).size).toBe(
@@ -45,6 +46,7 @@ describe("public navigation", () => {
     );
     expect(currentLabel("/reading/")).toBe("Sources");
     expect(currentLabel("/governance/")).toBe("Governance");
+    expect(currentLabel("/principles/")).toBe("Principles");
     expect(currentLabel("/research/")).toBe("Questions");
   });
 
