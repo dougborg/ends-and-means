@@ -415,6 +415,78 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "bandung-communique-episode",
+    "identityIds": [],
+    "label": "Bandung deliberation and communiqué",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Bandung_Conference",
+    ],
+    "reason": "Bandung Conference directly defines or situates Bandung deliberation and communiqué; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bandung_Conference",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "bandung-conference-1955",
+    "identityIds": [],
+    "label": "Asian-African Conference at Bandung, 1955",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Bandung_Conference",
+    ],
+    "reason": "Bandung Conference directly defines or situates Asian-African Conference at Bandung, 1955; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bandung_Conference",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "bandung-indonesia",
+    "identityIds": [
+      "Q10389",
+    ],
+    "label": "Bandung",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Bandung",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Bandung",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q10389",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q10389",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "bonjol-melayu-ulayat-governance",
     "identityIds": [],
     "label": "Melayu-clan ulayat governance in Nagari Bonjol",
@@ -846,6 +918,36 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "orientationUrls": [],
     "reason": "Candidate reviewed: Cocoa production in Ghana; rejected because Cocoa production in Ghana was the nearest canonical candidate opened, but it is not the same identity as Gold Coast cocoa-growing regions: Cocoa-growing regions of Asante and the colonial Gold Coast, within present-day Ghana.",
     "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "colonialism",
+    "identityIds": [
+      "Q7167",
+    ],
+    "label": "Colonialism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Colonialism",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Colonialism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q7167",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q7167",
+      },
+    ],
     "targetType": "entity",
   },
   {
@@ -1683,6 +1785,78 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "ghana-1957",
+    "identityIds": [
+      "Q117",
+    ],
+    "label": "Ghana",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Ghana",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Ghana",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q117",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q117",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "ghana-independence-1957",
+    "identityIds": [],
+    "label": "Ghanaian legal independence, 6 March 1957",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Independence_of_Ghana",
+    ],
+    "reason": "Independence of Ghana directly defines or situates Ghanaian legal independence, 6 March 1957; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Independence_of_Ghana",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "ghana-independence-legal-transition-episode",
+    "identityIds": [],
+    "label": "Ghanaian legal-independence transition",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Independence_of_Ghana",
+    ],
+    "reason": "Independence of Ghana directly defines or situates Ghanaian legal-independence transition; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Independence_of_Ghana",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "gold-coast-cocoa-expansion",
     "identityIds": [],
     "label": "Gold Coast cocoa expansion, c. 1890–1936",
@@ -1718,6 +1892,78 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Cocoa_production_in_Ghana",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "hawaiian-annexation-resistance-episode",
+    "identityIds": [],
+    "label": "Hawaiian resistance to annexation, 1897–1898",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Opposition_to_the_overthrow_of_the_Hawaiian_Kingdom",
+    ],
+    "reason": "Opposition to the overthrow of the Hawaiian Kingdom directly defines or situates Hawaiian resistance to annexation, 1897–1898; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Opposition_to_the_overthrow_of_the_Hawaiian_Kingdom",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "hawaiian-kingdom-islands",
+    "identityIds": [
+      "Q192626",
+    ],
+    "label": "Hawaiian Islands",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Hawaiian_Islands",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Hawaiian_Islands",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q192626",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q192626",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "hawaiian-overthrow-annexation-1893-1898",
+    "identityIds": [],
+    "label": "Hawaiian overthrow and annexation, 1893–1898",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Overthrow_of_the_Hawaiian_Kingdom",
+    ],
+    "reason": "Overthrow of the Hawaiian Kingdom directly defines or situates Hawaiian overthrow and annexation, 1893–1898; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Overthrow_of_the_Hawaiian_Kingdom",
       },
     ],
     "targetType": "entity",
@@ -1811,6 +2057,36 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Parental_leave",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "imperialism",
+    "identityIds": [
+      "Q7260",
+    ],
+    "label": "Imperialism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Imperialism",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Imperialism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q7260",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q7260",
       },
     ],
     "targetType": "entity",
@@ -2919,6 +3195,36 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "orientationUrls": [],
     "reason": "Candidate reviewed: Minangkabau people; rejected because Minangkabau people was the nearest canonical candidate opened, but it is not the same identity as Nagari Koto Tinggi, Agam: The nagari in Baso subdistrict, Agam Regency, examined during October 2016 fieldwork.",
     "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "nationalism",
+    "identityIds": [
+      "Q6235",
+    ],
+    "label": "Nationalism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Nationalism",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Nationalism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q6235",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q6235",
+      },
+    ],
     "targetType": "entity",
   },
   {
@@ -5063,6 +5369,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "guide-colonialism",
+    "identityIds": [
+      "Q7167",
+    ],
+    "label": "Colonialism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Colonialism",
+    ],
+    "reason": "Uses the reviewed mapping owned by colonialism.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Colonialism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q7167",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q7167",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "guide-communism",
     "identityIds": [
       "Q6186",
@@ -5268,6 +5605,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "targetType": "subject-guide",
   },
   {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "guide-imperialism",
+    "identityIds": [
+      "Q7260",
+    ],
+    "label": "Imperialism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Imperialism",
+    ],
+    "reason": "Uses the reviewed mapping owned by imperialism.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Imperialism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q7260",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q7260",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
     "consideredCandidates": [
       {
         "boundary": "Mongolia was the nearest canonical candidate opened, but it does not identify the Jinst post-collective pastoral governance guide composition; that guide keeps identity with its primary subject jinst-postcollective-pastoral-governance.",
@@ -5431,6 +5799,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "identity",
         "system": "wikidata",
         "url": "https://www.wikidata.org/wiki/Q7269",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "guide-nationalism",
+    "identityIds": [
+      "Q6235",
+    ],
+    "label": "Nationalism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Nationalism",
+    ],
+    "reason": "Uses the reviewed mapping owned by nationalism.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Nationalism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q6235",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q6235",
       },
     ],
     "targetType": "subject-guide",

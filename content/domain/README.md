@@ -40,6 +40,11 @@ Broad labels for political organization do not override those bounds.
 Keep community self-description, translations, scholarly categories, and
 colonial or administrative classifications distinct; do not encode a universal
 band–tribe–chiefdom–state sequence.
+Likewise, country and empire names do not inherit Nationalism, Colonialism, or
+Imperialism classifications. A self-description records an attributed claim,
+formal sovereignty records a legal status, and a bounded Case records specified
+institutions and practices; none proves the others or a linear
+empire–colony–nation-state sequence.
 Living-community research should include appropriately authorized community
 records or oral histories where available, with the speaker, capacity,
 publication context, permissions, and limits kept visible.

@@ -33,6 +33,14 @@ export const reviewedOrientationOnlyMappings = {
   "gold-coast-cocoa-expansion": "Cocoa production in Ghana",
   "gold-coast-cocoa-takeoff-1890-1936": "Cocoa production in Ghana",
   "historical-italian-fascism": "Fascism",
+  "hawaiian-overthrow-annexation-1893-1898":
+    "Overthrow of the Hawaiian Kingdom",
+  "hawaiian-annexation-resistance-episode":
+    "Opposition to the overthrow of the Hawaiian Kingdom",
+  "bandung-conference-1955": "Bandung Conference",
+  "bandung-communique-episode": "Bandung Conference",
+  "ghana-independence-1957": "Independence of Ghana",
+  "ghana-independence-legal-transition-episode": "Independence of Ghana",
   "iceland-parental-leave-2000-2018": "Parental leave",
   "iceland-parental-leave-outcomes-episode": "Parental leave",
   "india-constitutional-rights-episode": "Constitution of India",

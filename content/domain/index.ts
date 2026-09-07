@@ -16,6 +16,7 @@ import { environmentalismEvidenceDocuments } from "./evidence/environmentalism";
 import { feminismEvidenceDocuments } from "./evidence/feminism";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
+import { nationalismColonialismImperialismEvidenceDocuments } from "./evidence/nationalism-colonialism-imperialism";
 import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
 import { monarchyEvidenceDocuments } from "./evidence/monarchy";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
@@ -39,6 +40,7 @@ import { foundationalConceptDossierDocuments } from "./presentation/foundational
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
 import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
+import { nationalismColonialismImperialismGuideDocuments } from "./presentation/nationalism-colonialism-imperialism-guides";
 import { minangkabauDossierDocuments } from "./presentation/minangkabau-dossier";
 import { minangkabauGuideDocuments } from "./presentation/minangkabau-guide";
 import { monarchyGuideDocuments } from "./presentation/monarchy-guide";
@@ -62,6 +64,7 @@ import { environmentalismRelationshipDocuments } from "./relationships/environme
 import { feminismRelationshipDocuments } from "./relationships/feminism";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
+import { nationalismColonialismImperialismRelationshipDocuments } from "./relationships/nationalism-colonialism-imperialism";
 import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
 import { monarchyRelationshipDocuments } from "./relationships/monarchy";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
@@ -80,6 +83,7 @@ import { centralPlanningResearchDocuments } from "./research/central-planning";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
 import { environmentalismResearchDocuments } from "./research/environmentalism";
+import { nationalismColonialismImperialismResearchDocuments } from "./research/nationalism-colonialism-imperialism";
 import { feminismResearchDocuments } from "./research/feminism";
 import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
 import { minangkabauResearchDocuments } from "./research/minangkabau";
@@ -119,6 +123,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...zapatistaCaracolesEvidenceDocuments,
   ...nomadicConfederatedOrganizationEvidenceDocuments,
   ...liberalismConservatismEvidenceDocuments,
+  ...nationalismColonialismImperialismEvidenceDocuments,
   ...minangkabauEvidenceDocuments,
   ...monarchyEvidenceDocuments,
   ...oligarchyEvidenceDocuments,
@@ -142,6 +147,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...nomadicConfederatedOrganizationDossierDocuments,
   ...nomadicConfederatedOrganizationGuideDocuments,
   ...liberalismConservatismGuideDocuments,
+  ...nationalismColonialismImperialismGuideDocuments,
   ...minangkabauDossierDocuments,
   ...minangkabauGuideDocuments,
   ...monarchyGuideDocuments,
@@ -158,6 +164,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...democracyRepublicResearchDocuments,
   ...authoritarianismFascismTotalitarianismResearchDocuments,
   ...liberalismConservatismResearchDocuments,
+  ...nationalismColonialismImperialismResearchDocuments,
   ...tawantinsuyuResearchDocuments,
   ...anarchismResearchDocuments,
   ...zapatistaCaracolesResearchDocuments,
@@ -183,6 +190,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...zapatistaCaracolesRelationshipDocuments,
   ...nomadicConfederatedOrganizationRelationshipDocuments,
   ...liberalismConservatismRelationshipDocuments,
+  ...nationalismColonialismImperialismRelationshipDocuments,
   ...minangkabauRelationshipDocuments,
   ...monarchyRelationshipDocuments,
   ...oligarchyRelationshipDocuments,
