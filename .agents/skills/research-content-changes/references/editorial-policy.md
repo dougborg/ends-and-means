@@ -42,6 +42,13 @@ review owns acceptance, IDs, reconciliation, relationship decisions, and
 publication. Keep claims and their supporting implementation together in the
 branch so reviewers evaluate what merging will actually publish.
 
+The public editorial principles at `src/pages/principles/index.astro` govern
+framing, claim types, source selection, fair disagreement, synthesis and
+originality, bounded conclusions, evaluation, uncertainty, and revision.
+Keep the promise-to-responsibility mapping in
+`src/lib/editorial-principles.ts` synchronized with executable checks and named
+human decisions.
+
 The public governance policy at `src/pages/governance/index.astro` governs
 corrections, reconsideration, conflicts and recusal, sensitive subjects,
 moderation, privacy, AI assistance, exceptions, and policy amendments. Read it

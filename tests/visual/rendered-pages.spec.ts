@@ -38,6 +38,7 @@ const defaultRoutes = [
   "/guides/jinst-postcollective-pastoral-governance/",
   "/challenges/distribution-of-gains-and-ownership/",
   "/framework/",
+  "/principles/",
   "/governance/",
   "/reading/",
   "/research/",
@@ -827,10 +828,54 @@ test("governance policy exposes correction, reconsideration, and keyboard sectio
   await expect(page.locator("#ai")).toBeVisible();
 });
 
+test("editorial principles survive no JavaScript, zoom, forced colors, print, and keyboard navigation", async ({ browser, page }, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string") throw new Error("Playwright project must configure baseURL");
+  const noScriptContext = await browser.newContext({ baseURL, javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto("/principles/");
+  await expect(noScriptPage.getByRole("heading", { level: 1, name: "Fairness requires visible judgment." })).toBeVisible();
+  await expect(noScriptPage.getByText("Sourced fact", { exact: true })).toBeVisible();
+  await noScriptContext.close();
+
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.goto("/principles/");
+  const sourceLink = page.getByRole("navigation", { name: "On this page" }).getByRole("link", { name: "Sources and synthesis" });
+  await sourceLink.focus();
+  await expect(sourceLink).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#sources")).toBeVisible();
+  await page.evaluate(() => {
+    document.documentElement.style.zoom = "2";
+  });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+
+  await page.emulateMedia({ forcedColors: "active" });
+  await expect(page.locator("#sources")).toBeVisible();
+  await page.emulateMedia({ media: "print", forcedColors: "none" });
+  await expect(page.getByText("Counterfactuals", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Suggest a correction in a public GitHub issue" })).toBeVisible();
+});
+
+test("governance and principles section targets remain usable at 320 CSS pixels", async ({ page }) => {
+  // 320 CSS pixels is the WCAG reflow equivalent of a 1280px viewport at 400% zoom.
+  await page.setViewportSize({ width: 320, height: 900 });
+  for (const route of ["/governance/", "/principles/"]) {
+    await page.goto(route);
+    const links = page.getByRole("navigation", { name: "On this page" }).getByRole("link");
+    const dimensions = await links.evaluateAll((items) =>
+      items.map((item) => {
+        const box = item.getBoundingClientRect();
+        return { height: box.height, width: box.width };
+      }),
+    );
+    expect(dimensions.every(({ height, width }) => height >= 44 && width >= 44)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  }
+});
+
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: one cohesive cross-shell geometry audit.
-test("editorial shells share wide geometry while preserving semantic reading measures", async ({
-  page,
-}) => {
+test("editorial shells share wide geometry while preserving semantic reading measures", async ({ page }) => {
   const headerUsesSemanticMeasure = async (selector: string) =>
     page.locator(selector).evaluate((header) => {
       const root = document.documentElement;
@@ -857,7 +902,7 @@ test("editorial shells share wide geometry while preserving semantic reading mea
     });
 
   await page.setViewportSize({ width: 1440, height: 1000 });
-  for (const route of ["/framework/", "/governance/", "/reading/"]) {
+  for (const route of ["/framework/", "/principles/", "/governance/", "/reading/"]) {
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator("main")).toHaveClass(/site-main--wide/);
@@ -955,6 +1000,7 @@ test("global navigation remains ordered, reachable, and legible across constrain
     ...primaryLabels,
     "Sources",
     "Method",
+    "Principles",
     "Governance",
   ];
 
@@ -962,6 +1008,7 @@ test("global navigation remains ordered, reachable, and legible across constrain
     "/explore/",
     "/concepts/economic-democracy/",
     "/sources/erixon-rehn-meidner-model-source/",
+    "/principles/",
   ]) {
     await page.goto(route);
     const primary = page.getByRole("navigation", { name: "Primary" });
@@ -969,7 +1016,7 @@ test("global navigation remains ordered, reachable, and legible across constrain
     await expect(primary.getByRole("link")).toHaveText(primaryLabels);
     await expect(siteMap.getByRole("link")).toHaveText(siteMapLabels);
     await expect(primary.locator('[aria-current="page"]')).toHaveCount(
-      route.startsWith("/sources/") ? 0 : 1,
+      route.startsWith("/explore/") || route.startsWith("/concepts/") ? 1 : 0,
     );
     await expect(siteMap.locator('[aria-current="page"]')).toHaveCount(1);
   }
@@ -1092,7 +1139,7 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({
       page
         .getByRole("navigation", { name: "Mobile navigation" })
         .getByRole("link"),
-    ).toHaveCount(8);
+    ).toHaveCount(9);
     await page.keyboard.press("Escape");
     await expect(disclosure).not.toHaveAttribute("open", "");
     await expect(summary).toBeFocused();
@@ -1277,7 +1324,7 @@ test("mobile menu retains native navigation without JavaScript", async ({
   const disclosure = page.locator("details.mobile-navigation");
   await disclosure.locator("summary").click();
   await expect(disclosure).toHaveAttribute("open", "");
-  await expect(disclosure.getByRole("link")).toHaveCount(8);
+  await expect(disclosure.getByRole("link")).toHaveCount(9);
   await expect(disclosure.locator('[aria-current="page"]')).toHaveText(
     /Explore/,
   );

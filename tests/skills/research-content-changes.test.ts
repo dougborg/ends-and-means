@@ -121,6 +121,8 @@ describe("editorial governance contract", () => {
     expect(normalize(policy)).toMatch(/Never equate access or publication permission with authority/);
     expect(normalize(policy)).toMatch(/privacy-protective non-attribution/);
     expect(normalize(policy)).toMatch(/automated structural and source-similarity output/);
+    expect(normalize(policy)).toMatch(/public editorial principles.+framing.+claim types.+source selection.+fair disagreement.+originality.+bounded conclusions.+evaluation.+uncertainty.+revision/i);
+    expect(normalize(policy)).toMatch(/promise-to-responsibility mapping.+executable checks.+named human decisions/i);
   });
 });
 
