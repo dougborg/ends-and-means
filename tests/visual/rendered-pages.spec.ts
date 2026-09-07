@@ -61,21 +61,33 @@ async function expectNativeNewPageRequest(
   timeout = 5_000,
 ) {
   let navigationRequest: Request | undefined;
-  let requestPage: Page | undefined;
+  let openedPage: Page | undefined;
   let primaryError: unknown;
   const existingPages = new Set(context.pages());
-  const requestPromise = context.waitForEvent("request", {
-    predicate: (request) =>
-      request.isNavigationRequest() && request.url() === expectedURL,
-    timeout,
-  });
+  // Native new-context targets can open and close before context.pages() is
+  // sampled. Install both event waits before activation so cleanup retains the
+  // Page object even when Chromium removes it from the live page inventory.
+  const pagePromise = context
+    .waitForEvent("page", { timeout })
+    .then((page) => (openedPage = page));
+  const requestPromise = context
+    .waitForEvent("request", {
+      predicate: (request) =>
+        request.isNavigationRequest() && request.url() === expectedURL,
+      timeout,
+    })
+    .then((request) => (navigationRequest = request));
 
   try {
-    await activate();
-    navigationRequest = await requestPromise;
+    [openedPage, navigationRequest] = await Promise.all([
+      pagePromise,
+      requestPromise,
+      activate(),
+    ]);
+    expect(openedPage).not.toBe(sourcePage);
+    await expect(openedPage).toHaveURL(expectedURL, { timeout });
     try {
-      requestPage = navigationRequest.frame().page();
-      expect(requestPage).not.toBe(sourcePage);
+      expect(navigationRequest.frame().page()).toBe(openedPage);
     } catch (error) {
       if (
         !(error instanceof Error) ||
@@ -99,7 +111,7 @@ async function expectNativeNewPageRequest(
       context,
       existingPages,
       () => {
-        if (requestPage !== undefined) return requestPage;
+        if (openedPage !== undefined) return openedPage;
         if (navigationRequest === undefined) return undefined;
         try {
           return navigationRequest.frame().page();
