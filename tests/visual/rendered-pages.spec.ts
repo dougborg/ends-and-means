@@ -6,10 +6,7 @@ import {
   type Request,
   test,
 } from "@playwright/test";
-import {
-  closeRegisteredPages,
-  observeOpenedPage,
-} from "../../scripts/browser-page-cleanup";
+import { closeEventuallyOpenedPages } from "../../scripts/browser-page-cleanup";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 
 const defaultRoutes = [
@@ -64,9 +61,9 @@ async function expectNativeNewPageRequest(
   timeout = 5_000,
 ) {
   let navigationRequest: Request | undefined;
+  let requestPage: Page | undefined;
   let primaryError: unknown;
   const existingPages = new Set(context.pages());
-  const registeredPage = observeOpenedPage(context, existingPages, timeout);
   const requestPromise = context.waitForEvent("request", {
     predicate: (request) =>
       request.isNavigationRequest() && request.url() === expectedURL,
@@ -76,13 +73,9 @@ async function expectNativeNewPageRequest(
   try {
     await activate();
     navigationRequest = await requestPromise;
-    expect(navigationRequest.method()).toBe("GET");
-    expect(navigationRequest.resourceType()).toBe("document");
-    expect((await navigationRequest.allHeaders())["sec-fetch-dest"]).toBe(
-      "document",
-    );
     try {
-      expect(navigationRequest.frame().page()).not.toBe(sourcePage);
+      requestPage = navigationRequest.frame().page();
+      expect(requestPage).not.toBe(sourcePage);
     } catch (error) {
       if (
         !(error instanceof Error) ||
@@ -91,13 +84,37 @@ async function expectNativeNewPageRequest(
         throw error;
       }
     }
+    expect(navigationRequest.method()).toBe("GET");
+    expect(navigationRequest.resourceType()).toBe("document");
+    expect((await navigationRequest.allHeaders())["sec-fetch-dest"]).toBe(
+      "document",
+    );
   } catch (error) {
     primaryError = error;
   }
 
   let cleanupError: unknown;
   try {
-    await closeRegisteredPages(context, existingPages, registeredPage);
+    await closeEventuallyOpenedPages(
+      context,
+      existingPages,
+      () => {
+        if (requestPage !== undefined) return requestPage;
+        if (navigationRequest === undefined) return undefined;
+        try {
+          return navigationRequest.frame().page();
+        } catch (error) {
+          if (
+            error instanceof Error &&
+            /request\s+was issued before the frame is created/.test(error.message)
+          ) {
+            return undefined;
+          }
+          throw error;
+        }
+      },
+      timeout,
+    );
   } catch (error) {
     cleanupError = error;
   }
