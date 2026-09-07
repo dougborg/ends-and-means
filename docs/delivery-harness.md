@@ -42,8 +42,10 @@ pnpm audit:delivery -- --live-project --private-state /secure/path/delivery-stat
 ```
 
 The command is read-only and never changes Project visibility.
-Authenticated mode also retrieves every open repository issue, including
-issues outside the delivery Project. It reports literal escaped control
+Authenticated mode exhausts GitHub's REST pagination and retrieves every open
+repository issue, excluding pull requests returned by the shared endpoint and
+including issues outside the delivery Project. Any page or schema failure
+fails the live audit closed. It reports literal escaped control
 sequences, terminal formatting, likely pasted command/test transcripts,
 implausibly large acceptance sections, and conservative likely-duplicate
 active scope. Findings include issue numbers and remediation, but the audit
