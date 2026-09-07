@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { closeEventuallyOpenedPages } from "../../scripts/browser-page-cleanup";
+import {
+  closeEventuallyOpenedPages,
+  pageForNavigationRequest,
+} from "../../scripts/browser-page-cleanup";
 
 function page() {
   let closed = false;
@@ -12,6 +15,33 @@ function page() {
 }
 
 describe("browser page cleanup", () => {
+  it("returns no page when a navigation request precedes frame creation", () => {
+    expect(
+      pageForNavigationRequest({
+        frame: () => {
+          throw new Error("Request was issued before the frame is created");
+        },
+      }),
+    ).toBeUndefined();
+  });
+
+  it("returns a navigation request's page when its frame exists", () => {
+    const requestPage = page();
+    expect(
+      pageForNavigationRequest({ frame: () => ({ page: () => requestPage }) }),
+    ).toBe(requestPage);
+  });
+
+  it("does not hide unrelated request-frame failures", () => {
+    expect(() =>
+      pageForNavigationRequest({
+        frame: () => {
+          throw new Error("browser disconnected");
+        },
+      }),
+    ).toThrow("browser disconnected");
+  });
+
   it("closes the request page without waiting for a context page event", async () => {
     const sourcePage = page();
     const requestPage = page();
