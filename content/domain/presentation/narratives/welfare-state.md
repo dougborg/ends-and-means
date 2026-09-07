@@ -1,6 +1,6 @@
 Welfare States use law, financing, administration, and services to pool social risks, transfer income, and organize access to support.
 They vary in who qualifies, who pays, who delivers benefits, how claims are enforced, and what people receive in practice.
-The presence of welfare programs therefore establishes neither social ownership, Capitalism, Socialism, nor Social Democracy, and it does not identify a government as democratic.
+The presence of welfare programs therefore does not establish social ownership, Capitalism, Socialism, or Social Democracy, and it does not identify a government as democratic.
 
 ## definitions
 

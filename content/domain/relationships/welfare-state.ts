@@ -82,7 +82,7 @@ const citations = [
   [
     "universal-categorical-boundary",
     "ilo-world-social-protection-2024-source",
-    "Annex 1, Universal/categorical non-contributory benefits and universal benefits definitions",
+    "Annex 1, Universal scheme/categorical scheme definition",
     "supports",
   ],
   [
@@ -118,7 +118,7 @@ const citations = [
   [
     "esping-decommodification-purpose",
     "orloff-gender-social-rights-source",
-    "p. 312, discussion of social citizenship and decommodification",
+    "pp. 311–312, discussion of social citizenship and decommodification",
     "supports",
   ],
   [
@@ -208,7 +208,7 @@ const citations = [
   [
     "costa-rica-ccss-formation",
     "vargas-muiser-costa-rica-universal-coverage-source",
-    "Background, First period of reform, paragraphs 1–5",
+    "table 1 and Background, First period of major reform, paragraphs 1–5",
     "supports",
   ],
   [
@@ -306,6 +306,18 @@ const citations = [
     "oecd-korea-economic-survey-2008-source",
     "chapter 3, pp. 82–84",
     "supports",
+  ],
+  [
+    "south-korea-welfare-case-limit",
+    "ku-korea-welfare-reform-source",
+    "abstract and Social welfare reform after the financial crisis",
+    "qualifies",
+  ],
+  [
+    "south-korea-welfare-case-limit",
+    "shim-legislature-welfare-source",
+    "abstract and pp. 1241–1248",
+    "qualifies",
   ],
 ] as const;
 
