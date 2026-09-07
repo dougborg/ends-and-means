@@ -1,13 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { gotoRenderedPage } from "./support/rendered-page";
 
 test("collective capital formation publishes its traced reader narrative", async ({
   page,
 }) => {
-  const response = await page.goto("/concepts/collective-capital-formation/", {
-    waitUntil: "networkidle",
-  });
-
-  expect(response?.ok()).toBe(true);
+  await gotoRenderedPage(page, "/concepts/collective-capital-formation/");
   await expect(
     page.getByRole("heading", { name: "Collective capital formation", level: 1 }),
   ).toBeVisible();

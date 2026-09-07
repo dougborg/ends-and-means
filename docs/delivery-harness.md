@@ -165,6 +165,26 @@ unoccupied port when a runner needs an explicit assignment. The server remains
 non-reusable in every environment, which proves the suite is exercising the
 preview process started from the current worktree and its local `dist` build.
 
+Static page navigation waits for the application-owned render boundary rather
+than global network quiescence. `DOMContentLoaded` establishes that the HTML
+response was committed, the document was parsed, and synchronous scripts ran;
+the shared browser helper then requires the visible `main#main-content`
+landmark.
+Individual tests use web-first assertions for the exact content or geometry
+they need. A pending analytics request, remote font download, or other
+third-party connection therefore cannot redefine whether an application page
+is ready. The suite rejects `waitUntil: "networkidle"` as a readiness signal.
+Published pages also use deliberate local system sans, serif, and monospace
+stacks and contain no externally hosted font resource. This keeps the rendered
+site private, deterministic, and readable without a font provider; any future
+webfont must first be locally hosted and pass licensing and provenance review.
+
+Playwright retries are disabled locally and in CI. A retry is actionable flake
+evidence, not a successful result: diagnose whether the assertion belongs to
+the application, browser engine, or an external dependency, then repair that
+boundary. Stress repetitions use `--repeat-each` with `--retries 0` so every
+iteration remains visible.
+
 Browser engines own modifier- and middle-button tab creation and document
 commit. Hosted headless Chromium does not expose those lifecycle events
 reliably, so the suite stops at the product-owned boundary: the rendered value

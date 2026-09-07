@@ -4,6 +4,7 @@ import {
   test,
 } from "@playwright/test";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
+import { gotoRenderedPage } from "./support/rendered-page";
 
 const defaultRoutes = [
   "/",
@@ -137,8 +138,7 @@ for (const route of routes) {
       page.on("pageerror", (error) => browserErrors.push(error.message));
       await page.setViewportSize(viewport);
 
-      const response = await page.goto(route, { waitUntil: "networkidle" });
-      expect(response?.ok()).toBe(true);
+      await gotoRenderedPage(page, route);
       await page.screenshot({
         path: testInfo.outputPath("page.png"),
         fullPage: true,
@@ -311,7 +311,7 @@ test("forced colors preserve focus, evidence marks, and current-page state", asy
   page,
 }) => {
   await page.emulateMedia({ forcedColors: "active" });
-  await page.goto("/guides/feminism/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/guides/feminism/");
 
   const currentPage = page.locator('.primary-nav a[aria-current="page"]');
   await expect(currentPage).toHaveCSS("text-decoration-line", "underline");
@@ -401,7 +401,7 @@ test("generated outlines navigate long pages and collapse natively on mobile", a
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/guides/economic-democracy/");
   const desktopOutline = page.locator(".page-outline__desktop");
   await expect(desktopOutline).toBeVisible();
   await expect(page.locator(".page-outline")).toHaveCSS("position", "sticky");
@@ -448,7 +448,7 @@ test("qualifying routes derive exact ordered links from rendered targets", async
     "/cases/swedish-wage-earner-funds/",
     "/challenges/authority-and-accountability/",
   ]) {
-    await page.goto(route, { waitUntil: "networkidle" });
+    await gotoRenderedPage(page, route);
     const links = page.locator(".page-outline__desktop li a");
     const count = await links.count();
     expect(count).toBeGreaterThanOrEqual(3);
@@ -479,7 +479,7 @@ test("short and out-of-scope real routes omit on-page navigation", async ({
   page,
 }) => {
   for (const route of ["/concepts/institutional-abolition/", "/reading/"]) {
-    await page.goto(route, { waitUntil: "networkidle" });
+    await gotoRenderedPage(page, route);
     await expect(page.locator(".page-outline")).toHaveCount(0);
   }
 });
@@ -496,7 +496,7 @@ test("generated learner pages contain no duplicate fragment identifiers", async 
     "/cases/swedish-solidaristic-bargaining/",
     "/challenges/authority-and-accountability/",
   ]) {
-    await page.goto(route, { waitUntil: "networkidle" });
+    await gotoRenderedPage(page, route);
     const duplicates = await page.locator("[id]").evaluateAll((elements) => {
       const counts = new Map<string, number>();
       for (const element of elements)
@@ -510,7 +510,7 @@ test("generated learner pages contain no duplicate fragment identifiers", async 
 test("repeated guide research questions have one fragment owner", async ({
   page,
 }) => {
-  await page.goto("/guides/socialism/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/guides/socialism/");
   const obligationId = "socialism-democratic-control-threshold";
   const repeatedQuestion = page.locator(".research-obligation").filter({
     has: page.getByRole("heading", {
@@ -1599,7 +1599,7 @@ test("homepage purpose and evidence trail survive no JavaScript, zoom, and keybo
 test("Explore search preserves owned meanings and explicit research gaps", async ({
   page,
 }) => {
-  await page.goto("/explore/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/explore/");
   const search = page.getByRole("searchbox", {
     name: "What do you want to understand?",
   });
@@ -1652,7 +1652,7 @@ test("Explore search preserves owned meanings and explicit research gaps", async
 test("Explore restores query state from initial URLs and browser history", async ({
   page,
 }) => {
-  await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/explore/?q=communism");
   const search = page.getByRole("searchbox", {
     name: "What do you want to understand?",
   });
@@ -1684,7 +1684,7 @@ test("Explore directory remains complete without JavaScript", async ({
   });
   try {
     const page = await context.newPage();
-    await page.goto("/explore/?q=communism", { waitUntil: "networkidle" });
+    await gotoRenderedPage(page, "/explore/?q=communism");
     await expect(page.locator("[data-subject-result]")).toHaveCount(
       canonicalGraph.subjectGuides.length,
     );
@@ -1705,7 +1705,7 @@ test("Explore directory remains complete without JavaScript", async ({
 test("Explore search reflows for mobile and text zoom", async ({ page }) => {
   for (const width of [320, 390, 640]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/explore/", { waitUntil: "networkidle" });
+    await gotoRenderedPage(page, "/explore/");
     if (width === 640)
       await page.evaluate(() => {
         document.documentElement.style.zoom = "2";
@@ -1743,7 +1743,7 @@ test("central planning guide, case, and approach remain readable across viewport
   for (const viewport of viewports) {
     await page.setViewportSize(viewport);
     for (const route of routes) {
-      await page.goto(route, { waitUntil: "networkidle" });
+      await gotoRenderedPage(page, route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       await expect(page.locator("main")).toBeVisible();
       expect(
