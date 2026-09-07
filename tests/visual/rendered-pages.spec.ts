@@ -3,6 +3,7 @@ import {
   expect,
   type Locator,
   type Page,
+  type Request,
   test,
 } from "@playwright/test";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
@@ -51,27 +52,45 @@ const defaultRoutes = [
   "/sources/erixon-rehn-meidner-model-source/",
 ];
 
-async function expectNativeNewPage(
+async function expectNativeNewPageRequest(
   context: BrowserContext,
+  sourcePage: Page,
   activate: () => Promise<void>,
-  expectedURL: RegExp,
+  expectedURL: string,
 ) {
-  let openedPage: Page | undefined;
-  const openedPagePromise = context
-    .waitForEvent("page", { timeout: 5_000 })
-    .then((page) => {
-      openedPage = page;
-      return page;
-    });
+  let navigationRequest: Request | undefined;
+  const existingPages = new Set(context.pages());
+  const requestPromise = context.waitForEvent("request", {
+    predicate: (request) =>
+      request.isNavigationRequest() && request.url() === expectedURL,
+    timeout: 5_000,
+  });
 
   try {
     await activate();
-    const page = await openedPagePromise;
-    await page.waitForLoadState("domcontentloaded", { timeout: 5_000 });
-    await expect(page).toHaveURL(expectedURL);
+    navigationRequest = await requestPromise;
+    expect(navigationRequest.method()).toBe("GET");
+    expect(navigationRequest.resourceType()).toBe("document");
+    expect((await navigationRequest.allHeaders())["sec-fetch-dest"]).toBe(
+      "document",
+    );
+    try {
+      expect(navigationRequest.frame().page()).not.toBe(sourcePage);
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !/request\s+was issued before the frame is created/.test(error.message)
+      ) {
+        throw error;
+      }
+    }
   } finally {
-    const pendingPage = await openedPagePromise.catch(() => undefined);
-    await (openedPage ?? pendingPage)?.close();
+    await requestPromise.catch(() => undefined);
+    for (const openedPage of context.pages()) {
+      if (!existingPages.has(openedPage) && !openedPage.isClosed()) {
+        await openedPage.close();
+      }
+    }
   }
 }
 
@@ -1293,20 +1312,22 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
     .getByRole("navigation", { name: "Mobile navigation" })
     .getByRole("link", { name: "Questions" });
   const platformModifier = process.platform === "darwin" ? "Meta" : "Control";
-  await expectNativeNewPage(
+  await expectNativeNewPageRequest(
     page.context(),
+    page,
     () => questions.click({ modifiers: [platformModifier] }),
-    /\/challenges\/$/,
+    new URL("/challenges/", page.url()).href,
   );
 
-  await expectNativeNewPage(
+  await expectNativeNewPageRequest(
     page.context(),
+    page,
     () =>
       page
         .getByRole("navigation", { name: "Mobile navigation" })
         .getByRole("link", { name: "Sources" })
         .click({ button: "middle" }),
-    /\/reading\/$/,
+    new URL("/reading/", page.url()).href,
   );
 
   const touchContext = await browser.newContext({

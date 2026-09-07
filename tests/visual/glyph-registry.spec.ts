@@ -84,7 +84,7 @@ test("every current guide uses the restrained section glyph grammar", async ({
   expect(guideRoutes).toHaveLength(21);
 
   for (const route of guideRoutes) {
-    await page.goto(route, { waitUntil: "networkidle" });
+    await page.goto(route, { waitUntil: "domcontentloaded" });
     const sections = page.locator(".subject-guide__section");
     const glyphs = sections.locator(":scope > header .glyph");
 
