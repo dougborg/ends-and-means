@@ -10,6 +10,7 @@ import {
   walkRequiredFiles,
 } from "../../scripts/content-integrity-files";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
+import { compileDomainGraph } from "../../src/lib/domain/compile";
 import {
   compareCodeUnits,
   formatIntegrityResult,
@@ -17,6 +18,7 @@ import {
   runContentIntegrity,
   validationFindingLocation,
 } from "../../src/lib/domain/content-integrity";
+import type { DomainEntity } from "../../src/lib/domain/entities";
 import type {
   AuthoringDocument,
   CompiledDomainGraph,
@@ -454,26 +456,57 @@ describe("editorial similarity signals", () => {
         severity: "attention",
         location: "fixture-dossier#answer",
       });
-      expect(finding.message).toContain("compare against Source fixture-source");
-      expect(finding.message.match(/compare against Source fixture-source/gu)).toHaveLength(1);
+      expect(finding.message).toContain(
+        "compare against Source fixture-source",
+      );
+      expect(
+        finding.message.match(/compare against Source fixture-source/gu),
+      ).toHaveLength(1);
     }
   });
 });
 
 function standfirstSimilarityFixture() {
-  const graph = structuredClone(canonicalGraph);
-  const statement = graph.entities.find(
-    (entity) => entity.kind === "statement",
-  );
-  const source = graph.entities.find((entity) => entity.kind === "source");
-  if (statement?.kind !== "statement" || source?.kind !== "source")
-    throw new Error("Missing canonical similarity fixtures");
   const fixtureStatement = {
-    ...statement,
     id: "standfirst-similarity-statement",
+    kind: "statement",
+    label: "Standfirst similarity statement",
+    description: "Synthetic fixture.",
+    publicationStatus: "reviewed",
+    statementKind: "observation",
     text: "Residents repeatedly inspect the same public accounts before delegates make binding decisions.",
-  };
-  graph.entities.push(fixtureStatement, {
+  } satisfies DomainEntity;
+  const source = {
+    id: "standfirst-similarity-source",
+    kind: "source",
+    label: "Standfirst similarity source",
+    description: "Synthetic fixture.",
+    publicationStatus: "reviewed",
+    sourceType: "report",
+    title: "Standfirst similarity report",
+    workId: "standfirst-similarity-work",
+    contributorDisplay: ["Fixture researcher"],
+    publisher: "Fixture press",
+    publicationYear: 2026,
+    resourceLinks: [
+      {
+        purpose: "publisher",
+        url: "https://example.test/standfirst-similarity",
+        label: "Publisher page",
+      },
+    ],
+  } satisfies DomainEntity;
+  const work = {
+    id: "standfirst-similarity-work",
+    kind: "work",
+    label: "Standfirst similarity work",
+    description: "Synthetic fixture.",
+    publicationStatus: "reviewed",
+    title: "Standfirst similarity report",
+    workType: "report",
+    originalPublicationYear: 2026,
+  } satisfies DomainEntity;
+  const fixtureDossier = {
     id: "standfirst-similarity-dossier",
     kind: "dossier",
     label: "Standfirst similarity dossier",
@@ -483,23 +516,53 @@ function standfirstSimilarityFixture() {
     standfirst: fixtureStatement.text,
     standfirstStatementIds: [fixtureStatement.id],
     reviewedAt: "2026-09-05",
-    sections: [],
-  });
-  graph.relationships.push({
+    sections: [
+      {
+        id: "context",
+        heading: "Context",
+        body: "This synthetic section exercises a valid compiled Dossier.",
+        traceStatus: "supported",
+        statementIds: [fixtureStatement.id],
+      },
+    ],
+  } satisfies DomainEntity;
+  const fixtureSubject = {
+    id: "fixture-subject",
+    kind: "concept",
+    label: "Fixture subject",
+    description: "Synthetic fixture.",
+    publicationStatus: "reviewed",
+    schemeIds: [],
+    scopeNote: "Used only to validate the similarity integration boundary.",
+  } satisfies DomainEntity;
+  const fixtureCitation = {
     id: "standfirst-similarity-citation",
     predicate: "cites",
     subject: { kind: "statement", id: fixtureStatement.id },
     object: { kind: "source", id: source.id },
     role: "supports",
     locator: "p. 1",
+  } as const;
+  const documents: AuthoringDocument[] = [
+    fixtureSubject,
+    work,
+    source,
+    fixtureStatement,
+    fixtureDossier,
+  ].map((entity) => ({ documentType: "entity", entity }));
+  documents.push({
+    documentType: "relationships",
+    subject: fixtureCitation.subject,
+    relationships: [fixtureCitation],
   });
-  return { graph, fixtureStatement, source };
+  return { documents, fixtureStatement, source };
 }
 
 describe("standfirst similarity signals", () => {
   it("checks a Dossier standfirst against its traced Statements", () => {
-    const { graph } = standfirstSimilarityFixture();
-    const openFinding = verify({ graph }).findings.find(
+    const { documents } = standfirstSimilarityFixture();
+    const graph = compileDomainGraph(documents);
+    const openFinding = verify({ documents, graph }).findings.find(
       ({ location }) => location === "standfirst-similarity-dossier#standfirst",
     );
     expect(openFinding).toEqual(
@@ -512,22 +575,34 @@ describe("standfirst similarity signals", () => {
       }),
     );
 
-    const dossier = graph.entities.find(
-      ({ id }) => id === "standfirst-similarity-dossier",
+    const dossierDocument = documents.find(
+      (document) =>
+        document.documentType === "entity" &&
+        document.entity.id === "standfirst-similarity-dossier",
     );
-    if (dossier?.kind !== "dossier")
+    if (
+      dossierDocument?.documentType !== "entity" ||
+      dossierDocument.entity.kind !== "dossier"
+    )
       throw new Error("Missing standfirst Dossier fixture");
-    dossier.standfirstStatementIds = [];
-    expect(verify({ graph }).findings).not.toContainEqual(
+    dossierDocument.entity.standfirst =
+      "This wording remains deliberately distinct from the traced claim.";
+    expect(
+      verify({ documents, graph: compileDomainGraph(documents) }).findings,
+    ).not.toContainEqual(
       expect.objectContaining({
         location: "standfirst-similarity-dossier#standfirst",
       }),
     );
   });
+});
 
+describe("reviewed standfirst similarity", () => {
   it("clears only exact reviewed input and reopens changed Source input", () => {
-    const { graph, fixtureStatement, source } = standfirstSimilarityFixture();
-    const openFinding = verify({ graph }).findings.find(
+    const { documents, fixtureStatement, source } =
+      standfirstSimilarityFixture();
+    const graph = compileDomainGraph(documents);
+    const openFinding = verify({ documents, graph }).findings.find(
       ({ location }) => location === "standfirst-similarity-dossier#standfirst",
     );
     const fingerprint = openFinding?.message.match(/sha256:[a-f0-9]{64}/u)?.[0];
@@ -547,20 +622,33 @@ describe("standfirst similarity signals", () => {
       disposition: "acknowledged-synthesis" as const,
     };
     expect(
-      verify({ graph, reviewedOverlapAcknowledgements: [reviewed] }).findings,
+      verify({
+        documents,
+        graph,
+        reviewedOverlapAcknowledgements: [reviewed],
+      }).findings,
     ).not.toContainEqual(
       expect.objectContaining({
         location: "standfirst-similarity-dossier#standfirst",
       }),
     );
 
-    const citedSource = graph.entities.find(({ id }) => id === source.id);
-    if (citedSource?.kind !== "source")
+    const citedSourceDocument = documents.find(
+      (document) =>
+        document.documentType === "entity" && document.entity.id === source.id,
+    );
+    if (
+      citedSourceDocument?.documentType !== "entity" ||
+      citedSourceDocument.entity.kind !== "source"
+    )
       throw new Error("Missing cited Source fixture");
-    citedSource.title = `${citedSource.title} revised`;
-    expect(
-      verify({ graph, reviewedOverlapAcknowledgements: [reviewed] }).findings,
-    ).toEqual(
+    citedSourceDocument.entity.title = `${citedSourceDocument.entity.title} revised`;
+    const changedFindings = verify({
+      documents,
+      graph: compileDomainGraph(documents),
+      reviewedOverlapAcknowledgements: [reviewed],
+    }).findings;
+    expect(changedFindings).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           category: "reviewed-overlap-acknowledgement",
@@ -573,6 +661,10 @@ describe("standfirst similarity signals", () => {
         }),
       ]),
     );
+    const changedSignal = changedFindings.find(
+      ({ category }) => category === "source-similarity",
+    );
+    expect(changedSignal?.message).not.toContain(fingerprint);
   });
 });
 

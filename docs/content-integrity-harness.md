@@ -31,6 +31,14 @@ Parser-backed integrity modules are imported only by audit tooling and its tests
 Malformed executable syntax and non-static dynamic dependency calls fail closed because the scanner cannot prove their publication boundary.
 Scanned filesystem paths are normalized to forward slashes before publication-boundary checks so the same exclusions apply on every supported platform.
 
+Rule-level integrity tests use the smallest compiled graph that exercises the
+owned contract.
+They must not repeatedly clone, validate, or audit the full canonical corpus to
+prove a local mutation such as acknowledgement fingerprint invalidation.
+Separate canonical acceptance tests retain end-to-end coverage of the complete
+graph, while focused mutation fixtures keep their cost independent of corpus
+growth and shared CI load.
+
 ## Source preflight
 
 Before exact-head review of a canonical tranche, run:
