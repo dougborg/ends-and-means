@@ -11,6 +11,22 @@ const paths = [
   ...new Set(skillCapabilities.flatMap((capability) => capability.paths)),
 ];
 
+interface ResearchDeliveryFixture {
+  name: string;
+  append?: string;
+  remove?: string;
+}
+
+const researchSkillPath = ".agents/skills/research-content-changes/SKILL.md";
+
+async function copySkillCorpus(root: string): Promise<void> {
+  for (const path of paths) {
+    const target = join(root, path);
+    await mkdir(dirname(target), { recursive: true });
+    await writeFile(target, await readFile(join(process.cwd(), path), "utf8"));
+  }
+}
+
 describe("repository skill contract", () => {
   it("covers the cross-skill delivery and research capabilities", () => {
     expect(auditSkillContracts(process.cwd())).toEqual([]);
@@ -19,14 +35,7 @@ describe("repository skill contract", () => {
   it("detects deletion of every capability from its owning skill corpus", async () => {
     for (const capability of skillCapabilities) {
       const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
-      for (const path of paths) {
-        const target = join(root, path);
-        await mkdir(dirname(target), { recursive: true });
-        await writeFile(
-          target,
-          await readFile(join(process.cwd(), path), "utf8"),
-        );
-      }
+      await copySkillCorpus(root);
       const deletion = new RegExp(
         capability.deletion.pattern.source,
         `${capability.deletion.pattern.flags.replace("g", "")}g`,
@@ -57,6 +66,37 @@ describe("repository skill contract", () => {
         expect(finding.code).toBe("SKILL_CAPABILITY");
         expect(legitimateMessages).toContain(finding.message);
       }
+    }
+  });
+
+  it("rejects research pull-request policy regressions from fixtures", async () => {
+    const fixtures = JSON.parse(
+      await readFile(
+        join(
+          process.cwd(),
+          "tests/fixtures/skill-contracts/research-review-delivery.json",
+        ),
+        "utf8",
+      ),
+    ) as ResearchDeliveryFixture[];
+
+    for (const fixture of fixtures) {
+      const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+      await copySkillCorpus(root);
+      const target = join(root, researchSkillPath);
+      let skill = await readFile(target, "utf8");
+      if (fixture.remove) {
+        expect(skill, fixture.name).toContain(fixture.remove);
+        skill = skill.replace(fixture.remove, "");
+      }
+      if (fixture.append) skill += fixture.append;
+      await writeFile(target, skill);
+
+      expect(auditSkillContracts(root), fixture.name).toContainEqual({
+        code: "SKILL_CAPABILITY",
+        message:
+          "research-content-changes does not cover research review delivery.",
+      });
     }
   });
 

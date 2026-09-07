@@ -1,0 +1,10 @@
+[
+  {
+    "name": "former draft-by-default instruction",
+    "append": "\nPush and open a draft pull request when authorized; do not merge.\n"
+  },
+  {
+    "name": "missing selective stack boundary",
+    "remove": "Use stacked pull requests only for genuine dependency chains."
+  }
+]

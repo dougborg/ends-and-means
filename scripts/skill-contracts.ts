@@ -11,6 +11,7 @@ export interface SkillCapability {
   owner: "coordinate-project-delivery" | "research-content-changes";
   paths: string[];
   patterns: RegExp[];
+  forbiddenPatterns?: RegExp[];
   deletion: { path: string; pattern: RegExp };
 }
 
@@ -93,6 +94,24 @@ export const skillCapabilities: SkillCapability[] = [
     deletion: {
       path: `${deliveryRoot}/SKILL.md`,
       pattern: /continuous improvement/i,
+    },
+  },
+  {
+    name: "research review delivery",
+    owner: "research-content-changes",
+    paths: [`${researchRoot}/SKILL.md`],
+    patterns: [
+      /completed, verified work.+ready\s+pull request.+default/is,
+      /draft only.+experimental.+early-feedback.+substantial work remaining/is,
+      /issue `In progress`.+marked ready/is,
+      /stacked pull requests only for genuine dependency chains/i,
+      /bottom-up.+rebase-only linear history/is,
+      /exact-head evidence.+automatic rebase.+retargeting/is,
+    ],
+    forbiddenPatterns: [/Push and open a draft pull request when authorized/i],
+    deletion: {
+      path: `${researchRoot}/SKILL.md`,
+      pattern: /stacked pull requests only for genuine dependency chains/i,
     },
   },
   {
@@ -191,7 +210,13 @@ export function auditSkillContracts(root: string): SkillContractFinding[] {
     const corpus = capability.paths
       .map((path) => readFileSync(join(root, path), "utf8"))
       .join("\n");
-    return capability.patterns.every((pattern) => pattern.test(corpus))
+    const coversRequired = capability.patterns.every((pattern) =>
+      pattern.test(corpus),
+    );
+    const containsForbidden = capability.forbiddenPatterns?.some((pattern) =>
+      pattern.test(corpus),
+    );
+    return coversRequired && !containsForbidden
       ? []
       : [
           {

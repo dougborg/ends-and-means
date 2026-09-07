@@ -35,14 +35,19 @@ integrating agent reviews reported commits and reruns the complete suite.
 
 Implement directly in the canonical content model or its deterministic source
 generator. Research, rendering, and tests may change together when they form one
-reviewable outcome. Push and open a draft pull request when authorized; do not
-merge or publish without human approval.
+reviewable outcome. When authorized, open completed, verified work as a ready
+pull request by default. Use a draft only for an explicitly experimental
+approach or an early-feedback checkpoint with substantial work remaining, and
+keep its issue `In progress` until the pull request is marked ready. Do not merge
+or publish without human approval.
 
 Rebase onto the current base before final review and integration.
 Resolve automated review findings and obtain an independent adversarial review
 of the material content and model-boundary risks.
-Integrate with rebase-only linear history, then verify public output after
-deployment.
+Use stacked pull requests only for genuine dependency chains. Integrate stacks
+bottom-up with rebase-only linear history, and renew exact-head evidence after
+an automatic rebase or retargeting. Then verify public output after deployment.
+Follow `coordinate-project-delivery` for the full delivery and review mechanics.
 
 ## Route the request
 
