@@ -168,6 +168,7 @@ async function verifyGlobalNavigation() {
     ["/research/", "Questions"],
     ["/sources/erixon-rehn-meidner-model-source/", "Sources"],
     ["/framework/", "Method"],
+    ["/principles/", "Principles"],
     ["/governance/", "Governance"],
   ] as const) {
     const html = await readFile(routeFile(route), "utf8");
