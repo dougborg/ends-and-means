@@ -311,4 +311,22 @@ export const reviewedOrientationLabels = {
   "subject-guide:guide-tawantinsuyu-imperial-organization":
     "Tawantinsuyu (Inka Empire)",
   "subject-guide:guide-totalitarianism": "Totalitarianism",
+  "entity:nationalism": "Nationalism",
+  "entity:colonialism": "Colonialism",
+  "entity:imperialism": "Imperialism",
+  "entity:hawaiian-kingdom-islands": "Hawaiian Islands",
+  "entity:bandung-indonesia": "Bandung",
+  "entity:ghana-1957": "Ghana",
+  "entity:hawaiian-overthrow-annexation-1893-1898":
+    "Hawaiian overthrow and annexation, 1893–1898",
+  "entity:hawaiian-annexation-resistance-episode":
+    "Hawaiian resistance to annexation, 1897–1898",
+  "entity:bandung-conference-1955": "Asian-African Conference at Bandung, 1955",
+  "entity:bandung-communique-episode": "Bandung deliberation and communiqué",
+  "entity:ghana-independence-1957": "Ghanaian legal independence, 6 March 1957",
+  "entity:ghana-independence-legal-transition-episode":
+    "Ghanaian legal-independence transition",
+  "subject-guide:guide-nationalism": "Nationalism",
+  "subject-guide:guide-colonialism": "Colonialism",
+  "subject-guide:guide-imperialism": "Imperialism",
 } as const;

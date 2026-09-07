@@ -458,6 +458,18 @@ const expectedOpenResearchObligations = [
     status: "open",
   })),
   {
+    id: "colonialism-independence-institutional-persistence",
+    obligationType: "counterfactual",
+    target: "concept:colonialism#decolonization",
+    status: "open",
+  },
+  {
+    id: "colonialism-settler-indigenous-scope",
+    obligationType: "counterargument",
+    target: "concept:colonialism",
+    status: "open",
+  },
+  {
     id: "communism-claimed-identity-practice-gap",
     obligationType: "research-gap",
     target: "concept:communism#does-a-communist-label-settle-the-case",
@@ -584,6 +596,18 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "imperialism-capital-geopolitics-counterfactual",
+    obligationType: "counterfactual",
+    target: "concept:imperialism#theories",
+    status: "open",
+  },
+  {
+    id: "imperialism-informal-falsifiability",
+    obligationType: "counterevidence",
+    target: "concept:imperialism",
+    status: "open",
+  },
+  {
     id: "jinst-access-inequality",
     obligationType: "counterevidence",
     target: "case:jinst-postcollective-pastoral-governance",
@@ -683,6 +707,18 @@ const expectedOpenResearchObligations = [
     id: "monarchy-personal-influence-reserve-power",
     obligationType: "research-gap",
     target: "concept:monarchy#institutions",
+    status: "open",
+  },
+  {
+    id: "nationalism-translation-people-nation",
+    obligationType: "research-gap",
+    target: "concept:nationalism",
+    status: "open",
+  },
+  {
+    id: "nationalism-unity-exclusion",
+    obligationType: "counterevidence",
+    target: "concept:nationalism",
     status: "open",
   },
   {

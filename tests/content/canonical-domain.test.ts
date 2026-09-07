@@ -39,12 +39,15 @@ describe("canonical vertical slice", () => {
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
       "athens-four-hundred-five-thousand-411-bce",
+      "bandung-conference-1955",
       "bonjol-melayu-ulayat-governance",
       "china-dual-track-market-reforms",
       "chipko-garhwal-1973-1981",
       "combahee-river-collective-1974-1980",
       "english-agrarian-market-dependence",
+      "ghana-independence-1957",
       "gold-coast-cocoa-expansion",
+      "hawaiian-overthrow-annexation-1893-1898",
       "iceland-parental-leave-2000-2018",
       "india-constitutional-rights-settlement-1946-1950",
       "indonesia-oligarchy-debate-1998-2013",
