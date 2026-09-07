@@ -166,7 +166,10 @@ non-reusable in every environment, which proves the suite is exercising the
 preview process started from the current worktree and its local `dist` build.
 
 Native-navigation event listeners use bounded waits and close every page or
-context in `finally` blocks. The modifier assertion selects `Meta` on macOS and
+context in `finally` blocks. Modifier and middle-button checks assert the
+browser's top-level document request from a distinct page frame; this remains
+observable while a background target is still `about:blank` or has not emitted
+a Playwright `page` event. The modifier assertion selects `Meta` on macOS and
 `Control` elsewhere rather than relying on an environment-dependent alias.
 No-JavaScript anchors use focused Enter activation and wait for their exact URL
 condition; forced activation is not an acceptable substitute for native
