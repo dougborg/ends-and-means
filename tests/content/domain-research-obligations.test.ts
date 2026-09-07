@@ -608,6 +608,12 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "iran-elections-institutional-autonomy",
+    obligationType: "counterevidence",
+    target: "concept:theocracy",
+    status: "open",
+  },
+  {
     id: "jinst-access-inequality",
     obligationType: "counterevidence",
     target: "case:jinst-postcollective-pastoral-governance",
@@ -854,6 +860,18 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "theocracy-category-travel",
+    obligationType: "counterargument",
+    target: "concept:theocracy",
+    status: "open",
+  },
+  {
+    id: "theocracy-threshold-religious-review",
+    obligationType: "research-gap",
+    target: "concept:theocracy",
+    status: "open",
+  },
+  {
     id: "tonga-colonial-missionary-mediation",
     obligationType: "research-gap",
     target: "concept:monarchy#tonga",
@@ -863,6 +881,12 @@ const expectedOpenResearchObligations = [
     id: "totalitarian-control-evidence",
     obligationType: "counterevidence",
     target: "concept:totalitarianism#bounded-practice",
+    status: "open",
+  },
+  {
+    id: "vatican-delegated-power-practice",
+    obligationType: "counterevidence",
+    target: "concept:theocracy",
     status: "open",
   },
   {

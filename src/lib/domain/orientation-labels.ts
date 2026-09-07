@@ -235,6 +235,18 @@ export const reviewedOrientationLabels = {
     "Succession war and invasion, c. 1527–1533",
   "entity:totalitarianism": "Totalitarianism",
   "entity:theocracy": "Theocracy",
+  "entity:iran": "Iran",
+  "entity:iran-constitutional-authority-1989-present":
+    "Iran under the amended 1989 Constitution",
+  "entity:iran-post-1989-constitutional-episode":
+    "Iranian constitutional authority after the 1989 amendment",
+  "entity:religiously-grounded-governing-authority":
+    "Religiously grounded governing authority",
+  "entity:vatican-city": "Vatican City",
+  "entity:vatican-city-authority-2023-present":
+    "Vatican City under the 2023 Fundamental Law",
+  "entity:vatican-post-2023-fundamental-law-episode":
+    "Vatican authority under the 2023 Fundamental Law",
   "entity:tonga": "Tonga",
   "entity:tonga-constitutional-settlement-2010-2013":
     "Tonga's 2010 constitutional settlement",
@@ -301,6 +313,7 @@ export const reviewedOrientationLabels = {
   "subject-guide:guide-liberalism": "Liberalism",
   "subject-guide:guide-market-economy": "Market Economy",
   "subject-guide:guide-monarchy": "Monarchy",
+  "subject-guide:guide-theocracy": "Theocracy",
   "subject-guide:guide-matriliny-property-authority":
     "Does matriliny mean women rule?",
   "subject-guide:guide-republic": "Republic",

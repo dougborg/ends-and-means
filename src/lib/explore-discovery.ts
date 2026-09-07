@@ -123,6 +123,10 @@ export const exploreDirectoryCuration: ExploreDirectoryCuration = {
     reason: "Bounded historical polity",
     incomingPath: "/cases/",
   },
+  "guide-theocracy": {
+    placement: "browse",
+    reason: "High-level contested form of governing authority",
+  },
   "guide-totalitarianism": {
     placement: "browse",
     reason: "High-level analytical concept and form of rule",

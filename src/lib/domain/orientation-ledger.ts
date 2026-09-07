@@ -36,6 +36,26 @@ export type ReviewedOrientationDecision = {
 };
 const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
   ...[
+    "iran",
+    "iran-constitutional-authority-1989-present",
+    "iran-post-1989-constitutional-episode",
+    "religiously-grounded-governing-authority",
+    "vatican-city",
+    "vatican-city-authority-2023-present",
+    "vatican-post-2023-fundamental-law-episode",
+  ].map((id) => ({
+    targetType: "entity" as const,
+    id,
+    disposition: "intentionally-unmatched" as const,
+    references: [],
+  })),
+  {
+    targetType: "subject-guide",
+    id: "guide-theocracy",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  ...[
     "chipko-garhwal-1973-1981",
     "chipko-garhwal-actions-episode",
     "environmentalism",
@@ -2076,6 +2096,14 @@ const reviewedMappingOverrides: Record<
   "entity:monarchism": mapped("Monarchism", "Q216669"),
   "entity:saudi-arabia": mapped("Saudi Arabia", "Q851"),
   "entity:theocracy": mapped("Theocracy", "Q44405"),
+  "entity:iran": mapped("Iran", "Q794"),
+  "entity:vatican-city": mapped("Vatican City", "Q237"),
+  "subject-guide:guide-theocracy": mapped(
+    "Theocracy",
+    "Q44405",
+    "exact",
+    "Uses the reviewed mapping owned by the Theocracy Concept while preserving the guide's institutional and case boundaries.",
+  ),
   "entity:tonga": mapped("Tonga", "Q678"),
   "subject-guide:guide-monarchy": mapped(
     "Monarchy",

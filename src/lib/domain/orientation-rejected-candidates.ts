@@ -658,6 +658,36 @@ const allReviewedRejectedOrientationCandidates = {
     boundary:
       "Ruwallah was the nearest canonical candidate opened, but it does not identify the Ruwalla organization across post-Ottoman borders guide composition; that guide keeps identity with its primary subject ruwalla-borderland-organization.",
   },
+  "entity:iran-constitutional-authority-1989-present": {
+    title: "Politics of Iran",
+    url: "https://en.wikipedia.org/wiki/Politics_of_Iran",
+    boundary:
+      "Politics of Iran was the nearest candidate opened, but it does not identify Iran under the amended 1989 Constitution, this evidence-bounded Case.",
+  },
+  "entity:iran-post-1989-constitutional-episode": {
+    title: "Constitution of Iran",
+    url: "https://en.wikipedia.org/wiki/Constitution_of_Iran",
+    boundary:
+      "Constitution of Iran was the nearest candidate opened, but it identifies a constitution rather than Iranian constitutional authority after the 1989 amendment, this ongoing Case Episode.",
+  },
+  "entity:religiously-grounded-governing-authority": {
+    title: "Theocracy",
+    url: "https://en.wikipedia.org/wiki/Theocracy",
+    boundary:
+      "Theocracy was the nearest candidate opened, but it is a political classification rather than Religiously grounded governing authority, this project-defined descriptive dimension.",
+  },
+  "entity:vatican-city-authority-2023-present": {
+    title: "Politics of Vatican City",
+    url: "https://en.wikipedia.org/wiki/Politics_of_Vatican_City",
+    boundary:
+      "Politics of Vatican City was the nearest candidate opened, but it does not identify Vatican City under the 2023 Fundamental Law, this evidence-bounded Case.",
+  },
+  "entity:vatican-post-2023-fundamental-law-episode": {
+    title: "Fundamental Law of Vatican City State",
+    url: "https://en.wikipedia.org/wiki/Fundamental_Law_of_Vatican_City_State",
+    boundary:
+      "Fundamental Law of Vatican City State was the nearest candidate opened, but it identifies the law rather than Vatican authority under the 2023 Fundamental Law, this ongoing Case Episode.",
+  },
 } as const;
 
 export const reviewedRejectedOrientationCandidates = Object.fromEntries(

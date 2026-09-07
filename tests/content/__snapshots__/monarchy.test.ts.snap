@@ -1243,7 +1243,7 @@ Hereditary, elective, rotational, designated, and disputed succession must be di
       "workType": "other",
     },
     {
-      "description": "A contested classification for government in which religious authority or divine law has a governing institutional role.",
+      "description": "A contested classification for government in which divine sovereignty, authoritative religious law, or a religious office has legally consequential governing authority.",
       "externalRefs": [
         {
           "checkedAt": "2026-09-06",
@@ -1268,7 +1268,16 @@ Hereditary, elective, rotational, designated, and disputed succession must be di
       "schemeIds": [
         "political-economic-ideas",
       ],
-      "scopeNote": "Do not infer theocracy from sacred legitimation, an established religion, or religious language without specifying the governing institutions and definition used.",
+      "scopeNote": "Distinguish divine sovereignty, religious-law review, clerical rule, sacred monarchy, official religion, and ordinary religious influence; classify only specified institutions and never a religion or its adherents.",
+    },
+    {
+      "description": "Sacred monarchy is a separate institutional question",
+      "id": "theocracy-sacred-monarchy-boundary",
+      "kind": "statement",
+      "label": "Sacred monarchy is a separate institutional question",
+      "publicationStatus": "reviewed",
+      "statementKind": "editorial-interpretation",
+      "text": "A monarch's sacred status or claim of divine legitimation does not show whether religious officeholders or religious-law institutions govern.",
     },
     {
       "description": "Constitutional-monarchy design varies by context",
@@ -2348,6 +2357,54 @@ Hereditary, elective, rotational, designated, and disputed succession must be di
       "role": "context",
       "subject": {
         "id": "saudi-theocracy-classification-boundary",
+        "kind": "statement",
+      },
+    },
+    {
+      "id": "theocracy-contested-in-iran",
+      "object": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+      "predicate": "contested-in-case",
+      "statementIds": [
+        "iran-classification-qualified",
+        "iran-hybrid-rival-reading",
+      ],
+      "status": "qualified",
+      "subject": {
+        "id": "iran-constitutional-authority-1989-present",
+        "kind": "case",
+      },
+    },
+    {
+      "id": "theocracy-contested-in-vatican",
+      "object": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+      "predicate": "contested-in-case",
+      "statementIds": [
+        "vatican-classification-qualified",
+        "holy-see-vatican-distinct",
+      ],
+      "status": "qualified",
+      "subject": {
+        "id": "vatican-city-authority-2023-present",
+        "kind": "case",
+      },
+    },
+    {
+      "id": "theocracy-sacred-monarchy-boundary-cites-6",
+      "locator": "pp. 1–2, divine rule and human institutions",
+      "object": {
+        "id": "huzakai-theocracy-source",
+        "kind": "source",
+      },
+      "predicate": "cites",
+      "role": "qualifies",
+      "subject": {
+        "id": "theocracy-sacred-monarchy-boundary",
         "kind": "statement",
       },
     },

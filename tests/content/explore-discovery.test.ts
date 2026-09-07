@@ -235,7 +235,7 @@ describe("Explore directory curation", () => {
         ({ guide }) => guide.id,
       ),
     );
-    expect(directoryIds.size).toBe(20);
+    expect(directoryIds.size).toBe(21);
     for (const guideId of [
       "guide-central-planning",
       "guide-ruwalla-borderland-organization",
