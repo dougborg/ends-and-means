@@ -33,6 +33,10 @@
     "append": "\nDo not skip review, but research pull requests are drafts by default.\n"
   },
   {
+    "name": "direct negation followed by unnegated draft default",
+    "append": "\nNever open research pull requests as drafts by default, but open research pull requests as drafts by default.\n"
+  },
+  {
     "name": "missing ready-for-review default",
     "remove": "by default"
   },
