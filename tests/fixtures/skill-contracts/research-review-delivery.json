@@ -25,6 +25,14 @@
     "valid": true
   },
   {
+    "name": "unrelated prior negation before imperative draft default",
+    "append": "\nDo not merge without approval; open research pull requests as drafts by default.\n"
+  },
+  {
+    "name": "unrelated prior negation before declarative draft default",
+    "append": "\nDo not skip review, but research pull requests are drafts by default.\n"
+  },
+  {
     "name": "missing ready-for-review default",
     "remove": "by default"
   },

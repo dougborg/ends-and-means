@@ -204,7 +204,7 @@ function containsUnnegatedMatch(text: string, pattern: RegExp): boolean {
     const match = pattern.exec(sentence);
     if (!match) return false;
     const prefix = sentence.slice(0, match.index);
-    return !/\b(?:never|do not|don't|must not|should not|cannot|can't)\b/i.test(
+    return !/\b(?:never|do not|don't|must not|should not|cannot|can't)\s*$/i.test(
       prefix,
     );
   });
