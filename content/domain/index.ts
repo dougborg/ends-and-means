@@ -6,19 +6,20 @@ import { centralPlanningApproachDocuments } from "./approaches/central-planning"
 import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
 import { approachDocuments } from "./approaches/swedish-wage-earner-funds";
 import { anarchismEvidenceDocuments } from "./evidence/anarchism";
+import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evidence/authoritarianism-fascism-totalitarianism";
 import { capitalismMarketEvidenceDocuments } from "./evidence/capitalism-market-economy";
 import { centralPlanningEvidenceDocuments } from "./evidence/central-planning";
 import { collectiveCapitalFormationEvidenceDocuments } from "./evidence/collective-capital-formation";
 import { democracyRepublicEvidenceDocuments } from "./evidence/democracy-republic";
-import { authoritarianismFascismTotalitarianismEvidenceDocuments } from "./evidence/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyEvidenceDocuments } from "./evidence/economic-democracy";
+import { environmentalismEvidenceDocuments } from "./evidence/environmentalism";
 import { feminismEvidenceDocuments } from "./evidence/feminism";
 import { kahnawakeCommunityDecisionMakingEvidenceDocuments } from "./evidence/kahnawake-community-decision-making";
 import { liberalismConservatismEvidenceDocuments } from "./evidence/liberalism-conservatism";
 import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
 import { monarchyEvidenceDocuments } from "./evidence/monarchy";
-import { oligarchyEvidenceDocuments } from "./evidence/oligarchy";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
+import { oligarchyEvidenceDocuments } from "./evidence/oligarchy";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
@@ -27,22 +28,23 @@ import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { zapatistaCaracolesEvidenceDocuments } from "./evidence/zapatista-caracoles";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
+import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
 import { capitalismMarketGuideDocuments } from "./presentation/capitalism-market-economy-guides";
 import { centralPlanningGuideDocuments } from "./presentation/central-planning-guide";
 import { collectiveCapitalFormationDossierDocuments } from "./presentation/collective-capital-formation-dossier";
 import { democracyRepublicGuideDocuments } from "./presentation/democracy-republic-guides";
-import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
-import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
+import { environmentalismGuideDocuments } from "./presentation/environmentalism-guide";
 import { feminismGuideDocuments } from "./presentation/feminism-guide";
+import { foundationalConceptDossierDocuments } from "./presentation/foundational-concept-dossiers";
 import { kahnawakeCommunityDecisionMakingDossierDocuments } from "./presentation/kahnawake-community-decision-making-dossier";
 import { kahnawakeCommunityDecisionMakingGuideDocuments } from "./presentation/kahnawake-community-decision-making-guide";
 import { liberalismConservatismGuideDocuments } from "./presentation/liberalism-conservatism-guides";
 import { minangkabauDossierDocuments } from "./presentation/minangkabau-dossier";
 import { minangkabauGuideDocuments } from "./presentation/minangkabau-guide";
 import { monarchyGuideDocuments } from "./presentation/monarchy-guide";
-import { oligarchyGuideDocuments } from "./presentation/oligarchy-guide";
 import { nomadicConfederatedOrganizationDossierDocuments } from "./presentation/nomadic-confederated-organizations-dossiers";
 import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/nomadic-confederated-organizations-guides";
+import { oligarchyGuideDocuments } from "./presentation/oligarchy-guide";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
 import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
@@ -50,19 +52,20 @@ import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossie
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
 import { zapatistaCaracolesDossierDocuments } from "./presentation/zapatista-caracoles-dossier";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
+import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
 import { capitalismMarketRelationshipDocuments } from "./relationships/capitalism-market-economy";
 import { centralPlanningRelationshipDocuments } from "./relationships/central-planning";
 import { collectiveCapitalFormationRelationshipDocuments } from "./relationships/collective-capital-formation";
 import { democracyRepublicRelationshipDocuments } from "./relationships/democracy-republic";
-import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
 import { economicDemocracyRelationshipDocuments } from "./relationships/economic-democracy";
+import { environmentalismRelationshipDocuments } from "./relationships/environmentalism";
 import { feminismRelationshipDocuments } from "./relationships/feminism";
 import { kahnawakeCommunityDecisionMakingRelationshipDocuments } from "./relationships/kahnawake-community-decision-making";
 import { liberalismConservatismRelationshipDocuments } from "./relationships/liberalism-conservatism";
 import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
 import { monarchyRelationshipDocuments } from "./relationships/monarchy";
-import { oligarchyRelationshipDocuments } from "./relationships/oligarchy";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
+import { oligarchyRelationshipDocuments } from "./relationships/oligarchy";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
 import { socialOwnershipRelationshipDocuments } from "./relationships/social-ownership";
@@ -71,22 +74,23 @@ import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { zapatistaCaracolesRelationshipDocuments } from "./relationships/zapatista-caracoles";
 import { anarchismResearchDocuments } from "./research/anarchism";
+import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
 import { capitalismMarketResearchDocuments } from "./research/capitalism-market-economy";
 import { centralPlanningResearchDocuments } from "./research/central-planning";
 import { collectiveCapitalFormationResearchDocuments } from "./research/collective-capital-formation";
 import { democracyRepublicResearchDocuments } from "./research/democracy-republic";
-import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
-import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
+import { environmentalismResearchDocuments } from "./research/environmentalism";
 import { feminismResearchDocuments } from "./research/feminism";
+import { liberalismConservatismResearchDocuments } from "./research/liberalism-conservatism";
 import { minangkabauResearchDocuments } from "./research/minangkabau";
 import { monarchyResearchDocuments } from "./research/monarchy";
+import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nomadic-confederated-organizations";
 import { oligarchyResearchDocuments } from "./research/oligarchy";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
-import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nomadic-confederated-organizations";
-import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
 import { minangkabauVocabularyDocuments } from "./vocabulary/minangkabau";
+import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
 import { vocabularyDocuments } from "./vocabulary/swedish-wage-earner-funds";
 
 const rawCanonicalDocuments: AuthoringDocument[] = [
@@ -100,6 +104,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...rehnMeidnerEvidenceDocuments,
   ...economicDemocracyEvidenceDocuments,
   ...feminismEvidenceDocuments,
+  ...environmentalismEvidenceDocuments,
   ...collectiveCapitalFormationEvidenceDocuments,
   ...centralPlanningEvidenceDocuments,
   ...capitalismMarketEvidenceDocuments,
@@ -120,6 +125,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...feminismGuideDocuments,
+  ...environmentalismGuideDocuments,
   ...collectiveCapitalFormationDossierDocuments,
   ...centralPlanningGuideDocuments,
   ...capitalismMarketGuideDocuments,
@@ -141,6 +147,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyGuideDocuments,
   ...openResearchObligationDocuments,
   ...feminismResearchDocuments,
+  ...environmentalismResearchDocuments,
   ...minangkabauResearchDocuments,
   ...monarchyResearchDocuments,
   ...oligarchyGuideDocuments,
@@ -161,6 +168,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...rehnMeidnerRelationshipDocuments,
   ...economicDemocracyRelationshipDocuments,
   ...feminismRelationshipDocuments,
+  ...environmentalismRelationshipDocuments,
   ...collectiveCapitalFormationRelationshipDocuments,
   ...centralPlanningRelationshipDocuments,
   ...capitalismMarketRelationshipDocuments,

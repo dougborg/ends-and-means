@@ -1,0 +1,829 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`foundational Environmentalism guide > pins Statements, citation roles, and locators 1`] = `
+[
+  {
+    "citations": [
+      {
+        "locator": "introduction; sections 1 and 4",
+        "role": "supports",
+        "sourceId": "sep-environmental-ethics-source",
+      },
+    ],
+    "id": "environmentalism-contested-family",
+    "statementKind": "definition",
+    "text": "Environmentalism names multiple ethical positions, movements, and political projects rather than one doctrine, organization, or policy program.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "introduction, paragraphs 1–5; section 5",
+        "role": "supports",
+        "sourceId": "sep-environmental-ethics-source",
+      },
+    ],
+    "id": "environmentalism-science-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Ecology and environmental science investigate relationships and conditions, while environmentalism makes ethical or political claims about what people and institutions should do.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "publisher description, paragraphs 1–2",
+        "role": "supports",
+        "sourceId": "guha-environmentalism-global-history-source",
+      },
+    ],
+    "id": "environmentalism-conservation-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Conservation and preservation are historically important but disputed projects within a wider field that also addresses pollution, health, livelihood, justice, technology, and political authority.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 2, paragraphs 1–27",
+        "role": "supports",
+        "sourceId": "brundtland-common-future-source",
+      },
+    ],
+    "id": "environmentalism-sustainability-boundary",
+    "statementKind": "definition",
+    "text": "The Brundtland Commission defined sustainable development around meeting present needs without compromising future generations, a formulation that neither defines all environmentalism nor resolves disputes over needs and distribution.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 4.6 and 5",
+        "role": "context",
+        "sourceId": "sep-environmental-ethics-source",
+      },
+    ],
+    "id": "environmentalism-climate-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Climate mitigation and adaptation are policy fields that may be supported, opposed, or interpreted differently within environmental movements, while environmentalism also concerns harms and relations not reducible to climate change.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 1–5",
+        "role": "context",
+        "sourceId": "sep-environmental-ethics-source",
+      },
+    ],
+    "id": "environmentalism-party-policy-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "A green party, environmental agency, protected area, pollution rule, or energy policy requires its own actors, design, operation, and outcomes; its label alone does not establish environmentalist purposes or effects.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "publisher description, paragraphs 1–2",
+        "role": "supports",
+        "sourceId": "guha-environmentalism-global-history-source",
+      },
+    ],
+    "id": "environmentalism-global-history-plural",
+    "statementKind": "classification",
+    "text": "Guha distinguishes multiple histories and social bases of environmental action rather than treating environmentalism as a single movement exported unchanged from one region.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "introduction, pp. 1–15",
+        "role": "supports",
+        "sourceId": "martinez-alier-environmentalism-poor-source",
+      },
+    ],
+    "id": "environmentalism-poor-attributed-classification",
+    "statementKind": "classification",
+    "text": "Martínez-Alier uses environmentalism of the poor for conflicts in which livelihood and unequal exposure motivate resistance to environmental damage; the category is an attributed interpretation, not a self-description inherited by every affected community.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "abstract; pp. 397–401 and 405–413",
+        "role": "supports",
+        "sourceId": "schlosberg-environmental-justice-source",
+      },
+    ],
+    "id": "environmental-justice-three-dimensions",
+    "statementKind": "definition",
+    "text": "Schlosberg distinguishes distribution, participation or procedure, and recognition as related dimensions of environmental justice rather than one interchangeable measure.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 599–604 and 611–614",
+        "role": "supports",
+        "sourceId": "whyte-indigenous-climate-source",
+      },
+    ],
+    "id": "indigenous-relations-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Whyte argues that Indigenous climate vulnerability and collective action must be understood through histories of colonialism, governance, and reciprocal responsibilities rather than treating Indigenous knowledge as a detachable policy input.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapters 2–4, pp. 35–116",
+        "role": "supports",
+        "sourceId": "guha-unquiet-woods-source",
+      },
+    ],
+    "id": "colonial-conservation-displacement",
+    "statementKind": "editorial-interpretation",
+    "text": "Protected-land and forestry projects can restrict customary access and political authority, so conservation status alone cannot establish justice or environmental benefit for affected communities.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 4.4–4.6 and 5",
+        "role": "context",
+        "sourceId": "sep-environmental-ethics-source",
+      },
+    ],
+    "id": "nuclear-environmental-policy-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Nuclear power and nuclear weapons raise distinct questions about climate, extraction, land, safety, waste, security, and justice; an environmentalist relationship does not determine a position on either technology.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapters 3–5, pp. 61–152",
+        "role": "supports",
+        "sourceId": "guha-unquiet-woods-source",
+      },
+    ],
+    "id": "chipko-commercial-forestry-conflict",
+    "statementKind": "observation",
+    "text": "Guha locates Chipko actions in Garhwal conflicts over state forestry, commercial felling, local access, and village livelihood during the 1970s.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 5, pp. 130–152",
+        "role": "supports",
+        "sourceId": "guha-unquiet-woods-source",
+      },
+    ],
+    "id": "chipko-organized-tree-protection",
+    "statementKind": "observation",
+    "text": "Participants in selected Garhwal actions used collective presence and nonviolent obstruction to prevent contracted tree felling.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 119–125 and 145–154",
+        "role": "supports",
+        "sourceId": "agarwal-gender-environment-debate-source",
+      },
+    ],
+    "id": "chipko-women-participation",
+    "statementKind": "observation",
+    "text": "Agarwal relates rural women's participation in forest protection to gendered divisions of labor, subsistence responsibilities, property, and decision-making power rather than an innate female closeness to nature.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 119–126 and 145–154",
+        "role": "supports",
+        "sourceId": "agarwal-gender-environment-debate-source",
+      },
+    ],
+    "id": "chipko-ecofeminist-rival",
+    "statementKind": "causal-hypothesis",
+    "text": "Agarwal challenges accounts that explain Chipko through a universal women–nature bond and instead emphasizes material and institutional differences among women.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "abstract; pp. 343–362",
+        "role": "supports",
+        "sourceId": "rangan-contested-boundaries-source",
+      },
+    ],
+    "id": "chipko-state-community-rival",
+    "statementKind": "causal-hypothesis",
+    "text": "Rangan argues that Garhwal forestry involved negotiation and conflict among state institutions, communities, and classes rather than a simple state-versus-community divide.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "contents; section II(A), Subject Files 3–5; section II(B)",
+        "role": "supports",
+        "sourceId": "chandi-prasad-bhatt-papers-catalogue-source",
+      },
+    ],
+    "id": "chipko-local-archive-provenance",
+    "statementKind": "observation",
+    "text": "The Chandi Prasad Bhatt papers catalogue identifies Hindi correspondence and organizational files from the Dasholi Gram Swarajya Mandal and Chipko activity in Chamoli, including 1973 forest-preservation records and Reni material.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "abstract; pp. 343–362",
+        "role": "qualifies",
+        "sourceId": "rangan-contested-boundaries-source",
+      },
+    ],
+    "id": "chipko-case-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "The selected Garhwal actions illuminate forestry, livelihood, gender, and movement interpretation but do not define all Chipko activity, Indian environmentalism, or rural women's politics.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–4 and appendix I",
+        "role": "supports",
+        "sourceId": "gao-hazardous-landfills-source",
+      },
+    ],
+    "id": "warren-county-landfill-siting",
+    "statementKind": "observation",
+    "text": "North Carolina selected a predominantly Black Warren County community for a landfill holding soil contaminated by illegal PCB dumping elsewhere in the state.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "foreword, pp. x–xiii; pp. 17–20",
+        "role": "supports",
+        "sourceId": "ucc-toxic-wastes-race-source",
+      },
+    ],
+    "id": "warren-county-protest",
+    "statementKind": "observation",
+    "text": "In 1982, Warren County residents and allied civil-rights and religious organizations used demonstrations and civil disobedience against the landfill, and hundreds of participants were arrested.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–4 and appendix I",
+        "role": "supports",
+        "sourceId": "gao-hazardous-landfills-source",
+      },
+    ],
+    "id": "warren-county-landfill-built",
+    "statementKind": "observation",
+    "text": "The protests did not prevent construction and filling of the Warren County PCB landfill.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "digest; pp. 1–4 and 14–16",
+        "role": "supports",
+        "sourceId": "gao-hazardous-landfills-source",
+      },
+    ],
+    "id": "gao-siting-pattern",
+    "statementKind": "observation",
+    "text": "The 1983 General Accounting Office study found that three of four southeastern hazardous-waste landfills it examined were in majority-Black communities and that all four surrounding communities had relatively high poverty rates.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "executive summary, pp. xiii–xvi; pp. 13–16",
+        "role": "supports",
+        "sourceId": "ucc-toxic-wastes-race-source",
+      },
+    ],
+    "id": "ucc-national-race-finding",
+    "statementKind": "observation",
+    "text": "The 1987 United Church of Christ study reported race as the most significant variable associated with commercial hazardous-waste facility location in its national analysis.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Principles 1–17",
+        "role": "supports",
+        "sourceId": "ej-principles-source",
+      },
+    ],
+    "id": "ej-summit-principles",
+    "statementKind": "attributed-value",
+    "text": "Delegates at the First National People of Color Environmental Leadership Summit adopted seventeen principles linking ecological protection with self-determination, public participation, health, work, and opposition to environmental racism.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 397–405",
+        "role": "qualifies",
+        "sourceId": "schlosberg-environmental-justice-source",
+      },
+    ],
+    "id": "warren-county-causal-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Warren County became an important reference point for environmental-justice organizing, but the selected evidence does not isolate its effect from longer civil-rights, labor, Indigenous, and anti-toxics organizing or prove that it caused every later policy change.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 12 and 14–16",
+        "role": "supports",
+        "sourceId": "te-awa-tupua-act-source",
+      },
+    ],
+    "id": "te-awa-legal-person",
+    "statementKind": "observation",
+    "text": "The Te Awa Tupua Act declares Te Awa Tupua a legal person with corresponding rights, powers, duties, and liabilities.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 12–13",
+        "role": "supports",
+        "sourceId": "te-awa-tupua-act-source",
+      },
+    ],
+    "id": "te-awa-living-whole",
+    "statementKind": "observation",
+    "text": "The Act recognizes Te Awa Tupua as an indivisible living whole from the mountains to the sea, incorporating physical and metaphysical elements.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "section 13 and sections 29–37",
+        "role": "supports",
+        "sourceId": "te-awa-tupua-act-source",
+      },
+    ],
+    "id": "te-awa-tupua-kawa",
+    "statementKind": "observation",
+    "text": "The Act sets out Tupua te Kawa as intrinsic values and requires relevant actors to recognize the relationship of Whanganui iwi and hapū with Te Awa Tupua.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections 18–23",
+        "role": "supports",
+        "sourceId": "te-awa-tupua-act-source",
+      },
+    ],
+    "id": "te-pou-tupua-representation",
+    "statementKind": "observation",
+    "text": "The Act establishes Te Pou Tupua as the human face of Te Awa Tupua and provides for two appointees acting as one office.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Legal Recognition of Te Awa Tupua, paragraphs 1–10",
+        "role": "supports",
+        "sourceId": "te-pou-tupua-te-awa-source",
+      },
+    ],
+    "id": "te-awa-iwi-provenance",
+    "statementKind": "observation",
+    "text": "Te Pou Tupua describes the framework as supporting values practised by Whanganui hapū and iwi and protecting their continuing authority to speak for their own interests.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Legal Recognition of Te Awa Tupua, paragraphs 1–10; community account, paragraphs 1–8",
+        "role": "supports",
+        "sourceId": "te-pou-tupua-te-awa-source",
+      },
+      {
+        "locator": "long title; sections 3, 12–20, and 69–71",
+        "role": "supports",
+        "sourceId": "te-awa-tupua-act-source",
+      },
+    ],
+    "id": "te-awa-environmentalism-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "The Te Awa Tupua framework is a Whanganui iwi–Crown settlement and legal-governance arrangement grounded in Whanganui relationships and law; placing it near environmentalism does not reclassify those relationships as an environmental ideology.",
+  },
+]
+`;
+
+exports[`foundational Environmentalism guide > pins the Concept, bounded cases, obligations, and guide 1`] = `
+{
+  "cases": [
+    {
+      "conditionStatementIds": [
+        "chipko-commercial-forestry-conflict",
+      ],
+      "description": "Selected forest-protection actions and disputes over their interpretation in the Garhwal Himalaya.",
+      "endDate": {
+        "certainty": "approximate",
+        "note": "The guide bounds the early movement through approximately 1981.",
+        "year": 1981,
+      },
+      "episodeIds": [
+        "chipko-garhwal-actions-episode",
+      ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chipko_movement",
+        },
+      ],
+      "id": "chipko-garhwal-1973-1981",
+      "kind": "case",
+      "label": "Chipko actions in Garhwal, 1973–1981",
+      "locationIds": [
+        "garhwal-uttarakhand",
+      ],
+      "publicationStatus": "reviewed",
+      "reviewedAt": "2026-09-06",
+      "scope": "Selected Garhwal forestry actions from the first Mandal action through the movement's early expansion and interpretation; not every action called Chipko or all Himalayan forest politics.",
+      "selectionRationale": "The case exposes livelihood, gender, conservation, and state–community boundaries through both movement history and serious rival interpretations.",
+      "startDate": {
+        "certainty": "exact",
+        "year": 1973,
+      },
+    },
+    {
+      "conditionStatementIds": [
+        "warren-county-landfill-siting",
+      ],
+      "description": "The Warren County PCB protest, subsequent siting research, and the 1991 national summit principles.",
+      "endDate": {
+        "certainty": "exact",
+        "year": 1991,
+      },
+      "episodeIds": [
+        "warren-county-to-ej-summit-episode",
+      ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/North_Carolina_PCB_protest,_1982",
+        },
+      ],
+      "id": "warren-county-environmental-justice-1982-1991",
+      "kind": "case",
+      "label": "Warren County and environmental-justice organizing, 1982–1991",
+      "locationIds": [
+        "warren-county-north-carolina",
+        "united-states",
+      ],
+      "publicationStatus": "reviewed",
+      "reviewedAt": "2026-09-06",
+      "scope": "The 1982 Warren County protest, selected 1983 and 1987 siting studies, and 1991 summit principles; not the whole environmental-justice movement or every later policy attributed to it.",
+      "selectionRationale": "The case connects affected-community action to distribution, participation, recognition, and the limits of movement-effect claims.",
+      "startDate": {
+        "certainty": "exact",
+        "year": 1982,
+      },
+    },
+    {
+      "asOf": "2026-09-06",
+      "conditionStatementIds": [
+        "te-awa-iwi-provenance",
+      ],
+      "description": "The statutory recognition and governance framework for Te Awa Tupua and its relationship with Whanganui iwi and hapū.",
+      "episodeIds": [
+        "te-awa-tupua-enacted-framework-episode",
+      ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Te_Awa_Tupua",
+        },
+      ],
+      "freshness": "review-needed",
+      "id": "te-awa-tupua-framework-2017-present",
+      "kind": "case",
+      "label": "Te Awa Tupua framework, 2017–present",
+      "lastReviewedAt": "2026-09-06",
+      "locationIds": [
+        "whanganui-river-catchment",
+      ],
+      "publicationStatus": "reviewed",
+      "reviewedAt": "2026-09-06",
+      "scope": "The enacted statutory framework and Te Pou Tupua's account through the review date; not all Whanganui tikanga, Māori law, rights-of-nature initiatives, or observed ecological outcomes.",
+      "selectionRationale": "The case tests whether environmentalist categories can be kept adjacent to, but distinct from, an iwi-grounded legal and governance relationship.",
+      "startDate": {
+        "certainty": "exact",
+        "year": 2017,
+      },
+    },
+  ],
+  "concept": {
+    "description": "A contested family of ethical commitments, social movements, and political projects concerned with human relations to environments and nonhuman life.",
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Environmentalism",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q2855609",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q2855609",
+      },
+    ],
+    "id": "environmentalism",
+    "kind": "concept",
+    "label": "Environmentalism",
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "schemeIds": [
+      "political-economic-ideas",
+    ],
+    "scopeNote": "Environmentalism is not ecology or environmental science, and it does not make every conservation policy, climate policy, green party, or Indigenous land relation an instance of one ideology.",
+  },
+  "guide": {
+    "description": "Environmentalism includes competing ethical commitments, movements, and political projects concerned with environments and nonhuman life; it is not environmental science, one conservation program, or a label that can be imposed on Indigenous governance.",
+    "id": "guide-environmentalism",
+    "label": "Environmentalism",
+    "primarySubject": {
+      "id": "environmentalism",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "searchQueries": [
+      {
+        "query": "environmentalism",
+      },
+      {
+        "query": "what is environmentalism",
+      },
+      {
+        "query": "environmental movement",
+      },
+      {
+        "query": "environmental justice",
+      },
+      {
+        "query": "ecology vs environmentalism",
+      },
+      {
+        "query": "conservation vs environmentalism",
+      },
+      {
+        "query": "climate change and environmentalism",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "What does environmentalism mean?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "environmentalism-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "environmentalism",
+            "kind": "concept",
+          },
+        ],
+        "heading": "What belongs together—and what does not?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "meanings",
+          },
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "boundaries",
+          },
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "heading": "Whose environment, knowledge, and authority count?",
+        "id": "justice",
+        "narrativeRefs": [
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "justice",
+          },
+        ],
+        "researchObligationIds": [
+          "environmentalism-colonial-conservation-outcomes",
+          "environmentalism-knowledge-authority",
+          "environmentalism-north-south-translation",
+        ],
+        "role": "variants-and-disputes",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "chipko-garhwal-1973-1981",
+            "kind": "case",
+          },
+          {
+            "id": "warren-county-environmental-justice-1982-1991",
+            "kind": "case",
+          },
+          {
+            "id": "te-awa-tupua-framework-2017-present",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do three bounded contexts establish?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "chipko",
+          },
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "warren-county",
+          },
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "te-awa",
+          },
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "heading": "What should be compared next?",
+        "id": "comparisons-and-next-steps",
+        "narrativeRefs": [
+          {
+            "dossierId": "environmentalism-dossier",
+            "sectionId": "comparisons",
+          },
+        ],
+        "role": "comparisons-and-next-steps",
+      },
+      {
+        "heading": "What remains unsettled?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "environmentalism-movement-effects",
+          "environmentalism-colonial-conservation-outcomes",
+          "environmentalism-knowledge-authority",
+          "environmentalism-north-south-translation",
+          "environmentalism-gendered-claims",
+          "environmentalism-nuclear-divergence",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "environmentalism",
+  },
+  "obligations": [
+    {
+      "addressedStatementIds": [
+        "warren-county-protest",
+        "warren-county-landfill-built",
+        "warren-county-causal-boundary",
+      ],
+      "currentLimitation": "The current sequence shows organizing, an immediate defeat, later research, and movement articulation without isolating one intervention's effect.",
+      "description": "A causal question separating organizing, institutional response, and concurrent change.",
+      "evidenceNeeded": "Policy-process records, participant accounts, rival explanations, comparison sites, and research designs that identify mechanism and counterfactual.",
+      "id": "environmentalism-movement-effects",
+      "kind": "research-obligation",
+      "label": "Movement effects and coincident policy change",
+      "obligationStatus": "open",
+      "obligationType": "counterfactual",
+      "publicationStatus": "reviewed",
+      "question": "Which environmental movement interventions changed a specified policy or outcome compared with what likely would have happened without them?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Named campaigns, institutions, outcomes, places, and periods rather than a general movement-effect estimate.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+      "targetSectionId": "warren-county",
+    },
+    {
+      "addressedStatementIds": [
+        "environmentalism-conservation-boundary",
+        "colonial-conservation-displacement",
+      ],
+      "currentLimitation": "The reviewed sources establish the category error and one Himalayan history but not comparative social and ecological outcomes across colonial conservation regimes.",
+      "description": "A distributional and institutional comparison of protected-land arrangements.",
+      "evidenceNeeded": "Community and archival records, land-tenure histories, before-and-after ecological measures, and comparisons that retain coercion and displacement.",
+      "id": "environmentalism-colonial-conservation-outcomes",
+      "kind": "research-obligation",
+      "label": "Colonial conservation, displacement, and ecological outcomes",
+      "obligationStatus": "open",
+      "obligationType": "counterevidence",
+      "publicationStatus": "reviewed",
+      "question": "When conservation restricted customary access or displaced communities, how did authority, livelihoods, and ecological conditions change?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Bounded protected-land and forestry institutions under named colonial and postcolonial authorities.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+      "targetSectionId": "justice",
+    },
+    {
+      "addressedStatementIds": [
+        "indigenous-relations-boundary",
+        "te-awa-iwi-provenance",
+        "te-awa-environmentalism-boundary",
+      ],
+      "currentLimitation": "Public statutory and organizational accounts cannot establish consent, access, and authority rules for knowledge that communities have not made public.",
+      "description": "A question about who may define, share, and use environmental knowledge.",
+      "evidenceNeeded": "Community-authorized protocols, public self-descriptions, consent and data-governance rules, and research that does not solicit or expose restricted knowledge.",
+      "id": "environmentalism-knowledge-authority",
+      "kind": "research-obligation",
+      "label": "Knowledge authority and control",
+      "obligationStatus": "open",
+      "obligationType": "counterargument",
+      "publicationStatus": "reviewed",
+      "question": "Who controls the production and use of knowledge in environmental decisions, and what authority do affected communities retain over restricted or community-held knowledge?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Named communities and institutions under their own publication and access rules; no extraction of restricted knowledge.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "environmentalism-global-history-plural",
+        "environmentalism-poor-attributed-classification",
+      ],
+      "currentLimitation": "Two global syntheses and English-language case scholarship cannot establish community self-description or translation across languages and periods.",
+      "description": "A focused test of externally applied movement labels across political histories.",
+      "evidenceNeeded": "Original-language movement records, named translations, participant oral histories with publication provenance, and scholarship on local political vocabularies.",
+      "id": "environmentalism-north-south-translation",
+      "kind": "research-obligation",
+      "label": "Translation of environmentalist categories",
+      "obligationStatus": "open",
+      "obligationType": "research-gap",
+      "publicationStatus": "reviewed",
+      "question": "When do actors claim, translate, reject, or receive labels such as environmentalism, livelihood environmentalism, or environmentalism of the poor?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Specific organizations, communities, languages, and periods; no global hierarchy of authentic environmentalism.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+      "targetSectionId": "meanings",
+    },
+    {
+      "addressedStatementIds": [
+        "chipko-women-participation",
+        "chipko-ecofeminist-rival",
+        "chipko-state-community-rival",
+      ],
+      "currentLimitation": "The Chipko debate identifies material and institutional mechanisms but does not test their operation across other movements or among differently positioned women.",
+      "description": "A test of rival explanations for participation and authority.",
+      "evidenceNeeded": "Participant accounts and disaggregated studies of work, tenure, caste, class, age, household position, authority, and movement decision-making.",
+      "id": "environmentalism-gendered-claims",
+      "kind": "research-obligation",
+      "label": "Gendered environmental claims and institutions",
+      "obligationStatus": "open",
+      "obligationType": "counterargument",
+      "publicationStatus": "reviewed",
+      "question": "How do labor, property, kinship, political authority, and exposure—not presumed identity—shape gendered participation in environmental action?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Named movements and communities without attributing an innate relationship between women and nature.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+      "targetSectionId": "chipko",
+    },
+    {
+      "addressedStatementIds": [
+        "nuclear-environmental-policy-boundary",
+        "environmentalism-climate-boundary",
+      ],
+      "currentLimitation": "The current guide establishes only that no environmentalist label determines a nuclear position; it does not yet present the strongest rival arguments or their evidence.",
+      "description": "A policy-boundary question preserving distinct energy and weapons debates.",
+      "evidenceNeeded": "Primary movement positions, energy-system and weapons evidence, affected-community testimony, and sources that keep civilian power, weapons, waste, mining, and security claims distinct.",
+      "id": "environmentalism-nuclear-divergence",
+      "kind": "research-obligation",
+      "label": "Environmental arguments about nuclear technologies",
+      "obligationStatus": "open",
+      "obligationType": "research-gap",
+      "publicationStatus": "reviewed",
+      "question": "How do environmental actors weigh climate, safety, waste, extraction, land, proliferation, and justice when arguing about nuclear power or nuclear weapons?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Specified technologies, institutions, places, periods, and claims; no pro- or anti-nuclear score.",
+      "statementIds": [],
+      "target": {
+        "id": "environmentalism",
+        "kind": "concept",
+      },
+      "targetSectionId": "boundaries",
+    },
+  ],
+}
+`;
