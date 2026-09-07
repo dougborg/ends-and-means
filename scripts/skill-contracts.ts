@@ -102,13 +102,16 @@ export const skillCapabilities: SkillCapability[] = [
     paths: [`${researchRoot}/SKILL.md`],
     patterns: [
       /completed, verified work.+ready\s+pull request.+default/is,
-      /draft only.+experimental.+early-feedback.+substantial work remaining/is,
+      /draft only when substantial work remains.+either.+explicitly experimental.+or.+deliberate early-feedback/is,
       /issue `In progress`.+marked ready/is,
       /stacked pull requests only for genuine dependency chains/i,
       /bottom-up.+rebase-only linear history/is,
       /exact-head evidence.+automatic rebase.+retargeting/is,
     ],
-    forbiddenPatterns: [/Push and open a draft pull request when authorized/i],
+    forbiddenPatterns: [
+      /Push and open a draft pull request when authorized/i,
+      /\b(?:open|create|submit|push)\b[^.\n]{0,100}\b(?:draft pull requests?|pull requests? as drafts?)\b[^.\n]{0,40}\b(?:by default|as the default|normally)\b/i,
+    ],
     deletion: {
       path: `${researchRoot}/SKILL.md`,
       pattern: /stacked pull requests only for genuine dependency chains/i,
