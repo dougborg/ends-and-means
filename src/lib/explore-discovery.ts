@@ -135,6 +135,10 @@ export const exploreDirectoryCuration: ExploreDirectoryCuration = {
     placement: "browse",
     reason: "High-level analytical concept and form of rule",
   },
+  "guide-welfare-state": {
+    placement: "browse",
+    reason: "High-level institutional category",
+  },
 };
 
 export function auditExploreDirectoryCuration(

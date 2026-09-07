@@ -1,0 +1,241 @@
+import type { AuthoringDocument } from "../../../src/lib/domain";
+
+const citations = [
+  [
+    "welfare-state-institutional-category",
+    "briggs-historical-perspective-source",
+    "pp. 221–258, especially pp. 228–230",
+    "supports",
+  ],
+  [
+    "welfare-regime-analytical-category",
+    "esping-andersen-three-worlds-source",
+    "part I, chapters 1–5",
+    "supports",
+  ],
+  [
+    "social-protection-category-boundary",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Social protection and Social security definitions",
+    "supports",
+  ],
+  [
+    "public-spending-insufficient",
+    "oecd-socx-source",
+    "dataset description and SOCX Manual/Methodology",
+    "supports",
+  ],
+  [
+    "welfare-political-regime-boundary",
+    "shim-legislature-welfare-source",
+    "pp. 1235–1255, abstract and analysis across 1948–2016",
+    "supports",
+  ],
+  [
+    "welfare-outcome-boundary",
+    "ilo-world-social-protection-2024-source",
+    "Annex 2, legal and effective coverage measures",
+    "supports",
+  ],
+  [
+    "welfare-design-facets",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Social protection programme or scheme; Annex 2",
+    "supports",
+  ],
+  [
+    "welfare-benefit-forms",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, contributory, non-contributory, means-tested, conditional, and universal schemes",
+    "supports",
+  ],
+  [
+    "welfare-mixed-provision",
+    "ilo-world-social-protection-2024-source",
+    "Annex 1, Social security, paragraphs on public responsibility and delivery",
+    "supports",
+  ],
+  [
+    "esping-welfare-regime-typology",
+    "esping-andersen-three-worlds-source",
+    "part I, chapters 1–3",
+    "supports",
+  ],
+  [
+    "esping-typology-boundary",
+    "esping-andersen-three-worlds-source",
+    "description and part I, chapters 1–5",
+    "supports",
+  ],
+  [
+    "care-social-reproduction-boundary",
+    "orloff-gender-social-rights-source",
+    "pp. 303–328, especially pp. 312–320",
+    "supports",
+  ],
+  [
+    "social-care-welfare-mix",
+    "daly-lewis-social-care-source",
+    "pp. 281–298, abstract and conceptual framework",
+    "supports",
+  ],
+  [
+    "welfare-attributed-purposes",
+    "barr-welfare-state-piggy-bank-source",
+    "abstract and chapter 1, distinction among insurance, consumption smoothing, poverty relief, and redistribution",
+    "supports",
+  ],
+  [
+    "welfare-attributed-purposes",
+    "briggs-historical-perspective-source",
+    "pp. 228–230, three directions of state action",
+    "supports",
+  ],
+  [
+    "welfare-attributed-purposes",
+    "kwon-developmental-welfare-source",
+    "pp. 477–497, selective and inclusive welfare developmentalism",
+    "qualifies",
+  ],
+  [
+    "beveridge-proposal-boundary",
+    "beveridge-social-insurance-source",
+    "Social Insurance and Allied Services, 1942; UK Parliament catalogue BBK/D/495",
+    "supports",
+  ],
+  [
+    "uk-national-insurance-formal-rule",
+    "uk-national-insurance-act-1946-source",
+    "sections 1–4 and First Schedule",
+    "supports",
+  ],
+  ["uk-nhs-formal-rule", "uk-nhs-act-1946-source", "sections 1–3", "supports"],
+  [
+    "uk-assistance-formal-rule",
+    "uk-national-assistance-act-1948-source",
+    "sections 1–6 and 14",
+    "supports",
+  ],
+  [
+    "britain-welfare-case-limit",
+    "briggs-historical-perspective-source",
+    "pp. 221–228, history and variable uses of the term",
+    "supports",
+  ],
+  [
+    "costa-rica-ccss-formation",
+    "saenz-costa-rica-universal-coverage-source",
+    "pp. 3–5, historical and legal framework",
+    "supports",
+  ],
+  [
+    "costa-rica-universalization-mandate",
+    "saenz-costa-rica-universal-coverage-source",
+    "pp. 3–5, 1961 universalization law",
+    "supports",
+  ],
+  [
+    "costa-rica-1973-health-integration",
+    "saenz-costa-rica-universal-coverage-source",
+    "pp. 3–5, 1973 institutional transfer and General Health Law",
+    "supports",
+  ],
+  [
+    "costa-rica-financing-access",
+    "saenz-costa-rica-universal-coverage-source",
+    "pp. 6–10, coverage, services, and tripartite financing",
+    "supports",
+  ],
+  [
+    "costa-rica-welfare-case-limit",
+    "saenz-costa-rica-universal-coverage-source",
+    "pp. 3–6, historical scope and coverage measures",
+    "supports",
+  ],
+  [
+    "korea-democratization-expansion",
+    "ku-korea-welfare-reform-source",
+    "Social welfare reform after the financial crisis, paragraphs 1–8",
+    "supports",
+  ],
+  [
+    "korea-crisis-coverage-gap",
+    "ku-korea-welfare-reform-source",
+    "Social context of the financial crisis, paragraphs 9–10",
+    "supports",
+  ],
+  [
+    "korea-employment-insurance-expansion",
+    "ku-korea-welfare-reform-source",
+    "Responses of social welfare policy, paragraphs 1–4",
+    "supports",
+  ],
+  [
+    "korea-reform-outcome-limit",
+    "ku-korea-welfare-reform-source",
+    "Social development since the social welfare reform, table 1 and accompanying discussion",
+    "supports",
+  ],
+  [
+    "korea-authoritarian-democratic-boundary",
+    "shim-legislature-welfare-source",
+    "pp. 1235–1255, abstract and regime-period comparison",
+    "supports",
+  ],
+  [
+    "south-korea-welfare-case-limit",
+    "kwon-developmental-welfare-source",
+    "pp. 477–497, continuity and reform around the 1997 crisis",
+    "supports",
+  ],
+] as const;
+
+export const welfareStateRelationshipDocuments = [
+  {
+    documentType: "relationships",
+    subject: { kind: "concept", id: "welfare-state" },
+    relationships: [
+      {
+        id: "welfare-state-related-to-capitalism",
+        predicate: "related-to",
+        subject: { kind: "concept", id: "welfare-state" },
+        object: { kind: "concept", id: "capitalism" },
+        status: "qualified",
+        statementIds: [
+          "welfare-political-regime-boundary",
+          "esping-welfare-regime-typology",
+        ],
+      },
+      {
+        id: "welfare-state-related-to-social-democracy",
+        predicate: "related-to",
+        subject: { kind: "concept", id: "welfare-state" },
+        object: { kind: "concept", id: "social-democracy" },
+        status: "qualified",
+        statementIds: ["welfare-political-regime-boundary"],
+      },
+      {
+        id: "welfare-state-related-to-socialism",
+        predicate: "related-to",
+        subject: { kind: "concept", id: "welfare-state" },
+        object: { kind: "concept", id: "socialism" },
+        status: "qualified",
+        statementIds: ["welfare-political-regime-boundary"],
+      },
+    ],
+  },
+  ...citations.map(([statementId, sourceId, locator, role], index) => ({
+    documentType: "relationships" as const,
+    subject: { kind: "statement" as const, id: statementId },
+    relationships: [
+      {
+        id: `welfare-state-citation-${index + 1}`,
+        predicate: "cites" as const,
+        subject: { kind: "statement" as const, id: statementId },
+        object: { kind: "source" as const, id: sourceId },
+        role,
+        locator,
+      },
+    ],
+  })),
+] satisfies AuthoringDocument[];

@@ -82,6 +82,18 @@ export const reviewedOrientationOnlyMappings = {
   "zambia-pf-2006-campaign-episode": "2006 Zambian general election",
   "thai-rak-thai-government-2001-2006": "Thai Rak Thai Party",
   "thaksin-first-governments-episode": "Premiership of Thaksin Shinawatra",
+  "welfare-state": "Welfare state",
+  "britain-welfare-state-case-place": "United Kingdom",
+  "britain-welfare-state-formation-1942-1951":
+    "History of the welfare state in the United Kingdom",
+  "britain-welfare-state-formation-episode":
+    "History of the welfare state in the United Kingdom",
+  "costa-rica-welfare-state-case-place": "Costa Rica",
+  "costa-rica-social-insurance-health-1941-1973": "Healthcare in Costa Rica",
+  "costa-rica-social-insurance-health-episode": "Healthcare in Costa Rica",
+  "south-korea-welfare-state-case-place": "South Korea",
+  "south-korea-welfare-expansion-1988-2008": "Welfare in South Korea",
+  "south-korea-welfare-expansion-episode": "Welfare in South Korea",
   "cmp-operation-1943-1945": "Economic planning",
   "controlled-materials-allocation": "Economic planning",
   "regional-wage-earner-fund-boards": "Rehn–Meidner model",
@@ -148,4 +160,5 @@ export const reviewedOrientationOnlyGuideSubjects = {
   "guide-ruwalla-borderland-organization": "ruwalla-borderland-organization",
   "guide-environmentalism": "environmentalism",
   "guide-populism": "populism",
+  "guide-welfare-state": "welfare-state",
 } as const;

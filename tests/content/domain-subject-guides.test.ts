@@ -122,6 +122,7 @@ const liveGuideIds = [
   "guide-tawantinsuyu-imperial-organization",
   "guide-theocracy",
   "guide-totalitarianism",
+  "guide-welfare-state",
 ];
 
 describe("compiled learner SubjectGuide composition", () => {
@@ -165,8 +166,8 @@ describe("SubjectGuide content attention", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 28,
-      total: 28,
+      live: 29,
+      total: 29,
       liveIds: liveGuideIds,
     });
   });
@@ -183,7 +184,7 @@ describe("compiled SubjectGuide publication boundaries", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(28);
+      expect(graph.subjectGuideRecords).toHaveLength(29);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual(
         liveGuideIds.filter((id) => id !== guide.id),
       );
