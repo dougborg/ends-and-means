@@ -343,8 +343,8 @@ export const environmentalismEvidenceDocuments = [
   ),
   statement(
     "environmentalism-climate-boundary",
-    "Climate politics and environmentalism overlap without coinciding",
-    "Climate mitigation and adaptation are policy fields that may be supported, opposed, or interpreted differently within environmental movements, while environmentalism also concerns harms and relations not reducible to climate change.",
+    "Climate change does not exhaust environmental ethics",
+    "The Stanford Encyclopedia of Philosophy treats sustainability and climate change as one area of environmental ethics alongside distinct questions about nonhuman moral standing, wilderness, built environments, poverty, and politics.",
     "editorial-interpretation",
   ),
   statement(

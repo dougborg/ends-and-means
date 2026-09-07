@@ -28,8 +28,8 @@ const citations = [
   [
     "environmentalism-climate-boundary",
     "sep-environmental-ethics-source",
-    "sections 4.6 and 5",
-    "context",
+    "introduction, paragraphs 1–2; sections 5–6",
+    "supports",
   ],
   [
     "environmentalism-party-policy-boundary",
