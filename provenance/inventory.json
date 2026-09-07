@@ -64,6 +64,7 @@
     { "name": "@lucide/astro", "scope": "runtime", "license": "ISC", "source": "https://github.com/lucide-icons/lucide/tree/main/packages/astro", "terms": "https://github.com/lucide-icons/lucide/blob/main/LICENSE" },
     { "name": "astro", "scope": "runtime", "license": "MIT", "source": "https://github.com/withastro/astro/tree/main/packages/astro", "terms": "https://github.com/withastro/astro/blob/main/LICENSE" },
     { "name": "micromark", "scope": "runtime", "license": "MIT", "source": "https://github.com/micromark/micromark/tree/main/packages/micromark", "terms": "https://github.com/micromark/micromark/blob/main/license" },
+    { "name": "undici", "scope": "runtime", "license": "MIT", "source": "https://github.com/nodejs/undici", "terms": "https://github.com/nodejs/undici/blob/main/LICENSE" },
     { "name": "@astrojs/check", "scope": "development", "license": "MIT", "source": "https://github.com/withastro/language-tools/tree/main/packages/astro-check", "terms": "https://github.com/withastro/language-tools/blob/main/LICENSE" },
     { "name": "@astrojs/compiler", "scope": "development", "license": "MIT", "source": "https://github.com/withastro/compiler", "terms": "https://github.com/withastro/compiler/blob/main/LICENSE" },
     { "name": "@biomejs/biome", "scope": "development", "license": "MIT OR Apache-2.0", "source": "https://github.com/biomejs/biome", "terms": "https://github.com/biomejs/biome/blob/main/LICENSE-APACHE" },

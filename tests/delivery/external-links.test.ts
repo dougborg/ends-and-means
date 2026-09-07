@@ -52,8 +52,11 @@ const documents: AuthoringDocument[] = [
   },
 ];
 
-const response = (status: number, url: string, redirected = false) =>
-  ({ status, url, redirected }) as Response;
+const response = (
+  status: number,
+  url: string,
+  headers: Record<string, string> = {},
+) => ({ status, url, headers: new Headers(headers), body: null }) as Response;
 
 describe("canonical external-link inventory", () => {
   it("deduplicates requests while preserving every owner and check date", () => {
@@ -155,10 +158,18 @@ describe("report-only remote checks", () => {
   });
 
   it("reports material redirects without rewriting the owner", async () => {
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        response(301, entry.url, {
+          location: "https://publisher.test/replacement",
+        }),
+      )
+      .mockResolvedValueOnce(
+        response(200, "https://publisher.test/replacement"),
+      );
     const checks = await checkExternalLinks([entry], {
-      fetch: vi.fn(async () =>
-        response(200, "https://publisher.test/replacement", true),
-      ),
+      fetch: fetcher,
     });
     expect(checks[0]).toMatchObject({
       availability: "material-redirect",
@@ -183,6 +194,160 @@ describe("report-only remote checks", () => {
     expect(check).toMatchObject({ availability: "reachable", attempts: 2 });
     expect(fetcher).toHaveBeenCalledTimes(2);
     expect(sleep).toHaveBeenCalledWith(10);
+  });
+});
+
+describe("redirect and provider responses", () => {
+  const entry = {
+    url: "https://example.test/item",
+    owners: [
+      {
+        ownerId: "source",
+        ownerKind: "source" as const,
+        field: "resourceLinks" as const,
+        purpose: "publisher" as const,
+        authoringLocation: "content/domain/evidence/source.ts",
+        checkedAt: null,
+        freshness: "never-recorded" as const,
+      },
+    ],
+  };
+
+  it("preserves rate limiting as a transient provider failure and honors bounded Retry-After", async () => {
+    const fetcher = vi.fn(async () =>
+      response(429, entry.url, { "retry-after": "30" }),
+    );
+    const sleep = vi.fn(async () => undefined);
+    const checks = await checkExternalLinks(
+      [entry, { ...entry, url: "https://example.test/second" }],
+      {
+        fetch: fetcher,
+        retries: 1,
+        sleep,
+        providerFailureLimit: 1,
+      },
+    );
+    expect(checks[0]).toMatchObject({
+      availability: "rate-limited",
+      attempts: 2,
+    });
+    expect(checks[1]).toMatchObject({ attempts: 0 });
+    expect(sleep).toHaveBeenCalledWith(5_000);
+  });
+
+  it("reports a redirect without a destination instead of treating it as reachable", async () => {
+    const checks = await checkExternalLinks([entry], {
+      fetch: vi.fn(async () => response(302, entry.url)),
+    });
+    expect(checks[0]).toMatchObject({
+      availability: "unfollowable-redirect",
+      editorialReview: ["redirect"],
+    });
+  });
+
+  it("follows a non-material query redirect", async () => {
+    const destination = `${entry.url}?view=full`;
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        response(302, entry.url, { location: destination }),
+      )
+      .mockResolvedValueOnce(response(200, destination));
+    const checks = await checkExternalLinks([entry], { fetch: fetcher });
+    expect(checks[0]).toMatchObject({
+      availability: "reachable",
+      destination,
+    });
+  });
+});
+
+describe("SSRF boundary", () => {
+  const entry = { url: "https://public.test/item", owners: [] };
+  const publicAddress = async () => [
+    { address: "8.8.8.8", family: 4 as const },
+  ];
+
+  it.each([
+    "http://127.0.0.1/item",
+    "http://169.254.169.254/latest/meta-data",
+    "http://10.0.0.1/item",
+    "http://[::1]/item",
+    "http://[fe80::1]/item",
+    "http://[::ffff:127.0.0.1]/item",
+    "https://user:secret@public.test/item",
+  ])("rejects unsafe literal or credentialed target %s", async (url) => {
+    const fetcher = vi.fn<typeof fetch>();
+    const checks = await checkExternalLinks([{ ...entry, url }], {
+      fetch: fetcher,
+      resolveHost: publicAddress,
+      retries: 0,
+    });
+    expect(checks[0]?.availability).toBe("unsafe-target");
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it("rejects a hostname when any answer is private", async () => {
+    const fetcher = vi.fn<typeof fetch>();
+    const checks = await checkExternalLinks([entry], {
+      fetch: fetcher,
+      resolveHost: async () => [
+        { address: "8.8.8.8", family: 4 },
+        { address: "192.168.1.1", family: 4 },
+      ],
+      retries: 0,
+    });
+    expect(checks[0]?.availability).toBe("unsafe-target");
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it("resolves and validates every redirect hop immediately before fetching it", async () => {
+    const fetcher = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        response(302, entry.url, { location: "https://private.test/item" }),
+      );
+    const resolver = vi.fn(async (hostname: string) => [
+      {
+        address: hostname === "private.test" ? "10.0.0.7" : "8.8.8.8",
+        family: 4 as const,
+      },
+    ]);
+    const checks = await checkExternalLinks([entry], {
+      fetch: fetcher,
+      resolveHost: resolver,
+      retries: 0,
+    });
+    expect(checks[0]?.availability).toBe("unsafe-target");
+    expect(resolver).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it("revalidates DNS on retry and stops if a later answer becomes private", async () => {
+    const fetcher = vi.fn(async () => response(503, entry.url));
+    const resolver = vi
+      .fn()
+      .mockResolvedValueOnce([{ address: "8.8.8.8", family: 4 as const }])
+      .mockResolvedValueOnce([{ address: "127.0.0.1", family: 4 as const }]);
+    const checks = await checkExternalLinks([entry], {
+      fetch: fetcher,
+      resolveHost: resolver,
+      retries: 1,
+      sleep: async () => undefined,
+    });
+    expect(checks[0]?.availability).toBe("unsafe-target");
+    expect(resolver).toHaveBeenCalledTimes(2);
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it("permits a public IPv6 answer", async () => {
+    const fetcher = vi.fn(async () => response(200, entry.url));
+    const checks = await checkExternalLinks([entry], {
+      fetch: fetcher,
+      resolveHost: async () => [{ address: "2606:4700:4700::1111", family: 6 }],
+      retries: 0,
+    });
+    expect(checks[0]?.availability).toBe("reachable");
+    expect(fetcher).toHaveBeenCalledOnce();
   });
 });
 

@@ -1,6 +1,9 @@
+import { lookup } from "node:dns/promises";
 import { readdir } from "node:fs/promises";
+import { isIP } from "node:net";
 import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { Agent, fetch as undiciFetch } from "undici";
 import type {
   AuthoringDocument,
   DomainEntity,
@@ -18,6 +21,9 @@ export type LinkAvailability =
   | "material-redirect"
   | "client-error"
   | "server-error"
+  | "rate-limited"
+  | "unfollowable-redirect"
+  | "unsafe-target"
   | "timeout-network-failure"
   | "unsupported-manual-check";
 
@@ -47,6 +53,7 @@ export interface ExternalLinkCheck extends ExternalLinkInventoryEntry {
 
 export interface CheckOptions {
   fetch?: typeof fetch;
+  resolveHost?: HostResolver;
   now?: Date;
   staleAfterDays?: number;
   concurrency?: number;
@@ -58,6 +65,13 @@ export interface CheckOptions {
   providerFailureLimit?: number;
 }
 
+export interface ResolvedAddress {
+  address: string;
+  family: 4 | 6;
+}
+
+export type HostResolver = (hostname: string) => Promise<ResolvedAddress[]>;
+
 export interface InventoryOptions {
   now?: Date;
   staleAfterDays?: number;
@@ -67,6 +81,123 @@ export interface InventoryOptions {
 const defaultManualHosts = new Set(["books.google.com"]);
 const userAgent =
   "EndsAndMeans-LinkAudit/1.0 (+https://github.com/dougborg/ends-and-means)";
+const redirectLimit = 5;
+
+class UnsafeTargetError extends Error {}
+
+const defaultResolver: HostResolver = async (hostname) =>
+  (await lookup(hostname, { all: true, verbatim: true })).map(
+    ({ address, family }) => ({ address, family: family as 4 | 6 }),
+  );
+
+function ipv4Number(address: string) {
+  return (
+    address
+      .split(".")
+      .reduce((value, part) => (value << 8) + Number(part), 0) >>> 0
+  );
+}
+
+function inIpv4Range(address: string, network: string, bits: number) {
+  const mask = bits === 0 ? 0 : (0xffffffff << (32 - bits)) >>> 0;
+  return (ipv4Number(address) & mask) === (ipv4Number(network) & mask);
+}
+
+function unsafeIpv4(address: string) {
+  return [
+    ["0.0.0.0", 8],
+    ["10.0.0.0", 8],
+    ["100.64.0.0", 10],
+    ["127.0.0.0", 8],
+    ["169.254.0.0", 16],
+    ["172.16.0.0", 12],
+    ["192.0.0.0", 24],
+    ["192.0.2.0", 24],
+    ["192.168.0.0", 16],
+    ["198.18.0.0", 15],
+    ["198.51.100.0", 24],
+    ["203.0.113.0", 24],
+    ["224.0.0.0", 4],
+    ["240.0.0.0", 4],
+  ].some(([network, bits]) =>
+    inIpv4Range(address, String(network), Number(bits)),
+  );
+}
+
+function ipv6Bytes(address: string) {
+  const [left = "", right = ""] = address.toLowerCase().split("::");
+  const parse = (part: string) =>
+    part
+      ? part.split(":").flatMap((word) => {
+          if (word.includes(".")) {
+            const value = ipv4Number(word);
+            return [(value >>> 16).toString(16), (value & 0xffff).toString(16)];
+          }
+          return [word];
+        })
+      : [];
+  const before = parse(left);
+  const after = parse(right);
+  const words = address.includes("::")
+    ? [
+        ...before,
+        ...Array(8 - before.length - after.length).fill("0"),
+        ...after,
+      ]
+    : before;
+  if (words.length !== 8) return undefined;
+  return words.flatMap((word) => {
+    const value = Number.parseInt(word, 16);
+    return [value >>> 8, value & 0xff];
+  });
+}
+
+function unsafeAddress(address: string) {
+  if (isIP(address) === 4) return unsafeIpv4(address);
+  if (isIP(address) !== 6) return true;
+  const bytes = ipv6Bytes(address);
+  if (!bytes) return true;
+  const first = bytes[0] ?? 0;
+  const second = bytes[1] ?? 0;
+  const mapped =
+    bytes.slice(0, 10).every((byte) => byte === 0) &&
+    bytes[10] === 0xff &&
+    bytes[11] === 0xff;
+  if (mapped) return unsafeIpv4(bytes.slice(12).join("."));
+  return (
+    bytes.every((byte) => byte === 0) ||
+    (bytes.slice(0, 15).every((byte) => byte === 0) && bytes[15] === 1) ||
+    (first & 0xfe) === 0xfc ||
+    (first === 0xfe && (second & 0x80) === 0x80) ||
+    first === 0xff ||
+    (first === 0x20 &&
+      second === 0x01 &&
+      bytes[2] === 0x0d &&
+      bytes[3] === 0xb8)
+  );
+}
+
+async function resolvePublicTarget(url: URL, resolver: HostResolver) {
+  if (url.username || url.password)
+    throw new UnsafeTargetError("URL credentials are not permitted");
+  if (url.hostname === "localhost" || url.hostname.endsWith(".localhost"))
+    throw new UnsafeTargetError("Localhost targets are not permitted");
+  const literal = url.hostname.replace(/^\[|\]$/g, "");
+  const addresses = isIP(literal)
+    ? [{ address: literal, family: isIP(literal) as 4 | 6 }]
+    : await resolver(url.hostname);
+  if (
+    addresses.length === 0 ||
+    addresses.some(
+      ({ address, family }) =>
+        unsafeAddress(address) || isIP(address) !== family,
+    )
+  )
+    throw new UnsafeTargetError(
+      "Target resolves to a non-public network address",
+    );
+  return addresses;
+}
 
 function compare(left: string, right: string) {
   return left < right ? -1 : left > right ? 1 : 0;
@@ -214,28 +345,93 @@ function isMaterialRedirect(from: string, to: string) {
   );
 }
 
-async function request(url: string, fetcher: typeof fetch, timeoutMs: number) {
-  const requestWithMethod = async (method: "HEAD" | "GET") => {
+interface RequestOutcome {
+  response: Response;
+  destination: string;
+  materialRedirect: boolean;
+  unfollowableRedirect: boolean;
+}
+
+async function request(
+  url: string,
+  fetcher: typeof fetch | undefined,
+  resolver: HostResolver,
+  timeoutMs: number,
+): Promise<RequestOutcome> {
+  const requestWithMethod = async (target: string, method: "HEAD" | "GET") => {
+    const addresses = await resolvePublicTarget(new URL(target), resolver);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    const dispatcher = fetcher
+      ? undefined
+      : new Agent({
+          connect: {
+            lookup: (_hostname, _options, callback) => {
+              const selected = addresses[0];
+              if (!selected) {
+                callback(new Error("No validated public address"), "", 4);
+                return;
+              }
+              callback(null, selected.address, selected.family);
+            },
+          },
+        });
     try {
-      const response = await fetcher(url, {
+      const response = await (
+        fetcher ?? (undiciFetch as unknown as typeof fetch)
+      )(target, {
         method,
-        redirect: "follow",
+        redirect: "manual",
         signal: controller.signal,
         headers: {
           "user-agent": userAgent,
           ...(method === "GET" ? { range: "bytes=0-0" } : {}),
         },
-      });
+        ...(dispatcher ? { dispatcher } : {}),
+      } as RequestInit);
       if (method === "GET") await response.body?.cancel();
       return response;
     } finally {
       clearTimeout(timeout);
+      await dispatcher?.close();
     }
   };
-  const head = await requestWithMethod("HEAD");
-  return [405, 501].includes(head.status) ? requestWithMethod("GET") : head;
+  let target = url;
+  let materialRedirect = false;
+  for (let hop = 0; hop <= redirectLimit; hop += 1) {
+    let response = await requestWithMethod(target, "HEAD");
+    if ([405, 501].includes(response.status))
+      response = await requestWithMethod(target, "GET");
+    if (response.status < 300 || response.status >= 400)
+      return {
+        response,
+        destination: target,
+        materialRedirect,
+        unfollowableRedirect: false,
+      };
+    const location = response.headers.get("location");
+    if (!location || hop === redirectLimit)
+      return {
+        response,
+        destination: target,
+        materialRedirect,
+        unfollowableRedirect: true,
+      };
+    let next: string;
+    try {
+      next = new URL(location, target).href;
+    } catch {
+      return {
+        response,
+        destination: target,
+        materialRedirect,
+        unfollowableRedirect: true,
+      };
+    }
+    materialRedirect ||= isMaterialRedirect(target, next);
+    target = next;
+  }
+  throw new Error("unreachable redirect state");
 }
 
 function manualCheck(
@@ -257,6 +453,16 @@ function manualCheck(
       editorialReview: [],
     };
   }
+  if (parsed.username || parsed.password)
+    return {
+      ...entry,
+      availability: "unsafe-target",
+      status: null,
+      destination: null,
+      attempts: 0,
+      detail: "URL credentials are not permitted.",
+      editorialReview: [],
+    };
   if (
     ["http:", "https:"].includes(parsed.protocol) &&
     !manualHosts.has(parsed.hostname)
@@ -275,11 +481,22 @@ function manualCheck(
 
 function classifyResponse(
   entry: ExternalLinkInventoryEntry,
-  response: Response,
+  outcome: RequestOutcome,
   attempt: number,
 ): ExternalLinkCheck {
-  const destination = response.url || entry.url;
-  if (response.redirected && isMaterialRedirect(entry.url, destination))
+  const { response, destination } = outcome;
+  if (outcome.unfollowableRedirect)
+    return {
+      ...entry,
+      availability: "unfollowable-redirect",
+      status: response.status,
+      destination,
+      attempts: attempt,
+      detail:
+        "Redirect could not be followed safely; editorial review is required.",
+      editorialReview: ["redirect"],
+    };
+  if (outcome.materialRedirect)
     return {
       ...entry,
       availability: "material-redirect",
@@ -290,11 +507,13 @@ function classifyResponse(
       editorialReview: ["redirect"],
     };
   const availability: LinkAvailability =
-    response.status >= 500
-      ? "server-error"
-      : response.status >= 400
-        ? "client-error"
-        : "reachable";
+    response.status === 429
+      ? "rate-limited"
+      : response.status >= 500
+        ? "server-error"
+        : response.status >= 400
+          ? "client-error"
+          : "reachable";
   return {
     ...entry,
     availability,
@@ -312,50 +531,64 @@ function classifyResponse(
   };
 }
 
+function retryDelay(response: Response, fallback: number) {
+  const value = response.headers.get("retry-after");
+  if (!value) return fallback;
+  const seconds = Number(value);
+  const requested = Number.isFinite(seconds)
+    ? seconds * 1_000
+    : Date.parse(value) - Date.now();
+  return Math.max(fallback, Math.min(5_000, Math.max(0, requested)));
+}
+
+function failedCheck(
+  entry: ExternalLinkInventoryEntry,
+  error: unknown,
+  attempt: number,
+): ExternalLinkCheck {
+  const unsafe = error instanceof UnsafeTargetError;
+  return {
+    ...entry,
+    availability: unsafe ? "unsafe-target" : "timeout-network-failure",
+    status: null,
+    destination: null,
+    attempts: attempt,
+    detail: error instanceof Error ? error.message : "Unknown network failure",
+    editorialReview: [],
+  };
+}
+
 async function checkOne(
   entry: ExternalLinkInventoryEntry,
-  options: Required<
-    Pick<
-      CheckOptions,
-      | "fetch"
-      | "timeoutMs"
-      | "retries"
-      | "retryDelayMs"
-      | "sleep"
-      | "manualHosts"
-    >
-  >,
+  options: ResolvedCheckOptions,
 ): Promise<ExternalLinkCheck> {
   const manual = manualCheck(entry, options.manualHosts);
   if (manual) return manual;
 
   for (let attempt = 1; attempt <= options.retries + 1; attempt += 1) {
     try {
-      const response = await request(
+      const outcome = await request(
         entry.url,
         options.fetch,
+        options.resolveHost,
         options.timeoutMs,
       );
-      if (isRetryableStatus(response.status) && attempt <= options.retries) {
-        await options.sleep(options.retryDelayMs);
+      if (
+        isRetryableStatus(outcome.response.status) &&
+        attempt <= options.retries
+      ) {
+        await options.sleep(retryDelay(outcome.response, options.retryDelayMs));
         continue;
       }
-      return classifyResponse(entry, response, attempt);
+      return classifyResponse(entry, outcome, attempt);
     } catch (error) {
+      if (error instanceof UnsafeTargetError)
+        return failedCheck(entry, error, attempt);
       if (attempt <= options.retries) {
         await options.sleep(options.retryDelayMs);
         continue;
       }
-      return {
-        ...entry,
-        availability: "timeout-network-failure",
-        status: null,
-        destination: null,
-        attempts: attempt,
-        detail:
-          error instanceof Error ? error.message : "Unknown network failure",
-        editorialReview: [],
-      };
+      return failedCheck(entry, error, attempt);
     }
   }
   throw new Error("unreachable retry state");
@@ -389,9 +622,14 @@ function skippedAfterProviderFailures(
 type ResolvedCheckOptions = Required<
   Pick<
     CheckOptions,
-    "fetch" | "timeoutMs" | "retries" | "retryDelayMs" | "sleep" | "manualHosts"
+    | "resolveHost"
+    | "timeoutMs"
+    | "retries"
+    | "retryDelayMs"
+    | "sleep"
+    | "manualHosts"
   >
->;
+> & { fetch: typeof fetch | undefined };
 
 async function checkProviderQueue(
   queue: number[],
@@ -410,9 +648,11 @@ async function checkProviderQueue(
     }
     const result = await checkOne(entry, options);
     results[index] = result;
-    consecutiveFailures = ["server-error", "timeout-network-failure"].includes(
-      result.availability,
-    )
+    consecutiveFailures = [
+      "server-error",
+      "rate-limited",
+      "timeout-network-failure",
+    ].includes(result.availability)
       ? consecutiveFailures + 1
       : 0;
   }
@@ -424,7 +664,12 @@ export async function checkExternalLinks(
 ) {
   const concurrency = Math.max(1, boundedInteger(options.concurrency, 6, 16));
   const resolved = {
-    fetch: options.fetch ?? fetch,
+    fetch: options.fetch,
+    resolveHost:
+      options.resolveHost ??
+      (options.fetch
+        ? async () => [{ address: "93.184.216.34", family: 4 as const }]
+        : defaultResolver),
     timeoutMs: Math.max(100, boundedInteger(options.timeoutMs, 10_000, 60_000)),
     retries: boundedInteger(options.retries, 1, 2),
     retryDelayMs: boundedInteger(options.retryDelayMs, 500, 5_000),
@@ -479,6 +724,9 @@ export function summarizeExternalLinkChecks(checks: ExternalLinkCheck[]) {
       "material-redirect",
       "client-error",
       "server-error",
+      "rate-limited",
+      "unfollowable-redirect",
+      "unsafe-target",
       "timeout-network-failure",
       "unsupported-manual-check",
     ].map((state) => [

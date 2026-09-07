@@ -35,7 +35,7 @@ Build output (`dist/`), coverage, screenshots, caches, and installed packages
 are generated and ignored.
 They are not a separate authorship category: a distributed artifact carries
 the applicable terms of its source inputs and any included third-party code.
-The production dependencies are Astro and micromark under MIT terms and
+The production dependencies are Astro, micromark, and Undici under MIT terms and
 `@lucide/astro` under ISC terms;
 the rest of the direct dependency inventory is development-only.
 The lockfile controls the full transitive dependency graph.
