@@ -59,6 +59,7 @@
     "zod": "^4.5.4"
   },
   "knip": {
+    "ignore": [],
     "ignoreDependencies": [
       "@emnapi/core",
       "@emnapi/runtime"

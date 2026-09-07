@@ -1,10 +1,11 @@
+import { createHash } from "node:crypto";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { workflowReferencesIn } from "../../src/lib/domain";
 import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
-import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
 import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
+import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -38,24 +39,33 @@ function hasElementWithClasses(
   return [...html.matchAll(new RegExp(`<${tag}(?=[\\s/>])[^>]*>`, "gi"))].some(
     ([element]) => {
       const classNames =
-        element?.match(/\bclass=(?:"([^"]*)"|'([^']*)')/i)?.slice(1).find(Boolean)
+        element
+          ?.match(/\bclass=(?:"([^"]*)"|'([^']*)')/i)
+          ?.slice(1)
+          .find(Boolean)
           ?.split(/\s+/)
           .filter(Boolean) ?? [];
-      return expectedClasses.every((className) => classNames.includes(className));
+      return expectedClasses.every((className) =>
+        classNames.includes(className),
+      );
     },
   );
 }
 
 it("requires the exact supported tag when matching element classes", () => {
   expect(
-    hasElementWithClasses('<header-nav class="editorial-header"></header-nav>', "header", [
-      "editorial-header",
-    ]),
+    hasElementWithClasses(
+      '<header-nav class="editorial-header"></header-nav>',
+      "header",
+      ["editorial-header"],
+    ),
   ).toBe(false);
   expect(
-    hasElementWithClasses('<header class="extra editorial-header"></header>', "header", [
-      "editorial-header",
-    ]),
+    hasElementWithClasses(
+      '<header class="extra editorial-header"></header>',
+      "header",
+      ["editorial-header"],
+    ),
   ).toBe(true);
 });
 
@@ -133,6 +143,7 @@ async function verifyEveryPublicRecordRenders() {
   await verifyExploreAndCaseRoutes();
   await verifyReferenceRoutes();
   await verifyGlobalNavigation();
+  await verifyThemeBootstrap();
 }
 
 async function verifyGlobalNavigation() {
@@ -142,7 +153,9 @@ async function verifyGlobalNavigation() {
     ["Compare", "/compare/"],
     ["Questions", "/challenges/"],
   ];
-  const expectedSiteMap = [["Home", "/"], ...expectedPrimary,
+  const expectedSiteMap = [
+    ["Home", "/"],
+    ...expectedPrimary,
     ["Sources", "/reading/"],
     ["Method", "/framework/"],
     ["Principles", "/principles/"],
@@ -198,6 +211,43 @@ async function verifyGlobalNavigation() {
   }
 }
 
+async function verifyThemeBootstrap() {
+  const home = await readFile(routeFile("/"), "utf8");
+  const head = home.match(/<head>([\s\S]*?)<\/head>/i)?.[1] ?? "";
+  const csp =
+    head.match(
+      /<meta[^>]*http-equiv="content-security-policy"[^>]*content="([^"]+)"[^>]*>/i,
+    )?.[1] ?? "";
+  const bootstrap = head.match(
+    /<script[^>]*data-theme-bootstrap[^>]*>([\s\S]*?)<\/script>/i,
+  );
+  const bootstrapSource = bootstrap?.[1] ?? "";
+  const bootstrapHash = createHash("sha256")
+    .update(bootstrapSource)
+    .digest("base64");
+  expect(csp).toContain(`script-src 'self' 'sha256-${bootstrapHash}'`);
+  expect(csp).not.toContain("unsafe-inline");
+  expect(bootstrapSource).toContain(
+    'localStorage.getItem("ends-and-means-theme")',
+  );
+  expect(bootstrapSource).not.toMatch(
+    /(?:fetch|XMLHttpRequest|sendBeacon|document\.cookie)/,
+  );
+  expect(head.indexOf("content-security-policy")).toBeLessThan(
+    head.indexOf("data-theme-bootstrap"),
+  );
+  expect(head.indexOf("data-theme-bootstrap")).toBeLessThan(
+    head.indexOf('rel="stylesheet"'),
+  );
+  expect(head).toContain('data-theme-color="light"');
+  expect(head).toContain('data-theme-color="dark"');
+  expect(home).toMatch(/<html[^>]*class="no-js"/i);
+  expect(home).toMatch(
+    /<script type="module" src="\/_astro\/BaseLayout[^>]+\.js"><\/script>/,
+  );
+  await expect(stat(path.join(dist, "theme.js"))).rejects.toThrow();
+}
+
 async function verifyHomepage() {
   const home = await readFile(routeFile("/"), "utf8");
   const homeText = stripMarkup(home);
@@ -205,29 +255,55 @@ async function verifyHomepage() {
   expect(homeText).toContain(
     "Political, economic, social, legal, cultural, and organizational ideas in theory and practice.",
   );
-  expect(homeText).toContain("political, economic, social, legal, cultural, and organizational life");
-  expect(homeText).toContain("AI can assist discovery, synthesis, drafting, and consistency checks");
+  expect(homeText).toContain(
+    "political, economic, social, legal, cultural, and organizational life",
+  );
+  expect(homeText).toContain(
+    "AI can assist discovery, synthesis, drafting, and consistency checks",
+  );
   expect(homeText).toContain("It is not evidence");
   expect(homeText).toContain("See what sits behind a sentence.");
   expect(homeText).toContain("Karl Marx locates the capitalist’s increment");
-  expect(homeText).toContain("Marx describes the capitalist’s purchase of labor-power");
+  expect(homeText).toContain(
+    "Marx describes the capitalist’s purchase of labor-power",
+  );
   expect(homeText).toContain("chapter 7, section 2, paragraphs beginning");
   expect(homeText).toContain("supports");
-  expect(homeText).toContain("How should definitions centered on wage labor classify");
+  expect(homeText).toContain(
+    "How should definitions centered on wage labor classify",
+  );
   expect(homeText).toContain("A person reviews the proposal");
-  expect(homeText).not.toMatch(/01 \/|02 \/|03 \/|canonical graph|learner path|pull request|workflow/i);
+  expect(homeText).not.toMatch(
+    /01 \/|02 \/|03 \/|canonical graph|learner path|pull request|workflow/i,
+  );
   expect(home).toMatch(/class="homepage-primary-action" href="\/explore\/"/);
-  expect(hrefs(home)).toEqual(expect.arrayContaining([
-    "/explore/", "/cases/", "/challenges/", "/compare/", "/framework/", "/reading/",
-    "/guides/democracy/", "/guides/capitalism/", "/guides/kahnawake-community-lawmaking/",
-    "/sources/marx-capital-volume-one-source/",
-    "/research/#capitalism-coerced-labor-boundary",
-    "/guides/capitalism/#capitalism-marx-definition",
-  ]));
+  expect(hrefs(home)).toEqual(
+    expect.arrayContaining([
+      "/explore/",
+      "/cases/",
+      "/challenges/",
+      "/compare/",
+      "/framework/",
+      "/reading/",
+      "/guides/democracy/",
+      "/guides/capitalism/",
+      "/guides/kahnawake-community-lawmaking/",
+      "/sources/marx-capital-volume-one-source/",
+      "/research/#capitalism-coerced-labor-boundary",
+      "/guides/capitalism/#capitalism-marx-definition",
+    ]),
+  );
 
-  const capitalismGuide = await readFile(routeFile("/guides/capitalism/"), "utf8");
-  expect(capitalismGuide).toMatch(/<details[^>]*>[\s\S]*<article class="canonical-claim" id="capitalism-marx-definition">/);
-  expect(stripMarkup(capitalismGuide)).toContain("chapter 7, section 2, paragraphs beginning");
+  const capitalismGuide = await readFile(
+    routeFile("/guides/capitalism/"),
+    "utf8",
+  );
+  expect(capitalismGuide).toMatch(
+    /<details[^>]*>[\s\S]*<article class="canonical-claim" id="capitalism-marx-definition">/,
+  );
+  expect(stripMarkup(capitalismGuide)).toContain(
+    "chapter 7, section 2, paragraphs beginning",
+  );
 }
 
 async function verifyExploreAndCaseRoutes() {
@@ -239,7 +315,9 @@ async function verifyExploreAndCaseRoutes() {
   expect(stripMarkup(explore)).toContain("The problem it tried to address");
   expect(stripMarkup(explore)).toContain("What should you know?");
   expect(stripMarkup(explore)).toContain("The mechanism that was enacted");
-  expect(stripMarkup(explore)).toContain("Sources for “The problem it tried to address”");
+  expect(stripMarkup(explore)).toContain(
+    "Sources for “The problem it tried to address”",
+  );
   expect(explore).toContain("<details");
   expect(
     explore.match(/class="canonical-claim"/g)?.length,
@@ -275,13 +353,17 @@ async function verifyExploreAndCaseRoutes() {
   );
   expect(hrefs(canonicalCase)).toContain("/compare/");
   expect(stripMarkup(canonicalCase)).toContain("Compare promise with practice");
-  expect(stripMarkup(canonicalCase)).not.toContain("Compare promise and practice");
+  expect(stripMarkup(canonicalCase)).not.toContain(
+    "Compare promise and practice",
+  );
   expect(stripMarkup(canonicalCase)).toContain(
     "How would Swedish listed-company ownership",
   );
   expect(hrefs(canonicalCase)).toContain("/research/");
   expect(stripMarkup(canonicalCase)).toContain("What happened in this case?");
-  expect(stripMarkup(canonicalCase)).toContain("What are the case boundaries and records?");
+  expect(stripMarkup(canonicalCase)).toContain(
+    "What are the case boundaries and records?",
+  );
   expect(canonicalCase).toContain("<details");
 
   await verifyConceptRoutes();
@@ -324,7 +406,9 @@ async function verifySubjectGuideRoutes() {
 
   const socialism = await readFile(routeFile("/guides/socialism/"), "utf8");
   expect(stripMarkup(socialism)).toContain("What does socialism mean?");
-  expect(stripMarkup(socialism)).toContain("What can one Swedish experiment show?");
+  expect(stripMarkup(socialism)).toContain(
+    "What can one Swedish experiment show?",
+  );
   expect(stripMarkup(socialism)).toContain(
     "do not show how socialist institutions would work elsewhere",
   );
@@ -337,7 +421,9 @@ async function verifySubjectGuideRoutes() {
   expect(stripMarkup(communism)).toContain(
     "Why is the same word used for an ideal, movement, and state label?",
   );
-  expect(stripMarkup(communism)).toContain("Which bounded cases still need evidence?");
+  expect(stripMarkup(communism)).toContain(
+    "Which bounded cases still need evidence?",
+  );
   expect(hrefs(communism)).toContain("/concepts/socialism/");
   expect(hrefs(communism)).toContain("/concepts/social-class/");
   expect(hrefs(communism)).toContain("/concepts/statelessness/");
@@ -438,11 +524,16 @@ async function verifyOrientationRoutes() {
   );
 }
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: One cohesive generated-route contract is easier to audit together.
 async function verifyMethodRoute() {
   const method = await readFile(routeFile("/framework/"), "utf8");
   expect(method).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
-  expect(hasElementWithClasses(method, "article", ["editorial-page", "method-page"])).toBe(true);
-  expect(hasElementWithClasses(method, "header", ["editorial-header"])).toBe(true);
+  expect(
+    hasElementWithClasses(method, "article", ["editorial-page", "method-page"]),
+  ).toBe(true);
+  expect(hasElementWithClasses(method, "header", ["editorial-header"])).toBe(
+    true,
+  );
   expect(method).toMatch(
     /class="comparison-grid criteria-grid"[^>]*data-comparison-columns="3"/,
   );
@@ -455,7 +546,9 @@ async function verifyMethodRoute() {
   );
   expect(methodText).toContain("How we research and classify.");
   expect(methodText).toContain("The commitments behind each explanation");
-  expect(methodText).toContain("AI may assist discovery, synthesis, drafting, and consistency checks");
+  expect(methodText).toContain(
+    "AI may assist discovery, synthesis, drafting, and consistency checks",
+  );
   expect(methodText).toContain("it is not evidence or authority");
   expect(methodText).toContain("Read the technical protocols");
   expect(methodText).toContain("How can I check an explanation?");
@@ -463,27 +556,47 @@ async function verifyMethodRoute() {
   expect(methodText).toContain("Evidence about what happened");
   expect(methodText).toContain("Explanations of why it happened");
   expect(methodText).toContain("Judgments about whether it was good");
-  expect(methodText).toContain("A case shows a setting, not a perfect example.");
+  expect(methodText).toContain(
+    "A case shows a setting, not a perfect example.",
+  );
   expect(methodText).toContain("What does the evidence trail contain?");
   expect(methodText).toContain("A work is the underlying book");
   expect(methodText).toContain("A source is the particular edition");
-  expect(methodText).toContain("always names a precise page, table, section, timestamp");
+  expect(methodText).toContain(
+    "always names a precise page, table, section, timestamp",
+  );
   expect(methodText).toContain("attribute a value or purpose to a named actor");
   expect(methodText).toContain("describe a proposed design");
   expect(methodText).toContain("record a classification or causal hypothesis");
   expect(methodText).toContain("make an editorial interpretation");
   expect(methodText).toContain("factual, attributed, and analytical language");
-  expect(methodText).toContain("support, challenge, qualify, or provide context");
-  expect(methodText).toContain("These links are orientation aids, not evidence.");
+  expect(methodText).toContain(
+    "support, challenge, qualify, or provide context",
+  );
+  expect(methodText).toContain(
+    "These links are orientation aids, not evidence.",
+  );
   expect(methodText).toContain("Within a case, an episode narrows attention");
-  expect(methodText).toContain("conditions, formal rules, rules in use, interactions, and outcomes");
-  expect(methodText).toContain("Qualifications and limits attach to the claims they constrain");
+  expect(methodText).toContain(
+    "conditions, formal rules, rules in use, interactions, and outcomes",
+  );
+  expect(methodText).toContain(
+    "Qualifications and limits attach to the claims they constrain",
+  );
   expect(methodText).toContain("What happens when the evidence is not enough?");
-  expect(methodText).toContain("The live site includes only material that has been checked against its sources");
-  expect(methodText).toContain("No score or automated rule settles a contested identity.");
+  expect(methodText).toContain(
+    "The live site includes only material that has been checked against its sources",
+  );
+  expect(methodText).toContain(
+    "No score or automated rule settles a contested identity.",
+  );
   expect(methodText).toContain("Human judgment remains accountable.");
-  expect(methodText).toContain("Fairness does not give every account equal weight");
-  expect(methodText).toContain("A counterfactual makes the comparison explicit");
+  expect(methodText).toContain(
+    "Fairness does not give every account equal weight",
+  );
+  expect(methodText).toContain(
+    "A counterfactual makes the comparison explicit",
+  );
   expect(methodText).toContain("Go to the passage");
   expect(methodText).toContain("name the page or claim");
   expect(methodText).toContain("A person reviews the proposal");
@@ -505,21 +618,46 @@ async function verifyMethodRoute() {
 async function verifyGovernanceRoute() {
   const governance = await readFile(routeFile("/governance/"), "utf8");
   expect(governance).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
-  expect(hasElementWithClasses(governance, "article", ["editorial-page", "governance-page"])).toBe(true);
-  expect(hasElementWithClasses(governance, "header", ["editorial-header"])).toBe(true);
-  expect(governance).toContain(`data-editorial-intake="${editorialGovernanceContract.editorialIntake}"`);
-  expect(governance).toContain(`data-recusal-authority="${editorialGovernanceContract.conflictedDecision}"`);
-  expect(governance).toContain(`data-record-boundary="${editorialGovernanceContract.recordBoundary}"`);
+  expect(
+    hasElementWithClasses(governance, "article", [
+      "editorial-page",
+      "governance-page",
+    ]),
+  ).toBe(true);
+  expect(
+    hasElementWithClasses(governance, "header", ["editorial-header"]),
+  ).toBe(true);
+  expect(governance).toContain(
+    `data-editorial-intake="${editorialGovernanceContract.editorialIntake}"`,
+  );
+  expect(governance).toContain(
+    `data-recusal-authority="${editorialGovernanceContract.conflictedDecision}"`,
+  );
+  expect(governance).toContain(
+    `data-record-boundary="${editorialGovernanceContract.recordBoundary}"`,
+  );
   const links = hrefs(governance);
   expect(links).toContain("/principles/");
   expect(links.filter((href) => /title=Correction/.test(href))).toHaveLength(1);
-  expect(links.filter((href) => /title=Reconsideration/.test(href))).toHaveLength(1);
-  expect(links.some((href) => /security\/advisories|private.*report/i.test(href))).toBe(false);
+  expect(
+    links.filter((href) => /title=Reconsideration/.test(href)),
+  ).toHaveLength(1);
+  expect(
+    links.some((href) => /security\/advisories|private.*report/i.test(href)),
+  ).toBe(false);
   const text = stripMarkup(governance);
-  expect(text).toMatch(/only editorial intake channel, and it is public.+No private editorial intake currently exists.+security reporting is not an editorial channel/i);
-  expect(text).toMatch(/editor takes no part in judging the merits.+independent reviewer makes the binding merits decision.+editor may then perform only the administrative steps.+If no eligible reviewer is available, the decision is deferred/i);
-  expect(text).toMatch(/provenance identifies the recorder, source, translator, access conditions, and permission to access or publish.+permission is not treated as authority to represent a whole community.+Privacy-protective non-attribution remains possible/i);
-  expect(text).toMatch(/editor can remove or redact the live site.+GitHub-hosted discussion can be moderated only through available platform controls.+Git history ordinarily remains; rewriting it is an exceptional response.+Forks, caches, archives, and copies held by others are outside the project’s control/i);
+  expect(text).toMatch(
+    /only editorial intake channel, and it is public.+No private editorial intake currently exists.+security reporting is not an editorial channel/i,
+  );
+  expect(text).toMatch(
+    /editor takes no part in judging the merits.+independent reviewer makes the binding merits decision.+editor may then perform only the administrative steps.+If no eligible reviewer is available, the decision is deferred/i,
+  );
+  expect(text).toMatch(
+    /provenance identifies the recorder, source, translator, access conditions, and permission to access or publish.+permission is not treated as authority to represent a whole community.+Privacy-protective non-attribution remains possible/i,
+  );
+  expect(text).toMatch(
+    /editor can remove or redact the live site.+GitHub-hosted discussion can be moderated only through available platform controls.+Git history ordinarily remains; rewriting it is an exceptional response.+Forks, caches, archives, and copies held by others are outside the project’s control/i,
+  );
   expect(text).not.toMatch(/pull request|worktree|\bWIP\b|migration|agent/i);
 }
 
@@ -565,6 +703,7 @@ async function verifyPrinciplesRoute() {
   ]));
 }
 
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: One cohesive generated-route contract is easier to audit together.
 async function verifyReferenceRoutes() {
   await verifyMethodRoute();
   await verifyPrinciplesRoute();
@@ -601,12 +740,16 @@ async function verifyReferenceRoutes() {
   const compare = await readFile(routeFile("/compare/"), "utf8");
   expect(compare).toContain("<table>");
   expect(stripMarkup(compare)).toContain("Compare promise with practice");
-  expect(stripMarkup(compare)).toContain("Did the design deliver what its advocates sought?");
+  expect(stripMarkup(compare)).toContain(
+    "Did the design deliver what its advocates sought?",
+  );
   expect(stripMarkup(compare)).toContain("Why no score?");
   expect(stripMarkup(compare)).toContain(
     "Collective wage-earner shareholding authority",
   );
-  expect(stripMarkup(compare)).toContain("This scale describes; it does not judge.");
+  expect(stripMarkup(compare)).toContain(
+    "This scale describes; it does not judge.",
+  );
   expect(stripMarkup(compare)).toContain("1984–1991 · Sweden");
   expect(stripMarkup(compare)).toContain("1992 · Sweden");
   expect(stripMarkup(compare)).not.toContain("1992–1992");
@@ -616,19 +759,32 @@ async function verifyReferenceRoutes() {
     routeFile("/challenges/distribution-of-gains-and-ownership/"),
     "utf8",
   );
-  expect(stripMarkup(challenge)).toMatch(/^(?![\s\S]*What should you know\?)[\s\S]*Why this question matters[\s\S]*How published approaches respond/u);
+  expect(stripMarkup(challenge)).toMatch(
+    /^(?![\s\S]*What should you know\?)[\s\S]*Why this question matters[\s\S]*How published approaches respond/u,
+  );
   expect(stripMarkup(challenge)).toContain("Swedish wage-earner fund program");
   expect(stripMarkup(challenge)).toContain("APPROACH / Qualified");
   expect(stripMarkup(challenge)).not.toContain("research-needed");
 
   const reading = await readFile(routeFile("/reading/"), "utf8");
   expect(reading).toMatch(/<main[^>]*class="[^"]*\bsite-main--wide\b[^"]*"/);
-  expect(hasElementWithClasses(reading, "article", ["editorial-page", "reading-page"])).toBe(true);
-  expect(hasElementWithClasses(reading, "header", ["editorial-header"])).toBe(true);
-  expect(stripMarkup(reading)).toContain("Which sources connect to the explanations?");
+  expect(
+    hasElementWithClasses(reading, "article", [
+      "editorial-page",
+      "reading-page",
+    ]),
+  ).toBe(true);
+  expect(hasElementWithClasses(reading, "header", ["editorial-header"])).toBe(
+    true,
+  );
+  expect(stripMarkup(reading)).toContain(
+    "Which sources connect to the explanations?",
+  );
   expect(stripMarkup(reading)).toContain("Cited by");
   expect(stripMarkup(reading)).not.toMatch(/Supports \d+ claims?/);
-  expect(stripMarkup(reading)).not.toMatch(/published source records|published evidence/i);
+  expect(stripMarkup(reading)).not.toMatch(
+    /published source records|published evidence/i,
+  );
   expect(
     hrefs(reading).filter((href) => href.startsWith("/sources/")),
   ).toHaveLength(entitiesOfKind("source").length);

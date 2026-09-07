@@ -11,7 +11,22 @@
   body { margin: 0; min-width: 18rem; }
   button, a, summary { touch-action: manipulation; }
   a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: .08em; }
+  a:visited { color: var(--link-visited); }
   a:hover { color: var(--link-hover); }
+
+  :where(button, input, select, textarea) {
+    border-color: var(--rule-strong);
+    color: var(--text);
+    background-color: var(--surface);
+    font: inherit;
+  }
+
+  :where(button, input, select, textarea):disabled {
+    border-color: var(--rule);
+    color: var(--text-muted);
+    background-color: var(--surface-subtle);
+    cursor: not-allowed;
+  }
 
   :where(a, button, summary, [tabindex]):focus-visible {
     outline: 3px solid var(--focus);
@@ -27,4 +42,6 @@
   code { font-family: var(--font-apparatus); font-size: .86em; }
 
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  @media print { html { background: var(--canvas); } }
 }

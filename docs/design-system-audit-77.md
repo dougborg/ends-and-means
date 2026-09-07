@@ -1,7 +1,7 @@
 # Design-system and theme checkpoint
 
-**Status:** approved direction; Slice 1 Light-theme foundations expanded across
-the current corpus for review, with theme switching reserved for Slice 2
+**Status:** approved direction; Light-theme foundations and the accessible
+Light, Dark, and System behavior are implemented across the current corpus
 
 This checkpoint proposes how to extract the existing editorial identity into a
 small system and add Light, Dark, and System themes. It is grounded in the
@@ -270,8 +270,9 @@ Narrative type size, measure, and source order remain primary.
   override and responds live to operating-system changes.
 - An inline head bootstrap, before render-blocking styles, reads only the known
   values `light` and `dark`, sets `data-theme` and `color-scheme`, and fails
-  closed to System. It does not hide the document. The normal module owns
-  interaction after parsing.
+  closed to System. Its exact bytes are authorized by a generated SHA-256 CSP
+  hash without `unsafe-inline`; all normal interaction remains in a deferred
+  same-origin module. It does not hide the document.
 - Theme-specific `meta[name="theme-color"]` values use media queries for System;
   the module updates the active value for explicit choices.
 - With JavaScript disabled, the site follows System, remains fully readable,

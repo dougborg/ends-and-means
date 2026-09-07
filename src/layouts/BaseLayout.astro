@@ -1,20 +1,36 @@
 ---
 import "../styles/global.css";
+import { createHash } from "node:crypto";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
 interface Props { title?: string; description?: string; currentPath?: string; eyebrow?: string; fullBleed?: boolean; mainClass?: string; }
 const { title, description = "Understand political, economic, social, legal, cultural, and organizational ideas through evidence, cases, and comparison.", currentPath = Astro.url.pathname, fullBleed = false, mainClass } = Astro.props;
 const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
+const themeBootstrap = `(()=>{const e=document.documentElement,t=matchMedia("(prefers-color-scheme: dark)");let a="system";try{const e=localStorage.getItem("ends-and-means-theme");e==="light"||e==="dark"?a=e:e!==null&&localStorage.removeItem("ends-and-means-theme")}catch{}a==="system"?e.removeAttribute("data-theme"):e.dataset.theme=a,e.dataset.effectiveTheme=a==="system"?t.matches?"dark":"light":a,e.classList.remove("no-js"),e.classList.add("js")})();`;
+const themeBootstrapHash = createHash("sha256").update(themeBootstrap).digest("base64");
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  `script-src 'self' 'sha256-${themeBootstrapHash}'`,
+  "style-src 'self' https://fonts.googleapis.com",
+].join("; ");
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#f1f6f7" />
+    <meta http-equiv="content-security-policy" content={contentSecurityPolicy} />
+    <meta name="theme-color" content="#f1f6f7" media="(prefers-color-scheme: light)" data-theme-color="light" />
+    <meta name="theme-color" content="#10191f" media="(prefers-color-scheme: dark)" data-theme-color="dark" />
+    <script is:inline data-theme-bootstrap set:html={themeBootstrap}></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400..600&display=swap" />
@@ -27,7 +43,9 @@ const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
       <slot />
     </main>
     <SiteFooter currentPath={currentPath} />
-    <script is:inline>
+    <script>
+      import "../scripts/theme-controller";
+
       (() => {
         const openTarget = () => {
           if (!location.hash) return;
@@ -39,10 +57,10 @@ const pageTitle = title ? `${title} — Ends and Means` : "Ends and Means";
         openTarget();
         addEventListener("hashchange", openTarget);
 
-        let printClosed = [];
-        const setPrintState = (printing) => {
+        let printClosed: HTMLDetailsElement[] = [];
+        const setPrintState = (printing: boolean) => {
           if (printing) {
-            printClosed = [...document.querySelectorAll("details:not([open])")];
+            printClosed = [...document.querySelectorAll<HTMLDetailsElement>("details:not([open])")];
             for (const disclosure of printClosed) disclosure.open = true;
           } else {
             for (const disclosure of printClosed) disclosure.open = false;
