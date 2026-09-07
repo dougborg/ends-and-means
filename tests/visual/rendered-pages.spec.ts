@@ -58,13 +58,15 @@ async function expectNativeNewPageRequest(
   sourcePage: Page,
   activate: () => Promise<void>,
   expectedURL: string,
+  timeout = 5_000,
 ) {
   let navigationRequest: Request | undefined;
+  let primaryError: unknown;
   const existingPages = new Set(context.pages());
   const requestPromise = context.waitForEvent("request", {
     predicate: (request) =>
       request.isNavigationRequest() && request.url() === expectedURL,
-    timeout: 5_000,
+    timeout,
   });
 
   try {
@@ -85,13 +87,23 @@ async function expectNativeNewPageRequest(
         throw error;
       }
     }
-  } finally {
-    const observedRequest =
-      navigationRequest ?? (await requestPromise.catch(() => undefined));
-    if (observedRequest) {
-      await closeEventuallyOpenedPages(context, existingPages);
-    }
+  } catch (error) {
+    primaryError = error;
   }
+
+  let cleanupError: unknown;
+  try {
+    await closeEventuallyOpenedPages(
+      context,
+      existingPages,
+      Math.min(timeout, 1_000),
+    );
+  } catch (error) {
+    cleanupError = error;
+  }
+
+  if (primaryError !== undefined) throw primaryError;
+  if (cleanupError !== undefined) throw cleanupError;
 }
 
 test("external mappings remain a quiet, accessible trust aid", async ({
@@ -1347,6 +1359,33 @@ test("mobile links preserve native pointer, touch, keyboard, and new-context nav
   } finally {
     await touchContext.close();
   }
+});
+
+test("failed native new-context assertions close unexpected targets", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/research/");
+  await page.locator("details.mobile-navigation summary").click();
+  const context = page.context();
+  const existingPages = context.pages();
+
+  await expect(
+    expectNativeNewPageRequest(
+      context,
+      page,
+      () =>
+        page
+          .getByRole("navigation", { name: "Mobile navigation" })
+          .getByRole("link", { name: "Sources" })
+          .click({ button: "middle" }),
+      new URL("/unexpected-native-target/", page.url()).href,
+      500,
+    ),
+  ).rejects.toThrow();
+
+  expect(context.pages()).toEqual(existingPages);
+  await expect(page).toHaveURL(/\/research\/$/);
 });
 
 test("mobile navigation does not enter the narrow print layout", async ({
