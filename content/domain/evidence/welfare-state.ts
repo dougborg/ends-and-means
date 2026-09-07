@@ -669,7 +669,7 @@ export const welfareStateEvidenceDocuments = [
     "costa-rica-welfare-state-case-place",
     1941,
     1973,
-    "CCSS formation, the universalization mandate, and the 1973 consolidation of public health administration in Costa Rica.",
+    "CCSS formation, the universalization mandate, and the 1973 Hospital Transfer and General Health laws in Costa Rica.",
     "Tests staged universalization outside the European cases that shaped prominent welfare-regime typologies.",
     ["costa-rica-ccss-formation"],
     [
