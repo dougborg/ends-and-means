@@ -201,12 +201,16 @@ export const skillCapabilities: SkillCapability[] = [
 
 function containsUnnegatedMatch(text: string, pattern: RegExp): boolean {
   return text.split(/[.\n]+/).some((sentence) => {
-    const match = pattern.exec(sentence);
-    if (!match) return false;
-    const prefix = sentence.slice(0, match.index);
-    return !/\b(?:never|do not|don't|must not|should not|cannot|can't)\s*$/i.test(
-      prefix,
+    const matcher = new RegExp(
+      pattern.source,
+      pattern.flags.includes("g") ? pattern.flags : `${pattern.flags}g`,
     );
+    return [...sentence.matchAll(matcher)].some((match) => {
+      const prefix = sentence.slice(0, match.index);
+      return !/\b(?:never|do not|don't|must not|should not|cannot|can't)\s*$/i.test(
+        prefix,
+      );
+    });
   });
 }
 
