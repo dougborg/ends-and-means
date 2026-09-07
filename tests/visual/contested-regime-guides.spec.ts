@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { gotoRenderedPage } from "./support/rendered-page";
 
 const routes = [
   "/guides/authoritarianism/",
@@ -17,8 +18,7 @@ for (const viewport of viewports) {
   test(`contested regime guides and cases remain readable at ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize(viewport);
     for (const route of routes) {
-      const response = await page.goto(route, { waitUntil: "networkidle" });
-      expect(response?.ok(), route).toBe(true);
+      await gotoRenderedPage(page, route);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), `${route} at ${viewport.width}px`).toBeLessThanOrEqual(1);
       const summaries = page.locator("summary");

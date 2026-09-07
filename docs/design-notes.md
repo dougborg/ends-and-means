@@ -229,13 +229,16 @@ tokens require WCAG contrast testing in context.
 
 ### Typography
 
-- **Display and navigation:** IBM Plex Sans, 500–600. Use for the wordmark,
-  page questions, and major navigation. Its quieter proportions let the
-  analytical structure carry the identity instead of oversized display type.
-- **Reading:** Literata, 400–600. Use for explanations, historical accounts,
-  interpretations, and longer statements.
-- **Apparatus:** IBM Plex Mono, 400–500. Use for dates, scope labels, citation
-  markers, evidence states, and compact control labels.
+- **Display and navigation:** the local system sans stack at 500–600. Use it
+  for the wordmark, page questions, and major navigation.
+- **Reading:** the local system serif stack at 400–600. Use it for
+  explanations, historical accounts, interpretations, and longer statements.
+- **Apparatus:** the local system monospace stack at 400–500. Use it for dates,
+  scope labels, citation markers, evidence states, and compact control labels.
+
+These roles deliberately use fonts already available on the reader's device.
+They preserve the editorial hierarchy without making rendering, privacy, or
+test readiness depend on a third-party font host.
 
 Suggested fluid scale:
 

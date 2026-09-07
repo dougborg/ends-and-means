@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
+import { gotoRenderedPage } from "./support/rendered-page";
 
 const guideRoutes = canonicalGraph.subjectGuides.map(
   (guide) => `/guides/${guide.slug}/`,
 );
 
 test("glyphs remain supplemental, legible, and printable", async ({ page }) => {
-  await page.goto("/guides/economic-democracy/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/guides/economic-democracy/");
 
   const glyphs = page.locator("main .glyph");
   const visibleSectionGlyph = page
@@ -63,7 +64,7 @@ test("glyphs remain supplemental, legible, and printable", async ({ page }) => {
 test("representative directories render bounded-case and definition glyphs", async ({
   page,
 }) => {
-  await page.goto("/explore/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/explore/");
   await expect(
     page.locator('[data-glyph="idea-definition"]').first(),
   ).toBeVisible();
@@ -71,7 +72,7 @@ test("representative directories render bounded-case and definition glyphs", asy
     page.locator('[data-glyph="institution-mechanism"]').first(),
   ).toBeVisible();
 
-  await page.goto("/cases/", { waitUntil: "networkidle" });
+  await gotoRenderedPage(page, "/cases/");
   await expect(
     page.locator('[data-glyph="bounded-practice"]').first(),
   ).toBeVisible();
@@ -84,7 +85,7 @@ test("every current guide uses the restrained section glyph grammar", async ({
   expect(guideRoutes).toHaveLength(22);
 
   for (const route of guideRoutes) {
-    await page.goto(route, { waitUntil: "domcontentloaded" });
+    await gotoRenderedPage(page, route);
     const sections = page.locator(".subject-guide__section");
     const glyphs = sections.locator(":scope > header .glyph");
 
@@ -99,9 +100,7 @@ test("glyph labels reflow at 200% text size without horizontal overflow", async 
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/guides/matriliny-property-authority/", {
-    waitUntil: "networkidle",
-  });
+  await gotoRenderedPage(page, "/guides/matriliny-property-authority/");
   await page.evaluate(() => {
     document.documentElement.style.fontSize = "200%";
   });

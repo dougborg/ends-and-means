@@ -23,7 +23,10 @@ export default defineConfig({
   outputDir: ".artifacts/visual-review",
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 1 : 0,
+  // A retry is evidence that the browser contract is unstable, not a passing
+  // result. Keep it visible so the owning boundary is corrected instead of
+  // publishing a green run with a flaky annotation.
+  retries: 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
     baseURL,

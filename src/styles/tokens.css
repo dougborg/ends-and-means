@@ -40,9 +40,9 @@
     --shadow-panel: 0 1.25rem 3.5rem rgb(23 35 43 / 8%);
     --shadow-ledger: 0 1.5rem 5rem rgb(23 35 43 / 8%);
 
-    --font-display: "IBM Plex Sans", sans-serif;
-    --font-reading: "Literata", Georgia, serif;
-    --font-apparatus: "IBM Plex Mono", Consolas, monospace;
+    --font-display: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-reading: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+    --font-apparatus: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
     --measure-prose: 70ch;
     --measure-standfirst: 76ch;

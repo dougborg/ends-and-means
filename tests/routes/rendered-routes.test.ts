@@ -644,6 +644,22 @@ async function verifyReferenceRoutes() {
 }
 
 describe("canonical public routes", () => {
+  it("keeps published rendering independent of externally hosted fonts", async () => {
+    const externalResources: string[] = [];
+    for (const file of (await walk(dist)).filter((candidate) =>
+      candidate.endsWith(".html"),
+    )) {
+      const html = await readFile(file, "utf8");
+      for (const [link] of html.matchAll(/<link\b[^>]*>/gi)) {
+        const href = link.match(/\bhref=(?:"([^"]*)"|'([^']*)')/i);
+        const value = href?.[1] ?? href?.[2];
+        if (value && /^https?:\/\//i.test(value))
+          externalResources.push(`${path.relative(dist, file)} -> ${value}`);
+      }
+    }
+    expect(externalResources).toEqual([]);
+  });
+
   it("does not publish retired or archived route families", async () => {
     for (const route of [
       "/systems/",

@@ -51,8 +51,9 @@ or apparatus roles.
 
 ### What is already coherent
 
-- IBM Plex Sans for display/navigation, Literata for reading, and IBM Plex Mono
-  for evidence apparatus establish a clear editorial hierarchy.
+- Distinct local system sans, serif, and monospace stacks establish a clear
+  display/navigation, reading, and evidence-apparatus hierarchy without a
+  third-party rendering dependency.
 - The cool Atmosphere/Sheet ground, Night text, Cobalt interaction, Field teal
   evidence, and Signal amber qualification colors already encode the intended
   comparative-instrument character.
@@ -148,14 +149,15 @@ marks, selected navigation, and native controls before the values are frozen.
 
 ### Type
 
-Retain all three established families and currently loaded weights. Define
+Retain the three established typographic roles and current weights. Define
 semantic roles rather than a larger type scale:
 
-- display: IBM Plex Sans 600 for page questions and major headings;
-- interface: IBM Plex Sans 500–600 for navigation and controls;
-- reading: Literata 400–600 at a 1.6–1.72 line height for answers and narrative;
-- apparatus: IBM Plex Mono 400–500 for coordinates, dates, citation roles, and
-  compact data—not for ordinary body copy.
+- display: local system sans 600 for page questions and major headings;
+- interface: local system sans 500–600 for navigation and controls;
+- reading: local system serif 400–600 at a 1.6–1.72 line height for answers and
+  narrative;
+- apparatus: local system monospace 400–500 for coordinates, dates, citation
+  roles, and compact data—not for ordinary body copy.
 
 Keep the current fluid page-title and Subject Guide hero scales. Normalize the
 remaining sizes into `step--1`, `step-0`, `step-1`, `step-2`, and `step-3`, with
