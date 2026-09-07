@@ -1,0 +1,799 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`foundational Theocracy guide > pins every Statement and precise citation in the evidence ledger 1`] = `
+[
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–2, historical meanings and modern forms",
+        "role": "supports",
+        "sourceId": "huzakai-theocracy-source",
+      },
+    ],
+    "id": "theocracy-contested-family",
+    "statementKind": "definition",
+    "text": "Huzakai traces theocracy from a claim of divine rule to several arrangements in which religious authority is connected to government; the term does not identify one timeless institutional form.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–2, divine rule and priestly rule",
+        "role": "supports",
+        "sourceId": "huzakai-theocracy-source",
+      },
+    ],
+    "id": "theocracy-hierocracy-boundary",
+    "statementKind": "definition",
+    "text": "A narrow hierocratic or ecclesiocratic use requires rule by a priestly body, while broader uses of theocracy also include divine-law authority or offices that combine religious and state jurisdiction.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 2–12, definition and four elements",
+        "role": "supports",
+        "sourceId": "hirschl-constitutional-theocracy-source",
+      },
+    ],
+    "id": "theocracy-state-religion-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Constitutional recognition or support of a religion does not establish which institutions can make, review, execute, or enforce public law.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 2–12, constitutional status and jurisdiction",
+        "role": "supports",
+        "sourceId": "hirschl-constitutional-theocracy-source",
+      },
+    ],
+    "id": "theocracy-religious-law-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "A clause naming religious law as a source or limit of legislation is evidence of legal authority, but theocratic classification also depends on who interprets the clause and what consequences follow.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "p. 2, institutional forms",
+        "role": "qualifies",
+        "sourceId": "huzakai-theocracy-source",
+      },
+    ],
+    "id": "theocracy-influence-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Voting, lobbying, moral advocacy, or public religious language can influence government without assigning state authority to a religious office or religious-law reviewer.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–2, divine rule and human institutions",
+        "role": "qualifies",
+        "sourceId": "huzakai-theocracy-source",
+      },
+    ],
+    "id": "theocracy-sacred-monarchy-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "A monarch's sacred status or claim of divine legitimation does not show whether religious officeholders or religious-law institutions govern.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 7–12, hybrid constitutional form",
+        "role": "supports",
+        "sourceId": "hirschl-constitutional-theocracy-source",
+      },
+    ],
+    "id": "theocracy-authoritarianism-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Theocracy concerns the institutional location or asserted source of governing authority; authoritarianism concerns constrained pluralism and limited political accountability, so neither classification follows automatically from the other.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "p. 1, conceptual history",
+        "role": "context",
+        "sourceId": "huzakai-theocracy-source",
+      },
+    ],
+    "id": "theocracy-polemical-label-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Calling opponents theocratic does not establish their formal offices, legal review powers, rules-in-use, or coercive capacities.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 2–12, definition and four elements",
+        "role": "supports",
+        "sourceId": "hirschl-constitutional-theocracy-source",
+      },
+    ],
+    "id": "constitutional-theocracy-hybrid",
+    "statementKind": "classification",
+    "text": "Hirschl uses constitutional theocracy for systems that retain constitutional institutions while granting a single religion or its law formal status and empowering religious bodies or courts in constitutional governance.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 2",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-divine-sovereignty-principles",
+    "statementKind": "observation",
+    "text": "Article 2 grounds the Islamic Republic in belief in one God, divine sovereignty and legislation, revelation, and leadership, while also naming human dignity, reason, science, and public participation.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 4",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-laws-islamic-criteria",
+    "statementKind": "observation",
+    "text": "Article 4 requires civil, criminal, financial, economic, administrative, cultural, military, political, and other laws and regulations to conform to Islamic criteria, with Guardian Council jurists judging conformity.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 6",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-popular-elections",
+    "statementKind": "observation",
+    "text": "Article 6 states that public affairs are administered through elections and referenda, including elections for the presidency, parliament, and councils.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 57",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-separation-under-leader",
+    "statementKind": "observation",
+    "text": "Article 57 assigns legislative, executive, and judicial powers to separate branches while placing them under the supervision of the absolute religious Leader.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 91–92",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-guardian-council-composition",
+    "statementKind": "observation",
+    "text": "Articles 91 and 92 establish twelve Guardian Council members: six Islamic jurists selected by the Leader and six lawyers elected by parliament from nominees of the judiciary chief.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 93–96",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-guardian-council-review",
+    "statementKind": "observation",
+    "text": "Articles 93 through 96 make the Guardian Council necessary to ordinary parliamentary validity and assign it review of legislation for Islamic and constitutional conformity.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 99",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-guardian-council-elections",
+    "statementKind": "observation",
+    "text": "Article 99 assigns the Guardian Council supervision of elections for the Assembly of Experts, presidency, parliament, and referenda.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 107 and 111",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-leader-selection",
+    "statementKind": "observation",
+    "text": "Articles 107 and 111 assign the elected Assembly of Experts authority to designate and, under specified conditions, dismiss the Leader.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 110",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-leader-powers",
+    "statementKind": "observation",
+    "text": "Article 110 assigns the Leader powers including setting general policies, commanding the armed forces, declaring war and peace, making senior appointments, and confirming or dismissing the president under specified rules.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 112",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-expediency-council",
+    "statementKind": "observation",
+    "text": "Article 112 provides for an Expediency Council appointed by the Leader to address specified disputes between parliament and the Guardian Council and advise the Leader.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–12 and 293–310",
+        "role": "supports",
+        "sourceId": "schirazi-constitution-iran-source",
+      },
+      {
+        "locator": "sections on sovereignty, institutions, and contradictions",
+        "role": "supports",
+        "sourceId": "iranica-iran-constitution-source",
+      },
+    ],
+    "id": "iran-hybrid-rival-reading",
+    "statementKind": "classification",
+    "text": "Schirazi argues that Iran's constitutional order joins popular-sovereignty institutions to clerical supervisory authority and documents persistent conflict rather than a single undifferentiated clerical chain of command.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 33–48, Iran",
+        "role": "supports",
+        "sourceId": "hirschl-constitutional-theocracy-source",
+      },
+      {
+        "locator": "articles 4, 6, 57, 91–99, and 107–112",
+        "role": "supports",
+        "sourceId": "iran-constitution-1989-source",
+      },
+    ],
+    "id": "iran-classification-qualified",
+    "statementKind": "editorial-interpretation",
+    "text": "The amended 1989 constitutional design combines elected offices and separate branches with binding Islamic-law review and extensive powers assigned to religiously qualified institutions; this placement describes those institutions, not Islam or Shi'a traditions.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 1",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+    ],
+    "id": "vatican-pope-sovereign",
+    "statementKind": "observation",
+    "text": "Article 1 of the 2023 Fundamental Law states that the Supreme Pontiff, sovereign of Vatican City State, possesses the fullness of governmental power, including legislative, executive, and judicial power.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 7–8",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+    ],
+    "id": "vatican-legislative-commission",
+    "statementKind": "observation",
+    "text": "Articles 7 and 8 provide that the Pontifical Commission exercises legislative power except in matters reserved to the Pope and is composed of cardinals and other members appointed for five-year terms.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 10–13",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+    ],
+    "id": "vatican-executive-governorate",
+    "statementKind": "observation",
+    "text": "Articles 10 through 13 assign executive functions to the President of the Governorate under the law's specified structure and reporting duties.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "article 21",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+      {
+        "locator": "articles 1–2",
+        "role": "context",
+        "sourceId": "vatican-judicial-law-2020-source",
+      },
+    ],
+    "id": "vatican-judicial-name",
+    "statementKind": "observation",
+    "text": "Article 21 provides that judicial power is exercised in the name of the Supreme Pontiff by organs constituted under Vatican judicial law.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "sections ‘The Holy See’ and ‘Vatican City State’",
+        "role": "supports",
+        "sourceId": "holy-see-vatican-distinction-source",
+      },
+      {
+        "locator": "section on origins and nature; Lateran Treaty context",
+        "role": "context",
+        "sourceId": "lateran-treaty-source",
+      },
+    ],
+    "id": "holy-see-vatican-distinct",
+    "statementKind": "observation",
+    "text": "The Holy See's institutional account distinguishes the sovereign subject of international law centered on the Pope and Roman Curia from Vatican City State, the territorial state created to secure that independence.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "canon 331",
+        "role": "supports",
+        "sourceId": "canon-law-331-source",
+      },
+      {
+        "locator": "article 1",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+    ],
+    "id": "pope-religious-state-office",
+    "statementKind": "editorial-interpretation",
+    "text": "Canon 331 describes the Roman Pontiff's supreme ecclesial office, while Vatican Fundamental Law separately identifies the same officeholder as sovereign of the state; the two jurisdictions should not be collapsed.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 1 and 7–21",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+      {
+        "locator": "sections on legislative and executive implementation",
+        "role": "context",
+        "sourceId": "vatican-law-one-year-source",
+      },
+    ],
+    "id": "vatican-delegation-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "The 2023 Fundamental Law delegates ordinary legislative and executive functions to state organs while reserving the Pope's plenitude of governmental power and allowing him to reserve matters.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "articles 1 and 7–21",
+        "role": "supports",
+        "sourceId": "vatican-fundamental-law-2023-source",
+      },
+    ],
+    "id": "vatican-classification-qualified",
+    "statementKind": "editorial-interpretation",
+    "text": "Vatican City's 2023 constitutional design places ultimate legislative, executive, and judicial authority in the Pope, whose eligibility derives from a religious office, while ordinary functions are delegated to distinct state organs; the placement does not classify Catholic people or Christianity.",
+  },
+]
+`;
+
+exports[`foundational Theocracy guide > pins the concept, cases, placements, obligations, and guide 1`] = `
+{
+  "cases": [
+    {
+      "asOf": "2026-09-07",
+      "conditionStatementIds": [
+        "iran-divine-sovereignty-principles",
+        "iran-popular-elections",
+      ],
+      "description": "Iran's formal allocation of elected, religious-review, leadership, and branch authority under the Constitution amended in 1989, current only through the stated review date.",
+      "episodeIds": [
+        "iran-post-1989-constitutional-episode",
+      ],
+      "freshness": "current",
+      "id": "iran-constitutional-authority-1989-present",
+      "kind": "case",
+      "label": "Iran under the amended 1989 Constitution",
+      "lastReviewedAt": "2026-09-07",
+      "locationIds": [
+        "iran",
+      ],
+      "publicationStatus": "reviewed",
+      "scope": "The formal amended constitutional design and Schirazi's account of its institutional conflict; not every rule in use, later election, Iranian society, Islam, or Shi'a traditions.",
+      "selectionRationale": "Tests a constitutional-theocracy classification where elections and secularly staffed institutions coexist with religious qualification, review, and leadership powers.",
+      "startDate": {
+        "certainty": "exact",
+        "day": 28,
+        "month": 7,
+        "year": 1989,
+      },
+    },
+    {
+      "asOf": "2026-09-07",
+      "conditionStatementIds": [
+        "holy-see-vatican-distinct",
+        "pope-religious-state-office",
+      ],
+      "description": "Vatican City's allocation of sovereign and delegated authority under the Fundamental Law effective 7 June 2023, current only through the stated review date.",
+      "episodeIds": [
+        "vatican-post-2023-fundamental-law-episode",
+      ],
+      "freshness": "current",
+      "id": "vatican-city-authority-2023-present",
+      "kind": "case",
+      "label": "Vatican City under the 2023 Fundamental Law",
+      "lastReviewedAt": "2026-09-07",
+      "locationIds": [
+        "vatican-city",
+      ],
+      "publicationStatus": "reviewed",
+      "scope": "Vatican City's formal constitutional offices and official account of first-year implementation; not the Holy See's entire ecclesial government, Catholicism, Christianity, or informal practice beyond the reviewed record.",
+      "selectionRationale": "Tests a theocracy classification where a religious officeholder holds plenary state power but distinct organs ordinarily exercise legislative, executive, and judicial functions.",
+      "startDate": {
+        "certainty": "exact",
+        "day": 7,
+        "month": 6,
+        "year": 2023,
+      },
+    },
+  ],
+  "concept": {
+    "description": "A contested classification for government in which divine sovereignty, authoritative religious law, or a religious office has legally consequential governing authority.",
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Theocracy",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q44405",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q44405",
+      },
+    ],
+    "id": "theocracy",
+    "kind": "concept",
+    "label": "Theocracy",
+    "publicationStatus": "reviewed",
+    "schemeIds": [
+      "political-economic-ideas",
+    ],
+    "scopeNote": "Distinguish divine sovereignty, religious-law review, clerical rule, sacred monarchy, official religion, and ordinary religious influence; classify only specified institutions and never a religion or its adherents.",
+  },
+  "guide": {
+    "description": "Theocracy is a contested classification for governing authority grounded in divine sovereignty, religious law, or religious office. Official religion, sacred monarchy, and public religious influence do not by themselves show who governs.",
+    "id": "guide-theocracy",
+    "label": "Theocracy",
+    "primarySubject": {
+      "id": "theocracy",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-07",
+    "searchQueries": [
+      {
+        "query": "theocracy",
+      },
+      {
+        "query": "what is theocracy",
+      },
+      {
+        "query": "rule by religious leaders",
+      },
+      {
+        "query": "religious government",
+      },
+      {
+        "disambiguation": "Rule by clergy is one narrower institutional form, not every use of theocracy.",
+        "query": "clerical rule",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "What does theocracy mean?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "theocracy-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "theocracy",
+            "kind": "concept",
+          },
+        ],
+        "heading": "Why does the term cover different arrangements?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "theocracy-dossier",
+            "sectionId": "meanings",
+          },
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "religiously-grounded-governing-authority",
+            "kind": "comparison-dimension",
+          },
+        ],
+        "heading": "Which powers matter for classification?",
+        "id": "institutions",
+        "narrativeRefs": [
+          {
+            "dossierId": "theocracy-dossier",
+            "sectionId": "boundaries",
+          },
+        ],
+        "researchObligationIds": [
+          "theocracy-threshold-religious-review",
+        ],
+        "role": "institutions-and-mechanisms",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "iran-constitutional-authority-1989-present",
+            "kind": "case",
+          },
+          {
+            "id": "vatican-city-authority-2023-present",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do Iran and Vatican City show?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "theocracy-dossier",
+            "sectionId": "iran",
+          },
+          {
+            "dossierId": "theocracy-dossier",
+            "sectionId": "vatican",
+          },
+        ],
+        "relationshipIds": [
+          "iran-religious-authority-placement",
+          "vatican-religious-authority-placement",
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "heading": "Where can formal design mislead?",
+        "id": "variants-and-disputes",
+        "researchObligationIds": [
+          "iran-elections-institutional-autonomy",
+          "vatican-delegated-power-practice",
+        ],
+        "role": "variants-and-disputes",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "monarchy",
+            "kind": "concept",
+          },
+          {
+            "id": "authoritarianism",
+            "kind": "concept",
+          },
+          {
+            "id": "totalitarianism",
+            "kind": "concept",
+          },
+        ],
+        "heading": "What should be kept separate?",
+        "id": "comparisons-and-next-steps",
+        "narrativeRefs": [
+          {
+            "dossierId": "theocracy-dossier",
+            "sectionId": "comparisons",
+          },
+        ],
+        "relationshipIds": [
+          "monarchy-related-to-theocracy",
+        ],
+        "role": "comparisons-and-next-steps",
+      },
+      {
+        "heading": "What remains open?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "theocracy-category-travel",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "theocracy",
+  },
+  "obligations": [
+    {
+      "addressedStatementIds": [
+        "theocracy-state-religion-boundary",
+        "theocracy-religious-law-boundary",
+        "constitutional-theocracy-hybrid",
+      ],
+      "currentLimitation": "The reviewed definitions identify relevant powers but do not establish a cross-system threshold that survives different court structures and legal traditions.",
+      "description": "A comparative threshold question about legally binding religious authority.",
+      "evidenceNeeded": "Comparative constitutional studies of appointment, jurisdiction, review finality, enforcement, amendment, and institutional override in named systems.",
+      "id": "theocracy-threshold-religious-review",
+      "kind": "research-obligation",
+      "label": "Threshold from religious review to theocratic rule",
+      "obligationStatus": "open",
+      "obligationType": "research-gap",
+      "publicationStatus": "reviewed",
+      "question": "When does official religion or religious-law review become theocratic governing authority rather than a bounded constitutional rule?",
+      "reviewedAt": "2026-09-07",
+      "scope": "Formal and practiced public-law institutions; religious demographics and private observance are excluded.",
+      "statementIds": [],
+      "target": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "iran-popular-elections",
+        "iran-guardian-council-elections",
+        "iran-leader-powers",
+        "iran-classification-qualified",
+      ],
+      "currentLimitation": "The constitutional text allocates powers but does not measure electoral competition, legislative bargaining, policy divergence, enforcement, or informal intervention after 1989.",
+      "description": "A rules-in-use question about elected institutions under supervisory powers.",
+      "evidenceNeeded": "Periodized Persian-language election records, candidate decisions, legislation, implementation evidence, and rival Iranian and diasporic scholarship.",
+      "id": "iran-elections-institutional-autonomy",
+      "kind": "research-obligation",
+      "label": "Iranian elections and institutional autonomy",
+      "obligationStatus": "open",
+      "obligationType": "counterevidence",
+      "publicationStatus": "reviewed",
+      "question": "When have Iran's elected executive and legislative institutions exercised consequential autonomy despite candidate screening, religious-law review, and leadership powers?",
+      "reviewedAt": "2026-09-07",
+      "scope": "Iranian national institutions from 1989 onward, disaggregated by electoral period and office.",
+      "statementIds": [],
+      "target": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "vatican-pope-sovereign",
+        "vatican-legislative-commission",
+        "vatican-executive-governorate",
+        "vatican-judicial-name",
+        "vatican-delegation-boundary",
+      ],
+      "currentLimitation": "The Fundamental Law specifies formal delegation, while the reviewed first-year official account does not provide a complete independent record of decisions, reservations, reversals, or judicial administration.",
+      "description": "A rules-in-use question about plenary authority and delegated government.",
+      "evidenceNeeded": "Dated legislation, administrative acts, judicial records, reservation decisions, and Catholic canonical-law scholarship that distinguishes state from ecclesial jurisdiction.",
+      "id": "vatican-delegated-power-practice",
+      "kind": "research-obligation",
+      "label": "Delegated and practiced authority in Vatican City",
+      "obligationStatus": "open",
+      "obligationType": "counterevidence",
+      "publicationStatus": "reviewed",
+      "question": "How often and through which procedures have Vatican City's delegated legislative, executive, and judicial organs acted independently of papal reservation since June 2023?",
+      "reviewedAt": "2026-09-07",
+      "scope": "Vatican City State from 7 June 2023 onward; Holy See governance outside state jurisdiction is excluded.",
+      "statementIds": [],
+      "target": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "theocracy-contested-family",
+        "theocracy-hierocracy-boundary",
+        "iran-hybrid-rival-reading",
+        "pope-religious-state-office",
+      ],
+      "currentLimitation": "The English-language category can compress distinct claims about divine sovereignty, guardianship, jurisprudence, canon law, ecclesial office, and territorial sovereignty.",
+      "description": "A translation and comparison question about a Greek-derived category.",
+      "evidenceNeeded": "Versioned original-language constitutional and canonical texts, translator notes, conceptual histories, and scholarship by Iranian, Arabic-language, and Catholic legal scholars.",
+      "id": "theocracy-category-travel",
+      "kind": "research-obligation",
+      "label": "Travel of theocracy across theological vocabularies",
+      "obligationStatus": "open",
+      "obligationType": "counterargument",
+      "publicationStatus": "reviewed",
+      "question": "Which local concepts in Persian, Arabic, and Italian legal and theological vocabularies align with, resist, or change the analytical category theocracy?",
+      "reviewedAt": "2026-09-07",
+      "scope": "Named legal and theological terms in bounded texts and institutions; no claim that one vocabulary represents a religion or language community as a whole.",
+      "statementIds": [],
+      "target": {
+        "id": "theocracy",
+        "kind": "concept",
+      },
+    },
+  ],
+  "placements": [
+    {
+      "basis": "declared-design",
+      "id": "iran-religious-authority-placement",
+      "object": {
+        "id": "religiously-grounded-governing-authority",
+        "kind": "comparison-dimension",
+      },
+      "predicate": "placed-on",
+      "scope": {
+        "endDate": "2026-09-07",
+        "note": "The amended constitutional design, not Iranian society or a classification of Islam or Shi'a traditions.",
+        "placeIds": [
+          "iran",
+        ],
+        "startDate": "1989-07-28",
+      },
+      "statementIds": [
+        "iran-laws-islamic-criteria",
+        "iran-separation-under-leader",
+        "iran-guardian-council-review",
+        "iran-leader-powers",
+        "iran-classification-qualified",
+      ],
+      "status": "qualified",
+      "subject": {
+        "id": "iran-post-1989-constitutional-episode",
+        "kind": "case-episode",
+      },
+      "uncertainty": "High confidence in the cited formal allocation; rules in use, contested elections, and the relative power of institutions require separate evidence.",
+      "value": {
+        "categoryId": "cross-branch-supervision",
+        "kind": "category",
+      },
+    },
+    {
+      "basis": "declared-design",
+      "id": "vatican-religious-authority-placement",
+      "object": {
+        "id": "religiously-grounded-governing-authority",
+        "kind": "comparison-dimension",
+      },
+      "predicate": "placed-on",
+      "scope": {
+        "endDate": "2026-09-07",
+        "note": "Vatican City's formal design, not Catholic people, Catholicism, or Christianity.",
+        "placeIds": [
+          "vatican-city",
+        ],
+        "startDate": "2023-06-07",
+      },
+      "statementIds": [
+        "vatican-pope-sovereign",
+        "pope-religious-state-office",
+        "vatican-delegation-boundary",
+        "vatican-classification-qualified",
+      ],
+      "status": "qualified",
+      "subject": {
+        "id": "vatican-post-2023-fundamental-law-episode",
+        "kind": "case-episode",
+      },
+      "uncertainty": "High confidence in ultimate authority under the 2023 law; ordinary delegated practice and the distinct international personality of the Holy See remain outside this placement.",
+      "value": {
+        "categoryId": "plenary-religious-office",
+        "kind": "category",
+      },
+    },
+  ],
+}
+`;

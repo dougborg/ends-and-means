@@ -174,7 +174,6 @@ const expectedMissingConceptDossiers = [
   "social-class",
   "socialist-feminism",
   "statelessness",
-  "theocracy",
   "wage-labor",
 ];
 
@@ -195,7 +194,7 @@ describe("canonical narrative coverage", () => {
     expect(
       report.dossierCoverage.find(({ kind }) => kind === "concept"),
     ).toMatchObject({
-      covered: 25,
+      covered: 26,
       total: 53,
       missingIds: expectedMissingConceptDossiers,
     });

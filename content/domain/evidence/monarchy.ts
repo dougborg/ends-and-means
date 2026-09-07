@@ -332,10 +332,10 @@ export const monarchyEvidenceDocuments = [
       kind: "concept",
       label: "Theocracy",
       description:
-        "A contested classification for government in which religious authority or divine law has a governing institutional role.",
+        "A contested classification for government in which divine sovereignty, authoritative religious law, or a religious office has legally consequential governing authority.",
       schemeIds: ["political-economic-ideas"],
       scopeNote:
-        "Do not infer theocracy from sacred legitimation, an established religion, or religious language without specifying the governing institutions and definition used.",
+        "Distinguish divine sovereignty, religious-law review, clerical rule, sacred monarchy, official religion, and ordinary religious influence; classify only specified institutions and never a religion or its adherents.",
       externalRefs: [
         {
           system: "wikipedia",

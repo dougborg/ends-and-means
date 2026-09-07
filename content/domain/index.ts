@@ -1,6 +1,7 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
 import { reviewedOrientationOnlyMappings } from "../../src/lib/domain/orientation-only-mappings";
 import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
+import { theocracyAnalysisDocuments } from "./analysis/theocracy";
 import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
 import { centralPlanningApproachDocuments } from "./approaches/central-planning";
 import { rehnMeidnerApproachDocuments } from "./approaches/rehn-meidner-model";
@@ -27,6 +28,7 @@ import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
 import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-communism";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
+import { theocracyEvidenceDocuments } from "./evidence/theocracy";
 import { zapatistaCaracolesEvidenceDocuments } from "./evidence/zapatista-caracoles";
 import { anarchismGuideDocuments } from "./presentation/anarchism-guide";
 import { authoritarianismFascismTotalitarianismGuideDocuments } from "./presentation/authoritarianism-fascism-totalitarianism-guides";
@@ -52,6 +54,7 @@ import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossier";
 import { tawantinsuyuGuideDocuments } from "./presentation/tawantinsuyu-guide";
+import { theocracyGuideDocuments } from "./presentation/theocracy-guide";
 import { zapatistaCaracolesDossierDocuments } from "./presentation/zapatista-caracoles-dossier";
 import { anarchismRelationshipDocuments } from "./relationships/anarchism";
 import { authoritarianismFascismTotalitarianismRelationshipDocuments } from "./relationships/authoritarianism-fascism-totalitarianism";
@@ -75,6 +78,7 @@ import { socialOwnershipRelationshipDocuments } from "./relationships/social-own
 import { socialismCommunismRelationshipDocuments } from "./relationships/socialism-communism";
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
+import { theocracyRelationshipDocuments } from "./relationships/theocracy";
 import { zapatistaCaracolesRelationshipDocuments } from "./relationships/zapatista-caracoles";
 import { anarchismResearchDocuments } from "./research/anarchism";
 import { authoritarianismFascismTotalitarianismResearchDocuments } from "./research/authoritarianism-fascism-totalitarianism";
@@ -92,6 +96,7 @@ import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nom
 import { oligarchyResearchDocuments } from "./research/oligarchy";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
+import { theocracyResearchDocuments } from "./research/theocracy";
 import { zapatistaCaracolesResearchDocuments } from "./research/zapatista-caracoles";
 import { minangkabauVocabularyDocuments } from "./vocabulary/minangkabau";
 import { socialismCommunismVocabularyDocuments } from "./vocabulary/socialism-communism";
@@ -127,6 +132,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...minangkabauEvidenceDocuments,
   ...monarchyEvidenceDocuments,
   ...oligarchyEvidenceDocuments,
+  ...theocracyEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...feminismGuideDocuments,
@@ -151,6 +157,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...minangkabauDossierDocuments,
   ...minangkabauGuideDocuments,
   ...monarchyGuideDocuments,
+  ...theocracyGuideDocuments,
   ...openResearchObligationDocuments,
   ...feminismResearchDocuments,
   ...environmentalismResearchDocuments,
@@ -158,6 +165,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyResearchDocuments,
   ...oligarchyGuideDocuments,
   ...oligarchyResearchDocuments,
+  ...theocracyResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...capitalismMarketResearchDocuments,
@@ -171,6 +179,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...nomadicConfederatedOrganizationResearchDocuments,
   ...analysisDocuments,
   ...centralPlanningAnalysisDocuments,
+  ...theocracyAnalysisDocuments,
   ...relationshipDocuments,
   ...rehnMeidnerRelationshipDocuments,
   ...economicDemocracyRelationshipDocuments,
@@ -194,6 +203,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...minangkabauRelationshipDocuments,
   ...monarchyRelationshipDocuments,
   ...oligarchyRelationshipDocuments,
+  ...theocracyRelationshipDocuments,
 ];
 
 export const canonicalDocuments: AuthoringDocument[] =

@@ -51,6 +51,7 @@ describe("canonical vertical slice", () => {
       "iceland-parental-leave-2000-2018",
       "india-constitutional-rights-settlement-1946-1950",
       "indonesia-oligarchy-debate-1998-2013",
+      "iran-constitutional-authority-1989-present",
       "italian-fascist-dictatorship-1925-1943",
       "japan-constitutional-rights-settlement-1946-1947",
       "japan-symbolic-emperorship-1947-2004",
@@ -71,6 +72,7 @@ describe("canonical vertical slice", () => {
       "tonga-constitutional-settlement-2010-2013",
       "us-controlled-materials-plan",
       "us-federal-policy-preferences-1981-2002",
+      "vatican-city-authority-2023-present",
       "warren-county-environmental-justice-1982-1991",
       "zapatista-autonomy-chiapas-1994-present",
     ]);
@@ -133,14 +135,17 @@ describe("canonical comparison and lookup helpers", () => {
   it("publishes a descriptive Dimension with scoped episode Placements", () => {
     expect(entitiesOfKind("comparison-dimension").map(({ id }) => id)).toEqual([
       "collective-wage-earner-shareholding-authority",
+      "religiously-grounded-governing-authority",
     ]);
     const placements = canonicalGraph.relationships.filter(
       ({ predicate }) => predicate === "placed-on",
     );
-    expect(placements).toHaveLength(2);
+    expect(placements).toHaveLength(4);
     expect(placements.map(({ subject }) => subject.id)).toEqual([
       "enacted-wage-earner-funds-1984-1991",
+      "iran-post-1989-constitutional-episode",
       "liquidation-board-period-1992",
+      "vatican-post-2023-fundamental-law-episode",
     ]);
   });
 
