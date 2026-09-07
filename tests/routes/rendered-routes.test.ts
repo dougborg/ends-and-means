@@ -1,14 +1,15 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { workflowReferencesIn } from "../../src/lib/domain";
-import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
-import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
-import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
 import {
   findExternalFontCss,
   findExternalFontHtml,
 } from "../../scripts/external-font-policy";
+import { workflowReferencesIn } from "../../src/lib/domain";
+import { canonicalGraph, entitiesOfKind } from "../../src/lib/domain/canonical";
+import { findForbiddenPublicationReference } from "../../src/lib/domain/publication-boundary";
+import { editorialGovernanceContract } from "../../src/lib/editorial-governance";
+import { exploreDirectoryCuration } from "../../src/lib/explore-discovery";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const dist = path.join(root, "dist");
@@ -137,6 +138,19 @@ async function verifyEveryPublicRecordRenders() {
   await verifyExploreAndCaseRoutes();
   await verifyReferenceRoutes();
   await verifyGlobalNavigation();
+  await verifyNonBrowseGuideDiscovery();
+}
+
+async function verifyNonBrowseGuideDiscovery() {
+  for (const guide of canonicalGraph.subjectGuides) {
+    const decision = exploreDirectoryCuration[guide.id];
+    if (!decision || decision.placement === "browse") continue;
+    const incoming = await readFile(routeFile(decision.incomingPath), "utf8");
+    expect(
+      hrefs(incoming),
+      `${guide.id} from ${decision.incomingPath}`,
+    ).toContain(`/guides/${guide.slug}/`);
+  }
 }
 
 async function verifyGlobalNavigation() {
@@ -306,10 +320,14 @@ async function verifySubjectGuideRoutes() {
   expect(stripMarkup(explore)).toContain("worker ownership");
   expect(stripMarkup(explore)).toContain("direct democracy");
   expect(stripMarkup(explore)).toContain("Research gap");
-  expect(stripMarkup(explore)).toContain("Idea or tradition");
-  expect(stripMarkup(explore)).toContain("Bounded case");
+  expect(stripMarkup(explore)).toContain("Idea, system, or tradition");
   expect(explore).toContain('data-subject-kind="concept"');
-  expect(explore).toContain('data-subject-kind="case"');
+  expect(explore).not.toContain('data-subject-kind="case"');
+  const excludedGuideSlugs = ["central-planning", "ruwalla-borderland-organization", "jinst-postcollective-pastoral-governance", "kahnawake-community-lawmaking", "tawantinsuyu-imperial-organization", "matriliny-property-authority"];
+  for (const slug of excludedGuideSlugs) {
+    expect(hrefs(explore)).not.toContain(`/guides/${slug}/`);
+    expect(await readFile(routeFile(`/guides/${slug}/`), "utf8")).toContain("<main");
+  }
   expect(stripMarkup(explore)).not.toContain("START HERE");
   expect(explore).not.toMatch(/research-needed|in-review|deprecated/i);
 

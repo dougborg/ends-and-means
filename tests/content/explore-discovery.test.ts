@@ -1,12 +1,20 @@
 import { describe, expect, it } from "vitest";
-import type { SubjectGuide } from "../../src/lib/domain";
+import type {
+  SubjectGuide,
+  SubjectGuideSubjectKind,
+} from "../../src/lib/domain";
 import { canonicalGraph } from "../../src/lib/domain/canonical";
 import { buildExploreApproaches } from "../../src/lib/explore-approaches";
 import {
   auditExploreAliases,
+  auditExploreDirectoryCuration,
   buildExploreDirectory,
+  type ExploreDirectoryCuration,
+  type ExploreDirectoryDecision,
+  exploreDirectoryCuration,
   markerForExploreSubject,
   matchExploreDirectory,
+  nonBrowseGuidesDiscoveredAt,
   normalizeExploreQuery,
   ownedExploreAliases,
 } from "../../src/lib/explore-discovery";
@@ -20,39 +28,98 @@ function expectPlannedEconomyRouting() {
     buildExploreDirectory(canonicalGraph.subjectGuides),
     "planned economy",
   );
-  expect(matches.map(({ guide }) => guide.id)).toEqual([
-    "guide-central-planning",
-    "guide-socialism",
-  ]);
-  expect(matches[0]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus ?? "guide").toBe("guide");
-  expect(matches[1]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus).toBe("research-gap");
+  expect(matches.map(({ guide }) => guide.id)).toEqual(["guide-socialism"]);
+  expect(
+    matches[0]?.aliases.find(({ query }) => query === "planned economy")
+      ?.resultStatus,
+  ).toBe("research-gap");
+}
+
+function browseCuration(guides: readonly SubjectGuide[]) {
+  return Object.fromEntries(
+    guides.map(({ id }) => [
+      id,
+      { placement: "browse", reason: "Test fixture" },
+    ]),
+  ) as ExploreDirectoryCuration;
 }
 
 describe("Explore subject markers", () => {
   it("derives truthful reader-facing markers from every eligible subject kind", () => {
-    expect(markerForExploreSubject("concept")).toEqual({
-      label: "Idea or tradition",
-      glyph: "idea-definition",
-    });
-    expect(markerForExploreSubject("case")).toEqual({
-      label: "Bounded case",
-      glyph: "bounded-practice",
+    const eligibleKinds: SubjectGuideSubjectKind[] = [
+      "concept",
+      "collection",
+      "approach",
+      "end",
+      "means",
+      "challenge",
+      "criterion",
+      "place",
+      "case",
+      "case-episode",
+      "event",
+      "transition",
+      "comparison-dimension",
+      "person",
+      "organization",
+      "depiction",
+    ];
+    expect(
+      Object.fromEntries(
+        eligibleKinds.map((kind) => [kind, markerForExploreSubject(kind)]),
+      ),
+    ).toEqual({
+      concept: {
+        label: "Idea, system, or tradition",
+        glyph: "idea-definition",
+      },
+      collection: { label: "Subject collection", glyph: "idea-definition" },
+      approach: {
+        label: "Institutional approach",
+        glyph: "institution-mechanism",
+      },
+      end: { label: "Proposed aim", glyph: "proposed-aim" },
+      means: { label: "Method or instrument", glyph: "institution-mechanism" },
+      challenge: {
+        label: "Problem or tension",
+        glyph: "question-disagreement",
+      },
+      criterion: {
+        label: "Evaluation criterion",
+        glyph: "question-disagreement",
+      },
+      place: { label: "Place" },
+      case: { label: "Bounded case", glyph: "bounded-practice" },
+      "case-episode": {
+        label: "Bounded case episode",
+        glyph: "bounded-practice",
+      },
+      event: { label: "Historical event", glyph: "change-over-time" },
+      transition: { label: "Historical transition", glyph: "change-over-time" },
+      "comparison-dimension": {
+        label: "Comparison dimension",
+        glyph: "comparison",
+      },
+      person: { label: "Person" },
+      organization: { label: "Organization" },
+      depiction: { label: "Depiction", glyph: "depiction" },
     });
 
     const directory = buildExploreDirectory(canonicalGraph.subjectGuides);
     const markerByGuide = new Map(
       directory.map(({ guide, marker }) => [guide.id, marker]),
     );
-    for (const guideId of ["guide-republic", "guide-socialism"]) {
-      expect(markerByGuide.get(guideId)?.label).toBe("Idea or tradition");
-    }
     for (const guideId of [
-      "guide-ruwalla-borderland-organization",
-      "guide-jinst-postcollective-pastoral-governance",
-      "guide-kahnawake-community-lawmaking",
-      "guide-tawantinsuyu-imperial-organization",
+      "guide-republic",
+      "guide-socialism",
+      "guide-environmentalism",
+      "guide-nationalism",
+      "guide-colonialism",
+      "guide-imperialism",
     ]) {
-      expect(markerByGuide.get(guideId)?.label).toBe("Bounded case");
+      expect(markerByGuide.get(guideId)?.label).toBe(
+        "Idea, system, or tradition",
+      );
     }
   });
 });
@@ -60,12 +127,13 @@ describe("Explore subject markers", () => {
 describe("learner-first Explore guide discovery", () => {
   it("builds only from the reviewed and published guide projection", () => {
     const records = clonedGuides();
+    const baseline = buildExploreDirectory(records);
     const first = records[0];
     if (!first) throw new Error("Missing guide fixture");
     first.publicationStatus = "in-review";
     const directory = buildExploreDirectory(records);
 
-    expect(directory).toHaveLength(records.length - 1);
+    expect(directory).toHaveLength(baseline.length - 1);
     expect(directory.map(({ guide }) => guide.id)).not.toContain(first.id);
   });
 
@@ -96,7 +164,7 @@ describe("learner-first Explore guide discovery", () => {
     },
   );
 
-  it("routes planned economy first to the bounded guide while preserving the socialism gap", () => {
+  it("keeps planned economy within a broad subject when its bounded guide is not browsable", () => {
     expectPlannedEconomyRouting();
   });
 
@@ -152,14 +220,94 @@ describe("learner-first Explore guide discovery", () => {
     }
 
     expect(
-      matchExploreDirectory(buildExploreDirectory(guides), "shared phrase").map(
-        ({ guide }) => guide.id,
-      ),
+      matchExploreDirectory(
+        buildExploreDirectory(guides, browseCuration(guides)),
+        "shared phrase",
+      ).map(({ guide }) => guide.id),
     ).toHaveLength(2);
   });
 });
 
-describe("Explore discovery publication boundaries", () => {
+describe("Explore directory curation", () => {
+  it("curates broad subjects without unpublishing bounded or narrow guides", () => {
+    const directoryIds = new Set(
+      buildExploreDirectory(canonicalGraph.subjectGuides).map(
+        ({ guide }) => guide.id,
+      ),
+    );
+    expect(directoryIds.size).toBe(20);
+    for (const guideId of [
+      "guide-central-planning",
+      "guide-ruwalla-borderland-organization",
+      "guide-jinst-postcollective-pastoral-governance",
+      "guide-kahnawake-community-lawmaking",
+      "guide-tawantinsuyu-imperial-organization",
+      "guide-matriliny-property-authority",
+    ]) {
+      expect(directoryIds).not.toContain(guideId);
+      expect(
+        canonicalGraph.subjectGuides.find(({ id }) => id === guideId)
+          ?.publicationStatus,
+      ).toBe("reviewed");
+    }
+  });
+
+  it("requires an explicit current placement decision for every live guide", () => {
+    const guides = clonedGuides();
+    const curation: Record<string, ExploreDirectoryDecision> = structuredClone(
+      exploreDirectoryCuration,
+    );
+    const first = guides[0];
+    if (!first) throw new Error("Missing guide fixture");
+    delete curation[first.id];
+    curation["guide-stale"] = {
+      placement: "browse",
+      reason: "Stale fixture",
+    };
+
+    expect(auditExploreDirectoryCuration(guides, curation)).toEqual(
+      expect.arrayContaining([
+        `${first.id}: live Subject Guide has no Explore placement decision`,
+        "guide-stale: Explore placement decision has no Subject Guide",
+      ]),
+    );
+  });
+
+  it("requires and projects a distinct incoming route for every non-browse guide", () => {
+    const guides = clonedGuides();
+    const curation: Record<string, ExploreDirectoryDecision> = structuredClone(
+      exploreDirectoryCuration,
+    );
+    curation["guide-matriliny-property-authority"] = {
+      placement: "context-only",
+      reason: "Invalid fixture",
+      incomingPath: "/guides/matriliny-property-authority/",
+    };
+
+    expect(auditExploreDirectoryCuration(guides, curation)).toContain(
+      "guide-matriliny-property-authority: non-browse Subject Guide requires a distinct public incoming route",
+    );
+    expect(
+      nonBrowseGuidesDiscoveredAt(canonicalGraph.subjectGuides, "/cases/").map(
+        ({ guide }) => guide.id,
+      ),
+    ).toEqual([
+      "guide-central-planning",
+      "guide-jinst-postcollective-pastoral-governance",
+      "guide-kahnawake-community-lawmaking",
+      "guide-ruwalla-borderland-organization",
+      "guide-tawantinsuyu-imperial-organization",
+    ]);
+    expect(
+      nonBrowseGuidesDiscoveredAt(
+        canonicalGraph.subjectGuides,
+        "/concepts/matriliny/",
+      ).map(({ guide }) => guide.id),
+    ).toEqual(["guide-matriliny-property-authority"]);
+  });
+});
+
+describe("Explore alias publication boundaries", () => {
   it("fails closed on orphaned, non-public, and ambiguous aliases", () => {
     const guides = clonedGuides();
     const first = guides[0];
@@ -225,14 +373,16 @@ describe("Explore discovery publication boundaries", () => {
 
     const expected = ["guide-alpha-a", "guide-alpha-z", third.id];
     expect(
-      buildExploreDirectory([first, second, third]).map(
-        ({ guide }) => guide.id,
-      ),
+      buildExploreDirectory(
+        [first, second, third],
+        browseCuration([first, second, third]),
+      ).map(({ guide }) => guide.id),
     ).toEqual(expected);
     expect(
-      buildExploreDirectory([third, first, second]).map(
-        ({ guide }) => guide.id,
-      ),
+      buildExploreDirectory(
+        [third, first, second],
+        browseCuration([third, first, second]),
+      ).map(({ guide }) => guide.id),
     ).toEqual(expected);
   });
 });

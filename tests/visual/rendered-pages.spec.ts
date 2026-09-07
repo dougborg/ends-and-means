@@ -3,7 +3,6 @@ import {
   type Locator,
   test,
 } from "@playwright/test";
-import { canonicalGraph } from "../../src/lib/domain/canonical";
 import { gotoRenderedPage } from "./support/rendered-page";
 
 const defaultRoutes = [
@@ -1639,45 +1638,42 @@ test("Explore search preserves owned meanings and explicit research gaps", async
     }),
   ).toBeVisible();
   await expect(page.locator("#subject-search-status")).toContainText(
-    "No reviewed guides match",
+    "No broad subject guides match",
   );
 
   await search.fill("");
   await expect
     .poll(() => new URL(page.url()).searchParams.has("q"))
     .toBe(false);
-  await expect(results).toHaveCount(canonicalGraph.subjectGuides.length);
+  await expect(results).toHaveCount(20);
 });
 
-test("Explore distinguishes concept guides from bounded cases", async ({
-  page,
-}) => {
-  await page.goto("/explore/", { waitUntil: "networkidle" });
+test("Explore foregrounds broad subjects and leaves bounded guides in context", async ({ page }) => {
+  await gotoRenderedPage(page, "/explore/");
 
-  for (const name of ["Republic", "Socialism"]) {
-    const result = page.locator("[data-subject-result]", {
-      has: page.getByRole("heading", { name, exact: true }),
-    });
+  for (const name of ["Republic", "Socialism", "Environmentalism", "Nationalism", "Colonialism", "Imperialism"]) {
+    const result = page.locator("[data-subject-result]", { has: page.getByRole("heading", { name, exact: true }) });
     await expect(result).toHaveAttribute("data-subject-kind", "concept");
-    await expect(result.getByText("Idea or tradition", { exact: true })).toBeVisible();
+    await expect(result.getByText("Idea, system, or tradition", { exact: true })).toBeVisible();
     await expect(result.locator('[data-glyph="idea-definition"]')).toBeVisible();
   }
 
-  for (const name of [
-    "Ruwalla organization across post-Ottoman borders",
-    "Jinst post-collective pastoral governance",
-    "Kahnawà:ke community law-making",
-    "Tawantinsuyu (Inka Empire)",
-  ]) {
-    const result = page.locator("[data-subject-result]", {
-      has: page.getByRole("heading", { name, exact: true }),
-    });
-    await expect(result).toHaveAttribute("data-subject-kind", "case");
-    await expect(result.getByText("Bounded case", { exact: true })).toBeVisible();
-    await expect(result.locator('[data-glyph="bounded-practice"]')).toBeVisible();
+  const excludedGuideSlugs = ["central-planning", "ruwalla-borderland-organization", "jinst-postcollective-pastoral-governance", "kahnawake-community-lawmaking", "tawantinsuyu-imperial-organization", "matriliny-property-authority"];
+  for (const slug of excludedGuideSlugs) {
+    await expect(page.locator(`[data-subject-result][data-guide-id="guide-${slug}"]`)).toHaveCount(0);
   }
 
   await expect(page.getByText("START HERE", { exact: true })).toHaveCount(0);
+  await gotoRenderedPage(page, "/cases/");
+  for (const slug of ["us-controlled-materials-plan", "ruwalla-borderland-organization", "jinst-postcollective-pastoral-governance", "kahnawake-community-lawmaking", "tawantinsuyu-imperial-organization"]) {
+    await expect(page.locator(`a[href="/cases/${slug}/"]`)).toHaveCount(1);
+  }
+  for (const slug of ["central-planning", "ruwalla-borderland-organization", "jinst-postcollective-pastoral-governance", "kahnawake-community-lawmaking", "tawantinsuyu-imperial-organization"]) {
+    await expect(page.locator(`a[href="/guides/${slug}/"]`)).toHaveCount(1);
+  }
+
+  await gotoRenderedPage(page, "/concepts/matriliny/");
+  await expect(page.locator('a[href="/guides/matriliny-property-authority/"]')).toHaveCount(1);
 });
 
 test("Explore restores query state from initial URLs and browser history", async ({
@@ -1717,7 +1713,7 @@ test("Explore directory remains complete without JavaScript", async ({
     const page = await context.newPage();
     await gotoRenderedPage(page, "/explore/?q=communism");
     await expect(page.locator("[data-subject-result]")).toHaveCount(
-      canonicalGraph.subjectGuides.length,
+      20,
     );
     expect(await page.locator("noscript").textContent()).toContain(
       "Use your browser's Find command",
