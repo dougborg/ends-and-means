@@ -70,6 +70,21 @@ export const reviewedOrientationLabels = {
     "Agrarian change in England, c. 1450–1750",
   "entity:english-agrarian-transformation-1450-1750":
     "English agrarian change, c. 1450–1750",
+  "entity:chipko-garhwal-1973-1981": "Chipko actions in Garhwal, 1973–1981",
+  "entity:chipko-garhwal-actions-episode":
+    "Selected Garhwal Chipko actions, 1973–1981",
+  "entity:environmentalism": "Environmentalism",
+  "entity:garhwal-uttarakhand": "Garhwal, Uttarakhand",
+  "entity:te-awa-tupua-framework-2017-present":
+    "Te Awa Tupua framework, 2017–present",
+  "entity:te-awa-tupua-enacted-framework-episode":
+    "Te Awa Tupua enacted framework, 2017–present",
+  "entity:warren-county-environmental-justice-1982-1991":
+    "Warren County and environmental-justice organizing, 1982–1991",
+  "entity:warren-county-north-carolina": "Warren County, North Carolina",
+  "entity:warren-county-to-ej-summit-episode":
+    "From Warren County protest to summit principles, 1982–1991",
+  "entity:whanganui-river-catchment": "Whanganui River catchment",
   "entity:equal-political-standing": "Equal political standing",
   "entity:equality-with-employment": "Equality with employment",
   "entity:fascism": "Fascism",
@@ -276,6 +291,7 @@ export const reviewedOrientationLabels = {
   "subject-guide:guide-conservatism": "Conservatism",
   "subject-guide:guide-democracy": "Democracy",
   "subject-guide:guide-economic-democracy": "Economic democracy",
+  "subject-guide:guide-environmentalism": "Environmentalism",
   "subject-guide:guide-fascism": "Fascism",
   "subject-guide:guide-feminism": "Feminism",
   "subject-guide:guide-jinst-postcollective-pastoral-governance":

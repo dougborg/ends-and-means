@@ -23,6 +23,8 @@ export const reviewedOrientationOnlyMappings = {
   "english-agrarian-market-dependence": "British Agricultural Revolution",
   "english-agrarian-transformation-1450-1750":
     "British Agricultural Revolution",
+  "chipko-garhwal-1973-1981": "Chipko movement",
+  "chipko-garhwal-actions-episode": "Chipko movement",
   "equal-political-standing": "Social equality",
   "fascist-movements": "Fascism",
   "feminist-traditions": "Feminism",
@@ -92,6 +94,11 @@ export const reviewedOrientationOnlyMappings = {
   "tonga-constitutional-settlement-2010-2013": "Politics of Tonga",
   "tonga-post-reform-monarchy-episode": "Politics of Tonga",
   "us-controlled-materials-plan": "Economic planning",
+  "warren-county-environmental-justice-1982-1991":
+    "North Carolina PCB protest, 1982",
+  "warren-county-to-ej-summit-episode": "North Carolina PCB protest, 1982",
+  "te-awa-tupua-framework-2017-present": "Te Awa Tupua",
+  "te-awa-tupua-enacted-framework-episode": "Te Awa Tupua",
   "us-wartime-production-mobilization": "Economic planning",
   "wage-earner-fund-board-abolition": "Rehn–Meidner model",
   "wage-earner-funds-to-liquidation": "Rehn–Meidner model",
@@ -118,4 +125,5 @@ export const reviewedOrientationOnlyGuideSubjects = {
   "guide-central-planning": "central-planning-arrangements",
   "guide-kahnawake-community-lawmaking": "kahnawake-community-lawmaking",
   "guide-ruwalla-borderland-organization": "ruwalla-borderland-organization",
+  "guide-environmentalism": "environmentalism",
 } as const;

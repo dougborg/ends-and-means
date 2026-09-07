@@ -41,6 +41,7 @@ describe("canonical vertical slice", () => {
       "athens-four-hundred-five-thousand-411-bce",
       "bonjol-melayu-ulayat-governance",
       "china-dual-track-market-reforms",
+      "chipko-garhwal-1973-1981",
       "combahee-river-collective-1974-1980",
       "english-agrarian-market-dependence",
       "gold-coast-cocoa-expansion",
@@ -63,9 +64,11 @@ describe("canonical vertical slice", () => {
       "swedish-solidaristic-bargaining",
       "swedish-wage-earner-funds",
       "tawantinsuyu-imperial-organization",
+      "te-awa-tupua-framework-2017-present",
       "tonga-constitutional-settlement-2010-2013",
       "us-controlled-materials-plan",
       "us-federal-policy-preferences-1981-2002",
+      "warren-county-environmental-justice-1982-1991",
       "zapatista-autonomy-chiapas-1994-present",
     ]);
   });
