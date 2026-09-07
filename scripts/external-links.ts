@@ -1,8 +1,8 @@
 import { lookup } from "node:dns/promises";
 import { readdir } from "node:fs/promises";
-import { isIP } from "node:net";
 import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import ipaddr from "ipaddr.js";
 import { Agent, fetch as undiciFetch } from "undici";
 import type {
   AuthoringDocument,
@@ -90,91 +90,14 @@ const defaultResolver: HostResolver = async (hostname) =>
     ({ address, family }) => ({ address, family: family as 4 | 6 }),
   );
 
-function ipv4Number(address: string) {
-  return (
-    address
-      .split(".")
-      .reduce((value, part) => (value << 8) + Number(part), 0) >>> 0
-  );
-}
-
-function inIpv4Range(address: string, network: string, bits: number) {
-  const mask = bits === 0 ? 0 : (0xffffffff << (32 - bits)) >>> 0;
-  return (ipv4Number(address) & mask) === (ipv4Number(network) & mask);
-}
-
-function unsafeIpv4(address: string) {
-  return [
-    ["0.0.0.0", 8],
-    ["10.0.0.0", 8],
-    ["100.64.0.0", 10],
-    ["127.0.0.0", 8],
-    ["169.254.0.0", 16],
-    ["172.16.0.0", 12],
-    ["192.0.0.0", 24],
-    ["192.0.2.0", 24],
-    ["192.168.0.0", 16],
-    ["198.18.0.0", 15],
-    ["198.51.100.0", 24],
-    ["203.0.113.0", 24],
-    ["224.0.0.0", 4],
-    ["240.0.0.0", 4],
-  ].some(([network, bits]) =>
-    inIpv4Range(address, String(network), Number(bits)),
-  );
-}
-
-function ipv6Bytes(address: string) {
-  const [left = "", right = ""] = address.toLowerCase().split("::");
-  const parse = (part: string) =>
-    part
-      ? part.split(":").flatMap((word) => {
-          if (word.includes(".")) {
-            const value = ipv4Number(word);
-            return [(value >>> 16).toString(16), (value & 0xffff).toString(16)];
-          }
-          return [word];
-        })
-      : [];
-  const before = parse(left);
-  const after = parse(right);
-  const words = address.includes("::")
-    ? [
-        ...before,
-        ...Array(8 - before.length - after.length).fill("0"),
-        ...after,
-      ]
-    : before;
-  if (words.length !== 8) return undefined;
-  return words.flatMap((word) => {
-    const value = Number.parseInt(word, 16);
-    return [value >>> 8, value & 0xff];
-  });
+function addressKind(address: string) {
+  if (!ipaddr.isValid(address)) return undefined;
+  return ipaddr.parse(address).kind() === "ipv4" ? 4 : 6;
 }
 
 function unsafeAddress(address: string) {
-  if (isIP(address) === 4) return unsafeIpv4(address);
-  if (isIP(address) !== 6) return true;
-  const bytes = ipv6Bytes(address);
-  if (!bytes) return true;
-  const first = bytes[0] ?? 0;
-  const second = bytes[1] ?? 0;
-  const mapped =
-    bytes.slice(0, 10).every((byte) => byte === 0) &&
-    bytes[10] === 0xff &&
-    bytes[11] === 0xff;
-  if (mapped) return unsafeIpv4(bytes.slice(12).join("."));
-  return (
-    bytes.every((byte) => byte === 0) ||
-    (bytes.slice(0, 15).every((byte) => byte === 0) && bytes[15] === 1) ||
-    (first & 0xfe) === 0xfc ||
-    (first === 0xfe && (second & 0x80) === 0x80) ||
-    first === 0xff ||
-    (first === 0x20 &&
-      second === 0x01 &&
-      bytes[2] === 0x0d &&
-      bytes[3] === 0xb8)
-  );
+  if (!ipaddr.isValid(address)) return true;
+  return ipaddr.parse(address).range() !== "unicast";
 }
 
 async function resolvePublicTarget(url: URL, resolver: HostResolver) {
@@ -183,14 +106,15 @@ async function resolvePublicTarget(url: URL, resolver: HostResolver) {
   if (url.hostname === "localhost" || url.hostname.endsWith(".localhost"))
     throw new UnsafeTargetError("Localhost targets are not permitted");
   const literal = url.hostname.replace(/^\[|\]$/g, "");
-  const addresses = isIP(literal)
-    ? [{ address: literal, family: isIP(literal) as 4 | 6 }]
+  const literalFamily = addressKind(literal);
+  const addresses = literalFamily
+    ? [{ address: literal, family: literalFamily }]
     : await resolver(url.hostname);
   if (
     addresses.length === 0 ||
     addresses.some(
       ({ address, family }) =>
-        unsafeAddress(address) || isIP(address) !== family,
+        unsafeAddress(address) || addressKind(address) !== family,
     )
   )
     throw new UnsafeTargetError(
