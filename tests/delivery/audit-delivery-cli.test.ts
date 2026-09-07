@@ -47,6 +47,7 @@ describe("delivery audit result classes", () => {
     const result = run(["--repository-only"]);
     expect(result.status).toBe(0);
     expect(result.stdout).toContain("Project state: UNAVAILABLE");
+    expect(result.stdout).toContain("Backlog integrity: UNAVAILABLE");
   });
 
   it("distinguishes invalid snapshot schema", () => {

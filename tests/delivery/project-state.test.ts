@@ -51,6 +51,20 @@ describe("delivery Project policy", () => {
     expect(canPromote(snapshot, item(snapshot, 5))).toBe(true);
   });
 
+  it("includes repository-wide backlog findings when a snapshot provides issues", async () => {
+    const snapshot = await fixture();
+    snapshot.backlogIssues = [
+      {
+        number: 290,
+        title: "Corrupted issue",
+        body: "## Outcome\\n\\nBad body\\n\\n## Scope\\n\\nPasted body",
+        state: "OPEN",
+        labels: [],
+      },
+    ];
+    expect(codes(snapshot)).toContain("BACKLOG_LITERAL_ESCAPES");
+  });
+
   it("rejects Ready outside 3–5 and deterministically orders Priority independent of item-list order", async () => {
     const tooSmall = await fixture();
     tooSmall.items = tooSmall.items.filter(

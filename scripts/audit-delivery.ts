@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
+import { backlogIssueSchema } from "./backlog-integrity.ts";
 import {
   commitOidSchema,
   compareSchema,
@@ -102,6 +103,15 @@ const prViewSchema = z
 const labelsSchema = z.array(
   z.object({ name: z.string().min(1) }).passthrough(),
 );
+const repositoryIssueSchema = z
+  .object({
+    number: z.number().int().positive(),
+    title: z.string().min(1),
+    body: z.string(),
+    state: z.enum(["OPEN", "CLOSED"]),
+    labels: labelsSchema,
+  })
+  .passthrough();
 
 class InputInvalidError extends Error {}
 class ApiUnavailableError extends Error {}
@@ -308,6 +318,22 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
     labelsSchema,
     "repository labels",
   );
+  const repositoryIssues = parseJson(
+    gh([
+      "issue",
+      "list",
+      "--repo",
+      repository,
+      "--state",
+      "open",
+      "--limit",
+      "1000",
+      "--json",
+      "number,title,body,state,labels",
+    ]),
+    z.array(repositoryIssueSchema),
+    "open repository issues",
+  );
   return parseInput(
     {
       project: {
@@ -317,6 +343,15 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
       },
       capturedAt: new Date().toISOString(),
       repositoryLabels: labels.map((label) => label.name),
+      backlogIssues: repositoryIssues.map((issue) =>
+        backlogIssueSchema.parse({
+          number: issue.number,
+          title: issue.title,
+          body: issue.body,
+          state: issue.state,
+          labels: issue.labels.map((label) => label.name),
+        }),
+      ),
       items: list.items.map((item) => loadLiveItem(item, privateState)),
     },
     deliverySnapshotSchema,
@@ -381,12 +416,26 @@ function loadSnapshot(args: string[]) {
 
 try {
   const snapshot = loadSnapshot(process.argv.slice(2));
-  if (!snapshot)
+  if (!snapshot) {
     console.log(
       "Project state: UNAVAILABLE (repository-only audit; no GitHub credentials requested)",
     );
-  else {
+    console.log(
+      "Backlog integrity: UNAVAILABLE (repository-only audit; no GitHub credentials requested)",
+    );
+  } else {
     const findings = auditDeliverySnapshot(snapshot);
+    const backlogFindings = findings.filter(({ code }) =>
+      code.startsWith("BACKLOG_"),
+    );
+    if (!snapshot.backlogIssues)
+      console.log(
+        "Backlog integrity: UNAVAILABLE (normalized snapshot contains no repository issues)",
+      );
+    else if (backlogFindings.length === 0)
+      console.log(
+        `Backlog integrity: clean (${snapshot.backlogIssues.length} open issues checked)`,
+      );
     if (findings.length === 0)
       console.log(
         `Project #${snapshot.project.number}: clean (${snapshot.items.length} delivery items checked)`,

@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  auditBacklogIssues,
+  backlogIssueSchema,
+} from "./backlog-integrity.ts";
 import { localGitFailureCodes } from "./delivery-local-git.ts";
 
 export const projectStatuses = [
@@ -95,6 +99,7 @@ export const deliverySnapshotSchema = z
       .strict(),
     capturedAt: dateTime,
     repositoryLabels: z.array(z.string().min(1)),
+    backlogIssues: z.array(backlogIssueSchema).optional(),
     items: z.array(deliveryItemSchema),
   })
   .strict();
@@ -561,6 +566,15 @@ export function auditDeliverySnapshot(
         item: item.number,
         message: `#${item.number} is Blocked without a concrete named condition.`,
       });
+  }
+  if (snapshot.backlogIssues) {
+    findings.push(
+      ...auditBacklogIssues(snapshot.backlogIssues).map((finding) => ({
+        code: finding.code,
+        item: finding.issue,
+        message: finding.message,
+      })),
+    );
   }
   return findings;
 }
