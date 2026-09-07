@@ -1576,6 +1576,37 @@ test("Explore search preserves owned meanings and explicit research gaps", async
   await expect(results).toHaveCount(canonicalGraph.subjectGuides.length);
 });
 
+test("Explore distinguishes concept guides from bounded cases", async ({
+  page,
+}) => {
+  await page.goto("/explore/", { waitUntil: "networkidle" });
+
+  for (const name of ["Republic", "Socialism"]) {
+    const result = page.locator("[data-subject-result]", {
+      has: page.getByRole("heading", { name, exact: true }),
+    });
+    await expect(result).toHaveAttribute("data-subject-kind", "concept");
+    await expect(result.getByText("Idea or tradition", { exact: true })).toBeVisible();
+    await expect(result.locator('[data-glyph="idea-definition"]')).toBeVisible();
+  }
+
+  for (const name of [
+    "Ruwalla organization across post-Ottoman borders",
+    "Jinst post-collective pastoral governance",
+    "Kahnawà:ke community law-making",
+    "Tawantinsuyu (Inka Empire)",
+  ]) {
+    const result = page.locator("[data-subject-result]", {
+      has: page.getByRole("heading", { name, exact: true }),
+    });
+    await expect(result).toHaveAttribute("data-subject-kind", "case");
+    await expect(result.getByText("Bounded case", { exact: true })).toBeVisible();
+    await expect(result.locator('[data-glyph="bounded-practice"]')).toBeVisible();
+  }
+
+  await expect(page.getByText("START HERE", { exact: true })).toHaveCount(0);
+});
+
 test("Explore restores query state from initial URLs and browser history", async ({
   page,
 }) => {

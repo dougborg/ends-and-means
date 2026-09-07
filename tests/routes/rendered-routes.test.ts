@@ -302,6 +302,11 @@ async function verifySubjectGuideRoutes() {
   expect(stripMarkup(explore)).toContain("worker ownership");
   expect(stripMarkup(explore)).toContain("direct democracy");
   expect(stripMarkup(explore)).toContain("Research gap");
+  expect(stripMarkup(explore)).toContain("Idea or tradition");
+  expect(stripMarkup(explore)).toContain("Bounded case");
+  expect(explore).toContain('data-subject-kind="concept"');
+  expect(explore).toContain('data-subject-kind="case"');
+  expect(stripMarkup(explore)).not.toContain("START HERE");
   expect(explore).not.toMatch(/research-needed|in-review|deprecated/i);
 
   const guide = await readFile(

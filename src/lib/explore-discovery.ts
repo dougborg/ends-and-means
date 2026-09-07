@@ -1,4 +1,45 @@
-import type { SubjectGuide, SubjectGuideSearchQuery } from "./domain";
+import type {
+  SubjectGuide,
+  SubjectGuideSearchQuery,
+  SubjectGuideSubjectKind,
+} from "./domain";
+import {
+  glyphForEntityKind,
+  type GlyphName,
+} from "./presentation-glyphs";
+
+export interface ExploreSubjectMarker {
+  label: string;
+  glyph?: GlyphName;
+}
+
+const subjectMarkerLabels = {
+  concept: "Idea or tradition",
+  collection: "Subject collection",
+  approach: "Institutional approach",
+  end: "Proposed aim",
+  means: "Method or instrument",
+  challenge: "Problem or tension",
+  criterion: "Evaluation criterion",
+  place: "Place",
+  case: "Bounded case",
+  "case-episode": "Bounded case episode",
+  event: "Historical event",
+  transition: "Historical transition",
+  "comparison-dimension": "Comparison dimension",
+  person: "Person",
+  organization: "Organization",
+  depiction: "Depiction",
+} as const satisfies Record<SubjectGuideSubjectKind, string>;
+
+export function markerForExploreSubject(
+  kind: SubjectGuideSubjectKind,
+): ExploreSubjectMarker {
+  const glyph = glyphForEntityKind(kind);
+  return glyph
+    ? { label: subjectMarkerLabels[kind], glyph }
+    : { label: subjectMarkerLabels[kind] };
+}
 
 export interface ExploreAlias extends SubjectGuideSearchQuery {
   guideId: string;
@@ -8,6 +49,7 @@ export interface ExploreGuideEntry {
   guide: SubjectGuide;
   aliases: ExploreAlias[];
   searchText: string;
+  marker: ExploreSubjectMarker;
 }
 
 export type ExploreSearchEntry = Pick<
@@ -128,6 +170,7 @@ export function buildExploreDirectory(guides: readonly SubjectGuide[]) {
       return {
         guide,
         aliases: ownedAliases,
+        marker: markerForExploreSubject(guide.primarySubject.kind),
         searchText: normalizeExploreQuery(
           [
             guide.label,
