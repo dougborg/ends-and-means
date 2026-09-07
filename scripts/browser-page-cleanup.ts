@@ -7,6 +7,22 @@ interface PageContext<Page extends ClosablePage> {
   pages(): Page[];
 }
 
+export function pageForNavigationRequest<Page>(request: {
+  frame(): { page(): Page };
+}) {
+  try {
+    return request.frame().page();
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      /request\s+was issued before the frame is created/i.test(error.message)
+    ) {
+      return undefined;
+    }
+    throw error;
+  }
+}
+
 export async function closeEventuallyOpenedPages<Page extends ClosablePage>(
   context: PageContext<Page>,
   existingPages: ReadonlySet<Page>,
