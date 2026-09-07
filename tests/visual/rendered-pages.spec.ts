@@ -775,6 +775,17 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
     await expect(summary).toContainText("Menu");
     await expect(summary).toContainText("Explore");
     await summary.focus();
+    const focus = await summary.evaluate((element) => {
+      const style = getComputedStyle(element);
+      return {
+        height: element.getBoundingClientRect().height,
+        outlineStyle: style.outlineStyle,
+        outlineWidth: Number.parseFloat(style.outlineWidth),
+      };
+    });
+    expect(focus.height).toBeGreaterThanOrEqual(44);
+    expect(focus.outlineStyle).not.toBe("none");
+    expect(focus.outlineWidth).toBeGreaterThanOrEqual(3);
     await page.keyboard.press("Enter");
     await expect(disclosure).toHaveAttribute("open", "");
     await expect(page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link")).toHaveCount(8);
@@ -785,6 +796,13 @@ test("mobile menu is compact, complete, and predictably enhanced", async ({ page
     await page.mouse.click(5, 880);
     await expect(disclosure).not.toHaveAttribute("open", "");
   }
+
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.goto("/research/");
+  const researchDisclosure = page.locator("details.mobile-navigation");
+  await expect(researchDisclosure.locator("summary")).toContainText("Questions");
+  await researchDisclosure.locator("summary").click();
+  await expect(researchDisclosure.locator('[aria-current="page"]')).toHaveText("Questions");
 
   // A 1280px layout viewport resolves to these CSS widths at 200% and 400% zoom.
   for (const width of [640, 320]) {

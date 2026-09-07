@@ -17,7 +17,7 @@ export const publicRoutes = [
   {
     href: "/challenges/",
     label: "Questions",
-    matchingPrefixes: ["/challenges/"],
+    matchingPrefixes: ["/challenges/", "/research/"],
     level: "primary",
   },
   {

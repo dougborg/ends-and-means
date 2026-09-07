@@ -160,7 +160,13 @@ async function verifyGlobalNavigation() {
     ["/explore/", "Explore"],
     ["/guides/economic-democracy/", "Explore"],
     ["/concepts/economic-democracy/", "Explore"],
+    ["/cases/", "Cases"],
+    ["/compare/", "Compare"],
+    ["/challenges/", "Questions"],
+    ["/research/", "Questions"],
     ["/sources/erixon-rehn-meidner-model-source/", "Sources"],
+    ["/framework/", "Method"],
+    ["/governance/", "Governance"],
   ] as const) {
     const html = await readFile(routeFile(route), "utf8");
     const primary = navigationIn(html, "Primary");

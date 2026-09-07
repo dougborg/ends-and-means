@@ -45,7 +45,7 @@ describe("public navigation", () => {
     );
     expect(currentLabel("/reading/")).toBe("Sources");
     expect(currentLabel("/governance/")).toBe("Governance");
-    expect(currentLabel("/research/")).toBeUndefined();
+    expect(currentLabel("/research/")).toBe("Questions");
   });
 
   it("marks Home only at the site root", () => {
