@@ -13,6 +13,7 @@ import { parse as parsePostCss } from "postcss";
 import { describe, expect, it } from "vitest";
 import EditorialHeader from "../../src/components/EditorialHeader.astro";
 import Notice from "../../src/components/Notice.astro";
+import ThemeControl from "../../src/components/ThemeControl.astro";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const sourceDirectory = path.join(root, "src");
@@ -197,6 +198,59 @@ describe("design tokens and shared components", () => {
     }
   });
 
+});
+
+describe("theme contracts", () => {
+  it("maps every theme through the complete semantic color contract", async () => {
+    const tokens = await readFile(path.join(root, "src/styles/tokens.css"), "utf8");
+    const roles = [
+      "canvas", "surface", "surface-subtle", "surface-hover", "text",
+      "text-muted", "text-inverse", "rule", "rule-strong", "link",
+      "link-hover", "link-visited", "focus", "evidence", "evidence-text",
+      "evidence-surface", "caution", "caution-text", "caution-surface",
+      "caution-rule", "shadow-panel", "shadow-ledger",
+    ];
+    const sheet = parsePostCss(tokens, { from: undefined });
+    const declarations = (selector: string, media?: string) => {
+      const values = new Map<string, string>();
+      sheet.walkRules((rule) => {
+        const parentMedia = rule.parent?.type === "atrule" && rule.parent.name === "media"
+          ? rule.parent.params
+          : undefined;
+        if (rule.selectors.map((value) => value.trim()).includes(selector) && parentMedia === media) {
+          rule.walkDecls(/^--/, (declaration) => {
+            values.set(declaration.prop.slice(2), declaration.value);
+          });
+        }
+      });
+      return values;
+    };
+    const systemDark = declarations(":root:not([data-theme])", "(prefers-color-scheme: dark)");
+    const explicitDark = declarations(':root[data-theme="dark"]');
+    for (const [theme, contract] of Object.entries({
+      light: declarations(":root"), systemDark, explicitDark,
+      print: declarations(':root[data-theme]', "print"),
+    })) {
+      for (const role of roles) expect(contract.has(role), `${theme} ${role}`).toBe(true);
+    }
+    expect(Object.fromEntries(systemDark)).toEqual(Object.fromEntries(explicitDark));
+  });
+
+  it("renders a native Appearance choice without requiring JavaScript", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(ThemeControl);
+    expect(html).toContain("<fieldset");
+    expect(html).toContain("<legend>Appearance</legend>");
+    expect(html.match(/type="radio"/g)).toHaveLength(3);
+    expect(html).toContain('value="system" checked');
+    expect(html).toContain('value="light"');
+    expect(html).toContain('value="dark"');
+  });
+
+});
+
+describe("design tokens and shared components", () => {
+
   it("uses named width roles instead of recreating the shared content measures", async () => {
     const contents = await stylesheetContents();
     const duplicatedMeasure =
@@ -217,6 +271,13 @@ describe("design tokens and shared components", () => {
       ":where(a, button, summary, [tabindex]):focus-visible",
     );
     expect(base).toContain("outline: 3px solid var(--focus)");
+  });
+
+  it("keeps visited and disabled states on semantic tokens", async () => {
+    const base = await readFile(path.join(root, "src/styles/base.css"), "utf8");
+    expect(base).toMatch(/a:visited\s*{\s*color:\s*var\(--link-visited\)/);
+    expect(base).toMatch(/:where\(button, input, select, textarea\):disabled/);
+    expect(base).toContain("background-color: var(--surface-subtle)");
   });
 
   it("renders a conventional editorial header without changing heading semantics", async () => {
