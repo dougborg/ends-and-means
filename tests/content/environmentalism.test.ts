@@ -20,7 +20,6 @@ const statementIds = [
   "environmental-justice-three-dimensions",
   "indigenous-relations-boundary",
   "colonial-conservation-displacement",
-  "nuclear-environmental-policy-boundary",
   "chipko-commercial-forestry-conflict",
   "chipko-organized-tree-protection",
   "chipko-women-participation",

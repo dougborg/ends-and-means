@@ -154,11 +154,10 @@ export const environmentalismResearchDocuments = [
       target: { kind: "concept", id: "environmentalism" },
       targetSectionId: "boundaries",
       addressedStatementIds: [
-        "nuclear-environmental-policy-boundary",
         "environmentalism-climate-boundary",
       ],
       currentLimitation:
-        "The current guide establishes only that no environmentalist label determines a nuclear position; it does not yet present the strongest rival arguments or their evidence.",
+        "The reviewed guide does not yet make a claim about nuclear power or nuclear weapons because it lacks a source set that distinguishes the technologies, rival environmental arguments, and their evidence.",
       evidenceNeeded:
         "Primary movement positions, energy-system and weapons evidence, affected-community testimony, and sources that keep civilian power, weapons, waste, mining, and security claims distinct.",
       scope:

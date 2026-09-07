@@ -223,9 +223,9 @@ export const environmentalismEvidenceDocuments = [
     "authorized-reading",
   ),
   ...source(
-    "schlosberg-environmental-justice",
+    "mohai-pellow-roberts-environmental-justice",
     "Environmental Justice",
-    ["David Schlosberg"],
+    ["Paul Mohai", "David Pellow", "J. Timmons Roberts"],
     2009,
     2009,
     "Annual Review of Environment and Resources",
@@ -233,6 +233,18 @@ export const environmentalismEvidenceDocuments = [
     "article",
     "article",
     { doi: "10.1146/annurev-environ-082508-094348" },
+  ),
+  ...source(
+    "schlosberg-reconceiving-environmental-justice",
+    "Reconceiving Environmental Justice: Global Movements and Political Theories",
+    ["David Schlosberg"],
+    2004,
+    2004,
+    "Environmental Politics",
+    "https://doi.org/10.1080/0964401042000229025",
+    "article",
+    "article",
+    { doi: "10.1080/0964401042000229025" },
   ),
   ...source(
     "whyte-indigenous-climate",
@@ -371,13 +383,6 @@ export const environmentalismEvidenceDocuments = [
     "Protected-land and forestry projects can restrict customary access and political authority, so conservation status alone cannot establish justice or environmental benefit for affected communities.",
     "editorial-interpretation",
   ),
-  statement(
-    "nuclear-environmental-policy-boundary",
-    "Nuclear policy does not follow from the label environmentalism",
-    "Nuclear power and nuclear weapons raise distinct questions about climate, extraction, land, safety, waste, security, and justice; an environmentalist relationship does not determine a position on either technology.",
-    "editorial-interpretation",
-  ),
-
   statement(
     "chipko-commercial-forestry-conflict",
     "Chipko arose within a commercial-forestry conflict",

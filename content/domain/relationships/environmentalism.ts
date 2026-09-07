@@ -51,8 +51,8 @@ const citations = [
   ],
   [
     "environmental-justice-three-dimensions",
-    "schlosberg-environmental-justice-source",
-    "abstract; pp. 397–401 and 405–413",
+    "schlosberg-reconceiving-environmental-justice-source",
+    "abstract; pp. 517–519 and 534–536",
     "supports",
   ],
   [
@@ -66,12 +66,6 @@ const citations = [
     "guha-unquiet-woods-source",
     "chapters 2–4, pp. 35–116",
     "supports",
-  ],
-  [
-    "nuclear-environmental-policy-boundary",
-    "sep-environmental-ethics-source",
-    "sections 4.4–4.6 and 5",
-    "context",
   ],
   [
     "chipko-commercial-forestry-conflict",
@@ -153,8 +147,8 @@ const citations = [
   ],
   [
     "warren-county-causal-boundary",
-    "schlosberg-environmental-justice-source",
-    "pp. 397–405",
+    "mohai-pellow-roberts-environmental-justice-source",
+    "pp. 406–408",
     "qualifies",
   ],
   [
