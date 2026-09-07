@@ -16,7 +16,8 @@ Theocracy and authoritarianism can overlap, but they identify different institut
 
 Iran's amended Constitution assigns public affairs to elections and separates legislative, executive, and judicial branches, yet subjects all law to Islamic criteria and places the branches under the Leader's supervision.
 The Guardian Council reviews legislation and supervises elections; the Assembly of Experts selects the Leader; and the Leader holds enumerated policy, military, appointment, and presidential powers.
-Schirazi's institutional account identifies tensions among popular participation, separate state institutions, and clerical supervisory authority, which supports a qualified hybrid classification rather than a claim about Islam, Shi'a traditions, or Iranian society.
+Arjomand's account cautions against reading the participatory provisions or branch structure apart from the Constitution's leadership framework.
+This mixed allocation supports a qualified hybrid classification rather than a claim about Islam, Shi'a traditions, or Iranian society.
 
 ## vatican
 

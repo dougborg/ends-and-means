@@ -122,7 +122,7 @@ const rows: [string, string, string, Role][] = [
   [
     "iran-hybrid-rival-reading",
     "iranica-iran-constitution-source",
-    "sections ‘The Islamic character of the Constitution’ and ‘Constitutional conflicts and amendments,’ especially discussion of articles 56–61 and institutional conflict",
+    "section ‘The Islamic character of the Constitution,’ paragraphs discussing articles 3, 7, and 56–61",
     "supports",
   ],
   [

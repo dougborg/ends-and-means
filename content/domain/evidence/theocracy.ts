@@ -12,6 +12,7 @@ const source = (
   sourceType: "article" | "edition" | "web-page",
   year?: number,
   manifestationTitle?: string,
+  consultedDescription?: string,
 ): AuthoringDocument[] => [
   {
     documentType: "entity",
@@ -32,7 +33,9 @@ const source = (
       id: `${id}-source`,
       kind: "source",
       label: manifestationTitle ?? title,
-      description: `The consulted ${publisher} manifestation of ${title}.`,
+      description:
+        consultedDescription ??
+        `The consulted ${publisher} manifestation of ${title}.`,
       title: manifestationTitle ?? title,
       sourceType,
       workId: `${id}-work`,
@@ -109,12 +112,14 @@ export const theocracyEvidenceDocuments = [
   ...source(
     "iranica-iran-constitution",
     "Constitution of the Islamic Republic",
-    ["Asghar Schirazi"],
+    ["Saïd Amir Arjomand"],
     "Encyclopaedia Iranica",
     "https://www.iranicaonline.org/articles/constitution-of-the-islamic-republic/",
     "article",
     "web-page",
-    2011,
+    1992,
+    undefined,
+    "The consulted Encyclopaedia Iranica article by Saïd Amir Arjomand, published 15 December 1992 and last updated 30 June 2016.",
   ),
   ...source(
     "vatican-fundamental-law-2023",
@@ -302,8 +307,8 @@ export const theocracyEvidenceDocuments = [
   ),
   statement(
     "iran-hybrid-rival-reading",
-    "Schirazi identifies constitutional contradictions between authorities",
-    "Schirazi's institutional account identifies unresolved constitutional tensions among popular participation, separate state institutions, and clerical supervisory authority rather than a single undifferentiated chain of command.",
+    "Arjomand identifies retained institutions under religious leadership",
+    "Arjomand observes that the Constitution retains popular participation and separate legislative, executive, and judicial institutions while subordinating those institutions to religious leadership and review.",
     "classification",
   ),
   statement(
