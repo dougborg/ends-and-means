@@ -12,6 +12,9 @@ the reviewed/published projection.
 It must never use `subjectGuideRecords` or its editorial indexes.
 Explore likewise lists only the live projection and presents existing Approach
 dossiers as distinct institutional paths, not incomplete Subject Guides.
+Each directory entry labels the kind of its canonical `primarySubject`, so an
+idea or tradition is visibly distinct from a bounded case without giving the
+Subject Guide itself a canonical kind.
 Its subject search is a deterministic projection of guide labels,
 descriptions, and guide-owned `searchQueries`; it has no separate alias index.
 Fallback search requires complete normalized tokens rather than substring

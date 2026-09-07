@@ -5,6 +5,7 @@ import { buildExploreApproaches } from "../../src/lib/explore-approaches";
 import {
   auditExploreAliases,
   buildExploreDirectory,
+  markerForExploreSubject,
   matchExploreDirectory,
   normalizeExploreQuery,
   ownedExploreAliases,
@@ -26,6 +27,35 @@ function expectPlannedEconomyRouting() {
   expect(matches[0]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus ?? "guide").toBe("guide");
   expect(matches[1]?.aliases.find(({ query }) => query === "planned economy")?.resultStatus).toBe("research-gap");
 }
+
+describe("Explore subject markers", () => {
+  it("derives truthful reader-facing markers from every eligible subject kind", () => {
+    expect(markerForExploreSubject("concept")).toEqual({
+      label: "Idea or tradition",
+      glyph: "idea-definition",
+    });
+    expect(markerForExploreSubject("case")).toEqual({
+      label: "Bounded case",
+      glyph: "bounded-practice",
+    });
+
+    const directory = buildExploreDirectory(canonicalGraph.subjectGuides);
+    const markerByGuide = new Map(
+      directory.map(({ guide, marker }) => [guide.id, marker]),
+    );
+    for (const guideId of ["guide-republic", "guide-socialism"]) {
+      expect(markerByGuide.get(guideId)?.label).toBe("Idea or tradition");
+    }
+    for (const guideId of [
+      "guide-ruwalla-borderland-organization",
+      "guide-jinst-postcollective-pastoral-governance",
+      "guide-kahnawake-community-lawmaking",
+      "guide-tawantinsuyu-imperial-organization",
+    ]) {
+      expect(markerByGuide.get(guideId)?.label).toBe("Bounded case");
+    }
+  });
+});
 
 describe("learner-first Explore guide discovery", () => {
   it("builds only from the reviewed and published guide projection", () => {
