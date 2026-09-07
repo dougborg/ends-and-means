@@ -22,6 +22,7 @@ import { minangkabauEvidenceDocuments } from "./evidence/minangkabau";
 import { monarchyEvidenceDocuments } from "./evidence/monarchy";
 import { nomadicConfederatedOrganizationEvidenceDocuments } from "./evidence/nomadic-confederated-organizations";
 import { oligarchyEvidenceDocuments } from "./evidence/oligarchy";
+import { populismEvidenceDocuments } from "./evidence/populism";
 import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
@@ -49,6 +50,7 @@ import { monarchyGuideDocuments } from "./presentation/monarchy-guide";
 import { nomadicConfederatedOrganizationDossierDocuments } from "./presentation/nomadic-confederated-organizations-dossiers";
 import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/nomadic-confederated-organizations-guides";
 import { oligarchyGuideDocuments } from "./presentation/oligarchy-guide";
+import { populismGuideDocuments } from "./presentation/populism-guide";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
 import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
@@ -72,6 +74,7 @@ import { minangkabauRelationshipDocuments } from "./relationships/minangkabau";
 import { monarchyRelationshipDocuments } from "./relationships/monarchy";
 import { nomadicConfederatedOrganizationRelationshipDocuments } from "./relationships/nomadic-confederated-organizations";
 import { oligarchyRelationshipDocuments } from "./relationships/oligarchy";
+import { populismRelationshipDocuments } from "./relationships/populism";
 import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-model";
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
 import { socialOwnershipRelationshipDocuments } from "./relationships/social-ownership";
@@ -94,6 +97,7 @@ import { minangkabauResearchDocuments } from "./research/minangkabau";
 import { monarchyResearchDocuments } from "./research/monarchy";
 import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nomadic-confederated-organizations";
 import { oligarchyResearchDocuments } from "./research/oligarchy";
+import { populismResearchDocuments } from "./research/populism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { theocracyResearchDocuments } from "./research/theocracy";
@@ -133,6 +137,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyEvidenceDocuments,
   ...oligarchyEvidenceDocuments,
   ...theocracyEvidenceDocuments,
+  ...populismEvidenceDocuments,
   ...dossierDocuments,
   ...foundationalConceptDossierDocuments,
   ...feminismGuideDocuments,
@@ -164,8 +169,10 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...minangkabauResearchDocuments,
   ...monarchyResearchDocuments,
   ...oligarchyGuideDocuments,
+  ...populismGuideDocuments,
   ...oligarchyResearchDocuments,
   ...theocracyResearchDocuments,
+  ...populismResearchDocuments,
   ...collectiveCapitalFormationResearchDocuments,
   ...centralPlanningResearchDocuments,
   ...capitalismMarketResearchDocuments,
@@ -204,6 +211,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...monarchyRelationshipDocuments,
   ...oligarchyRelationshipDocuments,
   ...theocracyRelationshipDocuments,
+  ...populismRelationshipDocuments,
 ];
 
 export const canonicalDocuments: AuthoringDocument[] =

@@ -260,6 +260,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "argentina-populism-case",
+    "identityIds": [],
+    "label": "Argentina",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Argentina",
+    ],
+    "reason": "Argentina directly defines or situates Argentina; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Argentina",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "athens",
     "identityIds": [
       "Q1524",
@@ -1676,6 +1697,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "identity",
         "system": "wikidata",
         "url": "https://www.wikidata.org/wiki/Q43015",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "first-peron-governments-episode",
+    "identityIds": [],
+    "label": "Peronist formation and first governments, 1943–1955",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/History_of_Argentina_(1946–1955)",
+    ],
+    "reason": "History of Argentina (1946–1955) directly defines or situates Peronist formation and first governments, 1943–1955; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/History_of_Argentina_(1946–1955)",
       },
     ],
     "targetType": "entity",
@@ -3421,6 +3463,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "peronist-formation-1943-1955",
+    "identityIds": [],
+    "label": "Peronist formation and first governments, 1943–1955",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Peronism",
+    ],
+    "reason": "Peronism directly defines or situates Peronist formation and first governments, 1943–1955; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Peronism",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "planning-correctability",
     "identityIds": [],
     "label": "Planning correctability",
@@ -3456,6 +3519,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Economic_planning",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "populism",
+    "identityIds": [],
+    "label": "Populism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Populism",
+    ],
+    "reason": "Populism directly defines or situates Populism; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Populism",
       },
     ],
     "targetType": "entity",
@@ -4523,6 +4607,69 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "thai-rak-thai-government-2001-2006",
+    "identityIds": [],
+    "label": "Thai Rak Thai government under Thaksin, 2001–2006",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Thai_Rak_Thai_Party",
+    ],
+    "reason": "Thai Rak Thai Party directly defines or situates Thai Rak Thai government under Thaksin, 2001–2006; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Thai_Rak_Thai_Party",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "thailand-populism-case",
+    "identityIds": [],
+    "label": "Thailand",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Thailand",
+    ],
+    "reason": "Thailand directly defines or situates Thailand; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Thailand",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "thaksin-first-governments-episode",
+    "identityIds": [],
+    "label": "Thai Rak Thai government under Thaksin, 2001–2006",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Premiership_of_Thaksin_Shinawatra",
+    ],
+    "reason": "Premiership of Thaksin Shinawatra directly defines or situates Thai Rak Thai government under Thaksin, 2001–2006; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Premiership_of_Thaksin_Shinawatra",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "theocracy",
     "identityIds": [
       "Q44405",
@@ -4706,6 +4853,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "united-states-populism-case",
+    "identityIds": [],
+    "label": "United States",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/United_States",
+    ],
+    "reason": "United States directly defines or situates United States; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/United_States",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "us-controlled-materials-plan",
     "identityIds": [],
     "label": "United States Controlled Materials Plan",
@@ -4745,6 +4913,48 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "orientationUrls": [],
     "reason": "Candidate reviewed: Oligarchy; rejected because The general concept does not identify U.S. federal policy-preference study, 1981–2002: the exact proposal sample; using it would imply an unsupported country classification.",
     "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "us-peoples-party-1890-1896",
+    "identityIds": [],
+    "label": "United States People's Party, 1890–1896",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/People's_Party_(United_States)",
+    ],
+    "reason": "People's Party (United States) directly defines or situates United States People's Party, 1890–1896; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/People's_Party_(United_States)",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "us-peoples-party-platform-episode",
+    "identityIds": [],
+    "label": "United States People's Party, 1890–1896",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/People's_Party_(United_States)",
+    ],
+    "reason": "People's Party (United States) directly defines or situates United States People's Party, 1890–1896; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/People's_Party_(United_States)",
+      },
+    ],
     "targetType": "entity",
   },
   {
@@ -5183,6 +5393,69 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/War_Production_Board",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "zambia-pf-2006-campaign-episode",
+    "identityIds": [],
+    "label": "Patriotic Front opposition under Michael Sata, 2001–2008",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/2006_Zambian_general_election",
+    ],
+    "reason": "2006 Zambian general election directly defines or situates Patriotic Front opposition under Michael Sata, 2001–2008; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/2006_Zambian_general_election",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "zambia-pf-opposition-2001-2008",
+    "identityIds": [],
+    "label": "Patriotic Front opposition under Michael Sata, 2001–2008",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Patriotic_Front_(Zambia)",
+    ],
+    "reason": "Patriotic Front (Zambia) directly defines or situates Patriotic Front opposition under Michael Sata, 2001–2008; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Patriotic_Front_(Zambia)",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "zambia-populism-case",
+    "identityIds": [],
+    "label": "Zambia",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Zambia",
+    ],
+    "reason": "Zambia directly defines or situates Zambia; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Zambia",
       },
     ],
     "targetType": "entity",
@@ -6059,6 +6332,27 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "identity",
         "system": "wikidata",
         "url": "https://www.wikidata.org/wiki/Q79751",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "guide-populism",
+    "identityIds": [],
+    "label": "Populism",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Populism",
+    ],
+    "reason": "Uses the reviewed orientation-only mapping owned by populism.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Populism",
       },
     ],
     "targetType": "subject-guide",

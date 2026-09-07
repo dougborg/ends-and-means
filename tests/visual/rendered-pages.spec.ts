@@ -1645,7 +1645,7 @@ test("Explore search preserves owned meanings and explicit research gaps", async
   await expect
     .poll(() => new URL(page.url()).searchParams.has("q"))
     .toBe(false);
-  await expect(results).toHaveCount(21);
+  await expect(results).toHaveCount(22);
 });
 
 test("Explore foregrounds broad subjects and leaves bounded guides in context", async ({ page }) => {
@@ -1713,7 +1713,7 @@ test("Explore directory remains complete without JavaScript", async ({
     const page = await context.newPage();
     await gotoRenderedPage(page, "/explore/?q=communism");
     await expect(page.locator("[data-subject-result]")).toHaveCount(
-      21,
+      22,
     );
     expect(await page.locator("noscript").textContent()).toContain(
       "Use your browser's Find command",
