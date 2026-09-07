@@ -37,6 +37,74 @@ export type ReviewedOrientationDecision = {
 const baseReviewedOrientationLedger: ReviewedOrientationDecision[] = [
   {
     targetType: "entity",
+    id: "athens",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "athens-411-constitutional-change",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "athens-four-hundred-five-thousand-411-bce",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "indonesia",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "indonesia-oligarchy-debate-1998-2013",
+    disposition: "intentionally-unmatched",
+    reason:
+      "No external article identifies this project-defined 1998–2013 scholarly-debate boundary; a generic Oligarchy article would not situate it.",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "indonesia-post-new-order-power-debate",
+    disposition: "intentionally-unmatched",
+    reason:
+      "No external article matches this project-defined episode of scholarly claims; a generic Oligarchy article would obscure its Indonesian and temporal scope.",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "oligarchy",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "us-federal-policy-preferences-1981-2002",
+    disposition: "intentionally-unmatched",
+    reason:
+      "No external article matches the exact 1981–2002 federal proposal sample; a generic Oligarchy article would turn a bounded dataset into a country classification.",
+    references: [],
+  },
+  {
+    targetType: "entity",
+    id: "us-policy-responsiveness-analysis-1981-2002",
+    disposition: "intentionally-unmatched",
+    reason:
+      "No external article identifies this exact proposal-period episode independently of the later publications that analyzed it.",
+    references: [],
+  },
+  {
+    targetType: "subject-guide",
+    id: "guide-oligarchy",
+    disposition: "intentionally-unmatched",
+    references: [],
+  },
+  {
+    targetType: "entity",
     id: "accountability",
     disposition: "intentionally-unmatched",
     reason:
@@ -1931,6 +1999,20 @@ const reviewedMappingOverrides: Record<
   string,
   Omit<ReviewedOrientationDecision, "targetType" | "id">
 > = {
+  "entity:athens": mapped("Athens", "Q1524"),
+  "entity:indonesia": mapped("Indonesia", "Q252"),
+  "entity:oligarchy": mapped(
+    "Oligarchy",
+    "Q79751",
+    "exact",
+    "The candidate is the same contested concept; the project record retains explicit rival definitions and rejects inference from minority size or inequality alone.",
+  ),
+  "subject-guide:guide-oligarchy": mapped(
+    "Oligarchy",
+    "Q79751",
+    "exact",
+    "Uses the explicitly reviewed Concept mapping while preserving the guide's authored evidentiary boundaries.",
+  ),
   "entity:monarchy": mapped("Monarchy", "Q7269"),
   "entity:monarchism": mapped("Monarchism", "Q216669"),
   "entity:saudi-arabia": mapped("Saudi Arabia", "Q851"),

@@ -1,0 +1,841 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`foundational Oligarchy guide > pins every Statement, citation role, and locator in the evidence ledger 1`] = `
+[
+  {
+    "citations": [
+      {
+        "locator": "Book III, chapter 7, 1279a22–1279b10",
+        "role": "supports",
+        "sourceId": "aristotle-politics-rackham-source",
+      },
+    ],
+    "id": "oligarchy-aristotle-few-common-interest",
+    "statementKind": "definition",
+    "text": "In Rackham's translation of Aristotle's constitutional scheme, government by a few for the common interest is aristocracy, while its deviation for the rulers' advantage is oligarchy.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Book III, chapter 8, 1279b11–1280a6",
+        "role": "supports",
+        "sourceId": "aristotle-politics-rackham-source",
+      },
+    ],
+    "id": "oligarchy-aristotle-wealth-distinction",
+    "statementKind": "definition",
+    "text": "Aristotle argues that poverty and wealth distinguish democracy from oligarchy more exactly than the bare fact that many or few govern.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "book abstract and chapter 1 abstract",
+        "role": "supports",
+        "sourceId": "simonton-classical-greek-oligarchy-source",
+      },
+    ],
+    "id": "oligarchy-simonton-historical-form",
+    "statementKind": "definition",
+    "text": "Simonton describes classical Greek oligarchy as minority rule by wealthy citizens maintained through institutions that coordinated rulers and divided opponents.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "abstract, paragraphs 1–2",
+        "role": "supports",
+        "sourceId": "winters-oligarchy-encyclopedia-source",
+      },
+    ],
+    "id": "oligarchy-winters-wealth-defense",
+    "statementKind": "definition",
+    "text": "Winters defines oligarchs as actors who command concentrated material resources and directs oligarchy theory toward their wealth-defense objectives.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 731–733",
+        "role": "supports",
+        "sourceId": "page-winters-us-oligarchy-source",
+      },
+    ],
+    "id": "oligarchy-page-winters-democracy-coexistence",
+    "statementKind": "definition",
+    "text": "Page and Winters argue that democratic institutions can coexist with oligarchic power because wealthy actors need not hold office or control every political question.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 731–735",
+        "role": "supports",
+        "sourceId": "page-winters-us-oligarchy-source",
+      },
+    ],
+    "id": "oligarchy-elite-theory-distinction",
+    "statementKind": "definition",
+    "text": "Page and Winters distinguish their material account of oligarchy from elite theories concerned more broadly with leadership, organization, expertise, or control by minorities.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 1 abstract and book abstract",
+        "role": "context",
+        "sourceId": "simonton-classical-greek-oligarchy-source",
+      },
+    ],
+    "id": "oligarchy-polemic-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Calling opponents an oligarchy identifies a political allegation, not evidence that a named definition, mechanism, and bounded outcome have been established.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–9",
+        "role": "supports",
+        "sourceId": "ford-pepinsky-beyond-oligarchy-introduction-source",
+      },
+    ],
+    "id": "oligarchy-inequality-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "A distribution of wealth can identify unequal resources without establishing who used them, through which mechanism, to affect which political outcome.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 731–736",
+        "role": "supports",
+        "sourceId": "page-winters-us-oligarchy-source",
+      },
+    ],
+    "id": "oligarchy-officeholding-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Formal office, agenda control, ownership, coercion, organization, and informal access are different mechanisms and should not be inferred from one another.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 564–565 and 573–577",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+    ],
+    "id": "oligarchy-regime-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "Evidence about one institution, policy domain, period, or model cannot by itself classify an entire political order as oligarchic.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapters 29.1–29.4",
+        "role": "supports",
+        "sourceId": "aristotle-athenian-constitution-rackham-source",
+      },
+    ],
+    "id": "athens-411-war-crisis",
+    "statementKind": "observation",
+    "text": "The Athenian Constitution places the constitutional change after the Sicilian disaster and amid expectations of Persian assistance in the war.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 29.5",
+        "role": "supports",
+        "sourceId": "aristotle-athenian-constitution-rackham-source",
+      },
+    ],
+    "id": "athens-411-five-thousand-proposal",
+    "statementKind": "observation",
+    "text": "The proposed constitution entrusted government to at least five thousand Athenians judged most able to serve with person and property.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 32.1",
+        "role": "supports",
+        "sourceId": "aristotle-athenian-constitution-rackham-source",
+      },
+    ],
+    "id": "athens-411-four-hundred-actual-rule",
+    "statementKind": "observation",
+    "text": "The Athenian Constitution reports that the Five Thousand were initially only nominally selected while the Four Hundred occupied the council house and administered government.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Book VIII, chapters 65–66",
+        "role": "supports",
+        "sourceId": "thucydides-peloponnesian-war-crawley-source",
+      },
+    ],
+    "id": "athens-411-coercion",
+    "statementKind": "observation",
+    "text": "Thucydides reports that conspirators used assassinations and fear while the identities and numbers behind the movement remained uncertain to other citizens.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 33.1",
+        "role": "supports",
+        "sourceId": "aristotle-athenian-constitution-rackham-source",
+      },
+    ],
+    "id": "athens-411-four-hundred-duration",
+    "statementKind": "observation",
+    "text": "The Athenian Constitution dates the rule of the Four Hundred to approximately four months in 411 BCE.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "Book VIII, chapter 97.1–2",
+        "role": "supports",
+        "sourceId": "thucydides-peloponnesian-war-crawley-source",
+      },
+    ],
+    "id": "athens-411-five-thousand-successor",
+    "statementKind": "observation",
+    "text": "Thucydides reports that the Athenians deposed the Four Hundred and transferred affairs to the Five Thousand, defined as those able to furnish their own arms.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "chapter 1 abstract",
+        "role": "context",
+        "sourceId": "simonton-classical-greek-oligarchy-source",
+      },
+    ],
+    "id": "athens-411-source-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "The surviving narrative accounts describe institutions and actions in 411 BCE but do not supply a neutral census of participation or make later oligarchy theories interchangeable with ancient oligarchia.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 11–15",
+        "role": "supports",
+        "sourceId": "winters-indonesia-oligarchy-democracy-source",
+      },
+    ],
+    "id": "indonesia-winters-material-power",
+    "statementKind": "causal-hypothesis",
+    "text": "Winters argues that highly concentrated material resources gave wealthy actors unusually durable and versatile political power in post-1998 Indonesia.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 15–20",
+        "role": "supports",
+        "sourceId": "winters-indonesia-oligarchy-democracy-source",
+      },
+    ],
+    "id": "indonesia-winters-wealth-defense",
+    "statementKind": "causal-hypothesis",
+    "text": "Winters interprets wealth defense as a central shared objective of Indonesian oligarchs across the transition from the New Order to electoral democracy.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–9",
+        "role": "supports",
+        "sourceId": "ford-pepinsky-beyond-oligarchy-introduction-source",
+      },
+    ],
+    "id": "indonesia-democracy-coexistence",
+    "statementKind": "observation",
+    "text": "The Indonesia debate examines how electoral democracy after 1998 could coexist with continuing concentrations of material and organizational power.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 35–38 and 54–57",
+        "role": "supports",
+        "sourceId": "hadiz-robison-reorganization-power-source",
+      },
+    ],
+    "id": "indonesia-hadiz-robison-rival",
+    "statementKind": "causal-hypothesis",
+    "text": "Hadiz and Robison explain post-New Order politics through the reorganization of entrenched interests and networks rather than a simple persistence of unchanged individual oligarchs.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–9",
+        "role": "supports",
+        "sourceId": "ford-pepinsky-beyond-oligarchy-introduction-source",
+      },
+    ],
+    "id": "indonesia-beyond-oligarchy-critique",
+    "statementKind": "causal-hypothesis",
+    "text": "Ford and Pepinsky argue that an oligarchy framework can understate institutions, non-material resources, actors outside wealthy elites, and variation across Indonesian political contests.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–9",
+        "role": "supports",
+        "sourceId": "ford-pepinsky-beyond-oligarchy-introduction-source",
+      },
+    ],
+    "id": "indonesia-debate-reply",
+    "statementKind": "editorial-interpretation",
+    "text": "Contributors to the Indonesia exchange dispute which resources, organizations, and institutions explain outcomes rather than treating wealth concentration alone as a complete result.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "title, pp. 11–13",
+        "role": "context",
+        "sourceId": "winters-indonesia-oligarchy-democracy-source",
+      },
+    ],
+    "id": "indonesia-case-boundary",
+    "statementKind": "editorial-interpretation",
+    "text": "The 1998–2013 case records competing explanations of post-New Order power and does not assign Indonesia a timeless or regime-wide identity.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 564 and 568–570",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+    ],
+    "id": "us-gilens-page-dataset",
+    "statementKind": "observation",
+    "text": "Gilens and Page analyzed 1,779 United States policy proposals from 1981 through 2002 for which preference and outcome data were available.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 572–575, tables 3–4",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+    ],
+    "id": "us-gilens-page-elite-effect",
+    "statementKind": "observation",
+    "text": "In their 2014 publication, Gilens and Page reported that affluent Americans' preferences were strongly associated with outcomes in multivariate models of the 1981–2002 proposal sample after accounting for average-citizen preferences and interest-group alignments.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 572–575, tables 3–4",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+    ],
+    "id": "us-gilens-page-average-effect",
+    "statementKind": "observation",
+    "text": "In the same 2014 models of the 1981–2002 proposal sample, average citizens' preferences had little or no independent association with policy outcomes when correlated preferences and organized groups were included.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 564–566 and 576–577",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+    ],
+    "id": "us-gilens-page-not-oligarchy-test",
+    "statementKind": "editorial-interpretation",
+    "text": "Gilens and Page's 2014 article tested predictions associated with several theories of political influence using proposals dated 1981–2002; the dataset did not measure every political decision or establish a regime-wide classification.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 778–780 and 793–798",
+        "role": "supports",
+        "sourceId": "gilens-inequality-responsiveness-source",
+      },
+    ],
+    "id": "us-gilens-earlier-income-gradient",
+    "statementKind": "observation",
+    "text": "Gilens's earlier analysis found that policy responsiveness increased with income, with the largest differences under conditions where preference gaps between income groups were wide.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–6",
+        "role": "supports",
+        "sourceId": "bashir-testing-inferences-source",
+      },
+    ],
+    "id": "us-bashir-model-critique",
+    "statementKind": "causal-hypothesis",
+    "text": "In 2015, Bashir argued that correlated predictors, a dichotomous outcome, and model specification could generate an extreme contrast between affluent and average-citizen coefficients even under simulated equal influence.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 1–3",
+        "role": "supports",
+        "sourceId": "gilens-simulating-representation-source",
+      },
+    ],
+    "id": "us-gilens-simulation-reply",
+    "statementKind": "causal-hypothesis",
+    "text": "In 2016, Gilens replied that Bashir's simulation imposed preference distributions and relationships unlike the observed data, so it did not reproduce the inferential problem it claimed to demonstrate.",
+  },
+  {
+    "citations": [
+      {
+        "locator": "pp. 564–577",
+        "role": "supports",
+        "sourceId": "gilens-page-testing-theories-source",
+      },
+      {
+        "locator": "pp. 1–6",
+        "role": "qualifies",
+        "sourceId": "bashir-testing-inferences-source",
+      },
+      {
+        "locator": "pp. 1–3",
+        "role": "qualifies",
+        "sourceId": "gilens-simulating-representation-source",
+      },
+    ],
+    "id": "us-study-bounded-conclusion",
+    "statementKind": "editorial-interpretation",
+    "text": "The study and its methodological exchange support scrutiny of unequal policy responsiveness within the sampled federal proposals, not a score or verdict for the United States as a whole.",
+  },
+]
+`;
+
+exports[`foundational Oligarchy guide > pins the scoped Concept, bounded cases, open questions, and guide composition 1`] = `
+{
+  "cases": [
+    {
+      "conditionStatementIds": [
+        "athens-411-war-crisis",
+      ],
+      "description": "A bounded constitutional episode during the Peloponnesian War.",
+      "endDate": {
+        "certainty": "exact",
+        "note": "411 BCE",
+        "year": -411,
+      },
+      "episodeIds": [
+        "athens-411-constitutional-change",
+      ],
+      "externalRefs": [
+        {
+          "checkedAt": "2026-09-06",
+          "language": "en",
+          "purpose": "orientation",
+          "system": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Athenian_coup_of_411_BC",
+        },
+      ],
+      "id": "athens-four-hundred-five-thousand-411-bce",
+      "kind": "case",
+      "label": "Athens’ Four Hundred and Five Thousand, 411 BCE",
+      "locationIds": [
+        "athens",
+      ],
+      "publicationStatus": "reviewed",
+      "scope": "The overthrow, approximately four-month rule of the Four Hundred, and transfer to the Five Thousand during 411 BCE; not classical Athens as a whole.",
+      "selectionRationale": "The episode separates proposed participation, actual control, coercive practice, and constitutional succession within one named ancient setting.",
+      "startDate": {
+        "certainty": "exact",
+        "note": "411 BCE",
+        "year": -411,
+      },
+    },
+    {
+      "conditionStatementIds": [
+        "indonesia-democracy-coexistence",
+      ],
+      "description": "A bounded scholarly debate about wealth, organization, institutions, and power after the New Order.",
+      "endDate": {
+        "certainty": "exact",
+        "year": 2013,
+      },
+      "episodeIds": [
+        "indonesia-post-new-order-power-debate",
+      ],
+      "id": "indonesia-oligarchy-debate-1998-2013",
+      "kind": "case",
+      "label": "Indonesia oligarchy debate, 1998–2013",
+      "locationIds": [
+        "indonesia",
+      ],
+      "publicationStatus": "reviewed",
+      "scope": "Competing scholarly explanations of Indonesian political power from the 1998 transition through the 2013 Indonesia exchange; not a regime label.",
+      "selectionRationale": "The exchange makes rival mechanisms and the limits of transferring wealth-defense theory directly visible.",
+      "startDate": {
+        "certainty": "exact",
+        "year": 1998,
+      },
+    },
+    {
+      "conditionStatementIds": [
+        "us-gilens-page-dataset",
+      ],
+      "description": "The 1981–2002 federal proposal sample later analyzed by Gilens and Page.",
+      "endDate": {
+        "certainty": "exact",
+        "year": 2002,
+      },
+      "episodeIds": [
+        "us-policy-responsiveness-analysis-1981-2002",
+      ],
+      "id": "us-federal-policy-preferences-1981-2002",
+      "kind": "case",
+      "label": "U.S. federal policy-preference study, 1981–2002",
+      "locationIds": [
+        "united-states",
+      ],
+      "publicationStatus": "reviewed",
+      "scope": "The federal policy proposals dated 1981–2002 and the preferences and outcomes recorded for them; the 2014 analysis and 2015–2016 methodological exchange are later publications, not events inside this period.",
+      "selectionRationale": "The case distinguishes a dataset and model result from the broader labels attached to it in public discussion.",
+      "startDate": {
+        "certainty": "exact",
+        "year": 1981,
+      },
+    },
+  ],
+  "concept": {
+    "description": "A contested concept used for rule by a few, rule by the wealthy, durable minority power, and allegations that a small group dominates political decisions.",
+    "externalRefs": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q79751",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q79751",
+      },
+    ],
+    "id": "oligarchy",
+    "kind": "concept",
+    "label": "Oligarchy",
+    "publicationStatus": "reviewed",
+    "schemeIds": [
+      "political-economic-ideas",
+    ],
+    "scopeNote": "Neither inequality, wealth, elite office, a small legislature, nondemocracy, nor an unpopular governing group alone establishes oligarchy; each use needs a definition, mechanism, scope, and evidence.",
+  },
+  "guide": {
+    "description": "Oligarchy can mean rule by a few, rule by the wealthy, or a theory of durable minority power; those uses require different evidence, and neither inequality nor a powerful elite alone classifies an entire political order.",
+    "id": "guide-oligarchy",
+    "label": "Oligarchy",
+    "primarySubject": {
+      "id": "oligarchy",
+      "kind": "concept",
+    },
+    "publicationStatus": "reviewed",
+    "reviewedAt": "2026-09-06",
+    "searchQueries": [
+      {
+        "query": "oligarchy",
+      },
+      {
+        "query": "what is oligarchy",
+      },
+      {
+        "query": "rule by the few",
+      },
+      {
+        "query": "rule by the wealthy",
+      },
+      {
+        "disambiguation": "Plutocracy overlaps with wealth-centered uses of oligarchy but requires its own conceptual history and boundaries.",
+        "query": "plutocracy",
+        "resultStatus": "research-gap",
+      },
+    ],
+    "sections": [
+      {
+        "heading": "What does oligarchy mean?",
+        "id": "short-answer",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+          },
+        ],
+        "role": "short-answer",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "oligarchy",
+            "kind": "concept",
+          },
+        ],
+        "heading": "Why does one word name several claims?",
+        "id": "meanings-and-boundaries",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "meanings",
+          },
+        ],
+        "role": "meanings-and-boundaries",
+      },
+      {
+        "heading": "How could minority power operate?",
+        "id": "mechanisms",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "mechanisms",
+          },
+        ],
+        "researchObligationIds": [
+          "oligarchy-minority-delegation-boundary",
+          "oligarchy-wealth-political-conversion",
+        ],
+        "role": "institutions-and-mechanisms",
+      },
+      {
+        "heading": "Where do the theories disagree?",
+        "id": "disputes",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "indonesia",
+          },
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "united-states",
+          },
+        ],
+        "researchObligationIds": [
+          "oligarchy-wealth-defense-travel",
+          "oligarchy-us-policy-model-robustness",
+        ],
+        "role": "variants-and-disputes",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "athens-four-hundred-five-thousand-411-bce",
+            "kind": "case",
+          },
+          {
+            "id": "indonesia-oligarchy-debate-1998-2013",
+            "kind": "case",
+          },
+          {
+            "id": "us-federal-policy-preferences-1981-2002",
+            "kind": "case",
+          },
+        ],
+        "heading": "What do three bounded cases establish?",
+        "id": "bounded-practice",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "athens",
+          },
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "indonesia",
+          },
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "united-states",
+          },
+        ],
+        "role": "bounded-practice",
+      },
+      {
+        "entityRefs": [
+          {
+            "id": "democracy",
+            "kind": "concept",
+          },
+          {
+            "id": "capitalism",
+            "kind": "concept",
+          },
+          {
+            "id": "authoritarianism",
+            "kind": "concept",
+          },
+        ],
+        "heading": "What should be compared instead of scored?",
+        "id": "comparisons-and-next-steps",
+        "narrativeRefs": [
+          {
+            "dossierId": "oligarchy-dossier",
+            "sectionId": "comparisons",
+          },
+        ],
+        "role": "comparisons-and-next-steps",
+      },
+      {
+        "heading": "What remains unsettled?",
+        "id": "open-questions",
+        "researchObligationIds": [
+          "oligarchy-minority-delegation-boundary",
+          "oligarchy-wealth-political-conversion",
+          "oligarchy-wealth-defense-travel",
+          "oligarchy-ancient-translation-reception",
+          "oligarchy-us-policy-model-robustness",
+          "oligarchy-regime-label-threshold",
+        ],
+        "role": "open-questions",
+      },
+    ],
+    "slug": "oligarchy",
+  },
+  "obligations": [
+    {
+      "addressedStatementIds": [
+        "oligarchy-elite-theory-distinction",
+        "oligarchy-officeholding-boundary",
+      ],
+      "currentLimitation": "The reviewed definitions distinguish material oligarchy from broader elite theory but do not supply a cross-institutional threshold for authorization, contestability, or revocation.",
+      "description": "A focused boundary between domination and authorized specialist decision-making.",
+      "evidenceNeeded": "Comparative studies that measure mandate, transparency, removal, agenda control, expertise, and affected-party contestation in named institutions.",
+      "id": "oligarchy-minority-delegation-boundary",
+      "kind": "research-obligation",
+      "label": "Minority power, delegation, and expertise",
+      "obligationStatus": "open",
+      "obligationType": "research-gap",
+      "publicationStatus": "reviewed",
+      "question": "When does durable minority control become domination rather than revocable delegation, representation, or specialist authority?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Specified governing and organizational institutions; no assumption that every small decision-making body is oligarchic.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "oligarchy-winters-wealth-defense",
+        "oligarchy-inequality-boundary",
+        "indonesia-winters-material-power",
+        "us-gilens-page-elite-effect",
+      ],
+      "currentLimitation": "Resource concentration and preference–outcome associations do not independently identify lobbying, ownership, agenda control, candidate selection, coercion, or another causal channel.",
+      "description": "A causal question about mechanisms connecting resources to decisions.",
+      "evidenceNeeded": "Mechanism-specific designs using interventions, process tracing, disclosure records, institutional discontinuities, or credible counterfactual comparisons.",
+      "id": "oligarchy-wealth-political-conversion",
+      "kind": "research-obligation",
+      "label": "Conversion of wealth into political power",
+      "obligationStatus": "open",
+      "obligationType": "counterfactual",
+      "publicationStatus": "reviewed",
+      "question": "Through which mechanisms does concentrated wealth change political outcomes compared with otherwise similar decisions lacking that intervention?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Named policy domains, actors, places, and periods rather than a universal wealth-to-power coefficient.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "indonesia-winters-wealth-defense",
+        "indonesia-hadiz-robison-rival",
+        "indonesia-beyond-oligarchy-critique",
+        "indonesia-debate-reply",
+      ],
+      "currentLimitation": "The Indonesia exchange identifies rival resources and institutions but does not establish a general domain of applicability for the material account.",
+      "description": "A focused test of whether one material theory transfers across political settings.",
+      "evidenceNeeded": "Comparable within- and cross-case studies that observe wealth-defense behavior, organization, legal constraint, coercive capacity, and rival power resources.",
+      "id": "oligarchy-wealth-defense-travel",
+      "kind": "research-obligation",
+      "label": "Travel of wealth-defense theory",
+      "obligationStatus": "open",
+      "obligationType": "counterargument",
+      "publicationStatus": "reviewed",
+      "question": "Which legal, organizational, coercive, and economic conditions must hold before wealth-defense theory can travel beyond the settings from which it was developed?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Bounded comparisons that preserve each setting's institutions and period; no country-level essence.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+      "targetSectionId": "indonesia",
+    },
+    {
+      "addressedStatementIds": [
+        "oligarchy-aristotle-few-common-interest",
+        "oligarchy-aristotle-wealth-distinction",
+        "athens-411-source-boundary",
+      ],
+      "currentLimitation": "Two English translations and one modern history cannot establish the range, self-description, hostile usage, and reception of oligarchia across ancient evidence.",
+      "description": "A philological and reception-history question about an ancient term's changing use.",
+      "evidenceNeeded": "Greek texts with named editions and translators, inscriptions where available, source-critical histories, and reception studies with precise lexical locators.",
+      "id": "oligarchy-ancient-translation-reception",
+      "kind": "research-obligation",
+      "label": "Translation and reception of oligarchia",
+      "obligationStatus": "open",
+      "obligationType": "research-gap",
+      "publicationStatus": "reviewed",
+      "question": "How did ancient uses of oligarchia vary across authors and poleis, and how have translators and later political writers changed its apparent boundaries?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Named ancient texts, poleis, and later receptions; no direct equivalence between an ancient constitutional term and modern regime labels.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+    },
+    {
+      "addressedStatementIds": [
+        "us-gilens-page-elite-effect",
+        "us-gilens-page-average-effect",
+        "us-bashir-model-critique",
+        "us-gilens-simulation-reply",
+        "us-study-bounded-conclusion",
+      ],
+      "currentLimitation": "The critique and reply dispute a simulation and model behavior without settling external validity across other samples, measures, periods, or decision venues.",
+      "description": "A focused methodological question prompted by a published critique and reply.",
+      "evidenceNeeded": "Replications using preregistered specifications, alternative outcome definitions, later periods, subnational decisions, agenda non-decisions, and direct mechanism evidence.",
+      "id": "oligarchy-us-policy-model-robustness",
+      "kind": "research-obligation",
+      "label": "Robustness of United States policy-influence models",
+      "obligationStatus": "open",
+      "obligationType": "counterevidence",
+      "publicationStatus": "reviewed",
+      "question": "Do alternative measurements, specifications, time periods, and policy samples reproduce the unequal-responsiveness pattern in the 1981–2002 federal proposal dataset?",
+      "reviewedAt": "2026-09-06",
+      "scope": "United States policy responsiveness in defined datasets and periods; not a national regime classification.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+      "targetSectionId": "united-states",
+    },
+    {
+      "addressedStatementIds": [
+        "oligarchy-regime-boundary",
+        "indonesia-case-boundary",
+        "us-gilens-page-not-oligarchy-test",
+        "us-study-bounded-conclusion",
+      ],
+      "currentLimitation": "The reviewed materials use different units and thresholds and do not supply one validated rule for regime-wide classification.",
+      "description": "A focused question about escalation from a demonstrated mechanism to a whole-order classification.",
+      "evidenceNeeded": "Explicit classification rules tested against multiple decision domains, institutions, periods, rival explanations, and cases of both presence and absence.",
+      "id": "oligarchy-regime-label-threshold",
+      "kind": "research-obligation",
+      "label": "Bounded mechanism versus regime label",
+      "obligationStatus": "open",
+      "obligationType": "counterargument",
+      "publicationStatus": "reviewed",
+      "question": "What additional evidence would justify moving from a bounded finding of minority influence to an oligarchy classification for a political order?",
+      "reviewedAt": "2026-09-06",
+      "scope": "Analytical classifications under named definitions; no universal score or automatic inference from a single outcome.",
+      "statementIds": [],
+      "target": {
+        "id": "oligarchy",
+        "kind": "concept",
+      },
+    },
+  ],
+}
+`;

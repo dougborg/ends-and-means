@@ -13,6 +13,11 @@ export const reviewedOrientationLabels = {
   "entity:anarchist-traditions": "Anarchist traditions",
   "entity:anarcho-syndicalism": "Anarcho-syndicalism",
   "entity:anarcho-syndicalist-organizing": "Anarcho-syndicalist organizing",
+  "entity:athens": "Athens",
+  "entity:athens-411-constitutional-change":
+    "Athenian constitutional change, 411 BCE",
+  "entity:athens-four-hundred-five-thousand-411-bce":
+    "Athens’ Four Hundred and Five Thousand, 411 BCE",
   "entity:andes-tawantinsuyu": "Tawantinsuyu",
   "entity:authoritarianism": "Authoritarianism",
   "entity:authority-and-accountability": "Authority and accountability",
@@ -90,6 +95,11 @@ export const reviewedOrientationLabels = {
     "Indian constitutional-rights drafting and commencement",
   "entity:india-constitutional-rights-settlement-1946-1950":
     "India's constitutional-rights settlement, 1946–1950",
+  "entity:indonesia": "Indonesia",
+  "entity:indonesia-oligarchy-debate-1998-2013":
+    "Indonesia oligarchy debate, 1998–2013",
+  "entity:indonesia-post-new-order-power-debate":
+    "Post-New Order power debate, 1998–2013",
   "entity:indigenous-autonomy": "Indigenous autonomy",
   "entity:institutional-abolition": "Institutional abolition",
   "entity:institutional-formation": "Institutional formation",
@@ -146,6 +156,7 @@ export const reviewedOrientationLabels = {
   "entity:neo-republican-nondomination": "Neo-republican non-domination",
   "entity:nontransferable-parental-leave":
     "Non-transferable paid parental leave",
+  "entity:oligarchy": "Oligarchy",
   "entity:planning-correctability": "Planning correctability",
   "entity:planning-information-and-coordination":
     "Planning information and coordination",
@@ -218,6 +229,10 @@ export const reviewedOrientationLabels = {
   "entity:united-states": "United States",
   "entity:us-controlled-materials-plan":
     "United States Controlled Materials Plan",
+  "entity:us-federal-policy-preferences-1981-2002":
+    "U.S. federal policy-preference study, 1981–2002",
+  "entity:us-policy-responsiveness-analysis-1981-2002":
+    "Federal policy-responsiveness analysis, 1981–2002",
   "entity:us-wartime-production-mobilization":
     "United States controlled-materials allocation",
   "entity:wage-earner-fund-board-abolition":
@@ -275,6 +290,7 @@ export const reviewedOrientationLabels = {
   "subject-guide:guide-republic": "Republic",
   "subject-guide:guide-ruwalla-borderland-organization":
     "Ruwalla organization across post-Ottoman borders",
+  "subject-guide:guide-oligarchy": "Oligarchy",
   "subject-guide:guide-socialism": "Socialism",
   "subject-guide:guide-tawantinsuyu-imperial-organization":
     "Tawantinsuyu (Inka Empire)",
