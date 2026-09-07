@@ -75,6 +75,7 @@ export const theocracyResearchDocuments = [
       addressedStatementIds: [
         "vatican-pope-sovereign",
         "vatican-legislative-commission",
+        "vatican-commission-amendment",
         "vatican-executive-governorate",
         "vatican-judicial-name",
         "vatican-delegation-boundary",

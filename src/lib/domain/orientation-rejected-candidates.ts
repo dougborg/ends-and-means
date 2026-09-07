@@ -682,6 +682,12 @@ const allReviewedRejectedOrientationCandidates = {
     boundary:
       "Politics of Vatican City was the nearest candidate opened, but it does not identify Vatican City under the 2023 Fundamental Law, this evidence-bounded Case.",
   },
+  "entity:vatican-commission-membership-amended-2025": {
+    title: "Fundamental Law of Vatican City State",
+    url: "https://en.wikipedia.org/wiki/Fundamental_Law_of_Vatican_City_State",
+    boundary:
+      "Fundamental Law of Vatican City State was the nearest candidate opened, but it identifies the law rather than Vatican commission membership rule amended, the 19 November 2025 amendment Event.",
+  },
   "entity:vatican-post-2023-fundamental-law-episode": {
     title: "Fundamental Law of Vatican City State",
     url: "https://en.wikipedia.org/wiki/Fundamental_Law_of_Vatican_City_State",

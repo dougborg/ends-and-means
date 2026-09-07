@@ -2387,6 +2387,7 @@ Hereditary, elective, rotational, designated, and disputed succession must be di
       "statementIds": [
         "vatican-classification-qualified",
         "holy-see-vatican-distinct",
+        "vatican-commission-amendment",
       ],
       "status": "qualified",
       "subject": {
@@ -2396,7 +2397,7 @@ Hereditary, elective, rotational, designated, and disputed succession must be di
     },
     {
       "id": "theocracy-sacred-monarchy-boundary-cites-6",
-      "locator": "pp. 1–2, divine rule and human institutions",
+      "locator": "pp. 342–343, divine rule and human institutions",
       "object": {
         "id": "huzakai-theocracy-source",
         "kind": "source",

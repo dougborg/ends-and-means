@@ -1,17 +1,20 @@
-import type { AuthoringDocument, DomainRelationship } from "../../../src/lib/domain";
+import type {
+  AuthoringDocument,
+  DomainRelationship,
+} from "../../../src/lib/domain";
 
 type Role = "supports" | "qualifies" | "context" | "challenges";
 const rows: [string, string, string, Role][] = [
   [
     "theocracy-contested-family",
     "huzakai-theocracy-source",
-    "pp. 1–2, historical meanings and modern forms",
+    "pp. 342–343, historical meanings and modern forms",
     "supports",
   ],
   [
     "theocracy-hierocracy-boundary",
     "huzakai-theocracy-source",
-    "pp. 1–2, divine rule and priestly rule",
+    "pp. 342–343, divine rule and priestly rule",
     "supports",
   ],
   [
@@ -29,13 +32,13 @@ const rows: [string, string, string, Role][] = [
   [
     "theocracy-influence-boundary",
     "huzakai-theocracy-source",
-    "p. 2, institutional forms",
+    "p. 343, institutional forms",
     "qualifies",
   ],
   [
     "theocracy-sacred-monarchy-boundary",
     "huzakai-theocracy-source",
-    "pp. 1–2, divine rule and human institutions",
+    "pp. 342–343, divine rule and human institutions",
     "qualifies",
   ],
   [
@@ -47,7 +50,7 @@ const rows: [string, string, string, Role][] = [
   [
     "theocracy-polemical-label-boundary",
     "huzakai-theocracy-source",
-    "p. 1, conceptual history",
+    "p. 342, conceptual history",
     "context",
   ],
   [
@@ -118,14 +121,8 @@ const rows: [string, string, string, Role][] = [
   ],
   [
     "iran-hybrid-rival-reading",
-    "schirazi-constitution-iran-source",
-    "pp. 1–12 and 293–310",
-    "supports",
-  ],
-  [
-    "iran-hybrid-rival-reading",
     "iranica-iran-constitution-source",
-    "sections on sovereignty, institutions, and contradictions",
+    "sections ‘The Islamic character of the Constitution’ and ‘Constitutional conflicts and amendments,’ especially discussion of articles 56–61 and institutional conflict",
     "supports",
   ],
   [
@@ -149,7 +146,13 @@ const rows: [string, string, string, Role][] = [
   [
     "vatican-legislative-commission",
     "vatican-fundamental-law-2023-source",
-    "articles 7–8",
+    "articles 7–8 as promulgated 13 May 2023",
+    "supports",
+  ],
+  [
+    "vatican-commission-amendment",
+    "vatican-commission-amendment-2025-source",
+    "paragraph 1 and entry-into-force clause",
     "supports",
   ],
   [
@@ -249,6 +252,7 @@ const relationships: DomainRelationship[] = [
     statementIds: [
       "vatican-classification-qualified",
       "holy-see-vatican-distinct",
+      "vatican-commission-amendment",
     ],
   },
   {
@@ -301,7 +305,7 @@ const relationships: DomainRelationship[] = [
     },
     basis: "declared-design" as const,
     uncertainty:
-      "High confidence in ultimate authority under the 2023 law; ordinary delegated practice and the distinct international personality of the Holy See remain outside this placement.",
+      "High confidence in ultimate authority under the 2023 law as amended through 19 November 2025; ordinary delegated practice and the distinct international personality of the Holy See remain outside this placement.",
     scope: {
       startDate: "2023-06-07",
       endDate: "2026-09-07",
@@ -311,6 +315,7 @@ const relationships: DomainRelationship[] = [
     status: "qualified" as const,
     statementIds: [
       "vatican-pope-sovereign",
+      "vatican-commission-amendment",
       "pope-religious-state-office",
       "vatican-delegation-boundary",
       "vatican-classification-qualified",
@@ -329,5 +334,9 @@ export const theocracyRelationshipDocuments: AuthoringDocument[] = [
 ].map((group) => {
   const first = group[0];
   if (!first) throw new Error("Empty Theocracy relationship group");
-  return { documentType: "relationships", subject: first.subject, relationships: group };
+  return {
+    documentType: "relationships",
+    subject: first.subject,
+    relationships: group,
+  };
 });

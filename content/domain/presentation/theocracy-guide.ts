@@ -74,6 +74,7 @@ const dossier = attachNarrative("theocracy.md", {
       statementIds: [
         "vatican-pope-sovereign",
         "vatican-legislative-commission",
+        "vatican-commission-amendment",
         "vatican-executive-governorate",
         "vatican-judicial-name",
         "holy-see-vatican-distinct",

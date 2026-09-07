@@ -4847,6 +4847,29 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [
       {
+        "boundary": "Fundamental Law of Vatican City State was the nearest candidate opened, but it identifies the law rather than Vatican commission membership rule amended, the 19 November 2025 amendment Event.",
+        "resolution": {
+          "canonicalArticleTitle": "Fundamental Law of Vatican City State",
+          "canonicalArticleUrl": "https://en.wikipedia.org/wiki/Fundamental_Law_of_Vatican_City_State",
+          "checkedAt": "2026-09-06",
+          "pageKind": "article",
+        },
+        "title": "Fundamental Law of Vatican City State",
+        "url": "https://en.wikipedia.org/wiki/Fundamental_Law_of_Vatican_City_State",
+      },
+    ],
+    "disposition": "intentionally-unmatched",
+    "id": "vatican-commission-membership-amended-2025",
+    "identityIds": [],
+    "label": "Vatican commission membership rule amended",
+    "orientationUrls": [],
+    "reason": "Candidate reviewed: Fundamental Law of Vatican City State; rejected because Fundamental Law of Vatican City State was the nearest candidate opened, but it identifies the law rather than Vatican commission membership rule amended, the 19 November 2025 amendment Event.",
+    "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [
+      {
         "boundary": "Fundamental Law of Vatican City State was the nearest candidate opened, but it identifies the law rather than Vatican authority under the 2023 Fundamental Law, this ongoing Case Episode.",
         "resolution": {
           "canonicalArticleTitle": "Fundamental Law of Vatican City State",

@@ -32,6 +32,7 @@ const statements = [
   "iran-classification-qualified",
   "vatican-pope-sovereign",
   "vatican-legislative-commission",
+  "vatican-commission-amendment",
   "vatican-executive-governorate",
   "vatican-judicial-name",
   "holy-see-vatican-distinct",
@@ -82,9 +83,11 @@ describe("foundational Theocracy guide", () => {
           id,
           statementKind: record.statementKind,
           text: record.text,
-          citations: citationsFor(id).map(
-            ({ object, role, locator }) => ({ sourceId: object.id, role, locator }),
-          ),
+          citations: citationsFor(id).map(({ object, role, locator }) => ({
+            sourceId: object.id,
+            role,
+            locator,
+          })),
         };
       }),
     ).toMatchSnapshot();
@@ -127,6 +130,27 @@ describe("Theocracy model boundaries", () => {
       "case-episode",
       "case-episode",
     ]);
+  });
+
+  it("versions Vatican's amended formal rule without claiming rules in use", () => {
+    const vaticanCase = entityById("vatican-city-authority-2023-present");
+    const vaticanEpisode = entityById(
+      "vatican-post-2023-fundamental-law-episode",
+    );
+    const iranEpisode = entityById("iran-post-1989-constitutional-episode");
+    expect(vaticanCase?.kind).toBe("case");
+    expect(
+      vaticanCase?.kind === "case" && vaticanCase.materialChangeEventIds,
+    ).toEqual(["vatican-commission-membership-amended-2025"]);
+    expect(vaticanEpisode?.kind).toBe("case-episode");
+    expect(
+      vaticanEpisode?.kind === "case-episode" &&
+        vaticanEpisode.ruleInUseStatementIds,
+    ).toEqual([]);
+    expect(iranEpisode?.kind).toBe("case-episode");
+    expect(
+      iranEpisode?.kind === "case-episode" && iranEpisode.ruleInUseStatementIds,
+    ).toEqual([]);
   });
 
   it("rejects a placement whose subject is widened from an episode to the Concept", () => {

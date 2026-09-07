@@ -16,11 +16,12 @@ Theocracy and authoritarianism can overlap, but they identify different institut
 
 Iran's amended Constitution assigns public affairs to elections and separates legislative, executive, and judicial branches, yet subjects all law to Islamic criteria and places the branches under the Leader's supervision.
 The Guardian Council reviews legislation and supervises elections; the Assembly of Experts selects the Leader; and the Leader holds enumerated policy, military, appointment, and presidential powers.
-Schirazi treats the resulting order as conflict between Islamic and republican elements, which supports a qualified hybrid classification rather than a claim about Islam, Shi'a traditions, or Iranian society.
+Schirazi's institutional account identifies tensions among popular participation, separate state institutions, and clerical supervisory authority, which supports a qualified hybrid classification rather than a claim about Islam, Shi'a traditions, or Iranian society.
 
 ## vatican
 
 The 2023 Fundamental Law vests ultimate legislative, executive, and judicial power in the Pope as sovereign while assigning ordinary functions to a legislative commission, the Governorate, and judicial organs.
+As enacted, Article 8 limited the commission to a Cardinal President and other Cardinals; Leo XIV replaced that paragraph in November 2025 with a rule providing for the Cardinal and other members, including the President, all appointed by the Pope for five-year terms.
 The Pope's Catholic office and state sovereignty are joined in one officeholder, but Vatican City remains institutionally distinct from the Holy See.
 This supports a papal-theocracy classification of the state's formal design, not of Catholic people or Christianity, and it does not establish how every delegated power operates in practice.
 
