@@ -38,6 +38,7 @@ describe("canonical vertical slice", () => {
       "us-wartime-production-mobilization",
     ]);
     expect(entitiesOfKind("case").map(({ id }) => id)).toEqual([
+      "athens-four-hundred-five-thousand-411-bce",
       "bonjol-melayu-ulayat-governance",
       "china-dual-track-market-reforms",
       "combahee-river-collective-1974-1980",
@@ -45,6 +46,7 @@ describe("canonical vertical slice", () => {
       "gold-coast-cocoa-expansion",
       "iceland-parental-leave-2000-2018",
       "india-constitutional-rights-settlement-1946-1950",
+      "indonesia-oligarchy-debate-1998-2013",
       "italian-fascist-dictatorship-1925-1943",
       "japan-constitutional-rights-settlement-1946-1947",
       "japan-symbolic-emperorship-1947-2004",
@@ -63,6 +65,7 @@ describe("canonical vertical slice", () => {
       "tawantinsuyu-imperial-organization",
       "tonga-constitutional-settlement-2010-2013",
       "us-controlled-materials-plan",
+      "us-federal-policy-preferences-1981-2002",
       "zapatista-autonomy-chiapas-1994-present",
     ]);
   });

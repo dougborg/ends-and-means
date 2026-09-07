@@ -260,6 +260,78 @@ exports[`orientation audit > inventories every live guide and canonical entity >
   {
     "consideredCandidates": [],
     "disposition": "mapped",
+    "id": "athens",
+    "identityIds": [
+      "Q1524",
+    ],
+    "label": "Athens",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Athens",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Athens",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q1524",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q1524",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "athens-411-constitutional-change",
+    "identityIds": [],
+    "label": "Athenian constitutional change, 411 BCE",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Athenian_coup_of_411_BC",
+    ],
+    "reason": "Athenian coup of 411 BC directly defines or situates Athenian constitutional change, 411 BCE; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Athenian_coup_of_411_BC",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "athens-four-hundred-five-thousand-411-bce",
+    "identityIds": [],
+    "label": "Athens’ Four Hundred and Five Thousand, 411 BCE",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Athenian_coup_of_411_BC",
+    ],
+    "reason": "Athenian coup of 411 BC directly defines or situates Athens’ Four Hundred and Five Thousand, 411 BCE; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Athenian_coup_of_411_BC",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
     "id": "authoritarianism",
     "identityIds": [
       "Q6229",
@@ -1734,6 +1806,82 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "targetType": "entity",
   },
   {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "indonesia",
+    "identityIds": [
+      "Q252",
+    ],
+    "label": "Indonesia",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Indonesia",
+    ],
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Indonesia",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q252",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q252",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [
+      {
+        "boundary": "The general concept does not identify Indonesia oligarchy debate, 1998–2013: the project-defined scholarly-debate boundary.",
+        "resolution": {
+          "canonicalArticleTitle": "Oligarchy",
+          "canonicalArticleUrl": "https://en.wikipedia.org/wiki/Oligarchy",
+          "checkedAt": "2026-09-06",
+          "pageKind": "article",
+        },
+        "title": "Oligarchy",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+    ],
+    "disposition": "intentionally-unmatched",
+    "id": "indonesia-oligarchy-debate-1998-2013",
+    "identityIds": [],
+    "label": "Indonesia oligarchy debate, 1998–2013",
+    "orientationUrls": [],
+    "reason": "Candidate reviewed: Oligarchy; rejected because The general concept does not identify Indonesia oligarchy debate, 1998–2013: the project-defined scholarly-debate boundary.",
+    "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [
+      {
+        "boundary": "The general concept does not identify Post-New Order power debate, 1998–2013: this episode of rival claims about Indonesian power.",
+        "resolution": {
+          "canonicalArticleTitle": "Oligarchy",
+          "canonicalArticleUrl": "https://en.wikipedia.org/wiki/Oligarchy",
+          "checkedAt": "2026-09-06",
+          "pageKind": "article",
+        },
+        "title": "Oligarchy",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+    ],
+    "disposition": "intentionally-unmatched",
+    "id": "indonesia-post-new-order-power-debate",
+    "identityIds": [],
+    "label": "Post-New Order power debate, 1998–2013",
+    "orientationUrls": [],
+    "reason": "Candidate reviewed: Oligarchy; rejected because The general concept does not identify Post-New Order power debate, 1998–2013: this episode of rival claims about Indonesian power.",
+    "references": [],
+    "targetType": "entity",
+  },
+  {
     "consideredCandidates": [
       {
         "boundary": "Abolitionism was the nearest canonical candidate opened, but it is not the same identity as Institutional abolition: The legal termination of an institution or governing body.",
@@ -2750,6 +2898,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "orientation",
         "system": "wikipedia",
         "url": "https://en.wikipedia.org/wiki/Parental_leave",
+      },
+    ],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "oligarchy",
+    "identityIds": [
+      "Q79751",
+    ],
+    "label": "Oligarchy",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Oligarchy",
+    ],
+    "reason": "The candidate is the same contested concept; the project record retains explicit rival definitions and rejects inference from minority size or inequality alone.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q79751",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q79751",
       },
     ],
     "targetType": "entity",
@@ -3996,6 +4175,52 @@ exports[`orientation audit > inventories every live guide and canonical entity >
     "targetType": "entity",
   },
   {
+    "consideredCandidates": [
+      {
+        "boundary": "The general concept does not identify U.S. federal policy-preference study, 1981–2002: the exact proposal sample; using it would imply an unsupported country classification.",
+        "resolution": {
+          "canonicalArticleTitle": "Oligarchy",
+          "canonicalArticleUrl": "https://en.wikipedia.org/wiki/Oligarchy",
+          "checkedAt": "2026-09-06",
+          "pageKind": "article",
+        },
+        "title": "Oligarchy",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+    ],
+    "disposition": "intentionally-unmatched",
+    "id": "us-federal-policy-preferences-1981-2002",
+    "identityIds": [],
+    "label": "U.S. federal policy-preference study, 1981–2002",
+    "orientationUrls": [],
+    "reason": "Candidate reviewed: Oligarchy; rejected because The general concept does not identify U.S. federal policy-preference study, 1981–2002: the exact proposal sample; using it would imply an unsupported country classification.",
+    "references": [],
+    "targetType": "entity",
+  },
+  {
+    "consideredCandidates": [
+      {
+        "boundary": "The general concept does not identify Federal policy-responsiveness analysis, 1981–2002: the proposal-period episode, or distinguish it from the later analysis and methodological exchange.",
+        "resolution": {
+          "canonicalArticleTitle": "Oligarchy",
+          "canonicalArticleUrl": "https://en.wikipedia.org/wiki/Oligarchy",
+          "checkedAt": "2026-09-06",
+          "pageKind": "article",
+        },
+        "title": "Oligarchy",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+    ],
+    "disposition": "intentionally-unmatched",
+    "id": "us-policy-responsiveness-analysis-1981-2002",
+    "identityIds": [],
+    "label": "Federal policy-responsiveness analysis, 1981–2002",
+    "orientationUrls": [],
+    "reason": "Candidate reviewed: Oligarchy; rejected because The general concept does not identify Federal policy-responsiveness analysis, 1981–2002: the proposal-period episode, or distinguish it from the later analysis and methodological exchange.",
+    "references": [],
+    "targetType": "entity",
+  },
+  {
     "consideredCandidates": [],
     "disposition": "mapped",
     "id": "us-wartime-production-mobilization",
@@ -4928,6 +5153,37 @@ exports[`orientation audit > inventories every live guide and canonical entity >
         "purpose": "identity",
         "system": "wikidata",
         "url": "https://www.wikidata.org/wiki/Q7269",
+      },
+    ],
+    "targetType": "subject-guide",
+  },
+  {
+    "consideredCandidates": [],
+    "disposition": "mapped",
+    "id": "guide-oligarchy",
+    "identityIds": [
+      "Q79751",
+    ],
+    "label": "Oligarchy",
+    "orientationUrls": [
+      "https://en.wikipedia.org/wiki/Oligarchy",
+    ],
+    "reason": "Uses the explicitly reviewed Concept mapping while preserving the guide's authored evidentiary boundaries.",
+    "references": [
+      {
+        "checkedAt": "2026-09-06",
+        "language": "en",
+        "purpose": "orientation",
+        "system": "wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Oligarchy",
+      },
+      {
+        "checkedAt": "2026-09-06",
+        "id": "Q79751",
+        "match": "exact",
+        "purpose": "identity",
+        "system": "wikidata",
+        "url": "https://www.wikidata.org/wiki/Q79751",
       },
     ],
     "targetType": "subject-guide",

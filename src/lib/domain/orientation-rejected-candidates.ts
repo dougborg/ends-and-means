@@ -4,6 +4,30 @@ import {
 } from "./orientation-only-mappings";
 
 const allReviewedRejectedOrientationCandidates = {
+  "entity:indonesia-oligarchy-debate-1998-2013": {
+    title: "Oligarchy",
+    url: "https://en.wikipedia.org/wiki/Oligarchy",
+    boundary:
+      "The general concept does not identify Indonesia oligarchy debate, 1998–2013: the project-defined scholarly-debate boundary.",
+  },
+  "entity:indonesia-post-new-order-power-debate": {
+    title: "Oligarchy",
+    url: "https://en.wikipedia.org/wiki/Oligarchy",
+    boundary:
+      "The general concept does not identify Post-New Order power debate, 1998–2013: this episode of rival claims about Indonesian power.",
+  },
+  "entity:us-federal-policy-preferences-1981-2002": {
+    title: "Oligarchy",
+    url: "https://en.wikipedia.org/wiki/Oligarchy",
+    boundary:
+      "The general concept does not identify U.S. federal policy-preference study, 1981–2002: the exact proposal sample; using it would imply an unsupported country classification.",
+  },
+  "entity:us-policy-responsiveness-analysis-1981-2002": {
+    title: "Oligarchy",
+    url: "https://en.wikipedia.org/wiki/Oligarchy",
+    boundary:
+      "The general concept does not identify Federal policy-responsiveness analysis, 1981–2002: the proposal-period episode, or distinguish it from the later analysis and methodological exchange.",
+  },
   "entity:executive-dynastic-monarchy": {
     title: "Absolute monarchy",
     url: "https://en.wikipedia.org/wiki/Absolute_monarchy",

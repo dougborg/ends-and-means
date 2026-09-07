@@ -110,6 +110,7 @@ const liveGuideIds = [
   "guide-market-economy",
   "guide-matriliny-property-authority",
   "guide-monarchy",
+  "guide-oligarchy",
   "guide-republic",
   "guide-ruwalla-borderland-organization",
   "guide-socialism",
@@ -158,8 +159,8 @@ describe("SubjectGuide content attention", () => {
   it("reports live SubjectGuide coverage in the content attention audit", () => {
     const report = auditContent(canonicalGraph);
     expect(report.subjectGuides).toEqual({
-      live: 21,
-      total: 21,
+      live: 22,
+      total: 22,
       liveIds: liveGuideIds,
     });
   });
@@ -176,7 +177,7 @@ describe("compiled SubjectGuide publication boundaries", () => {
 
       const graph = compileDomainGraph(documents);
       expect(subjectGuideRecordById(guide.id, graph)).toBe(guide);
-      expect(graph.subjectGuideRecords).toHaveLength(21);
+      expect(graph.subjectGuideRecords).toHaveLength(22);
       expect(graph.subjectGuides.map(({ id }) => id)).toEqual(
         liveGuideIds.filter((id) => id !== guide.id),
       );

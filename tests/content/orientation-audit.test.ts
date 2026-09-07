@@ -21,18 +21,18 @@ describe("orientation audit", () => {
         ["reviewed", "published"].includes(publicationStatus),
       ).length;
     expect(inventory).toHaveLength(expectedCount);
-    expect(inventory).toHaveLength(1107);
+    expect(inventory).toHaveLength(1182);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(188);
+    ).toHaveLength(194);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
       ),
-    ).toHaveLength(19);
+    ).toHaveLength(23);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
-    ).toHaveLength(900);
+    ).toHaveLength(965);
     expect(
       inventory.filter(({ disposition }) => disposition !== "not-applicable"),
     ).toMatchSnapshot("eligible-target-decisions");
@@ -64,6 +64,23 @@ describe("orientation audit", () => {
         }),
       ]),
     );
+    expect(inventory.find(({ id }) => id === "oligarchy")).toMatchObject({
+      disposition: "mapped",
+      orientationUrls: ["https://en.wikipedia.org/wiki/Oligarchy"],
+      identityIds: ["Q79751"],
+    });
+    for (const id of [
+      "indonesia-oligarchy-debate-1998-2013",
+      "indonesia-post-new-order-power-debate",
+      "us-federal-policy-preferences-1981-2002",
+      "us-policy-responsiveness-analysis-1981-2002",
+    ]) {
+      expect(inventory.find((candidate) => candidate.id === id)).toMatchObject({
+        disposition: "intentionally-unmatched",
+        orientationUrls: [],
+        identityIds: [],
+      });
+    }
   });
 });
 

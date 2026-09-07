@@ -5,6 +5,8 @@ export const reviewedOrientationOnlyMappings = {
   "affected-community-accountability": "Accountability",
   "anarchist-traditions": "Anarchism",
   "anarcho-syndicalist-organizing": "Anarcho-syndicalism",
+  "athens-411-constitutional-change": "Athenian coup of 411 BC",
+  "athens-four-hundred-five-thousand-411-bce": "Athenian coup of 411 BC",
   "andes-tawantinsuyu": "Inca Empire",
   "bonjol-melayu-ulayat-governance": "Minangkabau people",
   "bonjol-ulayat-governance-2000-2016": "Minangkabau people",

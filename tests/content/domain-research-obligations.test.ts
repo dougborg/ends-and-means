@@ -650,6 +650,42 @@ const expectedOpenResearchObligations = [
     status: "open",
   },
   {
+    id: "oligarchy-ancient-translation-reception",
+    obligationType: "research-gap",
+    target: "concept:oligarchy",
+    status: "open",
+  },
+  {
+    id: "oligarchy-minority-delegation-boundary",
+    obligationType: "research-gap",
+    target: "concept:oligarchy",
+    status: "open",
+  },
+  {
+    id: "oligarchy-regime-label-threshold",
+    obligationType: "counterargument",
+    target: "concept:oligarchy",
+    status: "open",
+  },
+  {
+    id: "oligarchy-us-policy-model-robustness",
+    obligationType: "counterevidence",
+    target: "concept:oligarchy#united-states",
+    status: "open",
+  },
+  {
+    id: "oligarchy-wealth-defense-travel",
+    obligationType: "counterargument",
+    target: "concept:oligarchy#indonesia",
+    status: "open",
+  },
+  {
+    id: "oligarchy-wealth-political-conversion",
+    obligationType: "counterfactual",
+    target: "concept:oligarchy",
+    status: "open",
+  },
+  {
     id: "republic-self-description-exclusion-boundary",
     obligationType: "counterargument",
     target: "concept:republic#disputes",
