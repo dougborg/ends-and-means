@@ -101,9 +101,9 @@ exports[`foundational Environmentalism guide > pins Statements, citation roles, 
   {
     "citations": [
       {
-        "locator": "abstract; pp. 397–401 and 405–413",
+        "locator": "abstract; pp. 517–519 and 534–536",
         "role": "supports",
-        "sourceId": "schlosberg-environmental-justice-source",
+        "sourceId": "schlosberg-reconceiving-environmental-justice-source",
       },
     ],
     "id": "environmental-justice-three-dimensions",
@@ -133,18 +133,6 @@ exports[`foundational Environmentalism guide > pins Statements, citation roles, 
     "id": "colonial-conservation-displacement",
     "statementKind": "editorial-interpretation",
     "text": "Protected-land and forestry projects can restrict customary access and political authority, so conservation status alone cannot establish justice or environmental benefit for affected communities.",
-  },
-  {
-    "citations": [
-      {
-        "locator": "sections 4.4–4.6 and 5",
-        "role": "context",
-        "sourceId": "sep-environmental-ethics-source",
-      },
-    ],
-    "id": "nuclear-environmental-policy-boundary",
-    "statementKind": "editorial-interpretation",
-    "text": "Nuclear power and nuclear weapons raise distinct questions about climate, extraction, land, safety, waste, security, and justice; an environmentalist relationship does not determine a position on either technology.",
   },
   {
     "citations": [
@@ -305,9 +293,9 @@ exports[`foundational Environmentalism guide > pins Statements, citation roles, 
   {
     "citations": [
       {
-        "locator": "pp. 397–405",
+        "locator": "pp. 406–408",
         "role": "qualifies",
-        "sourceId": "schlosberg-environmental-justice-source",
+        "sourceId": "mohai-pellow-roberts-environmental-justice-source",
       },
     ],
     "id": "warren-county-causal-boundary",
@@ -802,10 +790,9 @@ exports[`foundational Environmentalism guide > pins the Concept, bounded cases, 
     },
     {
       "addressedStatementIds": [
-        "nuclear-environmental-policy-boundary",
         "environmentalism-climate-boundary",
       ],
-      "currentLimitation": "The current guide establishes only that no environmentalist label determines a nuclear position; it does not yet present the strongest rival arguments or their evidence.",
+      "currentLimitation": "The reviewed guide does not yet make a claim about nuclear power or nuclear weapons because it lacks a source set that distinguishes the technologies, rival environmental arguments, and their evidence.",
       "description": "A policy-boundary question preserving distinct energy and weapons debates.",
       "evidenceNeeded": "Primary movement positions, energy-system and weapons evidence, affected-community testimony, and sources that keep civilian power, weapons, waste, mining, and security claims distinct.",
       "id": "environmentalism-nuclear-divergence",

@@ -37,7 +37,6 @@ const dossier = attachNarrative("environmentalism.md", {
         "environmentalism-sustainability-boundary",
         "environmentalism-climate-boundary",
         "environmentalism-party-policy-boundary",
-        "nuclear-environmental-policy-boundary",
       ],
     },
     {
