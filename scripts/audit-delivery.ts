@@ -117,18 +117,27 @@ const repositoryIssueSchema = z
 class InputInvalidError extends Error {}
 class ApiUnavailableError extends Error {}
 const repository = "dougborg/ends-and-means";
+// Paginated issue bodies can exceed Node's default 1 MiB capture limit.
+// Keep a finite ceiling and reject overflow rather than audit partial evidence.
+const githubOutputLimitBytes = 16 * 1024 * 1024;
 
 function gh(args: string[]) {
   try {
     return execFileSync("gh", args, {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
+      maxBuffer: githubOutputLimitBytes,
     });
   } catch (error) {
     const commandError = error as Error & {
       code?: string;
       stderr?: string | Buffer;
     };
+    if (commandError.code === "ENOBUFS") {
+      throw new Error(
+        `gh ${args[0] ?? "command"} exceeded the 16 MiB output limit; no partial response was audited`,
+      );
+    }
     const stderr = String(commandError.stderr ?? "").trim();
     const detail = stderr || commandError.message || String(error);
     if (
