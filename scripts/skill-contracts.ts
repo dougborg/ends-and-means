@@ -97,8 +97,15 @@ export const skillCapabilities: SkillCapability[] = [
     patterns: [
       /post-merge cleanup/i,
       /rebase merge rewrites commit/i,
+      /registered worktrees, standalone review clones, and exported review copies/i,
+      /processes and listeners before removing/i,
+      /dependency links both inside each candidate/i,
+      /review evidence and any useful recovery history/i,
+      /retry normal removal; do not use blind forced removal/i,
       /preserve a dirty or/i,
       /git worktree list --porcelain/i,
+      /only after these checks/i,
+      /reconcile the final Project `Done` state/i,
       /shared\/global package and browser caches/i,
     ],
     deletion: {
