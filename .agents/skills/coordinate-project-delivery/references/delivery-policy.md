@@ -25,7 +25,7 @@ expired, duplicate, or malformed private evidence never passes implicitly.
 | In progress | Named owner, current branch, and isolated worktree in fresh private state, plus an open workstream slot; remove `status:ready`. |
 | In review | Coherent open pull request; implementation WIP slot is released. |
 | Blocked | Open issue with `status:blocked` and a concrete named unblock condition. |
-| Done | Merged or closed authoritative work, with post-merge state reconciled. |
+| Done | Merged or closed authoritative work, with post-merge state reconciled and its applicable owned cleanup checklist complete. |
 
 Ready contains three to five items; audit output orders them deterministically by Priority (`Now`, `Next`, `Later`) and issue number rather than trusting API response order.
 In progress contains at most three implementation items and normally at most one per workstream.
