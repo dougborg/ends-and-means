@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
-import { chmodSync, mkdtempSync, writeFileSync } from "node:fs";
+import { chmodSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
@@ -80,6 +80,87 @@ describe("delivery audit result classes", () => {
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("Project state: ERROR");
     expect(result.stderr).toContain("HTTP 404");
+  });
+});
+
+describe("delivery audit complete API responses", () => {
+  function runWithIssueResponse(response: string) {
+    const bin = mkdtempSync(join(tmpdir(), "ends-means-gh-response-"));
+    const privateState = freshPrivateState();
+    try {
+      const responsePath = join(bin, "issues.json");
+      writeFileSync(responsePath, response);
+      const executable = join(bin, "gh");
+      writeFileSync(
+        executable,
+        `#!${process.execPath}
+const { readFileSync } = require("node:fs");
+const [command, action] = process.argv.slice(2);
+if (command === "api") process.stdout.write(readFileSync(${JSON.stringify(responsePath)}));
+else if (command === "project" && action === "view") console.log(JSON.stringify({number:7,title:"Delivery",public:false}));
+else if (command === "project" && action === "item-list") console.log(JSON.stringify({items:[]}));
+else if (command === "label" && action === "list") console.log("[]");
+else { console.error("Unexpected command"); process.exitCode = 1; }
+`,
+      );
+      chmodSync(executable, 0o755);
+      return run(["--live-project", "--private-state", privateState], bin);
+    } finally {
+      rmSync(bin, { recursive: true, force: true });
+      rmSync(dirname(privateState), { recursive: true, force: true });
+    }
+  }
+
+  const issue = (number: number, body: string) => ({
+    number,
+    title: `Issue ${number}`,
+    body,
+    state: "open",
+    labels: [],
+  });
+  const firstPage = () =>
+    Array.from({ length: 20 }, (_, index) =>
+      issue(index + 1, "Research context. ".repeat(3300)),
+    );
+
+  it("validates all pages beyond 1 MiB and retains a final-record finding", () => {
+    const response = JSON.stringify([
+      firstPage(),
+      [issue(21, "\u001b[31mfinal-record sentinel")],
+    ]);
+    expect(Buffer.byteLength(response)).toBeGreaterThan(1024 * 1024);
+    const result = runWithIssueResponse(response);
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain("BACKLOG_TERMINAL_CONTROL: #21");
+    expect(result.stderr).not.toContain("ENOBUFS");
+    expect(result.stdout).not.toContain("Project #7: clean");
+  });
+
+  it("counts every record in a complete large response", () => {
+    const result = runWithIssueResponse(
+      JSON.stringify([firstPage(), [issue(21, "Final issue")]]),
+    );
+    // The deliberately empty Project still fails its Ready-queue policy.
+    expect(result.status).toBe(1);
+    expect(result.stdout).toContain(
+      "Backlog integrity: clean (21 open issues checked)",
+    );
+  });
+
+  it("rejects malformed JSON after the former buffer boundary", () => {
+    const result = runWithIssueResponse(
+      `${JSON.stringify([firstPage()])}truncated`,
+    );
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("Project state: INVALID");
+    expect(result.stdout).not.toContain("clean");
+  });
+
+  it("fails closed when output exceeds the explicit 16 MiB bound", () => {
+    const result = runWithIssueResponse(" ".repeat(17 * 1024 * 1024));
+    expect(result.status).toBe(2);
+    expect(result.stderr).toContain("exceeded the 16 MiB output limit");
+    expect(result.stdout).not.toContain("clean");
   });
 });
 
