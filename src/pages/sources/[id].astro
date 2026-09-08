@@ -6,10 +6,18 @@ export function getStaticPaths() { return entitiesOfKind("source").map((source) 
 const source = Astro.props.source as Source;
 const work = source.workId ? entityById(source.workId) as Work | undefined : undefined;
 const claims = relationshipsTo(source.id).filter((relationship) => relationship.predicate === "cites").flatMap((citation) => { const statement = entityById(citation.subject.id); return statement?.kind === "statement" ? [{ statement: statement as Statement, citation }] : []; });
+type ClaimCitation = (typeof claims)[number]["citation"];
+const claimGroups = new Map<string, { statement: Statement; citations: ClaimCitation[] }>();
+for (const { statement, citation } of claims) {
+  const group = claimGroups.get(statement.id);
+  if (group) group.citations.push(citation);
+  else claimGroups.set(statement.id, { statement, citations: [citation] });
+}
+const groupedClaims = [...claimGroups.values()];
 ---
 <BaseLayout title={source.title} description={source.description}>
   <article class="source-page"><nav aria-label="Breadcrumb"><a href="/reading/">Reading</a> <span aria-hidden="true">/</span> Source</nav><header><p class="coordinate">SOURCE / {source.sourceType.replaceAll("-", " ")}</p><h1>{source.title}</h1><p class="source-byline">{source.contributorDisplay?.join(", ")}{source.publicationYear ? ` · ${source.publicationYear}` : ""}</p></header>
     <div class="source-layout"><section><h2>About this source</h2><p>{source.description}</p>{source.resourceLinks?.length ? <ul class="source-links">{source.resourceLinks.map((link) => <li><a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a></li>)}</ul> : null}</section><aside><p class="coordinate">BIBLIOGRAPHIC RECORD</p><dl><div><dt>Type</dt><dd>{source.sourceType.replaceAll("-", " ")}</dd></div>{source.publisher && <div><dt>Publisher</dt><dd>{source.publisher}</dd></div>}{work && <div><dt>Work</dt><dd>{work.title}</dd></div>}{source.identifiers?.doi && <div><dt>DOI</dt><dd>{source.identifiers.doi}</dd></div>}</dl></aside></div>
-    <section class="claim-connections" aria-labelledby="connections-title"><p class="coordinate">CLAIM CONNECTIONS / {claims.length}</p><h2 id="connections-title">Where this source is used</h2>{claims.length > 0 ? <ul>{claims.map(({ statement, citation }) => <li id={statement.id}><p>{statement.text}</p><p>{citation.role} · {citation.locator}</p></li>)}</ul> : <p>No published Statement currently cites this source.</p>}</section>
+    <section class="claim-connections" aria-labelledby="connections-title"><p class="coordinate">CLAIM CONNECTIONS / {groupedClaims.length}</p><h2 id="connections-title">Where this source is used</h2>{groupedClaims.length > 0 ? <ul>{groupedClaims.map(({ statement, citations }) => <li id={statement.id}><p>{statement.text}</p><ul aria-label="Citation details">{citations.map((citation) => <li>{citation.role} · {citation.locator}</li>)}</ul></li>)}</ul> : <p>No published Statement currently cites this source.</p>}</section>
   </article>
 </BaseLayout>

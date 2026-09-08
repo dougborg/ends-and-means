@@ -129,6 +129,15 @@ async function verifyEveryPublicRecordRenders() {
     expect(text.length, route).toBeGreaterThan(200);
     expect(html, route).not.toMatch(/<astro-island\b/i);
     expect(workflowReferencesIn(text), route).toEqual([]);
+    if (route.startsWith("/sources/")) {
+      const ids = [
+        ...html.matchAll(/\bid=(?:"([^"]+)"|'([^']+)')/gi),
+      ].map((match) => match[1] ?? match[2]);
+      expect(
+        new Set(ids).size,
+        `${route} has duplicate element IDs`,
+      ).toBe(ids.length);
+    }
     for (const [, classNames] of html.matchAll(
       /class="([^"]*\bdek\b[^"]*)"/g,
     )) {
@@ -630,6 +639,34 @@ async function verifyPrinciplesRoute() {
   ]));
 }
 
+async function verifySourceClaimGrouping(reading: string) {
+  const bonjolSourceId = "mutolib-bonjol-ulayat-source";
+  const bonjolLink = `href="/sources/${bonjolSourceId}/"`;
+  const bonjolLinkIndex = reading.indexOf(bonjolLink);
+  expect(bonjolLinkIndex).toBeGreaterThan(-1);
+  const bonjolItem = reading.slice(
+    reading.lastIndexOf("<li>", bonjolLinkIndex),
+    reading.indexOf("</li>", bonjolLinkIndex) + "</li>".length,
+  );
+  expect(stripMarkup(bonjolItem)).toContain("Cited by 32 claims");
+
+  const bonjolSource = await readFile(
+    routeFile(`/sources/${bonjolSourceId}/`),
+    "utf8",
+  );
+  const causalStatementId = "bonjol-authors-causal-interpretation";
+  expect(
+    bonjolSource.match(new RegExp(`id="${causalStatementId}"`, "g")),
+  ).toHaveLength(1);
+  const bonjolText = stripMarkup(bonjolSource);
+  expect(bonjolText).toContain(
+    "supports · pp. 38–40, ‘Why are Melayu Women Oppressed?’, enumerated explanations",
+  );
+  expect(bonjolText).toContain(
+    "qualifies · pp. 26–27, reported cross-sectional methods and sample",
+  );
+}
+
 async function verifyReferenceRoutes() {
   await verifyMethodRoute();
   await verifyPrinciplesRoute();
@@ -698,6 +735,7 @@ async function verifyReferenceRoutes() {
     hrefs(reading).filter((href) => href.startsWith("/sources/")),
   ).toHaveLength(entitiesOfKind("source").length);
   expect(stripMarkup(reading)).not.toContain("Every record here is connected");
+  await verifySourceClaimGrouping(reading);
   const firstSource = entitiesOfKind("source")[0];
   if (!firstSource) throw new Error("Expected at least one canonical Source");
   const source = await readFile(

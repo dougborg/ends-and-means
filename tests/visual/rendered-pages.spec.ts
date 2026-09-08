@@ -529,6 +529,40 @@ test("repeated guide research questions have one fragment owner", async ({
   );
 });
 
+test("Source claim fragments group distinct citation roles under one anchor", async ({
+  page,
+}) => {
+  const statementId = "bonjol-authors-causal-interpretation";
+  await gotoRenderedPage(
+    page,
+    `/sources/mutolib-bonjol-ulayat-source/#${statementId}`,
+  );
+
+  const claim = page.locator(`#${statementId}`);
+  await expect(claim).toHaveCount(1);
+  await expect(claim).toBeInViewport();
+  const citationDetails = claim.getByRole("list", {
+    name: "Citation details",
+  });
+  await expect(citationDetails).toHaveCount(1);
+  await expect(citationDetails.getByRole("listitem")).toHaveText([
+    "supports · pp. 38–40, ‘Why are Melayu Women Oppressed?’, enumerated explanations",
+    "qualifies · pp. 26–27, reported cross-sectional methods and sample",
+  ]);
+
+  await gotoRenderedPage(page, "/sources/marx-capital-volume-one-source/");
+  const singleClaim = page.locator(".claim-connections > ul > li");
+  await expect(singleClaim).toHaveCount(1);
+  await expect(
+    singleClaim.getByRole("list", { name: "Citation details" }),
+  ).toHaveCount(1);
+  await expect(
+    singleClaim
+      .getByRole("list", { name: "Citation details" })
+      .getByRole("listitem"),
+  ).toHaveCount(1);
+});
+
 test("representative pages have learner-first outlines and unique disclosure names", async ({
   page,
 }) => {
