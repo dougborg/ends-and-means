@@ -54,4 +54,47 @@ Use GitHub's rebase integration only—never squash, merge commits, force pushes
 For a stack, integrate from the bottom upward and verify each automatically rebased or retargeted layer against its declared base before continuing.
 Confirm linear history before integration.
 After merge, verify the commit on `main`, required main checks, and Pages deployment when public output or its build path changed.
-Then reconcile the issue and Project item and safely remove only the merged branch/worktree owned by the task.
+Then reconcile the issue and Project item and complete the cleanup below.
+
+## Post-merge cleanup
+
+Cleanup is part of the final handoff and definition of done. Retire only the
+worktree, branch, processes, and generated storage owned by the completed task.
+
+1. For implementation work, confirm the pull request is authoritatively merged
+   and identify its result on the declared base. A rebase merge rewrites commit
+   IDs, so map the reviewed branch to the merged pull-request diff or commits
+   instead of relying only on `git branch --merged` or ancestor checks. For an
+   issue closed without implementation, confirm that it has no assigned branch,
+   worktree, process, or generated storage to retire.
+2. Inspect `git status --short --untracked-files=all` and
+   `git status --short --ignored=matching`, the private assignment, and owned
+   processes and listeners before removing anything. Check both dependency
+   links inside the candidate worktree and links from retained worktrees into
+   it; replace or preserve a still-used target first. Preserve a dirty or
+   unmerged worktree, an uncertain merge mapping, or work still assigned to an
+   active owner; record the exact remaining condition in the handoff.
+3. Preserve required review evidence and any useful recovery history outside
+   disposable build storage. Keep source notes, logs, screenshots, exact-head
+   attestations, or a recovery ref when they remain necessary to audit or
+   recover the merged work.
+4. Stop previews, test servers, watchers, and other processes started for the
+   task. Confirm their listeners have exited before another worktree reuses the
+   affected tool or port.
+5. From the coordinator repository, remove the clean registered worktree with
+   `git worktree remove <path>`. If normal removal reports ignored outputs,
+   inspect them, preserve required evidence, remove only reviewed disposable
+   worktree-local installs, builds, coverage, test artifacts, or caches, and
+   retry normal removal; do not use blind forced removal. Do not feed discovered
+   paths directly into a deletion command, remove another owner's files, or
+   purge shared/global package and browser caches as routine cleanup.
+6. Delete the local task branch only when the authoritative merge mapping is
+   established and the result remains recoverable from `main`, the merged pull
+   request, or an intentionally preserved ref. Prefer normal branch deletion;
+   after a verified rebase merge, use forced local branch deletion only when
+   the rewritten mapping and recovery path have been recorded.
+7. Run `git worktree list --porcelain` and inspect the affected paths,
+   listeners, and disk usage. Confirm the retired worktree is absent, no owned
+   process or dangling dependency link remains, and the expected space was
+   reclaimed. Update or remove the private assignment, then include the cleanup
+   result and any intentionally preserved artifact or ref in the final handoff.

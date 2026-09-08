@@ -87,6 +87,26 @@ export const skillCapabilities: SkillCapability[] = [
     },
   },
   {
+    name: "post-merge cleanup",
+    owner: "coordinate-project-delivery",
+    paths: [
+      `${deliveryRoot}/SKILL.md`,
+      `${deliveryRoot}/references/delivery-policy.md`,
+      `${deliveryRoot}/references/review-and-integration.md`,
+    ],
+    patterns: [
+      /post-merge cleanup/i,
+      /rebase merge rewrites commit/i,
+      /preserve a dirty or/i,
+      /git worktree list --porcelain/i,
+      /shared\/global package and browser caches/i,
+    ],
+    deletion: {
+      path: `${deliveryRoot}/references/review-and-integration.md`,
+      pattern: /rebase merge rewrites commit/i,
+    },
+  },
+  {
     name: "continuous improvement",
     owner: "coordinate-project-delivery",
     paths: [`${deliveryRoot}/SKILL.md`],

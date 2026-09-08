@@ -75,4 +75,10 @@ Record only the privacy-safe exact-head markers defined in the review reference;
 These reviews are project-process gates even though GitHub does not require an approving review.
 Resolve conversations and all strict checks, rebase again if the base moved, integrate with rebase rather than squash or merge commits, and verify main plus deployment after merge.
 
+Treat post-merge cleanup as part of handoff and the definition of done. After
+the authoritative merge and post-merge checks are verified, follow the
+[post-merge cleanup checklist](references/review-and-integration.md#post-merge-cleanup).
+Preserve dirty, unmerged, ambiguously mapped, or still-owned work and report
+the exact remaining condition instead of forcing removal.
+
 Never bypass a failed check, unresolved conversation, review finding, or branch rule merely to clear the queue.
