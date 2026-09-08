@@ -72,6 +72,26 @@ const democracyDossier = attachNarrative("democracy.md", {
       ],
     },
     {
+      id: "south-carolina-reconstruction",
+      heading: "How did formal membership and governing practice diverge in South Carolina?",
+      body: "",
+      traceStatus: "qualified" as const,
+      statementIds: [
+        "sc-constitution-elector-membership-1868",
+        "sc-constitution-elector-residence-1868",
+        "sc-constitution-institutional-confinement-exclusion",
+        "sc-constitution-religious-office-test",
+        "sc-house-black-majority-1868-1876",
+        "sc-hill-political-renunciation-demands",
+      ],
+      relatedEntityRefs: [
+        {
+          kind: "case" as const,
+          id: "south-carolina-reconstruction-political-membership",
+        },
+      ],
+    },
+    {
       id: "comparisons",
       heading: "How does democracy differ from republic?",
       body: "",
@@ -311,11 +331,21 @@ export const democracyRepublicGuideDocuments = [
     {
       id: "bounded-practice",
       role: "bounded-practice",
-      heading: "What can one community process show?",
+      heading: "What do bounded cases show?",
       narrativeRefs: [
         { dossierId: "democracy-dossier", sectionId: "bounded-practice" },
+        {
+          dossierId: "democracy-dossier",
+          sectionId: "south-carolina-reconstruction",
+        },
       ],
-      entityRefs: [{ kind: "case", id: "kahnawake-community-lawmaking" }],
+      entityRefs: [
+        { kind: "case", id: "kahnawake-community-lawmaking" },
+        {
+          kind: "case",
+          id: "south-carolina-reconstruction-political-membership",
+        },
+      ],
     },
     {
       id: "variants-disputes-and-limits",

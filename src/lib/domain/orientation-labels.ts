@@ -369,4 +369,34 @@ export const reviewedOrientationLabels = {
   "subject-guide:guide-nationalism": "Nationalism",
   "subject-guide:guide-colonialism": "Colonialism",
   "subject-guide:guide-imperialism": "Imperialism",
+  "entity:south-carolina": "South Carolina",
+  "entity:south-carolina-upcountry": "South Carolina upcountry",
+  "entity:hamburg-south-carolina": "Hamburg, South Carolina",
+  "entity:columbia-south-carolina": "Columbia, South Carolina",
+  "entity:political-coercion": "Political coercion",
+  "entity:south-carolina-reconstruction-political-membership":
+    "South Carolina political membership under Reconstruction, 1868–1877",
+  "entity:sc-constitution-formation-1868":
+    "South Carolina constitution formation, January–June 1868",
+  "entity:sc-black-legislative-participation-1868-1876":
+    "Black legislative participation, 1868–1876",
+  "entity:sc-political-coercion-federal-enforcement-1871-1872":
+    "Political coercion and federal enforcement, 1871–1872",
+  "entity:sc-election-contest-office-transfer-1876-1877":
+    "Election contest and executive-office transfer, 1876–1877",
+  "entity:sc-convention-adopted-constitution-event":
+    "South Carolina convention adopted the constitution",
+  "entity:sc-elector-ratification-event":
+    "South Carolina electors ratified the constitution",
+  "entity:sc-congressional-admission-event":
+    "Congress admitted South Carolina to representation",
+  "entity:sc-habeas-suspension-event":
+    "Grant suspended habeas corpus in South Carolina counties",
+  "entity:sc-hamburg-confrontation-event": "Hamburg confrontation",
+  "entity:sc-rifle-club-disband-order-event":
+    "Grant ordered South Carolina rifle clubs to disband",
+  "entity:sc-statehouse-troop-withdrawal-event":
+    "Federal troops left the South Carolina State House",
+  "entity:sc-executive-office-transfer-event":
+    "South Carolina executive office transferred",
 } as const;
