@@ -1,5 +1,8 @@
 import type { AuthoringDocument } from "../../src/lib/domain";
-import { reviewedOrientationOnlyMappings } from "../../src/lib/domain/orientation-only-mappings";
+import {
+  reviewedOrientationDecisionCheckedAt,
+  reviewedOrientationOnlyMappings,
+} from "../../src/lib/domain/orientation-only-mappings";
 import { centralPlanningAnalysisDocuments } from "./analysis/central-planning";
 import { theocracyAnalysisDocuments } from "./analysis/theocracy";
 import { analysisDocuments } from "./analysis/swedish-wage-earner-funds";
@@ -27,6 +30,7 @@ import { rehnMeidnerEvidenceDocuments } from "./evidence/rehn-meidner-model";
 import { socialDemocracyEvidenceDocuments } from "./evidence/social-democracy";
 import { socialOwnershipEvidenceDocuments } from "./evidence/social-ownership";
 import { socialismCommunismEvidenceDocuments } from "./evidence/socialism-communism";
+import { southCarolinaReconstructionEvidenceDocuments } from "./evidence/south-carolina-reconstruction";
 import { evidenceDocuments } from "./evidence/swedish-wage-earner-funds";
 import { tawantinsuyuEvidenceDocuments } from "./evidence/tawantinsuyu";
 import { theocracyEvidenceDocuments } from "./evidence/theocracy";
@@ -53,6 +57,7 @@ import { nomadicConfederatedOrganizationGuideDocuments } from "./presentation/no
 import { oligarchyGuideDocuments } from "./presentation/oligarchy-guide";
 import { populismGuideDocuments } from "./presentation/populism-guide";
 import { socialismCommunismDossierDocuments } from "./presentation/socialism-communism-dossiers";
+import { southCarolinaReconstructionDossierDocuments } from "./presentation/south-carolina-reconstruction-dossier";
 import { subjectGuideDocuments } from "./presentation/subject-guides";
 import { dossierDocuments } from "./presentation/swedish-dossiers";
 import { tawantinsuyuDossierDocuments } from "./presentation/tawantinsuyu-dossier";
@@ -81,6 +86,7 @@ import { rehnMeidnerRelationshipDocuments } from "./relationships/rehn-meidner-m
 import { socialDemocracyRelationshipDocuments } from "./relationships/social-democracy";
 import { socialOwnershipRelationshipDocuments } from "./relationships/social-ownership";
 import { socialismCommunismRelationshipDocuments } from "./relationships/socialism-communism";
+import { southCarolinaReconstructionRelationshipDocuments } from "./relationships/south-carolina-reconstruction";
 import { relationshipDocuments } from "./relationships/swedish-wage-earner-funds";
 import { tawantinsuyuRelationshipDocuments } from "./relationships/tawantinsuyu";
 import { theocracyRelationshipDocuments } from "./relationships/theocracy";
@@ -102,6 +108,7 @@ import { nomadicConfederatedOrganizationResearchDocuments } from "./research/nom
 import { oligarchyResearchDocuments } from "./research/oligarchy";
 import { populismResearchDocuments } from "./research/populism";
 import { openResearchObligationDocuments } from "./research/open-obligations";
+import { southCarolinaReconstructionResearchDocuments } from "./research/south-carolina-reconstruction";
 import { tawantinsuyuResearchDocuments } from "./research/tawantinsuyu";
 import { theocracyResearchDocuments } from "./research/theocracy";
 import { welfareStateResearchDocuments } from "./research/welfare-state";
@@ -130,6 +137,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...socialOwnershipEvidenceDocuments,
   ...socialDemocracyEvidenceDocuments,
   ...socialismCommunismEvidenceDocuments,
+  ...southCarolinaReconstructionEvidenceDocuments,
   ...tawantinsuyuEvidenceDocuments,
   ...anarchismEvidenceDocuments,
   ...kahnawakeCommunityDecisionMakingEvidenceDocuments,
@@ -153,6 +161,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...democracyRepublicGuideDocuments,
   ...authoritarianismFascismTotalitarianismGuideDocuments,
   ...socialismCommunismDossierDocuments,
+  ...southCarolinaReconstructionDossierDocuments,
   ...tawantinsuyuDossierDocuments,
   ...tawantinsuyuGuideDocuments,
   ...subjectGuideDocuments,
@@ -170,6 +179,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...theocracyGuideDocuments,
   ...welfareStateGuideDocuments,
   ...openResearchObligationDocuments,
+  ...southCarolinaReconstructionResearchDocuments,
   ...feminismResearchDocuments,
   ...environmentalismResearchDocuments,
   ...minangkabauResearchDocuments,
@@ -207,6 +217,7 @@ const rawCanonicalDocuments: AuthoringDocument[] = [
   ...socialDemocracyRelationshipDocuments,
   ...socialOwnershipRelationshipDocuments,
   ...socialismCommunismRelationshipDocuments,
+  ...southCarolinaReconstructionRelationshipDocuments,
   ...tawantinsuyuRelationshipDocuments,
   ...anarchismRelationshipDocuments,
   ...kahnawakeCommunityDecisionMakingRelationshipDocuments,
@@ -240,7 +251,10 @@ export const canonicalDocuments: AuthoringDocument[] =
             url: `https://en.wikipedia.org/wiki/${article.replaceAll(" ", "_")}`,
             purpose: "orientation",
             language: "en",
-            checkedAt: "2026-09-06",
+            checkedAt:
+              reviewedOrientationDecisionCheckedAt[
+                `entity:${document.entity.id}` as keyof typeof reviewedOrientationDecisionCheckedAt
+              ] ?? "2026-09-06",
           },
         ],
       },

@@ -66,6 +66,7 @@ describe("canonical vertical slice", () => {
       "ruwalla-borderland-organization",
       "saudi-basic-law-monarchy-1992-2022",
       "sewa-ahmedabad-1972-1977",
+      "south-carolina-reconstruction-political-membership",
       "south-korea-welfare-expansion-1988-2008",
       "spanish-anarchist-initiatives-1936-1939",
       "swatantra-opposition-organization-1959-1967",
@@ -94,6 +95,14 @@ describe("canonical vertical slice", () => {
     ]);
     expect(transition?.toEpisodeIds).toEqual(["liquidation-board-period-1992"]);
     expect(entitiesOfKind("event").map(({ id }) => id)).toEqual([
+      "sc-congressional-admission-event",
+      "sc-convention-adopted-constitution-event",
+      "sc-elector-ratification-event",
+      "sc-executive-office-transfer-event",
+      "sc-habeas-suspension-event",
+      "sc-hamburg-confrontation-event",
+      "sc-rifle-club-disband-order-event",
+      "sc-statehouse-troop-withdrawal-event",
       "vatican-commission-membership-amended-2025",
       "wage-earner-fund-board-abolition",
       "zapatista-autonomy-reorganization-2023",

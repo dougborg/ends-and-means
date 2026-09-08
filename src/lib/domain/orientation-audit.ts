@@ -4,6 +4,7 @@ import type { CompiledDomainGraph } from "./graph";
 import { reviewedOrientationLedger } from "./orientation-ledger";
 import { reviewedOrientationLabels } from "./orientation-labels";
 import {
+  reviewedOrientationDecisionCheckedAt,
   reviewedOrientationOnlyGuideSubjects,
   reviewedOrientationOnlyMappings,
 } from "./orientation-only-mappings";
@@ -60,6 +61,11 @@ const reviewedDecisions = new Map(
     decision,
   ]),
 );
+
+const reviewedDecisionDate = (key: string) =>
+  reviewedOrientationDecisionCheckedAt[
+    key as keyof typeof reviewedOrientationDecisionCheckedAt
+  ] ?? "2026-09-06";
 
 const notApplicableReasons: Partial<Record<DomainEntity["kind"], string>> = {
   "concept-scheme":
@@ -325,7 +331,7 @@ function validateReviewedDecision(
     (!decision.resolution ||
       typeof decision.resolution === "string" ||
       decision.resolution.pageKind !== "article" ||
-      decision.resolution.checkedAt !== "2026-09-06" ||
+      decision.resolution.checkedAt !== reviewedDecisionDate(key) ||
       decision.resolution.canonicalArticleUrl !== entry.orientationUrls[0] ||
       decision.resolution.wikidataId !== entry.identityIds[0])
   )

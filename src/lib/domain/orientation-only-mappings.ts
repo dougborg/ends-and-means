@@ -94,6 +94,28 @@ export const reviewedOrientationOnlyMappings = {
   "south-korea-welfare-state-case-place": "South Korea",
   "south-korea-welfare-expansion-1988-2008": "Welfare in South Korea",
   "south-korea-welfare-expansion-episode": "Welfare in South Korea",
+  "political-coercion": "Political violence",
+  "south-carolina-reconstruction-political-membership":
+    "Reconstruction in South Carolina",
+  "sc-constitution-formation-1868": "Reconstruction in South Carolina",
+  "sc-black-legislative-participation-1868-1876":
+    "Reconstruction in South Carolina",
+  "sc-political-coercion-federal-enforcement-1871-1872":
+    "South Carolina Ku Klux Klan trials of 1871–1872",
+  "sc-election-contest-office-transfer-1876-1877":
+    "1876 South Carolina gubernatorial election",
+  "sc-convention-adopted-constitution-event": "Reconstruction in South Carolina",
+  "sc-elector-ratification-event": "Reconstruction in South Carolina",
+  "sc-congressional-admission-event": "Reconstruction in South Carolina",
+  "sc-habeas-suspension-event":
+    "South Carolina Ku Klux Klan trials of 1871–1872",
+  "sc-hamburg-confrontation-event": "Hamburg massacre",
+  "sc-rifle-club-disband-order-event":
+    "1876 South Carolina gubernatorial election",
+  "sc-statehouse-troop-withdrawal-event":
+    "1876 South Carolina gubernatorial election",
+  "sc-executive-office-transfer-event":
+    "1876 South Carolina gubernatorial election",
   "cmp-operation-1943-1945": "Economic planning",
   "controlled-materials-allocation": "Economic planning",
   "regional-wage-earner-fund-boards": "Rehn–Meidner model",
@@ -153,6 +175,27 @@ export const reviewedOrientationOnlyMappings = {
 
 export const orientationOnlyReason = (label: string, article: string) =>
   `${article} directly defines or situates ${label}; no Wikidata identity is asserted because the project target retains its authored kind, scope, or historical boundary.`;
+
+export const reviewedOrientationDecisionCheckedAt = {
+  "entity:south-carolina": "2026-09-08",
+  "entity:south-carolina-upcountry": "2026-09-08",
+  "entity:hamburg-south-carolina": "2026-09-08",
+  "entity:columbia-south-carolina": "2026-09-08",
+  "entity:political-coercion": "2026-09-08",
+  "entity:south-carolina-reconstruction-political-membership": "2026-09-08",
+  "entity:sc-constitution-formation-1868": "2026-09-08",
+  "entity:sc-black-legislative-participation-1868-1876": "2026-09-08",
+  "entity:sc-political-coercion-federal-enforcement-1871-1872": "2026-09-08",
+  "entity:sc-election-contest-office-transfer-1876-1877": "2026-09-08",
+  "entity:sc-convention-adopted-constitution-event": "2026-09-08",
+  "entity:sc-elector-ratification-event": "2026-09-08",
+  "entity:sc-congressional-admission-event": "2026-09-08",
+  "entity:sc-habeas-suspension-event": "2026-09-08",
+  "entity:sc-hamburg-confrontation-event": "2026-09-08",
+  "entity:sc-rifle-club-disband-order-event": "2026-09-08",
+  "entity:sc-statehouse-troop-withdrawal-event": "2026-09-08",
+  "entity:sc-executive-office-transfer-event": "2026-09-08",
+} as const;
 
 export const reviewedOrientationOnlyGuideSubjects = {
   "guide-central-planning": "central-planning-arrangements",

@@ -5,6 +5,7 @@ import {
   buildOrientationAudit,
   validateOrientationAudit,
 } from "../../src/lib/domain/orientation-audit";
+import { reviewedOrientationLedger } from "../../src/lib/domain/orientation-ledger";
 
 const canonicalGraph = () =>
   compileDomainGraph(structuredClone(canonicalDocuments));
@@ -21,10 +22,10 @@ describe("orientation audit", () => {
         ["reviewed", "published"].includes(publicationStatus),
       ).length;
     expect(inventory).toHaveLength(expectedCount);
-    expect(inventory).toHaveLength(1603);
+    expect(inventory).toHaveLength(1721);
     expect(
       inventory.filter(({ disposition }) => disposition === "mapped"),
-    ).toHaveLength(248);
+    ).toHaveLength(266);
     expect(
       inventory.filter(
         ({ disposition }) => disposition === "intentionally-unmatched",
@@ -32,7 +33,7 @@ describe("orientation audit", () => {
     ).toHaveLength(29);
     expect(
       inventory.filter(({ disposition }) => disposition === "not-applicable"),
-    ).toHaveLength(1326);
+    ).toHaveLength(1426);
     expect(
       inventory.filter(({ disposition }) => disposition !== "not-applicable"),
     ).toMatchSnapshot("eligible-target-decisions");
@@ -85,6 +86,32 @@ describe("orientation audit", () => {
 });
 
 describe("orientation audit mutation enforcement", () => {
+  it("accepts legacy and current reviewed dates but rejects a substituted South Carolina date", () => {
+    expect(validateOrientationAudit(canonicalGraph())).toEqual([]);
+    const democracy = reviewedOrientationLedger.find(
+      ({ targetType, id }) => targetType === "entity" && id === "democracy",
+    );
+    if (!democracy?.resolution || typeof democracy.resolution === "string")
+      throw new Error("Missing Democracy orientation resolution");
+    expect(democracy.resolution.checkedAt).toBe("2026-09-06");
+
+    const southCarolina = reviewedOrientationLedger.find(
+      ({ targetType, id }) => targetType === "entity" && id === "south-carolina",
+    );
+    if (!southCarolina?.resolution || typeof southCarolina.resolution === "string")
+      throw new Error("Missing South Carolina orientation resolution");
+    const reviewedDate = southCarolina.resolution.checkedAt;
+    try {
+      southCarolina.resolution.checkedAt = "2026-09-06";
+      expect(validateOrientationAudit(canonicalGraph())).toContain(
+        "entity:south-carolina: canonical-target resolution is not reviewed or stale",
+      );
+    } finally {
+      southCarolina.resolution.checkedAt = reviewedDate;
+    }
+    expect(validateOrientationAudit(canonicalGraph())).toEqual([]);
+  });
+
   it("detects missing, duplicate, and actual unpublished graph targets", () => {
     const graph = canonicalGraph();
     const inventory = buildOrientationAudit(graph);

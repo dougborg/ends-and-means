@@ -28,6 +28,12 @@ That bounded example widens institutional comparison without turning one Kanienâ
 Majority authorization can conflict with equal standing and basic rights.
 Disagreement therefore concerns both who decides and which decisions democratic authority may legitimately make.
 
+## south-carolina-reconstruction
+
+South Carolina's 1868 constitution widened Black men's formal electoral eligibility while retaining residence, confinement, and officeholding exclusions.
+The reported Black majority in the state House shows realized access to governing office, while Elias Hill's testimony shows coercion directed at Republican organization and public activity.
+The bounded Case therefore connects formal membership to governing practice and coercive limits without classifying the state or period as a pure embodiment of democracy.
+
 ## comparisons
 
 A republic is one neighboring constitutional idea, not a synonym for democracy.
