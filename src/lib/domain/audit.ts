@@ -58,9 +58,7 @@ function proseShingles(value: string) {
   );
 }
 
-function overlap(left: string, right: string) {
-  const a = proseShingles(left);
-  const b = proseShingles(right);
+function overlap(a: Set<string>, b: Set<string>) {
   if (Math.min(a.size, b.size) < 3) return 0;
   const shared = [...a].filter((shingle) => b.has(shingle)).length;
   return shared / Math.min(a.size, b.size);
@@ -70,10 +68,15 @@ function narrativeFindings(dossiers: Dossier[]) {
   const passages = dossiers.flatMap((dossier) => {
     const prefix = `${dossier.subject.kind}:${dossier.subject.id}`;
     return [
-      { location: `${prefix}#standfirst`, text: dossier.standfirst },
+      {
+        location: `${prefix}#standfirst`,
+        text: dossier.standfirst,
+        shingles: proseShingles(dossier.standfirst),
+      },
       ...dossier.sections.map(({ id, body }) => ({
         location: `${prefix}#${id}`,
         text: body,
+        shingles: proseShingles(body),
       })),
     ];
   });
@@ -91,7 +94,7 @@ function narrativeFindings(dossiers: Dossier[]) {
     for (let right = left + 1; right < passages.length; right += 1) {
       const a = passages[left];
       const b = passages[right];
-      if (a && b && overlap(a.text, b.text) >= 0.65) {
+      if (a && b && overlap(a.shingles, b.shingles) >= 0.65) {
         findings.push({
           location: `${a.location} ↔ ${b.location}`,
           reason: "possible repeated phrasing",

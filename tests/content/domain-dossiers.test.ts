@@ -256,6 +256,24 @@ describe("canonical narrative coverage", () => {
   });
 });
 
+const graphWithTwoPassages = (left: string, right: string) => {
+  const graph = structuredClone(canonicalGraph);
+  const dossiers = graph.entities.filter((entity) => entity.kind === "dossier");
+  const first = dossiers[0];
+  const second = dossiers[1];
+  if (first?.kind !== "dossier" || second?.kind !== "dossier")
+    throw new Error("Missing Dossier fixtures");
+  first.standfirst = left;
+  first.sections = [];
+  second.standfirst = right;
+  second.sections = [];
+  graph.entities = [first, second];
+  graph.relationships = [];
+  graph.subjectGuides = [];
+  graph.subjectGuideRecords = [];
+  return { graph, first, second };
+};
+
 describe("narrative attention signals", () => {
   it("reports an empty Source identifier object as missing access metadata", () => {
     const graph = structuredClone(canonicalGraph);
@@ -319,6 +337,83 @@ describe("narrative attention signals", () => {
         ({ reason }) => reason === "possible repeated phrasing",
       ),
     ).toEqual([]);
+  });
+});
+
+describe("narrative repeated-phrasing semantics", () => {
+  it("keeps the minimum shingle and overlap thresholds exact across mutations", () => {
+    const sixWords = "one two three four five six";
+    const { graph, first, second } = graphWithTwoPassages(sixWords, sixWords);
+    expect(auditContent(graph).narrativeAttention).toEqual([]);
+
+    const leftWords = Array.from({ length: 24 }, (_, index) => `left${index}`);
+    const atThreshold = [
+      ...leftWords.slice(0, 17),
+      ...Array.from({ length: 7 }, (_, index) => `right${index}`),
+    ];
+    first.standfirst = leftWords.join(" ");
+    second.standfirst = atThreshold.join(" ");
+    expect(auditContent(graph).narrativeAttention).toContainEqual(
+      expect.objectContaining({ reason: "possible repeated phrasing" }),
+    );
+
+    second.standfirst = [
+      ...leftWords.slice(0, 16),
+      ...Array.from({ length: 8 }, (_, index) => `changed${index}`),
+    ].join(" ");
+    expect(auditContent(graph).narrativeAttention).toEqual([]);
+  });
+
+  it("counts unique shingles rather than repeated word positions", () => {
+    const repeatedWords = Array.from({ length: 20 }, () => "repeat").join(" ");
+    const { graph } = graphWithTwoPassages(repeatedWords, repeatedWords);
+
+    expect(auditContent(graph).narrativeAttention).toEqual([]);
+  });
+
+  it("keeps repeated-phrasing findings in passage-pair order", () => {
+    const graph = structuredClone(canonicalGraph);
+    const dossiers = graph.entities.filter(
+      (entity) => entity.kind === "dossier",
+    );
+    const first = dossiers[0];
+    const second = dossiers[1];
+    const third = dossiers[2];
+    if (
+      first?.kind !== "dossier" ||
+      second?.kind !== "dossier" ||
+      third?.kind !== "dossier"
+    )
+      throw new Error("Missing Dossier fixtures");
+    const repeated =
+      "Five appointed boards invested collectively financed capital under statutory ownership caps.";
+    for (const dossier of [first, second, third]) {
+      dossier.standfirst = repeated;
+      dossier.sections = [];
+    }
+    graph.entities = [first, second, third];
+    graph.relationships = [];
+    graph.subjectGuides = [];
+    graph.subjectGuideRecords = [];
+
+    expect(
+      auditContent(graph).narrativeAttention.filter(
+        ({ reason }) => reason === "possible repeated phrasing",
+      ),
+    ).toEqual([
+      {
+        location: `${first.subject.kind}:${first.subject.id}#standfirst ↔ ${second.subject.kind}:${second.subject.id}#standfirst`,
+        reason: "possible repeated phrasing",
+      },
+      {
+        location: `${first.subject.kind}:${first.subject.id}#standfirst ↔ ${third.subject.kind}:${third.subject.id}#standfirst`,
+        reason: "possible repeated phrasing",
+      },
+      {
+        location: `${second.subject.kind}:${second.subject.id}#standfirst ↔ ${third.subject.kind}:${third.subject.id}#standfirst`,
+        reason: "possible repeated phrasing",
+      },
+    ]);
   });
 });
 const base = {
