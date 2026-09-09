@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-09-06",
+  "reviewedOn": "2026-09-08",
   "scope": "Tracked repository inputs and classes that may be bundled into the public site; generated and installed outputs are recorded but not committed.",
   "boundaries": [
     { "id": "application-code", "pathPrefix": "src/", "material": "repository-owned", "kind": "code", "distribution": "source-and-site" },
@@ -36,9 +36,9 @@
   "assetClasses": [
     { "class": "fonts", "extensions": [".otf", ".ttf", ".woff", ".woff2"], "paths": [], "state": "none", "note": "CSS uses system font stacks; no font files or remote font service are bundled." },
     { "class": "icons", "extensions": [".ico"], "paths": [], "state": "generated", "note": "Selected @lucide/astro components emit static inline SVG in built pages; no standalone icon files are copied into the repository." },
-    { "class": "flags", "extensions": [], "paths": [], "state": "none", "note": "No flags are bundled; design guidance discourages flag imagery." },
-    { "class": "logos", "extensions": [], "paths": [], "state": "none", "note": "The wordmark is authored text, not a third-party logo asset." },
-    { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "paths": [], "state": "none", "note": "No image files are bundled." },
+    { "class": "flags", "extensions": [], "paths": ["public/contextual-media/sweden-flag.svg"], "state": "present", "note": "One sourced flag is bundled only as a place mark for the modeled Sweden case context; it is not a concept emblem." },
+    { "class": "logos", "extensions": [], "paths": ["public/contextual-media/war-production-board-seal.svg"], "state": "present", "note": "One sourced historical federal organization seal is bundled to identify the modeled War Production Board; the wordmark remains authored text." },
+    { "class": "images", "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"], "paths": ["public/contextual-media/"], "state": "present", "note": "Reviewed contextual derivatives are local, checksum-bound, and connected to exact canonical contexts by src/lib/contextual-imagery.ts." },
     { "class": "audio-video", "extensions": [".aac", ".m4a", ".mp3", ".mp4", ".ogg", ".wav", ".webm"], "paths": [], "state": "none", "note": "No audio or video files are bundled." },
     { "class": "datasets", "extensions": [".csv", ".parquet"], "paths": [], "state": "none", "note": "Canonical TypeScript records cite datasets but do not copy dataset contents." },
     { "class": "quotations", "extensions": [], "paths": ["archive/legacy-research/docs/system-comparison-by-crux-v1.md"], "state": "present", "note": "A short attributed quotation exists in the non-public archive; cited Sources are references, not copied source works." },
@@ -58,6 +58,58 @@
       "distributionNote": "Mechanically excluded from public builds.",
       "attribution": "Preserve cited author/work references; do not relicense or publish archive material until rights and provenance are reviewed.",
       "resolution": "Owner must decide whether to retain as all-rights-reserved working material, replace/rewrite items from verified sources, or remove them before any broad repository-content license is applied."
+    },
+    {
+      "id": "war-production-board-seal",
+      "paths": ["public/contextual-media/war-production-board-seal.svg"],
+      "origin": "Wikimedia Commons file US-WarProductionBoard-Seal.svg, traced from U.S. Office of War Information reproduction LC-USE6-D-001968-a.",
+      "authorOrProvider": "United States Government; traced and cleaned by Wikimedia Commons contributors.",
+      "licenseOrTerms": "United States federal work; Commons applies Public Domain Mark and PD-USGov.",
+      "termsLocator": "https://commons.wikimedia.org/wiki/File:US-WarProductionBoard-Seal.svg#Licensing",
+      "modified": true,
+      "distribution": "source-and-site",
+      "distributionNote": "Sanitized local SVG; paths, polygons, proportions, and colors retained.",
+      "attribution": "Visible credit and source/rights links identify the U.S. Government origin and traced Commons derivative.",
+      "resolution": "Reviewed for distribution on 2026-09-08; retain exact organization placement and do not imply current sponsorship."
+    },
+    {
+      "id": "peoples-party-campaign-print-1892",
+      "paths": ["public/contextual-media/peoples-party-1892-382.avif", "public/contextual-media/peoples-party-1892-382.webp", "public/contextual-media/peoples-party-1892-382.jpg", "public/contextual-media/peoples-party-1892-764.avif", "public/contextual-media/peoples-party-1892-764.webp", "public/contextual-media/peoples-party-1892-764.jpg"],
+      "origin": "Library of Congress item 2018695404, original-item digital reproduction LC-DIG-ppmsca-44763.",
+      "authorOrProvider": "Goes Lithographing Company; Chicago Sentinel Publishing Company named as copyright claimant; Library of Congress provider.",
+      "licenseOrTerms": "Library of Congress item-level advisory: No known restrictions on publication.",
+      "termsLocator": "https://hdl.loc.gov/loc.pnp/res.248.pga",
+      "modified": true,
+      "distribution": "source-and-site",
+      "distributionNote": "Complete composition retained; metadata stripped, sRGB conversion, responsive resize, and AVIF/WebP/JPEG encoding.",
+      "attribution": "Visible credit names the Library of Congress collection and exact reproduction number; source and rights links remain adjacent.",
+      "resolution": "Reviewed for distribution on 2026-09-08 under the exact item advisory, which is preserved as an advisory rather than a universal guarantee."
+    },
+    {
+      "id": "guaman-poma-drawing-80",
+      "paths": ["public/contextual-media/guaman-poma-drawing-80-415.avif", "public/contextual-media/guaman-poma-drawing-80-415.webp", "public/contextual-media/guaman-poma-drawing-80-415.jpg", "public/contextual-media/guaman-poma-drawing-80-830.avif", "public/contextual-media/guaman-poma-drawing-80-830.webp", "public/contextual-media/guaman-poma-drawing-80-830.jpg"],
+      "origin": "Wikimedia Commons file Nueva_coronica.jpg, Drawing 80, manuscript page 215, from the Royal Danish Library manuscript.",
+      "authorOrProvider": "Felipe Guamán Poma de Ayala; Royal Danish Library; reproduction via Wikimedia Commons.",
+      "licenseOrTerms": "Wikimedia Commons public-domain record, including life-plus-70 and stated pre-1931 United States publication/registration bases.",
+      "termsLocator": "https://commons.wikimedia.org/wiki/File:Nueva_coronica.jpg#Licensing",
+      "modified": true,
+      "distribution": "source-and-site",
+      "distributionNote": "Complete manuscript page retained; metadata stripped, sRGB conversion, responsive resize, and AVIF/WebP/JPEG encoding.",
+      "attribution": "Visible credit names Guaman Poma, the Royal Danish Library, and Wikimedia Commons; source and rights links remain adjacent.",
+      "resolution": "Reviewed for distribution on 2026-09-08; the record dates the drawing 1615–1616 and no creator death date is inferred."
+    },
+    {
+      "id": "sweden-flag-place-mark",
+      "paths": ["public/contextual-media/sweden-flag.svg"],
+      "origin": "Wikimedia Commons file Flag_of_Sweden.svg implementing the Swedish state specification.",
+      "authorOrProvider": "Swedish state specification; Wikimedia Commons vector provider.",
+      "licenseOrTerms": "Public-domain simple geometry; Commons also records official-insignia restrictions concerning false impressions of endorsement.",
+      "termsLocator": "https://commons.wikimedia.org/wiki/File:Flag_of_Sweden.svg#Licensing",
+      "modified": true,
+      "distribution": "source-and-site",
+      "distributionNote": "XML declaration removed; geometry, dimensions, and colors retained.",
+      "attribution": "Visible caption identifies Sweden and exact bounded case context; credit and source/rights links preserve the official-insignia note.",
+      "resolution": "Reviewed for distribution on 2026-09-08 solely as a modeled place mark, never as a concept or ideology emblem."
     }
   ],
   "dependencies": [

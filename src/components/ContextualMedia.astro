@@ -1,0 +1,59 @@
+---
+import {
+  type ContextualAssetVariant,
+  type ContextualPlacement,
+  contextualAssetForPlacement,
+} from "../lib/contextual-imagery";
+import { entityById } from "../lib/domain/canonical";
+
+interface Props {
+  placement: ContextualPlacement;
+}
+
+const { placement } = Astro.props;
+const asset = contextualAssetForPlacement(placement);
+const variants = asset?.variants ?? [];
+const byMime = (mimeType: ContextualAssetVariant["mimeType"]) =>
+  variants.filter((variant) => variant.mimeType === mimeType).sort((a, b) => a.width - b.width);
+const avif = byMime("image/avif");
+const webp = byMime("image/webp");
+const jpeg = byMime("image/jpeg");
+const svg = byMime("image/svg+xml")[0];
+const fallback = jpeg.at(-1) ?? svg;
+const srcset = (items: ContextualAssetVariant[]) =>
+  items.map(({ url, width }) => `${url} ${width}w`).join(", ");
+const alt = asset?.alt.kind === "informative" ? asset.alt.text : "";
+const depicted = entityById(placement.depictedRef.id);
+---
+
+{asset && fallback && (
+  <figure
+    class:list={["contextual-media", `contextual-media--${placement.displayMode}`, asset.kind === "organization-mark" && "contextual-media--organization-card"]}
+    data-contextual-placement={placement.id}
+    data-context-entity={`${placement.depictedRef.kind}:${placement.depictedRef.id}`}
+  >
+    <picture>
+      {avif.length > 0 && <source type="image/avif" srcset={srcset(avif)} sizes={placement.sizes} />}
+      {webp.length > 0 && <source type="image/webp" srcset={srcset(webp)} sizes={placement.sizes} />}
+      <img
+        src={fallback.url}
+        {...(jpeg.length > 1 ? { srcset: srcset(jpeg), sizes: placement.sizes } : {})}
+        width={fallback.width}
+        height={fallback.height}
+        alt={alt}
+        loading={placement.loading}
+        decoding="async"
+      />
+    </picture>
+    <figcaption>
+      {placement.displayMode === "compact-mark" && depicted && <span class="coordinate">{depicted.label}</span>}
+      <strong>{placement.caption}</strong>
+      <span>{asset.creditLine}</span>
+      <span class="contextual-media__links">
+        <a href={asset.sourcePageUrl}>Source record</a>
+        <a href={asset.manifestationUrl}>Original file</a>
+        <a href={asset.termsUrl}>Rights note: {asset.termsLabel}</a>
+      </span>
+    </figcaption>
+  </figure>
+)}

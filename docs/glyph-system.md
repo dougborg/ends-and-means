@@ -14,6 +14,10 @@ Because the selected Target shape is Feather-derived, the deployed `public/third
 A local SVG set would avoid a runtime package dependency, but would make this project responsible for drawing consistency, sanitization, provenance per file, and ongoing maintenance.
 The library package is the smaller maintenance surface because the registry imports only selected components and Astro emits static SVG with no client runtime.
 Flags and organization marks remain outside this system because they need separate provenance and must not imply that a place or organization stands for an ideology.
+Reviewed contextual media follows the separate typed registry in
+`src/lib/contextual-imagery.ts`.
+That registry binds a sourced mark or artifact to an exact modeled entity and
+selected narrative passage; it never extends the glyph vocabulary.
 
 ## Reader roles
 
