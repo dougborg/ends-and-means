@@ -168,6 +168,33 @@ It cannot prove which internal agent performed the independent review or why Cop
 The public marker is therefore the repository coordinator's accountable assertion that a separately assigned review occurred, not cryptographic proof of internal-agent independence.
 Keep internal agent handles, assignments, worktree paths, quota state, and operational explanations in private coordination state rather than public review evidence.
 
+Generate review-marker body files with the repository emitter so the body has
+the exact two lines accepted by the audit and no terminal newline. Set
+`REVIEWED_HEAD_OID` to the exact commit that completed the independent review
+or Copilot-request disposition, then confirm the pull request still has that
+head immediately before generation:
+
+```sh
+(
+  set -eu
+  pr_number="${PR_NUMBER:?Set PR_NUMBER to the reviewed pull-request number}"
+  expected_head="${REVIEWED_HEAD_OID:?Set REVIEWED_HEAD_OID to the reviewed 40-hex head}"
+  current_head="$(gh pr view "$pr_number" --json headRefOid --jq .headRefOid)"
+  test "$current_head" = "$expected_head"
+  marker_dir="$(mktemp -d)"
+  marker_file="$marker_dir/review-marker.txt"
+  trap 'rm -f "$marker_file"; rmdir "$marker_dir"' EXIT
+  pnpm emit:review-marker --kind independent-approved --head "$expected_head" --output "$marker_file"
+  gh pr comment "$pr_number" --body-file "$marker_file"
+)
+```
+
+Use `--kind copilot-unavailable` only after the normal Copilot request produces
+no review. The emitter validates an exact lowercase 40-hex commit OID, refuses
+to overwrite its output file, and never calls GitHub. A changed pull-request
+head invalidates the marker; repeat the review or request disposition and
+generate a new file for the new head.
+
 For open pull requests created under the earlier contract, add the two-line adversarial marker for the exact current head after independent review.
 When Copilot is known to be unavailable for the delivery window, do not repeat requests on every pull request; add the two-line unavailable marker instead.
 Do not rewrite unrelated review history; after any rebase, repeat review and replace the stale evidence with new exact-head markers.

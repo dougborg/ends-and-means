@@ -22,6 +22,7 @@
     "test:routes": "node scripts/environment-entry.mjs command && vitest run tests/routes",
     "test:visual": "node scripts/environment-entry.mjs focused && playwright test",
     "review:visual": "node scripts/environment-entry.mjs focused && playwright test",
+    "emit:review-marker": "node scripts/environment-entry.mjs command && node --import tsx scripts/emit-review-marker.ts",
     "validate": "node scripts/environment-entry.mjs command && node --import tsx scripts/validate-domain.ts",
     "audit:content": "node scripts/environment-entry.mjs command && node --import tsx scripts/audit-content.ts",
     "audit:content-preflight": "node scripts/environment-entry.mjs focused && node --import tsx scripts/content-semantic-preflight.ts",
