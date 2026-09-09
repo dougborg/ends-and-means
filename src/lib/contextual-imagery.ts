@@ -168,12 +168,14 @@ export function validateSvgSource(source: string) {
     )
   )
     errors.push("SVG requires the standard namespace");
+  if (!/<title>[^<]+<\/title>/i.test(source))
+    errors.push("SVG requires a nonempty title");
   if (unsafeSvgPattern.test(source))
     errors.push("SVG contains active, external, embedded, or font content");
   const tags = [...source.matchAll(/<\/?([a-zA-Z][\w:-]*)\b/g)].map(([, tag]) =>
     tag?.toLowerCase(),
   );
-  const allowedTags = new Set(["svg", "g", "path", "polygon"]);
+  const allowedTags = new Set(["svg", "title", "g", "path", "polygon"]);
   if (tags.some((tag) => !tag || !allowedTags.has(tag)))
     errors.push("SVG contains an unreviewed element");
   errors.push(...validateSvgStructure(source));
@@ -197,7 +199,7 @@ export const contextualAssets: ContextualAsset[] = [
       "https://commons.wikimedia.org/wiki/File:US-WarProductionBoard-Seal.svg#Licensing",
     retrievalDate: "2026-09-08",
     modifications:
-      "Removed XML declaration, doctype, generator comment, unused identifiers, and presentation metadata; retained vector paths, polygons, proportions, and colors.",
+      "Removed XML declaration, doctype, generator comment, unused identifiers, and presentation metadata; retained vector paths, polygons, proportions, and colors; added a descriptive title.",
     creditLine:
       "U.S. Government seal; SVG traced from an LOC/OWI reproduction and cleaned by Wikimedia Commons contributors.",
     rightsResolution: "reviewed-for-distribution",
@@ -211,9 +213,9 @@ export const contextualAssets: ContextualAsset[] = [
         mimeType: "image/svg+xml",
         width: 720,
         height: 720,
-        byteSize: 23899,
+        byteSize: 23962,
         sha256:
-          "12d98bbd534c2a05c70936ad120c3ca5aa85f5724e0c63d3dd2da4026eae2a4c",
+          "b586559a53908cb4f6186a025a9f51e0b1daae844a60ab6bc8ff45be1f6d2cb5",
       },
     ],
     byteBudget: 25000,
@@ -412,7 +414,7 @@ export const contextualAssets: ContextualAsset[] = [
       "https://commons.wikimedia.org/wiki/File:Flag_of_Sweden.svg#Licensing",
     retrievalDate: "2026-09-08",
     modifications:
-      "Removed the XML declaration only; retained official geometry, viewBox, dimensions, and colors.",
+      "Removed the XML declaration; retained official geometry, viewBox, dimensions, and colors; added a descriptive title.",
     creditLine:
       "Flag of Sweden; public-domain simple geometry. Official-insignia rules can restrict uses that imply endorsement.",
     rightsResolution: "reviewed-for-distribution",
@@ -425,9 +427,9 @@ export const contextualAssets: ContextualAsset[] = [
         mimeType: "image/svg+xml",
         width: 1600,
         height: 1000,
-        byteSize: 174,
+        byteSize: 204,
         sha256:
-          "2c8f91b794a379b25805624c160dac796788633a0e15575c1de9fc3f05d0ce45",
+          "8b0cef733681d5de873fe82218e56cd96330eb0e0d169d3ccd286b156dffca39",
       },
     ],
     byteBudget: 256,
