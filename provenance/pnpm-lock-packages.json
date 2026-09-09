@@ -4898,17 +4898,6 @@
       "evidenceDigest": "d4aba3ff1c88a4fc41ae69c443c80990c14c2d107012f0318e572a9d4abc30dc"
     },
     {
-      "key": "smol-toml@1.7.0",
-      "name": "smol-toml",
-      "version": "1.7.0",
-      "origin": "https://registry.npmjs.org/smol-toml/1.7.0",
-      "terms": "https://www.npmjs.com/package/smol-toml/v/1.7.0?activeTab=code",
-      "source": "github:squirrelchat/smol-toml",
-      "license": "BSD-3-Clause",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "cb6ce63616861170ba165200a1d5b0acb213bbed985614449557a0d64aff964a"
-    },
-    {
       "key": "smol-toml@1.8.0",
       "name": "smol-toml",
       "version": "1.8.0",

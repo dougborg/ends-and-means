@@ -27,6 +27,16 @@ owner decisions; the harness does not select a license.
 Domain validation runs transitively through `pnpm build`, which is defined as `pnpm validate && astro build` in `package.json`.
 The shared CI composite action invokes this command once; Pages consumes the resulting verified `dist` artifact.
 
+`markdownlint-cli2` currently pins `smol-toml` to a release affected by
+[GHSA-7w5x-hrqm-74c2](https://github.com/advisories/GHSA-7w5x-hrqm-74c2).
+The root pnpm workspace configuration therefore overrides only the
+`markdownlint-cli2>smol-toml` edge to
+[version 1.8.0](https://github.com/squirrelchat/smol-toml/releases/tag/v1.8.0),
+a patched version already used elsewhere in the dependency graph.
+Remove the override when a maintained `markdownlint-cli2` release depends on a
+patched `smol-toml` version, after regenerating and reviewing the lockfile and
+exact dependency provenance inventory.
+
 Repository-only verification deliberately prints `Project state: UNAVAILABLE` because pull-request jobs do not receive credentials for the private user Project.
 This is an explicit unavailable message, not evidence that Project state is clean; repository-only mode exits 0 when its repository and skill audits pass so credential-free CI can succeed.
 It likewise prints `Backlog integrity: UNAVAILABLE`: a repository checkout does
