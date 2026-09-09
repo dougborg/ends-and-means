@@ -259,6 +259,11 @@ describe("contextual imagery committed files", () => {
       "SVG requires a nonempty title",
     ],
     [
+      "whitespace title",
+      '<svg xmlns="http://www.w3.org/2000/svg"><title>   </title></svg>',
+      "SVG requires a nonempty title",
+    ],
+    [
       "escaped external paint",
       String.raw`<svg xmlns="http://www.w3.org/2000/svg"><path fill="u\72l(https://example.test/a.svg#paint)" /></svg>`,
       "SVG contains an unreviewed attribute",

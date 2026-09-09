@@ -168,8 +168,8 @@ export function validateSvgSource(source: string) {
     )
   )
     errors.push("SVG requires the standard namespace");
-  if (!/<title>[^<]+<\/title>/i.test(source))
-    errors.push("SVG requires a nonempty title");
+  const title = /<title>([^<]*)<\/title>/i.exec(source)?.[1];
+  if (!title?.trim()) errors.push("SVG requires a nonempty title");
   if (unsafeSvgPattern.test(source))
     errors.push("SVG contains active, external, embedded, or font content");
   const tags = [...source.matchAll(/<\/?([a-zA-Z][\w:-]*)\b/g)].map(([, tag]) =>
