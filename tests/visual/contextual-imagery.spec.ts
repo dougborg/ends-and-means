@@ -128,6 +128,7 @@ test("diagrams expose evidence and source marks retain exact identity", async ({
   await expect(evidence).toHaveAttribute("open", "");
   await expect(evidence.locator(".canonical-claim")).toHaveCount(7);
 
+  await page.emulateMedia({ colorScheme: "dark" });
   await gotoRenderedPage(page, "/guides/central-planning/");
   const wpb = page.locator(
     '[data-contextual-placement="central-planning-wpb-seal"]',
@@ -137,6 +138,10 @@ test("diagrams expose evidence and source marks retain exact identity", async ({
     "organization:war-production-board",
   );
   await expect(wpb.locator("img")).toHaveAttribute("alt", "");
+  await expect(wpb.locator("img")).toHaveCSS(
+    "background-color",
+    "rgb(255, 255, 255)",
+  );
   await expect(wpb).toContainText("War Production Board");
 
   await gotoRenderedPage(page, "/guides/tawantinsuyu-imperial-organization/");

@@ -42,6 +42,7 @@
     --surface: var(--color-sheet);
     --surface-subtle: #f8fbfb;
     --surface-hover: #f7fafb;
+    --media-matte: var(--color-sheet);
     --text: var(--color-night);
     --text-muted: var(--color-muted);
     --text-inverse: var(--color-sheet);
@@ -71,6 +72,7 @@
     --measure-apparatus: 64rem;
     --measure-header: 78rem;
     --measure-page: 90rem;
+    --measure-media: 58rem;
     --measure-rail: minmax(13rem, 18rem);
 
     --space-1: 0.25rem;
