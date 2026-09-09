@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { gotoRenderedPage } from "./support/rendered-page";
 
 const routes = [
@@ -10,6 +10,66 @@ const routes = [
   "/guides/economic-democracy/",
   "/concepts/liberalism/",
 ];
+
+async function expectReservedImageLayout(
+  page: Page,
+  route: string,
+  placementId: string,
+  assetPattern: string,
+) {
+  let releaseAsset = () => {};
+  let requestSeen = false;
+  const waiting = new Promise<void>((resolve) => {
+    releaseAsset = resolve;
+  });
+  await page.route(assetPattern, async (request) => {
+    requestSeen = true;
+    await waiting;
+    await request.continue();
+  });
+  try {
+    await gotoRenderedPage(page, route);
+    const figure = page.locator(`[data-contextual-placement="${placementId}"]`);
+    const image = figure.locator("img");
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => requestSeen).toBe(true);
+    const before = await figure.evaluate((element) => {
+      const imageBox = element.querySelector("img")?.getBoundingClientRect();
+      const captionBox = element
+        .querySelector("figcaption")
+        ?.getBoundingClientRect();
+      return {
+        imageHeight: imageBox?.height ?? 0,
+        imageWidth: imageBox?.width ?? 0,
+        captionTop: captionBox?.top ?? 0,
+      };
+    });
+    expect(before.imageWidth).toBeGreaterThan(0);
+    expect(before.imageHeight).toBeGreaterThan(0);
+    releaseAsset();
+    await expect
+      .poll(() =>
+        image.evaluate((item) => (item as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
+    const after = await figure.evaluate((element) => {
+      const imageBox = element.querySelector("img")?.getBoundingClientRect();
+      const captionBox = element
+        .querySelector("figcaption")
+        ?.getBoundingClientRect();
+      return {
+        imageHeight: imageBox?.height ?? 0,
+        imageWidth: imageBox?.width ?? 0,
+        captionTop: captionBox?.top ?? 0,
+      };
+    });
+    for (const key of ["imageHeight", "imageWidth", "captionTop"] as const)
+      expect(Math.abs(after[key] - before[key]), key).toBeLessThanOrEqual(1);
+  } finally {
+    releaseAsset();
+    await page.unroute(assetPattern);
+  }
+}
 
 test("contextual imagery remains stable across responsive layouts", async ({
   page,
@@ -87,6 +147,24 @@ test("diagrams expose evidence and source marks retain exact identity", async ({
   ).toHaveAttribute("alt", /woman weaving at an upright loom/);
 });
 
+test("intrinsic dimensions reserve raster and SVG layout before decoding", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 820, height: 1000 });
+  await expectReservedImageLayout(
+    page,
+    "/guides/populism/",
+    "populism-peoples-party-print",
+    "**/contextual-media/peoples-party-1892-*",
+  );
+  await expectReservedImageLayout(
+    page,
+    "/guides/central-planning/",
+    "central-planning-wpb-seal",
+    "**/contextual-media/war-production-board-seal.svg",
+  );
+});
+
 test("contextual media remains legible without scripts, in print, and in forced colors", async ({
   browser,
   page,
@@ -121,6 +199,16 @@ test("contextual media remains legible without scripts, in print, and in forced 
   await expect(
     page.locator('[data-concept-diagram="social-ownership-rights-diagram"]'),
   ).toBeVisible();
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
   await page.emulateMedia({ media: "print", forcedColors: "none" });
   await expect(
     page.locator('[data-contextual-placement="social-ownership-sweden-place"]'),

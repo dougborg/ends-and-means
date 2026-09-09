@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, statSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
+  conceptDiagramFor,
   conceptDiagrams,
   contextualAssetForPlacement,
   contextualAssets,
@@ -90,6 +91,10 @@ describe("contextual imagery placement", () => {
       "social-ownership",
       "populism",
     ]);
+    expect(conceptDiagramFor("populism")?.id).toBe(
+      "populism-attributed-accounts-diagram",
+    );
+    expect(conceptDiagramFor("liberalism")).toBeUndefined();
   });
 });
 
@@ -126,6 +131,40 @@ describe("contextual imagery rejection boundaries", () => {
       ]),
     );
   });
+
+  it("rejects a wrong live context even when the passage owns its Statements", () => {
+    const wrongOrganization = structuredClone(contextualPlacements);
+    itemAt(wrongOrganization, 0).contextRef = {
+      kind: "organization",
+      id: "wpb-requirements-committee",
+    };
+    expect(
+      validateContextualImagery(
+        canonicalGraph,
+        canonicalGraph.subjectGuides,
+        contextualAssets,
+        wrongOrganization,
+      ),
+    ).toContain(
+      "central-planning-wpb-seal: context does not match the depicted identity",
+    );
+
+    const wrongCase = structuredClone(contextualPlacements);
+    itemAt(wrongCase, 1).contextRef = {
+      kind: "case",
+      id: "peronist-formation-1943-1955",
+    };
+    expect(
+      validateContextualImagery(
+        canonicalGraph,
+        canonicalGraph.subjectGuides,
+        contextualAssets,
+        wrongCase,
+      ),
+    ).toContain(
+      "populism-peoples-party-print: guide passage does not select its context",
+    );
+  });
 });
 
 describe("contextual imagery provenance boundaries", () => {
@@ -137,6 +176,7 @@ describe("contextual imagery provenance boundaries", () => {
     itemAt(assets, 2).termsLabel = "";
     itemAt(assets, 2).creditLine = "";
     itemAt(assets, 3).termsUrl = "https://";
+    itemAt(assets, 1).boundedPeriod = { startYear: 2000, endYear: 1892 };
     itemAt(itemAt(assets, 0).variants, 0).url =
       "/contextual-media/../../outside.svg";
     expect(
@@ -150,6 +190,7 @@ describe("contextual imagery provenance boundaries", () => {
         "war-production-board-seal: retrieval date is missing or malformed",
         "war-production-board-seal: asset URL must be local",
         "peoples-party-campaign-print-1892: publication rights are unresolved",
+        "peoples-party-campaign-print-1892: bounded period is invalid",
         "guaman-poma-drawing-80: descriptive provenance record is incomplete",
         "sweden-flag: terms locator must use HTTPS",
       ]),

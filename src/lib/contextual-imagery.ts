@@ -318,7 +318,8 @@ export const contextualAssets: ContextualAsset[] = [
       "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nueva_coronica.jpg",
     sourceSha1: "490a4e52798f401d360a6bf4cb8d348fa8fd2216",
     termsLabel: "Public Domain Mark record at Wikimedia Commons",
-    termsUrl: "https://creativecommons.org/publicdomain/mark/1.0/",
+    termsUrl:
+      "https://commons.wikimedia.org/wiki/File:Nueva_coronica.jpg#Licensing",
     retrievalDate: "2026-09-08",
     modifications:
       "Preserved the complete manuscript page; removed embedded metadata, converted to sRGB, resized to 415 and 830 pixels wide, and encoded AVIF, WebP, and JPEG derivatives.",
@@ -448,7 +449,7 @@ export const contextualPlacements: ContextualPlacement[] = [
     contextRef: { kind: "organization", id: "war-production-board" },
     statementIds: ["cmp-authority", "cmp-scope"],
     caption:
-      "War Production Board seal, used here to identify the agency administering the bounded United States wartime case.",
+      "War Production Board seal. The agency administered the bounded United States wartime materials-allocation case.",
     displayMode: "compact-mark",
     sizes: "9rem",
     loading: "lazy",
@@ -494,7 +495,7 @@ export const contextualPlacements: ContextualPlacement[] = [
       "tawantinsuyu-guaman-poma-service",
     ],
     caption:
-      "Guaman Poma's Drawing 80, manuscript page 215, sits beside his age-graded service account. The drawing is a colonial-era retrospective representation, not direct proof of pre-conquest practice.",
+      "Guaman Poma, Drawing 80, manuscript page 215. This colonial-era retrospective image appears in his age-group sequence; it is not direct evidence of pre-conquest practice.",
     displayMode: "archival",
     sizes: "(max-width: 48rem) 92vw, 30rem",
     loading: "lazy",
@@ -636,6 +637,17 @@ function selectedByDossierSection(
   );
 }
 
+function selectedByDossierContext(
+  dossier: Dossier,
+  sectionId: string,
+  reference: EntityRef,
+) {
+  return (
+    sameRef(dossier.subject, reference) ||
+    selectedByDossierSection(dossier, sectionId, reference)
+  );
+}
+
 function contextualCaseForEpisode(
   graph: CompiledDomainGraph,
   reference: EntityRef,
@@ -655,6 +667,27 @@ function isExactCalendarDate(value: string) {
     parsed.getUTCFullYear() === Number(year) &&
     parsed.getUTCMonth() + 1 === Number(month) &&
     parsed.getUTCDate() === Number(day)
+  );
+}
+
+function isValidBoundedPeriod(period: ContextualAsset["boundedPeriod"]) {
+  return (
+    !period ||
+    (Number.isInteger(period.startYear) &&
+      Number.isInteger(period.endYear) &&
+      period.startYear <= period.endYear)
+  );
+}
+
+function hasCompleteAssetProvenance(asset: ContextualAsset) {
+  return Boolean(
+    asset.title.trim() &&
+      asset.creatorOrAuthority.trim() &&
+      asset.creationDateOrPeriod.trim() &&
+      asset.modifications.trim() &&
+      asset.creditLine.trim() &&
+      asset.termsLabel.trim() &&
+      asset.variants.length > 0,
   );
 }
 
@@ -715,18 +748,12 @@ function validateAsset(
     errors.push(`${asset.id}: retrieval date is missing or malformed`);
   if (!/^[a-f0-9]{40}$/.test(asset.sourceSha1))
     errors.push(`${asset.id}: source SHA-1 is missing or malformed`);
-  if (
-    !asset.title.trim() ||
-    !asset.creatorOrAuthority.trim() ||
-    !asset.creationDateOrPeriod.trim() ||
-    !asset.modifications.trim() ||
-    !asset.creditLine.trim() ||
-    !asset.termsLabel.trim() ||
-    asset.variants.length === 0
-  )
+  if (!hasCompleteAssetProvenance(asset))
     errors.push(`${asset.id}: descriptive provenance record is incomplete`);
   if (asset.alt.kind === "informative" && !asset.alt.text.trim())
     errors.push(`${asset.id}: informative alt text is empty`);
+  if (!isValidBoundedPeriod(asset.boundedPeriod))
+    errors.push(`${asset.id}: bounded period is invalid`);
   for (const reference of asset.depictedRefs) {
     if (graph.indexes.entitiesById[reference.id]?.kind !== reference.kind)
       errors.push(
@@ -762,13 +789,13 @@ function guidePlacementErrors(
   const episodeCase = contextualCaseForEpisode(graph, placement.contextRef);
   const selectedContext = Boolean(
     dossier &&
-      (selectedByDossierSection(
+      (selectedByDossierContext(
         dossier,
         target.dossierSectionId,
         placement.contextRef,
       ) ||
         (episodeCase &&
-          selectedByDossierSection(dossier, target.dossierSectionId, {
+          selectedByDossierContext(dossier, target.dossierSectionId, {
             kind: "case",
             id: episodeCase.id,
           }))),
@@ -776,8 +803,8 @@ function guidePlacementErrors(
   const ownsStatements = placement.statementIds.every((id) =>
     section?.statementIds.includes(id),
   );
-  if (!selectedContext && !ownsStatements)
-    errors.push(`${placement.id}: guide passage does not own its context`);
+  if (!selectedContext)
+    errors.push(`${placement.id}: guide passage does not select its context`);
   if (section && !ownsStatements)
     errors.push(
       `${placement.id}: guide passage does not own every contextual Statement`,
@@ -841,6 +868,13 @@ function placementIdentityErrors(
     errors.push(`${placement.id}: depicted reference kind does not match`);
   if (context?.kind !== placement.contextRef.kind)
     errors.push(`${placement.id}: context reference kind does not match`);
+  if (
+    asset.kind !== "place-mark" &&
+    !sameRef(placement.contextRef, placement.depictedRef)
+  )
+    errors.push(
+      `${placement.id}: context does not match the depicted identity`,
+    );
   for (const statementId of placement.statementIds) {
     if (graph.indexes.entitiesById[statementId]?.kind !== "statement")
       errors.push(`${placement.id}: Statement ${statementId} is missing`);
