@@ -73,6 +73,34 @@ the target platform and preserve every required license or notice text.
 | `@lucide/astro` | selected static interface glyphs | Lucide contributors; ISC; unmodified component output; installed through pnpm; see `docs/glyph-system.md`. |
 | Future third-party assets | fonts, flags, logos, images, media, datasets, quotations, imported metadata | Require an inventory record before commit or publication, including source, provider, terms, modifications, distribution, and attribution. |
 
+## Contextual media
+
+Bundled contextual images have two linked records.
+`provenance/inventory.json` records the repository licensing boundary and every
+distributed path.
+`src/lib/contextual-imagery.ts` records the exact source manifestation, source
+checksum, creator or authority, retrieval date, terms link, modifications,
+local derivative checksums and dimensions, alt treatment, depicted entity, and
+allowed narrative placement.
+Both records must be complete before an asset appears on a live page.
+
+Review a new or replaced asset directly at its source page and manifestation.
+Record the retrieval date and source checksum, make responsive derivatives
+without an identity-changing crop, then record each committed file's checksum,
+dimensions, and byte size.
+Inspect SVG source for scripts, event handlers, external references, embedded
+content, animation, style imports, fonts, `foreignObject`, doctypes, and
+entities; serve reviewed SVG files through `img` rather than inline markup.
+Run the contextual-media asset tests against the committed bytes.
+
+Rights language remains exact to the provider.
+An advisory such as the Library of Congress wording “No known restrictions on
+publication” remains an advisory, while official-insignia restrictions remain
+visible beside an otherwise public-domain mark.
+If identity, terms, or permission becomes unresolved, remove the placement and
+distributed derivatives together or replace them with a separately reviewed
+record; do not preserve the image behind an unreviewed exception.
+
 This split keeps the live site canonical-only and prevents a repository-wide
 license statement from accidentally claiming rights in unresolved archive or
 future third-party material.

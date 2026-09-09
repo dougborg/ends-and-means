@@ -207,9 +207,13 @@ graph paper, newspapers, government forms, or academic PDFs. Surfaces are cool
 and clear. Rules express relationships. Labels behave like coordinates because
 they name actual analytical roles.
 
-Avoid political red/blue coding, flags, ornamental portraits, marble columns,
+Avoid political red/blue coding, ornamental portraits, marble columns,
 voting-box imagery, gradients, glass effects, pill-heavy interfaces, rounded
 card grids, and generic “serious publication” sepia.
+Use a flag only as a restrained mark beside an exact modeled place and bounded
+case context.
+A flag never represents an abstract concept, ideology, actor, or inferred
+national identity.
 
 The reusable Light-theme foundations, semantic token roles, normalized
 measures, spacing rhythm, component boundaries, and accessibility rules are

@@ -1,0 +1,133 @@
+import { expect, test } from "@playwright/test";
+import { gotoRenderedPage } from "./support/rendered-page";
+
+const routes = [
+  "/concepts/social-ownership/",
+  "/concepts/populism/",
+  "/guides/central-planning/",
+  "/guides/populism/",
+  "/guides/tawantinsuyu-imperial-organization/",
+  "/guides/economic-democracy/",
+  "/concepts/liberalism/",
+];
+
+test("contextual imagery remains stable across responsive layouts", async ({
+  page,
+}) => {
+  for (const viewport of [
+    { width: 1440, height: 1000 },
+    { width: 820, height: 1000 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    for (const route of routes) {
+      await gotoRenderedPage(page, route);
+      expect(
+        await page.evaluate(
+          () =>
+            document.documentElement.scrollWidth -
+            document.documentElement.clientWidth,
+        ),
+        `${route} at ${viewport.width}px`,
+      ).toBeLessThanOrEqual(1);
+      const media = page.locator("[data-contextual-placement]");
+      for (let index = 0; index < (await media.count()); index += 1) {
+        const figure = media.nth(index);
+        await expect(figure).toBeVisible();
+        const image = figure.locator("img");
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toHaveJSProperty("complete", true);
+        expect(
+          await image.evaluate(
+            (element) => (element as HTMLImageElement).naturalWidth,
+          ),
+        ).toBeGreaterThan(0);
+        await expect(
+          figure.getByRole("link", { name: "Source record" }),
+        ).toHaveAttribute("href", /^https:\/\//);
+        await expect(
+          figure.getByRole("link", { name: /^Rights note:/ }),
+        ).toHaveAttribute("href", /^https:\/\//);
+      }
+    }
+  }
+});
+
+test("diagrams expose evidence and source marks retain exact identity", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await gotoRenderedPage(page, "/concepts/populism/");
+  const diagram = page.locator(
+    '[data-concept-diagram="populism-attributed-accounts-diagram"]',
+  );
+  await expect(diagram.locator(":scope > ol > li")).toHaveCount(5);
+  const evidence = diagram.locator("details");
+  await evidence.locator("summary").focus();
+  await evidence.locator("summary").press("Enter");
+  await expect(evidence).toHaveAttribute("open", "");
+  await expect(evidence.locator(".canonical-claim")).toHaveCount(7);
+
+  await gotoRenderedPage(page, "/guides/central-planning/");
+  const wpb = page.locator(
+    '[data-contextual-placement="central-planning-wpb-seal"]',
+  );
+  await expect(wpb).toHaveAttribute(
+    "data-context-entity",
+    "organization:war-production-board",
+  );
+  await expect(wpb.locator("img")).toHaveAttribute("alt", "");
+  await expect(wpb).toContainText("War Production Board");
+
+  await gotoRenderedPage(page, "/guides/tawantinsuyu-imperial-organization/");
+  await expect(
+    page.locator(
+      '[data-contextual-placement="tawantinsuyu-guaman-poma-drawing"] img',
+    ),
+  ).toHaveAttribute("alt", /woman weaving at an upright loom/);
+});
+
+test("contextual media remains legible without scripts, in print, and in forced colors", async ({
+  browser,
+  page,
+}, testInfo) => {
+  const baseURL = testInfo.project.use.baseURL;
+  if (typeof baseURL !== "string")
+    throw new Error("Playwright project must configure baseURL");
+  const noScript = await browser.newContext({
+    baseURL,
+    javaScriptEnabled: false,
+    viewport: { width: 390, height: 844 },
+  });
+  const mobile = await noScript.newPage();
+  await gotoRenderedPage(mobile, "/guides/populism/");
+  await expect(
+    mobile.locator(
+      '[data-contextual-placement="populism-peoples-party-print"]',
+    ),
+  ).toBeVisible();
+  expect(
+    await mobile.evaluate(
+      () =>
+        document.documentElement.scrollWidth -
+        document.documentElement.clientWidth,
+    ),
+  ).toBeLessThanOrEqual(1);
+  await noScript.close();
+
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.emulateMedia({ colorScheme: "dark", forcedColors: "active" });
+  await gotoRenderedPage(page, "/concepts/social-ownership/");
+  await expect(
+    page.locator('[data-concept-diagram="social-ownership-rights-diagram"]'),
+  ).toBeVisible();
+  await page.emulateMedia({ media: "print", forcedColors: "none" });
+  await expect(
+    page.locator('[data-contextual-placement="social-ownership-sweden-place"]'),
+  ).toBeVisible();
+  await expect(
+    page.locator(
+      '[data-contextual-placement="social-ownership-sweden-place"] figcaption',
+    ),
+  ).toContainText("Sweden");
+});

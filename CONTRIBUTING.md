@@ -208,6 +208,11 @@ that its reported command passed.
   Regenerate lockfile evidence with `pnpm inventory:dependencies` after an
   intentional dependency change. Unresolved third-party material cannot enter
   the live site.
+- Contextual media also requires a typed placement record in
+  `src/lib/contextual-imagery.ts`.
+  Recheck the exact asset identity and terms during review, bind the placement
+  to a selected modeled context, and keep factual caption claims owned by named
+  canonical Statements.
 - Copilot and independent adversarial review are project-process requirements.
   Request Copilot normally; when it produces no review, record the explicit
   exact-head unavailable marker instead of silently inferring availability or

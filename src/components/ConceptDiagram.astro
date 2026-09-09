@@ -1,0 +1,38 @@
+---
+import type { ConceptDiagramDefinition } from "../lib/contextual-imagery";
+import { entityById } from "../lib/domain/canonical";
+import CanonicalStatement from "./CanonicalStatement.astro";
+
+interface Props {
+  diagram: ConceptDiagramDefinition;
+}
+
+const { diagram } = Astro.props;
+---
+
+<figure class="concept-diagram" data-concept-diagram={diagram.id} aria-labelledby={`${diagram.id}-title`}>
+  <header>
+    <p class="coordinate">QUESTIONS TO SEPARATE</p>
+    <h2 id={`${diagram.id}-title`}>{diagram.heading}</h2>
+    <p>{diagram.introduction}</p>
+  </header>
+  <ol>
+    {diagram.items.map((item, index) => (
+      <li>
+        <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+        <h3>{item.heading}</h3>
+        {item.statementIds.map((id) => {
+          const statement = entityById(id);
+          return statement?.kind === "statement" && <p data-statement-id={id}>{statement.text}</p>;
+        })}
+      </li>
+    ))}
+  </ol>
+  <details class="reference-disclosure concept-diagram__evidence">
+    <summary>Sources for this diagram <span>{diagram.statementIds.length} claims</span></summary>
+    <div class="reference-disclosure__body">
+      {diagram.statementIds.map((id) => <CanonicalStatement statementId={id} anchored={false} />)}
+    </div>
+  </details>
+  <figcaption>{diagram.boundary}</figcaption>
+</figure>

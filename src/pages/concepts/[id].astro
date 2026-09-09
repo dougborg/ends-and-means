@@ -1,10 +1,12 @@
 ---
 import CanonicalStatement from "../../components/CanonicalStatement.astro";
+import ConceptDiagram from "../../components/ConceptDiagram.astro";
 import DossierStandfirst from "../../components/DossierStandfirst.astro";
 import ExternalReferences from "../../components/ExternalReferences.astro";
 import NarrativeDossier from "../../components/NarrativeDossier.astro";
 import OpenResearchQuestions from "../../components/OpenResearchQuestions.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { conceptDiagramFor } from "../../lib/contextual-imagery";
 import type { Approach, Concept } from "../../lib/domain";
 import { canonicalGraph, dossierForSubject, entitiesOfKind, entityById, relationshipsTo } from "../../lib/domain/canonical";
 import { nonBrowseGuidesDiscoveredAt } from "../../lib/explore-discovery";
@@ -15,13 +17,15 @@ const dossier = dossierForSubject("concept", concept.id);
 const approaches = relationshipsTo(concept.id).filter((relation) => relation.predicate === "interprets-concept").map((relation) => ({ approach: entityById(relation.subject.id) as Approach | undefined, role: relation.role, interpretation: relation.interpretation, statementIds: relation.statementIds })).filter((value): value is { approach: Approach; role: "core" | "adjacent" | "peripheral" | "contested"; interpretation: string; statementIds: string[] } => Boolean(value.approach));
 const narrativeSections = dossier?.sections ?? [{ id: "meaning", heading: "What it means here", body: concept.scopeNote, traceStatus: "research-gap" as const, statementIds: [] }];
 const focusedGuides = nonBrowseGuidesDiscoveredAt(canonicalGraph.subjectGuides, `/concepts/${concept.id}/`);
+const diagram = conceptDiagramFor(concept.id);
 ---
 <BaseLayout title={concept.label} description={dossier?.standfirst ?? concept.description} fullBleed>
   <article class="concept-dossier canonical-dossier">
     <nav aria-label="Breadcrumb"><a href="/explore/">Explore</a> / Concept</nav>
     <header><p class="coordinate">CONCEPT</p><h1>{concept.label}</h1><DossierStandfirst content={dossier?.standfirst ?? concept.description} statementIds={dossier?.standfirstStatementIds} /></header>
     {focusedGuides.length > 0 && <nav class="next-actions" aria-label={`Guides about ${concept.label}`}>{focusedGuides.map(({ guide }) => <a href={`/guides/${guide.slug}/`}>Read: {guide.label}</a>)}</nav>}
-    <NarrativeDossier sections={narrativeSections} label="Definition" />
+    {diagram && <ConceptDiagram diagram={diagram} />}
+    <NarrativeDossier sections={narrativeSections} label="Definition" conceptId={concept.id} />
     <OpenResearchQuestions kind="concept" id={concept.id} />
     <section class="reference-apparatus" aria-labelledby="concept-reference-title"><header><p class="coordinate">REFERENCE</p><h2 id="concept-reference-title">Usage and orientation</h2></header>{approaches.length > 0 && <details class="apparatus-group"><summary>How published approaches use this idea <span>{approaches.length}</span></summary><div class="apparatus-group__body apparatus-group__body--single">{approaches.map(({ approach, role, interpretation, statementIds }) => <article><p class="coordinate">{role}</p><h3><a href={`/explore/${approach.id}/`}>{approach.label}</a></h3><p>{interpretation}</p>{statementIds.map((id) => <CanonicalStatement statementId={id} />)}</article>)}</div></details>}<details class="apparatus-group"><summary>External orientation</summary><div class="apparatus-group__body apparatus-group__body--single"><ExternalReferences references={concept.externalRefs} /></div></details></section>
   </article>

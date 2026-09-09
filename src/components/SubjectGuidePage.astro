@@ -1,4 +1,5 @@
 ---
+import { contextualPlacementsForGuideNarrative } from "../lib/contextual-imagery";
 import type {
   DomainRelationship,
   Dossier,
@@ -16,6 +17,7 @@ import {
   visibleSubjectGuideSections,
 } from "../lib/subject-guide-presentation";
 import CanonicalStatement from "./CanonicalStatement.astro";
+import ContextualMedia from "./ContextualMedia.astro";
 import Glyph from "./Glyph.astro";
 import MarkdownProse from "./MarkdownProse.astro";
 import OnPageNavigation from "./OnPageNavigation.astro";
@@ -34,8 +36,8 @@ function dossierFor(id: string) {
 }
 
 type NarrativeSelection =
-  | { narrative: Dossier; standfirst: true }
-  | { narrative: NarrativeSection; standfirst: false };
+  | { narrative: Dossier; standfirst: true; dossierId: string }
+  | { narrative: NarrativeSection; standfirst: false; dossierId: string; sectionId: string };
 
 function selectedNarrative(
   section: SubjectGuideSection,
@@ -45,11 +47,11 @@ function selectedNarrative(
     const dossier = dossierFor(reference.dossierId);
     if (!dossier) continue;
     if (reference.sectionId === undefined) {
-      selections.push({ narrative: dossier, standfirst: true });
+      selections.push({ narrative: dossier, standfirst: true, dossierId: dossier.id });
       continue;
     }
     const narrative = dossier.sections.find(({ id }) => id === reference.sectionId);
-    if (narrative) selections.push({ narrative, standfirst: false });
+    if (narrative) selections.push({ narrative, standfirst: false, dossierId: dossier.id, sectionId: narrative.id });
   }
   return selections;
 }
@@ -191,6 +193,12 @@ function ownsObligationAnchor(id: string) {
               return (
                 <div class="subject-guide__passage">
                   <MarkdownProse content={narrativeBody(selection)} />
+                  {!selection.standfirst && contextualPlacementsForGuideNarrative(
+                    guide.id,
+                    section.id,
+                    selection.dossierId,
+                    selection.sectionId,
+                  ).map((placement) => <ContextualMedia placement={placement} />)}
                   {statementIds.length > 0 && (
                     <details class="reference-disclosure subject-guide__evidence">
                       <summary>Sources for “{evidenceSubject}” <span>{statementIds.length} {statementIds.length === 1 ? "claim" : "claims"}</span></summary>
