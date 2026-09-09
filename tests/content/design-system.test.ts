@@ -183,6 +183,8 @@ describe("design tokens and shared components", () => {
 
     expect(tokens).toContain("--canvas:");
     expect(tokens).toContain("--measure-page: 90rem");
+    expect(tokens).toContain("--measure-media: 58rem");
+    expect(tokens).toContain("--media-matte: var(--color-sheet)");
     expect(tokens).toContain("--space-1: 0.25rem");
     expect(tokens).toContain("--shadow-panel:");
     for (const { file, css } of contents.filter(
