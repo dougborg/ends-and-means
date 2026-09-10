@@ -23,11 +23,19 @@ import {
 
 const roots: string[] = [];
 const script = resolve("scripts/record-execution.mjs");
-const tsx = resolve("node_modules/tsx/dist/loader.mjs");
 afterEach(() => {
   for (const root of roots.splice(0))
     rmSync(root, { recursive: true, force: true });
 });
+function fixtureEnvironment(bin: string, inherited = process.env) {
+  // The selected fixture executable is also the child launcher authority.
+  // An inherited host launcher would trigger unrelated version subprocesses.
+  return {
+    ...inherited,
+    PATH: `${bin}:${inherited.PATH}`,
+    npm_execpath: join(bin, "pnpm"),
+  };
+}
 function fixture(exit: number) {
   const root = realpathSync(mkdtempSync(join(tmpdir(), "execution-cli-")));
   roots.push(root);
@@ -85,12 +93,16 @@ function fixture(exit: number) {
   const privateState = join(root, "state.json");
   writeFileSync(privateState, JSON.stringify(state), { mode: 0o600 });
   const store = join(root, "records");
+  const ambientLauncher = join(root, "ambient-pnpm");
+  writeFileSync(
+    ambientLauncher,
+    '#!/bin/sh\nprintf "called\\n" >> "$0.calls"\nprintf "11.25.0\\n"\n',
+    { mode: 0o700 },
+  );
   const call = (mode: string, extra: string[] = []) =>
     spawnSync(
       process.execPath,
       [
-        "--import",
-        tsx,
         script,
         mode,
         "--store",
@@ -103,12 +115,15 @@ function fixture(exit: number) {
       ],
       {
         cwd: worktree,
-        env: { ...process.env, PATH: `${bin}:${process.env.PATH}` },
+        env: fixtureEnvironment(bin, {
+          ...process.env,
+          npm_execpath: ambientLauncher,
+        }),
         encoding: "utf8",
         timeout: 20_000,
       },
     );
-  return { call, store, root, bin, worktree, privateState };
+  return { call, store, root, bin, worktree, privateState, ambientLauncher };
 }
 describe("execution CLI actual direct child outcomes", () => {
   it.each([0, 7])(
@@ -181,8 +196,6 @@ describe("execution interruptions", () => {
     const child = spawn(
       process.execPath,
       [
-        "--import",
-        tsx,
         script,
         "run",
         "--store",
@@ -196,7 +209,7 @@ describe("execution interruptions", () => {
       ],
       {
         cwd: worktree,
-        env: { ...process.env, PATH: `${bin}:${process.env.PATH}` },
+        env: fixtureEnvironment(bin),
         stdio: ["ignore", "pipe", "pipe"],
       },
     );
@@ -252,7 +265,7 @@ describe("scoped authoring and output bounds", () => {
   it.each([0, 7])(
     "records focused exit %s on dirty source without claiming exact commit PASS",
     (exit) => {
-      const { call, worktree } = fixture(exit);
+      const { call, worktree, store, ambientLauncher } = fixture(exit);
       for (const name of ["package.json", ".node-version", ".nvmrc"])
         writeFileSync(join(worktree, name), readFileSync(name));
       writeFileSync(join(worktree, "dirty.txt"), "authoring change");
@@ -269,6 +282,28 @@ describe("scoped authoring and output bounds", () => {
         exactHeadPass: false,
         blocker: exit === 0 ? "INPUT_CHANGED" : "COMMAND_FAILED",
       });
+      const runId = readdirSync(store)[0];
+      if (!runId) throw new Error("Missing actual focused run");
+      const started = JSON.parse(
+        readFileSync(join(store, runId, "0001.json"), "utf8"),
+      );
+      const terminal = JSON.parse(
+        readFileSync(join(store, runId, "0002.json"), "utf8"),
+      );
+      expect(started.payload).toMatchObject({ kind: "spawned" });
+      expect(terminal.payload).toMatchObject({
+        kind: "finished",
+        exitCode: exit,
+        environment: { source: { dirty: true } },
+      });
+      expect(readFileSync(join(store, runId, "output.log"), "utf8")).toContain(
+        "RAW_LOG_SENTINEL",
+      );
+      const ambientCalls = existsSync(`${ambientLauncher}.calls`)
+        ? readFileSync(`${ambientLauncher}.calls`, "utf8").trim().split("\n")
+            .length
+        : 0;
+      expect(ambientCalls).toBe(0);
     },
   );
   it("drains output beyond the private log cap while preserving completion", () => {
@@ -365,8 +400,6 @@ function startAsyncRun(input: ReturnType<typeof fixture>) {
   const child = spawn(
     process.execPath,
     [
-      "--import",
-      tsx,
       script,
       "run",
       "--store",
@@ -380,7 +413,7 @@ function startAsyncRun(input: ReturnType<typeof fixture>) {
     ],
     {
       cwd: input.worktree,
-      env: { ...process.env, PATH: `${input.bin}:${process.env.PATH}` },
+      env: fixtureEnvironment(input.bin),
       stdio: ["ignore", "pipe", "pipe"],
     },
   );
