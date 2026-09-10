@@ -44,6 +44,7 @@ export const researchBriefContract = {
     "inspect-used-passages",
     "targeted-follow-up",
     "independent-review",
+    "separate-roles",
   ],
 } as const;
 

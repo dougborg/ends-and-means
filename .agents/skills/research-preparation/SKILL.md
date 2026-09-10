@@ -86,5 +86,7 @@ The `research-content-changes` skill is the implementation consumer. Its author
 must inspect every passage actually used, validate the final claim-to-source
 mapping, preserve the original issue scope, and request targeted follow-up for a
 material gap instead of silently expanding the work or restarting discovery.
-Substantial content still requires independent final review and its own
-publication gates.
+For a substantial tranche, hand the brief to an implementation agent who did
+not prepare it, then use another agent for independent final review. A small
+correction may use one agent and the proportionate short brief. Every content
+change retains its own publication gates.
