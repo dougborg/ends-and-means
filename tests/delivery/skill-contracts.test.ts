@@ -141,9 +141,26 @@ describe("research brief capability audit", () => {
     const original = await readFile(preparationPath, "utf8");
     await writeFile(
       preparationPath,
-      original.replace(
-        "Prepare a bounded, implementation-ready research brief",
-        "Create a scoped research handoff",
+      original
+        .replace(
+          "Prepare a bounded, implementation-ready research brief",
+          "Create a scoped research handoff",
+        )
+        .replace(
+          "Research preparation does not require a worktree",
+          "A worktree is unnecessary for research preparation",
+        ),
+    );
+    const examplesPath = join(
+      root,
+      ".agents/skills/research-preparation/references/examples.md",
+    );
+    const examples = await readFile(examplesPath, "utf8");
+    await writeFile(
+      examplesPath,
+      examples.replace(
+        "keep the dependent claim out of the evidence-complete set",
+        "exclude the dependent claim from evidence-complete claims",
       ),
     );
     expect(auditSkillContracts(root)).toEqual([]);

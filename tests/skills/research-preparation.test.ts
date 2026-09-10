@@ -30,9 +30,10 @@ describe("research-preparation skill", () => {
         "utf8",
       ),
     ).resolves.toContain(`research-brief:v${researchBriefContract.version}`);
-    expect(skill).toContain("does not require a worktree");
-    expect(skill).toContain("Do not edit `content/domain/`");
-    expect(skill).toContain("delivery coordinator separately decides");
+    expect(skill).toContain("references/research-brief-template.md");
+    expect(skill).toContain(
+      "../research-content-changes/references/editorial-policy.md",
+    );
   });
 
   it("keeps the versioned brief structurally complete without pinning prose", async () => {
@@ -61,7 +62,8 @@ describe("research-preparation skill", () => {
     expect(examples).toContain(
       "research-brief-example:inaccessible-source disposition:needs-evidence",
     );
-    expect(examples).toContain("keep the dependent claim out");
-    expect(examples).toContain("does not change the evidence state");
+    expect(examples).not.toContain(
+      "research-brief-example:inaccessible-source disposition:ready",
+    );
   });
 });

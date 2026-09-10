@@ -39,7 +39,14 @@ new lead.
 
 A small correction may arrive with the template's proportionate short brief.
 Use the same evidence and projection boundaries without demanding unrelated
-sections. Substantial content still receives an independent final review.
+sections.
+
+<!-- research-handoff:separate-roles -->
+
+For a substantial tranche, the implementation agent must be different from the
+research-preparation agent, and another agent performs the independent final
+review. A small correction may use one agent while retaining its evidence and
+release gates.
 
 Begin with the reader's familiar subject or question.
 The primary product is a clear learning and comparison journey; the graph and
