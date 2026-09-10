@@ -107,7 +107,7 @@ const { readFileSync } = require("node:fs");
 const [command, action] = process.argv.slice(2);
 if (command === "api") process.stdout.write(readFileSync(${JSON.stringify(responsePath)}));
 else if (command === "project" && action === "view") console.log(JSON.stringify({number:7,title:"Delivery",public:false}));
-else if (command === "project" && action === "item-list") console.log(JSON.stringify({items:[]}));
+else if (command === "project" && action === "item-list") console.log(JSON.stringify({items:[],totalCount:0}));
 else if (command === "label" && action === "list") console.log("[]");
 else { console.error("Unexpected command"); process.exitCode = 1; }
 `,

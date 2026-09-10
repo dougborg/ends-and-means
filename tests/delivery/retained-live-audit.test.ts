@@ -68,7 +68,7 @@ appendFileSync(${JSON.stringify(calls)}, JSON.stringify(args) + "\\n");
 const [command, action] = args;
 let value;
 if (command === "project" && action === "view") value = {number:7,title:"Ends and Means — Delivery",public:false};
-else if (command === "project" && action === "item-list") value = {items:[]};
+else if (command === "project" && action === "item-list") value = {items:[],totalCount:0};
 else if (command === "label") value = ${JSON.stringify(requiredTrackLabels.map((name) => ({ name })))};
 else if (command === "api" && args.includes("--paginate")) value = [[{number:99,title:"Retained work",body:"Preserved scope",state:"open",updated_at:${JSON.stringify(now.toISOString())},labels:[]}]];
 else if (command === "pr") value = {state:"OPEN",baseRefName:"old-base",headRefName:"preserved/branch",headRefOid:"a".repeat(40),isDraft:false,author:{login:"example"},reviews:[],comments:[]};
