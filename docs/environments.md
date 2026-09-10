@@ -133,6 +133,8 @@ A matching commit alone is insufficient when environment fingerprints differ; th
 
 After every full gate passes, `pnpm verify` emits `kind: verified-static-artifact` and writes an exclusively created JSON file under owned `.artifacts/environment/`.
 It includes the start fingerprint, source stability check, artifact file count and SHA-256 over sorted relative names and bytes in `dist`.
+Artifact content is read through opened descriptors without following final-component symlinks; opened-directory identity checks reject observed directory replacement.
+These checks protect the task-owned traversal, but do not provide an atomic snapshot against repeated concurrent ancestor replacements.
 CI uploads that evidence alongside coverage/browser evidence and uploads that same `dist` as the Pages artifact.
 The deployment job consumes the artifact from its verified build job without rebuilding.
 Diagnostic output alone never asserts that deployment succeeded.
