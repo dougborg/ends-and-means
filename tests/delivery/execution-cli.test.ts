@@ -360,3 +360,129 @@ describe("execution bootstrap privacy", () => {
     );
   });
 });
+
+function startAsyncRun(input: ReturnType<typeof fixture>) {
+  const child = spawn(
+    process.execPath,
+    [
+      "--import",
+      tsx,
+      script,
+      "run",
+      "--store",
+      input.store,
+      "--private-state",
+      input.privateState,
+      "--issue",
+      "194",
+      "--command",
+      "readiness",
+    ],
+    {
+      cwd: input.worktree,
+      env: { ...process.env, PATH: `${input.bin}:${process.env.PATH}` },
+      stdio: ["ignore", "pipe", "pipe"],
+    },
+  );
+  let stdout = "";
+  let stderr = "";
+  child.stdout.on("data", (chunk) => {
+    stdout += chunk;
+  });
+  child.stderr.on("data", (chunk) => {
+    stderr += chunk;
+  });
+  const closed = new Promise<number | null>((resolveExit) =>
+    child.once("close", resolveExit),
+  );
+  return { child, closed, output: () => ({ stdout, stderr }) };
+}
+async function waitForExitedLeader(
+  input: ReturnType<typeof fixture>,
+  pidFile: string,
+) {
+  const deadline = Date.now() + 8_000;
+  while (Date.now() < deadline) {
+    try {
+      const runId = readdirSync(input.store).find(
+        (name) => !name.startsWith("."),
+      );
+      const started = JSON.parse(
+        readFileSync(join(input.store, runId ?? "", "0001.json"), "utf8"),
+      );
+      const descendant = Number(readFileSync(pidFile, "utf8"));
+      try {
+        process.kill(started.payload.pid, 0);
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code === "ESRCH")
+          return { runId, descendant };
+      }
+    } catch {
+      /* Wait only for this fixture's observed launch and direct exit. */
+    }
+    await new Promise((resolveWait) => setTimeout(resolveWait, 20));
+  }
+  throw new Error("Fixture leader did not exit");
+}
+describe("bounded inherited-pipe completion", () => {
+  it.each([false, true])(
+    "fails closed after leader exit with interrupt=%s and leaves descendant cleanup explicit",
+    async (interrupt) => {
+      const input = fixture(0);
+      const pidFile = join(input.root, "descendant.pid");
+      const program = `#!${process.execPath}\nconst { spawn } = require("node:child_process"); const { writeFileSync } = require("node:fs"); if (process.argv[2] === "--version") { console.log("11.25.0"); } else { const descendant = spawn(process.execPath, ["-e", "setTimeout(() => {}, 20000)"], { stdio: ["ignore", "inherit", "inherit"] }); writeFileSync(${JSON.stringify(pidFile)}, String(descendant.pid)); descendant.unref(); process.exit(0); }\n`;
+      writeFileSync(join(input.bin, "pnpm"), program, { mode: 0o700 });
+      const run = startAsyncRun(input);
+      let descendant: number | undefined;
+      try {
+        const observed = await waitForExitedLeader(input, pidFile);
+        descendant = observed.descendant;
+        const exitedAt = Date.now();
+        if (interrupt) run.child.kill("SIGTERM");
+        expect(await run.closed).toBe(1);
+        expect(Date.now() - exitedAt).toBeLessThan(10_000);
+        const report = JSON.parse(run.output().stdout);
+        expect(report.current).toMatchObject({
+          phase: "unknown",
+          exitCode: 0,
+          signal: null,
+          commandPassed: false,
+          exactHeadPass: false,
+          blocker: "COMPLETION_UNKNOWN",
+          logTruncated: true,
+        });
+        expect(report.nextAction).toContain(
+          "descendant cleanup may be unconfirmed",
+        );
+        expect(run.output().stderr).toBe("");
+        const terminal = JSON.parse(
+          readFileSync(
+            join(input.store, observed.runId ?? "", "0002.json"),
+            "utf8",
+          ),
+        );
+        expect(terminal.payload).toMatchObject({
+          kind: "finished",
+          exitCode: 0,
+          reason: "COMPLETION_UNKNOWN",
+        });
+        // Product deliberately did not use the exited leader's numeric group ID.
+        // This test owns the never-restarted descendant and cleans it separately.
+        expect(() => process.kill(descendant as number, 0)).not.toThrow();
+      } finally {
+        if (descendant === undefined && existsSync(pidFile))
+          descendant = Number(readFileSync(pidFile, "utf8"));
+        if (descendant) {
+          try {
+            process.kill(descendant, "SIGKILL");
+          } catch {
+            /* Fixture exited. */
+          }
+        }
+        if (run.child.exitCode === null) run.child.kill("SIGKILL");
+        await run.closed;
+      }
+    },
+    15_000,
+  );
+});
