@@ -43,11 +43,13 @@ Sources and Method remain close at hand as a quieter trust layer.
 
 ## Develop locally
 
-Requires Node 26 (currently 26.8.1; see `.node-version` and `.nvmrc`).
+Use the exact declared toolchain and task-owned setup in the [environment matrix](docs/environments.md).
 
 ```sh
+node scripts/environment-entry.mjs command
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
+pnpm environment:check
 pnpm verify
 ```
 

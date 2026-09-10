@@ -175,6 +175,7 @@ available; an unavailable API or credential result is not a clean audit.
   the trailing comment so Dependabot updates remain readable.
 - Production Pages build and deployment jobs depend on successful main-branch
   verification; pull requests cannot enter the deployment path.
+- Follow the [environment matrix](docs/environments.md) for the governed toolchain, isolated setup, readiness checks, configuration and artifact boundary.
 - `pnpm verify` is the single full local and CI verification path. It includes
   repository/skill and asset-provenance drift checks, lint, static analysis, dependency audit, type
   checks, coverage, build, route tests, and browser review. See the

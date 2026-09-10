@@ -279,6 +279,10 @@ action, and [delivery harness](../../../docs/delivery-harness.md) as execution
 authorities. Record actual runtime evidence rather than embedding a personal
 tool path in the skill. Issue #329 owns the pending diagnostics and environment
 consistency improvements; this workflow does not imply they are implemented.
+Use the [governed environment contract](../../../docs/environments.md) for exact toolchain selection, task-owned dependencies, readiness results and explicit probes.
+Keep full verification free of global route/base/port overrides; record the actual environment fingerprint with handoff evidence.
+A readiness result does not replace verification or authorize retrying a denied command unchanged.
+
 Run before handoff:
 
 ```bash
