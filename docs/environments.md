@@ -78,7 +78,7 @@ The preserved #324 candidate is the first existing-work pilot after the supporti
 | `ASTRO_PREVIEW_BACKGROUND` | Managed Playwright launch explicitly sets `0` to keep the server foreground; other explicit values fail |
 | `NODE_ENV` | Unset for full verification and build; each underlying tool selects its normal environment |
 | `NODE_OPTIONS` | Nonempty ambient values fail supported entry checks because loaders/options change execution |
-| `PUBLIC_*`, `VITE_*`, `.env*` build/development files | No application environment inputs are supported; public-prefixed variables and standard dotenv files fail the guard; keep secrets out of browser inputs |
+| `PUBLIC_*`, `VITE_*`, `.env*` build/development files | No application environment inputs are supported; public-prefixed variables and standard dotenv files (including `.env.test` and `.env.test.local`) fail the guard; keep secrets out of browser inputs |
 | Package-manager registry credentials | Only installation or explicit audit uses the normal pnpm credential resolution; values, registry URLs and raw audit errors are never diagnostic output |
 | GitHub credentials | Not required by `pnpm verify`; an explicitly authorized `pnpm audit:delivery -- --live-project --private-state ...` uses the separate delivery access contract |
 | Playwright cache configuration | `PLAYWRIGHT_BROWSERS_PATH` may locate the lock-governed installed executable; the diagnostic records revision and availability, never cache paths; browser installation is explicit |

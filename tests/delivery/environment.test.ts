@@ -142,6 +142,42 @@ describe("explicit owned preview and advisory capabilities", () => {
 });
 
 describe("readiness CLI boundary", () => {
+  it.each(["rev-parse", "status", "ls-files"])("redacts both output streams when diagnostic Git %s fails", failingCommand => {
+    const root = fixture();
+    const git = join(root, "git");
+    const marker = join(root, "git-calls");
+    const sentinel = "private-path-and-credential-sentinel";
+    writeFileSync(git, `#!/bin/sh\necho "$1" >> '${marker}'\nif [ "$1" = "${failingCommand}" ]; then echo '${sentinel}'; echo '${sentinel}' >&2; exit 1; fi\nif [ "$1" = "rev-parse" ]; then echo aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa; fi\n`);
+    chmodSync(git, 0o755);
+    const result = spawnSync(process.execPath, ["scripts/check-environment.mjs"], { cwd: process.cwd(), encoding: "utf8", timeout: 5_000, env: { ...process.env, NODE_ENV: undefined, PATH: `${root}:${process.env.PATH}` } });
+    expect(result.status).toBe(1);
+    expect(result.stdout).not.toContain(sentinel);
+    expect(result.stderr).toBe("");
+    const report = JSON.parse(result.stdout);
+    expect(report.findings.map((finding: { code: string }) => finding.code)).toContain("SOURCE_UNAVAILABLE");
+    expect(report.fingerprint.source).toEqual({ commit: null, dirty: null, inputDigest: null });
+    const commands = ["rev-parse", "status", "ls-files"];
+    expect(readFileSync(marker, "utf8").trim().split("\n")).toEqual(commands.slice(0, commands.indexOf(failingCommand) + 1));
+  });
+
+  it.each([".env.test", ".env.test.local"])("rejects %s at the actual full entry before launching verification checks", dotenvFile => {
+    const root = fixture();
+    const marker = join(root, "substantive-check-started");
+    const sentinel = "private-dotenv-sentinel";
+    mkdirSync(join(root, "scripts"));
+    for (const file of ["environment-entry.mjs", "environment-runtime.ts"]) cpSync(join(process.cwd(), "scripts", file), join(root, "scripts", file));
+    const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+    manifest.scripts = { verify: JSON.parse(readFileSync("package.json", "utf8")).scripts.verify };
+    writeFileSync(join(root, "package.json"), JSON.stringify(manifest));
+    writeFileSync(join(root, "scripts/verify-environment.ts"), `import { writeFileSync } from "node:fs"; writeFileSync(${JSON.stringify(marker)}, "started"); console.log("${sentinel}");`);
+    writeFileSync(join(root, dotenvFile), `VITE_TEST_SECRET=${sentinel}\n`);
+    const result = spawnSync("pnpm", ["run", "verify"], { cwd: root, encoding: "utf8", timeout: 5_000, env: { ...process.env, NODE_ENV: undefined } });
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain("CONFIG_DOTENV");
+    expect(result.stdout + result.stderr).not.toContain(sentinel);
+    expect(existsSync(marker)).toBe(false);
+  });
+
   it("defaults to local inspection and redacts private environment values", () => {
     const root = fixture();
     const executable = join(root, "pnpm");

@@ -77,7 +77,7 @@ export function configurationFindings(mode: EnvironmentMode, env: NodeJS.Process
 export function toolchainFindings(root: string, observed: RuntimeObservation): EnvironmentFinding[] {
   const findings: EnvironmentFinding[] = [];
   try {
-    if ([".env", ".env.local", ".env.production", ".env.production.local", ".env.development", ".env.development.local"].some(file => existsSync(join(root, file)))) findings.push({ code: "CONFIG_DOTENV", remedy: "The supported build uses repository configuration without local dotenv inputs; move private configuration outside this worktree." });
+    if ([".env", ".env.local", ".env.production", ".env.production.local", ".env.development", ".env.development.local", ".env.test", ".env.test.local"].some(file => existsSync(join(root, file)))) findings.push({ code: "CONFIG_DOTENV", remedy: "Supported commands use repository configuration without local dotenv inputs; move private configuration outside this worktree." });
     const pin = readFileSync(join(root, ".node-version"), "utf8").trim();
     const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     const major = Number(pin.split(".")[0]);
