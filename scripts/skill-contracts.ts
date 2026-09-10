@@ -8,7 +8,10 @@ export interface SkillContractFinding {
 
 export interface SkillCapability {
   name: string;
-  owner: "coordinate-project-delivery" | "research-content-changes";
+  owner:
+    | "coordinate-project-delivery"
+    | "research-preparation"
+    | "research-content-changes";
   paths: string[];
   patterns: RegExp[];
   forbiddenPatterns?: RegExp[];
@@ -16,7 +19,33 @@ export interface SkillCapability {
 }
 
 const deliveryRoot = ".agents/skills/coordinate-project-delivery";
+const preparationRoot = ".agents/skills/research-preparation";
 const researchRoot = ".agents/skills/research-content-changes";
+
+export const researchBriefContract = {
+  version: 1,
+  sectionIds: [
+    "reader-outcome",
+    "scope-boundaries",
+    "existing-records-dependencies",
+    "evidence-ledger",
+    "candidate-claims",
+    "disagreements-comparisons",
+    "cases-narrative-visuals",
+    "gaps-disposition",
+    "implementation-acceptance",
+  ],
+  evidenceStates: ["inspected", "lead", "inaccessible"],
+  dispositions: ["ready", "needs-evidence", "deferred"],
+  scales: ["substantial", "short-correction"],
+  consumerObligationIds: [
+    "brief-not-evidence",
+    "preserve-scope",
+    "inspect-used-passages",
+    "targeted-follow-up",
+    "independent-review",
+  ],
+} as const;
 
 export const skillCapabilities: SkillCapability[] = [
   {
@@ -121,6 +150,36 @@ export const skillCapabilities: SkillCapability[] = [
     deletion: {
       path: `${deliveryRoot}/SKILL.md`,
       pattern: /continuous improvement/i,
+    },
+  },
+  {
+    name: "research preparation routing",
+    owner: "research-preparation",
+    paths: [
+      `${preparationRoot}/SKILL.md`,
+      `${preparationRoot}/references/research-brief-template.md`,
+      `${preparationRoot}/references/examples.md`,
+    ],
+    patterns: [
+      /references\/research-brief-template\.md/i,
+      /research-content-changes\/references\/editorial-policy\.md/i,
+    ],
+    deletion: {
+      path: `${preparationRoot}/SKILL.md`,
+      pattern: /references\/research-brief-template\.md/i,
+    },
+  },
+  {
+    name: "research handoff consumption",
+    owner: "research-content-changes",
+    paths: [`${researchRoot}/SKILL.md`],
+    patterns: [
+      /research-preparation\/references\/research-brief-template\.md/i,
+      /research-brief:v1/i,
+    ],
+    deletion: {
+      path: `${researchRoot}/SKILL.md`,
+      pattern: /research-preparation\/references\/research-brief-template\.md/i,
     },
   },
   {
@@ -241,6 +300,63 @@ function containsUnnegatedMatch(text: string, pattern: RegExp): boolean {
   });
 }
 
+function researchBriefStructureFindings(root: string): SkillContractFinding[] {
+  const templatePath = join(
+    root,
+    preparationRoot,
+    "references/research-brief-template.md",
+  );
+  const examplesPath = join(root, preparationRoot, "references/examples.md");
+  const consumerPath = join(root, researchRoot, "SKILL.md");
+  if (
+    !existsSync(templatePath) ||
+    !existsSync(examplesPath) ||
+    !existsSync(consumerPath)
+  )
+    return [];
+
+  const template = readFileSync(templatePath, "utf8");
+  const examples = readFileSync(examplesPath, "utf8");
+  const consumer = readFileSync(consumerPath, "utf8");
+  const requiredMarkers = [
+    `research-brief:v${researchBriefContract.version}`,
+    ...researchBriefContract.sectionIds.map(
+      (section) => `research-brief-section:${section}`,
+    ),
+  ];
+  const missingMarker = requiredMarkers.some(
+    (marker) => !template.includes(marker),
+  );
+  const missingValue = [
+    ...researchBriefContract.evidenceStates,
+    ...researchBriefContract.dispositions,
+    ...researchBriefContract.scales,
+  ].some((value) => !template.includes(`\`${value}\``));
+  const invalidExamples =
+    !examples.includes("research-brief-example:short-correction") ||
+    !examples.includes(
+      "research-brief-example:inaccessible-source disposition:needs-evidence",
+    );
+  const missingConsumerObligation =
+    researchBriefContract.consumerObligationIds.some(
+      (obligation) => !consumer.includes(`research-handoff:${obligation}`),
+    );
+
+  const findings: SkillContractFinding[] = [];
+  if (missingMarker || missingValue || invalidExamples)
+    findings.push({
+      code: "SKILL_CAPABILITY",
+      message: "research-preparation does not cover research brief structure.",
+    });
+  if (missingConsumerObligation)
+    findings.push({
+      code: "SKILL_CAPABILITY",
+      message:
+        "research-content-changes does not cover research handoff consumption.",
+    });
+  return findings;
+}
+
 export function auditSkillContracts(root: string): SkillContractFinding[] {
   const missingPaths = new Map<string, SkillCapability["owner"]>();
   for (const capability of skillCapabilities) {
@@ -272,5 +388,9 @@ export function auditSkillContracts(root: string): SkillContractFinding[] {
           },
         ];
   });
-  return [...missingFindings, ...capabilityFindings];
+  return [
+    ...missingFindings,
+    ...capabilityFindings,
+    ...researchBriefStructureFindings(root),
+  ];
 }

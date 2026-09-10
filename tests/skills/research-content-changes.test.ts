@@ -1,10 +1,30 @@
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
+import { researchBriefContract } from "../../scripts/skill-contracts.ts";
 
 const skillRoot = new URL(
   "../../.agents/skills/research-content-changes/",
   import.meta.url,
 );
+
+describe("research handoff consumption", () => {
+  it("consumes a prepared brief without treating it as evidence or approval", async () => {
+    const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
+    await expect(
+      readFile(
+        new URL(
+          "../research-preparation/references/research-brief-template.md",
+          skillRoot,
+        ),
+        "utf8",
+      ),
+    ).resolves.toContain("research-brief:v1");
+    const obligationIds = [
+      ...skill.matchAll(/<!-- research-handoff:([^ ]+) -->/g),
+    ].map(([, id]) => id);
+    expect(obligationIds).toEqual(researchBriefContract.consumerObligationIds);
+  });
+});
 
 describe("research-content-changes skill", () => {
   it("routes canonical Approach and Comparison Dimension work", async () => {

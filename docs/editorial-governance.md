@@ -35,8 +35,10 @@ removes human responsibility for source fitness.
 - Canonical publication states, source locators, workflow-language guards,
   structural validation, route checks, and browser checks fail closed in
   `pnpm verify`.
-- The research-content skill governs evidence, community self-description,
-  oral-history provenance, source similarity, and human publication judgment.
+- The research-preparation skill governs research-only evidence handoff, and the
+  research-content skill governs canonical implementation. Both use the same
+  policy for evidence, community self-description, oral-history provenance,
+  source similarity, and human publication judgment.
 - The delivery skill governs accountable handoff, exact-head review, and
   rebase-only integration.
 
