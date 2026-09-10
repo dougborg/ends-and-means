@@ -130,6 +130,57 @@ describe("repository skill contract", () => {
   });
 });
 
+describe("cleanup capability wording and routing", () => {
+  it("accepts equivalent cleanup wording routed through an existing policy reference", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+    await copySkillCorpus(root);
+    const reference = join(
+      root,
+      ".agents/skills/coordinate-project-delivery/references/review-and-integration.md",
+    );
+    const policy = join(
+      root,
+      ".agents/skills/coordinate-project-delivery/references/delivery-policy.md",
+    );
+    const review = await readFile(reference, "utf8");
+    const boundary = review.indexOf("## Post-merge cleanup");
+    expect(boundary).toBeGreaterThan(0);
+    const routed = review
+      .slice(boundary)
+      .replace(
+        "rebase merge rewrites commit\n   IDs",
+        "rebasing changes commit identifiers",
+      )
+      .replace(
+        "registered worktrees, standalone review clones, and exported review copies",
+        "registered worktrees, independent review clones and exported source copies",
+      )
+      .replace(
+        "retry normal removal; do not use blind forced removal",
+        "repeat ordinary removal; never force unreviewed deletion",
+      );
+    expect(routed).toContain("rebasing changes commit identifiers");
+    await writeFile(
+      reference,
+      review.slice(0, boundary) +
+        "See [post-merge cleanup](delivery-policy.md#post-merge-cleanup).\n",
+    );
+    await writeFile(policy, `${await readFile(policy, "utf8")}\n${routed}`);
+    expect(auditSkillContracts(root)).toEqual([]);
+    await writeFile(
+      policy,
+      (await readFile(policy, "utf8")).replace(
+        "rebasing changes commit identifiers",
+        "mapping safeguard removed",
+      ),
+    );
+    expect(auditSkillContracts(root)).toContainEqual({
+      code: "SKILL_CAPABILITY",
+      message: "coordinate-project-delivery does not cover post-merge cleanup.",
+    });
+  });
+});
+
 describe("research brief capability audit", () => {
   it("audits stable structure without fixing editorial sentences", async () => {
     const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
@@ -161,10 +212,7 @@ describe("research brief capability audit", () => {
       "exclude the dependent claim from evidence-complete claims",
     );
     expect(paraphrasedExamples).not.toBe(examples);
-    await writeFile(
-      examplesPath,
-      paraphrasedExamples,
-    );
+    await writeFile(examplesPath, paraphrasedExamples);
     expect(auditSkillContracts(root)).toEqual([]);
   });
 
@@ -199,10 +247,7 @@ describe("research brief capability audit", () => {
     const consumer = await readFile(consumerPath, "utf8");
     await writeFile(
       consumerPath,
-      consumer.replace(
-        "<!-- research-handoff:inspect-used-passages -->",
-        "",
-      ),
+      consumer.replace("<!-- research-handoff:inspect-used-passages -->", ""),
     );
     expect(auditSkillContracts(root)).toContainEqual({
       code: "SKILL_CAPABILITY",

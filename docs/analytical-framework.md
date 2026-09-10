@@ -120,7 +120,7 @@ evidence requirements are stated.
 
 Each Dimension defines its endpoints or categories, eligible subject types,
 method, embedded choices, known correlations, and limits. Each Placement is a
-separate, sourced analytical Statement with a subject, time/place scope, basis,
+separate `placed-on` relationship supported by Statements, with a subject, time/place scope, basis,
 range or category, uncertainty, and rival interpretations. Ideal types and
 dated empirical Cases must remain distinguishable.
 
@@ -144,6 +144,10 @@ evidence can support a contested conclusion, while an intuitively plausible
 assessment can still need citation.
 
 ## Product implications
+
+These are analytical design commitments, not a list of completed interfaces.
+The current Compare slice uses bounded questions and a Placement table; general
+maps, matrices and claim-specific feedback controls remain proposed.
 
 - Explore begins with familiar subjects and reader questions; Cases, Compare,
   and Questions provide task-oriented paths, and none is an ontology root.

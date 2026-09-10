@@ -2,6 +2,12 @@
 
 **Status:** learner-first design direction
 
+Implemented routes use canonical guide composition, semantic tables, native
+disclosures and the shared theme/glyph system. General comparison maps, dynamic
+evidence rails, argument-trace animation and contextual imagery described below
+remain design proposals. See the [domain-model boundary](domain-model.md#reader-facing-information-architecture)
+and [glyph contract](glyph-system.md); a glyph registry is not a contextual-media feature.
+
 Reader-facing Dossier pages follow the repository's
 [plain-spoken analytical narrative style](narrative-style.md).
 The visible reading path answers first; claim traces, definitions, external
@@ -513,6 +519,15 @@ Bibliographic facts lead; commerce follows. Primary actions are “Find at a
 library,” “Read online,” and “Publisher.” A separate “Buy this book” region may
 list vendors with affiliate status disclosed beside each link. Purchase links
 never affect ordering or visually outrank access and citation information.
+
+Current Source pages render one ordered `resourceLinks` list; they do not yet
+separate purchases or display the affiliate field. The preceding separation and
+disclosure are design requirements, not a claim of current renderer behavior.
+[Source access #258](https://github.com/dougborg/ends-and-means/issues/258) owns
+purchase/affiliate exclusion pending the separate
+[commercial decision #16](https://github.com/dougborg/ends-and-means/issues/16).
+Metadata validation does not prove that a passage was inspected, nor does a
+citation grant permission to reproduce contextual media.
 
 People pages show typed relationships: author of, advocate of, critic of,
 participant in, officeholder during, or subject of a claim. Portraits are useful

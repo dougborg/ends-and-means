@@ -18,18 +18,16 @@
 
 ## Verification
 
-- [ ] `pnpm lint`
-- [ ] `pnpm static`
-- [ ] `pnpm check`
-- [ ] `pnpm test:coverage`
+<!-- Name focused checks and actual outcomes when useful; do not repeat every full-gate stage as a separate requirement. For rendering review, mark inapplicable with a reason when no public surface changed. -->
+
 - [ ] I inspected the desktop, tablet, and mobile screenshots for hierarchy, readability, spacing, and empty/broken states.
-- [ ] `pnpm verify` (the full local/CI path; the individual checks above remain useful for focused diagnosis)
+- [ ] `pnpm verify` (the full local/CI path, including lint, static analysis, type checks, coverage, build, routes and browser tests)
 
 ## Review and integration
 
 - [ ] Applicable Copilot findings are resolved, or an exact-head unavailable marker records that a normal request produced no review.
 - [ ] An independent adversarial review covered the material risks, with a privacy-safe exact-head attestation recorded as described in `docs/delivery-harness.md`.
-- [ ] The branch is rebased on current `main` and will use rebase integration.
+- [ ] The branch is rebased on its current declared base (`main`, or the lower layer of an intentional stack) and will use rebase integration.
 
 ## Human decisions requested
 

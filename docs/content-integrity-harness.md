@@ -65,8 +65,10 @@ Removed canonical IDs participate in both signals, and deleted test or snapshot 
 The report cannot verify source passages, statement atomicity, interpretive
 fairness, case transfer, or whether counterevidence is sufficient. Reviewers
 retain those decisions. During remediation, run focused affected checks; run
-the full `CI=true pnpm verify` once at final handoff and again after a change or
-rebase that can affect that surface. Exact-head CI and review remain required.
+the full `pnpm verify` once at final handoff and again after a change or
+rebase that can affect that surface. Keep `CI` unset locally so the governed
+local resource profile applies; hosted execution sets its own CI environment.
+Exact-head CI and review remain required.
 
 Before advancing a Statement beyond `research-needed`, verify every cited URL in a browser and confirm the Source metadata, authority, claim support, and precise locator.
 Network availability and publisher behavior are not stable enough to make live URL requests a deterministic CI gate, so the automated validator checks recorded HTTP(S) form and evidence contracts while the pull-request checklist records the human verification.

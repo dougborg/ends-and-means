@@ -122,42 +122,72 @@ describe("editorial governance contract", () => {
   it("keeps channel, recusal, provenance, and enforcement boundaries aligned", async () => {
     const [policy, notes, philosophy] = await Promise.all([
       readFile(new URL("references/editorial-policy.md", skillRoot), "utf8"),
-      readFile(new URL("../../../docs/editorial-governance.md", skillRoot), "utf8"),
-      readFile(new URL("../../../docs/editorial-philosophy.md", skillRoot), "utf8"),
+      readFile(
+        new URL("../../../docs/editorial-governance.md", skillRoot),
+        "utf8",
+      ),
+      readFile(
+        new URL("../../../docs/editorial-philosophy.md", skillRoot),
+        "utf8",
+      ),
     ]);
     const normalize = (text: string) => text.replace(/\s+/g, " ");
     for (const text of [policy, notes].map(normalize)) {
-      expect(text).toMatch(/only current editorial intake|No private editorial intake currently exists/);
-      expect(text).toMatch(/security reporting.+not.+editorial\s+channel|not.+route editorial concerns.+security reporting/is);
+      expect(text).toMatch(
+        /only current editorial intake|No private editorial intake currently exists/,
+      );
+      expect(text).toMatch(
+        /security reporting.+not.+editorial\s+channel|not.+route editorial concerns.+security reporting/is,
+      );
     }
     for (const text of [notes, philosophy].map(normalize)) {
-      expect(text).toMatch(/independent reviewer makes the binding merits decision/i);
-      expect(text).toMatch(/editor.+only publish or record|only.+administrative/is);
+      expect(text).toMatch(
+        /independent reviewer makes the binding merits decision/i,
+      );
+      expect(text).toMatch(
+        /editor.+only publish or record|only.+administrative/is,
+      );
       expect(text).toMatch(/decision is deferred/i);
     }
-    expect(normalize(notes)).toMatch(/CODEOWNERS.+does not itself create a GitHub approval requirement/is);
-    expect(normalize(notes)).toMatch(/independent review.+project process.+not by a GitHub approval-required/is);
-    expect(normalize(policy)).toMatch(/recorder, source, translator, access, and publication-permission provenance/);
-    expect(normalize(policy)).toMatch(/Never equate access or publication permission with authority/);
+    expect(normalize(notes)).toMatch(
+      /CODEOWNERS.+does not itself create a GitHub approval requirement/is,
+    );
+    expect(normalize(notes)).toMatch(
+      /independent review.+project process.+not by a GitHub approval-required/is,
+    );
+    expect(normalize(policy)).toMatch(
+      /recorder, source, translator, access, and publication-permission provenance/,
+    );
+    expect(normalize(policy)).toMatch(
+      /Never equate access or publication permission with authority/,
+    );
     expect(normalize(policy)).toMatch(/privacy-protective non-attribution/);
-    expect(normalize(policy)).toMatch(/automated structural and source-similarity output/);
-    expect(normalize(policy)).toMatch(/public editorial principles.+framing.+claim types.+source selection.+fair disagreement.+originality.+bounded conclusions.+evaluation.+uncertainty.+revision/i);
-    expect(normalize(policy)).toMatch(/promise-to-responsibility mapping.+executable checks.+named human decisions/i);
+    expect(normalize(policy)).toMatch(
+      /automated structural and source-similarity output/,
+    );
+    expect(normalize(policy)).toMatch(
+      /public editorial principles.+framing.+claim types.+source selection.+fair disagreement.+originality.+bounded conclusions.+evaluation.+uncertainty.+revision/i,
+    );
+    expect(normalize(policy)).toMatch(
+      /promise-to-responsibility mapping.+executable checks.+named human decisions/i,
+    );
   });
 });
 
 describe("semantic preflight handoff", () => {
   it("runs focused remediation before one full handoff gate", async () => {
     const skill = await readFile(new URL("SKILL.md", skillRoot), "utf8");
-    const handoffBlock = skill.match(
-      /Run before handoff:\s+```bash\s+([\s\S]*?)```/,
-    )?.[1];
-    expect(new Set(handoffBlock?.trim().split("\n"))).toEqual(
-      new Set(["pnpm audit:content-preflight", "pnpm verify"]),
+    const manifest = JSON.parse(
+      await readFile(new URL("../../../package.json", skillRoot), "utf8"),
     );
-    expect(skill).toMatch(
-      /focused affected checks.+single full handoff verification/s,
+    expect(manifest.scripts["verify:checks"]).toContain(
+      "pnpm audit:content-preflight",
     );
+    expect(manifest.scripts.verify).toContain("scripts/verify-environment.ts");
+    expect(skill).toContain("pnpm audit:content-preflight");
+    expect(skill).toContain("pnpm verify");
+    expect(skill).toContain("../../../docs/execution-records.md");
+    expect(skill).toMatch(/focused checks.+single full handoff verification/s);
   });
 });
 

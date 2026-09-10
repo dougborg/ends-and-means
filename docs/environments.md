@@ -63,7 +63,8 @@ pnpm verify
 `verify:checks` is an internal stage containing the existing full chain; supported handoff evidence is produced by `pnpm verify`, which inspects readiness first, runs every gate, requires source stability, then fingerprints the actual output.
 No additional full run is required merely because the diagnostic was added.
 Exact-head hosted checks, independent review, browser tests and post-merge deployment verification remain required.
-The preserved #324 candidate is the first existing-work pilot after the supporting tools land; this issue's isolated implementation checks do not replace that pilot.
+The existing-work pilot uses these same entries and the execution recorder;
+its scoped results, full verification and hosted/deployed evidence remain separate.
 
 ## Configuration names, defaults, and precedence
 
@@ -139,6 +140,9 @@ CI uploads that evidence alongside coverage/browser evidence and uploads that sa
 The deployment job consumes the artifact from its verified build job without rebuilding.
 Diagnostic output alone never asserts that deployment succeeded.
 
-Issue #330 can consume these versioned objects instead of duplicating toolchain/configuration rules; it owns durable command/history recording.
+The [execution recorder](execution-records.md) consumes these versioned objects and reuses the same toolchain/configuration rules.
+For a recorded full run, its child receives an execution correlation ID; the terminal record requires one new matching receipt and stable source/environment before reporting an exact full PASS.
+Standalone verification receipts remain valid without that private correlation field.
+Neither form proves a later deployment; retain the hosted artifact and Pages evidence separately.
 Task cleanup may remove owned generated outputs after evidence is preserved and integration is verified, following the [delivery cleanup contract](../.agents/skills/coordinate-project-delivery/references/review-and-integration.md#post-merge-cleanup).
 Never purge shared pnpm or browser caches as task cleanup.

@@ -26,3 +26,10 @@ Label purchase links and set their affiliate status explicitly; authorized
 reading and publisher links take priority. Attach relevance through located
 Statement citation relationships. Flag editions or title variants as duplicate
 candidates.
+
+The current Source page does not display affiliate metadata or group purchases
+separately. Do not mistake schema acceptance for completed access/disclosure UI;
+[source access #258](https://github.com/dougborg/ends-and-means/issues/258) and
+[Source redesign #259](https://github.com/dougborg/ends-and-means/issues/259) own
+those pending boundaries. Source metadata and reachable URLs do not establish
+passage access or source fitness; inspect the exact material used.
