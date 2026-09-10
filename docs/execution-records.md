@@ -97,7 +97,10 @@ A failed local precondition uses a separate enforcement category.
 
 An exact full local PASS additionally requires the recognized `pnpm verify`
 command, clean unchanged starting/ending/current input, matching current
-assignment and environment, and one new #329 verified static artifact receipt.
+assignment and environment, current full readiness, and one new #329 verified static artifact receipt.
+Current full readiness must also remain valid even when a dependency or output
+finding changes without changing the fingerprint; historical scoped command
+success is retained separately.
 The receipt must match the ending fingerprint, actual `dist` file digest and
 the UUID supplied by this live recorder to its owned child.
 The optional `executionRunId` is private correlation metadata outside both
@@ -155,8 +158,17 @@ log and 1 MiB per rendered report; private assignment input is bounded to 1 MiB.
 Logs drain after their cap and set `logTruncated` rather than filling the disk.
 The runner records heartbeats every 10 seconds and enforces a 15-minute command
 limit.
-Interruption and timeout forward termination only to the process group actually
-spawned by that live runner, with a five-second kill fallback.
+Interruption and timeout forward termination only while the directly spawned
+leader remains live, with the existing five-second kill fallback.
+After the direct leader exits, inherited output pipes have a five-second drain
+limit; after escalation, a further five-second completion limit bounds cleanup.
+If either completion bound expires, the recorder closes its own pipes and
+reports `COMPLETION_UNKNOWN`, preserving any observed direct exit code and
+marking truncated output.
+Descendant cleanup is explicitly unconfirmed: the recorder does not signal an
+exited leader's potentially recycled numeric process-group identity.
+Inspect owned process evidence before any explicit cleanup or another attempt.
+This unknown outcome cannot establish command success or full verification.
 Historical PIDs are never used to recover, adopt or terminate processes.
 
 A crash may leave a prepared run, a stale heartbeat, an unpublished `.pending-*`

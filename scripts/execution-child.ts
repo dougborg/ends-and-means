@@ -22,22 +22,6 @@ function signalOwned(child: ChildProcess, signal: NodeJS.Signals) {
     /* The live runner's actual owned child already exited. */
   }
 }
-function control(child: ChildProcess) {
-  let requested: Finished["reason"] | null = null;
-  let escalation: ReturnType<typeof setTimeout> | undefined;
-  return {
-    stop(reason: Finished["reason"]) {
-      requested ??= reason;
-      if (!ownedAlive(child)) return;
-      signalOwned(child, "SIGTERM");
-      escalation ??= setTimeout(() => signalOwned(child, "SIGKILL"), 5_000);
-    },
-    finish() {
-      clearTimeout(escalation);
-      return requested;
-    },
-  };
-}
 function boundedLog(path: string) {
   const fd = openSync(
     path,
@@ -117,6 +101,123 @@ function outcome(
     reason: code === 0 ? "NONE" : "COMMAND_FAILED",
   };
 }
+// The live runner owns these timers and pipes, never a recovered historical PID.
+class ChildObservation {
+  private requested: Finished["reason"] | null = null;
+  private heartbeat: ReturnType<typeof setInterval> | undefined;
+  private deadline: ReturnType<typeof setTimeout> | undefined;
+  private escalation: ReturnType<typeof setTimeout> | undefined;
+  private drain: ReturnType<typeof setTimeout> | undefined;
+  private finalDeadline: ReturnType<typeof setTimeout> | undefined;
+  private launchFailed = false;
+  private settled = false;
+  private directExit: {
+    code: number | null;
+    signal: NodeJS.Signals | null;
+  } | null = null;
+  private readonly interrupt = () => this.stop("INTERRUPTED");
+
+  private readonly child: ChildProcess;
+  private readonly log: ReturnType<typeof boundedLog>;
+  private readonly append: (payload: ExecutionPayload) => void;
+  private readonly resolve: (value: Outcome) => void;
+  constructor(
+    child: ChildProcess,
+    log: ReturnType<typeof boundedLog>,
+    append: (payload: ExecutionPayload) => void,
+    resolve: (value: Outcome) => void,
+  ) {
+    this.child = child;
+    this.log = log;
+    this.append = append;
+    this.resolve = resolve;
+    process.once("SIGINT", this.interrupt);
+    process.once("SIGTERM", this.interrupt);
+    child.stdout?.on("data", (chunk) => this.output(chunk));
+    child.stderr?.on("data", (chunk) => this.output(chunk));
+    child.once("spawn", () => this.started());
+    child.once("error", () => {
+      this.launchFailed = true;
+    });
+    child.once("exit", (code, signal) => {
+      if (this.settled) return;
+      this.directExit = { code, signal };
+      // A descendant may retain inherited pipes after its leader exits.
+      this.drain = setTimeout(() => this.finish(true), 5_000);
+    });
+    child.once("close", (code, signal) => {
+      this.directExit ??= { code, signal };
+      this.finish(false);
+    });
+  }
+  private publish(payload: ExecutionPayload) {
+    try {
+      this.append(payload);
+    } catch {
+      this.stop("RECORDER_FAILURE");
+    }
+  }
+  private output(chunk: Buffer) {
+    if (this.settled) return;
+    try {
+      this.log.output(chunk);
+    } catch {
+      this.stop("RECORDER_FAILURE");
+    }
+  }
+  private started() {
+    const nonce = randomUUID();
+    this.publish({ kind: "spawned", pid: this.child.pid as number, nonce });
+    this.heartbeat = setInterval(() => {
+      if (ownedAlive(this.child)) this.publish({ kind: "heartbeat", nonce });
+    }, executionLimits.heartbeatMs);
+    this.deadline = setTimeout(
+      () => this.stop("RUN_TIMEOUT"),
+      executionLimits.timeoutMs,
+    );
+  }
+  private stop(reason: Finished["reason"]) {
+    if (this.settled) return;
+    this.requested ??= reason;
+    signalOwned(this.child, "SIGTERM");
+    this.escalation ??= setTimeout(() => {
+      signalOwned(this.child, "SIGKILL");
+      this.finalDeadline = setTimeout(() => this.finish(true), 5_000);
+    }, 5_000);
+  }
+  private finish(abandoned: boolean) {
+    if (this.settled) return;
+    this.settled = true;
+    clearInterval(this.heartbeat);
+    for (const timer of [
+      this.deadline,
+      this.escalation,
+      this.drain,
+      this.finalDeadline,
+    ])
+      clearTimeout(timer);
+    process.removeListener("SIGINT", this.interrupt);
+    process.removeListener("SIGTERM", this.interrupt);
+    if (abandoned) {
+      this.requested = "COMPLETION_UNKNOWN";
+      this.child.stdout?.destroy();
+      this.child.stderr?.destroy();
+      this.child.unref();
+    }
+    let logResult = { logBytes: 0, logTruncated: true };
+    try {
+      logResult = this.log.close();
+    } catch {
+      this.requested = "RECORDER_FAILURE";
+    }
+    const direct = this.directExit ?? { code: null, signal: null };
+    this.resolve({
+      ...outcome(direct.code, direct.signal, this.launchFailed, this.requested),
+      ...logResult,
+      logTruncated: abandoned || logResult.logTruncated,
+    });
+  }
+}
 export async function runExecutionChild(
   argv: string[],
   root: string,
@@ -141,59 +242,7 @@ export async function runExecutionChild(
     log.close();
     throw error;
   }
-  const owner = control(child);
-  const interrupted = () => owner.stop("INTERRUPTED");
-  const output = (chunk: Buffer) => {
-    try {
-      log.output(chunk);
-    } catch {
-      owner.stop("RECORDER_FAILURE");
-    }
-  };
-  const publish = (payload: ExecutionPayload) => {
-    try {
-      append(payload);
-    } catch {
-      owner.stop("RECORDER_FAILURE");
-    }
-  };
-  process.once("SIGINT", interrupted);
-  process.once("SIGTERM", interrupted);
-  child.stdout?.on("data", output);
-  child.stderr?.on("data", output);
   return await new Promise((resolve) => {
-    let heartbeat: ReturnType<typeof setInterval> | undefined;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    let launchFailed = false;
-    child.once("spawn", () => {
-      const nonce = randomUUID();
-      publish({ kind: "spawned", pid: child.pid as number, nonce });
-      heartbeat = setInterval(() => {
-        if (ownedAlive(child)) publish({ kind: "heartbeat", nonce });
-      }, executionLimits.heartbeatMs);
-      timer = setTimeout(
-        () => owner.stop("RUN_TIMEOUT"),
-        executionLimits.timeoutMs,
-      );
-    });
-    child.once("error", () => {
-      launchFailed = true;
-    });
-    child.once("close", (code, signal) => {
-      clearInterval(heartbeat);
-      clearTimeout(timer);
-      process.removeListener("SIGINT", interrupted);
-      process.removeListener("SIGTERM", interrupted);
-      let logResult = { logBytes: 0, logTruncated: true };
-      try {
-        logResult = log.close();
-      } catch {
-        owner.stop("RECORDER_FAILURE");
-      }
-      resolve({
-        ...outcome(code, signal, launchFailed, owner.finish()),
-        ...logResult,
-      });
-    });
+    new ChildObservation(child, log, append, resolve);
   });
 }

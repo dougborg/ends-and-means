@@ -36,6 +36,11 @@ function identityBlock(
     return "OWNERSHIP_UNAVAILABLE";
   if (!start.environment || !end.environment || !environment)
     return "ENVIRONMENT_UNAVAILABLE";
+  if (
+    start.command.scope === "full-local" &&
+    environment.readiness !== "locally-ready"
+  )
+    return "ENVIRONMENT_UNAVAILABLE";
   const sources = [
     start.environment.source,
     end.environment.source,
@@ -81,6 +86,7 @@ function finishedOutcome(
   assignment: ExecutionAssignment | null,
   environment: EnvironmentEvidence | null,
 ) {
+  if (end.reason === "COMPLETION_UNKNOWN") return unknownOutcome;
   const phases = {
     interrupted: "interrupted",
     "launch-failed": "launch-failed",
@@ -192,7 +198,7 @@ export type ExecutionProjection = ReturnType<typeof projectExecution>;
 const actions: Record<string, string> = {
   NONE: "Retain this observation; continue the next required gate.",
   COMPLETION_UNKNOWN:
-    "Inspect the owned runner and preserved events; do not infer an exit or signal a historical PID.",
+    "Inspect preserved direct-exit and stream evidence; descendant cleanup may be unconfirmed. Do not infer success, retry automatically or signal a historical PID.",
   OWNERSHIP_UNAVAILABLE:
     "Reconcile current assignment evidence before claiming current verification.",
   ENVIRONMENT_UNAVAILABLE:

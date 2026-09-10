@@ -155,6 +155,35 @@ describe("execution result identity", () => {
       blocker: "RECEIPT_UNAVAILABLE",
     });
   });
+});
+describe("current environment and ownership validity", () => {
+  it("keeps historical success but rejects current full PASS when readiness changes without a new fingerprint", () => {
+    const unavailable = {
+      ...environment,
+      readiness: "not-ready" as const,
+      findingCodes: ["DEPENDENCY_VIEW_MISMATCH"],
+    };
+    expect(
+      projectExecution(events(), assignment, unavailable, now),
+    ).toMatchObject({
+      commandPassed: true,
+      exactHeadPass: false,
+      blocker: "ENVIRONMENT_UNAVAILABLE",
+    });
+    const focused = events();
+    const start = focused[0];
+    if (start?.payload.kind !== "prepared") throw new Error("Missing fixture");
+    start.payload.command = executionCommand("focused-test", [
+      "tests/delivery/example.test.ts",
+    ]);
+    expect(
+      projectExecution(focused, assignment, unavailable, now),
+    ).toMatchObject({
+      commandPassed: true,
+      exactHeadPass: false,
+      blocker: "NONE",
+    });
+  });
   it("rejects expired ownership even when its identity matches the completed record", () => {
     expect(
       projectExecution(
