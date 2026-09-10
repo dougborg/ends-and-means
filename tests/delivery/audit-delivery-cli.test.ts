@@ -32,7 +32,16 @@ function freshPrivateState() {
   writeFileSync(
     path,
     JSON.stringify({
-      version: 1,
+      version: 2,
+      coordination: {
+        mode: "running",
+        changedAt: new Date(now - 60_000).toISOString(),
+        instructionEvidence: true,
+        instructionRef: "Example instruction",
+        finishStarted: false,
+      },
+      researchBuffer: [],
+      retained: [],
       repository: "dougborg/ends-and-means",
       generatedAt: new Date(now - 60_000).toISOString(),
       expiresAt: new Date(now + 23 * 60 * 60 * 1000).toISOString(),
@@ -140,7 +149,7 @@ else { console.error("Unexpected command"); process.exitCode = 1; }
     const result = runWithIssueResponse(
       JSON.stringify([firstPage(), [issue(21, "Final issue")]]),
     );
-    // The deliberately empty Project still fails its Ready-queue policy.
+    // The deliberately incorrect Project identity and missing labels still fail policy.
     expect(result.status).toBe(1);
     expect(result.stdout).toContain(
       "Backlog integrity: clean (21 open issues checked)",

@@ -127,7 +127,7 @@ not appear in public content.
 
 The issue backlog and milestones are the authoritative plan.
 The GitHub Project is a thin delivery queue containing active reviews,
-concrete blockers, and the next three to five ready items rather than a mirror
+concrete blockers, and a bounded selection of at most three unfinished issues rather than a mirror
 of the backlog.
 
 Work moves through three tracks:

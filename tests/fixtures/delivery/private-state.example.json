@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "repository": "dougborg/ends-and-means",
   "generatedAt": "2026-09-06T10:00:00Z",
   "expiresAt": "2026-09-07T10:00:00Z",
@@ -8,7 +8,42 @@
       "issue": 194,
       "owner": "example-coordinator-id",
       "branch": "chore/example",
-      "worktree": "/example/nonexistent-worktree"
+      "worktree": "/example/nonexistent-worktree",
+      "observedAt": "2026-09-06T10:00:00Z",
+      "expiresAt": "2026-09-07T10:00:00Z"
+    }
+  ],
+  "coordination": {
+    "mode": "running",
+    "changedAt": "2026-09-05T10:00:00Z",
+    "instructionEvidence": true,
+    "instructionRef": "Example instruction",
+    "finishStarted": false
+  },
+  "researchBuffer": [],
+  "retained": [
+    {
+      "issue": 194,
+      "disposition": "selected",
+      "decisionAt": "2026-09-05T10:00:00Z",
+      "decisionEvidence": true,
+      "started": true,
+      "startedAt": null,
+      "resumedAt": null,
+      "preservedEvidence": true,
+      "nextReviewCondition": false,
+      "cleanupPending": false,
+      "observation": {
+        "phase": "unknown",
+        "observedAt": null,
+        "evidence": false
+      },
+      "branch": "chore/example",
+      "pullRequests": [],
+      "evidenceRefs": ["Example preserved evidence"],
+      "nextReview": null,
+      "decisionRef": "Example selection",
+      "observationRef": null
     }
   ]
 }

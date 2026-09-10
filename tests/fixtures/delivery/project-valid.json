@@ -1,7 +1,7 @@
 {
   "project": {
     "number": 7,
-    "title": "Ends and Means — Delivery",
+    "title": "Ends and Means \u2014 Delivery",
     "public": false
   },
   "capturedAt": "2026-09-05T12:00:00.000Z",
@@ -52,13 +52,12 @@
       "title": "Delivery work",
       "type": "Issue",
       "state": "OPEN",
-      "status": "In progress",
+      "status": "Backlog",
       "workstream": "Platform/process",
       "priority": "Now",
       "labels": ["track:platform-process", "process"],
       "updatedAt": "2026-09-03T10:00:00.000Z",
       "linkedPullRequestStates": [],
-      "ownershipEvidence": true,
       "baseCurrent": true,
       "historyLinear": true
     },
@@ -111,19 +110,118 @@
       "linkedPullRequestDraft": false,
       "baseCurrent": true,
       "historyLinear": true,
-      "reviewEvidence": { "copilot": "reviewed", "adversarial": true }
+      "reviewEvidence": {
+        "copilot": "reviewed",
+        "adversarial": true
+      }
     },
     {
       "number": 8,
       "title": "Blocked",
       "type": "Issue",
       "state": "OPEN",
-      "status": "Blocked",
+      "status": "Backlog",
       "workstream": "Corpus",
       "priority": "Later",
-      "labels": ["status:blocked"],
+      "labels": [],
       "body": "Blocked on #42.",
       "linkedPullRequestStates": []
     }
-  ]
+  ],
+  "flow": {
+    "coordination": {
+      "mode": "running",
+      "changedAt": "2026-09-05T10:00:00Z",
+      "instructionEvidence": true,
+      "finishStarted": false
+    },
+    "researchBuffer": [],
+    "retained": [
+      {
+        "issue": 1,
+        "disposition": "selected",
+        "decisionAt": "2026-09-05T10:00:00Z",
+        "decisionEvidence": true,
+        "started": true,
+        "startedAt": null,
+        "resumedAt": null,
+        "preservedEvidence": true,
+        "nextReviewCondition": false,
+        "cleanupPending": false,
+        "observation": {
+          "phase": "unknown",
+          "observedAt": null,
+          "evidence": false
+        }
+      },
+      {
+        "issue": 2,
+        "disposition": "selected",
+        "decisionAt": "2026-09-05T10:00:00Z",
+        "decisionEvidence": true,
+        "started": true,
+        "startedAt": null,
+        "resumedAt": null,
+        "preservedEvidence": true,
+        "nextReviewCondition": false,
+        "cleanupPending": false,
+        "observation": {
+          "phase": "unknown",
+          "observedAt": null,
+          "evidence": false
+        }
+      },
+      {
+        "issue": 3,
+        "disposition": "parked",
+        "decisionAt": "2026-09-05T10:00:00Z",
+        "decisionEvidence": true,
+        "started": true,
+        "startedAt": null,
+        "resumedAt": null,
+        "preservedEvidence": true,
+        "nextReviewCondition": true,
+        "cleanupPending": false,
+        "observation": {
+          "phase": "unknown",
+          "observedAt": null,
+          "evidence": false
+        }
+      },
+      {
+        "issue": 7,
+        "disposition": "selected",
+        "decisionAt": "2026-09-05T10:00:00Z",
+        "decisionEvidence": true,
+        "started": true,
+        "startedAt": null,
+        "resumedAt": null,
+        "preservedEvidence": true,
+        "nextReviewCondition": false,
+        "cleanupPending": false,
+        "observation": {
+          "phase": "unknown",
+          "observedAt": null,
+          "evidence": false
+        }
+      },
+      {
+        "issue": 8,
+        "disposition": "parked",
+        "decisionAt": "2026-09-05T10:00:00Z",
+        "decisionEvidence": true,
+        "started": true,
+        "startedAt": null,
+        "resumedAt": null,
+        "preservedEvidence": true,
+        "nextReviewCondition": true,
+        "cleanupPending": false,
+        "observation": {
+          "phase": "unknown",
+          "observedAt": null,
+          "evidence": false
+        }
+      }
+    ]
+  }
 }

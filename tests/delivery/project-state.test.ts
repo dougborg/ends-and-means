@@ -42,13 +42,13 @@ describe("delivery Project policy", () => {
     );
   });
 
-  it("accepts a valid thin delivery queue and excludes review from WIP", async () => {
+  it("accepts a bounded queue and keeps review in selected capacity", async () => {
     const snapshot = await fixture();
     expect(auditDeliverySnapshot(snapshot)).toEqual([]);
     expect(canPromote(snapshot, item(snapshot, 5))).toBe(false);
     item(snapshot, 2).status = "In review";
     item(snapshot, 2).linkedPullRequestStates = ["OPEN"];
-    expect(canPromote(snapshot, item(snapshot, 5))).toBe(true);
+    expect(canPromote(snapshot, item(snapshot, 5))).toBe(false);
   });
 
   it("includes repository-wide backlog findings when a snapshot provides issues", async () => {
@@ -65,12 +65,12 @@ describe("delivery Project policy", () => {
     expect(codes(snapshot)).toContain("BACKLOG_LITERAL_ESCAPES");
   });
 
-  it("rejects Ready outside 3–5 and deterministically orders Priority independent of item-list order", async () => {
+  it("permits an undersized Ready queue and deterministically orders Priority", async () => {
     const tooSmall = await fixture();
     tooSmall.items = tooSmall.items.filter(
       (item) => item.status !== "Ready" || item.number === 4,
     );
-    expect(codes(tooSmall)).toContain("READY_SIZE");
+    expect(codes(tooSmall)).not.toContain("READY_SIZE");
     const unordered = await fixture();
     unordered.items.reverse();
     expect(
@@ -80,6 +80,7 @@ describe("delivery Project policy", () => {
 
   it("rejects excess WIP, duplicate workstreams, and non-delivery Platform work", async () => {
     const snapshot = await fixture();
+    item(snapshot, 3).status = "In progress";
     const ready = item(snapshot, 4);
     ready.status = "In progress";
     ready.updatedAt = snapshot.capturedAt;
@@ -137,6 +138,7 @@ describe("delivery evidence and dependencies", () => {
     const active = item(snapshot, 1);
     active.linkedPullRequestStates = ["OPEN"];
     const blocked = item(snapshot, 8);
+    blocked.status = "Blocked";
     blocked.body = "Needs more work.";
     blocked.labels = [];
     const review = item(snapshot, 7);
@@ -190,6 +192,7 @@ describe("delivery evidence and dependencies", () => {
   it("accepts a named dependency as a concrete Blocked condition", async () => {
     const snapshot = await fixture();
     const blocked = item(snapshot, 8);
+    blocked.status = "Blocked";
     blocked.body =
       "Depends on #130 establishing the reviewed navigation contract.";
     expect(codes(snapshot)).not.toContain("BLOCKER_UNNAMED");
@@ -224,6 +227,7 @@ describe("delivery evidence completeness", () => {
     item(snapshot, 1).baseCurrent = undefined;
     item(snapshot, 7).baseCurrent = false;
     item(snapshot, 2).historyLinear = false;
+    item(snapshot, 3).status = "In progress";
     item(snapshot, 3).workstream = undefined;
     item(snapshot, 7).reviewEvidence = {
       copilot: "reviewed",

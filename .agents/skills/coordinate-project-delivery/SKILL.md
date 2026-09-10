@@ -40,12 +40,13 @@ Do not weaken checks because credentials or API state are unavailable, and never
 
 ## Coordinate work
 
-- Keep three to five independently executable Ready items, ordered by Priority.
-- Count only In progress as implementation WIP; keep it at three or fewer and normally one each for Corpus, Reader experience, and delivery-enabling Platform/process work.
-- In review does not consume implementation WIP, but must keep moving.
+- Select at most three unfinished issues, including reserved selections that have not started. Review and selected blocked work consume this cap; report started-but-unmerged work separately.
+- Retain the implementation limit of three In progress items, normally one each for Corpus, Reader experience, and delivery-enabling Platform/process work. Promote only a selected executable issue when its implementation slot is open.
+- Ready has no mandatory minimum. Preserve dependency-free eligibility and deterministic Priority ordering; keep the separate prepared-research buffer at zero to three issues.
+- Park deliberately with preserved branch/evidence and a next review condition. Keep parked work visible in the full unfinished inventory, including work outside the Project; never automatically park, truncate, or drop excess work to satisfy capacity.
+- Record running or user-paused mode explicitly in private state. A user-paused mode blocks starts and parked resumptions; completion of already-started work follows the actual user instruction, never permission invented from mode metadata. Resume and reselect explicitly.
 - Give Blocked work a concrete named condition in its issue.
-- Promote only when both total capacity and the workstream slot are open.
-- Reconcile issue labels, issue state, linked PR state, and Project status after each transition.
+- Reconcile the affected issue, labels, linked PR, and Project item once per material transition, with targeted readback. Reserve complete live audits for grooming, integration batches, or evidence of wider drift.
 - Treat Corpus research as separable from publication integration when the presentation contract is not ready; neither lane may weaken the evidence or canonical-only publication rules.
 - Capture newly observed, independently reviewable work as a focused issue rather than silently widening the active change.
 
@@ -54,6 +55,10 @@ That review must take community self-description and oral-history provenance ser
 Continuous improvement means fixing safe in-scope findings or recording a focused issue without silently widening the active change.
 
 ## Verify and hand off
+
+Use one implementation owner and one independent reviewer. An early representative evidence/model sample may precede expansion. Review a coherent final candidate with one consolidated finding list; subsequent review examines affected changes while renewing required exact-head evidence. Coordinator review addresses dependencies and contested findings instead of routinely duplicating independent review.
+
+Use focused checks during authoring. Provide one terminal handoff with commit, actual command results, unresolved findings or blocker, next action, and owned cleanup. Report active process, local candidate, open PR, dependency block, approval/tool block, and parked work with evidence age or unknown state. Assignments and PIDs alone do not prove an active process. Preserve unknown history and old evidence; do not refresh record ages by rewriting the file.
 
 Run the single local/CI verification path:
 

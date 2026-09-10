@@ -1,8 +1,6 @@
 import { z } from "zod";
-import {
-  auditBacklogIssues,
-  backlogIssueSchema,
-} from "./backlog-integrity.ts";
+import { auditBacklogIssues, backlogIssueSchema } from "./backlog-integrity.ts";
+import { auditDeliveryFlow, flowSchema } from "./delivery-flow.ts";
 import { localGitFailureCodes } from "./delivery-local-git.ts";
 
 export const projectStatuses = [
@@ -98,6 +96,7 @@ export const deliverySnapshotSchema = z
       })
       .strict(),
     capturedAt: dateTime,
+    flow: flowSchema.optional(),
     repositoryLabels: z.array(z.string().min(1)),
     backlogIssues: z.array(backlogIssueSchema).optional(),
     items: z.array(deliveryItemSchema),
@@ -401,6 +400,15 @@ export function canPromote(
   candidate: DeliveryItem,
 ) {
   if (!isReadyCandidate(candidate)) return false;
+  if (snapshot.flow?.coordination.mode !== "running") return false;
+  if (auditDeliveryFlow(snapshot).length > 0) return false;
+  if (
+    !snapshot.flow.retained.some(
+      (record) =>
+        record.issue === candidate.number && record.disposition === "selected",
+    )
+  )
+    return false;
   const active = snapshot.items.filter((item) => item.status === "In progress");
   if (active.some((item) => !item.workstream)) return false;
   return (
@@ -412,12 +420,6 @@ export function canPromote(
 function auditReady(items: DeliveryItem[]): DeliveryFinding[] {
   const findings: DeliveryFinding[] = [];
   const ready = orderedReady(items);
-  if (ready.length < 3 || ready.length > 5) {
-    findings.push({
-      code: "READY_SIZE",
-      message: `Ready contains ${ready.length} items; expected 3–5.`,
-    });
-  }
   for (const item of ready.filter(
     (candidate) => !isReadyCandidate(candidate),
   )) {
@@ -554,6 +556,7 @@ export function auditDeliverySnapshot(
       });
   }
   findings.push(
+    ...auditDeliveryFlow(snapshot),
     ...auditReady(snapshot.items),
     ...auditWip(snapshot.items, snapshot.capturedAt, staleDays),
     ...auditLearnerSequence(snapshot.items),

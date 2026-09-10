@@ -8,6 +8,7 @@ import {
   compareSchema,
   mainRefSchema,
 } from "./delivery-api-schema.ts";
+import { groomingReport } from "./delivery-flow.ts";
 import {
   branchTargetForActiveItem,
   loadActiveBranchEvidence,
@@ -15,6 +16,7 @@ import {
 import { localGitEvidence } from "./delivery-local-git.ts";
 import {
   assignmentForIssue,
+  normalizedDeliveryFlow,
   type PrivateDeliveryState,
   PrivateDeliveryStateUnavailableError,
   readPrivateDeliveryState,
@@ -111,6 +113,7 @@ const repositoryIssueSchema = z
     state: z.enum(["open", "closed"]),
     labels: labelsSchema,
     pull_request: z.unknown().optional(),
+    updated_at: z.string().datetime({ offset: true }).optional(),
   })
   .passthrough();
 
@@ -226,22 +229,38 @@ function prEvidence(url: string) {
 function loadLiveItem(
   item: z.infer<typeof projectItemSchema>,
   privateState: PrivateDeliveryState,
+  inventory: Map<number, z.infer<typeof repositoryIssueSchema>>,
 ): DeliveryItem {
-  const issue = parseJson(
-    gh([
-      "issue",
-      "view",
-      String(item.content.number),
-      "--repo",
-      repository,
-      "--json",
-      "state,updatedAt,body",
-    ]),
-    issueViewSchema,
-    `issue #${item.content.number}`,
-  );
+  const cached = inventory.get(item.content.number);
+  const issue = cached
+    ? {
+        state: cached.state.toUpperCase() as "OPEN" | "CLOSED",
+        body: cached.body ?? "",
+        updatedAt: cached.updated_at,
+      }
+    : parseJson(
+        gh([
+          "issue",
+          "view",
+          String(item.content.number),
+          "--repo",
+          repository,
+          "--json",
+          "state,updatedAt,body",
+        ]),
+        issueViewSchema,
+        `issue #${item.content.number}`,
+      );
   const assignment = assignmentForIssue(privateState, item.content.number);
-  const links = item["linked pull requests"] ?? [];
+  const retained = privateState.retained.find(
+    (record) => record.issue === item.content.number,
+  );
+  const links = [
+    ...new Set([
+      ...(item["linked pull requests"] ?? []),
+      ...(retained?.pullRequests ?? []),
+    ]),
+  ];
   const prs = links.map((url) => prEvidence(url));
   const relevantPr = selectRelevantPullRequest(prs);
   const target = ["In progress", "In review"].includes(item.status)
@@ -267,7 +286,7 @@ function loadLiveItem(
     status: item.status,
     workstream: item.workstream,
     priority: item.priority,
-    labels: item.labels ?? [],
+    labels: cached?.labels.map((label) => label.name) ?? item.labels ?? [],
     body: issue.body,
     updatedAt: issue.updatedAt,
     linkedPullRequestStates: prs.map((pr) => pr.state),
@@ -283,7 +302,7 @@ function loadLiveItem(
   };
 }
 
-function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
+function loadPrivateState(privateStatePath: string) {
   let privateState: PrivateDeliveryState;
   try {
     privateState = readPrivateDeliveryState(privateStatePath);
@@ -291,9 +310,13 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
     if (error instanceof PrivateDeliveryStateUnavailableError)
       throw new ApiUnavailableError(error.message);
     throw new InputInvalidError(
-      `private delivery state: ${error instanceof Error ? error.message : String(error)}`,
+      `private delivery state: ${error instanceof z.ZodError ? "schema invalid; inspect the explicitly supplied file privately" : error instanceof Error ? error.message : "invalid state"}`,
     );
   }
+  return privateState;
+}
+
+function loadLiveMetadata() {
   const project = parseJson(
     gh(["project", "view", "7", "--owner", "dougborg", "--format", "json"]),
     projectViewSchema,
@@ -338,6 +361,44 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
     z.array(z.array(repositoryIssueSchema)),
     "open repository issues",
   );
+  return { project, list, labels, repositoryIssues };
+}
+
+function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
+  const privateState = loadPrivateState(privateStatePath);
+  const { project, list, labels, repositoryIssues } = loadLiveMetadata();
+  const inventory = new Map(
+    repositoryIssues
+      .flat()
+      .filter((issue) => issue.pull_request === undefined)
+      .map((issue) => [issue.number, issue]),
+  );
+  const projectItems = [...list.items];
+  for (const record of privateState.retained) {
+    if (projectItems.some((item) => item.content.number === record.issue))
+      continue;
+    projectItems.push({
+      content: {
+        number: record.issue,
+        title:
+          inventory.get(record.issue)?.title ??
+          `Retained issue #${record.issue}`,
+        type: "Issue",
+      },
+      status: "Backlog",
+    });
+  }
+  const items = projectItems.map((item) =>
+    loadLiveItem(item, privateState, inventory),
+  );
+  // A retained closed issue outside Project has no Project status to reconcile.
+  for (const item of items) {
+    if (
+      !list.items.some((entry) => entry.content.number === item.number) &&
+      item.state !== "OPEN"
+    )
+      item.status = "Done";
+  }
   return parseInput(
     {
       project: {
@@ -359,7 +420,8 @@ function loadLiveSnapshot(privateStatePath: string): DeliverySnapshot {
             labels: issue.labels.map((label) => label.name),
           }),
         ),
-      items: list.items.map((item) => loadLiveItem(item, privateState)),
+      items,
+      flow: normalizedDeliveryFlow(privateState),
     },
     deliverySnapshotSchema,
     "normalized live Project snapshot",
@@ -432,6 +494,14 @@ try {
     );
   } else {
     const findings = auditDeliverySnapshot(snapshot);
+    const report = groomingReport(snapshot);
+    console.log(
+      `Delivery flow: ${report.mode}; selected unfinished ${report.selectedUnfinished}/3; started unmerged ${report.startedUnmerged}; unknown start ${report.unknownStart}; known unfinished ${report.unfinished}; parked ${report.parked}; prepared research ${report.researchPrepared}/3`,
+    );
+    for (const row of report.inventory)
+      console.log(
+        `#${row.issue}: ${row.disposition}; ${row.phase}; observed ${row.evidencePhase}; open PR ${row.openPr === null ? "unknown" : row.openPr}; complete ${row.complete}; cleanup pending ${row.cleanupPending}; evidence age ${row.evidenceAgeMs === null ? "unknown" : `${row.evidenceAgeMs}ms`}; start age ${row.startedAgeMs === null ? "unknown" : `${row.startedAgeMs}ms`}`,
+      );
     const backlogFindings = findings.filter(({ code }) =>
       code.startsWith("BACKLOG_"),
     );

@@ -63,24 +63,36 @@ never edits or closes an issue. Long research context and fenced code examples
 are ignored by the paste heuristics; duplicate detection excludes closed
 issues and explicit umbrella, parent, child, subtask, and follow-up
 relationships.
-The explicitly supplied JSON file is the private source of truth for active
-assignments. It has `version: 1`, the repository name, `generatedAt`,
-`expiresAt`, and one assignment per issue containing `owner`, `branch`, and
-`worktree`. Generate it in private coordination storage; when a local copy is
-necessary, `.delivery-private-state.json` is ignored. Never commit the real
-file or copy its owner identities or filesystem paths into issues, pull
-requests, comments, fixtures, or logs.
+The explicitly supplied version 2 JSON file owns active assignments and explicit flow decisions. Generate it in private coordination storage; `.delivery-private-state.json` is ignored for local use. Never commit real owner identities, paths, instruction references, or operational evidence. The synthetic example is `tests/fixtures/delivery/private-state.example.json`; `scripts/delivery-private-state.ts` is the runtime schema.
 
-`generatedAt` must not be in the future, may be at most 24 hours old, and has
-no allowed clock-skew grace period. `expiresAt` must be later, must be no more
-than 24 hours after `generatedAt`, and must remain later than the audit time.
-Refresh the assignment whenever its owner, branch, or worktree changes. A missing assignment is a
-policy finding; an unreadable source is `UNAVAILABLE`; malformed, duplicate,
-long-lived, old, future, or expired state is `INVALID`. All fail closed with a
-nonzero exit. Unreadable includes missing paths, permission failures,
-non-directory path components, directory paths, symlink loops, and exhausted
-process or system file descriptors; readable malformed JSON or schema data is
-invalid rather than unavailable.
+The file contains the repository name, `generatedAt`, `expiresAt`, `coordination`, `researchBuffer`, `retained`, and `assignments`:
+
+- `coordination` records `mode` (`running` or `user-paused`), `changedAt`, `instructionEvidence: true`, a private `instructionRef`, and `finishStarted` reflecting the actual user instruction. It never grants authorization itself.
+- `researchBuffer` lists zero to three prepared open issues, separately from Ready and selected implementation. Ready has no mandatory minimum; executable eligibility and deterministic ordering remain enforced.
+- Each `retained` record identifies an issue and its `selected`, `parked`, or `unclassified` disposition, decision timestamp/reference, whether work started (`true`, `false`, or `null` when unknown), nullable original start/resumption timestamps, preserved branch and evidence references, linked PR URLs, next review condition, and cleanup-pending state. See the example for exact fields. Record-level booleans are privacy-safe attestations backed by the private references, not substitutes for authoritative Git/PR evidence.
+- `observation` records phase, observation time, and whether supporting evidence exists; `observationRef` retains that evidence privately. Supported observed phases are `active-process`, `local-candidate`, `dependency-block`, `approval-tool-block`, and `unknown`. An active-process observation requires a currently observed running command tied to the task and actual process identity/liveness, not an assignment or PID alone; the report treats process observations older than one minute as unknown. Local-candidate evidence identifies a concrete head/diff; block evidence identifies the dependency or actual tool/approval result. Do not freshly date an old observation merely because it was copied.
+- Each current assignment has one `owner`, `branch`, `worktree`, `observedAt`, and `expiresAt`. Assignment validity is independent of the outer file timestamp. Historical owners stay in preserved evidence, never in current assignments unless explicitly reassigned after inspection.
+
+The file's `generatedAt` cannot be future or more than 24 hours old. Its `expiresAt` must be later than both generation and audit time, at most 24 hours after generation. Each assignment likewise needs a nonfuture observation and unexpired validity interval of at most 24 hours. Rewriting the file does not renew an expired assignment. Missing ownership is a policy finding; unreadable input is `UNAVAILABLE`; malformed, duplicate, long-lived, future, or expired input is `INVALID`. All fail closed. Private schema diagnostics omit raw field values.
+
+### Grooming and capacity report
+
+The normalized snapshot adds `flow` with privacy-safe coordination metadata, research issue numbers, and retained records. It excludes owner identities, filesystem paths, freeform operational conditions, and evidence references. The CLI reports mode, selected unfinished occupancy (maximum three, including reserved not-started selections), started-unmerged occupancy, unknown-start count, known unfinished inventory, parked count, and prepared-research occupancy. Per-issue rows show disposition, effective phase, underlying observed phase, open-PR presence, authoritative completion, cleanup state, evidence age, and start age. Missing historical dates display `unknown`. A preserved non-process classification may have unknown age; that does not claim its condition was freshly retried.
+
+Project status cannot free selected capacity: review and selected blocked work count. Parking is explicit, preserves evidence and a next review condition, and remains visible outside the Project. A concrete Project Blocked condition may coexist with deliberate parking; parking is execution disposition, not deletion of the dependency. In progress and In review cannot simultaneously claim to be parked. A parked open PR stays intact and requires explicit reselection and renewed applicable gates before integration. No blanket current-base comparison is performed for parked records.
+
+The live loader reuses the complete bounded open-issue inventory for Project and retained issues. It performs targeted reads only for missing identities and explicitly linked PRs. Retained records outside the Project are included without adding Project cards. A missing classification remains a finding and blocks promotion; excess inventory is never automatically parked or truncated. Promotion requires explicit selection, running mode, an executable Ready issue, available selected capacity, and an open implementation workstream slot.
+
+Snapshot evidence cannot establish that every historical branch was disclosed, prove a past human instruction, or turn a private completion flag into a merge. Closed implementation issues alone remain unfinished until linked authoritative merge evidence exists. Authoritatively merged work with cleanup pending stays visible and releases unmerged capacity; the existing cleanup and Done reconciliation obligations still apply. The report is a classification/count/age contract; durable command history and richer waiting/retry instrumentation are separate work, not implemented here.
+
+### Explicit migration from version 1
+
+Version 1 fails with an explicit migration-required result. Preserve the original file, historical evidence, and grooming decisions separately before preparing a candidate. `proposeDeliveryStateMigration` in `scripts/delivery-state-migration.ts` returns a private reviewable candidate and the unchanged historical data; it performs no writes. It retains every legacy issue as unclassified retained work with unknown start state and observation times, preserves an explicit historical reference, and leaves active assignments empty. It does not reactivate expired owners, infer authorized parking, or trim surplus work.
+
+Reconcile that proposal against current assignments, authorized grooming manifests, retained worktree inventory, issue/PR state, and actual user instructions. Preserve issues, branches, acceptance criteria, research, review evidence, unknown dates, and ambiguous mappings. Apply only individually supported selected/parked decisions, with the original decision times where known. Review stale blanket publication holds against actual authorization individually; neither copy all holds forward nor universally remove them. Add current ownership only after inspection and explicit assignment; keep expired historical owners in the preserved original. Retain parked candidates even if absent from the Project, and preserve separately deferred work and cleanup-pending merged records.
+
+Run the normalized candidate audit first and inspect all counts and findings. Resolve excess selected work through an explicit decision without silently moving or dropping records. A fresh candidate file is not fresh historical evidence. The coordinator activates the reviewed private candidate only after this reconciliation, then uses targeted readback for affected issue/Project transitions. The migration helper is a proposal builder, not an automatic active-state conversion or board writer.
+
 Live and snapshot modes exit 0 for a clean readable snapshot, 1 for policy findings, and 2 for `INVALID`, `UNAVAILABLE`, or `ERROR` results, including invalid input, credentials or API access failures, and unexpected execution errors.
 Runtime schemas reject malformed API and snapshot data before policy analysis and distinguish invalid input, unavailable API access, and unexpected execution errors.
 Tests use normalized fixtures for Ready eligibility, implementation WIP, workstream capacity, ownership, current-base and linear-history evidence, review evidence, staleness, blocked conditions, track labels, learner dependencies, and issue/PR/status reconciliation.
