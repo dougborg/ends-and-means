@@ -7,6 +7,7 @@ import {
   commitOidSchema,
   compareSchema,
   mainRefSchema,
+  retainedPullRequestUrlSchema,
 } from "./delivery-api-schema.ts";
 import { groomingReport } from "./delivery-flow.ts";
 import {
@@ -64,8 +65,15 @@ const projectItemSchema = z
   })
   .passthrough();
 const projectListSchema = z
-  .object({ items: z.array(projectItemSchema) })
-  .passthrough();
+  .object({
+    items: z.array(projectItemSchema),
+    totalCount: z.number().int().nonnegative(),
+  })
+  .passthrough()
+  .refine(
+    (list) => list.items.length === list.totalCount,
+    "Project item response is incomplete; obtain the complete bounded inventory before auditing",
+  );
 const issueViewSchema = z
   .object({
     state: z.enum(["OPEN", "CLOSED", "MERGED"]),
@@ -200,18 +208,43 @@ function branchEvidence(base: string, branch: string) {
 }
 
 function prEvidence(url: string) {
+  const identity = retainedPullRequestUrlSchema.safeParse(url);
+  if (!identity.success)
+    throw new InputInvalidError(
+      "Linked pull request identity must be a canonical public PR URL in the intended repository.",
+    );
+  const number = identity.data.split("/").at(-1) as string;
+  try {
+    return loadPullRequestEvidence(number);
+  } catch (error) {
+    // Do not echo private-origin arguments, returned values, or command stderr.
+    if (error instanceof ApiUnavailableError)
+      throw new ApiUnavailableError(
+        `Pull request #${number} evidence is unavailable; inspect the GitHub connection privately.`,
+      );
+    if (error instanceof InputInvalidError)
+      throw new InputInvalidError(
+        `Pull request #${number} response is invalid; inspect the response privately.`,
+      );
+    throw new Error(
+      `Pull request #${number} evidence failed; inspect the command result privately.`,
+    );
+  }
+}
+
+function loadPullRequestEvidence(number: string) {
   const pr = parseJson(
     gh([
       "pr",
       "view",
-      url,
+      number,
       "--repo",
       repository,
       "--json",
       "state,baseRefName,headRefName,headRefOid,isDraft,author,reviews,comments",
     ]),
     prViewSchema,
-    `pull request ${url}`,
+    `pull request #${number}`,
   );
   return {
     state: pr.state,

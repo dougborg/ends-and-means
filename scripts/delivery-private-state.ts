@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
+import { retainedPullRequestUrlSchema } from "./delivery-api-schema.ts";
 import { coordinationSchema, retainedWorkSchema } from "./delivery-flow.ts";
 
 const dateTime = z.string().datetime({ offset: true });
@@ -29,7 +30,7 @@ export const privateDeliveryStateSchema = z
       retainedWorkSchema
         .extend({
           branch: z.string().min(1).nullable(),
-          pullRequests: z.array(z.string().url()),
+          pullRequests: z.array(retainedPullRequestUrlSchema),
           evidenceRefs: z.array(z.string().min(1)),
           nextReview: z.string().min(1).nullable(),
           decisionRef: z.string().min(1).nullable(),

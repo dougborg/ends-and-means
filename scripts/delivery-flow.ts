@@ -122,6 +122,9 @@ function hasStarted(
   if (
     record?.started === true ||
     record?.startedAt ||
+    record?.resumedAt ||
+    (record?.observation.evidence &&
+      record.observation.phase === "active-process") ||
     item?.ownershipEvidence === true ||
     item?.linkedPullRequestStates?.includes("OPEN") === true ||
     ["In progress", "In review"].includes(item?.status ?? "")
@@ -210,6 +213,7 @@ function auditCapacity(
 function auditDisposition(
   record: RetainedWork,
   item: DeliveryItem | undefined,
+  row: InventoryRow,
   add: AddFinding,
 ) {
   const issue = record.issue;
@@ -219,17 +223,19 @@ function auditDisposition(
       `#${issue} lacks explicit disposition evidence.`,
       issue,
     );
-  if (
-    record.disposition === "selected" &&
-    item?.ownershipEvidence &&
-    item.status === "Backlog"
-  )
+  if (item?.ownershipEvidence && item.status === "Backlog")
     add(
       "ASSIGNMENT_STATUS",
       `#${issue} has active ownership outside an active or blocked Project state.`,
       issue,
     );
   if (record.disposition !== "parked") return;
+  if (!row.complete && hasExecutionEvidence(item, row))
+    add(
+      "PARKED_EXECUTION",
+      `#${issue} has active execution evidence while parked; reconcile its disposition without hiding resumed work.`,
+      issue,
+    );
   if (!record.preservedEvidence || !record.nextReviewCondition)
     add(
       "PARKING_EVIDENCE",
@@ -263,12 +269,26 @@ function auditRecordTimes(
         row.issue,
       );
   }
-  if (!record.started && (record.startedAt || record.resumedAt || row.started))
+  if (
+    record.started === false &&
+    (record.startedAt || record.resumedAt || row.started)
+  )
     add(
       "START_EVIDENCE_DRIFT",
       `#${row.issue} has start evidence but is declared not started.`,
       row.issue,
     );
+}
+
+function hasExecutionEvidence(
+  item: DeliveryItem | undefined,
+  row: InventoryRow,
+) {
+  return (
+    item?.ownershipEvidence === true ||
+    row.evidencePhase === "active-process" ||
+    ["In progress", "In review"].includes(item?.status ?? "")
+  );
 }
 
 function auditPause(
@@ -278,28 +298,22 @@ function auditPause(
   item: DeliveryItem | undefined,
   add: AddFinding,
 ) {
-  if (
-    flow.coordination.mode !== "user-paused" ||
-    record.disposition !== "selected" ||
-    !row.started ||
-    row.complete
-  )
-    return;
+  if (flow.coordination.mode !== "user-paused" || row.complete) return;
   const pausedAt = Date.parse(flow.coordination.changedAt);
-  if (
-    !record.startedAt ||
-    Date.parse(record.startedAt) >= pausedAt ||
-    (record.resumedAt && Date.parse(record.resumedAt) >= pausedAt)
-  )
+  const postPauseActivity = [record.startedAt, record.resumedAt].some(
+    (at) => at !== null && Date.parse(at) >= pausedAt,
+  );
+  const executing = hasExecutionEvidence(item, row);
+  const missingPriorStart =
+    !record.startedAt &&
+    ((row.started === true && record.disposition === "selected") || executing);
+  if (postPauseActivity || missingPriorStart)
     add(
       "PAUSED_START",
-      `#${row.issue} is not proven started before the explicit pause without a later resumption.`,
+      `#${row.issue} has a post-pause start/resumption or lacks required evidence of a prior start.`,
       row.issue,
     );
-  if (
-    !flow.coordination.finishStarted &&
-    ["In progress", "In review"].includes(item?.status ?? "")
-  )
+  if (!flow.coordination.finishStarted && executing)
     add(
       "PAUSED_COMPLETION",
       `#${row.issue} remains active while the actual pause instruction does not permit completion.`,
@@ -342,7 +356,7 @@ export function auditDeliveryFlow(
         row.issue,
       );
     if (!record) continue;
-    auditDisposition(record, item, add);
+    auditDisposition(record, item, row, add);
     auditRecordTimes(record, row, snapshot.capturedAt, add);
     auditPause(flow, record, row, item, add);
   }
