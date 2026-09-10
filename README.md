@@ -8,7 +8,7 @@ disagreements, and evidence.
 The typed canonical graph is trust infrastructure, not a prerequisite for
 learning.
 
-Intended home: **[endsandmeans.info](https://endsandmeans.info)**
+Public site: **[endsandmeans.info](https://endsandmeans.info)**
 
 Explore starts with recognizable ideas, ideologies, systems, and institutions.
 Cases show what happened in a bounded place and period, while Compare answers
@@ -30,13 +30,18 @@ Sources and Method remain close at hand as a quieter trust layer.
 | [`docs/editorial-philosophy.md`](docs/editorial-philosophy.md) | Implementation companion to the public principles for fairness, evidence, judgment, originality, and revision. |
 | [`docs/editorial-governance.md`](docs/editorial-governance.md) | Implementation notes and reusable responsibility language for the public governance policy. |
 | [`docs/narrative-style.md`](docs/narrative-style.md) | Plain-spoken prose, attribution, source-similarity safeguards, and editorial review. |
+| [`docs/environments.md`](docs/environments.md) | Supported toolchain, isolated dependencies, focused/full commands and verified static production artifacts. |
+| [`docs/execution-records.md`](docs/execution-records.md) | Durable command outcomes and private/offline or allowlisted public status. |
 | [`docs/delivery-harness.md`](docs/delivery-harness.md) | Local/CI verification, Project-state diagnostics, stable checks, and review/integration gates. |
 | [`docs/content-integrity-harness.md`](docs/content-integrity-harness.md) | Deterministic publication checks, actionable research attention, and safe-publication boundaries. |
+| [`docs/final-workflow-audit.md`](docs/final-workflow-audit.md) | Pinned documentation/harness coverage matrix and retained implementation limits. |
 | [`docs/licensing-audit.md`](docs/licensing-audit.md) | Asset/provenance inventory, candidate licensing boundaries, and owner decisions; no license is selected. |
 | [`docs/adr/0001-astro-and-portable-content-core.md`](docs/adr/0001-astro-and-portable-content-core.md) | Accepted architecture decision and boundaries. |
 | [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`docs/adr/0003-markdown-narrative-authoring.md`](docs/adr/0003-markdown-narrative-authoring.md) | Markdown prose, typed manifests, sentence-per-line linting, and safe rendering. |
 | [`docs/adr/0004-subject-guides-as-presentation-compositions.md`](docs/adr/0004-subject-guides-as-presentation-compositions.md) | Subject Guides as presentation compositions above entity-owned Dossiers. |
+| [`docs/adr/0005-material-change-events-as-freshness-metadata.md`](docs/adr/0005-material-change-events-as-freshness-metadata.md) | Accepted Event references as editorial freshness metadata, without inferred causation. |
+| [`docs/adr/0006-society-specific-political-organization.md`](docs/adr/0006-society-specific-political-organization.md) | Accepted bounded, society-specific modeling without universal-stage labels. |
 | [`.agents/skills/research-preparation/SKILL.md`](.agents/skills/research-preparation/SKILL.md) | Research-only source inspection and issue-body handoffs before canonical authoring. |
 | [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Implementation workflow for researched canonical content reviewed in pull requests. |
 | [`.agents/skills/coordinate-project-delivery/SKILL.md`](.agents/skills/coordinate-project-delivery/SKILL.md) | Project-state, pull-request, CI, and rebase-integration coordination. |

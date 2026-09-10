@@ -186,5 +186,6 @@ explicit reviewed converter into a separate store.
 Retention is explicit: preserve the private store with task evidence until its
 coordinator approves owned cleanup, then archive or delete only that owned store.
 Never infer cleanup authority from a stored PID or stale assignment.
-The small recorder demonstration establishes this interface; #324 remains the
-first existing-work pilot and measures whether coordination effort improves.
+The existing-work pilot demonstrates coordinator consumption of runner-written
+terminal evidence without a second manual completion account. That observable
+step does not establish total time saved or guarantee future test deadlines.

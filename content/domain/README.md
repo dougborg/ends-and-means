@@ -12,15 +12,20 @@ substantive edges. The compiler in `src/lib/domain/` validates these records and
 produces the read graph consumed by routes. Build products never become
 authoring inputs.
 
-Declarative records may use JSON. All executable repository code remains
-TypeScript.
+Declarative records may use JSON; executable canonical authoring remains
+TypeScript. Repository tooling also uses small JavaScript bootstrap entries,
+which do not create another content source.
 
 Works represent intellectual objects. Sources represent the particular edition,
 article, dataset, legal text, archival record, or web manifestation actually
 consulted. Statement-to-Source citation relationships own evidentiary roles and
 locators. Publisher, library, authorized-reading, archive, and purchase links
 are secondary resource metadata; purchase links must disclose affiliate status
-and never serve as canonical identifiers.
+and never serve as canonical identifiers. The current Source renderer does not
+yet display affiliate metadata or separate purchase links; the pending
+[source-access contract #258](https://github.com/dougborg/ends-and-means/issues/258)
+and [Source redesign #259](https://github.com/dougborg/ends-and-means/issues/259)
+own those publication limits.
 Record a Work's original publication year separately from the consulted
 Source's publication or digitization year. Omit a Source year when the linked
 manifestation does not establish one, retain translators and editors needed to

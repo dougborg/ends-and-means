@@ -47,7 +47,7 @@ the evidence supports; keep community self-description separate from translated,
 scholarly, colonial, and statutory classifications.
 Common search language may route to a reviewed society-specific guide without
 becoming a canonical Concept or alternate label.
-See [ADR 0005](adr/0005-society-specific-political-organization.md).
+See [ADR 0006](adr/0006-society-specific-political-organization.md).
 
 ## The layers
 
@@ -282,7 +282,8 @@ evidence quality, Collection membership, or any other relationship.
 ### Comparison specification
 
 A comparison page is a derived query over canonical entities and relationships,
-not another content owner. A saved or curated specification may select:
+not another content owner. The following generalized saved specification is a
+proposal, not an exported TypeScript API in the current implementation:
 
 ```ts
 interface ComparisonSpec {
@@ -296,7 +297,7 @@ interface ComparisonSpec {
 }
 ```
 
-The compiler returns only genuinely comparable relationships and reports
+A future comparison compiler should return only genuinely comparable relationships and report
 missing, inapplicable, differently scoped, or unreviewed material explicitly.
 It does not manufacture symmetric coverage or comparison prose.
 
@@ -683,13 +684,17 @@ embedding them in either endpoint or producing thousands of fragments.
   before/change/after sequence, not an uncontested causal verdict.
 - Sources own bibliographic identity; citation links own locators and the exact
   Statements they support.
-- Dossiers, comparisons, navigation trees, backlinks, and counts are derived
-  views and never canonical authoring files.
+- Dossier records and their Markdown narrative are canonical presentation
+  authoring. Rendered pages, comparison views, navigation trees, backlinks and
+  counts are derived and must not become competing authoring sources.
 
 ### Build products
 
 The compiler reads the modular sources, validates each record, resolves
-references, validates graph-wide invariants, and emits:
+references, validates graph-wide invariants, and returns an in-memory
+`CompiledDomainGraph`. The validation command reports diagnostics and counts;
+Astro builds static pages into `dist`. The following file layout is a proposed
+export arrangement, not output currently emitted by `pnpm validate`:
 
 ```text
 generated/
@@ -729,6 +734,14 @@ a database later without changing content identity.
 
 ## Reader-facing information architecture
 
+Public guide helpers enforce their reviewed/published projection. This is not
+a universal guarantee for every Source route: the current Source detail uses
+raw entity and citation traversal. Public Source/Statement/destination selection
+and draft-Work exclusions remain in the
+[Source redesign #259](https://github.com/dougborg/ends-and-means/issues/259),
+under [source/access contracts #255](https://github.com/dougborg/ends-and-means/issues/255).
+No public leak is established by this documented implementation limit.
+
 Explore is the main subject directory.
 It accepts familiar terms and entry phrases without asking readers to choose an
 entity kind first.
@@ -762,7 +775,9 @@ distinct destinations within it.
 New public areas must define their reader-facing label and descendant route
 prefixes in that registry rather than editing the landmarks independently.
 
-Compare supports three initial modes:
+The current `/compare/` route offers two bounded Swedish comparison questions
+and a sourced ordinal Placement table. Generalized filtering, lens selection
+and maps are not implemented. The intended broader comparison modes are:
 
 1. responses to a shared Challenge;
 2. pairwise or small-set comparison across supported factual dimensions and
@@ -774,7 +789,7 @@ The [project vision's learner journey](project-vision.md#the-learner-journey)
 is the authoritative completeness guide.
 SubjectGuide selects entity-owned narrative and derived graph material but
 never owns duplicate factual claims or relationships.
-The learner-first prototype in #130 must consume only the live SubjectGuide
+The implemented guide routes consume only the live SubjectGuide
 projection and public helpers; sparse and immature states belong in test or
 preview fixtures, not production route generation.
 

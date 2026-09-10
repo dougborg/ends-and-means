@@ -58,7 +58,13 @@ Continuous improvement means fixing safe in-scope findings or recording a focuse
 
 Use one implementation owner and one independent reviewer. An early representative evidence/model sample may precede expansion. Review a coherent final candidate with one consolidated finding list; subsequent review examines affected changes while renewing required exact-head evidence. Coordinator review addresses dependencies and contested findings instead of routinely duplicating independent review.
 
-Use focused checks during authoring. Provide one terminal handoff with commit, actual command results, unresolved findings or blocker, next action, and owned cleanup. Report active process, local candidate, open PR, dependency block, approval/tool block, and parked work with evidence age or unknown state. Assignments and PIDs alone do not prove an active process. Preserve unknown history and old evidence; do not refresh record ages by rewriting the file.
+Use focused checks during authoring. For supported commands, use the
+[execution recorder](../../../docs/execution-records.md) and provide its private
+store/run identity at launch. The coordinator reads the actual terminal result
+from durable status; do not require a second completion narrative before
+accepting that command evidence. The author still owns tool-handle polling and
+process cleanup. Provide one concise candidate handoff with commit, evidence
+references, new findings or blocker, next action, and owned cleanup. Report active process, local candidate, open PR, dependency block, approval/tool block, and parked work with evidence age or unknown state. Assignments and PIDs alone do not prove an active process. Preserve unknown history and old evidence; do not refresh record ages by rewriting the file.
 
 Use the [governed environment contract](../../../docs/environments.md) for exact toolchain selection, task-owned dependencies, readiness results and explicit probes.
 Keep full verification free of global route/base/port overrides; record the actual environment fingerprint with handoff evidence.

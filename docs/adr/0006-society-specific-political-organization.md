@@ -1,4 +1,4 @@
-# ADR 0005: Model society-specific political organization before broad labels
+# ADR 0006: Model society-specific political organization before broad labels
 
 **Status:** accepted
 

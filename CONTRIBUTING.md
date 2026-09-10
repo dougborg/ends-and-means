@@ -36,10 +36,14 @@ a proportionate short brief.
    owner responsible for its mutations.
 3. Implement the concrete candidate in the canonical content model or its
    deterministic source generator, including rendering and tests when needed.
-4. Run `pnpm validate`, `pnpm lint`, `pnpm static`, `pnpm check`,
-   `pnpm test`, `pnpm build`, `pnpm test:routes`, and the rendered-page
-   review described below, plus `pnpm audit:content` for canonical content or
-   narrative changes.
+4. Use the [governed environment](docs/environments.md) and focused affected
+   checks while authoring. For canonical changes, run `pnpm audit:content-preflight`
+   early to find affected graph boundaries and `pnpm audit:content` when
+   research-attention output helps the review. Review the coherent candidate,
+   resolve findings, then run the single full `pnpm verify` gate before handoff.
+   It includes the build and substantive checks; do not repeat that full chain
+   as a separate checklist. Public rendering changes also need the human
+   screenshot inspection described below.
 5. Rebase onto the current base, open a ready-for-review pull request, and
    identify all claims, classifications, and judgments the reviewer must decide.
    Use a draft only for an explicitly experimental approach or deliberate early
@@ -69,8 +73,9 @@ pull-request, verification, review, and rebase-only integration state.
 
 Subject Guides are learner-facing presentation compositions, not canonical
 graph superclasses.
-Until their contract is implemented, preserve entity-owned Dossiers and do not
-manufacture a route-local substitute.
+The implemented `subject-guide` contract selects existing entity-owned Dossier
+narrative and canonical records by ID; it does not own duplicate claims or
+route-local content. See [ADR 0004](docs/adr/0004-subject-guides-as-presentation-compositions.md).
 
 ### Narrative prose
 
@@ -141,12 +146,26 @@ backlog with the observed problem, desired outcome, dependencies, and
 acceptance criteria rather than silently widening the pull request.
 
 Issues and milestones are the authoritative backlog.
-The GitHub Project contains active reviews, concrete blockers, and only
-the next three to five implementation-ready items.
-Keep no more than three implementation items active, normally one each in the
-Corpus, Reader experience, and Platform/process tracks.
-Use `pnpm audit:delivery -- --live-project` when authenticated Project access is
-available; an unavailable API or credential result is not a clean audit.
+The GitHub Project is a thin execution queue. Select at most three unfinished
+issues, including reservations, reviews and selected blocked work; Ready has no
+mandatory minimum. Keep at most three implementation items In progress,
+normally one per workstream. Preserve deliberately parked work and resume it
+only through explicit selection. The [delivery policy](.agents/skills/coordinate-project-delivery/references/delivery-policy.md)
+owns these limits and pause rules.
+
+For an authorized live audit with authenticated Project access and fresh private
+ownership evidence, run:
+
+```sh
+pnpm audit:delivery -- --live-project --private-state /secure/path/delivery-state.json
+```
+
+Replace the path with the actual private version 2 file described in the
+[delivery harness](docs/delivery-harness.md). The command is read-only; an
+unavailable API or credential result is not a clean audit. Keep ownership
+identities and paths out of public reports. Use [recorded executions](docs/execution-records.md)
+to retain actual child outcomes; a readable status report does not itself mean
+that its reported command passed.
 
 ## Automated quality and security gates
 
@@ -199,10 +218,10 @@ available; an unavailable API or credential result is not a clean audit.
 ## Rendered-page review
 
 An issue that changes public rendering is not implemented until its affected
-pages have been evaluated in a browser. Build the site and run:
+pages have been evaluated in a browser. After the one-time Chromium setup,
+the full gate builds and tests the site:
 
 ```sh
-pnpm exec playwright install chromium
 pnpm verify
 ```
 
@@ -210,7 +229,7 @@ The command builds and audits the content, then renders representative pages at 
 saves full-page screenshots under `.artifacts/visual-review`; and fails on
 browser errors, horizontal overflow, undefined CSS design tokens, or WCAG text
 contrast failures. To focus the review on changed routes, provide a
-comma-separated list:
+comma-separated list after `pnpm build` has refreshed the affected output:
 
 ```sh
 REVIEW_ROUTES=/cases/example/,/concepts/example/ pnpm review:visual

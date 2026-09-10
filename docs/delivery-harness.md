@@ -89,7 +89,7 @@ Project status cannot free selected capacity: review and selected blocked work c
 
 The live loader rejects a Project item-list response unless its required nonnegative `totalCount` equals the returned item count; hitting the bounded read ceiling cannot produce a clean partial report. It reuses the complete bounded open-issue inventory for Project and retained issues. It performs targeted reads only for missing identities and explicitly linked PRs. Retained records outside the Project are included without adding Project cards. A missing classification remains a finding and blocks promotion; excess inventory is never automatically parked or truncated. Promotion requires explicit selection, running mode, an executable Ready issue, available selected capacity, and an open implementation workstream slot.
 
-Snapshot evidence cannot establish that every historical branch was disclosed, prove a past human instruction, or turn a private completion flag into a merge. Closed implementation issues alone remain unfinished until linked authoritative merge evidence exists. Authoritatively merged work with cleanup pending stays visible and releases unmerged capacity; the existing cleanup and Done reconciliation obligations still apply. The report is a classification/count/age contract; durable command history and richer waiting/retry instrumentation are separate work, not implemented here.
+Snapshot evidence cannot establish that every historical branch was disclosed, prove a past human instruction, or turn a private completion flag into a merge. Closed implementation issues alone remain unfinished until linked authoritative merge evidence exists. Authoritatively merged work with cleanup pending stays visible and releases unmerged capacity; the existing cleanup and Done reconciliation obligations still apply. The report is a classification/count/age contract. The [execution recorder](execution-records.md) separately records actual child outcomes, heartbeats and bounded elapsed intervals; it does not infer historical waiting time or retry automatically.
 
 ### Explicit migration from version 1
 
@@ -294,7 +294,7 @@ condition; forced activation is not an acceptable substitute for native
 navigation. To repeat the two regression cohorts without diagnostic retries:
 
 ```sh
-CI=1 pnpm exec playwright test tests/visual/rendered-pages.spec.ts \
+pnpm review:visual tests/visual/rendered-pages.spec.ts \
   --grep "mobile links preserve|subject guide works without JavaScript" \
   --repeat-each 50 --retries 0
 ```

@@ -70,7 +70,9 @@ When parallel agents are explicitly requested, use shared worktrees only for
 read-only audits. Give each mutating agent a dedicated branch and worktree with
 an agreed file boundary. Never switch the branch of a worktree another agent is
 using, edit another agent's dirty files, or merge on the agent's behalf. The
-integrating agent reviews reported commits and reruns the complete suite.
+integrating agent checks the recorded results and renews affected verification
+after source or base changes; an unchanged verified candidate does not need a
+duplicate full run merely because ownership of integration changed.
 
 Implement directly in the canonical content model or its deterministic source
 generator. Research, rendering, and tests may change together when they form one
@@ -277,21 +279,26 @@ Install Playwright's Chromium runtime once.
 Use the repository's tracked `.node-version`, `packageManager`, shared CI verify
 action, and [delivery harness](../../../docs/delivery-harness.md) as execution
 authorities. Record actual runtime evidence rather than embedding a personal
-tool path in the skill. Issue #329 owns the pending diagnostics and environment
-consistency improvements; this workflow does not imply they are implemented.
+tool path in the skill. The implemented environment diagnostic checks readiness
+without installing dependencies, probing capabilities or changing permissions
+by default.
 Use the [governed environment contract](../../../docs/environments.md) for exact toolchain selection, task-owned dependencies, readiness results and explicit probes.
 Keep full verification free of global route/base/port overrides; record the actual environment fingerprint with handoff evidence.
 A readiness result does not replace verification or authorize retrying a denied command unchanged.
 
-Run before handoff:
+Run `pnpm audit:content-preflight` during authoring to identify affected semantic
+boundaries, then use focused checks to remediate findings. After coherent review
+and fixes, run the single full handoff verification:
 
 ```bash
-pnpm audit:content-preflight
 pnpm verify
 ```
 
-Use focused affected checks while authoring and remediating findings, then run
-the semantic preflight before the single full handoff verification. Rerun the
+The full gate already includes semantic preflight; do not duplicate its stages
+as a second mandatory checklist. Use the [execution recorder](../../../docs/execution-records.md)
+for supported commands so the coordinator can consume the actual terminal
+result; keep command, source/environment, full verification and deployment
+evidence distinct. Rerun the
 full gate after a later change or rebase only when it can affect the verified
 surface; exact-head hosted CI, independent review, and post-merge verification
 remain mandatory.

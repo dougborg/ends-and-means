@@ -56,7 +56,7 @@ cross-layer relationships, and honest open questions—not raw page count alone.
 1. Enforce content integrity, canonical-only publication, narrative quality,
    and evidence traceability in the authoring harness.
 2. Detect delivery drift: excess work in progress, stale states, an oversized or
-   empty ready queue, and divergence between local and hosted checks.
+   misclassified selected work, and divergence between local and hosted checks.
 3. Keep dependencies, security analysis, coverage, complexity, accessibility,
    and deployment verification current and ratcheted.
 4. Audit repository skills when workflows change, keeping instructions concise
@@ -100,10 +100,11 @@ durable.
 
 ## Delivery policy
 
-Keep three to five implementation-ready issues in the Project and no more than
-three implementation items in progress.
-Reviews do not consume implementation WIP, but they must keep moving and cannot
-be bypassed to start unlimited new work.
+Follow the [delivery policy](.agents/skills/coordinate-project-delivery/references/delivery-policy.md):
+at most three selected unfinished issues, including reservations, reviews and
+selected blocked work, with no mandatory Ready minimum. Keep at most three
+implementation items In progress, normally one per workstream. Reviews release
+an implementation slot but retain selection capacity.
 Blocked items name their unblock condition.
 Issues remain focused and implementation-ready; milestones describe outcomes
 rather than mirroring issue checklists in this file.
