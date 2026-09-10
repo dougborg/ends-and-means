@@ -156,12 +156,14 @@ describe("research brief capability audit", () => {
       ".agents/skills/research-preparation/references/examples.md",
     );
     const examples = await readFile(examplesPath, "utf8");
+    const paraphrasedExamples = examples.replace(
+      "keep the dependent claim out\nof the evidence-complete set",
+      "exclude the dependent claim from evidence-complete claims",
+    );
+    expect(paraphrasedExamples).not.toBe(examples);
     await writeFile(
       examplesPath,
-      examples.replace(
-        "keep the dependent claim out of the evidence-complete set",
-        "exclude the dependent claim from evidence-complete claims",
-      ),
+      paraphrasedExamples,
     );
     expect(auditSkillContracts(root)).toEqual([]);
   });
