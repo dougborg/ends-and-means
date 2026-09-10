@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
+import { coordinationSchema, retainedWorkSchema } from "./delivery-flow.ts";
 
 const dateTime = z.string().datetime({ offset: true });
 export const privateStateMaximumAgeMs = 24 * 60 * 60 * 1000;
@@ -19,7 +20,23 @@ export class PrivateDeliveryStateUnavailableError extends Error {}
 
 export const privateDeliveryStateSchema = z
   .object({
-    version: z.literal(1),
+    version: z.literal(2),
+    coordination: coordinationSchema
+      .extend({ instructionRef: z.string().min(1) })
+      .strict(),
+    researchBuffer: z.array(z.number().int().positive()),
+    retained: z.array(
+      retainedWorkSchema
+        .extend({
+          branch: z.string().min(1).nullable(),
+          pullRequests: z.array(z.string().url()),
+          evidenceRefs: z.array(z.string().min(1)),
+          nextReview: z.string().min(1).nullable(),
+          decisionRef: z.string().min(1).nullable(),
+          observationRef: z.string().min(1).nullable(),
+        })
+        .strict(),
+    ),
     repository: z.literal("dougborg/ends-and-means"),
     generatedAt: dateTime,
     expiresAt: dateTime,
@@ -30,6 +47,8 @@ export const privateDeliveryStateSchema = z
           owner: z.string().min(1),
           branch: z.string().min(1),
           worktree: z.string().min(1),
+          observedAt: dateTime,
+          expiresAt: dateTime,
         })
         .strict(),
     ),
@@ -67,9 +86,16 @@ export const privateDeliveryStateSchema = z
   });
 
 export type PrivateDeliveryState = z.infer<typeof privateDeliveryStateSchema>;
-export type PrivateAssignment = PrivateDeliveryState["assignments"][number];
+export type PrivateAssignment = Pick<
+  PrivateDeliveryState["assignments"][number],
+  "issue" | "owner" | "branch" | "worktree"
+>;
 
 export function parsePrivateDeliveryState(value: unknown, now = new Date()) {
+  if ((value as { version?: unknown } | null)?.version === 1)
+    throw new Error(
+      "version 1 requires explicit migration; retain historical assignments without reactivating expired owners",
+    );
   const state = privateDeliveryStateSchema.parse(value);
   const generatedAt = Date.parse(state.generatedAt);
   if (generatedAt > now.getTime())
@@ -82,7 +108,51 @@ export function parsePrivateDeliveryState(value: unknown, now = new Date()) {
     );
   if (Date.parse(state.expiresAt) <= now.getTime())
     throw new Error("expiresAt has passed; refresh the private delivery state");
+  validateAssignmentEvidence(state, now);
+  validateRetainedReferences(state);
   return state;
+}
+
+function validateAssignmentEvidence(state: PrivateDeliveryState, now: Date) {
+  for (const assignment of state.assignments) {
+    if (
+      Date.parse(assignment.observedAt) > now.getTime() ||
+      Date.parse(assignment.expiresAt) <= now.getTime() ||
+      Date.parse(assignment.expiresAt) <= Date.parse(assignment.observedAt) ||
+      Date.parse(assignment.expiresAt) - Date.parse(assignment.observedAt) >
+        privateStateMaximumAgeMs
+    )
+      throw new Error(
+        "assignment evidence is future, expired, or longer than 24 hours; refreshing the file does not renew ownership",
+      );
+    if (
+      !state.retained.some(
+        (record) =>
+          record.issue === assignment.issue &&
+          record.branch === assignment.branch,
+      )
+    )
+      throw new Error(
+        "each active assignment requires a matching retained issue and branch record",
+      );
+  }
+}
+
+function validateRetainedReferences(state: PrivateDeliveryState) {
+  for (const record of state.retained) {
+    if (record.decisionEvidence && !record.decisionRef)
+      throw new Error(
+        "disposition evidence requires a private decision reference",
+      );
+    if (record.preservedEvidence && !record.evidenceRefs.length)
+      throw new Error("preserved evidence requires private references");
+    if (record.nextReviewCondition && !record.nextReview)
+      throw new Error("parking requires a private next review condition");
+    if (record.observation.evidence && !record.observationRef)
+      throw new Error(
+        "phase evidence requires a private observation reference; an assignment or PID alone is insufficient",
+      );
+  }
 }
 
 export function readPrivateDeliveryState(path: string, now = new Date()) {
@@ -96,13 +166,31 @@ export function readPrivateDeliveryState(path: string, now = new Date()) {
       );
     throw error;
   }
-  return parsePrivateDeliveryState(JSON.parse(raw), now);
+  let value: unknown;
+  try {
+    value = JSON.parse(raw);
+  } catch {
+    throw new Error(
+      "private delivery state contains malformed JSON; inspect it privately",
+    );
+  }
+  return parsePrivateDeliveryState(value, now);
 }
 
 export function isPrivateStateUnavailableError(error: unknown) {
   return unavailableFilesystemCodes.has(
     String((error as NodeJS.ErrnoException | undefined)?.code ?? ""),
   );
+}
+
+export function normalizedDeliveryFlow(state: PrivateDeliveryState) {
+  return {
+    coordination: coordinationSchema.strip().parse(state.coordination),
+    researchBuffer: state.researchBuffer,
+    retained: state.retained.map((record) =>
+      retainedWorkSchema.strip().parse(record),
+    ),
+  };
 }
 
 export function assignmentForIssue(state: PrivateDeliveryState, issue: number) {

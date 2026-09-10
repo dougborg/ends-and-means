@@ -1,5 +1,9 @@
 {
-  "project": { "number": 7, "title": "Ends and Means — Delivery", "public": false },
+  "project": {
+    "number": 7,
+    "title": "Ends and Means — Delivery",
+    "public": false
+  },
   "capturedAt": "not-a-date",
   "repositoryLabels": [],
   "items": [

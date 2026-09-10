@@ -66,10 +66,25 @@ export const skillCapabilities: SkillCapability[] = [
       `${deliveryRoot}/SKILL.md`,
       `${deliveryRoot}/references/delivery-policy.md`,
     ],
-    patterns: [/three to five/i, /In progress/i, /In review/i, /Blocked/i],
+    patterns: [
+      /three selected unfinished|three unfinished issues/i,
+      /reserved selections/i,
+      /In progress/i,
+      /In review/i,
+      /Blocked/i,
+      /research buffer|prepared-research buffer/i,
+      /user-paused/i,
+      /next review condition/i,
+      /outside the Project/i,
+      /unknown/i,
+    ],
+    forbiddenPatterns: [
+      /Keep three to five independently executable Ready/i,
+      /Ready contains three to five/i,
+    ],
     deletion: {
       path: `${deliveryRoot}/references/delivery-policy.md`,
-      pattern: /three to five/i,
+      pattern: /three selected unfinished|three unfinished issues/i,
     },
   },
   {

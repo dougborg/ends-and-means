@@ -30,6 +30,14 @@ Order the stack from the shared foundation to its consumers, merge bottom-up, an
 Do not turn a cross-cutting audit into the top of every contributing stack.
 Hold a corpus-, presentation-, navigation-, or delivery-wide capstone sweep until its input tranche lands, then rebase, rerun, and expand that sweep against the resulting baseline.
 
+## Consolidated review and handoff
+
+Assign one implementation owner and one independent reviewer. An early representative sample may settle evidence or model decisions before expansion. Final review uses a coherent candidate and one consolidated finding list. Subsequent rounds focus on affected changes, while every changed head still renews required exact-head evidence. Coordinator review handles dependencies and contested findings rather than routinely duplicating review.
+
+Use focused checks while authoring and full verification at final handoff; renew affected evidence after later changes or rebases. Keep one terminal handoff containing the exact commit, actual command outcomes, unresolved findings or concrete blocker, next action, and owned cleanup. Record observable review rounds, waiting intervals, and environment failures privately; unknown historical intervals remain unknown. Do not fabricate an efficiency percentage.
+
+Reconcile affected issue/Project state once per material transition with readback. Full live backlog audits belong at grooming, integration batches, or demonstrated wider drift, not after each wording edit.
+
 ## Review gates
 
 Copilot review and independent adversarial review are required by project process.

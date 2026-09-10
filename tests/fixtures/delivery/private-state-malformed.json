@@ -1,5 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "repository": "dougborg/ends-and-means",
-  "generatedAt": "not-a-date"
+  "generatedAt": "not-a-date",
+  "coordination": {
+    "mode": "running",
+    "changedAt": "2026-09-05T10:00:00Z",
+    "instructionEvidence": true,
+    "instructionRef": "Example instruction",
+    "finishStarted": false
+  },
+  "researchBuffer": [],
+  "retained": []
 }
