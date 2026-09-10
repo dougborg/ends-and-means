@@ -1,24 +1,47 @@
 import { createHash } from "node:crypto";
-import { lstatSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { closeSync, constants, fstatSync, lstatSync, mkdirSync, openSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { outputFindings } from "./environment-dependencies.ts";
+
+interface OpenDirectory { path: string; descriptor: number }
+
+function assertDirectoryIdentities(directories: OpenDirectory[]) {
+  for (const directory of directories) {
+    const opened = fstatSync(directory.descriptor);
+    const current = lstatSync(directory.path);
+    if (!current.isDirectory() || current.dev !== opened.dev || current.ino !== opened.ino) throw new Error("Artifact directory changed during traversal");
+  }
+}
 
 export function artifactDigest(root: string) {
   const hash = createHash("sha256");
   let files = 0;
-  const visit = (directory: string, prefix: string) => {
-    for (const entry of readdirSync(directory).sort()) {
-      const path = join(directory, entry);
-      const relative = `${prefix}${entry}`;
-      const stat = lstatSync(path);
-      if (stat.isSymbolicLink()) throw new Error("Redirected artifact");
-      if (stat.isDirectory()) visit(path, `${relative}/`);
-      else if (stat.isFile()) { hash.update(relative).update("\0").update(readFileSync(path)).update("\0"); files++; }
-      else throw new Error("Unsupported artifact entry");
-    }
+  const visit = (path: string, relative: string, ancestors: OpenDirectory[]) => {
+    // Refuse a final-component symlink atomically, then inspect and read the
+    // same open object. A path replacement cannot redirect the content read.
+    // NONBLOCK prevents an unexpected FIFO from blocking before fstat rejects it.
+    const descriptor = openSync(path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);
+    try {
+      const stat = fstatSync(descriptor);
+      assertDirectoryIdentities(ancestors);
+      if (stat.isDirectory()) {
+        const directories = [...ancestors, { path, descriptor }];
+        assertDirectoryIdentities(directories);
+        const prefix = relative ? `${relative}/` : "";
+        for (const entry of readdirSync(path).sort()) {
+          assertDirectoryIdentities(directories);
+          visit(join(path, entry), `${prefix}${entry}`, directories);
+        }
+        assertDirectoryIdentities(directories);
+      } else if (stat.isFile() && relative) {
+        const contents = readFileSync(descriptor);
+        assertDirectoryIdentities(ancestors);
+        hash.update(relative).update("\0").update(contents).update("\0");
+        files++;
+      } else throw new Error("Unsupported artifact entry");
+    } finally { closeSync(descriptor); }
   };
-  if (lstatSync(join(root, "dist")).isSymbolicLink()) throw new Error("Redirected artifact");
-  visit(join(root, "dist"), "");
+  visit(join(root, "dist"), "", []);
   if (!files) throw new Error("Empty artifact");
   return { directory: "dist", sha256: hash.digest("hex"), files };
 }

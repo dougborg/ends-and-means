@@ -1,3 +1,6 @@
+import { createHash } from "node:crypto";
+import fs from "node:fs";
+import { syncBuiltinESMExports } from "node:module";
 import { execFileSync, spawnSync } from "node:child_process";
 import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { createServer } from "node:net";
@@ -11,7 +14,7 @@ import { advisoryProbe, classifyAdvisory, previewProbe } from "../../scripts/env
 import { configurationFindings, resourceProfile, toolchainFindings } from "../../scripts/environment-runtime.ts";
 
 const roots: string[] = [];
-afterEach(() => { vi.unstubAllEnvs(); for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
+afterEach(() => { vi.restoreAllMocks(); syncBuiltinESMExports(); vi.unstubAllEnvs(); for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), "environment-test-")); roots.push(root);
   const manifest = { packageManager: "pnpm@11.25.0", engines: { node: ">=26 <27" }, dependencies: { example: "^1.0.0" } };
@@ -211,6 +214,69 @@ describe("verified static artifact boundary", () => {
       expect(result.status).toBe(1);
       expect(existsSync("foreign-output")).toBe(false);
     }
+  });
+  it("reads the opened artifact object when its path is replaced before the content read", () => {
+    const root = fixture(); mkdirSync(join(root, "dist"));
+    const target = join(root, "dist/index.html");
+    const foreign = join(root, "private-file");
+    writeFileSync(target, "verified original"); writeFileSync(foreign, "foreign secret");
+    const originalRead = fs.readFileSync;
+    let replaced = false;
+    const read = vi.spyOn(fs, "readFileSync").mockImplementation((...args: Parameters<typeof fs.readFileSync>) => {
+      if (!replaced) {
+        replaced = true;
+        fs.renameSync(target, join(root, "preserved-original"));
+        symlinkSync(foreign, target);
+      }
+      return originalRead(...args);
+    });
+    syncBuiltinESMExports();
+    const digest = artifactDigest(root);
+    expect(replaced).toBe(true);
+    expect(read.mock.calls[0]?.[0]).toEqual(expect.any(Number));
+    expect(digest.sha256).toBe(createHash("sha256").update("index.html\0verified original\0").digest("hex"));
+    expect(digest.files).toBe(1);
+  });
+  it.each(["root", "nested"])("rejects observed %s directory replacement before reading content", location => {
+    const root = fixture(); mkdirSync(join(root, "dist/pages"), { recursive: true });
+    writeFileSync(join(root, "dist/pages/index.html"), "verified original");
+    const foreign = join(root, "foreign-directory"); mkdirSync(foreign);
+    writeFileSync(join(foreign, "index.html"), "foreign secret");
+    const replacedDirectory = join(root, location === "root" ? "dist" : "dist/pages");
+    const trigger = location === "root" ? replacedDirectory : join(replacedDirectory, "index.html");
+    const originalOpen = fs.openSync;
+    let replaced = false;
+    vi.spyOn(fs, "openSync").mockImplementation((...args: Parameters<typeof fs.openSync>) => {
+      const descriptor = originalOpen(...args);
+      if (args[0] === trigger) {
+        replaced = true;
+        fs.renameSync(replacedDirectory, join(root, "preserved-directory"));
+        symlinkSync(foreign, replacedDirectory);
+      }
+      return descriptor;
+    });
+    const read = vi.spyOn(fs, "readFileSync");
+    syncBuiltinESMExports();
+    expect(() => artifactDigest(root)).toThrow("Artifact directory changed during traversal");
+    expect(replaced).toBe(true);
+    expect(read).not.toHaveBeenCalled();
+  });
+  it("rejects symlinks on open and closes owned descriptors after a failed read", () => {
+    const root = fixture(); mkdirSync(join(root, "dist"));
+    const target = join(root, "dist/index.html");
+    const foreign = join(root, "private-file"); writeFileSync(foreign, "foreign secret");
+    symlinkSync(foreign, target);
+    expect(() => artifactDigest(root)).toThrow();
+    rmSync(target); writeFileSync(target, "verified original");
+    let descriptor: number | undefined;
+    vi.spyOn(fs, "readFileSync").mockImplementation((file) => {
+      if (typeof file === "number") descriptor = file;
+      throw new Error("Injected read failure");
+    });
+    syncBuiltinESMExports();
+    expect(() => artifactDigest(root)).toThrow("Injected read failure");
+    expect(descriptor).toEqual(expect.any(Number));
+    expect(() => fs.fstatSync(descriptor as number)).toThrow(expect.objectContaining({ code: "EBADF" }));
   });
   it("hashes actual output bytes and names and preserves earlier evidence", () => {
     const root = fixture(); mkdirSync(join(root, "dist")); writeFileSync(join(root, "dist/index.html"), "first");
