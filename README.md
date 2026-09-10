@@ -37,7 +37,8 @@ Sources and Method remain close at hand as a quieter trust layer.
 | [`docs/adr/0002-git-backed-canonical-content.md`](docs/adr/0002-git-backed-canonical-content.md) | Git-backed modular authoring, one compiled graph, and the database deferral. |
 | [`docs/adr/0003-markdown-narrative-authoring.md`](docs/adr/0003-markdown-narrative-authoring.md) | Markdown prose, typed manifests, sentence-per-line linting, and safe rendering. |
 | [`docs/adr/0004-subject-guides-as-presentation-compositions.md`](docs/adr/0004-subject-guides-as-presentation-compositions.md) | Subject Guides as presentation compositions above entity-owned Dossiers. |
-| [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Source-backed workflow for concrete content changes reviewed in pull requests. |
+| [`.agents/skills/research-preparation/SKILL.md`](.agents/skills/research-preparation/SKILL.md) | Research-only source inspection and issue-body handoffs before canonical authoring. |
+| [`.agents/skills/research-content-changes/SKILL.md`](.agents/skills/research-content-changes/SKILL.md) | Implementation workflow for researched canonical content reviewed in pull requests. |
 | [`.agents/skills/coordinate-project-delivery/SKILL.md`](.agents/skills/coordinate-project-delivery/SKILL.md) | Project-state, pull-request, CI, and rebase-integration coordination. |
 
 ## Develop locally

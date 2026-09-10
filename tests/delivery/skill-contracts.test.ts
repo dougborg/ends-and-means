@@ -124,7 +124,71 @@ describe("repository skill contract", () => {
         .map(({ message }) => message),
     ).toEqual([
       "coordinate-project-delivery is missing .agents/skills/coordinate-project-delivery/SKILL.md.",
+      "research-preparation is missing .agents/skills/research-preparation/SKILL.md.",
       "research-content-changes is missing .agents/skills/research-content-changes/SKILL.md.",
     ]);
+  });
+});
+
+describe("research brief capability audit", () => {
+  it("audits stable structure without fixing editorial sentences", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+    await copySkillCorpus(root);
+    const preparationPath = join(
+      root,
+      ".agents/skills/research-preparation/SKILL.md",
+    );
+    const original = await readFile(preparationPath, "utf8");
+    await writeFile(
+      preparationPath,
+      original.replace(
+        "Prepare a bounded, implementation-ready research brief",
+        "Create a scoped research handoff",
+      ),
+    );
+    expect(auditSkillContracts(root)).toEqual([]);
+  });
+
+  it("rejects an evidence-complete disposition for the inaccessible example", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+    await copySkillCorpus(root);
+    const examplesPath = join(
+      root,
+      ".agents/skills/research-preparation/references/examples.md",
+    );
+    const examples = await readFile(examplesPath, "utf8");
+    await writeFile(
+      examplesPath,
+      examples.replace(
+        "research-brief-example:inaccessible-source disposition:needs-evidence",
+        "research-brief-example:inaccessible-source disposition:ready",
+      ),
+    );
+    expect(auditSkillContracts(root)).toContainEqual({
+      code: "SKILL_CAPABILITY",
+      message: "research-preparation does not cover research brief structure.",
+    });
+  });
+
+  it("rejects removal of an implementation handoff obligation", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ends-means-skills-"));
+    await copySkillCorpus(root);
+    const consumerPath = join(
+      root,
+      ".agents/skills/research-content-changes/SKILL.md",
+    );
+    const consumer = await readFile(consumerPath, "utf8");
+    await writeFile(
+      consumerPath,
+      consumer.replace(
+        "<!-- research-handoff:inspect-used-passages -->",
+        "",
+      ),
+    );
+    expect(auditSkillContracts(root)).toContainEqual({
+      code: "SKILL_CAPABILITY",
+      message:
+        "research-content-changes does not cover research handoff consumption.",
+    });
   });
 });

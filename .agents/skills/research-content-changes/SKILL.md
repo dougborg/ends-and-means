@@ -1,6 +1,6 @@
 ---
 name: research-content-changes
-description: Research and implement evidence-backed changes to the Ends and Means canonical graph and learner-facing narrative for review in a pull request. Use for additions or substantial revisions to Subject Guides, Dossiers, vocabulary, Collections, Approaches, Ends, Means, Questions, Criteria, Statements, Sources, bounded Cases, Events, Transitions, Depictions, Comparison Dimensions, or Placements.
+description: Implement evidence-backed changes to the Ends and Means canonical graph and learner-facing narrative for review in a pull request. Use when a content issue is ready for authoring or needs targeted evidence follow-up during implementation; use research-preparation for a research-only handoff.
 ---
 
 # Research Content Changes
@@ -8,6 +8,38 @@ description: Research and implement evidence-backed changes to the Ends and Mean
 Create the concrete candidate change on a focused branch. The pull request is
 the proposal and review boundary; do not create a parallel proposal artifact or
 staging tree.
+
+## Consume the research handoff
+
+<!-- research-handoff:brief-not-evidence -->
+
+When the issue contains a `research-brief:v1` marker, read the brief using the
+[research-preparation template](../research-preparation/references/research-brief-template.md).
+The brief is part of the issue specification, not canonical content, evidence by
+itself, a source-fitness verdict, or publication approval.
+
+<!-- research-handoff:preserve-scope -->
+
+Preserve the issue's reader outcome, scope, dependencies, inspected-versus-lead
+distinctions, candidate claim map, disagreements, and named gaps.
+
+<!-- research-handoff:inspect-used-passages -->
+
+Inspect every passage actually used and validate the final Statement-to-Source
+mapping.
+
+<!-- research-handoff:targeted-follow-up -->
+
+If a material proposition remains unsupported, request the smallest targeted
+follow-up and update the brief and affected acceptance criteria explicitly. Do
+not restart broad discovery, silently narrow the issue, or expand it around a
+new lead.
+
+<!-- research-handoff:independent-review -->
+
+A small correction may arrive with the template's proportionate short brief.
+Use the same evidence and projection boundaries without demanding unrelated
+sections. Substantial content still receives an independent final review.
 
 Begin with the reader's familiar subject or question.
 The primary product is a clear learning and comparison journey; the graph and
@@ -123,6 +155,8 @@ before writing. Archived material is a discovery lead only and must never be
 imported, rendered, or cited as evidence. Record plausible candidates; do not
 silently merge concepts.
 Keep substantive claims as atomic Statements with precise locators.
+The shared [editorial and source policy](references/editorial-policy.md) remains
+authoritative for both preparation and implementation.
 
 For external orientation and identity mappings, browse the final target after
 resolving redirects and disambiguation. Record Wikipedia only as an orientation
@@ -233,6 +267,11 @@ qualifying citations remain permitted only when a Source tied to a resolved
 non-fiction Work independently supports the empirical Statement.
 
 Install Playwright's Chromium runtime once.
+Use the repository's tracked `.node-version`, `packageManager`, shared CI verify
+action, and [delivery harness](../../../docs/delivery-harness.md) as execution
+authorities. Record actual runtime evidence rather than embedding a personal
+tool path in the skill. Issue #329 owns the pending diagnostics and environment
+consistency improvements; this workflow does not imply they are implemented.
 Run before handoff:
 
 ```bash

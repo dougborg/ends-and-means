@@ -22,6 +22,15 @@ never evidence or editorial authority. Contributors must inspect the cited
 material themselves; reviewers remain responsible for source fitness, framing,
 interpretation, wording, and publication.
 
+Substantial content work may begin with a research-only pass using the
+repo-local `research-preparation` skill. It produces a dated, versioned brief in
+the implementation issue: the reader outcome, scope, existing records,
+dependencies, inspected evidence and leads, candidate claims, disagreements,
+bounded Cases, narrative outline, gaps, disposition, and acceptance criteria.
+The brief is preparation rather than canonical content or publication approval;
+Project readiness remains a separate delivery decision. Small corrections use
+a proportionate short brief.
+
 1. Start from an up-to-date `main` branch in a clean, isolated worktree.
 2. Create a focused branch named `research/<type>-<stable-id>` and keep one
    owner responsible for its mutations.
@@ -48,11 +57,13 @@ interpretation, wording, and publication.
 7. Rebase again when required, integrate without a merge or squash commit, and
    verify the resulting deployment when public output changes.
 
-Do not maintain a parallel proposal artifact or staging tree. Git history and
-the PR preserve the candidate, discussion, revisions, and decision.
+Once authoring begins, do not maintain a parallel canonical proposal or staging
+tree. The issue brief remains the specification; Git history and the PR preserve
+the concrete candidate, discussion, revisions, and decision.
 
-The repo-local `research-content-changes` skill provides the detailed entity
-contracts and editorial evidence policy.
+The repo-local `research-preparation` skill governs source-feasibility handoff.
+The `research-content-changes` skill consumes that handoff and provides the
+detailed entity contracts. Both use one shared editorial evidence policy.
 The separate `coordinate-project-delivery` skill governs issue, Project,
 pull-request, verification, review, and rebase-only integration state.
 

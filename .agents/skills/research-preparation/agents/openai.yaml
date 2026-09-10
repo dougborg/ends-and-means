@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Preparation"
+  short_description: "Prepare bounded evidence briefs before authoring"
+  default_prompt: "Use $research-preparation to inspect evidence and prepare a bounded issue-body research brief without editing canonical content."
