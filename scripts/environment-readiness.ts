@@ -11,16 +11,16 @@ import { configurationFindings, runtimeObservation, toolchainFindings } from "./
 
 export function inputFingerprint(root: string) {
   const hash = createHash("sha256");
-  const files = execFileSync("git", ["ls-files", "-z", "--cached", "--others", "--exclude-standard"], { cwd: root, encoding: "utf8", timeout: 5_000, maxBuffer: 8_000_000 }).split("\0").filter(Boolean).sort();
+  const files = execFileSync("git", ["ls-files", "-z", "--cached", "--others", "--exclude-standard"], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: 5_000, maxBuffer: 8_000_000 }).split("\0").filter(Boolean).sort();
   for (const file of files) { hash.update(file).update("\0"); try { hash.update(readFileSync(join(root, file))); } catch { hash.update("missing"); } hash.update("\0"); }
   return hash.digest("hex");
 }
 
 export function sourceObservation(root: string) {
   try {
-    const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8", timeout: 5_000 }).trim();
+    const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: 5_000 }).trim();
     if (!/^[0-9a-f]{40}$/.test(head)) throw new Error("Invalid source");
-    const dirty = execFileSync("git", ["status", "--porcelain", "--untracked-files=normal"], { cwd: root, encoding: "utf8", timeout: 5_000 }).length > 0;
+    const dirty = execFileSync("git", ["status", "--porcelain", "--untracked-files=normal"], { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: 5_000 }).length > 0;
     return { commit: head, dirty, inputDigest: inputFingerprint(root) };
   } catch { return { commit: null, dirty: null, inputDigest: null }; }
 }
