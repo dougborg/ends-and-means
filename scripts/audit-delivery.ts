@@ -1,4 +1,3 @@
-import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
@@ -10,6 +9,10 @@ import {
   retainedPullRequestUrlSchema,
 } from "./delivery-api-schema.ts";
 import { groomingReport } from "./delivery-flow.ts";
+import {
+  ApiUnavailableError,
+  boundedGitHubRead as gh,
+} from "./delivery-github-read.ts";
 import {
   branchTargetForActiveItem,
   loadActiveBranchEvidence,
@@ -126,42 +129,7 @@ const repositoryIssueSchema = z
   .passthrough();
 
 class InputInvalidError extends Error {}
-class ApiUnavailableError extends Error {}
 const repository = "dougborg/ends-and-means";
-// Paginated issue bodies can exceed Node's default 1 MiB capture limit.
-// Keep a finite ceiling and reject overflow rather than audit partial evidence.
-const githubOutputLimitBytes = 16 * 1024 * 1024;
-
-function gh(args: string[]) {
-  try {
-    return execFileSync("gh", args, {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
-      maxBuffer: githubOutputLimitBytes,
-    });
-  } catch (error) {
-    const commandError = error as Error & {
-      code?: string;
-      stderr?: string | Buffer;
-    };
-    if (commandError.code === "ENOBUFS") {
-      throw new Error(
-        `gh ${args[0] ?? "command"} exceeded the 16 MiB output limit; no partial response was audited`,
-      );
-    }
-    const stderr = String(commandError.stderr ?? "").trim();
-    const detail = stderr || commandError.message || String(error);
-    if (
-      commandError.code === "ENOENT" ||
-      /auth login|not logged into|authentication required|error connecting|could not resolve|failed to connect/i.test(
-        detail,
-      )
-    ) {
-      throw new ApiUnavailableError(detail);
-    }
-    throw new Error(`gh ${args[0] ?? "command"} failed: ${detail}`);
-  }
-}
 
 function parseJson<T>(raw: string, schema: z.ZodType<T>, source: string): T {
   try {

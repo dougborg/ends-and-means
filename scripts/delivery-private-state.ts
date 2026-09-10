@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
@@ -196,4 +197,19 @@ export function normalizedDeliveryFlow(state: PrivateDeliveryState) {
 
 export function assignmentForIssue(state: PrivateDeliveryState, issue: number) {
   return state.assignments.find((assignment) => assignment.issue === issue);
+}
+
+/** Stable run binding includes original observation/expiry; file refresh cannot renew it. */
+export function executionAssignmentForIssue(
+  state: PrivateDeliveryState,
+  issue: number,
+) {
+  const assignment = assignmentForIssue(state, issue);
+  if (!assignment) throw new Error("EXECUTION_OWNERSHIP_UNAVAILABLE");
+  return {
+    ...assignment,
+    identity: createHash("sha256")
+      .update(JSON.stringify(assignment))
+      .digest("hex"),
+  };
 }
