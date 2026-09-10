@@ -32,7 +32,10 @@
     "audit:content-integrity": "node scripts/environment-entry.mjs command && node --import tsx scripts/verify-content-integrity.ts",
     "verify": "node scripts/environment-entry.mjs verify && node scripts/verify-environment.ts",
     "verify:checks": "node scripts/environment-entry.mjs verify && pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm audit:corpus-diversity && pnpm audit:content-preflight && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual",
-    "environment:check": "node scripts/check-environment.mjs"
+    "environment:check": "node scripts/check-environment.mjs",
+    "execution:run": "node scripts/record-execution.mjs run",
+    "execution:status": "node scripts/record-execution.mjs status",
+    "execution:note": "node scripts/record-execution.mjs note"
   },
   "dependencies": {
     "@lucide/astro": "^1.41.0",

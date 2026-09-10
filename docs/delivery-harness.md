@@ -5,6 +5,9 @@ Issues and milestones remain authoritative for scope and outcomes.
 
 ## Full verification
 
+Use [recorded executions](execution-records.md) for durable command outcomes and
+read-only status; command success, full verification and hosted evidence stay distinct.
+
 Follow the [environment matrix](environments.md) for toolchain selection, isolated dependency setup, configuration and explicit capability probes.
 Install dependencies and the browser runtime once, then run the same verification path CI owns:
 
@@ -219,7 +222,9 @@ Each Playwright invocation starts and owns its preview server. Its default port
 is derived from the absolute worktree path, so concurrent branches do not share
 the repository-wide Astro default; an occupied selected port fails closed
 instead of reusing an unknown listener. Set `PLAYWRIGHT_TEST_PORT` to a valid
-unoccupied port when a runner needs an explicit assignment. The server remains
+unoccupied port only for a scoped focused browser or preview entry, as defined
+in the [environment contract](environments.md); full verification rejects the
+override. The server remains
 non-reusable in every environment, which proves the suite is exercising the
 preview process started from the current worktree and its local `dist` build.
 
