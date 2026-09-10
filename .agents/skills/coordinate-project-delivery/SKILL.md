@@ -60,6 +60,10 @@ Use one implementation owner and one independent reviewer. An early representati
 
 Use focused checks during authoring. Provide one terminal handoff with commit, actual command results, unresolved findings or blocker, next action, and owned cleanup. Report active process, local candidate, open PR, dependency block, approval/tool block, and parked work with evidence age or unknown state. Assignments and PIDs alone do not prove an active process. Preserve unknown history and old evidence; do not refresh record ages by rewriting the file.
 
+Use the [governed environment contract](../../../docs/environments.md) for exact toolchain selection, task-owned dependencies, readiness results and explicit probes.
+Keep full verification free of global route/base/port overrides; record the actual environment fingerprint with handoff evidence.
+A readiness result does not replace verification or authorize retrying a denied command unchanged.
+
 Run the single local/CI verification path:
 
 ```bash

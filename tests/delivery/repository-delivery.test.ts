@@ -72,6 +72,14 @@ describe("repository delivery configuration", () => {
     expect(codes).toEqual(expect.arrayContaining(["PNPM_CACHE", "PNPM_CACHE_KEY", "FROZEN_INSTALL", "VERIFY_DUPLICATE", "PAGES_ARTIFACT", "REQUIRED_CHECK_NAME"]));
   });
 
+  it("rejects divergent toolchain selection and artifact targets", async () => {
+    const root = await repositoryFixture();
+    await replace(root, ".github/actions/verify/action.yml", "node-version-file: .node-version", "node-version: 25");
+    await replace(root, ".github/actions/verify/action.yml", "run_install: false", "version: 10.0.0\n        run_install: false");
+    await replace(root, ".github/actions/verify/action.yml", "path: dist", "path: other-output");
+    expect(auditRepositoryDelivery(root).map(finding => finding.code)).toEqual(expect.arrayContaining(["TOOLCHAIN_CI", "PAGES_ARTIFACT"]));
+  });
+
   it("detects a missing Pages artifact producer", async () => {
     const root = await repositoryFixture();
     await replace(root, ".github/actions/verify/action.yml", "actions/upload-pages-artifact@", "actions/upload-artifact@");

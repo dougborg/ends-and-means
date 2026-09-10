@@ -5,11 +5,14 @@ Issues and milestones remain authoritative for scope and outcomes.
 
 ## Full verification
 
+Follow the [environment matrix](environments.md) for toolchain selection, isolated dependency setup, configuration and explicit capability probes.
 Install dependencies and the browser runtime once, then run the same verification path CI owns:
 
 ```sh
+node scripts/environment-entry.mjs command
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
+pnpm environment:check
 pnpm verify
 ```
 
@@ -24,7 +27,7 @@ class states, and prevents unresolved third-party material from being marked
 for site distribution.
 See [the licensing audit](licensing-audit.md) for the inventory boundary and
 owner decisions; the harness does not select a license.
-Domain validation runs transitively through `pnpm build`, which is defined as `pnpm validate && astro build` in `package.json`.
+Domain validation runs transitively through the guarded `pnpm build` entry, followed by the fixed Astro static build.
 The shared CI composite action invokes this command once; Pages consumes the resulting verified `dist` artifact.
 
 `markdownlint-cli2` currently pins `smol-toml` to a release affected by

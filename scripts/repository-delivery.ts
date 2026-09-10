@@ -242,10 +242,17 @@ function auditActionPins(allSteps: StepEntry[], allJobs: JobEntry[]) {
   ];
 }
 
-function auditActionSetup(actionSteps: Node[]) {
+function auditActionSetup(actionSteps: Node[], packageManager: string | undefined) {
   const findings: RepositoryDeliveryFinding[] = [];
   const checkout = actionSteps.find((step) => String(step.uses).startsWith("actions/checkout@"));
+  const setupPnpm = actionSteps.find((step) => String(step.uses).startsWith("pnpm/action-setup@"));
+  const selectedPnpm = record(setupPnpm?.with).version;
+  if (!setupPnpm || (selectedPnpm !== undefined && `pnpm@${selectedPnpm}` !== packageManager)) findings.push({ code: "TOOLCHAIN_CI", message: "CI pnpm must derive from packageManager or match its exact pin." });
   const setupNode = actionSteps.find((step) => String(step.uses).startsWith("actions/setup-node@"));
+  const guardIndex = actionSteps.findIndex(step => step.run === "node scripts/environment-entry.mjs verify");
+  const installIndex = actionSteps.findIndex(step => step.run === "pnpm install --frozen-lockfile");
+  if (guardIndex < 0 || guardIndex >= installIndex) findings.push({ code: "TOOLCHAIN_CI", message: "The executing toolchain guard must precede dependency installation." });
+  if (record(setupNode?.with)["node-version-file"] !== ".node-version" || !actionSteps.some(step => step.run === "node scripts/environment-entry.mjs verify")) findings.push({ code: "TOOLCHAIN_CI", message: "CI must select .node-version and check executing tools before installation." });
   if (record(checkout?.with)["persist-credentials"] !== false) findings.push({ code: "CHECKOUT_CREDENTIALS", message: "Checkout credentials must not persist." });
   if (record(checkout?.with)["fetch-depth"] !== 0) findings.push({ code: "CURRENT_BASE_FETCH", message: "Verification checkout must fetch history for current-base and linear-history checks." });
   if (record(setupNode?.with).cache !== "pnpm") findings.push({ code: "PNPM_CACHE", message: "Node setup must use the pnpm lockfile-backed cache." });
@@ -267,8 +274,9 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   requireRule(packageJson.packageManager?.startsWith("pnpm@") ?? false, "PNPM_MANAGER", "packageManager must pin pnpm.");
   requireRule(existsSync(join(root, "pnpm-lock.yaml")), "PNPM_LOCK", "pnpm-lock.yaml is required.");
   requireRule(
-    packageJson.scripts?.verify ===
-      "pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm audit:corpus-diversity && pnpm audit:content-preflight && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual",
+    packageJson.scripts?.verify === "node scripts/environment-entry.mjs verify && node scripts/verify-environment.ts" &&
+    packageJson.scripts?.["verify:checks"] ===
+      "node scripts/environment-entry.mjs verify && pnpm audit:delivery -- --repository-only && pnpm audit:provenance && pnpm audit:corpus-diversity && pnpm audit:content-preflight && pnpm lint && pnpm static && pnpm audit --audit-level=moderate && pnpm check && pnpm test:coverage && pnpm build && pnpm audit:content-integrity && pnpm test:routes && pnpm test:visual",
     "VERIFY_PATH",
     "pnpm verify must remain the single full local/CI verification path.",
   );
@@ -304,7 +312,7 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
   }
 
   const actionSteps = steps(record(verifyAction.runs));
-  findings.push(...auditActionSetup(actionSteps));
+  findings.push(...auditActionSetup(actionSteps, packageJson.packageManager));
 
   const pages = workflows.get("pages.yml") ?? {};
   const pagesJobs = record(pages.jobs);
@@ -313,9 +321,10 @@ export function auditRepositoryDelivery(root: string): RepositoryDeliveryFinding
     (step) => step.uses === "$/.github/actions/verify" && record(step.with)["upload-pages-artifact"] === "true",
   );
   const compositeProducer = steps(record(verifyAction.runs)).some(
-    (step) => String(step.uses).startsWith("actions/upload-pages-artifact@") && step.if === "inputs.upload-pages-artifact == 'true'",
+    (step) => String(step.uses).startsWith("actions/upload-pages-artifact@") && step.if === "inputs.upload-pages-artifact == 'true'" && record(step.with).path === "dist",
   );
   requireRule(pagesProducer && compositeProducer, "PAGES_ARTIFACT", "Pages must request and produce the verified Pages artifact.");
+  requireRule(!steps(pagesJobs.deploy).some(step => step.run !== undefined || String(step.uses).startsWith("actions/checkout@")), "PAGES_ARTIFACT", "Pages deployment must consume the verified artifact without a checkout or rebuild.");
   const deployPermissions = record(record(pagesJobs.deploy).permissions);
   const deployWriteScopes = Object.entries(deployPermissions).filter(([, access]) => access === "write").map(([scope]) => scope).toSorted();
   requireRule(
