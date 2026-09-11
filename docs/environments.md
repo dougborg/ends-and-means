@@ -66,6 +66,27 @@ Exact-head hosted checks, independent review, browser tests and post-merge deplo
 The existing-work pilot uses these same entries and the execution recorder;
 its scoped results, full verification and hosted/deployed evidence remain separate.
 
+## Dispatch environment check
+
+At assignment or resumption, select the declared toolchain in the shell that
+will execute the task; a previous agent's PATH or successful check is not proof
+of this shell's runtime.
+Run the built-in entry guard before dependency setup, then inspect readiness
+once the task-owned frozen install is available, using the setup sequence above.
+Record evidence references in the current private handoff instead of copying
+machine-specific paths into public documentation.
+
+Determine capabilities from the affected commands before launching them.
+Tests that create loopback sockets need binding capability even when they do
+not launch a browser; use the explicit preview probe when relevant and already
+authorized.
+Use the advisory probe only when advisory access is needed and authorized.
+If a probe is denied, record the outcome and establish the changed capability
+before running the dependent command; unaffected static work can continue.
+Repeat readiness when its toolchain, dependencies, configuration or execution
+context changes, rather than before every command in the same setup.
+Supported entry guards and full verification still perform their own checks.
+
 ## Configuration names, defaults, and precedence
 
 | Name | Supported use and precedence |

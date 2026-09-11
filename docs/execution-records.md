@@ -189,3 +189,41 @@ Never infer cleanup authority from a stored PID or stale assignment.
 The existing-work pilot demonstrates coordinator consumption of runner-written
 terminal evidence without a second manual completion account. That observable
 step does not establish total time saved or guarantee future test deadlines.
+
+## Compact dispatch and handoff
+
+At assignment or resumption, provide the issue and acceptance criteria, owned
+branch/worktree, current base, relevant evidence references, next action, and
+concrete blocker if one exists.
+Read the current snapshot first; open historical logs only to resolve a specific
+uncertainty rather than replaying the whole conversation.
+Keep one current private snapshot and preserve prior events separately.
+Reference the issue's research brief and recorded command results instead of
+copying them into parallel checklists, issue bodies and handoff narratives.
+
+Before the first dependent command, follow the
+[dispatch environment check](environments.md#dispatch-environment-check).
+At recorded command launch, send the store/run identity once.
+The process owner polls its tool handle; the coordinator consumes durable status
+at completion or when a decision needs it.
+Avoid duplicate polling by both roles and repeated status queries while the
+same known command is running.
+Continue concise user updates at meaningful milestones or explain a prolonged wait.
+
+At a coherent candidate, update the same snapshot with the exact commit,
+focused/full evidence references and scope, consolidated review findings,
+next action, and owned cleanup.
+A new failure, changed head, review decision, blocker, merge, or cleanup completion
+can justify a state update; a heartbeat or unchanged check result does not.
+Reconcile each affected public issue/Project transition once with targeted
+readback, retaining the existing review and integration gates.
+
+For the next three completed deliveries, record observed selection, candidate,
+review request/completion, gate start/end, merge and cleanup timestamps when
+available, plus review rounds and environment-only retries with their causes.
+Use existing command events and GitHub timestamps before adding manual entries.
+Label unobserved intervals unknown, and distinguish overlapping work, user
+pauses, command execution and hosted queueing from elapsed delivery time.
+Compare like scopes and environments; command-call counts measure coordination
+activity, not time wasted or proof of overall speedup.
+This is a bounded measurement exercise, not a new completion gate.

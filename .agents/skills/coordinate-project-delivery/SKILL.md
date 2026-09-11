@@ -58,6 +58,9 @@ Continuous improvement means fixing safe in-scope findings or recording a focuse
 
 Use one implementation owner and one independent reviewer. An early representative evidence/model sample may precede expansion. Review a coherent final candidate with one consolidated finding list; subsequent review examines affected changes while renewing required exact-head evidence. Coordinator review addresses dependencies and contested findings instead of routinely duplicating independent review.
 
+Use the [compact dispatch and handoff guidance](../../../docs/execution-records.md#compact-dispatch-and-handoff) when assigning or resuming work.
+Keep one current private snapshot with evidence references; archive history separately instead of copying it into each assignment.
+
 Use focused checks during authoring. For supported commands, use the
 [execution recorder](../../../docs/execution-records.md) and provide its private
 store/run identity at launch. The coordinator reads the actual terminal result
