@@ -161,6 +161,12 @@ const expectedCitationTuples = [
   ],
   [
     "jbg-civil-military-authority-limit",
+    "gunderson-autonomist-critique-author-proof-source",
+    "supports",
+    "author-posted proof, printed pp. 542–543, paragraph beginning ‘The suggestion that there is’; proof pagination, not final journal pagination",
+  ],
+  [
+    "jbg-civil-military-authority-limit",
     "gunderson-autonomist-critique-source",
     "supports",
     "pp. 542–543",
