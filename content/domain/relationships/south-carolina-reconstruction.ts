@@ -24,7 +24,7 @@ const citations = [
   ["sc-constitution-election-protection-directive", "sc-1868-constitution-later-compilation-source", "Article I §33, printed p. 9", "supports"],
   ["sc-house-population-apportionment-rule", "sc-1868-constitution-later-compilation-source", "Article II §4, printed pp. 11–12", "supports"],
   ["sc-house-county-minimum-representation-rule", "sc-1868-constitution-later-compilation-source", "Article II §6, printed p. 12", "supports"],
-  ["sc-constitution-later-amendment-boundary", "sc-1868-constitution-later-compilation-source", "amendment notes at printed pp. 55–57 and 109–110", "qualifies"],
+  ["sc-constitution-later-amendment-boundary", "sc-1868-constitution-later-compilation-source", "later amendments at printed pp. 52–55: January 22, 1878 (pp. 52–53); December 21, 1882 (pp. 54–55); December 12, 1884 (p. 55)", "qualifies"],
 
   ["sc-ransier-opposed-education-voting-test", "sc-1868-convention-proceedings-scan-source", "printed pp. 829–830", "supports"],
   ["sc-ransier-opposed-property-voting-test", "sc-1868-convention-proceedings-scan-source", "printed pp. 829–830", "supports"],
