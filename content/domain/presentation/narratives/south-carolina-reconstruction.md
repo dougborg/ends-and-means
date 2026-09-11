@@ -50,7 +50,7 @@ They demonstrate realized governing composition under the new officeholding rule
 ## political-coercion
 
 Elias Hill testified that he had served as a local Union League president and held political meetings at his house.
-He said masked assailants attacked and threatened him on May 5, 1871, demanding that he stop a Republican newspaper, stop preaching, renounce Republicanism publicly, and leave the League.
+He said masked assailants attacked and threatened him on May 5, 1871, demanding that he stop a Republican newspaper, stop preaching, and renounce Republicanism publicly.
 Alberry Bonner separately testified that Klan riding made his League stop meeting because gatherings were unsafe; the selected passage does not date that underlying event.
 
 These are named witnesses' accounts preserved through a congressional investigation.

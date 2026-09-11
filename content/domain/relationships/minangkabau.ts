@@ -167,7 +167,7 @@ const citationRows: [string, string, string, CitationRole, string][] = [
   [
     "koto-tinggi-formal-participation-rules",
     "nurdin-nagari-governance-source",
-    "p. 109, ‘The Mechanism of Rural Development’, paragraph beginning ‘The meeting was attended’",
+    "p. 109, ‘The Mechanism of Rural Development’, paragraph beginning ‘According to the Regulation of Ministry of Village’",
     "supports",
     "koto-meeting-rules",
   ],
