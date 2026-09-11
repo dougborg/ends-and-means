@@ -227,3 +227,38 @@ pauses, command execution and hosted queueing from elapsed delivery time.
 Compare like scopes and environments; command-call counts measure coordination
 activity, not time wasted or proof of overall speedup.
 This is a bounded measurement exercise, not a new completion gate.
+
+## Generated private command handoff
+
+Generate a current command snapshot and basic timeline from the same validated
+version 1 records, without a second handwritten completion report:
+
+```sh
+umask 077
+pnpm --silent execution:status --store /private/tmp/task-executions \
+  --private-state /private/tmp/task-ownership.json --issue 330 \
+  --private --handoff --format markdown > /private/tmp/task-handoff.md
+```
+
+Use a task-owned private destination; shell redirection does not tighten the
+permissions of an existing file.
+Omit `--format markdown` for structured JSON.
+`--handoff` requires explicit `--private`, accepts only status, and refuses
+`--refresh`; ordinary public status output remains unchanged.
+The generated report is private: it includes run identities and event/log paths,
+but never reads raw logs or edits the event store or assignment file.
+Historical records remain readable when their assignment is unavailable;
+that does not renew ownership or current exact full PASS.
+
+The current entry is the latest prepared attempt, consistent with status.
+Each timeline row retains outcome, command scope, evidence age, input/environment
+identity and its private evidence references.
+Known command intervals measure recorded spawn to terminal capture.
+The report gives their sum, their union with each instant counted once, and
+sum minus union as overlapping command time.
+These are partial observations, not total delivery time or evidence of savings.
+Prepared-only, stale, unstarted, future-dated and unconfirmed-completion history
+keeps an unknown command interval rather than borrowing the report timestamp.
+An incomplete store observation keeps the overall state unknown.
+Selection, candidate, review, hosted queue, user pauses, merge and cleanup timing
+remain outside this command-only slice and are not inferred from gaps.

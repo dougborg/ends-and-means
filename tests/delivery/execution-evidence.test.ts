@@ -14,6 +14,10 @@ import { artifactDigest } from "../../scripts/environment-artifact.ts";
 import { executionCommand } from "../../scripts/execution-commands.ts";
 import { newVerifiedArtifact } from "../../scripts/execution-context.ts";
 import { executionRunIdentity } from "../../scripts/execution-correlation.ts";
+import {
+  executionHandoff,
+  executionHandoffMarkdown,
+} from "../../scripts/execution-handoff.ts";
 import { refreshExecutionEvidence } from "../../scripts/execution-refresh.ts";
 import { projectExecution } from "../../scripts/execution-report.ts";
 import type {
@@ -405,5 +409,151 @@ describe("verified receipt association", () => {
     expect(result.status).toBe(1);
     expect(result.stdout).toBe("");
     expect(result.stderr).not.toContain("PRIVATE_MALFORMED_ID");
+  });
+});
+
+function handoffFor(
+  histories: ExecutionEvent[][],
+  currentEnvironment = environment,
+) {
+  const attempts = histories.map((history) =>
+    projectExecution(history, assignment, currentEnvironment, now),
+  );
+  return executionHandoff(
+    {
+      schemaVersion: 1,
+      kind: "execution-status",
+      phaseVersion: 1,
+      issue: 330,
+      observedAt: now.toISOString(),
+      source: "local-event-log",
+      phase: attempts.at(-1)?.phase ?? "unknown",
+      current: attempts.at(-1) ?? null,
+      attempts,
+      completedChecks: [],
+      incompleteRuns: 0,
+      ownershipAvailable: true,
+      hosted: {
+        source: "offline",
+        observedAt: now.toISOString(),
+        status: "unavailable",
+        code: "HOSTED_NOT_REQUESTED",
+      },
+      blocker: attempts.at(-1)?.blocker ?? "COMPLETION_UNKNOWN",
+      nextAction: "Inspect evidence.",
+      limits: [],
+      privateEvidence: histories.map((history) => ({
+        runId: history[0]?.runId,
+        events: history,
+      })),
+    },
+    "/PRIVATE_STORE",
+  );
+}
+function timedEvents(start: number, end: number) {
+  const history = events();
+  history.forEach((event, index) => {
+    event.observedAt = new Date(
+      now.getTime() + (index === 2 ? end : start),
+    ).toISOString();
+  });
+  return history;
+}
+describe("private command handoff timeline", () => {
+  it("retains successful, failed and interrupted command outcomes with scope and age", () => {
+    const success = timedEvents(-10_000, -8_000);
+    const failure = timedEvents(-7_000, -5_000);
+    const interrupted = timedEvents(-4_000, -1_000);
+    const failedEnd = failure[2];
+    const interruptedEnd = interrupted[2];
+    if (
+      failedEnd?.payload.kind !== "finished" ||
+      interruptedEnd?.payload.kind !== "finished"
+    )
+      throw new Error("Fixture");
+    Object.assign(failedEnd.payload, {
+      result: "failure",
+      exitCode: 7,
+      reason: "COMMAND_FAILED",
+    });
+    Object.assign(interruptedEnd.payload, {
+      result: "interrupted",
+      exitCode: null,
+      signal: "SIGTERM",
+      reason: "INTERRUPTED",
+    });
+    const report = handoffFor([success, failure, interrupted]);
+    expect(
+      report.timeline.map((entry) => [
+        entry.commandPassed,
+        entry.phase,
+        entry.commandIntervalMs,
+      ]),
+    ).toEqual([
+      [true, "completed-command", 2_000],
+      [false, "completed-command", 2_000],
+      [false, "interrupted", 3_000],
+    ]);
+    expect(report.current).toMatchObject({
+      signal: "SIGTERM",
+      scope: "full-local",
+      evidenceAgeMs: 1_000,
+    });
+    expect(executionHandoffMarkdown(report)).toContain("INTERRUPTED");
+    expect(executionHandoffMarkdown(report)).toContain("/PRIVATE_STORE");
+  });
+  it("counts the union once across nested and overlapping intervals, with no delivery-duration inference", () => {
+    const report = handoffFor([
+      timedEvents(-10_000, -5_000),
+      timedEvents(-9_000, -8_000),
+      timedEvents(-6_000, -2_000),
+      timedEvents(-1_000, 0),
+    ]);
+    expect(report.timing).toMatchObject({
+      summedKnownCommandMs: 11_000,
+      unionKnownCommandMs: 9_000,
+      overlappingKnownCommandMs: 2_000,
+      deliveryElapsedMs: null,
+      hostedQueueMs: null,
+      userPauseMs: null,
+    });
+  });
+  it("keeps prepared, stale heartbeat, unconfirmed completion and future observations unknown", () => {
+    const unknown = timedEvents(-4_000, -1_000);
+    const terminal = unknown[2];
+    if (terminal?.payload.kind !== "finished") throw new Error("Fixture");
+    terminal.payload.reason = "COMPLETION_UNKNOWN";
+    const report = handoffFor([
+      events().slice(0, 1),
+      timedEvents(-60_000, -40_000).slice(0, 2),
+      unknown,
+      timedEvents(1_000, 2_000),
+    ]);
+    expect(
+      report.timeline.every((entry) => entry.commandIntervalMs === null),
+    ).toBe(true);
+    expect(report.timing).toMatchObject({
+      knownCommandIntervals: 0,
+      unknownCommandIntervals: 4,
+      summedKnownCommandMs: null,
+      unionKnownCommandMs: null,
+    });
+    expect(handoffFor([]).latestRunId).toBeNull();
+  });
+});
+describe("private handoff current identity", () => {
+  it("preserves historical success while refusing current PASS after input or environment changes", () => {
+    for (const changed of [
+      { ...environment, identity: "b".repeat(64) },
+      { ...environment, source: { ...environment.source, commit: base } },
+    ]) {
+      const report = handoffFor([timedEvents(-2_000, -1_000)], changed);
+      expect(report.current).toMatchObject({
+        commandPassed: true,
+        exactHeadPass: false,
+      });
+      expect(report.timeline[0]?.commandIntervalMs).toBe(1_000);
+      expect(report.blocker).not.toBe("NONE");
+    }
   });
 });
