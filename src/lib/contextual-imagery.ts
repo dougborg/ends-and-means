@@ -411,7 +411,7 @@ export const contextualAssets: ContextualAsset[] = [
     termsLabel:
       "Public-domain geometry and official-insignia notes at Wikimedia Commons",
     termsUrl:
-      "https://commons.wikimedia.org/wiki/File:Flag_of_Sweden.svg#Licensing",
+      "https://commons.wikimedia.org/wiki/File:Flag_of_Sweden.svg#Summary",
     retrievalDate: "2026-09-08",
     modifications:
       "Removed the XML declaration; retained official geometry, viewBox, dimensions, and colors; added a descriptive title.",
