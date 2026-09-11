@@ -1,5 +1,9 @@
 import { parseArgs } from "node:util";
 import { z } from "zod";
+import {
+  executionHandoff,
+  executionHandoffMarkdown,
+} from "./execution-handoff.ts";
 import { executionMarkdown, executionStatus } from "./execution-report.ts";
 import { recordExecution } from "./execution-runner.ts";
 import { commandNameSchema } from "./execution-schema.ts";
@@ -13,6 +17,7 @@ const argumentsSchema = z
     file: z.array(z.string()).optional(),
     format: z.enum(["json", "markdown"]).default("json"),
     private: z.boolean().optional(),
+    handoff: z.boolean().optional(),
     refresh: z.boolean().optional(),
     pr: z.coerce.number().int().positive().safe().optional(),
     "hosted-source": z
@@ -40,6 +45,7 @@ function parseInput() {
       file: { type: "string", multiple: true },
       format: { type: "string" },
       private: { type: "boolean" },
+      handoff: { type: "boolean" },
       refresh: { type: "boolean" },
       pr: { type: "string" },
       "hosted-source": { type: "string" },
@@ -53,12 +59,17 @@ function parseInput() {
     .tuple([z.enum(["run", "status", "note"])])
     .parse(parsed.positionals)[0];
   const values = argumentsSchema.parse(parsed.values);
-  if (values.private && values.format !== "json")
+  if (values.private && values.format !== "json" && !values.handoff)
     throw new Error("EXECUTION_ARGUMENT");
   validateMode(mode, values);
   return { mode, values };
 }
 function validateMode(mode: "run" | "status" | "note", values: Arguments) {
+  if (
+    values.handoff &&
+    (mode !== "status" || !values.private || values.refresh)
+  )
+    throw new Error("EXECUTION_ARGUMENT");
   const hosted =
     values.pr !== undefined || values["hosted-source"] !== undefined;
   if (hosted && !values.refresh) throw new Error("EXECUTION_ARGUMENT");
@@ -75,6 +86,21 @@ function validateMode(mode: "run" | "status" | "note", values: Arguments) {
     throw new Error("EXECUTION_ARGUMENT");
   if ((mode === "note") !== (values.reason !== undefined))
     throw new Error("EXECUTION_ARGUMENT");
+}
+function renderReport(
+  report: Awaited<ReturnType<typeof executionStatus>>,
+  values: Arguments,
+) {
+  const handoff = values.handoff
+    ? executionHandoff(report, values.store)
+    : null;
+  return handoff
+    ? values.format === "markdown"
+      ? executionHandoffMarkdown(handoff)
+      : JSON.stringify(handoff, null, 2)
+    : values.format === "markdown"
+      ? executionMarkdown(report)
+      : JSON.stringify(report, null, 2);
 }
 async function main() {
   const { mode, values } = parseInput();
@@ -103,10 +129,7 @@ async function main() {
       ? { hostedSource: values["hosted-source"] }
       : {}),
   });
-  const output =
-    values.format === "markdown"
-      ? executionMarkdown(report)
-      : JSON.stringify(report, null, 2);
+  const output = renderReport(report, values);
   if (Buffer.byteLength(output) > 1024 * 1024)
     throw new Error("EXECUTION_OUTPUT_LIMIT");
   process.stdout.write(`${output}\n`);

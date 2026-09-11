@@ -519,3 +519,77 @@ describe("bounded inherited-pipe completion", () => {
     15_000,
   );
 });
+
+describe("private handoff CLI", () => {
+  it("renders the same validated history in private JSON and Markdown while public output stays redacted", () => {
+    const input = fixture(0);
+    const runId = seedStatus(input);
+    const before = readFileSync(join(input.store, runId, "0001.json"), "utf8");
+    const json = input.call("status", ["--private", "--handoff"]);
+    expect(json.status).toBe(0);
+    const report = JSON.parse(json.stdout);
+    expect(report).toMatchObject({
+      kind: "private-execution-handoff",
+      latestRunId: runId,
+      phase: "not-started",
+      timing: { unknownCommandIntervals: 1, unionKnownCommandMs: null },
+    });
+    expect(report.timeline[0].logReference).toBe(
+      join(input.store, runId, "output.log"),
+    );
+    const markdown = input.call("status", [
+      "--private",
+      "--handoff",
+      "--format",
+      "markdown",
+    ]);
+    expect(markdown.status).toBe(0);
+    expect(markdown.stdout).toContain(runId);
+    expect(markdown.stdout).toContain("USER_PAUSED");
+    for (const format of ["json", "markdown"]) {
+      const publicOutput = input.call("status", ["--format", format]);
+      expect(publicOutput.status).toBe(0);
+      expect(publicOutput.stdout).not.toContain(runId);
+      expect(publicOutput.stdout).not.toContain(input.store);
+      expect(publicOutput.stdout).not.toContain("PRIVATE_OWNER_SENTINEL");
+    }
+    expect(json.stdout + markdown.stdout).not.toMatch(
+      /RAW_LOG_SENTINEL|NETWORK_SENTINEL/,
+    );
+    expect(existsSync(join(input.bin, "gh.called"))).toBe(false);
+    expect(readFileSync(join(input.store, runId, "0001.json"), "utf8")).toBe(
+      before,
+    );
+  });
+  it("requires explicit private status and refuses refresh or command launch", () => {
+    const input = fixture(0);
+    for (const [mode, args] of [
+      ["status", ["--handoff"]],
+      ["status", ["--private", "--handoff", "--refresh"]],
+      ["run", ["--command", "readiness", "--private", "--handoff"]],
+    ] as const) {
+      const result = input.call(mode, [...args]);
+      expect(result.status).toBe(2);
+      expect(JSON.parse(result.stdout).phase).toBe("unknown");
+      expect(result.stdout + result.stderr).not.toContain(input.store);
+    }
+    expect(existsSync(input.store)).toBe(false);
+  });
+  it("fails closed on corrupt history and preserves incomplete allocation observations", () => {
+    const input = fixture(0);
+    const runId = seedStatus(input);
+    mkdirSync(join(input.store, ".allocation"), { mode: 0o700 });
+    const incomplete = input.call("status", ["--private", "--handoff"]);
+    expect(JSON.parse(incomplete.stdout)).toMatchObject({
+      phase: "unknown",
+      incompleteRuns: 1,
+      blocker: "COMPLETION_UNKNOWN",
+    });
+    writeFileSync(join(input.store, runId, "0001.json"), "PRIVATE_CORRUPTION");
+    const corrupt = input.call("status", ["--private", "--handoff"]);
+    expect(corrupt.status).toBe(2);
+    expect(corrupt.stdout + corrupt.stderr).not.toMatch(
+      /PRIVATE_CORRUPTION|execution-cli-/,
+    );
+  });
+});
