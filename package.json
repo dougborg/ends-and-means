@@ -51,7 +51,7 @@
     "@emnapi/runtime": "^1.11.3",
     "@playwright/test": "^1.63.0",
     "@types/css-tree": "^3.2.0",
-    "@types/node": "^26.4.1",
+    "@types/node": "^26.5.0",
     "@vitest/coverage-v8": "^5.0.0",
     "css-tree": "^3.2.1",
     "knip": "^6.34.0",
