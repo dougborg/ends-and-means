@@ -42,17 +42,29 @@ The lockfile controls the full transitive dependency graph.
 The committed exact-lockfile inventory records all 526 package/version keys in
 the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
-declared licenses for 398 packages observed in installed manifests on macOS or
-captured from the exact-version npm registry manifests for Linux packages.
-The remaining 129 unresolved entries were unavailable in the audit platform's installed
-package store; their exact registry/terms locators are recorded and their
+declared licenses for 397 packages observed in installed manifests for the two
+audit targets: macOS arm64 development hosts and the Ubuntu x64 (glibc) CI runner.
+The remaining 129 unresolved entries are not installed for either audit target;
+their exact registry/terms locators are recorded and their
 license metadata is explicitly unresolved rather than guessed. This count is
 an observation about available manifest evidence, not a claim that every entry
 has the same optional-dependency role in the lockfile graph.
 `pnpm inventory:dependencies` deterministically regenerates this evidence from
-the lockfile and installed package manifests, while `pnpm audit:provenance`
-fails on lock/inventory drift, locator mutation, or a license/source value that
-differs from an installed manifest.
+the lockfile by making a frozen, script-free install for each audit target in a
+disposable directory and reading the installed package manifests, so the output
+is identical on any supported host.
+It also rewrites `provenance/platform-package-evidence.json`, the Linux-only
+observations that let a macOS audit check records it cannot install.
+`pnpm audit:provenance` fails on lock/inventory drift, locator mutation, or a
+license/source value that differs from an installed manifest.
+
+Dependency updates, including Dependabot pull requests, change the lockfile
+without these files, so `verify` fails until they are regenerated.
+Check out the update branch, run `pnpm install --frozen-lockfile` and
+`pnpm inventory:dependencies`, review the provenance diff (new or changed
+licenses need the same review as any other dependency change), commit both
+provenance files, and push.
+A push from a person's account triggers the required pull-request checks again.
 Each resolved record also carries a deterministic digest of its observed
 identity, license, source, and status so accidental metadata mutation fails.
 The registry locators identify unavailable cross-platform packages but do not

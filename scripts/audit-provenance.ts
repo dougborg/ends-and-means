@@ -15,10 +15,12 @@ function main() {
   const lockfile = parse(readFileSync("pnpm-lock.yaml", "utf8")) as { packages?: Record<string, unknown> };
   const trackedFiles = trackedFilesFromGit(() => execFileSync("git", ["ls-files", "-z"], { encoding: "utf8" }));
   const evidence = mergePackageEvidence(readCommittedPackageEvidence(), readInstalledPackageEvidence());
-  const findings = [...auditProvenance(inventory, trackedFiles, manifest, existsSync), ...auditLockfilePackages(lockedInventory, Object.keys(lockfile.packages ?? {}), evidence)];
+  const lockfileFindings = auditLockfilePackages(lockedInventory, Object.keys(lockfile.packages ?? {}), evidence);
+  const findings = [...auditProvenance(inventory, trackedFiles, manifest, existsSync), ...lockfileFindings];
 
   if (findings.length > 0) {
-    console.error(["Repository provenance: findings", ...findings.map((finding) => `- ${finding}`)].join("\n"));
+    const remedy = lockfileFindings.length > 0 ? ["After an intentional dependency change, including a Dependabot update, run pnpm inventory:dependencies and commit the provenance files."] : [];
+    console.error(["Repository provenance: findings", ...findings.map((finding) => `- ${finding}`), ...remedy].join("\n"));
     process.exitCode = 1;
   } else {
     console.log(`Repository provenance: clean (${trackedFiles.length} tracked files, ${inventory.dependencies.length} direct and ${lockedInventory.packages.length} locked packages)`);

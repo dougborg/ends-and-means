@@ -206,8 +206,9 @@ that its reported command passed.
   `pnpm audit:provenance` fails on unregistered governed file types, stale asset
   states, direct/optional manifest drift, and exact-lockfile package drift.
   Regenerate lockfile evidence with `pnpm inventory:dependencies` after an
-  intentional dependency change. Unresolved third-party material cannot enter
-  the live site.
+  intentional dependency change, including every Dependabot npm update (see the
+  [licensing audit](docs/licensing-audit.md) for the procedure). Unresolved
+  third-party material cannot enter the live site.
 - Contextual media also requires a typed placement record in
   `src/lib/contextual-imagery.ts`.
   Recheck the exact asset identity and terms during review, bind the placement

@@ -1,5 +1,8 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { mergePackageEvidence, packageEvidenceDigest } from "../../scripts/package-provenance.ts";
+import { mergePackageEvidence, packageEvidenceDigest, platformObservations, readInstalledPackageEvidence } from "../../scripts/package-provenance.ts";
 import { auditLockfilePackages, auditProvenance, type LockfilePackageInventory, type ProvenanceInventory, trackedFilesFromGit } from "../../scripts/provenance.ts";
 
 const inventory: ProvenanceInventory = {
@@ -174,5 +177,39 @@ describe("cross-platform package evidence", () => {
     expect(() => mergePackageEvidence(mac, new Map([["native@1.0.0", { license: "GPL-3.0-only", source: "https://example.test/native" }]]))).toThrow(
       "native@1.0.0: installed manifest conflicts with committed platform evidence",
     );
+  });
+
+  it("records only Linux-target packages that the macOS target cannot observe", () => {
+    const darwin = new Map([["shared@1.0.0", { license: "MIT", source: "https://example.test/shared" }]]);
+    const linux = new Map([
+      ["shared@1.0.0", { license: "MIT", source: "https://example.test/shared" }],
+      ["tool-linux-x64-gnu@2.0.0", { license: "MIT", source: "https://example.test/tool" }],
+      ["@scope/cli-linux-x64@1.0.0", { license: "Apache-2.0", source: "https://example.test/cli" }],
+    ]);
+    expect(platformObservations(linux, darwin)).toEqual([
+      { key: "@scope/cli-linux-x64@1.0.0", platform: "linux-x64", license: "Apache-2.0", source: "https://example.test/cli" },
+      { key: "tool-linux-x64-gnu@2.0.0", platform: "linux-x64-gnu", license: "MIT", source: "https://example.test/tool" },
+    ]);
+    expect(() => platformObservations(new Map([["bare@1.0.0", { license: "MIT", source: null }]]), darwin)).toThrow("bare@1.0.0: Linux-only package manifest lacks an upstream source locator");
+  });
+
+  it("filters installed manifests that declare a different libc family", () => {
+    const root = mkdtempSync(join(tmpdir(), "provenance-libc-"));
+    try {
+      const manifests = [
+        { name: "tool-linux-x64-gnu", version: "1.0.0", license: "MIT", repository: "https://example.test/tool", libc: ["glibc"] },
+        { name: "tool-linux-x64-musl", version: "1.0.0", license: "MIT", repository: "https://example.test/tool", libc: ["musl"] },
+        { name: "portable", version: "1.0.0", license: "MIT", repository: { url: "https://example.test/portable" } },
+      ];
+      for (const manifest of manifests) {
+        const directory = join(root, `${manifest.name}@${manifest.version}`, "node_modules", manifest.name);
+        mkdirSync(directory, { recursive: true });
+        writeFileSync(join(directory, "package.json"), JSON.stringify(manifest));
+      }
+      expect([...readInstalledPackageEvidence(root, "glibc").keys()].sort()).toEqual(["portable@1.0.0", "tool-linux-x64-gnu@1.0.0"]);
+      expect(readInstalledPackageEvidence(root).size).toBe(3);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });
