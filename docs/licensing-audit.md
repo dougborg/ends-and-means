@@ -39,10 +39,10 @@ The production dependencies are Astro and micromark under MIT terms and
 `@lucide/astro` under ISC terms;
 the rest of the direct dependency inventory is development-only.
 The lockfile controls the full transitive dependency graph.
-The committed exact-lockfile inventory records all 526 package/version keys in
+The committed exact-lockfile inventory records all 525 package/version keys in
 the lockfile `packages` table (not the separate importer or snapshot keys),
 including origin and terms locators, available upstream source metadata, and
-declared licenses for 397 packages observed in installed manifests for the two
+declared licenses for 396 packages observed in installed manifests for the two
 audit targets: macOS arm64 development hosts and the Ubuntu x64 (glibc) CI runner.
 The remaining 129 unresolved entries are not installed for either audit target;
 their exact registry/terms locators are recorded and their
