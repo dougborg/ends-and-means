@@ -9,7 +9,7 @@ export interface PackageManifestEvidence {
 
 interface PlatformEvidenceFile {
   schemaVersion: number;
-  observations: Array<PackageManifestEvidence & { key: string; platform: string }>;
+  observations: PlatformObservation[];
 }
 
 export function readCommittedPackageEvidence(path = "provenance/platform-package-evidence.json") {
@@ -21,6 +21,20 @@ export function readCommittedPackageEvidence(path = "provenance/platform-package
     evidence.set(observation.key, { license: observation.license, source: observation.source });
   }
   return evidence;
+}
+
+export type PlatformObservation = PackageManifestEvidence & { key: string; platform: string };
+
+/** Records packages installed only for the Linux audit target, which a macOS audit host cannot observe. */
+export function platformObservations(linux: Map<string, PackageManifestEvidence>, darwin: Map<string, PackageManifestEvidence>): PlatformObservation[] {
+  const observations: PlatformObservation[] = [];
+  for (const [key, evidence] of [...linux].sort(([left], [right]) => (left < right ? -1 : 1))) {
+    if (darwin.has(key)) continue;
+    if (!evidence.source) throw new Error(`${key}: Linux-only package manifest lacks an upstream source locator`);
+    const platform = /linux-x64(?:-gnu)?$/.exec(packageIdentity(key).name)?.[0] ?? "linux-x64-glibc";
+    observations.push({ key, platform, license: evidence.license, source: evidence.source });
+  }
+  return observations;
 }
 
 export function mergePackageEvidence(committed: Map<string, PackageManifestEvidence>, installed: Map<string, PackageManifestEvidence>) {
@@ -39,6 +53,7 @@ interface PackageManifest {
   license?: string | { type?: string };
   homepage?: string;
   repository?: string | { url?: string };
+  libc?: string | string[];
 }
 
 function packageDirectories(root: string) {
@@ -62,14 +77,20 @@ function licenseFrom(manifest: PackageManifest) {
   return manifest.license?.type ?? "unresolved";
 }
 
-export function readInstalledPackageEvidence(root = "node_modules/.pnpm") {
+// pnpm applies --libc only on Linux hosts, so a cross-host install also needs this manifest filter.
+function excludedByLibc(manifest: PackageManifest, libc: string | undefined) {
+  if (!libc || manifest.libc === undefined) return false;
+  return ![manifest.libc].flat().includes(libc);
+}
+
+export function readInstalledPackageEvidence(root = "node_modules/.pnpm", libc?: string) {
   const metadata = new Map<string, PackageManifestEvidence>();
   for (const virtualStore of readdirSync(root)) {
     const modules = join(root, virtualStore, "node_modules");
     try {
       for (const directory of packageDirectories(modules)) {
         const manifest = JSON.parse(readFileSync(join(directory, "package.json"), "utf8")) as PackageManifest;
-        if (manifest.name && manifest.version) metadata.set(`${manifest.name}@${manifest.version}`, { license: licenseFrom(manifest), source: sourceFrom(manifest) });
+        if (manifest.name && manifest.version && !excludedByLibc(manifest, libc)) metadata.set(`${manifest.name}@${manifest.version}`, { license: licenseFrom(manifest), source: sourceFrom(manifest) });
       }
     } catch {
       // Cross-platform optional packages are not installed on every audit host.
