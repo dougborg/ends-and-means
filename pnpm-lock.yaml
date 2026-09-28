@@ -12,11 +12,11 @@ importers:
   .:
     dependencies:
       '@lucide/astro':
-        specifier: ^1.46.0
-        version: 1.46.0(astro@7.3.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
+        specifier: ^1.47.0
+        version: 1.47.0(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
       astro:
-        specifier: ^7.3.2
-        version: 7.3.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1)
+        specifier: ^7.3.3
+        version: 7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1)
       micromark:
         specifier: ^4.0.2
         version: 4.0.2
@@ -699,8 +699,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@lucide/astro@1.46.0':
-    resolution: {integrity: sha512-yuJSS8gD+B6RwnQ6zvKzy4wmJYZyyHXoESVyUd4eAFzF8QCDgYO9mom6nwow5VR4qu5mtHklkgEQffrXdYHvyw==}
+  '@lucide/astro@1.47.0':
+    resolution: {integrity: sha512-jpqLn/6Mbt1LhGHrgAXv64Wiqi+8cd80LD09Z/QqnXHfoC0z5Y+RSty/SjWw+sohYww3MGtkppf3OvQ28uxCrQ==}
     peerDependencies:
       astro: ^4 || ^5 || ^6 || ^7
 
@@ -1259,8 +1259,8 @@ packages:
   ast-v8-to-istanbul@1.0.5:
     resolution: {integrity: sha512-UPAgKJFSEGMWSDr3LX4tqnAb4f7KGT8O40Tyx8wbYmmZ/yn58lNCm8h3svs3eXgiGd5AXxz8NDOvXWvicq+rJA==}
 
-  astro@7.3.2:
-    resolution: {integrity: sha512-ysTcdpGP61XZpHoMRYC/CK19DQ94qkBvzXMtXEo0gEqPNkmOU/Tv++CtWmzaI4nF2Ck8RXFdiWvdlTWa2oOr9w==}
+  astro@7.3.3:
+    resolution: {integrity: sha512-NF08hk3edFkVmr9avf9HW/rQyf6NrpbVDyYj2cVN3JfijDhfJYh1ivWVTY5PUd5+rRZn/Vtu4iaeyNlP0Iv6mg==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     peerDependencies:
@@ -1492,8 +1492,8 @@ packages:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
-  find-proc@0.1.0:
-    resolution: {integrity: sha512-OaOpEYv2PiQ7SQ5LIrl+deA1XaWcxEjnpM6VuWXTUvn+teIXxeFTLDmu18/zDQpFmHN4o3oDBX+BT0AGwEhemg==}
+  find-proc@0.2.0:
+    resolution: {integrity: sha512-a6h2nTrgB3g5Wrn4au9Ux4kMk7IJtyF6oA8uGn+mk3weLZssUtc1cp6meHIzzuW2o1srrBAxzkmXLbqjRkgB6w==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
   flattie@1.1.1:
@@ -2283,6 +2283,10 @@ packages:
       uploadthing:
         optional: true
 
+  verkit@0.4.1:
+    resolution: {integrity: sha512-mMVzj0TXExtVdlDEq+Mzp0eyOuyznNpFobNM3uAqe3HVm/Ps2c+u17BligMkZjZCA6EiXpoon8iRTer3iu40SQ==}
+    engines: {node: '>=18.12.0'}
+
   vfile-message@4.0.3:
     resolution: {integrity: sha512-QTHzsGd1EhbZs4AsQ20JX1rC3cOlt/IWJruk893DfLRr57lcnOeMaWG4K0JrRta4mIJZKth2Au3mM3u03/JWKw==}
 
@@ -3024,9 +3028,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@lucide/astro@1.46.0(astro@7.3.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))':
+  '@lucide/astro@1.47.0(astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))':
     dependencies:
-      astro: 7.3.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1)
+      astro: 7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1)
 
   '@napi-rs/wasm-runtime@1.2.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)':
     dependencies:
@@ -3451,7 +3455,7 @@ snapshots:
       estree-walker: 3.0.3
       js-tokens: 10.0.0
 
-  astro@7.3.2(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1):
+  astro@7.3.3(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@types/node@26.5.1)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1):
     dependencies:
       '@astrojs/compiler-rs': 0.4.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)
       '@astrojs/internal-helpers': 0.11.0
@@ -3472,7 +3476,7 @@ snapshots:
       dset: 3.1.4
       es-module-lexer: 2.3.2
       esbuild: 0.28.2
-      find-proc: 0.1.0
+      find-proc: 0.2.0
       flattie: 1.1.1
       fontace: 0.4.1
       get-tsconfig: 5.0.0-beta.4
@@ -3491,7 +3495,6 @@ snapshots:
       package-manager-detector: 1.8.0
       piccolore: 0.1.3
       picomatch: 4.0.7
-      semver: 7.8.5
       shiki: 4.4.3
       smol-toml: 1.8.0
       svgo: 4.1.0
@@ -3501,6 +3504,7 @@ snapshots:
       ultrahtml: 1.7.0
       unifont: 0.7.5
       unstorage: 1.17.5
+      verkit: 0.4.1
       vite: 8.2.2(@types/node@26.5.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1)
       vitefu: 1.1.3(vite@8.2.2(@types/node@26.5.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.13)(yaml@2.9.1))
       xxhash-wasm: 1.1.0
@@ -3756,7 +3760,7 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  find-proc@0.1.0: {}
+  find-proc@0.2.0: {}
 
   flattie@1.1.1: {}
 
@@ -4650,6 +4654,8 @@ snapshots:
       node-fetch-native: 1.6.7
       ofetch: 1.5.1
       ufo: 1.6.4
+
+  verkit@0.4.1: {}
 
   vfile-message@4.0.3:
     dependencies:
