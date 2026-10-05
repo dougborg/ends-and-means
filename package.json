@@ -39,9 +39,9 @@
     "execution:note": "node scripts/record-execution.mjs note"
   },
   "dependencies": {
-    "@lucide/astro": "^1.46.0",
-    "astro": "^7.3.2",
-    "micromark": "^4.0.2"
+    "@lucide/astro": "^1.48.0",
+    "astro": "^7.3.5",
+    "micromark": "^4.0.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
