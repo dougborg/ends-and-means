@@ -1,21 +1,26 @@
 import { getViteConfig } from "astro/config";
 import { resourceProfile } from "./scripts/environment-runtime.ts";
 
-export default getViteConfig({
-  // Vitest extends Vite's config; Astro's helper types only the Vite surface.
-  // @ts-expect-error -- consumed by Vitest after Astro installs its plugin.
-  test: {
-    maxWorkers: resourceProfile().workers,
-    coverage: {
-      include: ["src/lib/**/*.ts"],
-      provider: "v8",
-      reporter: ["text", "json-summary", "html"],
-      thresholds: {
-        branches: 87,
-        functions: 100,
-        lines: 90,
-        statements: 88,
+export default getViteConfig(
+  {
+    // Vitest extends Vite's config; Astro's helper types only the Vite surface.
+    // @ts-expect-error -- consumed by Vitest after Astro installs its plugin.
+    test: {
+      maxWorkers: resourceProfile().workers,
+      coverage: {
+        include: ["src/lib/**/*.ts"],
+        provider: "v8",
+        reporter: ["text", "json-summary", "html"],
+        thresholds: {
+          branches: 87,
+          functions: 100,
+          lines: 90,
+          statements: 88,
+        },
       },
     },
   },
-});
+  // Tests render in serve mode, where the dev toolbar would annotate markup
+  // with local source paths; assert the markup a production build emits.
+  { devToolbar: { enabled: false } },
+);
