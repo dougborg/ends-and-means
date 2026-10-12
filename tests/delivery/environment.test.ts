@@ -54,7 +54,7 @@ describe("environment toolchain and supported configuration", () => {
 
   it("resolves a bare launcher name from a nested standalone pnpm run through PATH", () => {
     const root = fixture();
-    for (const [name, version] of [["pnpm", "11.25.0"], ["other-pnpm", "10.0.0"]]) {
+    for (const [name, version] of [["pnpm", "11.25.0"], ["other-pnpm", "10.0.0"]] as const) {
       writeFileSync(join(root, name), `#!/bin/sh\necho ${version}\n`);
       chmodSync(join(root, name), 0o755);
     }
