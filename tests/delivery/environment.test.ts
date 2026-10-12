@@ -11,7 +11,7 @@ import { stringify } from "yaml";
 import { artifactDigest, writeVerificationEvidence } from "../../scripts/environment-artifact.ts";
 import { dependencyFindings, outputFindings } from "../../scripts/environment-dependencies.ts";
 import { advisoryProbe, classifyAdvisory, previewProbe } from "../../scripts/environment-probes.ts";
-import { configurationFindings, resourceProfile, toolchainFindings } from "../../scripts/environment-runtime.ts";
+import { configurationFindings, resourceProfile, runtimeObservation, toolchainFindings } from "../../scripts/environment-runtime.ts";
 
 const roots: string[] = [];
 afterEach(() => { vi.restoreAllMocks(); syncBuiltinESMExports(); vi.unstubAllEnvs(); for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
@@ -50,6 +50,17 @@ describe("environment toolchain and supported configuration", () => {
     expect(result.status).toBe(1);
     expect(result.stderr).toContain("NODE_MISMATCH");
     expect(existsSync(join(root, "dist"))).toBe(false);
+  });
+
+  it("resolves a bare launcher name from a nested standalone pnpm run through PATH", () => {
+    const root = fixture();
+    for (const [name, version] of [["pnpm", "11.25.0"], ["other-pnpm", "10.0.0"]]) {
+      writeFileSync(join(root, name), `#!/bin/sh\necho ${version}\n`);
+      chmodSync(join(root, name), 0o755);
+    }
+    const env = { ...process.env, PATH: `${root}:${process.env.PATH}` };
+    expect(runtimeObservation({ ...env, npm_execpath: "pnpm" })).toMatchObject({ pnpm: "11.25.0", packageManagerResolved: true });
+    expect(runtimeObservation({ ...env, npm_execpath: "other-pnpm" }).packageManagerResolved).toBe(false);
   });
 
   it("governs and records intentional local and hosted resource profiles", () => {

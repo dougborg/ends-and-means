@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { accessSync, constants, existsSync, readFileSync, realpathSync } from "node:fs";
 import { availableParallelism, tmpdir } from "node:os";
-import { delimiter, join } from "node:path";
+import { delimiter, join, sep } from "node:path";
 
 export type EnvironmentMode = "command" | "focused" | "verify";
 export interface EnvironmentFinding { code: string; remedy: string }
@@ -50,9 +50,10 @@ export function runtimeObservation(env: NodeJS.ProcessEnv = process.env): Runtim
     node = /^v\d+\.\d+\.\d+$/.test(observedNode) ? observedNode.slice(1) : null;
     pnpm = /^\d+\.\d+\.\d+$/.test(observedPnpm) ? observedPnpm : null;
     executablesResolved = nodePath === realpathSync(process.execPath);
-    packageManagerResolved = !env.npm_execpath || realpathSync(env.npm_execpath) === pnpmPath;
-    if (!packageManagerResolved && env.npm_execpath) {
-      const launcher = realpathSync(env.npm_execpath);
+    // A nested run under a standalone pnpm binary reports a bare command name, which names a PATH executable.
+    const launcher = env.npm_execpath && (env.npm_execpath.includes(sep) ? realpathSync(env.npm_execpath) : executable(env.npm_execpath, env));
+    packageManagerResolved = !launcher || launcher === pnpmPath;
+    if (!packageManagerResolved && launcher) {
       const launchedVersion = /\.[cm]?js$/.test(launcher) ? execFileSync(process.execPath, [launcher, "--version"], options) : execFileSync(launcher, ["--version"], options);
       packageManagerResolved = launchedVersion.trim() === observedPnpm;
     }
