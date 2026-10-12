@@ -4,9 +4,9 @@ import tomlParse from "markdownlint-cli2/parsers/toml";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 
-const patchedVersion = "1.8.0";
+const patchedVersion = "1.9.1";
 const patchedIntegrity =
-  "sha512-kCZr2V3ch9i00x8zXRhjUNVcjG9ijES5dDudkXvUVCT5QlJNQWElSJdZqyPemffHoLNUYwOcou0Fy+ojN0uHSQ==";
+  "sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==";
 
 type Lockfile = {
   overrides?: Record<string, string>;
@@ -27,14 +27,14 @@ describe("TOML parser dependency security", () => {
     expect(lockfile.overrides?.["markdownlint-cli2>smol-toml"]).toBe(
       patchedVersion,
     );
-    expect(Object.keys(lockfile.packages ?? {})).not.toContain(
-      "smol-toml@1.7.0",
-    );
+    for (const vulnerable of ["smol-toml@1.7.0", "smol-toml@1.8.0"]) {
+      expect(Object.keys(lockfile.packages ?? {})).not.toContain(vulnerable);
+    }
     expect(
       lockfile.packages?.[`smol-toml@${patchedVersion}`]?.resolution?.integrity,
     ).toBe(patchedIntegrity);
     expect(
-      lockfile.snapshots?.["markdownlint-cli2@0.23.2"]?.dependencies?.[
+      lockfile.snapshots?.["markdownlint-cli2@0.23.3"]?.dependencies?.[
         "smol-toml"
       ],
     ).toBe(patchedVersion);
