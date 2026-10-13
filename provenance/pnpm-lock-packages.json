@@ -168,15 +168,15 @@
       "evidenceDigest": "1f1ecc8377e66aada005c089667d79a993340747c858eb2844c09210ffc62d67"
     },
     {
-      "key": "@astrojs/internal-helpers@0.11.0",
+      "key": "@astrojs/internal-helpers@0.12.0",
       "name": "@astrojs/internal-helpers",
-      "version": "0.11.0",
-      "origin": "https://registry.npmjs.org/%40astrojs%2Finternal-helpers/0.11.0",
-      "terms": "https://www.npmjs.com/package/%40astrojs%2Finternal-helpers/v/0.11.0?activeTab=code",
+      "version": "0.12.0",
+      "origin": "https://registry.npmjs.org/%40astrojs%2Finternal-helpers/0.12.0",
+      "terms": "https://www.npmjs.com/package/%40astrojs%2Finternal-helpers/v/0.12.0?activeTab=code",
       "source": "git+https://github.com/withastro/astro.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "7838a7ef89c2ba333ddc0aad1242d4d16650bd552d6b9c5d978ad763245dd736"
+      "evidenceDigest": "92507437c4a311c680922488569963e0cceaf564fe66fa0c88dd75c9545aa3e9"
     },
     {
       "key": "@astrojs/language-server@2.16.16",
@@ -190,15 +190,15 @@
       "evidenceDigest": "d8ecf695a9af94feafdbc3ac11e20ccf3e290377d4bdaafab920a0aa3a79c312"
     },
     {
-      "key": "@astrojs/markdown-satteri@0.4.2",
+      "key": "@astrojs/markdown-satteri@0.4.3",
       "name": "@astrojs/markdown-satteri",
-      "version": "0.4.2",
-      "origin": "https://registry.npmjs.org/%40astrojs%2Fmarkdown-satteri/0.4.2",
-      "terms": "https://www.npmjs.com/package/%40astrojs%2Fmarkdown-satteri/v/0.4.2?activeTab=code",
+      "version": "0.4.3",
+      "origin": "https://registry.npmjs.org/%40astrojs%2Fmarkdown-satteri/0.4.3",
+      "terms": "https://www.npmjs.com/package/%40astrojs%2Fmarkdown-satteri/v/0.4.3?activeTab=code",
       "source": "git+https://github.com/withastro/astro.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "88fdfd42bc62b8ec30dfd537ce6968d80283daf775a9b1a848d7acd9518addac"
+      "evidenceDigest": "ea308682dd359ada1c4f84b915646f8f603ef0f82d3b9fb34d275c3dd002a157"
     },
     {
       "key": "@astrojs/prism@4.0.2",
@@ -289,103 +289,103 @@
       "evidenceDigest": "63bbfff13c9bd57488e96811b5259d311412ef78c2e4c41390f390f555d82018"
     },
     {
-      "key": "@biomejs/biome@2.5.14",
+      "key": "@biomejs/biome@2.5.15",
       "name": "@biomejs/biome",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fbiome/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fbiome/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fbiome/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fbiome/v/2.5.15?activeTab=code",
       "source": "git+https://github.com/biomejs/biome.git",
       "license": "MIT OR Apache-2.0",
       "metadataStatus": "resolved",
-      "evidenceDigest": "e64c6cfc48501d8277adfdf6aaef518e21b8f2f50ebdca66adecba01c4c435c2"
+      "evidenceDigest": "560817262cb628990b758d6607ede8ef5a61a33771f136fc34571c93d0262c2e"
     },
     {
-      "key": "@biomejs/cli-darwin-arm64@2.5.14",
+      "key": "@biomejs/cli-darwin-arm64@2.5.15",
       "name": "@biomejs/cli-darwin-arm64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-darwin-arm64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-darwin-arm64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-darwin-arm64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-darwin-arm64/v/2.5.15?activeTab=code",
       "source": "git+https://github.com/biomejs/biome.git",
       "license": "MIT OR Apache-2.0",
       "metadataStatus": "resolved",
-      "evidenceDigest": "f2c0db7fddf59c7574daebed801c6f53038b51f192f24b33e09a21c5b4be6481"
+      "evidenceDigest": "d7ea9381182d90ba20815b019717b6beef450d264301d23330684a01e190a19b"
     },
     {
-      "key": "@biomejs/cli-darwin-x64@2.5.14",
+      "key": "@biomejs/cli-darwin-x64@2.5.15",
       "name": "@biomejs/cli-darwin-x64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-darwin-x64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-darwin-x64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-darwin-x64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-darwin-x64/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "5772bbc73e3e2ae1285e82c77e8e2ee33e2b570d97062b53d5b3e39ec9a69253"
+      "evidenceDigest": "f172b0b2caeace351bcdeebd6b5e9e1cfa86ffb2340d04f1fd9888ae9c0547b9"
     },
     {
-      "key": "@biomejs/cli-linux-arm64-musl@2.5.14",
+      "key": "@biomejs/cli-linux-arm64-musl@2.5.15",
       "name": "@biomejs/cli-linux-arm64-musl",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-arm64-musl/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-arm64-musl/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-arm64-musl/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-arm64-musl/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "9cd31f6554f15b97ddaf760fb638f0a22e51583e8427317956c51794aca860e8"
+      "evidenceDigest": "b380de7f2c0a572e02f9cd9c5ca2cd32a9dc32305d9b3fb5c462524f7b913cab"
     },
     {
-      "key": "@biomejs/cli-linux-arm64@2.5.14",
+      "key": "@biomejs/cli-linux-arm64@2.5.15",
       "name": "@biomejs/cli-linux-arm64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-arm64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-arm64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-arm64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-arm64/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "37a873f0d1b0c4a6c2913d4b7bb995a473d7f4837695fb7d43e4956b82896c05"
+      "evidenceDigest": "a6f75e8ee59cb4d199c07ccf3ab528c2261111424b12de9fd5724633599068c8"
     },
     {
-      "key": "@biomejs/cli-linux-x64-musl@2.5.14",
+      "key": "@biomejs/cli-linux-x64-musl@2.5.15",
       "name": "@biomejs/cli-linux-x64-musl",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-x64-musl/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-x64-musl/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-x64-musl/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-x64-musl/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "6332c2e875c4e4038a1fbdaa273be62127167c29409fe9a4a972fa6a857e68c9"
+      "evidenceDigest": "5ce740c1fc555a7dd2bf0bf1a09d1b4c89d6499ba88754f4b4a7a158976fc3c5"
     },
     {
-      "key": "@biomejs/cli-linux-x64@2.5.14",
+      "key": "@biomejs/cli-linux-x64@2.5.15",
       "name": "@biomejs/cli-linux-x64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-x64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-x64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-linux-x64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-linux-x64/v/2.5.15?activeTab=code",
       "source": "git+https://github.com/biomejs/biome.git",
       "license": "MIT OR Apache-2.0",
       "metadataStatus": "resolved",
-      "evidenceDigest": "6fe451cde411751852b7e5e532209acdd13456ffa7aec0f36e054f02fc93529c"
+      "evidenceDigest": "87934e840d29f6a6e598230a68724d9e026b84d11181230b7803d79df50624b7"
     },
     {
-      "key": "@biomejs/cli-win32-arm64@2.5.14",
+      "key": "@biomejs/cli-win32-arm64@2.5.15",
       "name": "@biomejs/cli-win32-arm64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-win32-arm64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-win32-arm64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-win32-arm64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-win32-arm64/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "5eee13f74f0cefbf0e15873f90dd7a441f51039234506a255ed64e300a669851"
+      "evidenceDigest": "0a33cdfd35efac836abf90d5a7642921466b11f6ab83467eba8b74b82f36db84"
     },
     {
-      "key": "@biomejs/cli-win32-x64@2.5.14",
+      "key": "@biomejs/cli-win32-x64@2.5.15",
       "name": "@biomejs/cli-win32-x64",
-      "version": "2.5.14",
-      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-win32-x64/2.5.14",
-      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-win32-x64/v/2.5.14?activeTab=code",
+      "version": "2.5.15",
+      "origin": "https://registry.npmjs.org/%40biomejs%2Fcli-win32-x64/2.5.15",
+      "terms": "https://www.npmjs.com/package/%40biomejs%2Fcli-win32-x64/v/2.5.15?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "164a9760efb31282e6eea793f8b9d46e1ec90ae01b200805bea2e5d1eec5aa75"
+      "evidenceDigest": "eb80057ecea1b8a1d2ad67c6ce253a66ec6fd62403434cfb3eeb5237aec302cf"
     },
     {
       "key": "@bruits/satteri-darwin-arm64@0.10.5",
@@ -498,26 +498,26 @@
       "evidenceDigest": "c18607c9b4723e5b626079ed27d07bdbebdf0aec4055ae3a57da72ebd26e4b96"
     },
     {
-      "key": "@clack/core@1.4.3",
+      "key": "@clack/core@1.5.1",
       "name": "@clack/core",
-      "version": "1.4.3",
-      "origin": "https://registry.npmjs.org/%40clack%2Fcore/1.4.3",
-      "terms": "https://www.npmjs.com/package/%40clack%2Fcore/v/1.4.3?activeTab=code",
+      "version": "1.5.1",
+      "origin": "https://registry.npmjs.org/%40clack%2Fcore/1.5.1",
+      "terms": "https://www.npmjs.com/package/%40clack%2Fcore/v/1.5.1?activeTab=code",
       "source": "git+https://github.com/bombshell-dev/clack.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "ae731ed7fe35958eadbb627ceec5ddb9d28e69383c530f5176eefda21e365f92"
+      "evidenceDigest": "9a329c41407901388cc08d08691b0dff61f8959996d341532924e2ac974fc74d"
     },
     {
-      "key": "@clack/prompts@1.7.0",
+      "key": "@clack/prompts@1.8.1",
       "name": "@clack/prompts",
-      "version": "1.7.0",
-      "origin": "https://registry.npmjs.org/%40clack%2Fprompts/1.7.0",
-      "terms": "https://www.npmjs.com/package/%40clack%2Fprompts/v/1.7.0?activeTab=code",
+      "version": "1.8.1",
+      "origin": "https://registry.npmjs.org/%40clack%2Fprompts/1.8.1",
+      "terms": "https://www.npmjs.com/package/%40clack%2Fprompts/v/1.8.1?activeTab=code",
       "source": "git+https://github.com/bombshell-dev/clack.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "2c6adbdebca5f28f34e20dcb415148244d1cdb1627988d0730b33e6c5249ca1f"
+      "evidenceDigest": "238a16fc318c77427b1e69608bec780c503e9eff379c7bafb1125ee323a31bfe"
     },
     {
       "key": "@emmetio/abbreviation@2.3.3",
@@ -1301,26 +1301,15 @@
       "evidenceDigest": "cd2b1cacb06233a7fbfaa65793111a55af08b723c8f3ca1e7e058377d55bcfb0"
     },
     {
-      "key": "@lucide/astro@1.48.0",
+      "key": "@lucide/astro@1.55.0",
       "name": "@lucide/astro",
-      "version": "1.48.0",
-      "origin": "https://registry.npmjs.org/%40lucide%2Fastro/1.48.0",
-      "terms": "https://www.npmjs.com/package/%40lucide%2Fastro/v/1.48.0?activeTab=code",
+      "version": "1.55.0",
+      "origin": "https://registry.npmjs.org/%40lucide%2Fastro/1.55.0",
+      "terms": "https://www.npmjs.com/package/%40lucide%2Fastro/v/1.55.0?activeTab=code",
       "source": "https://github.com/lucide-icons/lucide.git",
       "license": "ISC",
       "metadataStatus": "resolved",
-      "evidenceDigest": "00ef330c0fdcc49b5f6e8c9ee9a430db85e86803b8667a5b663c34b97f451357"
-    },
-    {
-      "key": "@napi-rs/wasm-runtime@1.2.3",
-      "name": "@napi-rs/wasm-runtime",
-      "version": "1.2.3",
-      "origin": "https://registry.npmjs.org/%40napi-rs%2Fwasm-runtime/1.2.3",
-      "terms": "https://www.npmjs.com/package/%40napi-rs%2Fwasm-runtime/v/1.2.3?activeTab=code",
-      "source": null,
-      "license": "unresolved",
-      "metadataStatus": "unresolved",
-      "evidenceDigest": "85adfb319f462471b7edbf65d547fd44e613fc89b4a5a1bdd78fbc51e209647a"
+      "evidenceDigest": "318d04ae0569e3601afadfcc2e968a298fb4470fbbc296aa68ff5b021c2e4eb6"
     },
     {
       "key": "@napi-rs/wasm-runtime@1.2.4",
@@ -1378,235 +1367,224 @@
       "evidenceDigest": "c6ad3f7e604ba05db6a68080a2b8544390f2927caf6b688f67df7e9b62d3a0ef"
     },
     {
-      "key": "@oxc-parser/binding-android-arm-eabi@0.150.0",
+      "key": "@oxc-parser/binding-android-arm-eabi@0.153.0",
       "name": "@oxc-parser/binding-android-arm-eabi",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-android-arm-eabi/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-android-arm-eabi/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-android-arm-eabi/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-android-arm-eabi/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "022842e931374a539f408abafc4a93b3ea81940ae501fa19ecbb6fcd2b120dde"
+      "evidenceDigest": "79723584611e2e72506b4e5ccbc6fac41e92f56f095eae9b4ce368ac831e6957"
     },
     {
-      "key": "@oxc-parser/binding-android-arm64@0.150.0",
+      "key": "@oxc-parser/binding-android-arm64@0.153.0",
       "name": "@oxc-parser/binding-android-arm64",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-android-arm64/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-android-arm64/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-android-arm64/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-android-arm64/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "93b678abbbb69fed6cb966a91cf2123896a6422295091465a21de5f53f234a25"
+      "evidenceDigest": "b964de5ae254806dd14284ee19639eb391f74be4ccdfb164314c2aa8f9a3c1d0"
     },
     {
-      "key": "@oxc-parser/binding-darwin-arm64@0.150.0",
+      "key": "@oxc-parser/binding-darwin-arm64@0.153.0",
       "name": "@oxc-parser/binding-darwin-arm64",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-darwin-arm64/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-darwin-arm64/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-darwin-arm64/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-darwin-arm64/v/0.153.0?activeTab=code",
       "source": "git+https://github.com/oxc-project/oxc.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "cc49f261443e24cf4bc432d15164556e773983eeac7884690fa1bb39e711d360"
+      "evidenceDigest": "b175a5d581abb28329db83a041adfbd0a4703da6b64fcec0dc6b76fc51a223e9"
     },
     {
-      "key": "@oxc-parser/binding-darwin-x64@0.150.0",
+      "key": "@oxc-parser/binding-darwin-x64@0.153.0",
       "name": "@oxc-parser/binding-darwin-x64",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-darwin-x64/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-darwin-x64/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-darwin-x64/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-darwin-x64/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "15530c7b176c67666a7bda1d1d59330fd3f567c92c457d15ae375e41efd5902a"
+      "evidenceDigest": "2004796bd1568d91c4fdd491f16dd7ed7b6e9330d612f87124006f87aeeb8089"
     },
     {
-      "key": "@oxc-parser/binding-freebsd-x64@0.150.0",
+      "key": "@oxc-parser/binding-freebsd-x64@0.153.0",
       "name": "@oxc-parser/binding-freebsd-x64",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-freebsd-x64/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-freebsd-x64/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-freebsd-x64/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-freebsd-x64/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "6d9ea2ae11f8746adff5b10df936de56a17278d1ae63b8b4bcd8841c466d043a"
+      "evidenceDigest": "c235bb385c669c96841b912e381c7c7e57571a3d60b82722701ecd79d334c340"
     },
     {
-      "key": "@oxc-parser/binding-linux-arm-gnueabihf@0.150.0",
+      "key": "@oxc-parser/binding-linux-arm-gnueabihf@0.153.0",
       "name": "@oxc-parser/binding-linux-arm-gnueabihf",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm-gnueabihf/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm-gnueabihf/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm-gnueabihf/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm-gnueabihf/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "7161c103bb6f90e47358afcc35cb109d1dea8b54e000e96b2a6d9f84aa5a1366"
+      "evidenceDigest": "8f5d25df461bbd4ee99ceaf4ff891e90a0b068e5611116f7340229a38db361ac"
     },
     {
-      "key": "@oxc-parser/binding-linux-arm-musleabihf@0.150.0",
+      "key": "@oxc-parser/binding-linux-arm-musleabihf@0.153.0",
       "name": "@oxc-parser/binding-linux-arm-musleabihf",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm-musleabihf/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm-musleabihf/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm-musleabihf/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm-musleabihf/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "91a49422c73a5cd672b96de62ef714216a8845389568d3df18358b32394c2ddc"
+      "evidenceDigest": "3bcbb518eed6c7ac6f4eb3056064e109f232ea839ea6f68552283fe0be43d1d0"
     },
     {
-      "key": "@oxc-parser/binding-linux-arm64-gnu@0.150.0",
+      "key": "@oxc-parser/binding-linux-arm64-gnu@0.153.0",
       "name": "@oxc-parser/binding-linux-arm64-gnu",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm64-gnu/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm64-gnu/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm64-gnu/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm64-gnu/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "0bfe7f40c6908d763ab678a8d1305367a66694bf3f3c09b1153fe499df1de031"
+      "evidenceDigest": "d5a2c10ce1734da997ae86014925f834f31b590eb7b11081f7c3ebf7c43ddd9f"
     },
     {
-      "key": "@oxc-parser/binding-linux-arm64-musl@0.150.0",
+      "key": "@oxc-parser/binding-linux-arm64-musl@0.153.0",
       "name": "@oxc-parser/binding-linux-arm64-musl",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm64-musl/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm64-musl/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-arm64-musl/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-arm64-musl/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "5ad08118c7b82ddf2caa3bdb631356c07bb30bfb8687f6e10da0ecf1530c8622"
+      "evidenceDigest": "52329c540005af920fc48ebe409461e1ed0aa936f33c17a3ea60ffa3e2bbe32d"
     },
     {
-      "key": "@oxc-parser/binding-linux-ppc64-gnu@0.150.0",
+      "key": "@oxc-parser/binding-linux-ppc64-gnu@0.153.0",
       "name": "@oxc-parser/binding-linux-ppc64-gnu",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-ppc64-gnu/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-ppc64-gnu/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-ppc64-gnu/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-ppc64-gnu/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "788335d9dd07140ac946ecddf5a7f0de56bf1db6c3bb8b3dfb87df33779b9298"
+      "evidenceDigest": "b580625bb1aae7609b370f78426c4f12e5948bfcef1d14e4ddcd127f7ccdc6c1"
     },
     {
-      "key": "@oxc-parser/binding-linux-riscv64-gnu@0.150.0",
+      "key": "@oxc-parser/binding-linux-riscv64-gnu@0.153.0",
       "name": "@oxc-parser/binding-linux-riscv64-gnu",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-riscv64-gnu/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-riscv64-gnu/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-riscv64-gnu/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-riscv64-gnu/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "dd1891906587787c73e138faf5639262f7d9ee09638e6b8685278342b620ca42"
+      "evidenceDigest": "e5a9695c23014ba1eb27998d3aaef35587155423f976764d42170015a85c4092"
     },
     {
-      "key": "@oxc-parser/binding-linux-riscv64-musl@0.150.0",
+      "key": "@oxc-parser/binding-linux-riscv64-musl@0.153.0",
       "name": "@oxc-parser/binding-linux-riscv64-musl",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-riscv64-musl/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-riscv64-musl/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-riscv64-musl/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-riscv64-musl/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "d52a3f9a4b6b07394f64a3afc678051b81ce0bd9fe96e3189a317617a087cd86"
+      "evidenceDigest": "9bb6349c5044d19ea583379344ee4ecf5ffe5630f60784e26f369cfe5875bef0"
     },
     {
-      "key": "@oxc-parser/binding-linux-s390x-gnu@0.150.0",
+      "key": "@oxc-parser/binding-linux-s390x-gnu@0.153.0",
       "name": "@oxc-parser/binding-linux-s390x-gnu",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-s390x-gnu/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-s390x-gnu/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-s390x-gnu/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-s390x-gnu/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "7b1abac95e79b722fd6aaf5ebc44190b6dde5dcae7d6263b2208361931f7809d"
+      "evidenceDigest": "63e0f4193f5002a7aae8e0da550bcf35a7bb761bce5771d7cd3169164a698071"
     },
     {
-      "key": "@oxc-parser/binding-linux-x64-gnu@0.150.0",
+      "key": "@oxc-parser/binding-linux-x64-gnu@0.153.0",
       "name": "@oxc-parser/binding-linux-x64-gnu",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-x64-gnu/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-x64-gnu/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-x64-gnu/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-x64-gnu/v/0.153.0?activeTab=code",
       "source": "git+https://github.com/oxc-project/oxc.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "babed4e92117bcfa18bf1f20b39036e5bb72b06b48e3a0fa14388ca5120e9a56"
+      "evidenceDigest": "f701ca2c29e085203bc9a7dcfa20d681f21dbfd8cf326d37929a3edd23b1d989"
     },
     {
-      "key": "@oxc-parser/binding-linux-x64-musl@0.150.0",
+      "key": "@oxc-parser/binding-linux-x64-musl@0.153.0",
       "name": "@oxc-parser/binding-linux-x64-musl",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-x64-musl/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-x64-musl/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-linux-x64-musl/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-linux-x64-musl/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "bc0de42d6215f17f5b7b20535a3332c04d7a094ee18a4983c19ed7083bae2faa"
+      "evidenceDigest": "8b34479489d647e48c3160499b610c3cbdcfbf93bf5d78f823b700f9a51304e6"
     },
     {
-      "key": "@oxc-parser/binding-openharmony-arm64@0.150.0",
+      "key": "@oxc-parser/binding-openharmony-arm64@0.153.0",
       "name": "@oxc-parser/binding-openharmony-arm64",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-openharmony-arm64/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-openharmony-arm64/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-openharmony-arm64/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-openharmony-arm64/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "0d5e1d0448df2914885e20102df24db7eeb4077e08dc989d53e347d0166e02a8"
+      "evidenceDigest": "f1b216cff4dc02c0f18f0dbfeb182f73f81161ce0ab83faac5626e9c1ad6daa5"
     },
     {
-      "key": "@oxc-parser/binding-win32-arm64-msvc@0.150.0",
+      "key": "@oxc-parser/binding-win32-arm64-msvc@0.153.0",
       "name": "@oxc-parser/binding-win32-arm64-msvc",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-arm64-msvc/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-arm64-msvc/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-arm64-msvc/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-arm64-msvc/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "6f21ffca867e28bbfcfcd11c7ba2725c8e0e5db87e54e734373dc78d24ba1539"
+      "evidenceDigest": "a12ae493f1796e8e7dcbc9a26ec7d84843555c0d20fd9ad149a5a5a8b1a911b0"
     },
     {
-      "key": "@oxc-parser/binding-win32-ia32-msvc@0.150.0",
+      "key": "@oxc-parser/binding-win32-ia32-msvc@0.153.0",
       "name": "@oxc-parser/binding-win32-ia32-msvc",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-ia32-msvc/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-ia32-msvc/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-ia32-msvc/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-ia32-msvc/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "42605b8c4eda8f7d9333a47625a0577acb7c6fb66d5a04f04f1f5a036a3b1aef"
+      "evidenceDigest": "1ad100d028695d0ec13d73283dc5ffa84dd021d3fb8b015672d4c517de158460"
     },
     {
-      "key": "@oxc-parser/binding-win32-x64-msvc@0.150.0",
+      "key": "@oxc-parser/binding-win32-x64-msvc@0.153.0",
       "name": "@oxc-parser/binding-win32-x64-msvc",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-x64-msvc/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-x64-msvc/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-parser%2Fbinding-win32-x64-msvc/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-parser%2Fbinding-win32-x64-msvc/v/0.153.0?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "70cf1cf44ffc0dbc2fbf8bcb5139c04ae29c3728db131d8a2f341696c88d05f7"
+      "evidenceDigest": "4ac8a30df28ebb11ece74ff95daa6e1aabd24c5a7f20b678577fbb8f3e7f2e97"
     },
     {
-      "key": "@oxc-project/types@0.148.0",
+      "key": "@oxc-project/types@0.153.0",
       "name": "@oxc-project/types",
-      "version": "0.148.0",
-      "origin": "https://registry.npmjs.org/%40oxc-project%2Ftypes/0.148.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-project%2Ftypes/v/0.148.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/%40oxc-project%2Ftypes/0.153.0",
+      "terms": "https://www.npmjs.com/package/%40oxc-project%2Ftypes/v/0.153.0?activeTab=code",
       "source": "git+https://github.com/oxc-project/oxc.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "154ffa1bfca45e68c894f0eb0df33e10b36c6e3aaee08318ef0ed1ab1f772c90"
-    },
-    {
-      "key": "@oxc-project/types@0.150.0",
-      "name": "@oxc-project/types",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/%40oxc-project%2Ftypes/0.150.0",
-      "terms": "https://www.npmjs.com/package/%40oxc-project%2Ftypes/v/0.150.0?activeTab=code",
-      "source": "git+https://github.com/oxc-project/oxc.git",
-      "license": "MIT",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "c1a3e3eff7b70e48faa92c86b811c76a42cce822d4332741a88af93e379438df"
+      "evidenceDigest": "0993cb440f825aeafa2cfc986d5998496a1354b17efdc372f579d2742e5f6c08"
     },
     {
       "key": "@oxc-resolver/binding-android-arm-eabi@11.24.2",
@@ -1829,169 +1807,169 @@
       "evidenceDigest": "d88af7a0c22c3f757f4544a8a786b8ac6c7695f11c4981ef215b54f82e710e06"
     },
     {
-      "key": "@rolldown/binding-android-arm-eabi@1.2.7",
+      "key": "@rolldown/binding-android-arm-eabi@1.2.13",
       "name": "@rolldown/binding-android-arm-eabi",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-android-arm-eabi/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-android-arm-eabi/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-android-arm-eabi/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-android-arm-eabi/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "f0aa059126233ba570d741471d786c5b6056062d7c1f11d940a66f379b1b826f"
+      "evidenceDigest": "933ee3cd35450bf193059bc036401472f24070605d9747e49b01d990bc6ce140"
     },
     {
-      "key": "@rolldown/binding-android-arm64@1.2.7",
+      "key": "@rolldown/binding-android-arm64@1.2.13",
       "name": "@rolldown/binding-android-arm64",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-android-arm64/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-android-arm64/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-android-arm64/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-android-arm64/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "9dfed34ac0020277aa56de91e75d42e47483d7e83d30d0910b22b0ab342516b9"
+      "evidenceDigest": "86bf6432c59ab43366ff276222a2f07b82a8ffeade2a7b99c24802845da4c37a"
     },
     {
-      "key": "@rolldown/binding-darwin-arm64@1.2.7",
+      "key": "@rolldown/binding-darwin-arm64@1.2.13",
       "name": "@rolldown/binding-darwin-arm64",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-darwin-arm64/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-darwin-arm64/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-darwin-arm64/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-darwin-arm64/v/1.2.13?activeTab=code",
       "source": "git+https://github.com/rolldown/rolldown.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "43818872b9511f67d83a3519451d777a234bb59d960a65f085ddddf1ca958f8f"
+      "evidenceDigest": "0a10e3795397766208a2d93e6c1aa9129a0fc97398ab887d7bf8aace89c8c833"
     },
     {
-      "key": "@rolldown/binding-darwin-x64@1.2.7",
+      "key": "@rolldown/binding-darwin-x64@1.2.13",
       "name": "@rolldown/binding-darwin-x64",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-darwin-x64/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-darwin-x64/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-darwin-x64/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-darwin-x64/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "c02fe87bbb7bfffcb16e24fba9b612eea7f492e272d4f00ecb7944e59b376a6f"
+      "evidenceDigest": "d83d70bb8cf55e023eb7ed3b6ab0d11c3c2c578f09f8eff4b9b1bef5767c0c02"
     },
     {
-      "key": "@rolldown/binding-freebsd-x64@1.2.7",
+      "key": "@rolldown/binding-freebsd-x64@1.2.13",
       "name": "@rolldown/binding-freebsd-x64",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-freebsd-x64/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-freebsd-x64/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-freebsd-x64/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-freebsd-x64/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "f68f82a4064510317387be7bf62b0c3df224cb4c7f7bd19691fc8f1013edf2d5"
+      "evidenceDigest": "13d13b0b64f95d368e22881b9dbd9241220823d6cf807b2564dfd29ea5653f46"
     },
     {
-      "key": "@rolldown/binding-linux-arm-gnueabihf@1.2.7",
+      "key": "@rolldown/binding-linux-arm-gnueabihf@1.2.13",
       "name": "@rolldown/binding-linux-arm-gnueabihf",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm-gnueabihf/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm-gnueabihf/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm-gnueabihf/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm-gnueabihf/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "a83a6f243fa886c3fe7caa3ac02699a7317c6bab7086b61c44f42fd86208e1ae"
+      "evidenceDigest": "23469c98c8ce0956d8e2c5b8a7a8112b388571f1f1dfab4a7d9e23bdb805ba43"
     },
     {
-      "key": "@rolldown/binding-linux-arm64-gnu@1.2.7",
+      "key": "@rolldown/binding-linux-arm64-gnu@1.2.13",
       "name": "@rolldown/binding-linux-arm64-gnu",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm64-gnu/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm64-gnu/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm64-gnu/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm64-gnu/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "e3749170ef2481459d0a93d9cdbd74cc9c092a10a6309acd0047e1cdf51fdae5"
+      "evidenceDigest": "7fbe5238cd4fbcc092d60a1e44fd0510149db955493854598eb993325938dd7a"
     },
     {
-      "key": "@rolldown/binding-linux-arm64-musl@1.2.7",
+      "key": "@rolldown/binding-linux-arm64-musl@1.2.13",
       "name": "@rolldown/binding-linux-arm64-musl",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm64-musl/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm64-musl/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-arm64-musl/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-arm64-musl/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "4319058e20fc499f0a104819c92fa5263d024e6e3b6508f2ded2455794c452bf"
+      "evidenceDigest": "b653773ed12dcb9d52e7831644133de88ccc630315d8c37e239945f5fff1514a"
     },
     {
-      "key": "@rolldown/binding-linux-ppc64-gnu@1.2.7",
+      "key": "@rolldown/binding-linux-ppc64-gnu@1.2.13",
       "name": "@rolldown/binding-linux-ppc64-gnu",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-ppc64-gnu/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-ppc64-gnu/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-ppc64-gnu/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-ppc64-gnu/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "6686dab20112728e9c8c1b6e1da6dedc90e3310ec1740ad5bcb35d376eb7568b"
+      "evidenceDigest": "e44cb495fc9f442a3bc20022a3afc7e37b48e835afdc695409c07207b257c2b3"
     },
     {
-      "key": "@rolldown/binding-linux-s390x-gnu@1.2.7",
+      "key": "@rolldown/binding-linux-s390x-gnu@1.2.13",
       "name": "@rolldown/binding-linux-s390x-gnu",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-s390x-gnu/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-s390x-gnu/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-s390x-gnu/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-s390x-gnu/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "24aea60804cc95510f90d2c94493282c3c352d5a9fc19803abbf871102c1ce94"
+      "evidenceDigest": "a71f552afbc65b2aff11ea93f886cd00e93cc92369c88941e8f04d1e1231f10d"
     },
     {
-      "key": "@rolldown/binding-linux-x64-gnu@1.2.7",
+      "key": "@rolldown/binding-linux-x64-gnu@1.2.13",
       "name": "@rolldown/binding-linux-x64-gnu",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-x64-gnu/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-x64-gnu/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-x64-gnu/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-x64-gnu/v/1.2.13?activeTab=code",
       "source": "git+https://github.com/rolldown/rolldown.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "373893a765be9bdaa7bc8a4e16dccdc367da7d13fdff0286eb5f3b9fbe7e338c"
+      "evidenceDigest": "0cef8e0c04fc144e1ea64ae5cb7729b265d68a03a23c37b78984b60ad25ad445"
     },
     {
-      "key": "@rolldown/binding-linux-x64-musl@1.2.7",
+      "key": "@rolldown/binding-linux-x64-musl@1.2.13",
       "name": "@rolldown/binding-linux-x64-musl",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-x64-musl/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-x64-musl/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-linux-x64-musl/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-linux-x64-musl/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "0c3a2a2594074b5f4075f6b2393f692d047a421b7305c0eb083bf78613b7959e"
+      "evidenceDigest": "79d746b7e7f567be2f3c7aece3639c4385a8018daa77e77d3af5764cfb814b55"
     },
     {
-      "key": "@rolldown/binding-openharmony-arm64@1.2.7",
+      "key": "@rolldown/binding-openharmony-arm64@1.2.13",
       "name": "@rolldown/binding-openharmony-arm64",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-openharmony-arm64/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-openharmony-arm64/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-openharmony-arm64/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-openharmony-arm64/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "c2912ad3ed2f358fc7c4fcaac7e7ccbdd74755c9e3f23d0f33bc91e4f2ee44d3"
+      "evidenceDigest": "5f8a29c66b1b80b658413f3abb7af4a7100515f519cf2febc35da7fec7fcb333"
     },
     {
-      "key": "@rolldown/binding-win32-arm64-msvc@1.2.7",
+      "key": "@rolldown/binding-win32-arm64-msvc@1.2.13",
       "name": "@rolldown/binding-win32-arm64-msvc",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-win32-arm64-msvc/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-win32-arm64-msvc/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-win32-arm64-msvc/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-win32-arm64-msvc/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "165c6ae125adefb41640f2b48b5092ea62ab84ff588898d4f48c2ff087e2fbb5"
+      "evidenceDigest": "cc756220e11bf46512197fc585590f855801bc9333f029438949c53f93812326"
     },
     {
-      "key": "@rolldown/binding-win32-x64-msvc@1.2.7",
+      "key": "@rolldown/binding-win32-x64-msvc@1.2.13",
       "name": "@rolldown/binding-win32-x64-msvc",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-win32-x64-msvc/1.2.7",
-      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-win32-x64-msvc/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/%40rolldown%2Fbinding-win32-x64-msvc/1.2.13",
+      "terms": "https://www.npmjs.com/package/%40rolldown%2Fbinding-win32-x64-msvc/v/1.2.13?activeTab=code",
       "source": null,
       "license": "unresolved",
       "metadataStatus": "unresolved",
-      "evidenceDigest": "4e854a6f5d96052a736ff90c3d63f60636ee3f33cb3c8d02fb0d674c7ce663f3"
+      "evidenceDigest": "4b12f6982f49dd68c0a4ea9a81dbf9f6ab39aa4ceedca8606c99779982881154"
     },
     {
       "key": "@rolldown/pluginutils@1.0.1",
@@ -2236,15 +2214,15 @@
       "evidenceDigest": "78fafac74ed108c81729ae38b8e41195913d67348f448b20c7f953b3ce3bb919"
     },
     {
-      "key": "@types/node@26.6.2",
+      "key": "@types/node@26.6.5",
       "name": "@types/node",
-      "version": "26.6.2",
-      "origin": "https://registry.npmjs.org/%40types%2Fnode/26.6.2",
-      "terms": "https://www.npmjs.com/package/%40types%2Fnode/v/26.6.2?activeTab=code",
+      "version": "26.6.5",
+      "origin": "https://registry.npmjs.org/%40types%2Fnode/26.6.5",
+      "terms": "https://www.npmjs.com/package/%40types%2Fnode/v/26.6.5?activeTab=code",
       "source": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "5e43458e725cea36a15216ffb13147f1d1cf18a3dad8964b2bff0321fc210147"
+      "evidenceDigest": "2e1a10f1de81703e1697a0c2a7d8a1decc09caa1ff09cfeeb7942db9ca2f4361"
     },
     {
       "key": "@types/unist@2.0.11",
@@ -2280,59 +2258,59 @@
       "evidenceDigest": "3c4770c694cc316963dedb200db26f1dd9f0fe856af20c8d98d75d5c84925ca0"
     },
     {
-      "key": "@vitest/coverage-v8@5.0.1",
+      "key": "@vitest/coverage-v8@5.0.4",
       "name": "@vitest/coverage-v8",
-      "version": "5.0.1",
-      "origin": "https://registry.npmjs.org/%40vitest%2Fcoverage-v8/5.0.1",
-      "terms": "https://www.npmjs.com/package/%40vitest%2Fcoverage-v8/v/5.0.1?activeTab=code",
+      "version": "5.0.4",
+      "origin": "https://registry.npmjs.org/%40vitest%2Fcoverage-v8/5.0.4",
+      "terms": "https://www.npmjs.com/package/%40vitest%2Fcoverage-v8/v/5.0.4?activeTab=code",
       "source": "git+https://github.com/vitest-dev/vitest.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "7c258985b5427474dc33dee6b0a06cbadbc266435233f9be44d2ecaddf69bd3e"
+      "evidenceDigest": "f831588bc5487cca8099d246a80d0820cc7fb47e537ad79a733e2dd8aaf5782c"
     },
     {
-      "key": "@vitest/istanbul-lib-coverage@1.0.1",
+      "key": "@vitest/istanbul-lib-coverage@1.0.2",
       "name": "@vitest/istanbul-lib-coverage",
-      "version": "1.0.1",
-      "origin": "https://registry.npmjs.org/%40vitest%2Fistanbul-lib-coverage/1.0.1",
-      "terms": "https://www.npmjs.com/package/%40vitest%2Fistanbul-lib-coverage/v/1.0.1?activeTab=code",
+      "version": "1.0.2",
+      "origin": "https://registry.npmjs.org/%40vitest%2Fistanbul-lib-coverage/1.0.2",
+      "terms": "https://www.npmjs.com/package/%40vitest%2Fistanbul-lib-coverage/v/1.0.2?activeTab=code",
       "source": "git+https://github.com/vitest-dev/istanbuljs.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "05524fb1c496fd2c7cc9855b4528276d72cebef8e660b95a7656d76b10f526c8"
+      "evidenceDigest": "1564efc1cd5690cf41a506e18c183aea25e830ad86661c0d48a1c94c3cb40124"
     },
     {
-      "key": "@vitest/istanbul-lib-report@1.0.1",
+      "key": "@vitest/istanbul-lib-report@1.0.2",
       "name": "@vitest/istanbul-lib-report",
-      "version": "1.0.1",
-      "origin": "https://registry.npmjs.org/%40vitest%2Fistanbul-lib-report/1.0.1",
-      "terms": "https://www.npmjs.com/package/%40vitest%2Fistanbul-lib-report/v/1.0.1?activeTab=code",
+      "version": "1.0.2",
+      "origin": "https://registry.npmjs.org/%40vitest%2Fistanbul-lib-report/1.0.2",
+      "terms": "https://www.npmjs.com/package/%40vitest%2Fistanbul-lib-report/v/1.0.2?activeTab=code",
       "source": "git+https://github.com/vitest-dev/istanbuljs.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "e9445d68d0ee4b69a1fcef8ed02bcecfb6307b0b53650aef39b1bee77324bc8b"
+      "evidenceDigest": "3efb246012d0681352ce1a66c595fa76d36aed55fb79140cee36216834cc73ca"
     },
     {
-      "key": "@vitest/mocker@5.0.1",
+      "key": "@vitest/mocker@5.0.4",
       "name": "@vitest/mocker",
-      "version": "5.0.1",
-      "origin": "https://registry.npmjs.org/%40vitest%2Fmocker/5.0.1",
-      "terms": "https://www.npmjs.com/package/%40vitest%2Fmocker/v/5.0.1?activeTab=code",
+      "version": "5.0.4",
+      "origin": "https://registry.npmjs.org/%40vitest%2Fmocker/5.0.4",
+      "terms": "https://www.npmjs.com/package/%40vitest%2Fmocker/v/5.0.4?activeTab=code",
       "source": "git+https://github.com/vitest-dev/vitest.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "64b914380aa83e7de94cdc3fc54820156a0d1700f1a0d39c8b27c6f39b91f0a3"
+      "evidenceDigest": "1d080c6e8301c9c3bba462e47d2666db708c16060d112541babd5da1429868ff"
     },
     {
-      "key": "@vitest/spy@5.0.1",
+      "key": "@vitest/spy@5.0.4",
       "name": "@vitest/spy",
-      "version": "5.0.1",
-      "origin": "https://registry.npmjs.org/%40vitest%2Fspy/5.0.1",
-      "terms": "https://www.npmjs.com/package/%40vitest%2Fspy/v/5.0.1?activeTab=code",
+      "version": "5.0.4",
+      "origin": "https://registry.npmjs.org/%40vitest%2Fspy/5.0.4",
+      "terms": "https://www.npmjs.com/package/%40vitest%2Fspy/v/5.0.4?activeTab=code",
       "source": "git+https://github.com/vitest-dev/vitest.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "0adc15b5fdd154580d93e851e34c32e4f39f9578ea86b13c06fedd01f793d0a6"
+      "evidenceDigest": "3455ee8312f574b2313832cfef5fa9e3b27bba95d2ffd15ee3bc933d8cee3fb9"
     },
     {
       "key": "@volar/kit@2.4.28",
@@ -2456,15 +2434,15 @@
       "evidenceDigest": "1b045ba24dc72ecefc8cde4b667ae4bc0257255f2cc87bd18f1b8870bc75c0f2"
     },
     {
-      "key": "am-i-vibing@0.4.0",
+      "key": "am-i-vibing@0.5.0",
       "name": "am-i-vibing",
-      "version": "0.4.0",
-      "origin": "https://registry.npmjs.org/am-i-vibing/0.4.0",
-      "terms": "https://www.npmjs.com/package/am-i-vibing/v/0.4.0?activeTab=code",
+      "version": "0.5.0",
+      "origin": "https://registry.npmjs.org/am-i-vibing/0.5.0",
+      "terms": "https://www.npmjs.com/package/am-i-vibing/v/0.5.0?activeTab=code",
       "source": "git+https://github.com:ascorbic/am-i-vibing.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "89669ce64c9b267b6c96030ea0ff36f5de4b3f8e2baa2a783fde04370828aee7"
+      "evidenceDigest": "e4cd037c0edb0f4757516f377608cf7d48640777182747c1e4766e37d98d014d"
     },
     {
       "key": "ansi-regex@6.3.0",
@@ -2544,26 +2522,26 @@
       "evidenceDigest": "b1968e3b5e015cbd765284b78d6d835864e6a5484190f6e999d6e284dfbb2148"
     },
     {
-      "key": "ast-v8-to-istanbul@1.0.5",
+      "key": "ast-v8-to-istanbul@1.0.7",
       "name": "ast-v8-to-istanbul",
-      "version": "1.0.5",
-      "origin": "https://registry.npmjs.org/ast-v8-to-istanbul/1.0.5",
-      "terms": "https://www.npmjs.com/package/ast-v8-to-istanbul/v/1.0.5?activeTab=code",
+      "version": "1.0.7",
+      "origin": "https://registry.npmjs.org/ast-v8-to-istanbul/1.0.7",
+      "terms": "https://www.npmjs.com/package/ast-v8-to-istanbul/v/1.0.7?activeTab=code",
       "source": "git+https://github.com/AriPerkkio/ast-v8-to-istanbul.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "572da351201778223031301cf768c1470296ffa957b4cde528b0adc35f4d1dd4"
+      "evidenceDigest": "13a059f900a7ad2e7e0e214b0e9c9c4ac241d96d3be430434f468b0405a9f671"
     },
     {
-      "key": "astro@7.3.5",
+      "key": "astro@7.3.8",
       "name": "astro",
-      "version": "7.3.5",
-      "origin": "https://registry.npmjs.org/astro/7.3.5",
-      "terms": "https://www.npmjs.com/package/astro/v/7.3.5?activeTab=code",
+      "version": "7.3.8",
+      "origin": "https://registry.npmjs.org/astro/7.3.8",
+      "terms": "https://www.npmjs.com/package/astro/v/7.3.8?activeTab=code",
       "source": "git+https://github.com/withastro/astro.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "ddc562a6a1453a1f321d9c654a90e1152cc6ab5d06b45bc301697949fc838480"
+      "evidenceDigest": "50281ad379da773a07e2b78227eccf2b7a6822447f5ff15e8b4b4db91c17d2e3"
     },
     {
       "key": "axobject-query@4.1.0",
@@ -2621,15 +2599,15 @@
       "evidenceDigest": "d33a9f2230259ecd4e11dd030f8feb5ac4735d20813cd9190ee7bbb1c89926a0"
     },
     {
-      "key": "chai@6.2.2",
+      "key": "chai@6.3.0",
       "name": "chai",
-      "version": "6.2.2",
-      "origin": "https://registry.npmjs.org/chai/6.2.2",
-      "terms": "https://www.npmjs.com/package/chai/v/6.2.2?activeTab=code",
+      "version": "6.3.0",
+      "origin": "https://registry.npmjs.org/chai/6.3.0",
+      "terms": "https://www.npmjs.com/package/chai/v/6.3.0?activeTab=code",
       "source": "https://github.com/chaijs/chai",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "60b48c2fc75f9b05641e7a4b2cdfc63751fce59d29e666679979a15d592358f4"
+      "evidenceDigest": "7c0b16d150b2fd3b8d4547514021b246c9aaaac5f8133dff8882b3de5dc91909"
     },
     {
       "key": "character-entities-html4@2.1.0",
@@ -3072,6 +3050,17 @@
       "evidenceDigest": "44af0d4a4ff1c3861bbe4b8d75fadbc92e13f786ef7e795300378113106c227f"
     },
     {
+      "key": "es-module-lexer@3.0.3",
+      "name": "es-module-lexer",
+      "version": "3.0.3",
+      "origin": "https://registry.npmjs.org/es-module-lexer/3.0.3",
+      "terms": "https://www.npmjs.com/package/es-module-lexer/v/3.0.3?activeTab=code",
+      "source": "git+https://github.com/guybedford/es-module-lexer.git",
+      "license": "MIT",
+      "metadataStatus": "resolved",
+      "evidenceDigest": "96cd1b1c896a5acd20187acdf46b646d005bff5b899417f26639f8c62c8bcd1b"
+    },
+    {
       "key": "esbuild@0.28.2",
       "name": "esbuild",
       "version": "0.28.2",
@@ -3292,15 +3281,15 @@
       "evidenceDigest": "0d349d1efa43262fcb28ebdd7db2a2f12054b0eab75a6844c83c9c2d1282cd39"
     },
     {
-      "key": "formatly@0.7.0",
+      "key": "formatly@0.11.4",
       "name": "formatly",
-      "version": "0.7.0",
-      "origin": "https://registry.npmjs.org/formatly/0.7.0",
-      "terms": "https://www.npmjs.com/package/formatly/v/0.7.0?activeTab=code",
+      "version": "0.11.4",
+      "origin": "https://registry.npmjs.org/formatly/0.11.4",
+      "terms": "https://www.npmjs.com/package/formatly/v/0.11.4?activeTab=code",
       "source": "git+https://github.com/JoshuaKGoldberg/formatly.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "5c356e4a72e088e08d1ea2189323df068700af8f2ba8d6e76dd5431706874d22"
+      "evidenceDigest": "520066def5bc34f021ca71e5bd4d628b2852073cd9b10eb2cc1c12976b382f68"
     },
     {
       "key": "fsevents@2.3.3",
@@ -3347,15 +3336,15 @@
       "evidenceDigest": "5aba7a3d23f8f24c7f1479941b7f2a2283c290c4131c7fb03a9b92cb79aabfaf"
     },
     {
-      "key": "get-tsconfig@5.0.0-beta.4",
+      "key": "get-tsconfig@5.0.0-beta.6",
       "name": "get-tsconfig",
-      "version": "5.0.0-beta.4",
-      "origin": "https://registry.npmjs.org/get-tsconfig/5.0.0-beta.4",
-      "terms": "https://www.npmjs.com/package/get-tsconfig/v/5.0.0-beta.4?activeTab=code",
+      "version": "5.0.0-beta.6",
+      "origin": "https://registry.npmjs.org/get-tsconfig/5.0.0-beta.6",
+      "terms": "https://www.npmjs.com/package/get-tsconfig/v/5.0.0-beta.6?activeTab=code",
       "source": "privatenumber/get-tsconfig",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "d2d8002805dac8465f458b911c496d0f7b36cdee2fb5732f65c9d0a271143d8f"
+      "evidenceDigest": "a3f6817cb83f7e049897be330bc91e5db29b706bbbe107aa99cc3a6c21e00f72"
     },
     {
       "key": "github-slugger@2.0.0",
@@ -3611,17 +3600,6 @@
       "evidenceDigest": "5bc7bee11b9eafb89825454b86ea7972b7acc2e582ee588f321453b09a09dae4"
     },
     {
-      "key": "js-yaml@4.3.2",
-      "name": "js-yaml",
-      "version": "4.3.2",
-      "origin": "https://registry.npmjs.org/js-yaml/4.3.2",
-      "terms": "https://www.npmjs.com/package/js-yaml/v/4.3.2?activeTab=code",
-      "source": "nodeca/js-yaml",
-      "license": "MIT",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "b623500ceba607b7780e23cc03f6ca4103f449e285a4963d291dd08c7b594620"
-    },
-    {
       "key": "js-yaml@5.4.1",
       "name": "js-yaml",
       "version": "5.4.1",
@@ -3699,15 +3677,15 @@
       "evidenceDigest": "ce493a6d724910150011ca48db80d5ed579b9f0dc5d350026a5b54f8a0349572"
     },
     {
-      "key": "knip@6.37.0",
+      "key": "knip@6.41.0",
       "name": "knip",
-      "version": "6.37.0",
-      "origin": "https://registry.npmjs.org/knip/6.37.0",
-      "terms": "https://www.npmjs.com/package/knip/v/6.37.0?activeTab=code",
+      "version": "6.41.0",
+      "origin": "https://registry.npmjs.org/knip/6.41.0",
+      "terms": "https://www.npmjs.com/package/knip/v/6.41.0?activeTab=code",
       "source": "git+https://github.com/webpro-nl/knip.git",
       "license": "ISC",
       "metadataStatus": "resolved",
-      "evidenceDigest": "ac20a8a0df50aeac9c6cfb24aebb21a1c57400085c19dee8a05a775e407c192f"
+      "evidenceDigest": "55d6882a68d64551ba4d34021653f6d117f3eb452cae252a87d22251532fca48"
     },
     {
       "key": "lightningcss-android-arm64@1.33.0",
@@ -3864,26 +3842,26 @@
       "evidenceDigest": "c7fb352d2975560e3fddf66acbd79310f1c21049dc7f5232cb5fe4f06f30558c"
     },
     {
-      "key": "magic-string@1.2.3",
+      "key": "magic-string@1.4.3",
       "name": "magic-string",
-      "version": "1.2.3",
-      "origin": "https://registry.npmjs.org/magic-string/1.2.3",
-      "terms": "https://www.npmjs.com/package/magic-string/v/1.2.3?activeTab=code",
+      "version": "1.4.3",
+      "origin": "https://registry.npmjs.org/magic-string/1.4.3",
+      "terms": "https://www.npmjs.com/package/magic-string/v/1.4.3?activeTab=code",
       "source": "git+https://github.com/Rich-Harris/magic-string.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "f6980a6bdfa833df6552cd1431af93517c8b73eae98622c82893571af1fb6ac7"
+      "evidenceDigest": "f204d91121d56d9ee5236ceddc871f736dad30c82e1de5f80d3ee957a5d1adc3"
     },
     {
-      "key": "magicast@0.5.4",
+      "key": "magicast@0.5.5",
       "name": "magicast",
-      "version": "0.5.4",
-      "origin": "https://registry.npmjs.org/magicast/0.5.4",
-      "terms": "https://www.npmjs.com/package/magicast/v/0.5.4?activeTab=code",
+      "version": "0.5.5",
+      "origin": "https://registry.npmjs.org/magicast/0.5.5",
+      "terms": "https://www.npmjs.com/package/magicast/v/0.5.5?activeTab=code",
       "source": "unjs/magicast",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "112a3be7392002e0f6da37396413392c73a911fd6b77ecd1a1a630aafe916f0d"
+      "evidenceDigest": "098823da59f14894f3233cc0984dff2e0a5efc959e92c4a2545582d9d87b3085"
     },
     {
       "key": "markdown-it@15.0.1",
@@ -4348,15 +4326,15 @@
       "evidenceDigest": "3cb5eb778a742181ac38665ad067d6961dfdfa59695406dad9741e862c2ed30b"
     },
     {
-      "key": "nanoid@3.3.18",
+      "key": "nanoid@3.3.20",
       "name": "nanoid",
-      "version": "3.3.18",
-      "origin": "https://registry.npmjs.org/nanoid/3.3.18",
-      "terms": "https://www.npmjs.com/package/nanoid/v/3.3.18?activeTab=code",
+      "version": "3.3.20",
+      "origin": "https://registry.npmjs.org/nanoid/3.3.20",
+      "terms": "https://www.npmjs.com/package/nanoid/v/3.3.20?activeTab=code",
       "source": "ai/nanoid",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "aeb728f12e59fb808ce995f6580ead7fcb052d4ee21c99e55cbbbef9e7d171cb"
+      "evidenceDigest": "d5bb60af98e57cb97afa1645747a3107cc503eecf92db8ac6234e0c0b98bab92"
     },
     {
       "key": "neotraverse@1.0.1",
@@ -4425,17 +4403,6 @@
       "evidenceDigest": "6b7880cda14889f3fda06886e2e9d1057593bbb4297946390db358137e933263"
     },
     {
-      "key": "obug@2.1.4",
-      "name": "obug",
-      "version": "2.1.4",
-      "origin": "https://registry.npmjs.org/obug/2.1.4",
-      "terms": "https://www.npmjs.com/package/obug/v/2.1.4?activeTab=code",
-      "source": "git+https://github.com/sxzz/obug.git",
-      "license": "MIT",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "193ea3dd763781d8bec109bedcf6ed609b924dc218bbf7ad339b9e235605b5d9"
-    },
-    {
       "key": "obug@3.0.0",
       "name": "obug",
       "version": "3.0.0",
@@ -4491,15 +4458,15 @@
       "evidenceDigest": "f183a04cbd8210db8634f219334f8f32f6d00b1875dfd7f1a67c550d8056e552"
     },
     {
-      "key": "oxc-parser@0.150.0",
+      "key": "oxc-parser@0.153.0",
       "name": "oxc-parser",
-      "version": "0.150.0",
-      "origin": "https://registry.npmjs.org/oxc-parser/0.150.0",
-      "terms": "https://www.npmjs.com/package/oxc-parser/v/0.150.0?activeTab=code",
+      "version": "0.153.0",
+      "origin": "https://registry.npmjs.org/oxc-parser/0.153.0",
+      "terms": "https://www.npmjs.com/package/oxc-parser/v/0.153.0?activeTab=code",
       "source": "git+https://github.com/oxc-project/oxc.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "0f53cead4ec20786403a145b70cc26848cd78579a33edbc8a6c9e12cd7b42c8a"
+      "evidenceDigest": "63813a5669e48f893f0d616d6c54698dc247a4d470cd4f02463634671cf6e10b"
     },
     {
       "key": "oxc-resolver@11.24.2",
@@ -4513,15 +4480,15 @@
       "evidenceDigest": "992aa13ab9933867baef45589be3ac1ba0578410ba5626d1c62971a7cd22e9b2"
     },
     {
-      "key": "p-limit@7.3.2",
+      "key": "p-limit@7.3.3",
       "name": "p-limit",
-      "version": "7.3.2",
-      "origin": "https://registry.npmjs.org/p-limit/7.3.2",
-      "terms": "https://www.npmjs.com/package/p-limit/v/7.3.2?activeTab=code",
+      "version": "7.3.3",
+      "origin": "https://registry.npmjs.org/p-limit/7.3.3",
+      "terms": "https://www.npmjs.com/package/p-limit/v/7.3.3?activeTab=code",
       "source": "sindresorhus/p-limit",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "003e64dc97572ba20755d67d59c1aeec27e1084283864379af2a7c2bd2b8efa8"
+      "evidenceDigest": "aa4c2c5de667d5ab5d96460d73b2894b4ffb3449b5b92bc824c95aa00062bba9"
     },
     {
       "key": "p-queue@9.3.3",
@@ -4645,15 +4612,15 @@
       "evidenceDigest": "7edfc14c6f65543855e04c2afcbc2f39fac3165fb3118766ae75a6d47f5c64c7"
     },
     {
-      "key": "postcss@8.5.28",
+      "key": "postcss@8.5.30",
       "name": "postcss",
-      "version": "8.5.28",
-      "origin": "https://registry.npmjs.org/postcss/8.5.28",
-      "terms": "https://www.npmjs.com/package/postcss/v/8.5.28?activeTab=code",
+      "version": "8.5.30",
+      "origin": "https://registry.npmjs.org/postcss/8.5.30",
+      "terms": "https://www.npmjs.com/package/postcss/v/8.5.30?activeTab=code",
       "source": "postcss/postcss",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "f050a47f32ab2381fe2419d94b37ea24f8efb6eb4176dbd310b32da8c4a76cf6"
+      "evidenceDigest": "5b71651bd682e87294fcb7666001c0976f31e08ccfc3cd029e589707fff98839"
     },
     {
       "key": "prettier@3.9.6",
@@ -4854,15 +4821,15 @@
       "evidenceDigest": "93d65d328f2acadc3a1fa51eec4608227395fd50277e6930238f7db35b480378"
     },
     {
-      "key": "rolldown@1.2.7",
+      "key": "rolldown@1.2.13",
       "name": "rolldown",
-      "version": "1.2.7",
-      "origin": "https://registry.npmjs.org/rolldown/1.2.7",
-      "terms": "https://www.npmjs.com/package/rolldown/v/1.2.7?activeTab=code",
+      "version": "1.2.13",
+      "origin": "https://registry.npmjs.org/rolldown/1.2.13",
+      "terms": "https://www.npmjs.com/package/rolldown/v/1.2.13?activeTab=code",
       "source": "git+https://github.com/rolldown/rolldown.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "3f64b48cf47ca8f3ee4f8adedac1fc614afaacf83e4b994ace405b1ff2ec4f8d"
+      "evidenceDigest": "5f0f21314b7328ca3db7d5fb7cd68a21d78c1cb2c682e58887bea75af3b58b2e"
     },
     {
       "key": "run-parallel@1.2.0",
@@ -4942,17 +4909,6 @@
       "evidenceDigest": "a50e773aef1d71a0421c37b098e5b83d8cd48d69994dd84aa40e65d1a2079372"
     },
     {
-      "key": "siginfo@2.0.0",
-      "name": "siginfo",
-      "version": "2.0.0",
-      "origin": "https://registry.npmjs.org/siginfo/2.0.0",
-      "terms": "https://www.npmjs.com/package/siginfo/v/2.0.0?activeTab=code",
-      "source": "git+https://github.com/emilbayes/siginfo.git",
-      "license": "ISC",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "50f8769c5dbd0a6a5b84406df3bc98a11e68aeb4b16f71bb119e98e371a294cd"
-    },
-    {
       "key": "sisteransi@1.0.5",
       "name": "sisteransi",
       "version": "1.0.5",
@@ -5008,26 +4964,15 @@
       "evidenceDigest": "ac96a2256f1cf364a3555afe208ff0b747de7441a85b32dedae487872a566d2d"
     },
     {
-      "key": "stackback@0.0.2",
-      "name": "stackback",
-      "version": "0.0.2",
-      "origin": "https://registry.npmjs.org/stackback/0.0.2",
-      "terms": "https://www.npmjs.com/package/stackback/v/0.0.2?activeTab=code",
-      "source": "git://github.com/shtylman/node-stackback.git",
-      "license": "MIT",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "3801b22116a1ad143ca8fb734b93b0dcff4cf040b2966b00de8c81504932c742"
-    },
-    {
-      "key": "std-env@4.2.0",
+      "key": "std-env@4.3.0",
       "name": "std-env",
-      "version": "4.2.0",
-      "origin": "https://registry.npmjs.org/std-env/4.2.0",
-      "terms": "https://www.npmjs.com/package/std-env/v/4.2.0?activeTab=code",
+      "version": "4.3.0",
+      "origin": "https://registry.npmjs.org/std-env/4.3.0",
+      "terms": "https://www.npmjs.com/package/std-env/v/4.3.0?activeTab=code",
       "source": "unjs/std-env",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "458f6a020a0b5393d27f04f81735932b6fe8f3e718ef55815b8ccac2fccb5631"
+      "evidenceDigest": "56e41360d0d45c119bf7f93eceddd5495cf1819ac9d8e79a2153905f2ee79719"
     },
     {
       "key": "string-width@7.2.0",
@@ -5118,15 +5063,15 @@
       "evidenceDigest": "2a35f8766c13e76661b859ff9939f92de5a53b19d10e3a77376f3097d9df27a1"
     },
     {
-      "key": "tinybench@6.1.4",
+      "key": "tinybench@6.2.2",
       "name": "tinybench",
-      "version": "6.1.4",
-      "origin": "https://registry.npmjs.org/tinybench/6.1.4",
-      "terms": "https://www.npmjs.com/package/tinybench/v/6.1.4?activeTab=code",
+      "version": "6.2.2",
+      "origin": "https://registry.npmjs.org/tinybench/6.2.2",
+      "terms": "https://www.npmjs.com/package/tinybench/v/6.2.2?activeTab=code",
       "source": "tinylibs/tinybench",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "ebad83afd035005921efa31285bb76bf88342d44758e12a7d3af8a2831217d70"
+      "evidenceDigest": "62444f035325edc95d8c62bfa8d1f3d64fc6f9cb1229cc1a470eced779573c38"
     },
     {
       "key": "tinyclip@1.0.3",
@@ -5138,17 +5083,6 @@
       "license": "MIT",
       "metadataStatus": "resolved",
       "evidenceDigest": "38ddf5ccf50d1c5dccb0004c8a9c76dc89db133e28451998e0659949a4881e67"
-    },
-    {
-      "key": "tinyexec@1.3.0",
-      "name": "tinyexec",
-      "version": "1.3.0",
-      "origin": "https://registry.npmjs.org/tinyexec/1.3.0",
-      "terms": "https://www.npmjs.com/package/tinyexec/v/1.3.0?activeTab=code",
-      "source": "git+https://github.com/tinylibs/tinyexec.git",
-      "license": "MIT",
-      "metadataStatus": "resolved",
-      "evidenceDigest": "198f0dea9a592c58f2cbd7009b2474b151403eb616c8697332e5824ccd3af1a1"
     },
     {
       "key": "tinyexec@1.3.1",
@@ -5173,15 +5107,15 @@
       "evidenceDigest": "4c69296e2b655c20885a03a28e62d3cff72746b5248e9f6201a9a0e5bd09a380"
     },
     {
-      "key": "tinyrainbow@3.1.1",
+      "key": "tinyrainbow@3.2.0",
       "name": "tinyrainbow",
-      "version": "3.1.1",
-      "origin": "https://registry.npmjs.org/tinyrainbow/3.1.1",
-      "terms": "https://www.npmjs.com/package/tinyrainbow/v/3.1.1?activeTab=code",
+      "version": "3.2.0",
+      "origin": "https://registry.npmjs.org/tinyrainbow/3.2.0",
+      "terms": "https://www.npmjs.com/package/tinyrainbow/v/3.2.0?activeTab=code",
       "source": "git+https://github.com/tinylibs/tinyrainbow.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "cf11dfb84a47cc09e42527d053c6d1c62f22edf8dccddfd3bd66a4a8147d38f8"
+      "evidenceDigest": "07f1adf4d70c89b073811e4d5c33ad2eb464491caf18a053bf9839b793c385a3"
     },
     {
       "key": "to-regex-range@5.0.1",
@@ -5305,15 +5239,15 @@
       "evidenceDigest": "bfa54b7a5cbbb0408d04c40d226dbb23efb3158259088547a26e326edaaf1100"
     },
     {
-      "key": "unbash@4.0.11",
+      "key": "unbash@5.1.0",
       "name": "unbash",
-      "version": "4.0.11",
-      "origin": "https://registry.npmjs.org/unbash/4.0.11",
-      "terms": "https://www.npmjs.com/package/unbash/v/4.0.11?activeTab=code",
+      "version": "5.1.0",
+      "origin": "https://registry.npmjs.org/unbash/5.1.0",
+      "terms": "https://www.npmjs.com/package/unbash/v/5.1.0?activeTab=code",
       "source": "git+https://github.com/webpro-nl/unbash.git",
       "license": "ISC",
       "metadataStatus": "resolved",
-      "evidenceDigest": "bb8cd35780383cfe6603e19ea57528765b575c6bb2c066a11fe7b25276ffe24b"
+      "evidenceDigest": "afc3048343f80172415a2a0be75a36417b06510a2fa2b274851113c6e58963b7"
     },
     {
       "key": "uncrypto@0.1.3",
@@ -5448,15 +5382,15 @@
       "evidenceDigest": "374a49ecbbf683d23a2b27d560e774b976e49baafd942dffafb5f168fad65acf"
     },
     {
-      "key": "verkit@0.4.1",
+      "key": "verkit@0.5.0",
       "name": "verkit",
-      "version": "0.4.1",
-      "origin": "https://registry.npmjs.org/verkit/0.4.1",
-      "terms": "https://www.npmjs.com/package/verkit/v/0.4.1?activeTab=code",
+      "version": "0.5.0",
+      "origin": "https://registry.npmjs.org/verkit/0.5.0",
+      "terms": "https://www.npmjs.com/package/verkit/v/0.5.0?activeTab=code",
       "source": "git+https://github.com/sxzz/verkit.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "3aacc7e9f00436e6e3e7f313ab43b3eb3c653a3ca7625d2b20d58c245cea8416"
+      "evidenceDigest": "ec84035a02c804c17a8f5428b3945e3cc791e0b1275d10c99e4e2993107ae456"
     },
     {
       "key": "vfile-message@4.0.3",
@@ -5481,15 +5415,15 @@
       "evidenceDigest": "fb034b9ffe35faca5f7fc545abd91207cb261b0151a506083501f212e60a72e5"
     },
     {
-      "key": "vite@8.2.2",
+      "key": "vite@8.3.4",
       "name": "vite",
-      "version": "8.2.2",
-      "origin": "https://registry.npmjs.org/vite/8.2.2",
-      "terms": "https://www.npmjs.com/package/vite/v/8.2.2?activeTab=code",
+      "version": "8.3.4",
+      "origin": "https://registry.npmjs.org/vite/8.3.4",
+      "terms": "https://www.npmjs.com/package/vite/v/8.3.4?activeTab=code",
       "source": "git+https://github.com/vitejs/vite.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "79c8752d188f4b01cae4ad55342fff33714d5c57d5031b2bf3f67448fdb58d2c"
+      "evidenceDigest": "00c55266614cd9469c9ab904c76db8220724a2bacdc37deaf286e63196100271"
     },
     {
       "key": "vitefu@1.1.3",
@@ -5503,15 +5437,15 @@
       "evidenceDigest": "30fe18f7d714022492c3bb1b58394928c910490bed85db6ee15621468863038c"
     },
     {
-      "key": "vitest@5.0.1",
+      "key": "vitest@5.0.4",
       "name": "vitest",
-      "version": "5.0.1",
-      "origin": "https://registry.npmjs.org/vitest/5.0.1",
-      "terms": "https://www.npmjs.com/package/vitest/v/5.0.1?activeTab=code",
+      "version": "5.0.4",
+      "origin": "https://registry.npmjs.org/vitest/5.0.4",
+      "terms": "https://www.npmjs.com/package/vitest/v/5.0.4?activeTab=code",
       "source": "git+https://github.com/vitest-dev/vitest.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "85393378da7f3834b19b528d6b586d25ebf099ccb1ababc6d263a5257683cb47"
+      "evidenceDigest": "3cf8af25dea6758fefc0499413935903a40773568a94fd965b1b7dbed1837a9c"
     },
     {
       "key": "volar-service-css@0.0.71",
@@ -5745,15 +5679,15 @@
       "evidenceDigest": "d6aba0c4c3845ff59e5dec46937d18e95239e5ceec1c3ce1e5d756d260b4be5a"
     },
     {
-      "key": "why-is-node-running@2.3.0",
+      "key": "why-is-node-running@3.2.1",
       "name": "why-is-node-running",
-      "version": "2.3.0",
-      "origin": "https://registry.npmjs.org/why-is-node-running/2.3.0",
-      "terms": "https://www.npmjs.com/package/why-is-node-running/v/2.3.0?activeTab=code",
+      "version": "3.2.1",
+      "origin": "https://registry.npmjs.org/why-is-node-running/3.2.1",
+      "terms": "https://www.npmjs.com/package/why-is-node-running/v/3.2.1?activeTab=code",
       "source": "https://github.com/mafintosh/why-is-node-running.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "1f84eba8f6860de232b321fd0d932f74757e1cd90e0d27f3d88a9480aa4d6604"
+      "evidenceDigest": "befb977d576976a6f8e07716df10f8bb2e8df2dde5104783b39a4664d506c986"
     },
     {
       "key": "wrap-ansi@9.0.2",
@@ -5855,15 +5789,15 @@
       "evidenceDigest": "3ed198901acd1e6e9b0957f4b2de23a41dcd9eaab02f68712fc04eff0f809012"
     },
     {
-      "key": "zod@4.6.5",
+      "key": "zod@4.6.7",
       "name": "zod",
-      "version": "4.6.5",
-      "origin": "https://registry.npmjs.org/zod/4.6.5",
-      "terms": "https://www.npmjs.com/package/zod/v/4.6.5?activeTab=code",
+      "version": "4.6.7",
+      "origin": "https://registry.npmjs.org/zod/4.6.7",
+      "terms": "https://www.npmjs.com/package/zod/v/4.6.7?activeTab=code",
       "source": "git+https://github.com/colinhacks/zod.git",
       "license": "MIT",
       "metadataStatus": "resolved",
-      "evidenceDigest": "78b6dbb59be63e833f97105a5a9d43b437b7a1254d8bf2205e4abc693460d764"
+      "evidenceDigest": "6c269be6a5e06ae11235da8e7a819e1d67ba1180f6c522da257611be200a4680"
     },
     {
       "key": "zwitch@2.0.4",
