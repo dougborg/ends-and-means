@@ -64,7 +64,9 @@ export function dependencyFindings(root: string): EnvironmentFinding[] {
     const manifest = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
     const lock = yaml(join(root, "pnpm-lock.yaml"));
     const workspace = yaml(join(root, "pnpm-workspace.yaml"));
-    if (Object.keys(workspace).some(key => !["overrides", "allowBuilds", "minimumReleaseAgeExclude"].includes(key)) || ["peerDependencies", "peerDependenciesMeta", "pnpm", "bundledDependencies", "bundleDependencies", "dependenciesMeta"].some(key => Object.hasOwn(manifest, key))) return failure("DEPENDENCY_POLICY", "Dependency policy fields outside the supported repository contract require an explicit contract update before installation.");
+    // Audit exceptions change advisory reporting only, never resolution.
+    const auditOnly = (key: string) => key === "auditConfig" && Object.keys(record(workspace[key])).every(field => field === "ignoreGhsas");
+    if (Object.keys(workspace).some(key => !["overrides", "allowBuilds", "minimumReleaseAgeExclude"].includes(key) && !auditOnly(key)) || ["peerDependencies", "peerDependenciesMeta", "pnpm", "bundledDependencies", "bundleDependencies", "dependenciesMeta"].some(key => Object.hasOwn(manifest, key))) return failure("DEPENDENCY_POLICY", "Dependency policy fields outside the supported repository contract require an explicit contract update before installation.");
     const modules = yaml(join(modulesPath, ".modules.yaml"));
     const virtualStore = realpathSync(resolve(modulesPath, String(modules.virtualStoreDir)));
     if (virtualStore !== join(realpathSync(modulesPath), ".pnpm") || modules.nodeLinker !== "isolated" || modules.layoutVersion !== 5) return failure("DEPENDENCY_RELOCATED", "Use the supported isolated pnpm layout in this worktree.");

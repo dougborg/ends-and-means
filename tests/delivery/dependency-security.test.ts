@@ -74,3 +74,25 @@ describe("TOML parser dependency security", () => {
     });
   });
 });
+
+describe("braces audit exception", () => {
+  const advisory = "GHSA-vfj7-8cjw-p6xm";
+  const expiry = Date.parse("2027-01-01T00:00:00Z");
+
+  it("stays temporary and lapses once a newer braces resolves (#368)", () => {
+    const workspace = parse(readFileSync("pnpm-workspace.yaml", "utf8")) as {
+      auditConfig?: { ignoreGhsas?: string[] };
+    };
+    if (!workspace.auditConfig?.ignoreGhsas?.includes(advisory)) return;
+
+    const lockfile = parse(readFileSync("pnpm-lock.yaml", "utf8")) as Lockfile;
+    const braces = Object.keys(lockfile.packages ?? {}).filter((key) =>
+      key.startsWith("braces@"),
+    );
+
+    expect(Date.now(), "re-assess the exception in #368").toBeLessThan(expiry);
+    expect(braces, "remove the exception now that braces moved").toEqual([
+      "braces@3.0.3",
+    ]);
+  });
+});

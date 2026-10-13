@@ -86,6 +86,13 @@ describe("effective dependency and output inspection", () => {
     const workspace = fixture(); writeFileSync(join(workspace, "pnpm-workspace.yaml"), "overrides:\n  example: 9.0.0\n");
     expect(dependencyFindings(workspace)[0]?.code).toBe("DEPENDENCY_LOCK_MISMATCH");
   });
+  it("accepts advisory exceptions but no other audit configuration", () => {
+    const root = fixture();
+    writeFileSync(join(root, "pnpm-workspace.yaml"), "auditConfig:\n  ignoreGhsas:\n    - GHSA-0000-0000-0000\n");
+    expect(dependencyFindings(root)).toEqual([]);
+    writeFileSync(join(root, "pnpm-workspace.yaml"), "auditConfig:\n  ignoreCves:\n    - CVE-0000-0000\n");
+    expect(dependencyFindings(root)[0]?.code).toBe("DEPENDENCY_POLICY");
+  });
   it("checks actual transitive dependency resolution rather than matching metadata alone", () => {
     const root = fixture();
     writeFileSync(join(root, "node_modules/.pnpm/nested@2.0.0/node_modules/nested/package.json"), JSON.stringify({ name: "nested", version: "3.0.0" }));

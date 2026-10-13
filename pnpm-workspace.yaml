@@ -6,3 +6,9 @@ minimumReleaseAgeExclude:
   - playwright@1.63.0
 overrides:
   markdownlint-cli2>smol-toml: 1.9.1
+auditConfig:
+  ignoreGhsas:
+    # braces <= 3.0.3 has no patched release. It is development-only
+    # (markdownlint-cli2 > globby) and expands only repository-authored globs.
+    # Temporary until 2026-12-31; see dougborg/ends-and-means#368.
+    - GHSA-vfj7-8cjw-p6xm
